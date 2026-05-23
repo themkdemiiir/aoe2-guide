@@ -6,17 +6,17 @@ targetAge: feudal
 durationMin: 14
 civsRecommended: [chinese, huns, malians, portuguese]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → oduna, Lumber Camp kur" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → ilk domuzu çek" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → House kur, ardından meyveye Mill kur" }
-  - { villagers: 16, time: "3:20",  assign: "+6 → avda (boar + koyun)" }
-  - { villagers: 18, time: "4:10",  assign: "+2 → 2. domuzu çek ve avda çalış", note: "Loom araştır; Feudal Age'e ~8:50'de tıkla" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal gelir — 6 köylü oduna (toplam 8 oduncu), 4 köylü meyveye" }
-  - { villagers: 18, time: "9:00",  assign: "2 köylü avdan: biri Barracks, biri House kurar" }
-  - { villagers: 18, time: "9:10",  assign: "Stable kur, Scout Cavalry üret; Double-Bit Axe araştır" }
-  - { villagers: 22, time: "10:30", assign: "+4 yeni köylü av veya straggler ağaçlarına; 2 Archery Range kur" }
-  - { villagers: 25, time: "12:00", assign: "+3 köylü altına, Mining Camp kur; Blacksmith kur, Fletching araştır" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
+  - { villagers: 16, assign: "+6 → avda (boar + koyun)", icons: ["food"] }
+  - { villagers: 18, assign: "+2 → 2. domuzu çek ve avda çalış", note: "Loom araştır; Feudal Age'e ~8:50'de tıkla", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "Feudal gelir — 6 köylü oduna (toplam 8 oduncu), 4 köylü meyveye", icons: ["lumber-camp", "wood", "food"] }
+  - { villagers: 18, assign: "2 köylü avdan: biri Barracks, biri House kurar", icons: ["barracks", "house"] }
+  - { villagers: 18, assign: "Stable kur, Scout Cavalry üret; Double-Bit Axe araştır", icons: ["stable", "light-cavalry", "double-bit-axe"] }
+  - { villagers: 22, assign: "+4 yeni köylü av veya straggler ağaçlarına; 2 Archery Range kur", icons: ["archery-range"] }
+  - { villagers: 25, assign: "+3 köylü altına, Mining Camp kur; Blacksmith kur, Fletching araştır", icons: ["gold", "mining-camp", "blacksmith", "fletching"] }
 source:
   author: "Hera"
 

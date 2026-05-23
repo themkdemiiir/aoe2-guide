@@ -6,17 +6,17 @@ targetAge: feudal
 durationMin: 14
 civsRecommended: [chinese, huns, malians, portuguese]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → wood, build lumber camp" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → lure nearest boar" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → build house then mill on berries" }
-  - { villagers: 16, time: "3:20",  assign: "+6 → hunt under TC (boar + sheep)" }
-  - { villagers: 18, time: "4:10",  assign: "+2 → lure 2nd boar and hunt", note: "Research Loom; click Feudal at ~8:50" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal arrives — 6 vils → wood (8 total on lumber), 4 → berries" }
-  - { villagers: 18, time: "9:00",  assign: "2 vils: one builds Barracks, one builds House" }
-  - { villagers: 18, time: "9:10",  assign: "Build Stable, produce Scout Cavalry; research Double-Bit Axe" }
-  - { villagers: 22, time: "10:30", assign: "+4 new vils → hunt or straggler trees; build 2 Archery Ranges" }
-  - { villagers: 25, time: "12:00", assign: "+3 → gold, build Mining Camp; build Blacksmith, research Fletching" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 16, assign: "+6 → hunt under TC (boar + sheep)", icons: ["food"] }
+  - { villagers: 18, assign: "+2 → lure 2nd boar and hunt", note: "Research Loom; click Feudal at ~8:50", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "Feudal arrives — 6 vils → wood (8 total on lumber), 4 → berries", icons: ["lumber-camp", "wood", "food"] }
+  - { villagers: 18, assign: "2 vils: one builds Barracks, one builds House", icons: ["barracks", "house"] }
+  - { villagers: 18, assign: "Build Stable, produce Scout Cavalry; research Double-Bit Axe", icons: ["stable", "light-cavalry", "double-bit-axe"] }
+  - { villagers: 22, assign: "+4 new vils → hunt or straggler trees; build 2 Archery Ranges", icons: ["archery-range"] }
+  - { villagers: 25, assign: "+3 → gold, build Mining Camp; build Blacksmith, research Fletching", icons: ["gold", "mining-camp", "blacksmith", "fletching"] }
 source:
   author: "Hera"
 

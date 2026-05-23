@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 20
 civsRecommended: [cumans]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep (food)" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → wood, build lumber camp" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → lure nearest boar" }
-  - { villagers: 11, time: "1:50",  assign: "+2 → hunt under boar and deer" }
-  - { villagers: 12, time: "2:15",  assign: "+1 → build house then mill on berries" }
-  - { villagers: 15, time: "3:10",  assign: "+3 → berries" }
-  - { villagers: 18, time: "4:10",  assign: "+3 vils; build House", note: "On closed maps you can click Feudal without Loom; click Feudal at ~8:50" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal arrives — 6 vils from hunting → wood; build 2nd TC near wood line" }
-  - { villagers: 18, time: "9:00",  assign: "Research Double-Bit Axe; add Horse Collar if map is safe" }
-  - { villagers: 27, time: "12:00", assign: "+9 new vils; both TCs produce villagers continuously; build Farms" }
-  - { villagers: 27, time: "14:00", assign: "6–8 vils → gold, build Mining Camp; build Market + Blacksmith" }
-  - { villagers: 27, time: "19:30", assign: "Click Castle Age (~19:30); research Bow Saw; stabilize economy" }
+  - { villagers: 6,  assign: "6 → sheep (food)", icons: ["food"] }
+  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 11, assign: "+2 → hunt under boar and deer", icons: ["food"] }
+  - { villagers: 12, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 15, assign: "+3 → berries", icons: ["food"] }
+  - { villagers: 18, assign: "+3 vils; build House", note: "On closed maps you can click Feudal without Loom; click Feudal at ~8:50", icons: ["house"] }
+  - { villagers: 18, assign: "Feudal arrives — 6 vils from hunting → wood; build 2nd TC near wood line", icons: ["wood", "town-center"] }
+  - { villagers: 18, assign: "Research Double-Bit Axe; add Horse Collar if map is safe", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 27, assign: "+9 new vils; both TCs produce villagers continuously; build Farms", icons: ["town-center", "farm"] }
+  - { villagers: 27, assign: "6–8 vils → gold, build Mining Camp; build Market + Blacksmith", icons: ["gold", "mining-camp", "market", "blacksmith"] }
+  - { villagers: 27, assign: "Click Castle Age (~19:30); research Bow Saw; stabilize economy", icons: ["wood"] }
 source:
   author: "Hera"
 

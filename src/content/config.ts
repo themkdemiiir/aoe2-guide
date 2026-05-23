@@ -33,9 +33,10 @@ const buildOrders = defineCollection({
     steps: z.array(
       z.object({
         villagers: z.number(),
-        time: z.string(),
+        time: z.string().optional(),
         assign: z.string(),
         note: z.string().optional(),
+        icons: z.array(z.string()).optional(),
       }),
     ),
     source: z.object({

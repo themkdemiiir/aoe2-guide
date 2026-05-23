@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 20
 civsRecommended: [cumans]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda (yiyecek)" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → oduna, Lumber Camp kur" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → ilk domuzu çek" }
-  - { villagers: 11, time: "1:50",  assign: "+2 → boar ve geyik altında yiyecek" }
-  - { villagers: 12, time: "2:15",  assign: "+1 → House kur, ardından meyveye Mill kur" }
-  - { villagers: 15, time: "3:10",  assign: "+3 → meyveye" }
-  - { villagers: 18, time: "4:10",  assign: "+3 köylü; House ekle", note: "Kapalı haritada Loom basmadan Feudal tıklayabilirsin; ~8:50'de Feudal Age'e tıkla" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal gelir — 6 köylü oduna; 2. Town Center kur (odun hattına yakın)" }
-  - { villagers: 18, time: "9:00",  assign: "Double-Bit Axe araştır; harita güvenliyse Horse Collar ekle" }
-  - { villagers: 27, time: "12:00", assign: "+9 yeni köylü; her iki TC sürekli köylü üretmeli; Farm kur" }
-  - { villagers: 27, time: "14:00", assign: "6–8 köylü altına, Mining Camp kur; Market + Blacksmith kur" }
-  - { villagers: 27, time: "19:30", assign: "Castle Age'e tıkla (~19:30); Bow Saw araştır; ekonomiyi stabilize et" }
+  - { villagers: 6,  assign: "6 → koyunda (yiyecek)", icons: ["food"] }
+  - { villagers: 8,  assign: "+2 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 11, assign: "+2 → boar ve geyik altında yiyecek", icons: ["food"] }
+  - { villagers: 12, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
+  - { villagers: 15, assign: "+3 → meyveye", icons: ["food"] }
+  - { villagers: 18, assign: "+3 köylü; House ekle", note: "Kapalı haritada Loom basmadan Feudal tıklayabilirsin; ~8:50'de Feudal Age'e tıkla", icons: ["house"] }
+  - { villagers: 18, assign: "Feudal gelir — 6 köylü oduna; 2. Town Center kur (odun hattına yakın)", icons: ["wood", "town-center"] }
+  - { villagers: 18, assign: "Double-Bit Axe araştır; harita güvenliyse Horse Collar ekle", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 27, assign: "+9 yeni köylü; her iki TC sürekli köylü üretmeli; Farm kur", icons: ["town-center", "farm"] }
+  - { villagers: 27, assign: "6–8 köylü altına, Mining Camp kur; Market + Blacksmith kur", icons: ["gold", "mining-camp", "market", "blacksmith"] }
+  - { villagers: 27, assign: "Castle Age'e tıkla (~19:30); Bow Saw araştır; ekonomiyi stabilize et", icons: ["wood"] }
 source:
   author: "Hera"
 

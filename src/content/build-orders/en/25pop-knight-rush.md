@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 16
 civsRecommended: [franks, magyars, slavs, berbers, huns]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 9,  time: "1:15",  assign: "+3 → wood, build lumber camp" }
-  - { villagers: 10, time: "1:45",  assign: "+1 → lure nearest boar" }
-  - { villagers: 11, time: "2:10",  assign: "+1 → build house then mill on berries" }
-  - { villagers: 12, time: "2:35",  assign: "+1 → lure 2nd boar" }
-  - { villagers: 16, time: "3:40",  assign: "+4 → berries" }
-  - { villagers: 21, time: "5:30",  assign: "+5 → wood" }
-  - { villagers: 24, time: "7:00",  assign: "+3 → gold, build Mining Camp", note: "Research Loom; click Feudal at 25 pop (~11:45)" }
-  - { villagers: 25, time: "11:45", assign: "Feudal arrives — 1 vil builds Barracks, 1 builds House" }
-  - { villagers: 25, time: "12:00", assign: "2 vils build Stable and Market; +4 → gold" }
-  - { villagers: 27, time: "13:30", assign: "+2 vils; research Double-Bit Axe + Horse Collar; click Castle (~16:05)" }
-  - { villagers: 29, time: "16:05", assign: "Castle Age — add Stable, produce Knights from both Stables" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 12, assign: "+1 → lure 2nd boar", icons: ["food"] }
+  - { villagers: 16, assign: "+4 → berries", icons: ["food"] }
+  - { villagers: 21, assign: "+5 → wood", icons: ["wood"] }
+  - { villagers: 24, assign: "+3 → gold, build Mining Camp", note: "Research Loom; click Feudal at 25 pop (~11:45)", icons: ["gold", "mining-camp", "loom"] }
+  - { villagers: 25, assign: "Feudal arrives — 1 vil builds Barracks, 1 builds House", icons: ["barracks", "house"] }
+  - { villagers: 25, assign: "2 vils build Stable and Market; +4 → gold", icons: ["stable", "market", "gold"] }
+  - { villagers: 27, assign: "+2 vils; research Double-Bit Axe + Horse Collar; click Castle (~16:05)", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 29, assign: "Castle Age — add Stable, produce Knights from both Stables", icons: ["stable", "knight"] }
 source:
   author: "Hera"
 

@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 14
 civsRecommended: [burgundians, poles, bohemians, portuguese, bengalis]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 9,  time: "1:15",  assign: "+3 → oduna, Lumber Camp kur" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → ilk domuzu çek" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → House kur, ardından meyveye Mill kur" }
-  - { villagers: 13, time: "2:50",  assign: "+2 → geyik veya 2. domuza" }
-  - { villagers: 17, time: "4:00",  assign: "+4 → meyveye" }
-  - { villagers: 21, time: "5:10",  assign: "+4 → tarlaya (domuzlar bitince)" }
-  - { villagers: 23, time: "6:00",  assign: "+2 → altına; +4 → oduna", note: "23. köylüyle Feudal Age'e tıkla (~10:30)" }
-  - { villagers: 23, time: "10:30", assign: "Feudal gelir — 1 köylü Blacksmith, 2 köylü Market kurar; +2 köylü oduna" }
-  - { villagers: 25, time: "11:30", assign: "+2 köylü; Double-Bit Axe + Horse Collar araştır; Castle Age'e tıkla (~14:00)" }
-  - { villagers: 25, time: "14:00", assign: "Castle Age — yeni Lumber Camp kur; Bow Saw araştır; ek TC'leri kur" }
-  - { villagers: 30, time: "16:00", assign: "+5 köylü; Wheelbarrow (~18 tarlada) araştır; 3+ TC sürekli köylü üretmeli" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
+  - { villagers: 13, assign: "+2 → geyik veya 2. domuza", icons: ["food"] }
+  - { villagers: 17, assign: "+4 → meyveye", icons: ["food"] }
+  - { villagers: 21, assign: "+4 → tarlaya (domuzlar bitince)", icons: ["farm"] }
+  - { villagers: 23, assign: "+2 → altına; +4 → oduna", note: "23. köylüyle Feudal Age'e tıkla (~10:30)", icons: ["gold", "wood"] }
+  - { villagers: 23, assign: "Feudal gelir — 1 köylü Blacksmith, 2 köylü Market kurar; +2 köylü oduna", icons: ["blacksmith", "market", "wood"] }
+  - { villagers: 25, assign: "+2 köylü; Double-Bit Axe + Horse Collar araştır; Castle Age'e tıkla (~14:00)", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 25, assign: "Castle Age — yeni Lumber Camp kur; Bow Saw araştır; ek TC'leri kur", icons: ["lumber-camp", "town-center"] }
+  - { villagers: 30, assign: "+5 köylü; Wheelbarrow (~18 tarlada) araştır; 3+ TC sürekli köylü üretmeli", icons: ["town-center", "farm"] }
 source:
   author: "Hera"
 

@@ -6,18 +6,18 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [japanese]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → oduna, Lumber Camp kur" }
-  - { villagers: 9,  time: "1:10",  assign: "+1 → ilk domuzu çek" }
-  - { villagers: 10, time: "1:30",  assign: "+1 → 2. domuzu çek (TC altında)" }
-  - { villagers: 11, time: "1:50",  assign: "+1 → House kur, avın altına dön" }
-  - { villagers: 13, time: "2:20",  assign: "+2 → avda (ikinci domuz sırasında); 1 köylü Barracks kurar (üs önüne)" }
-  - { villagers: 15, time: "3:00",  assign: "+2 → yiyeceğe (TC altında); +1 → oduna (3 oduncu)" }
-  - { villagers: 17, time: "3:50",  assign: "+2; geyik avı zorunlu", note: "Loom araştır; Feudal Age'e ~8:25'te tıkla" }
-  - { villagers: 17, time: "8:25",  assign: "Feudal gelir — 2 köylü altına, Mining Camp kur; 3 Militia hemen üret" }
-  - { villagers: 17, time: "8:35",  assign: "Militia rakip üssüne gönder; 4 köylü oduna (toplam 7 oduncu)" }
-  - { villagers: 19, time: "9:30",  assign: "+2 köylü; Archery Range kur, Archer üret; Man-at-Arms araştır" }
-  - { villagers: 20, time: "10:30", assign: "+1 → meyveye, Mill kur; Fletching araştır" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → 2. domuzu çek (TC altında)", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → House kur, avın altına dön", icons: ["house"] }
+  - { villagers: 13, assign: "+2 → avda (ikinci domuz sırasında); 1 köylü Barracks kurar (üs önüne)", icons: ["food", "barracks"] }
+  - { villagers: 15, assign: "+2 → yiyeceğe (TC altında); +1 → oduna (3 oduncu)", icons: ["food", "wood"] }
+  - { villagers: 17, assign: "+2; geyik avı zorunlu", note: "Loom araştır; Feudal Age'e ~8:25'te tıkla", icons: ["food", "loom"] }
+  - { villagers: 17, assign: "Feudal gelir — 2 köylü altına, Mining Camp kur; 3 Militia hemen üret", icons: ["gold", "mining-camp", "militia"] }
+  - { villagers: 17, assign: "Militia rakip üssüne gönder; 4 köylü oduna (toplam 7 oduncu)", icons: ["militia", "wood"] }
+  - { villagers: 19, assign: "+2 köylü; Archery Range kur, Archer üret; Man-at-Arms araştır", icons: ["archery-range", "crossbowman"] }
+  - { villagers: 20, assign: "+1 → meyveye, Mill kur; Fletching araştır", icons: ["food", "mill", "fletching"] }
 source:
   author: "Hera"
 

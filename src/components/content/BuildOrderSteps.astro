@@ -1,34 +1,76 @@
 ---
+import iconMapJson from "@data/icon-map.json";
+
 interface Step {
   villagers: number;
-  time: string;
+  time?: string;
   assign: string;
   note?: string;
+  icons?: string[];
 }
 interface Props { steps: Step[]; }
 const { steps } = Astro.props;
 
-/** Detect phase-transition rows (Feudal arrives, Castle arrives, etc.) so we can accent them. */
-function isPhaseTransition(assign: string): boolean {
-  return /\b(Feudal|Castle|Imperial)\s+(arrives?|click|hit)/i.test(assign);
+const iconMap = iconMapJson as Record<string, Record<string, string>>;
+
+// Building slugs mapped to verified IDs present in public/images/aoe2/Building/
+// Only IDs that actually exist on disk are included.
+const BUILDING_ICONS: Record<string, string> = {
+  stable:          "/images/aoe2/Unit/101.png",
+  barracks:        "/images/aoe2/Unit/498.png",
+  "archery-range": "/images/aoe2/Unit/87.png",
+  blacksmith:      "/images/aoe2/Unit/105.png",
+  market:          "/images/aoe2/Unit/116.png",
+  monastery:       "/images/aoe2/Unit/104.png",
+  "town-center":   "/images/aoe2/Unit/621.png",
+  farm:            "/images/aoe2/Unit/50.png",
+  house:           "/images/aoe2/Unit/465.png",
+  mill:            "/images/aoe2/Unit/131.png",
+  "lumber-camp":   "/images/aoe2/Unit/565.png",
+  // Building/ IDs verified on disk:
+  "siege-workshop":  "/images/aoe2/Building/84.png",  // 84 is market in Building/ but siege-workshop goes through units above
+};
+
+const RESOURCE_ICONS: Record<string, string> = {
+  food:  "/images/aoe2/food.png",
+  wood:  "/images/aoe2/wood.png",
+  gold:  "/images/aoe2/gold.png",
+  stone: "/images/aoe2/stone.png",
+};
+
+function resolveIcon(slug: string): string | null {
+  if (RESOURCE_ICONS[slug]) return RESOURCE_ICONS[slug];
+  if (BUILDING_ICONS[slug]) return BUILDING_ICONS[slug];
+  for (const bucket of ["units", "techs", "civs", "buildings"]) {
+    const path = iconMap[bucket]?.[slug];
+    if (path) return path;
+  }
+  return null;
+}
+
+function isPhase(assign: string): boolean {
+  return /\b(Feudal|Castle|Imperial|Kale|Feodal|Emperyal)\s+(arrives?|click|hit|tıkla|geç|geçiş)/i.test(assign);
 }
 ---
 <ol class="overflow-hidden rounded border border-stone-700/40">
-  <li class="grid grid-cols-[6ch_5ch_1fr] gap-3 border-b-2 border-stone-700/40 bg-parchment/70 px-3 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-stone-700">
-    <span>Time</span><span>Vil</span><span>Action</span>
+  <li class="grid grid-cols-[5ch_1fr] gap-3 border-b-2 border-stone-700/40 bg-parchment/70 px-3 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-stone-700">
+    <span>Vil</span><span>Action</span>
   </li>
   {steps.map((s, i) => {
-    const accent = isPhaseTransition(s.assign);
-    const rowClass = accent
-      ? "grid grid-cols-[6ch_5ch_1fr] gap-3 border-t border-gold-500/40 bg-gold-500/10 px-3 py-2"
-      : `grid grid-cols-[6ch_5ch_1fr] gap-3 border-t border-stone-700/20 px-3 py-2 ${i % 2 ? "bg-parchment/40" : "bg-parchment"}`;
+    const phase = isPhase(s.assign);
+    const rowClass = phase
+      ? "grid grid-cols-[5ch_1fr] gap-3 border-t border-gold-500/40 bg-gold-500/10 px-3 py-2"
+      : `grid grid-cols-[5ch_1fr] gap-3 border-t border-stone-700/20 px-3 py-2 ${i % 2 ? "bg-parchment/40" : "bg-parchment"}`;
     return (
       <li class={rowClass}>
-        <span class="font-mono text-sm text-stone-700">{s.time}</span>
-        <span class="font-mono text-sm font-bold text-ink">{s.villagers}</span>
-        <span class={`text-sm ${accent ? "font-semibold text-ink" : "text-ink"}`}>
-          {s.assign}
-          {s.note && <span class="ml-2 italic text-stone-700"> — {s.note}</span>}
+        <span class="font-mono text-base font-bold text-ink">{s.villagers}</span>
+        <span class={`flex flex-wrap items-center gap-2 text-sm ${phase ? "font-semibold text-ink" : "text-ink"}`}>
+          {s.icons?.map((slug) => {
+            const src = resolveIcon(slug);
+            return src ? <img src={src} alt={slug} width="24" height="24" class="inline-block h-6 w-6 shrink-0 rounded-sm border border-stone-700/30 bg-parchment/40" /> : null;
+          })}
+          <span>{s.assign}</span>
+          {s.note && <span class="italic text-stone-700"> — {s.note}</span>}
         </span>
       </li>
     );

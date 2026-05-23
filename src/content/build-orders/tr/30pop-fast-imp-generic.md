@@ -6,16 +6,16 @@ targetAge: imperial
 durationMin: 21
 civsRecommended: []
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 16, time: "2:30",  assign: "+10 → oduna (2 Lumber Camp kur)" }
-  - { villagers: 20, time: "4:00",  assign: "+4 → meyveye, Mill kur" }
-  - { villagers: 28, time: "6:00",  assign: "+8 → avda (domuz / geyik / koyun)" }
-  - { villagers: 30, time: "7:00",  assign: "+2 → altına, Mining Camp kur", note: "30. köylüyle Feodal'e tıkla; av bitince köylüler tarlaya geçer" }
-  - { villagers: 30, time: "13:00", assign: "Feodal gelir (~13:00) — 1 Demirci, 2 Pazar kur; +2 altın" }
-  - { villagers: 32, time: "14:00", assign: "+2 köylü; Kale Çağı'na tıkla (~16:30)" }
-  - { villagers: 32, time: "16:30", assign: "Castle Age — 1 Manastır, 1 Siege Workshop kur; +2 odun" }
-  - { villagers: 34, time: "18:00", assign: "+2 köylü; meyveler bitince köylüler tarlaya; İmparatorluk Çağı'na tıkla (~21:00)" }
-  - { villagers: 34, time: "21:00", assign: "Imperial Age — 12 tarla, 9 odun, 8 altın dağılımı; ordu kur ve ölçekle" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 16, assign: "+10 → oduna (2 Lumber Camp kur)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 20, assign: "+4 → meyveye, Mill kur", icons: ["food", "mill"] }
+  - { villagers: 28, assign: "+8 → avda (domuz / geyik / koyun)", icons: ["food"] }
+  - { villagers: 30, assign: "+2 → altına, Mining Camp kur", note: "30. köylüyle Feodal'e tıkla; av bitince köylüler tarlaya geçer", icons: ["gold", "mining-camp"] }
+  - { villagers: 30, assign: "Feodal gelir (~13:00) — 1 Demirci, 2 Pazar kur; +2 altın", icons: ["blacksmith", "market", "gold"] }
+  - { villagers: 32, assign: "+2 köylü; Kale Çağı'na tıkla (~16:30)", icons: ["food", "gold"] }
+  - { villagers: 32, assign: "Castle Age — 1 Manastır, 1 Siege Workshop kur; +2 odun", icons: ["monastery", "wood"] }
+  - { villagers: 34, assign: "+2 köylü; meyveler bitince köylüler tarlaya; İmparatorluk Çağı'na tıkla (~21:00)", icons: ["farm"] }
+  - { villagers: 34, assign: "Imperial Age — 12 tarla, 9 odun, 8 altın dağılımı; ordu kur ve ölçekle", icons: ["food", "wood", "gold"] }
 source:
   author: "Hera"
 

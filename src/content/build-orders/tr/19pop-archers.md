@@ -6,16 +6,16 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [britons, mayans, ethiopians, tatars, vikings]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → TC altında koyunda" }
-  - { villagers: 9,  time: "1:05",  assign: "+3 → oduna, Lumber Camp kur" }
-  - { villagers: 10, time: "1:30",  assign: "+1 → en yakın domuzu çek" }
-  - { villagers: 11, time: "1:55",  assign: "+1 → House kur, ardından meyveye" }
-  - { villagers: 17, time: "3:30",  assign: "+6 → TC altında av, 2. domuzu çek" }
-  - { villagers: 19, time: "4:20",  assign: "+2 → straggler ağaçlara", note: "Loom araştır; 19 köylüyle Feudal Age'e tıkla" }
-  - { villagers: 19, time: "9:15",  assign: "Feudal gelir — 5 köylü 2. Lumber Camp'e, 2 köylü straggler ağaçlara" }
-  - { villagers: 19, time: "9:20",  assign: "1 köylü Barracks + House kurar, 2 köylü altına Mining Camp kurar" }
-  - { villagers: 21, time: "10:10", assign: "Double-Bit Axe araştır; Archery Range kur" }
-  - { villagers: 23, time: "11:00", assign: "+2 → altına; Blacksmith kur → en kısa sürede Fletching araştır" }
+  - { villagers: 6,  assign: "6 → TC altında koyunda", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → en yakın domuzu çek", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → House kur, ardından meyveye", icons: ["house", "mill", "food"] }
+  - { villagers: 17, assign: "+6 → TC altında av, 2. domuzu çek", icons: ["food"] }
+  - { villagers: 19, assign: "+2 → straggler ağaçlara", note: "Loom araştır; 19 köylüyle Feudal Age'e tıkla", icons: ["wood", "loom"] }
+  - { villagers: 19, assign: "Feudal gelir — 5 köylü 2. Lumber Camp'e, 2 köylü straggler ağaçlara", icons: ["lumber-camp", "wood"] }
+  - { villagers: 19, assign: "1 köylü Barracks + House kurar, 2 köylü altına Mining Camp kurar", icons: ["barracks", "house", "gold", "mining-camp"] }
+  - { villagers: 21, assign: "Double-Bit Axe araştır; Archery Range kur", icons: ["double-bit-axe", "archery-range"] }
+  - { villagers: 23, assign: "+2 → altına; Blacksmith kur → en kısa sürede Fletching araştır", icons: ["gold", "blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://ageofnotes.com/build-orders/1-range-archers-19-vils/"

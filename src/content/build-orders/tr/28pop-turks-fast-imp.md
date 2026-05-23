@@ -6,17 +6,17 @@ targetAge: imperial
 durationMin: 20
 civsRecommended: [turks]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 10, time: "1:30",  assign: "+4 → oduna, Lumber Camp kur" }
-  - { villagers: 18, time: "3:30",  assign: "+8 → yiyeceğe (domuz / koyun / geyik)" }
-  - { villagers: 22, time: "5:00",  assign: "+4 → meyveye, Mill kur" }
-  - { villagers: 27, time: "7:00",  assign: "+5 → altına, Mining Camp kur" }
-  - { villagers: 28, time: "7:30",  assign: "+1 → oduna", note: "28. köylüyle Feudal Age'e tıkla (~12:30)" }
-  - { villagers: 28, time: "12:30", assign: "Feudal gelir — 1 köylü Blacksmith, 2 köylü Market kurar; +2 köylü altına" }
-  - { villagers: 30, time: "13:30", assign: "+2 köylü; Kale Çağı'na tıkla (~16:00)" }
-  - { villagers: 30, time: "16:00", assign: "Castle Age — 2 Siege Workshop, 1 Manastır kur; +2 köylü altına; taş sat" }
-  - { villagers: 32, time: "17:30", assign: "+2 köylü; İmparatorluk Çağı'na tıkla (~20:00)" }
-  - { villagers: 32, time: "20:00", assign: "Imperial Age — El Topçuları + Bombardıman Topları üret; 13 altın, 8 odun, 11 yiyecek dağılımı hedefle" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 10, assign: "+4 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 18, assign: "+8 → yiyeceğe (domuz / koyun / geyik)", icons: ["food"] }
+  - { villagers: 22, assign: "+4 → meyveye, Mill kur", icons: ["food", "mill"] }
+  - { villagers: 27, assign: "+5 → altına, Mining Camp kur", icons: ["gold", "mining-camp"] }
+  - { villagers: 28, assign: "+1 → oduna", note: "28. köylüyle Feudal Age'e tıkla (~12:30)", icons: ["wood"] }
+  - { villagers: 28, assign: "Feudal gelir — 1 köylü Blacksmith, 2 köylü Market kurar; +2 köylü altına", icons: ["blacksmith", "market", "gold"] }
+  - { villagers: 30, assign: "+2 köylü; Kale Çağı'na tıkla (~16:00)", icons: ["food", "gold"] }
+  - { villagers: 30, assign: "Castle Age — 2 Siege Workshop, 1 Manastır kur; +2 köylü altına; taş sat", icons: ["monastery", "gold"] }
+  - { villagers: 32, assign: "+2 köylü; İmparatorluk Çağı'na tıkla (~20:00)", icons: ["food", "gold"] }
+  - { villagers: 32, assign: "Imperial Age — El Topçuları + Bombardıman Topları üret; 13 altın, 8 odun, 11 yiyecek dağılımı hedefle", icons: ["janissary", "bombard-cannon"] }
 source:
   author: "Hera"
 

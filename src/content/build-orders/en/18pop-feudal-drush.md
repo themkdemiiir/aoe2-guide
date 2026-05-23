@@ -6,16 +6,16 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [malians, lithuanians, japanese, britons, vikings]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep" }
-  - { villagers: 9,  time: "1:05",  assign: "+3 → wood, build lumber camp" }
-  - { villagers: 10, time: "1:30",  assign: "+1 → lure boar" }
-  - { villagers: 13, time: "2:20",  assign: "+3 → hunt under TC" }
-  - { villagers: 16, time: "3:25",  assign: "+3; 1 vil builds Barracks at front of base" }
-  - { villagers: 18, time: "4:15",  assign: "+2 → wood", note: "Research Loom; click Feudal at ~8:50" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal arrives — produce 2 Militia immediately; send toward enemy base" }
-  - { villagers: 18, time: "8:55",  assign: "4 vils → wood (lumber camp expansion)" }
-  - { villagers: 19, time: "9:20",  assign: "+1 → berries, build Mill; research Double-Bit Axe" }
-  - { villagers: 21, time: "10:00", assign: "+2 → follow-up military based on opponent (scouts/archers/spears)" }
+  - { villagers: 6,  assign: "6 → sheep", icons: ["food"] }
+  - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → lure boar", icons: ["food"] }
+  - { villagers: 13, assign: "+3 → hunt under TC", icons: ["food"] }
+  - { villagers: 16, assign: "+3; 1 vil builds Barracks at front of base", icons: ["barracks"] }
+  - { villagers: 18, assign: "+2 → wood", note: "Research Loom; click Feudal at ~8:50", icons: ["wood", "loom"] }
+  - { villagers: 18, assign: "Feudal arrives — produce 2 Militia immediately; send toward enemy base", icons: ["militia", "barracks"] }
+  - { villagers: 18, assign: "4 vils → wood (lumber camp expansion)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 19, assign: "+1 → berries, build Mill; research Double-Bit Axe", icons: ["food", "mill", "double-bit-axe"] }
+  - { villagers: 21, assign: "+2 → follow-up military based on opponent (scouts/archers/spears)", icons: ["barracks"] }
 source:
   author: "Hera"
   url: "https://ageofnotes.com/build-orders/feudal-drush-18-vils/"

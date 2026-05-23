@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 17
 civsRecommended: [chinese, britons, franks, teutons, vikings]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep" }
-  - { villagers: 10, time: "1:40",  assign: "+4 → wood, build lumber camp" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → lure boar" }
-  - { villagers: 15, time: "3:20",  assign: "+4 → house near berries + mill, then berries" }
-  - { villagers: 16, time: "3:45",  assign: "+1 → lure 2nd boar" }
-  - { villagers: 20, time: "5:00",  assign: "+4 → seed farms around TC" }
-  - { villagers: 23, time: "5:55",  assign: "+3 → 2nd lumber camp + wood" }
-  - { villagers: 26, time: "6:50",  assign: "+3 → gold mining camp + gold", note: "Click Feudal at 26 pop — target ~10:30" }
-  - { villagers: 26, time: "10:30", assign: "Feudal arrives — 4 vils → build Blacksmith + Market" }
-  - { villagers: 28, time: "11:30", assign: "+2 vils; click Castle Age (~13:00); sell stone at Market if needed" }
-  - { villagers: 30, time: "13:00", assign: "Castle Age — 4 vils → build 2–3 additional TCs near resources" }
-  - { villagers: 40, time: "17:00", assign: "Economy boomed; begin military production from multiple buildings" }
+  - { villagers: 6,  assign: "6 → sheep", icons: ["food"] }
+  - { villagers: 10, assign: "+4 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 11, assign: "+1 → lure boar", icons: ["food"] }
+  - { villagers: 15, assign: "+4 → house near berries + mill, then berries", icons: ["house", "mill", "food"] }
+  - { villagers: 16, assign: "+1 → lure 2nd boar", icons: ["food"] }
+  - { villagers: 20, assign: "+4 → seed farms around TC", icons: ["farm"] }
+  - { villagers: 23, assign: "+3 → 2nd lumber camp + wood", icons: ["lumber-camp", "wood"] }
+  - { villagers: 26, assign: "+3 → gold mining camp + gold", note: "Click Feudal at 26 pop — target ~10:30", icons: ["gold", "mining-camp"] }
+  - { villagers: 26, assign: "Feudal arrives — 4 vils → build Blacksmith + Market", icons: ["blacksmith", "market"] }
+  - { villagers: 28, assign: "+2 vils; click Castle Age (~13:00); sell stone at Market if needed", icons: ["market"] }
+  - { villagers: 30, assign: "Castle Age — 4 vils → build 2–3 additional TCs near resources", icons: ["town-center"] }
+  - { villagers: 40, assign: "Economy boomed; begin military production from multiple buildings", icons: ["barracks", "stable", "archery-range"] }
 source:
   author: "AoE Companion"
   url: "https://aoecompanion.com/build-guides/fast-castle-boom"

@@ -6,16 +6,16 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [franks, huns, lithuanians, magyars, malians]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → wood, build lumber camp" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → lure nearest boar" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → build house then mill on berries" }
-  - { villagers: 16, time: "3:10",  assign: "+6 → hunt under TC, lure 2nd boar when needed" }
-  - { villagers: 18, time: "4:00",  assign: "+2 → wood", note: "Research Loom; click Feudal at 18 pop" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal arrives — 5 vils → 2nd lumber camp, 4 → berries" }
-  - { villagers: 18, time: "9:00",  assign: "1 vil → barracks, 2 vils → build stable" }
-  - { villagers: 20, time: "9:30",  assign: "+2 TC vils; stable builders → palisade walls" }
-  - { villagers: 24, time: "11:15", assign: "+2 → gold, build Mining Camp; research Bloodlines after 7–8 scouts" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 16, assign: "+6 → hunt under TC, lure 2nd boar when needed", icons: ["food"] }
+  - { villagers: 18, assign: "+2 → wood", note: "Research Loom; click Feudal at 18 pop", icons: ["wood", "loom"] }
+  - { villagers: 18, assign: "Feudal arrives — 5 vils → 2nd lumber camp, 4 → berries", icons: ["lumber-camp", "food"] }
+  - { villagers: 18, assign: "1 vil → barracks, 2 vils → build stable", icons: ["barracks", "stable"] }
+  - { villagers: 20, assign: "+2 TC vils; stable builders → palisade walls", icons: ["stable"] }
+  - { villagers: 24, assign: "+2 → gold, build Mining Camp; research Bloodlines after 7–8 scouts", icons: ["gold", "mining-camp", "light-cavalry"] }
 source:
   author: "Hera"
   url: "https://ageofnotes.com/build-orders/1-stable-scouts-18-vils/"

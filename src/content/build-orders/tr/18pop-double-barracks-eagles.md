@@ -6,17 +6,17 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [aztecs, incas, mayans]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 köylü koyunda" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 köylü oduna, Lumber Camp kur" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 köylü ilk domuzu çeker" }
-  - { villagers: 10, time: "1:40",  assign: "+1 köylü avda (TC altında)" }
-  - { villagers: 11, time: "2:05",  assign: "+1 köylü House kurar → Mill kurar (meyve yanına)" }
-  - { villagers: 12, time: "2:30",  assign: "+1 köylü ikinci domuzu çeker" }
-  - { villagers: 16, time: "3:30",  assign: "+4 köylü avda (toplam 16 köylü)", note: "Aztec/Inca oynuyorsan Loom araştır; Feudal Age'e ~8:50'de tıkla" }
-  - { villagers: 16, time: "8:50",  assign: "Feudal gelir — 5 köylü oduna (toplam 7 oduncu)" }
-  - { villagers: 18, time: "9:00",  assign: "+2 köylü; 2 köylü altına, Mining Camp kur; 2 köylü Barracks + House kurar" }
-  - { villagers: 18, time: "9:15",  assign: "3 köylü meyveye; Double-Bit Axe araştır; ikinci Barracks kur" }
-  - { villagers: 22, time: "10:30", assign: "+4 yeni köylü altına; her iki Barracks'tan Eagle Scout üret" }
+  - { villagers: 6,  assign: "6 köylü koyunda", icons: ["food"] }
+  - { villagers: 8,  assign: "+2 köylü oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 köylü ilk domuzu çeker", icons: ["food"] }
+  - { villagers: 10, assign: "+1 köylü avda (TC altında)", icons: ["food"] }
+  - { villagers: 11, assign: "+1 köylü House kurar → Mill kurar (meyve yanına)", icons: ["house", "mill", "food"] }
+  - { villagers: 12, assign: "+1 köylü ikinci domuzu çeker", icons: ["food"] }
+  - { villagers: 16, assign: "+4 köylü avda (toplam 16 köylü)", note: "Aztec/Inca oynuyorsan Loom araştır; Feudal Age'e ~8:50'de tıkla", icons: ["food", "loom"] }
+  - { villagers: 16, assign: "Feudal gelir — 5 köylü oduna (toplam 7 oduncu)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 18, assign: "+2 köylü; 2 köylü altına, Mining Camp kur; 2 köylü Barracks + House kurar", icons: ["gold", "mining-camp", "barracks", "house"] }
+  - { villagers: 18, assign: "3 köylü meyveye; Double-Bit Axe araştır; ikinci Barracks kur", icons: ["food", "double-bit-axe", "barracks"] }
+  - { villagers: 22, assign: "+4 yeni köylü altına; her iki Barracks'tan Eagle Scout üret", icons: ["gold", "eagle-scout"] }
 source:
   author: "Hera"
 

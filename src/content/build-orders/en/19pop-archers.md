@@ -6,16 +6,16 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [britons, mayans, ethiopians, tatars, vikings]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 9,  time: "1:05",  assign: "+3 → wood, build lumber camp" }
-  - { villagers: 10, time: "1:30",  assign: "+1 → lure nearest boar" }
-  - { villagers: 11, time: "1:55",  assign: "+1 → build house then berries" }
-  - { villagers: 17, time: "3:30",  assign: "+6 → hunt under TC, lure 2nd boar" }
-  - { villagers: 19, time: "4:20",  assign: "+2 → straggler trees", note: "Research Loom; click Feudal at 19 pop" }
-  - { villagers: 19, time: "9:15",  assign: "Feudal arrives — 5 vils → 2nd lumber camp, 2 → straggler trees" }
-  - { villagers: 19, time: "9:20",  assign: "1 → barracks + house, 2 → gold mining camp" }
-  - { villagers: 21, time: "10:10", assign: "Research Double-Bit Axe; build Archery Range" }
-  - { villagers: 23, time: "11:00", assign: "+2 → gold; build Blacksmith → research Fletching ASAP" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build house then berries", icons: ["house", "mill", "food"] }
+  - { villagers: 17, assign: "+6 → hunt under TC, lure 2nd boar", icons: ["food"] }
+  - { villagers: 19, assign: "+2 → straggler trees", note: "Research Loom; click Feudal at 19 pop", icons: ["wood", "loom"] }
+  - { villagers: 19, assign: "Feudal arrives — 5 vils → 2nd lumber camp, 2 → straggler trees", icons: ["lumber-camp", "wood"] }
+  - { villagers: 19, assign: "1 → barracks + house, 2 → gold mining camp", icons: ["barracks", "house", "gold", "mining-camp"] }
+  - { villagers: 21, assign: "Research Double-Bit Axe; build Archery Range", icons: ["double-bit-axe", "archery-range"] }
+  - { villagers: 23, assign: "+2 → gold; build Blacksmith → research Fletching ASAP", icons: ["gold", "blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://ageofnotes.com/build-orders/1-range-archers-19-vils/"

@@ -6,16 +6,16 @@ targetAge: imperial
 durationMin: 21
 civsRecommended: []
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 16, time: "2:30",  assign: "+10 → wood (build 2 Lumber Camps)" }
-  - { villagers: 20, time: "4:00",  assign: "+4 → berries, build mill" }
-  - { villagers: 28, time: "6:00",  assign: "+8 → hunt (boar / deer / sheep)" }
-  - { villagers: 30, time: "7:00",  assign: "+2 → gold, build Mining Camp", note: "Click Feudal at 30 pop; transition hunting vils to farms when food runs out" }
-  - { villagers: 30, time: "13:00", assign: "Feudal arrives (~13:00) — 1 builds Blacksmith, 2 build Market; +2 gold" }
-  - { villagers: 32, time: "14:00", assign: "+2 vils; click Castle Age (~16:30)" }
-  - { villagers: 32, time: "16:30", assign: "Castle Age — build 1 Monastery, 1 Siege Workshop; +2 wood" }
-  - { villagers: 34, time: "18:00", assign: "+2 vils; redirect berry vils to farms; click Imperial Age (~21:00)" }
-  - { villagers: 34, time: "21:00", assign: "Imperial Age — 12 food / 9 wood / 8 gold distribution; build military and scale" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 16, assign: "+10 → wood (build 2 Lumber Camps)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 20, assign: "+4 → berries, build mill", icons: ["food", "mill"] }
+  - { villagers: 28, assign: "+8 → hunt (boar / deer / sheep)", icons: ["food"] }
+  - { villagers: 30, assign: "+2 → gold, build Mining Camp", note: "Click Feudal at 30 pop; transition hunting vils to farms when food runs out", icons: ["gold", "mining-camp"] }
+  - { villagers: 30, assign: "Feudal arrives (~13:00) — 1 builds Blacksmith, 2 build Market; +2 gold", icons: ["blacksmith", "market", "gold"] }
+  - { villagers: 32, assign: "+2 vils; click Castle Age (~16:30)", icons: ["food", "gold"] }
+  - { villagers: 32, assign: "Castle Age — build 1 Monastery, 1 Siege Workshop; +2 wood", icons: ["monastery", "wood"] }
+  - { villagers: 34, assign: "+2 vils; redirect berry vils to farms; click Imperial Age (~21:00)", icons: ["farm"] }
+  - { villagers: 34, assign: "Imperial Age — 12 food / 9 wood / 8 gold distribution; build military and scale", icons: ["food", "wood", "gold"] }
 source:
   author: "Hera"
 

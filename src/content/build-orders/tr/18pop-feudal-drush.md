@@ -6,16 +6,16 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [malians, lithuanians, japanese, britons, vikings]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda" }
-  - { villagers: 9,  time: "1:05",  assign: "+3 → oduna, Lumber Camp kur" }
-  - { villagers: 10, time: "1:30",  assign: "+1 → domuzu çek" }
-  - { villagers: 13, time: "2:20",  assign: "+3 → TC altında av" }
-  - { villagers: 16, time: "3:25",  assign: "+3; 1 köylü üssün ön tarafına Barracks kurar" }
-  - { villagers: 18, time: "4:15",  assign: "+2 → oduna", note: "Loom araştır; Feudal Age'e ~8:50'de tıkla" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal gelir — hemen 2 Militia üret; düşman üssüne gönder" }
-  - { villagers: 18, time: "8:55",  assign: "4 köylü → oduna (Lumber Camp genişlemesi)" }
-  - { villagers: 19, time: "9:20",  assign: "+1 → meyveye, Mill kur; Double-Bit Axe araştır" }
-  - { villagers: 21, time: "10:00", assign: "+2 → rakibe göre takip askeri (scouts/archers/spears)" }
+  - { villagers: 6,  assign: "6 → koyunda", icons: ["food"] }
+  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → domuzu çek", icons: ["food"] }
+  - { villagers: 13, assign: "+3 → TC altında av", icons: ["food"] }
+  - { villagers: 16, assign: "+3; 1 köylü üssün ön tarafına Barracks kurar", icons: ["barracks"] }
+  - { villagers: 18, assign: "+2 → oduna", note: "Loom araştır; Feudal Age'e ~8:50'de tıkla", icons: ["wood", "loom"] }
+  - { villagers: 18, assign: "Feudal gelir — hemen 2 Militia üret; düşman üssüne gönder", icons: ["militia", "barracks"] }
+  - { villagers: 18, assign: "4 köylü → oduna (Lumber Camp genişlemesi)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 19, assign: "+1 → meyveye, Mill kur; Double-Bit Axe araştır", icons: ["food", "mill", "double-bit-axe"] }
+  - { villagers: 21, assign: "+2 → rakibe göre takip askeri (scouts/archers/spears)", icons: ["barracks"] }
 source:
   author: "Hera"
   url: "https://ageofnotes.com/build-orders/feudal-drush-18-vils/"

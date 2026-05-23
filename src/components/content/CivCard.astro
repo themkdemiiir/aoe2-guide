@@ -18,7 +18,7 @@ const meta = (civsData.civs as Array<Record<string, any>>).find((c) => c.slug ==
 <a href={localizedPath(`/civs/${slug}`, locale)}
    class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500">
   <div class="flex items-center gap-3">
-    <Icon slug={slug} kind="civ" size={56} />
+    <Icon slug={slug} kind="civ" size={64} />
     <div>
       <h3 class="font-display text-xl text-ink">{name}</h3>
       <p class="text-sm text-stone-700">{tagline}</p>

@@ -6,17 +6,17 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [teutons]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → oduna, Lumber Camp kur" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → ilk domuzu çek" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → House kur, ardından meyveye Mill kur" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → 2. domuzu çek" }
-  - { villagers: 16, time: "3:30",  assign: "+5 → avda (TC altında)" }
-  - { villagers: 17, time: "4:00",  assign: "+1; 2 köylü taşa, Mining Camp kur", note: "Loom araştır; Feudal Age'e ~8:25'te tıkla" }
-  - { villagers: 17, time: "8:25",  assign: "Feudal gelir — 1 köylü oduna ekle (toplam 3 oduncu)" }
-  - { villagers: 17, time: "8:30",  assign: "10 köylüyü rakip üssüne doğru yolla; TC altında 1 köylü bırak" }
-  - { villagers: 19, time: "9:30",  assign: "+2 yeni köylü av ve tarlaya; ileri köylülerle rakibin odun hattına kule kur (~8 kare)" }
-  - { villagers: 21, time: "11:00", assign: "+2 köylü; Palisade Wall ile kuleyi çevir; kule zinciri kur" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
+  - { villagers: 11, assign: "+1 → 2. domuzu çek", icons: ["food"] }
+  - { villagers: 16, assign: "+5 → avda (TC altında)", icons: ["food"] }
+  - { villagers: 17, assign: "+1; 2 köylü taşa, Mining Camp kur", note: "Loom araştır; Feudal Age'e ~8:25'te tıkla", icons: ["stone", "mining-camp", "loom"] }
+  - { villagers: 17, assign: "Feudal gelir — 1 köylü oduna ekle (toplam 3 oduncu)", icons: ["wood"] }
+  - { villagers: 17, assign: "10 köylüyü rakip üssüne doğru yolla; TC altında 1 köylü bırak", icons: ["watch-tower"] }
+  - { villagers: 19, assign: "+2 yeni köylü av ve tarlaya; ileri köylülerle rakibin odun hattına kule kur (~8 kare)", icons: ["watch-tower", "stone"] }
+  - { villagers: 21, assign: "+2 köylü; Palisade Wall ile kuleyi çevir; kule zinciri kur", icons: ["watch-tower"] }
 source:
   author: "Hera"
 

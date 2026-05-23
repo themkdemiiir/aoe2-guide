@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 16
 civsRecommended: [franks, magyars, slavs, berbers, huns]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 9,  time: "1:15",  assign: "+3 → oduna, Lumber Camp kur" }
-  - { villagers: 10, time: "1:45",  assign: "+1 → ilk domuzu çek" }
-  - { villagers: 11, time: "2:10",  assign: "+1 → House kur, ardından meyveye Mill kur" }
-  - { villagers: 12, time: "2:35",  assign: "+1 → 2. domuzu çek" }
-  - { villagers: 16, time: "3:40",  assign: "+4 → meyveye" }
-  - { villagers: 21, time: "5:30",  assign: "+5 → oduna" }
-  - { villagers: 24, time: "7:00",  assign: "+3 → altına, Mining Camp kur", note: "Loom al; 25. köylüyle Feudal Age'e tıkla (~11:45)" }
-  - { villagers: 25, time: "11:45", assign: "Feudal gelir — 1 köylü Barracks, 1 köylü House kurar" }
-  - { villagers: 25, time: "12:00", assign: "2 köylüyle Stable ve Market kur; +4 köylü altına" }
-  - { villagers: 27, time: "13:30", assign: "+2 köylü; Double-Bit Axe + Horse Collar araştır; Castle Age'e tıkla (~16:05)" }
-  - { villagers: 29, time: "16:05", assign: "Castle Age — Stable ekle, her iki Stable'dan Knight üret" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
+  - { villagers: 12, assign: "+1 → 2. domuzu çek", icons: ["food"] }
+  - { villagers: 16, assign: "+4 → meyveye", icons: ["food"] }
+  - { villagers: 21, assign: "+5 → oduna", icons: ["wood"] }
+  - { villagers: 24, assign: "+3 → altına, Mining Camp kur", note: "Loom al; 25. köylüyle Feudal Age'e tıkla (~11:45)", icons: ["gold", "mining-camp", "loom"] }
+  - { villagers: 25, assign: "Feudal gelir — 1 köylü Barracks, 1 köylü House kurar", icons: ["barracks", "house"] }
+  - { villagers: 25, assign: "2 köylüyle Stable ve Market kur; +4 köylü altına", icons: ["stable", "market", "gold"] }
+  - { villagers: 27, assign: "+2 köylü; Double-Bit Axe + Horse Collar araştır; Castle Age'e tıkla (~16:05)", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 29, assign: "Castle Age — Stable ekle, her iki Stable'dan Knight üret", icons: ["stable", "knight"] }
 source:
   author: "Hera"
 

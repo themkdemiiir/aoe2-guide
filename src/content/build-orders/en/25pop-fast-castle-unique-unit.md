@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 15
 civsRecommended: [spanish, turks, mayans, burgundians, mongols]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 9,  time: "1:15",  assign: "+3 → wood, build lumber camp" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → lure nearest boar" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → build house then mill on berries" }
-  - { villagers: 14, time: "3:00",  assign: "+3 → hunt (deer or 2nd boar)" }
-  - { villagers: 18, time: "4:20",  assign: "+4 → berries" }
-  - { villagers: 21, time: "5:30",  assign: "+3 → farms (prevent sheep from running out early)" }
-  - { villagers: 23, time: "6:20",  assign: "+2 → gold; +5 → wood", note: "Click Feudal at 25 pop (~11:20)" }
-  - { villagers: 25, time: "11:20", assign: "Feudal arrives — 4 vils → stone, build Mining Camp; research Double-Bit Axe + Horse Collar" }
-  - { villagers: 27, time: "12:00", assign: "+2 vils; 1 builds Blacksmith, 2 build Market; +2 → stone" }
-  - { villagers: 27, time: "14:50", assign: "Click Castle Age (~14:50); stone vils build Castle immediately" }
-  - { villagers: 29, time: "15:30", assign: "Castle arrives — start Unique Unit production; research Bow Saw" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 14, assign: "+3 → hunt (deer or 2nd boar)", icons: ["food"] }
+  - { villagers: 18, assign: "+4 → berries", icons: ["food"] }
+  - { villagers: 21, assign: "+3 → farms (prevent sheep from running out early)", icons: ["farm"] }
+  - { villagers: 23, assign: "+2 → gold; +5 → wood", note: "Click Feudal at 25 pop (~11:20)", icons: ["gold", "wood"] }
+  - { villagers: 25, assign: "Feudal arrives — 4 vils → stone, build Mining Camp; research Double-Bit Axe + Horse Collar", icons: ["stone", "mining-camp", "double-bit-axe", "horse-collar"] }
+  - { villagers: 27, assign: "+2 vils; 1 builds Blacksmith, 2 build Market; +2 → stone", icons: ["blacksmith", "market", "stone"] }
+  - { villagers: 27, assign: "Click Castle Age (~14:50); stone vils build Castle immediately", icons: ["stone"] }
+  - { villagers: 29, assign: "Castle arrives — start Unique Unit production; research Bow Saw", icons: ["fortress", "wood"] }
 source:
   author: "Hera"
 

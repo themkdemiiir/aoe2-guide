@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 17
 civsRecommended: [chinese, britons, franks, teutons, vikings]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda" }
-  - { villagers: 10, time: "1:40",  assign: "+4 → oduna, Lumber Camp kur" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → domuzu çek" }
-  - { villagers: 15, time: "3:20",  assign: "+4 → meyvelerin yanına House + Mill, ardından meyveye" }
-  - { villagers: 16, time: "3:45",  assign: "+1 → 2. domuzu çek" }
-  - { villagers: 20, time: "5:00",  assign: "+4 → TC çevresine Farm kur" }
-  - { villagers: 23, time: "5:55",  assign: "+3 → 2. Lumber Camp + oduna" }
-  - { villagers: 26, time: "6:50",  assign: "+3 → Mining Camp + altına", note: "26 köylüyle Feudal Age'e tıkla — hedef ~10:30" }
-  - { villagers: 26, time: "10:30", assign: "Feudal gelir — 4 köylü Blacksmith + Market kurar" }
-  - { villagers: 28, time: "11:30", assign: "+2 köylü; Castle Age'e tıkla (~13:00); gerekirse Market'te taş sat" }
-  - { villagers: 30, time: "13:00", assign: "Castle Age — 4 köylü kaynak yakınına 2–3 ek TC kurar" }
-  - { villagers: 40, time: "17:00", assign: "Ekonomi boomlandi; birden fazla binadan asker üretimine başla" }
+  - { villagers: 6,  assign: "6 → koyunda", icons: ["food"] }
+  - { villagers: 10, assign: "+4 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 11, assign: "+1 → domuzu çek", icons: ["food"] }
+  - { villagers: 15, assign: "+4 → meyvelerin yanına House + Mill, ardından meyveye", icons: ["house", "mill", "food"] }
+  - { villagers: 16, assign: "+1 → 2. domuzu çek", icons: ["food"] }
+  - { villagers: 20, assign: "+4 → TC çevresine Farm kur", icons: ["farm"] }
+  - { villagers: 23, assign: "+3 → 2. Lumber Camp + oduna", icons: ["lumber-camp", "wood"] }
+  - { villagers: 26, assign: "+3 → Mining Camp + altına", note: "26 köylüyle Feudal Age'e tıkla — hedef ~10:30", icons: ["gold", "mining-camp"] }
+  - { villagers: 26, assign: "Feudal gelir — 4 köylü Blacksmith + Market kurar", icons: ["blacksmith", "market"] }
+  - { villagers: 28, assign: "+2 köylü; Castle Age'e tıkla (~13:00); gerekirse Market'te taş sat", icons: ["market"] }
+  - { villagers: 30, assign: "Castle Age — 4 köylü kaynak yakınına 2–3 ek TC kurar", icons: ["town-center"] }
+  - { villagers: 40, assign: "Ekonomi boomlandi; birden fazla binadan asker üretimine başla", icons: ["barracks", "stable", "archery-range"] }
 source:
   author: "AoE Companion"
   url: "https://aoecompanion.com/build-guides/fast-castle-boom"

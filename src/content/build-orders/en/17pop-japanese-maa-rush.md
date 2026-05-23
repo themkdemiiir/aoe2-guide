@@ -6,18 +6,18 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [japanese]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → wood, build lumber camp" }
-  - { villagers: 9,  time: "1:10",  assign: "+1 → lure nearest boar" }
-  - { villagers: 10, time: "1:30",  assign: "+1 → lure 2nd boar (under TC)" }
-  - { villagers: 11, time: "1:50",  assign: "+1 → build house, return to hunting" }
-  - { villagers: 13, time: "2:20",  assign: "+2 → hunt under 2nd boar; 1 vil builds Barracks at front of base" }
-  - { villagers: 15, time: "3:00",  assign: "+2 → food under TC; +1 → wood (3 lumberjacks total)" }
-  - { villagers: 17, time: "3:50",  assign: "+2; lure deer (mandatory)", note: "Research Loom; click Feudal at ~8:25" }
-  - { villagers: 17, time: "8:25",  assign: "Feudal arrives — 2 vils → gold, build Mining Camp; produce 3 Militia immediately" }
-  - { villagers: 17, time: "8:35",  assign: "Send Militia to enemy base; 4 vils from hunting → wood (7 lumberjacks)" }
-  - { villagers: 19, time: "9:30",  assign: "+2 vils; build Archery Range, produce Archers; research Man-at-Arms" }
-  - { villagers: 20, time: "10:30", assign: "+1 → berries, build Mill; research Fletching" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → lure 2nd boar (under TC)", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build house, return to hunting", icons: ["house"] }
+  - { villagers: 13, assign: "+2 → hunt under 2nd boar; 1 vil builds Barracks at front of base", icons: ["food", "barracks"] }
+  - { villagers: 15, assign: "+2 → food under TC; +1 → wood (3 lumberjacks total)", icons: ["food", "wood"] }
+  - { villagers: 17, assign: "+2; lure deer (mandatory)", note: "Research Loom; click Feudal at ~8:25", icons: ["food", "loom"] }
+  - { villagers: 17, assign: "Feudal arrives — 2 vils → gold, build Mining Camp; produce 3 Militia immediately", icons: ["gold", "mining-camp", "militia"] }
+  - { villagers: 17, assign: "Send Militia to enemy base; 4 vils from hunting → wood (7 lumberjacks)", icons: ["militia", "wood"] }
+  - { villagers: 19, assign: "+2 vils; build Archery Range, produce Archers; research Man-at-Arms", icons: ["archery-range", "crossbowman"] }
+  - { villagers: 20, assign: "+1 → berries, build Mill; research Fletching", icons: ["food", "mill", "fletching"] }
 source:
   author: "Hera"
 

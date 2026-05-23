@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 18
 civsRecommended: [huns, mongols, magyars, japanese, tatars]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → wood, build lumber camp" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → lure nearest boar" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → build house then mill" }
-  - { villagers: 14, time: "3:00",  assign: "+4 → hunt (boar + sheep)" }
-  - { villagers: 16, time: "3:50",  assign: "+2 → wood (4 total lumberjacks)" }
-  - { villagers: 18, time: "4:30",  assign: "+2 → hunt", note: "Research Loom; click Feudal at ~8:50" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal arrives — 5 vils → wood (9 total), build 2nd lumber camp" }
-  - { villagers: 18, time: "9:00",  assign: "5 vils → berries; 1 builds Barracks, 2 build Stable" }
-  - { villagers: 18, time: "9:15",  assign: "Produce Scout Cavalry; research Double-Bit Axe; begin walling base" }
-  - { villagers: 23, time: "11:30", assign: "+5 new vils; 5 → gold, build Mining Camp; build Blacksmith" }
-  - { villagers: 30, time: "14:00", assign: "Click Castle Age (~18:00 target); build 2 Archery Ranges, begin CA production" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → build house then mill", icons: ["house", "mill"] }
+  - { villagers: 14, assign: "+4 → hunt (boar + sheep)", icons: ["food"] }
+  - { villagers: 16, assign: "+2 → wood (4 total lumberjacks)", icons: ["wood"] }
+  - { villagers: 18, assign: "+2 → hunt", note: "Research Loom; click Feudal at ~8:50", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "Feudal arrives — 5 vils → wood (9 total), build 2nd lumber camp", icons: ["lumber-camp", "wood"] }
+  - { villagers: 18, assign: "5 vils → berries; 1 builds Barracks, 2 build Stable", icons: ["food", "barracks", "stable"] }
+  - { villagers: 18, assign: "Produce Scout Cavalry; research Double-Bit Axe; begin walling base", icons: ["light-cavalry", "double-bit-axe"] }
+  - { villagers: 23, assign: "+5 new vils; 5 → gold, build Mining Camp; build Blacksmith", icons: ["gold", "mining-camp", "blacksmith"] }
+  - { villagers: 30, assign: "Click Castle Age (~18:00 target); build 2 Archery Ranges, begin CA production", icons: ["archery-range", "cavalry-archer"] }
 source:
   author: "Hera"
 

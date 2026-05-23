@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 15
 civsRecommended: [spanish, turks, mayans, burgundians, mongols]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
-  - { villagers: 9,  time: "1:15",  assign: "+3 → oduna, Lumber Camp kur" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → ilk domuzu çek" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → House kur, ardından meyveye Mill kur" }
-  - { villagers: 14, time: "3:00",  assign: "+3 → avda (geyik veya 2. domuz)" }
-  - { villagers: 18, time: "4:20",  assign: "+4 → meyveye" }
-  - { villagers: 21, time: "5:30",  assign: "+3 → tarlaya (koyunları erken bitirmemek için)" }
-  - { villagers: 23, time: "6:20",  assign: "+2 → altına; +5 → oduna", note: "25. köylüyle Feudal Age'e tıkla (~11:20)" }
-  - { villagers: 25, time: "11:20", assign: "Feudal gelir — 4 köylü taşa, Mining Camp kur; Double-Bit Axe + Horse Collar araştır" }
-  - { villagers: 27, time: "12:00", assign: "+2 köylü; 1 köylü Blacksmith, 2 köylü Market kurar; +2 köylü taşa" }
-  - { villagers: 27, time: "14:50", assign: "Castle Age'e tıkla (~14:50); taş köylüleriyle Castle inşa et" }
-  - { villagers: 29, time: "15:30", assign: "Castle gelir — Unique Unit üretimine başla; Bow Saw araştır" }
+  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
+  - { villagers: 14, assign: "+3 → avda (geyik veya 2. domuz)", icons: ["food"] }
+  - { villagers: 18, assign: "+4 → meyveye", icons: ["food"] }
+  - { villagers: 21, assign: "+3 → tarlaya (koyunları erken bitirmemek için)", icons: ["farm"] }
+  - { villagers: 23, assign: "+2 → altına; +5 → oduna", note: "25. köylüyle Feudal Age'e tıkla (~11:20)", icons: ["gold", "wood"] }
+  - { villagers: 25, assign: "Feudal gelir — 4 köylü taşa, Mining Camp kur; Double-Bit Axe + Horse Collar araştır", icons: ["stone", "mining-camp", "double-bit-axe", "horse-collar"] }
+  - { villagers: 27, assign: "+2 köylü; 1 köylü Blacksmith, 2 köylü Market kurar; +2 köylü taşa", icons: ["blacksmith", "market", "stone"] }
+  - { villagers: 27, assign: "Castle Age'e tıkla (~14:50); taş köylüleriyle Castle inşa et", icons: ["stone"] }
+  - { villagers: 29, assign: "Castle gelir — Unique Unit üretimine başla; Bow Saw araştır", icons: ["fortress", "wood"] }
 source:
   author: "Hera"
 

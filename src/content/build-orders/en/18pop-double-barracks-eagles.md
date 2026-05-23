@@ -6,17 +6,17 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [aztecs, incas, mayans]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 8,  time: "0:50",  assign: "+2 → wood, build lumber camp" }
-  - { villagers: 9,  time: "1:15",  assign: "+1 → lure nearest boar" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → hunt under TC" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → build house then mill on berries" }
-  - { villagers: 12, time: "2:30",  assign: "+1 → lure 2nd boar" }
-  - { villagers: 16, time: "3:30",  assign: "+4 → hunt (16 total)", note: "Aztecs/Incas: research Loom now; click Feudal at ~8:50" }
-  - { villagers: 16, time: "8:50",  assign: "Feudal arrives — 5 vils → wood (7 total lumberjacks)" }
-  - { villagers: 18, time: "9:00",  assign: "+2 vils; 2 → gold, build Mining Camp; 2 vils build Barracks + House" }
-  - { villagers: 18, time: "9:15",  assign: "3 → berries; research Double-Bit Axe; build 2nd Barracks" }
-  - { villagers: 22, time: "10:30", assign: "+4 new vils → gold; produce Eagle Scouts from both Barracks" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → hunt under TC", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 12, assign: "+1 → lure 2nd boar", icons: ["food"] }
+  - { villagers: 16, assign: "+4 → hunt (16 total)", note: "Aztecs/Incas: research Loom now; click Feudal at ~8:50", icons: ["food", "loom"] }
+  - { villagers: 16, assign: "Feudal arrives — 5 vils → wood (7 total lumberjacks)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 18, assign: "+2 vils; 2 → gold, build Mining Camp; 2 vils build Barracks + House", icons: ["gold", "mining-camp", "barracks", "house"] }
+  - { villagers: 18, assign: "3 → berries; research Double-Bit Axe; build 2nd Barracks", icons: ["food", "double-bit-axe", "barracks"] }
+  - { villagers: 22, assign: "+4 new vils → gold; produce Eagle Scouts from both Barracks", icons: ["gold", "eagle-scout"] }
 source:
   author: "Hera"
 

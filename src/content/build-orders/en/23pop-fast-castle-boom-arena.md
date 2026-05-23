@@ -6,18 +6,18 @@ targetAge: castle
 durationMin: 14
 civsRecommended: [burgundians, poles, bohemians, portuguese, bengalis]
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 → sheep under TC" }
-  - { villagers: 9,  time: "1:15",  assign: "+3 → wood, build lumber camp" }
-  - { villagers: 10, time: "1:40",  assign: "+1 → lure nearest boar" }
-  - { villagers: 11, time: "2:05",  assign: "+1 → build house then mill on berries" }
-  - { villagers: 13, time: "2:50",  assign: "+2 → deer or 2nd boar" }
-  - { villagers: 17, time: "4:00",  assign: "+4 → berries" }
-  - { villagers: 21, time: "5:10",  assign: "+4 → farms (when boars run out)" }
-  - { villagers: 23, time: "6:00",  assign: "+2 → gold; +4 → wood", note: "Click Feudal at 23 pop (~10:30)" }
-  - { villagers: 23, time: "10:30", assign: "Feudal arrives — 1 builds Blacksmith, 2 build Market; +2 → wood" }
-  - { villagers: 25, time: "11:30", assign: "+2 vils; research Double-Bit Axe + Horse Collar; click Castle Age (~14:00)" }
-  - { villagers: 25, time: "14:00", assign: "Castle Age — build new Lumber Camp; research Bow Saw; place additional TCs" }
-  - { villagers: 30, time: "16:00", assign: "+5 vils; research Wheelbarrow (~18 farms); 3+ TCs produce villagers continuously" }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → lure nearest boar", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 13, assign: "+2 → deer or 2nd boar", icons: ["food"] }
+  - { villagers: 17, assign: "+4 → berries", icons: ["food"] }
+  - { villagers: 21, assign: "+4 → farms (when boars run out)", icons: ["farm"] }
+  - { villagers: 23, assign: "+2 → gold; +4 → wood", note: "Click Feudal at 23 pop (~10:30)", icons: ["gold", "wood"] }
+  - { villagers: 23, assign: "Feudal arrives — 1 builds Blacksmith, 2 build Market; +2 → wood", icons: ["blacksmith", "market", "wood"] }
+  - { villagers: 25, assign: "+2 vils; research Double-Bit Axe + Horse Collar; click Castle Age (~14:00)", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 25, assign: "Castle Age — build new Lumber Camp; research Bow Saw; place additional TCs", icons: ["lumber-camp", "town-center"] }
+  - { villagers: 30, assign: "+5 vils; research Wheelbarrow (~18 farms); 3+ TCs produce villagers continuously", icons: ["town-center", "farm"] }
 source:
   author: "Hera"
 
