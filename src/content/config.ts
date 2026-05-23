@@ -22,7 +22,7 @@ const civilizations = defineCollection({
 });
 
 const buildOrders = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/build-orders" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/build-orders", generateId: pathId }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -46,7 +46,7 @@ const buildOrders = defineCollection({
 });
 
 const units = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/units" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/units", generateId: pathId }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -56,7 +56,7 @@ const units = defineCollection({
 });
 
 const maps = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/maps" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/maps", generateId: pathId }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -67,7 +67,7 @@ const maps = defineCollection({
 });
 
 const matchups = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/matchups" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/matchups", generateId: pathId }),
   schema: z.object({
     slug: z.string(),
     civA: z.string(),
@@ -77,7 +77,7 @@ const matchups = defineCollection({
 });
 
 const beginner = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/beginner" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/beginner", generateId: pathId }),
   schema: z.object({
     slug: z.string(),
     title: z.string(),
@@ -87,7 +87,7 @@ const beginner = defineCollection({
 });
 
 const glossary = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/glossary" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/glossary", generateId: pathId }),
   schema: z.object({
     slug: z.string(),
     term: z.string(),
