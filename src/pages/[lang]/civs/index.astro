@@ -1,16 +1,32 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import CivCard from "@/components/content/CivCard.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
+
 const lang = Astro.params.lang as Locale;
+const civs = await getLocalizedEntries("civilizations", lang);
 ---
 <BaseLayout title={t(lang, "nav.civs")} canonicalPath="/civs">
-  <section class="mx-auto max-w-prose px-4 py-12">
+  <section class="mx-auto max-w-7xl px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.civs")}</h1>
-    <p class="mt-4 text-stone-700">Coming soon.</p>
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {civs.map((c) => (
+        <li>
+          <CivCard
+            slug={canonicalSlug(c.id)}
+            name={c.data.name}
+            tagline={c.data.tagline}
+            bonuses={c.data.bonuses}
+            locale={lang}
+          />
+        </li>
+      ))}
+    </ul>
   </section>
 </BaseLayout>

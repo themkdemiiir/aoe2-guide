@@ -1,0 +1,74 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { render } from "astro:content";
+import { locales, type Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
+import civsData from "@data/civilizations.json";
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { lang: string; civ: string } }> = [];
+  for (const lang of locales) {
+    const civs = await getLocalizedEntries("civilizations", lang);
+    for (const c of civs) {
+      paths.push({ params: { lang, civ: canonicalSlug(c.id) } });
+    }
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Locale;
+const civSlug = Astro.params.civ as string;
+const found = await getLocalizedEntry("civilizations", civSlug, lang);
+if (!found) return Astro.redirect("/404");
+
+const { entry, fallback } = found;
+const { Content } = await render(entry);
+const meta = (civsData.civs as Array<Record<string, any>>).find((c) => c.slug === civSlug);
+---
+<BaseLayout title={entry.data.name} canonicalPath={`/civs/${civSlug}`}>
+  <article class="mx-auto max-w-prose px-4 py-12">
+    {fallback && (
+      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
+        {t(lang, "ui.translation.missing")}
+      </div>
+    )}
+    <header class="flex items-center gap-4">
+      <Icon slug={civSlug} kind="civ" size={72} />
+      <div>
+        <h1 class="font-display text-4xl text-ink">{entry.data.name}</h1>
+        <p class="text-stone-700">{entry.data.tagline}</p>
+      </div>
+    </header>
+
+    {meta && (
+      <dl class="mt-6 grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
+        <div><dt class="text-stone-700">Specialty</dt><dd class="text-ink">{meta.specialty}</dd></div>
+        <div><dt class="text-stone-700">Region</dt><dd class="text-ink">{meta.region}</dd></div>
+        <div><dt class="text-stone-700">Tier</dt><dd class="text-gold-500">{meta.tier ?? "—"}</dd></div>
+        <div><dt class="text-stone-700">Patch</dt><dd class="text-ink">{civsData.patch}</dd></div>
+      </dl>
+    )}
+
+    <section class="mt-8">
+      <h2 class="font-display text-2xl text-ink">Bonuses</h2>
+      <ul class="mt-2 list-inside list-disc space-y-1 text-ink">
+        {entry.data.bonuses.map((b: string) => <li>{b}</li>)}
+      </ul>
+      <p class="mt-3 text-sm text-stone-700"><strong>Team:</strong> {entry.data.teamBonus}</p>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="font-display text-2xl text-ink">Unique Techs</h2>
+      <ul class="mt-2 space-y-2 text-ink">
+        <li><strong>{entry.data.uniqueTechs.castle.name}</strong> — {entry.data.uniqueTechs.castle.effect}</li>
+        <li><strong>{entry.data.uniqueTechs.imperial.name}</strong> — {entry.data.uniqueTechs.imperial.effect}</li>
+      </ul>
+    </section>
+
+    <section class="prose prose-stone mt-10 max-w-none">
+      <Content />
+    </section>
+  </article>
+</BaseLayout>

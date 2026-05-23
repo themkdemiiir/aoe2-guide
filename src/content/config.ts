@@ -1,8 +1,13 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+/** Force path-based IDs (e.g. "en/britons") instead of using frontmatter slug. */
+function pathId({ entry }: { entry: string }): string {
+  return entry.replace(/\.(md|mdx)$/i, "");
+}
+
 const civilizations = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/civilizations" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/civilizations", generateId: pathId }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
