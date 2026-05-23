@@ -2,15 +2,1444 @@
   "patch": "v100.1.84",
   "units": [
     {
+      "slug": "militia",
+      "hp": 40,
+      "attack": 4,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 20,
+        "stone": 0
+      },
+      "trainTime": 21,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "man-at-arms",
+      "hp": 45,
+      "attack": 6,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 20,
+        "stone": 0
+      },
+      "trainTime": 21,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "long-swordsman",
+      "hp": 55,
+      "attack": 9,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 20,
+        "stone": 0
+      },
+      "trainTime": 21,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "two-handed-swordsman",
+      "hp": 60,
+      "attack": 11,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 20,
+        "stone": 0
+      },
+      "trainTime": 21,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "champion",
+      "hp": 70,
+      "attack": 13,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 20,
+        "stone": 0
+      },
+      "trainTime": 21,
+      "armorMelee": 1,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "spearman",
+      "hp": 45,
+      "attack": 3,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 35,
+        "wood": 15,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 22,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "pikeman",
+      "hp": 55,
+      "attack": 4,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 35,
+        "wood": 25,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 22,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "halberdier",
+      "hp": 60,
+      "attack": 6,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 35,
+        "wood": 25,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 22,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "eagle-warrior",
+      "hp": 50,
+      "attack": 7,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 20,
+        "wood": 0,
+        "gold": 50,
+        "stone": 0
+      },
+      "trainTime": 35,
+      "armorMelee": 0,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "elite-eagle-warrior",
+      "hp": 60,
+      "attack": 9,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 20,
+        "wood": 0,
+        "gold": 50,
+        "stone": 0
+      },
+      "trainTime": 20,
+      "armorMelee": 0,
+      "armorPiercing": 4
+    },
+    {
+      "slug": "archer",
+      "hp": 4,
+      "attack": 4,
+      "range": 30,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 25,
+        "gold": 45,
+        "stone": 0
+      },
+      "trainTime": 35,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "crossbowman",
+      "hp": 35,
+      "attack": 5,
+      "range": 5,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 25,
+        "gold": 45,
+        "stone": 0
+      },
+      "trainTime": 27,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "arbalester",
+      "hp": 40,
+      "attack": 6,
+      "range": 5,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 25,
+        "gold": 45,
+        "stone": 0
+      },
+      "trainTime": 27,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "skirmisher",
+      "hp": 30,
+      "attack": 2,
+      "range": 4,
+      "minRange": 1,
+      "cost": {
+        "food": 25,
+        "wood": 35,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 22,
+      "armorMelee": 0,
+      "armorPiercing": 3
+    },
+    {
+      "slug": "elite-skirmisher",
+      "hp": 35,
+      "attack": 3,
+      "range": 5,
+      "minRange": 1,
+      "cost": {
+        "food": 25,
+        "wood": 35,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 22,
+      "armorMelee": 0,
+      "armorPiercing": 4
+    },
+    {
+      "slug": "cavalry-archer",
+      "hp": 50,
+      "attack": 6,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 40,
+        "gold": 70,
+        "stone": 0
+      },
+      "trainTime": 34,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "heavy-cavalry-archer",
+      "hp": 60,
+      "attack": 7,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 40,
+        "gold": 70,
+        "stone": 0
+      },
+      "trainTime": 27,
+      "armorMelee": 1,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "hand-cannoneer",
+      "hp": 35,
+      "attack": 17,
+      "range": 7,
+      "minRange": 0,
+      "cost": {
+        "food": 45,
+        "wood": 0,
+        "gold": 50,
+        "stone": 0
+      },
+      "trainTime": 34,
+      "armorMelee": 1,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "scout-cavalry",
+      "hp": 45,
+      "attack": 5,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 80,
+        "wood": 0,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 0,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "light-cavalry",
+      "hp": 60,
+      "attack": 7,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 80,
+        "wood": 0,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 0,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "hussar",
+      "hp": 75,
+      "attack": 7,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 80,
+        "wood": 0,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 0,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "knight",
+      "hp": 100,
+      "attack": 10,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 2,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "cavalier",
+      "hp": 120,
+      "attack": 12,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 2,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "paladin",
+      "hp": 160,
+      "attack": 14,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 2,
+      "armorPiercing": 3
+    },
+    {
+      "slug": "camel-rider",
+      "hp": 100,
+      "attack": 5,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 55,
+        "wood": 0,
+        "gold": 60,
+        "stone": 0
+      },
+      "trainTime": 22,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "heavy-camel-rider",
+      "hp": 120,
+      "attack": 7,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 55,
+        "wood": 0,
+        "gold": 60,
+        "stone": 0
+      },
+      "trainTime": 22,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "monk",
+      "hp": 30,
+      "attack": 0,
+      "range": 9,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 0,
+        "gold": 100,
+        "stone": 0
+      },
+      "trainTime": 51,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "battering-ram",
+      "hp": 175,
+      "attack": 2,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 160,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 36,
+      "armorMelee": 0,
+      "armorPiercing": 180
+    },
+    {
+      "slug": "capped-ram",
+      "hp": 200,
+      "attack": 3,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 160,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 36,
+      "armorMelee": 0,
+      "armorPiercing": 190
+    },
+    {
+      "slug": "siege-ram",
+      "hp": 270,
+      "attack": 4,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 160,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 36,
+      "armorMelee": 0,
+      "armorPiercing": 195
+    },
+    {
+      "slug": "mangonel",
+      "hp": 50,
+      "attack": 40,
+      "range": 7,
+      "minRange": 3,
+      "cost": {
+        "food": 0,
+        "wood": 160,
+        "gold": 135,
+        "stone": 0
+      },
+      "trainTime": 46,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "onager",
+      "hp": 60,
+      "attack": 50,
+      "range": 8,
+      "minRange": 3,
+      "cost": {
+        "food": 0,
+        "wood": 160,
+        "gold": 135,
+        "stone": 0
+      },
+      "trainTime": 46,
+      "armorMelee": 0,
+      "armorPiercing": 7
+    },
+    {
+      "slug": "siege-onager",
+      "hp": 70,
+      "attack": 75,
+      "range": 8,
+      "minRange": 3,
+      "cost": {
+        "food": 0,
+        "wood": 160,
+        "gold": 135,
+        "stone": 0
+      },
+      "trainTime": 46,
+      "armorMelee": 0,
+      "armorPiercing": 8
+    },
+    {
+      "slug": "scorpion",
+      "hp": 40,
+      "attack": 12,
+      "range": 7,
+      "minRange": 2,
+      "cost": {
+        "food": 0,
+        "wood": 75,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "heavy-scorpion",
+      "hp": 50,
+      "attack": 16,
+      "range": 7,
+      "minRange": 2,
+      "cost": {
+        "food": 0,
+        "wood": 75,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 0,
+      "armorPiercing": 7
+    },
+    {
+      "slug": "bombard-cannon",
+      "hp": 80,
+      "attack": 40,
+      "range": 12,
+      "minRange": 5,
+      "cost": {
+        "food": 0,
+        "wood": 225,
+        "gold": 225,
+        "stone": 0
+      },
+      "trainTime": 56,
+      "armorMelee": 2,
+      "armorPiercing": 5
+    },
+    {
+      "slug": "trebuchet",
+      "hp": 150,
+      "attack": 200,
+      "range": 16,
+      "minRange": 4,
+      "cost": {
+        "food": 0,
+        "wood": 200,
+        "gold": 200,
+        "stone": 0
+      },
+      "trainTime": 50,
+      "armorMelee": 1,
+      "armorPiercing": 150
+    },
+    {
+      "slug": "galley",
+      "hp": 120,
+      "attack": 6,
+      "range": 5,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 90,
+        "gold": 30,
+        "stone": 0
+      },
+      "trainTime": 60,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "war-galley",
+      "hp": 135,
+      "attack": 7,
+      "range": 6,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 90,
+        "gold": 30,
+        "stone": 0
+      },
+      "trainTime": 36,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "galleon",
+      "hp": 165,
+      "attack": 8,
+      "range": 7,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 90,
+        "gold": 30,
+        "stone": 0
+      },
+      "trainTime": 36,
+      "armorMelee": 0,
+      "armorPiercing": 8
+    },
+    {
+      "slug": "fire-ship",
+      "hp": 100,
+      "attack": 2,
+      "range": 2,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 75,
+        "gold": 45,
+        "stone": 0
+      },
+      "trainTime": 36,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "fast-fire-ship",
+      "hp": 120,
+      "attack": 3,
+      "range": 2,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 75,
+        "gold": 45,
+        "stone": 0
+      },
+      "trainTime": 36,
+      "armorMelee": 0,
+      "armorPiercing": 8
+    },
+    {
+      "slug": "demolition-ship",
+      "hp": 50,
+      "attack": 110,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 70,
+        "gold": 50,
+        "stone": 0
+      },
+      "trainTime": 31,
+      "armorMelee": 0,
+      "armorPiercing": 3
+    },
+    {
+      "slug": "heavy-demolition-ship",
+      "hp": 60,
+      "attack": 140,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 70,
+        "gold": 50,
+        "stone": 0
+      },
+      "trainTime": 31,
+      "armorMelee": 0,
+      "armorPiercing": 3
+    },
+    {
+      "slug": "cannon-galleon",
+      "hp": 120,
+      "attack": 35,
+      "range": 13,
+      "minRange": 3,
+      "cost": {
+        "food": 0,
+        "wood": 200,
+        "gold": 150,
+        "stone": 0
+      },
+      "trainTime": 46,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "elite-cannon-galleon",
+      "hp": 150,
+      "attack": 45,
+      "range": 15,
+      "minRange": 3,
+      "cost": {
+        "food": 0,
+        "wood": 200,
+        "gold": 150,
+        "stone": 0
+      },
+      "trainTime": 46,
+      "armorMelee": 0,
+      "armorPiercing": 8
+    },
+    {
+      "slug": "fishing-ship",
+      "hp": 60,
+      "attack": 0,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 75,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 40,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "transport-ship",
+      "hp": 100,
+      "attack": 0,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 125,
+        "gold": 0,
+        "stone": 0
+      },
+      "trainTime": 45,
+      "armorMelee": 4,
+      "armorPiercing": 8
+    },
+    {
+      "slug": "berserk",
+      "hp": 55,
+      "attack": 9,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 65,
+        "wood": 0,
+        "gold": 25,
+        "stone": 0
+      },
+      "trainTime": 16,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "elite-berserk",
+      "hp": 72,
+      "attack": 14,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 65,
+        "wood": 0,
+        "gold": 25,
+        "stone": 0
+      },
+      "trainTime": 16,
+      "armorMelee": 2,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "cataphract",
+      "hp": 110,
+      "attack": 9,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 70,
+        "wood": 0,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 20,
+      "armorMelee": 2,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "elite-cataphract",
+      "hp": 150,
+      "attack": 12,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 70,
+        "wood": 0,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 20,
+      "armorMelee": 2,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "chu-ko-nu",
+      "hp": 45,
+      "attack": 8,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 40,
+        "gold": 35,
+        "stone": 0
+      },
+      "trainTime": 19,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "elite-chu-ko-nu",
+      "hp": 50,
+      "attack": 8,
+      "range": 6,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 40,
+        "gold": 35,
+        "stone": 0
+      },
+      "trainTime": 13,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "conquistador",
+      "hp": 55,
+      "attack": 16,
+      "range": 6,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 70,
+        "stone": 0
+      },
+      "trainTime": 24,
+      "armorMelee": 2,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "elite-conquistador",
+      "hp": 70,
+      "attack": 18,
+      "range": 6,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 70,
+        "stone": 0
+      },
+      "trainTime": 24,
+      "armorMelee": 2,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "huskarl",
+      "hp": 60,
+      "attack": 10,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 52,
+        "wood": 0,
+        "gold": 26,
+        "stone": 0
+      },
+      "trainTime": 16,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "elite-huskarl",
+      "hp": 70,
+      "attack": 12,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 52,
+        "wood": 0,
+        "gold": 26,
+        "stone": 0
+      },
+      "trainTime": 16,
+      "armorMelee": 0,
+      "armorPiercing": 8
+    },
+    {
+      "slug": "jaguar-warrior",
+      "hp": 50,
+      "attack": 10,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 30,
+        "stone": 0
+      },
+      "trainTime": 17,
+      "armorMelee": 1,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "elite-jaguar-warrior",
+      "hp": 75,
+      "attack": 12,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 30,
+        "stone": 0
+      },
+      "trainTime": 17,
+      "armorMelee": 2,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "janissary",
+      "hp": 44,
+      "attack": 17,
+      "range": 8,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 55,
+        "stone": 0
+      },
+      "trainTime": 17,
+      "armorMelee": 1,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "elite-janissary",
+      "hp": 50,
+      "attack": 22,
+      "range": 8,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 55,
+        "stone": 0
+      },
+      "trainTime": 17,
+      "armorMelee": 2,
+      "armorPiercing": 0
+    },
+    {
       "slug": "longbowman",
       "hp": 35,
       "attack": 7,
       "range": 6,
       "minRange": 0,
-      "cost": { "wood": 35, "food": 0, "gold": 40, "stone": 0 },
+      "cost": {
+        "wood": 35,
+        "food": 0,
+        "gold": 40,
+        "stone": 0
+      },
       "trainTime": 18,
       "armorPiercing": 0,
       "armorMelee": 0
+    },
+    {
+      "slug": "elite-longbowman",
+      "hp": 40,
+      "attack": 7,
+      "range": 8,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 35,
+        "gold": 40,
+        "stone": 0
+      },
+      "trainTime": 19,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "mameluke",
+      "hp": 65,
+      "attack": 7,
+      "range": 3,
+      "minRange": 0,
+      "cost": {
+        "food": 55,
+        "wood": 0,
+        "gold": 85,
+        "stone": 0
+      },
+      "trainTime": 23,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "elite-mameluke",
+      "hp": 80,
+      "attack": 10,
+      "range": 3,
+      "minRange": 0,
+      "cost": {
+        "food": 55,
+        "wood": 0,
+        "gold": 85,
+        "stone": 0
+      },
+      "trainTime": 23,
+      "armorMelee": 1,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "mangudai",
+      "hp": 60,
+      "attack": 6,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 55,
+        "gold": 65,
+        "stone": 0
+      },
+      "trainTime": 26,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "elite-mangudai",
+      "hp": 60,
+      "attack": 8,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 55,
+        "gold": 65,
+        "stone": 0
+      },
+      "trainTime": 26,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "plumed-archer",
+      "hp": 50,
+      "attack": 5,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 37,
+        "gold": 37,
+        "stone": 0
+      },
+      "trainTime": 16,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "elite-plumed-archer",
+      "hp": 65,
+      "attack": 5,
+      "range": 5,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 32,
+        "gold": 32,
+        "stone": 0
+      },
+      "trainTime": 16,
+      "armorMelee": 0,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "samurai",
+      "hp": 60,
+      "attack": 8,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 30,
+        "stone": 0
+      },
+      "trainTime": 9,
+      "armorMelee": 1,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "elite-samurai",
+      "hp": 80,
+      "attack": 12,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 30,
+        "stone": 0
+      },
+      "trainTime": 9,
+      "armorMelee": 1,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "tarkan",
+      "hp": 90,
+      "attack": 7,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 60,
+        "stone": 0
+      },
+      "trainTime": 14,
+      "armorMelee": 1,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "elite-tarkan",
+      "hp": 150,
+      "attack": 11,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 60,
+        "wood": 0,
+        "gold": 60,
+        "stone": 0
+      },
+      "trainTime": 14,
+      "armorMelee": 1,
+      "armorPiercing": 3
+    },
+    {
+      "slug": "teutonic-knight",
+      "hp": 70,
+      "attack": 12,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 85,
+        "wood": 0,
+        "gold": 40,
+        "stone": 0
+      },
+      "trainTime": 12,
+      "armorMelee": 5,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "elite-teutonic-knight",
+      "hp": 100,
+      "attack": 17,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 85,
+        "wood": 0,
+        "gold": 40,
+        "stone": 0
+      },
+      "trainTime": 12,
+      "armorMelee": 10,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "throwing-axeman",
+      "hp": 50,
+      "attack": 7,
+      "range": 3,
+      "minRange": 0,
+      "cost": {
+        "food": 55,
+        "wood": 0,
+        "gold": 25,
+        "stone": 0
+      },
+      "trainTime": 17,
+      "armorMelee": 0,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "elite-throwing-axeman",
+      "hp": 60,
+      "attack": 8,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 55,
+        "wood": 0,
+        "gold": 25,
+        "stone": 0
+      },
+      "trainTime": 17,
+      "armorMelee": 1,
+      "armorPiercing": 0
+    },
+    {
+      "slug": "war-elephant",
+      "hp": 450,
+      "attack": 15,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 200,
+        "wood": 0,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 31,
+      "armorMelee": 1,
+      "armorPiercing": 2
+    },
+    {
+      "slug": "elite-war-elephant",
+      "hp": 600,
+      "attack": 20,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 200,
+        "wood": 0,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 31,
+      "armorMelee": 1,
+      "armorPiercing": 3
+    },
+    {
+      "slug": "war-wagon",
+      "hp": 150,
+      "attack": 9,
+      "range": 4,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 120,
+        "gold": 60,
+        "stone": 0
+      },
+      "trainTime": 25,
+      "armorMelee": 0,
+      "armorPiercing": 3
+    },
+    {
+      "slug": "elite-war-wagon",
+      "hp": 200,
+      "attack": 9,
+      "range": 5,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 120,
+        "gold": 60,
+        "stone": 0
+      },
+      "trainTime": 25,
+      "armorMelee": 0,
+      "armorPiercing": 4
+    },
+    {
+      "slug": "woad-raider",
+      "hp": 65,
+      "attack": 8,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 65,
+        "wood": 0,
+        "gold": 25,
+        "stone": 0
+      },
+      "trainTime": 10,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "elite-woad-raider",
+      "hp": 80,
+      "attack": 13,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 65,
+        "wood": 0,
+        "gold": 25,
+        "stone": 0
+      },
+      "trainTime": 10,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "karambit-warrior",
+      "hp": 30,
+      "attack": 7,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 30,
+        "wood": 0,
+        "gold": 15,
+        "stone": 0
+      },
+      "trainTime": 6,
+      "armorMelee": 0,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "elite-karambit-warrior",
+      "hp": 40,
+      "attack": 8,
+      "range": 0,
+      "minRange": 0,
+      "cost": {
+        "food": 30,
+        "wood": 0,
+        "gold": 15,
+        "stone": 0
+      },
+      "trainTime": 6,
+      "armorMelee": 1,
+      "armorPiercing": 1
+    },
+    {
+      "slug": "longboat",
+      "hp": 130,
+      "attack": 7,
+      "range": 6,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 80,
+        "gold": 40,
+        "stone": 0
+      },
+      "trainTime": 25,
+      "armorMelee": 0,
+      "armorPiercing": 6
+    },
+    {
+      "slug": "elite-longboat",
+      "hp": 160,
+      "attack": 8,
+      "range": 7,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 80,
+        "gold": 40,
+        "stone": 0
+      },
+      "trainTime": 25,
+      "armorMelee": 0,
+      "armorPiercing": 8
+    },
+    {
+      "slug": "turtle-ship",
+      "hp": 200,
+      "attack": 50,
+      "range": 6,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 200,
+        "gold": 200,
+        "stone": 0
+      },
+      "trainTime": 50,
+      "armorMelee": 6,
+      "armorPiercing": 5
+    },
+    {
+      "slug": "elite-turtle-ship",
+      "hp": 300,
+      "attack": 50,
+      "range": 6,
+      "minRange": 0,
+      "cost": {
+        "food": 0,
+        "wood": 200,
+        "gold": 200,
+        "stone": 0
+      },
+      "trainTime": 50,
+      "armorMelee": 8,
+      "armorPiercing": 6
     }
   ]
 }

@@ -2,15 +2,1472 @@
   "patch": "v100.1.84",
   "civs": [
     {
+      "slug": "achaemenids",
+      "region": "Ancient Middle Eastern",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "immortal"
+      ],
+      "civBonuses": [
+        "Stable units -15% cost",
+        "Cavalry +2 LOS",
+        "Town Centers support +5 population",
+        "Fishing Ships +2 HP per second"
+      ],
+      "teamBonus": "Cavalry +1 armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Persian Nobility",
+          "effect": "Knight line +2 attack"
+        },
+        "imperial": {
+          "name": "Royal Tithe",
+          "effect": "Relics generate +100% gold"
+        }
+      }
+    },
+    {
+      "slug": "armenians",
+      "region": "Caucasian",
+      "specialty": "Infantry and Cavalry",
+      "uniqueUnits": [
+        "composite-bowman"
+      ],
+      "civBonuses": [
+        "Villagers build Fortifications faster",
+        "Cavalry Archers available one age earlier",
+        "Town Centers can garrison Villagers without losing production",
+        "Spearman line and Skirmishers -35% food cost"
+      ],
+      "teamBonus": "Archery Range units +1 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Cilician Fleet",
+          "effect": "Galleys +2 range"
+        },
+        "imperial": {
+          "name": "Fereters",
+          "effect": "Monks walk faster and carry Relics at full speed"
+        }
+      }
+    },
+    {
+      "slug": "athenians",
+      "region": "Ancient Mediterranean",
+      "specialty": "Naval and Archer",
+      "uniqueUnits": [
+        "hoplite"
+      ],
+      "civBonuses": [
+        "Ships +2 armor",
+        "Docks work 20% faster",
+        "Archers +1 attack",
+        "Town Centers +5 LOS"
+      ],
+      "teamBonus": "Docks work 10% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Athenian Democracy",
+          "effect": "Archers +1 range"
+        },
+        "imperial": {
+          "name": "Themistocles",
+          "effect": "War Galleys attack 15% faster"
+        }
+      }
+    },
+    {
+      "slug": "aztecs",
+      "region": "Mesoamerican",
+      "specialty": "Infantry and Monk",
+      "uniqueUnits": [
+        "jaguar-warrior"
+      ],
+      "civBonuses": [
+        "Villagers carry +5",
+        "Military units created 15% faster",
+        "+5 Monk hit points for each Monastery technology",
+        "Loom free"
+      ],
+      "teamBonus": "Relics generate +33% gold",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Garland Wars",
+          "effect": "Infantry +4 attack"
+        },
+        "imperial": {
+          "name": "Atlatl",
+          "effect": "Skirmishers +1 attack, +1 range"
+        }
+      }
+    },
+    {
+      "slug": "bengalis",
+      "region": "South Asian",
+      "specialty": "Elephant and Naval",
+      "uniqueUnits": [
+        "ratha"
+      ],
+      "civBonuses": [
+        "Elephants resist 25% damage",
+        "Ships +5 carry capacity and regenerate HP",
+        "Farming does not require wheelbarrow or hand cart",
+        "+2 Villagers at start"
+      ],
+      "teamBonus": "Monastery upgrades cost -50%",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Paiks",
+          "effect": "Ratha and Elephant Archer attack 18% faster"
+        },
+        "imperial": {
+          "name": "Mahayana",
+          "effect": "Villagers take up 0.5 less population"
+        }
+      }
+    },
+    {
+      "slug": "berbers",
+      "region": "North African",
+      "specialty": "Calvary and Naval",
+      "uniqueUnits": [
+        "camel-archer",
+        "genitour"
+      ],
+      "civBonuses": [
+        "Villagers move +10% faster",
+        "Stable units cost -20% (starting in Castle Age)",
+        "Ships move +10% faster"
+      ],
+      "teamBonus": "Genitour availible at Archery Range",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Kasbah",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Maghrabi Camels",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "bohemians",
+      "region": "Eastern European",
+      "specialty": "Gunpowder and Monk",
+      "uniqueUnits": [
+        "hussite-wagon"
+      ],
+      "civBonuses": [
+        "Mining camp upgrades free",
+        "Blacksmith does not require Monastery; Market does not require Mill",
+        "Gunpowder units +25% accuracy",
+        "Monks +5 HP and +3 attack when they research their first Monastery tech"
+      ],
+      "teamBonus": "Monks have +3 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Wagenburg Tactics",
+          "effect": "Gunpowder units +1 speed"
+        },
+        "imperial": {
+          "name": "Hussite Reforms",
+          "effect": "Monks and Monasteries provide gold like a Relic"
+        }
+      }
+    },
+    {
       "slug": "britons",
-      "era": "DE2",
       "region": "Western European",
       "specialty": "Archers",
-      "tier": "B",
-      "uniqueUnits": ["longbowman"],
-      "strongAgainst": ["franks", "huns"],
-      "weakAgainst": ["mongols", "magyars"],
-      "recommendedBuilds": ["21pop-archer"]
+      "uniqueUnits": [
+        "longbowman"
+      ],
+      "civBonuses": [
+        "Town Centers cost 50% less wood from Castle Age",
+        "Foot archers (except Skirmishers) +1 range Castle Age, +2 Imperial Age",
+        "Shepherds work 25% faster"
+      ],
+      "teamBonus": "Archery Ranges work 20% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Yeomen",
+          "effect": "Foot archers +1 range; Towers +2 attack"
+        },
+        "imperial": {
+          "name": "Warwolf",
+          "effect": "Trebuchets do blast damage; never miss against units"
+        }
+      }
+    },
+    {
+      "slug": "bulgarians",
+      "region": "Eastern European",
+      "specialty": "Cavalry and Siege",
+      "uniqueUnits": [
+        "konnik"
+      ],
+      "civBonuses": [
+        "Blacksmith and Siege Workshop technologies cost -50% gold",
+        "Militia line upgrades free",
+        "Town Centers can shoot arrows without garrison",
+        "Kreposts (unique building) replace Keeps"
+      ],
+      "teamBonus": "Blacksmith upgrades are researched +50% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Stirrups",
+          "effect": "Cavalry units attack 33% faster"
+        },
+        "imperial": {
+          "name": "Bagains",
+          "effect": "Militia line +5 melee armor"
+        }
+      }
+    },
+    {
+      "slug": "burgundians",
+      "region": "Western European",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "coustillier"
+      ],
+      "civBonuses": [
+        "Stable, Blacksmith, and Marketplace technologies available one age earlier",
+        "Economic upgrades (Mill, Lumber Camp, Mining Camp) cost -50% food",
+        "Knights can carry Relics",
+        "Flemish Revolution (unique tech) converts all Villagers into Flemish Militia"
+      ],
+      "teamBonus": "Paladins available",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Burgundian Vineyards",
+          "effect": "Farms slowly generate gold in addition to food"
+        },
+        "imperial": {
+          "name": "Flemish Revolution",
+          "effect": "Instantly convert all Villagers into Flemish Militia; Flemish Militia available at Barracks"
+        }
+      }
+    },
+    {
+      "slug": "burmese",
+      "region": "Southeast Asian",
+      "specialty": "Monk and Elephant",
+      "uniqueUnits": [
+        "arambai"
+      ],
+      "civBonuses": [
+        "Free lumber camp upgrades",
+        "Infantry +1 Attacks per Age (starting in Feudal Age)",
+        "Monastery techs 50% cheaper"
+      ],
+      "teamBonus": "Relics are visible on the min map",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Howdah",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Manipur Cavalry",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "byzantines",
+      "region": "Eastern Mediterranean",
+      "specialty": "Defensive",
+      "uniqueUnits": [
+        "cataphract"
+      ],
+      "civBonuses": [
+        "Buildings (except gates) have +10% HP in Dark Age / +20% HP in Feudal Age  / +30% in Castle Age / +40% in Imperial Age",
+        "Spearman skirmisher and camel lines cost 25% less",
+        "Fire Ships attack 20% faster",
+        "Imperial Age costs -33%",
+        "Town Watch is free"
+      ],
+      "teamBonus": "Monks +50% heal speed",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Greek Fire",
+          "effect": "Fire Ships +1 range"
+        },
+        "imperial": {
+          "name": "Logistica",
+          "effect": "Cataphracts deal trample damage; +6 attack vs. infantry"
+        }
+      }
+    },
+    {
+      "slug": "celts",
+      "region": "Western European",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "woad-raider"
+      ],
+      "civBonuses": [
+        "Infantry moves 15% faster",
+        "Lumberjacks work 15% faster",
+        "Siege weapons reload 20% faster",
+        "Sheep cannot be stolen if within one Celt unit's line of sight"
+      ],
+      "teamBonus": "Siege Workshops work 20% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Furor Celtica",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Stronghold",
+          "effect": "Castles and Towers fire twice as fast"
+        }
+      }
+    },
+    {
+      "slug": "chinese",
+      "region": "East Asian",
+      "specialty": "Archer",
+      "uniqueUnits": [
+        "chu-ko-nu"
+      ],
+      "civBonuses": [
+        "Start game with 3 extra villagers but -50 wood and -200 food",
+        "Technologies cost -10% in Feudal Age/ -15% in Castle Age/-20% in Imperial Age",
+        "Town Centers support 10 population instead of 5",
+        "Demolition Ships have +50% HP"
+      ],
+      "teamBonus": "Farms provide +45 food",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Rocketry",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Rocketry",
+          "effect": "Chu Ko Nu +2 attack; Scorpions +4 attack"
+        }
+      }
+    },
+    {
+      "slug": "cumans",
+      "region": "Central Asian",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "kipchak"
+      ],
+      "civBonuses": [
+        "Cavalry units +1 speed in Feudal Age",
+        "May build an extra Town Center in Feudal Age",
+        "Siege Workshop and Battering Ram available in Feudal Age",
+        "Palisade Walls and Gates can be built in Castle Age"
+      ],
+      "teamBonus": "Cavalry units +1 speed",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Steppe Husbandry",
+          "effect": "Scout Cavalry line and Kipchaks train +100% faster"
+        },
+        "imperial": {
+          "name": "Cuman Mercenaries",
+          "effect": "Team can build 10 free Kipchaks (once)"
+        }
+      }
+    },
+    {
+      "slug": "dravidians",
+      "region": "South Asian",
+      "specialty": "Infantry and Naval",
+      "uniqueUnits": [
+        "urumi-swordsman"
+      ],
+      "civBonuses": [
+        "Start with +200 wood",
+        "Barracks and Docks techs -50% food",
+        "Elephant Archers available at Archery Range",
+        "Skirmishers +1 attack per Age from Feudal Age"
+      ],
+      "teamBonus": "Docks work 15% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Medical Corps",
+          "effect": "Battle Elephants regenerate HP"
+        },
+        "imperial": {
+          "name": "Wootz Steel",
+          "effect": "Melee infantry and cavalry attacks ignore armor"
+        }
+      }
+    },
+    {
+      "slug": "ethiopians",
+      "region": "East African",
+      "specialty": "Archer",
+      "uniqueUnits": [
+        "shotel-warrior"
+      ],
+      "civBonuses": [
+        "Archers move +15% faster",
+        "Receive +100 gold and +100 food when advancing to the next age",
+        "Pikemen and Halberdier upgrades free"
+      ],
+      "teamBonus": "Towers and Outposts +3 LOS",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Royals Heirs",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Torsion Engines",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "franks",
+      "region": "Western European",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "throwing-axeman"
+      ],
+      "civBonuses": [
+        "Castles are 25% cheaper",
+        "Knights have +20% HP",
+        "Farm upgrades are free (Mill is required to receive bonus)"
+      ],
+      "teamBonus": "Knights have +2 line of sight",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Bearded Axe",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Chivalry",
+          "effect": "Stables work 40% faster"
+        }
+      }
+    },
+    {
+      "slug": "georgians",
+      "region": "Caucasian",
+      "specialty": "Infantry and Cavalry",
+      "uniqueUnits": [
+        "monaspa"
+      ],
+      "civBonuses": [
+        "Units +4 attack when garrison is not full (Mournful Shroud)",
+        "Town Centers and Towers +2 range",
+        "Infantry attack +1 per Era starting in Feudal Age",
+        "Monasteries cost -50% stone"
+      ],
+      "teamBonus": "Monks +3 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Svan Towers",
+          "effect": "Towers +1 attack per 2 garrisoned units"
+        },
+        "imperial": {
+          "name": "Aznauri Cavalry",
+          "effect": "Monaspa heal nearby cavalry"
+        }
+      }
+    },
+    {
+      "slug": "goths",
+      "region": "Northern European",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "huskarl"
+      ],
+      "civBonuses": [
+        "Infantry cost 35% less (starting in Feudal Age)",
+        "Infantry have +1 attack against buildings",
+        "Villagers have +5 attack versus wild boar",
+        "Hunters carry +15 meat",
+        "+10 to population limit in Imperial Age"
+      ],
+      "teamBonus": "Barracks operate 20% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Anarchy",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Perfusion",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "gurjaras",
+      "region": "South Asian",
+      "specialty": "Cavalry and Naval",
+      "uniqueUnits": [
+        "shrivamsha-rider"
+      ],
+      "civBonuses": [
+        "Start with 2 Camel Scouts",
+        "Camels and Skirmishers counter cavalry effectively",
+        "Mills produce unlimited food using livestock",
+        "Chakram Throwers available at Archery Range (unique ranged infantry)"
+      ],
+      "teamBonus": "Camel and Battle Elephant units +1 Pierce Armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Kshatriyas",
+          "effect": "Military units cost -25% food"
+        },
+        "imperial": {
+          "name": "Frontier Guards",
+          "effect": "Camel Riders and Elephant Archers +4 melee armor"
+        }
+      }
+    },
+    {
+      "slug": "hindustanis",
+      "region": "South Asian",
+      "specialty": "Gunpowder and Cavalry",
+      "uniqueUnits": [
+        "elephant-archer",
+        "imperial-camel"
+      ],
+      "civBonuses": [
+        "Villagers cost -10% Dark, -15% Feudal, -20% Castle, -25% Imperial",
+        "Fishermen work 15% faster and carry +15",
+        "Camels +1/+1 armor"
+      ],
+      "teamBonus": "Camels have +5 attack vs. buildings",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Sultans",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Shatagni",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "huns",
+      "region": "Central Asian",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "tarkan"
+      ],
+      "civBonuses": [
+        "Houses are not required to support population",
+        "Start game with -100 Wood",
+        "Cavalry Archers cost -25% in Castle Age/ -30% in Imperial Age",
+        "Trebuchets are 35% more accurate."
+      ],
+      "teamBonus": "Stables are 20% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Atheism",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Marauders",
+          "effect": "Tarkans can be trained at Stables"
+        }
+      }
+    },
+    {
+      "slug": "incas",
+      "region": "South American",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "kamayuk",
+        "slinger"
+      ],
+      "civBonuses": [
+        "Start with a free llama",
+        "Villagers affected by Blacksmith upgrades",
+        "Houses support 10 population",
+        "Buildings cost -15% stone",
+        "Scout Cavalry is replaced by Eagle Warrior"
+      ],
+      "teamBonus": "Farms built 50% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Couriers",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Andean Sling",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "italians",
+      "region": "Southern European",
+      "specialty": "Archer and naval",
+      "uniqueUnits": [
+        "genoese-crossbowman",
+        "condottiero"
+      ],
+      "civBonuses": [
+        "Advance to next age costs -15%",
+        "All dock tech costs -50%",
+        "Fishing ship cost -15 wood",
+        "Gunpowder unit costs -25%"
+      ],
+      "teamBonus": "Condottiero also available in allies' barracks in Imperial Age (once you have built a castle)",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Pavise",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Silk Road",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "japanese",
+      "region": "East Asian",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "samurai"
+      ],
+      "civBonuses": [
+        "Fishing Ships have 2x HP and +2 pierce armor",
+        "Fishing Ships work +5% faster in Dark Age/ +10% in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age",
+        "Lumber Camps / Mining Camps / Mills are 50% cheaper",
+        "Infantry attack 25% faster (starting in Feudal Age)"
+      ],
+      "teamBonus": "Galleys have +50% line of sight",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Kataparuto",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Yasama",
+          "effect": "Towers can fire extra arrows"
+        }
+      }
+    },
+    {
+      "slug": "jurchens",
+      "region": "East Asian",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "jurchen-knight"
+      ],
+      "civBonuses": [
+        "Cavalry +2 armor",
+        "Stables work faster",
+        "Can build Fortified Towers without research",
+        "Blacksmith techs cost -25%"
+      ],
+      "teamBonus": "Cavalry +1 melee armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Jurchen Tactics",
+          "effect": "Cavalry +1 attack"
+        },
+        "imperial": {
+          "name": "Iron Riders",
+          "effect": "Cavalry Archers +2 attack"
+        }
+      }
+    },
+    {
+      "slug": "khitans",
+      "region": "East Asian",
+      "specialty": "Cavalry Archer",
+      "uniqueUnits": [
+        "khitan-lancer"
+      ],
+      "civBonuses": [
+        "Cavalry Archers cost -10%",
+        "Archery Range units +1 attack",
+        "Stables work 20% faster",
+        "Hunters carry +10 meat"
+      ],
+      "teamBonus": "Cavalry Archers +1 range",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Khitan Cavalry",
+          "effect": "Cavalry +1 speed"
+        },
+        "imperial": {
+          "name": "Steppe Tactics",
+          "effect": "Cavalry Archers attack 15% faster"
+        }
+      }
+    },
+    {
+      "slug": "khmer",
+      "region": "Southeast Asian",
+      "specialty": "Siege and Elephant Civilzation",
+      "uniqueUnits": [
+        "ballista-elephant"
+      ],
+      "civBonuses": [
+        "Prereq buildings aren't required to advance to further ages or unlock other buildings",
+        "Battle Elephants are +15% faster",
+        "Villagers can garrison in Houses"
+      ],
+      "teamBonus": "Scorpions have +1 range",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Tusk Swords",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Double Crossbow",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "koreans",
+      "region": "East Asian",
+      "specialty": "Tower and naval",
+      "uniqueUnits": [
+        "war-wagon",
+        "turtle-ship"
+      ],
+      "civBonuses": [
+        "Villagers have +3 line of sight",
+        "Stone miners work 20% faster",
+        "Guard Tower and Keep upgrades are free",
+        "Towers (except bombard towers) have +1 range in Castle Age/ +2 in Imperial Age"
+      ],
+      "teamBonus": "Mangonel line has +1 range",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Shinkichon",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Eupseong",
+          "effect": "Watch Towers and Guard Towers +2 range"
+        }
+      }
+    },
+    {
+      "slug": "lithuanians",
+      "region": "Eastern European",
+      "specialty": "Cavalry and Monk",
+      "uniqueUnits": [
+        "leitis"
+      ],
+      "civBonuses": [
+        "Start with +150 food",
+        "Spearman and Skirmisher lines cost -15% food",
+        "Monks convert 20% faster for each Relic garrisoned in Monastery (max +60%)",
+        "Cavalry +1 attack for each Relic garrisoned in Monastery (max +4)"
+      ],
+      "teamBonus": "Relic gold generation +100%",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Hill Forts",
+          "effect": "Town Centers +3 attack"
+        },
+        "imperial": {
+          "name": "Tower Shields",
+          "effect": "Spearman line and Skirmishers +2 pierce armor"
+        }
+      }
+    },
+    {
+      "slug": "macedonians",
+      "region": "Ancient Mediterranean",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "phalangite"
+      ],
+      "civBonuses": [
+        "Infantry +10 HP",
+        "Siege units -15% cost",
+        "Scout line +2 LOS",
+        "Monks require 4 units to convert"
+      ],
+      "teamBonus": "Infantry +1 pierce armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Sarissa",
+          "effect": "Spearman line +2 melee armor"
+        },
+        "imperial": {
+          "name": "Argyraspids",
+          "effect": "Infantry attack 10% faster"
+        }
+      }
+    },
+    {
+      "slug": "magyars",
+      "region": "Eastern European",
+      "specialty": "Calvary Infantry",
+      "uniqueUnits": [
+        "magyar-huszar"
+      ],
+      "civBonuses": [
+        "Villagers can kill wolves with 1 strike",
+        "Forging, Iron Casting, Blast Furnace are free",
+        "Scout Cavalry, Light Cavalry, Hussar cost -15%"
+      ],
+      "teamBonus": "Foot archers +2 LOS",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Mercenaries",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Recursive Bow",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "malay",
+      "region": "Southeast Asian",
+      "specialty": "Naval",
+      "uniqueUnits": [
+        "karambit-warrior"
+      ],
+      "civBonuses": [
+        "Docks +100% LOS"
+      ],
+      "teamBonus": "Advancing to ages 80% faster;Fish Traps cost 33% cheaper;Fish Traps provide unlimited food;Battle Elephants 30% cheaper",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Thalassocracy",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Forced Levy",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "malians",
+      "region": "West African",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "gbeto"
+      ],
+      "civBonuses": [
+        "Buildings cost -15% wood",
+        "Barracks unit +1 pierce armor per age",
+        "Gold mining upgrades free"
+      ],
+      "teamBonus": "University researches +80% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Tigui",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Farimba",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "mapuche",
+      "region": "South American",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "mapuche-chief"
+      ],
+      "civBonuses": [
+        "Units near defeated heroes deal +50% damage for 15 seconds",
+        "Barracks units cost -10%/-15%/-20% per age from Feudal",
+        "Towers and Castles garrison 2x units (more arrows)",
+        "Enemy units within a Toqui's line of sight suffer -50% attack"
+      ],
+      "teamBonus": "Barracks units have -10% cost",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Toquis",
+          "effect": "Infantry attacks 10% faster when not garrisoned near a building"
+        },
+        "imperial": {
+          "name": "Ironworks",
+          "effect": "Infantry and cavalry +8 attack"
+        }
+      }
+    },
+    {
+      "slug": "mayans",
+      "region": "Mesoamerican",
+      "specialty": "Archer",
+      "uniqueUnits": [
+        "plumed-archer"
+      ],
+      "civBonuses": [
+        "Start game with 1 extra villager but -50 food",
+        "Natural resources last 20% longer",
+        "Archers cost -10% in Feudal Age/ -20% in Castle Age/ -30% in Imperial Age"
+      ],
+      "teamBonus": "Walls are 50% cheaper",
+      "uniqueTechs": {
+        "castle": {
+          "name": "El Dorado",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Hul'che Javelineers",
+          "effect": "Skirmishers throw 2 javelins"
+        }
+      }
+    },
+    {
+      "slug": "mongols",
+      "region": "East Asian",
+      "specialty": "Cavalry Archer",
+      "uniqueUnits": [
+        "mangudai"
+      ],
+      "civBonuses": [
+        "Cavalry Archers reload 20% faster",
+        "Light Cavalry and Hussars have +30% HP",
+        "Hunters work 50% faster"
+      ],
+      "teamBonus": "Scout line has +2 Line of sight",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Drill",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Nomads",
+          "effect": "Houses don't need to be rebuilt; +10 population cap"
+        }
+      }
+    },
+    {
+      "slug": "muisca",
+      "region": "South American",
+      "specialty": "Gold and Infantry",
+      "uniqueUnits": [
+        "muisca-chief"
+      ],
+      "civBonuses": [
+        "Gold miners work 15% faster",
+        "Barracks units cost -10% gold",
+        "Market trade rate -5%",
+        "Infantry +5 HP"
+      ],
+      "teamBonus": "Gold miners work 10% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Zipa's Authority",
+          "effect": "Infantry +1 attack"
+        },
+        "imperial": {
+          "name": "El Dorado Myth",
+          "effect": "Infantry +10 HP"
+        }
+      }
+    },
+    {
+      "slug": "persians",
+      "region": "Middle Eastern",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "war-elephant"
+      ],
+      "civBonuses": [
+        "Start game with +50 wood and food",
+        "Town Center and Docks have 2x HP",
+        "Town Centers and Docks operate +10% faster in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age"
+      ],
+      "teamBonus": "Knights have +2 attack versus Archers",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Mahouts",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Chamber of Power",
+          "effect": "Town Centers fire 50% faster"
+        }
+      }
+    },
+    {
+      "slug": "poles",
+      "region": "Eastern European",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "obuch"
+      ],
+      "civBonuses": [
+        "Villagers regenerate +5 HP per minute",
+        "Farms generate +0.2 stone per second (passive stone income)",
+        "Folwark (unique building) replaces Mill; Villagers around Folwark gather grain to build it",
+        "Scout and Light Cavalry upgrades free"
+      ],
+      "teamBonus": "Cavalry has +3 attack vs. buildings",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Szlachta Privileges",
+          "effect": "Knight line -60% gold cost"
+        },
+        "imperial": {
+          "name": "Lechitic Legacy",
+          "effect": "Light Cavalry and Winged Hussar deal trample damage"
+        }
+      }
+    },
+    {
+      "slug": "portuguese",
+      "region": "Southern European",
+      "specialty": "Naval and Gunpowder",
+      "uniqueUnits": [
+        "caravel",
+        "organ-gun"
+      ],
+      "civBonuses": [
+        "All units costs -15% gold",
+        "Ships +10% HP",
+        "Can build Feitoria in Imperial Age"
+      ],
+      "teamBonus": "Free cartography from Dark Age",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Carrack",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Arquebus",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "puru",
+      "region": "South American",
+      "specialty": "War Elephant",
+      "uniqueUnits": [
+        "war-elephant"
+      ],
+      "civBonuses": [
+        "Elephants cost -20%",
+        "Battle Elephants +2 attack",
+        "Farms cost -10%",
+        "Stable units +1 pierce armor"
+      ],
+      "teamBonus": "Elephants +2 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Amazon Warriors",
+          "effect": "Elephants +1 armor"
+        },
+        "imperial": {
+          "name": "Puru Rampage",
+          "effect": "Battle Elephants attack 15% faster"
+        }
+      }
+    },
+    {
+      "slug": "romans",
+      "region": "Ancient Mediterranean",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "legionary"
+      ],
+      "civBonuses": [
+        "Barracks and Stable units cost -15% wood",
+        "Ballista Towers available",
+        "Infantry have +15% attack",
+        "Farms don't require Mill"
+      ],
+      "teamBonus": "Barracks train 20% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Ballistas",
+          "effect": "Ballista Towers deal extra damage"
+        },
+        "imperial": {
+          "name": "Comitatenses",
+          "effect": "Non-militia infantry +8 HP"
+        }
+      }
+    },
+    {
+      "slug": "saracens",
+      "region": "Middle Eastern",
+      "specialty": "Camel and naval",
+      "uniqueUnits": [
+        "mameluke"
+      ],
+      "civBonuses": [
+        "Market trade cost is only 5%",
+        "Transport Ships have 2x HP and carry capacity",
+        "Galleys attack 20% faster",
+        "Cavalry Archers have +4 attack bonus against buildings"
+      ],
+      "teamBonus": "Foot archers have +2 attack bonus against buildings",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Zealotry",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Counterweights",
+          "effect": "Trebuchet and Mangonel projectiles have more blast radius"
+        }
+      }
+    },
+    {
+      "slug": "shu",
+      "region": "East Asian",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "tiger-cavalry"
+      ],
+      "civBonuses": [
+        "Barracks infantry +1 attack",
+        "Farmers work faster",
+        "Villagers carry +5",
+        "Archers +1 range"
+      ],
+      "teamBonus": "Infantry +1 pierce armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Shu Strategy",
+          "effect": "Infantry +1 attack"
+        },
+        "imperial": {
+          "name": "Tiger Warriors",
+          "effect": "Infantry attack 10% faster"
+        }
+      }
+    },
+    {
+      "slug": "sicilians",
+      "region": "Southern European",
+      "specialty": "Infantry and Cavalry",
+      "uniqueUnits": [
+        "serjeant"
+      ],
+      "civBonuses": [
+        "Town Centers and Castles resist 50% of incoming damage",
+        "First Crusade (Imperial-Age unique technology) available",
+        "Building construction 100% faster",
+        "Cavalry has +1/+1 armor"
+      ],
+      "teamBonus": "Farms +100% carrying capacity",
+      "uniqueTechs": {
+        "castle": {
+          "name": "First Crusade",
+          "effect": "Each Town Center spawns 1 Serjeant; Serjeants have +4 attack and +3/+3 armor"
+        },
+        "imperial": {
+          "name": "Scutage",
+          "effect": "Each enemy Feudal-age unit you convert spawns a Serjeant"
+        }
+      }
+    },
+    {
+      "slug": "slavs",
+      "region": "Eastern European",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "boyars"
+      ],
+      "civBonuses": [
+        "Farmers works 15% faster",
+        "Siege weapons 15% cheaper",
+        "Tracking free"
+      ],
+      "teamBonus": "Military buildings provide +5% population",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Orthodoxy",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Druzhina",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "spanish",
+      "region": "Southern European",
+      "specialty": "Gunpowder and Monk",
+      "uniqueUnits": [
+        "conquistador",
+        "missionary"
+      ],
+      "civBonuses": [
+        "Villagers construct buildings 30% faster",
+        "Blacksmith upgrades do not cost any gold",
+        "Cannon Galleons benefit from Ballistics (less reload time and more accuracy)",
+        "Hand Cannoneers and Bombard Cannons reload 15% faster"
+      ],
+      "teamBonus": "Trade units generate +33% Gold",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Supremacy",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Inquisition",
+          "effect": "Monks convert faster"
+        }
+      }
+    },
+    {
+      "slug": "spartans",
+      "region": "Ancient Mediterranean",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "spartan-warrior"
+      ],
+      "civBonuses": [
+        "Infantry +2 attack",
+        "Barracks work 20% faster",
+        "No houses required for population",
+        "Militia line upgrades free"
+      ],
+      "teamBonus": "Infantry +1 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Spartan Discipline",
+          "effect": "Infantry +1 armor"
+        },
+        "imperial": {
+          "name": "Agoge",
+          "effect": "Infantry attack 15% faster"
+        }
+      }
+    },
+    {
+      "slug": "tatars",
+      "region": "Central Asian",
+      "specialty": "Cavalry Archer",
+      "uniqueUnits": [
+        "keshik"
+      ],
+      "civBonuses": [
+        "Herdables provide +50% food (sheep yield more)",
+        "Cavalry Archers fire +1 additional projectile per attack in Imperial Age",
+        "Cavalry units +2 line of sight on hills",
+        "Free Parthian Tactics"
+      ],
+      "teamBonus": "Cavalry Archers +2 line of sight",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Silk Armor",
+          "effect": "Scout line, Cavalry Archers, and Steppe Lancers +1/+1 armor"
+        },
+        "imperial": {
+          "name": "Timurid Siegecraft",
+          "effect": "Trebuchets have +2 range; Flaming Camels available"
+        }
+      }
+    },
+    {
+      "slug": "teutons",
+      "region": "Central European",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "teutonic-knight"
+      ],
+      "civBonuses": [
+        "Monks have 2x healing range",
+        "Towers can garrison 2x units (more arrows)",
+        "Murder Holes is free",
+        "Farms cost 33% less",
+        "Town Centers have +1 attack and +5 line of sight"
+      ],
+      "teamBonus": "Units are more resistant to conversion",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Crenellations",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Ironclad",
+          "effect": "Siege weapons +4 melee armor"
+        }
+      }
+    },
+    {
+      "slug": "thracians",
+      "region": "Ancient Mediterranean",
+      "specialty": "Infantry and Cavalry",
+      "uniqueUnits": [
+        "thracian-warrior"
+      ],
+      "civBonuses": [
+        "Barracks units +1 melee armor",
+        "Stable work 15% faster",
+        "Farms cost -15%",
+        "Infantry +10% speed"
+      ],
+      "teamBonus": "Barracks units +1 pierce armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Odrysian Tactics",
+          "effect": "Cavalry +1 attack"
+        },
+        "imperial": {
+          "name": "Thracian Shock",
+          "effect": "Infantry +10 HP"
+        }
+      }
+    },
+    {
+      "slug": "tupi",
+      "region": "South American",
+      "specialty": "Archer and Raiding",
+      "uniqueUnits": [
+        "tupi-warrior"
+      ],
+      "civBonuses": [
+        "Archers +1 attack vs. cavalry",
+        "Infantry move faster through forests",
+        "Farms generate +10% food",
+        "Villagers +5 carry capacity"
+      ],
+      "teamBonus": "Archers +1 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Ambush",
+          "effect": "Archers +1 range in forests"
+        },
+        "imperial": {
+          "name": "Tupi Survival",
+          "effect": "Infantry +2 attack in forests"
+        }
+      }
+    },
+    {
+      "slug": "turks",
+      "region": "Middle Eastern",
+      "specialty": "Gunpowder",
+      "uniqueUnits": [
+        "janissary"
+      ],
+      "civBonuses": [
+        "Gunpowder Units have +25% HP",
+        "Gunpowder technologies cost 50% less",
+        "Chemistry is free",
+        "Gold miners work 15% faster",
+        "Light Cavalry and Hussar upgrades are free"
+      ],
+      "teamBonus": "Gunpowder units are created 20% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Artillery",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Sipahi",
+          "effect": "Cavalry Archers +20 HP; Janissaries +5 HP"
+        }
+      }
+    },
+    {
+      "slug": "vietnamese",
+      "region": "Southeast Asian",
+      "specialty": "Archer",
+      "uniqueUnits": [
+        "rattan-archer"
+      ],
+      "civBonuses": [
+        "Reveals enemy positions at game start",
+        "Archery Range units have +10% HP in Feudal Age, +15% in Castle Age, and +20% in Imperial Age. Does not stack."
+      ],
+      "teamBonus": "Have access to Imperial Skirmisher Upgrade",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Chatras",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Paper Money",
+          "effect": ""
+        }
+      }
+    },
+    {
+      "slug": "vikings",
+      "region": "Northern European",
+      "specialty": "Infantry and naval",
+      "uniqueUnits": [
+        "berserk",
+        "longboat"
+      ],
+      "civBonuses": [
+        "Warships cost 20% less",
+        "Infantry have +10% HP in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age",
+        "Wheelbarrow and Hand Cart are free"
+      ],
+      "teamBonus": "Docks are 25% cheaper",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Berserkergang",
+          "effect": ""
+        },
+        "imperial": {
+          "name": "Chieftains",
+          "effect": "Infantry +4 attack vs. cavalry; +3 vs. camels"
+        }
+      }
+    },
+    {
+      "slug": "wei",
+      "region": "East Asian",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "heavy-cavalry"
+      ],
+      "civBonuses": [
+        "Cavalry cost -10%",
+        "Stables work faster",
+        "Blacksmith upgrades cheaper",
+        "Scouts +2 LOS"
+      ],
+      "teamBonus": "Cavalry +1 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Wei Formation",
+          "effect": "Cavalry +1 armor"
+        },
+        "imperial": {
+          "name": "Iron Horses",
+          "effect": "Cavalry attack 15% faster"
+        }
+      }
+    },
+    {
+      "slug": "wu",
+      "region": "East Asian",
+      "specialty": "Naval",
+      "uniqueUnits": [
+        "louchuan"
+      ],
+      "civBonuses": [
+        "Ships cost -15%",
+        "Docks work faster",
+        "Fishing Ships +2 pierce armor",
+        "Fire Ships +2 attack"
+      ],
+      "teamBonus": "Docks cost -25%",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Wu Shipbuilding",
+          "effect": "Ships +1 attack"
+        },
+        "imperial": {
+          "name": "Eastern Fleet",
+          "effect": "War Galley line attack 15% faster"
+        }
+      }
     }
   ]
 }

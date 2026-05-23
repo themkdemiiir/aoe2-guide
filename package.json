@@ -15,7 +15,10 @@
     "icons:map": "node scripts/build-icon-map.mjs",
     "import:md": "node scripts/import-from-md.mjs",
     "new:guide": "node scripts/new-guide.mjs",
-    "check:translations": "node scripts/check-translations.mjs"
+    "check:translations": "node scripts/check-translations.mjs",
+    "sync:game-data": "node scripts/sync-game-data.mjs",
+    "build:civilizations": "node scripts/build-civilizations.mjs",
+    "build:units": "node scripts/build-units.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
