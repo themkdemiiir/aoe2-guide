@@ -37,10 +37,10 @@ A multi-language static guide site for Age of Empires II covering civilizations,
 
 | Layer | Choice | Rationale |
 |---|---|---|
-| Site generator | **Astro 4+** (static output mode) | Native i18n, content collections + Zod, islands architecture for the future civ comparator, MDX support. Built on Vite (user already knows Vite). |
-| Styling | **TailwindCSS** with custom medieval tokens | Fast iteration, design tokens map cleanly to CSS vars, no runtime cost. |
-| Content authoring | **Markdown / MDX** in Astro Content Collections | Low barrier for community PRs, schema-validated via Zod. |
-| Search | **Pagefind** | Client-side, no backend, multi-language. Indexes built HTML. |
+| Site generator | **Astro 5.2+** (static output mode) | Native i18n, Content Layer API with Zod schemas, islands architecture for the future civ comparator, MDX support. Built on Vite (user already knows Vite). |
+| Styling | **TailwindCSS v4** via `@tailwindcss/vite` (CSS-first config) | v4 puts theme in CSS via `@theme {}`. The deprecated `@astrojs/tailwind` integration is NOT used. |
+| Content authoring | **Markdown / MDX** loaded via Astro **Content Layer API** (`loader: glob(...)`) | Low barrier for community PRs, schema-validated via Zod at build time. |
+| Search | **Pagefind** via the **`astro-pagefind`** integration | Client-side, no backend. Pagefind auto-creates per-language indexes from `<html lang>`; no manual filtering needed. |
 | Interactivity | **Astro Islands** (zero by default, opt-in per component) | Civ comparator hydrates only its own component. |
 | Deployment | **Cloudflare Pages** (git integration) | Free, global CDN, deploy-on-push. |
 | CI | **GitHub Actions** | Build check + schema validation on PR. |
@@ -323,12 +323,13 @@ i18n: {
   routing: {
     prefixDefaultLocale: true,
     redirectToDefaultLocale: false,
+    fallbackType: "rewrite",   // serve EN content at /tr/ URL instead of redirecting
   },
   fallback: { tr: "en", es: "en", de: "en" },
 }
 ```
 
-Missing translations auto-serve EN content under the localized URL with a "translation in progress" banner. Translators see exactly what needs work.
+`fallbackType: "rewrite"` is critical — it serves EN content at the localized URL (e.g., `/tr/civs/portuguese/` shows the EN page) rather than redirecting away from the TR path. Combined with a "translation in progress" banner on the page, translators see exactly what needs work.
 
 ### Root `/` behavior
 

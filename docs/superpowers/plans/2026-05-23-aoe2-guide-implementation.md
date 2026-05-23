@@ -4,9 +4,15 @@
 
 **Goal:** Build a four-language static Age of Empires II guide site (civs, build orders, units, maps, matchups, beginner path, glossary) deployable to Cloudflare Pages with no server-side runtime.
 
-**Architecture:** Astro 4+ in static-output mode with TypeScript, Tailwind theme tokens, content collections validated by Zod, English-canonical slugs across 4 locales (EN/TR/ES/DE), Pagefind search, Astro Islands reserved for the future civ-comparator. JSON files in `src/data/` hold language-agnostic facts; localized markdown in `src/content/` holds translatable text.
+**Architecture:** Astro 5.2+ in static-output mode with TypeScript, Tailwind v4 (CSS-first config), Content Layer API + Zod schemas, English-canonical slugs across 4 locales (EN/TR/ES/DE), Pagefind search (auto per-language via `<html lang>`), Astro Islands reserved for the future civ-comparator. JSON files in `src/data/` hold language-agnostic facts; localized markdown in `src/content/` holds translatable text.
 
-**Tech Stack:** Astro 4+, TypeScript, TailwindCSS, MDX, Pagefind, Zod, pnpm, Vitest (for utility code), Cloudflare Pages.
+**Tech Stack:** Astro 5.2+, TypeScript strict, TailwindCSS v4 via `@tailwindcss/vite` (NOT the deprecated `@astrojs/tailwind`), MDX, `astro-pagefind`, Zod, pnpm, Vitest (for utility code), Cloudflare Pages.
+
+**Key library decisions (verified against current docs via Context7):**
+- Astro Content Layer API with `loader: glob({...})` — the legacy `type: "content"` is deprecated.
+- `fallbackType: "rewrite"` in i18n config — serves EN content at TR/ES/DE URL rather than redirecting.
+- `@astrojs/tailwind` is DEPRECATED — use `@tailwindcss/vite` instead. Theme config lives in CSS via `@theme {}`.
+- `astro-pagefind` integration handles index building automatically; per-page `<PagefindConfig lang={locale}/>` scopes search to the current language.
 
 **Spec:** [`docs/superpowers/specs/2026-05-23-aoe2-guide-design.md`](../specs/2026-05-23-aoe2-guide-design.md)
 
@@ -40,14 +46,16 @@
 echo "20" > .nvmrc
 ```
 
-- [ ] **Step 2: Initialize pnpm + scaffold Astro non-interactively**
+- [ ] **Step 2: Initialize pnpm + install Astro 5+ and core integrations**
 
 ```bash
 corepack enable
 pnpm init
-pnpm add -D astro@^4 @astrojs/check typescript@^5
+pnpm add -D astro@^5 @astrojs/check typescript@^5
 pnpm add -D @astrojs/mdx @astrojs/sitemap
 ```
+
+(Tailwind v4 + Pagefind integrations are installed in Task 2 and Task 29 respectively. Do NOT install `@astrojs/tailwind` — it is deprecated.)
 
 - [ ] **Step 3: Write `astro.config.mjs`**
 
@@ -63,7 +71,11 @@ export default defineConfig({
   i18n: {
     defaultLocale: "en",
     locales: ["en", "tr", "es", "de"],
-    routing: { prefixDefaultLocale: true, redirectToDefaultLocale: false },
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
+      fallbackType: "rewrite",   // serve EN content at /tr/... URLs (not a redirect)
+    },
     fallback: { tr: "en", es: "en", de: "en" },
   },
   integrations: [mdx(), sitemap()],
@@ -149,126 +161,111 @@ git commit -m "chore: scaffold Astro project with TS, i18n config, MDX, sitemap"
 
 ---
 
-## Task 2: Add TailwindCSS with medieval theme tokens
+## Task 2: Add TailwindCSS v4 with CSS-first medieval theme
+
+> **CRITICAL:** Tailwind v4 abandoned `tailwind.config.js`. Theme tokens now live in CSS via the `@theme {}` directive. The `@astrojs/tailwind` integration is **deprecated** — use `@tailwindcss/vite` directly.
 
 **Files:**
-- Create: `tailwind.config.mjs`, `src/styles/tokens.css`, `src/styles/globals.css`
-- Modify: `astro.config.mjs` (add Tailwind integration)
+- Create: `src/styles/globals.css`
+- Modify: `astro.config.mjs` (add `@tailwindcss/vite` plugin)
+- Modify: `src/pages/index.astro` (import the stylesheet for the smoke test)
 
-- [ ] **Step 1: Install Tailwind via official integration**
+- [ ] **Step 1: Install Tailwind v4 + Vite plugin**
 
 ```bash
-pnpm add -D @astrojs/tailwind tailwindcss
+pnpm add -D tailwindcss@^4 @tailwindcss/vite@^4
 ```
 
-- [ ] **Step 2: Add Tailwind integration to `astro.config.mjs`**
+- [ ] **Step 2: Add the Vite plugin to `astro.config.mjs`**
 
-Change `integrations: [mdx(), sitemap()]` to:
-
-```js
-import tailwind from "@astrojs/tailwind";
-// ...
-integrations: [mdx(), sitemap(), tailwind({ applyBaseStyles: false })],
-```
-
-- [ ] **Step 3: Write `tailwind.config.mjs` with design tokens**
+Add the import and a `vite.plugins` entry. Final file:
 
 ```js
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}"],
-  darkMode: ["class", '[data-theme="dark"]'],
-  theme: {
-    extend: {
-      colors: {
-        parchment: "rgb(var(--parchment) / <alpha-value>)",
-        ink: "rgb(var(--ink) / <alpha-value>)",
-        stone: {
-          700: "rgb(var(--stone-700) / <alpha-value>)",
-        },
-        gold: {
-          400: "rgb(var(--gold-400) / <alpha-value>)",
-          500: "rgb(var(--gold-500) / <alpha-value>)",
-        },
-        royal: "rgb(var(--royal-red) / <alpha-value>)",
-        forest: "rgb(var(--forest-700) / <alpha-value>)",
-        steel: "rgb(var(--steel-600) / <alpha-value>)",
-        ember: "rgb(var(--ember) / <alpha-value>)",
-        "stone-bg": "rgb(var(--stone-bg) / <alpha-value>)",
-        res: {
-          food: "rgb(var(--res-food) / <alpha-value>)",
-          wood: "rgb(var(--res-wood) / <alpha-value>)",
-          gold: "rgb(var(--res-gold) / <alpha-value>)",
-          stone: "rgb(var(--res-stone) / <alpha-value>)",
-        },
-      },
-      fontFamily: {
-        display: ["Cinzel", "serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
-      },
-      borderRadius: {
-        DEFAULT: "4px",
-        sm: "2px",
-      },
-      maxWidth: {
-        prose: "75ch",
-      },
+// astro.config.mjs
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  site: "https://aoe2.example.com",
+  output: "static",
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "tr", "es", "de"],
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
+      fallbackType: "rewrite",
     },
+    fallback: { tr: "en", es: "en", de: "en" },
   },
-};
+  integrations: [mdx(), sitemap()],
+  vite: { plugins: [tailwindcss()] },
+});
 ```
 
-- [ ] **Step 4: Write `src/styles/tokens.css`**
+- [ ] **Step 3: Write `src/styles/globals.css` — single file, CSS-first theme**
+
+Tailwind v4 reads `@theme {}` and turns each `--color-*` / `--font-*` / etc. into utility classes (`bg-parchment`, `text-ink`, `font-display` …).
 
 ```css
-:root {
-  /* Light (parchment) — default */
-  --parchment: 245 236 215;
-  --ink: 31 24 18;
-  --stone-700: 61 53 48;
-  --gold-500: 201 164 76;
-  --gold-400: 217 183 96;
-  --royal-red: 139 30 30;
-  --forest-700: 61 105 54;
-  --steel-600: 74 96 121;
-  --ember: 240 217 154;
-  --stone-bg: 28 22 17;
+@import "tailwindcss";
 
-  --res-food: 212 77 77;
-  --res-wood: 139 115 85;
-  --res-gold: 220 190 76;
-  --res-stone: 136 136 136;
+/* Dark mode triggers on data-theme="dark" (class strategy via custom variant). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  /* Light (parchment) base palette — these become bg-parchment, text-ink, etc. */
+  --color-parchment: oklch(0.93 0.04 80);   /* warm cream */
+  --color-ink: oklch(0.22 0.02 60);
+  --color-stone-700: oklch(0.34 0.02 50);
+  --color-gold-500: oklch(0.73 0.13 80);
+  --color-gold-400: oklch(0.80 0.12 80);
+  --color-royal: oklch(0.42 0.18 25);
+  --color-forest: oklch(0.50 0.10 145);
+  --color-steel: oklch(0.50 0.05 240);
+  --color-ember: oklch(0.86 0.12 75);
+  --color-stone-bg: oklch(0.17 0.02 50);
+
+  /* Resource colors locked to game convention */
+  --color-res-food: oklch(0.62 0.18 25);
+  --color-res-wood: oklch(0.50 0.05 50);
+  --color-res-gold: oklch(0.78 0.14 85);
+  --color-res-stone: oklch(0.62 0 0);
+
+  /* Typography */
+  --font-display: "Cinzel", "serif";
+  --font-body: "Inter", "system-ui", "sans-serif";
+  --font-mono: "JetBrains Mono", "ui-monospace", "monospace";
+
+  /* Border radius */
+  --radius: 4px;
+  --radius-sm: 2px;
 }
 
-html[data-theme="dark"] {
-  --parchment: 28 22 17;     /* stone-bg becomes the page bg */
-  --ink: 240 217 154;        /* ember text */
-  --stone-700: 90 79 63;     /* parchment-60 secondary */
-  --gold-500: 217 183 96;    /* gold-400 brighter on dark */
+/* Dark theme — overrides via the same custom properties */
+[data-theme="dark"] {
+  --color-parchment: oklch(0.17 0.02 50);    /* stone-bg becomes page bg */
+  --color-ink: oklch(0.86 0.12 75);          /* ember text */
+  --color-stone-700: oklch(0.50 0.03 55);
+  --color-gold-500: oklch(0.80 0.12 80);
 }
-```
-
-- [ ] **Step 5: Write `src/styles/globals.css`**
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "./tokens.css";
 
 html { color-scheme: light dark; }
 html[data-theme="light"] { color-scheme: light; }
 html[data-theme="dark"]  { color-scheme: dark; }
 
 body {
-  @apply bg-parchment text-ink font-body antialiased;
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
 }
 ```
 
-- [ ] **Step 6: Verify Tailwind compiles**
+- [ ] **Step 4: Verify Tailwind compiles**
 
 Update `src/pages/index.astro`:
 
@@ -276,41 +273,38 @@ Update `src/pages/index.astro`:
 ---
 import "@/styles/globals.css";
 ---
-<html lang="en"><body class="font-display text-2xl">Tailwind ok ✓</body></html>
+<html lang="en"><body><h1 class="font-display text-4xl text-ink">Tailwind v4 ok ✓</h1></body></html>
 ```
 
 Run: `pnpm dev`
-Expected: page shows styled text. Kill server.
+Expected: page shows large display-font heading on parchment background. Kill server.
 
-- [ ] **Step 7: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
 git add .
-git commit -m "feat(style): add Tailwind with medieval theme tokens and globals"
+git commit -m "feat(style): add Tailwind v4 CSS-first theme with medieval tokens"
 ```
 
 ---
 
-## Task 3: Self-host fonts (Cinzel, Inter, JetBrains Mono)
+## Task 3: Self-host fonts (Cinzel, Inter, JetBrains Mono) via fontsource
 
 **Files:**
-- Create: `public/fonts/*.woff2` (download), `src/styles/fonts.css`
-- Modify: `src/styles/globals.css` (import fonts.css)
+- Modify: `src/styles/globals.css` (prepend font imports)
+- Modify: `src/pages/index.astro` (smoke-test the typefaces)
 
-- [ ] **Step 1: Download font subsets**
-
-We need:
-- Cinzel 400, 600 (latin + latin-ext)
-- Inter 400, 500, 700 (latin + latin-ext)
-- JetBrains Mono 400, 700 (latin + latin-ext)
-
-Use Google Fonts → "Download family" or use `fontsource` packages for stable subsets:
+- [ ] **Step 1: Install fontsource packages**
 
 ```bash
 pnpm add @fontsource/cinzel @fontsource/inter @fontsource/jetbrains-mono
 ```
 
-- [ ] **Step 2: Write `src/styles/fonts.css`**
+These ship .woff2 + face declarations; no manual download needed.
+
+- [ ] **Step 2: Add font imports to the TOP of `src/styles/globals.css`**
+
+The imports must come **before** `@import "tailwindcss";` so the `--font-display` token in `@theme` resolves to actual loaded faces.
 
 ```css
 @import "@fontsource/cinzel/400.css";
@@ -320,31 +314,27 @@ pnpm add @fontsource/cinzel @fontsource/inter @fontsource/jetbrains-mono
 @import "@fontsource/inter/700.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/700.css";
+
+@import "tailwindcss";
+
+/* …existing @custom-variant, @theme, body styles from Task 2 unchanged… */
 ```
 
-- [ ] **Step 3: Import in `src/styles/globals.css`**
-
-Add at top, after `@tailwind utilities;`:
-
-```css
-@import "./fonts.css";
-```
-
-- [ ] **Step 4: Verify fonts load**
+- [ ] **Step 3: Verify fonts load**
 
 Update `src/pages/index.astro` body content:
 
 ```astro
-<body class="font-body">
-  <h1 class="font-display text-4xl">Cinzel Display</h1>
-  <p class="font-body">Inter Body</p>
-  <code class="font-mono">JetBrains Mono</code>
+<body>
+  <h1 class="font-display text-4xl text-ink">Cinzel Display</h1>
+  <p class="font-body text-ink">Inter Body</p>
+  <code class="font-mono text-ink">JetBrains Mono</code>
 </body>
 ```
 
 Run `pnpm dev`, visually verify three distinct typefaces render. Kill server.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
 git add .
@@ -943,13 +933,16 @@ On `/en/civs/`, switch to TR via the dropdown — should land on `/tr/civs/`.
 **Files:**
 - Create: `src/content/config.ts`
 
-- [ ] **Step 1: Write the file with all 7 collections**
+- [ ] **Step 1: Write the file with all 7 collections (Content Layer API)**
+
+> Uses `loader: glob({...})` — the Content Layer pattern. The legacy `type: "content"` is deprecated in current Astro versions. Each glob picks up `<lang>/<slug>.md` files; the resulting entry `id` is `<lang>/<slug>`, which our helpers (Task 10) parse.
 
 ```ts
-import { z, defineCollection } from "astro:content";
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const civilizations = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/civilizations" }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -964,7 +957,7 @@ const civilizations = defineCollection({
 });
 
 const buildOrders = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/build-orders" }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -988,7 +981,7 @@ const buildOrders = defineCollection({
 });
 
 const units = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/units" }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -998,7 +991,7 @@ const units = defineCollection({
 });
 
 const maps = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/maps" }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -1009,7 +1002,7 @@ const maps = defineCollection({
 });
 
 const matchups = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/matchups" }),
   schema: z.object({
     slug: z.string(),
     civA: z.string(),
@@ -1019,7 +1012,7 @@ const matchups = defineCollection({
 });
 
 const beginner = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/beginner" }),
   schema: z.object({
     slug: z.string(),
     title: z.string(),
@@ -1029,7 +1022,7 @@ const beginner = defineCollection({
 });
 
 const glossary = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/glossary" }),
   schema: z.object({
     slug: z.string(),
     term: z.string(),
@@ -1811,6 +1804,7 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Icon from "@components/ui/Icon.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { render } from "astro:content";
 import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 import civsData from "@data/civilizations.json";
 
@@ -1831,7 +1825,7 @@ const found = await getLocalizedEntry("civilizations", civSlug, lang);
 if (!found) return Astro.redirect("/404");
 
 const { entry, fallback } = found;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const meta = (civsData.civs as Array<any>).find((c) => c.slug === civSlug);
 ---
 <BaseLayout title={entry.data.name} canonicalPath={`/civs/${civSlug}`}>
@@ -2002,6 +1996,7 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import BuildOrderSteps from "@components/content/BuildOrderSteps.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { render } from "astro:content";
 import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 
 export async function getStaticPaths() {
@@ -2018,7 +2013,7 @@ const slug = Astro.params.build as string;
 const found = await getLocalizedEntry("build-orders", slug, lang);
 if (!found) return Astro.redirect("/404");
 const { entry, fallback } = found;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 <BaseLayout title={entry.data.name} canonicalPath={`/builds/${slug}`}>
   <article class="mx-auto max-w-prose px-4 py-12">
@@ -2254,6 +2249,7 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Icon from "@components/ui/Icon.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { render } from "astro:content";
 import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 import unitStats from "@data/unit-stats.json";
 
@@ -2271,7 +2267,7 @@ const slug = Astro.params.unit as string;
 const found = await getLocalizedEntry("units", slug, lang);
 if (!found) return Astro.redirect("/404");
 const { entry, fallback } = found;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const stats = (unitStats.units as Array<any>).find((u) => u.slug === slug);
 ---
 <BaseLayout title={entry.data.name} canonicalPath={`/units/${slug}`}>
@@ -2470,6 +2466,7 @@ const chapters = (await getLocalizedEntries("beginner", lang)).sort(
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
+import { render } from "astro:content";
 import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 
 export async function getStaticPaths() {
@@ -2486,7 +2483,7 @@ const slug = Astro.params.chapter as string;
 const found = await getLocalizedEntry("beginner", slug, lang);
 if (!found) return Astro.redirect("/404");
 const { entry, fallback } = found;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const all = (await getLocalizedEntries("beginner", lang)).sort(
   (a, b) => a.data.order - b.data.order
@@ -2553,49 +2550,58 @@ The second age of the game. Unlocks Archery Range, Stable, Blacksmith, walls, an
 
 - [ ] **Step 2: Write glossary index page (single-page, alphabetical with anchor jumps)**
 
+> **Note:** Content Layer entries no longer have `entry.render()` — we use `render(entry)` and pre-render all terms in the frontmatter into a sync structure for the template. (Astro doesn't await promises inside `.map()` in templates.)
+
 ```astro
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { render } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
-import { t } from "@/i18n/utils";
+import { t as tt } from "@/i18n/utils";
 import { getLocalizedEntries } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+
 const terms = (await getLocalizedEntries("glossary", lang)).sort((a, b) =>
   a.data.term.localeCompare(b.data.term),
 );
-const grouped = new Map<string, typeof terms>();
-for (const t of terms) {
-  const list = grouped.get(t.data.letter) ?? [];
-  list.push(t);
-  grouped.set(t.data.letter, list);
+
+// Pre-render every term's content so the template can stay sync.
+const rendered = await Promise.all(
+  terms.map(async (term) => ({ data: term.data, ...(await render(term)) })),
+);
+
+const grouped = new Map<string, typeof rendered>();
+for (const term of rendered) {
+  const list = grouped.get(term.data.letter) ?? [];
+  list.push(term);
+  grouped.set(term.data.letter, list);
 }
 const letters = [...grouped.keys()].sort();
 ---
-<BaseLayout title={t(lang, "nav.glossary")} canonicalPath="/glossary">
+<BaseLayout title={tt(lang, "nav.glossary")} canonicalPath="/glossary">
   <section class="mx-auto max-w-prose px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">{t(lang, "nav.glossary")}</h1>
+    <h1 class="font-display text-4xl text-ink">{tt(lang, "nav.glossary")}</h1>
 
     <nav class="mt-4 flex flex-wrap gap-2 text-sm">
-      {letters.map((l) => <a href={`#${l}`} class="rounded border border-stone-700/30 px-2 py-1 hover:border-gold-500 hover:text-gold-500">{l}</a>)}
+      {letters.map((l) => (
+        <a href={`#${l}`} class="rounded border border-stone-700/30 px-2 py-1 hover:border-gold-500 hover:text-gold-500">{l}</a>
+      ))}
     </nav>
 
     {letters.map((l) => (
       <section id={l} class="mt-10">
         <h2 class="font-display text-2xl text-gold-500">{l}</h2>
         <dl class="mt-2 space-y-3">
-          {grouped.get(l)!.map(async (term) => {
-            const { Content } = await term.render();
-            return (
-              <div>
-                <dt class="font-display text-lg text-ink">{term.data.term}</dt>
-                <dd class="prose prose-stone max-w-none"><Content /></dd>
-              </div>
-            );
-          })}
+          {grouped.get(l)!.map((term) => (
+            <div>
+              <dt class="font-display text-lg text-ink">{term.data.term}</dt>
+              <dd class="prose prose-stone max-w-none"><term.Content /></dd>
+            </div>
+          ))}
         </dl>
       </section>
     ))}
@@ -2614,31 +2620,36 @@ git commit -m "feat(glossary): alphabetical single-page glossary with anchor nav
 
 # Phase 7 — Search, tooling, deploy
 
-## Task 29: Pagefind search
+## Task 29: Pagefind search via `astro-pagefind` integration
+
+> **Note:** We use the `astro-pagefind` integration package — it runs Pagefind during `astro build` and serves the index in dev too. Language scoping is automatic: Pagefind reads `<html lang="...">` and builds a separate index per language. The search UI gets pointed at the current locale via `<PagefindConfig lang={locale}/>` — no manual `data-pagefind-filter` is needed for language.
 
 **Files:**
-- Modify: `astro.config.mjs` (post-build hook) OR add npm script
-- Create: `src/pages/[lang]/search.astro`
+- Modify: `astro.config.mjs` (add `astro-pagefind` integration)
+- Modify: `src/components/layout/BaseLayout.astro` (mark indexable body)
+- Modify: `src/pages/[lang]/search.astro`
 
-- [ ] **Step 1: Install Pagefind**
+- [ ] **Step 1: Install Pagefind + Astro integration**
 
 ```bash
-pnpm add -D pagefind
+pnpm add -D pagefind astro-pagefind
 ```
 
-- [ ] **Step 2: Add post-build script**
+- [ ] **Step 2: Register the integration in `astro.config.mjs`**
 
-In `package.json`:
+Add import and integration entry:
 
-```json
-"scripts": {
-  "build": "astro build && pagefind --site dist"
-}
+```js
+import pagefind from "astro-pagefind";
+// ...
+integrations: [mdx(), sitemap(), pagefind()],
 ```
 
-- [ ] **Step 3: Add Pagefind data attribute to BaseLayout main**
+No post-build script needed — `astro-pagefind` indexes automatically on `astro build` and serves the index in `astro dev`.
 
-In `BaseLayout.astro`, change the `<main>` to:
+- [ ] **Step 3: Mark the indexable body in `BaseLayout.astro`**
+
+Change `<main class="flex-1">` to:
 
 ```astro
 <main class="flex-1" data-pagefind-body>
@@ -2646,13 +2657,14 @@ In `BaseLayout.astro`, change the `<main>` to:
 </main>
 ```
 
-In every page that should be indexed, also add `data-pagefind-filter="lang:<lang>"` on the article/section root so we can filter by locale.
+Per-page language filtering is **automatic** — Pagefind reads the `lang` attribute we already set on `<html>` (Task 5 BaseLayout already sets `lang={locale}`). No manual `data-pagefind-filter="lang:..."` is required.
 
 - [ ] **Step 4: Write the search page `src/pages/[lang]/search.astro`**
 
 ```astro
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 
@@ -2664,32 +2676,26 @@ const lang = Astro.params.lang as Locale;
 <BaseLayout title={t(lang, "nav.search")} canonicalPath="/search">
   <section class="mx-auto max-w-prose px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.search")}</h1>
-    <div id="search" class="mt-6"></div>
-    <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
-    <script src="/pagefind/pagefind-ui.js" defer is:inline></script>
-    <script is:inline define:vars={{ lang }}>
-      window.addEventListener("DOMContentLoaded", () => {
-        new PagefindUI({
-          element: "#search",
-          showSubResults: true,
-          // Scope results to the current language
-          baseFilters: { lang },
-        });
-      });
-    </script>
+    <PagefindConfig lang={lang} preload={true} />
+    <div class="mt-6">
+      <pagefind-searchbox placeholder={t(lang, "ui.search.placeholder")}></pagefind-searchbox>
+      <pagefind-results></pagefind-results>
+    </div>
   </section>
 </BaseLayout>
 ```
 
+`<PagefindConfig lang={lang}/>` selects the per-language index; the native web components (`pagefind-searchbox`, `pagefind-results`) handle the UI.
+
 - [ ] **Step 5: Verify**
 
-Run `pnpm build`, then `pnpm preview`. Visit `/en/search/`, type "britons", expect the civ page to appear.
+Run `pnpm build`, then `pnpm preview`. Visit `/en/search/`, type "britons" — expect the EN civ page. Visit `/tr/search/`, type "britons" — expect the TR civ page only (TR index, not EN).
 
 - [ ] **Step 6: Commit**
 
 ```bash
 git add .
-git commit -m "feat(search): Pagefind integration scoped per-locale"
+git commit -m "feat(search): astro-pagefind integration with per-locale auto-scoping"
 ```
 
 ---
