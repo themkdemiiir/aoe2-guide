@@ -35,38 +35,34 @@ source:
 - 1 villager lures the first boar
 - 1 villager builds a House then a Mill
 - (Recommended) Drive deer to Town Center with your scout
-- +6 villagers hunting (boar + sheep) → 14 total
+- +4 villagers hunting (boar + sheep) → 14 total
 - +2 villagers to wood → 18 total
 - Research Loom
 - Click Feudal Age (~8:50)
 
-## Feudal Preparation (Safe Opening)
+## Feudal Preparation
 
 - Send 5 hunting villagers to wood + build 2nd Lumber Camp (9 total lumberjacks)
 - Send 5 hunting villagers to berries
 - 1 villager builds Barracks
 - 2 villagers build Stable
-- Research Double-Bit Axe
-- (Situational) Horse Collar:
-  - Skip on open maps if you fear early pressure
-  - Always research on closed maps
-- Send the 2 Stable builders to opposite ends of base to build walls
-- Build Farms as excess wood accumulates
-- Start producing Scout Cavalry and take map control
+- Begin walling base with the 2 Stable builders after construction
+
+**Research:**
+- Double-Bit Axe
+- Horse Collar (always on closed maps; skip on open if early pressure threatens)
+
+## Feudal Age (18 Villagers)
+
+- Produce Scout Cavalry and take map control
 - Build 1–4 Spearmen depending on opponent scout numbers
-- Aim for ~15 Farms (+/- 2 depending on situation)
-
-## Castle Transition
-
+- Build Farms as excess wood accumulates; aim for ~15 Farms
 - Send 5 villagers to gold and build Mining Camp
 - Build Blacksmith
-- When berries run out redirect villagers to gold / wood / farms
-- Ensure base is fully walled
-- Research Castle Age
+- When berries run out redirect villagers to gold, wood, or farms
+- Ensure base is fully walled before clicking Castle Age
 
-**Redistribute economy:** aim for ~12 wood / 15 food / 8 gold (~35+ pop)
-
-## Castle Age Phase (Cavalry Archer Production)
+## Castle Age (Cavalry Archer Production)
 
 - Build 2 Archery Ranges
 - Research Gold Mining
@@ -74,21 +70,17 @@ source:
 - Begin producing Cavalry Archers
 - Research Bow Saw, Bodkin Arrow, and Husbandry
 
-## What's Next
+## Strategy and Follow-Up (What's Next)
 
-**If you couldn't fully wall:**
-- Abandon this build, produce more Scouts + Bloodlines
-- Build Towers for defense if needed
-- Town Watch early helps read incoming pressure
+- This build demands patience — the payoff is Cavalry Archers, one of the strongest mobile ranged units in the game.
+- **Weak against:** Heavy Skirmisher responses in Feudal; if you cannot fully wall, Scouts cannot sustain pressure.
+- **Strong against:** Static defensive openings; opponents who cannot kite or respond to mobile ranged units.
 
-**Decide direction in Castle Age:**
-- If safe, add extra Town Center
-- For pressure: prioritize Monastery, Ballistics, or Siege Workshop
-- Full all-in: start with 3 Ranges (2 Ranges = scalable production)
+**Options:**
 
-**Late Game Compositions:**
-- Best compositions:
-  - Cavalry Archers + Hussars, or
-  - Cavalry Archers + Halberdiers
-- Add appropriate Siege in either case
-- These two compositions are among Arabia's strongest Imperial Age combinations when played correctly
+1. **Double Archery Range Full Production:** 2 Ranges pumping Cavalry Archers continuously is the core threat; add Hussars for melee support.
+2. **Add Extra Town Center:** If safe, place a 2nd TC in Castle Age to grow economy while CA pressure builds.
+3. **Ballistics + Siege:** For extra punch, research Ballistics and add a Siege Workshop; Mangonels behind CA cover is extremely strong.
+
+**Defense Tip:**
+If you could not fully wall, abandon the CA plan and produce more Scouts with Bloodlines. Use Towers for base defense and Town Watch early to read incoming pressure. Best late-game compositions are Cavalry Archers + Hussars or Cavalry Archers + Halberdiers with appropriate Siege.

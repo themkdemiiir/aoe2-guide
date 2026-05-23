@@ -23,60 +23,63 @@ source:
 
 ---
 
-# Cumans 2 TC Boom (Intermediate)
+# 18 Pop Cumans 2 TC Boom
 
-**Goal:** Build a second Town Center early in Feudal Age to create a dominant economy. If the opponent's Feudal attacks are not respected, this build leads to automatic late-game superiority.
+**Goal:** Build a second Town Center early in Feudal Age to create a dominant economy and outpace the opponent's development.
+**Recommended civs:** Cumans
 
 ## Dark Age (0–18 Villagers)
 
 - 6 villagers on sheep (food)
 - 2 villagers on wood
-- 1 villager lures boar
+- 1 villager lures first boar
 - 2 villagers collect food under boar and deer
 - 1 villager builds a House then a Mill near berries
 - 3 villagers to berries
 - Build another House
-- Total 18 villagers before clicking Feudal Age (~8:50)
 
 On closed maps (Arena, Hideout) you can click Feudal early without Loom.
+Click Feudal Age with 18th villager (~8:50).
 
-## Feudal Age (18–27 Villagers)
+## Feudal Preparation
 
 - Send 6 villagers from hunting to wood
 - Continue working from the first Lumber Camp
 - Use newly produced villagers to build 2nd Town Center (preferably near the wood line)
-- Research Double-Bit Axe
-- If the map is safe, add Horse Collar
 
-**Goal:** Both Town Centers should produce villagers continuously.
-Maintain balance of Wood, Food, and a small amount of Stone.
+**Research:**
+- Double-Bit Axe
+- Horse Collar (if map is safe)
 
-## Castle Transition (27+ Villagers)
+## Feudal Age (18 Villagers)
 
+- Both Town Centers produce villagers continuously
+- Maintain balance of Wood, Food, and a small amount of Stone
 - Build Farms to increase food production
 - Once wood and farm balance is established, send 6–8 villagers to gold
 - Build Market + Blacksmith
 - Click Castle Age (~19:30)
 
-## Castle Age (~20 Minutes)
+## Castle Age (27 Villagers)
 
 - Continue producing from two Town Centers
 - Research Bow Saw
 - Do not produce military before stabilizing economy
 - Use Market to balance excess resources
 - Scout the map; add extra TC if needed
-
-Reaching 60+ villagers without cutting 2 TC production is the primary goal of this build.
+- Reaching 60+ villagers without cutting 2 TC production is the primary goal
 
 ## Strategy and Follow-Up (What's Next)
 
-- If the opponent is aggressive, move some villagers to stone and build Tower defense
-- On open maps, add Scouts or Archers to reduce pressure
-- If the opponent is planning FC + Castle Drop, get military out early
-- If there is no pressure, continue full boom
-- At minutes 19–20 you're in Castle Age, which is when the game tips in your favor
+- Cumans are the only civilization that can build a second Town Center in Feudal Age — this is their defining advantage.
+- **Weak against:** Feudal all-in rushes that arrive before the 2nd TC economy pays off; Feudal Scout Rush can punish unprotected villagers.
+- **Strong against:** Fast Castle and boom strategies; any opponent who cannot apply Feudal pressure.
 
-**Notes:**
-- The 2 TC Boom is the most efficient economic opening for Cumans.
-- Double-Bit Axe + Horse Collar are mandatory when the map is safe.
-- The goal is continuous villager production, balanced resources, and outpacing the opponent's development.
+**Options:**
+
+1. **Pure Boom:** Continue full 2 TC production into Imperial Age with no military, ideal on Arena.
+2. **Defensive Response:** Move some villagers to stone and build Tower defense if the opponent is aggressive; add Scouts or Archers on open maps.
+3. **Military Pivot:** If the opponent plans Fast Castle + Castle Drop, get military out early and use Cumans' faster attack upgrades.
+
+**Defense Tip:**
+At minutes 19–20 you reach Castle Age, which is when the game tips in your favor. The 2 TC Boom is the most efficient economic opening for Cumans — prioritize Double-Bit Axe and Horse Collar whenever the map is safe.

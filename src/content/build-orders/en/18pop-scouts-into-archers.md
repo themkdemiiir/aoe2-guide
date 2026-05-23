@@ -24,7 +24,7 @@ source:
 
 # 18 Pop Scouts into Archers
 
-**Goal:** Apply early pressure with Scout Cavalry in the Feudal Age, then transition by adding an Archery Range and switching to Archers.
+**Goal:** Apply early pressure with Scout Cavalry in Feudal Age, then transition to Archers by adding Archery Ranges.
 **Recommended civs:** Chinese, Huns, Malians, Portuguese
 
 ## Dark Age (0–18 Villagers)
@@ -32,10 +32,8 @@ source:
 - 6 villagers on sheep
 - 2 villagers on wood
 - 1 villager lures the first boar
-- 1 villager hunts under the Town Center
 - 1 villager builds a House then a Mill near berries
 - 1 villager lures the second boar
-- (Optional) Drive deer to the Town Center with your scout
 - +6 villagers hunting (boar + sheep), 16 total
 - Research Loom
 - Click Feudal Age (~8:50)
@@ -45,41 +43,34 @@ source:
 - Send 6 hunting villagers to wood (8 total lumberjacks; one or two Lumber Camps)
 - Send 4 villagers to berries
 - Pull 2 villagers from hunting: one builds Barracks, one builds House
-- Research Double-Bit Axe
-- (Optional) Research Horse Collar
+- Build Stable and begin producing Scout Cavalry
 
-## Scout Phase (Early Pressure)
+**Research:**
+- Double-Bit Axe
+- (Optional) Horse Collar
 
-- Build Stable and produce Scout Cavalry
+## Feudal Age (18 Villagers)
+
 - New villagers work hunt or straggler trees
-- Produce at least 1 Spearman (2+ if needed)
-- Build up to 8 Farms
-- Then send 8 villagers to gold and build a Mining Camp
-
-## Archer Transition
-
+- Produce at least 1 Spearman (2+ if needed against enemy Scouts)
+- Build up to 8 Farms as food allows
+- Send 3 villagers to gold and build a Mining Camp
 - When enough wood is banked, build 2 Archery Ranges
 - Start producing Archers
 - When berries run out, redirect those villagers to farms or wood
 - Build Blacksmith and research Fletching
-- Continue building Farms with new villagers
 
-## What's Next
+## Strategy and Follow-Up (What's Next)
 
-**Feudal All-In:**
-- Research Bloodlines, Forging, Cavalry Armor
-- Increase scout production, maintain pressure
+- Scouts into Archers is a flexible two-wave strategy: Scouts threaten first, then Archers sustain the pressure.
+- **Weak against:** Opponent walling early and producing Spearmen to neutralize Scouts; Skirmisher response to Archers.
+- **Strong against:** Greedy openings; opponents who cannot respond to two different unit types at once.
 
-**Castle Transition:**
-- Balance economy and advance to Castle Age
-- Prepare for a strong Crossbow timing
+**Options:**
 
-**Castle Age Combinations:**
-- Crossbow + Knights → effective against Skirmishers and Siege
-- 2 Ranges + 2 Stables → full gold-based all-in push
-- If the opponent has no Skirmishers, Ballistics can be prioritized
+1. **Feudal All-In:** Research Bloodlines, add a 2nd Stable for more Scouts; flood with Scouts + Archers and force a decision.
+2. **Castle Transition:** Balance economy, advance to Castle Age, and prepare for a strong Crossbow timing.
+3. **Crossbow + Knights:** Once in Castle Age, 2 Archery Ranges + 2 Stables creates a powerful combined arms push effective against Skirmishers and Siege.
 
-**Late Game:**
-- Expand farm count, maintain gold/wood balance
-- Scale economy and production
-- Close out the game with a strong late-game composition
+**Defense Tip:**
+If the opponent has no Skirmishers, Ballistics can be prioritized in Castle Age for immediate Archer value. Continuously expand farm count and maintain gold/wood balance to sustain production through the mid-game.

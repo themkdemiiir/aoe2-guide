@@ -9,23 +9,67 @@ steps:
   - { villagers: 6,  time: "0:00",  assign: "6 → sheep" }
   - { villagers: 9,  time: "1:05",  assign: "+3 → wood, build lumber camp" }
   - { villagers: 10, time: "1:30",  assign: "+1 → lure boar" }
-  - { villagers: 16, time: "3:25",  assign: "+1 → build barracks at front of base" }
-  - { villagers: 18, time: "4:15",  assign: "+2 → finish wood + hunt", note: "Loom; Feudal click at 18 pop" }
-  - { villagers: 18, time: "8:50",  assign: "Feudal arrives — 2 militia produced, sent to enemy immediately" }
-  - { villagers: 18, time: "8:55",  assign: "4 vils → lumber camp expansion" }
-  - { villagers: 19, time: "9:20",  assign: "+1 → berries (build mill); research Double-Bit Axe" }
-  - { villagers: 21, time: "10:00", assign: "+2 → follow-up depends on opponent (scouts/archers/spears)" }
+  - { villagers: 13, time: "2:20",  assign: "+3 → hunt under TC" }
+  - { villagers: 16, time: "3:25",  assign: "+3; 1 vil builds Barracks at front of base" }
+  - { villagers: 18, time: "4:15",  assign: "+2 → wood", note: "Research Loom; click Feudal at ~8:50" }
+  - { villagers: 18, time: "8:50",  assign: "Feudal arrives — produce 2 Militia immediately; send toward enemy base" }
+  - { villagers: 18, time: "8:55",  assign: "4 vils → wood (lumber camp expansion)" }
+  - { villagers: 19, time: "9:20",  assign: "+1 → berries, build Mill; research Double-Bit Axe" }
+  - { villagers: 21, time: "10:00", assign: "+2 → follow-up military based on opponent (scouts/archers/spears)" }
 source:
   author: "Hera"
   url: "https://ageofnotes.com/build-orders/feudal-drush-18-vils/"
+
 ---
 
 # 18 Pop Feudal Drush
 
-The Feudal Drush sends 2 militia during the Feudal transition — not in the dark age — making it lighter than a full Drush FC. Get the first hit in while still advancing, delay the opponent's opening, then adapt.
+**Goal:** Reach Feudal Age at 18 population, immediately produce 2 Militia and send them to pressure the enemy, then adapt to any follow-up military.
+**Recommended civs:** Malians, Lithuanians, Japanese, Britons, Vikings
 
-The militia walk toward the enemy while Feudal completes. Their job: kill 1–3 villagers or force the opponent to pull villagers off resources. Use your scout to block wall gaps and deny retreating villagers. If successful, the lead finances a strong follow-up; if not, you advanced at a normal time.
+## Dark Age (0–18 Villagers)
 
-Reaction framework: opponent stable → spearmen + archers; opponent range → match with scouts or own range + skirmishers; opponent drush → trade militia and proceed normally. Do not over-commit militia to a defended base.
+- 6 villagers on sheep
+- 3 villagers on wood
+- 1 villager lures first boar
+- 3 villagers hunting under Town Center
+- 1 villager builds Barracks at front of base
+- +2 villagers to wood
+- Research Loom
 
-Pairs well with militia-bonus civs (Malians, Japanese, Goths) and strong wood bonuses. Transition into 1-range archers or 1-stable scouts depending on the matchup.
+Click Feudal Age with 18th villager (~8:50).
+
+## Feudal Preparation
+
+- Produce 2 Militia immediately upon Feudal arriving
+- Send Militia to enemy base while Feudal completes
+- Send 4 villagers to wood (lumber camp expansion)
+- Use your scout to block wall gaps and deny retreating villagers
+
+**Research:**
+- Double-Bit Axe
+- (Optional) Horse Collar
+
+## Feudal Age (18 Villagers)
+
+- +1 villager to berries, build Mill
+- +2 villagers to follow-up military production based on opponent reaction
+- If opponent is stable: produce Spearmen + Archers
+- If opponent builds Archers: match with Scouts or Skirmishers
+- If opponent sends their own Drush: trade Militia and proceed normally
+- Do not over-commit Militia to a well-defended base
+
+## Strategy and Follow-Up (What's Next)
+
+- The Feudal Drush sends Militia during the Feudal transition — not in Dark Age — making it lighter than a full Drush FC but still threatening.
+- **Weak against:** Opponents who wall fast or produce Scouts to intercept; a defended base with Spearmen makes Militia ineffective.
+- **Strong against:** Greedy openings; opponents slow to wall; civs with no early military.
+
+**Options:**
+
+1. **Scouts Follow-Up:** Build Stable and add Scout Cavalry after Militia pressure; strong if opponent has no Spearmen.
+2. **Archers Follow-Up:** Build Archery Range and transition to Archers; pairs well with civs that have Archer bonuses (Britons, Mayans).
+3. **Castle Transition:** If Militia deal good damage, wall up and advance to Castle Age for a strong economic or military follow-up.
+
+**Defense Tip:**
+The Militia walk toward the enemy while Feudal completes. Their job is to kill 1–3 villagers or force the opponent to pull workers off resources. If successful, the lead finances a strong follow-up; if not, you advanced at a normal time with no long-term cost.

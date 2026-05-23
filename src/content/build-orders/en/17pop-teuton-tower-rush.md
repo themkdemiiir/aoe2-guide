@@ -24,8 +24,8 @@ source:
 
 # 17 Pop Teuton Tower Rush
 
-**Goal:** Reach Feudal Age early, send 10 villagers forward, and pin the enemy under tower chains.
-**Recommended civ:** Teutons
+**Goal:** Reach Feudal Age early, send 10 villagers forward, and pin the enemy under tower chains to deny their economy.
+**Recommended civs:** Teutons
 
 ## Dark Age (0–17 Villagers)
 
@@ -33,54 +33,45 @@ source:
 - 6 villagers on sheep
 - 2 villagers on wood
 - 1 villager lures first boar
-- 1 villager hunts (under deer or sheep)
 - 1 villager builds a House then a Mill near berries
 - 1 villager lures second boar
 - +5 villagers hunting under Town Center
+- 2 villagers to stone, build Mining Camp
 
 Research Loom.
 You must find the enemy with your scout before clicking Feudal Age — you need to know their location.
 Click Feudal Age (~8:25).
 
-## Pre-Feudal Preparation
+## Feudal Preparation
 
 - Move 1 hunting villager to wood (3 lumberjacks total)
-- Send 2 villagers to stone, build Mining Camp
-- Send 10 villagers forward (toward enemy base)
+- Send 10 villagers forward toward enemy base
 - Leave 1 villager near TC to prevent enemy scout from stealing your sheep
 - Do not research any economy upgrades yet (Double-Bit Axe, Horse Collar, etc.)
+
+**Research:**
+- (Delay) Double-Bit Axe and Horse Collar until forward tower is secured
 
 ## Feudal Age (17 Villagers)
 
 - Continue producing villagers; send them to hunting and farms
 - Use the forward villagers to build the first Tower ~8 tiles from the enemy's wood or berry line
+- Surround Tower with Palisade Walls; fight with your villagers if the enemy attacks
+- Move low-HP villagers inside the Tower to save them
 - Build Houses with forward villagers if needed to maintain supply
-- Adjust home villagers on wood / stone / food by eye
-- Optionally add a defensive Barracks or extra House at home
+- Chain towers 6–8 tiles apart if the enemy doesn't respond
 
-## Strategy and Execution (What's Next)
+## Strategy and Follow-Up (What's Next)
 
-**Defending the First Tower:**
-- You must protect the first Tower at all costs.
-- Surround it with Palisade Walls; fight with your villagers if the enemy attacks.
-- Move low-HP villagers inside the Tower to save them.
+- Teutons have the most cost-efficient Watch Towers and Guard Towers, making this the premier Tower Rush civilization.
+- **Weak against:** Opponent scouting forward in time and walling before your villagers arrive.
+- **Strong against:** Greedy openings, opponents who cannot respond quickly in Feudal.
 
-**Tower Chain:**
-- If the enemy doesn't respond, chain towers 6–8 tiles apart.
-- Each new tower should be close enough to protect the previous one.
+**Options:**
 
-**Economy and Continuation:**
-- Balance home economy: 5–6 villagers on stone is usually enough.
-- Build Blacksmith and research Fletching at the first opportunity.
-- Once economy stabilizes, add Double-Bit Axe and Horse Collar.
-- When pressure ends, secure forward resources under Towers.
+1. **All-in Knight Rush:** If the opponent held in Feudal, build a Stable forward in Castle Age and produce Knights.
+2. **Forward Castle + Bodkin Arrow:** Drop a Castle near secured towers for continued pressure.
+3. **Siege Workshop + Monk Push:** Use Monks and Mangonels behind tower lines; research Guard Towers and Ballistics.
 
-## Castle Age Transition and Follow-Up Options
-
-If the enemy held in Feudal, you have three paths after Castle Age:
-
-1. **All-in Knight Rush** (build Stable forward)
-2. **Forward Castle + Bodkin Arrow**
-3. **Siege Workshop + Monk Push**, followed by Guard Towers and Ballistics upgrades
-
-General goal: completely disrupt the enemy's early game plan and seize map control with tower chains.
+**Defense Tip:**
+Balance home economy at 5–6 villagers on stone, which is usually enough for the tower chain. Once forward resources are secured under towers, add Double-Bit Axe and Horse Collar. The general goal is to completely disrupt the enemy's early game and seize map control.

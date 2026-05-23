@@ -25,8 +25,8 @@ source:
 
 # 17 Pop Japanese Man-at-Arms Rush
 
-**Goal:** Apply the earliest possible pressure. The first wave uses Man-at-Arms (MAA), quickly backed by Archers from an Archery Range and the Fletching upgrade.
-**Recommended civ:** Japanese
+**Goal:** Apply the earliest possible pressure with Man-at-Arms (MAA), quickly backed by Archers from an Archery Range and the Fletching upgrade.
+**Recommended civs:** Japanese
 
 ## Dark Age (0–17 Villagers)
 
@@ -34,43 +34,50 @@ source:
 - 2 villagers on wood
 - 1 villager lures first boar
 - 1 villager lures second boar (under Town Center)
-- Lure at least 2 deer (mandatory)
+- Lure at least 2 deer (mandatory for food)
 - 1 villager builds a House then returns to hunting
 - +2 villagers hunting (during second boar)
-- 1 villager builds Barracks (at the front of base)
+- 1 villager builds Barracks at the front of base
 - +2 villagers to food under Town Center
-- +1 villager to wood (3 lumberjacks)
+- +1 villager to wood (3 lumberjacks total)
 
 Research Loom.
-Click Feudal Age (~8:25)
+Click Feudal Age (~8:25).
 
-## Early Feudal Preparation
+## Feudal Preparation
 
 - Send 2 hunting villagers to gold, build Mining Camp
 - Produce 3 Militia and immediately send them to the enemy base
 - Take 4 villagers from hunting and send to Lumber Camp (7 lumberjacks total)
-- Immediately build Archery Range and start producing Archers
+- Build Archery Range immediately and start producing Archers
 - Research Man-at-Arms
-- Target enemy villagers with Scouts and MAA
+
+**Research:**
+- Double-Bit Axe
+- (Optional) Horse Collar
+
+## Feudal Age (17 Villagers)
+
+- Send Scout and MAA to target enemy villagers
 - Build Blacksmith when resources allow
-- Research Double-Bit Axe (TC may be idle ~10 sec)
-
-## Feudal Age (17–20 Villagers)
-
 - +2 villagers to gold (4 total)
 - +1 villager to berries, build Mill
 - Begin transitioning hunting villagers to farms before sheep run out
 - Research Fletching (TC may be idle ~15–20 sec)
 - Merge Archers into MAA group and push forward
-- This army can punish even villagers behind palisade walls
+- Continue producing Archers at home; leave a few back for defense if needed
 
-Keep producing Archers at home; leave a few back for defense if needed.
+## Strategy and Follow-Up (What's Next)
 
-## What's Next
+- Japanese MAA receive +2/+2 armour for free at Feudal Age, making this the strongest MAA civ.
+- **Weak against:** Opponent walling fast or producing Scouts to intercept MAA.
+- **Strong against:** Greedy openings with no early military and slow walling.
 
-- After early pressure, begin building defense:
-  - If opponent comes with Scouts — add Spearmen and wall
-  - If opponent attacks with Archers — wall immediately, build Tower if needed
-- If your attack dealt serious damage, wall up and prepare for Castle Age
-- If the attack failed, you must pivot — you over-invested resources early
-- In Castle Age, play standard Archer build principles (Archers + Siege or Crossbow follow-up)
+**Options:**
+
+1. **Full Feudal All-In:** Add 2nd Archery Range after first Archers arrive; flood Archer + MAA and deny Castle Age.
+2. **Castle Transition:** If attack fails or is contained, wall up and advance to Castle Age for Crossbow follow-up.
+3. **Archer-Heavy Feudal:** Drop MAA pressure early if opponent walled; shift to pure Archers and Fletching timing attack.
+
+**Defense Tip:**
+If your attack dealt serious damage, wall up and prepare for Castle Age. If it failed, you over-invested resources early — pivot to a standard Castle Age Archer build (Crossbow + Siege). Do not re-engage with damaged MAA.

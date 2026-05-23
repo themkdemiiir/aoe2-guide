@@ -2,39 +2,6 @@
   "patch": "v100.1.84",
   "civs": [
     {
-      "slug": "achaemenids",
-      "region": "Ancient Middle Eastern",
-      "specialty": "Cavalry",
-      "uniqueUnits": [
-        "immortal"
-      ],
-      "civBonuses": [
-        "Stable units -15% cost",
-        "Cavalry +2 LOS",
-        "Town Centers support +5 population",
-        "Fishing Ships +2 HP per second"
-      ],
-      "teamBonus": "Cavalry +1 armor",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Persian Nobility",
-          "effect": "Knight line +2 attack"
-        },
-        "imperial": {
-          "name": "Royal Tithe",
-          "effect": "Relics generate +100% gold"
-        }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      }
-    },
-    {
       "slug": "armenians",
       "region": "Caucasian",
       "specialty": "Infantry and Cavalry",
@@ -62,39 +29,6 @@
         "winRate": 51.62,
         "playRate": 1.98,
         "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      }
-    },
-    {
-      "slug": "athenians",
-      "region": "Ancient Mediterranean",
-      "specialty": "Naval and Archer",
-      "uniqueUnits": [
-        "hoplite"
-      ],
-      "civBonuses": [
-        "Ships +2 armor",
-        "Docks work 20% faster",
-        "Archers +1 attack",
-        "Town Centers +5 LOS"
-      ],
-      "teamBonus": "Docks work 10% faster",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Athenian Democracy",
-          "effect": "Archers +1 range"
-        },
-        "imperial": {
-          "name": "Themistocles",
-          "effect": "War Galleys attack 15% faster"
-        }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
@@ -1026,39 +960,6 @@
       }
     },
     {
-      "slug": "macedonians",
-      "region": "Ancient Mediterranean",
-      "specialty": "Infantry",
-      "uniqueUnits": [
-        "phalangite"
-      ],
-      "civBonuses": [
-        "Infantry +10 HP",
-        "Siege units -15% cost",
-        "Scout line +2 LOS",
-        "Monks require 4 units to convert"
-      ],
-      "teamBonus": "Infantry +1 pierce armor",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Sarissa",
-          "effect": "Spearman line +2 melee armor"
-        },
-        "imperial": {
-          "name": "Argyraspids",
-          "effect": "Infantry attack 10% faster"
-        }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      }
-    },
-    {
       "slug": "magyars",
       "region": "Eastern European",
       "specialty": "Calvary Infantry",
@@ -1381,39 +1282,6 @@
       }
     },
     {
-      "slug": "puru",
-      "region": "South American",
-      "specialty": "War Elephant",
-      "uniqueUnits": [
-        "war-elephant"
-      ],
-      "civBonuses": [
-        "Elephants cost -20%",
-        "Battle Elephants +2 attack",
-        "Farms cost -10%",
-        "Stable units +1 pierce armor"
-      ],
-      "teamBonus": "Elephants +2 attack",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Amazon Warriors",
-          "effect": "Elephants +1 armor"
-        },
-        "imperial": {
-          "name": "Puru Rampage",
-          "effect": "Battle Elephants attack 15% faster"
-        }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      }
-    },
-    {
       "slug": "romans",
       "region": "Ancient Mediterranean",
       "specialty": "Infantry",
@@ -1612,39 +1480,6 @@
       }
     },
     {
-      "slug": "spartans",
-      "region": "Ancient Mediterranean",
-      "specialty": "Infantry",
-      "uniqueUnits": [
-        "spartan-warrior"
-      ],
-      "civBonuses": [
-        "Infantry +2 attack",
-        "Barracks work 20% faster",
-        "No houses required for population",
-        "Militia line upgrades free"
-      ],
-      "teamBonus": "Infantry +1 attack",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Spartan Discipline",
-          "effect": "Infantry +1 armor"
-        },
-        "imperial": {
-          "name": "Agoge",
-          "effect": "Infantry attack 15% faster"
-        }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      }
-    },
-    {
       "slug": "tatars",
       "region": "Central Asian",
       "specialty": "Cavalry Archer",
@@ -1706,39 +1541,6 @@
         "winRate": 49.91,
         "playRate": 2.7,
         "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      }
-    },
-    {
-      "slug": "thracians",
-      "region": "Ancient Mediterranean",
-      "specialty": "Infantry and Cavalry",
-      "uniqueUnits": [
-        "thracian-warrior"
-      ],
-      "civBonuses": [
-        "Barracks units +1 melee armor",
-        "Stable work 15% faster",
-        "Farms cost -15%",
-        "Infantry +10% speed"
-      ],
-      "teamBonus": "Barracks units +1 pierce armor",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Odrysian Tactics",
-          "effect": "Cavalry +1 attack"
-        },
-        "imperial": {
-          "name": "Thracian Shock",
-          "effect": "Infantry +10 HP"
-        }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
