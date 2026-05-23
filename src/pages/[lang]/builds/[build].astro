@@ -1,0 +1,55 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import BuildOrderSteps from "@/components/content/BuildOrderSteps.astro";
+import { render } from "astro:content";
+import { locales, type Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { lang: string; build: string } }> = [];
+  for (const lang of locales) {
+    const builds = await getLocalizedEntries("build-orders", lang);
+    for (const b of builds) paths.push({ params: { lang, build: canonicalSlug(b.id) } });
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Locale;
+const slug = Astro.params.build as string;
+const found = await getLocalizedEntry("build-orders", slug, lang);
+if (!found) return Astro.redirect("/404");
+const { entry, fallback } = found;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.name} canonicalPath={`/builds/${slug}`}>
+  <article class="mx-auto max-w-prose px-4 py-12">
+    {fallback && (
+      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
+        {t(lang, "ui.translation.missing")}
+      </div>
+    )}
+    <header>
+      <h1 class="font-display text-4xl text-ink">{entry.data.name}</h1>
+      <p class="mt-1 text-sm text-stone-700">
+        {entry.data.difficulty} · {entry.data.targetAge} · ~{entry.data.durationMin} min
+      </p>
+      {entry.data.source && (
+        <p class="mt-1 text-xs text-stone-700">
+          Source: {entry.data.source.url
+            ? <a href={entry.data.source.url} class="underline hover:text-gold-500">{entry.data.source.author}</a>
+            : entry.data.source.author}
+        </p>
+      )}
+    </header>
+
+    <section class="mt-8">
+      <h2 class="font-display text-2xl text-ink">Steps</h2>
+      <div class="mt-2"><BuildOrderSteps steps={entry.data.steps} /></div>
+    </section>
+
+    <section class="prose prose-stone mt-10 max-w-none">
+      <Content />
+    </section>
+  </article>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+interface Step {
+  villagers: number;
+  time: string;
+  assign: string;
+  note?: string;
+}
+interface Props { steps: Step[]; }
+const { steps } = Astro.props;
+---
+<ol class="overflow-hidden rounded border border-stone-700/40">
+  <li class="grid grid-cols-[6ch_5ch_1fr] gap-3 bg-parchment/60 px-3 py-2 font-mono text-xs text-stone-700">
+    <span>Time</span><span>Vil</span><span>Action</span>
+  </li>
+  {steps.map((s, i) => (
+    <li class={`grid grid-cols-[6ch_5ch_1fr] gap-3 border-t border-stone-700/20 px-3 py-2 ${i % 2 ? "bg-parchment/40" : "bg-parchment"}`}>
+      <span class="font-mono text-sm text-stone-700">{s.time}</span>
+      <span class="font-mono text-sm text-stone-700">{s.villagers}</span>
+      <span class="text-sm text-ink">
+        {s.assign}
+        {s.note && <span class="ml-2 text-stone-700"> — {s.note}</span>}
+      </span>
+    </li>
+  ))}
+</ol>

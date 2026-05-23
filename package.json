@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "assets:sync": "node scripts/sync-assets.mjs",
-    "icons:map": "node scripts/build-icon-map.mjs"
+    "icons:map": "node scripts/build-icon-map.mjs",
+    "import:md": "node scripts/import-from-md.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

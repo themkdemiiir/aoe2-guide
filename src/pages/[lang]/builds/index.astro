@@ -1,16 +1,34 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import { locales, type Locale } from "@/i18n/locales";
-import { t } from "@/i18n/utils";
+import { t, localizedPath } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+const builds = await getLocalizedEntries("build-orders", lang);
 ---
 <BaseLayout title={t(lang, "nav.builds")} canonicalPath="/builds">
-  <section class="mx-auto max-w-prose px-4 py-12">
+  <section class="mx-auto max-w-7xl px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.builds")}</h1>
-    <p class="mt-4 text-stone-700">Coming soon.</p>
+    {builds.length === 0 ? (
+      <p class="mt-6 text-stone-700">No build orders yet — coming soon.</p>
+    ) : (
+      <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {builds.map((b) => (
+          <li>
+            <a href={localizedPath(`/builds/${canonicalSlug(b.id)}`, lang)}
+               class="block rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
+              <h3 class="font-display text-xl text-ink">{b.data.name}</h3>
+              <p class="mt-1 text-xs text-stone-700">
+                {b.data.difficulty} · {b.data.targetAge} · {b.data.durationMin}min
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </section>
 </BaseLayout>
