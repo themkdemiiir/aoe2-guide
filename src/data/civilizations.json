@@ -24,6 +24,14 @@
           "name": "Royal Tithe",
           "effect": "Relics generate +100% gold"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -49,6 +57,14 @@
           "name": "Fereters",
           "effect": "Monks walk faster and carry Relics at full speed"
         }
+      },
+      "meta": {
+        "winRate": 51.62,
+        "playRate": 1.98,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -74,6 +90,14 @@
           "name": "Themistocles",
           "effect": "War Galleys attack 15% faster"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -99,6 +123,14 @@
           "name": "Atlatl",
           "effect": "Skirmishers +1 attack, +1 range"
         }
+      },
+      "meta": {
+        "winRate": 48.86,
+        "playRate": 1.55,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -124,6 +156,14 @@
           "name": "Mahayana",
           "effect": "Villagers take up 0.5 less population"
         }
+      },
+      "meta": {
+        "winRate": 50.01,
+        "playRate": 0.99,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -149,6 +189,14 @@
           "name": "Maghrabi Camels",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 48.95,
+        "playRate": 1.37,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -174,6 +222,14 @@
           "name": "Hussite Reforms",
           "effect": "Monks and Monasteries provide gold like a Relic"
         }
+      },
+      "meta": {
+        "winRate": 49.56,
+        "playRate": 1.97,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -198,6 +254,14 @@
           "name": "Warwolf",
           "effect": "Trebuchets do blast damage; never miss against units"
         }
+      },
+      "meta": {
+        "winRate": 47.22,
+        "playRate": 3.12,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -223,6 +287,14 @@
           "name": "Bagains",
           "effect": "Militia line +5 melee armor"
         }
+      },
+      "meta": {
+        "winRate": 53.41,
+        "playRate": 2.21,
+        "tier": "S",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -248,6 +320,14 @@
           "name": "Flemish Revolution",
           "effect": "Instantly convert all Villagers into Flemish Militia; Flemish Militia available at Barracks"
         }
+      },
+      "meta": {
+        "winRate": 49,
+        "playRate": 2.2,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -272,6 +352,14 @@
           "name": "Manipur Cavalry",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 48.53,
+        "playRate": 0.98,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -298,6 +386,14 @@
           "name": "Logistica",
           "effect": "Cataphracts deal trample damage; +6 attack vs. infantry"
         }
+      },
+      "meta": {
+        "winRate": 46.98,
+        "playRate": 2.61,
+        "tier": "D",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -323,6 +419,14 @@
           "name": "Stronghold",
           "effect": "Castles and Towers fire twice as fast"
         }
+      },
+      "meta": {
+        "winRate": 50.04,
+        "playRate": 1.76,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -348,6 +452,14 @@
           "name": "Rocketry",
           "effect": "Chu Ko Nu +2 attack; Scorpions +4 attack"
         }
+      },
+      "meta": {
+        "winRate": 48.9,
+        "playRate": 2.03,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -373,6 +485,14 @@
           "name": "Cuman Mercenaries",
           "effect": "Team can build 10 free Kipchaks (once)"
         }
+      },
+      "meta": {
+        "winRate": 48.98,
+        "playRate": 2.03,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -398,6 +518,14 @@
           "name": "Wootz Steel",
           "effect": "Melee infantry and cavalry attacks ignore armor"
         }
+      },
+      "meta": {
+        "winRate": 48.94,
+        "playRate": 0.85,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -422,6 +550,14 @@
           "name": "Torsion Engines",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 50.15,
+        "playRate": 2.54,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -446,6 +582,14 @@
           "name": "Chivalry",
           "effect": "Stables work 40% faster"
         }
+      },
+      "meta": {
+        "winRate": 50.2,
+        "playRate": 4.93,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -471,6 +615,14 @@
           "name": "Aznauri Cavalry",
           "effect": "Monaspa heal nearby cavalry"
         }
+      },
+      "meta": {
+        "winRate": 46.78,
+        "playRate": 1,
+        "tier": "D",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -497,6 +649,14 @@
           "name": "Perfusion",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 50.17,
+        "playRate": 2.17,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -522,6 +682,14 @@
           "name": "Frontier Guards",
           "effect": "Camel Riders and Elephant Archers +4 melee armor"
         }
+      },
+      "meta": {
+        "winRate": 47.2,
+        "playRate": 1.02,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -547,6 +715,14 @@
           "name": "Shatagni",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 51.99,
+        "playRate": 1.89,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -572,6 +748,14 @@
           "name": "Marauders",
           "effect": "Tarkans can be trained at Stables"
         }
+      },
+      "meta": {
+        "winRate": 50.28,
+        "playRate": 2.52,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -599,6 +783,14 @@
           "name": "Andean Sling",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 51.05,
+        "playRate": 1.38,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -625,6 +817,14 @@
           "name": "Silk Road",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 49.85,
+        "playRate": 1.68,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -650,6 +850,14 @@
           "name": "Yasama",
           "effect": "Towers can fire extra arrows"
         }
+      },
+      "meta": {
+        "winRate": 51.67,
+        "playRate": 2.55,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -675,6 +883,14 @@
           "name": "Iron Riders",
           "effect": "Cavalry Archers +2 attack"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -700,6 +916,14 @@
           "name": "Steppe Tactics",
           "effect": "Cavalry Archers attack 15% faster"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -724,6 +948,14 @@
           "name": "Double Crossbow",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 48.82,
+        "playRate": 3.09,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -750,6 +982,14 @@
           "name": "Eupseong",
           "effect": "Watch Towers and Guard Towers +2 range"
         }
+      },
+      "meta": {
+        "winRate": 48.8,
+        "playRate": 1.9,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -775,6 +1015,14 @@
           "name": "Tower Shields",
           "effect": "Spearman line and Skirmishers +2 pierce armor"
         }
+      },
+      "meta": {
+        "winRate": 48.83,
+        "playRate": 2.31,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -800,6 +1048,14 @@
           "name": "Argyraspids",
           "effect": "Infantry attack 10% faster"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -824,6 +1080,14 @@
           "name": "Recursive Bow",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 50.49,
+        "playRate": 3.31,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -846,6 +1110,14 @@
           "name": "Forced Levy",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 52.16,
+        "playRate": 1.46,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -870,6 +1142,14 @@
           "name": "Farimba",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 52.11,
+        "playRate": 1.62,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -895,6 +1175,14 @@
           "name": "Ironworks",
           "effect": "Infantry and cavalry +8 attack"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -919,6 +1207,14 @@
           "name": "Hul'che Javelineers",
           "effect": "Skirmishers throw 2 javelins"
         }
+      },
+      "meta": {
+        "winRate": 49.45,
+        "playRate": 1.81,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -943,6 +1239,14 @@
           "name": "Nomads",
           "effect": "Houses don't need to be rebuilt; +10 population cap"
         }
+      },
+      "meta": {
+        "winRate": 50.7,
+        "playRate": 5.65,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -968,6 +1272,14 @@
           "name": "El Dorado Myth",
           "effect": "Infantry +10 HP"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -992,6 +1304,14 @@
           "name": "Chamber of Power",
           "effect": "Town Centers fire 50% faster"
         }
+      },
+      "meta": {
+        "winRate": 50.92,
+        "playRate": 3.9,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1017,6 +1337,14 @@
           "name": "Lechitic Legacy",
           "effect": "Light Cavalry and Winged Hussar deal trample damage"
         }
+      },
+      "meta": {
+        "winRate": 49.61,
+        "playRate": 1.81,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1042,6 +1370,14 @@
           "name": "Arquebus",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 49.14,
+        "playRate": 2.25,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1067,6 +1403,14 @@
           "name": "Puru Rampage",
           "effect": "Battle Elephants attack 15% faster"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1092,6 +1436,14 @@
           "name": "Comitatenses",
           "effect": "Non-militia infantry +8 HP"
         }
+      },
+      "meta": {
+        "winRate": 54.14,
+        "playRate": 1.81,
+        "tier": "S",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1117,6 +1469,14 @@
           "name": "Counterweights",
           "effect": "Trebuchet and Mangonel projectiles have more blast radius"
         }
+      },
+      "meta": {
+        "winRate": 47.91,
+        "playRate": 1.54,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1142,6 +1502,14 @@
           "name": "Tiger Warriors",
           "effect": "Infantry attack 10% faster"
         }
+      },
+      "meta": {
+        "winRate": 49.46,
+        "playRate": 0.73,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1167,6 +1535,14 @@
           "name": "Scutage",
           "effect": "Each enemy Feudal-age unit you convert spawns a Serjeant"
         }
+      },
+      "meta": {
+        "winRate": 51.99,
+        "playRate": 1.83,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1191,6 +1567,14 @@
           "name": "Druzhina",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 49.21,
+        "playRate": 1.34,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1217,6 +1601,14 @@
           "name": "Inquisition",
           "effect": "Monks convert faster"
         }
+      },
+      "meta": {
+        "winRate": 50.83,
+        "playRate": 3.27,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1242,6 +1634,14 @@
           "name": "Agoge",
           "effect": "Infantry attack 15% faster"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1267,6 +1667,14 @@
           "name": "Timurid Siegecraft",
           "effect": "Trebuchets have +2 range; Flaming Camels available"
         }
+      },
+      "meta": {
+        "winRate": 48.56,
+        "playRate": 1.3,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1293,6 +1701,14 @@
           "name": "Ironclad",
           "effect": "Siege weapons +4 melee armor"
         }
+      },
+      "meta": {
+        "winRate": 49.91,
+        "playRate": 2.7,
+        "tier": "B",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1318,6 +1734,14 @@
           "name": "Thracian Shock",
           "effect": "Infantry +10 HP"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1343,6 +1767,14 @@
           "name": "Tupi Survival",
           "effect": "Infantry +2 attack in forests"
         }
+      },
+      "meta": {
+        "winRate": null,
+        "playRate": null,
+        "tier": null,
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1369,6 +1801,14 @@
           "name": "Sipahi",
           "effect": "Cavalry Archers +20 HP; Janissaries +5 HP"
         }
+      },
+      "meta": {
+        "winRate": 51.43,
+        "playRate": 2.27,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1392,6 +1832,14 @@
           "name": "Paper Money",
           "effect": ""
         }
+      },
+      "meta": {
+        "winRate": 47.38,
+        "playRate": 3.09,
+        "tier": "C",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1417,6 +1865,14 @@
           "name": "Chieftains",
           "effect": "Infantry +4 attack vs. cavalry; +3 vs. camels"
         }
+      },
+      "meta": {
+        "winRate": 52.46,
+        "playRate": 1.66,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1442,6 +1898,14 @@
           "name": "Iron Horses",
           "effect": "Cavalry attack 15% faster"
         }
+      },
+      "meta": {
+        "winRate": 51.14,
+        "playRate": 1.33,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     },
     {
@@ -1467,7 +1931,18 @@
           "name": "Eastern Fleet",
           "effect": "War Galley line attack 15% faster"
         }
+      },
+      "meta": {
+        "winRate": 52.12,
+        "playRate": 0.69,
+        "tier": "A",
+        "sample": "1v1 RM, ALL ratings",
+        "lastFetched": "2026-05-23",
+        "source": "aoestats.io"
       }
     }
-  ]
+  ],
+  "metaLastFetched": "2026-05-23",
+  "metaSource": "aoestats.io",
+  "tierMethod": "Derived from win rate: ≥53% → S | 51-53% → A | 49-51% → B | 47-49% → C | <47% → D"
 }
