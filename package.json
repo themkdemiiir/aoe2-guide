@@ -13,7 +13,9 @@
     "test:watch": "vitest",
     "assets:sync": "node scripts/sync-assets.mjs",
     "icons:map": "node scripts/build-icon-map.mjs",
-    "import:md": "node scripts/import-from-md.mjs"
+    "import:md": "node scripts/import-from-md.mjs",
+    "new:guide": "node scripts/new-guide.mjs",
+    "check:translations": "node scripts/check-translations.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
