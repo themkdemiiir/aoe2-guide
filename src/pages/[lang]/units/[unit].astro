@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Icon from "@/components/ui/Icon.astro";
+import { render } from "astro:content";
+import { locales, type Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
+import unitStats from "@data/unit-stats.json";
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { lang: string; unit: string } }> = [];
+  for (const lang of locales) {
+    const units = await getLocalizedEntries("units", lang);
+    for (const u of units) paths.push({ params: { lang, unit: canonicalSlug(u.id) } });
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Locale;
+const slug = Astro.params.unit as string;
+const found = await getLocalizedEntry("units", slug, lang);
+if (!found) return Astro.redirect("/404");
+const { entry, fallback } = found;
+const { Content } = await render(entry);
+const stats = (unitStats.units as Array<Record<string, any>>).find((u) => u.slug === slug);
+---
+<BaseLayout title={entry.data.name} canonicalPath={`/units/${slug}`}>
+  <article class="mx-auto max-w-prose px-4 py-12">
+    {fallback && (
+      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
+        {t(lang, "ui.translation.missing")}
+      </div>
+    )}
+    <header class="flex items-center gap-4">
+      <Icon slug={slug} kind="unit" size={64} />
+      <div>
+        <h1 class="font-display text-4xl text-ink">{entry.data.name}</h1>
+        <p class="text-sm text-stone-700">{entry.data.role}</p>
+      </div>
+    </header>
+
+    {stats && (
+      <table class="mt-6 w-full text-sm">
+        <tbody>
+          <tr><th class="text-left text-stone-700">HP</th><td class="text-ink">{stats.hp}</td></tr>
+          <tr><th class="text-left text-stone-700">Attack</th><td class="text-ink">{stats.attack}</td></tr>
+          <tr><th class="text-left text-stone-700">Range</th><td class="text-ink">{stats.range}</td></tr>
+          <tr><th class="text-left text-stone-700">Train time</th><td class="text-ink">{stats.trainTime}s</td></tr>
+          <tr><th class="text-left text-stone-700">Cost</th>
+              <td class="text-ink">
+                <span class="text-res-food">{stats.cost.food}f</span>
+                <span class="ml-2 text-res-wood">{stats.cost.wood}w</span>
+                <span class="ml-2 text-res-gold">{stats.cost.gold}g</span>
+                <span class="ml-2 text-res-stone">{stats.cost.stone}s</span>
+              </td></tr>
+        </tbody>
+      </table>
+    )}
+
+    <section class="prose prose-stone mt-10 max-w-none">
+      <Content />
+    </section>
+  </article>
+</BaseLayout>

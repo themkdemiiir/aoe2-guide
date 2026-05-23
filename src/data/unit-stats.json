@@ -1,4 +1,16 @@
 {
   "patch": "v100.1.84",
-  "units": []
+  "units": [
+    {
+      "slug": "longbowman",
+      "hp": 35,
+      "attack": 7,
+      "range": 6,
+      "minRange": 0,
+      "cost": { "wood": 35, "food": 0, "gold": 40, "stone": 0 },
+      "trainTime": 18,
+      "armorPiercing": 0,
+      "armorMelee": 0
+    }
+  ]
 }

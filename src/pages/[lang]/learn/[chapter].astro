@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { render } from "astro:content";
+import { locales, type Locale } from "@/i18n/locales";
+import { t, localizedPath } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { lang: string; chapter: string } }> = [];
+  for (const lang of locales) {
+    const chs = await getLocalizedEntries("beginner", lang);
+    for (const c of chs) paths.push({ params: { lang, chapter: canonicalSlug(c.id) } });
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Locale;
+const slug = Astro.params.chapter as string;
+const found = await getLocalizedEntry("beginner", slug, lang);
+if (!found) return Astro.redirect("/404");
+const { entry, fallback } = found;
+const { Content } = await render(entry);
+
+const all = (await getLocalizedEntries("beginner", lang)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const idx = all.findIndex((e) => canonicalSlug(e.id) === slug);
+const prev = idx > 0 ? all[idx - 1] : null;
+const next = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : null;
+---
+<BaseLayout title={entry.data.title} canonicalPath={`/learn/${slug}`}>
+  <article class="mx-auto max-w-prose px-4 py-12">
+    {fallback && (
+      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
+        {t(lang, "ui.translation.missing")}
+      </div>
+    )}
+    <h1 class="font-display text-4xl text-ink">{entry.data.title}</h1>
+    <section class="prose prose-stone mt-8 max-w-none"><Content /></section>
+    <nav class="mt-12 flex justify-between text-sm text-stone-700">
+      {prev ? <a href={localizedPath(`/learn/${canonicalSlug(prev.id)}`, lang)} class="hover:text-gold-500">← {prev.data.title}</a> : <span />}
+      {next ? <a href={localizedPath(`/learn/${canonicalSlug(next.id)}`, lang)} class="hover:text-gold-500">{next.data.title} →</a> : <span />}
+    </nav>
+  </article>
+</BaseLayout>

@@ -1,16 +1,36 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Icon from "@/components/ui/Icon.astro";
 import { locales, type Locale } from "@/i18n/locales";
-import { t } from "@/i18n/utils";
+import { t, localizedPath } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+const units = await getLocalizedEntries("units", lang);
 ---
 <BaseLayout title={t(lang, "nav.units")} canonicalPath="/units">
-  <section class="mx-auto max-w-prose px-4 py-12">
+  <section class="mx-auto max-w-7xl px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.units")}</h1>
-    <p class="mt-4 text-stone-700">Coming soon.</p>
+    {units.length === 0 ? (
+      <p class="mt-6 text-stone-700">No units yet — coming soon.</p>
+    ) : (
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {units.map((u) => (
+          <li>
+            <a href={localizedPath(`/units/${canonicalSlug(u.id)}`, lang)}
+               class="flex items-center gap-3 rounded border border-stone-700/40 bg-parchment p-3 hover:border-gold-500">
+              <Icon slug={canonicalSlug(u.id)} kind="unit" size={40} />
+              <div>
+                <div class="font-display text-lg text-ink">{u.data.name}</div>
+                <div class="text-xs text-stone-700">{u.data.role}</div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </section>
 </BaseLayout>

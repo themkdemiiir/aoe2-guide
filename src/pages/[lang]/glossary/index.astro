@@ -1,16 +1,59 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { render } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
-import { t } from "@/i18n/utils";
+import { t as tt } from "@/i18n/utils";
+import { getLocalizedEntries } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+
+const terms = (await getLocalizedEntries("glossary", lang)).sort((a, b) =>
+  a.data.term.localeCompare(b.data.term),
+);
+
+const rendered = await Promise.all(
+  terms.map(async (term) => ({ data: term.data, ...(await render(term)) })),
+);
+
+const grouped = new Map<string, typeof rendered>();
+for (const term of rendered) {
+  const list = grouped.get(term.data.letter) ?? [];
+  list.push(term);
+  grouped.set(term.data.letter, list);
+}
+const letters = [...grouped.keys()].sort();
 ---
-<BaseLayout title={t(lang, "nav.glossary")} canonicalPath="/glossary">
+<BaseLayout title={tt(lang, "nav.glossary")} canonicalPath="/glossary">
   <section class="mx-auto max-w-prose px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">{t(lang, "nav.glossary")}</h1>
-    <p class="mt-4 text-stone-700">Coming soon.</p>
+    <h1 class="font-display text-4xl text-ink">{tt(lang, "nav.glossary")}</h1>
+
+    {rendered.length === 0 ? (
+      <p class="mt-6 text-stone-700">No glossary terms yet — coming soon.</p>
+    ) : (
+      <>
+        <nav class="mt-4 flex flex-wrap gap-2 text-sm">
+          {letters.map((l) => (
+            <a href={`#${l}`} class="rounded border border-stone-700/30 px-2 py-1 hover:border-gold-500 hover:text-gold-500">{l}</a>
+          ))}
+        </nav>
+
+        {letters.map((l) => (
+          <section id={l} class="mt-10">
+            <h2 class="font-display text-2xl text-gold-500">{l}</h2>
+            <dl class="mt-2 space-y-3">
+              {grouped.get(l)!.map((term) => (
+                <div>
+                  <dt class="font-display text-lg text-ink">{term.data.term}</dt>
+                  <dd class="prose prose-stone max-w-none"><term.Content /></dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+      </>
+    )}
   </section>
 </BaseLayout>

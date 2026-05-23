@@ -1,0 +1,37 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { render } from "astro:content";
+import { locales, type Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { lang: string; map: string } }> = [];
+  for (const lang of locales) {
+    const maps = await getLocalizedEntries("maps", lang);
+    for (const m of maps) paths.push({ params: { lang, map: canonicalSlug(m.id) } });
+  }
+  return paths;
+}
+
+const lang = Astro.params.lang as Locale;
+const slug = Astro.params.map as string;
+const found = await getLocalizedEntry("maps", slug, lang);
+if (!found) return Astro.redirect("/404");
+const { entry, fallback } = found;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.name} canonicalPath={`/maps/${slug}`}>
+  <article class="mx-auto max-w-prose px-4 py-12">
+    {fallback && (
+      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
+        {t(lang, "ui.translation.missing")}
+      </div>
+    )}
+    <header>
+      <h1 class="font-display text-4xl text-ink">{entry.data.name}</h1>
+      <p class="mt-1 text-sm text-stone-700">{entry.data.type}{entry.data.size ? ` · ${entry.data.size}` : ""}</p>
+    </header>
+    <section class="prose prose-stone mt-8 max-w-none"><Content /></section>
+  </article>
+</BaseLayout>

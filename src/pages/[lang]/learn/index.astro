@@ -1,16 +1,34 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import { locales, type Locale } from "@/i18n/locales";
-import { t } from "@/i18n/utils";
+import { t, localizedPath } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+const chapters = (await getLocalizedEntries("beginner", lang)).sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 <BaseLayout title={t(lang, "nav.learn")} canonicalPath="/learn">
   <section class="mx-auto max-w-prose px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.learn")}</h1>
-    <p class="mt-4 text-stone-700">Coming soon.</p>
+    {chapters.length === 0 ? (
+      <p class="mt-6 text-stone-700">No beginner chapters yet — coming soon.</p>
+    ) : (
+      <ol class="mt-8 space-y-2">
+        {chapters.map((c) => (
+          <li>
+            <a href={localizedPath(`/learn/${canonicalSlug(c.id)}`, lang)}
+               class="block rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
+              <span class="font-mono text-xs text-stone-700">{String(c.data.order).padStart(2, "0")}</span>
+              <span class="ml-2 font-display text-lg text-ink">{c.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    )}
   </section>
 </BaseLayout>
