@@ -11,7 +11,8 @@
     "check": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "assets:sync": "node scripts/sync-assets.mjs"
+    "assets:sync": "node scripts/sync-assets.mjs",
+    "icons:map": "node scripts/build-icon-map.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
