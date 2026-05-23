@@ -1,0 +1,51 @@
+---
+import "@/styles/globals.css";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import { locales, localeMeta } from "@/i18n/locales";
+import { getLocaleFromUrl, t, allLocalePaths } from "@/i18n/utils";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Path WITHOUT locale prefix, used for hreflang and lang switcher. e.g. "/civs/britons" */
+  canonicalPath?: string;
+}
+
+const { title, description = "Age of Empires II guide", canonicalPath = "/" } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const dir = localeMeta[locale].dir;
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const alternates = allLocalePaths(canonicalPath);
+---
+<!doctype html>
+<html lang={locale} dir={dir} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {alternates.map(({ locale: l, path }) => (
+      <link rel="alternate" hreflang={l} href={`${site}${path}`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${site}/en${canonicalPath}`} />
+    <link rel="canonical" href={`${site}/${locale}${canonicalPath}`} />
+    <script is:inline>
+      // Set theme before paint to avoid FOUC
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const sys = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const t = stored === "dark" || stored === "light" ? stored : sys;
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

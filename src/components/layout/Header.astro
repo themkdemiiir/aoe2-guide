@@ -1,0 +1,31 @@
+---
+import { getLocaleFromUrl, t, localizedPath } from "@/i18n/utils";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const locale = getLocaleFromUrl(Astro.url);
+const nav = [
+  { key: "nav.civs",     href: localizedPath("/civs",     locale) },
+  { key: "nav.builds",   href: localizedPath("/builds",   locale) },
+  { key: "nav.units",    href: localizedPath("/units",    locale) },
+  { key: "nav.maps",     href: localizedPath("/maps",     locale) },
+  { key: "nav.matchups", href: localizedPath("/matchups", locale) },
+  { key: "nav.learn",    href: localizedPath("/learn",    locale) },
+  { key: "nav.glossary", href: localizedPath("/glossary", locale) },
+] as const;
+---
+<header class="sticky top-0 z-40 border-b border-stone-700/30 bg-parchment/95 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
+    <a href={localizedPath("/", locale)} class="font-display text-xl text-ink">AOE2 Guide</a>
+    <nav class="ml-4 hidden gap-4 md:flex">
+      {nav.map(({ key, href }) => (
+        <a href={href} class="text-sm text-stone-700 hover:text-gold-500">{t(locale, key)}</a>
+      ))}
+    </nav>
+    <div class="ml-auto flex items-center gap-2">
+      <a href={localizedPath("/search", locale)} class="text-sm text-stone-700 hover:text-gold-500">{t(locale, "nav.search")}</a>
+      <LanguageSwitcher />
+      <ThemeToggle />
+    </div>
+  </div>
+</header>

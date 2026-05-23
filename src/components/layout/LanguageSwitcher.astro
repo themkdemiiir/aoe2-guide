@@ -1,0 +1,20 @@
+---
+import { locales, localeMeta } from "@/i18n/locales";
+import { getLocaleFromUrl, localizedPath } from "@/i18n/utils";
+
+const currentLocale = getLocaleFromUrl(Astro.url);
+const pathname = Astro.url.pathname;
+---
+<details class="relative">
+  <summary class="cursor-pointer list-none text-sm text-stone-700 hover:text-gold-500">
+    {localeMeta[currentLocale].flag} {localeMeta[currentLocale].name}
+  </summary>
+  <div class="absolute right-0 mt-2 w-40 rounded border border-stone-700/40 bg-parchment p-1 shadow">
+    {locales.map((l) => (
+      <a href={localizedPath(pathname, l)}
+         class={`block rounded px-2 py-1 text-sm ${l === currentLocale ? "bg-gold-500/20 text-ink" : "text-stone-700 hover:bg-stone-700/10"}`}>
+        {localeMeta[l].flag} {localeMeta[l].name}
+      </a>
+    ))}
+  </div>
+</details>

@@ -1,0 +1,30 @@
+---
+import { getLocaleFromUrl, t } from "@/i18n/utils";
+const locale = getLocaleFromUrl(Astro.url);
+---
+<button id="theme-toggle"
+        type="button"
+        aria-label={t(locale, "ui.theme.light") + " / " + t(locale, "ui.theme.dark")}
+        class="rounded border border-stone-700/40 px-2 py-1 text-sm text-stone-700 hover:text-gold-500">
+  <span data-theme-icon-light>☀</span>
+  <span data-theme-icon-dark class="hidden">☾</span>
+</button>
+<script is:inline>
+  (() => {
+    const btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    const sync = () => {
+      const dark = document.documentElement.getAttribute("data-theme") === "dark";
+      btn.querySelector("[data-theme-icon-light]").classList.toggle("hidden", dark);
+      btn.querySelector("[data-theme-icon-dark]").classList.toggle("hidden", !dark);
+    };
+    sync();
+    btn.addEventListener("click", () => {
+      const dark = document.documentElement.getAttribute("data-theme") === "dark";
+      const next = dark ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+      sync();
+    });
+  })();
+</script>
