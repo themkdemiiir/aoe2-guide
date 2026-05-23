@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://aoe2.example.com",
@@ -17,4 +18,5 @@ export default defineConfig({
     fallback: { tr: "en", es: "en", de: "en" },
   },
   integrations: [mdx(), sitemap()],
+  vite: { plugins: [tailwindcss()] },
 });

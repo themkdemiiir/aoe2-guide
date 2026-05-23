@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-parchment: oklch(0.93 0.04 80);
+  --color-ink: oklch(0.22 0.02 60);
+  --color-stone-700: oklch(0.34 0.02 50);
+  --color-gold-500: oklch(0.73 0.13 80);
+  --color-gold-400: oklch(0.80 0.12 80);
+  --color-royal: oklch(0.42 0.18 25);
+  --color-forest: oklch(0.50 0.10 145);
+  --color-steel: oklch(0.50 0.05 240);
+  --color-ember: oklch(0.86 0.12 75);
+  --color-stone-bg: oklch(0.17 0.02 50);
+
+  --color-res-food: oklch(0.62 0.18 25);
+  --color-res-wood: oklch(0.50 0.05 50);
+  --color-res-gold: oklch(0.78 0.14 85);
+  --color-res-stone: oklch(0.62 0 0);
+
+  --font-display: "Cinzel", "serif";
+  --font-body: "Inter", "system-ui", "sans-serif";
+  --font-mono: "JetBrains Mono", "ui-monospace", "monospace";
+
+  --radius: 4px;
+  --radius-sm: 2px;
+}
+
+[data-theme="dark"] {
+  --color-parchment: oklch(0.17 0.02 50);
+  --color-ink: oklch(0.86 0.12 75);
+  --color-stone-700: oklch(0.50 0.03 55);
+  --color-gold-500: oklch(0.80 0.12 80);
+}
+
+html { color-scheme: light dark; }
+html[data-theme="light"] { color-scheme: light; }
+html[data-theme="dark"]  { color-scheme: dark; }
+
+body {
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
