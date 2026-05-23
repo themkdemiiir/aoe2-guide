@@ -1,0 +1,78 @@
+import type { Locale } from "./locales";
+
+export const ui = {
+  en: {
+    "nav.civs": "Civilizations",
+    "nav.builds": "Build Orders",
+    "nav.units": "Units",
+    "nav.maps": "Maps",
+    "nav.matchups": "Matchups",
+    "nav.learn": "Learn",
+    "nav.glossary": "Glossary",
+    "nav.search": "Search",
+    "nav.about": "About",
+    "ui.search.placeholder": "Search guides…",
+    "ui.theme.light": "Light",
+    "ui.theme.dark": "Dark",
+    "ui.theme.auto": "Auto",
+    "ui.translation.missing": "This page is not translated yet — showing English.",
+    "footer.attribution":
+      "Age of Empires II © Microsoft Corporation. This site was created under Microsoft's \"Game Content Usage Rules\" using assets from Age of Empires II, and it is not endorsed by or affiliated with Microsoft.",
+  },
+  tr: {
+    "nav.civs": "Uygarlıklar",
+    "nav.builds": "Yapım Sıraları",
+    "nav.units": "Birimler",
+    "nav.maps": "Haritalar",
+    "nav.matchups": "Eşleşmeler",
+    "nav.learn": "Öğren",
+    "nav.glossary": "Sözlük",
+    "nav.search": "Ara",
+    "nav.about": "Hakkında",
+    "ui.search.placeholder": "Rehberlerde ara…",
+    "ui.theme.light": "Açık",
+    "ui.theme.dark": "Koyu",
+    "ui.theme.auto": "Otomatik",
+    "ui.translation.missing": "Bu sayfa henüz çevrilmedi — İngilizce gösteriliyor.",
+    "footer.attribution":
+      "Age of Empires II © Microsoft Corporation. Bu site, Microsoft'un \"Game Content Usage Rules\" kuralları çerçevesinde Age of Empires II varlıkları kullanılarak oluşturulmuştur; Microsoft tarafından onaylanmamıştır veya bağlantılı değildir.",
+  },
+  es: {
+    "nav.civs": "Civilizaciones",
+    "nav.builds": "Órdenes de Construcción",
+    "nav.units": "Unidades",
+    "nav.maps": "Mapas",
+    "nav.matchups": "Enfrentamientos",
+    "nav.learn": "Aprende",
+    "nav.glossary": "Glosario",
+    "nav.search": "Buscar",
+    "nav.about": "Acerca de",
+    "ui.search.placeholder": "Buscar guías…",
+    "ui.theme.light": "Claro",
+    "ui.theme.dark": "Oscuro",
+    "ui.theme.auto": "Auto",
+    "ui.translation.missing": "Esta página aún no está traducida — mostrando inglés.",
+    "footer.attribution":
+      "Age of Empires II © Microsoft Corporation. Este sitio se creó bajo las \"Game Content Usage Rules\" de Microsoft utilizando assets de Age of Empires II; no está respaldado ni afiliado a Microsoft.",
+  },
+  de: {
+    "nav.civs": "Zivilisationen",
+    "nav.builds": "Aufbaureihenfolgen",
+    "nav.units": "Einheiten",
+    "nav.maps": "Karten",
+    "nav.matchups": "Begegnungen",
+    "nav.learn": "Lernen",
+    "nav.glossary": "Glossar",
+    "nav.search": "Suche",
+    "nav.about": "Über",
+    "ui.search.placeholder": "Guides durchsuchen…",
+    "ui.theme.light": "Hell",
+    "ui.theme.dark": "Dunkel",
+    "ui.theme.auto": "Auto",
+    "ui.translation.missing": "Diese Seite ist noch nicht übersetzt — Englisch wird angezeigt.",
+    "footer.attribution":
+      "Age of Empires II © Microsoft Corporation. Diese Seite wurde unter den \"Game Content Usage Rules\" von Microsoft mit Inhalten aus Age of Empires II erstellt; sie ist nicht von Microsoft unterstützt oder mit ihm verbunden.",
+  },
+} as const satisfies Record<Locale, Record<string, string>>;
+
+export type UIKey = keyof typeof ui.en;
