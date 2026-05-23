@@ -17,11 +17,11 @@ const units = await getLocalizedEntries("units", lang);
     {units.length === 0 ? (
       <p class="mt-6 text-stone-700">No units yet — coming soon.</p>
     ) : (
-      <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-8 grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {units.map((u) => (
-          <li>
+          <li class="h-full">
             <a href={localizedPath(`/units/${canonicalSlug(u.id)}`, lang)}
-               class="flex items-center gap-3 rounded border border-stone-700/40 bg-parchment p-3 hover:border-gold-500">
+               class="flex h-full items-center gap-3 rounded border border-stone-700/40 bg-parchment p-3 hover:border-gold-500">
               <Icon slug={canonicalSlug(u.id)} kind="unit" size={40} />
               <div>
                 <div class="font-display text-lg text-ink">{u.data.name}</div>

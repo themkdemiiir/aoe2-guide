@@ -16,13 +16,13 @@ const builds = await getLocalizedEntries("build-orders", lang);
     {builds.length === 0 ? (
       <p class="mt-6 text-stone-700">No build orders yet — coming soon.</p>
     ) : (
-      <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {builds.map((b) => (
-          <li>
+          <li class="h-full">
             <a href={localizedPath(`/builds/${canonicalSlug(b.id)}`, lang)}
-               class="block rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
+               class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
               <h3 class="font-display text-xl text-ink">{b.data.name}</h3>
-              <p class="mt-1 text-xs text-stone-700">
+              <p class="mt-auto pt-2 text-xs text-stone-700">
                 {b.data.difficulty} · {b.data.targetAge} · {b.data.durationMin}min
               </p>
             </a>

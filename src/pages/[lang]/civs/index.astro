@@ -15,7 +15,7 @@ const civs = await getLocalizedEntries("civilizations", lang);
 <BaseLayout title={t(lang, "nav.civs")} canonicalPath="/civs">
   <section class="mx-auto max-w-7xl px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.civs")}</h1>
-    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {civs.map((c) => (
         <li>
           <CivCard

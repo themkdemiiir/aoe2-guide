@@ -16,7 +16,7 @@ const { slug, name, tagline, bonuses, locale } = Astro.props;
 const meta = (civsData.civs as Array<Record<string, any>>).find((c) => c.slug === slug);
 ---
 <a href={localizedPath(`/civs/${slug}`, locale)}
-   class="block rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500">
+   class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500">
   <div class="flex items-center gap-3">
     <Icon slug={slug} kind="civ" size={56} />
     <div>
@@ -31,7 +31,7 @@ const meta = (civsData.civs as Array<Record<string, any>>).find((c) => c.slug ==
     </div>
   )}
   {bonuses && bonuses.length > 0 && (
-    <ul class="mt-3 list-inside list-disc space-y-1 text-sm text-stone-700">
+    <ul class="mt-auto list-inside list-disc space-y-1 pt-3 text-sm text-stone-700">
       {bonuses.slice(0, 3).map((b) => <li>{b}</li>)}
     </ul>
   )}

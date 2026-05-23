@@ -15,11 +15,11 @@ Watch for: Franks scouts hitting your archer line while you're walling. Always w
 
 ## Castle Age
 
-This is where the matchup pivots. Britons' Crossbowmen with Yeomen reach a tier of range no other archer civ matches; Franks' Knights with free Bloodlines and cheaper Castle Age (via the Frank Knight discount) are the strongest raw cavalry on the field. The Britons player wants to stay back, mass Crossbows, and add Pikemen for spear support. The Franks player wants to flood Knights, especially against an under-walled position.
+This is where the matchup pivots. Britons' Crossbowmen with Yeomen reach a tier of range no other archer civ matches; Franks' Knights with +20% HP (their civ bonus) and cheap Castle Age age-up (free Farm upgrades) are the strongest raw cavalry on the field. The Britons player wants to stay back, mass Crossbows, and add Pikemen for spear support. The Franks player wants to flood Knights, especially against an under-walled position.
 
 Decisive moments:
 - **Britons** must research Ballistics and add 3+ Archery Ranges before Franks' second wave of Knights arrives.
-- **Franks** must research Bloodlines and have at least 8–10 Knights pushing simultaneously, not in dribs and drabs.
+- **Franks** must research Forging + Iron Casting and have at least 8–10 Knights pushing simultaneously, not in dribs and drabs. (Note: Franks do NOT have access to Bloodlines — their cavalry HP bonus partially compensates.)
 
 If Britons stabilizes Castle Age safely, they win the long game. If Franks lands a Castle Age timing attack with raids, the game often ends before Imperial.
 

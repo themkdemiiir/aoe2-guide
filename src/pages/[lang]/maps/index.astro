@@ -16,13 +16,13 @@ const maps = await getLocalizedEntries("maps", lang);
     {maps.length === 0 ? (
       <p class="mt-6 text-stone-700">No maps yet — coming soon.</p>
     ) : (
-      <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {maps.map((m) => (
-          <li>
+          <li class="h-full">
             <a href={localizedPath(`/maps/${canonicalSlug(m.id)}`, lang)}
-               class="block rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
+               class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
               <h3 class="font-display text-xl text-ink">{m.data.name}</h3>
-              <p class="mt-1 text-xs text-stone-700">{m.data.type}{m.data.size ? ` · ${m.data.size}` : ""}</p>
+              <p class="mt-auto pt-2 text-xs text-stone-700">{m.data.type}{m.data.size ? ` · ${m.data.size}` : ""}</p>
             </a>
           </li>
         ))}

@@ -29,4 +29,4 @@ Critical milestones: lumber camp at ~50s, mill+berries at ~1:40, Feudal click at
 
 Common mistakes: forgetting to lure the second boar, building the stable too late, neglecting palisade walls. Always use 2 villagers to build the stable so it finishes faster.
 
-In Castle Age, the standard follow-up is 2-stable Knights. If the opponent has crossbowmen, pivot to Elite Skirmishers. Franks (free Bloodlines), Huns (no houses), and Malians (cheaper infantry) get the most mileage.
+In Castle Age, the standard follow-up is 2-stable Knights. If the opponent has crossbowmen, pivot to Elite Skirmishers. Franks (+20% HP cavalry, free Farm upgrades), Huns (no houses needed), and Malians (attack-bonus infantry, cheaper Universities) get the most mileage. (Note: Franks do NOT have Bloodlines — they make up for it with their HP bonus, but research Husbandry instead for the speed.)
