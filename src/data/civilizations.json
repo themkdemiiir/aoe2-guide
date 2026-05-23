@@ -1,4 +1,16 @@
 {
   "patch": "v100.1.84",
-  "civs": []
+  "civs": [
+    {
+      "slug": "britons",
+      "era": "DE2",
+      "region": "Western European",
+      "specialty": "Archers",
+      "tier": "B",
+      "uniqueUnits": ["longbowman"],
+      "strongAgainst": ["franks", "huns"],
+      "weakAgainst": ["mongols", "magyars"],
+      "recommendedBuilds": ["21pop-archer"]
+    }
+  ]
 }
