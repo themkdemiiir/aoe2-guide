@@ -1,11 +1,36 @@
 ---
-import "@/styles/globals.css";
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { locales, localeMeta } from "@/i18n/locales";
 ---
-<html lang="en">
-  <body class="p-8">
-    <h1 class="font-display text-5xl text-ink">Cinzel — display heading</h1>
-    <p class="mt-4 font-body text-base text-ink">Inter — this is body copy. Look at how the readable sans-serif balances the engraved display face above.</p>
-    <p class="mt-2 font-mono text-sm text-stone-700">JetBrains Mono — 0:00 → 8 vil wood (build-order timing style)</p>
-    <p class="mt-6 text-gold-500 underline">Gold accent link</p>
-  </body>
-</html>
+<BaseLayout title="AOE2 Guide" canonicalPath="/">
+  <script is:inline>
+    // Auto-redirect to preferred locale on return visits.
+    (() => {
+      try {
+        const stored = localStorage.getItem("preferredLang");
+        const supported = ["en", "tr", "es", "de"];
+        if (location.pathname === "/" && supported.includes(stored)) {
+          location.replace("/" + stored + "/");
+        }
+      } catch {}
+    })();
+  </script>
+
+  <section class="mx-auto max-w-2xl px-4 py-16 text-center">
+    <h1 class="font-display text-5xl text-ink">AOE2 Guide</h1>
+    <p class="mt-4 text-stone-700">Pick your language to enter.</p>
+
+    <ul class="mt-10 grid gap-3 sm:grid-cols-2">
+      {locales.map((l) => (
+        <li>
+          <a href={`/${l}/`}
+             onclick={`localStorage.setItem('preferredLang','${l}')`}
+             class="flex items-center justify-center gap-2 rounded border border-stone-700/40 bg-parchment px-4 py-3 text-lg text-ink hover:border-gold-500 hover:text-gold-500">
+            <span>{localeMeta[l].flag}</span>
+            <span>{localeMeta[l].name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
