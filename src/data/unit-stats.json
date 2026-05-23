@@ -15,7 +15,9 @@
       },
       "trainTime": 21,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "militia-line",
+      "lineRank": 1
     },
     {
       "slug": "man-at-arms",
@@ -31,7 +33,9 @@
       },
       "trainTime": 21,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "militia-line",
+      "lineRank": 2
     },
     {
       "slug": "long-swordsman",
@@ -47,7 +51,9 @@
       },
       "trainTime": 21,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "militia-line",
+      "lineRank": 3
     },
     {
       "slug": "two-handed-swordsman",
@@ -63,7 +69,9 @@
       },
       "trainTime": 21,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "militia-line",
+      "lineRank": 4
     },
     {
       "slug": "champion",
@@ -79,7 +87,9 @@
       },
       "trainTime": 21,
       "armorMelee": 1,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "militia-line",
+      "lineRank": 5
     },
     {
       "slug": "spearman",
@@ -95,7 +105,9 @@
       },
       "trainTime": 22,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "spearman-line",
+      "lineRank": 1
     },
     {
       "slug": "pikeman",
@@ -111,7 +123,9 @@
       },
       "trainTime": 22,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "spearman-line",
+      "lineRank": 2
     },
     {
       "slug": "halberdier",
@@ -127,7 +141,9 @@
       },
       "trainTime": 22,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "spearman-line",
+      "lineRank": 3
     },
     {
       "slug": "eagle-warrior",
@@ -143,7 +159,9 @@
       },
       "trainTime": 35,
       "armorMelee": 0,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "eagle-line",
+      "lineRank": 2
     },
     {
       "slug": "elite-eagle-warrior",
@@ -159,7 +177,9 @@
       },
       "trainTime": 20,
       "armorMelee": 0,
-      "armorPiercing": 4
+      "armorPiercing": 4,
+      "line": "eagle-line",
+      "lineRank": 3
     },
     {
       "slug": "archer",
@@ -175,7 +195,9 @@
       },
       "trainTime": 35,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "archer-line",
+      "lineRank": 1
     },
     {
       "slug": "crossbowman",
@@ -191,7 +213,9 @@
       },
       "trainTime": 27,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "archer-line",
+      "lineRank": 2
     },
     {
       "slug": "arbalester",
@@ -207,7 +231,9 @@
       },
       "trainTime": 27,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "archer-line",
+      "lineRank": 3
     },
     {
       "slug": "skirmisher",
@@ -223,7 +249,9 @@
       },
       "trainTime": 22,
       "armorMelee": 0,
-      "armorPiercing": 3
+      "armorPiercing": 3,
+      "line": "skirmisher-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-skirmisher",
@@ -239,7 +267,9 @@
       },
       "trainTime": 22,
       "armorMelee": 0,
-      "armorPiercing": 4
+      "armorPiercing": 4,
+      "line": "skirmisher-line",
+      "lineRank": 2
     },
     {
       "slug": "cavalry-archer",
@@ -255,7 +285,9 @@
       },
       "trainTime": 34,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "cavalry-archer-line",
+      "lineRank": 1
     },
     {
       "slug": "heavy-cavalry-archer",
@@ -271,7 +303,9 @@
       },
       "trainTime": 27,
       "armorMelee": 1,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "cavalry-archer-line",
+      "lineRank": 2
     },
     {
       "slug": "hand-cannoneer",
@@ -287,7 +321,9 @@
       },
       "trainTime": 34,
       "armorMelee": 1,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "hand-cannoneer-line",
+      "lineRank": 1
     },
     {
       "slug": "scout-cavalry",
@@ -303,7 +339,9 @@
       },
       "trainTime": 30,
       "armorMelee": 0,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "scout-line",
+      "lineRank": 1
     },
     {
       "slug": "light-cavalry",
@@ -319,7 +357,9 @@
       },
       "trainTime": 30,
       "armorMelee": 0,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "scout-line",
+      "lineRank": 2
     },
     {
       "slug": "hussar",
@@ -335,7 +375,9 @@
       },
       "trainTime": 30,
       "armorMelee": 0,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "scout-line",
+      "lineRank": 3
     },
     {
       "slug": "knight",
@@ -351,7 +393,9 @@
       },
       "trainTime": 30,
       "armorMelee": 2,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "knight-line",
+      "lineRank": 1
     },
     {
       "slug": "cavalier",
@@ -367,7 +411,9 @@
       },
       "trainTime": 30,
       "armorMelee": 2,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "knight-line",
+      "lineRank": 2
     },
     {
       "slug": "paladin",
@@ -383,7 +429,9 @@
       },
       "trainTime": 30,
       "armorMelee": 2,
-      "armorPiercing": 3
+      "armorPiercing": 3,
+      "line": "knight-line",
+      "lineRank": 3
     },
     {
       "slug": "camel-rider",
@@ -399,7 +447,9 @@
       },
       "trainTime": 22,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "camel-line",
+      "lineRank": 1
     },
     {
       "slug": "heavy-camel-rider",
@@ -415,7 +465,9 @@
       },
       "trainTime": 22,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "camel-line",
+      "lineRank": 2
     },
     {
       "slug": "monk",
@@ -431,7 +483,9 @@
       },
       "trainTime": 51,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "monk-line",
+      "lineRank": 1
     },
     {
       "slug": "battering-ram",
@@ -447,7 +501,9 @@
       },
       "trainTime": 36,
       "armorMelee": 0,
-      "armorPiercing": 180
+      "armorPiercing": 180,
+      "line": "ram-line",
+      "lineRank": 1
     },
     {
       "slug": "capped-ram",
@@ -463,7 +519,9 @@
       },
       "trainTime": 36,
       "armorMelee": 0,
-      "armorPiercing": 190
+      "armorPiercing": 190,
+      "line": "ram-line",
+      "lineRank": 2
     },
     {
       "slug": "siege-ram",
@@ -479,7 +537,9 @@
       },
       "trainTime": 36,
       "armorMelee": 0,
-      "armorPiercing": 195
+      "armorPiercing": 195,
+      "line": "ram-line",
+      "lineRank": 3
     },
     {
       "slug": "mangonel",
@@ -495,7 +555,9 @@
       },
       "trainTime": 46,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "mangonel-line",
+      "lineRank": 1
     },
     {
       "slug": "onager",
@@ -511,7 +573,9 @@
       },
       "trainTime": 46,
       "armorMelee": 0,
-      "armorPiercing": 7
+      "armorPiercing": 7,
+      "line": "mangonel-line",
+      "lineRank": 2
     },
     {
       "slug": "siege-onager",
@@ -527,7 +591,9 @@
       },
       "trainTime": 46,
       "armorMelee": 0,
-      "armorPiercing": 8
+      "armorPiercing": 8,
+      "line": "mangonel-line",
+      "lineRank": 3
     },
     {
       "slug": "scorpion",
@@ -543,7 +609,9 @@
       },
       "trainTime": 30,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "scorpion-line",
+      "lineRank": 1
     },
     {
       "slug": "heavy-scorpion",
@@ -559,7 +627,9 @@
       },
       "trainTime": 30,
       "armorMelee": 0,
-      "armorPiercing": 7
+      "armorPiercing": 7,
+      "line": "scorpion-line",
+      "lineRank": 2
     },
     {
       "slug": "bombard-cannon",
@@ -575,7 +645,9 @@
       },
       "trainTime": 56,
       "armorMelee": 2,
-      "armorPiercing": 5
+      "armorPiercing": 5,
+      "line": "bombard-cannon-line",
+      "lineRank": 1
     },
     {
       "slug": "trebuchet",
@@ -591,7 +663,9 @@
       },
       "trainTime": 50,
       "armorMelee": 1,
-      "armorPiercing": 150
+      "armorPiercing": 150,
+      "line": "trebuchet-line",
+      "lineRank": 1
     },
     {
       "slug": "galley",
@@ -607,7 +681,9 @@
       },
       "trainTime": 60,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "galley-line",
+      "lineRank": 1
     },
     {
       "slug": "war-galley",
@@ -623,7 +699,9 @@
       },
       "trainTime": 36,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "galley-line",
+      "lineRank": 2
     },
     {
       "slug": "galleon",
@@ -639,7 +717,9 @@
       },
       "trainTime": 36,
       "armorMelee": 0,
-      "armorPiercing": 8
+      "armorPiercing": 8,
+      "line": "galley-line",
+      "lineRank": 3
     },
     {
       "slug": "fire-ship",
@@ -655,7 +735,9 @@
       },
       "trainTime": 36,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "fire-ship-line",
+      "lineRank": 2
     },
     {
       "slug": "fast-fire-ship",
@@ -671,7 +753,9 @@
       },
       "trainTime": 36,
       "armorMelee": 0,
-      "armorPiercing": 8
+      "armorPiercing": 8,
+      "line": "fire-ship-line",
+      "lineRank": 3
     },
     {
       "slug": "demolition-ship",
@@ -687,7 +771,9 @@
       },
       "trainTime": 31,
       "armorMelee": 0,
-      "armorPiercing": 3
+      "armorPiercing": 3,
+      "line": "demolition-line",
+      "lineRank": 2
     },
     {
       "slug": "heavy-demolition-ship",
@@ -703,7 +789,9 @@
       },
       "trainTime": 31,
       "armorMelee": 0,
-      "armorPiercing": 3
+      "armorPiercing": 3,
+      "line": "demolition-line",
+      "lineRank": 3
     },
     {
       "slug": "cannon-galleon",
@@ -719,7 +807,9 @@
       },
       "trainTime": 46,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "cannon-galleon-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-cannon-galleon",
@@ -735,7 +825,9 @@
       },
       "trainTime": 46,
       "armorMelee": 0,
-      "armorPiercing": 8
+      "armorPiercing": 8,
+      "line": "cannon-galleon-line",
+      "lineRank": 2
     },
     {
       "slug": "fishing-ship",
@@ -751,7 +843,9 @@
       },
       "trainTime": 40,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "fishing-ship-line",
+      "lineRank": 1
     },
     {
       "slug": "transport-ship",
@@ -767,7 +861,9 @@
       },
       "trainTime": 45,
       "armorMelee": 4,
-      "armorPiercing": 8
+      "armorPiercing": 8,
+      "line": "transport-ship-line",
+      "lineRank": 1
     },
     {
       "slug": "berserk",
@@ -783,7 +879,9 @@
       },
       "trainTime": 16,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "berserk-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-berserk",
@@ -799,7 +897,9 @@
       },
       "trainTime": 16,
       "armorMelee": 2,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "berserk-line",
+      "lineRank": 2
     },
     {
       "slug": "cataphract",
@@ -815,7 +915,9 @@
       },
       "trainTime": 20,
       "armorMelee": 2,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "cataphract-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-cataphract",
@@ -831,7 +933,9 @@
       },
       "trainTime": 20,
       "armorMelee": 2,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "cataphract-line",
+      "lineRank": 2
     },
     {
       "slug": "chu-ko-nu",
@@ -847,7 +951,9 @@
       },
       "trainTime": 19,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "chu-ko-nu-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-chu-ko-nu",
@@ -863,7 +969,9 @@
       },
       "trainTime": 13,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "chu-ko-nu-line",
+      "lineRank": 2
     },
     {
       "slug": "conquistador",
@@ -879,7 +987,9 @@
       },
       "trainTime": 24,
       "armorMelee": 2,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "conquistador-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-conquistador",
@@ -895,7 +1005,9 @@
       },
       "trainTime": 24,
       "armorMelee": 2,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "conquistador-line",
+      "lineRank": 2
     },
     {
       "slug": "huskarl",
@@ -911,7 +1023,9 @@
       },
       "trainTime": 16,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "huskarl-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-huskarl",
@@ -927,7 +1041,9 @@
       },
       "trainTime": 16,
       "armorMelee": 0,
-      "armorPiercing": 8
+      "armorPiercing": 8,
+      "line": "huskarl-line",
+      "lineRank": 2
     },
     {
       "slug": "jaguar-warrior",
@@ -943,7 +1059,9 @@
       },
       "trainTime": 17,
       "armorMelee": 1,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "jaguar-warrior-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-jaguar-warrior",
@@ -959,7 +1077,9 @@
       },
       "trainTime": 17,
       "armorMelee": 2,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "jaguar-warrior-line",
+      "lineRank": 2
     },
     {
       "slug": "janissary",
@@ -975,7 +1095,9 @@
       },
       "trainTime": 17,
       "armorMelee": 1,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "janissary-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-janissary",
@@ -991,7 +1113,9 @@
       },
       "trainTime": 17,
       "armorMelee": 2,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "janissary-line",
+      "lineRank": 2
     },
     {
       "slug": "longbowman",
@@ -1007,7 +1131,9 @@
       },
       "trainTime": 18,
       "armorPiercing": 0,
-      "armorMelee": 0
+      "armorMelee": 0,
+      "line": "longbowman-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-longbowman",
@@ -1023,7 +1149,9 @@
       },
       "trainTime": 19,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "longbowman-line",
+      "lineRank": 2
     },
     {
       "slug": "mameluke",
@@ -1039,7 +1167,9 @@
       },
       "trainTime": 23,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "mameluke-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-mameluke",
@@ -1055,7 +1185,9 @@
       },
       "trainTime": 23,
       "armorMelee": 1,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "mameluke-line",
+      "lineRank": 2
     },
     {
       "slug": "mangudai",
@@ -1071,7 +1203,9 @@
       },
       "trainTime": 26,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "mangudai-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-mangudai",
@@ -1087,7 +1221,9 @@
       },
       "trainTime": 26,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "mangudai-line",
+      "lineRank": 2
     },
     {
       "slug": "plumed-archer",
@@ -1103,7 +1239,9 @@
       },
       "trainTime": 16,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "plumed-archer-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-plumed-archer",
@@ -1119,7 +1257,9 @@
       },
       "trainTime": 16,
       "armorMelee": 0,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "plumed-archer-line",
+      "lineRank": 2
     },
     {
       "slug": "samurai",
@@ -1135,7 +1275,9 @@
       },
       "trainTime": 9,
       "armorMelee": 1,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "samurai-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-samurai",
@@ -1151,7 +1293,9 @@
       },
       "trainTime": 9,
       "armorMelee": 1,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "samurai-line",
+      "lineRank": 2
     },
     {
       "slug": "tarkan",
@@ -1167,7 +1311,9 @@
       },
       "trainTime": 14,
       "armorMelee": 1,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "tarkan-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-tarkan",
@@ -1183,7 +1329,9 @@
       },
       "trainTime": 14,
       "armorMelee": 1,
-      "armorPiercing": 3
+      "armorPiercing": 3,
+      "line": "tarkan-line",
+      "lineRank": 2
     },
     {
       "slug": "teutonic-knight",
@@ -1199,7 +1347,9 @@
       },
       "trainTime": 12,
       "armorMelee": 5,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "teutonic-knight-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-teutonic-knight",
@@ -1215,7 +1365,9 @@
       },
       "trainTime": 12,
       "armorMelee": 10,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "teutonic-knight-line",
+      "lineRank": 2
     },
     {
       "slug": "throwing-axeman",
@@ -1231,7 +1383,9 @@
       },
       "trainTime": 17,
       "armorMelee": 0,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "throwing-axeman-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-throwing-axeman",
@@ -1247,7 +1401,9 @@
       },
       "trainTime": 17,
       "armorMelee": 1,
-      "armorPiercing": 0
+      "armorPiercing": 0,
+      "line": "throwing-axeman-line",
+      "lineRank": 2
     },
     {
       "slug": "war-elephant",
@@ -1263,7 +1419,9 @@
       },
       "trainTime": 31,
       "armorMelee": 1,
-      "armorPiercing": 2
+      "armorPiercing": 2,
+      "line": "war-elephant-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-war-elephant",
@@ -1279,7 +1437,9 @@
       },
       "trainTime": 31,
       "armorMelee": 1,
-      "armorPiercing": 3
+      "armorPiercing": 3,
+      "line": "war-elephant-line",
+      "lineRank": 2
     },
     {
       "slug": "war-wagon",
@@ -1295,7 +1455,9 @@
       },
       "trainTime": 25,
       "armorMelee": 0,
-      "armorPiercing": 3
+      "armorPiercing": 3,
+      "line": "war-wagon-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-war-wagon",
@@ -1311,7 +1473,9 @@
       },
       "trainTime": 25,
       "armorMelee": 0,
-      "armorPiercing": 4
+      "armorPiercing": 4,
+      "line": "war-wagon-line",
+      "lineRank": 2
     },
     {
       "slug": "woad-raider",
@@ -1327,7 +1491,9 @@
       },
       "trainTime": 10,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "woad-raider-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-woad-raider",
@@ -1343,7 +1509,9 @@
       },
       "trainTime": 10,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "woad-raider-line",
+      "lineRank": 2
     },
     {
       "slug": "karambit-warrior",
@@ -1359,7 +1527,9 @@
       },
       "trainTime": 6,
       "armorMelee": 0,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "karambit-warrior-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-karambit-warrior",
@@ -1375,7 +1545,9 @@
       },
       "trainTime": 6,
       "armorMelee": 1,
-      "armorPiercing": 1
+      "armorPiercing": 1,
+      "line": "karambit-warrior-line",
+      "lineRank": 2
     },
     {
       "slug": "longboat",
@@ -1391,7 +1563,9 @@
       },
       "trainTime": 25,
       "armorMelee": 0,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "longboat-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-longboat",
@@ -1407,7 +1581,9 @@
       },
       "trainTime": 25,
       "armorMelee": 0,
-      "armorPiercing": 8
+      "armorPiercing": 8,
+      "line": "longboat-line",
+      "lineRank": 2
     },
     {
       "slug": "turtle-ship",
@@ -1423,7 +1599,9 @@
       },
       "trainTime": 50,
       "armorMelee": 6,
-      "armorPiercing": 5
+      "armorPiercing": 5,
+      "line": "turtle-ship-line",
+      "lineRank": 1
     },
     {
       "slug": "elite-turtle-ship",
@@ -1439,7 +1617,9 @@
       },
       "trainTime": 50,
       "armorMelee": 8,
-      "armorPiercing": 6
+      "armorPiercing": 6,
+      "line": "turtle-ship-line",
+      "lineRank": 2
     }
   ]
 }

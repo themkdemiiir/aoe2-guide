@@ -3,6 +3,8 @@ slug: longbowman
 name: Longbowman
 role: Unique foot archer (Britons)
 civ: britons
+line: "longbowman-line"
+lineRank: 1
 ---
 
 The Longbowman is the Britons' unique unit — a foot archer with the longest range in the game when supported by Yeomen. Strong as a range-extending support to Crossbowman and Arbalester compositions.

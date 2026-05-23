@@ -53,6 +53,8 @@ const units = defineCollection({
     name: z.string(),
     role: z.string(),
     civ: z.string().optional(),
+    line: z.string().optional(),
+    lineRank: z.number().optional(),
   }),
 });
 

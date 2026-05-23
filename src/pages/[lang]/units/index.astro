@@ -4,29 +4,147 @@ import Icon from "@/components/ui/Icon.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
 import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
+import unitLines from "@data/unit-lines.json";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
-const units = await getLocalizedEntries("units", lang);
+const allUnits = await getLocalizedEntries("units", lang);
+
+// Build a slug -> entry map for quick lookup
+const bySlug = new Map(allUnits.map((u) => [canonicalSlug(u.id), u]));
+
+// Build one "line card" per line.  A line is included only when at least
+// one of its members exists in the content directory.
+interface LineCard {
+  lineRoot: string;
+  baseTierSlug: string;   // slug of the first existing tier — the link target
+  baseTierName: string;   // display name of that tier
+  role: string;
+  memberSlugs: string[];  // all existing tier slugs in order
+}
+
+const lineCards: LineCard[] = [];
+
+for (const [lineRoot, members] of Object.entries(unitLines as Record<string, string[]>)) {
+  const existingMembers = members.filter((m) => bySlug.has(m));
+  if (existingMembers.length === 0) continue;
+
+  const baseTierSlug = existingMembers[0];
+  const baseEntry = bySlug.get(baseTierSlug)!;
+
+  lineCards.push({
+    lineRoot,
+    baseTierSlug,
+    baseTierName: baseEntry.data.name,
+    role: baseEntry.data.role,
+    memberSlugs: existingMembers,
+  });
+}
+
+// Sort: single-member lines at the end, multi-member by base name
+lineCards.sort((a, b) => {
+  const aMulti = a.memberSlugs.length > 1 ? 0 : 1;
+  const bMulti = b.memberSlugs.length > 1 ? 0 : 1;
+  if (aMulti !== bMulti) return aMulti - bMulti;
+  return a.baseTierName.localeCompare(b.baseTierName);
+});
+
+// Helper: derive a human-readable line display name
+function lineDisplayName(card: LineCard): string {
+  if (card.memberSlugs.length === 1) return card.baseTierName;
+  // Strip "Line" suffix from lineRoot so we can append it naturally
+  const root = card.lineRoot.replace(/-line$/, "");
+  // Use the base tier name + "Line" only for generic lines
+  // For unique unit lines the base name is already descriptive
+  return card.baseTierName + " Line";
+}
+
+// Abbreviated tier names for the chain pills (max 4 shown)
+const abbreviations: Record<string, string> = {
+  militia: "Militia",
+  "man-at-arms": "MAA",
+  "long-swordsman": "Long Sword",
+  "two-handed-swordsman": "2H Sword",
+  champion: "Champ",
+  spearman: "Spear",
+  pikeman: "Pike",
+  halberdier: "Halbs",
+  "eagle-scout": "Scout",
+  "eagle-warrior": "EW",
+  "elite-eagle-warrior": "Elite EW",
+  archer: "Archer",
+  crossbowman: "Xbow",
+  arbalester: "Arb",
+  skirmisher: "Skirmisher",
+  "elite-skirmisher": "Elite Skirm",
+  "scout-cavalry": "Scout",
+  "light-cavalry": "LC",
+  hussar: "Hussar",
+  knight: "Knight",
+  cavalier: "Cavalier",
+  paladin: "Paladin",
+  "camel-rider": "Camel",
+  "heavy-camel-rider": "HCamel",
+  "cavalry-archer": "CA",
+  "heavy-cavalry-archer": "HCA",
+  "battering-ram": "Ram",
+  "capped-ram": "Capped",
+  "siege-ram": "Siege",
+  mangonel: "Mango",
+  onager: "Onager",
+  "siege-onager": "SO",
+  scorpion: "Scorpion",
+  "heavy-scorpion": "HSCorpion",
+  galley: "Galley",
+  "war-galley": "War G",
+  galleon: "Galleon",
+  "fire-ship": "Fire",
+  "fast-fire-ship": "Fast Fire",
+  "demolition-ship": "Demo",
+  "heavy-demolition-ship": "H Demo",
+  "cannon-galleon": "Cannon G",
+  "elite-cannon-galleon": "Elite",
+};
+
+function tierAbbr(slug: string): string {
+  return abbreviations[slug] ?? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
 ---
 <BaseLayout title={t(lang, "nav.units")} canonicalPath="/units">
   <section class="mx-auto max-w-7xl px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.units")}</h1>
-    {units.length === 0 ? (
+    {lineCards.length === 0 ? (
       <p class="mt-6 text-stone-700">No units yet — coming soon.</p>
     ) : (
       <ul class="mt-8 grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {units.map((u) => (
+        {lineCards.map((card) => (
           <li class="h-full">
-            <a href={localizedPath(`/units/${canonicalSlug(u.id)}`, lang)}
-               class="flex h-full items-center gap-3 rounded border border-stone-700/40 bg-parchment p-3 hover:border-gold-500">
-              <Icon slug={canonicalSlug(u.id)} kind="unit" size={40} />
-              <div>
-                <div class="font-display text-lg text-ink">{u.data.name}</div>
-                <div class="text-xs text-stone-700">{u.data.role}</div>
+            <a href={localizedPath(`/units/${card.baseTierSlug}`, lang)}
+               class="flex h-full flex-col gap-2 rounded border border-stone-700/40 bg-parchment p-3 hover:border-gold-500">
+              <div class="flex items-center gap-3">
+                <Icon slug={card.baseTierSlug} kind="unit" size={40} />
+                <div class="min-w-0 flex-1">
+                  <div class="font-display text-lg text-ink leading-tight">{lineDisplayName(card)}</div>
+                  <div class="text-xs text-stone-700">{card.role}</div>
+                </div>
               </div>
+              {card.memberSlugs.length > 1 && (
+                <div class="flex flex-wrap gap-1 pt-0.5">
+                  {card.memberSlugs.slice(0, 4).map((s) => (
+                    <span class="inline-flex items-center gap-1 rounded bg-stone-700/10 px-1.5 py-0.5 text-xs text-stone-700">
+                      <Icon slug={s} kind="unit" size={14} framed={false} />
+                      {tierAbbr(s)}
+                    </span>
+                  ))}
+                  {card.memberSlugs.length > 4 && (
+                    <span class="rounded bg-stone-700/10 px-1.5 py-0.5 text-xs text-stone-700">
+                      +{card.memberSlugs.length - 4}
+                    </span>
+                  )}
+                </div>
+              )}
             </a>
           </li>
         ))}

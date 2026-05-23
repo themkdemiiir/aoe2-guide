@@ -6,6 +6,7 @@ import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 import unitStats from "@data/unit-stats.json";
+import unitLines from "@data/unit-lines.json";
 
 export async function getStaticPaths() {
   const paths: Array<{ params: { lang: string; unit: string } }> = [];
@@ -23,6 +24,38 @@ if (!found) return Astro.redirect("/404");
 const { entry, fallback } = found;
 const { Content } = await render(entry);
 const stats = (unitStats.units as Array<Record<string, any>>).find((u) => u.slug === slug);
+
+// Build the upgrade chain if this unit has a line
+const lineRoot = entry.data.line as string | undefined;
+const currentRank = entry.data.lineRank as number | undefined;
+
+interface TierInfo {
+  slug: string;
+  name: string;
+  stats: Record<string, any> | undefined;
+  isCurrent: boolean;
+}
+
+let chainTiers: TierInfo[] = [];
+
+if (lineRoot) {
+  const lineDef = (unitLines as Record<string, string[]>)[lineRoot] ?? [];
+  // Fetch all units in this locale so we can get names
+  const allUnits = await getLocalizedEntries("units", lang);
+  const bySlug = new Map(allUnits.map((u) => [canonicalSlug(u.id), u]));
+
+  for (const tierSlug of lineDef) {
+    const tierEntry = bySlug.get(tierSlug);
+    if (!tierEntry) continue; // member doesn't have a file — skip
+    const tierStats = (unitStats.units as Array<Record<string, any>>).find((u) => u.slug === tierSlug);
+    chainTiers.push({
+      slug: tierSlug,
+      name: tierEntry.data.name,
+      stats: tierStats,
+      isCurrent: tierSlug === slug,
+    });
+  }
+}
 ---
 <BaseLayout title={entry.data.name} canonicalPath={`/units/${slug}`}>
   <article class="mx-auto max-w-prose px-4 py-12">
@@ -39,6 +72,52 @@ const stats = (unitStats.units as Array<Record<string, any>>).find((u) => u.slug
       </div>
     </header>
 
+    {/* Upgrade chain section */}
+    {chainTiers.length > 1 && (
+      <section class="mt-8">
+        <h2 class="font-display text-xl text-ink mb-3">Upgrade Chain</h2>
+        <div class="flex flex-col gap-2">
+          {chainTiers.map((tier, i) => (
+            <a
+              href={`/${lang}/units/${tier.slug}/`}
+              class={[
+                "flex items-center gap-3 rounded border p-3 transition-colors",
+                tier.isCurrent
+                  ? "border-gold-500 bg-gold-500/10 cursor-default"
+                  : "border-stone-700/40 bg-parchment hover:border-gold-500",
+              ].join(" ")}
+            >
+              {/* Rank badge */}
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-stone-700/20 text-xs font-bold text-stone-700">
+                {i + 1}
+              </span>
+
+              <Icon slug={tier.slug} kind="unit" size={32} />
+
+              <div class="min-w-0 flex-1">
+                <div class={`font-display text-base leading-tight ${tier.isCurrent ? "text-gold-500" : "text-ink"}`}>
+                  {tier.name}
+                  {tier.isCurrent && <span class="ml-2 text-xs font-normal text-gold-500">(viewing)</span>}
+                </div>
+              </div>
+
+              {tier.stats && (
+                <div class="hidden shrink-0 gap-4 text-xs text-stone-700 sm:flex">
+                  <span title="HP">❤ {tier.stats.hp}</span>
+                  <span title="Attack">⚔ {tier.stats.attack}</span>
+                  {tier.stats.range > 0 && <span title="Range">⬡ {tier.stats.range}</span>}
+                  <span title="Food" class="text-res-food">{tier.stats.cost?.food ?? 0}f</span>
+                  <span title="Wood" class="text-res-wood">{tier.stats.cost?.wood ?? 0}w</span>
+                  <span title="Gold" class="text-res-gold">{tier.stats.cost?.gold ?? 0}g</span>
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* Current tier stats */}
     {stats && (
       <table class="mt-6 w-full text-sm">
         <tbody>
