@@ -13,22 +13,31 @@ const { steps } = Astro.props;
 
 const iconMap = iconMapJson as Record<string, Record<string, string>>;
 
-// Building slugs mapped to verified IDs present in public/images/aoe2/Building/
-// Only IDs that actually exist on disk are included.
+// Building slugs mapped to verified image paths.
+// Entries that have a file in public/images/aoe2/Building/ use the Building/ folder.
+// Remaining buildings fall back to Unit/ paths (aoc-reference-data IDs) which also
+// exist on disk and display the correct building artwork.
 const BUILDING_ICONS: Record<string, string> = {
-  stable:          "/images/aoe2/Unit/101.png",
-  barracks:        "/images/aoe2/Unit/498.png",
-  "archery-range": "/images/aoe2/Unit/87.png",
-  blacksmith:      "/images/aoe2/Unit/105.png",
-  market:          "/images/aoe2/Unit/116.png",
-  monastery:       "/images/aoe2/Unit/104.png",
-  "town-center":   "/images/aoe2/Unit/621.png",
-  farm:            "/images/aoe2/Unit/50.png",
-  house:           "/images/aoe2/Unit/465.png",
-  mill:            "/images/aoe2/Unit/131.png",
+  // Verified Building/<id>.png (data.Building IDs confirmed on disk)
+  "town-center":   "/images/aoe2/Building/109.png",
+  "market":        "/images/aoe2/Building/84.png",
+  "archery-range": "/images/aoe2/Building/87.png",
+  "stable":        "/images/aoe2/Building/101.png",
+  "blacksmith":    "/images/aoe2/Building/103.png",
+  "monastery":     "/images/aoe2/Building/104.png",
+  // Unit/<id>.png fallbacks (aoc-reference-data IDs, all verified on disk)
+  "barracks":      "/images/aoe2/Unit/498.png",
+  "house":         "/images/aoe2/Unit/465.png",
+  "mill":          "/images/aoe2/Unit/131.png",
   "lumber-camp":   "/images/aoe2/Unit/565.png",
-  // Building/ IDs verified on disk:
-  "siege-workshop":  "/images/aoe2/Building/84.png",  // 84 is market in Building/ but siege-workshop goes through units above
+  "mining-camp":   "/images/aoe2/Unit/102.png",
+  "farm":          "/images/aoe2/Unit/50.png",
+  "siege-workshop":"/images/aoe2/Unit/49.png",
+  "dock":          "/images/aoe2/Unit/133.png",
+  "castle":        "/images/aoe2/Unit/33.png",
+  "watch-tower":   "/images/aoe2/Unit/79.png",
+  "stone-wall":    "/images/aoe2/Unit/117.png",
+  "palisade-wall": "/images/aoe2/Unit/72.png",
 };
 
 const RESOURCE_ICONS: Record<string, string> = {
