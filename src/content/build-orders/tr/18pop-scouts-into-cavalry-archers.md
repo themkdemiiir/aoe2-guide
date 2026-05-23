@@ -20,7 +20,7 @@ steps:
   - { villagers: 30, time: "14:00", assign: "Castle Age araştır (~18:00 hedef); 2 Archery Range kur, CA üretimine başla" }
 source:
   author: "Hera"
-  url: ""
+
 ---
 
 # 18 Köylü Scouts into Cavalry Archers

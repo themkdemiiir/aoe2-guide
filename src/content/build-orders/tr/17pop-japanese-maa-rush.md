@@ -20,7 +20,7 @@ steps:
   - { villagers: 20, time: "10:30", assign: "+1 köylü meyveye, Mill kur; Fletching araştır" }
 source:
   author: "Hera"
-  url: ""
+
 ---
 
 # 17 Köylü Japon Man-at-Arms Baskını

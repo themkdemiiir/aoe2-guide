@@ -20,7 +20,7 @@ steps:
   - { villagers: 29, time: "16:05", assign: "Castle Age — Stable ekle, her iki Stable'dan Knight üret" }
 source:
   author: "Hera"
-  url: ""
+
 ---
 
 # 25+4 Villager Knight Rush (Başlangıç Seviyesi)

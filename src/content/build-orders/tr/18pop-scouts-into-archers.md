@@ -19,7 +19,7 @@ steps:
   - { villagers: 25, time: "12:00", assign: "+3 köylü altına, Mining Camp kur; Blacksmith kur, Fletching araştır" }
 source:
   author: "Hera"
-  url: ""
+
 ---
 
 # 18 Köylü Scouts into Archers

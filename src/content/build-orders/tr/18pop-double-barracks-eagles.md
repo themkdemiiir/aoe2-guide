@@ -19,7 +19,7 @@ steps:
   - { villagers: 22, time: "10:30", assign: "+4 yeni köylü altına; her iki Barracks'tan Eagle Scout üret" }
 source:
   author: "Hera"
-  url: ""
+
 ---
 
 # 18 Köylü Double Barracks Eagles

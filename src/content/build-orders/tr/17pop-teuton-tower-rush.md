@@ -19,7 +19,7 @@ steps:
   - { villagers: 21, time: "11:00", assign: "+2 köylü; Palisade Wall ile kuleyi çevir; kule zinciri kur" }
 source:
   author: "Hera"
-  url: ""
+
 ---
 
 # 17 Köylü Teuton Kule Baskını
