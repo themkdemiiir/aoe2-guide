@@ -10,7 +10,8 @@
     "astro": "astro",
     "check": "astro check",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "assets:sync": "node scripts/sync-assets.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
