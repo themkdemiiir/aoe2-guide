@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Icon from "@/components/ui/Icon.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 
@@ -11,6 +12,20 @@ const lang = Astro.params.lang as Locale;
 <BaseLayout title={t(lang, "nav.about")} canonicalPath="/about">
   <section class="mx-auto max-w-prose px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.about")}</h1>
-    <p class="mt-4 text-stone-700">Coming soon.</p>
+
+    <h2 class="mt-8 font-display text-xl text-ink">Icon smoke test</h2>
+    <div class="mt-4 flex flex-wrap items-center gap-3">
+      <Icon slug="britons" kind="civ" size={56} />
+      <Icon slug="franks" kind="civ" size={56} />
+      <Icon slug="knight" kind="unit" />
+      <Icon slug="longbowman" kind="unit" />
+      <Icon slug="crossbowman" kind="unit" />
+      <Icon slug="loom" kind="tech" />
+      <Icon slug="not-a-real-thing" kind="unit" />
+    </div>
+
+    <p class="mt-12 text-xs text-stone-700">
+      Age of Empires II © Microsoft Corporation. This site was created under Microsoft's "Game Content Usage Rules" using assets from Age of Empires II; it is not endorsed by or affiliated with Microsoft.
+    </p>
   </section>
 </BaseLayout>

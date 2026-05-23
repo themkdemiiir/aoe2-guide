@@ -1,0 +1,31 @@
+---
+import iconMap from "@data/icon-map.json";
+
+interface Props {
+  slug: string;
+  kind?: "unit" | "tech" | "building" | "civ";
+  size?: number;
+  alt?: string;
+  framed?: boolean;
+}
+
+const { slug, kind = "unit", size = 48, alt = slug, framed = true } = Astro.props;
+
+const kindToKey = { unit: "units", tech: "techs", building: "buildings", civ: "civs" } as const;
+const bucket = (iconMap as Record<string, Record<string, string>>)[kindToKey[kind]] ?? {};
+const src = bucket[slug];
+
+const frameSize = size + 6;
+---
+{src ? (
+  <span class={`inline-flex items-center justify-center align-middle ${framed ? "rounded border border-stone-700/40 bg-parchment/40 p-0.5" : ""}`}
+        style={`width:${frameSize}px;height:${frameSize}px;`}>
+    <img src={src} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+  </span>
+) : (
+  <span class="inline-flex items-center justify-center rounded border border-dashed border-royal/50 bg-parchment/30 px-1 align-middle text-xs text-royal"
+        style={`width:${frameSize}px;height:${frameSize}px;`}
+        title={`Missing icon: ${kind}/${slug}`}>
+    ?{slug}
+  </span>
+)}
