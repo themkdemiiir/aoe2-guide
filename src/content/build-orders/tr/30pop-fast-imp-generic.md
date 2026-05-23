@@ -6,68 +6,80 @@ targetAge: imperial
 durationMin: 21
 civsRecommended: []
 steps:
-  - { villagers: 6,  time: "0:00",  assign: "6 köylü koyunda" }
-  - { villagers: 16, time: "2:30",  assign: "+10 köylü oduna (2 Lumber Camp kur)" }
-  - { villagers: 20, time: "4:00",  assign: "+4 köylü meyveye, Mill kur" }
-  - { villagers: 28, time: "6:00",  assign: "+8 köylü domuz / geyik / koyun avına" }
-  - { villagers: 30, time: "7:00",  assign: "+2 köylü altına, Mining Camp kur", note: "30. köylüyle Feodal'e tıkla; av bitince köylüler tarlaya geçer" }
+  - { villagers: 6,  time: "0:00",  assign: "6 → koyunda TC altında" }
+  - { villagers: 16, time: "2:30",  assign: "+10 → oduna (2 Lumber Camp kur)" }
+  - { villagers: 20, time: "4:00",  assign: "+4 → meyveye, Mill kur" }
+  - { villagers: 28, time: "6:00",  assign: "+8 → avda (domuz / geyik / koyun)" }
+  - { villagers: 30, time: "7:00",  assign: "+2 → altına, Mining Camp kur", note: "30. köylüyle Feodal'e tıkla; av bitince köylüler tarlaya geçer" }
   - { villagers: 30, time: "13:00", assign: "Feodal gelir (~13:00) — 1 Demirci, 2 Pazar kur; +2 altın" }
   - { villagers: 32, time: "14:00", assign: "+2 köylü; Kale Çağı'na tıkla (~16:30)" }
-  - { villagers: 32, time: "16:30", assign: "Castle Age — 1 Manastır, 1 Kuşatma Atölyesi kur; +2 odun" }
+  - { villagers: 32, time: "16:30", assign: "Castle Age — 1 Manastır, 1 Siege Workshop kur; +2 odun" }
   - { villagers: 34, time: "18:00", assign: "+2 köylü; meyveler bitince köylüler tarlaya; İmparatorluk Çağı'na tıkla (~21:00)" }
-  - { villagers: 34, time: "21:00", assign: "Imperial Age — 12 tarla, 9 odun, 8 altın dağılımı; ordu kur" }
+  - { villagers: 34, time: "21:00", assign: "Imperial Age — 12 tarla, 9 odun, 8 altın dağılımı; ordu kur ve ölçekle" }
 source:
   author: "Hera"
 
 ---
 
-# Fast Imp (Genel Düzen)
+# 30 Köylü Hızlı İmparatorluk (Genel)
 
-**Amaç:** Dengeli ekonomiyle hızlı İmparatorluk geçişi.
-
-**Hedef Süreler:**
-- Feodal → ~13:00
-- Kale → ~16:30
-- İmparatorluk → ~21:00
+**Amaç:** Dengeli ekonomiyle ~21. dakikada İmparatorluk Çağı'na ulaşmak; Feudal'de asker yatırımı yapmadan.
+**Önerilen medeniyetler:** Güçlü Imperial Age birimlerine sahip herhangi bir medeniyet
 
 ## Karanlık Çağ (0–30 Köylü)
 
-- 6 Koyun
-- 10 Odun (2 Oduncu Kampı)
-- 4 Meyve (Değirmen)
-- 8 Domuz / Geyik / Koyun
-- 2 Altın
+- 6 köylü koyunda
+- 10 köylü odunda (2 Lumber Camp)
+- 4 köylü meyveye (Değirmen)
+- 8 köylü domuz, geyik veya koyun avına
+- 2 köylü altına
+- Av kaynakları bitince köylüleri Tarla'ya geçir
+- İzci ile geyikleri Town Center'a sür
 
-**Av kaynakları bittiğinde:**
-- Köylüleri Tarlaya geç.
-- İzci ile geyikleri merkeze "push" yap.
+30. köylüyle Feodal Age'e tıkla (~13:00).
 
-30. köylüyle Feodal'e tıkla.
+## Feudal Hazırlığı
 
-## Feodal Çağ (30–32 Köylü)
+- 1 köylü Blacksmith kurar
+- 2 köylü Market kurar (bitince tekrar oduna dönsün)
+- +2 köylü altına
 
-- 1 Demirci
-- 2 Pazar
-  - Bu köylüler bitince tekrar oduna dönsün.
-- +2 Altın
+**Araştırmalar:**
+- (Geciktir) Double-Bit Axe ve Horse Collar, zaman kalırsa Feudal'de araştır
 
-Kale Çağı'na geç (~16:30)
+## Feodal Çağ (30 Köylü)
 
-## Kale Çağı (32–34 Köylü)
+- Blacksmith ve Market tamamlanır tamamlanmaz Kale Çağı'na tıkla (~16:30)
+- Feodal Age'de asker üretme
+- Yiyecek veya altın azsa Market'te fazla kaynakları sat
 
-- 1 Manastır
-- 1 Kuşatma Atölyesi
-- +2 Odun
+## Kale Çağı (32 Köylü)
 
-Meyveler bitince köylüleri Tarlaya gönder.
-Ekonomiyi dengede tut, altıncı sayısını artır.
+- 1 Manastır kur
+- 1 Siege Workshop kur
+- +2 köylü oduna
+- Meyveler bitince köylüleri Tarla'ya gönder
+- Ekonomiyi dengede tut; altın sayısını artır
+- İmparatorluk Çağı'na tıkla (~21:00)
 
-## İmparatorluk Çağı (34+)
+## İmparatorluk Çağı (34 Köylü)
 
-**Eko Dağılımı (yaklaşık):**
-- 12 Yiyecek (Tarla)
-- 9 Odun
-- 8 Altın
+- Hedef kaynak dağılımı: 12 yiyecek, 9 odun, 8 altın
+- İmparatorluk'a geçerken ordunu kur (okçu, topçu, rahip)
+- Ekonomiyi genişlet ve üretim binalarını çoğalt
+- Seçilen kompozisyona göre askeri üretim binası ekle
 
-İmparatorluk'a geçerken ordunu kur (okçu, topçu, rahip).
-Ekonomiyi genişlet, üretim binalarını çoğalt.
+## Strateji ve Devam (What's Next)
+
+- 30 Köylü Fast Imp uzun vadeli bir yatırım stratejisidir. Feudal baskısının pasif ekonomiyi engelleyemediği kapalı haritalarda en iyi çalışır.
+- **Zayıf olduğu:** Duvarlanma tamamlanmadan gelen Feudal veya Castle Age saldırıları; güçlü Castle Age baskısı uygulayan rakipler.
+- **Güçlü olduğu:** Aynı zamanda Imperial Age'e ulaşan ama daha zayıf askeri olan boom stratejileri.
+
+**Seçenekler:**
+
+1. **Trebuchet + Paladin:** Güçlü süvari ve kuşatmaya sahip medeniyetler için standart Imperial Age kompozisyonu.
+2. **Bombard Cannon + Piyade:** Kale savunmalarını yıkmak için etkilidir; Bombard Cannon'a erişimi olan herhangi bir medeniyetle çalışır.
+3. **Rahip + Siege:** Mangonel/Trebuchet yanında Rahiplerle çevirme desteği; maliyet-etkin bir all-in baskı oluşturur.
+
+**Savunma İpucu:**
+Feodal Age bitmeden tüm duvarları kapat. Erken Scout baskısına karşı en az birkaç Spearman üret. Imperial Age'e ulaşınca bir kompozisyona tam olarak odaklan — kararsızlık yanlış birimden daha pahalıya mal olur.

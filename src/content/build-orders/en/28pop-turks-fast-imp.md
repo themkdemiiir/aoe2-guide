@@ -22,51 +22,62 @@ source:
 
 ---
 
-# Turks Fast Imperial Age
+# 28 Pop Turks Fast Imp
 
-**Goal:** Fast Imperial Age transition with a strong gold economy and artillery dominance.
-
-**Target timings:**
-- Feudal → ~12:30
-- Castle → ~16:00
-- Imperial → ~20:00
+**Goal:** Reach Imperial Age at ~20 minutes with a gold-heavy economy, then dominate with Janissaries and Bombard Cannons.
+**Recommended civs:** Turks
 
 ## Dark Age (0–28 Villagers)
 
-- 6 on Sheep
-- 4 on Wood
-- 8 on Food (Boar / Sheep / Deer)
-- 4 on Berries
-- 5 on Gold
-- Remainder → Wood
+- 6 villagers on sheep
+- 4 villagers on wood
+- 8 villagers on food (boar, sheep, deer)
+- 4 villagers on berries
+- 5 villagers on gold
+- Remaining villager to wood
 
-Click Feudal Age with 28th villager.
+Click Feudal Age with 28th villager (~12:30).
 
-## Feudal Age (28–30 Villagers)
+## Feudal Preparation
 
-- 1 Blacksmith
-- 2 Market
-- +2 Gold
+- 1 villager builds Blacksmith
+- 2 villagers build Market (return to wood when done)
+- +2 villagers to gold
 
-**Total distribution:** 7 Gold | 8 Wood | 11 Food
+**Resource target:** 7 gold, 8 wood, 11 food
 
-Click Castle Age (~16:00)
+## Feudal Age (28 Villagers)
 
-## Castle Age (30–32 Villagers)
+- Click Castle Age (~16:00) immediately after Blacksmith and Market complete
+- No military production in Feudal Age
+- Sell stone at Market if short on food or gold
 
-- 2 Siege Workshops
-- 1 Monastery
-- +2 Gold
-- Sell Stone → accelerate economy
+## Castle Age (30 Villagers)
 
-Click Imperial Age (~20:00)
+- Build 2 Siege Workshops
+- Build 1 Monastery
+- +2 villagers to gold
+- Sell stone to accelerate economy
+- Click Imperial Age (~20:00)
 
-## Imperial Age (32+)
+## Imperial Age (32 Villagers)
 
-- 11 on Farms
-- 8 on Wood
-- 13 on Gold
+- Target resource distribution: 13 gold, 8 wood, 11 food
+- Produce Janissaries from Castles
+- Produce Bombard Cannons from Siege Workshops
+- Maintain pressure — do not lose your artillery
 
-Produce Janissaries + Bombard Cannons. Increase pressure — do not lose your artillery.
+## Strategy and Follow-Up (What's Next)
 
-**Note:** The Turks build is built around fast gold economy, stone selling, and early artillery power.
+- The Turks Fast Imp is built around gold economy, stone selling, and early artillery power. Turks get free Chemistry, making Bombard Cannons available immediately at Imperial Age.
+- **Weak against:** Feudal or Castle Age aggression that disrupts the passive economy; civs that can counter mass artillery (Siege Onagers, Trebuchets).
+- **Strong against:** Defensive boom strategies; opponents who cannot match the Imperial Age timing.
+
+**Options:**
+
+1. **Janissary + Bombard Cannon:** The core composition — Janissaries handle infantry and cavalry while Bombard Cannons destroy buildings and siege.
+2. **Imperial Camel:** If gold permits, mix in Imperial Camel units for anti-cavalry coverage.
+3. **Hussar Raid:** Use Light Cavalry (or Hussar) to harass and delay opponent military while Bombard Cannons close out the game.
+
+**Defense Tip:**
+Increase pressure once in Imperial Age and never let your Bombard Cannons be destroyed — losing artillery is usually the end of the game plan. Use the Monastery to heal damaged Janissaries. The Turks' free gold mining upgrades make sustaining the gold economy much easier than for other civilizations.

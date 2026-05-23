@@ -23,9 +23,9 @@ source:
 
 ---
 
-# Fast Castle into Unique Unit (25+2 Villagers)
+# 25 Pop Fast Castle into Unique Unit
 
-**Goal:** Reach Castle Age quickly, immediately build a Castle, and begin producing Unique Units.
+**Goal:** Reach Castle Age quickly at 25 population, immediately build a Castle, and begin producing Unique Units for an aggressive Castle Age push.
 **Recommended civs:** Spanish, Turks, Mayans, Burgundians, Mongols
 
 ## Dark Age (0–25 Villagers)
@@ -42,39 +42,40 @@ source:
 
 Click Feudal Age with 25th villager (~11:20).
 
-## Feudal Age (25+2 Villagers)
+## Feudal Preparation
 
 - When sheep run out, send 4 villagers to stone, build Mining Camp
-- 3 other villagers work straggler trees, then build:
-  - 1 villager builds Blacksmith
-  - 2 villagers build Market
+- 3 other villagers work straggler trees, then build Blacksmith (1 vil) and Market (2 vils)
 - +2 villagers to stone
-
-Click Castle Age (~14:50).
 
 **Research:**
 - Double-Bit Axe
 - Horse Collar
 
-Stone villagers build Castle immediately.
-Then:
+## Feudal Age (25 Villagers)
+
+- Click Castle Age (~14:50) — minimize time in Feudal
+- Stone villagers build Castle immediately upon Castle Age arriving
 - Research Bow Saw
-- When berry villagers free up, redirect to wood / gold / farms as needed
+- When berry villagers free up, redirect to wood, gold, or farms as needed
 
-## Castle Age Follow-Up (What's Next)
+## Castle Age (27 Villagers)
 
-You now have a Castle and your Unique Unit — several strategies are available:
+- Begin Unique Unit production from the Castle
+- Continue producing villagers; redirect stone villagers back to economy
+- Choose between safe development or aggressive play based on opponent's position
 
-**Safe Development:**
-- Begin Unique Unit production, then slowly add Town Centers.
-- Send 2–3 stone villagers back to mine; redirect others to wood and farms.
+## Strategy and Follow-Up (What's Next)
 
-**Aggressive Play:**
-- Keep all stone villagers mining; continuously produce Unique Units.
-- Within 2–3 minutes, move forward and drop a second Castle near the enemy for an early advantage.
+- A Castle + Unique Unit pressure at ~15:30 is very difficult to answer without a Castle of your own.
+- **Weak against:** Opponent building their own Castle before yours; aggressive Feudal attacks that disrupt the stone economy.
+- **Strong against:** Opponents going for a slow boom; Fast Castle opponents without their own Unique Unit ready.
 
-**Single TC Pressure:**
-- After stone villagers finish the Castle, return to a wood / gold / farm balance.
-- Apply pressure with Unique Units + Siege from a single Town Center.
+**Options:**
 
-No matter which path you choose, make sure your Castle is earning value — if it is not defending or attacking, you will fall behind economically.
+1. **Safe Development:** Begin Unique Unit production, then slowly add Town Centers; send 2–3 stone villagers back to mine.
+2. **Aggressive Castle Drop:** Keep all stone villagers mining; continuously produce Unique Units; drop a second Castle near the enemy within 2–3 minutes of Castle Age.
+3. **Single TC Pressure:** After stone villagers finish the Castle, return to wood/gold/farm balance; apply sustained pressure with Unique Units + Siege from one TC.
+
+**Defense Tip:**
+Make sure your Castle is always earning value — if it is not defending or attacking, you are falling behind economically. No matter which path you choose, the Castle must justify its 650 stone cost through combat value or opponent disruption.

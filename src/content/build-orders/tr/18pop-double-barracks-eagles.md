@@ -27,7 +27,7 @@ source:
 **Amaç:** Feodal Çağ'a erken ulaşarak iki Barracks üzerinden mümkün olduğunca fazla Eagle Scout üretmek.
 **Önerilen medeniyetler:** Aztecs, Incas, Mayans
 
-## Dark Age (0–18 Köylü)
+## Karanlık Çağ (0–18 Köylü)
 
 - 6 köylü koyunda
 - 2 köylü odunda
@@ -41,7 +41,7 @@ source:
 Eğer Aztecs veya Incas oynuyorsan şimdi Loom araştır.
 Feudal Age'e tıkla (~8:50).
 
-## Feudal'e Hazırlık
+## Feudal Hazırlığı
 
 - Avdan 5 köylüyü odundaki kampa gönder (toplam 7 oduncu)
 - 2 köylüyü altına gönder ve Mining Camp kur
@@ -52,7 +52,7 @@ Feudal Age'e tıkla (~8:50).
 - Double-Bit Axe
 - (İsteğe bağlı) Horse Collar
 
-## Feudal Age (18 Köylü)
+## Feudal Çağ (18 Köylü)
 
 - 4 yeni köylü üret, hepsini altına gönder
 - İkinci Barracks'ı kur
@@ -65,8 +65,8 @@ Feudal Age'e tıkla (~8:50).
 
 - Bu build yalnızca "Meso" medeniyetlere özeldir (Aztec, Inca, Maya).
 - Amaç, harita kontrolünü erken dönemde ele geçirip hızlı Castle Age geçişine zemin hazırlamaktır.
-- **Zayıf olunan durumlar:** Man-at-Arms ve Archer açılışları.
-- **Güçlü olunan durumlar:** Scout, Spear ve Skirm açılışları.
+- **Zayıf olduğu:** Man-at-Arms ve Archer açılışları.
+- **Güçlü olduğu:** Scout, Spear ve Skirmisher açılışları.
 
 **Seçenekler:**
 

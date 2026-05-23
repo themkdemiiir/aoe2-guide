@@ -23,9 +23,9 @@ source:
 
 ---
 
-# 25 Pop Knight Rush (Beginner)
+# 25 Pop Knight Rush
 
-**Goal:** Safely reach Castle Age and begin Knight production.
+**Goal:** Safely reach Castle Age with a stable economy, then immediately begin Knight production from two Stables.
 **Recommended civs:** Franks, Magyars, Slavs, Berbers, Huns
 
 ## Dark Age (0–25 Villagers)
@@ -35,7 +35,6 @@ source:
 - 3 villagers on wood
 - (Optional) Research Loom early, then lure the first boar
 - 1 villager builds 2 Houses then a Mill near berries
-- 1 villager hunts (under deer or boar)
 - 1 villager lures the second boar
 - +4 villagers to berries
 - +5 villagers to wood
@@ -45,20 +44,25 @@ source:
 If you skipped early Loom, research it now.
 Click Feudal Age with the 25th villager (~11:45).
 
-## Feudal Age (25+4 Villagers)
+## Feudal Preparation
 
 - 1 villager builds Barracks
 - 1 villager builds a House
-- (Optional) Build small walls around your base to strengthen defense
-- When sheep and hunting run dry, move some villagers to farms, rest to wood
 - 2 villagers build Stable and Market
 - Send +4 villagers to gold
+- (Optional) Build small walls around your base
 
-Click Castle Age (~16:05).
-
-**Upgrades:**
+**Research:**
 - Double-Bit Axe
 - Horse Collar
+
+## Feudal Age (25 Villagers)
+
+- When sheep and hunting run dry, move some villagers to farms, rest to wood
+- Use Market to balance resources if needed
+- Redirect idle villagers to wood, gold, or farms
+
+Click Castle Age (~16:05).
 
 ## Castle Age (29 Villagers)
 
@@ -66,14 +70,19 @@ Click Castle Age (~16:05).
 - Research Bow Saw
 - Begin producing Knights from both Stables
 - Keep producing villagers and maintain resource balance to sustain Knight production
-
-Use the Market to balance resources if needed.
-Redirect idle villagers to wood, gold, or farms.
+- Research Bloodlines, Husbandry, and Blacksmith upgrades over time
 
 ## Strategy and Follow-Up (What's Next)
 
-- Do not let resources sit idle — use the Market to balance excess
-- Continuously produce Knights and villagers
-- Gradually research Bloodlines, Husbandry, and Blacksmith upgrades
-- Expand your base; add extra Town Centers as your economy grows
-- Be careful of Pikemen or Camels — these are the natural counters to Knights
+- The 25 Pop Knight Rush is the safest and most beginner-friendly Castle Age aggressive opener. Two Stables produce Knights at a steady rate that is hard to answer without dedicated counter units.
+- **Weak against:** Pikemen and Camel Riders — these are the natural counters to Knights; Halberdiers in late game.
+- **Strong against:** Archer-based economies; opponents who do not produce anti-cavalry units early.
+
+**Options:**
+
+1. **Knight Flood:** Keep both Stables producing Knights and add a 3rd Stable; sell resources at Market to maintain gold flow.
+2. **Knights + Siege:** Add a Siege Workshop and produce Mangonels or Battering Rams to break walls and force engagements.
+3. **Extra Town Center:** If opponent has good defenses, add a Town Center and grow economy; Knights remain as harassment while you out-develop them.
+
+**Defense Tip:**
+Do not let resources sit idle — use the Market to balance excess. Continuously produce Knights and villagers simultaneously. Expand your base and add extra Town Centers as your economy grows. Watch for Pikemen massing — if this happens, switch to a combined arms approach rather than pure Knights.

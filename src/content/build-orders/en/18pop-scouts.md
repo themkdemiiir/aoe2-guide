@@ -13,20 +13,63 @@ steps:
   - { villagers: 16, time: "3:10",  assign: "+6 → hunt under TC, lure 2nd boar when needed" }
   - { villagers: 18, time: "4:00",  assign: "+2 → wood", note: "Research Loom; click Feudal at 18 pop" }
   - { villagers: 18, time: "8:50",  assign: "Feudal arrives — 5 vils → 2nd lumber camp, 4 → berries" }
-  - { villagers: 18, time: "9:00",  assign: "1 → barracks, 2 → build stable" }
+  - { villagers: 18, time: "9:00",  assign: "1 vil → barracks, 2 vils → build stable" }
   - { villagers: 20, time: "9:30",  assign: "+2 TC vils; stable builders → palisade walls" }
-  - { villagers: 24, time: "11:15", assign: "+2 → gold (mining camp), research Bloodlines after 7-8 scouts" }
+  - { villagers: 24, time: "11:15", assign: "+2 → gold, build Mining Camp; research Bloodlines after 7–8 scouts" }
 source:
   author: "Hera"
   url: "https://ageofnotes.com/build-orders/1-stable-scouts-18-vils/"
+
 ---
 
-# 18 Pop 1-Stable Scout Rush
+# 18 Pop 1-Stable Scouts
 
-The 18 pop 1-Stable Scout Rush is the foundational aggressive opening. Reach Feudal at 8:50 with the stable queued, then flood the map with fast cavalry to harass enemy villagers before they wall.
+**Goal:** Reach Feudal Age at 18 population with a Stable queued, then flood the map with Scout Cavalry to harass enemy villagers before they wall.
+**Recommended civs:** Franks, Huns, Lithuanians, Magyars, Malians
 
-Critical milestones: lumber camp at ~50s, mill+berries at ~1:40, Feudal click at 18 pop, stable up within 30 seconds of Feudal landing. Research Bloodlines once you have 7–8 scouts.
+## Dark Age (0–18 Villagers)
 
-Common mistakes: forgetting to lure the second boar, building the stable too late, neglecting palisade walls. Always use 2 villagers to build the stable so it finishes faster.
+- 6 villagers on sheep
+- 2 villagers on wood
+- 1 villager lures first boar
+- 1 villager builds a House then a Mill near berries
+- +6 villagers hunting (lure 2nd boar when needed), 16 total
+- +2 villagers to wood (18 total)
+- Research Loom
 
-In Castle Age, the standard follow-up is 2-stable Knights. If the opponent has crossbowmen, pivot to Elite Skirmishers. Franks (+20% HP cavalry, free Farm upgrades), Huns (no houses needed), and Malians (attack-bonus infantry, cheaper Universities) get the most mileage. (Note: Franks do NOT have Bloodlines — they make up for it with their HP bonus, but research Husbandry instead for the speed.)
+Click Feudal Age at 18 population (~8:50).
+
+## Feudal Preparation
+
+- Send 5 hunting villagers to 2nd lumber camp (7 total lumberjacks)
+- Send 4 villagers to berries
+- 1 villager builds Barracks
+- 2 villagers build Stable
+- Send Stable builders to palisade walls after construction
+
+**Research:**
+- Double-Bit Axe
+- (Optional) Horse Collar on closed maps
+
+## Feudal Age (18 Villagers)
+
+- Produce Scout Cavalry continuously from the Stable
+- New villagers from TC go to gold, build Mining Camp
+- Research Bloodlines after 7–8 Scouts are out
+- Build Farms as food allows
+- Produce 1–2 Spearmen if opponent also has Scouts
+
+## Strategy and Follow-Up (What's Next)
+
+- The Scout Rush is the foundational aggressive opening in AoE2. Critical milestones: lumber camp at ~50s, mill at ~1:40, Stable up within 30 seconds of Feudal.
+- **Weak against:** Archer openings (Archers beat Scouts in Feudal); opponents who wall fast and produce Spearmen.
+- **Strong against:** Opponents who don't wall; greedy Feudal Age economies without early military.
+
+**Options:**
+
+1. **2-Stable Knights:** The standard Castle Age follow-up — add a 2nd Stable and produce Knights for sustained pressure.
+2. **Pivot to Skirmishers:** If the opponent has Crossbowmen, produce Elite Skirmishers to counter before transitioning to Castle Age.
+3. **Feudal All-In:** If opponent has no walls and no Spearmen, flood 8+ Scouts for immediate kill pressure before they can respond.
+
+**Defense Tip:**
+Common beginner mistakes are forgetting to lure the second boar, building the Stable too late, and neglecting palisade walls. Note: Franks do NOT have Bloodlines — research Husbandry instead for speed. Huns require no houses, freeing wood for earlier Stable construction.
