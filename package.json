@@ -23,6 +23,8 @@
     "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^5.18.1",
+    "astro-pagefind": "^2.0.0",
+    "pagefind": "^1.5.2",
     "tailwindcss": "^4.3.0",
     "typescript": "^5.9.3",
     "vitest": "^4.1.7"

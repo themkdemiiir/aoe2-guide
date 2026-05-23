@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import pagefind from "astro-pagefind";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
@@ -17,6 +18,6 @@ export default defineConfig({
     },
     fallback: { tr: "en", es: "en", de: "en" },
   },
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), pagefind()],
   vite: { plugins: [tailwindcss()] },
 });
