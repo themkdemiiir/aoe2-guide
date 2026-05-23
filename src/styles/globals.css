@@ -19,9 +19,9 @@
   --color-res-gold: oklch(0.78 0.14 85);
   --color-res-stone: oklch(0.62 0 0);
 
-  --font-display: "Cinzel", "serif";
-  --font-body: "Inter", "system-ui", "sans-serif";
-  --font-mono: "JetBrains Mono", "ui-monospace", "monospace";
+  --font-display: "Cinzel", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --radius: 4px;
   --radius-sm: 2px;
