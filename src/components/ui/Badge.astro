@@ -1,0 +1,28 @@
+---
+// Badge — small inline label with variant styling.
+// Example: <Badge variant="success">S Tier</Badge>
+
+type Variant = "default" | "secondary" | "outline" | "destructive" | "success";
+
+interface Props {
+  variant?: Variant;
+  class?: string;
+}
+
+const { variant = "default", class: className = "" } = Astro.props;
+
+const VARIANTS: Record<Variant, string> = {
+  default: "border-stone-700/30 bg-stone-700/10 text-stone-700",
+  secondary: "border-stone-700/30 bg-parchment text-ink",
+  outline: "border-stone-700/40 bg-transparent text-stone-700",
+  destructive: "border-royal/40 bg-royal/10 text-royal",
+  success: "border-gold-500/40 bg-gold-500/10 text-gold-500",
+};
+---
+<span class:list={[
+  "inline-flex items-center gap-1 rounded border px-2 py-0.5 text-xs font-medium",
+  VARIANTS[variant],
+  className,
+]}>
+  <slot />
+</span>

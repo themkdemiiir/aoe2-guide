@@ -1,0 +1,20 @@
+---
+// Separator — horizontal or vertical divider.
+
+interface Props {
+  orientation?: "horizontal" | "vertical";
+  class?: string;
+}
+
+const { orientation = "horizontal", class: className = "" } = Astro.props;
+const isHorizontal = orientation === "horizontal";
+---
+<hr
+  role="separator"
+  aria-orientation={orientation}
+  class:list={[
+    "border-stone-700/30",
+    isHorizontal ? "my-4 w-full border-t" : "mx-2 h-full inline-block border-l",
+    className,
+  ]}
+/>

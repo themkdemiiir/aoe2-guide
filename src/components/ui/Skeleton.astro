@@ -1,0 +1,16 @@
+---
+// Skeleton — animated loading placeholder.
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+<span
+  aria-hidden="true"
+  class:list={[
+    "inline-block animate-pulse rounded bg-stone-700/15",
+    className,
+  ]}
+/>

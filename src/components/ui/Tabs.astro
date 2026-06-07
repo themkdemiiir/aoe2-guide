@@ -1,0 +1,74 @@
+---
+// Tabs — radio-input tab pattern with minimal JS for panel swap.
+// Each tab is defined by the `tabs` array of {id, label}.
+// Pass each panel as a named slot: `tab-<id>`.
+//
+// Example:
+//   <Tabs tabs={[{id: 'a', label: 'Castle'}, {id: 'b', label: 'Imperial'}]}>
+//     <div slot="tab-a">Castle content</div>
+//     <div slot="tab-b">Imperial content</div>
+//   </Tabs>
+
+interface Tab {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  tabs: Tab[];
+  name?: string;
+  defaultTab?: string;
+  class?: string;
+}
+
+const {
+  tabs,
+  name = `tabs-${Math.random().toString(36).slice(2, 8)}`,
+  defaultTab,
+  class: className = "",
+} = Astro.props;
+const initial = defaultTab ?? tabs[0]?.id;
+---
+<div class:list={["w-full", className]} data-ui-tabs>
+  <div role="tablist" class="flex gap-1 border-b border-stone-700/40">
+    {tabs.map((tab) => (
+      <label class="cursor-pointer">
+        <input
+          type="radio"
+          name={name}
+          value={tab.id}
+          checked={tab.id === initial}
+          class="peer sr-only"
+        />
+        <span class="block px-4 py-2 text-sm text-stone-700 peer-checked:text-gold-500 peer-checked:border-b-2 peer-checked:border-gold-500 transition-colors">
+          {tab.label}
+        </span>
+      </label>
+    ))}
+  </div>
+  <div class="mt-4">
+    {tabs.map((tab) => (
+      <div role="tabpanel" data-tab-id={tab.id} hidden={tab.id !== initial}>
+        <slot name={`tab-${tab.id}`} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Swap panels when the corresponding radio changes.
+  const containers = document.querySelectorAll<HTMLElement>("[data-ui-tabs]");
+  for (const container of containers) {
+    const tablist = container.querySelector('[role="tablist"]');
+    if (!tablist) continue;
+    const panels = container.querySelectorAll<HTMLElement>('[role="tabpanel"]');
+    const radios = tablist.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+    const update = () => {
+      const checked = tablist.querySelector<HTMLInputElement>('input[type="radio"]:checked');
+      const id = checked?.value;
+      for (const p of panels) p.hidden = p.dataset.tabId !== id;
+    };
+    for (const r of radios) r.addEventListener("change", update);
+    update();
+  }
+</script>

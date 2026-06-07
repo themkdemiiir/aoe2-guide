@@ -1,0 +1,28 @@
+---
+// Alert — info/warning/error callout banner.
+// Example:
+//   <Alert variant="warning">This page is not translated yet — showing English.</Alert>
+
+type Variant = "info" | "warning" | "error" | "success";
+
+interface Props {
+  variant?: Variant;
+  class?: string;
+}
+
+const { variant = "info", class: className = "" } = Astro.props;
+
+const VARIANTS: Record<Variant, string> = {
+  info: "border-stone-700/40 bg-parchment text-stone-700",
+  warning: "border-royal/40 bg-royal/10 text-royal",
+  error: "border-royal/60 bg-royal/15 text-royal",
+  success: "border-gold-500/40 bg-gold-500/10 text-gold-500",
+};
+---
+<div role="status" class:list={[
+  "rounded border px-3 py-2 text-sm",
+  VARIANTS[variant],
+  className,
+]}>
+  <slot />
+</div>

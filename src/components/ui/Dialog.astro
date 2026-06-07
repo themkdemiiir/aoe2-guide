@@ -1,0 +1,33 @@
+---
+// Dialog — wraps the native <dialog> element. Opened/closed via JS or form method=dialog.
+// Example:
+//   <Dialog id="confirm">
+//     <h2>Confirm action</h2>
+//     <p>Are you sure?</p>
+//     <form method="dialog" class="mt-4 flex justify-end gap-2">
+//       <button value="cancel">Cancel</button>
+//       <button value="confirm" class="bg-gold-500 text-parchment px-3 py-1 rounded">Confirm</button>
+//     </form>
+//   </Dialog>
+//
+// Browser support: <dialog> is supported in all evergreen browsers (Chrome 37+, Safari 15.4+,
+// Firefox 98+). Older Safari/Firefox users see the dialog as a normal block. Acceptable for
+// this site's audience per Phase 4 risk note.
+
+interface Props {
+  id: string;
+  class?: string;
+}
+
+const { id, class: className = "" } = Astro.props;
+---
+<dialog
+  id={id}
+  class:list={[
+    "rounded border border-stone-700/40 bg-parchment p-6 text-ink backdrop:bg-ink/40",
+    "open:flex open:flex-col max-w-md w-full",
+    className,
+  ]}
+>
+  <slot />
+</dialog>

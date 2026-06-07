@@ -1,0 +1,34 @@
+---
+// Tooltip — CSS-only tooltip using :hover and :focus-within.
+// Trigger element is wrapped; tooltip text is provided via the `text` prop.
+// For complex positioning use @floating-ui/dom in an island.
+// Example:
+//   <Tooltip text="Hit points">
+//     <span>HP</span>
+//   </Tooltip>
+
+interface Props {
+  text: string;
+  side?: "top" | "bottom";
+  class?: string;
+}
+
+const { text, side = "top", class: className = "" } = Astro.props;
+const sideClass =
+  side === "top"
+    ? "bottom-full mb-1 left-1/2 -translate-x-1/2"
+    : "top-full mt-1 left-1/2 -translate-x-1/2";
+---
+<span class:list={["relative inline-flex group", className]}>
+  <slot />
+  <span
+    role="tooltip"
+    class:list={[
+      "pointer-events-none absolute z-10 whitespace-nowrap rounded border border-stone-700/40 bg-parchment px-2 py-1 text-xs text-ink opacity-0 shadow transition-opacity",
+      "group-hover:opacity-100 group-focus-within:opacity-100",
+      sideClass,
+    ]}
+  >
+    {text}
+  </span>
+</span>

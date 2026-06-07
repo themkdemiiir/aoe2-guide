@@ -1,0 +1,29 @@
+---
+// Stat — label + value pair with optional inline icon slot.
+// Use for unit stats (HP, attack) or build-order step counts.
+// Example:
+//   <Stat label="HP">35</Stat>
+//   <Stat label="Cost" tone="resource"><span class="text-res-food">25f</span></Stat>
+
+type Tone = "default" | "highlight" | "muted";
+
+interface Props {
+  label: string;
+  tone?: Tone;
+  class?: string;
+}
+
+const { label, tone = "default", class: className = "" } = Astro.props;
+
+const TONES: Record<Tone, string> = {
+  default: "text-ink",
+  highlight: "text-gold-500 font-bold",
+  muted: "text-stone-700",
+};
+---
+<div class:list={["flex flex-col gap-0.5", className]}>
+  <dt class="text-xs uppercase tracking-wide text-stone-700">{label}</dt>
+  <dd class:list={["text-base", TONES[tone]]}>
+    <slot />
+  </dd>
+</div>

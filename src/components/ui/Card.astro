@@ -1,0 +1,31 @@
+---
+// Card — generic content container with optional header/footer slots.
+// Example:
+//   <Card>
+//     <Fragment slot="header"><h3>Britons</h3></Fragment>
+//     <p>Foot archer civ…</p>
+//     <Fragment slot="footer">Tier A</Fragment>
+//   </Card>
+
+interface Props {
+  href?: string;
+  class?: string;
+  /** Adds hover border highlight; useful when the card is a link. */
+  interactive?: boolean;
+}
+
+const { href, class: className = "", interactive = !!Astro.props.href } = Astro.props;
+const tag = href ? "a" : "div";
+const base =
+  "flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition";
+const hover = interactive ? "hover:border-gold-500" : "";
+---
+<tag href={href} class:list={[base, hover, className]}>
+  {Astro.slots.has("header") && (
+    <header class="mb-3"><slot name="header" /></header>
+  )}
+  <slot />
+  {Astro.slots.has("footer") && (
+    <footer class="mt-auto pt-3"><slot name="footer" /></footer>
+  )}
+</tag>
