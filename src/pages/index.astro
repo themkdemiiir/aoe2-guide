@@ -8,7 +8,7 @@ import { locales, localeMeta } from "@/i18n/locales";
     (() => {
       try {
         const stored = localStorage.getItem("preferredLang");
-        const supported = ["en", "tr", "es", "de"];
+        const supported = ["en", "tr"];
         if (location.pathname === "/" && supported.includes(stored)) {
           location.replace("/" + stored + "/");
         }

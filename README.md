@@ -1,6 +1,6 @@
 # AOE2 Guide
 
-Multi-language Age of Empires II guide — civilizations, build orders, units, maps, matchups, beginner curriculum, and glossary in **English, Türkçe, Español, Deutsch**.
+Bilingual Age of Empires II guide — civilizations, build orders, units, maps, matchups, beginner curriculum, and glossary in **English** and **Türkçe**.
 
 Static site, no server runtime. Built with **Astro 5 + Tailwind v4 + Pagefind**, deployed on **Cloudflare Pages**.
 
@@ -24,6 +24,12 @@ pnpm test         # Vitest (helpers + utilities)
 pnpm check        # Astro/TS type checks
 ```
 
+## AI-assisted development
+
+This repo includes shared setup for GitHub Copilot in VS Code and Claude Code: project instructions, scoped custom agents, reusable prompts, MCP server config, and editor tasks.
+
+See [`docs/ai-development.md`](docs/ai-development.md) for setup, security rules, and recommended agent workflows.
+
 ## Asset pipeline
 
 ```bash
@@ -40,7 +46,7 @@ $EDITOR md/build-orders/hera-new-build.md
 # 2. Promote it into a scaffolded EN content entry
 pnpm import:md md/build-orders/hera-new-build.md
 
-# 3. (After EN is filled in) scaffold TR/ES/DE versions
+# 3. (After EN is filled in) scaffold the TR version
 pnpm new:guide build-orders <slug>
 
 # 4. Translate the scaffolded files; missing translations fall back to EN

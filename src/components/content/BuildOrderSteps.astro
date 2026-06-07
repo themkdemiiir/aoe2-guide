@@ -13,24 +13,6 @@ const { steps } = Astro.props;
 
 const iconMap = iconMapJson as Record<string, Record<string, string>>;
 
-// Building slugs are tricky: aoe2techtree's Building/<id>.png uses an internal
-// catalog numbering that does NOT match game IDs, and they don't publish that
-// mapping. Until we identify it (or use a different asset source), only buildings
-// whose file we've VISUALLY confirmed against the upstream rendering are listed.
-// Missing slugs render no icon (cleaner than a wrong unit-image proxy).
-const BUILDING_ICONS: Record<string, string> = {
-  // VERIFIED via aoe2techtree's live tech-tree page rendering at the same IDs:
-  "town-center":   "/images/aoe2/Building/109.png",
-  "market":        "/images/aoe2/Building/84.png",
-  "archery-range": "/images/aoe2/Building/87.png",
-  "stable":        "/images/aoe2/Building/101.png",
-  "blacksmith":    "/images/aoe2/Building/103.png",
-  "monastery":     "/images/aoe2/Building/104.png",
-  // Below are UNVERIFIED. If we surface a wrong icon for one of these, remove it
-  // from this map so the slug renders no icon at all.
-  // (currently empty pending verification)
-};
-
 const RESOURCE_ICONS: Record<string, string> = {
   food:  "/images/aoe2/food.png",
   wood:  "/images/aoe2/wood.png",
@@ -40,7 +22,6 @@ const RESOURCE_ICONS: Record<string, string> = {
 
 function resolveIcon(slug: string): string | null {
   if (RESOURCE_ICONS[slug]) return RESOURCE_ICONS[slug];
-  if (BUILDING_ICONS[slug]) return BUILDING_ICONS[slug];
   for (const bucket of ["units", "techs", "civs", "buildings"]) {
     const path = iconMap[bucket]?.[slug];
     if (path) return path;
@@ -51,28 +32,101 @@ function resolveIcon(slug: string): string | null {
 function isPhase(assign: string): boolean {
   return /\b(Feudal|Castle|Imperial|Kale|Feodal|Emperyal)\s+(arrives?|click|hit|tıkla|geç|geçiş)/i.test(assign);
 }
+
+function titleCase(slug: string): string {
+  return slug
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function phaseLabel(assign: string): string | null {
+  if (/\b(Imperial|Emperyal|İmparatorluk)\b/i.test(assign)) return "Imperial Age";
+  if (/\b(Castle|Kale)\b/i.test(assign)) return "Castle Age";
+  if (/\b(Feudal|Feodal)\b/i.test(assign)) return "Feudal Age";
+  return null;
+}
+
+interface PhaseSection {
+  id: string;
+  label: string;
+  steps: Array<Step & { index: number; phase: boolean }>;
+}
+
+const sections: PhaseSection[] = [{ id: "opening", label: "Opening", steps: [] }];
+
+for (const [index, step] of steps.entries()) {
+  const phase = isPhase(step.assign);
+  const label = phaseLabel(step.assign);
+  if (label && sections[sections.length - 1]?.label !== label) {
+    sections.push({ id: label.toLowerCase().replace(/\s+/g, "-"), label, steps: [] });
+  }
+  sections[sections.length - 1].steps.push({ ...step, index, phase });
+}
 ---
-<ol class="overflow-hidden rounded border border-stone-700/40">
-  <li class="grid grid-cols-[5ch_1fr] gap-3 border-b-2 border-stone-700/40 bg-parchment/70 px-3 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-stone-700">
-    <span>Vil</span><span>Action</span>
-  </li>
-  {steps.map((s, i) => {
-    const phase = isPhase(s.assign);
-    const rowClass = phase
-      ? "grid grid-cols-[5ch_1fr] gap-3 border-t border-gold-500/40 bg-gold-500/10 px-3 py-2"
-      : `grid grid-cols-[5ch_1fr] gap-3 border-t border-stone-700/20 px-3 py-2 ${i % 2 ? "bg-parchment/40" : "bg-parchment"}`;
+<div class="space-y-4">
+  {sections.map((section) => {
+    const first = section.steps[0];
+    const last = section.steps[section.steps.length - 1];
     return (
-      <li class={rowClass}>
-        <span class="font-mono text-base font-bold text-ink">{s.villagers}</span>
-        <span class={`flex flex-wrap items-center gap-2 text-sm ${phase ? "font-semibold text-ink" : "text-ink"}`}>
-          {s.icons?.map((slug) => {
-            const src = resolveIcon(slug);
-            return src ? <img src={src} alt={slug} width="24" height="24" class="inline-block h-6 w-6 shrink-0 rounded-sm border border-stone-700/30 bg-parchment/40" /> : null;
-          })}
-          <span>{s.assign}</span>
-          {s.note && <span class="italic text-stone-700"> — {s.note}</span>}
-        </span>
-      </li>
+      <section class="overflow-hidden rounded border border-stone-700/40 bg-parchment shadow-sm">
+        <header class="flex flex-wrap items-end justify-between gap-2 border-b border-stone-700/30 bg-stone-700/10 px-4 py-3">
+          <div>
+            <h3 class="font-display text-lg text-ink">{section.label}</h3>
+            <p class="text-xs text-stone-700">
+              {section.steps.length} steps · pop {first?.villagers ?? "?"}-{last?.villagers ?? "?"}
+            </p>
+          </div>
+          {first?.time && <span class="font-mono text-xs text-stone-700">starts {first.time}</span>}
+        </header>
+
+        <ol class="divide-y divide-stone-700/20">
+          {section.steps.map((s) => (
+            <li class:list={[
+              "grid gap-3 px-4 py-3 sm:grid-cols-[5rem_1fr]",
+              s.phase ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
+            ]}>
+              <div class="flex items-center gap-3 sm:block">
+                <div class="inline-flex min-w-12 flex-col rounded border border-stone-700/30 bg-parchment/80 px-2 py-1 text-center">
+                  <span class="text-[0.65rem] uppercase tracking-wide text-stone-700">pop</span>
+                  <span class="font-mono text-lg font-bold leading-none text-ink">{s.villagers}</span>
+                </div>
+                <div class="font-mono text-xs text-stone-700 sm:mt-2 sm:text-center">
+                  {s.time ?? `#${s.index + 1}`}
+                </div>
+              </div>
+
+              <div class="min-w-0 space-y-2">
+                {s.icons && s.icons.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5">
+                    {s.icons.map((slug) => {
+                      const src = resolveIcon(slug);
+                      return src ? (
+                        <span class="inline-flex items-center gap-1 rounded border border-stone-700/30 bg-parchment/80 px-1.5 py-1 text-xs text-stone-700" title={titleCase(slug)}>
+                          <img src={src} alt={slug} width="28" height="28" class="h-7 w-7 shrink-0 rounded-sm object-contain" />
+                          <span class="sr-only">{titleCase(slug)}</span>
+                        </span>
+                      ) : (
+                        <span class="inline-flex items-center rounded border border-dashed border-stone-700/30 bg-stone-700/5 px-2 py-1 text-xs text-stone-700">
+                          {titleCase(slug)}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
+                <p class:list={["text-sm leading-relaxed", s.phase ? "font-semibold text-ink" : "text-ink"]}>
+                  {s.assign}
+                </p>
+                {s.note && (
+                  <p class="rounded border-l-2 border-gold-500 bg-gold-500/10 px-3 py-2 text-xs text-stone-700">
+                    {s.note}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
     );
   })}
-</ol>
+</div>

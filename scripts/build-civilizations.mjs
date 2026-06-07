@@ -10,13 +10,13 @@
 //   Supplemental (22+): SiegeEngineers/aoe2techtree     MIT
 //   Hand-coded fallback for newer DLC civs not fully covered by either source.
 
-import { readFile, writeFile, mkdir, access } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const CACHE_DIR  = path.resolve(".cache/aoe2-data");
-const DATA_OUT   = path.resolve("src/data/civilizations.json");
+const CACHE_DIR = path.resolve(".cache/aoe2-data");
+const DATA_OUT = path.resolve("src/data/civilizations.json");
 const CONTENT_EN = path.resolve("src/content/civilizations/en");
-const ICON_MAP   = path.resolve("src/data/icon-map.json");
+const ICON_MAP = path.resolve("src/data/icon-map.json");
 
 // ---------------------------------------------------------------------------
 // Slugify helpers
@@ -90,66 +90,66 @@ const REGION_MAP = {
 
 // Override region per-civ for accuracy
 const REGION_OVERRIDE = {
-  aztecs:      "Mesoamerican",
-  mayans:      "Mesoamerican",
-  incas:       "South American",
-  huns:        "Central Asian",
-  mongols:     "East Asian",
-  chinese:     "East Asian",
-  japanese:    "East Asian",
-  koreans:     "East Asian",
-  byzantines:  "Eastern Mediterranean",
-  persians:    "Middle Eastern",
-  saracens:    "Middle Eastern",
-  turks:       "Middle Eastern",
-  teutons:     "Central European",
-  celts:       "Western European",
-  franks:      "Western European",
-  britons:     "Western European",
-  vikings:     "Northern European",
-  goths:       "Northern European",
-  slavs:       "Eastern European",
-  bulgarians:  "Eastern European",
-  bohemians:   "Eastern European",
-  poles:       "Eastern European",
+  aztecs: "Mesoamerican",
+  mayans: "Mesoamerican",
+  incas: "South American",
+  huns: "Central Asian",
+  mongols: "East Asian",
+  chinese: "East Asian",
+  japanese: "East Asian",
+  koreans: "East Asian",
+  byzantines: "Eastern Mediterranean",
+  persians: "Middle Eastern",
+  saracens: "Middle Eastern",
+  turks: "Middle Eastern",
+  teutons: "Central European",
+  celts: "Western European",
+  franks: "Western European",
+  britons: "Western European",
+  vikings: "Northern European",
+  goths: "Northern European",
+  slavs: "Eastern European",
+  bulgarians: "Eastern European",
+  bohemians: "Eastern European",
+  poles: "Eastern European",
   lithuanians: "Eastern European",
-  cumans:      "Central Asian",
-  tatars:      "Central Asian",
-  berbers:     "North African",
-  malians:     "West African",
-  ethiopians:  "East African",
-  malay:       "Southeast Asian",
-  burmese:     "Southeast Asian",
-  khmer:       "Southeast Asian",
-  vietnamese:  "Southeast Asian",
-  italians:    "Southern European",
-  spanish:     "Southern European",
-  portuguese:  "Southern European",
-  sicilians:   "Southern European",
+  cumans: "Central Asian",
+  tatars: "Central Asian",
+  berbers: "North African",
+  malians: "West African",
+  ethiopians: "East African",
+  malay: "Southeast Asian",
+  burmese: "Southeast Asian",
+  khmer: "Southeast Asian",
+  vietnamese: "Southeast Asian",
+  italians: "Southern European",
+  spanish: "Southern European",
+  portuguese: "Southern European",
+  sicilians: "Southern European",
   burgundians: "Western European",
-  magyars:     "Eastern European",
+  magyars: "Eastern European",
   hindustanis: "South Asian",
-  dravidians:  "South Asian",
-  bengalis:    "South Asian",
-  gurjaras:    "South Asian",
-  georgians:   "Caucasian",
-  armenians:   "Caucasian",
-  mapuche:     "South American",
+  dravidians: "South Asian",
+  bengalis: "South Asian",
+  gurjaras: "South Asian",
+  georgians: "Caucasian",
+  armenians: "Caucasian",
+  mapuche: "South American",
   // newer DLC
-  romans:      "Ancient Mediterranean",
-  shu:         "East Asian",
-  wei:         "East Asian",
-  wu:          "East Asian",
-  jurchens:    "East Asian",
-  khitans:     "East Asian",
+  romans: "Ancient Mediterranean",
+  shu: "East Asian",
+  wei: "East Asian",
+  wu: "East Asian",
+  jurchens: "East Asian",
+  khitans: "East Asian",
   macedonians: "Ancient Mediterranean",
   achaemenids: "Ancient Middle Eastern",
-  athenians:   "Ancient Mediterranean",
-  spartans:    "Ancient Mediterranean",
-  thracians:   "Ancient Mediterranean",
-  tupi:        "South American",
-  muisca:      "South American",
-  puru:        "South American",
+  athenians: "Ancient Mediterranean",
+  spartans: "Ancient Mediterranean",
+  thracians: "Ancient Mediterranean",
+  tupi: "South American",
+  muisca: "South American",
+  puru: "South American",
 };
 
 // ---------------------------------------------------------------------------
@@ -158,28 +158,34 @@ const REGION_OVERRIDE = {
 // NOTE: aalises CSV's `unique_tech` column only lists one entry for many AOK civs.
 // ---------------------------------------------------------------------------
 const IMPERIAL_TECH_OVERRIDES = {
-  aztecs:     { name: "Atlatl",            effect: "Skirmishers +1 attack, +1 range" },
-  byzantines: { name: "Logistica",          effect: "Cataphracts deal trample damage; +6 attack vs. infantry" },
-  celts:      { name: "Stronghold",         effect: "Castles and Towers fire twice as fast" },
-  chinese:    { name: "Rocketry",           effect: "Chu Ko Nu +2 attack; Scorpions +4 attack" },
-  franks:     { name: "Chivalry",           effect: "Stables work 40% faster" },
-  huns:       { name: "Marauders",          effect: "Tarkans can be trained at Stables" },
-  japanese:   { name: "Yasama",             effect: "Towers can fire extra arrows" },
-  koreans:    { name: "Eupseong",           effect: "Watch Towers and Guard Towers +2 range" },
-  mayans:     { name: "Hul'che Javelineers",effect: "Skirmishers throw 2 javelins" },
-  mongols:    { name: "Nomads",             effect: "Houses don't need to be rebuilt; +10 population cap" },
-  persians:   { name: "Chamber of Power",   effect: "Town Centers fire 50% faster" },
-  saracens:   { name: "Counterweights",     effect: "Trebuchet and Mangonel projectiles have more blast radius" },
-  spanish:    { name: "Inquisition",        effect: "Monks convert faster" },
-  teutons:    { name: "Ironclad",           effect: "Siege weapons +4 melee armor" },
-  turks:      { name: "Sipahi",             effect: "Cavalry Archers +20 HP; Janissaries +5 HP" },
-  vikings:    { name: "Chieftains",         effect: "Infantry +4 attack vs. cavalry; +3 vs. camels" },
+  aztecs: { name: "Atlatl", effect: "Skirmishers +1 attack, +1 range" },
+  byzantines: {
+    name: "Logistica",
+    effect: "Cataphracts deal trample damage; +6 attack vs. infantry",
+  },
+  celts: { name: "Stronghold", effect: "Castles and Towers fire twice as fast" },
+  chinese: { name: "Rocketry", effect: "Chu Ko Nu +2 attack; Scorpions +4 attack" },
+  franks: { name: "Chivalry", effect: "Stables work 40% faster" },
+  huns: { name: "Marauders", effect: "Tarkans can be trained at Stables" },
+  japanese: { name: "Yasama", effect: "Towers can fire extra arrows" },
+  koreans: { name: "Eupseong", effect: "Watch Towers and Guard Towers +2 range" },
+  mayans: { name: "Hul'che Javelineers", effect: "Skirmishers throw 2 javelins" },
+  mongols: { name: "Nomads", effect: "Houses don't need to be rebuilt; +10 population cap" },
+  persians: { name: "Chamber of Power", effect: "Town Centers fire 50% faster" },
+  saracens: {
+    name: "Counterweights",
+    effect: "Trebuchet and Mangonel projectiles have more blast radius",
+  },
+  spanish: { name: "Inquisition", effect: "Monks convert faster" },
+  teutons: { name: "Ironclad", effect: "Siege weapons +4 melee armor" },
+  turks: { name: "Sipahi", effect: "Cavalry Archers +20 HP; Janissaries +5 HP" },
+  vikings: { name: "Chieftains", effect: "Infantry +4 attack vs. cavalry; +3 vs. camels" },
 };
 
 // Castle tech override when aalises has it listed as imperial (rare cases)
 const CASTLE_TECH_OVERRIDES = {
-  byzantines: { name: "Greek Fire",         effect: "Fire Ships +1 range" },
-  aztecs:     { name: "Garland Wars",        effect: "Infantry +4 attack" },
+  byzantines: { name: "Greek Fire", effect: "Fire Ships +1 range" },
+  aztecs: { name: "Garland Wars", effect: "Infantry +4 attack" },
 };
 
 // ---------------------------------------------------------------------------
@@ -199,8 +205,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Blacksmith upgrades are researched +50% faster",
     uniqueTechs: {
-      castle:   { name: "Stirrups",          effect: "Cavalry units attack 33% faster" },
-      imperial: { name: "Bagains",           effect: "Militia line +5 melee armor" },
+      castle: { name: "Stirrups", effect: "Cavalry units attack 33% faster" },
+      imperial: { name: "Bagains", effect: "Militia line +5 melee armor" },
     },
   },
   cumans: {
@@ -215,7 +221,10 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Cavalry units +1 speed",
     uniqueTechs: {
-      castle:   { name: "Steppe Husbandry", effect: "Scout Cavalry line and Kipchaks train +100% faster" },
+      castle: {
+        name: "Steppe Husbandry",
+        effect: "Scout Cavalry line and Kipchaks train +100% faster",
+      },
       imperial: { name: "Cuman Mercenaries", effect: "Team can build 10 free Kipchaks (once)" },
     },
   },
@@ -231,8 +240,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Relic gold generation +100%",
     uniqueTechs: {
-      castle:   { name: "Hill Forts",       effect: "Town Centers +3 attack" },
-      imperial: { name: "Tower Shields",    effect: "Spearman line and Skirmishers +2 pierce armor" },
+      castle: { name: "Hill Forts", effect: "Town Centers +3 attack" },
+      imperial: { name: "Tower Shields", effect: "Spearman line and Skirmishers +2 pierce armor" },
     },
   },
   tatars: {
@@ -247,8 +256,14 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Cavalry Archers +2 line of sight",
     uniqueTechs: {
-      castle:   { name: "Silk Armor",       effect: "Scout line, Cavalry Archers, and Steppe Lancers +1/+1 armor" },
-      imperial: { name: "Timurid Siegecraft",effect: "Trebuchets have +2 range; Flaming Camels available" },
+      castle: {
+        name: "Silk Armor",
+        effect: "Scout line, Cavalry Archers, and Steppe Lancers +1/+1 armor",
+      },
+      imperial: {
+        name: "Timurid Siegecraft",
+        effect: "Trebuchets have +2 range; Flaming Camels available",
+      },
     },
   },
   poles: {
@@ -263,8 +278,11 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Cavalry has +3 attack vs. buildings",
     uniqueTechs: {
-      castle:   { name: "Szlachta Privileges",  effect: "Knight line -60% gold cost" },
-      imperial: { name: "Lechitic Legacy",       effect: "Light Cavalry and Winged Hussar deal trample damage" },
+      castle: { name: "Szlachta Privileges", effect: "Knight line -60% gold cost" },
+      imperial: {
+        name: "Lechitic Legacy",
+        effect: "Light Cavalry and Winged Hussar deal trample damage",
+      },
     },
   },
   bohemians: {
@@ -279,8 +297,11 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Monks have +3 attack",
     uniqueTechs: {
-      castle:   { name: "Wagenburg Tactics",  effect: "Gunpowder units +1 speed" },
-      imperial: { name: "Hussite Reforms",    effect: "Monks and Monasteries provide gold like a Relic" },
+      castle: { name: "Wagenburg Tactics", effect: "Gunpowder units +1 speed" },
+      imperial: {
+        name: "Hussite Reforms",
+        effect: "Monks and Monasteries provide gold like a Relic",
+      },
     },
   },
   sicilians: {
@@ -295,8 +316,14 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Farms +100% carrying capacity",
     uniqueTechs: {
-      castle:   { name: "First Crusade",      effect: "Each Town Center spawns 1 Serjeant; Serjeants have +4 attack and +3/+3 armor" },
-      imperial: { name: "Scutage",            effect: "Each enemy Feudal-age unit you convert spawns a Serjeant" },
+      castle: {
+        name: "First Crusade",
+        effect: "Each Town Center spawns 1 Serjeant; Serjeants have +4 attack and +3/+3 armor",
+      },
+      imperial: {
+        name: "Scutage",
+        effect: "Each enemy Feudal-age unit you convert spawns a Serjeant",
+      },
     },
   },
   burgundians: {
@@ -311,8 +338,15 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Paladins available",
     uniqueTechs: {
-      castle:   { name: "Burgundian Vineyards",  effect: "Farms slowly generate gold in addition to food" },
-      imperial: { name: "Flemish Revolution",    effect: "Instantly convert all Villagers into Flemish Militia; Flemish Militia available at Barracks" },
+      castle: {
+        name: "Burgundian Vineyards",
+        effect: "Farms slowly generate gold in addition to food",
+      },
+      imperial: {
+        name: "Flemish Revolution",
+        effect:
+          "Instantly convert all Villagers into Flemish Militia; Flemish Militia available at Barracks",
+      },
     },
   },
   bengalis: {
@@ -327,8 +361,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Monastery upgrades cost -50%",
     uniqueTechs: {
-      castle:   { name: "Paiks",                effect: "Ratha and Elephant Archer attack 18% faster" },
-      imperial: { name: "Mahayana",              effect: "Villagers take up 0.5 less population" },
+      castle: { name: "Paiks", effect: "Ratha and Elephant Archer attack 18% faster" },
+      imperial: { name: "Mahayana", effect: "Villagers take up 0.5 less population" },
     },
   },
   dravidians: {
@@ -343,8 +377,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Docks work 15% faster",
     uniqueTechs: {
-      castle:   { name: "Medical Corps",        effect: "Battle Elephants regenerate HP" },
-      imperial: { name: "Wootz Steel",           effect: "Melee infantry and cavalry attacks ignore armor" },
+      castle: { name: "Medical Corps", effect: "Battle Elephants regenerate HP" },
+      imperial: { name: "Wootz Steel", effect: "Melee infantry and cavalry attacks ignore armor" },
     },
   },
   gurjaras: {
@@ -359,8 +393,11 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Camel and Battle Elephant units +1 Pierce Armor",
     uniqueTechs: {
-      castle:   { name: "Kshatriyas",            effect: "Military units cost -25% food" },
-      imperial: { name: "Frontier Guards",       effect: "Camel Riders and Elephant Archers +4 melee armor" },
+      castle: { name: "Kshatriyas", effect: "Military units cost -25% food" },
+      imperial: {
+        name: "Frontier Guards",
+        effect: "Camel Riders and Elephant Archers +4 melee armor",
+      },
     },
   },
   georgians: {
@@ -375,8 +412,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Monks +3 attack",
     uniqueTechs: {
-      castle:   { name: "Svan Towers",           effect: "Towers +1 attack per 2 garrisoned units" },
-      imperial: { name: "Aznauri Cavalry",       effect: "Monaspa heal nearby cavalry" },
+      castle: { name: "Svan Towers", effect: "Towers +1 attack per 2 garrisoned units" },
+      imperial: { name: "Aznauri Cavalry", effect: "Monaspa heal nearby cavalry" },
     },
   },
   armenians: {
@@ -391,8 +428,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Archery Range units +1 attack",
     uniqueTechs: {
-      castle:   { name: "Cilician Fleet",        effect: "Galleys +2 range" },
-      imperial: { name: "Fereters",              effect: "Monks walk faster and carry Relics at full speed" },
+      castle: { name: "Cilician Fleet", effect: "Galleys +2 range" },
+      imperial: { name: "Fereters", effect: "Monks walk faster and carry Relics at full speed" },
     },
   },
   mapuche: {
@@ -407,8 +444,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Barracks units cost -10% less",
     uniqueTechs: {
-      castle:   { name: "Toquis",                effect: "Infantry trained at Castle" },
-      imperial: { name: "Ironworks",             effect: "Infantry and cavalry +8 attack" },
+      castle: { name: "Toquis", effect: "Infantry trained at Castle" },
+      imperial: { name: "Ironworks", effect: "Infantry and cavalry +8 attack" },
     },
   },
   // Ancient/Historical expansion civs from Victors and Vanquished
@@ -424,8 +461,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Barracks train 20% faster",
     uniqueTechs: {
-      castle:   { name: "Ballistas",              effect: "Ballista Towers deal extra damage" },
-      imperial: { name: "Comitatenses",           effect: "Non-militia infantry +8 HP" },
+      castle: { name: "Ballistas", effect: "Ballista Towers deal extra damage" },
+      imperial: { name: "Comitatenses", effect: "Non-militia infantry +8 HP" },
     },
   },
   shu: {
@@ -440,8 +477,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Infantry +1 pierce armor",
     uniqueTechs: {
-      castle:   { name: "Shu Strategy",          effect: "Infantry +1 attack" },
-      imperial: { name: "Tiger Warriors",        effect: "Infantry attack 10% faster" },
+      castle: { name: "Shu Strategy", effect: "Infantry +1 attack" },
+      imperial: { name: "Tiger Warriors", effect: "Infantry attack 10% faster" },
     },
   },
   wei: {
@@ -456,8 +493,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Cavalry +1 attack",
     uniqueTechs: {
-      castle:   { name: "Wei Formation",         effect: "Cavalry +1 armor" },
-      imperial: { name: "Iron Horses",           effect: "Cavalry attack 15% faster" },
+      castle: { name: "Wei Formation", effect: "Cavalry +1 armor" },
+      imperial: { name: "Iron Horses", effect: "Cavalry attack 15% faster" },
     },
   },
   wu: {
@@ -472,8 +509,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Docks cost -25%",
     uniqueTechs: {
-      castle:   { name: "Wu Shipbuilding",       effect: "Ships +1 attack" },
-      imperial: { name: "Eastern Fleet",         effect: "War Galley line attack 15% faster" },
+      castle: { name: "Wu Shipbuilding", effect: "Ships +1 attack" },
+      imperial: { name: "Eastern Fleet", effect: "War Galley line attack 15% faster" },
     },
   },
   jurchens: {
@@ -488,8 +525,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Cavalry +1 melee armor",
     uniqueTechs: {
-      castle:   { name: "Jurchen Tactics",       effect: "Cavalry +1 attack" },
-      imperial: { name: "Iron Riders",           effect: "Cavalry Archers +2 attack" },
+      castle: { name: "Jurchen Tactics", effect: "Cavalry +1 attack" },
+      imperial: { name: "Iron Riders", effect: "Cavalry Archers +2 attack" },
     },
   },
   khitans: {
@@ -504,8 +541,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Cavalry Archers +1 range",
     uniqueTechs: {
-      castle:   { name: "Khitan Cavalry",        effect: "Cavalry +1 speed" },
-      imperial: { name: "Steppe Tactics",        effect: "Cavalry Archers attack 15% faster" },
+      castle: { name: "Khitan Cavalry", effect: "Cavalry +1 speed" },
+      imperial: { name: "Steppe Tactics", effect: "Cavalry Archers attack 15% faster" },
     },
   },
   macedonians: {
@@ -520,8 +557,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Infantry +1 pierce armor",
     uniqueTechs: {
-      castle:   { name: "Sarissa",               effect: "Spearman line +2 melee armor" },
-      imperial: { name: "Argyraspids",           effect: "Infantry attack 10% faster" },
+      castle: { name: "Sarissa", effect: "Spearman line +2 melee armor" },
+      imperial: { name: "Argyraspids", effect: "Infantry attack 10% faster" },
     },
   },
   achaemenids: {
@@ -536,8 +573,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Cavalry +1 armor",
     uniqueTechs: {
-      castle:   { name: "Persian Nobility",      effect: "Knight line +2 attack" },
-      imperial: { name: "Royal Tithe",           effect: "Relics generate +100% gold" },
+      castle: { name: "Persian Nobility", effect: "Knight line +2 attack" },
+      imperial: { name: "Royal Tithe", effect: "Relics generate +100% gold" },
     },
   },
   athenians: {
@@ -552,8 +589,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Docks work 10% faster",
     uniqueTechs: {
-      castle:   { name: "Athenian Democracy",    effect: "Archers +1 range" },
-      imperial: { name: "Themistocles",          effect: "War Galleys attack 15% faster" },
+      castle: { name: "Athenian Democracy", effect: "Archers +1 range" },
+      imperial: { name: "Themistocles", effect: "War Galleys attack 15% faster" },
     },
   },
   spartans: {
@@ -568,8 +605,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Infantry +1 attack",
     uniqueTechs: {
-      castle:   { name: "Spartan Discipline",    effect: "Infantry +1 armor" },
-      imperial: { name: "Agoge",                 effect: "Infantry attack 15% faster" },
+      castle: { name: "Spartan Discipline", effect: "Infantry +1 armor" },
+      imperial: { name: "Agoge", effect: "Infantry attack 15% faster" },
     },
   },
   thracians: {
@@ -584,8 +621,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Barracks units +1 pierce armor",
     uniqueTechs: {
-      castle:   { name: "Odrysian Tactics",      effect: "Cavalry +1 attack" },
-      imperial: { name: "Thracian Shock",        effect: "Infantry +10 HP" },
+      castle: { name: "Odrysian Tactics", effect: "Cavalry +1 attack" },
+      imperial: { name: "Thracian Shock", effect: "Infantry +10 HP" },
     },
   },
   tupi: {
@@ -600,8 +637,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Archers +1 attack",
     uniqueTechs: {
-      castle:   { name: "Ambush",                effect: "Archers +1 range in forests" },
-      imperial: { name: "Tupi Survival",         effect: "Infantry +2 attack in forests" },
+      castle: { name: "Ambush", effect: "Archers +1 range in forests" },
+      imperial: { name: "Tupi Survival", effect: "Infantry +2 attack in forests" },
     },
   },
   muisca: {
@@ -616,8 +653,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Gold miners work 10% faster",
     uniqueTechs: {
-      castle:   { name: "Zipa's Authority",      effect: "Infantry +1 attack" },
-      imperial: { name: "El Dorado Myth",        effect: "Infantry +10 HP" },
+      castle: { name: "Zipa's Authority", effect: "Infantry +1 attack" },
+      imperial: { name: "El Dorado Myth", effect: "Infantry +10 HP" },
     },
   },
   puru: {
@@ -632,8 +669,8 @@ const SUPPLEMENTAL = {
     ],
     teamBonus: "Elephants +2 attack",
     uniqueTechs: {
-      castle:   { name: "Amazon Warriors",       effect: "Elephants +1 armor" },
-      imperial: { name: "Puru Rampage",          effect: "Battle Elephants attack 15% faster" },
+      castle: { name: "Amazon Warriors", effect: "Elephants +1 armor" },
+      imperial: { name: "Puru Rampage", effect: "Battle Elephants attack 15% faster" },
     },
   },
 };
@@ -651,8 +688,11 @@ SUPPLEMENTAL.mapuche = {
   ],
   teamBonus: "Barracks units have -10% cost",
   uniqueTechs: {
-    castle:   { name: "Toquis",                  effect: "Infantry attacks 10% faster when not garrisoned near a building" },
-    imperial: { name: "Ironworks",               effect: "Infantry and cavalry +8 attack" },
+    castle: {
+      name: "Toquis",
+      effect: "Infantry attacks 10% faster when not garrisoned near a building",
+    },
+    imperial: { name: "Ironworks", effect: "Infantry and cavalry +8 attack" },
   },
 };
 
@@ -676,7 +716,10 @@ async function loadAalises() {
       .filter(Boolean);
 
     const rawTech = row.unique_tech || "";
-    const techs = rawTech.split(";").map((t) => t.trim()).filter(Boolean);
+    const techs = rawTech
+      .split(";")
+      .map((t) => t.trim())
+      .filter(Boolean);
     const castleTech = techs[0] || "";
     const imperialTech = techs[1] || "";
 
@@ -688,7 +731,7 @@ async function loadAalises() {
 
     const teamBonus = (row.team_bonus || "").trim();
     const expansion = (row.expansion || "").trim();
-    const armyType  = (row.army_type  || "").trim();
+    const armyType = (row.army_type || "").trim();
 
     civMap[slug] = {
       slug,
@@ -716,27 +759,24 @@ async function loadAoe2TT() {
 // ---------------------------------------------------------------------------
 // Build civ entry from aalises row + icon-map slug check
 // ---------------------------------------------------------------------------
-function buildCivEntry(slug, aalises, techNames, iconSlugs) {
+function _buildCivEntry(slug, aalises, _techNames, iconSlugs) {
   const specialty = aalises ? aalises.armyType : "Unknown";
   const expansion = aalises ? aalises.expansion : "";
-  const region =
-    REGION_OVERRIDE[slug] ||
-    REGION_MAP[expansion] ||
-    "Unknown";
+  const region = REGION_OVERRIDE[slug] || REGION_MAP[expansion] || "Unknown";
 
   let uniqueUnits = aalises ? aalises.uniqueUnits : [];
   // Filter unique units to those present in icon-map
   uniqueUnits = uniqueUnits.filter((u) => {
-    if (iconSlugs.units && iconSlugs.units[u]) return true;
+    if (iconSlugs.units?.[u]) return true;
     console.warn(`  [WARN] unique unit "${u}" for ${slug} not in icon-map — keeping slug anyway`);
     return true; // keep even if not in icon-map, as per spec
   });
 
-  let civBonuses = aalises ? aalises.bonuses : [];
-  let teamBonus  = aalises ? aalises.teamBonus : "";
+  const civBonuses = aalises ? aalises.bonuses : [];
+  const teamBonus = aalises ? aalises.teamBonus : "";
 
-  let castleTech   = aalises ? aalises.castleTech   : "";
-  let imperialTech = aalises ? aalises.imperialTech : "";
+  const castleTech = aalises ? aalises.castleTech : "";
+  const imperialTech = aalises ? aalises.imperialTech : "";
 
   // Look up tech effect from tech_tree_strings if available
   // (aoe2techtree doesn't provide effect text in the JSON, so we use the name as-is)
@@ -749,7 +789,7 @@ function buildCivEntry(slug, aalises, techNames, iconSlugs) {
     civBonuses,
     teamBonus,
     uniqueTechs: {
-      castle:   { name: castleTech,   effect: "" },
+      castle: { name: castleTech, effect: "" },
       imperial: { name: imperialTech, effect: "" },
     },
   };
@@ -765,8 +805,8 @@ async function run() {
     loadAoe2TT(),
   ]);
 
-  const iconMap  = JSON.parse(iconMapText);
-  const tt_civs  = aoe2ttData.civs;
+  const iconMap = JSON.parse(iconMapText);
+  const tt_civs = aoe2ttData.civs;
 
   // Build full civ list from aoe2techtree (it has the most complete set)
   const allCivSlugs = new Set();
@@ -818,7 +858,7 @@ async function run() {
     }
 
     const aalises = aalisesMap[slug];
-    const supp    = SUPPLEMENTAL[slug];
+    const supp = SUPPLEMENTAL[slug];
 
     // Determine display name
     let displayName = slug.charAt(0).toUpperCase() + slug.slice(1);
@@ -831,23 +871,26 @@ async function run() {
     // Build the entry
     let entry;
 
-    if (slug === "britons" && existingCivMap["britons"]) {
+    if (slug === "britons" && existingCivMap.britons) {
       // Preserve existing hand-written Britons data exactly
-      const existing = existingCivMap["britons"];
+      const existing = existingCivMap.britons;
       entry = {
         slug: "britons",
-        region:      existing.region      || "Western European",
-        specialty:   existing.specialty   || "Foot Archers",
+        region: existing.region || "Western European",
+        specialty: existing.specialty || "Foot Archers",
         uniqueUnits: existing.uniqueUnits || ["longbowman"],
-        civBonuses:  existing.civBonuses  || [
+        civBonuses: existing.civBonuses || [
           "Town Centers cost 50% less wood from Castle Age",
           "Foot archers (except Skirmishers) +1 range Castle Age, +2 Imperial Age",
           "Shepherds work 25% faster",
         ],
         teamBonus: existing.teamBonus || "Archery Ranges work 20% faster",
         uniqueTechs: existing.uniqueTechs || {
-          castle:   { name: "Yeomen",    effect: "Foot archers +1 range; Towers +2 attack" },
-          imperial: { name: "Warwolf",   effect: "Trebuchets do blast damage; never miss against units" },
+          castle: { name: "Yeomen", effect: "Foot archers +1 range; Towers +2 attack" },
+          imperial: {
+            name: "Warwolf",
+            effect: "Trebuchets do blast damage; never miss against units",
+          },
         },
       };
       // Remove non-schema fields from existing data (era, tier, etc.)
@@ -858,33 +901,32 @@ async function run() {
 
     if (aalises) {
       // Use aalises data as primary
-      const region =
-        REGION_OVERRIDE[slug] ||
-        REGION_MAP[aalises.expansion] ||
-        "Unknown";
+      const region = REGION_OVERRIDE[slug] || REGION_MAP[aalises.expansion] || "Unknown";
 
-      let uniqueUnits = aalises.uniqueUnits;
+      const uniqueUnits = aalises.uniqueUnits;
 
       // Get tech effect from SUPPLEMENTAL if available
       const suppData = supp || {};
-      const castleEffect   = suppData.uniqueTechs?.castle?.effect   || "";
+      const castleEffect = suppData.uniqueTechs?.castle?.effect || "";
       const imperialEffect = suppData.uniqueTechs?.imperial?.effect || "";
 
       // aalises CSV often only has one unique_tech entry; apply overrides for missing imperial
-      const castleName   = CASTLE_TECH_OVERRIDES[slug]?.name   || aalises.castleTech;
-      const castleEff    = CASTLE_TECH_OVERRIDES[slug]?.effect || castleEffect;
+      const castleName = CASTLE_TECH_OVERRIDES[slug]?.name || aalises.castleTech;
+      const castleEff = CASTLE_TECH_OVERRIDES[slug]?.effect || castleEffect;
       const imperialName = aalises.imperialTech || IMPERIAL_TECH_OVERRIDES[slug]?.name || "";
-      const imperialEff  = aalises.imperialTech ? imperialEffect : (IMPERIAL_TECH_OVERRIDES[slug]?.effect || "");
+      const imperialEff = aalises.imperialTech
+        ? imperialEffect
+        : IMPERIAL_TECH_OVERRIDES[slug]?.effect || "";
 
       entry = {
         slug,
         region,
         specialty: aalises.armyType,
         uniqueUnits,
-        civBonuses:  aalises.bonuses,
-        teamBonus:   aalises.teamBonus,
+        civBonuses: aalises.bonuses,
+        teamBonus: aalises.teamBonus,
         uniqueTechs: {
-          castle:   { name: castleName,   effect: castleEff },
+          castle: { name: castleName, effect: castleEff },
           imperial: { name: imperialName, effect: imperialEff },
         },
       };
@@ -892,11 +934,11 @@ async function run() {
       // Use supplemental hand-coded data
       entry = {
         slug,
-        region:      supp.region,
-        specialty:   supp.specialty,
+        region: supp.region,
+        specialty: supp.specialty,
         uniqueUnits: supp.uniqueUnits,
-        civBonuses:  supp.civBonuses,
-        teamBonus:   supp.teamBonus,
+        civBonuses: supp.civBonuses,
+        teamBonus: supp.teamBonus,
         uniqueTechs: supp.uniqueTechs,
       };
     } else {
@@ -904,13 +946,13 @@ async function run() {
       console.warn(`[WARN] No data for civ "${slug}" — emitting minimal entry`);
       entry = {
         slug,
-        region:      "Unknown",
-        specialty:   "Unknown",
+        region: "Unknown",
+        specialty: "Unknown",
         uniqueUnits: [],
-        civBonuses:  [],
-        teamBonus:   "",
+        civBonuses: [],
+        teamBonus: "",
         uniqueTechs: {
-          castle:   { name: "", effect: "" },
+          castle: { name: "", effect: "" },
           imperial: { name: "", effect: "" },
         },
       };
@@ -944,7 +986,7 @@ async function run() {
     civs: civEntries,
   };
 
-  await writeFile(DATA_OUT, JSON.stringify(output, null, 2) + "\n", "utf8");
+  await writeFile(DATA_OUT, `${JSON.stringify(output, null, 2)}\n`, "utf8");
 
   console.log(`\nDone.`);
   console.log(`  Civs in JSON:          ${civEntries.length}`);
@@ -958,9 +1000,7 @@ async function run() {
 function buildMarkdown(entry, displayName) {
   const { slug, region, specialty, civBonuses, teamBonus, uniqueTechs, uniqueUnits } = entry;
 
-  const bonusLines = civBonuses
-    .map((b) => `  - "${b}"`)
-    .join("\n");
+  const _bonusLines = civBonuses.map((b) => `  - "${b}"`).join("\n");
 
   const uniqueUnitLines = uniqueUnits
     .map((u) => {
@@ -972,10 +1012,10 @@ function buildMarkdown(entry, displayName) {
     })
     .join("\n");
 
-  const castleName    = uniqueTechs.castle.name    || "Castle Age Unique Tech";
-  const castleEffect  = uniqueTechs.castle.effect  || "See in-game tech tree";
-  const imperialName  = uniqueTechs.imperial.name   || "Imperial Age Unique Tech";
-  const imperialEffect= uniqueTechs.imperial.effect || "See in-game tech tree";
+  const castleName = uniqueTechs.castle.name || "Castle Age Unique Tech";
+  const castleEffect = uniqueTechs.castle.effect || "See in-game tech tree";
+  const imperialName = uniqueTechs.imperial.name || "Imperial Age Unique Tech";
+  const imperialEffect = uniqueTechs.imperial.effect || "See in-game tech tree";
 
   const tagline = `${displayName} — a ${specialty} civilization from ${region}.`;
 

@@ -4,7 +4,7 @@
 // Scaffolds an EN content entry from a raw source file, preserving body content
 // and adding placeholder frontmatter the user fills in.
 
-import { readFile, writeFile, mkdir, access } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 function slugify(s) {
@@ -17,7 +17,12 @@ function slugify(s) {
 }
 
 async function exists(p) {
-  try { await access(p); return true; } catch { return false; }
+  try {
+    await access(p);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 async function run() {
@@ -68,4 +73,7 @@ source:
   console.log("Next: fill in steps:[] and civsRecommended:[], then translate.");
 }
 
-run().catch((e) => { console.error(e); process.exit(1); });
+run().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

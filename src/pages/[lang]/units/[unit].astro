@@ -1,12 +1,10 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Icon from "@/components/ui/Icon.astro";
-import { render } from "astro:content";
+import { getEntry, render } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
-import unitStats from "@data/unit-stats.json";
-import unitLines from "@data/unit-lines.json";
 
 export async function getStaticPaths() {
   const paths: Array<{ params: { lang: string; unit: string } }> = [];
@@ -23,7 +21,7 @@ const found = await getLocalizedEntry("units", slug, lang);
 if (!found) return Astro.redirect("/404");
 const { entry, fallback } = found;
 const { Content } = await render(entry);
-const stats = (unitStats.units as Array<Record<string, any>>).find((u) => u.slug === slug);
+const stats = (await getEntry("unit-stats", slug))?.data;
 
 // Build the upgrade chain if this unit has a line
 const lineRoot = entry.data.line as string | undefined;
@@ -39,7 +37,7 @@ interface TierInfo {
 let chainTiers: TierInfo[] = [];
 
 if (lineRoot) {
-  const lineDef = (unitLines as Record<string, string[]>)[lineRoot] ?? [];
+  const lineDef = (await getEntry("unit-lines", lineRoot))?.data.members ?? [];
   // Fetch all units in this locale so we can get names
   const allUnits = await getLocalizedEntries("units", lang);
   const bySlug = new Map(allUnits.map((u) => [canonicalSlug(u.id), u]));
@@ -47,7 +45,7 @@ if (lineRoot) {
   for (const tierSlug of lineDef) {
     const tierEntry = bySlug.get(tierSlug);
     if (!tierEntry) continue; // member doesn't have a file — skip
-    const tierStats = (unitStats.units as Array<Record<string, any>>).find((u) => u.slug === tierSlug);
+    const tierStats = (await getEntry("unit-stats", tierSlug))?.data;
     chainTiers.push({
       slug: tierSlug,
       name: tierEntry.data.name,

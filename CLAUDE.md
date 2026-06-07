@@ -1,6 +1,8 @@
 # AOE2 Guide
 
-A four-language static guide site for Age of Empires II, deployed to Cloudflare Pages.
+A bilingual (EN/TR) static guide site for Age of Empires II, deployed to Cloudflare Pages.
+
+For repo-shared GitHub Copilot, custom agent, VS Code, and MCP setup, see `.github/copilot-instructions.md`, `AGENTS.md`, and `docs/ai-development.md`.
 
 ## Stack invariants
 
@@ -13,7 +15,7 @@ A four-language static guide site for Age of Empires II, deployed to Cloudflare 
 
 ## Languages
 
-EN (source of truth), TR, ES, DE. Missing translations fall back to EN via `i18n.routing.fallbackType: "rewrite"`.
+EN (source of truth) and TR. Missing TR content falls back to EN through locale-aware content helpers in `src/lib/content.ts`.
 
 ## Slug policy
 
@@ -39,7 +41,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 | `docs/superpowers/specs/2026-05-23-aoe2-guide-design.md` | Architecture spec |
 | `docs/superpowers/plans/2026-05-23-aoe2-guide-implementation.md` | Implementation plan |
 | `src/content/config.ts` | All 7 Zod schemas (single source of truth for content shape) |
-| `src/content/<type>/{en,tr,es,de}/*.md` | Localized content |
+| `src/content/<type>/{en,tr}/*.md` | Localized content |
 | `src/data/*.json` | Language-agnostic structured data (stats, slug refs, patch info) |
 | `src/components/{layout,content,ui,islands}/` | Astro components |
 | `src/i18n/{locales,ui,utils}.ts` | i18n config, UI strings, helpers |
@@ -53,7 +55,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 1. Drop raw guide into `md/<type>/<source>-<topic>.md` with a frontmatter source block.
 2. `pnpm import:md md/<type>/<file>.md` scaffolds an EN entry with frontmatter placeholders.
 3. Edit the EN file: fill schema fields, write strategy notes.
-4. `pnpm new:guide <type> <slug>` creates empty TR/ES/DE scaffolds for translation.
+4. `pnpm new:guide <type> <slug>` creates an empty TR scaffold for translation.
 5. `pnpm build` validates schemas; broken frontmatter fails the build (and CI).
 
 ## Attribution requirement

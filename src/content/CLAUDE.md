@@ -9,14 +9,14 @@ src/content/<type>/<lang>/<slug>.md
 ```
 
 - `<type>`: civilizations · build-orders · units · maps · matchups · beginner · glossary
-- `<lang>`: en · tr · es · de
+- `<lang>`: en · tr
 - `<slug>`: English-canonical, kebab-case (e.g. `britons`, `21pop-archer`, `britons-vs-franks`)
 
 ## Critical patterns
 
 ### Use Content Layer API, not legacy `type: "content"`
 
-Each collection uses `loader: glob({ pattern, base, generateId: pathId })`. The `generateId: pathId` override is **required** — without it, frontmatter `slug` values collide across the 4 language directories (all `britons.md` files would claim ID `britons`).
+Each collection uses `loader: glob({ pattern, base, generateId: pathId })`. The `generateId: pathId` override is **required** — without it, frontmatter `slug` values collide across the 2 language directories (all `britons.md` files would claim ID `britons`).
 
 ### Render bodies via `render(entry)`
 
@@ -31,7 +31,7 @@ The legacy `entry.render()` method does **not exist** on Content Layer entries.
 
 1. `pnpm import:md md/<type>/<source>.md` (from a raw source), or `pnpm new:guide <type> <slug>` (scaffold blank).
 2. Fill the EN file's frontmatter — schema in `config.ts` is the source of truth for required fields.
-3. Translate to TR/ES/DE by editing the scaffolded files. Missing translations fall back to EN automatically.
+3. Translate to TR by editing the scaffolded file. Missing TR translations fall back to EN automatically.
 4. Schema-breaking changes will fail `pnpm build` and CI.
 
 ## Data split

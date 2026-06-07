@@ -1,6 +1,6 @@
-import { locales, defaultLocale, isLocale } from "./locales";
 import type { Locale } from "./locales";
-import { ui, type UIKey } from "./ui";
+import { defaultLocale, isLocale, locales } from "./locales";
+import { type UIKey, ui } from "./ui";
 
 export function getLocaleFromUrl(url: URL): Locale {
   const segments = url.pathname.split("/").filter(Boolean);
@@ -20,12 +20,12 @@ export function localizedPath(path: string, locale: Locale): string {
   } else {
     segments.unshift(locale);
   }
-  return "/" + segments.join("/");
+  return `/${segments.join("/")}`;
 }
 
 export function allLocalePaths(path: string): Array<{ locale: Locale; path: string }> {
   return locales.map((l) => ({ locale: l, path: localizedPath(path, l) }));
 }
 
-export { locales, defaultLocale, isLocale };
 export type { Locale };
+export { defaultLocale, isLocale, locales };

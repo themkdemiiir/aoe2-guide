@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // scripts/new-guide.mjs
 // Usage: node scripts/new-guide.mjs <type> <slug>
-// Creates src/content/<type>/{en,tr,es,de}/<slug>.md with empty frontmatter scaffolds.
+// Creates src/content/<type>/{en,tr}/<slug>.md with empty frontmatter scaffolds.
 
-import { writeFile, mkdir, access } from "node:fs/promises";
+import { access, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const TEMPLATES = {
@@ -100,7 +100,7 @@ async function run() {
     console.error("Supported:", Object.keys(TEMPLATES).join(", "));
     process.exit(1);
   }
-  for (const lang of ["en", "tr", "es", "de"]) {
+  for (const lang of ["en", "tr"]) {
     const out = path.resolve("src/content", type, lang, `${slug}.md`);
     if (await exists(out)) {
       console.log("skip (exists):", out);

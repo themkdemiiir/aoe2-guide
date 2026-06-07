@@ -17,7 +17,7 @@ import path from "node:path";
 
 // Pinned SHAs — fetched 2026-05-23
 const AALISES_SHA = process.env.AALISES_SHA || "3ec582fa0ebd5ea11b2d1ff405e61836c6f3a99d";
-const AOE2TT_SHA  = process.env.AOE2TT_SHA  || "b34082d13c31932d89788ad35af984896cbe050c";
+const AOE2TT_SHA = process.env.AOE2TT_SHA || "b34082d13c31932d89788ad35af984896cbe050c";
 
 const CACHE_DIR = path.resolve(".cache/aoe2-data");
 

@@ -9,18 +9,18 @@
 //   aalises/age-of-empires-II-api  BSD-3-Clause  (units.csv, 104 units)
 //   SiegeEngineers/aoe2techtree    MIT            (data.json, unit stats)
 
-import { readFile, writeFile, mkdir, access } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const CACHE_DIR  = path.resolve(".cache/aoe2-data");
-const DATA_OUT   = path.resolve("src/data/unit-stats.json");
+const CACHE_DIR = path.resolve(".cache/aoe2-data");
+const DATA_OUT = path.resolve("src/data/unit-stats.json");
 const CONTENT_EN = path.resolve("src/content/units/en");
-const ICON_MAP   = path.resolve("src/data/icon-map.json");
+const ICON_MAP = path.resolve("src/data/icon-map.json");
 
 // ---------------------------------------------------------------------------
 // Slugify
 // ---------------------------------------------------------------------------
-function slugify(str) {
+function _slugify(str) {
   return str
     .toLowerCase()
     .replace(/['']/g, "")
@@ -110,10 +110,10 @@ function parseRange(rangeStr) {
 // Returns { melee, pierce }
 // ---------------------------------------------------------------------------
 function parseArmor(armorStr) {
-  if (!armorStr || !armorStr.includes("/")) return { melee: 0, pierce: 0 };
+  if (!armorStr?.includes("/")) return { melee: 0, pierce: 0 };
   const parts = armorStr.split("/");
   return {
-    melee:  parseInt(parts[0], 10) || 0,
+    melee: parseInt(parts[0], 10) || 0,
     pierce: parseInt(parts[1], 10) || 0,
   };
 }
@@ -126,210 +126,210 @@ function parseArmor(armorStr) {
 // ---------------------------------------------------------------------------
 const CANONICAL_UNITS = {
   // Militia line
-  "Militia":               "militia",
-  "Man-at-Arms":           "man-at-arms",
-  "Long Swordsman":        "long-swordsman",
-  "Two-Handed Swordsman":  "two-handed-swordsman",
-  "Champion":              "champion",
+  Militia: "militia",
+  "Man-at-Arms": "man-at-arms",
+  "Long Swordsman": "long-swordsman",
+  "Two-Handed Swordsman": "two-handed-swordsman",
+  Champion: "champion",
   // Spear line
-  "Spearman":              "spearman",
-  "Pikeman":               "pikeman",
-  "Halberdier":            "halberdier",
+  Spearman: "spearman",
+  Pikeman: "pikeman",
+  Halberdier: "halberdier",
   // Eagle line (Meso civs)
-  "Eagle Warrior":         "eagle-warrior",
-  "Elite Eagle Warrior":   "elite-eagle-warrior",
+  "Eagle Warrior": "eagle-warrior",
+  "Elite Eagle Warrior": "elite-eagle-warrior",
   // Archer line
-  "Archer":                "archer",
-  "Crossbowman":           "crossbowman",
-  "Arbalest":              "arbalester",
+  Archer: "archer",
+  Crossbowman: "crossbowman",
+  Arbalest: "arbalester",
   // Skirmisher line
-  "Skirmisher":            "skirmisher",
-  "Elite Skirmisher":      "elite-skirmisher",
+  Skirmisher: "skirmisher",
+  "Elite Skirmisher": "elite-skirmisher",
   // Cavalry Archer line
-  "Cavalry Archer":        "cavalry-archer",
-  "Heavy Cavalry Archer":  "heavy-cavalry-archer",
+  "Cavalry Archer": "cavalry-archer",
+  "Heavy Cavalry Archer": "heavy-cavalry-archer",
   // Hand Cannoneer
-  "Hand Cannoneer":        "hand-cannoneer",
+  "Hand Cannoneer": "hand-cannoneer",
   // Scout line
-  "Scout Cavalry":         "scout-cavalry",
-  "Light Cavalry":         "light-cavalry",
-  "Hussar":                "hussar",
+  "Scout Cavalry": "scout-cavalry",
+  "Light Cavalry": "light-cavalry",
+  Hussar: "hussar",
   // Knight line
-  "Knight":                "knight",
-  "Cavalier":              "cavalier",
-  "Paladin":               "paladin",
+  Knight: "knight",
+  Cavalier: "cavalier",
+  Paladin: "paladin",
   // Camel line
-  "Camel":                 "camel-rider",
-  "Heavy Camel":           "heavy-camel-rider",
+  Camel: "camel-rider",
+  "Heavy Camel": "heavy-camel-rider",
   // Monk
-  "Monk":                  "monk",
+  Monk: "monk",
   // Siege
-  "Battering Ram":         "battering-ram",
-  "Capped Ram":            "capped-ram",
-  "Siege Ram":             "siege-ram",
-  "Mangonel":              "mangonel",
-  "Onager":                "onager",
-  "Siege Onager":          "siege-onager",
-  "Scorpion":              "scorpion",
-  "Heavy Scorpion":        "heavy-scorpion",
-  "Bombard Cannon":        "bombard-cannon",
-  "Trebuchet":             "trebuchet",
+  "Battering Ram": "battering-ram",
+  "Capped Ram": "capped-ram",
+  "Siege Ram": "siege-ram",
+  Mangonel: "mangonel",
+  Onager: "onager",
+  "Siege Onager": "siege-onager",
+  Scorpion: "scorpion",
+  "Heavy Scorpion": "heavy-scorpion",
+  "Bombard Cannon": "bombard-cannon",
+  Trebuchet: "trebuchet",
   // Navy
-  "Galley":                "galley",
-  "War Galley":            "war-galley",
-  "Galleon":               "galleon",
-  "Fire Ship":             "fire-ship",
-  "Fast Fire Ship":        "fast-fire-ship",
-  "Demolition Ship":       "demolition-ship",
+  Galley: "galley",
+  "War Galley": "war-galley",
+  Galleon: "galleon",
+  "Fire Ship": "fire-ship",
+  "Fast Fire Ship": "fast-fire-ship",
+  "Demolition Ship": "demolition-ship",
   "Heavy Demolition Ship": "heavy-demolition-ship",
-  "Cannon Galleon":        "cannon-galleon",
-  "Elite Cannon Galleon":  "elite-cannon-galleon",
-  "Fishing Ship":          "fishing-ship",
-  "Transport Ship":        "transport-ship",
+  "Cannon Galleon": "cannon-galleon",
+  "Elite Cannon Galleon": "elite-cannon-galleon",
+  "Fishing Ship": "fishing-ship",
+  "Transport Ship": "transport-ship",
   // Unique units from aalises
-  "Berserk":               "berserk",
-  "Elite Berserk":         "elite-berserk",
-  "Cataphract":            "cataphract",
-  "Elite Cataphract":      "elite-cataphract",
-  "Chu Ko Nu":             "chu-ko-nu",
-  "Elite Chu Ko Nu":       "elite-chu-ko-nu",
-  "Conquistador":          "conquistador",
-  "Elite Conquistador":    "elite-conquistador",
-  "Huskarl":               "huskarl",
-  "Elite Huskarl":         "elite-huskarl",
-  "Jaguar Warrior":        "jaguar-warrior",
-  "Elite Jaguar Warrior":  "elite-jaguar-warrior",
-  "Janissary":             "janissary",
-  "Elite Janissary":       "elite-janissary",
-  "Longbowman":            "longbowman",
-  "Elite Longbowman":      "elite-longbowman",
-  "Mameluke":              "mameluke",
-  "Elite Mameluke":        "elite-mameluke",
-  "Mangudai":              "mangudai",
-  "Elite Mangudai":        "elite-mangudai",
-  "Plumed Archer":         "plumed-archer",
-  "Elite Plumed Archer":   "elite-plumed-archer",
-  "Samurai":               "samurai",
-  "Elite Samurai":         "elite-samurai",
-  "Tarkan":                "tarkan",
-  "Elite Tarkan":          "elite-tarkan",
-  "Teutonic Knight":       "teutonic-knight",
+  Berserk: "berserk",
+  "Elite Berserk": "elite-berserk",
+  Cataphract: "cataphract",
+  "Elite Cataphract": "elite-cataphract",
+  "Chu Ko Nu": "chu-ko-nu",
+  "Elite Chu Ko Nu": "elite-chu-ko-nu",
+  Conquistador: "conquistador",
+  "Elite Conquistador": "elite-conquistador",
+  Huskarl: "huskarl",
+  "Elite Huskarl": "elite-huskarl",
+  "Jaguar Warrior": "jaguar-warrior",
+  "Elite Jaguar Warrior": "elite-jaguar-warrior",
+  Janissary: "janissary",
+  "Elite Janissary": "elite-janissary",
+  Longbowman: "longbowman",
+  "Elite Longbowman": "elite-longbowman",
+  Mameluke: "mameluke",
+  "Elite Mameluke": "elite-mameluke",
+  Mangudai: "mangudai",
+  "Elite Mangudai": "elite-mangudai",
+  "Plumed Archer": "plumed-archer",
+  "Elite Plumed Archer": "elite-plumed-archer",
+  Samurai: "samurai",
+  "Elite Samurai": "elite-samurai",
+  Tarkan: "tarkan",
+  "Elite Tarkan": "elite-tarkan",
+  "Teutonic Knight": "teutonic-knight",
   "Elite Teutonic Knight": "elite-teutonic-knight",
-  "Throwing Axeman":       "throwing-axeman",
+  "Throwing Axeman": "throwing-axeman",
   "Elite Throwing Axeman": "elite-throwing-axeman",
-  "War Elephant":          "war-elephant",
-  "Elite War Elephant":    "elite-war-elephant",
-  "War Wagon":             "war-wagon",
-  "Elite War Wagon":       "elite-war-wagon",
-  "Woad Raider":           "woad-raider",
-  "Elite Woad Raider":     "elite-woad-raider",
-  "Karambit Warrior":      "karambit-warrior",
-  "Elite Karambit Warrior":"elite-karambit-warrior",
-  "Longboat":              "longboat",
-  "Elite Longboat":        "elite-longboat",
-  "Turtle Ship":           "turtle-ship",
-  "Elite Turtle Ship":     "elite-turtle-ship",
+  "War Elephant": "war-elephant",
+  "Elite War Elephant": "elite-war-elephant",
+  "War Wagon": "war-wagon",
+  "Elite War Wagon": "elite-war-wagon",
+  "Woad Raider": "woad-raider",
+  "Elite Woad Raider": "elite-woad-raider",
+  "Karambit Warrior": "karambit-warrior",
+  "Elite Karambit Warrior": "elite-karambit-warrior",
+  Longboat: "longboat",
+  "Elite Longboat": "elite-longboat",
+  "Turtle Ship": "turtle-ship",
+  "Elite Turtle Ship": "elite-turtle-ship",
 };
 
 // Units that are civ-specific (unique units)
 // Maps unit slug -> civ slug
 const UNIQUE_UNIT_CIV = {
-  "longbowman":           "britons",
-  "elite-longbowman":     "britons",
-  "cataphract":           "byzantines",
-  "elite-cataphract":     "byzantines",
-  "woad-raider":          "celts",
-  "elite-woad-raider":    "celts",
-  "chu-ko-nu":            "chinese",
-  "elite-chu-ko-nu":      "chinese",
-  "throwing-axeman":      "franks",
-  "elite-throwing-axeman":"franks",
-  "huskarl":              "goths",
-  "elite-huskarl":        "goths",
-  "tarkan":               "huns",
-  "elite-tarkan":         "huns",
-  "samurai":              "japanese",
-  "elite-samurai":        "japanese",
-  "war-wagon":            "koreans",
-  "elite-war-wagon":      "koreans",
-  "turtle-ship":          "koreans",
-  "elite-turtle-ship":    "koreans",
-  "plumed-archer":        "mayans",
-  "elite-plumed-archer":  "mayans",
-  "mangudai":             "mongols",
-  "elite-mangudai":       "mongols",
-  "war-elephant":         "persians",
-  "elite-war-elephant":   "persians",
-  "mameluke":             "saracens",
-  "elite-mameluke":       "saracens",
-  "conquistador":         "spanish",
-  "elite-conquistador":   "spanish",
-  "teutonic-knight":      "teutons",
-  "elite-teutonic-knight":"teutons",
-  "janissary":            "turks",
-  "elite-janissary":      "turks",
-  "berserk":              "vikings",
-  "elite-berserk":        "vikings",
-  "longboat":             "vikings",
-  "elite-longboat":       "vikings",
-  "jaguar-warrior":       "aztecs",
+  longbowman: "britons",
+  "elite-longbowman": "britons",
+  cataphract: "byzantines",
+  "elite-cataphract": "byzantines",
+  "woad-raider": "celts",
+  "elite-woad-raider": "celts",
+  "chu-ko-nu": "chinese",
+  "elite-chu-ko-nu": "chinese",
+  "throwing-axeman": "franks",
+  "elite-throwing-axeman": "franks",
+  huskarl: "goths",
+  "elite-huskarl": "goths",
+  tarkan: "huns",
+  "elite-tarkan": "huns",
+  samurai: "japanese",
+  "elite-samurai": "japanese",
+  "war-wagon": "koreans",
+  "elite-war-wagon": "koreans",
+  "turtle-ship": "koreans",
+  "elite-turtle-ship": "koreans",
+  "plumed-archer": "mayans",
+  "elite-plumed-archer": "mayans",
+  mangudai: "mongols",
+  "elite-mangudai": "mongols",
+  "war-elephant": "persians",
+  "elite-war-elephant": "persians",
+  mameluke: "saracens",
+  "elite-mameluke": "saracens",
+  conquistador: "spanish",
+  "elite-conquistador": "spanish",
+  "teutonic-knight": "teutons",
+  "elite-teutonic-knight": "teutons",
+  janissary: "turks",
+  "elite-janissary": "turks",
+  berserk: "vikings",
+  "elite-berserk": "vikings",
+  longboat: "vikings",
+  "elite-longboat": "vikings",
+  "jaguar-warrior": "aztecs",
   "elite-jaguar-warrior": "aztecs",
-  "eagle-warrior":        "aztecs",   // shared by aztecs/mayans/incas
-  "elite-eagle-warrior":  "aztecs",
-  "karambit-warrior":     "malay",
-  "elite-karambit-warrior":"malay",
+  "eagle-warrior": "aztecs", // shared by aztecs/mayans/incas
+  "elite-eagle-warrior": "aztecs",
+  "karambit-warrior": "malay",
+  "elite-karambit-warrior": "malay",
 };
 
 // Role classification
 const UNIT_ROLES = {
-  "militia":              "melee infantry",
-  "man-at-arms":         "melee infantry",
-  "long-swordsman":      "melee infantry",
-  "two-handed-swordsman":"melee infantry",
-  "champion":            "melee infantry",
-  "spearman":            "anti-cavalry infantry",
-  "pikeman":             "anti-cavalry infantry",
-  "halberdier":          "anti-cavalry infantry",
-  "eagle-warrior":       "light infantry",
+  militia: "melee infantry",
+  "man-at-arms": "melee infantry",
+  "long-swordsman": "melee infantry",
+  "two-handed-swordsman": "melee infantry",
+  champion: "melee infantry",
+  spearman: "anti-cavalry infantry",
+  pikeman: "anti-cavalry infantry",
+  halberdier: "anti-cavalry infantry",
+  "eagle-warrior": "light infantry",
   "elite-eagle-warrior": "light infantry",
-  "archer":              "ranged infantry",
-  "crossbowman":         "ranged infantry",
-  "arbalester":          "ranged infantry",
-  "skirmisher":          "anti-archer ranged",
-  "elite-skirmisher":    "anti-archer ranged",
-  "cavalry-archer":      "mounted archer",
-  "heavy-cavalry-archer":"mounted archer",
-  "hand-cannoneer":      "gunpowder ranged",
-  "scout-cavalry":       "light cavalry",
-  "light-cavalry":       "light cavalry",
-  "hussar":              "light cavalry",
-  "knight":              "heavy cavalry",
-  "cavalier":            "heavy cavalry",
-  "paladin":             "heavy cavalry",
-  "camel-rider":         "anti-cavalry cavalry",
-  "heavy-camel-rider":   "anti-cavalry cavalry",
-  "monk":                "support / conversion",
-  "battering-ram":       "siege",
-  "capped-ram":          "siege",
-  "siege-ram":           "siege",
-  "mangonel":            "siege",
-  "onager":              "siege",
-  "siege-onager":        "siege",
-  "scorpion":            "siege",
-  "heavy-scorpion":      "siege",
-  "bombard-cannon":      "siege gunpowder",
-  "trebuchet":           "siege long-range",
-  "galley":              "naval",
-  "war-galley":          "naval",
-  "galleon":             "naval",
-  "fire-ship":           "anti-ship naval",
-  "fast-fire-ship":      "anti-ship naval",
-  "demolition-ship":     "naval suicide",
-  "heavy-demolition-ship":"naval suicide",
-  "cannon-galleon":      "naval siege",
-  "elite-cannon-galleon":"naval siege",
-  "fishing-ship":        "economic naval",
-  "transport-ship":      "utility naval",
+  archer: "ranged infantry",
+  crossbowman: "ranged infantry",
+  arbalester: "ranged infantry",
+  skirmisher: "anti-archer ranged",
+  "elite-skirmisher": "anti-archer ranged",
+  "cavalry-archer": "mounted archer",
+  "heavy-cavalry-archer": "mounted archer",
+  "hand-cannoneer": "gunpowder ranged",
+  "scout-cavalry": "light cavalry",
+  "light-cavalry": "light cavalry",
+  hussar: "light cavalry",
+  knight: "heavy cavalry",
+  cavalier: "heavy cavalry",
+  paladin: "heavy cavalry",
+  "camel-rider": "anti-cavalry cavalry",
+  "heavy-camel-rider": "anti-cavalry cavalry",
+  monk: "support / conversion",
+  "battering-ram": "siege",
+  "capped-ram": "siege",
+  "siege-ram": "siege",
+  mangonel: "siege",
+  onager: "siege",
+  "siege-onager": "siege",
+  scorpion: "siege",
+  "heavy-scorpion": "siege",
+  "bombard-cannon": "siege gunpowder",
+  trebuchet: "siege long-range",
+  galley: "naval",
+  "war-galley": "naval",
+  galleon: "naval",
+  "fire-ship": "anti-ship naval",
+  "fast-fire-ship": "anti-ship naval",
+  "demolition-ship": "naval suicide",
+  "heavy-demolition-ship": "naval suicide",
+  "cannon-galleon": "naval siege",
+  "elite-cannon-galleon": "naval siege",
+  "fishing-ship": "economic naval",
+  "transport-ship": "utility naval",
 };
 
 function getRole(slug) {
@@ -351,8 +351,8 @@ async function run() {
     readFile(path.join(CACHE_DIR, "units.csv"), "utf8"),
   ]);
 
-  const iconMap   = JSON.parse(iconMapText);
-  const csvRows   = parseCsv(unitsCsvText);
+  const _iconMap = JSON.parse(iconMapText);
+  const csvRows = parseCsv(unitsCsvText);
 
   // Build a map: canonical slug -> csv row (use first occurrence for duplicates)
   const rowBySlug = {};
@@ -368,7 +368,7 @@ async function run() {
       // Prefer non-zero cost
       const existing = rowBySlug[canonSlug];
       const existCost = parseCost(existing.cost || "");
-      const newCost   = parseCost(row.cost || "");
+      const newCost = parseCost(row.cost || "");
       if (existCost.food === 0 && existCost.gold === 0 && newCost.food > 0) {
         rowBySlug[canonSlug] = row;
       }
@@ -397,8 +397,8 @@ async function run() {
   // Process canonical units in defined order
   for (const [displayName, slug] of Object.entries(CANONICAL_UNITS)) {
     // Preserve existing hand-written longbowman
-    if (slug === "longbowman" && existingUnitMap["longbowman"]) {
-      unitEntries.push(existingUnitMap["longbowman"]);
+    if (slug === "longbowman" && existingUnitMap.longbowman) {
+      unitEntries.push(existingUnitMap.longbowman);
       // Content file will be skipped
       skipped++;
       continue;
@@ -408,11 +408,11 @@ async function run() {
     let entry;
 
     if (csvRow) {
-      const cost      = parseCost(csvRow.cost || "");
+      const cost = parseCost(csvRow.cost || "");
       const { range, minRange } = parseRange(csvRow.range || "0");
-      const armor     = parseArmor(csvRow.armor || "0/0");
-      const hp        = parseInt(csvRow.hit_points, 10) || 0;
-      const attack    = parseInt(csvRow.attack, 10) || 0;
+      const armor = parseArmor(csvRow.armor || "0/0");
+      const hp = parseInt(csvRow.hit_points, 10) || 0;
+      const attack = parseInt(csvRow.attack, 10) || 0;
       const trainTime = parseInt(csvRow.build_time, 10) || 0;
 
       entry = {
@@ -423,7 +423,7 @@ async function run() {
         minRange,
         cost,
         trainTime,
-        armorMelee:   armor.melee,
+        armorMelee: armor.melee,
         armorPiercing: armor.pierce,
       };
     } else {
@@ -432,14 +432,14 @@ async function run() {
       warnings++;
       entry = {
         slug,
-        hp:           0,
-        attack:       0,
-        range:        0,
-        minRange:     0,
-        cost:         { food: 0, wood: 0, gold: 0, stone: 0 },
-        trainTime:    0,
-        armorMelee:   0,
-        armorPiercing:0,
+        hp: 0,
+        attack: 0,
+        range: 0,
+        minRange: 0,
+        cost: { food: 0, wood: 0, gold: 0, stone: 0 },
+        trainTime: 0,
+        armorMelee: 0,
+        armorPiercing: 0,
       };
     }
 
@@ -457,9 +457,9 @@ async function run() {
       console.log(`  [SKIP] ${mdPath}`);
       skipped++;
     } else {
-      const civSlug   = UNIQUE_UNIT_CIV[slug] || null;
-      const role      = getRole(slug);
-      const building  = csvRow ? getBuilding(csvRow) : "Castle";
+      const civSlug = UNIQUE_UNIT_CIV[slug] || null;
+      const role = getRole(slug);
+      const building = csvRow ? getBuilding(csvRow) : "Castle";
       const md = buildMarkdown(slug, displayName, entry, role, civSlug, building);
       await writeFile(mdPath, md, "utf8");
       console.log(`  [WRITE] ${mdPath}`);
@@ -472,7 +472,7 @@ async function run() {
     patch: existingData.patch || "v100.1.84",
     units: unitEntries,
   };
-  await writeFile(DATA_OUT, JSON.stringify(output, null, 2) + "\n", "utf8");
+  await writeFile(DATA_OUT, `${JSON.stringify(output, null, 2)}\n`, "utf8");
 
   console.log(`\nDone.`);
   console.log(`  Units in JSON:          ${unitEntries.length}`);
@@ -488,15 +488,18 @@ async function run() {
 // ---------------------------------------------------------------------------
 function buildMarkdown(slug, displayName, stats, role, civSlug, building) {
   const costParts = [];
-  if (stats.cost.food)  costParts.push(`${stats.cost.food} Food`);
-  if (stats.cost.wood)  costParts.push(`${stats.cost.wood} Wood`);
-  if (stats.cost.gold)  costParts.push(`${stats.cost.gold} Gold`);
+  if (stats.cost.food) costParts.push(`${stats.cost.food} Food`);
+  if (stats.cost.wood) costParts.push(`${stats.cost.wood} Wood`);
+  if (stats.cost.gold) costParts.push(`${stats.cost.gold} Gold`);
   if (stats.cost.stone) costParts.push(`${stats.cost.stone} Stone`);
   const costStr = costParts.length ? costParts.join(", ") : "Free";
 
-  const rangeStr = stats.range > 0
-    ? (stats.minRange > 0 ? `${stats.minRange}–${stats.range}` : `${stats.range}`)
-    : "Melee";
+  const rangeStr =
+    stats.range > 0
+      ? stats.minRange > 0
+        ? `${stats.minRange}–${stats.range}`
+        : `${stats.range}`
+      : "Melee";
 
   const civLine = civSlug ? `civ: ${civSlug}` : "";
 

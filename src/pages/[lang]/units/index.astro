@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Icon from "@/components/ui/Icon.astro";
+import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
 import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
-import unitLines from "@data/unit-lines.json";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -26,16 +26,17 @@ interface LineCard {
 }
 
 const lineCards: LineCard[] = [];
+const allLines = await getCollection("unit-lines");
 
-for (const [lineRoot, members] of Object.entries(unitLines as Record<string, string[]>)) {
-  const existingMembers = members.filter((m) => bySlug.has(m));
+for (const line of allLines) {
+  const existingMembers = line.data.members.filter((m) => bySlug.has(m));
   if (existingMembers.length === 0) continue;
 
   const baseTierSlug = existingMembers[0];
   const baseEntry = bySlug.get(baseTierSlug)!;
 
   lineCards.push({
-    lineRoot,
+    lineRoot: line.data.slug,
     baseTierSlug,
     baseTierName: baseEntry.data.name,
     role: baseEntry.data.role,

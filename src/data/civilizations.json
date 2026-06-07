@@ -5,9 +5,7 @@
       "slug": "armenians",
       "region": "Caucasian",
       "specialty": "Infantry and Cavalry",
-      "uniqueUnits": [
-        "composite-bowman"
-      ],
+      "uniqueUnits": ["composite-bowman"],
       "civBonuses": [
         "Villagers build Fortifications faster",
         "Cavalry Archers available one age earlier",
@@ -38,9 +36,7 @@
       "slug": "aztecs",
       "region": "Mesoamerican",
       "specialty": "Infantry and Monk",
-      "uniqueUnits": [
-        "jaguar-warrior"
-      ],
+      "uniqueUnits": ["jaguar-warrior"],
       "civBonuses": [
         "Villagers carry +5",
         "Military units created 15% faster",
@@ -71,9 +67,7 @@
       "slug": "bengalis",
       "region": "South Asian",
       "specialty": "Elephant and Naval",
-      "uniqueUnits": [
-        "ratha"
-      ],
+      "uniqueUnits": ["ratha"],
       "civBonuses": [
         "Elephants resist 25% damage",
         "Ships +5 carry capacity and regenerate HP",
@@ -104,10 +98,7 @@
       "slug": "berbers",
       "region": "North African",
       "specialty": "Calvary and Naval",
-      "uniqueUnits": [
-        "camel-archer",
-        "genitour"
-      ],
+      "uniqueUnits": ["camel-archer", "genitour"],
       "civBonuses": [
         "Villagers move +10% faster",
         "Stable units cost -20% (starting in Castle Age)",
@@ -137,9 +128,7 @@
       "slug": "bohemians",
       "region": "Eastern European",
       "specialty": "Gunpowder and Monk",
-      "uniqueUnits": [
-        "hussite-wagon"
-      ],
+      "uniqueUnits": ["hussite-wagon"],
       "civBonuses": [
         "Mining camp upgrades free",
         "Blacksmith does not require Monastery; Market does not require Mill",
@@ -170,9 +159,7 @@
       "slug": "britons",
       "region": "Western European",
       "specialty": "Archers",
-      "uniqueUnits": [
-        "longbowman"
-      ],
+      "uniqueUnits": ["longbowman"],
       "civBonuses": [
         "Town Centers cost 50% less wood from Castle Age",
         "Foot archers (except Skirmishers) +1 range Castle Age, +2 Imperial Age",
@@ -202,9 +189,7 @@
       "slug": "bulgarians",
       "region": "Eastern European",
       "specialty": "Cavalry and Siege",
-      "uniqueUnits": [
-        "konnik"
-      ],
+      "uniqueUnits": ["konnik"],
       "civBonuses": [
         "Blacksmith and Siege Workshop technologies cost -50% gold",
         "Militia line upgrades free",
@@ -235,9 +220,7 @@
       "slug": "burgundians",
       "region": "Western European",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "coustillier"
-      ],
+      "uniqueUnits": ["coustillier"],
       "civBonuses": [
         "Stable, Blacksmith, and Marketplace technologies available one age earlier",
         "Economic upgrades (Mill, Lumber Camp, Mining Camp) cost -50% food",
@@ -268,9 +251,7 @@
       "slug": "burmese",
       "region": "Southeast Asian",
       "specialty": "Monk and Elephant",
-      "uniqueUnits": [
-        "arambai"
-      ],
+      "uniqueUnits": ["arambai"],
       "civBonuses": [
         "Free lumber camp upgrades",
         "Infantry +1 Attacks per Age (starting in Feudal Age)",
@@ -300,9 +281,7 @@
       "slug": "byzantines",
       "region": "Eastern Mediterranean",
       "specialty": "Defensive",
-      "uniqueUnits": [
-        "cataphract"
-      ],
+      "uniqueUnits": ["cataphract"],
       "civBonuses": [
         "Buildings (except gates) have +10% HP in Dark Age / +20% HP in Feudal Age  / +30% in Castle Age / +40% in Imperial Age",
         "Spearman skirmisher and camel lines cost 25% less",
@@ -334,9 +313,7 @@
       "slug": "celts",
       "region": "Western European",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "woad-raider"
-      ],
+      "uniqueUnits": ["woad-raider"],
       "civBonuses": [
         "Infantry moves 15% faster",
         "Lumberjacks work 15% faster",
@@ -367,9 +344,7 @@
       "slug": "chinese",
       "region": "East Asian",
       "specialty": "Archer",
-      "uniqueUnits": [
-        "chu-ko-nu"
-      ],
+      "uniqueUnits": ["chu-ko-nu"],
       "civBonuses": [
         "Start game with 3 extra villagers but -50 wood and -200 food",
         "Technologies cost -10% in Feudal Age/ -15% in Castle Age/-20% in Imperial Age",
@@ -400,9 +375,7 @@
       "slug": "cumans",
       "region": "Central Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "kipchak"
-      ],
+      "uniqueUnits": ["kipchak"],
       "civBonuses": [
         "Cavalry units +1 speed in Feudal Age",
         "May build an extra Town Center in Feudal Age",
@@ -433,9 +406,7 @@
       "slug": "dravidians",
       "region": "South Asian",
       "specialty": "Infantry and Naval",
-      "uniqueUnits": [
-        "urumi-swordsman"
-      ],
+      "uniqueUnits": ["urumi-swordsman"],
       "civBonuses": [
         "Start with +200 wood",
         "Barracks and Docks techs -50% food",
@@ -466,9 +437,7 @@
       "slug": "ethiopians",
       "region": "East African",
       "specialty": "Archer",
-      "uniqueUnits": [
-        "shotel-warrior"
-      ],
+      "uniqueUnits": ["shotel-warrior"],
       "civBonuses": [
         "Archers move +15% faster",
         "Receive +100 gold and +100 food when advancing to the next age",
@@ -498,9 +467,7 @@
       "slug": "franks",
       "region": "Western European",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "throwing-axeman"
-      ],
+      "uniqueUnits": ["throwing-axeman"],
       "civBonuses": [
         "Castles are 25% cheaper",
         "Knights have +20% HP",
@@ -530,9 +497,7 @@
       "slug": "georgians",
       "region": "Caucasian",
       "specialty": "Infantry and Cavalry",
-      "uniqueUnits": [
-        "monaspa"
-      ],
+      "uniqueUnits": ["monaspa"],
       "civBonuses": [
         "Units +4 attack when garrison is not full (Mournful Shroud)",
         "Town Centers and Towers +2 range",
@@ -563,9 +528,7 @@
       "slug": "goths",
       "region": "Northern European",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "huskarl"
-      ],
+      "uniqueUnits": ["huskarl"],
       "civBonuses": [
         "Infantry cost 35% less (starting in Feudal Age)",
         "Infantry have +1 attack against buildings",
@@ -597,9 +560,7 @@
       "slug": "gurjaras",
       "region": "South Asian",
       "specialty": "Cavalry and Naval",
-      "uniqueUnits": [
-        "shrivamsha-rider"
-      ],
+      "uniqueUnits": ["shrivamsha-rider"],
       "civBonuses": [
         "Start with 2 Camel Scouts",
         "Camels and Skirmishers counter cavalry effectively",
@@ -630,10 +591,7 @@
       "slug": "hindustanis",
       "region": "South Asian",
       "specialty": "Gunpowder and Cavalry",
-      "uniqueUnits": [
-        "elephant-archer",
-        "imperial-camel"
-      ],
+      "uniqueUnits": ["elephant-archer", "imperial-camel"],
       "civBonuses": [
         "Villagers cost -10% Dark, -15% Feudal, -20% Castle, -25% Imperial",
         "Fishermen work 15% faster and carry +15",
@@ -663,9 +621,7 @@
       "slug": "huns",
       "region": "Central Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "tarkan"
-      ],
+      "uniqueUnits": ["tarkan"],
       "civBonuses": [
         "Houses are not required to support population",
         "Start game with -100 Wood",
@@ -696,10 +652,7 @@
       "slug": "incas",
       "region": "South American",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "kamayuk",
-        "slinger"
-      ],
+      "uniqueUnits": ["kamayuk", "slinger"],
       "civBonuses": [
         "Start with a free llama",
         "Villagers affected by Blacksmith upgrades",
@@ -731,10 +684,7 @@
       "slug": "italians",
       "region": "Southern European",
       "specialty": "Archer and naval",
-      "uniqueUnits": [
-        "genoese-crossbowman",
-        "condottiero"
-      ],
+      "uniqueUnits": ["genoese-crossbowman", "condottiero"],
       "civBonuses": [
         "Advance to next age costs -15%",
         "All dock tech costs -50%",
@@ -765,9 +715,7 @@
       "slug": "japanese",
       "region": "East Asian",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "samurai"
-      ],
+      "uniqueUnits": ["samurai"],
       "civBonuses": [
         "Fishing Ships have 2x HP and +2 pierce armor",
         "Fishing Ships work +5% faster in Dark Age/ +10% in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age",
@@ -798,9 +746,7 @@
       "slug": "jurchens",
       "region": "East Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "jurchen-knight"
-      ],
+      "uniqueUnits": ["jurchen-knight"],
       "civBonuses": [
         "Cavalry +2 armor",
         "Stables work faster",
@@ -831,9 +777,7 @@
       "slug": "khitans",
       "region": "East Asian",
       "specialty": "Cavalry Archer",
-      "uniqueUnits": [
-        "khitan-lancer"
-      ],
+      "uniqueUnits": ["khitan-lancer"],
       "civBonuses": [
         "Cavalry Archers cost -10%",
         "Archery Range units +1 attack",
@@ -864,9 +808,7 @@
       "slug": "khmer",
       "region": "Southeast Asian",
       "specialty": "Siege and Elephant Civilzation",
-      "uniqueUnits": [
-        "ballista-elephant"
-      ],
+      "uniqueUnits": ["ballista-elephant"],
       "civBonuses": [
         "Prereq buildings aren't required to advance to further ages or unlock other buildings",
         "Battle Elephants are +15% faster",
@@ -896,10 +838,7 @@
       "slug": "koreans",
       "region": "East Asian",
       "specialty": "Tower and naval",
-      "uniqueUnits": [
-        "war-wagon",
-        "turtle-ship"
-      ],
+      "uniqueUnits": ["war-wagon", "turtle-ship"],
       "civBonuses": [
         "Villagers have +3 line of sight",
         "Stone miners work 20% faster",
@@ -930,9 +869,7 @@
       "slug": "lithuanians",
       "region": "Eastern European",
       "specialty": "Cavalry and Monk",
-      "uniqueUnits": [
-        "leitis"
-      ],
+      "uniqueUnits": ["leitis"],
       "civBonuses": [
         "Start with +150 food",
         "Spearman and Skirmisher lines cost -15% food",
@@ -963,9 +900,7 @@
       "slug": "magyars",
       "region": "Eastern European",
       "specialty": "Calvary Infantry",
-      "uniqueUnits": [
-        "magyar-huszar"
-      ],
+      "uniqueUnits": ["magyar-huszar"],
       "civBonuses": [
         "Villagers can kill wolves with 1 strike",
         "Forging, Iron Casting, Blast Furnace are free",
@@ -995,12 +930,8 @@
       "slug": "malay",
       "region": "Southeast Asian",
       "specialty": "Naval",
-      "uniqueUnits": [
-        "karambit-warrior"
-      ],
-      "civBonuses": [
-        "Docks +100% LOS"
-      ],
+      "uniqueUnits": ["karambit-warrior"],
+      "civBonuses": ["Docks +100% LOS"],
       "teamBonus": "Advancing to ages 80% faster;Fish Traps cost 33% cheaper;Fish Traps provide unlimited food;Battle Elephants 30% cheaper",
       "uniqueTechs": {
         "castle": {
@@ -1025,9 +956,7 @@
       "slug": "malians",
       "region": "West African",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "gbeto"
-      ],
+      "uniqueUnits": ["gbeto"],
       "civBonuses": [
         "Buildings cost -15% wood",
         "Barracks unit +1 pierce armor per age",
@@ -1057,9 +986,7 @@
       "slug": "mapuche",
       "region": "South American",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "mapuche-chief"
-      ],
+      "uniqueUnits": ["mapuche-chief"],
       "civBonuses": [
         "Units near defeated heroes deal +50% damage for 15 seconds",
         "Barracks units cost -10%/-15%/-20% per age from Feudal",
@@ -1090,9 +1017,7 @@
       "slug": "mayans",
       "region": "Mesoamerican",
       "specialty": "Archer",
-      "uniqueUnits": [
-        "plumed-archer"
-      ],
+      "uniqueUnits": ["plumed-archer"],
       "civBonuses": [
         "Start game with 1 extra villager but -50 food",
         "Natural resources last 20% longer",
@@ -1122,9 +1047,7 @@
       "slug": "mongols",
       "region": "East Asian",
       "specialty": "Cavalry Archer",
-      "uniqueUnits": [
-        "mangudai"
-      ],
+      "uniqueUnits": ["mangudai"],
       "civBonuses": [
         "Cavalry Archers reload 20% faster",
         "Light Cavalry and Hussars have +30% HP",
@@ -1154,9 +1077,7 @@
       "slug": "muisca",
       "region": "South American",
       "specialty": "Gold and Infantry",
-      "uniqueUnits": [
-        "muisca-chief"
-      ],
+      "uniqueUnits": ["muisca-chief"],
       "civBonuses": [
         "Gold miners work 15% faster",
         "Barracks units cost -10% gold",
@@ -1187,9 +1108,7 @@
       "slug": "persians",
       "region": "Middle Eastern",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "war-elephant"
-      ],
+      "uniqueUnits": ["war-elephant"],
       "civBonuses": [
         "Start game with +50 wood and food",
         "Town Center and Docks have 2x HP",
@@ -1219,9 +1138,7 @@
       "slug": "poles",
       "region": "Eastern European",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "obuch"
-      ],
+      "uniqueUnits": ["obuch"],
       "civBonuses": [
         "Villagers regenerate +5 HP per minute",
         "Farms generate +0.2 stone per second (passive stone income)",
@@ -1252,10 +1169,7 @@
       "slug": "portuguese",
       "region": "Southern European",
       "specialty": "Naval and Gunpowder",
-      "uniqueUnits": [
-        "caravel",
-        "organ-gun"
-      ],
+      "uniqueUnits": ["caravel", "organ-gun"],
       "civBonuses": [
         "All units costs -15% gold",
         "Ships +10% HP",
@@ -1285,9 +1199,7 @@
       "slug": "romans",
       "region": "Ancient Mediterranean",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "legionary"
-      ],
+      "uniqueUnits": ["legionary"],
       "civBonuses": [
         "Barracks and Stable units cost -15% wood",
         "Ballista Towers available",
@@ -1318,9 +1230,7 @@
       "slug": "saracens",
       "region": "Middle Eastern",
       "specialty": "Camel and naval",
-      "uniqueUnits": [
-        "mameluke"
-      ],
+      "uniqueUnits": ["mameluke"],
       "civBonuses": [
         "Market trade cost is only 5%",
         "Transport Ships have 2x HP and carry capacity",
@@ -1351,9 +1261,7 @@
       "slug": "shu",
       "region": "East Asian",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "tiger-cavalry"
-      ],
+      "uniqueUnits": ["tiger-cavalry"],
       "civBonuses": [
         "Barracks infantry +1 attack",
         "Farmers work faster",
@@ -1384,9 +1292,7 @@
       "slug": "sicilians",
       "region": "Southern European",
       "specialty": "Infantry and Cavalry",
-      "uniqueUnits": [
-        "serjeant"
-      ],
+      "uniqueUnits": ["serjeant"],
       "civBonuses": [
         "Town Centers and Castles resist 50% of incoming damage",
         "First Crusade (Imperial-Age unique technology) available",
@@ -1417,14 +1323,8 @@
       "slug": "slavs",
       "region": "Eastern European",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "boyars"
-      ],
-      "civBonuses": [
-        "Farmers works 15% faster",
-        "Siege weapons 15% cheaper",
-        "Tracking free"
-      ],
+      "uniqueUnits": ["boyars"],
+      "civBonuses": ["Farmers works 15% faster", "Siege weapons 15% cheaper", "Tracking free"],
       "teamBonus": "Military buildings provide +5% population",
       "uniqueTechs": {
         "castle": {
@@ -1449,10 +1349,7 @@
       "slug": "spanish",
       "region": "Southern European",
       "specialty": "Gunpowder and Monk",
-      "uniqueUnits": [
-        "conquistador",
-        "missionary"
-      ],
+      "uniqueUnits": ["conquistador", "missionary"],
       "civBonuses": [
         "Villagers construct buildings 30% faster",
         "Blacksmith upgrades do not cost any gold",
@@ -1483,9 +1380,7 @@
       "slug": "tatars",
       "region": "Central Asian",
       "specialty": "Cavalry Archer",
-      "uniqueUnits": [
-        "keshik"
-      ],
+      "uniqueUnits": ["keshik"],
       "civBonuses": [
         "Herdables provide +50% food (sheep yield more)",
         "Cavalry Archers fire +1 additional projectile per attack in Imperial Age",
@@ -1516,9 +1411,7 @@
       "slug": "teutons",
       "region": "Central European",
       "specialty": "Infantry",
-      "uniqueUnits": [
-        "teutonic-knight"
-      ],
+      "uniqueUnits": ["teutonic-knight"],
       "civBonuses": [
         "Monks have 2x healing range",
         "Towers can garrison 2x units (more arrows)",
@@ -1550,9 +1443,7 @@
       "slug": "tupi",
       "region": "South American",
       "specialty": "Archer and Raiding",
-      "uniqueUnits": [
-        "tupi-warrior"
-      ],
+      "uniqueUnits": ["tupi-warrior"],
       "civBonuses": [
         "Archers +1 attack vs. cavalry",
         "Infantry move faster through forests",
@@ -1583,9 +1474,7 @@
       "slug": "turks",
       "region": "Middle Eastern",
       "specialty": "Gunpowder",
-      "uniqueUnits": [
-        "janissary"
-      ],
+      "uniqueUnits": ["janissary"],
       "civBonuses": [
         "Gunpowder Units have +25% HP",
         "Gunpowder technologies cost 50% less",
@@ -1617,9 +1506,7 @@
       "slug": "vietnamese",
       "region": "Southeast Asian",
       "specialty": "Archer",
-      "uniqueUnits": [
-        "rattan-archer"
-      ],
+      "uniqueUnits": ["rattan-archer"],
       "civBonuses": [
         "Reveals enemy positions at game start",
         "Archery Range units have +10% HP in Feudal Age, +15% in Castle Age, and +20% in Imperial Age. Does not stack."
@@ -1648,10 +1535,7 @@
       "slug": "vikings",
       "region": "Northern European",
       "specialty": "Infantry and naval",
-      "uniqueUnits": [
-        "berserk",
-        "longboat"
-      ],
+      "uniqueUnits": ["berserk", "longboat"],
       "civBonuses": [
         "Warships cost 20% less",
         "Infantry have +10% HP in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age",
@@ -1681,9 +1565,7 @@
       "slug": "wei",
       "region": "East Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": [
-        "heavy-cavalry"
-      ],
+      "uniqueUnits": ["heavy-cavalry"],
       "civBonuses": [
         "Cavalry cost -10%",
         "Stables work faster",
@@ -1714,9 +1596,7 @@
       "slug": "wu",
       "region": "East Asian",
       "specialty": "Naval",
-      "uniqueUnits": [
-        "louchuan"
-      ],
+      "uniqueUnits": ["louchuan"],
       "civBonuses": [
         "Ships cost -15%",
         "Docks work faster",

@@ -1,15 +1,16 @@
 #!/usr/bin/env node
+
 // scripts/sync-assets.mjs
 // Fetches the img/ tree of SiegeEngineers/aoe2techtree at a pinned SHA
 // and mirrors it into public/images/aoe2/.
 //
 // Refresh policy: bump the SHA constant in a deliberate PR.
 
-import { mkdir, rm } from "node:fs/promises";
-import { createWriteStream } from "node:fs";
-import { pipeline } from "node:stream/promises";
 import { spawn } from "node:child_process";
+import { createWriteStream } from "node:fs";
+import { mkdir, rm } from "node:fs/promises";
 import path from "node:path";
+import { pipeline } from "node:stream/promises";
 
 const REPO = "SiegeEngineers/aoe2techtree";
 const SHA = process.env.AOE2TT_SHA || "b34082d13c31932d89788ad35af984896cbe050c";
@@ -34,7 +35,7 @@ async function run() {
       ["xzf", tarPath, "-C", TMP, "--wildcards", "*/img/*", "--strip-components=2"],
       { stdio: "inherit" },
     );
-    tar.on("exit", (code) => (code === 0 ? resolve() : reject(new Error("tar exit " + code))));
+    tar.on("exit", (code) => (code === 0 ? resolve() : reject(new Error(`tar exit ${code}`))));
   });
 
   // Remove the spurious nested img/ directory left by the wildcard extraction
@@ -48,8 +49,8 @@ async function run() {
   // --strip-components=2 already placed img/ contents directly into TMP
   // rsync with trailing slash on source copies contents (not the directory itself)
   await new Promise((resolve, reject) => {
-    const sync = spawn("rsync", ["-a", TMP + "/", TARGET + "/"], { stdio: "inherit" });
-    sync.on("exit", (code) => (code === 0 ? resolve() : reject(new Error("rsync exit " + code))));
+    const sync = spawn("rsync", ["-a", `${TMP}/`, `${TARGET}/`], { stdio: "inherit" });
+    sync.on("exit", (code) => (code === 0 ? resolve() : reject(new Error(`rsync exit ${code}`))));
   });
 
   console.log("Done. Assets at", TARGET);

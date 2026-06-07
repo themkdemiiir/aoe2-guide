@@ -7,3 +7,5 @@ dist/
 .DS_Store
 .cache/
 .pagefind/
+test-results/
+playwright-report/

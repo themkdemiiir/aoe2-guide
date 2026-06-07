@@ -24,7 +24,7 @@ Visit `http://localhost:4321/` and pick a language to enter.
 | Matchup | `src/content/matchups/<lang>/<civ-a>-vs-<civ-b>.md` | Civ slugs, difficulty rating, analysis |
 | Beginner chapter | `src/content/beginner/<lang>/<NN>-<topic>.md` | Sequence number, title, prose |
 | Glossary term | `src/content/glossary/<lang>/<term>.md` | Letter + term + definition prose |
-| Translation | Existing `<slug>.md` in TR/ES/DE | Match the EN structure; localize names + prose |
+| Translation | Existing `<slug>.md` in TR | Match the EN structure; localize names + prose |
 
 ## Step-by-step: adding a new build order
 
@@ -48,7 +48,7 @@ Visit `http://localhost:4321/` and pick a language to enter.
 
 3. Open the scaffolded `src/content/build-orders/en/<slug>.md`. Fill the frontmatter fields and write 3-4 short paragraphs of prose.
 
-4. Scaffold TR/ES/DE empty files:
+4. Scaffold the TR empty file:
    ```bash
    pnpm new:guide build-orders <slug>
    ```
@@ -64,7 +64,7 @@ Visit `http://localhost:4321/` and pick a language to enter.
 
 ## Slug convention
 
-English-canonical, kebab-case, descriptive: `21pop-archers`, `britons-vs-franks`, `arabia`, `feudal-age-glossary-term`. The same slug is used across all 4 language directories.
+English-canonical, kebab-case, descriptive: `21pop-archers`, `britons-vs-franks`, `arabia`, `feudal-age-glossary-term`. The same slug is used across EN and TR directories.
 
 ## Schema requirements
 
@@ -87,7 +87,7 @@ See [`docs/translation-workflow.md`](translation-workflow.md).
 
 ## CI checks
 
-Every PR runs `pnpm install --frozen-lockfile && pnpm test && pnpm build`. Schema errors, broken imports, or TypeScript errors will block merge.
+Every PR runs install, `pnpm check`, `pnpm check:all`, `pnpm test`, and `pnpm build`. Schema errors, broken imports, TypeScript errors, or lint/format errors will block merge.
 
 ## Attribution
 

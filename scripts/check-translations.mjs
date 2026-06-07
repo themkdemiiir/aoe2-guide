@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // scripts/check-translations.mjs
-// Walks src/content/<type>/{en,tr,es,de}/*.md and reports per-language coverage.
+// Walks src/content/<type>/{en,tr}/*.md and reports per-language coverage.
 
 import { readdir } from "node:fs/promises";
 import path from "node:path";
@@ -14,7 +14,7 @@ const TYPES = [
   "beginner",
   "glossary",
 ];
-const LANGS = ["en", "tr", "es", "de"];
+const LANGS = ["en", "tr"];
 
 async function listSlugs(type, lang) {
   try {

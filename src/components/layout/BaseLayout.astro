@@ -1,5 +1,7 @@
 ---
 import "@/styles/globals.css";
+import { ClientRouter } from "astro:transitions";
+import { SEO } from "astro-seo";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import { locales, localeMeta } from "@/i18n/locales";
@@ -17,20 +19,38 @@ const locale = getLocaleFromUrl(Astro.url);
 const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const alternates = allLocalePaths(canonicalPath);
+const canonical = `${site}/${locale}${canonicalPath}`;
 ---
 <!doctype html>
 <html lang={locale} dir={dir} data-theme="light">
   <head>
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          image: `${site}/favicon.svg`,
+          url: canonical,
+        },
+        optional: {
+          description,
+          locale,
+          siteName: "AOE2 Guide",
+        },
+      }}
+      twitter={{ card: "summary" }}
+    />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {alternates.map(({ locale: l, path }) => (
       <link rel="alternate" hreflang={l} href={`${site}${path}`} />
     ))}
     <link rel="alternate" hreflang="x-default" href={`${site}/en${canonicalPath}`} />
-    <link rel="canonical" href={`${site}/${locale}${canonicalPath}`} />
+    <ClientRouter />
     <script is:inline>
       // Set theme before paint to avoid FOUC
       (() => {
