@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 
 /** Force path-based IDs (e.g. "en/britons") instead of using frontmatter slug. */
 function pathId({ entry }: { entry: string }): string {
@@ -7,7 +7,11 @@ function pathId({ entry }: { entry: string }): string {
 }
 
 const civilizations = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/civilizations", generateId: pathId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/civilizations",
+    generateId: pathId,
+  }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -22,7 +26,11 @@ const civilizations = defineCollection({
 });
 
 const buildOrders = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/build-orders", generateId: pathId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/build-orders",
+    generateId: pathId,
+  }),
   schema: z.object({
     slug: z.string(),
     name: z.string(),
@@ -69,16 +77,6 @@ const maps = defineCollection({
   }),
 });
 
-const matchups = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/matchups", generateId: pathId }),
-  schema: z.object({
-    slug: z.string(),
-    civA: z.string(),
-    civB: z.string(),
-    difficulty: z.enum(["even", "favored", "unfavored"]),
-  }),
-});
-
 const beginner = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/beginner", generateId: pathId }),
   schema: z.object({
@@ -98,12 +96,92 @@ const glossary = defineCollection({
   }),
 });
 
+/* Data collections — sourced from src/data/*.json with Zod validation. */
+/* JSON file shapes are preserved (build scripts write to them unchanged).   */
+/* Each loader reshapes the JSON into the `[{id, ...}, ...]` form that the   */
+/* Content Layer API expects.                                                */
+
+const civData = defineCollection({
+  loader: file("src/data/civilizations.json", {
+    parser: (text) => {
+      const raw = JSON.parse(text) as { civs: Array<Record<string, unknown>> };
+      return raw.civs.map((c) => ({ id: c.slug as string, ...c }));
+    },
+  }),
+  schema: z.object({
+    slug: z.string(),
+    region: z.string().optional(),
+    specialty: z.string().optional(),
+    uniqueUnits: z.array(z.string()).default([]),
+    civBonuses: z.array(z.string()).default([]),
+    teamBonus: z.string().optional().default(""),
+    uniqueTechs: z
+      .object({
+        castle: z.object({ name: z.string(), effect: z.string() }),
+        imperial: z.object({ name: z.string(), effect: z.string() }),
+      })
+      .optional(),
+    meta: z
+      .object({
+        tier: z.string().nullable().optional(),
+        winRate: z.number().nullable().optional(),
+        playRate: z.number().nullable().optional(),
+        sampleSize: z.number().nullable().optional(),
+        snapshotDate: z.string().nullable().optional(),
+      })
+      .nullable()
+      .optional(),
+  }),
+});
+
+const unitStats = defineCollection({
+  loader: file("src/data/unit-stats.json", {
+    parser: (text) => {
+      const raw = JSON.parse(text) as { units: Array<Record<string, unknown>> };
+      return raw.units.map((u) => ({ id: u.slug as string, ...u }));
+    },
+  }),
+  schema: z.object({
+    slug: z.string(),
+    hp: z.number(),
+    attack: z.number(),
+    range: z.number().default(0),
+    minRange: z.number().default(0),
+    cost: z.object({
+      food: z.number().default(0),
+      wood: z.number().default(0),
+      gold: z.number().default(0),
+      stone: z.number().default(0),
+    }),
+    trainTime: z.number().optional(),
+    armorMelee: z.number().optional(),
+    armorPiercing: z.number().optional(),
+    line: z.string().optional(),
+    lineRank: z.number().optional(),
+  }),
+});
+
+const unitLines = defineCollection({
+  loader: file("src/data/unit-lines.json", {
+    parser: (text) => {
+      const raw = JSON.parse(text) as Record<string, string[]>;
+      return Object.entries(raw).map(([slug, members]) => ({ id: slug, slug, members }));
+    },
+  }),
+  schema: z.object({
+    slug: z.string(),
+    members: z.array(z.string()),
+  }),
+});
+
 export const collections = {
   civilizations,
   "build-orders": buildOrders,
   units,
   maps,
-  matchups,
   beginner,
   glossary,
+  "civ-data": civData,
+  "unit-stats": unitStats,
+  "unit-lines": unitLines,
 };

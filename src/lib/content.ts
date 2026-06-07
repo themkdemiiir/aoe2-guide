@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 
 type ContentType =
@@ -6,14 +6,13 @@ type ContentType =
   | "build-orders"
   | "units"
   | "maps"
-  | "matchups"
   | "beginner"
   | "glossary";
 
 /** Extract locale from a Content Layer entry id like "en/britons" → "en". */
 export function localeFromEntryId(id: string): Locale {
   const seg = id.split("/")[0];
-  return (seg === "en" || seg === "tr" || seg === "es" || seg === "de") ? seg : defaultLocale;
+  return seg === "en" || seg === "tr" ? seg : defaultLocale;
 }
 
 /** Extract the canonical (locale-stripped) slug from an entry id: "en/britons" → "britons". */
@@ -29,9 +28,16 @@ export async function getLocalizedEntries<T extends ContentType>(
   locale: Locale,
 ): Promise<Array<CollectionEntry<T>>> {
   const all = await getCollection(type);
-  const inLocale = all.filter((e) => localeFromEntryId(e.id) === locale);
-  if (inLocale.length > 0) return inLocale;
-  return all.filter((e) => localeFromEntryId(e.id) === defaultLocale);
+  const fallbackEntries = all.filter((e) => localeFromEntryId(e.id) === defaultLocale);
+  if (locale === defaultLocale) return fallbackEntries;
+
+  const localizedBySlug = new Map(
+    all
+      .filter((e) => localeFromEntryId(e.id) === locale)
+      .map((entry) => [canonicalSlug(entry.id), entry]),
+  );
+
+  return fallbackEntries.map((entry) => localizedBySlug.get(canonicalSlug(entry.id)) ?? entry);
 }
 
 /** Get a single entry by slug in a given locale; falls back to defaultLocale if not found. */
@@ -43,6 +49,8 @@ export async function getLocalizedEntry<T extends ContentType>(
   const all = await getCollection(type);
   const exact = all.find((e) => localeFromEntryId(e.id) === locale && canonicalSlug(e.id) === slug);
   if (exact) return { entry: exact, fallback: false };
-  const fb = all.find((e) => localeFromEntryId(e.id) === defaultLocale && canonicalSlug(e.id) === slug);
+  const fb = all.find(
+    (e) => localeFromEntryId(e.id) === defaultLocale && canonicalSlug(e.id) === slug,
+  );
   return fb ? { entry: fb, fallback: true } : null;
 }
