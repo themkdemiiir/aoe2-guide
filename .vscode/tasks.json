@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "pnpm: validate icons",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["validate:icons"],
+      "problemMatcher": []
+    },
+    {
+      "label": "pnpm: check",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["check"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "pnpm: test",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["test"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "pnpm: check translations",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["check:translations"],
+      "problemMatcher": []
+    },
+    {
+      "label": "pnpm: build",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["build"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "pnpm: release baseline",
+      "dependsOrder": "sequence",
+      "dependsOn": ["pnpm: validate icons", "pnpm: check", "pnpm: test", "pnpm: build"],
+      "problemMatcher": []
+    }
+  ]
+}
