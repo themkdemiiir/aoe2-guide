@@ -1,23 +1,24 @@
 // astro.config.mjs
-import { defineConfig } from "astro/config";
+
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import pagefind from "astro-pagefind";
 import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "astro/config";
+import icon from "astro-icon";
+import pagefind from "astro-pagefind";
+import { remarkBuildOrderTruncate } from "./src/lib/remark/build-order-truncate.mjs";
 
 export default defineConfig({
   site: "https://aoe2.example.com",
   output: "static",
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "tr", "es", "de"],
-    routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: false,
-      fallbackType: "rewrite",
-    },
-    fallback: { tr: "en", es: "en", de: "en" },
+  integrations: [
+    mdx(),
+    sitemap(),
+    pagefind(),
+    icon({ include: { lucide: ["*"], heroicons: ["*"] } }),
+  ],
+  markdown: {
+    remarkPlugins: [remarkBuildOrderTruncate],
   },
-  integrations: [mdx(), sitemap(), pagefind()],
   vite: { plugins: [tailwindcss()] },
 });
