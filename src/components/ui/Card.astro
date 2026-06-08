@@ -19,8 +19,10 @@ const { href, class: className = "", interactive = !!Astro.props.href } = Astro.
 // element, not the variable's value, which produced inert non-clickable cards.
 const Tag = href ? "a" : "div";
 const base =
-  "flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition";
-const hover = interactive ? "hover:border-gold-500" : "";
+  "group/card flex h-full flex-col rounded-lg border border-stone-700/25 bg-parchment p-5 shadow-sm transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/70";
+const hover = interactive
+  ? "hover:-translate-y-0.5 hover:border-gold-500 hover:shadow-md"
+  : "";
 ---
 <Tag href={href} class:list={[base, hover, className]}>
   {Astro.slots.has("header") && (
