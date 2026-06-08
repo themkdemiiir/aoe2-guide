@@ -35,6 +35,13 @@ const jsonLd = {
 <!doctype html>
 <html lang={locale} dir={dir} data-theme="light">
   <head>
+    <script is:inline>
+      // Cloudflare keeps the *.pages.dev subdomain permanently; bounce it to the
+      // canonical domain so visitors always land on aoe2guide.com.
+      if (location.hostname === "aoe2-guide.pages.dev") {
+        location.replace("https://aoe2guide.com" + location.pathname + location.search + location.hash);
+      }
+    </script>
     <SEO
       title={title}
       description={description}
