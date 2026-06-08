@@ -1,67 +1,74 @@
 ---
 slug: drush-fc
-name: "Dark Age Rush into Fast Castle"
+name: "Drush into Fast Castle"
 difficulty: advanced
 targetAge: castle
 durationMin: 16
-civsRecommended: [aztecs, mayans, lithuanians, slavs, celts]
+civsRecommended: [mayans, aztecs, lithuanians, slavs, celts]
 steps:
-  - { villagers: 3,  assign: "3 → sheep (Loom first if Aztec/Mayan for +5 carry)", icons: ["food"] }
-  - { villagers: 4,  assign: "+1 → build Barracks before house if needed", icons: ["barracks"] }
-  - { villagers: 6,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 6,  assign: "Queue 3 Militia from Barracks immediately", icons: ["barracks"] }
-  - { villagers: 9,  assign: "+3 → berries, build mill", icons: ["food", "mill"] }
-  - { villagers: 14, assign: "+5 → wood; send 3 Militia forward to opponent's wood line", icons: ["wood"] }
-  - { villagers: 18, assign: "+4; click Feudal at 18–20 pop", icons: ["food"] }
-  - { villagers: 20, assign: "Feudal: upgrade Militia to Men-at-Arms; build Blacksmith + Market; 4 → gold", icons: ["blacksmith", "market", "gold"] }
-  - { villagers: 26, assign: "+6; click Castle Age at ~26 pop; boom during transition", icons: ["castle-age", "farm"] }
+  - { villagers: 3,  assign: "3 → sheep under the TC; build 2 houses (2 vils on one, 1 on the other), then to sheep", icons: ["food", "house"] }
+  - { villagers: 6,  assign: "4–6 → sheep", icons: ["food"] }
+  - { villagers: 7,  assign: "7 → build Lumber Camp, then to wood", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "8–10 → wood", icons: ["wood"] }
+  - { villagers: 11, assign: "11 → lure the nearest boar", icons: ["food"] }
+  - { villagers: 13, assign: "12 → build 2 houses near berries; 13 → build Mill, then to berries", icons: ["food", "mill"] }
+  - { villagers: 16, assign: "14–15 → berries; 16 → mine 10 gold (for Feudal), then to wood", icons: ["food", "gold"] }
+  - { villagers: 17, assign: "17 → build Barracks, queue 3 Militia and send them with your Scout to harass", icons: ["barracks", "militia", "scout-cavalry"] }
+  - { villagers: 22, assign: "18–20 → wood; 21–22 → berries", icons: ["wood", "food"] }
+  - { villagers: 28, assign: "23–28 → farms; research Loom; click Feudal Age", icons: ["farm", "loom"] }
+  - { villagers: 28, assign: "Feudal: Double-Bit Axe; build Blacksmith + 2 Archery Ranges; click Castle Age (~29–30 vils)", icons: ["blacksmith", "archery-range"] }
+  - { villagers: 30, assign: "Castle: ~8 on gold, ~12 on wood; mass Crossbowmen (Bodkin Arrow, Bow Saw)", icons: ["gold", "crossbowman"] }
 source:
-  author: "Hera"
+  author: "AoE Companion"
+  url: "https://aoecompanion.com/build-guides/drush-fast-castle"
 ---
 
-# Dark Age Rush into Fast Castle
+# Drush into Fast Castle
 
-**Goal:** Send 3 Militia in the Dark Age to disrupt the opponent's economy, then Fast Castle while they're recovering — arriving in Castle Age with an economic lead.
-**Recommended civs:** Aztecs (Loom free, militia bonus), Mayans (free Loom), Lithuanians (infantry attack bonus), Slavs (faster farming), Celts (faster infantry movement)
+**Goal:** Send 3 Militia with your Scout in the Dark Age to disrupt the opponent's economy, then Fast Castle while they are recovering — arriving in Castle Age with the eco lead and a fast Crossbow follow-up.
+**Recommended civs:** Mayans (free Loom, strong archers), Aztecs (free Loom, infantry bonus), Lithuanians (infantry attack bonus), Slavs (faster farming), Celts (faster infantry movement)
 
-## Dark Age (0–18 Villagers)
+## Dark Age (3–28 Villagers)
 
-- 3 villagers on sheep (research Loom first if Aztec/Mayan)
-- 1 villager builds Barracks as early as possible
-- 2 villagers to wood; Lumber Camp after Barracks
-- Queue 3 Militia from Barracks immediately
-- 3 villagers to berries; Mill
-- 5 more villagers to wood (14 total)
-- 4 more villagers to food/wood (18 total)
+- 3 villagers to sheep; build 2 houses (2 villagers on one, 1 on the other) then to sheep
+- Villagers 4–6 to sheep
+- Villager 7 builds the Lumber Camp, then to wood
+- Villagers 8–10 to wood
+- Villager 11 lures the nearest boar
+- Villager 12 builds 2 houses near the berries; villager 13 builds the Mill, then to berries
+- Villagers 14–15 to berries
+- Villager 16 mines 10 gold (just enough for Feudal), then to wood
+- Villager 17 builds the Barracks — queue 3 Militia and send them forward with your Scout
+- Villagers 18–20 to wood; villagers 21–22 to berries
+- Villagers 23–28 build farms; research Loom; click Feudal Age at ~28 population
 
-**Send the 3 Militia forward at ~3:00–4:00** to the opponent's wood line. Even 1–2 villagers killed is a significant advantage. Do NOT upgrade to Men-at-Arms in Dark Age — wait for Feudal.
+**Send the 3 Militia forward as soon as they pop**, escorted by your Scout, to the opponent's villagers. Even one or two kills is a significant advantage. This is a true Drush — keep them as Militia and do NOT spend on the Men-at-Arms upgrade; your resources go into the climb to Castle Age.
 
-Click Feudal Age at 18–20 population (~9:30–10:00).
+Click Feudal Age at ~28 villagers.
 
-## Feudal Preparation
+## Feudal Age
 
-- Upgrade Militia to Men-at-Arms immediately (they get WAY stronger)
-- Build Blacksmith + Market (Castle Age prerequisites)
-- 4 villagers to gold; Mining Camp
-- Boom to 26 villagers; build Farms
+- Research Double-Bit Axe for faster wood
+- Build the Blacksmith and 2 Archery Ranges (your Castle Age army comes from here)
+- Continue mining gold; click Castle Age at ~29–30 population
 
-Men-at-Arms continue raiding during your transition.
+The Militia keep poking the opponent's eco during the transition.
 
-## Castle Age (26 Villagers)
+## Castle Age (~30 Villagers)
 
-- Boom aggressively — 2nd Town Center if possible
-- Add Farms for stable food income
-- Choose follow-up based on opponent's state: aggressive castle drop if crippled, or Crossbow + Siege if recovered
+- Reallocate to roughly 8 on gold and 12 on wood to sustain Crossbow production
+- Mass Crossbowmen out of the 2 Archery Ranges; research Bodkin Arrow and Bow Saw
+- Add farms for stable food and boom behind the Crossbow wall
 
 ## Strategy and Follow-Up (What's Next)
 
-The Drush FC is an advanced build combining early economic harassment with a strong economy. The opponent either spends resources defending against Militia (slowing their own boom) or takes villager losses.
+The Drush FC combines early infantry harassment with a clean Fast Castle. The opponent either burns resources defending against the Militia (slowing their own boom) or takes villager losses — and you punish either outcome with a fast Crossbow army.
 
-- **Weak against:** Opponents who wall early and ignore the Militia; players who also open Militia (Militia fight is even, no advantage gained).
-- **Strong against:** 23-pop Fast Castle players who assume they're safe; aggressive Feudal builds that don't expect Dark Age pressure.
+- **Weak against:** Opponents who wall early and ignore the Militia; players who also open Militia (the infantry fight is even, so no edge is gained); Scout-Cavalry openings that ride down your Militia and your eco.
+- **Strong against:** Greedy Fast Castle players who assume they are safe; archer or skirmisher openings that fold to early Militia pressure.
 
 **Options:**
 
-1. **FC into Knights:** The most common follow-up — boom + Knights after arriving safely in Castle Age.
-2. **FC into Crossbow:** Mass Crossbowmen if opponent has Knights coming.
-3. **Aggressive Castle Drop:** If the opponent's base is still in disarray, push a forward castle immediately.
+1. **FC into Crossbow (default):** The two Archery Ranges and Blacksmith pump upgraded Crossbowmen as soon as you hit Castle Age — the line this build is shaped for.
+2. **FC into Knights:** If the opponent has committed to archers, skip Crossbows and add a Stable for Knights instead.
+3. **Aggressive Castle Drop:** If the opponent's base is still in disarray from the Drush, push a forward Castle and keep the pressure on.

@@ -6,18 +6,20 @@ targetAge: imperial
 durationMin: 21
 civsRecommended: []
 steps:
-  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
-  - { villagers: 16, assign: "+10 → wood (build 2 Lumber Camps)", icons: ["wood", "lumber-camp"] }
-  - { villagers: 20, assign: "+4 → berries, build mill", icons: ["food", "mill"] }
-  - { villagers: 28, assign: "+8 → hunt (boar / deer / sheep)", icons: ["food"] }
-  - { villagers: 30, assign: "+2 → gold, build Mining Camp", note: "Click Feudal at 30 pop; transition hunting vils to farms when food runs out", icons: ["gold", "mining-camp"] }
-  - { villagers: 30, assign: "Feudal arrives (~13:00) — 1 builds Blacksmith, 2 build Market; +2 gold", icons: ["blacksmith", "market", "gold"] }
-  - { villagers: 32, assign: "+2 vils; click Castle Age (~16:30)", icons: ["food", "gold"] }
-  - { villagers: 32, assign: "Castle Age — build 1 Monastery, 1 Siege Workshop; +2 wood", icons: ["monastery", "wood"] }
-  - { villagers: 34, assign: "+2 vils; redirect berry vils to farms; click Imperial Age (~21:00)", icons: ["farm"] }
-  - { villagers: 34, assign: "Imperial Age — 12 food / 9 wood / 8 gold distribution; build military and scale", icons: ["food", "wood", "gold"] }
+  - { villagers: 6,  assign: "Villagers 1-6 → sheep under TC", icons: ["food", "town-center"] }
+  - { villagers: 10, assign: "Villagers 7-10 → wood (build Lumber Camp)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 11, assign: "Villager 11 → lure boar to TC", icons: ["food"] }
+  - { villagers: 14, assign: "Villagers 12-14 → berries (build Mill)", icons: ["food", "mill"] }
+  - { villagers: 19, assign: "Villagers 15-19 → more wood + second boar lure", icons: ["wood", "food"] }
+  - { villagers: 24, assign: "Villagers 20-24 → mixed food (sheep / boar / deer)", icons: ["food"] }
+  - { villagers: 30, assign: "Villagers 25-30 → gold (build Mining Camp)", note: "Click Feudal at 30 pop (~13:00); 6 on gold. Push deer to TC with scout", icons: ["gold", "mining-camp"] }
+  - { villagers: 30, assign: "Feudal arrives — 1 builds Blacksmith, 2 build Market then return to wood", icons: ["blacksmith", "market"] }
+  - { villagers: 32, assign: "+2 vils → gold (now 8 on gold); click Castle Age (~16:30)", icons: ["gold"] }
+  - { villagers: 32, assign: "Castle Age — build Monastery + Siege Workshop; transition hunt vils to farms", icons: ["monastery", "siege-workshop", "farm"] }
+  - { villagers: 32, assign: "Click Imperial Age (~21:00); keep food / wood / gold balanced", icons: ["food", "wood", "gold"] }
 source:
-  author: "Hera"
+  author: "Hera, AoE Companion"
+  url: "https://aoecompanion.com/build-guides/fast-imperial"
 
 ---
 
@@ -28,46 +30,48 @@ source:
 
 ## Dark Age (0–30 Villagers)
 
-- 6 villagers on sheep
-- 10 villagers on wood (2 Lumber Camps)
-- 4 villagers on berries (Mill)
-- 8 villagers on boar, deer, or sheep
-- 2 villagers on gold
-- When hunting runs out, transition villagers to Farms
-- Use scout to push deer toward TC
+- Villagers 1-6 on sheep under the Town Center
+- Villagers 7-10 on wood (build a Lumber Camp)
+- Villager 11 lures the first boar to the TC
+- Villagers 12-14 on berries (build a Mill)
+- Villagers 15-19 on more wood and the second boar lure
+- Villagers 20-24 on mixed food (sheep / boar / deer)
+- Villagers 25-30 on gold (build a Mining Camp) — finish with **6 villagers on gold**
+- Use the scout to push deer toward the TC
 
-Click Feudal Age with 30th villager (~13:00).
+Click Feudal Age with the 30th villager (~13:00).
 
 ## Feudal Preparation
 
-- 1 villager builds Blacksmith
-- 2 villagers build Market (return to wood when done)
-- +2 villagers to gold
+- 1 villager builds the Blacksmith
+- 2 villagers build the Market (return to wood when done)
+- Keep gold mining going to fund the age-ups
 
 **Research:**
-- (Delay) Double-Bit Axe and Horse Collar in Feudal if time permits
+
+- (Delay) Double-Bit Axe and Horse Collar in Feudal only if time and resources permit — speed to Castle is the priority
 
 ## Feudal Age (30 Villagers)
 
+- Add 2 villagers to gold (now 8 on gold) to bank toward the next age
 - Click Castle Age (~16:30) — minimize Feudal time
 - No military production in Feudal Age
-- Use Market to sell surplus resources for gold if needed
+- Use the Market to sell surplus resources for gold if needed
 
 ## Castle Age (32 Villagers)
 
 - Build 1 Monastery
 - Build 1 Siege Workshop
-- +2 villagers to wood
-- When berries run out, send villagers to Farms
-- Keep economy balanced; increase gold count
+- When berries and hunt run out, send those villagers to Farms
+- Keep the economy balanced; maintain a strong gold count
 - Click Imperial Age (~21:00)
 
-## Imperial Age (34 Villagers)
+## Imperial Age (32+ Villagers)
 
-- Target resource distribution: 12 food, 9 wood, 8 gold
-- Build military as you transition to Imperial Age (Archers, Artillery, Monks)
-- Expand economy and multiply production buildings
-- Add military production buildings to match chosen composition
+- Keep food, wood, and gold balanced; add Farms and gold as production scales up
+- Build military as you transition to Imperial Age (Archers, Cavalry, Monks, Siege)
+- Expand the economy and multiply production buildings
+- Add military production buildings to match your chosen composition
 
 ## Strategy and Follow-Up (What's Next)
 
