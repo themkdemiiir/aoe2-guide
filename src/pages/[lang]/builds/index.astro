@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Badge from "@/components/ui/Badge.astro";
+import FilterBar from "@/components/ui/FilterBar.astro";
 import Icon from "@/components/ui/Icon.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
@@ -17,41 +18,78 @@ export function getStaticPaths() {
 }
 const lang = Astro.params.lang as Locale;
 const builds = await getLocalizedEntries("build-orders", lang);
+
+const facets = [
+  {
+    name: "difficulty",
+    label: t(lang, "filter.difficulty"),
+    options: ["beginner", "intermediate", "advanced"].map((v) => ({
+      value: v,
+      label: t(lang, `difficulty.${v as "beginner" | "intermediate" | "advanced"}`),
+    })),
+  },
+  {
+    name: "age",
+    label: t(lang, "filter.age"),
+    options: ["feudal", "castle", "imperial"].map((v) => ({
+      value: v,
+      label: t(lang, `age.${v as "feudal" | "castle" | "imperial"}`),
+    })),
+  },
+];
 ---
 <BaseLayout title={t(lang, "nav.builds")} canonicalPath="/builds">
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">{t(lang, "nav.builds")}</h1>
+  <section class="mx-auto max-w-7xl px-4 py-12" data-filter-root>
+    <h1 class="mb-6 font-display text-4xl text-ink">{t(lang, "nav.builds")}</h1>
     {builds.length === 0 ? (
       <p class="mt-6 text-stone-700">No build orders yet — coming soon.</p>
     ) : (
-      <ul class="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {builds.map((b) => (
-          <li class="h-full">
-            <a href={localizedPath(`/builds/${canonicalSlug(b.id)}`, lang)}
-               class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500">
-              <div class="flex flex-wrap gap-2">
-                <Badge variant={difficultyVariant(b.data.difficulty)}>{b.data.difficulty}</Badge>
-                <Badge variant="outline">{b.data.targetAge}</Badge>
-                <Badge variant="secondary">~{b.data.durationMin} min</Badge>
-              </div>
-              <h3 class="mt-3 font-display text-xl text-ink">{b.data.name}</h3>
-              {b.data.civsRecommended.length > 0 && (
-                <div class="mt-4 flex flex-wrap gap-1.5">
-                  {b.data.civsRecommended.slice(0, 5).map((civSlug) => (
-                    <span class="inline-flex items-center gap-1 rounded border border-stone-700/30 bg-stone-700/5 px-1.5 py-1 text-xs text-stone-700">
-                      <Icon slug={civSlug} kind="civ" size={20} />
-                      {civSlug.replace(/-/g, " ")}
-                    </span>
-                  ))}
+      <>
+        <FilterBar
+          searchPlaceholder={`${t(lang, "filter.search")}…`}
+          facets={facets}
+          total={builds.length}
+          resultsLabel={t(lang, "filter.results")}
+          allLabel={t(lang, "filter.all")}
+          resetLabel={t(lang, "filter.reset")}
+        />
+        <ul class="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {builds.map((b) => (
+            <li
+              class="h-full"
+              data-filter-item
+              data-search={`${b.data.name} ${b.data.civsRecommended.join(" ")}`.toLowerCase()}
+              data-difficulty={b.data.difficulty}
+              data-age={b.data.targetAge}
+            >
+              <a href={localizedPath(`/builds/${canonicalSlug(b.id)}`, lang)}
+                 class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500">
+                <div class="flex flex-wrap gap-2">
+                  <Badge variant={difficultyVariant(b.data.difficulty)}>{t(lang, `difficulty.${b.data.difficulty}`)}</Badge>
+                  <Badge variant="outline">{t(lang, `age.${b.data.targetAge}`)}</Badge>
+                  <Badge variant="secondary">~{b.data.durationMin} {t(lang, "home.minutes")}</Badge>
                 </div>
-              )}
-              <p class="mt-auto pt-4 text-xs text-stone-700">
-                {b.data.steps.length} steps · ends around {b.data.steps.at(-1)?.villagers ?? "?"} pop
-              </p>
-            </a>
-          </li>
-        ))}
-      </ul>
+                <h3 class="mt-3 font-display text-xl text-ink">{b.data.name}</h3>
+                {b.data.civsRecommended.length > 0 && (
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    {b.data.civsRecommended.slice(0, 5).map((civSlug) => (
+                      <span class="inline-flex items-center gap-1 rounded border border-stone-700/30 bg-stone-700/5 px-1.5 py-1 text-xs text-stone-700">
+                        <Icon slug={civSlug} kind="civ" size={20} />
+                        {civSlug.replace(/-/g, " ")}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <p class="mt-auto pt-4 font-mono text-xs text-stone-700">
+                  {b.data.steps.length} {t(lang, "home.steps")} · ~{b.data.steps.at(-1)?.villagers ?? "?"} {t(lang, "home.pop")}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p data-filter-empty hidden class="mt-8 text-center text-stone-700">{t(lang, "filter.noResults")}</p>
+      </>
     )}
   </section>
+  <script>import "@/scripts/list-filter.ts";</script>
 </BaseLayout>

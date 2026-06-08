@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import FilterBar from "@/components/ui/FilterBar.astro";
 import Icon from "@/components/ui/Icon.astro";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
@@ -19,10 +20,10 @@ const bySlug = new Map(allUnits.map((u) => [canonicalSlug(u.id), u]));
 // one of its members exists in the content directory.
 interface LineCard {
   lineRoot: string;
-  baseTierSlug: string;   // slug of the first existing tier — the link target
-  baseTierName: string;   // display name of that tier
+  baseTierSlug: string; // slug of the first existing tier — the link target
+  baseTierName: string; // display name of that tier
   role: string;
-  memberSlugs: string[];  // all existing tier slugs in order
+  memberSlugs: string[]; // all existing tier slugs in order
 }
 
 const lineCards: LineCard[] = [];
@@ -52,15 +53,24 @@ lineCards.sort((a, b) => {
   return a.baseTierName.localeCompare(b.baseTierName);
 });
 
-// Helper: derive a human-readable line display name
 function lineDisplayName(card: LineCard): string {
   if (card.memberSlugs.length === 1) return card.baseTierName;
-  // Strip "Line" suffix from lineRoot so we can append it naturally
-  const root = card.lineRoot.replace(/-line$/, "");
-  // Use the base tier name + "Line" only for generic lines
-  // For unique unit lines the base name is already descriptive
-  return card.baseTierName + " Line";
+  return `${card.baseTierName} Line`;
 }
+
+// Role facet — slugify so multi-word roles (e.g. "heavy cavalry") match cleanly.
+const roleSlug = (role: string) => role.toLowerCase().replace(/\s+/g, "-");
+const roleMap = new Map<string, string>();
+for (const c of lineCards) if (!roleMap.has(roleSlug(c.role))) roleMap.set(roleSlug(c.role), c.role);
+const facets = [
+  {
+    name: "role",
+    label: t(lang, "filter.role"),
+    options: [...roleMap]
+      .map(([value, label]) => ({ value, label }))
+      .sort((a, b) => a.label.localeCompare(b.label)),
+  },
+];
 
 // Abbreviated tier names for the chain pills (max 4 shown)
 const abbreviations: Record<string, string> = {
@@ -114,42 +124,59 @@ function tierAbbr(slug: string): string {
 }
 ---
 <BaseLayout title={t(lang, "nav.units")} canonicalPath="/units">
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">{t(lang, "nav.units")}</h1>
+  <section class="mx-auto max-w-7xl px-4 py-12" data-filter-root>
+    <h1 class="mb-6 font-display text-4xl text-ink">{t(lang, "nav.units")}</h1>
     {lineCards.length === 0 ? (
       <p class="mt-6 text-stone-700">No units yet — coming soon.</p>
     ) : (
-      <ul class="mt-8 grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {lineCards.map((card) => (
-          <li class="h-full">
-            <a href={localizedPath(`/units/${card.baseTierSlug}`, lang)}
-               class="flex h-full flex-col gap-2 rounded border border-stone-700/40 bg-parchment p-3 hover:border-gold-500">
-              <div class="flex items-center gap-3">
-                <Icon slug={card.baseTierSlug} kind="unit" size={40} />
-                <div class="min-w-0 flex-1">
-                  <div class="font-display text-lg text-ink leading-tight">{lineDisplayName(card)}</div>
-                  <div class="text-xs text-stone-700">{card.role}</div>
+      <>
+        <FilterBar
+          searchPlaceholder={`${t(lang, "filter.search")}…`}
+          facets={facets}
+          total={lineCards.length}
+          resultsLabel={t(lang, "filter.results")}
+          allLabel={t(lang, "filter.all")}
+          resetLabel={t(lang, "filter.reset")}
+        />
+        <ul class="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {lineCards.map((card) => (
+            <li
+              class="h-full"
+              data-filter-item
+              data-search={`${lineDisplayName(card)} ${card.role} ${card.memberSlugs.join(" ")}`.toLowerCase()}
+              data-role={roleSlug(card.role)}
+            >
+              <a href={localizedPath(`/units/${card.baseTierSlug}`, lang)}
+                 class="flex h-full flex-col gap-2 rounded border border-stone-700/40 bg-parchment p-3 hover:border-gold-500">
+                <div class="flex items-center gap-3">
+                  <Icon slug={card.baseTierSlug} kind="unit" size={40} />
+                  <div class="min-w-0 flex-1">
+                    <div class="font-display text-lg text-ink leading-tight">{lineDisplayName(card)}</div>
+                    <div class="text-xs capitalize text-stone-700">{card.role}</div>
+                  </div>
                 </div>
-              </div>
-              {card.memberSlugs.length > 1 && (
-                <div class="flex flex-wrap gap-1 pt-0.5">
-                  {card.memberSlugs.slice(0, 4).map((s) => (
-                    <span class="inline-flex items-center gap-1 rounded bg-stone-700/10 px-1.5 py-0.5 text-xs text-stone-700">
-                      <Icon slug={s} kind="unit" size={14} framed={false} />
-                      {tierAbbr(s)}
-                    </span>
-                  ))}
-                  {card.memberSlugs.length > 4 && (
-                    <span class="rounded bg-stone-700/10 px-1.5 py-0.5 text-xs text-stone-700">
-                      +{card.memberSlugs.length - 4}
-                    </span>
-                  )}
-                </div>
-              )}
-            </a>
-          </li>
-        ))}
-      </ul>
+                {card.memberSlugs.length > 1 && (
+                  <div class="flex flex-wrap gap-1 pt-0.5">
+                    {card.memberSlugs.slice(0, 4).map((s) => (
+                      <span class="inline-flex items-center gap-1 rounded bg-stone-700/10 px-1.5 py-0.5 text-xs text-stone-700">
+                        <Icon slug={s} kind="unit" size={14} framed={false} />
+                        {tierAbbr(s)}
+                      </span>
+                    ))}
+                    {card.memberSlugs.length > 4 && (
+                      <span class="rounded bg-stone-700/10 px-1.5 py-0.5 text-xs text-stone-700">
+                        +{card.memberSlugs.length - 4}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p data-filter-empty hidden class="mt-8 text-center text-stone-700">{t(lang, "filter.noResults")}</p>
+      </>
     )}
   </section>
+  <script>import "@/scripts/list-filter.ts";</script>
 </BaseLayout>

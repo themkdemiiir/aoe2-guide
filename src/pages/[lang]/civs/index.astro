@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import CivCard from "@/components/content/CivCard.astro";
+import FilterBar from "@/components/ui/FilterBar.astro";
+import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
@@ -11,22 +13,74 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Locale;
 const civs = await getLocalizedEntries("civilizations", lang);
+
+// Join civ-data for tier/region facets (text lives in `civilizations`, meta in `civ-data`).
+const civData = await getCollection("civ-data");
+const metaBySlug = new Map(civData.map((c) => [c.data.slug, c.data]));
+
+const regionSlug = (r: string) => r.toLowerCase().replace(/\s+/g, "-");
+const tierRank: Record<string, number> = { S: 0, A: 1, B: 2, C: 3, D: 4, F: 5 };
+
+const tierSet = new Set<string>();
+const regionMap = new Map<string, string>(); // slug -> label
+for (const c of civs) {
+  const m = metaBySlug.get(canonicalSlug(c.id));
+  if (m?.meta?.tier) tierSet.add(m.meta.tier);
+  if (m?.region) regionMap.set(regionSlug(m.region), m.region);
+}
+
+const facets = [
+  {
+    name: "tier",
+    label: t(lang, "filter.tier"),
+    options: [...tierSet]
+      .sort((a, b) => (tierRank[a] ?? 9) - (tierRank[b] ?? 9))
+      .map((v) => ({ value: v, label: `${t(lang, "filter.tier")} ${v}` })),
+  },
+  {
+    name: "region",
+    label: t(lang, "filter.region"),
+    options: [...regionMap]
+      .map(([value, label]) => ({ value, label }))
+      .sort((a, b) => a.label.localeCompare(b.label)),
+  },
+];
 ---
 <BaseLayout title={t(lang, "nav.civs")} canonicalPath="/civs">
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">{t(lang, "nav.civs")}</h1>
-    <ul class="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {civs.map((c) => (
-        <li>
-          <CivCard
-            slug={canonicalSlug(c.id)}
-            name={c.data.name}
-            tagline={c.data.tagline}
-            bonuses={c.data.bonuses}
-            locale={lang}
-          />
-        </li>
-      ))}
+  <section class="mx-auto max-w-7xl px-4 py-12" data-filter-root>
+    <h1 class="mb-6 font-display text-4xl text-ink">{t(lang, "nav.civs")}</h1>
+    <FilterBar
+      searchPlaceholder={`${t(lang, "filter.search")}…`}
+      facets={facets}
+      total={civs.length}
+      resultsLabel={t(lang, "filter.results")}
+      allLabel={t(lang, "filter.all")}
+      resetLabel={t(lang, "filter.reset")}
+    />
+    <ul class="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {civs.map((c) => {
+        const slug = canonicalSlug(c.id);
+        const m = metaBySlug.get(slug);
+        return (
+          <li
+            class="h-full"
+            data-filter-item
+            data-search={`${c.data.name} ${c.data.tagline}`.toLowerCase()}
+            data-tier={m?.meta?.tier ?? ""}
+            data-region={m?.region ? regionSlug(m.region) : ""}
+          >
+            <CivCard
+              slug={slug}
+              name={c.data.name}
+              tagline={c.data.tagline}
+              bonuses={c.data.bonuses}
+              locale={lang}
+            />
+          </li>
+        );
+      })}
     </ul>
+    <p data-filter-empty hidden class="mt-8 text-center text-stone-700">{t(lang, "filter.noResults")}</p>
   </section>
+  <script>import "@/scripts/list-filter.ts";</script>
 </BaseLayout>

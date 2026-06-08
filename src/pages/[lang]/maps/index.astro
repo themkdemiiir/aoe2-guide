@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import FilterBar from "@/components/ui/FilterBar.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
 import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
@@ -9,24 +10,52 @@ export function getStaticPaths() {
 }
 const lang = Astro.params.lang as Locale;
 const maps = await getLocalizedEntries("maps", lang);
+
+const mapTypes = ["open", "closed", "hybrid", "water", "nomad"] as const;
+const facets = [
+  {
+    name: "type",
+    label: t(lang, "filter.type"),
+    options: mapTypes.map((v) => ({ value: v, label: t(lang, `mapType.${v}`) })),
+  },
+];
 ---
 <BaseLayout title={t(lang, "nav.maps")} canonicalPath="/maps">
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">{t(lang, "nav.maps")}</h1>
+  <section class="mx-auto max-w-7xl px-4 py-12" data-filter-root>
+    <h1 class="mb-6 font-display text-4xl text-ink">{t(lang, "nav.maps")}</h1>
     {maps.length === 0 ? (
       <p class="mt-6 text-stone-700">No maps yet — coming soon.</p>
     ) : (
-      <ul class="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {maps.map((m) => (
-          <li class="h-full">
-            <a href={localizedPath(`/maps/${canonicalSlug(m.id)}`, lang)}
-               class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
-              <h3 class="font-display text-xl text-ink">{m.data.name}</h3>
-              <p class="mt-auto pt-2 text-xs text-stone-700">{m.data.type}{m.data.size ? ` · ${m.data.size}` : ""}</p>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <>
+        <FilterBar
+          searchPlaceholder={`${t(lang, "filter.search")}…`}
+          facets={facets}
+          total={maps.length}
+          resultsLabel={t(lang, "filter.results")}
+          allLabel={t(lang, "filter.all")}
+          resetLabel={t(lang, "filter.reset")}
+        />
+        <ul class="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {maps.map((m) => (
+            <li
+              class="h-full"
+              data-filter-item
+              data-search={m.data.name.toLowerCase()}
+              data-type={m.data.type}
+            >
+              <a href={localizedPath(`/maps/${canonicalSlug(m.id)}`, lang)}
+                 class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
+                <h3 class="font-display text-xl text-ink">{m.data.name}</h3>
+                <p class="mt-auto pt-2 text-xs capitalize text-stone-700">
+                  {t(lang, `mapType.${m.data.type}`)}{m.data.size ? ` · ${m.data.size}` : ""}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p data-filter-empty hidden class="mt-8 text-center text-stone-700">{t(lang, "filter.noResults")}</p>
+      </>
     )}
   </section>
+  <script>import "@/scripts/list-filter.ts";</script>
 </BaseLayout>
