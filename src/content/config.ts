@@ -109,6 +109,21 @@ const glossary = defineCollection({
   }),
 });
 
+const articles = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/articles", generateId: pathId }),
+  schema: z.object({
+    slug: z.string(),
+    title: z.string(),
+    description: z.string(),
+    category: z.enum(["fundamentals", "strategy", "counters", "meta", "resources"]),
+    order: z.number().default(0),
+    updated: z.string().optional(),
+    heroIcon: z.string().optional(),
+    sources: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
 /* Data collections — sourced from src/data/*.json with Zod validation. */
 /* JSON file shapes are preserved (build scripts write to them unchanged).   */
 /* Each loader reshapes the JSON into the `[{id, ...}, ...]` form that the   */
@@ -194,6 +209,7 @@ export const collections = {
   maps,
   beginner,
   glossary,
+  articles,
   "civ-data": civData,
   "unit-stats": unitStats,
   "unit-lines": unitLines,
