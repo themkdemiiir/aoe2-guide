@@ -10,9 +10,9 @@ steps:
   - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 11, assign: "+2 → build Stable (multiple builders speed it up)", icons: ["stable"] }
   - { villagers: 12, assign: "+1 → berries, build mill", icons: ["food", "mill"] }
-  - { villagers: 16, assign: "+4 → wood; produce Scouts from the Stable continuously", icons: ["wood", "light-cavalry"] }
+  - { villagers: 16, assign: "+4 → wood; produce Scouts from the Stable continuously", icons: ["wood", "scout-cavalry"] }
   - { villagers: 18, assign: "+2; click Feudal at 18 pop; keep Scout production active", icons: ["food"] }
-  - { villagers: 18, assign: "Feudal: harass with Scouts; build Archery Range + Blacksmith; 4 → gold (mining camp)", icons: ["light-cavalry", "archery-range", "gold", "mining-camp"] }
+  - { villagers: 18, assign: "Feudal: harass with Scouts; build Archery Range + Blacksmith; 4 → gold (mining camp)", icons: ["scout-cavalry", "archery-range", "gold", "mining-camp"] }
   - { villagers: 22, assign: "+4 → food/wood; research Bloodlines; add farms; click Castle Age", icons: ["food", "castle-age"] }
   - { villagers: 24, assign: "Castle Age: produce Cavalry Archers from the Range; research Thumb Ring, then upgrade to Mangudai", icons: ["cavalry-archer"] }
 source:

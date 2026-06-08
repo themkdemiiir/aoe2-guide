@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/validate-icons.mjs",
+    "prebuild": "node scripts/validate-icons.mjs && node scripts/verify-build-facts.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -29,7 +29,9 @@
     "sync:game-data": "node scripts/sync-game-data.mjs",
     "build:civilizations": "node scripts/build-civilizations.mjs",
     "build:units": "node scripts/build-units.mjs",
-    "sync:meta": "node scripts/sync-meta-stats.mjs"
+    "sync:meta": "node scripts/sync-meta-stats.mjs",
+    "build:facts": "node scripts/build-game-facts.mjs",
+    "verify:facts": "node scripts/verify-build-facts.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

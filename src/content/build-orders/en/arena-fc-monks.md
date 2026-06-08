@@ -11,7 +11,7 @@ steps:
   - { villagers: 12, assign: "+3 → berries, build mill", icons: ["food", "mill"] }
   - { villagers: 15, assign: "+3 → wood", icons: ["wood"] }
   - { villagers: 23, assign: "+8; click Feudal at 23 pop; no Feudal military", icons: ["food"] }
-  - { villagers: 23, assign: "CRITICAL: send scout out gate immediately for relics", icons: ["light-cavalry"] }
+  - { villagers: 23, assign: "CRITICAL: send scout out gate immediately for relics", icons: ["scout-cavalry"] }
   - { villagers: 23, assign: "Feudal: build Blacksmith + Market; 4 → gold (mining camp)", icons: ["blacksmith", "market", "gold"] }
   - { villagers: 28, assign: "+5; click Castle Age; keep booming", icons: ["castle-age"] }
   - { villagers: 30, assign: "Castle: build Monastery + Castle; produce Monks; grab all relics", icons: ["monastery", "monk", "castle"] }

@@ -15,7 +15,7 @@ steps:
   - { villagers: 18, assign: "+2 → hunt", note: "Research Loom; click Feudal at ~8:50", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Feudal arrives — 5 vils → wood (9 total), build 2nd lumber camp", icons: ["lumber-camp", "wood"] }
   - { villagers: 18, assign: "5 vils → berries; 1 builds Barracks, 2 build Stable", icons: ["food", "barracks", "stable"] }
-  - { villagers: 18, assign: "Produce Scout Cavalry; research Double-Bit Axe; begin walling base", icons: ["light-cavalry", "double-bit-axe"] }
+  - { villagers: 18, assign: "Produce Scout Cavalry; research Double-Bit Axe; begin walling base", icons: ["scout-cavalry", "double-bit-axe"] }
   - { villagers: 23, assign: "+5 new vils; 5 → gold, build Mining Camp; build Blacksmith", icons: ["gold", "mining-camp", "blacksmith"] }
   - { villagers: 30, assign: "Click Castle Age (~18:00 target); build 2 Archery Ranges, begin CA production", icons: ["archery-range", "cavalry-archer"] }
 source:
