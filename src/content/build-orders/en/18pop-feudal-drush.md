@@ -62,7 +62,7 @@ Click Feudal Age with 18th villager (~8:50).
 ## Strategy and Follow-Up (What's Next)
 
 - The Feudal Drush sends Militia during the Feudal transition — not in Dark Age — making it lighter than a full Drush FC but still threatening.
-- **Weak against:** Opponents who wall fast or produce Scouts to intercept; a defended base with Spearmen makes Militia ineffective.
+- **Weak against:** Opponents who wall fast or produce Scouts to intercept; a defended base with Town Center fire and counter-Militia makes the raid ineffective.
 - **Strong against:** Greedy openings; opponents slow to wall; civs with no early military.
 
 **Options:**

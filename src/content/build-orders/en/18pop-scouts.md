@@ -69,7 +69,7 @@ Click Feudal Age at 20 population.
 **Options:**
 
 1. **2-Stable Knights:** The standard Castle Age follow-up — add a 2nd Stable and produce Knights for sustained pressure.
-2. **Pivot to Skirmishers:** If the opponent has Crossbowmen, produce Elite Skirmishers to counter before transitioning to Castle Age.
+2. **Pivot to Skirmishers:** If the opponent has Crossbowmen, produce Skirmishers to counter before transitioning to Castle Age.
 3. **Feudal All-In:** If opponent has no walls and no Spearmen, flood 8+ Scouts for immediate kill pressure before they can respond.
 
 **Defense Tip:**

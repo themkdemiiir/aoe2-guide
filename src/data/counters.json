@@ -94,7 +94,7 @@
       "note": "Cheap ranged DPS; fragile. Fletching/Bodkin are huge power spikes."
     },
     "skirmisher": {
-      "strongVs": ["archer", "cavalry-archer", "spearman"],
+      "strongVs": ["archer", "cavalry-archer", "crossbowman", "spearman"],
       "weakVs": ["scout-cavalry", "knight", "militia"],
       "note": "Trash counter to archers thanks to high pierce armour; useless vs melee."
     },
@@ -119,8 +119,8 @@
       "note": "The dominant Castle-Age unit: HP, attack, armour, speed — at ~2x cost."
     },
     "crossbowman": {
-      "strongVs": ["spearman", "pikeman", "skirmisher", "militia"],
-      "weakVs": ["knight", "mangonel", "light-cavalry"],
+      "strongVs": ["spearman", "pikeman", "militia"],
+      "weakVs": ["skirmisher", "elite-skirmisher", "knight", "mangonel", "light-cavalry"],
       "note": "Cheap upgrade from archers; the Xbow+Bodkin spike is unbeatable by Feudal units."
     },
     "pikeman": {

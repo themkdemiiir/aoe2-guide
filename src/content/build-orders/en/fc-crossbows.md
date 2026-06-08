@@ -57,7 +57,7 @@ Click Castle Age at ~26 population (~13:30).
 FC Crossbows is dominant in team games where the pocket has time to boom. Crossbow + Mangonel is very hard to counter without cavalry.
 
 - **Weak against:** Knight rushes arriving before Mangonels are out; Skirmisher + cavalry mixes.
-- **Strong against:** Infantry armies, other archer civs (out-ranges them with upgrades), Scout-heavy openings.
+- **Strong against:** Infantry armies, other archer civs (out-ranges them with upgrades).
 
 **Options:**
 

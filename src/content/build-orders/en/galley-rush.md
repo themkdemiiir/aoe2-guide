@@ -13,7 +13,7 @@ steps:
   - { villagers: 11, assign: "+2 → berries, build mill", icons: ["food", "mill"] }
   - { villagers: 14, assign: "+3 → wood; keep Fishing Ships queued", icons: ["wood"] }
   - { villagers: 17, assign: "+3; click Feudal at 17 pop", icons: ["food"] }
-  - { villagers: 17, assign: "Feudal: build 2nd Dock; research Fletching; War Galleys non-stop", icons: ["dock", "galley"] }
+  - { villagers: 17, assign: "Feudal: build 2nd Dock; research Fletching; Galleys non-stop", icons: ["dock", "galley"] }
   - { villagers: 20, assign: "+3 → wood; use Galleys to deny enemy Docks", icons: ["wood"] }
 source:
   author: "Spirit of the Law"
@@ -21,7 +21,7 @@ source:
 
 # Feudal Galley Rush
 
-**Goal:** Reach Feudal Age quickly and flood War Galleys from 2 Docks to destroy enemy Fishing Ships and deny water resources.
+**Goal:** Reach Feudal Age quickly and flood Galleys from 2 Docks to destroy enemy Fishing Ships and deny water resources.
 **Recommended civs:** Vikings (+10% wood from docks), Portuguese (slower ship death), Italians (cheaper Docks + Galleys), Byzantines (Greek Fire Ships in Castle), Malay (cheaper ships overall)
 
 ## Dark Age (0–17 Villagers)
@@ -40,7 +40,7 @@ Click Feudal Age at 17 population (~9:00).
 
 - Build 2nd Dock from a shore villager
 - Research Fletching in Blacksmith (+1 Galley range)
-- Produce War Galleys non-stop from both Docks
+- Produce Galleys non-stop from both Docks
 - 3 new TC villagers to wood
 - Contest enemy Docks with Galley group
 

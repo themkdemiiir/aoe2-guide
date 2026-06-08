@@ -76,7 +76,7 @@ Click Feudal Age with 28th villager (~12:30).
 **Options:**
 
 1. **Janissary + Bombard Cannon:** The core composition — Janissaries handle infantry and cavalry while Bombard Cannons destroy buildings and siege.
-2. **Imperial Camel:** If gold permits, mix in Imperial Camel units for anti-cavalry coverage.
+2. **Heavy Camel Rider:** If gold permits, mix in Heavy Camel Riders for anti-cavalry coverage. (Turks have the standard camel line up to Heavy Camel Rider; the Imperial Camel is a Hindustanis-only unique unit.)
 3. **Hussar Raid:** Use Light Cavalry (or Hussar) to harass and delay opponent military while Bombard Cannons close out the game.
 
 **Defense Tip:**

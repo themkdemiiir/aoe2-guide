@@ -16,7 +16,7 @@ steps:
   - { villagers: 17, assign: "+2; lure deer (mandatory)", note: "Research Loom; click Feudal at ~8:25", icons: ["food", "loom"] }
   - { villagers: 17, assign: "Feudal arrives — 2 vils → gold, build Mining Camp; produce 3 Militia immediately", icons: ["gold", "mining-camp", "militia"] }
   - { villagers: 17, assign: "Send Militia to enemy base; 4 vils from hunting → wood (7 lumberjacks)", icons: ["militia", "wood"] }
-  - { villagers: 19, assign: "+2 vils; build Archery Range, produce Archers; research Man-at-Arms", icons: ["archery-range", "crossbowman"] }
+  - { villagers: 19, assign: "+2 vils; build Archery Range, produce Archers; research Man-at-Arms", icons: ["archery-range", "archer"] }
   - { villagers: 20, assign: "+1 → berries, build Mill; research Fletching", icons: ["food", "mill", "fletching"] }
 source:
   author: "Hera"
@@ -69,7 +69,7 @@ Click Feudal Age (~8:25).
 
 ## Strategy and Follow-Up (What's Next)
 
-- Japanese MAA receive +2/+2 armour for free at Feudal Age, making this the strongest MAA civ.
+- Japanese infantry attack 25% faster starting in Feudal Age, making this the strongest MAA civ.
 - **Weak against:** Opponent walling fast or producing Scouts to intercept MAA.
 - **Strong against:** Greedy openings with no early military and slow walling.
 
