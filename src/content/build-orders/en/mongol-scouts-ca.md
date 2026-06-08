@@ -2,26 +2,27 @@
 slug: mongol-scouts-ca
 name: "Mongol Scouts into Cavalry Archers"
 difficulty: intermediate
-targetAge: feudal
-durationMin: 11
+targetAge: castle
+durationMin: 17
 civsRecommended: [mongols]
 steps:
   - { villagers: 6,  assign: "6 → sheep (Mongols build houses 50% faster — produce freely)", icons: ["food"] }
   - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 11, assign: "+2 → build Stable (multiple builders speed it up)", icons: ["stable"] }
   - { villagers: 12, assign: "+1 → berries, build mill", icons: ["food", "mill"] }
-  - { villagers: 16, assign: "+4 → wood; produce Scouts from Stable continuously", icons: ["wood", "light-cavalry"] }
+  - { villagers: 16, assign: "+4 → wood; produce Scouts from the Stable continuously", icons: ["wood", "light-cavalry"] }
   - { villagers: 18, assign: "+2; click Feudal at 18 pop; keep Scout production active", icons: ["food"] }
-  - { villagers: 18, assign: "Feudal: build Archery Range; transition from Scouts to Cavalry Archers", icons: ["archery-range", "cavalry-archer"] }
-  - { villagers: 22, assign: "+4 → gold (mining camp); research Thumb Ring", icons: ["gold", "mining-camp"] }
+  - { villagers: 18, assign: "Feudal: harass with Scouts; build Archery Range + Blacksmith; 4 → gold (mining camp)", icons: ["light-cavalry", "archery-range", "gold", "mining-camp"] }
+  - { villagers: 22, assign: "+4 → food/wood; research Bloodlines; add farms; click Castle Age", icons: ["food", "castle-age"] }
+  - { villagers: 24, assign: "Castle Age: produce Cavalry Archers from the Range; research Thumb Ring, then upgrade to Mangudai", icons: ["cavalry-archer"] }
 source:
   author: "Hera"
 ---
 
 # Mongol Scouts into Cavalry Archers
 
-**Goal:** Leverage Mongol production bonuses to harass with early Scouts, then transition to massed Cavalry Archers — one of the strongest late-game compositions.
-**Recommended civs:** Mongols only — Mangudai deal bonus damage vs. siege, fire 25% faster (unique bonus), and get free Parthian Tactics.
+**Goal:** Open with Scout Cavalry to harass in Feudal Age, then transition into massed Cavalry Archers — and the Mangudai upgrade — in Castle Age, one of the strongest compositions in the game.
+**Recommended civs:** Mongols only — Mangudai fire 25% faster (unique bonus), deal bonus damage vs. siege, and get free Parthian Tactics.
 
 ## Dark Age (0–18 Villagers)
 
@@ -36,21 +37,28 @@ Start Scout Cavalry from the Stable as soon as you have food. Click Feudal Age a
 
 ## Feudal Age (18 Villagers)
 
-- Build Archery Range for CA production
-- Continue Scouts initially; transition to Cavalry Archers as they become available
-- Research Thumb Ring (CA accuracy — very high priority)
-- 4 new villagers to gold; Mining Camp
-- Research Bloodlines for remaining Scouts
+- Harass the opponent's economy with Scout Cavalry
+- Build an **Archery Range** and a **Blacksmith** to prepare for Castle Age — you cannot train Cavalry Archers yet (they are a Castle-Age unit)
+- Send 4 villagers to gold; build a Mining Camp
+- Research Bloodlines for the Scouts; add Farms as food allows
+- Keep villager production going and bank food/gold for the Castle Age click
+
+## Castle Age — Cavalry Archers (the payoff)
+
+- Produce **Cavalry Archers** from the Archery Range (now unlocked in Castle Age)
+- Research **Thumb Ring** (accuracy + fire rate — top priority for the archer line)
+- Upgrade to **Mangudai** at the Castle — the elite Mongol unique unit
+- Keep adding gold; fold your remaining Scouts into the Cavalry Archer mass
 
 ## Strategy and Follow-Up (What's Next)
 
-Mongol CA is extremely hard to counter — free Parthian Tactics lets CA fire while retreating. Mangudai in Castle Age are elite anti-siege units.
+Mongol Cavalry Archers and Mangudai are extremely strong — free Parthian Tactics lets them fire while retreating, and Mangudai add bonus damage vs. siege. But they are still cavalry archers, and they do have counters.
 
-- **Weak against:** Mass Skirmishers (hard CA counter), Hussars closing the distance. No good Camel answer.
-- **Strong against:** Slow infantry, Scorpion/Mangonel lines, Knight compositions (CA kite safely), siege-heavy armies.
+- **Weak against:** Skirmishers and Elite Skirmishers (high pierce armour hard-counters the archer line); **Camels** (bonus damage vs. cavalry — Cavalry Archers are mounted, so Camels punish them); and Hussars / Light Cavalry that close the distance and shrug off being kited.
+- **Strong against:** Slow infantry, Scorpion/Mangonel lines (Mangudai snipe siege), and Knight/Cavalier compositions you can kite safely.
 
 **Options:**
 
-1. **Mangudai:** Castle Age upgrade — bonus damage vs. siege makes them uncounterable without mass cavalry.
-2. **Treb + Mangudai:** Mangudai protect Trebs perfectly with speed + anti-siege bonus.
-3. **Siege push:** Mongol Siege Engineers gives Trebs extra range — devastating for map control.
+1. **Mangudai:** The Castle-Age unique-unit upgrade — bonus damage vs. siege makes them devastating against siege-heavy armies.
+2. **Treb + Mangudai:** Mangudai protect Trebuchets perfectly with their speed and anti-siege bonus in the late game.
+3. **Siege push:** Mongol Siege Engineers gives Trebuchets extra range — excellent for map control alongside the Cavalry Archer mass.
