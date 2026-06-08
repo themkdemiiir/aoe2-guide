@@ -14,9 +14,9 @@ steps:
   - { villagers: 28, assign: "+1 → wood", note: "Click Feudal at 28 pop (~12:30)", icons: ["wood"] }
   - { villagers: 28, assign: "Feudal arrives — 1 builds Blacksmith, 2 build Market; +2 → gold", icons: ["blacksmith", "market", "gold"] }
   - { villagers: 30, assign: "+2 vils; click Castle Age (~16:00)", icons: ["food", "gold"] }
-  - { villagers: 30, assign: "Castle Age — build 2 Siege Workshops + 1 Monastery; +2 → gold; sell stone", icons: ["monastery", "gold"] }
+  - { villagers: 30, assign: "Castle Age — build 2 Siege Workshops + Monastery; +2 → gold; sell surplus stone (keep ~650 for a Castle)", icons: ["monastery", "gold"] }
   - { villagers: 32, assign: "+2 vils; click Imperial Age (~20:00)", icons: ["food", "gold"] }
-  - { villagers: 32, assign: "Imperial Age — produce Janissaries + Bombard Cannons; target 13 gold / 8 wood / 11 food", icons: ["janissary", "bombard-cannon"] }
+  - { villagers: 32, assign: "Imperial Age — build a Castle, then produce Janissaries + Bombard Cannons; target 13 gold / 8 wood / 11 food", icons: ["castle", "janissary", "bombard-cannon"] }
 source:
   author: "Hera"
 
@@ -80,4 +80,4 @@ Click Feudal Age with 28th villager (~12:30).
 3. **Hussar Raid:** Use Light Cavalry (or Hussar) to harass and delay opponent military while Bombard Cannons close out the game.
 
 **Defense Tip:**
-Increase pressure once in Imperial Age and never let your Bombard Cannons be destroyed — losing artillery is usually the end of the game plan. Use the Monastery to heal damaged Janissaries. The Turks' free gold mining upgrades make sustaining the gold economy much easier than for other civilizations.
+Increase pressure once in Imperial Age and never let your Bombard Cannons be destroyed — losing artillery is usually the end of the game plan. Use the Monastery to heal damaged Janissaries. The Turks' faster gold mining makes sustaining the gold economy much easier than for other civilizations.

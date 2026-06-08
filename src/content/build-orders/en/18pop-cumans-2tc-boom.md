@@ -79,7 +79,7 @@ Click Feudal Age with 18th villager (~8:50).
 
 1. **Pure Boom:** Continue full 2 TC production into Imperial Age with no military, ideal on Arena.
 2. **Defensive Response:** Move some villagers to stone and build Tower defense if the opponent is aggressive; add Scouts or Archers on open maps.
-3. **Military Pivot:** If the opponent plans Fast Castle + Castle Drop, get military out early and use Cumans' faster attack upgrades.
+3. **Military Pivot:** If the opponent plans Fast Castle + Castle Drop, get military out early and use Cumans' faster-moving cavalry to harass.
 
 **Defense Tip:**
 At minutes 19–20 you reach Castle Age, which is when the game tips in your favor. The 2 TC Boom is the most efficient economic opening for Cumans — prioritize Double-Bit Axe and Horse Collar whenever the map is safe.

@@ -23,7 +23,7 @@ source:
 # Arena Fast Castle with Monk Rush
 
 **Goal:** Fast Castle with no Feudal military, send the scout out the gate immediately to grab relics, then mass Monks and Siege in Castle Age.
-**Recommended civs:** Aztecs (+5 relic gold/sec), Byzantines (cheap Greek Fire + Cataphracts), Bohemians (faster Monastery tech), Spanish (free conversion gold), Saracens (Monks heal faster)
+**Recommended civs:** Aztecs (+5 Monk HP per Monastery tech, +33% relic gold), Byzantines (Monks heal 50% faster, cheap trash + Cataphracts), Bohemians (powerful Monastery upgrades + gunpowder), Spanish (Missionaries — mounted Monks), Saracens (Madrasah refunds gold when Monks die)
 
 ## Dark Age (0–23 Villagers)
 

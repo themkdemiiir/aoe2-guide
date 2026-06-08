@@ -13,7 +13,7 @@ steps:
   - { villagers: 11, assign: "+1 → lure the nearest Boar", icons: ["food"] }
   - { villagers: 13, assign: "+2 → build 2 Houses + Mill by berries, then → berries", icons: ["house", "mill", "food"] }
   - { villagers: 15, assign: "+2 → berries; lure the 2nd Boar", icons: ["food"] }
-  - { villagers: 16, assign: "+1 → mine just 10 Gold", icons: ["gold", "mining-camp"] }
+  - { villagers: 16, assign: "+1 → mine gold (~60 for 3 Militia)", icons: ["gold", "mining-camp"] }
   - { villagers: 17, assign: "+1 → build Barracks, train 3 Militia, then → sheep", icons: ["barracks", "militia", "food"] }
   - { villagers: 21, assign: "+4 → sheep / remaining hunt", icons: ["food"] }
   - { villagers: 24, assign: "+3 → build Farms next to TC and Mill", icons: ["farm"] }
@@ -38,7 +38,7 @@ source:
 - 1 villager lures the nearest Boar
 - 2 villagers build 2 Houses and a Mill by the berries, then gather berries
 - Lure the 2nd Boar around pop 15
-- 1 villager mines just 10 Gold (enough to train Militia)
+- 1 villager mines gold (3 Militia cost 60 gold total)
 - 1 villager builds a Barracks; train 3 Militia, then send the builder to sheep
 - New villagers to sheep through pop 21, then build Farms next to the TC / Mill (pop 22–24)
 - Villager 25 builds a Farm; research Loom
@@ -67,14 +67,14 @@ Click Feudal Age at 25 population (~12:00).
 ## Strategy and Follow-Up (What's Next)
 
 - This build layers Dark Age Militia harassment onto a greedier 25-pop Feudal timing, so the Archers arrive a little later than a pure 1-range rush but with two ranges producing at once. The early Militia buy time by forcing the opponent to react.
-- **Weak against:** Scout Cavalry, which beats Archers in the open before Fletching lands; fast Skirmishers backed by Forging; opponents who wall early and ignore the Militia.
+- **Weak against:** Scout Cavalry, which beats Archers in the open before Fletching lands; massed Skirmishers (their high pierce armour hard-counters the archer line); opponents who wall early and ignore the Militia.
 - **Strong against:** Greedy fast-castle or boom openings; civs with no early military answer; opponents slow to wall who lose villagers to the Dark Age Militia.
 
 **Options:**
 
 1. **Crossbow Castle Transition:** Wall up after the Archer push and advance to Castle Age with Bodkin Arrow for a strong Crossbow timing.
 2. **Feudal All-In:** Keep flooding Archers from both ranges; effective when the opponent has no Skirmisher counter.
-3. **Britons / Mayans Range Spam:** Civs with Archer bonuses can add a 3rd range and pursue Thumb Ring for sustained Castle Age pressure.
+3. **Mayans / Ethiopians Range Spam:** Civs with Archer bonuses can add a 3rd range and pursue Thumb Ring for sustained Castle Age pressure. (Britons lack Thumb Ring — they lean on their +1 archer range instead.)
 
 **Defense Tip:**
 The 3 Dark Age Militia are expendable — their job is to snipe a stray villager or pull the opponent off resources, not to win the game. Do not over-invest babysitting them; the build's real payoff is the two-range Archer mass. If you see enemy Scouts, add a few Spearmen from the Barracks before your Archers are out.

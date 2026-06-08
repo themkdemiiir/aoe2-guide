@@ -64,7 +64,7 @@ Click Feudal Age with the 27th villager. Build a Barracks while you advance.
 
 - Add a 2nd Stable
 - Begin producing Knights from both Stables
-- Research Bow Saw and Bloodlines, then Husbandry as you stabilize
+- Research Bow Saw and Bloodlines, then Husbandry as you stabilize (Franks have no Bloodlines — their +20% Knight HP makes up for it)
 - Keep producing villagers and maintain resource balance to sustain Knight production
 
 ## Strategy and Follow-Up (What's Next)
