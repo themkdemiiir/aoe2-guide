@@ -9,3 +9,10 @@
 # Astro fingerprints these filenames by content hash → safe to cache forever.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Static icon/image assets — not content-hashed, but stable; cache 30 days and
+# revalidate in the background so repeat visits don't re-fetch every PNG.
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

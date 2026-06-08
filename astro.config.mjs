@@ -11,6 +11,13 @@ import { remarkBuildOrderTruncate } from "./src/lib/remark/build-order-truncate.
 export default defineConfig({
   site: "https://aoe2guide.com",
   output: "static",
+  // Prefetch internal links on hover → near-instant navigation (pairs with the
+  // ClientRouter view transitions). Hover keeps it conservative on link-dense
+  // pages (civs/builds indexes) rather than prefetching everything upfront.
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
+  },
   integrations: [
     mdx(),
     sitemap(),
