@@ -36,3 +36,15 @@ Knights have +2 attack versus Archers
 
 - **Mahouts** (Castle Age) — See in-game tech tree
 - **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+
+## How to Play Persians
+
+**Ideal opening (Dark → Castle):** Lean on the bonus economy and open with a Scout Rush, then transition into Knights, camels, or light cavalry as the matchup demands. The faster Town Centers let you boom hard on the way to Savar in the late game — skip Cavalry Archers, as they don't pay off for this civ.
+
+**Ideal late-game composition:** Pair Paladins with Trash-Bows for a Halberdier, Trash-Bow, and Skirmisher core, adding Hussar when you need to clear out enemy Monks. Round it out with Bombard Cannons or Trebuchets for siege.
+
+**Deathball composition (closed maps / team games):** Mass War Elephants behind a wall of Trash-Bows and Hussar, supported by Cedrum siege or Bombard Cannons to crack fortified positions.
+
+**Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+
+*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

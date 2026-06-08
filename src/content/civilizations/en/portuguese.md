@@ -37,3 +37,15 @@ Free cartography from Dark Age
 
 - **Carrack** (Castle Age) — See in-game tech tree
 - **Arquebus** (Imperial Age) — See in-game tech tree
+
+## How to Play Portuguese
+
+**Ideal opening (Dark → Castle):** Begin with a single-range Archer push backed by your gold-based units — the -15% gold discount lets you afford a heavier gold composition than most civs at the same number of villagers. Keep pressure up while transitioning smoothly into the Castle Age.
+
+**Ideal late-game composition:** Settle on Arbalest (or Organ Gun if you commit to gunpowder) for ranged power, Halberdiers or Light Cavalry to soak up gold-free trades, and Bombard Cannon plus Bombard Towers for siege and defensive presence. Lean on the Feitoria once your gold mines run dry to keep this composition fueled.
+
+**Deathball composition (closed maps / team games):** Mass Organ Guns behind a wall of Bombard Cannon, with Cavalier providing melee protection for the gunpowder core — a slow, grinding push that excels on arena-style and team-game maps.
+
+**Recommended build:** [Portuguese Monk Rush](/en/builds/portuguese-monk-rush)
+
+*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

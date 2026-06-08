@@ -39,3 +39,15 @@ Mangonel line has +1 range
 
 - **Shinkichon** (Castle Age) — See in-game tech tree
 - **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+
+## How to Play Koreans
+
+**Ideal opening (Dark → Castle):** Lean on wood-based units rather than infantry or scouts — Koreans get no help there. Open with a Spear-Skirmisher mix or one-range Archers, then keep producing the units your lumber camps can sustain as you transition into Castle Age.
+
+**Ideal late-game composition:** Field Halberdiers as your trash backbone, back them with a gold core of Arbalests or War Wagons, and add Bombard Cannons or Trebuchets for siege. Your free Tower upgrades and ranged-tower bonus make defensive Yasama Tower lines a strong addition.
+
+**Deathball composition (closed maps / team games):** Stack War Wagons and Halberdiers behind long-range genitours (10 range) and finish with Trebuchets or Bombard Cannons, leaning on Korea's signature ranged firepower.
+
+**Recommended build:** [Korean Spear-Skirm](/en/builds/korean-spear-skirm)
+
+*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

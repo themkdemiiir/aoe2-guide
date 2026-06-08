@@ -38,3 +38,13 @@ Cavalry +1 melee armor
 
 - **Jurchen Tactics** (Castle Age) — Cavalry +1 attack
 - **Iron Riders** (Imperial Age) — Cavalry Archers +2 attack
+
+## How to Play Jurchens
+
+**Ideal opening (Dark → Castle):** Lean on the Jurchens' cavalry identity and head for a Fast Castle. Skip heavy Feudal aggression, secure your economy and wall up, then reach Castle Age to flood out of your faster-working Stables. With +2 cavalry armor, cheaper Blacksmith upgrades, and the Jurchen Knight on hand, you arrive in Castle with a tanky mounted force that snowballs map control — transitioning naturally into the Fire Lancer once you can support it.
+
+**Recommended build:** [Jurchens Fast Castle Fire Lancer](/en/builds/jurchens-fc-fire-lancer)
+
+*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
+
+*(Late-game and deathball compositions not yet covered for this civ.)*

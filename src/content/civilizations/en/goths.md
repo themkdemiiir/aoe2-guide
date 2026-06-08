@@ -40,3 +40,15 @@ Barracks operate 20% faster
 
 - **Anarchy** (Castle Age) — See in-game tech tree
 - **Perfusion** (Imperial Age) — See in-game tech tree
+
+## How to Play Goths
+
+**Ideal opening (Dark → Castle):** Lean on cheap infantry. Open with a two-militia drush or a Men-at-Arms push, or go Scouts backed by inexpensive Spearmen to pressure the enemy economy while you transition into the Castle Age.
+
+**Ideal late-game composition:** Field Halberdiers as your trash backbone, mass Huskarls as your gold-cost striking force, and back them with Bombard Cannons or Trebuchets for siege — swap in Hand Cannoneers when the enemy leans on infantry. Goths thrive on relentless production, so spam units and raid constantly.
+
+**Deathball composition (closed maps / team games):** Stack Huskarls and Halberdiers as the core melee block, add Heavy Scorpions for area damage, and bring Bombard Cannons to break fortifications.
+
+**Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+
+*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

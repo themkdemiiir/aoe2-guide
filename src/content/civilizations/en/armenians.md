@@ -38,3 +38,13 @@ Archery Range units +1 attack
 
 - **Cilician Fleet** (Castle Age) — Galleys +2 range
 - **Fereters** (Imperial Age) — Monks walk faster and carry Relics at full speed
+
+## How to Play Armenians
+
+**Ideal opening (Dark → Castle):** Pressure with a Scout Rush backed by early Spearmen built straight out of the Dark Age Barracks, then transition to a fast Castle Age. Once there, lean on your Fortified Church and Warrior Priests to seize relic control before adding Knights and rolling into your unique unit or Champions.
+
+**Recommended build:** [Armenian Spear into Fast Castle Relic](/en/builds/armenian-spear-fc-relic)
+
+*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
+
+*(Late-game and deathball compositions not yet covered for this civ.)*

@@ -38,3 +38,13 @@ Barracks train 20% faster
 
 - **Ballistas** (Castle Age) — Ballista Towers deal extra damage
 - **Comitatenses** (Imperial Age) — Non-militia infantry +8 HP
+
+## How to Play Romans
+
+**Ideal opening (Dark → Castle):** A Scout Rush is the strongest line — the Romans' powerful economy lets you pressure early while staying ahead on villagers. Transition into Long Swordsmen once you reach the Castle Age to lean on the infantry attack bonus. A Men-at-Arms opening is viable but tends to over-commit and can stall your economy.
+
+**Recommended build:** [Romans 5 Men-at-Arms](/en/builds/romans-5-maa)
+
+*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
+
+*(Late-game and deathball compositions not yet covered for this civ.)*

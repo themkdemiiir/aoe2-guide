@@ -9,3 +9,8 @@ dist/
 .pagefind/
 test-results/
 playwright-report/
+
+# Hera's strategy guide + video transcripts — local working reference only.
+# His copyrighted/paid content; never commit or redistribute. We synthesize
+# only the factual build data (timings, counters, openings) into our own prose.
+md/reference/hera-*

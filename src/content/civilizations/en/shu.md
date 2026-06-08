@@ -38,3 +38,11 @@ Infantry +1 pierce armor
 
 - **Shu Strategy** (Castle Age) — Infantry +1 attack
 - **Tiger Warriors** (Imperial Age) — Infantry attack 10% faster
+
+## How to Play Shu
+
+**Ideal opening (Dark → Castle):** As an infantry-bonus civ (Shu Strategy gives infantry +1 attack), open with a Man-at-Arms rush or a Feudal drush, then transition into Long Swordsmen and your Tiger Cavalry in Castle Age.
+
+**Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+
+*Hera's "every civ" guides don't yet cover this Three Kingdoms civ — opening synthesized from its bonuses.*

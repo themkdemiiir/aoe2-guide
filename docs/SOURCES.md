@@ -30,12 +30,23 @@ icons against `game-facts.json`: **no build may reference a unit whose real Age 
 build's `targetAge`** (e.g. a Castle-Age Cavalry Archer or Light Cavalry in a Feudal build). This is
 the objective "unit produced before it exists" class and is the authoritative gate for that error.
 
+## Build orders & per-civ strategy — Hera's guides (synthesized, cited)
+
+Build-order data (villager counts, timings, recommended civs) and the per-civ "How to play"
+sections (openings, late-game compositions, deathball compositions) are derived from
+**[Hera](https://www.patreon.com/heraaoe2)**'s December 2025 Strategy Guide and his "ideal
+strategy / composition for every civ" videos.
+
+- These are **facts/methods** (not copyrightable) re-expressed in **our own synthesized prose** —
+  no verbatim text from Hera's guide or video transcripts is published.
+- Hera's source material (the PDF + transcripts) is kept **local-only and gitignored**
+  (`md/reference/hera-*`) — never committed or redistributed; we cite Hera and link his channels.
+- Builds carry `source.author: "Hera"` + the Patreon link.
+
 ## What is NOT source-verified (and must be treated as editorial)
 
-- **Build-order timings & villager splits.** ~12 builds are cross-checked against
-  [aoecompanion.com/build-guides](https://aoecompanion.com/build-guides) (their `source.url` cites it).
-  The remaining civ-specific builds are community-knowledge drafts; their `source.author` labels
-  (Hera, ViBE, …) are **not backed by a verifiable URL** and want a human/expert pass.
+- **Strategy prose tone** (matchup framing, "best/strongest" wording) remains opinion, synthesized
+  from Hera's guidance — read it as a strong recommendation, not gospel.
 - **Counter / "strong vs / weak vs" claims.** Informed by the r/aoe2 wiki and Spirit of the Law
   (see `md/reference/unit-counters-SOURCE.md`) and cross-referenced with the attack-bonus data, but
   counters also depend on armour, speed and micro — they are not reducible to a single data field,

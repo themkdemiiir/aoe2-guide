@@ -38,3 +38,9 @@ Barracks units have -10% cost
 
 - **Toquis** (Castle Age) — Infantry attacks 10% faster when not garrisoned near a building
 - **Ironworks** (Imperial Age) — Infantry and cavalry +8 attack
+
+## How to Play Mapuche
+
+**Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+
+*(Hera's civ-strategy guides do not yet cover Mapuche, so no opening, late-game, or deathball composition is synthesized here.)*

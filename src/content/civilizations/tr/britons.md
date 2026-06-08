@@ -26,3 +26,15 @@ Britons güçlü bir odun ekonomisiyle (Şehir Merkezi bonusu) hızlı Kale Ça�
 
 - Güvenle ekonomi büyütebileceğin kapalı haritalar.
 - Uzunyay Okçusu + Trebuchet'lerin kuşatma savunmasını kıracağı geç oyun takım maçları.
+
+## Britons Nasıl Oynanır
+
+**İdeal açılış (Karanlık → Kale):** Tek bir Okçu Talimhanesi ile aç ve ucuz Şehir Merkezleri sayesinde odun ekonomin katlanırken pasif oyna. Akıcı bir şekilde Kale Çağı'na geç; burada +1 menzilli Tatar Yayların ordunun belkemiği olur.
+
+**İdeal geç oyun kompozisyonu:** Uzunyay Okçularını (ya da daha ucuz ve hızlı ateş eden bir hat istediğinde Arbalest) süvariye karşı perde görevi gören Halberdier'lerle birleştir; binaları ve birim yığınlarını ıskalamadan ezmek için Warwolf Trebuchet ekle.
+
+**Deathball kompozisyonu (kapalı haritalar / takım maçları):** 12 menzilli Uzunyay Okçularını bir Halberdier duvarının arkasına diz ve Trebuchet'lerle öne doğru ilerle — eşsiz menzil, düşman yaklaşamadan her şeyi alt etmeni sağlar.
+
+**Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)
+
+*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*
