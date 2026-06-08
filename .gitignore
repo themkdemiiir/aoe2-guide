@@ -14,3 +14,7 @@ playwright-report/
 # His copyrighted/paid content; never commit or redistribute. We synthesize
 # only the factual build data (timings, counters, openings) into our own prose.
 md/reference/hera-*
+# Defensive: ignore any Hera-named file dropped ANYWHERE in the repo (e.g. a PDF
+# saved to the project root) so it can never be committed by accident.
+hera-*
+*hera-strategy-guide*
