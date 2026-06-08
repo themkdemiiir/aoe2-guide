@@ -114,7 +114,7 @@
       "note": "Strong early Feudal aggression; safe under a tower. Kited by archers."
     },
     "knight": {
-      "strongVs": ["crossbowman", "archer", "monk", "mangonel", "skirmisher"],
+      "strongVs": ["crossbowman", "archer", "mangonel", "skirmisher"],
       "weakVs": ["pikeman", "camel-rider", "monk"],
       "note": "The dominant Castle-Age unit: HP, attack, armour, speed — at ~2x cost."
     },
@@ -145,7 +145,7 @@
     },
     "mangonel": {
       "strongVs": ["archer", "crossbowman", "skirmisher", "spearman"],
-      "weakVs": ["knight", "light-cavalry", "mangonel"],
+      "weakVs": ["knight", "light-cavalry"],
       "note": "Splash murders massed foot; dies to mobile melee and is beaten by micro."
     },
     "scorpion": {
