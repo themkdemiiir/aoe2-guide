@@ -92,6 +92,17 @@ export const ui = {
     "filter.reset": "Reset",
     "filter.results": "results",
     "filter.noResults": "No matches — try clearing the filters.",
+    "nav.counters": "Counters",
+    "counters.title": "Unit Counters",
+    "counters.intro":
+      "What beats what. Counters come down to pierce armour, bonus damage, and speed — not just cost. A counter only counts if it can actually kill its target before being kited.",
+    "counters.feudal": "Feudal Age counter cycle",
+    "counters.castle": "Castle Age counters",
+    "counters.strongVs": "Strong vs",
+    "counters.weakVs": "Weak vs",
+    "counters.beats": "beats",
+    "counters.allUnits": "Every unit",
+    "counters.readMore": "Read the full counters guide",
   },
   tr: {
     "nav.civs": "Uygarlıklar",
@@ -184,6 +195,17 @@ export const ui = {
     "filter.reset": "Sıfırla",
     "filter.results": "sonuç",
     "filter.noResults": "Eşleşme yok — filtreleri temizleyin.",
+    "nav.counters": "Counters",
+    "counters.title": "Birim Karşıtları",
+    "counters.intro":
+      "Hangi birim neyi yener. Counter'lar yalnızca maliyetle değil; delici zırh, bonus hasar ve hızla ilgilidir. Bir counter ancak hedefini gerçekten öldürebiliyorsa işe yarar.",
+    "counters.feudal": "Feudal Çağ counter döngüsü",
+    "counters.castle": "Kale Çağı counter'ları",
+    "counters.strongVs": "Karşı güçlü",
+    "counters.weakVs": "Karşı zayıf",
+    "counters.beats": "yener",
+    "counters.allUnits": "Tüm birimler",
+    "counters.readMore": "Tam counter rehberini oku",
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

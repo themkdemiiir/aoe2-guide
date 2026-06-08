@@ -1,0 +1,102 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import FilterBar from "@/components/ui/FilterBar.astro";
+import Icon from "@/components/ui/Icon.astro";
+import counters from "@data/counters.json";
+import { locales, type Locale } from "@/i18n/locales";
+import { t, localizedPath } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Locale;
+
+type Relation = { winner: string; loser: string; why: string };
+type UnitInfo = { strongVs: string[]; weakVs: string[]; note: string };
+const ages = counters.ages as Record<string, { intro: string; relations: Relation[] }>;
+const units = counters.units as Record<string, UnitInfo>;
+
+function displayName(slug: string) {
+  return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).localeCompare(displayName(b[0])));
+---
+<BaseLayout title={t(lang, "counters.title")} canonicalPath="/counters">
+  <section class="mx-auto max-w-5xl px-4 py-12">
+    <h1 class="font-display text-4xl text-ink">{t(lang, "counters.title")}</h1>
+    <p class="mt-3 max-w-prose text-stone-700">{t(lang, "counters.intro")}</p>
+
+    {(["feudal", "castle"] as const).map((ageKey) => {
+      const age = ages[ageKey];
+      if (!age) return null;
+      return (
+        <section class="mt-10">
+          <h2 class="font-display text-2xl text-ink">{t(lang, `counters.${ageKey}`)}</h2>
+          <p class="mt-1 max-w-prose text-sm text-stone-700">{age.intro}</p>
+          <ul class="mt-4 space-y-2">
+            {age.relations.map((r) => (
+              <li class="flex flex-wrap items-center gap-x-2 gap-y-1 rounded border border-stone-700/20 bg-parchment p-3">
+                <span class="inline-flex items-center gap-1.5 font-medium text-ink">
+                  <Icon slug={r.winner} kind="unit" size={24} /> {displayName(r.winner)}
+                </span>
+                <span class="text-xs font-bold uppercase tracking-wide text-gold-500">{t(lang, "counters.beats")}</span>
+                <span class="inline-flex items-center gap-1.5 text-stone-700">
+                  <Icon slug={r.loser} kind="unit" size={24} /> {displayName(r.loser)}
+                </span>
+                <span class="w-full text-sm text-stone-700 sm:flex-1 sm:border-l sm:border-stone-700/20 sm:pl-3">{r.why}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })}
+
+    <section class="mt-12" data-filter-root>
+      <h2 class="mb-4 font-display text-2xl text-ink">{t(lang, "counters.allUnits")}</h2>
+      <FilterBar
+        searchPlaceholder={`${t(lang, "filter.search")}…`}
+        total={unitEntries.length}
+        resultsLabel={t(lang, "filter.results")}
+        allLabel={t(lang, "filter.all")}
+        resetLabel={t(lang, "filter.reset")}
+      />
+      <ul class="grid auto-rows-fr gap-4 sm:grid-cols-2">
+        {unitEntries.map(([slug, info]) => (
+          <li class="h-full" data-filter-item data-search={displayName(slug).toLowerCase()}>
+            <div class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4">
+              <div class="flex items-center gap-3">
+                <Icon slug={slug} kind="unit" size={40} />
+                <h3 class="font-display text-lg text-ink">{displayName(slug)}</h3>
+              </div>
+              <div class="mt-3 space-y-2">
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wide text-forest">{t(lang, "counters.strongVs")}</span>
+                  <div class="mt-1 flex flex-wrap gap-1.5">
+                    {info.strongVs.map((u) => (
+                      <span class="inline-flex items-center gap-1 rounded bg-forest/10 px-1.5 py-0.5 text-xs text-ink">
+                        <Icon slug={u} kind="unit" size={16} framed={false} /> {displayName(u)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wide text-royal">{t(lang, "counters.weakVs")}</span>
+                  <div class="mt-1 flex flex-wrap gap-1.5">
+                    {info.weakVs.map((u) => (
+                      <span class="inline-flex items-center gap-1 rounded bg-royal/10 px-1.5 py-0.5 text-xs text-ink">
+                        <Icon slug={u} kind="unit" size={16} framed={false} /> {displayName(u)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <p class="mt-auto pt-3 text-sm text-stone-700">{info.note}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p data-filter-empty hidden class="mt-8 text-center text-stone-700">{t(lang, "filter.noResults")}</p>
+    </section>
+  </section>
+  <script>import "@/scripts/list-filter.ts";</script>
+</BaseLayout>

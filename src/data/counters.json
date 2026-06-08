@@ -1,4 +1,172 @@
 {
   "patch": "v100.1.84",
-  "counters": {}
+  "ages": {
+    "feudal": {
+      "intro": "The Feudal Age has one core counter cycle plus Men-at-Arms and towers. Counters here are about pierce armour and speed as much as bonus damage.",
+      "relations": [
+        {
+          "winner": "skirmisher",
+          "loser": "archer",
+          "why": "Bonus damage + 3 pierce armour reduces the archer's hit to 1 damage."
+        },
+        {
+          "winner": "scout-cavalry",
+          "loser": "skirmisher",
+          "why": "2 pierce armour (skirm deals 1) and enough speed to chase fleeing skirmishers down."
+        },
+        {
+          "winner": "spearman",
+          "loser": "scout-cavalry",
+          "why": "Large attack bonus vs cavalry — the hardest counter in Feudal, but slow and fragile vs everything else."
+        },
+        {
+          "winner": "archer",
+          "loser": "spearman",
+          "why": "Spearmen have low pierce armour and no answer to ranged fire."
+        },
+        {
+          "winner": "skirmisher",
+          "loser": "spearman",
+          "why": "Skirmishers also carry a bonus vs spearmen — don't use spears into skirms."
+        },
+        {
+          "winner": "man-at-arms",
+          "loser": "spearman",
+          "why": "Men-at-Arms beat most Feudal units in a straight fight; only hit-and-run archers trouble them. Safe under a tower."
+        }
+      ]
+    },
+    "castle": {
+      "intro": "Castle Age adds compositions: a counter must actually kill its target, do it before the target tech-spikes, and not simply be kited. Knights dominate; Crossbows are the most common answer.",
+      "relations": [
+        {
+          "winner": "knight",
+          "loser": "crossbowman",
+          "why": "Speed + armour close the gap; crossbows need big numbers or a Mangonel to hold."
+        },
+        {
+          "winner": "pikeman",
+          "loser": "knight",
+          "why": "Anti-cavalry bonus — but you need numbers, and pikes die to archers/infantry support."
+        },
+        {
+          "winner": "camel-rider",
+          "loser": "knight",
+          "why": "Bonus vs cavalry and mobile enough to catch them; the cleanest mobile anti-knight."
+        },
+        {
+          "winner": "crossbowman",
+          "loser": "pikeman",
+          "why": "Ranged fire shreds low-pierce-armour trash; protect them from cavalry."
+        },
+        {
+          "winner": "mangonel",
+          "loser": "crossbowman",
+          "why": "Splash devastates massed archers — unless they are microed apart."
+        },
+        {
+          "winner": "light-cavalry",
+          "loser": "mangonel",
+          "why": "Fast melee closes and snipes siege; also great vs Monks and raiding."
+        },
+        {
+          "winner": "elite-skirmisher",
+          "loser": "cavalry-archer",
+          "why": "High pierce armour hard-counters all archer-line and cavalry archers."
+        },
+        {
+          "winner": "monk",
+          "loser": "knight",
+          "why": "Conversion removes expensive units outright — but Monks die to archers and light cav."
+        },
+        {
+          "winner": "eagle-warrior",
+          "loser": "monk",
+          "why": "Fast, gold-light, with bonus vs monks/siege/archers; a mesoamerican raiding answer."
+        }
+      ]
+    }
+  },
+  "units": {
+    "archer": {
+      "strongVs": ["spearman", "militia", "man-at-arms"],
+      "weakVs": ["skirmisher", "scout-cavalry", "knight"],
+      "note": "Cheap ranged DPS; fragile. Fletching/Bodkin are huge power spikes."
+    },
+    "skirmisher": {
+      "strongVs": ["archer", "cavalry-archer", "spearman"],
+      "weakVs": ["scout-cavalry", "knight", "militia"],
+      "note": "Trash counter to archers thanks to high pierce armour; useless vs melee."
+    },
+    "spearman": {
+      "strongVs": ["scout-cavalry", "knight", "camel-rider"],
+      "weakVs": ["archer", "skirmisher", "militia"],
+      "note": "Anti-cavalry trash. Slow and fragile to anything ranged or infantry."
+    },
+    "scout-cavalry": {
+      "strongVs": ["skirmisher", "archer", "monk"],
+      "weakVs": ["spearman", "camel-rider"],
+      "note": "Fast raider; 2 pierce armour beats skirms. Stopped cold by spears."
+    },
+    "man-at-arms": {
+      "strongVs": ["spearman", "skirmisher", "eagle-scout"],
+      "weakVs": ["archer", "scout-cavalry"],
+      "note": "Strong early Feudal aggression; safe under a tower. Kited by archers."
+    },
+    "knight": {
+      "strongVs": ["crossbowman", "archer", "monk", "mangonel", "skirmisher"],
+      "weakVs": ["pikeman", "camel-rider", "monk"],
+      "note": "The dominant Castle-Age unit: HP, attack, armour, speed — at ~2x cost."
+    },
+    "crossbowman": {
+      "strongVs": ["spearman", "pikeman", "skirmisher", "militia"],
+      "weakVs": ["knight", "mangonel", "light-cavalry"],
+      "note": "Cheap upgrade from archers; the Xbow+Bodkin spike is unbeatable by Feudal units."
+    },
+    "pikeman": {
+      "strongVs": ["knight", "camel-rider", "cavalry-archer", "scout-cavalry"],
+      "weakVs": ["archer", "crossbowman", "militia", "mangonel"],
+      "note": "Upgraded anti-cavalry trash; needs numbers and ranged support."
+    },
+    "light-cavalry": {
+      "strongVs": ["mangonel", "scorpion", "monk", "archer"],
+      "weakVs": ["spearman", "pikeman", "camel-rider"],
+      "note": "Fast raider that snipes siege and Monks; trash-line so gold-free."
+    },
+    "camel-rider": {
+      "strongVs": ["knight", "scout-cavalry", "cavalry-archer"],
+      "weakVs": ["pikeman", "militia", "archer"],
+      "note": "Bonus vs cavalry and mobile — the answer to Knight-heavy play."
+    },
+    "cavalry-archer": {
+      "strongVs": ["long-swordsman", "spearman", "mangonel"],
+      "weakVs": ["skirmisher", "elite-skirmisher", "camel-rider"],
+      "note": "Mobile ranged DPS; expensive and hard-countered by Skirmishers."
+    },
+    "mangonel": {
+      "strongVs": ["archer", "crossbowman", "skirmisher", "spearman"],
+      "weakVs": ["knight", "light-cavalry", "mangonel"],
+      "note": "Splash murders massed foot; dies to mobile melee and is beaten by micro."
+    },
+    "scorpion": {
+      "strongVs": ["spearman", "skirmisher", "archer"],
+      "weakVs": ["mangonel", "knight", "light-cavalry"],
+      "note": "Linear bolt shreds tight formations; immobile and siege-vulnerable."
+    },
+    "monk": {
+      "strongVs": ["knight", "cavalier", "war-elephant"],
+      "weakVs": ["archer", "light-cavalry", "mangonel"],
+      "note": "Converts single expensive units and heals; very fragile to ranged + speed."
+    },
+    "eagle-warrior": {
+      "strongVs": ["monk", "mangonel", "archer", "cavalry-archer"],
+      "weakVs": ["militia", "knight"],
+      "note": "Fast, gold-light raider; bonus vs siege/monks/archers but loses to heavy infantry."
+    },
+    "battering-ram": {
+      "strongVs": ["archer", "skirmisher"],
+      "weakVs": ["militia", "monk"],
+      "note": "Demolishes buildings and absorbs arrows for your army; helpless once units swarm it."
+    }
+  }
 }
