@@ -127,6 +127,7 @@ export const ui = {
     "about.connect.body":
       "Questions, ideas, or just want to talk strategy? Start a thread in GitHub Discussions.",
     "about.connect.discussions": "GitHub Discussions",
+    "toc.title": "On this page",
   },
   tr: {
     "nav.civs": "Uygarlıklar",
@@ -254,6 +255,7 @@ export const ui = {
     "about.connect.body":
       "Soruların ya da fikirlerin mi var, yoksa strateji mi konuşmak istiyorsun? GitHub Discussions'ta bir başlık aç.",
     "about.connect.discussions": "GitHub Discussions",
+    "toc.title": "Bu sayfada",
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

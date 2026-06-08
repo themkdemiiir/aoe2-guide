@@ -1,0 +1,35 @@
+---
+// TableOfContents — builds an anchor list from a markdown render()'s `headings`.
+// Astro auto-assigns slug `id`s to headings, so `#${slug}` anchors resolve.
+// Renders nothing unless there are at least 3 h2/h3 headings.
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+  title: string;
+  class?: string;
+}
+const { headings, title, class: className = "" } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const show = items.length >= 3;
+---
+{show && (
+  <nav aria-label={title} class:list={["text-sm", className]}>
+    <p class="mb-2 font-display text-xs uppercase tracking-widest text-stone-700">{title}</p>
+    <ul class="space-y-1 border-l border-stone-700/25">
+      {items.map((h) => (
+        <li>
+          <a
+            href={`#${h.slug}`}
+            class:list={[
+              "-ml-px block border-l-2 border-transparent py-1 text-stone-700 transition-colors hover:border-gold-500 hover:text-gold-500",
+              h.depth === 3 ? "pl-6" : "pl-3",
+            ]}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}

@@ -6,6 +6,7 @@
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/700.css";
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
@@ -57,4 +58,38 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
+}
+
+/* Themed prose — maps @tailwindcss/typography to our medieval tokens.
+   Unlayered so it overrides the plugin's layered defaults (and prose-stone).
+   Dark mode follows automatically because the tokens swap on [data-theme]. */
+.prose {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-stone-700);
+  --tw-prose-links: var(--color-gold-500);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-stone-700);
+  --tw-prose-bullets: var(--color-gold-500);
+  --tw-prose-hr: color-mix(in oklch, var(--color-stone-700) 30%, transparent);
+  --tw-prose-quotes: var(--color-stone-700);
+  --tw-prose-quote-borders: var(--color-gold-500);
+  --tw-prose-captions: var(--color-stone-700);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-ink);
+  --tw-prose-pre-bg: color-mix(in oklch, var(--color-ink) 8%, transparent);
+  --tw-prose-th-borders: color-mix(in oklch, var(--color-stone-700) 45%, transparent);
+  --tw-prose-td-borders: color-mix(in oklch, var(--color-stone-700) 20%, transparent);
+}
+.prose :is(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.prose :is(code, kbd, pre, samp) {
+  font-family: var(--font-mono);
+}
+/* Strip the default backtick quotes the plugin adds around inline code. */
+.prose :where(code)::before,
+.prose :where(code)::after {
+  content: none;
 }

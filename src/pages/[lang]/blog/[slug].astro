@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Badge from "@/components/ui/Badge.astro";
+import TableOfContents from "@/components/content/TableOfContents.astro";
 import { render } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
@@ -20,38 +21,56 @@ const slug = Astro.params.slug as string;
 const found = await getLocalizedEntry("articles", slug, lang);
 if (!found) return Astro.redirect("/404");
 const { entry, fallback } = found;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const { category, updated, sources } = entry.data;
+const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
 <BaseLayout title={entry.data.title} description={entry.data.description} canonicalPath={`/blog/${slug}`}>
-  <article class="mx-auto max-w-prose px-4 py-12">
-    {fallback && (
-      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
-        {t(lang, "ui.translation.missing")}
+  <div class="mx-auto max-w-6xl px-4 py-12 lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-10">
+    <article class="min-w-0 max-w-prose">
+      {fallback && (
+        <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
+          {t(lang, "ui.translation.missing")}
+        </div>
+      )}
+      <header class="mb-8">
+        <Badge variant="outline">{t(lang, `blog.cat.${category}`)}</Badge>
+        <h1 class="mt-3 font-display text-4xl text-ink">{entry.data.title}</h1>
+        <p class="mt-2 text-stone-700">{entry.data.description}</p>
+        {updated && <p class="mt-2 text-xs text-stone-700">{t(lang, "blog.updated")}: {updated}</p>}
+      </header>
+
+      {tocItems.length >= 3 && (
+        <details class="mb-8 rounded border border-stone-700/30 bg-parchment p-3 lg:hidden">
+          <summary class="cursor-pointer font-display text-sm uppercase tracking-widest text-stone-700">
+            {t(lang, "toc.title")}
+          </summary>
+          <div class="mt-3"><TableOfContents headings={headings} title={t(lang, "toc.title")} /></div>
+        </details>
+      )}
+
+      <section class="prose prose-stone max-w-none"><Content /></section>
+
+      {sources.length > 0 && (
+        <footer class="mt-12 border-t border-stone-700/30 pt-4">
+          <h2 class="font-display text-sm uppercase tracking-wide text-stone-700">{t(lang, "blog.sources")}</h2>
+          <ul class="mt-2 space-y-1 text-sm">
+            {sources.map((s) => (
+              <li>
+                <a href={s.url} target="_blank" rel="noopener noreferrer" class="text-gold-500 hover:underline">
+                  {s.label} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </footer>
+      )}
+    </article>
+
+    <aside class="hidden lg:block">
+      <div class="sticky top-20">
+        <TableOfContents headings={headings} title={t(lang, "toc.title")} />
       </div>
-    )}
-    <header class="mb-8">
-      <Badge variant="outline">{t(lang, `blog.cat.${category}`)}</Badge>
-      <h1 class="mt-3 font-display text-4xl text-ink">{entry.data.title}</h1>
-      <p class="mt-2 text-stone-700">{entry.data.description}</p>
-      {updated && <p class="mt-2 text-xs text-stone-700">{t(lang, "blog.updated")}: {updated}</p>}
-    </header>
-
-    <section class="prose prose-stone max-w-none"><Content /></section>
-
-    {sources.length > 0 && (
-      <footer class="mt-12 border-t border-stone-700/30 pt-4">
-        <h2 class="font-display text-sm uppercase tracking-wide text-stone-700">{t(lang, "blog.sources")}</h2>
-        <ul class="mt-2 space-y-1 text-sm">
-          {sources.map((s) => (
-            <li>
-              <a href={s.url} target="_blank" rel="noopener noreferrer" class="text-gold-500 hover:underline">
-                {s.label} ↗
-              </a>
-            </li>
-          ))}
-        </ul>
-      </footer>
-    )}
-  </article>
+    </aside>
+  </div>
 </BaseLayout>

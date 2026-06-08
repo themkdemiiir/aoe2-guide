@@ -39,6 +39,7 @@
     "@iconify-json/heroicons": "^1.2.3",
     "@iconify-json/lucide": "^1.2.109",
     "@playwright/test": "^1.60.0",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^5.18.1",
     "astro-pagefind": "^2.0.0",
