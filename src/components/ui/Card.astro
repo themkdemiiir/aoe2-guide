@@ -15,12 +15,14 @@ interface Props {
 }
 
 const { href, class: className = "", interactive = !!Astro.props.href } = Astro.props;
-const tag = href ? "a" : "div";
+// Dynamic tag MUST be capitalized — Astro renders a lowercase `<tag>` as a literal
+// element, not the variable's value, which produced inert non-clickable cards.
+const Tag = href ? "a" : "div";
 const base =
   "flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition";
 const hover = interactive ? "hover:border-gold-500" : "";
 ---
-<tag href={href} class:list={[base, hover, className]}>
+<Tag href={href} class:list={[base, hover, className]}>
   {Astro.slots.has("header") && (
     <header class="mb-3"><slot name="header" /></header>
   )}
@@ -28,4 +30,4 @@ const hover = interactive ? "hover:border-gold-500" : "";
   {Astro.slots.has("footer") && (
     <footer class="mt-auto pt-3"><slot name="footer" /></footer>
   )}
-</tag>
+</Tag>
