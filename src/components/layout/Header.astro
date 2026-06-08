@@ -2,6 +2,8 @@
 import { getLocaleFromUrl, t, localizedPath } from "@/i18n/utils";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import ThemeToggle from "./ThemeToggle.astro";
+import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
+import { Icon as UIIcon } from "astro-icon/components";
 
 const locale = getLocaleFromUrl(Astro.url);
 const nav = [
@@ -24,9 +26,31 @@ const nav = [
       ))}
     </nav>
     <div class="ml-auto flex items-center gap-2">
-      <a href={localizedPath("/search", locale)} class="text-sm text-stone-700 hover:text-gold-500">{t(locale, "nav.search")}</a>
+      <button
+        id="site-search-trigger"
+        type="button"
+        aria-label={t(locale, "nav.search")}
+        class="flex items-center gap-2 rounded border border-stone-700/40 px-2 py-1.5 text-sm text-stone-700 transition-colors hover:border-gold-500 hover:text-gold-500 sm:w-44 sm:justify-start"
+      >
+        <UIIcon name="lucide:search" class="h-4 w-4 shrink-0" />
+        <span class="hidden sm:inline">{t(locale, "nav.search")}…</span>
+        <kbd class="ml-auto hidden rounded border border-stone-700/30 px-1.5 font-mono text-xs text-stone-700 sm:inline">⌘K</kbd>
+      </button>
       <LanguageSwitcher />
       <ThemeToggle />
     </div>
   </div>
+
+  <dialog
+    id="site-search"
+    aria-label={t(locale, "nav.search")}
+    class="mx-auto mt-[8vh] w-[92vw] max-w-xl rounded-lg border border-stone-700/40 bg-parchment p-4 text-ink shadow-2xl backdrop:bg-ink/50"
+  >
+    <PagefindConfig lang={locale} preload={false} />
+    <div class="pagefind-modal">
+      <pagefind-searchbox placeholder={t(locale, "ui.search.placeholder")}></pagefind-searchbox>
+      <pagefind-results class="mt-3 block max-h-[60vh] overflow-y-auto"></pagefind-results>
+    </div>
+  </dialog>
 </header>
+<script>import "@/scripts/search-modal.ts";</script>
