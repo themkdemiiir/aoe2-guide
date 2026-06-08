@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aoe2-guide.pages.dev/sitemap-index.xml
+Sitemap: https://aoe2guide.com/sitemap-index.xml
