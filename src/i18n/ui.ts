@@ -115,6 +115,18 @@ export const ui = {
     "blog.cat.counters": "Counters",
     "blog.cat.meta": "Meta",
     "blog.cat.resources": "Resources",
+    "about.intro":
+      "AOE2 Guide is a free, open-source, bilingual (English & Turkish) guide to Age of Empires II — civilizations, build orders, units, maps, counters, and beginner lessons. It's a community fan project, curated from trusted sources and improved over time.",
+    "about.contribute.title": "Contribute",
+    "about.contribute.body":
+      "Spotted a mistake, a stale build-order timing, or want to add content or a Turkish translation? The whole site is open source — contributions of every size are welcome.",
+    "about.contribute.repo": "View on GitHub",
+    "about.contribute.issues": "Open an issue",
+    "about.contribute.guide": "Contributing guide",
+    "about.connect.title": "Let's talk",
+    "about.connect.body":
+      "Questions, ideas, or just want to talk strategy? Start a thread in GitHub Discussions.",
+    "about.connect.discussions": "GitHub Discussions",
   },
   tr: {
     "nav.civs": "Uygarlıklar",
@@ -230,6 +242,18 @@ export const ui = {
     "blog.cat.counters": "Counter'lar",
     "blog.cat.meta": "Meta",
     "blog.cat.resources": "Kaynaklar",
+    "about.intro":
+      "AOE2 Guide; Age of Empires II için ücretsiz, açık kaynaklı ve iki dilli (İngilizce ve Türkçe) bir rehberdir — uygarlıklar, yapım sıraları, birimler, haritalar, counter'lar ve yeni başlayan dersleri. Güvenilir kaynaklardan derlenen ve zamanla geliştirilen bir topluluk hayran projesidir.",
+    "about.contribute.title": "Katkıda Bulun",
+    "about.contribute.body":
+      "Bir hata mı fark ettin, eski bir yapım sırası zamanlaması mı gördün, ya da içerik veya Türkçe çeviri mi eklemek istiyorsun? Tüm site açık kaynaktır — her boyutta katkı memnuniyetle karşılanır.",
+    "about.contribute.repo": "GitHub'da görüntüle",
+    "about.contribute.issues": "Konu (issue) aç",
+    "about.contribute.guide": "Katkı rehberi",
+    "about.connect.title": "Konuşalım",
+    "about.connect.body":
+      "Soruların ya da fikirlerin mi var, yoksa strateji mi konuşmak istiyorsun? GitHub Discussions'ta bir başlık aç.",
+    "about.connect.discussions": "GitHub Discussions",
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

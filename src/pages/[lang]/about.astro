@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import Icon from "@/components/ui/Icon.astro";
+import { Icon as UIIcon } from "astro-icon/components";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 
@@ -8,24 +8,70 @@ export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+
+const REPO = "https://github.com/themkdemiiir/aoe2-guide";
+const links = {
+  repo: REPO,
+  issues: `${REPO}/issues`,
+  guide: `${REPO}/blob/main/docs/CONTRIBUTING.md`,
+  discussions: `${REPO}/discussions`,
+};
 ---
 <BaseLayout title={t(lang, "nav.about")} canonicalPath="/about">
   <section class="mx-auto max-w-prose px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.about")}</h1>
+    <p class="mt-4 text-stone-700">{t(lang, "about.intro")}</p>
 
-    <h2 class="mt-8 font-display text-xl text-ink">Icon smoke test</h2>
-    <div class="mt-4 flex flex-wrap items-center gap-3">
-      <Icon slug="britons" kind="civ" size={56} />
-      <Icon slug="franks" kind="civ" size={56} />
-      <Icon slug="knight" kind="unit" />
-      <Icon slug="longbowman" kind="unit" />
-      <Icon slug="crossbowman" kind="unit" />
-      <Icon slug="loom" kind="tech" />
-      <Icon slug="not-a-real-thing" kind="unit" />
+    {/* Contribute */}
+    <h2 class="mt-12 font-display text-2xl text-ink">{t(lang, "about.contribute.title")}</h2>
+    <p class="mt-2 text-stone-700">{t(lang, "about.contribute.body")}</p>
+    <div class="mt-4 flex flex-wrap gap-3">
+      <a
+        href={links.repo}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded border border-gold-500 bg-gold-500/15 px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-gold-500/30"
+      >
+        <UIIcon name="lucide:github" class="h-4 w-4" />
+        {t(lang, "about.contribute.repo")}
+      </a>
+      <a
+        href={links.issues}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded border border-stone-700/40 px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-gold-500 hover:text-gold-500"
+      >
+        <UIIcon name="lucide:circle-dot" class="h-4 w-4" />
+        {t(lang, "about.contribute.issues")}
+      </a>
+      <a
+        href={links.guide}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded border border-stone-700/40 px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-gold-500 hover:text-gold-500"
+      >
+        <UIIcon name="lucide:book-open" class="h-4 w-4" />
+        {t(lang, "about.contribute.guide")}
+      </a>
     </div>
 
-    <p class="mt-12 text-xs text-stone-700">
-      Age of Empires II © Microsoft Corporation. This site was created under Microsoft's "Game Content Usage Rules" using assets from Age of Empires II; it is not endorsed by or affiliated with Microsoft.
+    {/* Connect */}
+    <h2 class="mt-12 font-display text-2xl text-ink">{t(lang, "about.connect.title")}</h2>
+    <p class="mt-2 text-stone-700">{t(lang, "about.connect.body")}</p>
+    <div class="mt-4">
+      <a
+        href={links.discussions}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded border border-stone-700/40 px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-gold-500 hover:text-gold-500"
+      >
+        <UIIcon name="lucide:messages-square" class="h-4 w-4" />
+        {t(lang, "about.connect.discussions")}
+      </a>
+    </div>
+
+    <p class="mt-12 border-t border-stone-700/30 pt-4 text-xs text-stone-700">
+      {t(lang, "footer.attribution")}
     </p>
   </section>
 </BaseLayout>
