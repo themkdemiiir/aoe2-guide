@@ -33,5 +33,5 @@ Secure every scrap of your own food — both boars under the Town Center and a m
 - Because nothing here depends on a civilization bonus, this is a dependable opener on any civ — expect a clean 19-pop (no Loom) or 18-pop (with Loom) arrival into Feudal at roughly 8:25.
 - The build deliberately runs lean: it is a short, food-heavy push to Feudal, so do not over-invest in Dark Age extras. Get the hunt in, get up, and let your follow-up define the game.
 - In Feudal, shift the hunt villagers onto a single lumber camp until 8 are chopping, then split 2 to stragglers and 2 to a Barracks and house — this gives you the wood and building base for any unit choice.
-- Pick your follow-up off what you scout: an Archery Range opening wants 4 villagers straight to gold, while a Scout, Spearman, or Skirmisher plan keeps your villagers on food and wood instead.
+- Pick your follow-up based on what you scout: an Archery Range opening wants 4 villagers straight to gold, while a Scout, Spearman, or Skirmisher plan keeps your villagers on food and wood instead.
 - Strongest as an insurance opener against aggressive scouting and laming; if the game goes quiet, you have aged up on time and can transition smoothly into a standard Feudal or Castle plan.

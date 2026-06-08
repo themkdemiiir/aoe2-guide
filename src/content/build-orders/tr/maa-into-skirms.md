@@ -15,11 +15,11 @@ steps:
   - { villagers: 14, assign: "+1 → ikinci yaban domuzunu çek ve ye", note: "İlk domuz azalmaya başlayınca ikincisini getir", icons: ["food"] }
   - { villagers: 16, assign: "+2 → av (domuz ve geyik)", icons: ["food"] }
   - { villagers: 17, assign: "+1 → üssünün ön tarafına bir Kışla ve bir Ev kur", icons: ["barracks", "house"] }
-  - { villagers: 19, time: "9:15", assign: "+2 → av, Loom araştır, sonra Feudal'a tıkla", note: "Yaklaşık 3 odunda, 15 yiyecekte iken çağ atla", icons: ["food", "loom"] }
+  - { villagers: 19, time: "9:15", assign: "+2 → av, Loom araştır, sonra Feudal'a tıkla", note: "Çağ atladığında yaklaşık 3 odunda, 15 yiyecekte ol", icons: ["food", "loom"] }
   - { villagers: 19, assign: "Yiyecekten 2 kişiyi → altına al, bir Maden Kampı kur; 3 Milis çıkar", icons: ["gold", "mining-camp", "militia"] }
   - { villagers: 19, assign: "Avdan 5 kişiyi → oduna, 3 kişiyi → çalılara gönder", icons: ["wood", "food"] }
   - { villagers: 19, assign: "Man-at-Arms, ardından Double-Bit Axe araştır (Horse Collar opsiyonel)", icons: ["man-at-arms", "double-bit-axe", "horse-collar"] }
-  - { villagers: 19, assign: "Ön tarafa bir Okçuluk Menzili kur; ağaç dibindeki Köylü'yü tarlalara al; Skirmiş üretmeye başla", icons: ["archery-range", "skirmisher", "farm"] }
+  - { villagers: 19, assign: "Ön tarafa bir Okçuluk Menzili kur; üs çevresindeki tek tük ağaçtan kesen Köylü'yü tarlalara al; Skirmiş üretmeye başla", icons: ["archery-range", "skirmisher", "farm"] }
   - { villagers: 19, assign: "Bir Demirci kur, Fletching araştır ve Man-at-Arms eklemeye devam et", icons: ["blacksmith", "fletching", "man-at-arms"] }
   - { villagers: 19, assign: "7-8 Man-at-Arms olunca Arson araştır, sonra Piyade ve Skirmiş zırhı; 14-16 tarlada Wheelbarrow al", icons: ["arson", "wheelbarrow", "farm"] }
 source:

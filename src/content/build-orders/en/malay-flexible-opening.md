@@ -10,9 +10,9 @@ steps:
   - { villagers: 9,  assign: "+3 → wood, drop a lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → lure and eat the first boar", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a house, then a mill on berries", icons: ["house", "mill", "food"] }
-  - { villagers: 16, assign: "+5 → hunt under the Town Center", note: "Lure the deer with your scout and bring in the second boar to stretch the food", icons: ["food"] }
+  - { villagers: 16, assign: "+5 → hunt under the Town Center", note: "Lure the deer with your scout and bring in the second boar to stretch your food", icons: ["food"] }
   - { villagers: 19, assign: "+3 → berries", icons: ["food"] }
-  - { villagers: 21, assign: "+2 → wood; research Loom and click up to Feudal", time: "9:13", note: "Feudal landing ~9:13 on 5 wood / 16 food — Malay's faster age-up buys you a roughly +2 villager lead", icons: ["wood", "loom"] }
+  - { villagers: 21, assign: "+2 → wood; research Loom and click up to Feudal", time: "9:13", note: "Feudal landing ~9:13 on 5 wood / 16 food — Malay's faster age-up buys you roughly a +2 villager lead", icons: ["wood", "loom"] }
   - { villagers: 21, assign: "Send 5 from hunt → wood, dropping a second lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 21, assign: "Pull 1 from hunt to build a Barracks early so a follow-up is ready the moment you decide", icons: ["barracks"] }
   - { villagers: 21, assign: "Fork A — Archers: build one Archery Range and start Archers, moving 4 villagers → gold", icons: ["archery-range", "archer", "gold"] }

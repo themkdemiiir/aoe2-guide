@@ -28,7 +28,7 @@ source:
 
 # Eagle and Range Feudal Rush
 
-Hit Feudal fast off heavy hunt, then apply two-pronged pressure with Eagle Scouts plus an Archery Range backing them up.
+Hit Feudal fast off a heavy hunt, then apply two-pronged pressure with Eagle Scouts plus an Archery Range backing them up.
 
 ## Strategy and Follow-Up (What's Next)
 

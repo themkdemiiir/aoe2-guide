@@ -6,18 +6,19 @@ targetAge: castle
 durationMin: 17
 civsRecommended: [chinese, britons, franks, teutons, vikings]
 steps:
-  - { villagers: 6,  assign: "6 → koyunda", icons: ["food"] }
-  - { villagers: 10, assign: "+4 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
-  - { villagers: 11, assign: "+1 → domuzu çek", icons: ["food"] }
-  - { villagers: 15, assign: "+4 → meyvelerin yanına House + Mill, ardından meyveye", icons: ["house", "mill", "food"] }
-  - { villagers: 16, assign: "+1 → 2. domuzu çek", icons: ["food"] }
-  - { villagers: 20, assign: "+4 → TC çevresine Farm kur", icons: ["farm"] }
-  - { villagers: 23, assign: "+3 → 2. Lumber Camp + oduna", icons: ["lumber-camp", "wood"] }
-  - { villagers: 26, assign: "+3 → Mining Camp + altına", note: "26 köylüyle Feudal Age'e tıkla — hedef ~10:30", icons: ["gold", "mining-camp"] }
-  - { villagers: 26, assign: "Feudal gelir — 4 köylü Blacksmith + Market kurar", icons: ["blacksmith", "market"] }
-  - { villagers: 28, assign: "+2 köylü; Castle Age'e tıkla (~13:00); gerekirse Market'te taş sat", icons: ["market"] }
-  - { villagers: 30, assign: "Castle Age — 4 köylü kaynak yakınına 2–3 ek TC kurar", icons: ["town-center"] }
-  - { villagers: 40, assign: "Ekonomi boomlandi; birden fazla binadan asker üretimine başla", icons: ["barracks", "stable", "archery-range"] }
+  - { villagers: 6,  assign: "6 → TC altındaki koyunlara", icons: ["food"] }
+  - { villagers: 10, assign: "+4 → oduna; ilki Lumber Camp kurar, sonra hepsi oduna", icons: ["wood", "lumber-camp"] }
+  - { villagers: 11, assign: "+1 → 1. domuzu çek", icons: ["food"] }
+  - { villagers: 16, assign: "+5 → meyvelerin yanına 2 House + Mill, sonra meyveye", icons: ["house", "mill", "food"] }
+  - { villagers: 16, assign: "Mevcut bir domuz köylüsünü 2. domuzu çekmesi için yeniden görevlendir", icons: ["food"] }
+  - { villagers: 18, assign: "+2 → TC veya Mill yanına Farm ek", icons: ["farm"] }
+  - { villagers: 23, assign: "+5 → oduna; 2. Lumber Camp + bir House kur, sonra hepsi oduna", icons: ["lumber-camp", "house", "wood"] }
+  - { villagers: 26, assign: "+3 → altına; altın Mining Camp kur, sonra altın çıkar", note: "26 nüfusta Feudal'a tıkla", icons: ["gold", "mining-camp"] }
+  - { villagers: 26, assign: "Feudal gelir — 1 köylü → Blacksmith, 2 köylü → Market (odundan)", icons: ["blacksmith", "market"] }
+  - { villagers: 26, assign: "Lumber Camp'te Double-Bit Axe araştır", icons: ["double-bit-axe"] }
+  - { villagers: 28, assign: "28 nüfusta Castle Age'e tıkla; istersen 4. TC için Market'ten 100 taş al", icons: ["market"] }
+  - { villagers: 28, assign: "Castle Age — her odun hattından 4 köylü çekip 2 ek Town Center kur", icons: ["town-center"] }
+  - { villagers: 40, assign: "Mill'de Horse Collar araştır; ekonomi boomlandı, seçtiğin binalardan asker üretimine başla", icons: ["horse-collar", "barracks", "stable", "archery-range"] }
 source:
   author: "AoE Companion"
   url: "https://aoecompanion.com/build-guides/fast-castle-boom"
@@ -26,55 +27,59 @@ source:
 
 # Fast Castle ile Boom
 
-**Amaç:** Mümkün olan en hızlı şekilde Castle Age'e ulaşmak (~13:00), ardından hemen 2–3 ek Town Center kurarak köylü üretimini katlamak.
+**Amaç:** Mümkün olan en hızlı şekilde Castle Age'e ulaşmak, ardından hemen ek Town Center'lar kurarak köylü üretimini katlamak.
 **Önerilen medeniyetler:** Chinese, Britons, Franks, Teutons, Vikings
 
 ## Karanlık Çağ (0–26 Köylü)
 
-- 6 köylü koyunda
-- 4 köylü odunda
-- 1 köylü ilk domuzu çeker
-- 4 köylü meyveye (House meyvelerin yanına + Mill)
-- 1 köylü ikinci domuzu çeker
-- +4 köylü TC çevresine Farm kurar
-- +3 köylü 2. Lumber Camp'e
-- +3 köylü altına
+- 6 köylü koyunda (4–6. köylüler başlangıçtaki üçe katılır)
+- 4 köylü odunda (7. köylü Lumber Camp'i kurar, sonra hepsi odun toplar)
+- 1 köylü ilk domuzu çeker (11. köylü)
+- 5 köylü meyvede — önce meyvelerin yanına 2 House ve bir Mill kur, sonra topla (12–16. köylüler)
+- Mevcut bir domuz köylüsünü ikinci domuzu çekmesi için yeniden görevlendir
+- 2 köylü TC veya Mill yanına Farm eker (17–18. köylüler)
+- 5 köylü odunda — 2. Lumber Camp ve bir House kur, sonra odun topla (19–23. köylüler)
+- 3 köylü altında — altın Mining Camp'i kur, sonra çıkar (24–26. köylüler)
 
-26 köylüyle Feudal Age'e tıkla (~10:30).
+26 nüfusta Feudal Age'e tıkla.
 
 ## Feudal Hazırlığı
 
-- 4 köylü Blacksmith + Market kurar (odundan veya straggler ağaçlardan alınır)
-- Yiyecek veya altın sıkıntısı varsa Market'te fazla taş sat
-- Feudal Age'de asker binası kurma
+- Blacksmith'i kurmak için odundan 1 köylü al
+- Market'i kurmak için odundan 2 köylü al
+- Yiyecek veya altın sıkıntısı varsa Market'te fazla taşı sat
+- Feudal Age'de asker binası yok
 
 **Araştırmalar:**
-- (Geciktir) Double-Bit Axe ve Horse Collar vakit daralıyorsa Castle Age'e ertelenebilir
+
+- Feudal Age sırasında Lumber Camp'te Double-Bit Axe araştır
 
 ## Feudal Çağ (26 Köylü)
 
-- Blacksmith ve Market yerleştirildikten hemen sonra Castle Age'e tıkla (~13:00)
-- Feudal Age'de asker üretme
-- Her kaynak yaş geçişi zincirine akar
+- Blacksmith ve Market yerleştirilir yerleştirilmez Castle Age'e tıkla
+- Feudal Age'de asker üretimi yok
+- Her kaynağı yaş geçişine yönlendir
+- Dördüncü bir Town Center kurmayı planlıyorsan Market'ten 100 taş al
 
 ## Kale Çağı (28 Köylü)
 
-- Hemen kaynakların (odun, altın, taş) yanına 2–3 Town Center kur
-- Çiftçiliği hızlandırmak için Wheelbarrow ve Horse Collar araştır
-- Odun verimliliği için Bow Saw araştır
-- 20. dakikaya kadar 40+ köylünün sürekli üretilmesi gerekir
+- Her odun hattından 4 köylü çekerek hemen kaynakların yanına 2 ek Town Center kur
+- İsteğe bağlı dördüncü Town Center için Market'ten 100 taş satın almak gerekir
+- Çiftçiliği güçlendirmek için Mill'de Horse Collar araştır
+- Koyunlar tükendikçe koyun köylülerini Farm'lara geçir
+- 20. dakikaya kadar 40+ köylünün sürekli üretim yapması gerekir
 
-## Strateji ve Devam (What's Next)
+## Strateji ve Devamı (Sırada Ne Var)
 
-- Fast Castle Boom, AoE2'nin kanonik savunmacı/ekonomik stratejisidir. Oyunun tamamı mümkün olan en hızlı Castle Age'e ulaşmaya ve ardından ekonomiyi patlatmaya adanmıştır.
-- **Zayıf olduğu:** Castle Age'den önce duvarları delen Feudal all-in baskıları; erken askeri harcamayı zorla yapan Scout Rush.
-- **Güçlü olduğu:** Yavaş boom stratejileri; askeri baskı uygulamadan Castle Age'e geçmeye çalışan rakipler.
+- Fast Castle Boom, kanonik savunmacı/ekonomik stratejidir. Oyunun tüm erken evresi mümkün olan en hızlı şekilde Castle Age'e ulaşmaya, ardından ek Town Center'larla ekonomiyi patlatmaya adanmıştır.
+- **Zayıf olduğu:** Castle Age'den önce duvarları aşan Feudal all-in baskınları; erken askeri harcamayı zorlayan Scout Rush.
+- **Güçlü olduğu:** Yavaş boom stratejileri; askeri baskı yapmadan Castle Age'e geçmeye çalışan rakipler.
 
 **Seçenekler:**
 
-1. **Tam Boom ile Imperial:** 3+ TC sürekli üretim yaparak Imperial Age'e geç; kapalı haritalarda (Arena, Black Forest) en güçlü seçenek.
-2. **Crossbow + Siege Geçişi:** 40+ köylü kurulduktan sonra 2–3 Archery Range ve Siege Workshop yatırımı yaparak hızlı savaş gücü kazan.
-3. **Knight Seli:** Kurulu ekonomiye 2 Stable ekle ve Knight üret; rakip Pikemen kurmamışsa çok güçlüdür.
+1. **Imperial'a Tam Boom:** 3+ TC sürekli üretim yaparak Imperial Age'e geçer; kapalı haritalarda (Arena, Black Forest) en güçlüsü.
+2. **Crossbow + Siege Geçişi:** 40+ köylü kurulduktan sonra, anında savaş gücü için 2–3 Archery Range ve bir Siege Workshop'a yatırım yap.
+3. **Knight Seli:** Knight üretimi için kurulu ekonomiye 2 Stable ekle; rakip Pikemen kurmadıysa çok güçlüdür.
 
 **Savunma İpucu:**
-Kapalı haritalarda (Arena, Black Forest) en güçlü stratejidir. Arabia'da dikkatli duvar çekme ve Feudal Age'de küçük bir savunma kuvveti gerekebilir. Chinese, Teutons ve Vikings ekonomik bonusları sayesinde bu stratejiyle en iyi ölçeklenen medeniyetlerdir. Castle Age'e geçtiğinde her şeyden önce ek Town Center'ları kur.
+Kapalı haritalarda (Arena, Black Forest) en güçlüsüdür. Arabia'da dikkatli duvar çekmeyi ve muhtemelen Feudal Age'de küçük bir savunma kuvveti gerektirir. Chinese, Teutons ve Vikings, ekonomik bonusları sayesinde bu stratejiyle en iyi ölçeklenen medeniyetlerdir. Castle Age gelir gelmez, başka herhangi bir şey yapmadan önce ek TC'leri yerleştir.

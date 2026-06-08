@@ -31,7 +31,7 @@ Land Feudal fast off heavy hunt, then drown the enemy in Eagle Scouts trained fr
 
 ## Strategy and Follow-Up (What's Next)
 
-- This opener belongs to the Mesoamerican civs (Aztecs, Incas, Mayans) — they are the only ones with Eagle Scouts, and their eco bonuses let the heavy-hunt collection land Feudal cleanly around 8:50.
+- This opener belongs to the Mesoamerican civs (Aztecs, Incas, Mayans) — they are the only ones with Eagle Scouts, and their eco bonuses let this heavy-hunt opening land in Feudal cleanly around 8:50.
 - Two Barracks let you keep constant Eagle pressure: their speed and gold-conversion bonus make raiding villagers and snowballing map control easy, so commit to harassment rather than turtling.
 - Open 2 Spearmen if you scout a Scout Rush, then flip fully to Eagles once the cavalry threat is dealt with.
 - You are strong into Scout, Spear, and Skirmisher openings but soft against Man-at-Arms and Archers — if you see either, slot in a single Archery Range for Skirmishers and lean on walls.

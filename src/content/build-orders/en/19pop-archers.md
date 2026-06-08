@@ -18,7 +18,7 @@ steps:
   - { villagers: 19, assign: "2 → gold, build a mining camp; research Double-Bit Axe (skip Horse Collar)", icons: ["gold", "mining-camp", "double-bit-axe"] }
   - { villagers: 19, assign: "Build an Archery Range and start Archers as soon as Feudal lands", icons: ["archery-range", "archer"] }
   - { villagers: 21, assign: "+2 → gold (4 total); build a Blacksmith → research Fletching", icons: ["gold", "blacksmith", "fletching"] }
-  - { villagers: 22, assign: "Optional: 1–4 Spearmen from the barracks if you scout enemy Scouts", icons: ["spearman"] }
+  - { villagers: 22, assign: "Optional: 1–4 Spearmen from the barracks if you spot enemy Scouts", icons: ["spearman"] }
   - { villagers: 26, assign: "+4 → berries (5 on berries total); seed farms", icons: ["food", "farm"] }
   - { villagers: 28, assign: "Wall with 2–3 vils as production stabilizes", icons: ["house"] }
 source:

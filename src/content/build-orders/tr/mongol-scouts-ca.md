@@ -10,7 +10,7 @@ steps:
   - { villagers: 8,  assign: "+2 → oduna; bir Kereste Kampı kur", icons: ["wood", "lumber-camp"] }
   - { villagers: 9,  assign: "+1 → ilk yaban domuzunu çek", icons: ["food"] }
   - { villagers: 10, assign: "+1 → bir Ev, ardından meyvelerin yanına Değirmen kur", icons: ["house", "mill"] }
-  - { villagers: 10, assign: "Süvariyle geyikleri Şehir Merkezi'ne doğru sür", note: "Köylü zamanı kaybetmeden bedava yiyecek", icons: ["scout-cavalry", "food"] }
+  - { villagers: 10, assign: "Süvariyle geyikleri Şehir Merkezi'ne doğru sür", note: "Köylü iş gücünden kaybetmeden bedava yiyecek", icons: ["scout-cavalry", "food"] }
   - { villagers: 16, assign: "+6 → ava; ikinci domuzu da çekip ekle", icons: ["food"] }
   - { villagers: 18, assign: "+2 → oduna; Loom araştır", note: "Moğollar: avcılar %40 daha hızlı çalışır, yiyecek hızla birikir", icons: ["wood", "loom"] }
   - { villagers: 18, time: "8:50", assign: "18 nüfusta Feudal çağa tıkla", note: "Mükemmel Feudal varışı ~8:50 civarı", icons: ["food"] }
@@ -36,5 +36,5 @@ Feudal çağda Süvarilerle harita kontrolünü ele geçir, üssünü güvenle d
 - Duvarlamak işin can damarıdır. Atlı Okçular yığılırken kırılgandır; kapalı bir üs, dışarı çıkmadan önce teknolojiye yatırım yapıp sayı toplamana imkân verir.
 - Süvari üretimini doğrudan Ahır'ın ekonomi yükseltmelerine yönlendir, sonra Castle çağa geçtiğin an tüm altını Okçu Menzillerine aktar.
 - Özellikle Moğollar için Mangudai yükseltmesine doğrudan git — daha hızlı atış hızı ve kuşatmaya karşı bonus, Atlı Okçu yığınını üst sınıf bir kompozisyona dönüştürür.
-- Saygı duyman gereken sert karşıtlar: Okçu Avcıları (Skirmisher) ve Develer atlı okçu hattını parçalar; bu yüzden sürekli hareket et, dikkatlice kite et (vur-kaç) ve geç oyun için yakın dövüş perdesi olarak Hussar veya Halberdier ekle.
+- Dikkat etmen gereken sert karşı birimler var: hem Okçu Avcıları (Skirmisher) hem de Develer atlı okçu hattını biçer; bu yüzden sürekli hareket halinde kal, dikkatlice kite et (vur-kaç) ve geç oyun için yakın dövüş perdesi olarak Hussar veya Halberdier ekle.
 - Zamanında duvarlayamazsan Atlı Okçu planından vazgeç, Bloodlines'lı Süvari üretmeye devam et ve bunun yerine ekonomi avantajına yaslan.

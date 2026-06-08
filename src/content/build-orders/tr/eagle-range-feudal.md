@@ -18,7 +18,7 @@ steps:
   - { villagers: 19, assign: "Feodal geldi — 5 avcıyı 2. Kereste Kampı'na, 1 avcıyı başlangıç odun hattına gönder", icons: ["wood", "lumber-camp"] }
   - { villagers: 19, assign: "2 avcı → meyveler; 1 avcı Kışla kursun (Feodal'in ~%50'sinde başlat)", icons: ["food", "barracks"] }
   - { villagers: 19, assign: "3 avcı → altın (Maden Kampı); Double-Bit Axe araştır, Horse Collar'ı atla", icons: ["gold", "mining-camp", "double-bit-axe"] }
-  - { villagers: 19, assign: "Kışla'dan Kartal İzcisi bas; 2 köylüyle bir Okçu Menzili ekle", note: "Menzil işçileriyle boşlukları Ev ve palisad ile çevir", icons: ["eagle-scout", "archery-range"] }
+  - { villagers: 19, assign: "Kışla'dan Kartal İzcisi bas; 2 köylüyle bir Okçu Menzili ekle", note: "Menzil işçileriyle boşlukları Ev ve palisad ile kapat", icons: ["eagle-scout", "archery-range"] }
   - { villagers: 23, assign: "KARAR — okçulara karşı +4 ŞM köylüsünü altına gönderip Okçu bas; nişancılara karşı +4'ü artık ağaç odununa gönderip Nişancı bas", icons: ["archer", "skirmisher"] }
   - { villagers: 23, assign: "Ekonominin arkasına Tarla ek; bir Demirci kur ve Fletching araştır", icons: ["farm", "blacksmith", "fletching"] }
 source:

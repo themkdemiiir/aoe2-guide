@@ -29,9 +29,9 @@ source:
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Bu açılışın tüm amacı Liman: üç Balıkçı Gemisi, kara köylülerinin sağlayamayacağı kesintisiz ve bol bir yiyecek akışı ekler; böylece boom'un koyunlarını ve domuzlarını sıkıştırmadan büyür.
-- En çok hibrit ve su haritalarında, kıyı balığı ile derin balığın rakipsiz olduğu yerlerde parlar; Four Lakes gibi kapalı bir haritada aynı ekonomiyle Kışla açıp Okçu ya da Süvariye geçebilirsin.
-- Feudal'e geçer geçmez su planını erken seç — gölü almak için Kadırga ya da Ateş Kadırgası (altında yaklaşık üç ila beş köylü), ya da su güvenliyse ekonomik kalıp balık tutmaya devam et.
-- Bu düzen Castle Çağı gücüne yaslanır: hızlı yükselmek için Pazar'da taş sat ve Castle'a ulaştığında Yıkım Gemilerinin acımasızca güçlü olduğunu unutma — suyu orada sert şekilde çekişmeyi planla.
+- Bu açılışın tüm amacı Liman: üç Balıkçı Gemisi, kara köylülerinin sağlayamayacağı kesintisiz ve bol bir yiyecek akışı ekler; böylece koyunlarını ve domuzlarını tıka basa doldurmadan boom'un katlanarak büyür.
+- En çok hibrit ve su haritalarında, kıyı balığı ile derin balığın rakipsiz olduğu yerlerde parlar; Four Lakes gibi kapalı bir haritada aynı ekonomiyle Kışla'ya geçip Archer ya da Scout çıkarabilirsin.
+- Feudal'e geçer geçmez su planını erken seç — gölü ele geçirmek için Galley ya da Fire Galley (altın madeninde yaklaşık üç ila beş köylü), ya da su güvenliyse ekonomik kalıp balık tutmaya devam et.
+- Bu düzen Castle Çağı gücüne yaslanır: hızlı yükselmek için Pazar'da taş sat ve Castle'a ulaştığında Demolition Ship'lerin acımasız derecede güçlü olduğunu unutma — suyu orada sert biçimde çekişmeyi planla.
 - Limanını ve Balıkçı Gemilerini şehir merkezin gibi koru — gemileri kaybetmek, bu açılışın üzerine kurulduğu tüm avantajı siler.
 - Su bonusu olan uygarlıklar (Italians, Japanese, Vikings, Lithuanians, Malians) balıkçılıktan en çok değeri çıkarır, ama harita sana suyu verdiği sürece herhangi bir uygarlık bu düzeni oynayabilir.

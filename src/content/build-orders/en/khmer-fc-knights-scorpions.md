@@ -12,7 +12,7 @@ steps:
   - { villagers: 12, assign: "+1 → build House + Mill, then berries", icons: ["house", "mill", "food"] }
   - { villagers: 13, assign: "+1 → berries", icons: ["food"] }
   - { villagers: 14, assign: "+1 → second boar", icons: ["food"] }
-  - { villagers: 18, assign: "+4 → berries; add a House (no Mill needed twice)", icons: ["food", "house"] }
+  - { villagers: 18, assign: "+4 → berries; add a House (no second Mill needed)", icons: ["food", "house"] }
   - { villagers: 19, assign: "+1 → wood", icons: ["wood"] }
   - { villagers: 20, assign: "+1 → build a Farm", icons: ["farm"] }
   - { villagers: 23, assign: "+3 → gold (Mining Camp); research Loom", time: "10:55", note: "Click Feudal at 23 pop with 4 wood / 16 food / 3 gold", icons: ["gold", "mining-camp", "loom"] }

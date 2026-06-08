@@ -11,7 +11,7 @@ steps:
   - { villagers: 11, assign: "+2 → ilk domuza", icons: ["food"] }
   - { villagers: 12, assign: "+1 → House + Mill kur, ardından meyveye", icons: ["house", "mill", "food"] }
   - { villagers: 13, assign: "+1 → meyveye", icons: ["food"] }
-  - { villagers: 14, assign: "+1 → ikinci domuz", icons: ["food"] }
+  - { villagers: 14, assign: "+1 → ikinci domuza", icons: ["food"] }
   - { villagers: 18, assign: "+4 → meyveye; bir House ekle (ikinci Mill gerekmez)", icons: ["food", "house"] }
   - { villagers: 19, assign: "+1 → oduna", icons: ["wood"] }
   - { villagers: 20, assign: "+1 → bir Farm kur", icons: ["farm"] }

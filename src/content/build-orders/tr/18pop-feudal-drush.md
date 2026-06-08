@@ -30,7 +30,7 @@ source:
 ## Strateji ve Devamı (Sırada Ne Var)
 
 - Bu hafif ve düşük riskli bir baskıdır: Militia, Dark Age'de değil Feudal geçişi sırasında yola çıkar; böylece ekonomin harass için neredeyse hiçbir bedel ödemezken rakibi yine de tepki vermeye zorlarsın.
-- Asıl tehdit scout ile 2 Militia birlikte: kaçan köylüleri kovala, lumber camp'leri engelle ve işçileri kaynaktan çekmeye zorla. 1-3 köylü öldürmek bile sana tempo avantajı kazandırır.
+- Asıl tehdit scout ile 2 Militia'nın birlikteliğidir: kaçan köylüleri kovala, lumber camp'leri engelle ve işçileri kaynaklardan uzaklaştır. 1-3 köylü öldürmek bile sana tempo avantajı kazandırır.
 - Takibini rakibi gözleyerek seç: Spearmen'ları yoksa Stable'dan Scout Cavalry ekle, ya da Archery Range açıp Archers yığ (archer ve ekonomi bonuslarıyla Britons ve Vikings'te güçlüdür).
 - Hemen Double-Bit Axe al ve üssünü yavaş duvarla; yemeğe ne kadar yüklendiğine göre Horse Collar isteğe bağlıdır.
 - Açgözlü, geç duvar çeken açılışlara karşı güçlü; hızlı duvar çeken ya da Militia'yı durdurmak için kendi Scout'larını üreten rakiplere karşı zayıftır.

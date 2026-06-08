@@ -31,9 +31,9 @@ Erken Spearman'lerle dürterek düşmanın açılışını engelle, ardından Fa
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- İki üç erken Spearman ve Scout'un düşük maliyetli bir sigortadır: rakibin Scout açılışını durdurur ve Fast Castle'ın ihtiyaç duyduğu zamanı kazandırır, üstelik yükselişten gerçek kaynak çekmeden.
+- İki-üç erken Spearman ve Scout, düşük maliyetli bir sigorta paketi oluşturur: rakibin Scout açılışını durdurur ve Fast Castle'ın ihtiyaç duyduğu zamanı kazandırırlar, üstelik yükselişten gerçek kaynak çekmeden.
 - İlerledikçe duvar ör. Domuz ve avlanma hattı çevresinde üç köylüyle örülen yavaş bir palisade build'i güvende tutar, böylece Spear baskısı asla tam bir savunma duruşuna dönüşmek zorunda kalmaz.
 - Castle Age'e geçince savunmaya uygun bir noktaya bir Fortified Church kur ve hemen Warrior Priest yığ — görevleri savaşmak değil, kalıntı toplamaktır. Uzun bir altın akışı için altıya kadar kalıntıyı kilitlemeyi hedefle; bu, sonrasında gelen her şeyi finanse eder.
 - Bow Saw'u erken al ki odun ekonomisi durmaksızın süren Warrior Priest ve bina üretimine yetişsin; bunun üstüne yükselirken sıraya aldığın Double-Bit Axe ve Horse Collar da gelir.
 - Bu yalnızca Armenian'a özel bir plandır: kalıntı kilidini mümkün kılan şey onların Fortified Church'ü ve Warrior Priest'leridir, dolayısıyla build başka medeniyetlere aktarılamaz.
-- Kalıntı geliri yavaş yanan bir gelirdir — Church'ü ve rahipleri duvarlar ve birkaç Spearman ile koru, istikrarlı altını matchup'ının gerektirdiği Castle Age ordusuna çevir.
+- Kalıntı geliri yavaş yanan bir ateş gibidir — Church'ü ve rahipleri duvarlar ve birkaç Spearman ile koru, istikrarlı altını matchup'ının gerektirdiği Castle Age ordusuna çevir.

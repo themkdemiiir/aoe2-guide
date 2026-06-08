@@ -32,7 +32,7 @@ source:
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Bu, menzilli açılışın temel kalıbıdır: tek range, oduna akan üretimi besleyen Double-Bit Axe ve ilk salvon hedefe varmadan Fletching'i bitirecek kadar erken bir Blacksmith. Feudal'da Horse Collar'ı atla — odun ve yiyecek tarla yükseltmesine değil askere gitsin.
+- Bu, menzilli açılışın temel kalıbıdır: tek range, oduna akan üretimi besleyen Double-Bit Axe ve ilk yaylım ateşin hedefe varmadan Fletching'i bitirecek kadar erken bir Blacksmith. Feudal'da Horse Collar'ı atla — odun ve yiyecek tarla yükseltmesine değil askere gitsin.
 - Altını sağlam tut. İki madenci tıklamada, iki madenci hemen ardından iner; oduncuları aç bırakmadan sürekli Archer üretimini sürdürmek için altında dört köylü yeterli.
 - Gördüğüne göre tepki ver. Rakip Scout'a yüklenirse barracks'tan birkaç Spearman açığı ucuza kapatır; Skirmisher'a giderse Archer'a fazla yatırım yapma — kaynak biriktir ve Castle geçişine yaslan.
 - Varsayılan devamı, 10–15 Archer'la Castle Age'e çıkmak, ardından sert bir timing saldırısı için Crossbow ve Bodkin Arrow'dur. Eşleşmeye göre ikinci bir Archery Range veya Stable ekle.

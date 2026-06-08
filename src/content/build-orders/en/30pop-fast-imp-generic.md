@@ -13,7 +13,7 @@ steps:
   - { villagers: 19, assign: "Villagers 15-19 → more wood + second boar lure", icons: ["wood", "food"] }
   - { villagers: 24, assign: "Villagers 20-24 → mixed food (sheep / boar / deer)", icons: ["food"] }
   - { villagers: 30, assign: "Villagers 25-30 → gold (build Mining Camp)", note: "Click Feudal at 30 pop (~13:00); 6 on gold. Push deer to TC with scout", icons: ["gold", "mining-camp"] }
-  - { villagers: 30, assign: "Feudal arrives — 1 builds Blacksmith, 2 build Market then return to wood", icons: ["blacksmith", "market"] }
+  - { villagers: 30, assign: "Feudal arrives — 1 villager builds the Blacksmith, 2 build the Market then return to wood", icons: ["blacksmith", "market"] }
   - { villagers: 32, assign: "+2 vils → gold (now 8 on gold); click Castle Age (~16:30)", icons: ["gold"] }
   - { villagers: 32, assign: "Castle Age — build Monastery + Siege Workshop; transition hunt vils to farms", icons: ["monastery", "siege-workshop", "farm"] }
   - { villagers: 32, assign: "Click Imperial Age (~21:00); keep food / wood / gold balanced", icons: ["food", "wood", "gold"] }

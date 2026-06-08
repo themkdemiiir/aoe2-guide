@@ -27,13 +27,13 @@ source:
 
 # Chinese Fast Feudal
 
-Chinese'in fazladan başlangıç köylülerinden ve evsiz açılışından yararlanarak Feudal Age'e hızlıca ulaş ve scout'unun gerektirdiği saldırıyı seç.
+Chinese'in fazladan başlangıç köylülerinden ve evsiz açılışından yararlanarak Feudal Age'e hızlıca ulaş ve keşfinin gerektirdiği saldırı hattını seç.
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
 - Chinese üç fazladan köylüyle ve kurulacak ev olmadan başlar, bu yüzden bu açılış diğer tüm uygarlıklardan daha erken köylüyü yiyeceğe yığar ve standart bir 20 pop inişinden iki köylü önde, yaklaşık 8:25'te çağ atlar.
-- Ekonomi bu kadar önde indiği için build bilinçli olarak uçları açık tutulmuştur: önce rakibini scout et, sonra kurulumunun en az cezalandırdığı hatta yönel.
+- Ekonomi bu kadar önde indiği için build bilinçli olarak uçları açık bırakılmıştır: önce rakibini scout et, sonra onun kurulumunun en az cezalandıracağı hatta yönel.
 - Belirsizliğe karşı Scouts güvenli varsayılandır — Stable'ı ekonomi yükseltmeleriyle birlikte kur ki süvari hasar ararken üstünlük kartopu gibi büyüsün.
 - Archers'a geçmeden önce biraz altın kurulumu gerekir; Range'den önce bir Mining Camp kur ve 2-3 köylü çek ki üretim hiç aç kalmasın, ardından üstüne Fletching ekle.
-- Man-at-Arms baskısı üç hızlı Militia ile yükseltme ve Double-Bit Axe'e dayanır; MAA'dan tower rush'a geçişi atla, çünkü erken ekonomi ikisini birden aynı anda finanse edemez.
+- Man-at-Arms baskısı üç hızlı Militia'ya, ardından yükseltme ve Double-Bit Axe'e dayanır; tam MAA'dan tower rush'a geçişi atla, çünkü erken ekonomi ikisini birden aynı anda finanse edemez.
 - Saf bir Tower Rush beş köylüyü rakibin altın ya da odununa gönderir — duvarsızken yıkıcıdır, ama buna ancak scout'un bir açık doğruladığında oyna.

@@ -7,13 +7,13 @@ durationMin: 8
 civsRecommended: [franks, huns, lithuanians, magyars, malians]
 steps:
   - { villagers: 6, assign: "6 → TC altında koyunlar", icons: ["food", "town-center"] }
-  - { villagers: 8, assign: "+2 → odun; ilk ormanda bir kereste kampı kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 8, assign: "+2 → ilk ormanda odun; bir kereste kampı kur", icons: ["wood", "lumber-camp"] }
   - { villagers: 9, assign: "+1 → ilk yaban domuzunu çek ve avla", note: "Koyunlar bitmeden domuzu yiyip bitir", icons: ["food"] }
   - { villagers: 10, assign: "+1 → bir ev, ardından çilek üzerine değirmen kur", icons: ["house", "mill"] }
   - { villagers: 10, assign: "Yiyeceği uzatmak için keşifçiyle geyikleri içeri çek", note: "Yeni köylü yok — TC'den üretime devam et", icons: ["food"] }
   - { villagers: 16, assign: "+6 → TC altında avlanma; ikinci domuzu çek", icons: ["food"] }
   - { villagers: 18, assign: "+2 → odun; Loom'u araştır, sonra Feudal'a tıkla", time: "8:50", note: "18 nüfusta 4 odun / 14 yiyecek dağılımıyla geç", icons: ["wood", "loom"] }
-  - { villagers: 18, assign: "Feudal: 4 köylüyü ilk kereste kampına gönder (agresif, oduncuda 8) ya da 5'ini yeni bir kampa (defansif, oduncuda 9)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 18, assign: "Feudal: 4 köylüyü ilk kereste kampına gönder (agresif, odunda 8) ya da 5'ini yeni bir kampa (defansif, odunda 9)", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "Yiyecekten 4 köylüyü → çileğe al; çağ atlama %60'tayken 1 köylüyü kışlaya gönder", icons: ["food", "barracks"] }
   - { villagers: 18, assign: "2 köylüyle ahır kur; biter bitmez Atlı Keşifçi üret", icons: ["stable", "scout-cavalry"] }
   - { villagers: 18, assign: "Double-Bit Axe ve Horse Collar'ı araştır; tarlaları ek", icons: ["double-bit-axe", "horse-collar", "farm"] }

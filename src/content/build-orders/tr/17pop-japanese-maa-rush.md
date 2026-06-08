@@ -16,7 +16,7 @@ steps:
   - { villagers: 16, assign: "+2 → Şehir Merkezi altında yiyecek", icons: ["food"] }
   - { villagers: 17, time: "8:25", assign: "+1 → oduna git, Loom'u araştır, sonra Feudal'a tıkla", note: "Yaklaşık 3 odunda, 13 yiyecekte iken çağ atla", icons: ["wood", "loom"] }
   - { villagers: 17, assign: "Avdan 2 kişi → altına git, Maden Kampı kur", icons: ["gold", "mining-camp"] }
-  - { villagers: 17, assign: "3 Milis bas ve haritanın karşısına, düşmana yürüt", icons: ["militia"] }
+  - { villagers: 17, assign: "3 Milis bas ve haritanın karşısına yürüt", icons: ["militia"] }
   - { villagers: 17, assign: "Şehir Merkezi'nden 4 kişi → Kereste Kampı'nda oduna", icons: ["wood", "lumber-camp"] }
   - { villagers: 17, assign: "Okçu Menzili kur ve Okçu basmaya başla; Man-at-Arms'ı araştır", icons: ["archery-range", "archer", "man-at-arms"] }
   - { villagers: 17, assign: "Demirci ekle; Double-Bit Axe'ı araştır", icons: ["blacksmith", "double-bit-axe"] }
@@ -34,7 +34,7 @@ Yaklaşık 8:25'te Feudal Çağ'a ulaş ve mümkün olan en hızlı Man-at-Arms 
 ## Strateji ve Devamı (Sırada Ne Var)
 
 - Bu, oyundaki en hızlı Man-at-Arms zamanlamasıdır — Japon piyadeleri daha hızlı saldırdığı için küçük bir Milis ve Man-at-Arms grubu bile duvarsız bir rakibi ağır cezalandırır.
-- Plan, baskıyı öne yükler: Feudal gelir gelmez 3 Milisi dışarı yürüt, ardından onları Man-at-Arms'a dönüştür ve Okçular ile Fletching ekleyerek baskıyı sürdür.
+- Plan tüm ağırlığını erken saldırıya verir: Feudal gelir gelmez 3 Milisi dışarı yürüt, ardından onları Man-at-Arms'a dönüştür ve Okçular ile Fletching ekleyerek baskıyı sürdür.
 - Ekonomin bilerek zayıf tutulur, bu yüzden erken hasarın kendini ödemesi gerekir; aradığın şey tam olarak boşta duran düşman köylüleri ve yavaş örülen duvardır.
-- Bu açılışın zayıf noktası geç oyundur — kapsanmış bir baskı seni ekonomide geride bırakacağından, savaşı Feudal'da bitirmeye odaklan, oyalanmaya değil.
+- Bu açılışın zayıf noktası geç oyundur — savuşturulan bir baskı seni ekonomide geride bırakacağından, oyalanmak yerine savaşı Feudal'da bitirmeye odaklan.
 - Rakip hızlı duvar örerse veya Scout'larla karşılık verirse baskıyı gevşet, altın ve odununu güvene al ve birlikleri ziyan etmek yerine temiz bir şekilde Castle Çağı Crossbow'larına geçiş yap.

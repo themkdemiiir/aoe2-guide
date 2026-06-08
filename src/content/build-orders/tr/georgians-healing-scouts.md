@@ -27,7 +27,7 @@ source:
 
 # Georgians Healing Scout Rush
 
-16 nüfusta yaklaşık 8:00'de Feudal'e geç ve Georgians'ın kendini iyileştiren süvarisini — üs yakınında dakikada yaklaşık 10 CP — kullanarak hiç tamir maliyeti ödemeden bitmek bilmeyen bir taciz uygula.
+Yaklaşık 8:00'de 16 nüfusla Feudal'e geç ve Georgians'ın kendini iyileştiren süvarisini — üs yakınında dakikada yaklaşık 10 HP — kullanarak hiç tamir maliyeti ödemeden durmak bilmeyen bir taciz uygula.
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
@@ -35,4 +35,4 @@ source:
 - Mule Cart senin tempo hilen. İstediğin yere "odun kampı" bırakmanı ve toplama noktalarını anında taşımanı sağlar; bu yüzden avdan oduna geçerken köylülerinle birlikte taşı, altına açarken bir kez daha taşı.
 - Süvarin döndükçe teknolojini geliştir: Forging, Scale Barding Armor ve Bloodlines içeren bir demirci her scout'u daha sert vurdurur ve daha uzun yaşatır; bu da iyileştirme avantajını katlar.
 - Ekonomi izin verir vermez Castle çağını hedefle. İki temiz devam yolu var: sürekli harita kontrolü için 2 ahırdan Knight, ya da daha ağır bir benzersiz birim baskısı istiyorsan Monaspa için bir Castle.
-- Düzene oturunca Bow Saw ve altın madenciliğini ekle, bir Fortified Church kur ve relic toplamak için keşişler çıkar; bu sırada ikinci bir TC dik — iyileştiren süvari tüm bu süre boyunca haritayı tartışmalı tutar.
+- İşler oturunca Bow Saw ve altın madenciliğini ekle, bir Fortified Church kur ve relic toplamak için keşişler çıkar; bu sırada ikinci bir TC dik — iyileştiren süvari bu süre boyunca haritanın kontrolünü sürekli çekişmeli tutar.

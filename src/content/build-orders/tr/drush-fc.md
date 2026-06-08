@@ -19,7 +19,7 @@ steps:
   - { villagers: 27, time: "12:35", assign: "+4 → altına; Feudal Age'e tıkla", note: "Ekonomi dağılımı ~8 odun / 14 yemek / 4 altın", icons: ["gold"] }
   - { villagers: 27, assign: "Feudal: duvarı tamamla; Militia + Scout ile baskıyı sürdür", icons: ["militia", "scout-cavalry"] }
   - { villagers: 29, assign: "+2 → altına; 2 Archery Range ve bir Blacksmith kur", icons: ["gold", "archery-range", "blacksmith"] }
-  - { villagers: 29, time: "16:05", assign: "Castle: Archers yığ; Double-Bit Axe, Horse Collar, Fletching araştır", note: "Ekonomi + teknoloji üstünlüğüyle Castle-first", icons: ["archer", "double-bit-axe", "fletching"] }
+  - { villagers: 29, time: "16:05", assign: "Castle: Archer yığ; Double-Bit Axe, Horse Collar, Fletching araştır", note: "Ekonomi + teknoloji üstünlüğüyle Castle-first", icons: ["archer", "double-bit-axe", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"
@@ -31,9 +31,9 @@ source:
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Drush, planın ucuz tarafıdır: üç Militia ve Scout düşmanın ekonomisini dürterken sen tamamen yükselişe odaklanırsın. Bir iki köylü ölümü bile rakibi kaynaktan çeker, çıkan panik ise onların kendi çağ atlamasını yavaşlatır.
+- Drush, planın ucuz tarafıdır: üç Militia ve Scout düşmanın ekonomisini dürterken sen tamamen yükselişe odaklanırsın. Bir iki köylüyü öldürmek bile rakibi kaynaktan çeker, çıkan panik ise onların kendi çağ atlamasını yavaşlatır.
 - Bu gerçek bir Drush'tır, Men-at-Arms rush değil — MAA yükseltmesine asla harcama yapma. Her artan kaynak Fast Castle'a gider, böylece üstünlük korunmuşken yaklaşık 16:05'te Castle Age'e ulaşırsın.
 - İlerledikçe duvar ör. Domuz ve odun hatlarının çevresindeki palisade'ler Militia inşaatçılarını güvende tutar ve rakibin baskıyı senin köylülerine geri çevirmesini engeller.
-- Castle Age'e geçince iki Range'inden Archers yığ; Double-Bit Axe, Horse Collar ve Fletching ile ekonomi-ve-teknoloji avantajını bir Crossbow zamanlamasına çevir.
-- Buradaki güçlü medeniyetler okçu güçleridir — Britons, Ethiopians, Italians, Mayans ve Vikings — daha ucuz ya da daha sert vuran Archers'larıyla Castle-first üstünlüğünü doğrudan kazandıran bir birime dönüştürürler.
+- Castle Age'e geçince iki Range'inden Archer yığ; Double-Bit Axe, Horse Collar ve Fletching ile ekonomi ve teknoloji avantajını bir Crossbow zamanlamasına çevir.
+- Buradaki güçlü medeniyetler okçu güçleridir — Britons, Ethiopians, Italians, Mayans ve Vikings — daha ucuz ya da daha sert vuran Archer'larıyla Castle-first üstünlüğünü doğrudan kazandıran bir birime dönüştürürler.
 - Rakip çoktan duvar örmüş ve turtle yapıyorsa baskıyı erken bırak ve boom'a yaslan: duvarlarının arkasında erken bir ikinci Town Center ekonomi üstünlüğünü daha da öne taşır.

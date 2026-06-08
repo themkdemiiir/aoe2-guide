@@ -26,7 +26,7 @@ source:
 
 # 18 Köylü Scouts into Cavalry Archers
 
-Harita kontrolü için Scout ile aç, onların arkasında güvenle duvarlan ve Castle Age'de duvarların ardına gizlediğin Cavalry Archer yığınıyla baskı kur.
+Harita kontrolü için Scout ile aç, onların arkasında güvenle duvarlan, ardından Castle Age'de duvarlarının arkasına bir Cavalry Archer yığını gizle.
 
 ## Strateji ve Devamı (Sırada Ne Var)
 

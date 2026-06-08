@@ -30,7 +30,7 @@ source:
 ## Strateji ve Devamı (Sırada Ne Var)
 
 - Asıl güç zamanlamada: 15. dakika civarında bir Castle ve sürekli akan Özel Birimler, çoğu rakibin takas edebileceği kendi Castle'ı olmadan önce gelir.
-- Bu build, yükseltilmemiş haliyle bile güçlü olan bir Özel Birime sahip medeniyet ister — Conquistador, Janissary, Plumed Archer, Coustillier veya Mangudai, Castle dikilir dikilmez sert bir baskı yaratır.
+- Bu build, üretim binasından çıkar çıkmaz, yükseltilmemiş haliyle bile güçlü olan bir Özel Birime sahip medeniyet ister — Conquistador, Janissary, Plumed Archer, Coustillier veya Mangudai, Castle dikilir dikilmez sert bir baskı yaratır.
 - Feudal'de taşı agresif biriktir. Castle Age'e ulaşıp Castle'ı hemen karşılayamazsan tüm plan çöker; bu yüzden taş köylülerini koru.
 - İlk Castle üretime geçince ya baskı için ileri bir Castle, ya da arkasında Town Center ekleyebileceğin savunma amaçlı bir Castle arasında karar ver.
 - Castle bitene kadar askeri açıdan zayıfsın; bu yüzden taşını ve altınını duvarla, scout'unu hayatta tut ve erken Feudal saldırılarını gözle.

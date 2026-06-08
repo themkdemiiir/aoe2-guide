@@ -24,13 +24,13 @@ source:
 
 # Fast Chickens Dark Age
 
-Town Center'ının yanındaki tavukları erken yiyecek için kullanan, esnek bir 18 nüfus Arabia açılışı; yaklaşık 8:50'de Feudal'a geçerek her türlü agresif stratejiye hazır olur.
+Town Center'ının yanındaki tavukları erken yiyecek için kullanan, esnek bir 18 nüfus Arabia açılışı; yaklaşık 8:50'de Feudal'a geçer ve her türlü agresif stratejiye hazır olursun.
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
 - Tüm mesele tempo: tavukların üzerine erken kurulan değirmen, TC'den birkaç kare ötede yoğun yiyecek verir, böylece köylüler daha az yürür ve TC asla boş kalmaz. Yukarı tıklayana kadar durmadan köylü üret.
 - Bu bağlayıcı bir plan değil, açık bir şablondur. 4 odun / 14 yiyecek geçişi sana scout, okçu veya man-at-arms baskısına dönme imkânı verir — bina dikmeden önce kararı scout'unun bilgisi versin.
-- Man-at-arms veya drush istiyorsan, odun kampını kurarken bir köylüyü daha oduna kaydır (5 odun) ve bir köylü sonra 19 nüfusta yukarı çık; bu, kışla ve erken piyade masrafını karşılar.
+- Man-at-arms veya drush istiyorsan, odun kampını kurarken bir köylüyü daha oduna kaydır (5 odun) ve bir köylü geç, 19 nüfusta yukarı çık; bu, kışla ve erken piyade masrafını karşılar.
 - Erken Feudal'da yaklaşık 6 köylüyü yeni bir değirmenle çilek çalılarına gönder. Bu, avcıları seçtiğin orduya göre odun ve altına kaydırırken yiyeceği dengeler.
-- Ekonomi geçişi yaparken duvar ör ve tepki ver: scout'a karşı bir ahır, okçuya karşı bir okçu menzili artı skirmisher, man-at-arms açtıysan haritanın karşısına militia bas.
+- Ekonomin geçiş yaparken duvar ör, sonra gördüğüne göre tepki ver: scout'a karşı bir ahır, okçuya karşı bir okçu menzili artı skirmisher, man-at-arms açtıysan haritanın karşısına militia bas.
 - Uygarlık notları: ekonomi bonusları (Mayans ek köylü, Aztecs daha hızlı toplama, Vikings ucuz ekonomi) tavuk yiyeceğini daha da uzatır; Malians ve Ethiopians ise ucuz veya hızlı menzilli birimleri sayesinde temiz bir şekilde okçu baskısına dönüşür.

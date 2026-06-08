@@ -31,8 +31,8 @@ Yaklaşık 9:15'te Feudal Çağ'a ulaş, beş Milis hazır olsun; ardından onla
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Tüm açılış, Roma +2 piyade zırhıyla desteklenen beş Man-at-Arms üzerine kuruludur — bu ekstra zırh her birimi çok daha dayanıklı yapar, böylece grubun okçulara, Scout'lara ve diğer erken piyadelere karşı kârlı takaslar yapar.
-- Milisleri erkenden çıkar ve beşini de hayatta tut; korumasız Köylülere ve Evlere verdikleri hasar, biraz daha yavaş olan ekonomine yetişmesi için zaman kazandıran şeydir.
+- Tüm açılış, Roma +2 piyade zırhıyla desteklenen beş Man-at-Arms üzerine kuruludur — bu ekstra zırh her birimi çok daha dayanıklı yapar, böylece grubun okçulara, Scout'lara ve diğer erken piyadelere karşı avantajlı takaslar yapar.
+- Milisleri erkenden çıkar ve beşini de hayatta tut; korumasız Köylülere ve Evlere verdikleri hasar, biraz daha yavaş olan ekonominin toparlanması için sana zaman kazandıran şeydir.
 - Man-at-Arms'ı Scout'unla eşleştir ki dağılmış birimleri kovalayabilesin ve Demirci yükseltmelerini bitirirken düşmanı üssüne sıkıştırasın.
 - Rakibin yaptığına göre tepki ver: okçuya giderse Okçu Menzili ve Skirmisher ekle, baskının arkasında duvar örmeyi ve tarla kurmayı sürdür ki ekonomik olarak tıkanmayasın.
 - Bu açılış Castle Çağı'na esnek geçer — tarlaları bir Market ve duvarın arkasında hızlı bir Castle'a dönüştür, sonra Long Swordsman ve Scorpion ile devam et, Knight'a geç ya da baskı seni öne geçirdiyse sadece boom yapıp Relic topla.

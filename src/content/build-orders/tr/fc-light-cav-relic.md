@@ -12,7 +12,7 @@ steps:
   - { villagers: 11, assign: "+1 → bir Ev kur, ardından çileklere bir Değirmen", icons: ["house", "mill", "food"] }
   - { villagers: 11, assign: "Atlı kâşifinle 3 geyiği de Şehir Merkezi'ne çek", note: "Yeni köylü yok — ekonomi köylülerini kaynakta tutarak yiyeceği uzat", icons: ["food", "scout-cavalry"] }
   - { villagers: 14, assign: "+3 → ava; ilki bitmeden ikinci yaban domuzunu çek", icons: ["food"] }
-  - { villagers: 18, assign: "+4 → çileklere; pop için bir Ev daha ekle", icons: ["food", "house"] }
+  - { villagers: 18, assign: "+4 → çileklere; pop alanı için bir Ev daha ekle", icons: ["food", "house"] }
   - { villagers: 18, assign: "Boşalan koyun köylüleriyle 3 tarla kur", note: "Yeni pop değil, yeniden görevlendirme", icons: ["farm"] }
   - { villagers: 23, assign: "+5 → tek bir Kereste Kampı'nda oduna", icons: ["wood", "lumber-camp"] }
   - { villagers: 25, assign: "+2 → altına, ardından Kale Çağı'na tıkla (~11:20 / 8 odun, 15 yiyecek, 2 altın)", note: "Manastır için altın gelirini akışta tut", icons: ["gold"] }
@@ -27,13 +27,13 @@ source:
 
 # Fast Castle Light Cav Relic Control
 
-Surlarının arkasında Kale Çağı'na koş, ardından merkezi keşişler ve birkaç Light Cavalry ile doldurarak rakibin tepki vermesinden önce tüm kalıntıları topla.
+Surlarının arkasında Kale Çağı'na koş, ardından merkezi keşişler ve birkaç Light Cavalry ile doldurup rakip daha tepki veremeden tüm kalıntıları kap.
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
 - Bu her şeyden önce bir Arena build order'ıdır: tüm Feudal askerini atladığın için geçidini erken çevir ve açık merkezi tek çekişme alanı olarak gör.
 - Feudal'daki Ahır ve Kışla esas olarak Kale Çağı'nı açmak ve sana hızlı bir askeri seçenek sunmak için var — fazla yatırım yapma, sadece 14:50'ye doğru tıklamaya devam et.
-- Kale iner inmez bir Manastır kur ve keşiş basmaya başla. Asıl mesele kalıntılar: her biri geç oyununu fonlayan yavaş bir altın akışı sağlarken aynı zamanda rakibi bundan mahrum bırakır.
-- Light Cavalry'yi yalnızca kalıntı toplama çekişmeliyken üret. Küçük bir grup keşişlerine eşlik eder ve düşman keşişlerini ya da kâşiflerini avlar; merkez sakinse onları atla ve kaynakları ekonomine dök.
-- Bow Saw ve taze bir Şehir Merkezi, keşişler çalışırken odununu ve köylü sayını yükseltmeye devam eder, böylece hiç aksamadan boom'a geçersin.
+- Kale iner inmez hemen bir Manastır kur ve keşiş basmaya başla. Asıl mesele kalıntılar: her biri, geç oyununu finanse eden yavaş bir altın akışı sağlarken rakibi de bu gelirden mahrum bırakır.
+- Light Cavalry'yi yalnızca kalıntı yarışı çekişmeliyse üret. Küçük bir grup, keşişlerine eşlik eder ve düşman keşişlerini ya da kâşiflerini avlar; merkez sakinse onları atla ve kaynakları ekonomine yatır.
+- Bow Saw ve yeni bir Şehir Merkezi, keşişler çalışırken odununu ve köylü sayını artırmaya devam eder; böylece hiç aksamadan boom'a geçersin.
 - Dört veya daha fazla kalıntıyı kontrol etmeyi hedefle, sonra devamını seç: harita kontrolünü ele geçirdiysen şövalye-kuşatma baskısı ya da oyun sakinleştiyse doğrudan Imperial'e boom.

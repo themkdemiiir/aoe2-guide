@@ -32,8 +32,8 @@ source:
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Bu, tam bağlılık gerektiren bir açılış olduğundan scout etmek tıklamadan önce gelir: önce rakibi bul ki on ileri köylün duvara veya boş haritaya değil, doğrudan kaynaklarına insin.
-- Teutonlar kule medeniyetinin tartışmasız zirvesidir — kuleleri daha ucuzdur, on köylüye kadar içeri alır ve sert ateş eder; bu yüzden bir Teuton kulesi her kule-kuleye savaşı güvenle kazanır ve sökülmesi son derece zordur.
+- Bu, tam bağlılık gerektiren bir açılış olduğundan scout etmek tıklamadan önce gelir: önce rakibi bul ki on ileri köylün duvara ya da boş haritaya değil, doğrudan kaynaklarının üzerine insin.
+- Teutonlar tartışmasız kule medeniyetidir — kuleleri daha ucuzdur, on köylüye kadar içeri alır ve sert karşılık verir; bu yüzden bir Teuton kulesi kuleye karşı kule savaşını güvenle kazanır ve sökülmesi son derece zordur.
 - İlk kule dikilene kadar tüm eko geliştirmelerini (Double-Bit Axe, Horse Collar) beklet; bu erken aşamada cephedeki taş ve köylüler, ekonomi cilasından çok daha önemlidir.
 - İlk kule dikildiğinde ilerlemeyi sürdür: kuleleri 6–8 kare aralıkla zincirleyerek rakibi her yemek ve odun alanından sırayla kopar ve toplamasını yavaşça boğ.
 - Sen gelmeden duvar çekerlerse baskıyı Castle Age'e taşı — ileride bir Stable ile Knight ya da kule hattının arkasında bir Siege Workshop ile Mangonel onları sabit tutar.

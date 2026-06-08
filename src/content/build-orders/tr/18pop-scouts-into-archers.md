@@ -32,7 +32,7 @@ source:
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Plan bir aşırı tepkiyi tuzağa düşürür: erken Scouts rakibi Spearman ve duvarlara yönlendirir; o süvari karşıtı birimlere aşırı yatırım yaptığı anda iki Range'den Archers'a geçersin, Spearman'ları buna yanıt veremez.
+- Plan, rakibi aşırı tepki vermeye kışkırtır: erken Scouts onu Spearman ve duvarlara yönlendirir; süvari karşıtı birimlere aşırı yatırım yaptığı anda iki Range'den Archers'a geçersin ve Spearman'ları buna yanıt veremez.
 - Aynı tarz Scout oyununa karşı korunmak için kendi tarafında da en az bir Spearman üretmeyi sürdür; bu sırada ekonomiyi Archer aşaması için oduna ve altına kaydır.
 - Altına geçişi dikkatli zamanla: 8 Town Center köylüsünü altına ve Mining Camp'e ancak tarlalar ve meyve yiyeceği karşıladığında çek; böylece Archer üretimi hiç durmaz.
 - Blacksmith ardından Fletching, buradaki kilit Archer güç sıçramasıdır; oklar uçmaya başladığında onu fazladan ekonomi yükseltmelerinin önüne al.

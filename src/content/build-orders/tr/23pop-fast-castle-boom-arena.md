@@ -31,9 +31,9 @@ Kapalı bir haritada temiz bir 23 köylü ekonomisiyle Castle Age'e koş, ardın
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Bu build tüm erken askeri ekonomiye feda eder, bu yüzden yalnızca duvarların ardında işe yarar — Arena, Hideout, Black Forest ya da tamamen kapatılmış bir Arabia pocket. Taahhüt etmeden önce duvarla.
+- Bu build tüm erken askeri ekonomiye feda eder, bu yüzden yalnızca duvarların ardında işe yarar — Arena, Hideout, Black Forest ya da tamamen kapatılmış bir Arabia pocket. Bu stratejiye girmeden önce duvarla.
 - Feudal'i mümkün olduğunca kısa tut: tek Feudal binaları, ihtiyacın olan yükseltmeleri ve ticareti açan bir Market ile Blacksmith'tir; sonra 14:00 civarında doğrudan Castle Age'e tıkla.
-- Castle gelir gelmez odun ekonomin işe yarar — taze bir Lumber Camp ve ek Town Center'larını kur, ardından booming köylülerin talebe yetişsin diye Bow Saw araştır.
+- Castle gelir gelmez odun ekonomin işe yarar — taze bir Lumber Camp ve ek Town Center'larını kur, ardından boom yapan köylülerin talebe yetişebilsin diye Bow Saw araştır.
 - Town Center'ları üst üste koy (önce 3, ardından bir taş madeninden 4.) ve köylü sayısını yukarı taşı; ~18 tarla civarında Wheelbarrow, kısa süre sonra da Hand Cart al ki yiyecek akmaya devam etsin.
-- Boom sırasında kaynak dalgalanmalarını dengelemek için Market'i kullan — bir stok şişince yiyecek veya odun al ki Town Center'ları asla boş bırakma.
+- Boom sırasında kaynak dalgalanmalarını dengelemek için Market'i kullan — bir stok şişince yiyecek veya odun al ki Town Center'ların asla boşta kalmasın.
 - Boom'u bıraktığında bir gold unit, bir trash unit ve bir siege unit'e karar ver; sonra rakibin eşleşemeyeceği bir ekonomiyle Imperial'a geç.

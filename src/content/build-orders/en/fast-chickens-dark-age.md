@@ -24,7 +24,7 @@ source:
 
 # Fast Chickens Dark Age
 
-A flexible 18-pop Arabia opener that uses the chickens by your Town Center for fast early food, landing in Feudal around 8:50 ready for any aggressive strategy.
+A flexible 18-pop Arabia opener that uses the chickens by your Town Center for fast early food, landing in Feudal around 8:50, ready for any aggressive strategy.
 
 ## Strategy and Follow-Up (What's Next)
 
@@ -32,5 +32,5 @@ A flexible 18-pop Arabia opener that uses the chickens by your Town Center for f
 - This is an open template, not a committed plan. The 4-wood / 14-food landing lets you turn into scouts, archers, or a man-at-arms rush — let your scout's information decide before you commit buildings.
 - If you want man-at-arms or a drush, shift one extra villager to wood while you place the lumber camp (5 on wood) and go up one villager later at 19 pop, which pays for the barracks and early infantry.
 - In early Feudal, send roughly 6 villagers to the berries with a fresh mill. That stabilizes food while you re-task hunters to wood and gold for your chosen military.
-- Wall as your eco transitions and react: add a stable versus scouts, an archery range plus skirmishers versus archers, or push militia across the map if you opened man-at-arms.
+- Wall as your economy transitions, then react to what you see: add a stable against scouts, an archery range plus skirmishers against archers, or push militia across the map if you opened man-at-arms.
 - Civ notes: eco bonuses (Mayans extra villager, Aztecs faster gathering, Vikings cheaper economy) stretch the chicken food further, while Malians and Ethiopians convert cleanly into archer pressure thanks to their cheaper or faster ranged units.

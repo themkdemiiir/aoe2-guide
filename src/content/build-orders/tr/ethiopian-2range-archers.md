@@ -29,7 +29,7 @@ source:
 
 # Takım Oyunları için Etiyopya 2 Menzilli Okçu
 
-18 nüfusta Feudal'a geç ve aynı anda iki Okçu Menzili aç; Etiyopya'nın hızlı Okçuları ve bedava çağ atlama kaynaklarına yaslanarak kanadı Okçu seliyle boğ.
+18 nüfusta Feudal'a geç ve aynı anda iki Okçu Menzili aç; Etiyopya'nın hızlı Okçuları ve bedava çağ atlama kaynaklarına yaslanarak kanadı ok yağmuruna tut.
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
@@ -37,4 +37,4 @@ source:
 - Karanlık Çağ av ağırlıklıdır — bir yaban domuzu, bir geyik çekme, sonra ikinci yaban domuzu — bu yüzden Feudal'a neredeyse hiç biriktirilmiş odun olmadan ulaşırsın. Yeni kütük kampını ve ayrık ağaç köylülerini hemen oduna geçir, yoksa Okçu üretimi tıkanır.
 - Altına sert yüklen. Feudal'da yedi köylü altına gider; böylece Fletching hızlı tamamlanır ve iki menzili beslerken hiç kurumazsın. Etiyopya'nın her çağ atlayışında verdiği bedava +100 yiyecek ve +100 altın, ağır askeri harcamayı yumuşatır ve Castle tıklamasını hızlandırır.
 - Bu açılış, tempo uğruna ekonomiyi bilerek feda eder. Meyve ve tarlaları yalnızca avın tükendikçe ekle, fazla taşı Pazar'dan satıp Castle tıklamasını öne çek ve ekonomi yükseltmelerine fazla yatırım yapmak yerine ham Okçu sayısını artırmaya devam et.
-- Castle Çağı'nda doğrudan Crossbow ve Bodkin Arrow'a git, oduyu akıtmak için Bow Saw'ı da al; altı köylüyle ikinci bir kütük kampı kitleyi besler. Ekonomi boom'unu cep müttefikine bırak, sen kanatta sürekli baskı uygula.
+- Castle Çağı'nda doğrudan Crossbow ve Bodkin Arrow'a git, odunu akıtmak için Bow Saw'ı da al; altı köylüyle ikinci bir kütük kampı kitleyi besler. Ekonomi boom'unu cep müttefikine bırak, sen kanatta sürekli baskı uygula.

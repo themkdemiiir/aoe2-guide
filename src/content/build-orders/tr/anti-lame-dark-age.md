@@ -33,5 +33,5 @@ Kendi yemeğinin her kırıntısını güvene al — iki yaban domuzunu da Şehi
 - Burada hiçbir şey bir uygarlık bonusuna bağlı olmadığı için, bu açılış her uygarlıkta güvenilirdir — Feudal'a yaklaşık 8:25'te temiz bir 19-pop (Loom'suz) ya da 18-pop (Loom'lu) varış bekle.
 - Build bilinçli olarak yalın çalışır: Feudal'a kısa, yemek ağırlıklı bir itiş olduğundan, Dark Age'de fazladan şeylere aşırı yatırım yapma. Avı topla, çık ve oyunu devamının belirlemesine izin ver.
 - Feudal'da av köylülerini tek bir kütük kampına kaydır, 8 köylü odun kesene dek; sonra 2'sini dağınık ağaçlara, 2'sini de Kışla ve eve ayır — bu, her birim seçimi için sana odun ve bina temelini verir.
-- Devamını keşfettiğine göre seç: bir Okçu Menzili açılışı 4 köylüyü doğrudan altına ister, oysa Scout, Mızraklı ya da Skirmisher planı köylülerini bunun yerine yemek ve odunda tutar.
+- Devamını keşifte gördüğüne göre belirle: bir Okçu Menzili açılışı 4 köylüyü doğrudan altına ister, oysa Scout, Mızraklı ya da Skirmisher planı köylülerini bunun yerine yemek ve odunda tutar.
 - Saldırgan keşfe ve lame'lemeye karşı bir sigorta açılışı olarak en güçlüsüdür; oyun sessizleşirse zamanında çıkmış olursun ve standart bir Feudal ya da Castle planına sorunsuzca geçebilirsin.

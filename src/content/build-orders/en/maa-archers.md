@@ -36,5 +36,5 @@ Hit Feudal Age around 8:50 on any civilization and open with 3 Militia upgraded 
 - The deer lure is the engine of the build: it banks the extra food that lets you click Feudal on time and still afford the Man-at-Arms upgrade plus the early Militia.
 - Send the 3 Militia out the instant you reach Feudal and upgrade them to Man-at-Arms; their job is to pin villagers and force a Spearman response while your economy rebuilds behind the wall.
 - The Archery Range comes online once Double-Bit Axe and the gold are flowing — Archers with Fletching are the real damage source, with Man-at-Arms acting as the shield in front of them.
-- Wall as you go and add Spearmen or a tower if Scouts show up; the early aggression buys time, it is not meant to win on its own.
+- Wall as you go and add Spearmen or a tower if Scouts show up; the early aggression buys time; it is not meant to win on its own.
 - The clean continuation is Castle Age Crossbows: once the Feudal fight settles, take your Archers into Crossbowman and Bodkin Arrow rather than overcommitting Militia.

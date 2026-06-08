@@ -36,8 +36,8 @@ source:
 - 4 villagers on wood (vil 7 builds the lumber camp, then all gather wood)
 - 1 villager lures the first boar (vil 11)
 - 5 villagers on berries — build 2 houses and a Mill next to the berries first, then gather (vils 12–16)
-- Re-task an existing boar villager to lure the second boar
-- 2 villagers seed farms next to the TC or Mills (vils 17–18)
+- Re-task one of the boar villagers to lure the second boar
+- 2 villagers seed farms next to the TC or Mill (vils 17–18)
 - 5 villagers on wood — build a 2nd lumber camp and a house, then gather wood (vils 19–23)
 - 3 villagers on gold — build the gold mining camp, then mine (vils 24–26)
 
@@ -58,7 +58,7 @@ Click Feudal Age at 26 population.
 
 - Click Castle Age as soon as the Blacksmith and Market are placed
 - No military production in Feudal Age
-- Every resource flows toward the age-up chain
+- Pour every resource into the age-up
 - Buy 100 stone at the Market if you intend to build a fourth Town Center
 
 ## Castle Age (28 Villagers)

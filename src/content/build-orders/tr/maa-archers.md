@@ -36,5 +36,5 @@ Herhangi bir uygarlıkla yaklaşık 8:50'de Feudal Çağ'a çık; 3 Milis'i Man-
 - Geyik çekme bu açılışın motorudur: Feudal'a zamanında tıklamanı sağlayan ve hâlâ hem Man-at-Arms yükseltmesine hem de erken Milis'e gücün yetmesini sağlayan fazladan yiyeceği biriktirir.
 - Feudal'a ulaşır ulaşmaz 3 Milis'i dışarı gönder ve Man-at-Arms'a yükselt; görevleri köylüleri köşeye sıkıştırmak ve ekonomin duvarın arkasında toparlanırken rakibi Mızrakçı yapmaya zorlamaktır.
 - Okçu Menzili, Double-Bit Axe ve altın akmaya başladığında devreye girer — Fletching'li Okçular asıl hasar kaynağıdır; Man-at-Arms ise önlerinde kalkan görevi görür.
-- İlerledikçe duvar ör; Hızlı Süvari (Scout) görürsen Mızrakçı veya kule ekle; erken baskı sana zaman kazandırır, tek başına kazanmak için değildir.
+- İlerledikçe duvar ör; Hızlı Süvari (Scout) görürsen Mızrakçı veya kule ekle; erken baskı sana zaman kazandırır; tek başına kazanmak için değildir.
 - Temiz devam Castle Çağ Crossbow'larıdır: Feudal kavgası yatıştığında, Milis'e fazla yüklenmek yerine Okçularını Crossbowman ve Bodkin Arrow'a taşı.

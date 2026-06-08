@@ -29,7 +29,7 @@ source:
 
 # Ethiopian 2-Range Archers for Team Games
 
-Land in Feudal at 18 pop and open two Archery Ranges at once, leaning on Ethiopia's faster Archers and free age-up resources to drown a flank in Archers.
+Land in Feudal at 18 pop and open two Archery Ranges at once, leaning on Ethiopia's faster Archers and free age-up resources to flood the flank with arrows.
 
 ## Strategy and Follow-Up (What's Next)
 

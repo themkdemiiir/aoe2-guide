@@ -18,7 +18,7 @@ steps:
   - { villagers: 18, assign: "Avdan 2 köylü al: biri Barracks, biri House kursun", icons: ["barracks", "house"] }
   - { villagers: 18, assign: "2 köylüyle Stable kur, sonra onları duvar ve oduna gönder; Scout Cavalry üretmeye başla", icons: ["stable", "scout-cavalry"] }
   - { villagers: 18, assign: "Double-Bit Axe araştır (Horse Collar isteğe bağlı); av tükenirken tarla ek", icons: ["double-bit-axe", "farm"] }
-  - { villagers: 18, assign: "Rakip Archers'a yöneldiğinde hızlıca Range kur; 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla", icons: ["archery-range", "skirmisher", "wood"] }
+  - { villagers: 18, assign: "Rakip Archers'a tam yöneldiğinde hızlıca Range kur; 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla", icons: ["archery-range", "skirmisher", "wood"] }
   - { villagers: 18, assign: "Blacksmith kur; Fletching ve piyade zırhını araştır", icons: ["blacksmith", "fletching"] }
   - { villagers: 18, assign: "Meyve bitince → ikinci lumber camp; 6 köylüyü → altına ve Mining Camp'e taşı; Wheelbarrow araştır", icons: ["lumber-camp", "gold", "mining-camp", "wheelbarrow"] }
 source:
@@ -33,8 +33,8 @@ source:
 ## Strateji ve Devamı (Sırada Ne Var)
 
 - Önce Scouts gelir; köylülere baskı yapıp rakibi tepki vermeye zorlar. Skirmisher geçişi tepkiseldir, bu yüzden Range'i ancak rakibin gerçekten Archers'a yaslandığını gördüğünde kur.
-- Skirmisher'lar altın gerektirmez ve Archers'ı sert şekilde sayar; böylece bu açılış en yaygın Feudal saldırısını omuz silker, bu sırada Scouts duvar dışına çıkan her şeyi cezalandırmaya devam eder.
+- Skirmisher'lar altın gerektirmez ve Archers'ı sert şekilde sayar; böylece bu açılış en yaygın Feudal saldırısını rahatça savuşturur, bu sırada Scouts duvar dışına çıkan her şeyi cezalandırmaya devam eder.
 - Ekonomiyi erken dönemde odun ve yiyecekte tut — Skirmisher ve Scouts hiç altın harcamaz, bu da altına geçişi meyve tükenip 6 köylüyü Mining Camp'e bölene kadar ertelemene izin verir.
-- Blacksmith ardından Fletching ve piyade zırhı kilit güç sıçramasıdır: Skirmisher'larını rakibin Archers'ının üzerine çıkarır ve çatışmada Scouts'unu hayatta tutar.
+- Blacksmith'in ardından Fletching ve piyade zırhı asıl güç sıçramasıdır: Skirmisher'larını rakibin Archers'ının üzerine çıkarır ve çatışmada Scouts'unu hayatta tutar.
 - Franks, Huns, Malians ve Lithuanians bu açılışa uyar: Franks daha dayanıklı süvari ve bedava tarla yükseltmeleri için, Huns ev kurmayı atladığı için, Malians ucuz tarımı için, Lithuanians ise tüm açılışı hızlandıran erken yiyecek bonusu için.
 - Castle Age'de bu, Knights destekli Elite Skirmisher'a temiz şekilde geçer — Skirmisher'lar Crossbow'lara karşı perde olurken, Knights altın-fakiri Feudal'ında eksik kalan vurucu gücü sağlar.

@@ -17,7 +17,7 @@ steps:
   - { villagers: 20, assign: "Pull 5 from the Town Center → drop a 2nd lumber camp on a fresh woodline", icons: ["wood", "lumber-camp"] }
   - { villagers: 22, assign: "Keep the Town Center adding 2 more villagers; build a Barracks when wood allows", icons: ["barracks"] }
   - { villagers: 22, assign: "Scout line: build a Stable, start Scout Cavalry, and prioritize eco upgrades", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 22, assign: "Archer line: move 2-3 villagers → gold with a Mining Camp, then add an Archery Range", icons: ["gold", "mining-camp", "archery-range", "archer"] }
+  - { villagers: 22, assign: "Archer line: move 2-3 villagers to gold under a Mining Camp, then add an Archery Range", icons: ["gold", "mining-camp", "archery-range", "archer"] }
   - { villagers: 22, assign: "Man-at-Arms line: make ~3 Militia, then research the Man-at-Arms upgrade and Double-Bit Axe", icons: ["barracks", "militia", "man-at-arms", "double-bit-axe"] }
   - { villagers: 22, assign: "Tower rush: send ~5 villagers forward to build Watch Towers in the enemy economy", note: "Skip the MAA-trush — the build is too poor to support both", icons: ["watch-tower"] }
 source:

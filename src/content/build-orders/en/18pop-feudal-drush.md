@@ -29,7 +29,7 @@ Reach Feudal at 18 population, push 2 Militia plus your scout into the enemy bas
 
 ## Strategy and Follow-Up (What's Next)
 
-- This is a light, low-commitment aggression: the Militia leave during the Feudal transition rather than in Dark Age, so your eco barely pays for the harass while still forcing the opponent to react.
+- This is a light, low-commitment aggression: the Militia leave during the Feudal transition rather than in the Dark Age, so your economy barely pays for the harass while still forcing the opponent to react.
 - The scout and 2 Militia together are the threat — chase fleeing villagers, deny lumber camps, and pull workers off resources. Killing even 1-3 villagers banks a tempo lead.
 - Decide your follow-up by scouting: add Scout Cavalry from a Stable if they lack Spearmen, or open an Archery Range and mass Archers (strong on Britons and Vikings with their archer and economy bonuses).
 - Take Double-Bit Axe immediately and slow-wall your base; Horse Collar is optional depending on how much you commit to food.

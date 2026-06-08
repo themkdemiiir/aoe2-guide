@@ -34,6 +34,6 @@ Yaklaşık 8:50'de Feudal'a geç ve kolayca yığılan, değer kaybetmesi zor uc
 - Mızrakçılar ve Skirmisher'lar yalnızca yiyecek ve oduna mal olur, bu yüzden tek bir hata bile altın kaybettirmez; bu affedici ekonomi, build'i yeni başlayanlar ve düşük elo için bu kadar güçlü kılan şeydir.
 - Önce mızrakçılar öne çıkıp rakibin ekonomisini ve scout hattını tehdit eder, ardından Skirmisher'lar katılıp rakibin çıkardığı her okçuyu doğrar; bu ikili neredeyse her Feudal kompozisyonuna cevap verir.
 - Double-Bit Axe ve Horse Collar, tek Barracks ve tek Range'den durmadan üretirken odun ve çiftlik gelirini akışta tutar; sırf birkaç ekstra birlik için bunları atlamayın.
-- Koreans, daha ucuz kuleleri ve bina odun indirimiyle başroldeki seçim; Byzantines indirimli çöp birliklerle daha da fazla yığar, Lithuanians ise erken hız ve esnek bir devam sunar.
+- Koreans, daha ucuz kuleleri ve binalarda odun indirimiyle başroldeki seçim; Byzantines indirimli çöp birliklerle daha da fazla yığar, Lithuanians ise erken hız ve esnek bir devam sunar.
 - 7 köylüyü altına ancak çiftlikler yiyeceğini karşıladığında çekin, sonra surları çekip Castle'a tıklamadan önce Blacksmith'ten Fletching alıp Skirmisher'ları güçlendirin.
 - Castle Age'de doğal olarak Elite Skirmisher ve Pikeman'a geçer, altınınız varsa Crossbow ya da Knight devamı eklersiniz; çöp ordunuz haritayı tutarken baskıya devam edin.

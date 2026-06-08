@@ -32,9 +32,9 @@ source:
 
 ## Strateji ve Devamı (Sırada Ne Var)
 
-- Bu, tek ahırlı açılışın daha riskli kuzenidir: ikinci ahır keşifçi üretimini ikiye katlar, bu yüzden build ancak iki kuyruğu da dolu tutarsan ve aynı anda TC'yi meşgul edersen karşılığını verir. Burada kaynak biriktirip durmak, fazladan ahırı boşuna kurdun demektir.
+- Bu, tek ahırlı açılışın daha çok yatırım isteyen kuzenidir: ikinci ahır keşifçi üretimini ikiye katlar, bu yüzden build ancak iki kuyruğu da dolu tutarsan ve aynı anda TC'yi meşgul edersen karşılığını verir. Burada kaynak biriktirip durmak, fazladan ahırı boşuna kurdun demektir.
 - İlk keşifçi dalgasını rakibin ekonomisini bulmak ve açıktaki köylüleri taciz etmek için kullan; ardından ikinci ahırı, tarla geçişinin çift üretimi besleyecek yiyeceği sağladığı ana denk getir.
-- Bloodlines ve Demirci geliştirmeleri bu çatışmaları kazandıran sıçramalardır — sahada zaten 7–8 keşifçi varken bunları araya sok ki askeri üretimi tek için hiç durdurma.
-- Mızraklı eklemeden önce keşifçinin gördüğünü oku: rakip keşifçiyle açıyorsa bir avuç Mızraklı artı kendi keşifçilerin ticareti kazanır, ama okçulara karşı mızraklıları atla ve sayı ile surlara güven.
-- Uygarlık notları: Franks'te Bloodlines yoktur, bu yüzden hız ve ham sayı için Husbandry'ye yüklen; Huns ev kurmadığı için açılan odunla ahırları daha erken başlatabilirsin; Magyars daha ucuz keşifçi ve kütleyi daha sert vurduran bedava bir saldırı geliştirmesi alır.
+- Bloodlines ve Demirci geliştirmeleri bu çatışmaları kazandıran sıçramalardır — sahada zaten 7–8 keşifçi varken bunları araya sok ki teknoloji için askeri üretimini asla durdurma.
+- Mızraklı eklemeden önce keşifçinin gördüğünü oku: rakip keşifçiyle açıyorsa bir avuç Mızraklı artı kendi keşifçilerin takası kazanır, ama okçulara karşı mızraklıları atla ve sayı ile surlara güven.
+- Uygarlık notları: Franks'te Bloodlines yoktur, bu yüzden hız ve sayı üstünlüğü için Husbandry'ye yüklen; Huns ev kurmadığı için açılan odunla ahırları daha erken başlatabilirsin; Magyars daha ucuz keşifçi ve kalabalığını daha sert vurduran bedava bir saldırı geliştirmesi alır.
 - Varsayılan Castle çağı devamı, aynı iki ahırdan Şövalye'ye yumuşak bir geçiştir; altını akıtmaya devam et ve taciz sana harita kontrolü kazandırdığında üçüncü bir TC veya daha fazla tarla ekle.
