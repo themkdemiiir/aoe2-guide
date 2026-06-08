@@ -1,3 +1,6 @@
 allowBuilds:
   esbuild: true
   sharp: true
+overrides:
+  # Security: force patched yaml (GHSA-48c2-rrv3-qjmp) in the astro-check tooling chain.
+  yaml: 2.8.3
