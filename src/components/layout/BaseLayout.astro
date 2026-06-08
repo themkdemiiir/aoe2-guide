@@ -31,6 +31,11 @@ const jsonLd = {
   description,
   inLanguage: locale,
 };
+
+// Cloudflare Web Analytics — privacy-first, cookieless. Set PUBLIC_CF_BEACON_TOKEN
+// as a Pages env var (Cloudflare dashboard → Web Analytics → Add a site → copy token).
+// When unset, no beacon renders — so this is safe before the token exists.
+const cfBeacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 ---
 <!doctype html>
 <html lang={locale} dir={dir} data-theme="light">
@@ -65,6 +70,14 @@ const jsonLd = {
     <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    {cfBeacon && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${cfBeacon}"}`}
+      />
+    )}
     {alternates.map(({ locale: l, path }) => (
       <link rel="alternate" hreflang={l} href={`${site}${path}`} />
     ))}
