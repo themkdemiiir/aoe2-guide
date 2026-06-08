@@ -3,6 +3,21 @@ slug: arena
 name: Arena
 type: closed
 recommendedCivs: [teutons, turks, burgundians, bohemians, aztecs]
+teamComps:
+  "2v2":
+    flank:
+      civs: [franks, chinese, slavs, celts]
+      strategy: "Fast Castle flank civs who boom and push with Knights or Rams in Castle Age. Franks' Chivalry gives Knights extra HP; Celts get faster siege production."
+    pocket:
+      civs: [aztecs, byzantines, turks, bohemians]
+      strategy: "Monk + siege pocket. Aztecs get +5 relic gold/sec; Byzantines have cheap Greek Fire and Cataphracts; Turks fast imperial with Janissaries; Bohemians have cheaper Chemistry."
+  "4v4":
+    flank:
+      civs: [franks, cumans, chinese, slavs]
+      strategy: "Flanks boom into Castle Age and push with cavalry + Battering Rams. Cumans 2TC Feudal boom gives the largest economic advantage of any civ on Arena."
+    pocket:
+      civs: [aztecs, turks, bohemians, burgundians]
+      strategy: "Pocket focuses on monks, relics, and Castle Age siege push. Turks go fast Imperial with gunpowder; Bohemians' cheaper Chemistry means faster Cannon Galleons and Hand Cannoneers."
 ---
 
 Arena is the canonical closed map. Every player starts inside a ring of stone walls that fully encloses their base resources. No Feudal aggression is possible from outside the walls, making the default strategy Fast Castle into Boom. Games extend into late Castle Age or Imperial Age and are decided by relic control, army composition, and economic macro rather than early pressure. Monk-and-siege armies are common and highly effective.

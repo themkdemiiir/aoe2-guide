@@ -66,6 +66,13 @@ const units = defineCollection({
   }),
 });
 
+const teamCompSlot = z
+  .object({
+    civs: z.array(z.string()),
+    strategy: z.string(),
+  })
+  .optional();
+
 const maps = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/maps", generateId: pathId }),
   schema: z.object({
@@ -74,6 +81,12 @@ const maps = defineCollection({
     type: z.enum(["open", "closed", "hybrid", "water", "nomad"]),
     size: z.enum(["tiny", "small", "medium", "large"]).optional(),
     recommendedCivs: z.array(z.string()),
+    teamComps: z
+      .object({
+        "2v2": z.object({ flank: teamCompSlot, pocket: teamCompSlot }).optional(),
+        "4v4": z.object({ flank: teamCompSlot, pocket: teamCompSlot }).optional(),
+      })
+      .optional(),
   }),
 });
 

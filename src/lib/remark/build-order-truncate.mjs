@@ -8,8 +8,7 @@ function isBoundaryHeading(node) {
     node.depth === 2 &&
     node.children.some(
       (c) =>
-        c.type === "text" &&
-        (c.value.startsWith("Strategy") || c.value.startsWith("Strateji"))
+        c.type === "text" && (c.value.startsWith("Strategy") || c.value.startsWith("Strateji")),
     )
   );
 }

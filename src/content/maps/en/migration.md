@@ -3,6 +3,21 @@ slug: migration
 name: Migration
 type: hybrid
 recommendedCivs: [vikings, malay, cumans, italians, franks]
+teamComps:
+  "2v2":
+    flank:
+      civs: [vikings, italians, malay, portuguese]
+      strategy: "Navy flank controls the water between islands and raids Transport Ships. Vikings' cheaper boats and Malay's faster Fish Traps fund an early water edge."
+    pocket:
+      civs: [franks, cumans, lithuanians, berbers]
+      strategy: "Pocket transports to the mainland fast and booms on the open land, then pushes with Knights. Cumans' Feudal 2TC boom is brutal once safely migrated."
+  "4v4":
+    flank:
+      civs: [vikings, italians, portuguese, malay]
+      strategy: "Flanks fight for water control so the team's transports land safely; navy denies enemy migration and fishing."
+    pocket:
+      civs: [franks, cumans, lithuanians, mongols]
+      strategy: "Pockets migrate to the mainland and boom into a massed cavalry push. Whoever establishes the bigger land economy after migration wins."
 ---
 
 Migration places each player on a small island with limited resources — one gold and one stone patch, berries, sheep, and forest — that runs dry relatively quickly. The large central continent holds abundant resources, especially wood. The map forces a transition: build a fleet, fish to sustain economy, then migrate to the mainland before island resources exhaust. Naval skirmishing and landing timing are the central skills this map tests.

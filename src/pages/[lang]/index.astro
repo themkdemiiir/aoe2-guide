@@ -1,15 +1,64 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import { Icon as UIIcon } from "astro-icon/components";
 import { locales, type Locale } from "@/i18n/locales";
+import { t, localizedPath } from "@/i18n/utils";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+
+const sections = [
+  { key: "nav.civs", desc: "home.civs.desc", href: "/civs", icon: "lucide:castle" },
+  { key: "nav.builds", desc: "home.builds.desc", href: "/builds", icon: "lucide:list-ordered" },
+  { key: "nav.units", desc: "home.units.desc", href: "/units", icon: "lucide:swords" },
+  { key: "nav.maps", desc: "home.maps.desc", href: "/maps", icon: "lucide:map" },
+  { key: "nav.matchups", desc: "home.matchups.desc", href: "/matchups", icon: "lucide:scale" },
+  { key: "nav.learn", desc: "home.learn.desc", href: "/learn", icon: "lucide:graduation-cap" },
+  { key: "nav.glossary", desc: "home.glossary.desc", href: "/glossary", icon: "lucide:book-open" },
+] as const;
 ---
 <BaseLayout title="AOE2 Guide" canonicalPath="/">
-  <section class="mx-auto max-w-prose px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">AOE2 Guide</h1>
-    <p class="mt-4 text-stone-700">Hub for civilizations, build orders, units, maps, and beginner learning.</p>
+  <section class="mx-auto max-w-5xl px-4 pt-16 pb-10 text-center">
+    <img src="/favicon.svg" alt="" width="72" height="72" class="mx-auto mb-6" />
+    <h1 class="font-display text-5xl text-ink sm:text-6xl">AOE2 Guide</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-lg text-stone-700">{t(lang, "home.tagline")}</p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href={localizedPath("/civs", lang)}
+        class="rounded border border-gold-500 bg-gold-500/15 px-5 py-2.5 font-medium text-ink transition-colors hover:bg-gold-500/30"
+      >
+        {t(lang, "home.ctaPrimary")}
+      </a>
+      <a
+        href={localizedPath("/builds", lang)}
+        class="rounded border border-stone-700/40 px-5 py-2.5 font-medium text-ink transition-colors hover:border-gold-500 hover:text-gold-500"
+      >
+        {t(lang, "home.ctaSecondary")}
+      </a>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-4 pb-20">
+    <h2 class="mb-5 font-display text-xl text-ink">{t(lang, "home.explore")}</h2>
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {sections.map((s) => (
+        <li>
+          <Card href={localizedPath(s.href, lang)} interactive class="group">
+            <div class="flex items-start gap-3">
+              <span class="rounded bg-gold-500/15 p-2 text-gold-500">
+                <UIIcon name={s.icon} class="h-6 w-6" />
+              </span>
+              <div>
+                <h3 class="font-display text-lg text-ink group-hover:text-gold-500">{t(lang, s.key)}</h3>
+                <p class="mt-1 text-sm text-stone-700">{t(lang, s.desc)}</p>
+              </div>
+            </div>
+          </Card>
+        </li>
+      ))}
+    </ul>
   </section>
 </BaseLayout>

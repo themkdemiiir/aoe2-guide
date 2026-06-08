@@ -20,6 +20,17 @@ const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const alternates = allLocalePaths(canonicalPath);
 const canonical = `${site}/${locale}${canonicalPath}`;
+const ogImage = `${site}/og.png`;
+
+// JSON-LD structured data — WebSite schema for rich results.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "AOE2 Guide",
+  url: site,
+  description,
+  inLanguage: locale,
+};
 ---
 <!doctype html>
 <html lang={locale} dir={dir} data-theme="light">
@@ -32,7 +43,7 @@ const canonical = `${site}/${locale}${canonicalPath}`;
         basic: {
           title,
           type: "website",
-          image: `${site}/favicon.svg`,
+          image: ogImage,
           url: canonical,
         },
         optional: {
@@ -40,12 +51,20 @@ const canonical = `${site}/${locale}${canonicalPath}`;
           locale,
           siteName: "AOE2 Guide",
         },
+        image: {
+          alt: "AOE2 Guide — Civilizations, Build Orders, Maps, Strategy",
+          width: 1200,
+          height: 630,
+        },
       }}
-      twitter={{ card: "summary" }}
+      twitter={{ card: "summary_large_image" }}
     />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
     {alternates.map(({ locale: l, path }) => (
       <link rel="alternate" hreflang={l} href={`${site}${path}`} />
     ))}

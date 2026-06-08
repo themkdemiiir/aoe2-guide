@@ -9,7 +9,7 @@ import pagefind from "astro-pagefind";
 import { remarkBuildOrderTruncate } from "./src/lib/remark/build-order-truncate.mjs";
 
 export default defineConfig({
-  site: "https://aoe2.example.com",
+  site: "https://aoe2-guide.pages.dev",
   output: "static",
   integrations: [
     mdx(),

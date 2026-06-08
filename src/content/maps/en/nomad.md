@@ -3,6 +3,21 @@ slug: nomad
 name: Nomad
 type: nomad
 recommendedCivs: [chinese, mayans, malians, persians, cumans]
+teamComps:
+  "2v2":
+    flank:
+      civs: [huns, cumans, mongols, berbers]
+      strategy: "Cavalry civs who don't need houses (Huns) or build fast (Cumans, Mongols). Secure your starting area and raid before the opponent can settle safely."
+    pocket:
+      civs: [chinese, aztecs, slavs, byzantines]
+      strategy: "Settle your TC in the most defensible spot and boom. Chinese extra starting resources are extremely powerful in Nomad where every resource matters in the first 2 minutes."
+  "4v4":
+    flank:
+      civs: [huns, mongols, cumans, tatars]
+      strategy: "Cavalry flanks settle fast and immediately harass. Huns skip house building completely; Tatars have sheep that produce extra food."
+    pocket:
+      civs: [chinese, slavs, persians, byzantines]
+      strategy: "Pocket settles in the most secure location and booms. Persians get extra TC work rate; Slavs farm faster for sustained eco."
 ---
 
 Nomad is defined by its no-Town-Center start. You begin with 3–4 scattered villagers — Chinese get 6, Mayans get 4 — and must find wood, build a Lumber Camp, and construct a Town Center before producing any new villagers. Extreme early vulnerability makes TC placement the single most important decision of the game. Matches can be chaotic in the opening minutes but extend to normal Castle or Imperial Age play once TCs are established.

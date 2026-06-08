@@ -35,6 +35,7 @@ const KNOWN_MISSING = new Set([
   "barracks",
   "blacksmith",
   "castle",
+  "dock",
   "farm",
   "fortress",
   "house",

@@ -3,6 +3,21 @@ slug: islands
 name: Islands
 type: water
 recommendedCivs: [vikings, italians, malay, portuguese, persians]
+teamComps:
+  "2v2":
+    flank:
+      civs: [vikings, portuguese, italians, byzantines]
+      strategy: "Navy flank. Vikings' Longboats devastate enemy fleets; Portuguese Fire Ships deal massive damage; Italians get cheaper Docks and Cannon Galleons."
+    pocket:
+      civs: [portuguese, malay, italians, spanish]
+      strategy: "Economic navy pocket — Fishing Ships for food, Cannon Galleons for Imperial push. Portuguese Carrack gives Cannon Galleons extra armor."
+  "4v4":
+    flank:
+      civs: [vikings, portuguese, italians, byzantines]
+      strategy: "Water combat flanks. Each flank must control their portion of the ocean; coordinated Galleon + Fire Ship pushes destroy enemy navy."
+    pocket:
+      civs: [malay, portuguese, italians, spanish]
+      strategy: "Cannon Galleon pocket. Spanish Cannon Galleons fire 25% faster; Portuguese have extra range and HP on theirs. Cannon Galleons shell land targets through enemy walls."
 ---
 
 Islands is the canonical pure water map. Every player starts on a separate island, making naval supremacy the prerequisite for any land action. Controlling the water means controlling fishing (the main food and economic source), blocking enemy transports, and enabling landing parties. Civs with strong navies dominate; landlocked-specialist civs such as Aztecs and Huns are very weak here.

@@ -4,6 +4,21 @@ name: Black Forest
 type: closed
 size: large
 recommendedCivs: [celts, koreans, teutons, spanish, byzantines]
+teamComps:
+  "2v2":
+    flank:
+      civs: [goths, celts, teutons, slavs]
+      strategy: "Infantry mass in the forest chokepoints. Goths produce cheap infantry endlessly; Teutonic Knights are nearly unkillable in narrow forest corridors."
+    pocket:
+      civs: [aztecs, byzantines, chinese, bohemians]
+      strategy: "Boom into Imperial and mass unique units or gunpowder. Aztecs' Monks + unique units are dominant; Chinese get discounted tech; Bohemians get powerful gunpowder late game."
+  "4v4":
+    flank:
+      civs: [goths, celts, koreans, teutons]
+      strategy: "Infantry + siege at chokepoints. Koreans get cheaper towers for chokepoint fortification; Celts produce Siege Rams faster."
+    pocket:
+      civs: [chinese, aztecs, byzantines, slavs]
+      strategy: "Deep boom into Imperial Age. Slavs farm faster; Chinese have tech discounts. Mass unique units or gunpowder for a coordinated Imperial push."
 ---
 
 Black Forest is defined by dense, nearly impassable tree coverage that creates natural chokepoints between bases. It strongly favors defensive booming — once the narrow gaps between forests are walled, bases become nearly impregnable. Games are slow and decided by whichever side breaks through with the strongest siege-and-army combination. Aggressive Castle drops and monk-siege rushes that bypass walls are the primary counters to a fortified position.

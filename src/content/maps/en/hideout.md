@@ -3,6 +3,21 @@ slug: hideout
 name: Hideout
 type: closed
 recommendedCivs: [britons, ethiopians, mayans, bohemians, burgundians]
+teamComps:
+  "2v2":
+    flank:
+      civs: [britons, ethiopians, mayans, koreans]
+      strategy: "Archer civs defend the narrow entrances and snipe units as they funnel in. Britons out-range everything; Koreans add cheap defensive towers at the chokepoints."
+    pocket:
+      civs: [aztecs, bohemians, burgundians, byzantines]
+      strategy: "Pocket booms behind the protected entrance and masses unique units or gunpowder. Burgundian Coustilliers and Bohemian Hand Cannoneers excel once the eco is safe."
+  "4v4":
+    flank:
+      civs: [britons, ethiopians, mayans, koreans]
+      strategy: "Flanks lock the entrances with massed archers + towers; coordinated Crossbow + Mangonel lines hold against any push."
+    pocket:
+      civs: [aztecs, bohemians, burgundians, turks]
+      strategy: "Pockets deep-boom into Imperial gunpowder and unique units, then break out through one entrance with a siege + gunpowder ball."
 ---
 
 Hideout is a semi-closed map where players begin inside a palisade wall ring enclosing their base. Unlike Arena's stone walls, these palisades are more vulnerable and can be breached in Feudal Age with a focused archer or Men-at-Arms push. Games trend toward Castle Age Fast Castle strategies, but Feudal aggression remains viable and traps passive opponents. Relic control matters significantly in the late game — all relics spawn outside the starting walls.

@@ -3,6 +3,21 @@ slug: hill-fort
 name: Hill Fort
 type: hybrid
 recommendedCivs: [aztecs, britons, teutons, lithuanians, bohemians]
+teamComps:
+  "2v2":
+    flank:
+      civs: [britons, mayans, ethiopians, celts]
+      strategy: "Archer civs use the elevated terrain for bonus damage. Holding the high ground with Crossbows makes any uphill assault very costly for the enemy."
+    pocket:
+      civs: [franks, lithuanians, aztecs, bohemians]
+      strategy: "Pocket booms on the fortified hill and pushes with Knights or unique units. Lithuanians and Franks field the strongest cavalry to exploit the safe economy."
+  "4v4":
+    flank:
+      civs: [britons, mayans, ethiopians, koreans]
+      strategy: "Flanks hold the high ground with massed archers and towers — elevation gives a permanent damage edge in every fight."
+    pocket:
+      civs: [franks, lithuanians, bohemians, aztecs]
+      strategy: "Pockets boom hard on the hill and convert the lead into Knights, unique units, or Imperial gunpowder."
 ---
 
 Hill Fort places each player on top of a hill enclosed by Fortified Palisade Walls — a special variant that cannot be rebuilt by players once destroyed. High ground provides an attack bonus for units shooting or firing downward. Two strategic arcs exist: fast Castle boom with a defensive posture exploiting high ground, or an early Feudal Age archer and Men-at-Arms push designed specifically to crack the Fortified Palisade Walls before the enemy booms safely. Map control below the hills becomes the contested mid-game battleground.

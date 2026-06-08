@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AOE2 Guide">
+  <rect width="64" height="64" rx="14" fill="#17110b"/>
+  <g fill="#cda434">
+    <rect x="15" y="15" width="5" height="8"/>
+    <rect x="24" y="15" width="5" height="8"/>
+    <rect x="33" y="15" width="5" height="8"/>
+    <rect x="42" y="15" width="5" height="8"/>
+    <rect x="15" y="22" width="32" height="29"/>
+  </g>
+  <rect x="27" y="36" width="8" height="15" fill="#17110b"/>
+  <rect x="20" y="28" width="4" height="6" fill="#17110b"/>
+  <rect x="38" y="28" width="4" height="6" fill="#17110b"/>
+</svg>
