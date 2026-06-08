@@ -34,6 +34,11 @@ const URLS = [
     url: `https://raw.githubusercontent.com/SiegeEngineers/aoe2techtree/${AOE2TT_SHA}/data/data.json`,
     dest: path.join(CACHE_DIR, "data.json"),
   },
+  {
+    // Localized in-game strings — civ help text (bonuses/team bonus) by help_string_id.
+    url: `https://raw.githubusercontent.com/SiegeEngineers/aoe2techtree/${AOE2TT_SHA}/data/locales/en/strings.json`,
+    dest: path.join(CACHE_DIR, "strings-en.json"),
+  },
 ];
 
 async function fetchFile({ url, dest }) {

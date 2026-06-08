@@ -147,6 +147,12 @@ async function run() {
       units[slug] = `/images/aoe2/Unit/${pictureIndex}.png`;
     } else if (item.useType === "Tech" && diskTechIds.has(pictureIndex) && !techs[slug]) {
       techs[slug] = `/images/aoe2/Tech/${pictureIndex}.png`;
+    } else if (
+      item.useType === "Building" &&
+      diskBuildingIds.has(pictureIndex) &&
+      !buildings[slug]
+    ) {
+      buildings[slug] = `/images/aoe2/Building/${pictureIndex}.png`;
     }
   }
 

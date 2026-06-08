@@ -30,6 +30,33 @@ function slugify(str) {
 }
 
 // ---------------------------------------------------------------------------
+// Parse a civ's bonuses + team bonus from aoe2techtree locale help text
+// (strings-en.json value for the civ's help_string_id). Authoritative + current —
+// replaces the stale hand-coded / aalises bonus text.
+// ---------------------------------------------------------------------------
+function parseHelpBonuses(raw) {
+  if (typeof raw !== "string") return null;
+  const lines = raw.split(/<br\s*\/?>/i).map((l) => l.replace(/<\/?[a-z]+>/gi, "").trim());
+  const out = { civBonuses: [], teamBonus: "" };
+  let section = "bonuses";
+  for (const l of lines) {
+    if (!l || /civilization$/i.test(l)) continue;
+    if (/^Unique Unit/i.test(l) || /^Unique Tech/i.test(l)) {
+      section = "skip";
+      continue;
+    }
+    if (/^Team Bonus/i.test(l)) {
+      section = "team";
+      continue;
+    }
+    const text = l.replace(/^•\s*/, "").trim();
+    if (section === "bonuses" && l.startsWith("•")) out.civBonuses.push(text);
+    else if (section === "team") out.teamBonus = out.teamBonus ? `${out.teamBonus} ${text}` : text;
+  }
+  return out.civBonuses.length ? out : null;
+}
+
+// ---------------------------------------------------------------------------
 // CSV parser (minimal — handles quoted fields with semicolons inside)
 // ---------------------------------------------------------------------------
 function parseCsv(text) {
@@ -799,14 +826,22 @@ function _buildCivEntry(slug, aalises, _techNames, iconSlugs) {
 // Main
 // ---------------------------------------------------------------------------
 async function run() {
-  const [iconMapText, aalisesMap, aoe2ttData] = await Promise.all([
+  const [iconMapText, aalisesMap, aoe2ttData, stringsText] = await Promise.all([
     readFile(ICON_MAP, "utf8"),
     loadAalises(),
     loadAoe2TT(),
+    readFile(path.join(CACHE_DIR, "strings-en.json"), "utf8").catch(() => "{}"),
   ]);
 
   const iconMap = JSON.parse(iconMapText);
   const tt_civs = aoe2ttData.civs;
+  const strings = JSON.parse(stringsText);
+
+  // help_string_id per civ slug → re-source bonuses from locale strings.
+  const helpIdBySlug = {};
+  for (const [civName, civ] of Object.entries(tt_civs)) {
+    if (civ?.help_string_id != null) helpIdBySlug[slugify(civName)] = civ.help_string_id;
+  }
 
   // Build full civ list from aoe2techtree (it has the most complete set)
   const allCivSlugs = new Set();
@@ -979,7 +1014,22 @@ async function run() {
     }
   }
 
-  // Always write Britons content file skip (it already exists)
+  // Re-source civBonuses + teamBonus from aoe2techtree locale strings (authoritative,
+  // current at the pinned SHA) — overrides stale hand-coded / aalises bonus text.
+  // Structured uniqueUnits (slugs) + uniqueTechs are left untouched.
+  let reSourced = 0;
+  for (const entry of civEntries) {
+    const helpId = helpIdBySlug[entry.slug];
+    const parsed =
+      helpId != null ? parseHelpBonuses(strings[helpId] ?? strings[String(helpId)]) : null;
+    if (parsed) {
+      entry.civBonuses = parsed.civBonuses;
+      if (parsed.teamBonus) entry.teamBonus = parsed.teamBonus;
+      reSourced++;
+    }
+  }
+  console.log(`  Bonuses re-sourced from aoe2techtree strings: ${reSourced}/${civEntries.length}`);
+
   // Write civilizations.json
   const output = {
     patch: existingData.patch || "v100.1.84",
