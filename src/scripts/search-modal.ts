@@ -46,6 +46,11 @@ function bindKeys() {
       openDialog(dialog);
     }
   });
+  // Close the open mobile nav menu when clicking outside it.
+  document.addEventListener("click", (e) => {
+    const menu = document.querySelector("details[data-mobile-menu][open]");
+    if (menu && !menu.contains(e.target as Node)) menu.removeAttribute("open");
+  });
 }
 
 bindKeys();

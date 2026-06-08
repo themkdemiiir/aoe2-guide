@@ -26,6 +26,24 @@ const nav = [
       ))}
     </nav>
     <div class="ml-auto flex items-center gap-2">
+      <details data-mobile-menu class="relative md:hidden">
+        <summary
+          class="flex cursor-pointer list-none items-center rounded border border-stone-700/40 p-2 text-stone-700 transition-colors hover:border-gold-500 hover:text-gold-500 [&::-webkit-details-marker]:hidden"
+          aria-label={t(locale, "nav.menu")}
+        >
+          <UIIcon name="lucide:menu" class="h-5 w-5" />
+        </summary>
+        <nav class="absolute right-0 z-50 mt-2 w-52 rounded border border-stone-700/30 bg-parchment p-2 shadow-xl">
+          {nav.map(({ key, href }) => (
+            <a
+              href={href}
+              class="block rounded px-3 py-2 text-sm text-stone-700 hover:bg-gold-500/15 hover:text-gold-500"
+            >
+              {t(locale, key)}
+            </a>
+          ))}
+        </nav>
+      </details>
       <button
         id="site-search-trigger"
         type="button"
