@@ -1,64 +1,40 @@
 ---
 slug: mongol-scouts-ca
-name: "Mongol Scouts into Cavalry Archers"
+name: "Scouts into Cavalry Archers"
 difficulty: intermediate
 targetAge: castle
 durationMin: 17
-civsRecommended: [mongols]
+civsRecommended: [mongols, huns, magyars, japanese, tatars]
 steps:
-  - { villagers: 6,  assign: "6 → sheep (Mongols build houses 50% faster — produce freely)", icons: ["food"] }
-  - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 11, assign: "+2 → build Stable (multiple builders speed it up)", icons: ["stable"] }
-  - { villagers: 12, assign: "+1 → berries, build mill", icons: ["food", "mill"] }
-  - { villagers: 16, assign: "+4 → wood; produce Scouts from the Stable continuously", icons: ["wood", "scout-cavalry"] }
-  - { villagers: 18, assign: "+2; click Feudal at 18 pop; keep Scout production active", icons: ["food"] }
-  - { villagers: 18, assign: "Feudal: harass with Scouts; build Archery Range + Blacksmith; 4 → gold (mining camp)", icons: ["scout-cavalry", "archery-range", "gold", "mining-camp"] }
-  - { villagers: 22, assign: "+4 → food/wood; research Bloodlines; add farms; click Castle Age", icons: ["food", "castle-age"] }
-  - { villagers: 24, assign: "Castle Age: produce Cavalry Archers from the Range; research Thumb Ring, then upgrade to Mangudai", icons: ["cavalry-archer"] }
+  - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood; build a Lumber Camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure the first boar", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → build a House, then a Mill on berries", icons: ["house", "mill"] }
+  - { villagers: 10, assign: "Use the Scout to push deer toward the Town Center", note: "Free food without losing villager time", icons: ["scout-cavalry", "food"] }
+  - { villagers: 16, assign: "+6 → hunt; lure the second boar into the mix", icons: ["food"] }
+  - { villagers: 18, assign: "+2 → wood; research Loom", note: "Mongols: hunters work 40% faster, so the food piles up fast", icons: ["wood", "loom"] }
+  - { villagers: 18, time: "8:50", assign: "Click Feudal Age at 18 pop", note: "Perfect Feudal landing around 8:50", icons: ["food"] }
+  - { villagers: 18, assign: "Feudal: 5 → wood + 2nd Lumber Camp; 5 → berries; 1 builds a Barracks", icons: ["wood", "lumber-camp", "food", "barracks"] }
+  - { villagers: 18, assign: "2 villagers build a Stable; pump Scout Cavalry and harass", note: "Wall the base with the two Stable builders once it is up", icons: ["stable", "scout-cavalry"] }
+  - { villagers: 18, assign: "Research Double-Bit Axe; add Horse Collar on closed maps; seed Farms; add 1–4 Spearmen vs. enemy scouts", icons: ["double-bit-axe", "horse-collar", "farm", "spearman"] }
+  - { villagers: 23, assign: "At ~15 Farms send 5 → gold + Mining Camp; build a Blacksmith; finish walling fully", icons: ["gold", "mining-camp", "blacksmith"] }
+  - { villagers: 27, assign: "Click Castle Age behind a sealed wall", note: "Bank gold and keep Scouts alive for the transition", icons: ["food"] }
+  - { villagers: 27, assign: "Castle: build 2 Archery Ranges; research Bloodlines + Fletching; start Cavalry Archers", icons: ["archery-range", "bloodlines", "cavalry-archer"] }
+  - { villagers: 27, assign: "Research Bow Saw, Bodkin Arrow, Husbandry; upgrade to Mangudai at the Castle", icons: ["bow-saw", "bodkin-arrow", "husbandry"] }
 source:
   author: "Hera"
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
-# Mongol Scouts into Cavalry Archers
+# Scouts into Cavalry Archers
 
-**Goal:** Open with Scout Cavalry to harass in Feudal Age, then transition into massed Cavalry Archers — and the Mangudai upgrade — in Castle Age, one of the strongest compositions in the game.
-**Recommended civs:** Mongols only — Mangudai fire 25% faster (unique bonus), deal bonus damage vs. siege, and get free Parthian Tactics.
-
-## Dark Age (0–18 Villagers)
-
-- 6 villagers on sheep (Mongols: houses build 50% faster — never delay production for house room)
-- 3 villagers on wood; Lumber Camp
-- 2 villagers build Stable (multiple builders finish it faster)
-- 1 villager to berries; Mill
-- 4 more villagers to wood (16 total)
-- 2 more villagers to food/wood (18 total)
-
-Start Scout Cavalry from the Stable as soon as you have food. Click Feudal Age at 18 pop (~9:00).
-
-## Feudal Age (18 Villagers)
-
-- Harass the opponent's economy with Scout Cavalry
-- Build an **Archery Range** and a **Blacksmith** to prepare for Castle Age — you cannot train Cavalry Archers yet (they are a Castle-Age unit)
-- Send 4 villagers to gold; build a Mining Camp
-- Research Bloodlines for the Scouts; add Farms as food allows
-- Keep villager production going and bank food/gold for the Castle Age click
-
-## Castle Age — Cavalry Archers (the payoff)
-
-- Produce **Cavalry Archers** from the Archery Range (now unlocked in Castle Age)
-- Research **Thumb Ring** (accuracy + fire rate — top priority for the archer line)
-- Upgrade to **Mangudai** at the Castle — the elite Mongol unique unit
-- Keep adding gold; fold your remaining Scouts into the Cavalry Archer mass
+Open with Scout Cavalry to grab map control in Feudal, wall up safely, then snowball into massed Cavalry Archers — and the Mangudai upgrade for Mongols — in Castle Age.
 
 ## Strategy and Follow-Up (What's Next)
 
-Mongol Cavalry Archers and Mangudai are extremely strong — free Parthian Tactics lets them fire while retreating, and Mangudai add bonus damage vs. siege. But they are still cavalry archers, and they do have counters.
-
-- **Weak against:** Skirmishers and Elite Skirmishers (high pierce armour hard-counters the archer line); **Camels** (bonus damage vs. cavalry — Cavalry Archers are mounted, so Camels punish them); and Hussars / Light Cavalry that close the distance and shrug off being kited.
-- **Strong against:** Slow infantry, Scorpion/Mangonel lines (Mangudai snipe siege), and Knight/Cavalier compositions you can kite safely.
-
-**Options:**
-
-1. **Mangudai:** The Castle-Age unique-unit upgrade — bonus damage vs. siege makes them devastating against siege-heavy armies.
-2. **Treb + Mangudai:** Mangudai protect Trebuchets perfectly with their speed and anti-siege bonus in the late game.
-3. **Siege push:** Mongol Siege Engineers gives Trebuchets extra range — excellent for map control alongside the Cavalry Archer mass.
+- The Feudal Scouts are a screen, not the win condition: their job is to deny the enemy map control and buy time while you wall fully. Do not over-commit them into Spearmen or Skirmishers.
+- Walling is the linchpin. Cavalry Archers are fragile while massing, so a sealed base lets you tech up and build numbers behind cover before pushing out.
+- Roll Scout production straight into the Stable's eco upgrades, then pivot all your gold into the Archery Ranges the moment you hit Castle Age.
+- For Mongols specifically, beeline the Mangudai upgrade — the faster firing rate and anti-siege bonus turn the Cavalry Archer mass into a top-tier composition.
+- Hard counters to respect: Skirmishers and Camels both shred the archer line, so keep moving, kite carefully, and add Hussars or Halberdiers as a melee screen for the late game.
+- If you cannot wall in time, abandon the Cavalry Archer plan, keep producing Bloodlines Scouts, and lean on the eco lead instead.

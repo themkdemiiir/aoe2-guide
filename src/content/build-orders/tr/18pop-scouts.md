@@ -1,75 +1,37 @@
 ---
 slug: 18pop-scouts
-name: "18 Köylü Tek Stable Scout Baskını"
-difficulty: beginner
+name: "Tek Ahırlı Atlı Keşifçiler"
+difficulty: intermediate
 targetAge: feudal
-durationMin: 9
+durationMin: 8
 civsRecommended: [franks, huns, lithuanians, magyars, malians]
 steps:
-  - { villagers: 6,  assign: "6 → TC altında koyunda", icons: ["food", "town-center"] }
-  - { villagers: 8,  assign: "+2 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
-  - { villagers: 9,  assign: "+1 → en yakın domuzu çek", icons: ["food"] }
-  - { villagers: 10, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
-  - { villagers: 16, assign: "+6 → TC altında av, gerektiğinde 2. domuzu çek", icons: ["food"] }
-  - { villagers: 18, assign: "+2 → oduna", note: "Loom araştır; 18 köylüyle Feudal Age'e tıkla", icons: ["wood", "loom"] }
-  - { villagers: 18, assign: "Feudal gelir — 5 köylü 2. Lumber Camp'e, 4 köylü meyveye", icons: ["lumber-camp", "food"] }
-  - { villagers: 18, assign: "1 köylü Barracks, 2 köylü Stable kurar", icons: ["barracks", "stable"] }
-  - { villagers: 20, assign: "+2 TC köylüsü; Stable kurucuları çit duvarı çekmeye geçer", icons: ["stable"] }
-  - { villagers: 24, assign: "+2 → altına, Mining Camp kur; 7–8 Scout sonra Bloodlines araştır", icons: ["gold", "mining-camp", "light-cavalry"] }
+  - { villagers: 6, assign: "6 → TC altında koyunlar", icons: ["food", "town-center"] }
+  - { villagers: 8, assign: "+2 → odun; ilk ormanda bir kereste kampı kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9, assign: "+1 → ilk yaban domuzunu çek ve avla", note: "Koyunlar bitmeden domuzu yiyip bitir", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → bir ev, ardından çilek üzerine değirmen kur", icons: ["house", "mill"] }
+  - { villagers: 10, assign: "Yiyeceği uzatmak için keşifçiyle geyikleri içeri çek", note: "Yeni köylü yok — TC'den üretime devam et", icons: ["food"] }
+  - { villagers: 16, assign: "+6 → TC altında avlanma; ikinci domuzu çek", icons: ["food"] }
+  - { villagers: 18, assign: "+2 → odun; Loom'u araştır, sonra Feudal'a tıkla", time: "8:50", note: "18 nüfusta 4 odun / 14 yiyecek dağılımıyla geç", icons: ["wood", "loom"] }
+  - { villagers: 18, assign: "Feudal: 4 köylüyü ilk kereste kampına gönder (agresif, oduncuda 8) ya da 5'ini yeni bir kampa (defansif, oduncuda 9)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 18, assign: "Yiyecekten 4 köylüyü → çileğe al; çağ atlama %60'tayken 1 köylüyü kışlaya gönder", icons: ["food", "barracks"] }
+  - { villagers: 18, assign: "2 köylüyle ahır kur; biter bitmez Atlı Keşifçi üret", icons: ["stable", "scout-cavalry"] }
+  - { villagers: 18, assign: "Double-Bit Axe ve Horse Collar'ı araştır; tarlaları ek", icons: ["double-bit-axe", "horse-collar", "farm"] }
+  - { villagers: 18, assign: "Ahırı kuran 2 köylüyle sur ör; durmadan keşifçi eklemeye devam et", icons: ["scout-cavalry"] }
+  - { villagers: 18, assign: "Rakip de keşifçiyle açarsa 1–4 Mızraklı ekle", note: "Okçulara karşı mızraklıları atla", icons: ["spearman"] }
 source:
   author: "Hera"
-  url: "https://ageofnotes.com/build-orders/1-stable-scouts-18-vils/"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
-# 18 Köylü Tek Stable Scout Baskını
+# Tek Ahırlı Atlı Keşifçiler
 
-**Amaç:** 18 köylüyle Feudal Age'e ulaşmak, Stable'ı hızla kurup Scout Cavalry seli ile düşman köylülerini duvarlanmadan önce taciz etmek.
-**Önerilen medeniyetler:** Franks, Huns, Lithuanians, Magyars, Malians
+8:50 civarında 18 nüfusla ve tek bir ahırla Feudal'a geç, sonra ekonomin büyürken Atlı Keşifçiler basarak rakibin köylülerini taciz et.
 
-## Karanlık Çağ (0–18 Köylü)
+## Strateji ve Devamı (Sırada Ne Var)
 
-- 6 köylü koyunda
-- 2 köylü odunda
-- 1 köylü ilk domuzu çeker
-- 1 köylü House yapar, ardından meyvelerin yanına Mill kurar
-- +6 köylü avda (gerektiğinde 2. domuzu çek), toplam 16 köylü
-- +2 köylü oduna (toplam 18)
-- Loom araştır
-
-18 köylüyle Feudal Age'e tıkla (~8:50).
-
-## Feudal Hazırlığı
-
-- 5 av köylüsünü 2. Lumber Camp'e gönder (toplam 7 oduncu)
-- 4 köylüyü meyveye gönder
-- 1 köylü Barracks kurar
-- 2 köylü Stable kurar
-- Stable kurucuları inşaat bitince çit duvarı çekmeye geçer
-
-**Araştırmalar:**
-- Double-Bit Axe
-- (İsteğe bağlı) Kapalı haritalarda Horse Collar
-
-## Feudal Çağ (18 Köylü)
-
-- Stable'dan sürekli Scout Cavalry üret
-- TC'den çıkan yeni köylüler altına gider, Mining Camp kurulur
-- 7–8 Scout çıktıktan sonra Bloodlines araştır
-- İmkân buldukça Farm kur
-- Rakip de Scout üretiyorsa 1–2 Spearman üret
-
-## Strateji ve Devam (What's Next)
-
-- Scout Rush, AoE2'nin temel agresif açılışıdır. Kritik kilometre taşları: ~50. saniyede Lumber Camp, ~1:40'ta Mill, Feudal'den sonraki 30 saniye içinde Stable.
-- **Zayıf olduğu:** Archer açılışları (Feudal'de Archers Scout'u yener); hızlı duvar çekip Spearman üreten rakipler.
-- **Güçlü olduğu:** Duvar çekmeyen rakipler; erken askeri olmayan açgözlü Feudal ekonomileri.
-
-**Seçenekler:**
-
-1. **2 Stable Knight:** Standart Castle Age takibi — 2. Stable ekle ve sürekli Knight üret.
-2. **Skirmisher'a Pivot:** Rakipte Crossbow varsa Elite Skirmisher üret, ardından Castle Age'e geç.
-3. **Feudal All-In:** Rakibin duvarı ve Spearman'ı yoksa anında baskı için 8+ Scout sel.
-
-**Savunma İpucu:**
-Yaygın başlangıç hataları: ikinci domuzu çekmeyi unutmak, Stable'ı geç kurmak ve çit duvarı ihmal etmek. Not: Franks'ın Bloodlines araştırması yoktur — hız için bunun yerine Husbandry araştır. Huns ev gerektirmez; bu da daha erken Stable inşası için odun kazandırır.
+- Üretim her şeydir: yeterli yiyeceğin olur olmaz ahırdan bir keşifçi çıkmalı ve TC asla boş durmamalı. 18 nüfuslu geçiş sana tempo kazandırır, bu yüzden evde oturmak yerine bu avantajı rakibe baskı kurmak için harca.
+- Keşifçinin gördüğüne göre tepki ver. Okçulara veya mızraklılara karşı bir okçu menzili ve sıyırıcı (skirmisher) ekle; rakip keşifçilerine karşı tamamen surla çevrilene kadar kendi keşifçilerini ve mızraklılarını ekle.
+- Süvarin akmaya başlayınca onu geliştir. Bir demirci kur ve sahada 7–8 keşifçi olduktan sonra Bloodlines'ı araştır ki askeri üretimi bunun için geciktirmeyesin.
+- Varsayılan Castle çağı planı sürekli baskı için 2 ahırlı Şövalye'dir. Yoğun bir crossbow kütlesine karşı tek bir menzili elit sıyırıcıya çevir; sadece harita kontrolü gereken açık haritalarda ise hafif süvari taciz akışını sürdürür.
+- Uygarlık notları: Franks'te Bloodlines yoktur, bu yüzden hız için Husbandry'ye yüklen; Huns'ta ev gerekmediği için açılan odunla ahırı biraz daha erken kurabilirsin.

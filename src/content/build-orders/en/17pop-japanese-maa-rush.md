@@ -1,83 +1,40 @@
 ---
 slug: 17pop-japanese-maa-rush
 name: "17 Pop Japanese Man-at-Arms Rush"
-difficulty: advanced
+difficulty: intermediate
 targetAge: feudal
-durationMin: 9
+durationMin: 8
 civsRecommended: [japanese]
 steps:
-  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
-  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
-  - { villagers: 10, assign: "+1 → lure 2nd boar (under TC)", icons: ["food"] }
-  - { villagers: 11, assign: "+1 → build house, return to hunting", icons: ["house"] }
-  - { villagers: 13, assign: "+2 → hunt under 2nd boar; 1 vil builds Barracks at front of base", icons: ["food", "barracks"] }
-  - { villagers: 15, assign: "+2 → food under TC; +1 → wood (3 lumberjacks total)", icons: ["food", "wood"] }
-  - { villagers: 17, assign: "+2; lure deer (mandatory)", note: "Research Loom; click Feudal at ~8:25", icons: ["food", "loom"] }
-  - { villagers: 17, assign: "Feudal arrives — 2 vils → gold, build Mining Camp; produce 3 Militia immediately", icons: ["gold", "mining-camp", "militia"] }
-  - { villagers: 17, assign: "Send Militia to enemy base; 4 vils from hunting → wood (7 lumberjacks)", icons: ["militia", "wood"] }
-  - { villagers: 19, assign: "+2 vils; build Archery Range, produce Archers; research Man-at-Arms", icons: ["archery-range", "archer"] }
-  - { villagers: 20, assign: "+1 → berries, build Mill; research Fletching", icons: ["food", "mill", "fletching"] }
+  - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood, drop a Lumber Camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure the first boar", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → lure the second boar under the Town Center", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build a House, then move to the hunt", note: "Lure at least 2 deer — this is mandatory", icons: ["house", "food"] }
+  - { villagers: 13, assign: "+2 → hunt (eat through the second boar)", icons: ["food"] }
+  - { villagers: 14, assign: "+1 → build a Barracks at the front of your base", icons: ["barracks"] }
+  - { villagers: 16, assign: "+2 → food under the Town Center", icons: ["food"] }
+  - { villagers: 17, time: "8:25", assign: "+1 → wood, research Loom, then click up to Feudal", note: "Land with roughly 3 on wood and 13 on food", icons: ["wood", "loom"] }
+  - { villagers: 17, assign: "2 from the hunt → gold, drop a Mining Camp", icons: ["gold", "mining-camp"] }
+  - { villagers: 17, assign: "Pump 3 Militia and walk them across the map", icons: ["militia"] }
+  - { villagers: 17, assign: "4 off the Town Center → wood at the Lumber Camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 17, assign: "Build an Archery Range and start Archers; research Man-at-Arms", icons: ["archery-range", "archer", "man-at-arms"] }
+  - { villagers: 17, assign: "Add a Blacksmith; research Double-Bit Axe", icons: ["blacksmith", "double-bit-axe"] }
+  - { villagers: 17, assign: "+2 → gold; 1 → berries and build a Mill", icons: ["gold", "food", "mill"] }
+  - { villagers: 17, assign: "Research Fletching; send Archers and Man-at-Arms across the map together", icons: ["fletching", "archer", "man-at-arms"] }
 source:
   author: "Hera"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 17 Pop Japanese Man-at-Arms Rush
 
-**Goal:** Apply the earliest possible pressure with Man-at-Arms (MAA), quickly backed by Archers from an Archery Range and the Fletching upgrade.
-**Recommended civs:** Japanese
-
-## Dark Age (0–17 Villagers)
-
-- 6 villagers on sheep
-- 2 villagers on wood
-- 1 villager lures first boar
-- 1 villager lures second boar (under Town Center)
-- Lure at least 2 deer (mandatory for food)
-- 1 villager builds a House then returns to hunting
-- +2 villagers hunting (during second boar)
-- 1 villager builds Barracks at the front of base
-- +2 villagers to food under Town Center
-- +1 villager to wood (3 lumberjacks total)
-
-Research Loom.
-Click Feudal Age (~8:25).
-
-## Feudal Preparation
-
-- Send 2 hunting villagers to gold, build Mining Camp
-- Produce 3 Militia and immediately send them to the enemy base
-- Take 4 villagers from hunting and send to Lumber Camp (7 lumberjacks total)
-- Build Archery Range immediately and start producing Archers
-- Research Man-at-Arms
-
-**Research:**
-- Double-Bit Axe
-- (Optional) Horse Collar
-
-## Feudal Age (17 Villagers)
-
-- Send Scout and MAA to target enemy villagers
-- Build Blacksmith when resources allow
-- +2 villagers to gold (4 total)
-- +1 villager to berries, build Mill
-- Begin transitioning hunting villagers to farms before sheep run out
-- Research Fletching (TC may be idle ~15–20 sec)
-- Merge Archers into MAA group and push forward
-- Continue producing Archers at home; leave a few back for defense if needed
+Reach Feudal Age around 8:25 and apply the fastest possible Man-at-Arms pressure, layering in Archers right behind the Militia.
 
 ## Strategy and Follow-Up (What's Next)
 
-- Japanese infantry attack 25% faster starting in Feudal Age, making this the strongest MAA civ.
-- **Weak against:** Opponent walling fast or producing Scouts to intercept MAA.
-- **Strong against:** Greedy openings with no early military and slow walling.
-
-**Options:**
-
-1. **Full Feudal All-In:** Add 2nd Archery Range after first Archers arrive; flood Archer + MAA and deny Castle Age.
-2. **Castle Transition:** If attack fails or is contained, wall up and advance to Castle Age for Crossbow follow-up.
-3. **Archer-Heavy Feudal:** Drop MAA pressure early if opponent walled; shift to pure Archers and Fletching timing attack.
-
-**Defense Tip:**
-If your attack dealt serious damage, wall up and prepare for Castle Age. If it failed, you over-invested resources early — pivot to a standard Castle Age Archer build (Crossbow + Siege). Do not re-engage with damaged MAA.
+- This is the quickest Man-at-Arms timing in the game — Japanese infantry attack faster, so even a small group of Militia and Man-at-Arms punishes an unwalled opponent hard.
+- The plan front-loads aggression: send the 3 Militia out the moment Feudal lands, then convert them to Man-at-Arms and reinforce with Archers and Fletching to keep the push rolling.
+- Your economy is deliberately thin, so the early damage has to pay for itself; idle enemy villagers and a slow wall are exactly what you are hunting for.
+- Late game is the weakness of this opening — commit to finishing the fight in Feudal rather than coasting, because a contained rush leaves you behind on eco.
+- If the opponent walls fast or counters with Scouts, ease off, secure your gold and wood, and transition cleanly into Castle Age Crossbows instead of throwing units away.

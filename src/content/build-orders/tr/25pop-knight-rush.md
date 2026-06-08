@@ -1,88 +1,38 @@
 ---
 slug: 25pop-knight-rush
-name: "25 Köylü Şövalye Baskını"
+name: "Knight Rush (Başlangıç)"
 difficulty: beginner
 targetAge: castle
 durationMin: 16
 civsRecommended: [franks, magyars, slavs, berbers, huns]
 steps:
-  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
-  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
-  - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
-  - { villagers: 11, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
-  - { villagers: 12, assign: "+1 → 2. domuzu çek", icons: ["food"] }
-  - { villagers: 16, assign: "+4 → meyveye", icons: ["food"] }
-  - { villagers: 21, assign: "+5 → oduna", icons: ["wood"] }
-  - { villagers: 24, assign: "+3 → altına, Mining Camp kur", note: "Loom al; 25. köylüyle Feudal Age'e tıkla (~11:45)", icons: ["gold", "mining-camp", "loom"] }
-  - { villagers: 25, assign: "Feudal gelir — 1 köylü Barracks, 1 köylü House kurar", icons: ["barracks", "house"] }
-  - { villagers: 25, assign: "2 köylüyle Stable ve Market kur; +4 köylü altına", icons: ["stable", "market", "gold"] }
-  - { villagers: 27, assign: "+2 köylü; Double-Bit Axe + Horse Collar araştır; Castle Age'e tıkla (~16:05)", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 29, assign: "Castle Age — Stable ekle, her iki Stable'dan Knight üret", icons: ["stable", "knight"] }
+  - { villagers: 6,  assign: "İlk 3 köylüyle 2 Ev dik, sonra 6 köylüyü de TC altındaki koyunlara al", icons: ["house", "food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → Kereste Kampı dik, ardından odun kes", icons: ["lumber-camp", "wood"] }
+  - { villagers: 10, assign: "+1 → ilk yaban domuzunu çek ve vur", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → 2 Ev dik, sonra meyvelere Değirmen kur ve toplamaya başla", icons: ["house", "mill", "food"] }
+  - { villagers: 12, assign: "+1 → ava git (geyik/artık yiyecek)", icons: ["food"] }
+  - { villagers: 13, assign: "+1 → 2. yaban domuzunu çek", icons: ["food"] }
+  - { villagers: 17, assign: "+4 → meyveler", icons: ["food"] }
+  - { villagers: 22, assign: "+5 → odun; nüfus dolunca araya bir Ev dik", icons: ["wood", "house"] }
+  - { villagers: 25, assign: "+3 → Maden Kampı dik ve altın çıkar, ardından Loom araştır ve çağı tıkla", note: "Feudal ~11:45'te gelir; yaklaşık 8 odunda, 14 yiyecekte, 3 altında", icons: ["mining-camp", "gold", "loom"] }
+  - { villagers: 25, assign: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır", icons: ["barracks", "house", "farm"] }
+  - { villagers: 27, assign: "+2 → Ahır ve Pazar dik", icons: ["stable", "market"] }
+  - { villagers: 31, assign: "+4 → altın; Double-Bit Axe araştır; Castle çağını tıkla", time: "16:05", note: "Çağ atlarken 2. Ahırı dik", icons: ["gold", "double-bit-axe", "stable"] }
+  - { villagers: 31, assign: "Castle çağında: Horse Collar ve Bow Saw araştır; iki Ahırdan da Şövalye bas", icons: ["horse-collar", "bow-saw", "knight"] }
 source:
   author: "Hera"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
-# 25 Köylü Şövalye Baskını
+# Knight Rush (Başlangıç)
 
-**Amaç:** Basit ve güvenli bir şekilde Castle Age'e ulaşarak iki Stable'dan Knight üretimine başlamak.
-**Önerilen medeniyetler:** Franks, Magyars, Slavs, Berbers, Huns
+Temiz bir ekonomiyle Castle çağına geç ve iki Ahırdan Şövalye yağdırarak affedici, yüksek etkili bir saldırı kur.
 
-## Karanlık Çağ (0–25 Köylü)
+## Strateji ve Devamı (Sırada Ne Var)
 
-- Başta 2 House kur
-- 6 köylü koyunda
-- 3 köylü odunda
-- (İsteğe bağlı) Gerekirse Loom al, ardından ilk domuzu çek
-- 1 köylü 2 House yapar, ardından meyvelerin yanına Mill kurar
-- 1 köylü ikinci domuzu çeker
-- +4 köylü meyvede
-- +5 köylü odunda
-- House ekle
-- +3 köylü altına
-
-Eğer erken Loom almadıysan şimdi al.
-25. köylüyle Feudal Age'e tıkla (~11:45).
-
-## Feudal Hazırlığı
-
-- 1 köylü Barracks kurar
-- 1 köylü House yapar
-- 2 köylüyle Stable ve Market kur
-- +4 köylü altına gönder
-- (İsteğe bağlı) Üs çevresine küçük duvarlar çekerek savunmanı güçlendir
-
-**Araştırmalar:**
-- Double-Bit Axe
-- Horse Collar
-
-## Feudal Çağ (25 Köylü)
-
-- Koyun ve av kaynakları bitince birkaç köylü tarlaya, diğerleri oduna geçsin
-- Gerekirse Market kullanarak kaynaklarını dengele
-- Idle kalan köylüleri odun, altın veya tarlaya yönlendir
-
-Castle Age'e tıkla (~16:05).
-
-## Kale Çağı (29 Köylü)
-
-- Stable ekle
-- Bow Saw araştır
-- Her iki Stable'dan da Knight üretmeye başla
-- Köylü üretimini sürdür ve kaynak dengesini koru (Knight üretimini destekleyecek şekilde)
-- Zamanla Bloodlines, Husbandry ve Blacksmith geliştirmelerini yap
-
-## Strateji ve Devam (What's Next)
-
-- 25 Köylü Knight Rush en güvenli ve başlangıç dostu Castle Age agresif açılışıdır. İki Stable'dan sürekli Knight üretmek, özel karşı birimler olmadan yanıt vermesi zor bir baskı oluşturur.
-- **Zayıf olduğu:** Pike ve Camel Rider birimleri — bunlar Knight'ın doğal karşıtıdır; geç oyunda Halberdier.
-- **Güçlü olduğu:** Okçu bazlı ekonomiler; erken anti-cavalry birimleri üretmeyen rakipler.
-
-**Seçenekler:**
-
-1. **Knight Seli:** Her iki Stable'ı sürekli Knight üretmeye devam ettir, 3. Stable ekle; altın akışını sürdürmek için Market'i kullan.
-2. **Knight + Siege:** Siege Workshop ekleyip Mangonel veya Battering Ram üret; duvarları kırmak ve zorla çatışma yaratmak için güçlüdür.
-3. **Ekstra Town Center:** Rakip iyi savunmaya sahipse TC ekle ve ekonomiyi büyüt; Knight'lar taciz ederken sen gelişimde öne geçersin.
-
-**Savunma İpucu:**
-Kaynakları harcamadan bekletme; fazla biriktiğinde Market ile dengele. Knight ve köylüyü aynı anda üretmeye devam et. Rakibin Pike biriktirdiğini görürsen, saf Knight yerine birleşik kuvvet yaklaşımına geç.
+- Bu, yeni başlayanlar için en uygun saldırı açılışıdır: ekonomin düzenli bir koyun-domuz-meyve-sonra-tarla döngüsünde döner, böylece Castle çağına para biriktirirken mikro yerine makroya odaklanabilirsin.
+- İki Ahır, Şövalyelerin durmadan gelmesini sağlar. Şövalyeler dayanıklı ve hızlıdır; duvarsız kereste kamplarını ve altın madencilerini cezalandırır, bu yüzden ilk Şövalye çıkar çıkmaz baskına git.
+- Odun ve tarla gelirini sağlam tutmak için Double-Bit Axe ile Horse Collar al, ardından Bow Saw ekle — burada ekstra askeri bina dikmekten çok sürekli ekonomi yükseltmeleri önemlidir.
+- Bloodlines çoğu uygarlık için büyük bir Şövalye güç sıçramasıdır; Franks bunu atlar çünkü takım geneli +%20 Şövalye canı bu açığı zaten kapatır.
+- Şövalyeler Mızraklılara (Pikeman) ve Develilere (Camel Rider) karşı erir, bu yüzden mızrak birimleri için keşif yap. Yığınla süvari karşıtı birim görünce Şövalye basmayı zorlamayı bırak; Skirmisher, bir Kuşatma Atölyesi ya da ikinci bir Ana Bina ile booma geçerek üstünlük kur.
+- Magyars, Slavs, Berbers ve Huns'un her biri planı tatlandırır (daha ucuz ya da daha hızlı Şövalye, bedava Ev, daha ucuz ekonomi), ama düzen beşinde de aynıdır.

@@ -6,70 +6,32 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [malians, lithuanians, japanese, britons, vikings]
 steps:
-  - { villagers: 6,  assign: "6 → sheep", icons: ["food"] }
+  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food"] }
   - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 10, assign: "+1 → lure boar", icons: ["food"] }
-  - { villagers: 13, assign: "+3 → hunt under TC", icons: ["food"] }
-  - { villagers: 16, assign: "+3; 1 vil builds Barracks at front of base", icons: ["barracks"] }
-  - { villagers: 18, assign: "+2 → wood", note: "Research Loom; click Feudal at ~8:50", icons: ["wood", "loom"] }
-  - { villagers: 18, assign: "Feudal arrives — produce 2 Militia immediately; send toward enemy base", icons: ["militia", "barracks"] }
-  - { villagers: 18, assign: "4 vils → wood (lumber camp expansion)", icons: ["wood", "lumber-camp"] }
-  - { villagers: 19, assign: "+1 → berries, build Mill; research Double-Bit Axe", icons: ["food", "mill", "double-bit-axe"] }
-  - { villagers: 21, assign: "+2 → follow-up military based on opponent (scouts/archers/spears)", icons: ["barracks"] }
+  - { villagers: 10, assign: "+1 → lure first boar", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build house, then hunt", note: "Lure deer with the scout", icons: ["house", "food"] }
+  - { villagers: 15, assign: "+4 → hunt; lure 2nd boar", icons: ["food"] }
+  - { villagers: 16, assign: "+1 → build Barracks at front of base, then house", icons: ["barracks", "house"] }
+  - { villagers: 17, assign: "+1 → hunt", icons: ["food"] }
+  - { villagers: 18, time: "8:50", assign: "+1 → wood; research Loom, then click Feudal Age", note: "Landing ~8:50 (4 wood / 13 food)", icons: ["wood", "loom"] }
+  - { villagers: 18, assign: "Feudal arrives — produce 2 Militia and send them to the enemy base", icons: ["militia", "barracks"] }
+  - { villagers: 18, assign: "4 vils from TC → initial lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 19, assign: "+1 from TC → berries, build Mill; research Double-Bit Axe", note: "Horse Collar optional", icons: ["food", "mill", "double-bit-axe"] }
+  - { villagers: 21, assign: "+2 → follow-up military by scouting opponent; slow-wall", icons: ["scout-cavalry", "barracks"] }
 source:
   author: "Hera"
-  url: "https://ageofnotes.com/build-orders/feudal-drush-18-vils/"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Feudal Drush
 
-**Goal:** Reach Feudal Age at 18 population, immediately produce 2 Militia and send them to pressure the enemy, then adapt to any follow-up military.
-**Recommended civs:** Malians, Lithuanians, Japanese, Britons, Vikings
-
-## Dark Age (0–18 Villagers)
-
-- 6 villagers on sheep
-- 3 villagers on wood
-- 1 villager lures first boar
-- 3 villagers hunting under Town Center
-- 1 villager builds Barracks at front of base
-- +2 villagers to wood
-- Research Loom
-
-Click Feudal Age with 18th villager (~8:50).
-
-## Feudal Preparation
-
-- Produce 2 Militia immediately upon Feudal arriving
-- Send Militia to enemy base while Feudal completes
-- Send 4 villagers to wood (lumber camp expansion)
-- Use your scout to block wall gaps and deny retreating villagers
-
-**Research:**
-- Double-Bit Axe
-- (Optional) Horse Collar
-
-## Feudal Age (18 Villagers)
-
-- +1 villager to berries, build Mill
-- +2 villagers to follow-up military production based on opponent reaction
-- If opponent is stable: produce Spearmen + Archers
-- If opponent builds Archers: match with Scouts or Skirmishers
-- If opponent sends their own Drush: trade Militia and proceed normally
-- Do not over-commit Militia to a well-defended base
+Reach Feudal at 18 population, push 2 Militia plus your scout into the enemy base, and keep the pressure on while your economy ticks along behind a slow wall.
 
 ## Strategy and Follow-Up (What's Next)
 
-- The Feudal Drush sends Militia during the Feudal transition — not in Dark Age — making it lighter than a full Drush FC but still threatening.
-- **Weak against:** Opponents who wall fast or produce Scouts to intercept; a defended base with Town Center fire and counter-Militia makes the raid ineffective.
-- **Strong against:** Greedy openings; opponents slow to wall; civs with no early military.
-
-**Options:**
-
-1. **Scouts Follow-Up:** Build Stable and add Scout Cavalry after Militia pressure; strong if opponent has no Spearmen.
-2. **Archers Follow-Up:** Build Archery Range and transition to Archers; pairs well with civs that have Archer bonuses (Britons, Mayans).
-3. **Castle Transition:** If Militia deal good damage, wall up and advance to Castle Age for a strong economic or military follow-up.
-
-**Defense Tip:**
-The Militia walk toward the enemy while Feudal completes. Their job is to kill 1–3 villagers or force the opponent to pull workers off resources. If successful, the lead finances a strong follow-up; if not, you advanced at a normal time with no long-term cost.
+- This is a light, low-commitment aggression: the Militia leave during the Feudal transition rather than in Dark Age, so your eco barely pays for the harass while still forcing the opponent to react.
+- The scout and 2 Militia together are the threat — chase fleeing villagers, deny lumber camps, and pull workers off resources. Killing even 1-3 villagers banks a tempo lead.
+- Decide your follow-up by scouting: add Scout Cavalry from a Stable if they lack Spearmen, or open an Archery Range and mass Archers (strong on Britons and Vikings with their archer and economy bonuses).
+- Take Double-Bit Axe immediately and slow-wall your base; Horse Collar is optional depending on how much you commit to food.
+- Strong into greedy, slow-to-wall openings; weak into players who wall fast or produce their own Scouts to intercept the Militia.
+- If the harass stalls against a defended base, do not feed Militia in — you have aged up on time and can simply transition into a normal Feudal or Castle plan.

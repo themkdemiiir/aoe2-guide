@@ -1,83 +1,39 @@
 ---
 slug: 28pop-turks-fast-imp
-name: "28 Pop Turks Fast Imp"
+name: "28 Pop Turks Fast Imperial"
 difficulty: advanced
 targetAge: imperial
 durationMin: 20
 civsRecommended: [turks]
 steps:
-  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
-  - { villagers: 10, assign: "+4 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 18, assign: "+8 → food (boar / sheep / deer)", icons: ["food"] }
-  - { villagers: 22, assign: "+4 → berries, build mill", icons: ["food", "mill"] }
-  - { villagers: 27, assign: "+5 → gold, build Mining Camp", icons: ["gold", "mining-camp"] }
-  - { villagers: 28, assign: "+1 → wood", note: "Click Feudal at 28 pop (~12:30)", icons: ["wood"] }
-  - { villagers: 28, assign: "Feudal arrives — 1 builds Blacksmith, 2 build Market; +2 → gold", icons: ["blacksmith", "market", "gold"] }
-  - { villagers: 30, assign: "+2 vils; click Castle Age (~16:00)", icons: ["food", "gold"] }
-  - { villagers: 30, assign: "Castle Age — build 2 Siege Workshops + Monastery; +2 → gold; sell surplus stone (keep ~650 for a Castle)", icons: ["monastery", "gold"] }
-  - { villagers: 32, assign: "+2 vils; click Imperial Age (~20:00)", icons: ["food", "gold"] }
-  - { villagers: 32, assign: "Imperial Age — build a Castle, then produce Janissaries + Bombard Cannons; target 13 gold / 8 wood / 11 food", icons: ["castle", "janissary", "bombard-cannon"] }
+  - { villagers: 6,  assign: "6 → sheep under the TC", icons: ["food", "town-center"] }
+  - { villagers: 10, assign: "+4 → wood, build Lumber Camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 11, assign: "+1 → lure the first boar to the TC", icons: ["food"] }
+  - { villagers: 12, assign: "+1 → build House then Mill, gather berries", icons: ["mill", "food"] }
+  - { villagers: 14, assign: "+2 → berries", icons: ["food"] }
+  - { villagers: 15, assign: "+1 → lure the second boar (also push 3 deer to the TC)", icons: ["food"] }
+  - { villagers: 16, assign: "+1 → build House then add to berries (4 total)", icons: ["house", "food"] }
+  - { villagers: 19, assign: "+3 → food under the TC (eat through hunt and sheep)", icons: ["food"] }
+  - { villagers: 23, assign: "+4 → wood; seed Farms as the sheep run out", icons: ["wood", "farm"] }
+  - { villagers: 28, time: "12:35", assign: "+5 → gold, click Feudal Age", note: "Land Feudal ~12:35 with roughly 8 wood / 15 food / 5 gold", icons: ["gold", "feudal-age"] }
+  - { villagers: 28, assign: "Feudal: 1 → Blacksmith, 2 → Market; +2 → gold; research Double-Bit Axe", icons: ["blacksmith", "market", "double-bit-axe"] }
+  - { villagers: 30, time: "16:05", assign: "Sell 200 stone, click Castle Age", icons: ["castle-age", "gold"] }
+  - { villagers: 30, assign: "Castle: builders → Farms, research Gold Mining; build Siege Workshop + Monastery", icons: ["siege-workshop", "monastery", "gold-mining"] }
+  - { villagers: 32, time: "20:05", assign: "Add a second Mining Camp, click Imperial Age", icons: ["imperial-age", "mining-camp"] }
+  - { villagers: 32, assign: "Imperial: buy wood, build Barracks + 2 Archery Ranges; mass Hand Cannoneers + 1-2 Bombard Cannons", icons: ["archery-range", "hand-cannoneer", "bombard-cannon"] }
 source:
   author: "Hera"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
-# 28 Pop Turks Fast Imp
+# 28 Pop Turks Fast Imperial
 
-**Goal:** Reach Imperial Age at ~20 minutes with a gold-heavy economy, then dominate with Janissaries and Bombard Cannons.
-**Recommended civs:** Turks
-
-## Dark Age (0–28 Villagers)
-
-- 6 villagers on sheep
-- 4 villagers on wood
-- 8 villagers on food (boar, sheep, deer)
-- 4 villagers on berries
-- 5 villagers on gold
-- Remaining villager to wood
-
-Click Feudal Age with 28th villager (~12:30).
-
-## Feudal Preparation
-
-- 1 villager builds Blacksmith
-- 2 villagers build Market (return to wood when done)
-- +2 villagers to gold
-
-**Resource target:** 7 gold, 8 wood, 11 food
-
-## Feudal Age (28 Villagers)
-
-- Click Castle Age (~16:00) immediately after Blacksmith and Market complete
-- No military production in Feudal Age
-- Sell stone at Market if short on food or gold
-
-## Castle Age (30 Villagers)
-
-- Build 2 Siege Workshops
-- Build 1 Monastery
-- +2 villagers to gold
-- Sell stone to accelerate economy
-- Click Imperial Age (~20:00)
-
-## Imperial Age (32 Villagers)
-
-- Target resource distribution: 13 gold, 8 wood, 11 food
-- Produce Janissaries from Castles
-- Produce Bombard Cannons from Siege Workshops
-- Maintain pressure — do not lose your artillery
+Rush to Imperial Age around the 20-minute mark and flood the field with instant gunpowder.
 
 ## Strategy and Follow-Up (What's Next)
 
-- The Turks Fast Imp is built around gold economy, stone selling, and early artillery power. Turks get free Chemistry, making Bombard Cannons available immediately at Imperial Age.
-- **Weak against:** Feudal or Castle Age aggression that disrupts the passive economy; civs that can counter mass artillery (Siege Onagers, Trebuchets).
-- **Strong against:** Defensive boom strategies; opponents who cannot match the Imperial Age timing.
-
-**Options:**
-
-1. **Janissary + Bombard Cannon:** The core composition — Janissaries handle infantry and cavalry while Bombard Cannons destroy buildings and siege.
-2. **Heavy Camel Rider:** If gold permits, mix in Heavy Camel Riders for anti-cavalry coverage. (Turks have the standard camel line up to Heavy Camel Rider; the Imperial Camel is a Hindustanis-only unique unit.)
-3. **Hussar Raid:** Use Light Cavalry (or Hussar) to harass and delay opponent military while Bombard Cannons close out the game.
-
-**Defense Tip:**
-Increase pressure once in Imperial Age and never let your Bombard Cannons be destroyed — losing artillery is usually the end of the game plan. Use the Monastery to heal damaged Janissaries. The Turks' faster gold mining makes sustaining the gold economy much easier than for other civilizations.
+- This is a greedy, economy-first plan: no Feudal or Castle military, just a clean climb to Imperial powered by selling stone and a fast gold transition. It rewards a safe or walled base where the passive economy is hard to punish.
+- Turks get Chemistry for free, so Hand Cannoneers and Bombard Cannons arrive the instant you hit Imperial — there is no awkward gunpowder research delay. Pump Hand Cannoneers from the two Archery Ranges and add one or two Bombard Cannons for siege.
+- Keep buying wood and seeding Farms through the transition; your bottleneck is wood for production buildings, not food. The free, faster gold mining keeps a heavy gunpowder army affordable.
+- Use the Monastery to heal damaged Hand Cannoneers and pick up a relic or two for trickle gold. Protect the Bombard Cannons at all costs — losing them stalls your siege answer.
+- Weak to early Feudal or Castle aggression that cracks the unwalled economy, and to mass Mangonels or Siege Onagers that punish clumped Hand Cannoneers. Spread your gunpowder and add Light Cavalry to snipe enemy siege.

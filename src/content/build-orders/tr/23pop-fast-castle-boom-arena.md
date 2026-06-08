@@ -1,85 +1,39 @@
 ---
 slug: 23pop-fast-castle-boom-arena
-name: "23 Köylü Hızlı Kale Boom – Arena"
+name: "23 Köylü Hızlı Kale Boom — Arena"
 difficulty: intermediate
 targetAge: castle
 durationMin: 14
 civsRecommended: [burgundians, poles, bohemians, portuguese, bengalis]
 steps:
-  - { villagers: 6,  assign: "6 → koyunda TC altında", icons: ["food", "town-center"] }
-  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 6,  assign: "6 → Town Center'ın altındaki koyunlara", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → oduna, bir Lumber Camp kur", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
-  - { villagers: 11, assign: "+1 → House kur, ardından meyveye Mill kur", icons: ["house", "mill", "food"] }
-  - { villagers: 13, assign: "+2 → geyik veya 2. domuza", icons: ["food"] }
-  - { villagers: 17, assign: "+4 → meyveye", icons: ["food"] }
-  - { villagers: 21, assign: "+4 → tarlaya (domuzlar bitince)", icons: ["farm"] }
-  - { villagers: 23, assign: "+2 → altına; +4 → oduna", note: "23. köylüyle Feudal Age'e tıkla (~10:30)", icons: ["gold", "wood"] }
-  - { villagers: 23, assign: "Feudal gelir — 1 köylü Blacksmith, 2 köylü Market kurar; +2 köylü oduna", icons: ["blacksmith", "market", "wood"] }
-  - { villagers: 25, assign: "+2 köylü; Double-Bit Axe + Horse Collar araştır; Castle Age'e tıkla (~14:00)", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 25, assign: "Castle Age — yeni Lumber Camp kur; Bow Saw araştır; ek TC'leri kur", icons: ["lumber-camp", "town-center"] }
-  - { villagers: 30, assign: "+5 köylü; Wheelbarrow (~18 tarlada) araştır; 3+ TC sürekli köylü üretmeli", icons: ["town-center", "farm"] }
+  - { villagers: 11, assign: "+1 → bir House, ardından meyvelerin yanına Mill kur", icons: ["house", "mill", "food"] }
+  - { villagers: 11, assign: "Yiyeceği uzatmak için scout ile 3 geyiği de çek", note: "Yeni köylü yok — scout geyikleri çekerken ekonomi köylüleri çalışmaya devam etsin", icons: ["food"] }
+  - { villagers: 13, assign: "+2 → ava; yiyecek azalınca ikinci domuzu çek", icons: ["food"] }
+  - { villagers: 17, assign: "+4 → meyvelere", icons: ["food"] }
+  - { villagers: 17, assign: "Boşalan koyun köylüleriyle 4 tarla kur", note: "Yeniden görevlendirme, yeni pop değil", icons: ["farm"] }
+  - { villagers: 21, assign: "+4 → tek bir Lumber Camp'te oduna", icons: ["wood", "lumber-camp"] }
+  - { villagers: 23, assign: "+2 → altına, ardından Feudal Age'e tıkla (~10:30 / 7 odun, 14 yiyecek, 2 altın)", note: "Feudal'de mümkün olduğunca az zaman geçir", icons: ["gold"] }
+  - { villagers: 23, assign: "Feudal: 1 → Blacksmith, 2 → Market; yiyeceği biten köylüler straggler ağaçlara; +2 → oduna", icons: ["blacksmith", "market", "wood"] }
+  - { villagers: 25, assign: "Castle Age'e tıkla; Double-Bit Axe ve Horse Collar araştır", time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 27, assign: "Castle: 1. ek Town Center'ı odun çizgisine kur; Bow Saw araştır; yeni tarlalar ek", icons: ["town-center", "bow-saw", "farm"] }
+  - { villagers: 30, assign: "2. ek TC altın/taşa; ~18 tarlada Wheelbarrow, ardından Hand Cart; gerekirse Market'ten yiyecek/odun al", icons: ["town-center", "wheelbarrow"] }
 source:
   author: "Hera"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 23 Köylü Hızlı Kale Boom — Arena
 
-**Amaç:** En hızlı şekilde Castle Age'e geçip ek Town Center'lar kurarak güçlü bir ekonomi oluşturmak.
-**Önerilen medeniyetler:** Burgundians, Poles, Bohemians, Portuguese, Bengalis
+Kapalı bir haritada temiz bir 23 köylü ekonomisiyle Castle Age'e koş, ardından rakip seni cezalandıramadan ek Town Center'larla ekonomini patlat.
 
-## Karanlık Çağ (0–23 Köylü)
+## Strateji ve Devamı (Sırada Ne Var)
 
-- 6 köylü koyunda
-- 3 köylü odunda
-- 1 köylü ilk domuzu çeker
-- 1 köylü House yapar, ardından Mill'i meyvelerin yanına kurar
-- +2 köylü geyik veya ikinci domuza gider
-- +4 köylü meyvede
-- +4 köylü tarlaya (domuzlar bitince)
-- +4 köylü oduna (tek Lumber Camp)
-- +2 köylü altına
-
-23. köylüyle Feudal Age'e tıkla (~10:30).
-
-## Feudal Hazırlığı
-
-- 1 köylü Blacksmith kurar
-- 2 köylü Market kurar (genelde straggler ağaçlarından alınan köylüler)
-- +2 köylü oduna
-
-**Araştırmalar:**
-- Double-Bit Axe
-- Horse Collar
-
-## Feudal Çağ (23 Köylü)
-
-- Castle Age'e tıkla (~14:00) — Feudal'de mümkün olduğunca az zaman geç
-- Feudal Age'de asker üretme
-- Her kaynak Castle Age gereksinimi için kullanılsın
-
-## Kale Çağı (25 Köylü)
-
-- Yeni bir Lumber Camp kur
-- Bow Saw araştır
-- Town Center'ı odun çizgisine yakın kur
-- Town Center'ı taş veya ikinci altın yakınına kur
-- Gerekirse Market üzerinden yiyecek/odun takası yap
-- (İsteğe bağlı) Heavy Plow araştır
-- Yaklaşık 18 tarladan sonra Wheelbarrow araştır, ardından Hand Cart
-- 3+ Town Center sürekli köylü üretmeli
-
-## Strateji ve Devam (What's Next)
-
-- Fast Castle Boom en güçlü kapalı haritalarda çalışır (Arena, Hideout, Black Forest); Feudal baskısı ekonomiyi engelleyemez.
-- **Zayıf olduğu:** Duvarlanma tamamlanmadan gelen erken Feudal all-in baskıları.
-- **Güçlü olduğu:** Aynı anda Castle Age hedefleyen ama askeri baskı uygulamayan her rakip.
-
-**Seçenekler:**
-
-1. **Tam Boom:** 60+ köylüye kadar boom yap, ardından baskın bir ekonomiyle Imperial Age'e geç.
-2. **Askeri Pivot:** Boom tamamlandığında 1 Gold Unit + 1 Trash Unit + 1 Siege Unit seç; bu kompozisyona odaklan.
-3. **4. Town Center:** Dilediğin zaman Stone madeni açıp 4. TC ekle; daha fazla TC daha hızlı köylü üretimi demektir.
-
-**Savunma İpucu:**
-200 pop kapasitesine kadar köylü üretmeye devam et (200 köylü değil, 200 toplam pop). Gerektiğinde fazla köylüleri silebilir ya da kale yapımı için kullanabilirsin. Boom aşamasında kaynak fazlasını dengelemek için Market'i kullan.
+- Bu build tüm erken askeri ekonomiye feda eder, bu yüzden yalnızca duvarların ardında işe yarar — Arena, Hideout, Black Forest ya da tamamen kapatılmış bir Arabia pocket. Taahhüt etmeden önce duvarla.
+- Feudal'i mümkün olduğunca kısa tut: tek Feudal binaları, ihtiyacın olan yükseltmeleri ve ticareti açan bir Market ile Blacksmith'tir; sonra 14:00 civarında doğrudan Castle Age'e tıkla.
+- Castle gelir gelmez odun ekonomin işe yarar — taze bir Lumber Camp ve ek Town Center'larını kur, ardından booming köylülerin talebe yetişsin diye Bow Saw araştır.
+- Town Center'ları üst üste koy (önce 3, ardından bir taş madeninden 4.) ve köylü sayısını yukarı taşı; ~18 tarla civarında Wheelbarrow, kısa süre sonra da Hand Cart al ki yiyecek akmaya devam etsin.
+- Boom sırasında kaynak dalgalanmalarını dengelemek için Market'i kullan — bir stok şişince yiyecek veya odun al ki Town Center'ları asla boş bırakma.
+- Boom'u bıraktığında bir gold unit, bir trash unit ve bir siege unit'e karar ver; sonra rakibin eşleşemeyeceği bir ekonomiyle Imperial'a geç.

@@ -3,76 +3,37 @@ slug: 18pop-double-barracks-eagles
 name: "18 Pop Double Barracks Eagles"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 9
+durationMin: 8
 civsRecommended: [aztecs, incas, mayans]
 steps:
-  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
-  - { villagers: 8,  assign: "+2 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 9,  assign: "+1 → lure nearest boar", icons: ["food"] }
-  - { villagers: 10, assign: "+1 → hunt under TC", icons: ["food"] }
-  - { villagers: 11, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
-  - { villagers: 12, assign: "+1 → lure 2nd boar", icons: ["food"] }
-  - { villagers: 16, assign: "+4 → hunt (16 total)", note: "Aztecs/Incas: research Loom now; click Feudal at ~8:50", icons: ["food", "loom"] }
-  - { villagers: 16, assign: "Feudal arrives — 5 vils → wood (7 total lumberjacks)", icons: ["wood", "lumber-camp"] }
-  - { villagers: 18, assign: "+2 vils; 2 → gold, build Mining Camp; 2 vils build Barracks + House", icons: ["gold", "mining-camp", "barracks", "house"] }
-  - { villagers: 18, assign: "3 → berries; research Double-Bit Axe; build 2nd Barracks", icons: ["food", "double-bit-axe", "barracks"] }
-  - { villagers: 22, assign: "+4 new vils → gold; produce Eagle Scouts from both Barracks", icons: ["gold", "eagle-scout"] }
+  - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
+  - { villagers: 8,  assign: "+2 → wood, drop a Lumber Camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 9,  assign: "+1 → lure the first boar to the TC", icons: ["food"] }
+  - { villagers: 10, assign: "+1 → hunt the boar under the TC", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build a House, then a Mill on berries", icons: ["house", "mill", "food"] }
+  - { villagers: 12, assign: "+1 → lure the second boar", icons: ["food"] }
+  - { villagers: 12, assign: "Push the deer toward your TC with the scout", note: "Keeps all hunt close so food never idles", icons: ["food"] }
+  - { villagers: 18, time: "8:50", assign: "+6 → hunt (16 on food, 2 on wood), then click up to Feudal", note: "Aztecs / Incas: research Loom before aging up", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "Feudal lands — move 5 hunters to wood (7 on the Lumber Camp)", icons: ["wood", "lumber-camp"] }
+  - { villagers: 18, assign: "Pull 2 hunters → gold (Mining Camp); 2 hunters build Barracks + House", icons: ["gold", "mining-camp", "barracks", "house"] }
+  - { villagers: 18, assign: "Send 3 hunters → berries; research Double-Bit Axe (Horse Collar optional)", icons: ["food", "double-bit-axe"] }
+  - { villagers: 22, assign: "+4 new villagers → gold; build a 2nd Barracks", icons: ["gold", "barracks"] }
+  - { villagers: 22, assign: "Pump Eagle Scouts from both Barracks (2 Spearmen first vs Scouts)", note: "Add straggler-tree workers and Farms behind the army", icons: ["eagle-scout", "spearman"] }
+  - { villagers: 22, assign: "Drop a Blacksmith for Eagle armor and attack upgrades", icons: ["blacksmith"] }
 source:
   author: "Hera"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Double Barracks Eagles
 
-**Goal:** Reach Feudal Age quickly, then flood the map with Eagle Scouts from two Barracks.
-**Recommended civs:** Aztecs, Incas, Mayans
-
-## Dark Age (0–18 Villagers)
-
-- 6 villagers on sheep
-- 2 villagers on wood
-- 1 villager lures first boar
-- 1 villager hunts under Town Center
-- 1 villager builds a House then a Mill near berries
-- 1 villager lures second boar
-- (Optional) Drive deer to Town Center with scout
-- +6 villagers hunting (16 total)
-
-If playing Aztecs or Incas, research Loom now.
-Click Feudal Age (~8:50).
-
-## Feudal Preparation
-
-- Send 5 hunting villagers to wood (7 total lumberjacks)
-- Send 2 villagers to gold, build Mining Camp
-- Pull 2 villagers from hunting: one builds Barracks, one builds House
-- Send 3 villagers to berries (use Mill)
-
-**Research:**
-- Double-Bit Axe
-- (Optional) Horse Collar
-
-## Feudal Age (18 Villagers)
-
-- Produce 4 new villagers, send all to gold
-- Build second Barracks
-- Produce Eagle Scouts from both Barracks
-- If opponent is running Scout Rush, produce 2 Spearmen first, then Eagle Scouts
-- New villagers can work straggler trees or farms
-- Build Blacksmith and research attack/armor upgrades for Eagles if resources allow
+Land Feudal fast off heavy hunt, then drown the enemy in Eagle Scouts trained from two Barracks at once.
 
 ## Strategy and Follow-Up (What's Next)
 
-- This build is exclusive to Mesoamerican civs (Aztec, Inca, Maya).
-- The goal is to seize map control early and set up a fast Castle Age transition.
-- **Weak against:** Man-at-Arms and Archer openings.
-- **Strong against:** Scout, Spear, and Skirmisher openings.
-
-**Options:**
-
-1. **Feudal All-In:** Add 3rd and 4th Barracks for full Eagle + Spear pressure.
-2. **Counter Archer Opening:** Build 1 Archery Range, add Skirmishers and Fletching/Archer Armor.
-3. **Castle Transition:** Build more farms, pile gold, use Market as 2nd Feudal building, optionally sell stone for fast Castle Age.
-
-**Defense Tip:**
-This strategy doesn't sustain long in Feudal, so wall your base. Consider placing a Tower near your gold mine — losing gold is usually game-over.
+- This opener belongs to the Mesoamerican civs (Aztecs, Incas, Mayans) — they are the only ones with Eagle Scouts, and their eco bonuses let the heavy-hunt collection land Feudal cleanly around 8:50.
+- Two Barracks let you keep constant Eagle pressure: their speed and gold-conversion bonus make raiding villagers and snowballing map control easy, so commit to harassment rather than turtling.
+- Open 2 Spearmen if you scout a Scout Rush, then flip fully to Eagles once the cavalry threat is dealt with.
+- You are strong into Scout, Spear, and Skirmisher openings but soft against Man-at-Arms and Archers — if you see either, slot in a single Archery Range for Skirmishers and lean on walls.
+- Keep gold flowing: it fuels every Eagle, so wall the base and consider a Watch Tower over your mining camp; losing gold here usually ends the game.
+- To transition, add Farms behind the army, bank gold, and use a Market (sell stone if needed) to push a tech-and-eco lead into Castle Age.

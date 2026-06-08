@@ -6,70 +6,32 @@ targetAge: feudal
 durationMin: 9
 civsRecommended: [malians, lithuanians, japanese, britons, vikings]
 steps:
-  - { villagers: 6,  assign: "6 → koyunda", icons: ["food"] }
-  - { villagers: 9,  assign: "+3 → oduna, Lumber Camp kur", icons: ["wood", "lumber-camp"] }
-  - { villagers: 10, assign: "+1 → domuzu çek", icons: ["food"] }
-  - { villagers: 13, assign: "+3 → TC altında av", icons: ["food"] }
-  - { villagers: 16, assign: "+3; 1 köylü üssün ön tarafına Barracks kurar", icons: ["barracks"] }
-  - { villagers: 18, assign: "+2 → oduna", note: "Loom araştır; Feudal Age'e ~8:50'de tıkla", icons: ["wood", "loom"] }
-  - { villagers: 18, assign: "Feudal gelir — hemen 2 Militia üret; düşman üssüne gönder", icons: ["militia", "barracks"] }
-  - { villagers: 18, assign: "4 köylü → oduna (Lumber Camp genişlemesi)", icons: ["wood", "lumber-camp"] }
-  - { villagers: 19, assign: "+1 → meyveye, Mill kur; Double-Bit Axe araştır", icons: ["food", "mill", "double-bit-axe"] }
-  - { villagers: 21, assign: "+2 → rakibe göre takip askeri (scouts/archers/spears)", icons: ["barracks"] }
+  - { villagers: 6,  assign: "6 → TC altında koyunda", icons: ["food"] }
+  - { villagers: 9,  assign: "+3 → oduna, lumber camp kur", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → ev kur, sonra ava", note: "Scout ile geyikleri çek", icons: ["house", "food"] }
+  - { villagers: 15, assign: "+4 → ava; 2. domuzu çek", icons: ["food"] }
+  - { villagers: 16, assign: "+1 → üssün ön tarafına barracks kur, sonra ev", icons: ["barracks", "house"] }
+  - { villagers: 17, assign: "+1 → ava", icons: ["food"] }
+  - { villagers: 18, time: "8:50", assign: "+1 → oduna; Loom araştır, sonra Feudal Age'e tıkla", note: "Geçiş ~8:50 (4 odun / 13 yemek)", icons: ["wood", "loom"] }
+  - { villagers: 18, assign: "Feudal gelir — 2 Militia üret ve düşman üssüne gönder", icons: ["militia", "barracks"] }
+  - { villagers: 18, assign: "TC'den 4 köylü → ilk lumber camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 19, assign: "TC'den +1 → meyveye, mill kur; Double-Bit Axe araştır", note: "Horse Collar isteğe bağlı", icons: ["food", "mill", "double-bit-axe"] }
+  - { villagers: 21, assign: "+2 → rakibi gözleyerek takip askeri; yavaş duvar çek", icons: ["scout-cavalry", "barracks"] }
 source:
   author: "Hera"
-  url: "https://ageofnotes.com/build-orders/feudal-drush-18-vils/"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Köylü Feudal Drush
 
-**Amaç:** 18 köylüyle Feudal Age'e ulaşmak, hemen 2 Militia üretip düşmana baskı yapmak ve ardından uygun askeri takiple devam etmek.
-**Önerilen medeniyetler:** Malians, Lithuanians, Japanese, Britons, Vikings
+18 köylüde Feudal'a yüksel, 2 Militia ile scout'unu düşman üssüne sok ve ekonomin yavaş duvarın arkasında ilerlerken baskıyı sürdür.
 
-## Karanlık Çağ (0–18 Köylü)
+## Strateji ve Devamı (Sırada Ne Var)
 
-- 6 köylü koyunda
-- 3 köylü odunda
-- 1 köylü ilk domuzu çeker
-- 3 köylü Town Center altında av
-- 1 köylü üssün ön tarafına Barracks kurar
-- +2 köylü oduna
-- Loom araştır
-
-18. köylüyle Feudal Age'e tıkla (~8:50).
-
-## Feudal Hazırlığı
-
-- Feudal gelir gelmez hemen 2 Militia üret
-- Feudal tamamlanırken Militia'yı düşman üssüne gönder
-- 4 köylüyü oduna yönlendir (Lumber Camp genişlemesi)
-- Scout ile duvar açıklarını kapat ve geri çekilen köylüleri engelle
-
-**Araştırmalar:**
-- Double-Bit Axe
-- (İsteğe bağlı) Horse Collar
-
-## Feudal Çağ (18 Köylü)
-
-- +1 köylü meyveye, Mill kur
-- +2 köylü rakibin tepkisine göre askeri üretim binasına yönlendir
-- Rakip sakinse: Spearmen + Archers üret
-- Rakip Archers üretiyorsa: Scouts veya Skirmishers ile karşılık ver
-- Rakip kendi Drush'ını gönderiyorsa: Militia ile takas yap ve normal ilerle
-- İyi savunulmuş bir üsse fazla Militia gönderme
-
-## Strateji ve Devam (What's Next)
-
-- Feudal Drush, Militia'yı Dark Age'de değil Feudal geçişi sırasında gönderir; bu da tam Drush FC'den daha hafiftir ama yine de tehdit edicidir.
-- **Zayıf olduğu:** Hızlı duvar çeken ya da Militia'yı durdurmak için Scout üreten rakipler; Spearmen'lı savunulmuş üsler.
-- **Güçlü olduğu:** Açgözlü açılışlar; yavaş duvar çeken rakipler; erken askeri olmayan medeniyetler.
-
-**Seçenekler:**
-
-1. **Scouts Takibi:** Militia baskısının ardından Stable kur ve Scout Cavalry ekle; rakibin Spearmen'ı yoksa güçlüdür.
-2. **Archers Takibi:** Archery Range kur ve Archers'a geç; Archer bonusu olan medeniyetlerle (Britons, Mayans) iyi uyum sağlar.
-3. **Castle Geçişi:** Militia iyi hasar verdiyse duvarları kapat ve Castle Age'e geç; güçlü ekonomik veya askeri takip için hazırlan.
-
-**Savunma İpucu:**
-Militia, Feudal tamamlanırken düşmana yürür. Görevleri 1–3 köylü öldürmek ya da rakibi kaynaktan işçi çekmeye zorlamaktır. Başarılıysa sağlanan avantaj güçlü bir takibi finanse eder; değilse normal sürede ilerlemişsindir ve uzun vadeli bir maliyet yoktur.
+- Bu hafif ve düşük riskli bir baskıdır: Militia, Dark Age'de değil Feudal geçişi sırasında yola çıkar; böylece ekonomin harass için neredeyse hiçbir bedel ödemezken rakibi yine de tepki vermeye zorlarsın.
+- Asıl tehdit scout ile 2 Militia birlikte: kaçan köylüleri kovala, lumber camp'leri engelle ve işçileri kaynaktan çekmeye zorla. 1-3 köylü öldürmek bile sana tempo avantajı kazandırır.
+- Takibini rakibi gözleyerek seç: Spearmen'ları yoksa Stable'dan Scout Cavalry ekle, ya da Archery Range açıp Archers yığ (archer ve ekonomi bonuslarıyla Britons ve Vikings'te güçlüdür).
+- Hemen Double-Bit Axe al ve üssünü yavaş duvarla; yemeğe ne kadar yüklendiğine göre Horse Collar isteğe bağlıdır.
+- Açgözlü, geç duvar çeken açılışlara karşı güçlü; hızlı duvar çeken ya da Militia'yı durdurmak için kendi Scout'larını üreten rakiplere karşı zayıftır.
+- Savunulan bir üsse karşı harass tıkanırsa Militia'yı içeri besleme — zamanında yükselmişsindir ve sorunsuzca normal bir Feudal veya Castle planına geçebilirsin.

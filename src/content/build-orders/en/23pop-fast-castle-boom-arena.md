@@ -6,80 +6,34 @@ targetAge: castle
 durationMin: 14
 civsRecommended: [burgundians, poles, bohemians, portuguese, bengalis]
 steps:
-  - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
-  - { villagers: 9,  assign: "+3 → wood, build lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 10, assign: "+1 → lure nearest boar", icons: ["food"] }
-  - { villagers: 11, assign: "+1 → build house then mill on berries", icons: ["house", "mill", "food"] }
-  - { villagers: 13, assign: "+2 → deer or 2nd boar", icons: ["food"] }
+  - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
+  - { villagers: 9,  assign: "+3 → wood, drop a Lumber Camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 10, assign: "+1 → lure the first boar", icons: ["food"] }
+  - { villagers: 11, assign: "+1 → build a House, then a Mill on the berries", icons: ["house", "mill", "food"] }
+  - { villagers: 11, assign: "Lure all 3 deer with the scout to stretch your food", note: "No new villager — keep eco vils busy while the scout pulls deer", icons: ["food"] }
+  - { villagers: 13, assign: "+2 → hunt; lure the second boar when food is low", icons: ["food"] }
   - { villagers: 17, assign: "+4 → berries", icons: ["food"] }
-  - { villagers: 21, assign: "+4 → farms (when boars run out)", icons: ["farm"] }
-  - { villagers: 23, assign: "+2 → gold; +4 → wood", note: "Click Feudal at 23 pop (~10:30)", icons: ["gold", "wood"] }
-  - { villagers: 23, assign: "Feudal arrives — 1 builds Blacksmith, 2 build Market; +2 → wood", icons: ["blacksmith", "market", "wood"] }
-  - { villagers: 25, assign: "+2 vils; research Double-Bit Axe + Horse Collar; click Castle Age (~14:00)", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 25, assign: "Castle Age — build new Lumber Camp; research Bow Saw; place additional TCs", icons: ["lumber-camp", "town-center"] }
-  - { villagers: 30, assign: "+5 vils; research Wheelbarrow (~18 farms); 3+ TCs produce villagers continuously", icons: ["town-center", "farm"] }
+  - { villagers: 17, assign: "Seed 4 farms with the freed-up sheep villagers", note: "Reassignment, not new pop", icons: ["farm"] }
+  - { villagers: 21, assign: "+4 → wood on a single Lumber Camp", icons: ["wood", "lumber-camp"] }
+  - { villagers: 23, assign: "+2 → gold, then click Feudal Age (~10:30 / 7 wood, 14 food, 2 gold)", note: "Spend as little time in Feudal as possible", icons: ["gold"] }
+  - { villagers: 23, assign: "Feudal: 1 → Blacksmith, 2 → Market; food-out vils to straggler trees; +2 → wood", icons: ["blacksmith", "market", "wood"] }
+  - { villagers: 25, assign: "Click Castle Age; research Double-Bit Axe and Horse Collar", time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 27, assign: "Castle: drop your 1st extra Town Center on the wood line; research Bow Saw; seed more farms", icons: ["town-center", "bow-saw", "farm"] }
+  - { villagers: 30, assign: "2nd extra TC on gold/stone; Wheelbarrow at ~18 farms, then Hand Cart; buy food/wood at Market as needed", icons: ["town-center", "wheelbarrow"] }
 source:
   author: "Hera"
-
+  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 23 Pop Fast Castle Boom — Arena
 
-**Goal:** Reach Castle Age as quickly as possible with 23 population, then immediately build additional Town Centers to create a dominant economy.
-**Recommended civs:** Burgundians, Poles, Bohemians, Portuguese, Bengalis
-
-## Dark Age (0–23 Villagers)
-
-- 6 villagers on sheep
-- 3 villagers on wood
-- 1 villager lures first boar
-- 1 villager builds a House then a Mill near berries
-- +2 villagers to deer or second boar
-- +4 villagers to berries
-- +4 villagers to farms (when boars are gone)
-- +4 villagers to wood (single Lumber Camp)
-- +2 villagers to gold
-
-Click Feudal Age with 23rd villager (~10:30).
-
-## Feudal Preparation
-
-- 1 villager builds Blacksmith
-- 2 villagers build Market (usually pulled from straggler trees)
-- +2 villagers to wood
-
-**Research:**
-- Double-Bit Axe
-- Horse Collar
-
-## Feudal Age (23 Villagers)
-
-- Click Castle Age (~14:00) — spend as little time in Feudal as possible
-- No military production in Feudal Age
-- Every resource goes toward the Castle Age requirement
-
-## Castle Age (25 Villagers)
-
-- Build a new Lumber Camp near additional wood
-- Research Bow Saw
-- Place Town Center near wood line
-- Place Town Center near stone or second gold
-- Trade food/wood at the Market if needed
-- (Optional) Research Heavy Plow
-- Research Wheelbarrow after ~18 farms, then Hand Cart
-- 3+ Town Centers produce villagers continuously
+Race to Castle Age off a clean 23-pop economy on a closed map, then snowball with extra Town Centers before the opponent can punish you.
 
 ## Strategy and Follow-Up (What's Next)
 
-- The Fast Castle Boom is strongest on closed maps (Arena, Hideout, Black Forest) where no Feudal pressure can interrupt the economy.
-- **Weak against:** Early Feudal all-in that arrives before walling is complete; Scout Rush that forces premature military spending.
-- **Strong against:** Any opponent also going for Castle Age; slow Imperial Age strategies that cannot match the villager count.
-
-**Options:**
-
-1. **Full Boom:** Continue booming to 60+ villagers, then transition to Imperial Age with dominant economy.
-2. **Military Pivot:** When boom is complete, choose 1 Gold Unit + 1 Trash Unit + 1 Siege Unit; commit to this composition.
-3. **4th Town Center:** Open a stone mine and add a 4th Town Center whenever desired; more TCs means faster villager production.
-
-**Defense Tip:**
-Keep producing villagers up to the population cap (200 total pop, not 200 villagers). Delete excess villagers or use them for castle construction when needed. Use Market to balance resource surpluses during the boom phase.
+- This build trades all early military for economy, so it only works behind walls — Arena, Hideout, Black Forest, or a fully sealed Arabia pocket. Wall before you commit.
+- Keep Feudal as short as possible: the only Feudal buildings are a Market and Blacksmith to unlock the upgrades and trading you need, then click straight to Castle around 14:00.
+- The moment Castle lands, your wood economy pays off — drop a fresh Lumber Camp and your extra Town Centers, then research Bow Saw so the booming villagers keep up with demand.
+- Stack Town Centers (3, then a 4th off a stone mine) and ride the villager count up; pick up Wheelbarrow near 18 farms and Hand Cart shortly after to keep the food flowing.
+- Use the Market to flatten resource spikes during the boom — buy food or wood when one stockpile balloons so you never idle Town Centers.
+- When you stop booming, commit to one gold unit, one trash unit, and one siege unit, then push into Imperial with an economy the opponent cannot match.
