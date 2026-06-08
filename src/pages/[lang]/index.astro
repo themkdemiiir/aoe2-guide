@@ -1,62 +1,338 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Card from "@/components/ui/Card.astro";
+import Badge from "@/components/ui/Badge.astro";
+import CivCard from "@/components/content/CivCard.astro";
+import Icon from "@/components/ui/Icon.astro";
 import { Icon as UIIcon } from "astro-icon/components";
+import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
+import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
 
-const sections = [
-  { key: "nav.civs", desc: "home.civs.desc", href: "/civs", icon: "lucide:castle" },
-  { key: "nav.builds", desc: "home.builds.desc", href: "/builds", icon: "lucide:list-ordered" },
-  { key: "nav.units", desc: "home.units.desc", href: "/units", icon: "lucide:swords" },
-  { key: "nav.maps", desc: "home.maps.desc", href: "/maps", icon: "lucide:map" },
-  { key: "nav.matchups", desc: "home.matchups.desc", href: "/matchups", icon: "lucide:scale" },
-  { key: "nav.learn", desc: "home.learn.desc", href: "/learn", icon: "lucide:graduation-cap" },
-  { key: "nav.glossary", desc: "home.glossary.desc", href: "/glossary", icon: "lucide:book-open" },
+// --- Live content (drives the action-tile counts, the top-civ strip, and the
+// featured build/map rows). getLocalizedEntries falls back to EN for missing TR. ---
+const civs = await getLocalizedEntries("civilizations", lang);
+const builds = await getLocalizedEntries("build-orders", lang);
+const maps = await getLocalizedEntries("maps", lang);
+
+// --- Top civilizations: rank by live meta win rate, then join back to the
+// localized civ entry for name/tagline/bonuses. civ-data carries the meta but
+// NOT the localized text; the `civilizations` collection carries the text but
+// no meta. Join the two, filter to slugs present in BOTH collections so CivCard
+// never receives an undefined name, and carry the FULL meta through so the
+// caption can show win/play rate (answers "why these six?"). ---
+const civBySlug = new Map(civs.map((c) => [canonicalSlug(c.id), c]));
+const civData = await getCollection("civ-data");
+const topCivs = [...civData]
+  .filter((cd) => civBySlug.has(cd.data.slug))
+  .sort((a, b) => (b.data.meta?.winRate ?? 0) - (a.data.meta?.winRate ?? 0))
+  .slice(0, 6)
+  .map((cd) => ({ entry: civBySlug.get(cd.data.slug)!, meta: cd.data.meta }));
+
+// --- Featured build orders: easiest content leads (beginner-first), capped at 3. ---
+const featuredBuilds = [...builds]
+  .sort((a, b) => {
+    const rank = (d: string) => (d === "beginner" ? 0 : d === "intermediate" ? 1 : 2);
+    return rank(a.data.difficulty) - rank(b.data.difficulty);
+  })
+  .slice(0, 3);
+
+// --- Featured maps: a quick taste of the map library, capped at 4. ---
+const featuredMaps = maps.slice(0, 4);
+
+function difficultyVariant(difficulty: string) {
+  if (difficulty === "beginner") return "success";
+  if (difficulty === "advanced") return "destructive";
+  return "default";
+}
+
+// --- Primary actions: the four highest-intent journeys, verb-phrased so
+// comprehension is instant, each carrying a live count. This is the page's
+// "easy to understand" core and sits directly under the hero so the page
+// answers "what do you want to do?" before any meta jargon. Matchups has no
+// collection, so its count is null (shows a sub-label instead). ---
+const actions = [
+  {
+    href: "/civs",
+    icon: "lucide:castle",
+    title: "home.action.civs.title",
+    desc: "home.civs.desc",
+    count: civs.length,
+    countLabel: "home.count.civs",
+  },
+  {
+    href: "/builds",
+    icon: "lucide:list-ordered",
+    title: "home.action.builds.title",
+    desc: "home.builds.desc",
+    count: builds.length,
+    countLabel: "home.count.builds",
+  },
+  {
+    href: "/maps",
+    icon: "lucide:map",
+    title: "home.action.maps.title",
+    desc: "home.maps.desc",
+    count: maps.length,
+    countLabel: "home.count.maps",
+  },
+  {
+    href: "/matchups",
+    icon: "lucide:scale",
+    title: "home.action.matchups.title",
+    desc: "home.matchups.desc",
+    count: null,
+    countLabel: "home.action.matchups.sub",
+  },
+] as const;
+
+// --- Remaining destinations: compact link row keeps every section one click
+// away (complete internal linking) without a redundant full nav grid. ---
+const more = [
+  { href: "/units", key: "nav.units", icon: "lucide:swords" },
+  { href: "/learn", key: "nav.learn", icon: "lucide:graduation-cap" },
+  { href: "/glossary", key: "nav.glossary", icon: "lucide:book-open" },
 ] as const;
 ---
 <BaseLayout title="AOE2 Guide" canonicalPath="/">
-  <section class="mx-auto max-w-5xl px-4 pt-16 pb-10 text-center">
-    <img src="/favicon.svg" alt="" width="72" height="72" class="mx-auto mb-6" />
-    <h1 class="font-display text-5xl text-ink sm:text-6xl">AOE2 Guide</h1>
-    <p class="mx-auto mt-4 max-w-2xl text-lg text-stone-700">{t(lang, "home.tagline")}</p>
-    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-      <a
-        href={localizedPath("/civs", lang)}
-        class="rounded border border-gold-500 bg-gold-500/15 px-5 py-2.5 font-medium text-ink transition-colors hover:bg-gold-500/30"
-      >
-        {t(lang, "home.ctaPrimary")}
-      </a>
-      <a
-        href={localizedPath("/builds", lang)}
-        class="rounded border border-stone-700/40 px-5 py-2.5 font-medium text-ink transition-colors hover:border-gold-500 hover:text-gold-500"
-      >
-        {t(lang, "home.ctaSecondary")}
-      </a>
+  {/* === Cinematic hero: full-bleed dark band ===
+       On bg-stone-bg use ONLY gold/ember text tokens — they stay light in both
+       themes; text-ink / text-stone-700 swap with the theme and would vanish on
+       a permanently-dark band. The border-y is load-bearing: --color-stone-bg is
+       byte-identical to dark-mode --color-parchment, so in dark mode the band
+       blends into the page background — the gold rules keep its extent visible. */}
+  <section class="border-y border-gold-500/40 bg-stone-bg">
+    <div class="mx-auto max-w-5xl px-4 py-20 text-center sm:py-24">
+      <img src="/favicon.svg" alt="" width="88" height="88" class="mx-auto drop-shadow-lg" />
+      <div class="mx-auto my-6 flex max-w-xs items-center gap-3" aria-hidden="true">
+        <span class="h-px flex-1 bg-gradient-to-r from-transparent to-gold-500/60"></span>
+        <UIIcon name="lucide:diamond" class="h-3 w-3 text-gold-500" />
+        <span class="h-px flex-1 bg-gradient-to-l from-transparent to-gold-500/60"></span>
+      </div>
+      <p class="font-display text-sm uppercase tracking-[0.35em] text-gold-400">
+        {t(lang, "home.eyebrow")}
+      </p>
+      <h1 class="mt-3 font-display text-5xl text-gold-500 sm:text-6xl">AOE2 Guide</h1>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-ember/90">{t(lang, "home.tagline")}</p>
+      <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href={localizedPath("/civs", lang)}
+          class="inline-flex items-center gap-2 rounded border border-gold-500 bg-gold-500/20 px-6 py-3 font-medium text-gold-400 transition-colors hover:bg-gold-500/35"
+        >
+          <UIIcon name="lucide:castle" class="h-5 w-5" />
+          {t(lang, "home.ctaPrimary")}
+        </a>
+        <a
+          href={localizedPath("/builds", lang)}
+          class="inline-flex items-center gap-2 rounded border border-gold-500/40 px-6 py-3 font-medium text-ember transition-colors hover:border-gold-500 hover:text-gold-400"
+        >
+          <UIIcon name="lucide:list-ordered" class="h-5 w-5" />
+          {t(lang, "home.ctaSecondary")}
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-5xl px-4 pb-20">
-    <h2 class="mb-5 font-display text-xl text-ink">{t(lang, "home.explore")}</h2>
-    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {sections.map((s) => (
-        <li>
-          <Card href={localizedPath(s.href, lang)} interactive class="group">
-            <div class="flex items-start gap-3">
-              <span class="rounded bg-gold-500/15 p-2 text-gold-500">
-                <UIIcon name={s.icon} class="h-6 w-6" />
+  {/* === Primary actions: verb-phrased entry points with live counts ===
+       Directly under the hero — clarity before the meta-driven Top Civs strip. */}
+  <section class="mx-auto max-w-5xl px-4 pt-14">
+    <h2 class="mb-5 font-display text-2xl text-ink">{t(lang, "home.heading")}</h2>
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {actions.map((a) => (
+        <li class="h-full">
+          <a
+            href={localizedPath(a.href, lang)}
+            class="group flex h-full items-start gap-4 rounded border border-stone-700/40 bg-parchment p-5 transition-colors hover:border-gold-500"
+          >
+            <span class="shrink-0 rounded bg-gold-500/15 p-3 text-gold-500">
+              <UIIcon name={a.icon} class="h-7 w-7" />
+            </span>
+            <span class="flex-1">
+              <span class="flex items-center justify-between gap-2">
+                <span class="font-display text-xl text-ink group-hover:text-gold-500">
+                  {t(lang, a.title)}
+                </span>
+                <UIIcon
+                  name="lucide:arrow-right"
+                  class="h-5 w-5 shrink-0 text-stone-700 transition-transform group-hover:translate-x-0.5 group-hover:text-gold-500"
+                />
               </span>
-              <div>
-                <h3 class="font-display text-lg text-ink group-hover:text-gold-500">{t(lang, s.key)}</h3>
-                <p class="mt-1 text-sm text-stone-700">{t(lang, s.desc)}</p>
+              <span class="mt-1 block text-sm text-stone-700">{t(lang, a.desc)}</span>
+              <span class="mt-3 block text-sm font-medium text-stone-700">
+                {a.count !== null ? (
+                  <>
+                    <span class="font-mono text-gold-500">{a.count}</span> {t(lang, a.countLabel)}
+                  </>
+                ) : (
+                  t(lang, a.countLabel)
+                )}
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* === Top civilizations: flagship data section. CivCard shows tier/specialty;
+       the caption adds win/play rate so the ranking is self-explaining. === */}
+  {topCivs.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 pt-14">
+      <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
+        <div>
+          <h2 class="font-display text-2xl text-ink">{t(lang, "home.topCivs.title")}</h2>
+          <p class="mt-1 text-sm text-stone-700">{t(lang, "home.topCivs.subtitle")}</p>
+        </div>
+        <a
+          href={localizedPath("/civs", lang)}
+          class="inline-flex items-center gap-1 text-sm font-medium text-gold-500 hover:underline"
+        >
+          {t(lang, "home.viewAll")}
+          <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+      <ul class="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {topCivs.map(({ entry, meta }) => (
+          <li class="flex h-full flex-col gap-2">
+            <CivCard
+              slug={canonicalSlug(entry.id)}
+              name={entry.data.name}
+              tagline={entry.data.tagline}
+              bonuses={entry.data.bonuses}
+              locale={lang}
+            />
+            {meta?.winRate != null && (
+              <p class="px-1 text-xs text-stone-700">
+                <span class="font-mono text-gold-500">{meta.winRate.toFixed(1)}%</span>{" "}
+                {t(lang, "matchups.winRate").toLowerCase()}
+                {meta.playRate != null && (
+                  <>
+                    {" · "}
+                    <span class="font-mono">{meta.playRate.toFixed(1)}%</span>{" "}
+                    {t(lang, "matchups.playRate").toLowerCase()}
+                  </>
+                )}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {/* === Featured build orders: easiest content leads. All badge labels go
+       through t() (no raw English enums leaking onto /tr). === */}
+  {featuredBuilds.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 pt-14">
+      <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
+        <div>
+          <h2 class="font-display text-2xl text-ink">{t(lang, "home.featuredBuilds.title")}</h2>
+          <p class="mt-1 text-sm text-stone-700">{t(lang, "home.featuredBuilds.subtitle")}</p>
+        </div>
+        <a
+          href={localizedPath("/builds", lang)}
+          class="inline-flex items-center gap-1 text-sm font-medium text-gold-500 hover:underline"
+        >
+          {t(lang, "home.viewAll")}
+          <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+      <ul class="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredBuilds.map((b) => (
+          <li class="h-full">
+            <a
+              href={localizedPath(`/builds/${canonicalSlug(b.id)}`, lang)}
+              class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500"
+            >
+              <div class="flex flex-wrap gap-2">
+                <Badge variant={difficultyVariant(b.data.difficulty)}>
+                  {t(lang, `difficulty.${b.data.difficulty}`)}
+                </Badge>
+                <Badge variant="outline">{t(lang, `age.${b.data.targetAge}`)}</Badge>
+                <Badge variant="secondary">
+                  ~{b.data.durationMin} {t(lang, "home.minutes")}
+                </Badge>
               </div>
-            </div>
-          </Card>
+              <h3 class="mt-3 font-display text-xl text-ink">{b.data.name}</h3>
+              {b.data.civsRecommended.length > 0 && (
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  {b.data.civsRecommended.slice(0, 5).map((civSlug) => (
+                    <span class="inline-flex items-center gap-1 rounded border border-stone-700/30 bg-stone-700/5 px-1.5 py-1 text-xs text-stone-700">
+                      <Icon slug={civSlug} kind="civ" size={20} />
+                      {civSlug.replace(/-/g, " ")}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <p class="mt-auto pt-4 font-mono text-xs text-stone-700">
+                {b.data.steps.length} {t(lang, "home.steps")} · ~{b.data.steps.at(-1)?.villagers ?? "?"} {t(lang, "home.pop")}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {/* === Featured maps: type label routed through t() (all 5 enum members). === */}
+  {featuredMaps.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 pt-14">
+      <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
+        <div>
+          <h2 class="font-display text-2xl text-ink">{t(lang, "home.maps.title")}</h2>
+          <p class="mt-1 text-sm text-stone-700">{t(lang, "home.maps.subtitle")}</p>
+        </div>
+        <a
+          href={localizedPath("/maps", lang)}
+          class="inline-flex items-center gap-1 text-sm font-medium text-gold-500 hover:underline"
+        >
+          {t(lang, "home.viewAll")}
+          <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+      <ul class="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {featuredMaps.map((m) => (
+          <li class="h-full">
+            <Card href={localizedPath(`/maps/${canonicalSlug(m.id)}`, lang)} interactive class="group">
+              <div class="flex items-center gap-3">
+                <span class="rounded bg-gold-500/15 p-2 text-gold-500">
+                  <UIIcon name="lucide:map" class="h-6 w-6" />
+                </span>
+                <div>
+                  <h3 class="font-display text-lg text-ink group-hover:text-gold-500">{m.data.name}</h3>
+                  <p class="mt-0.5 text-sm text-stone-700">{t(lang, `mapType.${m.data.type}`)}</p>
+                </div>
+              </div>
+            </Card>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {/* === More to explore: keeps every remaining section one click away. === */}
+  <section class="mx-auto max-w-5xl px-4 pt-14 pb-20">
+    <h2 class="mb-4 flex items-center gap-3 font-display text-sm uppercase tracking-wide text-stone-700">
+      <span class="h-px flex-1 bg-stone-700/30" aria-hidden="true"></span>
+      {t(lang, "home.more")}
+      <span class="h-px flex-1 bg-stone-700/30" aria-hidden="true"></span>
+    </h2>
+    <ul class="flex flex-wrap justify-center gap-3">
+      {more.map((m) => (
+        <li>
+          <a
+            href={localizedPath(m.href, lang)}
+            class="group inline-flex items-center gap-2 rounded border border-stone-700/40 bg-parchment px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-gold-500 hover:text-gold-500"
+          >
+            <UIIcon name={m.icon} class="h-4 w-4 text-stone-700 group-hover:text-gold-500" />
+            {t(lang, m.key)}
+          </a>
         </li>
       ))}
     </ul>
