@@ -1,13 +1,13 @@
 ---
 slug: poles
 name: "Poles"
-tagline: "Poles — a Cavalry civilization from Eastern European."
+tagline: "Poles — a Cavalry civilization from Eastern Europe."
 bonuses:
-  - "Villagers regenerate +5 HP per minute"
-  - "Farms generate +0.2 stone per second (passive stone income)"
-  - "Folwark (unique building) replaces Mill; Villagers around Folwark gather grain to build it"
-  - "Scout and Light Cavalry upgrades free"
-teamBonus: "Cavalry has +3 attack vs. buildings"
+  - "Folwark replaces Mill"
+  - "Villagers regenerate 10/15/20 HP in Feudal/Castle/Imperial Age"
+  - "Stone Miners generate gold in addition to stone"
+  - "Bloodlines and Scout Cavalry-line upgrades cost -50% food"
+teamBonus: "Scout Cavalry-line +1 attack vs. Ranged Soldiers"
 uniqueTechs:
   castle:
     name: "Szlachta Privileges"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Light Cavalry and Winged Hussar deal trample damage"
 ---
 
-Poles are a Eastern European civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Villagers regenerate +5 HP per minute
-- Farms generate +0.2 stone per second (passive stone income)
-- Folwark (unique building) replaces Mill; Villagers around Folwark gather grain to build it
-- Scout and Light Cavalry upgrades free
-
-## Team Bonus
-
-Cavalry has +3 attack vs. buildings
-
-## Unique Units
-
-- **Obuch** — Unique unit of the Poles
-
-## Unique Techs
-
-- **Szlachta Privileges** (Castle Age) — Knight line -60% gold cost
-- **Lechitic Legacy** (Imperial Age) — Light Cavalry and Winged Hussar deal trample damage
+Poles are a Cavalry civilization from Eastern Europe.
 
 ## How to Play Poles
 

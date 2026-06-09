@@ -1,12 +1,13 @@
 ---
 slug: persians
 name: "Persians"
-tagline: "Persians — a Cavalry civilization from Middle Eastern."
+tagline: "Persians — a Cavalry civilization from the Middle East."
 bonuses:
-  - "Start game with +50 wood and food"
-  - "Town Center and Docks have 2x HP"
-  - "Town Centers and Docks operate +10% faster in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age"
-teamBonus: "Knights have +2 attack versus Archers"
+  - "Start with +50 wood and +50 food"
+  - "Town Centers and Docks +100% HP and work +5/10/15/20% faster in Dark/Feudal/Castle/Imperial Age"
+  - "Parthian Tactics available in Castle Age"
+  - "Can build Caravanserai in Imperial Age"
+teamBonus: "Knight-line +2 attack vs. Ranged Soldiers"
 uniqueTechs:
   castle:
     name: "Mahouts"
@@ -16,26 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Persians are a Middle Eastern civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Start game with +50 wood and food
-- Town Center and Docks have 2x HP
-- Town Centers and Docks operate +10% faster in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age
-
-## Team Bonus
-
-Knights have +2 attack versus Archers
-
-## Unique Units
-
-- **War Elephant** — Unique unit of the Persians
-
-## Unique Techs
-
-- **Mahouts** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Persians are a Cavalry civilization from the Middle East.
 
 ## How to Play Persians
 

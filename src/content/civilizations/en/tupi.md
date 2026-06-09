@@ -1,13 +1,13 @@
 ---
 slug: tupi
 name: "Tupi"
-tagline: "Tupi — a Archer and Raiding civilization from South American."
+tagline: "Tupi — an Archer and Raiding civilization from South America."
 bonuses:
-  - "Archers +1 attack vs. cavalry"
-  - "Infantry move faster through forests"
-  - "Farms generate +10% food"
-  - "Villagers +5 carry capacity"
-teamBonus: "Archers +1 attack"
+  - "Start with +25 of each resource"
+  - "Villagers can garrison in Settlements"
+  - "Fallen units return 15% of their cost"
+  - "Archery Range and Barracks upgrades cost -50% food"
+teamBonus: "Towers and Castles provide +10 population space"
 uniqueTechs:
   castle:
     name: "Ambush"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Infantry +2 attack in forests"
 ---
 
-Tupi are a South American civilization specializing in Archer and Raiding.
-
-## Civ Bonuses
-
-- Archers +1 attack vs. cavalry
-- Infantry move faster through forests
-- Farms generate +10% food
-- Villagers +5 carry capacity
-
-## Team Bonus
-
-Archers +1 attack
-
-## Unique Units
-
-- **Tupi Warrior** — Unique unit of the Tupi
-
-## Unique Techs
-
-- **Ambush** (Castle Age) — Archers +1 range in forests
-- **Tupi Survival** (Imperial Age) — Infantry +2 attack in forests
+Tupi are an Archer and Raiding civilization from South America.
 
 ## How to Play Tupi
 

@@ -1,13 +1,13 @@
 ---
 slug: romans
 name: "Romans"
-tagline: "Romans — a Infantry civilization from Ancient Mediterranean."
+tagline: "Romans — an Infantry civilization from the Ancient Mediterranean."
 bonuses:
-  - "Barracks and Stable units cost -15% wood"
-  - "Ballista Towers available"
-  - "Infantry have +15% attack"
-  - "Farms don't require Mill"
-teamBonus: "Barracks train 20% faster"
+  - "Villagers gather, build, and repair +5% faster"
+  - "Infantry armor upgrade effects are doubled"
+  - "Scorpions cost -50% gold"
+  - "Galley-line and Dromons +1 melee/+1 pierce armor"
+teamBonus: "Scorpions minimum range reduced"
 uniqueTechs:
   castle:
     name: "Ballistas"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Non-militia infantry +8 HP"
 ---
 
-Romans are a Ancient Mediterranean civilization specializing in Infantry.
-
-## Civ Bonuses
-
-- Barracks and Stable units cost -15% wood
-- Ballista Towers available
-- Infantry have +15% attack
-- Farms don't require Mill
-
-## Team Bonus
-
-Barracks train 20% faster
-
-## Unique Units
-
-- **Legionary** — Unique unit of the Romans
-
-## Unique Techs
-
-- **Ballistas** (Castle Age) — Ballista Towers deal extra damage
-- **Comitatenses** (Imperial Age) — Non-militia infantry +8 HP
+Romans are an Infantry civilization from the Ancient Mediterranean.
 
 ## How to Play Romans
 

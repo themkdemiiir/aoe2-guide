@@ -1,13 +1,13 @@
 ---
 slug: koreans
 name: "Koreans"
-tagline: "Koreans — a Tower and naval civilization from East Asian."
+tagline: "Koreans — a Tower and Naval civilization from East Asia."
 bonuses:
-  - "Villagers have +3 line of sight"
-  - "Stone miners work 20% faster"
-  - "Guard Tower and Keep upgrades are free"
-  - "Towers (except bombard towers) have +1 range in Castle Age/ +2 in Imperial Age"
-teamBonus: "Mangonel line has +1 range"
+  - "Stone miners work +20% faster"
+  - "Ranged Soldiers and Infantry cost -50% wood"
+  - "Archer armor and tower upgrades free (Bombard Tower requires Chemistry)"
+  - "Warships cost -20% wood"
+teamBonus: "Villagers +3 line of sight"
 uniqueTechs:
   castle:
     name: "Shinkichon"
@@ -17,28 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Koreans are a East Asian civilization specializing in Tower and naval.
-
-## Civ Bonuses
-
-- Villagers have +3 line of sight
-- Stone miners work 20% faster
-- Guard Tower and Keep upgrades are free
-- Towers (except bombard towers) have +1 range in Castle Age/ +2 in Imperial Age
-
-## Team Bonus
-
-Mangonel line has +1 range
-
-## Unique Units
-
-- **War Wagon** — Unique unit of the Koreans
-- **Turtle Ship** — Unique unit of the Koreans
-
-## Unique Techs
-
-- **Shinkichon** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Koreans are a Tower and Naval civilization from East Asia.
 
 ## How to Play Koreans
 

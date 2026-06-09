@@ -1,12 +1,13 @@
 ---
 slug: hindustanis
 name: "Hindustanis"
-tagline: "Hindustanis — a Gunpowder and Cavalry civilization from South Asian."
+tagline: "Hindustanis — a Gunpowder and Cavalry civilization from South Asia."
 bonuses:
-  - "Villagers cost -10% Dark, -15% Feudal, -20% Castle, -25% Imperial"
-  - "Fishermen work 15% faster and carry +15"
-  - "Camels +1/+1 armor"
-teamBonus: "Camels have +5 attack vs. buildings"
+  - "Villagers cost -8/13/18/23% in Dark/Feudal/Castle/"
+  - "Camel Riders attack +20% faster"
+  - "Gunpowder Units +1 melee/+1 pierce armor"
+  - "Can build Caravanserai in Imperial Age"
+teamBonus: "Scout Cavalry-line and Camel Units +2 attack vs. buildings"
 uniqueTechs:
   castle:
     name: "Sultans"
@@ -16,27 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Hindustanis are a South Asian civilization specializing in Gunpowder and Cavalry.
-
-## Civ Bonuses
-
-- Villagers cost -10% Dark, -15% Feudal, -20% Castle, -25% Imperial
-- Fishermen work 15% faster and carry +15
-- Camels +1/+1 armor
-
-## Team Bonus
-
-Camels have +5 attack vs. buildings
-
-## Unique Units
-
-- **Elephant Archer** — Unique unit of the Hindustanis
-- **Imperial Camel** — Unique unit of the Hindustanis
-
-## Unique Techs
-
-- **Sultans** (Castle Age) — See in-game tech tree
-- **Shatagni** (Imperial Age) — See in-game tech tree
+Hindustanis are a Gunpowder and Cavalry civilization from South Asia.
 
 ## How to Play Hindustanis
 

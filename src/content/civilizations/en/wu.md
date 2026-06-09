@@ -1,13 +1,13 @@
 ---
 slug: wu
 name: "Wu"
-tagline: "Wu — a Naval civilization from East Asian."
+tagline: "Wu — a Naval civilization from East Asia."
 bonuses:
-  - "Ships cost -15%"
-  - "Docks work faster"
-  - "Fishing Ships +2 pierce armor"
-  - "Fire Ships +2 attack"
-teamBonus: "Docks cost -25%"
+  - "Military production buildings and Docks provide +55 food"
+  - "Infantry regenerates 10/15/30 HP per minute in Feudal/Castle/Imperial Age"
+  - "Jian Swordsmen and Hei Guang Cavalry +2 attack in Imperial Age"
+  - "Careening, Dry Dock free"
+teamBonus: "Houses built +100% faster"
 uniqueTechs:
   castle:
     name: "Wu Shipbuilding"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "War Galley line attack 15% faster"
 ---
 
-Wu are a East Asian civilization specializing in Naval.
-
-## Civ Bonuses
-
-- Ships cost -15%
-- Docks work faster
-- Fishing Ships +2 pierce armor
-- Fire Ships +2 attack
-
-## Team Bonus
-
-Docks cost -25%
-
-## Unique Units
-
-- **Louchuan** — Unique unit of the Wu
-
-## Unique Techs
-
-- **Wu Shipbuilding** (Castle Age) — Ships +1 attack
-- **Eastern Fleet** (Imperial Age) — War Galley line attack 15% faster
+Wu are a Naval civilization from East Asia.
 
 ## How to Play Wu
 

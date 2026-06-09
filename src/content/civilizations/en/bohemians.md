@@ -1,13 +1,14 @@
 ---
 slug: bohemians
 name: "Bohemians"
-tagline: "Bohemians — a Gunpowder and Monk civilization from Eastern European."
+tagline: "Bohemians — a Gunpowder and Monk civilization from Eastern Europe."
 bonuses:
-  - "Mining camp upgrades free"
-  - "Blacksmith does not require Monastery; Market does not require Mill"
-  - "Gunpowder units +25% accuracy"
-  - "Monks +5 HP and +3 attack when they research their first Monastery tech"
-teamBonus: "Monks have +3 attack"
+  - "Mining Camp technologies free"
+  - "Blacksmiths and Universities cost -100 wood"
+  - "Spearman-line deals +25% bonus damage"
+  - "Fervor and Sanctity affect Villagers"
+  - "Chemistry and Hand Cannoneer available in Castle Age"
+teamBonus: "Markets work +80% faster"
 uniqueTechs:
   castle:
     name: "Wagenburg Tactics"
@@ -17,27 +18,7 @@ uniqueTechs:
     effect: "Monks and Monasteries provide gold like a Relic"
 ---
 
-Bohemians are a Eastern European civilization specializing in Gunpowder and Monk.
-
-## Civ Bonuses
-
-- Mining camp upgrades free
-- Blacksmith does not require Monastery; Market does not require Mill
-- Gunpowder units +25% accuracy
-- Monks +5 HP and +3 attack when they research their first Monastery tech
-
-## Team Bonus
-
-Monks have +3 attack
-
-## Unique Units
-
-- **Hussite Wagon** — Unique unit of the Bohemians
-
-## Unique Techs
-
-- **Wagenburg Tactics** (Castle Age) — Gunpowder units +1 speed
-- **Hussite Reforms** (Imperial Age) — Monks and Monasteries provide gold like a Relic
+Bohemians are a Gunpowder and Monk civilization from Eastern Europe.
 
 ## How to Play Bohemians
 

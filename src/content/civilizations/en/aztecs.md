@@ -1,12 +1,12 @@
 ---
 slug: aztecs
 name: "Aztecs"
-tagline: "Aztecs — a Infantry and Monk civilization from Mesoamerican."
+tagline: "Aztecs — an Infantry and Monk civilization from Mesoamerica."
 bonuses:
-  - "Villagers carry +5"
-  - "Military units created 15% faster"
-  - "+5 Monk hit points for each Monastery technology"
-  - "Loom free"
+  - "Start with +50 gold"
+  - "Villagers carry +3"
+  - "Military Units train +15% faster"
+  - "Monks gain +5 HP for each researched Monastery technology"
 teamBonus: "Relics generate +33% gold"
 uniqueTechs:
   castle:
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Aztecs are a Mesoamerican civilization specializing in Infantry and Monk.
-
-## Civ Bonuses
-
-- Villagers carry +5
-- Military units created 15% faster
-- +5 Monk hit points for each Monastery technology
-- Loom free
-
-## Team Bonus
-
-Relics generate +33% gold
-
-## Unique Units
-
-- **Jaguar Warrior** — Unique unit of the Aztecs
-
-## Unique Techs
-
-- **Garland Wars** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Aztecs are an Infantry and Monk civilization from Mesoamerica.
 
 ## How to Play Aztecs
 

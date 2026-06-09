@@ -1,14 +1,13 @@
 ---
 slug: turks
 name: "Turks"
-tagline: "Turks — a Gunpowder civilization from Middle Eastern."
+tagline: "Turks — a Gunpowder civilization from the Middle East."
 bonuses:
-  - "Gunpowder Units have +25% HP"
-  - "Gunpowder technologies cost 50% less"
-  - "Chemistry is free"
-  - "Gold miners work 15% faster"
-  - "Light Cavalry and Hussar upgrades are free"
-teamBonus: "Gunpowder units are created 20% faster"
+  - "Gold miners work +25% faster"
+  - "Scout Cavalry-line +1 pierce armor and upgrades free"
+  - "Chemistry free; Gunpowder technologies costs -50%"
+  - "Gunpowder Units +25% HP"
+teamBonus: "Gunpowder Units train +25% faster"
 uniqueTechs:
   castle:
     name: "Artillery"
@@ -18,28 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Turks are a Middle Eastern civilization specializing in Gunpowder.
-
-## Civ Bonuses
-
-- Gunpowder Units have +25% HP
-- Gunpowder technologies cost 50% less
-- Chemistry is free
-- Gold miners work 15% faster
-- Light Cavalry and Hussar upgrades are free
-
-## Team Bonus
-
-Gunpowder units are created 20% faster
-
-## Unique Units
-
-- **Janissary** — Unique unit of the Turks
-
-## Unique Techs
-
-- **Artillery** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Turks are a Gunpowder civilization from the Middle East.
 
 ## How to Play Turks
 

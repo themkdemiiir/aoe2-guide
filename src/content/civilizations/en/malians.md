@@ -1,12 +1,12 @@
 ---
 slug: malians
 name: "Malians"
-tagline: "Malians — a Infantry civilization from West African."
+tagline: "Malians — an Infantry civilization from West Africa."
 bonuses:
   - "Buildings cost -15% wood"
-  - "Barracks unit +1 pierce armor per age"
-  - "Gold mining upgrades free"
-teamBonus: "University researches +80% faster"
+  - "Villagers drop off +10% more gold"
+  - "Barracks Units +1/+2/+3 pierce armor in Feudal/"
+teamBonus: "Universities work +80% faster"
 uniqueTechs:
   castle:
     name: "Tigui"
@@ -16,26 +16,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Malians are a West African civilization specializing in Infantry.
-
-## Civ Bonuses
-
-- Buildings cost -15% wood
-- Barracks unit +1 pierce armor per age
-- Gold mining upgrades free
-
-## Team Bonus
-
-University researches +80% faster
-
-## Unique Units
-
-- **Gbeto** — Unique unit of the Malians
-
-## Unique Techs
-
-- **Tigui** (Castle Age) — See in-game tech tree
-- **Farimba** (Imperial Age) — See in-game tech tree
+Malians are an Infantry civilization from West Africa.
 
 ## How to Play Malians
 

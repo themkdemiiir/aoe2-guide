@@ -1,11 +1,13 @@
 ---
 slug: vietnamese
 name: "Vietnamese"
-tagline: "Vietnamese — a Archer civilization from Southeast Asian."
+tagline: "Vietnamese — an Archer civilization from Southeast Asia."
 bonuses:
-  - "Reveals enemy positions at game start"
-  - "Archery Range units have +10% HP in Feudal Age, +15% in Castle Age, and +20% in Imperial Age. Does not stack."
-teamBonus: "Have access to Imperial Skirmisher Upgrade"
+  - "Enemy Town Centers are revealed at the start of the game"
+  - "Economic upgrades cost no wood and research +100% faster"
+  - "Archery Range units and Fire Lancers +20% HP"
+  - "Conscription free"
+teamBonus: "Imperial Skirmisher upgrade available in Imperial Age"
 uniqueTechs:
   castle:
     name: "Chatras"
@@ -15,25 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Vietnamese are a Southeast Asian civilization specializing in Archer.
-
-## Civ Bonuses
-
-- Reveals enemy positions at game start
-- Archery Range units have +10% HP in Feudal Age, +15% in Castle Age, and +20% in Imperial Age. Does not stack.
-
-## Team Bonus
-
-Have access to Imperial Skirmisher Upgrade
-
-## Unique Units
-
-- **Rattan Archer** — Unique unit of the Vietnamese
-
-## Unique Techs
-
-- **Chatras** (Castle Age) — See in-game tech tree
-- **Paper Money** (Imperial Age) — See in-game tech tree
+Vietnamese are an Archer civilization from Southeast Asia.
 
 ## How to Play Vietnamese
 

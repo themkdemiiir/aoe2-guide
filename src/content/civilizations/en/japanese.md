@@ -1,13 +1,13 @@
 ---
 slug: japanese
 name: "Japanese"
-tagline: "Japanese — a Infantry civilization from East Asian."
+tagline: "Japanese — an Infantry civilization from East Asia."
 bonuses:
-  - "Fishing Ships have 2x HP and +2 pierce armor"
-  - "Fishing Ships work +5% faster in Dark Age/ +10% in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age"
-  - "Lumber Camps / Mining Camps / Mills are 50% cheaper"
-  - "Infantry attack 25% faster (starting in Feudal Age)"
-teamBonus: "Galleys have +50% line of sight"
+  - "Mills, Lumber- and Mining Camps cost -50%"
+  - "Infantry attacks +33% faster starting in Feudal Age"
+  - "Cavalry Archers +2 attack vs. Ranged Soldiers (except Skirmishers)"
+  - "Fishing Ships work +5/10/15/20% faster in Dark/Feudal/Castle/Imperial Age; +100% HP"
+teamBonus: "Galley-line +4 line of sight"
 uniqueTechs:
   castle:
     name: "Kataparuto"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Japanese are a East Asian civilization specializing in Infantry.
-
-## Civ Bonuses
-
-- Fishing Ships have 2x HP and +2 pierce armor
-- Fishing Ships work +5% faster in Dark Age/ +10% in Feudal Age/ +15% in Castle Age/ +20% in Imperial Age
-- Lumber Camps / Mining Camps / Mills are 50% cheaper
-- Infantry attack 25% faster (starting in Feudal Age)
-
-## Team Bonus
-
-Galleys have +50% line of sight
-
-## Unique Units
-
-- **Samurai** — Unique unit of the Japanese
-
-## Unique Techs
-
-- **Kataparuto** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Japanese are an Infantry civilization from East Asia.
 
 ## How to Play Japanese
 

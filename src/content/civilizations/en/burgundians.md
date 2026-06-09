@@ -1,13 +1,13 @@
 ---
 slug: burgundians
 name: "Burgundians"
-tagline: "Burgundians — a Cavalry civilization from Western European."
+tagline: "Burgundians — a Cavalry civilization from Western Europe."
 bonuses:
-  - "Stable, Blacksmith, and Marketplace technologies available one age earlier"
-  - "Economic upgrades (Mill, Lumber Camp, Mining Camp) cost -50% food"
-  - "Knights can carry Relics"
-  - "Flemish Revolution (unique tech) converts all Villagers into Flemish Militia"
-teamBonus: "Paladins available"
+  - "Economic upgrades available one age earlier and cost -33% food"
+  - "Stable technologies cost -50%"
+  - "Cavalier upgrade available in Castle Age"
+  - "Gunpowder Units +25% attack"
+teamBonus: "Relics generate food in addition to gold"
 uniqueTechs:
   castle:
     name: "Burgundian Vineyards"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Instantly convert all Villagers into Flemish Militia; Flemish Militia available at Barracks"
 ---
 
-Burgundians are a Western European civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Stable, Blacksmith, and Marketplace technologies available one age earlier
-- Economic upgrades (Mill, Lumber Camp, Mining Camp) cost -50% food
-- Knights can carry Relics
-- Flemish Revolution (unique tech) converts all Villagers into Flemish Militia
-
-## Team Bonus
-
-Paladins available
-
-## Unique Units
-
-- **Coustillier** — Unique unit of the Burgundians
-
-## Unique Techs
-
-- **Burgundian Vineyards** (Castle Age) — Farms slowly generate gold in addition to food
-- **Flemish Revolution** (Imperial Age) — Instantly convert all Villagers into Flemish Militia; Flemish Militia available at Barracks
+Burgundians are a Cavalry civilization from Western Europe.
 
 ## How to Play Burgundians
 

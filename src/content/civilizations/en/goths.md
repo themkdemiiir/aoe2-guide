@@ -1,14 +1,14 @@
 ---
 slug: goths
 name: "Goths"
-tagline: "Goths — a Infantry civilization from Northern European."
+tagline: "Goths — an Infantry civilization from Northern Europe."
 bonuses:
-  - "Infantry cost 35% less (starting in Feudal Age)"
-  - "Infantry have +1 attack against buildings"
-  - "Villagers have +5 attack versus wild boar"
-  - "Hunters carry +15 meat"
-  - "+10 to population limit in Imperial Age"
-teamBonus: "Barracks operate 20% faster"
+  - "Loom is researched instantly"
+  - "Hunters carry +15; hunted animals last +20% longer"
+  - "Infantry costs -15/20/25/30% in Dark/Feudal/Castle/"
+  - "Infantry +1/+2/+3 attack vs. buildings in Feudal/"
+  - "+10 population space in Imperial Age"
+teamBonus: "Barracks work +20% faster"
 uniqueTechs:
   castle:
     name: "Anarchy"
@@ -18,28 +18,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Goths are a Northern European civilization specializing in Infantry.
-
-## Civ Bonuses
-
-- Infantry cost 35% less (starting in Feudal Age)
-- Infantry have +1 attack against buildings
-- Villagers have +5 attack versus wild boar
-- Hunters carry +15 meat
-- +10 to population limit in Imperial Age
-
-## Team Bonus
-
-Barracks operate 20% faster
-
-## Unique Units
-
-- **Huskarl** — Unique unit of the Goths
-
-## Unique Techs
-
-- **Anarchy** (Castle Age) — See in-game tech tree
-- **Perfusion** (Imperial Age) — See in-game tech tree
+Goths are an Infantry civilization from Northern Europe.
 
 ## How to Play Goths
 

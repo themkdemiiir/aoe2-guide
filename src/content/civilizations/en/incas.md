@@ -1,14 +1,13 @@
 ---
 slug: incas
 name: "Incas"
-tagline: "Incas — a Infantry civilization from South American."
+tagline: "Incas — an Infantry civilization from South America."
 bonuses:
-  - "Start with a free llama"
-  - "Villagers affected by Blacksmith upgrades"
-  - "Houses support 10 population"
+  - "Houses and Settlements provide +5 population space"
   - "Buildings cost -15% stone"
-  - "Scout Cavalry is replaced by Eagle Warrior"
-teamBonus: "Farms built 50% faster"
+  - "Military Units cost -5/10/15/20% food in Dark/Feudal/Castle/Imperial Age"
+  - "Villagers affected by Infantry Blacksmith upgrades starting in Castle Age"
+teamBonus: "Start with a free Llama"
 uniqueTechs:
   castle:
     name: "Couriers"
@@ -18,29 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Incas are a South American civilization specializing in Infantry.
-
-## Civ Bonuses
-
-- Start with a free llama
-- Villagers affected by Blacksmith upgrades
-- Houses support 10 population
-- Buildings cost -15% stone
-- Scout Cavalry is replaced by Eagle Warrior
-
-## Team Bonus
-
-Farms built 50% faster
-
-## Unique Units
-
-- **Kamayuk** — Unique unit of the Incas
-- **Slinger** — Unique unit of the Incas
-
-## Unique Techs
-
-- **Couriers** (Castle Age) — See in-game tech tree
-- **Andean Sling** (Imperial Age) — See in-game tech tree
+Incas are an Infantry civilization from South America.
 
 ## How to Play Incas
 

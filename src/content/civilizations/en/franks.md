@@ -1,12 +1,13 @@
 ---
 slug: franks
 name: "Franks"
-tagline: "Franks — a Cavalry civilization from Western European."
+tagline: "Franks — a Cavalry civilization from Western Europe."
 bonuses:
-  - "Castles are 25% cheaper"
-  - "Knights have +20% HP"
-  - "Farm upgrades are free (Mill is required to receive bonus)"
-teamBonus: "Knights have +2 line of sight"
+  - "Foragers work +15% faster"
+  - "Mill technologies free"
+  - "Mounted Units +20% HP starting in Feudal Age"
+  - "Castles cost -15/25% in Castle/Imperial Age"
+teamBonus: "Knight-line +2 line of sight"
 uniqueTechs:
   castle:
     name: "Bearded Axe"
@@ -16,26 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Franks are a Western European civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Castles are 25% cheaper
-- Knights have +20% HP
-- Farm upgrades are free (Mill is required to receive bonus)
-
-## Team Bonus
-
-Knights have +2 line of sight
-
-## Unique Units
-
-- **Throwing Axeman** — Unique unit of the Franks
-
-## Unique Techs
-
-- **Bearded Axe** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Franks are a Cavalry civilization from Western Europe.
 
 ## How to Play Franks
 

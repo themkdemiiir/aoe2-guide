@@ -1,13 +1,13 @@
 ---
 slug: georgians
 name: "Georgians"
-tagline: "Georgians — a Infantry and Cavalry civilization from Caucasian."
+tagline: "Georgians — an Infantry and Cavalry civilization from the Caucasus."
 bonuses:
-  - "Units +4 attack when garrison is not full (Mournful Shroud)"
-  - "Town Centers and Towers +2 range"
-  - "Infantry attack +1 per Era starting in Feudal Age"
-  - "Monasteries cost -50% stone"
-teamBonus: "Monks +3 attack"
+  - "Start with a Mule Cart"
+  - "Units and buildings receive -15% damage when located on higher elevation"
+  - "Mounted Units regenerate 2/8/14 HP per minute in Feudal/Castle/Imperial Age"
+  - "Fortified Churches provide Villagers in a 9 tiles radius with +10% work rate"
+teamBonus: "Building repairs cost -25%"
 uniqueTechs:
   castle:
     name: "Svan Towers"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Monaspa heal nearby cavalry"
 ---
 
-Georgians are a Caucasian civilization specializing in Infantry and Cavalry.
-
-## Civ Bonuses
-
-- Units +4 attack when garrison is not full (Mournful Shroud)
-- Town Centers and Towers +2 range
-- Infantry attack +1 per Era starting in Feudal Age
-- Monasteries cost -50% stone
-
-## Team Bonus
-
-Monks +3 attack
-
-## Unique Units
-
-- **Monaspa** — Unique unit of the Georgians
-
-## Unique Techs
-
-- **Svan Towers** (Castle Age) — Towers +1 attack per 2 garrisoned units
-- **Aznauri Cavalry** (Imperial Age) — Monaspa heal nearby cavalry
+Georgians are an Infantry and Cavalry civilization from the Caucasus.
 
 ## How to Play Georgians
 

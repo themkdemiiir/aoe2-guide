@@ -1,12 +1,12 @@
 ---
 slug: mayans
 name: "Mayans"
-tagline: "Mayans — a Archer civilization from Mesoamerican."
+tagline: "Mayans — an Archer civilization from Mesoamerica."
 bonuses:
-  - "Start game with 1 extra villager but -50 food"
-  - "Natural resources last 20% longer"
-  - "Archers cost -10% in Feudal Age/ -20% in Castle Age/ -30% in Imperial Age"
-teamBonus: "Walls are 50% cheaper"
+  - "Start with +1 Villager, but -50 food"
+  - "Resources last +15% longer"
+  - "Foot Archers cost -10/20/30% in Feudal/Castle/Imperial Age"
+teamBonus: "Walls cost -50%"
 uniqueTechs:
   castle:
     name: "El Dorado"
@@ -16,26 +16,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Mayans are a Mesoamerican civilization specializing in Archer.
-
-## Civ Bonuses
-
-- Start game with 1 extra villager but -50 food
-- Natural resources last 20% longer
-- Archers cost -10% in Feudal Age/ -20% in Castle Age/ -30% in Imperial Age
-
-## Team Bonus
-
-Walls are 50% cheaper
-
-## Unique Units
-
-- **Plumed Archer** — Unique unit of the Mayans
-
-## Unique Techs
-
-- **El Dorado** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Mayans are an Archer civilization from Mesoamerica.
 
 ## How to Play Mayans
 

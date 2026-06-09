@@ -1,13 +1,14 @@
 ---
 slug: armenians
 name: "Armenians"
-tagline: "Armenians — a Infantry and Cavalry civilization from Caucasian."
+tagline: "Armenians — an Infantry and Cavalry civilization from the Caucasus."
 bonuses:
-  - "Villagers build Fortifications faster"
-  - "Cavalry Archers available one age earlier"
-  - "Town Centers can garrison Villagers without losing production"
-  - "Spearman line and Skirmishers -35% food cost"
-teamBonus: "Archery Range units +1 attack"
+  - "Mule Carts cost -25%"
+  - "Mule Cart technologies are +40% more effective"
+  - "Spearman- and Militia-line upgrades (except Man-at-Arms) available one age earlier"
+  - "First Fortified Church receives a free Relic"
+  - "Galley-line and Dromons fire an additional projectile"
+teamBonus: "Infantry +2 line of sight"
 uniqueTechs:
   castle:
     name: "Cilician Fleet"
@@ -17,27 +18,7 @@ uniqueTechs:
     effect: "Monks walk faster and carry Relics at full speed"
 ---
 
-Armenians are a Caucasian civilization specializing in Infantry and Cavalry.
-
-## Civ Bonuses
-
-- Villagers build Fortifications faster
-- Cavalry Archers available one age earlier
-- Town Centers can garrison Villagers without losing production
-- Spearman line and Skirmishers -35% food cost
-
-## Team Bonus
-
-Archery Range units +1 attack
-
-## Unique Units
-
-- **Composite Bowman** — Unique unit of the Armenians
-
-## Unique Techs
-
-- **Cilician Fleet** (Castle Age) — Galleys +2 range
-- **Fereters** (Imperial Age) — Monks walk faster and carry Relics at full speed
+Armenians are an Infantry and Cavalry civilization from the Caucasus.
 
 ## How to Play Armenians
 

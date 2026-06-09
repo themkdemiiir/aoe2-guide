@@ -1,13 +1,14 @@
 ---
 slug: jurchens
 name: "Jurchens"
-tagline: "Jurchens — a Cavalry civilization from East Asian."
+tagline: "Jurchens — a Cavalry civilization from East Asia."
 bonuses:
-  - "Cavalry +2 armor"
-  - "Stables work faster"
-  - "Can build Fortified Towers without research"
-  - "Blacksmith techs cost -25%"
-teamBonus: "Cavalry +1 melee armor"
+  - "Meat of hunted and livestock animals doesn't decay"
+  - "Mounted Units and Fire Lancers attack +25% faster starting in Feudal Age"
+  - "Siege Engineers available in Castle Age"
+  - "Siege and Fortification upgrades cost -75% wood and research +100% faster"
+  - "Units receive -50% friendly fire damage"
+teamBonus: "Gunpowder Units +2 line of sight"
 uniqueTechs:
   castle:
     name: "Jurchen Tactics"
@@ -17,27 +18,7 @@ uniqueTechs:
     effect: "Cavalry Archers +2 attack"
 ---
 
-Jurchens are a East Asian civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Cavalry +2 armor
-- Stables work faster
-- Can build Fortified Towers without research
-- Blacksmith techs cost -25%
-
-## Team Bonus
-
-Cavalry +1 melee armor
-
-## Unique Units
-
-- **Jurchen Knight** — Unique unit of the Jurchens
-
-## Unique Techs
-
-- **Jurchen Tactics** (Castle Age) — Cavalry +1 attack
-- **Iron Riders** (Imperial Age) — Cavalry Archers +2 attack
+Jurchens are a Cavalry civilization from East Asia.
 
 ## How to Play Jurchens
 

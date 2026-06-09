@@ -1,10 +1,13 @@
 ---
 slug: malay
 name: "Malay"
-tagline: "Malay — a Naval civilization from Southeast Asian."
+tagline: "Malay — a Naval civilization from Southeast Asia."
 bonuses:
-  - "Docks +100% LOS"
-teamBonus: "Advancing to ages 80% faster;Fish Traps cost 33% cheaper;Fish Traps provide unlimited food;Battle Elephants 30% cheaper"
+  - "Advancing to the next Age is +66% faster"
+  - "Infantry armor upgrades free"
+  - "Battle Elephants cost -25/35% in Castle/Imperial Age"
+  - "Fish Traps cost -33% and provide +200% food"
+teamBonus: "Docks +6 line of sight"
 uniqueTechs:
   castle:
     name: "Thalassocracy"
@@ -14,24 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Malay are a Southeast Asian civilization specializing in Naval.
-
-## Civ Bonuses
-
-- Docks +100% LOS
-
-## Team Bonus
-
-Advancing to ages 80% faster;Fish Traps cost 33% cheaper;Fish Traps provide unlimited food;Battle Elephants 30% cheaper
-
-## Unique Units
-
-- **Karambit Warrior** — Unique unit of the Malay
-
-## Unique Techs
-
-- **Thalassocracy** (Castle Age) — See in-game tech tree
-- **Forced Levy** (Imperial Age) — See in-game tech tree
+Malay are a Naval civilization from Southeast Asia.
 
 ## How to Play Malay
 

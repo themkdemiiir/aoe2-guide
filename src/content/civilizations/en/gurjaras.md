@@ -1,13 +1,13 @@
 ---
 slug: gurjaras
 name: "Gurjaras"
-tagline: "Gurjaras — a Cavalry and Naval civilization from South Asian."
+tagline: "Gurjaras — a Cavalry and Naval civilization from South Asia."
 bonuses:
-  - "Start with 2 Camel Scouts"
-  - "Camels and Skirmishers counter cavalry effectively"
-  - "Mills produce unlimited food using livestock"
-  - "Chakram Throwers available at Archery Range (unique ranged infantry)"
-teamBonus: "Camel and Battle Elephant units +1 Pierce Armor"
+  - "Start with 2 Forage Bushes"
+  - "Can garrison livestock in Mills to passively produce food"
+  - "Mounted Units deal +20/30/40% bonus damage in Feudal/Castle/Imperial Age"
+  - "Docks +5 garrison capacity"
+teamBonus: "Camel and Elephant Units train +25% faster"
 uniqueTechs:
   castle:
     name: "Kshatriyas"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Camel Riders and Elephant Archers +4 melee armor"
 ---
 
-Gurjaras are a South Asian civilization specializing in Cavalry and Naval.
-
-## Civ Bonuses
-
-- Start with 2 Camel Scouts
-- Camels and Skirmishers counter cavalry effectively
-- Mills produce unlimited food using livestock
-- Chakram Throwers available at Archery Range (unique ranged infantry)
-
-## Team Bonus
-
-Camel and Battle Elephant units +1 Pierce Armor
-
-## Unique Units
-
-- **Shrivamsha Rider** — Unique unit of the Gurjaras
-
-## Unique Techs
-
-- **Kshatriyas** (Castle Age) — Military units cost -25% food
-- **Frontier Guards** (Imperial Age) — Camel Riders and Elephant Archers +4 melee armor
+Gurjaras are a Cavalry and Naval civilization from South Asia.
 
 ## How to Play Gurjaras
 

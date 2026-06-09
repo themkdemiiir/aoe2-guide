@@ -1,12 +1,12 @@
 ---
 slug: magyars
 name: "Magyars"
-tagline: "Magyars — a Calvary Infantry civilization from Eastern European."
+tagline: "Magyars — a Cavalry and Infantry civilization from Eastern Europe."
 bonuses:
-  - "Villagers can kill wolves with 1 strike"
-  - "Forging, Iron Casting, Blast Furnace are free"
-  - "Scout Cavalry, Light Cavalry, Hussar cost -15%"
-teamBonus: "Foot archers +2 LOS"
+  - "Villagers defeat wolves with one strike"
+  - "Scout Cavalry-line costs -15%"
+  - "Melee attack upgrades free"
+teamBonus: "Mounted Archers train +25% faster"
 uniqueTechs:
   castle:
     name: "Mercenaries"
@@ -16,26 +16,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Magyars are a Eastern European civilization specializing in Calvary Infantry.
-
-## Civ Bonuses
-
-- Villagers can kill wolves with 1 strike
-- Forging, Iron Casting, Blast Furnace are free
-- Scout Cavalry, Light Cavalry, Hussar cost -15%
-
-## Team Bonus
-
-Foot archers +2 LOS
-
-## Unique Units
-
-- **Magyar Huszar** — Unique unit of the Magyars
-
-## Unique Techs
-
-- **Mercenaries** (Castle Age) — See in-game tech tree
-- **Recursive Bow** (Imperial Age) — See in-game tech tree
+Magyars are a Cavalry and Infantry civilization from Eastern Europe.
 
 ## How to Play Magyars
 

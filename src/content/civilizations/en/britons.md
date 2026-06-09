@@ -1,12 +1,12 @@
 ---
 slug: britons
 name: Britons
-tagline: Foot archer specialists with the longest-range Longbowman.
+tagline: "Britons — an Archer civilization from Western Europe."
 bonuses:
-  - Town Centers cost 50% less wood from Castle Age.
-  - Foot archers (except Skirmishers) have +1 range in Castle Age, +2 in Imperial Age.
-  - Shepherds work 25% faster.
-teamBonus: Archery Ranges work 20% faster.
+  - "Shepherds work +25% faster"
+  - "Town Centers cost -50% wood starting in Castle Age"
+  - "Foot Archers +1/+2 range in Castle/Imperial Age"
+teamBonus: "Archery Ranges work +10% faster"
 uniqueTechs:
   castle:
     name: Yeomen
@@ -16,7 +16,7 @@ uniqueTechs:
     effect: Trebuchets do blast damage and never miss against units.
 ---
 
-Britons are an archer civilization with one of the strongest unique units in the game — the Longbowman, a foot archer with extreme range. They specialize in defensive play and ranged composition, particularly into Castle and Imperial Age.
+Britons are an Archer civilization from Western Europe.
 
 ## Playstyle
 

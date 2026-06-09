@@ -1,12 +1,13 @@
 ---
 slug: burmese
 name: "Burmese"
-tagline: "Burmese — a Monk and Elephant civilization from Southeast Asian."
+tagline: "Burmese — a Monk and Elephant civilization from Southeast Asia."
 bonuses:
-  - "Free lumber camp upgrades"
-  - "Infantry +1 Attacks per Age (starting in Feudal Age)"
-  - "Monastery techs 50% cheaper"
-teamBonus: "Relics are visible on the min map"
+  - "Lumber Camp technologies free"
+  - "Infantry +1/+2/+3 attack in Feudal/Castle/Imperial Age"
+  - "Battle Elephants +1 melee/+1 pierce armor"
+  - "Monastery technologies cost -50%"
+teamBonus: "Relics visible on the map at the start of the game"
 uniqueTechs:
   castle:
     name: "Howdah"
@@ -16,26 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Burmese are a Southeast Asian civilization specializing in Monk and Elephant.
-
-## Civ Bonuses
-
-- Free lumber camp upgrades
-- Infantry +1 Attacks per Age (starting in Feudal Age)
-- Monastery techs 50% cheaper
-
-## Team Bonus
-
-Relics are visible on the min map
-
-## Unique Units
-
-- **Arambai** — Unique unit of the Burmese
-
-## Unique Techs
-
-- **Howdah** (Castle Age) — See in-game tech tree
-- **Manipur Cavalry** (Imperial Age) — See in-game tech tree
+Burmese are a Monk and Elephant civilization from Southeast Asia.
 
 ## How to Play Burmese
 

@@ -1,13 +1,12 @@
 ---
 slug: wei
 name: "Wei"
-tagline: "Wei — a Cavalry civilization from East Asian."
+tagline: "Wei — a Cavalry civilization from East Asia."
 bonuses:
-  - "Cavalry cost -10%"
-  - "Stables work faster"
-  - "Blacksmith upgrades cheaper"
-  - "Scouts +2 LOS"
-teamBonus: "Cavalry +1 attack"
+  - "Receive one free Villager for each economic upgrade researched"
+  - "Hei Guang Cavalry and Xianbei Raider +20/30% HP in Castle/Imperial Age"
+  - "Traction Trebuchets and Lou Chuans cost -25%"
+teamBonus: "Cavalry +2 attack vs. Siege Weapons"
 uniqueTechs:
   castle:
     name: "Wei Formation"
@@ -17,27 +16,7 @@ uniqueTechs:
     effect: "Cavalry attack 15% faster"
 ---
 
-Wei are a East Asian civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Cavalry cost -10%
-- Stables work faster
-- Blacksmith upgrades cheaper
-- Scouts +2 LOS
-
-## Team Bonus
-
-Cavalry +1 attack
-
-## Unique Units
-
-- **Heavy Cavalry** — Unique unit of the Wei
-
-## Unique Techs
-
-- **Wei Formation** (Castle Age) — Cavalry +1 armor
-- **Iron Horses** (Imperial Age) — Cavalry attack 15% faster
+Wei are a Cavalry civilization from East Asia.
 
 ## How to Play Wei
 

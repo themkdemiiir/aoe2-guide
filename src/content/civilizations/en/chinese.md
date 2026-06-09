@@ -1,13 +1,13 @@
 ---
 slug: chinese
 name: "Chinese"
-tagline: "Chinese — a Archer civilization from East Asian."
+tagline: "Chinese — an Archer civilization from East Asia."
 bonuses:
-  - "Start game with 3 extra villagers but -50 wood and -200 food"
-  - "Technologies cost -10% in Feudal Age/ -15% in Castle Age/-20% in Imperial Age"
-  - "Town Centers support 10 population instead of 5"
-  - "Demolition Ships have +50% HP"
-teamBonus: "Farms provide +45 food"
+  - "Start with +3 Villagers, but -50 wood and -200 food"
+  - "Technologies cost -5/10/15% in Feudal/Castle/Imperial Age"
+  - "Town Centers +7 line of sight and provide +15 population space"
+  - "Fire Lancers and Fire Ships move +5/10% faster in Castle/Imperial Age"
+teamBonus: "Farms +10% food"
 uniqueTechs:
   castle:
     name: "Rocketry"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Chinese are a East Asian civilization specializing in Archer.
-
-## Civ Bonuses
-
-- Start game with 3 extra villagers but -50 wood and -200 food
-- Technologies cost -10% in Feudal Age/ -15% in Castle Age/-20% in Imperial Age
-- Town Centers support 10 population instead of 5
-- Demolition Ships have +50% HP
-
-## Team Bonus
-
-Farms provide +45 food
-
-## Unique Units
-
-- **Chu Ko Nu** — Unique unit of the Chinese
-
-## Unique Techs
-
-- **Rocketry** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Chinese are an Archer civilization from East Asia.
 
 ## How to Play Chinese
 

@@ -1,13 +1,12 @@
 ---
 slug: shu
 name: "Shu"
-tagline: "Shu — a Infantry civilization from East Asian."
+tagline: "Shu — an Infantry civilization from East Asia."
 bonuses:
-  - "Barracks infantry +1 attack"
-  - "Farmers work faster"
-  - "Villagers carry +5"
-  - "Archers +1 range"
-teamBonus: "Infantry +1 pierce armor"
+  - "Lumberjacks generate food in addition to wood"
+  - "Archery Unit technologies at the Archery Range and Blacksmith cost -25%"
+  - "Siege Weapons and Siege Warships move +10/15% faster in Castle/Imperial Age"
+teamBonus: "Foot Archers +2 line of sight"
 uniqueTechs:
   castle:
     name: "Shu Strategy"
@@ -17,27 +16,7 @@ uniqueTechs:
     effect: "Infantry attack 10% faster"
 ---
 
-Shu are a East Asian civilization specializing in Infantry.
-
-## Civ Bonuses
-
-- Barracks infantry +1 attack
-- Farmers work faster
-- Villagers carry +5
-- Archers +1 range
-
-## Team Bonus
-
-Infantry +1 pierce armor
-
-## Unique Units
-
-- **Tiger Cavalry** — Unique unit of the Shu
-
-## Unique Techs
-
-- **Shu Strategy** (Castle Age) — Infantry +1 attack
-- **Tiger Warriors** (Imperial Age) — Infantry attack 10% faster
+Shu are an Infantry civilization from East Asia.
 
 ## How to Play Shu
 

@@ -1,13 +1,13 @@
 ---
 slug: cumans
 name: "Cumans"
-tagline: "Cumans — a Cavalry civilization from Central Asian."
+tagline: "Cumans — a Cavalry civilization from Central Asia."
 bonuses:
-  - "Cavalry units +1 speed in Feudal Age"
-  - "May build an extra Town Center in Feudal Age"
-  - "Siege Workshop and Battering Ram available in Feudal Age"
-  - "Palisade Walls and Gates can be built in Castle Age"
-teamBonus: "Cavalry units +1 speed"
+  - "One additional Town Center can be built in Feudal Age"
+  - "Mounted Units move +5/10/15% faster in Feudal/"
+  - "Archery Ranges and Stables cost -75 wood"
+  - "Siege Workshop and Battering Ram available in Feudal Age; Capped Ram available in Castle Age"
+teamBonus: "Palisade Walls +33% HP"
 uniqueTechs:
   castle:
     name: "Steppe Husbandry"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Team can build 10 free Kipchaks (once)"
 ---
 
-Cumans are a Central Asian civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Cavalry units +1 speed in Feudal Age
-- May build an extra Town Center in Feudal Age
-- Siege Workshop and Battering Ram available in Feudal Age
-- Palisade Walls and Gates can be built in Castle Age
-
-## Team Bonus
-
-Cavalry units +1 speed
-
-## Unique Units
-
-- **Kipchak** — Unique unit of the Cumans
-
-## Unique Techs
-
-- **Steppe Husbandry** (Castle Age) — Scout Cavalry line and Kipchaks train +100% faster
-- **Cuman Mercenaries** (Imperial Age) — Team can build 10 free Kipchaks (once)
+Cumans are a Cavalry civilization from Central Asia.
 
 ## How to Play Cumans
 

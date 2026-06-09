@@ -1,13 +1,14 @@
 ---
 slug: sicilians
 name: "Sicilians"
-tagline: "Sicilians — a Infantry and Cavalry civilization from Southern European."
+tagline: "Sicilians — an Infantry and Cavalry civilization from Southern Europe."
 bonuses:
-  - "Town Centers and Castles resist 50% of incoming damage"
-  - "First Crusade (Imperial-Age unique technology) available"
-  - "Building construction 100% faster"
-  - "Cavalry has +1/+1 armor"
-teamBonus: "Farms +100% carrying capacity"
+  - "Start with +100 stone"
+  - "Farm upgrades provide +125% additional food"
+  - "Soldiers receive -40% bonus damage"
+  - "Can build Donjon in Dark Age, replaces Watch Tower-line"
+  - "Fortifications built +50% faster; Town Centers built +100% faster"
+teamBonus: "Transport Ships +5 line of sight and cost -50%"
 uniqueTechs:
   castle:
     name: "First Crusade"
@@ -17,27 +18,7 @@ uniqueTechs:
     effect: "Each enemy Feudal-age unit you convert spawns a Serjeant"
 ---
 
-Sicilians are a Southern European civilization specializing in Infantry and Cavalry.
-
-## Civ Bonuses
-
-- Town Centers and Castles resist 50% of incoming damage
-- First Crusade (Imperial-Age unique technology) available
-- Building construction 100% faster
-- Cavalry has +1/+1 armor
-
-## Team Bonus
-
-Farms +100% carrying capacity
-
-## Unique Units
-
-- **Serjeant** — Unique unit of the Sicilians
-
-## Unique Techs
-
-- **First Crusade** (Castle Age) — Each Town Center spawns 1 Serjeant; Serjeants have +4 attack and +3/+3 armor
-- **Scutage** (Imperial Age) — Each enemy Feudal-age unit you convert spawns a Serjeant
+Sicilians are an Infantry and Cavalry civilization from Southern Europe.
 
 ## How to Play Sicilians
 

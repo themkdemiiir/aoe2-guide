@@ -1,13 +1,14 @@
 ---
 slug: dravidians
 name: "Dravidians"
-tagline: "Dravidians — a Infantry and Naval civilization from South Asian."
+tagline: "Dravidians — an Infantry and Naval civilization from South Asia."
 bonuses:
-  - "Start with +200 wood"
-  - "Barracks and Docks techs -50% food"
-  - "Elephant Archers available at Archery Range"
-  - "Skirmishers +1 attack per Age from Feudal Age"
-teamBonus: "Docks work 15% faster"
+  - "Fishermen and Fishing Ships carry +15"
+  - "Receive +200 wood when advancing to the next Age"
+  - "Skirmishers and Elephant Archers attack +25% faster"
+  - "Barracks technologies cost -50%"
+  - "Siege Weapons cost -33% wood"
+teamBonus: "Docks provide +5 population space"
 uniqueTechs:
   castle:
     name: "Medical Corps"
@@ -17,27 +18,7 @@ uniqueTechs:
     effect: "Melee infantry and cavalry attacks ignore armor"
 ---
 
-Dravidians are a South Asian civilization specializing in Infantry and Naval.
-
-## Civ Bonuses
-
-- Start with +200 wood
-- Barracks and Docks techs -50% food
-- Elephant Archers available at Archery Range
-- Skirmishers +1 attack per Age from Feudal Age
-
-## Team Bonus
-
-Docks work 15% faster
-
-## Unique Units
-
-- **Urumi Swordsman** — Unique unit of the Dravidians
-
-## Unique Techs
-
-- **Medical Corps** (Castle Age) — Battle Elephants regenerate HP
-- **Wootz Steel** (Imperial Age) — Melee infantry and cavalry attacks ignore armor
+Dravidians are an Infantry and Naval civilization from South Asia.
 
 ## How to Play Dravidians
 

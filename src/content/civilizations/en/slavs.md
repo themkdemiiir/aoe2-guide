@@ -1,12 +1,13 @@
 ---
 slug: slavs
 name: "Slavs"
-tagline: "Slavs — a Cavalry civilization from Eastern European."
+tagline: "Slavs — a Cavalry civilization from Eastern Europe."
 bonuses:
-  - "Farmers works 15% faster"
-  - "Siege weapons 15% cheaper"
-  - "Tracking free"
-teamBonus: "Military buildings provide +5% population"
+  - "Farmers work +15% faster"
+  - "Arson, Gambesons free"
+  - "Siege Workshop Units cost -15%"
+  - "Monks move +20% faster"
+teamBonus: "Military buildings (except Castles) provide +5 population space"
 uniqueTechs:
   castle:
     name: "Orthodoxy"
@@ -16,26 +17,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Slavs are a Eastern European civilization specializing in Cavalry.
-
-## Civ Bonuses
-
-- Farmers works 15% faster
-- Siege weapons 15% cheaper
-- Tracking free
-
-## Team Bonus
-
-Military buildings provide +5% population
-
-## Unique Units
-
-- **Boyars** — Unique unit of the Slavs
-
-## Unique Techs
-
-- **Orthodoxy** (Castle Age) — See in-game tech tree
-- **Druzhina** (Imperial Age) — See in-game tech tree
+Slavs are a Cavalry civilization from Eastern Europe.
 
 ## How to Play Slavs
 

@@ -1,13 +1,14 @@
 ---
 slug: italians
 name: "Italians"
-tagline: "Italians — a Archer and naval civilization from Southern European."
+tagline: "Italians — an Archer and Naval civilization from Southern Europe."
 bonuses:
-  - "Advance to next age costs -15%"
-  - "All dock tech costs -50%"
-  - "Fishing ship cost -15 wood"
-  - "Gunpowder unit costs -25%"
-teamBonus: "Condottiero also available in allies' barracks in Imperial Age (once you have built a castle)"
+  - "Advancing to the next Age costs -15%"
+  - "Foot Archers and Condottieri +1 melee/+1 pierce armor"
+  - "Dock and University technologies cost -25%"
+  - "Gunpowder Units cost -20%"
+  - "Fishing Ships cost -15%"
+teamBonus: "Condottiero available at the Barracks in Imperial Age"
 uniqueTechs:
   castle:
     name: "Pavise"
@@ -17,28 +18,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Italians are a Southern European civilization specializing in Archer and naval.
-
-## Civ Bonuses
-
-- Advance to next age costs -15%
-- All dock tech costs -50%
-- Fishing ship cost -15 wood
-- Gunpowder unit costs -25%
-
-## Team Bonus
-
-Condottiero also available in allies' barracks in Imperial Age (once you have built a castle)
-
-## Unique Units
-
-- **Genoese Crossbowman** — Unique unit of the Italians
-- **Condottiero** — Unique unit of the Italians
-
-## Unique Techs
-
-- **Pavise** (Castle Age) — See in-game tech tree
-- **Silk Road** (Imperial Age) — See in-game tech tree
+Italians are an Archer and Naval civilization from Southern Europe.
 
 ## How to Play Italians
 

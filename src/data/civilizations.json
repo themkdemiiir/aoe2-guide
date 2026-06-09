@@ -31,7 +31,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "the Caucasus"
     },
     {
       "slug": "aztecs",
@@ -62,7 +63,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Mesoamerica"
     },
     {
       "slug": "bengalis",
@@ -94,12 +96,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South Asia"
     },
     {
       "slug": "berbers",
       "region": "North African",
-      "specialty": "Calvary and Naval",
+      "specialty": "Cavalry and Naval",
       "uniqueUnits": ["camel-archer", "genitour"],
       "civBonuses": [
         "Villagers move +5% faster in Dark Age, +10% faster starting in Feudal Age",
@@ -124,7 +127,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "North Africa"
     },
     {
       "slug": "bohemians",
@@ -156,12 +160,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Eastern Europe"
     },
     {
       "slug": "britons",
       "region": "Western European",
-      "specialty": "Archers",
+      "specialty": "Archer",
       "uniqueUnits": ["longbowman"],
       "civBonuses": [
         "Shepherds work +25% faster",
@@ -186,7 +191,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Western Europe"
     },
     {
       "slug": "bulgarians",
@@ -217,7 +223,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Eastern Europe"
     },
     {
       "slug": "burgundians",
@@ -248,7 +255,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Western Europe"
     },
     {
       "slug": "burmese",
@@ -279,7 +287,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southeast Asia"
     },
     {
       "slug": "byzantines",
@@ -311,7 +320,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "the Eastern Mediterranean"
     },
     {
       "slug": "celts",
@@ -342,7 +352,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Western Europe"
     },
     {
       "slug": "chinese",
@@ -373,7 +384,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "cumans",
@@ -404,7 +416,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Central Asia"
     },
     {
       "slug": "dravidians",
@@ -436,7 +449,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South Asia"
     },
     {
       "slug": "ethiopians",
@@ -466,7 +480,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Africa"
     },
     {
       "slug": "franks",
@@ -497,7 +512,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Western Europe"
     },
     {
       "slug": "georgians",
@@ -528,7 +544,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "the Caucasus"
     },
     {
       "slug": "goths",
@@ -560,7 +577,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Northern Europe"
     },
     {
       "slug": "gurjaras",
@@ -591,7 +609,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South Asia"
     },
     {
       "slug": "hindustanis",
@@ -622,7 +641,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South Asia"
     },
     {
       "slug": "huns",
@@ -653,7 +673,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Central Asia"
     },
     {
       "slug": "incas",
@@ -684,12 +705,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South America"
     },
     {
       "slug": "italians",
       "region": "Southern European",
-      "specialty": "Archer and naval",
+      "specialty": "Archer and Naval",
       "uniqueUnits": ["genoese-crossbowman", "condottiero"],
       "civBonuses": [
         "Advancing to the next Age costs -15%",
@@ -716,7 +738,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southern Europe"
     },
     {
       "slug": "japanese",
@@ -747,7 +770,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "jurchens",
@@ -779,7 +803,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "khitans",
@@ -810,12 +835,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "khmer",
       "region": "Southeast Asian",
-      "specialty": "Siege and Elephant Civilzation",
+      "specialty": "Siege and Elephant",
       "uniqueUnits": ["ballista-elephant"],
       "civBonuses": [
         "No buildings required to advance to the next Age or to unlock other buildings",
@@ -841,12 +867,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southeast Asia"
     },
     {
       "slug": "koreans",
       "region": "East Asian",
-      "specialty": "Tower and naval",
+      "specialty": "Tower and Naval",
       "uniqueUnits": ["war-wagon", "turtle-ship"],
       "civBonuses": [
         "Stone miners work +20% faster",
@@ -872,7 +899,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "lithuanians",
@@ -902,12 +930,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Eastern Europe"
     },
     {
       "slug": "magyars",
       "region": "Eastern European",
-      "specialty": "Calvary Infantry",
+      "specialty": "Cavalry and Infantry",
       "uniqueUnits": ["magyar-huszar"],
       "civBonuses": [
         "Villagers defeat wolves with one strike",
@@ -932,7 +961,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Eastern Europe"
     },
     {
       "slug": "malay",
@@ -963,7 +993,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southeast Asia"
     },
     {
       "slug": "malians",
@@ -993,7 +1024,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "West Africa"
     },
     {
       "slug": "mapuche",
@@ -1025,7 +1057,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South America"
     },
     {
       "slug": "mayans",
@@ -1055,7 +1088,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Mesoamerica"
     },
     {
       "slug": "mongols",
@@ -1085,7 +1119,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "muisca",
@@ -1117,7 +1152,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South America"
     },
     {
       "slug": "persians",
@@ -1148,7 +1184,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "the Middle East"
     },
     {
       "slug": "poles",
@@ -1179,7 +1216,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Eastern Europe"
     },
     {
       "slug": "portuguese",
@@ -1210,7 +1248,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southern Europe"
     },
     {
       "slug": "romans",
@@ -1241,12 +1280,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "the Ancient Mediterranean"
     },
     {
       "slug": "saracens",
       "region": "Middle Eastern",
-      "specialty": "Camel and naval",
+      "specialty": "Camel and Naval",
       "uniqueUnits": ["mameluke"],
       "civBonuses": [
         "Market trading fee only 5%; Markets cost -100 wood",
@@ -1272,7 +1312,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "the Middle East"
     },
     {
       "slug": "shu",
@@ -1302,7 +1343,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "sicilians",
@@ -1334,7 +1376,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southern Europe"
     },
     {
       "slug": "slavs",
@@ -1365,7 +1408,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Eastern Europe"
     },
     {
       "slug": "spanish",
@@ -1397,7 +1441,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southern Europe"
     },
     {
       "slug": "tatars",
@@ -1428,7 +1473,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Central Asia"
     },
     {
       "slug": "teutons",
@@ -1460,7 +1506,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Central Europe"
     },
     {
       "slug": "tupi",
@@ -1491,7 +1538,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "South America"
     },
     {
       "slug": "turks",
@@ -1522,7 +1570,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "the Middle East"
     },
     {
       "slug": "vietnamese",
@@ -1553,12 +1602,13 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Southeast Asia"
     },
     {
       "slug": "vikings",
       "region": "Northern European",
-      "specialty": "Infantry and naval",
+      "specialty": "Infantry and Naval",
       "uniqueUnits": ["berserk", "longboat"],
       "civBonuses": [
         "Wheelbarrow, Hand Cart free",
@@ -1583,7 +1633,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "Northern Europe"
     },
     {
       "slug": "wei",
@@ -1613,7 +1664,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     },
     {
       "slug": "wu",
@@ -1644,7 +1696,8 @@
         "sample": "1v1 RM, ALL ratings",
         "lastFetched": "2026-05-23",
         "source": "aoestats.io"
-      }
+      },
+      "regionNoun": "East Asia"
     }
   ],
   "metaLastFetched": "2026-05-23",

@@ -1,12 +1,12 @@
 ---
 slug: mongols
 name: "Mongols"
-tagline: "Mongols — a Cavalry Archer civilization from East Asian."
+tagline: "Mongols — a Cavalry Archer civilization from East Asia."
 bonuses:
-  - "Cavalry Archers reload 20% faster"
-  - "Light Cavalry and Hussars have +30% HP"
-  - "Hunters work 50% faster"
-teamBonus: "Scout line has +2 Line of sight"
+  - "Hunters work +40% faster"
+  - "Cavalry Archers attack +25% faster"
+  - "Scout Cavalry-line and Steppe Lancers +20/30% HP in Castle/Imperial Age"
+teamBonus: "Scout Cavalry-line +2 line of sight"
 uniqueTechs:
   castle:
     name: "Drill"
@@ -16,26 +16,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Mongols are a East Asian civilization specializing in Cavalry Archer.
-
-## Civ Bonuses
-
-- Cavalry Archers reload 20% faster
-- Light Cavalry and Hussars have +30% HP
-- Hunters work 50% faster
-
-## Team Bonus
-
-Scout line has +2 Line of sight
-
-## Unique Units
-
-- **Mangudai** — Unique unit of the Mongols
-
-## Unique Techs
-
-- **Drill** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Mongols are a Cavalry Archer civilization from East Asia.
 
 ## How to Play Mongols
 

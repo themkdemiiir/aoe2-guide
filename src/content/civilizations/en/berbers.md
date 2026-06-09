@@ -1,12 +1,12 @@
 ---
 slug: berbers
 name: "Berbers"
-tagline: "Berbers — a Calvary and Naval civilization from North African."
+tagline: "Berbers — a Cavalry and Naval civilization from North Africa."
 bonuses:
-  - "Villagers move +10% faster"
-  - "Stable units cost -20% (starting in Castle Age)"
+  - "Villagers move +5% faster in Dark Age, +10% faster starting in Feudal Age"
+  - "Stable Units cost -15/20% in Castle/Imperial Age"
   - "Ships move +10% faster"
-teamBonus: "Genitour availible at Archery Range"
+teamBonus: "Genitour available at the Archery Range starting in Castle Age"
 uniqueTechs:
   castle:
     name: "Kasbah"
@@ -16,27 +16,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Berbers are a North African civilization specializing in Calvary and Naval.
-
-## Civ Bonuses
-
-- Villagers move +10% faster
-- Stable units cost -20% (starting in Castle Age)
-- Ships move +10% faster
-
-## Team Bonus
-
-Genitour availible at Archery Range
-
-## Unique Units
-
-- **Camel Archer** — Unique unit of the Berbers
-- **Genitour** — Unique unit of the Berbers
-
-## Unique Techs
-
-- **Kasbah** (Castle Age) — See in-game tech tree
-- **Maghrabi Camels** (Imperial Age) — See in-game tech tree
+Berbers are a Cavalry and Naval civilization from North Africa.
 
 ## How to Play Berbers
 

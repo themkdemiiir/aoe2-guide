@@ -1,14 +1,14 @@
 ---
 slug: teutons
 name: "Teutons"
-tagline: "Teutons — a Infantry civilization from Central European."
+tagline: "Teutons — an Infantry civilization from Central Europe."
 bonuses:
-  - "Monks have 2x healing range"
-  - "Towers can garrison 2x units (more arrows)"
-  - "Murder Holes is free"
-  - "Farms cost 33% less"
-  - "Town Centers have +1 attack and +5 line of sight"
-teamBonus: "Units are more resistant to conversion"
+  - "Farms cost -40%"
+  - "Town Centers +10 garrison capacity; Towers +5 garrison capacity"
+  - "Barracks and Stable Units +1/+2 melee armor in Castle/Imperial Age"
+  - "Monks +100% healing range"
+  - "Murder Holes, Herbal Medicine free"
+teamBonus: "Units more resistant to conversion"
 uniqueTechs:
   castle:
     name: "Crenellations"
@@ -18,28 +18,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Teutons are a Central European civilization specializing in Infantry.
-
-## Civ Bonuses
-
-- Monks have 2x healing range
-- Towers can garrison 2x units (more arrows)
-- Murder Holes is free
-- Farms cost 33% less
-- Town Centers have +1 attack and +5 line of sight
-
-## Team Bonus
-
-Units are more resistant to conversion
-
-## Unique Units
-
-- **Teutonic Knight** — Unique unit of the Teutons
-
-## Unique Techs
-
-- **Crenellations** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Teutons are an Infantry civilization from Central Europe.
 
 ## How to Play Teutons
 

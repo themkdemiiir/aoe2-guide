@@ -1,13 +1,13 @@
 ---
 slug: khitans
 name: "Khitans"
-tagline: "Khitans — a Cavalry Archer civilization from East Asian."
+tagline: "Khitans — a Cavalry Archer civilization from East Asia."
 bonuses:
-  - "Cavalry Archers cost -10%"
-  - "Archery Range units +1 attack"
-  - "Stables work 20% faster"
-  - "Hunters carry +10 meat"
-teamBonus: "Cavalry Archers +1 range"
+  - "Pastures replace Farms"
+  - "Melee attack upgrade effects are doubled"
+  - "Skirmishers, Spearman-, and Scout Cavalry-line train and upgrade +15% faster"
+  - "Heavy Cavalry Archer upgrade available in Castle Age and costs -50%"
+teamBonus: "Infantry +2 attack vs. Ranged Soldiers"
 uniqueTechs:
   castle:
     name: "Khitan Cavalry"
@@ -17,27 +17,7 @@ uniqueTechs:
     effect: "Cavalry Archers attack 15% faster"
 ---
 
-Khitans are a East Asian civilization specializing in Cavalry Archer.
-
-## Civ Bonuses
-
-- Cavalry Archers cost -10%
-- Archery Range units +1 attack
-- Stables work 20% faster
-- Hunters carry +10 meat
-
-## Team Bonus
-
-Cavalry Archers +1 range
-
-## Unique Units
-
-- **Khitan Lancer** — Unique unit of the Khitans
-
-## Unique Techs
-
-- **Khitan Cavalry** (Castle Age) — Cavalry +1 speed
-- **Steppe Tactics** (Imperial Age) — Cavalry Archers attack 15% faster
+Khitans are a Cavalry Archer civilization from East Asia.
 
 ## How to Play Khitans
 

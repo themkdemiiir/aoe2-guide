@@ -993,6 +993,11 @@ async function run() {
       };
     }
 
+    // Normalize before persisting: clean specialty typos/casing + attach region noun
+    // form so the tagline reads "…from Eastern Europe." not "…from Eastern European."
+    entry.specialty = fixSpecialty(entry.specialty);
+    entry.regionNoun = REGION_NOUN[entry.region] ?? entry.region;
+
     civEntries.push(entry);
 
     // Write content file (skip if exists)
@@ -1047,30 +1052,56 @@ async function run() {
 // ---------------------------------------------------------------------------
 // Markdown template
 // ---------------------------------------------------------------------------
+const REGION_NOUN = {
+  "Ancient Mediterranean": "the Ancient Mediterranean",
+  Caucasian: "the Caucasus",
+  "Central Asian": "Central Asia",
+  "Central European": "Central Europe",
+  "East African": "East Africa",
+  "East Asian": "East Asia",
+  "Eastern European": "Eastern Europe",
+  "Eastern Mediterranean": "the Eastern Mediterranean",
+  Mesoamerican: "Mesoamerica",
+  "Middle Eastern": "the Middle East",
+  "North African": "North Africa",
+  "Northern European": "Northern Europe",
+  "South American": "South America",
+  "South Asian": "South Asia",
+  "Southeast Asian": "Southeast Asia",
+  "Southern European": "Southern Europe",
+  "West African": "West Africa",
+  "Western European": "Western Europe",
+};
+
+const _titleWord = (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+function fixSpecialty(s) {
+  let x = s
+    .replace(/Calvary/gi, "Cavalry")
+    .replace(/\s*\bCivilzation\b/gi, "")
+    .trim();
+  x = x
+    .split(/\s+and\s+/i)
+    .map((p) => p.split(/\s+/).map(_titleWord).join(" "))
+    .join(" and ");
+  x = x.replace(/\bArchers\b/g, "Archer");
+  if (x === "Cavalry Infantry") x = "Cavalry and Infantry";
+  return x;
+}
+
 function buildMarkdown(entry, displayName) {
-  const { slug, region, specialty, civBonuses, teamBonus, uniqueTechs, uniqueUnits } = entry;
-
-  const _bonusLines = civBonuses.map((b) => `  - "${b}"`).join("\n");
-
-  const uniqueUnitLines = uniqueUnits
-    .map((u) => {
-      const unitName = u
-        .split("-")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ");
-      return `- **${unitName}** — Unique unit of the ${displayName}`;
-    })
-    .join("\n");
+  const { slug, region, regionNoun, specialty, civBonuses, teamBonus, uniqueTechs } = entry;
 
   const castleName = uniqueTechs.castle.name || "Castle Age Unique Tech";
   const castleEffect = uniqueTechs.castle.effect || "See in-game tech tree";
   const imperialName = uniqueTechs.imperial.name || "Imperial Age Unique Tech";
   const imperialEffect = uniqueTechs.imperial.effect || "See in-game tech tree";
 
-  const tagline = `${displayName} — a ${specialty} civilization from ${region}.`;
+  const place = regionNoun || region;
+  const art = /^[aeiou]/i.test(specialty) ? "an" : "a";
+  const tagline = `${displayName} — ${art} ${specialty} civilization from ${place}.`;
 
-  const bonusBullets = civBonuses.map((b) => `- ${b}`).join("\n");
-
+  // Bonuses, team bonus, unique units, and unique techs render structurally from
+  // this frontmatter on the civ page — do NOT duplicate them as body sections.
   return `---
 slug: ${slug}
 name: "${displayName}"
@@ -1087,24 +1118,7 @@ uniqueTechs:
     effect: "${imperialEffect.replace(/"/g, '\\"')}"
 ---
 
-${displayName} are a ${region} civilization specializing in ${specialty}.
-
-## Civ Bonuses
-
-${bonusBullets || "- See in-game tech tree"}
-
-## Team Bonus
-
-${teamBonus || "See in-game tech tree"}
-
-## Unique Units
-
-${uniqueUnitLines || "- See Castle for unique unit"}
-
-## Unique Techs
-
-- **${castleName}** (Castle Age) — ${castleEffect}
-- **${imperialName}** (Imperial Age) — ${imperialEffect}
+${displayName} are ${art} ${specialty} civilization from ${place}.
 `;
 }
 

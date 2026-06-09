@@ -1,13 +1,14 @@
 ---
 slug: spanish
 name: "Spanish"
-tagline: "Spanish — a Gunpowder and Monk civilization from Southern European."
+tagline: "Spanish — a Gunpowder and Monk civilization from Southern Europe."
 bonuses:
-  - "Villagers construct buildings 30% faster"
-  - "Blacksmith upgrades do not cost any gold"
-  - "Cannon Galleons benefit from Ballistics (less reload time and more accuracy)"
-  - "Hand Cannoneers and Bombard Cannons reload 15% faster"
-teamBonus: "Trade units generate +33% Gold"
+  - "Builders work +30% faster"
+  - "Receive +20 gold for each technology researched"
+  - "Blacksmith upgrades cost no gold"
+  - "Gunpowder Units attack +18% faster"
+  - "Cannon Galleons fire more accurately at moving targets"
+teamBonus: "Trade Units generate +25% gold"
 uniqueTechs:
   castle:
     name: "Supremacy"
@@ -17,28 +18,7 @@ uniqueTechs:
     effect: "See in-game tech tree"
 ---
 
-Spanish are a Southern European civilization specializing in Gunpowder and Monk.
-
-## Civ Bonuses
-
-- Villagers construct buildings 30% faster
-- Blacksmith upgrades do not cost any gold
-- Cannon Galleons benefit from Ballistics (less reload time and more accuracy)
-- Hand Cannoneers and Bombard Cannons reload 15% faster
-
-## Team Bonus
-
-Trade units generate +33% Gold
-
-## Unique Units
-
-- **Conquistador** — Unique unit of the Spanish
-- **Missionary** — Unique unit of the Spanish
-
-## Unique Techs
-
-- **Supremacy** (Castle Age) — See in-game tech tree
-- **Imperial Age Unique Tech** (Imperial Age) — See in-game tech tree
+Spanish are a Gunpowder and Monk civilization from Southern Europe.
 
 ## How to Play Spanish
 
