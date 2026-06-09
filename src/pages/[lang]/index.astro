@@ -29,9 +29,17 @@ const maps = await getLocalizedEntries("maps", lang);
 // caption can show win/play rate (answers "why these six?"). ---
 const civBySlug = new Map(civs.map((c) => [canonicalSlug(c.id), c]));
 const civData = await getCollection("civ-data");
+// Rank by editorial tier (best first). The aoestats winRate is a stale Dec-2025
+// (patch 162286) snapshot, so it is neither used for ranking nor shown — only the
+// tier. Untiered civs (newest DLC) are excluded rather than guessed.
+const TIER_RANK: Record<string, number> = { S: 0, A: 1, B: 2, C: 3, D: 4 };
 const topCivs = [...civData]
-  .filter((cd) => civBySlug.has(cd.data.slug))
-  .sort((a, b) => (b.data.meta?.winRate ?? 0) - (a.data.meta?.winRate ?? 0))
+  .filter((cd) => civBySlug.has(cd.data.slug) && cd.data.meta?.tier)
+  .sort(
+    (a, b) =>
+      (TIER_RANK[a.data.meta?.tier ?? ""] ?? 9) - (TIER_RANK[b.data.meta?.tier ?? ""] ?? 9) ||
+      a.data.slug.localeCompare(b.data.slug),
+  )
   .slice(0, 6)
   .map((cd) => ({ entry: civBySlug.get(cd.data.slug)!, meta: cd.data.meta }));
 
@@ -209,17 +217,11 @@ const more = [
               bonuses={entry.data.bonuses}
               locale={lang}
             />
-            {meta?.winRate != null && (
+            {meta?.tier && (
               <p class="px-1 text-xs text-stone-700">
-                <span class="font-mono text-gold-500">{meta.winRate.toFixed(1)}%</span>{" "}
-                {t(lang, "matchups.winRate").toLowerCase()}
-                {meta.playRate != null && (
-                  <>
-                    {" · "}
-                    <span class="font-mono">{meta.playRate.toFixed(1)}%</span>{" "}
-                    {t(lang, "matchups.playRate").toLowerCase()}
-                  </>
-                )}
+                <span class="font-mono text-gold-500">
+                  {t(lang, "matchups.tier")} {meta.tier}
+                </span>
               </p>
             )}
           </li>
