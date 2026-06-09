@@ -20,7 +20,10 @@ const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const alternates = allLocalePaths(canonicalPath);
 const canonical = `${site}/${locale}${canonicalPath}`;
-const ogImage = `${site}/og.png`;
+// Per-page Open Graph card from scripts/build-og.mjs (/og/<seg>/<slug>.png);
+// non-detail pages fall back to the default card. Language-agnostic (English title).
+const ogMatch = canonicalPath.match(/^\/(civs|builds|units|maps)\/([^/]+)\/?$/);
+const ogImage = `${site}/og${ogMatch ? `/${ogMatch[1]}/${ogMatch[2]}` : "/default"}.png`;
 
 // JSON-LD structured data — WebSite schema for rich results.
 const jsonLd = {

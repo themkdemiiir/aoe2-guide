@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .astro/
+# Generated build-time Open Graph cards (scripts/build-og.mjs) — regenerated each build.
+public/og/
 .env
 .env.*
 !.env.example
