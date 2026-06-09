@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/validate-icons.mjs && node scripts/verify-build-facts.mjs",
+    "prebuild": "node scripts/validate-icons.mjs && node scripts/verify-build-facts.mjs && node scripts/validate-data.mjs",
+    "validate:data": "node scripts/validate-data.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -50,6 +51,7 @@
     "pagefind": "^1.5.2",
     "tailwindcss": "^4.3.0",
     "typescript": "^5.9.3",
+    "valibot": "^1.4.1",
     "vitest": "^4.1.7"
   },
   "dependencies": {
