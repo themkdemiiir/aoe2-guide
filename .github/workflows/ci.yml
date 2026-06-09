@@ -30,5 +30,8 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: i18n coverage (EN/TR parity)
+        run: pnpm i18n:coverage
+
       - name: Build
         run: pnpm build
