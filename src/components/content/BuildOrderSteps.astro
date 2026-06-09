@@ -11,8 +11,8 @@ interface Step {
   note?: string;
   icons?: string[];
 }
-interface Props { steps: Step[]; lang: Locale; }
-const { steps, lang } = Astro.props;
+interface Props { steps: Step[]; lang: Locale; slug: string; }
+const { steps, lang, slug } = Astro.props;
 
 const iconMap = iconMapJson as Record<string, Record<string, string>>;
 
@@ -72,7 +72,25 @@ for (const [index, step] of steps.entries()) {
   sections[sections.length - 1].steps.push({ ...step, index, isTransition });
 }
 ---
-<div class="space-y-4">
+<div data-trainer data-slug={slug} data-lang={lang} tabindex="-1" class="trainer focus:outline-none">
+  <div class="mb-4 flex flex-wrap items-center gap-2 rounded border border-stone-700/30 bg-stone-700/5 px-3 py-2 text-sm print:hidden">
+    <span class="font-mono text-stone-700"><span data-progress>0/0</span> {t(lang, "builds.doneLabel")}</span>
+    <span class="ml-auto flex items-center gap-1.5">
+      <button type="button" data-action="timer" data-start={t(lang, "builds.start")} data-pause={t(lang, "builds.pause")} class="rounded border border-stone-700/30 bg-parchment px-2 py-1 hover:border-gold-500">{t(lang, "builds.start")}</button>
+      <span data-clock class="w-10 text-center font-mono text-stone-700">0:00</span>
+      <select data-speed aria-label={t(lang, "builds.speed")} class="rounded border border-stone-700/30 bg-parchment px-1 py-1">
+        <option value="1">1.0×</option><option value="1.5">1.5×</option><option value="1.7" selected>1.7×</option><option value="2">2.0×</option>
+      </select>
+      <button type="button" data-action="timer-reset" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 hover:border-gold-500">{t(lang, "builds.timerReset")}</button>
+    </span>
+    <span class="flex items-center gap-1.5">
+      <button type="button" data-action="focus" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 hover:border-gold-500">{t(lang, "builds.focus")}</button>
+      <button type="button" data-action="copy" data-copied={t(lang, "builds.copied")} class="rounded border border-stone-700/30 bg-parchment px-2 py-1 hover:border-gold-500">{t(lang, "builds.copy")}</button>
+      <button type="button" data-action="print" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 hover:border-gold-500">{t(lang, "builds.print")}</button>
+      <button type="button" data-action="reset-progress" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 hover:border-gold-500">{t(lang, "builds.resetProgress")}</button>
+    </span>
+  </div>
+  <div class="space-y-4">
   {sections.map((section) => {
     const first = section.steps[0];
     const pops = section.steps.map((s) => s.villagers).filter((v): v is number => v != null);
@@ -91,8 +109,15 @@ for (const [index, step] of steps.entries()) {
 
         <ol class="divide-y divide-stone-700/20">
           {section.steps.map((s) => (
-            <li class:list={[
-              "grid gap-3 px-4 py-3 sm:grid-cols-[5rem_1fr]",
+            <li
+              id={`step-${s.index}`}
+              data-step={s.index}
+              data-time={s.time ?? ""}
+              data-pop={s.villagers ?? ""}
+              data-assign={s.assign}
+              tabindex="0"
+              class:list={[
+              "group grid cursor-pointer gap-3 px-4 py-3 scroll-mt-24 sm:grid-cols-[5rem_1fr]",
               s.isTransition ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
             ]}>
               <div class="flex items-center gap-3 sm:block">
@@ -144,4 +169,6 @@ for (const [index, step] of steps.entries()) {
       </section>
     );
   })}
+  </div>
 </div>
+<script>import "@/scripts/build-trainer.ts";</script>

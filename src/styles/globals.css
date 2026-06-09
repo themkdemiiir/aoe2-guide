@@ -140,3 +140,48 @@ body {
 .prose :where(code)::after {
   content: none;
 }
+
+/* --- Build-order trainer (progress / current / timer-due / focus / print) --- */
+.trainer [data-step] {
+  transition: opacity 150ms, background-color 150ms;
+}
+.trainer [data-step].is-done {
+  opacity: 0.5;
+}
+.trainer [data-step].is-current {
+  box-shadow: inset 4px 0 0 var(--color-gold-500);
+}
+.trainer [data-step].is-due:not(.is-done) {
+  background-color: color-mix(in oklch, var(--color-ember) 22%, transparent);
+}
+.trainer [data-step]:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: -2px;
+}
+/* Focus mode: only the current step, large; hide the rest + section chrome. */
+.trainer.focus-mode [data-step]:not(.is-current) {
+  display: none;
+}
+.trainer.focus-mode section > header {
+  display: none;
+}
+.trainer.focus-mode section:not(:has(.is-current)) {
+  display: none;
+}
+.trainer.focus-mode [data-step].is-current {
+  padding: 2.5rem;
+}
+.trainer.focus-mode [data-step].is-current p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+@media print {
+  header,
+  footer {
+    display: none !important;
+  }
+  .trainer [data-step] {
+    break-inside: avoid;
+    opacity: 1 !important;
+  }
+}
