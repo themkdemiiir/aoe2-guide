@@ -10,18 +10,18 @@ steps:
   - { villagers: 9,  assign: "+3 → wood, drop a Lumber Camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → lure and eat the first boar", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a House, then a Mill on the chickens or berries", icons: ["house", "mill", "food"] }
-  - { villagers: 11, assign: "Lure one or two deer into the Mill range with your Scout", note: "Free food that keeps your eco on hunt longer", icons: ["scout-cavalry", "food"] }
+  - { assign: "Lure one or two deer into the Mill range with your Scout", note: "Free food that keeps your eco on hunt longer", icons: ["scout-cavalry", "food"] }
   - { villagers: 13, assign: "+2 → Mill (berries)", icons: ["mill", "food"] }
   - { villagers: 14, assign: "+1 → lure and eat the second boar", note: "Bring it in as the first boar runs low", icons: ["food"] }
   - { villagers: 16, assign: "+2 → hunt (boar and deer)", icons: ["food"] }
-  - { villagers: 17, assign: "+1 → build a Barracks and a House at the front of your base", icons: ["barracks", "house"] }
-  - { villagers: 19, time: "9:15", assign: "+2 → hunt, research Loom, then click up to Feudal", note: "Land with roughly 3 on wood and 15 on food", icons: ["food", "loom"] }
+  - { assign: "+1 → build a Barracks and a House at the front of your base", icons: ["barracks", "house"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "+2 → hunt, research Loom, then click up to Feudal", note: "Land with roughly 3 on wood and 15 on food", icons: ["food", "loom"] }
   - { villagers: 19, assign: "Move 2 off food → gold and drop a Mining Camp; get 3 Militia out", icons: ["gold", "mining-camp", "militia"] }
   - { villagers: 19, assign: "Send 5 off the hunt → wood and 3 off the hunt → berries", icons: ["wood", "food"] }
-  - { villagers: 19, assign: "Research Man-at-Arms, then Double-Bit Axe (Horse Collar optional)", icons: ["man-at-arms", "double-bit-axe", "horse-collar"] }
-  - { villagers: 19, assign: "Build an Archery Range at the front; send the straggler-tree Villager onto farms; start Skirmishers", icons: ["archery-range", "skirmisher", "farm"] }
-  - { villagers: 19, assign: "Build a Blacksmith, research Fletching, and keep adding Man-at-Arms", icons: ["blacksmith", "fletching", "man-at-arms"] }
-  - { villagers: 19, assign: "Research Arson once you have 7-8 Man-at-Arms, then Infantry and Skirmisher armor; Wheelbarrow at 14-16 farms", icons: ["arson", "wheelbarrow", "farm"] }
+  - { assign: "Research Man-at-Arms, then Double-Bit Axe (Horse Collar optional)", icons: ["man-at-arms", "double-bit-axe", "horse-collar"] }
+  - { assign: "Build an Archery Range at the front; send the straggler-tree Villager onto farms; start Skirmishers", icons: ["archery-range", "skirmisher", "farm"] }
+  - { assign: "Build a Blacksmith, research Fletching, and keep adding Man-at-Arms", icons: ["blacksmith", "fletching", "man-at-arms"] }
+  - { assign: "Research Arson once you have 7-8 Man-at-Arms, then Infantry and Skirmisher armor; Wheelbarrow at 14-16 farms", icons: ["arson", "wheelbarrow", "farm"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

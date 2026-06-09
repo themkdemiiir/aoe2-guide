@@ -3,7 +3,7 @@ slug: scouts-into-skirms
 name: "18 Köylü Scouts into Skirms"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [franks, huns, malians, lithuanians]
 steps:
   - { villagers: 6,  assign: "6 → Town Center altında koyunda", icons: ["food", "town-center"] }
@@ -12,15 +12,15 @@ steps:
   - { villagers: 10, assign: "+1 → Town Center altında avda", icons: ["food"] }
   - { villagers: 11, assign: "+1 → bir ev, sonra meyvenin yanına mill kur", icons: ["house", "mill", "food"] }
   - { villagers: 12, assign: "+1 → ikinci domuzu çek", note: "Yiyeceği uzatmak için scout ile geyikleri sür", icons: ["food"] }
-  - { villagers: 18, assign: "+6 → Town Center altında avda; Loom araştır ve çağ atla", time: "8:50", note: "Feudal'a ~8:50'de iniş, 2 odun / 16 yiyecek ile", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "+6 → Town Center altında avda; Loom araştır ve çağ atla", time: "8:50", phase: feudal, note: "Feudal'a ~8:50'de iniş, 2 odun / 16 yiyecek ile", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Avdan 6 köylüyü → oduna gönder (tek lumber camp üzerinde toplam 8 oduncu)", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "Avdan 4 köylüyü → meyveye gönder", icons: ["food"] }
   - { villagers: 18, assign: "Avdan 2 köylü al: biri Barracks, biri House kursun", icons: ["barracks", "house"] }
-  - { villagers: 18, assign: "2 köylüyle Stable kur, sonra onları duvar ve oduna gönder; Scout Cavalry üretmeye başla", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 18, assign: "Double-Bit Axe araştır (Horse Collar isteğe bağlı); av tükenirken tarla ek", icons: ["double-bit-axe", "farm"] }
-  - { villagers: 18, assign: "Rakip Archers'a tam yöneldiğinde hızlıca Range kur; 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla", icons: ["archery-range", "skirmisher", "wood"] }
-  - { villagers: 18, assign: "Blacksmith kur; Fletching ve piyade zırhını araştır", icons: ["blacksmith", "fletching"] }
-  - { villagers: 18, assign: "Meyve bitince → ikinci lumber camp; 6 köylüyü → altına ve Mining Camp'e taşı; Wheelbarrow araştır", icons: ["lumber-camp", "gold", "mining-camp", "wheelbarrow"] }
+  - { assign: "2 köylüyle Stable kur, sonra onları duvar ve oduna gönder; Scout Cavalry üretmeye başla", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Double-Bit Axe araştır (Horse Collar isteğe bağlı); av tükenirken tarla ek", icons: ["double-bit-axe", "farm"] }
+  - { assign: "Rakip Archers'a tam yöneldiğinde hızlıca Range kur; 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla", icons: ["archery-range", "skirmisher", "wood"] }
+  - { assign: "Blacksmith kur; Fletching ve piyade zırhını araştır", icons: ["blacksmith", "fletching"] }
+  - { assign: "Meyve bitince → ikinci lumber camp; 6 köylüyü → altına ve Mining Camp'e taşı; Wheelbarrow araştır", icons: ["lumber-camp", "gold", "mining-camp", "wheelbarrow"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

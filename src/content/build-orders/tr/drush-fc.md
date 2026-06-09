@@ -9,17 +9,17 @@ steps:
   - { villagers: 6,  assign: "6 → TC altındaki koyunlara", icons: ["food", "town-center"] }
   - { villagers: 10, assign: "+4 → oduna (bir Lumber Camp kur)", icons: ["wood", "lumber-camp"] }
   - { villagers: 11, assign: "+1 → ilk domuzu çek", icons: ["food"] }
-  - { villagers: 12, assign: "+1 → 2 ev, ardından bir Barracks kur; palisade ile duvar ör", note: "Drush için Barracks'ı öne kur", icons: ["house", "barracks"] }
+  - { assign: "+1 → 2 ev, ardından bir Barracks kur; palisade ile duvar ör", note: "Drush için Barracks'ı öne kur", icons: ["house", "barracks"] }
   - { villagers: 13, assign: "+1 → 10 altın çıkar (Drush parası), sonra 2. domuza", icons: ["gold", "food"] }
-  - { villagers: 13, assign: "3 Militia üret ve Scout ile birlikte öne gönder", note: "Saf Drush — Men-at-Arms yükseltmesini ASLA yapma", icons: ["militia", "scout-cavalry"] }
+  - { assign: "3 Militia üret ve Scout ile birlikte öne gönder", note: "Saf Drush — Men-at-Arms yükseltmesini ASLA yapma", icons: ["militia", "scout-cavalry"] }
   - { villagers: 14, assign: "+1 → 2. domuz", icons: ["food"] }
   - { villagers: 19, assign: "+5 → meyveye (bir Mill kur)", icons: ["food", "mill"] }
   - { villagers: 23, assign: "+4 → oduna (1 Lumber Camp daha)", icons: ["wood", "lumber-camp"] }
-  - { villagers: 23, assign: "Loom araştır", icons: ["loom"] }
-  - { villagers: 27, time: "12:35", assign: "+4 → altına; Feudal Age'e tıkla", note: "Ekonomi dağılımı ~8 odun / 14 yemek / 4 altın", icons: ["gold"] }
-  - { villagers: 27, assign: "Feudal: duvarı tamamla; Militia + Scout ile baskıyı sürdür", icons: ["militia", "scout-cavalry"] }
+  - { assign: "Loom araştır", icons: ["loom"] }
+  - { villagers: 27, time: "12:35", phase: feudal, assign: "+4 → altına; Feudal Age'e tıkla", note: "Ekonomi dağılımı ~8 odun / 14 yemek / 4 altın", icons: ["gold"] }
+  - { assign: "Feudal: duvarı tamamla; Militia + Scout ile baskıyı sürdür", icons: ["militia", "scout-cavalry"] }
   - { villagers: 29, assign: "+2 → altına; 2 Archery Range ve bir Blacksmith kur", icons: ["gold", "archery-range", "blacksmith"] }
-  - { villagers: 29, time: "16:05", assign: "Castle: Archer yığ; Double-Bit Axe, Horse Collar, Fletching araştır", note: "Ekonomi + teknoloji üstünlüğüyle Castle-first", icons: ["archer", "double-bit-axe", "fletching"] }
+  - { time: "16:05", phase: castle, assign: "Castle: Archer yığ; Double-Bit Axe, Horse Collar, Fletching araştır", note: "Ekonomi + teknoloji üstünlüğüyle Castle-first", icons: ["archer", "double-bit-axe", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

@@ -13,14 +13,14 @@ steps:
   - { villagers: 11, assign: "+1 → build a house, then a mill on the berries", icons: ["house", "mill", "food"] }
   - { villagers: 12, assign: "+1 → lure and eat the second boar", icons: ["food"] }
   - { villagers: 17, assign: "+5 → hunt; keep the eco on food while you scout", note: "You MUST find the enemy before you click up — a blind push hits empty map", icons: ["food"] }
-  - { villagers: 17, assign: "Research Loom, then click up to Feudal Age", time: "8:25", icons: ["loom"] }
+  - { villagers: 17, phase: feudal, assign: "Research Loom, then click up to Feudal Age", time: "8:25", icons: ["loom"] }
   - { villagers: 17, assign: "Feudal arrives — move 1 hunter to wood", icons: ["wood"] }
   - { villagers: 17, assign: "Move 2 hunters to stone and drop a mining camp", icons: ["stone", "mining-camp"] }
   - { villagers: 17, assign: "Send 10 villagers forward; keep 1 on hunt at home", note: "Skip every eco upgrade for now — stone and bodies come first", icons: ["watch-tower"] }
-  - { villagers: 19, assign: "+2 new vils → hunt and food; add farms and houses as needed", icons: ["food", "farm"] }
-  - { villagers: 21, assign: "Build the first tower ~8 tiles from their woodline or berries", icons: ["watch-tower"] }
-  - { villagers: 23, assign: "+2 forward vils build houses for supply; garrison up to 10 vils per tower", icons: ["house", "watch-tower"] }
-  - { villagers: 25, assign: "Chain new towers 6–8 tiles apart, walking deeper into their economy", icons: ["watch-tower"] }
+  - { assign: "+2 new vils → hunt and food; add farms and houses as needed", icons: ["food", "farm"] }
+  - { assign: "Build the first tower ~8 tiles from their woodline or berries", icons: ["watch-tower"] }
+  - { assign: "+2 forward vils build houses for supply; garrison up to 10 vils per tower", icons: ["house", "watch-tower"] }
+  - { assign: "Chain new towers 6–8 tiles apart, walking deeper into their economy", icons: ["watch-tower"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

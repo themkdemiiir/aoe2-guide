@@ -10,17 +10,17 @@ steps:
   - { villagers: 8,  assign: "+2 → odun, bir Kereste Kampı kur", icons: ["wood", "lumber-camp"] }
   - { villagers: 9,  assign: "+1 → ilk yaban domuzunu Şehir Merkezi'ne çek", icons: ["food"] }
   - { villagers: 11, assign: "+2 → Şehir Merkezi'nin altındaki yaban domuzunu avla", icons: ["food"] }
-  - { villagers: 11, assign: "İzciyle 3 geyiği Şehir Merkezi'ne doğru çek", note: "Yiyeceği yakın tutar, toplayıcılar uzağa yürümez", icons: ["food"] }
+  - { assign: "İzciyle 3 geyiği Şehir Merkezi'ne doğru çek", note: "Yiyeceği yakın tutar, toplayıcılar uzağa yürümez", icons: ["food"] }
   - { villagers: 12, assign: "+1 → bir Ev, ardından meyvelerin üstüne Değirmen kur", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+4 → av (ikinci yaban domuzunu içeri çek)", icons: ["food"] }
   - { villagers: 17, assign: "+1 → meyveler", icons: ["food"] }
-  - { villagers: 19, time: "9:15", assign: "+2 → odun, Loom araştır, sonra Feodal'e tıkla", note: "Feodal'e 4 odun / 15 yiyecekle 9:15 civarında geç", icons: ["wood", "loom"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "+2 → odun, Loom araştır, sonra Feodal'e tıkla", note: "Feodal'e 4 odun / 15 yiyecekle 9:15 civarında geç", icons: ["wood", "loom"] }
   - { villagers: 19, assign: "Feodal geldi — 5 avcıyı 2. Kereste Kampı'na, 1 avcıyı başlangıç odun hattına gönder", icons: ["wood", "lumber-camp"] }
   - { villagers: 19, assign: "2 avcı → meyveler; 1 avcı Kışla kursun (Feodal'in ~%50'sinde başlat)", icons: ["food", "barracks"] }
   - { villagers: 19, assign: "3 avcı → altın (Maden Kampı); Double-Bit Axe araştır, Horse Collar'ı atla", icons: ["gold", "mining-camp", "double-bit-axe"] }
-  - { villagers: 19, assign: "Kışla'dan Kartal İzcisi bas; 2 köylüyle bir Okçu Menzili ekle", note: "Menzil işçileriyle boşlukları Ev ve palisad ile kapat", icons: ["eagle-scout", "archery-range"] }
-  - { villagers: 23, assign: "KARAR — okçulara karşı +4 ŞM köylüsünü altına gönderip Okçu bas; nişancılara karşı +4'ü artık ağaç odununa gönderip Nişancı bas", icons: ["archer", "skirmisher"] }
-  - { villagers: 23, assign: "Ekonominin arkasına Tarla ek; bir Demirci kur ve Fletching araştır", icons: ["farm", "blacksmith", "fletching"] }
+  - { assign: "Kışla'dan Kartal İzcisi bas; 2 köylüyle bir Okçu Menzili ekle", note: "Menzil işçileriyle boşlukları Ev ve palisad ile kapat", icons: ["eagle-scout", "archery-range"] }
+  - { assign: "KARAR — okçulara karşı +4 ŞM köylüsünü altına gönderip Okçu bas; nişancılara karşı +4'ü artık ağaç odununa gönderip Nişancı bas", icons: ["archer", "skirmisher"] }
+  - { assign: "Ekonominin arkasına Tarla ek; bir Demirci kur ve Fletching araştır", icons: ["farm", "blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

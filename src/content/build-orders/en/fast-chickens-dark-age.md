@@ -3,8 +3,8 @@ slug: fast-chickens-dark-age
 name: "Fast Chickens Dark Age"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
-civsRecommended: [mayans, aztecs, vikings, malians, ethiopians]
+durationMin: 9
+civsRecommended: []
 steps:
   - { villagers: 5, assign: "5 → sheep under the TC", icons: ["food", "town-center"] }
   - { villagers: 8, assign: "+3 → build a mill on the chickens and gather them", note: "Chickens give fast, dense food right next to the TC", icons: ["mill", "food"] }
@@ -13,10 +13,10 @@ steps:
   - { villagers: 11, assign: "+1 → build a house, then chop a straggler tree", icons: ["house", "wood"] }
   - { villagers: 14, assign: "+3 → straggler trees near the TC", icons: ["wood"] }
   - { villagers: 15, assign: "+1 → lure the second boar", icons: ["food"] }
-  - { villagers: 15, assign: "Drop a lumber camp on the 4 straggler-tree villagers", note: "No new villager — just relocate to a proper woodline", icons: ["lumber-camp", "wood"] }
-  - { villagers: 18, assign: "+3 → hunt under the TC; research Loom, then click up to Feudal", time: "8:50", note: "Land at 18 pop with a 4-wood / 14-food split", icons: ["food", "loom"] }
-  - { villagers: 18, assign: "Feudal: walk 6 villagers onto the berries with a mill so food keeps flowing", icons: ["food", "mill"] }
-  - { villagers: 18, assign: "Pick your feudal opening based on what your scout sees — scouts, archers, or man-at-arms all work from here", icons: ["scout-cavalry", "archer"] }
+  - { assign: "Drop a lumber camp on the 4 straggler-tree villagers", note: "No new villager — just relocate to a proper woodline", icons: ["lumber-camp", "wood"] }
+  - { villagers: 18, phase: feudal, assign: "+3 → hunt under the TC; research Loom, then click up to Feudal", time: "8:50", note: "Land at 18 pop with a 4-wood / 14-food split", icons: ["food", "loom"] }
+  - { assign: "Feudal: walk 6 villagers onto the berries with a mill so food keeps flowing", icons: ["food", "mill"] }
+  - { assign: "Pick your feudal opening based on what your scout sees — scouts, archers, or man-at-arms all work from here", icons: ["scout-cavalry", "archer"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

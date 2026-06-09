@@ -11,15 +11,15 @@ steps:
   - { villagers: 11, assign: "+2 → lure and eat the first boar", note: "Bring the second boar in when the first is about half eaten", icons: ["food"] }
   - { villagers: 12, assign: "+1 → build a House, then a Mill on berries", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+4 → berries", icons: ["food"] }
-  - { villagers: 17, assign: "+1 → build a Barracks and a House at the front of your base", icons: ["barracks", "house"] }
-  - { villagers: 19, time: "9:15", assign: "+2 → wood, research Loom, then click up to Feudal", note: "Land with roughly 5 on wood and 13 on food", icons: ["wood", "loom"] }
+  - { assign: "+1 → build a Barracks and a House at the front of your base", icons: ["barracks", "house"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "+2 → wood, research Loom, then click up to Feudal", note: "Land with roughly 5 on wood and 13 on food", icons: ["wood", "loom"] }
   - { villagers: 19, assign: "Move 2 off food → gold, then shift 7 off food → wood", icons: ["gold", "wood"] }
-  - { villagers: 19, assign: "Pump Militia up to 5 and walk them at the opponent", note: "These 5 are the core of the push — keep them alive", icons: ["militia"] }
-  - { villagers: 19, assign: "As the hunt runs out, send those Villagers to the straggler trees and seed 5 farms", icons: ["farm", "wood"] }
-  - { villagers: 19, assign: "Research Man-at-Arms, then Double-Bit Axe", icons: ["man-at-arms", "double-bit-axe"] }
-  - { villagers: 19, assign: "Send new Villagers onto the straggler trees; build a Blacksmith once 5 farms are down", icons: ["blacksmith", "wood"] }
-  - { villagers: 19, assign: "Research Infantry armor (+2) at the Blacksmith — Roman armor makes this huge", icons: ["blacksmith"] }
-  - { villagers: 19, assign: "Pressure with your Scout plus the Man-at-Arms together; pick fights you win", icons: ["scout-cavalry", "man-at-arms"] }
+  - { assign: "Pump Militia up to 5 and walk them at the opponent", note: "These 5 are the core of the push — keep them alive", icons: ["militia"] }
+  - { assign: "As the hunt runs out, send those Villagers to the straggler trees and seed 5 farms", icons: ["farm", "wood"] }
+  - { assign: "Research Man-at-Arms, then Double-Bit Axe", icons: ["man-at-arms", "double-bit-axe"] }
+  - { assign: "Send new Villagers onto the straggler trees; build a Blacksmith once 5 farms are down", icons: ["blacksmith", "wood"] }
+  - { assign: "Research Infantry armor (+2) at the Blacksmith — Roman armor makes this huge", icons: ["blacksmith"] }
+  - { assign: "Pressure with your Scout plus the Man-at-Arms together; pick fights you win", icons: ["scout-cavalry", "man-at-arms"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

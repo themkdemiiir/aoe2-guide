@@ -12,14 +12,14 @@ steps:
   - { villagers: 11, assign: "+1 → ilk domuzu çek ve ye", icons: ["food"] }
   - { villagers: 12, assign: "+1 → 2 ev kur, sonra meyvenin yanına mill kur", note: "Scout ile geyikleri sür — bu builde yiyecek hızlı tükenir", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+4 → Town Center altında avda; ikinci domuzu çek", icons: ["food"] }
-  - { villagers: 20, assign: "+4 → meyveye, sonra çağ atlamayı araştır", time: "8:25", note: "Feudal'a ~8:25'te iniş, 3 odun / 17 yiyecek ile", icons: ["food"] }
+  - { villagers: 20, assign: "+4 → meyveye, sonra çağ atlamayı araştır", time: "8:25", phase: feudal, note: "Feudal'a ~8:25'te iniş, 3 odun / 17 yiyecek ile", icons: ["food"] }
   - { villagers: 20, assign: "Town Center'dan 2 köylü çek → 1. lumber camp'i güçlendir", icons: ["wood", "lumber-camp"] }
   - { villagers: 20, assign: "Town Center'dan 5 köylü çek → yeni bir odun hattına 2. lumber camp kur", icons: ["wood", "lumber-camp"] }
-  - { villagers: 22, assign: "Town Center'ı 2 köylü daha eklemeye devam ettir; odun yetince Barracks kur", icons: ["barracks"] }
-  - { villagers: 22, assign: "Scout hattı: Stable kur, Scout Cavalry üret ve ekonomi yükseltmelerine öncelik ver", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 22, assign: "Archer hattı: 2-3 köylüyü → altına ve Mining Camp'e taşı, ardından Archery Range ekle", icons: ["gold", "mining-camp", "archery-range", "archer"] }
-  - { villagers: 22, assign: "Man-at-Arms hattı: ~3 Militia yap, sonra Man-at-Arms yükseltmesini ve Double-Bit Axe'i araştır", icons: ["barracks", "militia", "man-at-arms", "double-bit-axe"] }
-  - { villagers: 22, assign: "Tower rush: ~5 köylüyü rakibin ekonomisine Watch Tower kurmaya gönder", note: "MAA-trush'ı atla — build ikisini birden taşıyamayacak kadar fakir", icons: ["watch-tower"] }
+  - { assign: "Town Center'ı 2 köylü daha eklemeye devam ettir; odun yetince Barracks kur", icons: ["barracks"] }
+  - { assign: "Scout hattı: Stable kur, Scout Cavalry üret ve ekonomi yükseltmelerine öncelik ver", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Archer hattı: 2-3 köylüyü → altına ve Mining Camp'e taşı, ardından Archery Range ekle", icons: ["gold", "mining-camp", "archery-range", "archer"] }
+  - { assign: "Man-at-Arms hattı: ~3 Militia yap, sonra Man-at-Arms yükseltmesini ve Double-Bit Axe'i araştır", icons: ["barracks", "militia", "man-at-arms", "double-bit-axe"] }
+  - { assign: "Tower rush: ~5 köylüyü rakibin ekonomisine Watch Tower kurmaya gönder", note: "MAA-trush'ı atla — build ikisini birden taşıyamayacak kadar fakir", icons: ["watch-tower"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

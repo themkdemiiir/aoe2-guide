@@ -15,12 +15,12 @@ steps:
   - { villagers: 16, assign: "+1 → House kur sonra meyveye ekle (toplam 4)", icons: ["house", "food"] }
   - { villagers: 19, assign: "+3 → TC altında yiyeceğe (av ve koyunu tüket)", icons: ["food"] }
   - { villagers: 23, assign: "+4 → oduna; koyun bitince Farm ekmeye başla", icons: ["wood", "farm"] }
-  - { villagers: 28, time: "12:35", assign: "+5 → altına, Feudal Age'e tıkla", note: "~12:35'te yaklaşık 8 odun / 15 yiyecek / 5 altın ile Feudal'a geç", icons: ["gold", "feudal-age"] }
-  - { villagers: 28, assign: "Feudal: 1 → Blacksmith, 2 → Market; +2 → altına; Double-Bit Axe araştır", icons: ["blacksmith", "market", "double-bit-axe"] }
-  - { villagers: 30, time: "16:05", assign: "200 taş sat, Castle Age'e tıkla", icons: ["castle-age", "gold"] }
-  - { villagers: 30, assign: "Castle: inşaatçılar → Farm, Gold Mining araştır; Siege Workshop + Manastır kur", icons: ["siege-workshop", "monastery", "gold-mining"] }
-  - { villagers: 32, time: "20:05", assign: "İkinci Mining Camp kur, Imperial Age'e tıkla", icons: ["imperial-age", "mining-camp"] }
-  - { villagers: 32, assign: "Imperial: odun al, Barracks + 2 Archery Range kur; El Topçusu + 1-2 Bombard Cannon yığ", icons: ["archery-range", "hand-cannoneer", "bombard-cannon"] }
+  - { villagers: 28, time: "12:35", phase: feudal, assign: "+5 → altına, Feudal Age'e tıkla", note: "~12:35'te yaklaşık 8 odun / 15 yiyecek / 5 altın ile Feudal'a geç", icons: ["gold", "feudal-age"] }
+  - { villagers: 30, assign: "Feudal: 1 → Blacksmith, 2 → Market; +2 → altına; Double-Bit Axe araştır", icons: ["blacksmith", "market", "double-bit-axe"] }
+  - { time: "16:05", phase: castle, assign: "200 taş sat, Castle Age'e tıkla", icons: ["castle-age", "gold"] }
+  - { villagers: 32, assign: "Castle: inşaatçılar → Farm, Gold Mining araştır; Siege Workshop + Manastır kur", icons: ["siege-workshop", "monastery", "gold-mining"] }
+  - { time: "20:05", phase: imperial, assign: "İkinci Mining Camp kur, Imperial Age'e tıkla", icons: ["imperial-age", "mining-camp"] }
+  - { assign: "Imperial: odun al, Barracks + 2 Archery Range kur; El Topçusu + 1-2 Bombard Cannon yığ", icons: ["archery-range", "hand-cannoneer", "bombard-cannon"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

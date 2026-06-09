@@ -9,17 +9,17 @@ steps:
   - { villagers: 6,  assign: "6 → sheep under the TC", icons: ["food", "town-center"] }
   - { villagers: 10, assign: "+4 → wood (build a Lumber Camp)", icons: ["wood", "lumber-camp"] }
   - { villagers: 11, assign: "+1 → lure the first boar", icons: ["food"] }
-  - { villagers: 12, assign: "+1 → House, then a front Barracks, then a House; start a slow wall", note: "Front-place the Barracks for the Spear pressure", icons: ["house", "barracks"] }
+  - { assign: "+1 → House, then a front Barracks, then a House; start a slow wall", note: "Front-place the Barracks for the Spear pressure", icons: ["house", "barracks"] }
   - { villagers: 14, assign: "+2 → 1st boar; lure the deer with your Scout", icons: ["food", "scout-cavalry"] }
   - { villagers: 15, assign: "+1 → 2nd boar", icons: ["food"] }
   - { villagers: 17, assign: "+2 → boar / hunt", icons: ["food"] }
-  - { villagers: 17, assign: "Queue 2-3 Spearmen and harass alongside the Scout", note: "Spears deny enemy Scouts while you keep climbing", icons: ["spearman", "scout-cavalry"] }
+  - { assign: "Queue 2-3 Spearmen and harass alongside the Scout", note: "Spears deny enemy Scouts while you keep climbing", icons: ["spearman", "scout-cavalry"] }
   - { villagers: 23, assign: "+6 → berries (build a Mill); pull 2 hunters onto the wall (3 walling vils total)", icons: ["food", "mill"] }
   - { villagers: 26, assign: "+3 → gold; move 5 food villagers to wood (9 on wood); seed Farms", icons: ["gold", "wood", "farm"] }
-  - { villagers: 26, assign: "Research Loom", icons: ["loom"] }
-  - { villagers: 26, time: "12:10", assign: "Click Feudal Age", note: "Eco split ~9 wood / 11 food / 3 gold", icons: ["food"] }
+  - { assign: "Research Loom", icons: ["loom"] }
+  - { villagers: 26, time: "12:10", phase: feudal, assign: "Click Feudal Age", note: "Eco split ~9 wood / 11 food / 3 gold", icons: ["food"] }
   - { villagers: 26, assign: "Feudal: send walling villagers to stragglers; build a Market + Blacksmith with 3 of them", icons: ["market", "blacksmith"] }
-  - { villagers: 28, time: "15:40", assign: "+2 → gold; click Castle Age. Research Double-Bit Axe and Horse Collar", icons: ["gold", "double-bit-axe", "horse-collar"] }
+  - { villagers: 28, time: "15:40", phase: castle, assign: "+2 → gold; click Castle Age. Research Double-Bit Axe and Horse Collar", icons: ["gold", "double-bit-axe", "horse-collar"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

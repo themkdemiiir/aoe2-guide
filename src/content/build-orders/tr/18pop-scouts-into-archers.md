@@ -3,7 +3,7 @@ slug: 18pop-scouts-into-archers
 name: "18 Köylü Scouts into Archers"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [chinese, huns, malians, portuguese]
 steps:
   - { villagers: 6,  assign: "6 → Town Center altında koyunda", icons: ["food", "town-center"] }
@@ -12,15 +12,15 @@ steps:
   - { villagers: 10, assign: "+1 → Town Center altında avda", icons: ["food"] }
   - { villagers: 11, assign: "+1 → bir ev, sonra meyvenin yanına mill kur", icons: ["house", "mill", "food"] }
   - { villagers: 12, assign: "+1 → ikinci domuzu çek", note: "Yiyeceği uzatmak için scout ile geyikleri sür", icons: ["food"] }
-  - { villagers: 18, assign: "+6 → Town Center altında avda; Loom araştır ve çağ atla", time: "8:50", note: "Feudal'a ~8:50'de iniş, 2 odun / 16 yiyecek ile", icons: ["food", "loom"] }
+  - { villagers: 18, phase: feudal, assign: "+6 → Town Center altında avda; Loom araştır ve çağ atla", time: "8:50", note: "Feudal'a ~8:50'de iniş, 2 odun / 16 yiyecek ile", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Avdan 6 köylüyü → oduna gönder (toplam 8 oduncu, ya da ikinci kampa böl)", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "Avdan 4 köylüyü → meyveye gönder", icons: ["food"] }
   - { villagers: 18, assign: "Avdan 2 köylü al: biri Barracks, biri House kursun", icons: ["barracks", "house"] }
-  - { villagers: 18, assign: "Stable kur, Scout Cavalry üret, 1+ Spearman ekle; Double-Bit Axe araştır (Horse Collar isteğe bağlı)", icons: ["stable", "scout-cavalry", "spearman", "double-bit-axe"] }
-  - { villagers: 18, assign: "Av yiyeceği azalırken yaklaşık 8 tarla ek", icons: ["farm"] }
-  - { villagers: 18, assign: "8 Town Center köylüsünü → altına taşı, Mining Camp kur", icons: ["gold", "mining-camp"] }
-  - { villagers: 18, assign: "2 Archery Range kur ve Archers'a geç", icons: ["archery-range", "archer"] }
-  - { villagers: 18, assign: "Blacksmith kur ve Fletching araştır", icons: ["blacksmith", "fletching"] }
+  - { assign: "Stable kur, Scout Cavalry üret, 1+ Spearman ekle; Double-Bit Axe araştır (Horse Collar isteğe bağlı)", icons: ["stable", "scout-cavalry", "spearman", "double-bit-axe"] }
+  - { assign: "Av yiyeceği azalırken yaklaşık 8 tarla ek", icons: ["farm"] }
+  - { assign: "8 Town Center köylüsünü → altına taşı, Mining Camp kur", icons: ["gold", "mining-camp"] }
+  - { assign: "2 Archery Range kur ve Archers'a geç", icons: ["archery-range", "archer"] }
+  - { assign: "Blacksmith kur ve Fletching araştır", icons: ["blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

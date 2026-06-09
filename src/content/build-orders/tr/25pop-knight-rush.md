@@ -14,11 +14,11 @@ steps:
   - { villagers: 13, assign: "+1 → 2. yaban domuzunu çek", icons: ["food"] }
   - { villagers: 17, assign: "+4 → meyveler", icons: ["food"] }
   - { villagers: 22, assign: "+5 → odun; nüfus dolunca araya bir Ev dik", icons: ["wood", "house"] }
-  - { villagers: 25, assign: "+3 → Maden Kampı dik ve altın çıkar, ardından Loom araştır ve çağı tıkla", note: "Feudal ~11:45'te gelir; yaklaşık 8 odunda, 14 yiyecekte, 3 altında", icons: ["mining-camp", "gold", "loom"] }
-  - { villagers: 25, assign: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır", icons: ["barracks", "house", "farm"] }
-  - { villagers: 27, assign: "+2 → Ahır ve Pazar dik", icons: ["stable", "market"] }
-  - { villagers: 31, assign: "+4 → altın; Double-Bit Axe araştır; Castle çağını tıkla", time: "16:05", note: "Çağ atlarken 2. Ahırı dik", icons: ["gold", "double-bit-axe", "stable"] }
-  - { villagers: 31, assign: "Castle çağında: Horse Collar ve Bow Saw araştır; iki Ahırdan da Şövalye bas", icons: ["horse-collar", "bow-saw", "knight"] }
+  - { villagers: 25, phase: feudal, assign: "+3 → Maden Kampı dik ve altın çıkar, ardından Loom araştır ve çağı tıkla", note: "Feudal ~11:45'te gelir; yaklaşık 8 odunda, 14 yiyecekte, 3 altında", icons: ["mining-camp", "gold", "loom"] }
+  - { assign: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır", icons: ["barracks", "house", "farm"] }
+  - { assign: "+2 → Ahır ve Pazar dik", icons: ["stable", "market"] }
+  - { villagers: 29, phase: castle, assign: "+4 → altın; Double-Bit Axe araştır; Castle çağını tıkla", time: "16:05", note: "Çağ atlarken 2. Ahırı dik", icons: ["gold", "double-bit-axe", "stable"] }
+  - { assign: "Castle çağında: Horse Collar ve Bow Saw araştır; iki Ahırdan da Şövalye bas", icons: ["horse-collar", "bow-saw", "knight"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

@@ -3,22 +3,22 @@ slug: fc-fortress
 name: "Fortress'ta Hızlı Kale (Fast Castle)"
 difficulty: intermediate
 targetAge: castle
-durationMin: 10
-civsRecommended: [franks, persians, byzantines, teutons, romans]
+durationMin: 11
+civsRecommended: []
 steps:
-  - { villagers: 10, assign: "Fortress başlangıcı (10 köylü): 4 → meyveye ve bir Değirmen (Mill) kur", note: "Şehir Merkezi build boyunca sürekli köylü üretmeye devam etsin", icons: ["food", "mill", "town-center"] }
-  - { villagers: 10, assign: "3 → oduna, bir Kereste Kampı (Lumber Camp) bırak", icons: ["wood", "lumber-camp"] }
+  - { villagers: 4, assign: "Fortress başlangıcı (10 köylü): 4 → meyveye ve bir Değirmen (Mill) kur", note: "Şehir Merkezi build boyunca sürekli köylü üretmeye devam etsin", icons: ["food", "mill", "town-center"] }
+  - { villagers: 7, assign: "3 → oduna, bir Kereste Kampı (Lumber Camp) bırak", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "3 → tarlalara; ŞM yanındaki 5 hazır tarlayı kullan", icons: ["farm"] }
-  - { villagers: 10, assign: "İlk yaban domuzunu scout ile çek; ŞM altında ye", note: "Domuz biterken üretilen ilk 1-2 köylüyü tarlalara gönder", icons: ["food"] }
+  - { assign: "İlk yaban domuzunu scout ile çek; ŞM altında ye", note: "Domuz biterken üretilen ilk 1-2 köylüyü tarlalara gönder", icons: ["food"] }
   - { villagers: 16, assign: "+6 → ŞM altında yiyeceğe (yaklaşık 9'u yiyecekte, 4'ü meyvede)", icons: ["food"] }
-  - { villagers: 16, assign: "Yiyeceği akışta tutmak için ikinci domuzu çek", note: "Yeni nüfus yok — eko köylülerini meşgul tut", icons: ["food"] }
+  - { assign: "Yiyeceği akışta tutmak için ikinci domuzu çek", note: "Yeni nüfus yok — eko köylülerini meşgul tut", icons: ["food"] }
   - { villagers: 20, assign: "+4 → oduna, çünkü odun ekonomisi sıkışmaya başlar", icons: ["wood"] }
-  - { villagers: 20, assign: "Domuz bitince yiyecek köylülerini tarlalara aktar (4 tarla aç)", note: "Yeni nüfus değil, görev değişimi", icons: ["farm"] }
-  - { villagers: 22, assign: "+2 → altına, sonra Feudal Çağ'a tıkla (~7:10 / 7 odun, 13 yiyecek, 2 altın)", note: "Feudal'da olabildiğince az vakit harca", icons: ["gold"] }
+  - { assign: "Domuz bitince yiyecek köylülerini tarlalara aktar (4 tarla aç)", note: "Yeni nüfus değil, görev değişimi", icons: ["farm"] }
+  - { villagers: 22, phase: feudal, assign: "+2 → altına, sonra Feudal Çağ'a tıkla (~7:10 / 7 odun, 13 yiyecek, 2 altın)", note: "Feudal'da olabildiğince az vakit harca", icons: ["gold"] }
   - { villagers: 24, assign: "Feudal: scout'u iyileştir, sonra kalıntıları ve rakibi keşfet; +2 → oduna kaydır", icons: ["scout-cavalry", "wood"] }
-  - { villagers: 24, assign: "3 odun köylüsünü çek → Pazar (Market) (2) ve Demirci (Blacksmith) (1)", icons: ["market", "blacksmith"] }
-  - { villagers: 24, assign: "Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır", time: "10:40", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 24, assign: "Kale: meyve biterken o köylüleri ilk ek Şehir Merkezi noktasına gönder", icons: ["town-center", "farm"] }
+  - { assign: "3 odun köylüsünü çek → Pazar (Market) (2) ve Demirci (Blacksmith) (1)", icons: ["market", "blacksmith"] }
+  - { phase: castle, assign: "Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır", time: "10:40", icons: ["double-bit-axe", "horse-collar"] }
+  - { assign: "Kale: meyve biterken o köylüleri ilk ek Şehir Merkezi noktasına gönder", icons: ["town-center", "farm"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

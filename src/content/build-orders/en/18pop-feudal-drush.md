@@ -11,13 +11,13 @@ steps:
   - { villagers: 10, assign: "+1 → lure first boar", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build house, then hunt", note: "Lure deer with the scout", icons: ["house", "food"] }
   - { villagers: 15, assign: "+4 → hunt; lure 2nd boar", icons: ["food"] }
-  - { villagers: 16, assign: "+1 → build Barracks at front of base, then house", icons: ["barracks", "house"] }
+  - { assign: "+1 → build Barracks at front of base, then house", icons: ["barracks", "house"] }
   - { villagers: 17, assign: "+1 → hunt", icons: ["food"] }
-  - { villagers: 18, time: "8:50", assign: "+1 → wood; research Loom, then click Feudal Age", note: "Landing ~8:50 (4 wood / 13 food)", icons: ["wood", "loom"] }
-  - { villagers: 18, assign: "Feudal arrives — produce 2 Militia and send them to the enemy base", icons: ["militia", "barracks"] }
+  - { villagers: 18, time: "8:50", phase: feudal, assign: "+1 → wood; research Loom, then click Feudal Age", note: "Landing ~8:50 (4 wood / 13 food)", icons: ["wood", "loom"] }
+  - { assign: "Feudal arrives — produce 2 Militia and send them to the enemy base", icons: ["militia", "barracks"] }
   - { villagers: 18, assign: "4 vils from TC → initial lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 19, assign: "+1 from TC → berries, build Mill; research Double-Bit Axe", note: "Horse Collar optional", icons: ["food", "mill", "double-bit-axe"] }
-  - { villagers: 21, assign: "+2 → follow-up military by scouting opponent; slow-wall", icons: ["scout-cavalry", "barracks"] }
+  - { villagers: 18, assign: "+1 from TC → berries, build Mill; research Double-Bit Axe", note: "Horse Collar optional", icons: ["food", "mill", "double-bit-axe"] }
+  - { assign: "+2 → follow-up military by scouting opponent; slow-wall", icons: ["scout-cavalry", "barracks"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

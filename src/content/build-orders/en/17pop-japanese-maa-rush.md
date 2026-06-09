@@ -12,16 +12,16 @@ steps:
   - { villagers: 10, assign: "+1 → lure the second boar under the Town Center", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a House, then move to the hunt", note: "Lure at least 2 deer — this is mandatory", icons: ["house", "food"] }
   - { villagers: 13, assign: "+2 → hunt (eat through the second boar)", icons: ["food"] }
-  - { villagers: 14, assign: "+1 → build a Barracks at the front of your base", icons: ["barracks"] }
+  - { assign: "+1 → build a Barracks at the front of your base", icons: ["barracks"] }
   - { villagers: 16, assign: "+2 → food under the Town Center", icons: ["food"] }
-  - { villagers: 17, time: "8:25", assign: "+1 → wood, research Loom, then click up to Feudal", note: "Land with roughly 3 on wood and 13 on food", icons: ["wood", "loom"] }
+  - { villagers: 17, time: "8:25", phase: feudal, assign: "+1 → wood, research Loom, then click up to Feudal", note: "Land with roughly 3 on wood and 13 on food", icons: ["wood", "loom"] }
   - { villagers: 17, assign: "2 from the hunt → gold, drop a Mining Camp", icons: ["gold", "mining-camp"] }
-  - { villagers: 17, assign: "Pump 3 Militia and walk them across the map", icons: ["militia"] }
+  - { assign: "Pump 3 Militia and walk them across the map", icons: ["militia"] }
   - { villagers: 17, assign: "4 off the Town Center → wood at the Lumber Camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 17, assign: "Build an Archery Range and start Archers; research Man-at-Arms", icons: ["archery-range", "archer", "man-at-arms"] }
-  - { villagers: 17, assign: "Add a Blacksmith; research Double-Bit Axe", icons: ["blacksmith", "double-bit-axe"] }
-  - { villagers: 17, assign: "+2 → gold; 1 → berries and build a Mill", icons: ["gold", "food", "mill"] }
-  - { villagers: 17, assign: "Research Fletching; send Archers and Man-at-Arms across the map together", icons: ["fletching", "archer", "man-at-arms"] }
+  - { assign: "Build an Archery Range and start Archers; research Man-at-Arms", icons: ["archery-range", "archer", "man-at-arms"] }
+  - { assign: "Add a Blacksmith; research Double-Bit Axe", icons: ["blacksmith", "double-bit-axe"] }
+  - { villagers: 20, assign: "+2 → gold; 1 → berries and build a Mill", icons: ["gold", "food", "mill"] }
+  - { assign: "Research Fletching; send Archers and Man-at-Arms across the map together", icons: ["fletching", "archer", "man-at-arms"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

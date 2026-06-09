@@ -3,7 +3,7 @@ slug: scouts-into-skirms
 name: "18 Pop Scouts into Skirms"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [franks, huns, malians, lithuanians]
 steps:
   - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
@@ -12,15 +12,15 @@ steps:
   - { villagers: 10, assign: "+1 → hunt under the Town Center", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a house, then a mill on berries", icons: ["house", "mill", "food"] }
   - { villagers: 12, assign: "+1 → lure the second boar", note: "Lure deer with your scout to stretch the food", icons: ["food"] }
-  - { villagers: 18, assign: "+6 → hunt under the Town Center; research Loom and click up", time: "8:50", note: "Feudal landing ~8:50 on 2 wood / 16 food", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "+6 → hunt under the Town Center; research Loom and click up", time: "8:50", phase: feudal, note: "Feudal landing ~8:50 on 2 wood / 16 food", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Send 6 from hunt → wood (8 total on one lumber camp)", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "Send 4 from hunt → berries", icons: ["food"] }
   - { villagers: 18, assign: "Pull 2 from hunt: one builds a Barracks, one builds a House", icons: ["barracks", "house"] }
-  - { villagers: 18, assign: "Build a Stable with 2 villagers, then send them to wall and wood; start Scout Cavalry", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 18, assign: "Research Double-Bit Axe (Horse Collar optional); seed farms as the hunt runs dry", icons: ["double-bit-axe", "farm"] }
-  - { villagers: 18, assign: "When the opponent commits to Archers, drop a Range fast; move 2 to the woodline and start Skirmishers", icons: ["archery-range", "skirmisher", "wood"] }
-  - { villagers: 18, assign: "Build a Blacksmith; research Fletching and infantry armor", icons: ["blacksmith", "fletching"] }
-  - { villagers: 18, assign: "Berries out → 2nd lumber camp; move 6 → gold with a Mining Camp; research Wheelbarrow", icons: ["lumber-camp", "gold", "mining-camp", "wheelbarrow"] }
+  - { assign: "Build a Stable with 2 villagers, then send them to wall and wood; start Scout Cavalry", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Research Double-Bit Axe (Horse Collar optional); seed farms as the hunt runs dry", icons: ["double-bit-axe", "farm"] }
+  - { assign: "When the opponent commits to Archers, drop a Range fast; move 2 to the woodline and start Skirmishers", icons: ["archery-range", "skirmisher", "wood"] }
+  - { assign: "Build a Blacksmith; research Fletching and infantry armor", icons: ["blacksmith", "fletching"] }
+  - { assign: "Berries out → 2nd lumber camp; move 6 → gold with a Mining Camp; research Wheelbarrow", icons: ["lumber-camp", "gold", "mining-camp", "wheelbarrow"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

@@ -13,14 +13,14 @@ steps:
   - { villagers: 11, assign: "+1 → house kur, ardından meyvelere mill kur", icons: ["house", "mill", "food"] }
   - { villagers: 12, assign: "+1 → ikinci domuzu çek ve ye", icons: ["food"] }
   - { villagers: 17, assign: "+5 → avda; scout yaparken ekonomiyi yemekte tut", note: "Yukarı tıklamadan önce rakibi MUTLAKA bul — kör bir baskın boş haritaya toslar", icons: ["food"] }
-  - { villagers: 17, assign: "Loom araştır, sonra Feudal Age'e tıkla", time: "8:25", icons: ["loom"] }
+  - { villagers: 17, phase: feudal, assign: "Loom araştır, sonra Feudal Age'e tıkla", time: "8:25", icons: ["loom"] }
   - { villagers: 17, assign: "Feudal gelir — 1 avcıyı oduna kaydır", icons: ["wood"] }
   - { villagers: 17, assign: "2 avcıyı taşa al ve mining camp kur", icons: ["stone", "mining-camp"] }
   - { villagers: 17, assign: "10 köylüyü ileri yolla; 1 köylüyü evde avda bırak", note: "Şimdilik tüm eko geliştirmelerini atla — önce taş ve köylü gelir", icons: ["watch-tower"] }
-  - { villagers: 19, assign: "+2 yeni köylü → av ve yemek; gerektikçe tarla ve house ekle", icons: ["food", "farm"] }
-  - { villagers: 21, assign: "İlk kuleyi rakibin odun hattına veya meyvelerine ~8 kare mesafede kur", icons: ["watch-tower"] }
-  - { villagers: 23, assign: "+2 ileri köylü tedarik için house kursun; kule başına 10 köylüye kadar içeri al", icons: ["house", "watch-tower"] }
-  - { villagers: 25, assign: "Yeni kuleleri 6–8 kare aralıkla zincirle, ekonomilerinin içine doğru ilerle", icons: ["watch-tower"] }
+  - { assign: "+2 yeni köylü → av ve yemek; gerektikçe tarla ve house ekle", icons: ["food", "farm"] }
+  - { assign: "İlk kuleyi rakibin odun hattına veya meyvelerine ~8 kare mesafede kur", icons: ["watch-tower"] }
+  - { assign: "+2 ileri köylü tedarik için house kursun; kule başına 10 köylüye kadar içeri al", icons: ["house", "watch-tower"] }
+  - { assign: "Yeni kuleleri 6–8 kare aralıkla zincirle, ekonomilerinin içine doğru ilerle", icons: ["watch-tower"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

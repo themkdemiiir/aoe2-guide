@@ -3,24 +3,24 @@ slug: double-stable-scouts
 name: "Double Stable Scouts"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [franks, huns, magyars, lithuanians, persians]
 steps:
   - { villagers: 6, assign: "6 → sheep under the TC", icons: ["food", "town-center"] }
   - { villagers: 8, assign: "+2 → wood on the first woodline; build a lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 9, assign: "+1 → lure and kill the first boar", note: "Eat the boar before the sheep run out", icons: ["food"] }
   - { villagers: 10, assign: "+1 → build a house, then a mill on the berries", icons: ["house", "mill"] }
-  - { villagers: 10, assign: "Lure deer in with the scout to stretch your food", note: "No new villager — keep the TC producing", icons: ["food"] }
+  - { assign: "Lure deer in with the scout to stretch your food", note: "No new villager — keep the TC producing", icons: ["food"] }
   - { villagers: 16, assign: "+6 → hunt under the TC; lure the second boar", icons: ["food"] }
-  - { villagers: 18, assign: "+2 → wood; research Loom, then click up to Feudal", time: "8:50", note: "Land at 18 pop with a 4-wood / 14-food split", icons: ["wood", "loom"] }
+  - { villagers: 18, assign: "+2 → wood; research Loom, then click up to Feudal", time: "8:50", phase: feudal, note: "Land at 18 pop with a 4-wood / 14-food split", icons: ["wood", "loom"] }
   - { villagers: 18, assign: "Feudal: move 5 hunters → wood and drop a 2nd lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "Pull 4 vils off the TC food → berries; send 1 vil to a barracks", icons: ["food", "barracks"] }
   - { villagers: 18, assign: "Build a stable with 2 vils; start Scout Cavalry the moment it finishes", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 18, assign: "Research Double-Bit Axe and Horse Collar; wall with the stable builders and seed farms", icons: ["double-bit-axe", "horse-collar", "farm"] }
-  - { villagers: 18, assign: "Pump scouts non-stop; add 1–4 Spearmen only if the opponent also goes scouts", note: "Skip the spears versus archers", icons: ["scout-cavalry", "spearman"] }
-  - { villagers: 18, assign: "Around 15 farms, build the 2nd stable so you produce from both", icons: ["stable", "farm"] }
-  - { villagers: 18, assign: "+2 → gold; research Bloodlines and pick up Blacksmith armor/attack", icons: ["gold", "bloodlines", "blacksmith"] }
-  - { villagers: 18, assign: "At ~20 farms, research Wheelbarrow to keep the eco scaling with two stables", icons: ["farm"] }
+  - { assign: "Research Double-Bit Axe and Horse Collar; wall with the stable builders and seed farms", icons: ["double-bit-axe", "horse-collar", "farm"] }
+  - { assign: "Pump scouts non-stop; add 1–4 Spearmen only if the opponent also goes scouts", note: "Skip the spears versus archers", icons: ["scout-cavalry", "spearman"] }
+  - { assign: "Around 15 farms, build the 2nd stable so you produce from both", icons: ["stable", "farm"] }
+  - { villagers: 20, assign: "+2 → gold; research Bloodlines and pick up Blacksmith armor/attack", icons: ["gold", "bloodlines", "blacksmith"] }
+  - { assign: "At ~20 farms, research Wheelbarrow to keep the eco scaling with two stables", icons: ["farm"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

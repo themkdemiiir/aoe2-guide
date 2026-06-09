@@ -11,15 +11,15 @@ steps:
   - { villagers: 11, assign: "+2 → ilk yaban domuzunu çek ve ye", note: "İlk domuz yarılanınca ikinci domuzu içeri al", icons: ["food"] }
   - { villagers: 12, assign: "+1 → bir Ev yap, ardından çileklere Değirmen kur", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+4 → çilekler", icons: ["food"] }
-  - { villagers: 17, assign: "+1 → üssünün ön tarafına bir Kışla ve bir Ev kur", icons: ["barracks", "house"] }
-  - { villagers: 19, time: "9:15", assign: "+2 → oduna git, Loom'u araştır, sonra Feudal'a tıkla", note: "Yaklaşık 5 odunda, 13 yiyecekte iken çağ atla", icons: ["wood", "loom"] }
+  - { assign: "+1 → üssünün ön tarafına bir Kışla ve bir Ev kur", icons: ["barracks", "house"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "+2 → oduna git, Loom'u araştır, sonra Feudal'a tıkla", note: "Yaklaşık 5 odunda, 13 yiyecekte iken çağ atla", icons: ["wood", "loom"] }
   - { villagers: 19, assign: "Yiyecekten 2 kişiyi → altına, ardından 7 kişiyi yiyecekten → oduna kaydır", icons: ["gold", "wood"] }
-  - { villagers: 19, assign: "Milisi 5'e kadar bas ve rakibe doğru yürüt", note: "Bu 5 birim baskının çekirdeği — onları hayatta tut", icons: ["militia"] }
-  - { villagers: 19, assign: "Av tükenince o Köylüleri sapan ağaçlara gönder ve 5 tarla ek", icons: ["farm", "wood"] }
-  - { villagers: 19, assign: "Man-at-Arms'ı, ardından Double-Bit Axe'ı araştır", icons: ["man-at-arms", "double-bit-axe"] }
-  - { villagers: 19, assign: "Yeni Köylüleri sapan ağaçlara gönder; 5 tarla kurulunca bir Demirci kur", icons: ["blacksmith", "wood"] }
-  - { villagers: 19, assign: "Demirci'de Piyade zırhını (+2) araştır — Roma zırhı bunu çok güçlü kılar", icons: ["blacksmith"] }
-  - { villagers: 19, assign: "Scout ile Man-at-Arms'ı birlikte kullanarak baskı yap; sadece kazanacağın savaşlara gir", icons: ["scout-cavalry", "man-at-arms"] }
+  - { assign: "Milisi 5'e kadar bas ve rakibe doğru yürüt", note: "Bu 5 birim baskının çekirdeği — onları hayatta tut", icons: ["militia"] }
+  - { assign: "Av tükenince o Köylüleri sapan ağaçlara gönder ve 5 tarla ek", icons: ["farm", "wood"] }
+  - { assign: "Man-at-Arms'ı, ardından Double-Bit Axe'ı araştır", icons: ["man-at-arms", "double-bit-axe"] }
+  - { assign: "Yeni Köylüleri sapan ağaçlara gönder; 5 tarla kurulunca bir Demirci kur", icons: ["blacksmith", "wood"] }
+  - { assign: "Demirci'de Piyade zırhını (+2) araştır — Roma zırhı bunu çok güçlü kılar", icons: ["blacksmith"] }
+  - { assign: "Scout ile Man-at-Arms'ı birlikte kullanarak baskı yap; sadece kazanacağın savaşlara gir", icons: ["scout-cavalry", "man-at-arms"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

@@ -3,24 +3,24 @@ slug: maa-archers
 name: "18 Pop Generic Man-at-Arms Rush"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: []
 steps:
   - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
   - { villagers: 9,  assign: "+3 → wood, drop a Lumber Camp; use Houses to start a wall", icons: ["wood", "lumber-camp", "house"] }
   - { villagers: 10, assign: "+1 → lure the first boar", icons: ["food"] }
-  - { villagers: 10, assign: "Lure at least 2 deer", note: "Mandatory — this build leans on the extra hunt food", icons: ["food"] }
+  - { assign: "Lure at least 2 deer", note: "Mandatory — this build leans on the extra hunt food", icons: ["food"] }
   - { villagers: 15, assign: "+5 → hunt (eat through the second boar)", icons: ["food"] }
-  - { villagers: 16, assign: "+1 → build a Barracks and a House at the front", icons: ["barracks", "house"] }
-  - { villagers: 18, time: "8:50", assign: "+2 → hunt, research Loom, then click up to Feudal", note: "Land with roughly 3 on wood and 14 on food", icons: ["food", "loom"] }
+  - { assign: "+1 → build a Barracks and a House at the front", icons: ["barracks", "house"] }
+  - { villagers: 18, time: "8:50", phase: feudal, assign: "+2 → hunt, research Loom, then click up to Feudal", note: "Land with roughly 3 on wood and 14 on food", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Feudal: move 5 from the hunt → wood at the Lumber Camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "2 (hunt + Barracks builder) → gold, drop a Mining Camp", icons: ["gold", "mining-camp"] }
-  - { villagers: 18, assign: "Pump 3 Militia and walk them at the enemy; research Man-at-Arms", icons: ["militia", "man-at-arms"] }
+  - { assign: "Pump 3 Militia and walk them at the enemy; research Man-at-Arms", icons: ["militia", "man-at-arms"] }
   - { villagers: 18, assign: "1 → build a Mill at the berries; research Double-Bit Axe", icons: ["mill", "double-bit-axe"] }
   - { villagers: 23, assign: "+5 → berries, then seed Farms", icons: ["food", "farm"] }
   - { villagers: 25, assign: "Build an Archery Range; +2 → gold", icons: ["archery-range", "gold"] }
-  - { villagers: 25, assign: "Wall up and add Archers, Spearmen, or a tower as needed", icons: ["archer", "spearman", "watch-tower"] }
-  - { villagers: 25, assign: "Add a Blacksmith; research Fletching, then send Archers in to attack", icons: ["blacksmith", "fletching", "archer"] }
+  - { assign: "Wall up and add Archers, Spearmen, or a tower as needed", icons: ["archer", "spearman", "watch-tower"] }
+  - { assign: "Add a Blacksmith; research Fletching, then send Archers in to attack", icons: ["blacksmith", "fletching", "archer"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

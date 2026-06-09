@@ -10,17 +10,17 @@ steps:
   - { villagers: 8,  assign: "+2 → wood, drop a Lumber Camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 9,  assign: "+1 → lure the first boar to the TC", icons: ["food"] }
   - { villagers: 11, assign: "+2 → hunt the boar under the TC", icons: ["food"] }
-  - { villagers: 11, assign: "Lure 3 deer toward the TC with your scout", note: "Keeps food close so collectors never walk far", icons: ["food"] }
+  - { assign: "Lure 3 deer toward the TC with your scout", note: "Keeps food close so collectors never walk far", icons: ["food"] }
   - { villagers: 12, assign: "+1 → build a House, then a Mill on berries", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+4 → hunt (lure the second boar in)", icons: ["food"] }
   - { villagers: 17, assign: "+1 → berries", icons: ["food"] }
-  - { villagers: 19, time: "9:15", assign: "+2 → wood, research Loom, then click up to Feudal", note: "Land Feudal around 9:15 on 4 wood / 15 food", icons: ["wood", "loom"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "+2 → wood, research Loom, then click up to Feudal", note: "Land Feudal around 9:15 on 4 wood / 15 food", icons: ["wood", "loom"] }
   - { villagers: 19, assign: "Feudal lands — send 5 hunters to a 2nd Lumber Camp, 1 back to the starting woodline", icons: ["wood", "lumber-camp"] }
   - { villagers: 19, assign: "2 hunters → berries; 1 hunter builds a Barracks (start it ~50% into Feudal)", icons: ["food", "barracks"] }
   - { villagers: 19, assign: "3 hunters → gold (Mining Camp); research Double-Bit Axe and skip Horse Collar", icons: ["gold", "mining-camp", "double-bit-axe"] }
-  - { villagers: 19, assign: "Train Eagle Scouts from the Barracks; add an Archery Range with 2 villagers", note: "Wall the gaps with the Range builders using Houses and palisades", icons: ["eagle-scout", "archery-range"] }
-  - { villagers: 23, assign: "DECISION — vs archers send +4 TC villagers to gold for Archers; vs skirmishers send +4 to straggler wood for Skirmishers", icons: ["archer", "skirmisher"] }
-  - { villagers: 23, assign: "Seed Farms behind the eco; drop a Blacksmith and research Fletching", icons: ["farm", "blacksmith", "fletching"] }
+  - { assign: "Train Eagle Scouts from the Barracks; add an Archery Range with 2 villagers", note: "Wall the gaps with the Range builders using Houses and palisades", icons: ["eagle-scout", "archery-range"] }
+  - { assign: "DECISION — vs archers send +4 TC villagers to gold for Archers; vs skirmishers send +4 to straggler wood for Skirmishers", icons: ["archer", "skirmisher"] }
+  - { assign: "Seed Farms behind the eco; drop a Blacksmith and research Fletching", icons: ["farm", "blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

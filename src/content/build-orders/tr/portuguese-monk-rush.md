@@ -14,13 +14,13 @@ steps:
   - { villagers: 13, assign: "+1 → ikinci yaban domuzu", note: "Yiyeceği uzatmak için geyikleri çek ya da tavukları değirmene topla", icons: ["food"] }
   - { villagers: 18, assign: "+5 → çilekler", icons: ["food"] }
   - { villagers: 19, assign: "+1 → oduna", icons: ["wood"] }
-  - { villagers: 21, assign: "+2 → altın (madencilik kampı); ~9:40'ta Feudal'a tıkla (4 odun / 15 yiyecek / 2 altın)", icons: ["gold", "mining-camp"] }
+  - { villagers: 21, phase: feudal, assign: "+2 → altın (madencilik kampı); ~9:40'ta Feudal'a tıkla (4 odun / 15 yiyecek / 2 altın)", icons: ["gold", "mining-camp"] }
   - { villagers: 22, assign: "Feudal: 3 odun → Pazar + Demirci; +1 → oduna; Loom araştır", icons: ["market", "blacksmith", "loom"] }
-  - { villagers: 22, assign: "Castle tıklamasını finanse etmek için 200 taş sat, 100 yiyecek al", icons: ["market", "stone"] }
-  - { villagers: 22, assign: "Castle Çağı", time: "13:10", note: "Double-Bit Axe araştır; avı/çilekleri oduna ve altına kaydır", icons: ["wood", "gold"] }
-  - { villagers: 22, assign: "Kışla + 2 mızrakçı; 2 köylü + atlıyı merkeze gönder", icons: ["barracks", "spearman", "scout-cavalry"] }
-  - { villagers: 22, assign: "Harita merkezine yakın 2 Manastır kur; Keşiş üretmeye başla; kalıntıları topla", icons: ["monastery", "monk"] }
-  - { villagers: 22, assign: "Artan köylüler → tarlalar; kalıntı koruması için Kuşatma Atölyesi + Koçbaşı ekle", icons: ["farm", "siege-workshop", "battering-ram"] }
+  - { assign: "Castle tıklamasını finanse etmek için 200 taş sat, 100 yiyecek al", icons: ["market", "stone"] }
+  - { phase: castle, assign: "Castle Çağı", time: "13:10", note: "Double-Bit Axe araştır; avı/çilekleri oduna ve altına kaydır", icons: ["wood", "gold"] }
+  - { assign: "Kışla + 2 mızrakçı; 2 köylü + atlıyı merkeze gönder", icons: ["barracks", "spearman", "scout-cavalry"] }
+  - { assign: "Harita merkezine yakın 2 Manastır kur; Keşiş üretmeye başla; kalıntıları topla", icons: ["monastery", "monk"] }
+  - { assign: "Artan köylüler → tarlalar; kalıntı koruması için Kuşatma Atölyesi + Koçbaşı ekle", icons: ["farm", "siege-workshop", "battering-ram"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

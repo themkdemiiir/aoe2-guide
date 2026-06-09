@@ -10,16 +10,16 @@ steps:
   - { villagers: 9,  assign: "+3 → wood, drop a Lumber Camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → lure the first boar", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a House, then a Mill on the berries", icons: ["house", "mill", "food"] }
-  - { villagers: 11, assign: "Lure all 3 deer with the scout to stretch your food", note: "No new villager — keep eco vils busy while the scout pulls deer", icons: ["food"] }
+  - { assign: "Lure all 3 deer with the scout to stretch your food", note: "No new villager — keep eco vils busy while the scout pulls deer", icons: ["food"] }
   - { villagers: 13, assign: "+2 → hunt; lure the second boar when food is low", icons: ["food"] }
   - { villagers: 17, assign: "+4 → berries", icons: ["food"] }
   - { villagers: 17, assign: "Seed 4 farms with the freed-up sheep villagers", note: "Reassignment, not new pop", icons: ["farm"] }
   - { villagers: 21, assign: "+4 → wood on a single Lumber Camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 23, assign: "+2 → gold, then click Feudal Age (~10:30 / 7 wood, 14 food, 2 gold)", note: "Spend as little time in Feudal as possible", icons: ["gold"] }
-  - { villagers: 23, assign: "Feudal: 1 → Blacksmith, 2 → Market; food-out vils to straggler trees; +2 → wood", icons: ["blacksmith", "market", "wood"] }
-  - { villagers: 25, assign: "Click Castle Age; research Double-Bit Axe and Horse Collar", time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 27, assign: "Castle: drop your 1st extra Town Center on the wood line; research Bow Saw; seed more farms", icons: ["town-center", "bow-saw", "farm"] }
-  - { villagers: 30, assign: "2nd extra TC on gold/stone; Wheelbarrow at ~18 farms, then Hand Cart; buy food/wood at Market as needed", icons: ["town-center", "wheelbarrow"] }
+  - { villagers: 23, phase: feudal, assign: "+2 → gold, then click Feudal Age (~10:30 / 7 wood, 14 food, 2 gold)", note: "Spend as little time in Feudal as possible", icons: ["gold"] }
+  - { villagers: 25, assign: "Feudal: 1 → Blacksmith, 2 → Market; food-out vils to straggler trees; +2 → wood", icons: ["blacksmith", "market", "wood"] }
+  - { assign: "Click Castle Age; research Double-Bit Axe and Horse Collar", phase: castle, time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 25, assign: "Castle: drop your 1st extra Town Center on the wood line; research Bow Saw; seed more farms", icons: ["town-center", "bow-saw", "farm"] }
+  - { assign: "2nd extra TC on gold/stone; Wheelbarrow at ~18 farms, then Hand Cart; buy food/wood at Market as needed", icons: ["town-center", "wheelbarrow"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

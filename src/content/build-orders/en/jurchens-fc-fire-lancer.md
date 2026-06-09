@@ -11,16 +11,16 @@ steps:
   - { villagers: 11, assign: "+1 → lure and gather the first boar", icons: ["food"] }
   - { villagers: 12, assign: "+1 → build a House, then a Mill near the berries", icons: ["house", "mill"] }
   - { villagers: 13, assign: "+1 → lure the second boar", icons: ["food"] }
-  - { villagers: 13, assign: "Lure at least 2 deer to the boar/sheep pile (re-task, no new villager)", note: "Pop stays at 13 — this is a re-task", icons: ["food"] }
+  - { assign: "Lure at least 2 deer to the boar/sheep pile (re-task, no new villager)", note: "Pop stays at 13 — this is a re-task", icons: ["food"] }
   - { villagers: 15, assign: "+2 → hunt (deer and remaining boar meat)", icons: ["food"] }
   - { villagers: 19, assign: "+4 → berries", icons: ["food"] }
   - { villagers: 22, assign: "+3 → gold; build the Mining Camp, then mine", icons: ["gold", "mining-camp"] }
-  - { villagers: 22, assign: "Research Loom, then click Feudal Age", time: "10:30", note: "Land with roughly 4 wood / 15 food / 3 gold", icons: ["loom"] }
-  - { villagers: 22, assign: "Feudal: re-task 3 from wood → Market + Blacksmith; small-wall your wood and gold lines", icons: ["market", "blacksmith"] }
+  - { villagers: 22, phase: feudal, assign: "Research Loom, then click Feudal Age", time: "10:30", note: "Land with roughly 4 wood / 15 food / 3 gold", icons: ["loom"] }
+  - { assign: "Feudal: re-task 3 from wood → Market + Blacksmith; small-wall your wood and gold lines", icons: ["market", "blacksmith"] }
   - { villagers: 24, assign: "+2 → wood to fuel the age-up", icons: ["wood"] }
-  - { villagers: 24, assign: "Click Castle Age — do NOT sell stone, you may need a defensive Tower", time: "14:00", icons: ["watch-tower"] }
+  - { phase: castle, assign: "Click Castle Age — do NOT sell stone, you may need a defensive Tower", time: "14:00", icons: ["watch-tower"] }
   - { villagers: 24, assign: "Castle: pull ~10 from the Town Center → wood + a 2nd Lumber Camp; add 2 Barracks", icons: ["lumber-camp", "barracks"] }
-  - { villagers: 24, assign: "Research infantry armor (skip eco techs); pump Fire Lancers from both Barracks; add a forward Siege Workshop; seed Farms; research Squires", icons: ["barracks", "siege-workshop", "farm"] }
+  - { assign: "Research infantry armor (skip eco techs); pump Fire Lancers from both Barracks; add a forward Siege Workshop; seed Farms; research Squires", icons: ["barracks", "siege-workshop", "farm"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

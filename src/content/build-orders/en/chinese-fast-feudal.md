@@ -12,14 +12,14 @@ steps:
   - { villagers: 11, assign: "+1 → lure and eat the first boar", icons: ["food"] }
   - { villagers: 12, assign: "+1 → build 2 houses, then a mill on berries", note: "Lure deer with your scout — food drains fast on this build", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+4 → hunt under the Town Center; lure the second boar", icons: ["food"] }
-  - { villagers: 20, assign: "+4 → berries, then research the age-up", time: "8:25", note: "Feudal landing ~8:25 on 3 wood / 17 food", icons: ["food"] }
+  - { villagers: 20, assign: "+4 → berries, then research the age-up", time: "8:25", phase: feudal, note: "Feudal landing ~8:25 on 3 wood / 17 food", icons: ["food"] }
   - { villagers: 20, assign: "Pull 2 from the Town Center → reinforce the 1st lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 20, assign: "Pull 5 from the Town Center → drop a 2nd lumber camp on a fresh woodline", icons: ["wood", "lumber-camp"] }
-  - { villagers: 22, assign: "Keep the Town Center adding 2 more villagers; build a Barracks when wood allows", icons: ["barracks"] }
-  - { villagers: 22, assign: "Scout line: build a Stable, start Scout Cavalry, and prioritize eco upgrades", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 22, assign: "Archer line: move 2-3 villagers to gold under a Mining Camp, then add an Archery Range", icons: ["gold", "mining-camp", "archery-range", "archer"] }
-  - { villagers: 22, assign: "Man-at-Arms line: make ~3 Militia, then research the Man-at-Arms upgrade and Double-Bit Axe", icons: ["barracks", "militia", "man-at-arms", "double-bit-axe"] }
-  - { villagers: 22, assign: "Tower rush: send ~5 villagers forward to build Watch Towers in the enemy economy", note: "Skip the MAA-trush — the build is too poor to support both", icons: ["watch-tower"] }
+  - { assign: "Keep the Town Center adding 2 more villagers; build a Barracks when wood allows", icons: ["barracks"] }
+  - { assign: "Scout line: build a Stable, start Scout Cavalry, and prioritize eco upgrades", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Archer line: move 2-3 villagers to gold under a Mining Camp, then add an Archery Range", icons: ["gold", "mining-camp", "archery-range", "archer"] }
+  - { assign: "Man-at-Arms line: make ~3 Militia, then research the Man-at-Arms upgrade and Double-Bit Axe", icons: ["barracks", "militia", "man-at-arms", "double-bit-axe"] }
+  - { assign: "Tower rush: send ~5 villagers forward to build Watch Towers in the enemy economy", note: "Skip the MAA-trush — the build is too poor to support both", icons: ["watch-tower"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

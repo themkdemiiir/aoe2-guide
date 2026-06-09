@@ -12,12 +12,12 @@ steps:
   - { villagers: 10, assign: "+1 → lure 2nd boar, eat it under the TC", icons: ["food", "town-center"] }
   - { villagers: 11, assign: "+1 → finish the second boar", icons: ["food"] }
   - { villagers: 12, assign: "+1 → build a house, then mill on berries", icons: ["house", "mill", "food"] }
-  - { villagers: 12, assign: "Scout: lure at least 2 deer to the TC", note: "Mandatory — this is the core of the build", icons: ["food"] }
-  - { villagers: 17, time: "8:25", assign: "+5 → food under TC; research Loom (or send +1 to wood), then click Feudal", note: "Landing ~8:25 (2 wood / 15 food)", icons: ["food", "loom"] }
+  - { assign: "Scout: lure at least 2 deer to the TC", note: "Mandatory — this is the core of the build", icons: ["food"] }
+  - { villagers: 17, time: "8:25", phase: feudal, assign: "+5 → food under TC; research Loom (or send +1 to wood), then click Feudal", note: "Landing ~8:25 (2 wood / 15 food)", icons: ["food", "loom"] }
   - { villagers: 17, assign: "Feudal arrives — pull villagers off the hunt onto wood until 8 are on one lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 17, assign: "2 → straggler trees near the TC", icons: ["wood"] }
   - { villagers: 17, assign: "2 → build Barracks plus a house", icons: ["barracks", "house"] }
-  - { villagers: 17, assign: "Archer opening: send 4 villagers to gold; or run Scouts/Spears/Skirmishers and keep villagers on food and wood", icons: ["archer", "scout-cavalry"] }
+  - { assign: "Archer opening: send 4 villagers to gold; or run Scouts/Spears/Skirmishers and keep villagers on food and wood", icons: ["archer", "scout-cavalry"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

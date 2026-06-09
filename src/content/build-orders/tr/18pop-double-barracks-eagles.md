@@ -3,7 +3,7 @@ slug: 18pop-double-barracks-eagles
 name: "18 Köylü Çift Kışla Kartal Baskını"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [aztecs, incas, mayans]
 steps:
   - { villagers: 6,  assign: "6 → Şehir Merkezi altındaki koyunlara", icons: ["food", "town-center"] }
@@ -12,14 +12,14 @@ steps:
   - { villagers: 10, assign: "+1 → domuzu Şehir Merkezi altında avla", icons: ["food"] }
   - { villagers: 11, assign: "+1 → önce House, sonra meyvelere Mill kur", icons: ["house", "mill", "food"] }
   - { villagers: 12, assign: "+1 → ikinci domuzu çek", icons: ["food"] }
-  - { villagers: 12, assign: "Scout ile geyikleri Şehir Merkezi'ne doğru sür", note: "Tüm avı yakın tutar, böylece yiyecek toplaması hiç boşa düşmez", icons: ["food"] }
-  - { villagers: 18, time: "8:50", assign: "+6 → ava (16 yemekte, 2 odunda), sonra Feudal'a tıkla", note: "Aztecs / Incas: çağ atlamadan önce Loom araştır", icons: ["food", "loom"] }
+  - { assign: "Scout ile geyikleri Şehir Merkezi'ne doğru sür", note: "Tüm avı yakın tutar, böylece yiyecek toplaması hiç boşa düşmez", icons: ["food"] }
+  - { villagers: 18, time: "8:50", phase: feudal, assign: "+6 → ava (16 yemekte, 2 odunda), sonra Feudal'a tıkla", note: "Aztecs / Incas: çağ atlamadan önce Loom araştır", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Feudal gelir — 5 avcıyı oduna kaydır (Lumber Camp'te 7 köylü)", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "2 avcıyı → altına çek (Mining Camp); 2 avcı Barracks + House kurar", icons: ["gold", "mining-camp", "barracks", "house"] }
   - { villagers: 18, assign: "3 avcıyı → meyvelere gönder; Double-Bit Axe araştır (Horse Collar isteğe bağlı)", icons: ["food", "double-bit-axe"] }
-  - { villagers: 22, assign: "+4 yeni köylü → altına; 2. Barracks kur", icons: ["gold", "barracks"] }
-  - { villagers: 22, assign: "Her iki Barracks'tan Eagle Scout bas (Scout'a karşı önce 2 Spearman)", note: "Ordu arkasına straggler ağaçları ve Farm ekle", icons: ["eagle-scout", "spearman"] }
-  - { villagers: 22, assign: "Eagle zırh ve saldırı geliştirmeleri için Blacksmith kur", icons: ["blacksmith"] }
+  - { assign: "+4 yeni köylü → altına; 2. Barracks kur", icons: ["gold", "barracks"] }
+  - { assign: "Her iki Barracks'tan Eagle Scout bas (Scout'a karşı önce 2 Spearman)", note: "Ordu arkasına straggler ağaçları ve Farm ekle", icons: ["eagle-scout", "spearman"] }
+  - { assign: "Eagle zırh ve saldırı geliştirmeleri için Blacksmith kur", icons: ["blacksmith"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

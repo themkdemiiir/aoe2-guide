@@ -10,16 +10,16 @@ steps:
   - { villagers: 9,  assign: "+3 → oduna, bir Lumber Camp kur", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
   - { villagers: 11, assign: "+1 → bir House, ardından meyvelerin yanına Mill kur", icons: ["house", "mill", "food"] }
-  - { villagers: 11, assign: "Yiyeceği uzatmak için scout ile 3 geyiği de çek", note: "Yeni köylü yok — scout geyikleri çekerken ekonomi köylüleri çalışmaya devam etsin", icons: ["food"] }
+  - { assign: "Yiyeceği uzatmak için scout ile 3 geyiği de çek", note: "Yeni köylü yok — scout geyikleri çekerken ekonomi köylüleri çalışmaya devam etsin", icons: ["food"] }
   - { villagers: 13, assign: "+2 → ava; yiyecek azalınca ikinci domuzu çek", icons: ["food"] }
   - { villagers: 17, assign: "+4 → meyvelere", icons: ["food"] }
   - { villagers: 17, assign: "Boşalan koyun köylüleriyle 4 tarla kur", note: "Yeniden görevlendirme, yeni pop değil", icons: ["farm"] }
   - { villagers: 21, assign: "+4 → tek bir Lumber Camp'te oduna", icons: ["wood", "lumber-camp"] }
-  - { villagers: 23, assign: "+2 → altına, ardından Feudal Age'e tıkla (~10:30 / 7 odun, 14 yiyecek, 2 altın)", note: "Feudal'de mümkün olduğunca az zaman geçir", icons: ["gold"] }
-  - { villagers: 23, assign: "Feudal: 1 → Blacksmith, 2 → Market; yiyeceği biten köylüler straggler ağaçlara; +2 → oduna", icons: ["blacksmith", "market", "wood"] }
-  - { villagers: 25, assign: "Castle Age'e tıkla; Double-Bit Axe ve Horse Collar araştır", time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 27, assign: "Castle: 1. ek Town Center'ı odun çizgisine kur; Bow Saw araştır; yeni tarlalar ek", icons: ["town-center", "bow-saw", "farm"] }
-  - { villagers: 30, assign: "2. ek TC altın/taşa; ~18 tarlada Wheelbarrow, ardından Hand Cart; gerekirse Market'ten yiyecek/odun al", icons: ["town-center", "wheelbarrow"] }
+  - { villagers: 23, phase: feudal, assign: "+2 → altına, ardından Feudal Age'e tıkla (~10:30 / 7 odun, 14 yiyecek, 2 altın)", note: "Feudal'de mümkün olduğunca az zaman geçir", icons: ["gold"] }
+  - { villagers: 25, assign: "Feudal: 1 → Blacksmith, 2 → Market; yiyeceği biten köylüler straggler ağaçlara; +2 → oduna", icons: ["blacksmith", "market", "wood"] }
+  - { assign: "Castle Age'e tıkla; Double-Bit Axe ve Horse Collar araştır", phase: castle, time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 25, assign: "Castle: 1. ek Town Center'ı odun çizgisine kur; Bow Saw araştır; yeni tarlalar ek", icons: ["town-center", "bow-saw", "farm"] }
+  - { assign: "2. ek TC altın/taşa; ~18 tarlada Wheelbarrow, ardından Hand Cart; gerekirse Market'ten yiyecek/odun al", icons: ["town-center", "wheelbarrow"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

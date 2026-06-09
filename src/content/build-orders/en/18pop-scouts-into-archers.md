@@ -3,7 +3,7 @@ slug: 18pop-scouts-into-archers
 name: "18 Pop Scouts into Archers"
 difficulty: intermediate
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [chinese, huns, malians, portuguese]
 steps:
   - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
@@ -12,15 +12,15 @@ steps:
   - { villagers: 10, assign: "+1 → hunt under the Town Center", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a house, then a mill on berries", icons: ["house", "mill", "food"] }
   - { villagers: 12, assign: "+1 → lure the second boar", note: "Lure deer with your scout to stretch the food", icons: ["food"] }
-  - { villagers: 18, assign: "+6 → hunt under the Town Center; research Loom and click up", time: "8:50", note: "Feudal landing ~8:50 on 2 wood / 16 food", icons: ["food", "loom"] }
+  - { villagers: 18, phase: feudal, assign: "+6 → hunt under the Town Center; research Loom and click up", time: "8:50", note: "Feudal landing ~8:50 on 2 wood / 16 food", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Send 6 from hunt → wood (8 total on lumber, or split a second camp)", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "Send 4 from hunt → berries", icons: ["food"] }
   - { villagers: 18, assign: "Pull 2 from hunt: one builds a Barracks, one builds a House", icons: ["barracks", "house"] }
-  - { villagers: 18, assign: "Build a Stable, start Scout Cavalry, add 1+ Spearman; research Double-Bit Axe (Horse Collar optional)", icons: ["stable", "scout-cavalry", "spearman", "double-bit-axe"] }
-  - { villagers: 18, assign: "Seed roughly 8 farms as the hunt food winds down", icons: ["farm"] }
-  - { villagers: 18, assign: "Move 8 Town Center villagers → gold, build a Mining Camp", icons: ["gold", "mining-camp"] }
-  - { villagers: 18, assign: "Build 2 Archery Ranges and switch into Archers", icons: ["archery-range", "archer"] }
-  - { villagers: 18, assign: "Build a Blacksmith and research Fletching", icons: ["blacksmith", "fletching"] }
+  - { assign: "Build a Stable, start Scout Cavalry, add 1+ Spearman; research Double-Bit Axe (Horse Collar optional)", icons: ["stable", "scout-cavalry", "spearman", "double-bit-axe"] }
+  - { assign: "Seed roughly 8 farms as the hunt food winds down", icons: ["farm"] }
+  - { assign: "Move 8 Town Center villagers → gold, build a Mining Camp", icons: ["gold", "mining-camp"] }
+  - { assign: "Build 2 Archery Ranges and switch into Archers", icons: ["archery-range", "archer"] }
+  - { assign: "Build a Blacksmith and research Fletching", icons: ["blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

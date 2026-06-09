@@ -4,21 +4,21 @@ name: "Fast Castle Light Cav Relic Control"
 difficulty: intermediate
 targetAge: castle
 durationMin: 15
-civsRecommended: [burgundians, bohemians, poles, portuguese, byzantines]
+civsRecommended: []
 steps:
   - { villagers: 6,  assign: "6 → Şehir Merkezi'nin altındaki koyunlara", icons: ["food", "town-center"] }
   - { villagers: 9,  assign: "+3 → oduna, bir Kereste Kampı kur", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → ilk yaban domuzunu çek ve vur", icons: ["food"] }
   - { villagers: 11, assign: "+1 → bir Ev kur, ardından çileklere bir Değirmen", icons: ["house", "mill", "food"] }
-  - { villagers: 11, assign: "Atlı kâşifinle 3 geyiği de Şehir Merkezi'ne çek", note: "Yeni köylü yok — ekonomi köylülerini kaynakta tutarak yiyeceği uzat", icons: ["food", "scout-cavalry"] }
+  - { assign: "Atlı kâşifinle 3 geyiği de Şehir Merkezi'ne çek", note: "Yeni köylü yok — ekonomi köylülerini kaynakta tutarak yiyeceği uzat", icons: ["food", "scout-cavalry"] }
   - { villagers: 14, assign: "+3 → ava; ilki bitmeden ikinci yaban domuzunu çek", icons: ["food"] }
   - { villagers: 18, assign: "+4 → çileklere; pop alanı için bir Ev daha ekle", icons: ["food", "house"] }
   - { villagers: 18, assign: "Boşalan koyun köylüleriyle 3 tarla kur", note: "Yeni pop değil, yeniden görevlendirme", icons: ["farm"] }
   - { villagers: 23, assign: "+5 → tek bir Kereste Kampı'nda oduna", icons: ["wood", "lumber-camp"] }
-  - { villagers: 25, assign: "+2 → altına, ardından Kale Çağı'na tıkla (~11:20 / 8 odun, 15 yiyecek, 2 altın)", note: "Manastır için altın gelirini akışta tut", icons: ["gold"] }
-  - { villagers: 25, assign: "Feudal: yiyeceği biten köylüler → tek ağaçlara; bir Kışla, ardından bir Ahır kur; +2 → oduna", icons: ["barracks", "stable", "wood"] }
-  - { villagers: 25, assign: "Bir Pazar ekle ve 2 köylü gönder; Kale tıklaması için odun ve altını dengele", icons: ["market"] }
-  - { villagers: 25, assign: "Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır", time: "14:50", icons: ["double-bit-axe", "horse-collar"] }
+  - { villagers: 25, phase: feudal, assign: "+2 → altına, ardından Kale Çağı'na tıkla (~11:20 / 8 odun, 15 yiyecek, 2 altın)", note: "Manastır için altın gelirini akışta tut", icons: ["gold"] }
+  - { villagers: 27, assign: "Feudal: yiyeceği biten köylüler → tek ağaçlara; bir Kışla, ardından bir Ahır kur; +2 → oduna", icons: ["barracks", "stable", "wood"] }
+  - { assign: "Bir Pazar ekle ve 2 köylü gönder; Kale tıklaması için odun ve altını dengele", icons: ["market"] }
+  - { phase: castle, time: "14:50", assign: "Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır", icons: ["double-bit-axe", "horse-collar"] }
   - { villagers: 27, assign: "Kale: 4 inşaatçı → tek ağaçlara; daha fazla tarla kur; 2-3 atlı kâşif eğit ve hemen bir Manastır kur; Bow Saw; gücün yettiğinde bir ŞM ekle; yalnızca rekabet varsa Light Cav üret", icons: ["monastery", "bow-saw", "town-center", "light-cavalry", "monk"] }
 source:
   author: "Hera"

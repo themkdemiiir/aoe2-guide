@@ -10,14 +10,14 @@ steps:
   - { villagers: 9,  assign: "+3 → wood; first villager drops a Lumber Camp, then all gather", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → lure the first boar", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a house and a Mill on the berries", icons: ["house", "mill", "food"] }
-  - { villagers: 11, assign: "Re-task an idle villager to lure the deer", note: "No new pop — uses an existing villager", icons: ["food"] }
+  - { assign: "Re-task an idle villager to lure the deer", note: "No new pop — uses an existing villager", icons: ["food"] }
   - { villagers: 14, assign: "+3 → hunt (lure the second boar)", icons: ["food"] }
   - { villagers: 18, assign: "+4 → berries", icons: ["food"] }
   - { villagers: 18, assign: "Seed 3 farms with villagers freed from depleted food", note: "No new pop — re-task existing food gatherers", icons: ["farm"] }
   - { villagers: 23, assign: "+5 → wood (single Lumber Camp covers both woodlines)", icons: ["wood", "lumber-camp"] }
-  - { villagers: 25, assign: "+2 → gold; build a Gold Mining Camp, then click Feudal at 25 pop", note: "Feudal lands ~11:20 — eco at age-up: 8 wood / 15 food / 2 gold", icons: ["gold", "mining-camp"] }
+  - { phase: feudal, villagers: 25, assign: "+2 → gold; build a Gold Mining Camp, then click Feudal at 25 pop", note: "Feudal lands ~11:20 — eco at age-up: 8 wood / 15 food / 2 gold", icons: ["gold", "mining-camp"] }
   - { villagers: 27, assign: "Feudal — sheep run out, send 4 to stone + a Mining Camp; re-task 3 onto stragglers, then 1 builds Blacksmith and 2 build Market; +2 (now 27) → stone; research Double-Bit Axe + Horse Collar", icons: ["stone", "mining-camp", "blacksmith", "market", "double-bit-axe", "horse-collar"] }
-  - { villagers: 27, assign: "Keep mining stone, then click Castle Age — lands ~14:50. Drop a Castle with the stone villagers and mass Unique Units; research Bow Saw", time: "14:50", icons: ["stone", "castle", "bow-saw"] }
+  - { phase: castle, assign: "Keep mining stone, then click Castle Age — lands ~14:50. Drop a Castle with the stone villagers and mass Unique Units; research Bow Saw", time: "14:50", icons: ["stone", "castle", "bow-saw"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

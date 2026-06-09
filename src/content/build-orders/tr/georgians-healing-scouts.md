@@ -9,17 +9,17 @@ steps:
   - { villagers: 7, assign: "7 → TC altında koyunlar", icons: ["food", "town-center"] }
   - { villagers: 8, assign: "+1 → ilk yaban domuzunu çekip öldür", note: "Koyunlar bitmeden domuzu ye", icons: ["food"] }
   - { villagers: 11, assign: "+3 → ikinci domuzu TC altına çekerek öldür", icons: ["food", "town-center"] }
-  - { villagers: 11, assign: "Scout ile geyikleri çek; Mule Cart keşfe devam etsin", note: "Yeni köylü yok — TC yemekte kalsın", icons: ["food"] }
+  - { assign: "Scout ile geyikleri çek; Mule Cart keşfe devam etsin", note: "Yeni köylü yok — TC yemekte kalsın", icons: ["food"] }
   - { villagers: 12, assign: "+1 → bir ev yap, sonra meyvelere değirmen kur", icons: ["house", "mill"] }
   - { villagers: 13, assign: "+1 → ikinci domuz çiftine", icons: ["food"] }
   - { villagers: 16, assign: "+3 → TC altında ava", icons: ["food"] }
-  - { villagers: 16, assign: "Loom araştır (ya da bir köylü daha ekle), sonra Feudal'e tıkla", time: "8:00", note: "16 nüfusta saf 0 odun / 16 yemek dağılımıyla geç", icons: ["loom"] }
+  - { villagers: 16, assign: "Loom araştır (ya da bir köylü daha ekle), sonra Feudal'e tıkla", time: "8:00", phase: feudal, note: "16 nüfusta saf 0 odun / 16 yemek dağılımıyla geç", icons: ["loom"] }
   - { villagers: 16, assign: "Feudal: avdan 8 köylüyü Mule Cart ile bir odun hattına gönder; 3 köylüyü meyvelere taşı (toplam 4)", icons: ["wood", "lumber-camp", "food"] }
-  - { villagers: 16, assign: "Çağ atlamanın ~%50–60'ında 2 köylüyü kışlaya gönder, sonra ahır yap", icons: ["barracks", "stable"] }
-  - { villagers: 16, assign: "Double-Bit Axe araştır ve üssünün iki tarafını da duvarla", icons: ["double-bit-axe"] }
-  - { villagers: 16, assign: "Durmadan Scout Cavalry bas ve 3 scout ile taciz et", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 16, assign: "Horse Collar araştır ve duvarların arkasına tarlalar ek", icons: ["horse-collar", "farm"] }
-  - { villagers: 16, assign: "13–14 tarlada 7 köylüyü Mule Cart ile altına geçir; bir demirci ekle", icons: ["gold", "blacksmith"] }
+  - { assign: "Çağ atlamanın ~%50–60'ında 2 köylüyü kışlaya gönder, sonra ahır yap", icons: ["barracks", "stable"] }
+  - { assign: "Double-Bit Axe araştır ve üssünün iki tarafını da duvarla", icons: ["double-bit-axe"] }
+  - { assign: "Durmadan Scout Cavalry bas ve 3 scout ile taciz et", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Horse Collar araştır ve duvarların arkasına tarlalar ek", icons: ["horse-collar", "farm"] }
+  - { assign: "13–14 tarlada 7 köylüyü Mule Cart ile altına geçir; bir demirci ekle", icons: ["gold", "blacksmith"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

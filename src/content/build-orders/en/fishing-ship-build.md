@@ -12,12 +12,12 @@ steps:
   - { villagers: 13, assign: "+1 → build a House, then a Dock and put it on shore fish", note: "Place the Dock where it can reach the shore-fish patch", icons: ["house", "dock", "food"] }
   - { villagers: 14, assign: "+1 → lure the second boar", icons: ["food"] }
   - { villagers: 15, assign: "+1 → take the second boar under the Town Center", icons: ["food"] }
-  - { villagers: 15, assign: "From the Dock, queue Fishing Ships up to 3; build a House after the first one", note: "Fishing Ships are made at the Dock — they do not count toward your villager pop", icons: ["dock", "fishing-ship"] }
+  - { assign: "From the Dock, queue Fishing Ships up to 3; build a House after the first one", note: "Fishing Ships are made at the Dock — they do not count toward your villager pop", icons: ["dock", "fishing-ship"] }
   - { villagers: 19, assign: "+4 → food under the Town Center", icons: ["food", "town-center"] }
-  - { villagers: 19, assign: "Research Loom", icons: ["loom"] }
-  - { villagers: 19, time: "9:15", assign: "Click up to Feudal Age", note: "Land with roughly 5 on wood and 14 on food", icons: ["town-center"] }
+  - { assign: "Research Loom", icons: ["loom"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "Click up to Feudal Age", note: "Land with roughly 5 on wood and 14 on food", icons: ["town-center"] }
   - { villagers: 19, assign: "Move 7 from the sheep over to a second Lumber Camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 19, assign: "Keep all 3 Fishing Ships working the water for a steady food trickle", icons: ["fishing-ship", "food"] }
+  - { assign: "Keep all 3 Fishing Ships working the water for a steady food trickle", icons: ["fishing-ship", "food"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

@@ -14,13 +14,13 @@ steps:
   - { villagers: 13, assign: "+1 → second boar", note: "Lure deer or mill chickens to stretch food", icons: ["food"] }
   - { villagers: 18, assign: "+5 → berries", icons: ["food"] }
   - { villagers: 19, assign: "+1 → wood", icons: ["wood"] }
-  - { villagers: 21, assign: "+2 → gold (mining camp); click Feudal at ~9:40 (4 wood / 15 food / 2 gold)", icons: ["gold", "mining-camp"] }
+  - { villagers: 21, phase: feudal, assign: "+2 → gold (mining camp); click Feudal at ~9:40 (4 wood / 15 food / 2 gold)", icons: ["gold", "mining-camp"] }
   - { villagers: 22, assign: "Feudal: 3 wood → Market + Blacksmith; +1 → wood; research Loom", icons: ["market", "blacksmith", "loom"] }
-  - { villagers: 22, assign: "Sell 200 stone, buy 100 food to fund the Castle click", icons: ["market", "stone"] }
-  - { villagers: 22, assign: "Castle Age", time: "13:10", note: "Research Double-Bit Axe; move hunt/berries onto wood + gold", icons: ["wood", "gold"] }
-  - { villagers: 22, assign: "Barracks + 2 spearmen; send 2 vils + scout toward center", icons: ["barracks", "spearman", "scout-cavalry"] }
-  - { villagers: 22, assign: "Build 2 Monasteries near map center; start producing Monks; grab relics", icons: ["monastery", "monk"] }
-  - { villagers: 22, assign: "Stragglers → farms; add Siege Workshop + Battering Ram for relic escort", icons: ["farm", "siege-workshop", "battering-ram"] }
+  - { assign: "Sell 200 stone, buy 100 food to fund the Castle click", icons: ["market", "stone"] }
+  - { phase: castle, assign: "Castle Age", time: "13:10", note: "Research Double-Bit Axe; move hunt/berries onto wood + gold", icons: ["wood", "gold"] }
+  - { assign: "Barracks + 2 spearmen; send 2 vils + scout toward center", icons: ["barracks", "spearman", "scout-cavalry"] }
+  - { assign: "Build 2 Monasteries near map center; start producing Monks; grab relics", icons: ["monastery", "monk"] }
+  - { assign: "Stragglers → farms; add Siege Workshop + Battering Ram for relic escort", icons: ["farm", "siege-workshop", "battering-ram"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

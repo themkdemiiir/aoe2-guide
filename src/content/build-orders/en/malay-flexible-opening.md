@@ -12,14 +12,14 @@ steps:
   - { villagers: 11, assign: "+1 → build a house, then a mill on berries", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+5 → hunt under the Town Center", note: "Lure the deer with your scout and bring in the second boar to stretch your food", icons: ["food"] }
   - { villagers: 19, assign: "+3 → berries", icons: ["food"] }
-  - { villagers: 21, assign: "+2 → wood; research Loom and click up to Feudal", time: "9:13", note: "Feudal landing ~9:13 on 5 wood / 16 food — Malay's faster age-up buys you roughly a +2 villager lead", icons: ["wood", "loom"] }
+  - { villagers: 21, phase: feudal, assign: "+2 → wood; research Loom and click up to Feudal", time: "9:13", note: "Feudal landing ~9:13 on 5 wood / 16 food — Malay's faster age-up buys you roughly a +2 villager lead", icons: ["wood", "loom"] }
   - { villagers: 21, assign: "Send 5 from hunt → wood, dropping a second lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 21, assign: "Pull 1 from hunt to build a Barracks early so a follow-up is ready the moment you decide", icons: ["barracks"] }
-  - { villagers: 21, assign: "Fork A — Archers: build one Archery Range and start Archers, moving 4 villagers → gold", icons: ["archery-range", "archer", "gold"] }
-  - { villagers: 21, assign: "Fork B — Scouts: build a Stable and pump Scout Cavalry to harass the eco", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 21, assign: "Fork C — Spear-Skirm: produce Spearmen and Skirmishers, leaning on Malay's free infantry armor", icons: ["spearman", "skirmisher"] }
-  - { villagers: 21, assign: "Add farms as the hunt runs out and research Double-Bit Axe to keep wood flowing", icons: ["farm", "double-bit-axe"] }
-  - { villagers: 21, assign: "Build a Blacksmith and research Fletching once your chosen military is online", icons: ["blacksmith", "fletching"] }
+  - { assign: "Pull 1 from hunt to build a Barracks early so a follow-up is ready the moment you decide", icons: ["barracks"] }
+  - { assign: "Fork A — Archers: build one Archery Range and start Archers, moving 4 villagers → gold", icons: ["archery-range", "archer", "gold"] }
+  - { assign: "Fork B — Scouts: build a Stable and pump Scout Cavalry to harass the eco", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Fork C — Spear-Skirm: produce Spearmen and Skirmishers, leaning on Malay's free infantry armor", icons: ["spearman", "skirmisher"] }
+  - { assign: "Add farms as the hunt runs out and research Double-Bit Axe to keep wood flowing", icons: ["farm", "double-bit-axe"] }
+  - { assign: "Build a Blacksmith and research Fletching once your chosen military is online", icons: ["blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

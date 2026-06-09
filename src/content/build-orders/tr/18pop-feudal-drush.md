@@ -11,13 +11,13 @@ steps:
   - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
   - { villagers: 11, assign: "+1 → ev kur, sonra ava", note: "Scout ile geyikleri çek", icons: ["house", "food"] }
   - { villagers: 15, assign: "+4 → ava; 2. domuzu çek", icons: ["food"] }
-  - { villagers: 16, assign: "+1 → üssün ön tarafına barracks kur, sonra ev", icons: ["barracks", "house"] }
+  - { assign: "+1 → üssün ön tarafına barracks kur, sonra ev", icons: ["barracks", "house"] }
   - { villagers: 17, assign: "+1 → ava", icons: ["food"] }
-  - { villagers: 18, time: "8:50", assign: "+1 → oduna; Loom araştır, sonra Feudal Age'e tıkla", note: "Geçiş ~8:50 (4 odun / 13 yemek)", icons: ["wood", "loom"] }
-  - { villagers: 18, assign: "Feudal gelir — 2 Militia üret ve düşman üssüne gönder", icons: ["militia", "barracks"] }
+  - { villagers: 18, time: "8:50", phase: feudal, assign: "+1 → oduna; Loom araştır, sonra Feudal Age'e tıkla", note: "Geçiş ~8:50 (4 odun / 13 yemek)", icons: ["wood", "loom"] }
+  - { assign: "Feudal gelir — 2 Militia üret ve düşman üssüne gönder", icons: ["militia", "barracks"] }
   - { villagers: 18, assign: "TC'den 4 köylü → ilk lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 19, assign: "TC'den +1 → meyveye, mill kur; Double-Bit Axe araştır", note: "Horse Collar isteğe bağlı", icons: ["food", "mill", "double-bit-axe"] }
-  - { villagers: 21, assign: "+2 → rakibi gözleyerek takip askeri; yavaş duvar çek", icons: ["scout-cavalry", "barracks"] }
+  - { villagers: 18, assign: "TC'den +1 → meyveye, mill kur; Double-Bit Axe araştır", note: "Horse Collar isteğe bağlı", icons: ["food", "mill", "double-bit-axe"] }
+  - { assign: "+2 → rakibi gözleyerek takip askeri; yavaş duvar çek", icons: ["scout-cavalry", "barracks"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

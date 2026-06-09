@@ -12,15 +12,15 @@ steps:
   - { villagers: 11, assign: "+1 → build a house, then go to mill/berries", icons: ["house", "mill", "food"] }
   - { villagers: 17, assign: "+6 → hunt under the TC", note: "Lure the second boar before the first runs dry", icons: ["food", "town-center"] }
   - { villagers: 19, assign: "+2 → wood; research Loom", icons: ["wood", "loom"] }
-  - { villagers: 19, time: "9:15", assign: "Click up to Feudal at 19 pop (5 wood / 14 food)", icons: ["loom"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "Click up to Feudal at 19 pop (5 wood / 14 food)", icons: ["loom"] }
   - { villagers: 19, assign: "5 vils from the TC → 2nd lumber camp on a new woodline", icons: ["lumber-camp", "wood"] }
   - { villagers: 19, assign: "2 → straggler trees; 1 → house, then barracks, then back to food", icons: ["wood", "barracks", "house"] }
   - { villagers: 19, assign: "2 → gold, build a mining camp; research Double-Bit Axe (skip Horse Collar)", icons: ["gold", "mining-camp", "double-bit-axe"] }
-  - { villagers: 19, assign: "Build an Archery Range and start Archers as soon as Feudal lands", icons: ["archery-range", "archer"] }
+  - { assign: "Build an Archery Range and start Archers as soon as Feudal lands", icons: ["archery-range", "archer"] }
   - { villagers: 21, assign: "+2 → gold (4 total); build a Blacksmith → research Fletching", icons: ["gold", "blacksmith", "fletching"] }
-  - { villagers: 22, assign: "Optional: 1–4 Spearmen from the barracks if you spot enemy Scouts", icons: ["spearman"] }
-  - { villagers: 26, assign: "+4 → berries (5 on berries total); seed farms", icons: ["food", "farm"] }
-  - { villagers: 28, assign: "Wall with 2–3 vils as production stabilizes", icons: ["house"] }
+  - { assign: "Optional: 1–4 Spearmen from the barracks if you spot enemy Scouts", icons: ["spearman"] }
+  - { villagers: 21, assign: "+4 → berries (5 on berries total); seed farms", icons: ["food", "farm"] }
+  - { assign: "Wall with 2–3 vils using a mix of houses and palisades", icons: ["house"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

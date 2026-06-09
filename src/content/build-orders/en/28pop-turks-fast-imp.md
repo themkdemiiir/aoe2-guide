@@ -15,12 +15,12 @@ steps:
   - { villagers: 16, assign: "+1 → build House then add to berries (4 total)", icons: ["house", "food"] }
   - { villagers: 19, assign: "+3 → food under the TC (eat through hunt and sheep)", icons: ["food"] }
   - { villagers: 23, assign: "+4 → wood; seed Farms as the sheep run out", icons: ["wood", "farm"] }
-  - { villagers: 28, time: "12:35", assign: "+5 → gold, click Feudal Age", note: "Land Feudal ~12:35 with roughly 8 wood / 15 food / 5 gold", icons: ["gold", "feudal-age"] }
-  - { villagers: 28, assign: "Feudal: 1 → Blacksmith, 2 → Market; +2 → gold; research Double-Bit Axe", icons: ["blacksmith", "market", "double-bit-axe"] }
-  - { villagers: 30, time: "16:05", assign: "Sell 200 stone, click Castle Age", icons: ["castle-age", "gold"] }
-  - { villagers: 30, assign: "Castle: builders → Farms, research Gold Mining; build Siege Workshop + Monastery", icons: ["siege-workshop", "monastery", "gold-mining"] }
-  - { villagers: 32, time: "20:05", assign: "Add a second Mining Camp, click Imperial Age", icons: ["imperial-age", "mining-camp"] }
-  - { villagers: 32, assign: "Imperial: buy wood, build Barracks + 2 Archery Ranges; mass Hand Cannoneers + 1-2 Bombard Cannons", icons: ["archery-range", "hand-cannoneer", "bombard-cannon"] }
+  - { villagers: 28, time: "12:35", phase: feudal, assign: "+5 → gold, click Feudal Age", note: "Land Feudal ~12:35 with roughly 8 wood / 15 food / 5 gold", icons: ["gold", "feudal-age"] }
+  - { villagers: 30, assign: "Feudal: 1 → Blacksmith, 2 → Market; +2 → gold; research Double-Bit Axe", icons: ["blacksmith", "market", "double-bit-axe"] }
+  - { time: "16:05", phase: castle, assign: "Sell 200 stone, click Castle Age", icons: ["castle-age", "gold"] }
+  - { villagers: 32, assign: "Castle: builders → Farms, research Gold Mining; build Siege Workshop + Monastery", icons: ["siege-workshop", "monastery", "gold-mining"] }
+  - { time: "20:05", phase: imperial, assign: "Add a second Mining Camp, click Imperial Age", icons: ["imperial-age", "mining-camp"] }
+  - { assign: "Imperial: buy wood, build Barracks + 2 Archery Ranges; mass Hand Cannoneers + 1-2 Bombard Cannons", icons: ["archery-range", "hand-cannoneer", "bombard-cannon"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

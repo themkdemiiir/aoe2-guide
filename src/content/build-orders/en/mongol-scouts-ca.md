@@ -2,25 +2,25 @@
 slug: mongol-scouts-ca
 name: "Scouts into Cavalry Archers"
 difficulty: intermediate
-targetAge: castle
-durationMin: 17
+targetAge: feudal
+durationMin: 9
 civsRecommended: [mongols, huns, magyars, japanese, tatars]
 steps:
   - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
   - { villagers: 8,  assign: "+2 → wood; build a Lumber Camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 9,  assign: "+1 → lure the first boar", icons: ["food"] }
   - { villagers: 10, assign: "+1 → build a House, then a Mill on berries", icons: ["house", "mill"] }
-  - { villagers: 10, assign: "Use the Scout to push deer toward the Town Center", note: "Free food without losing villager time", icons: ["scout-cavalry", "food"] }
+  - { assign: "Use the Scout to push deer toward the Town Center", note: "Free food without losing villager time", icons: ["scout-cavalry", "food"] }
   - { villagers: 16, assign: "+6 → hunt; lure the second boar into the mix", icons: ["food"] }
   - { villagers: 18, assign: "+2 → wood; research Loom", note: "Mongols: hunters work 40% faster, so the food piles up fast", icons: ["wood", "loom"] }
-  - { villagers: 18, time: "8:50", assign: "Click Feudal Age at 18 pop", note: "Perfect Feudal landing around 8:50", icons: ["food"] }
+  - { villagers: 18, time: "8:50", phase: feudal, assign: "Click Feudal Age at 18 pop", note: "Perfect Feudal landing around 8:50", icons: ["food"] }
   - { villagers: 18, assign: "Feudal: 5 → wood + 2nd Lumber Camp; 5 → berries; 1 builds a Barracks", icons: ["wood", "lumber-camp", "food", "barracks"] }
   - { villagers: 18, assign: "2 villagers build a Stable; pump Scout Cavalry and harass", note: "Wall the base with the two Stable builders once it is up", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 18, assign: "Research Double-Bit Axe; add Horse Collar on closed maps; seed Farms; add 1–4 Spearmen vs. enemy scouts", icons: ["double-bit-axe", "horse-collar", "farm", "spearman"] }
-  - { villagers: 23, assign: "At ~15 Farms send 5 → gold + Mining Camp; build a Blacksmith; finish walling fully", icons: ["gold", "mining-camp", "blacksmith"] }
-  - { villagers: 27, assign: "Click Castle Age behind a sealed wall", note: "Bank gold and keep Scouts alive for the transition", icons: ["food"] }
-  - { villagers: 27, assign: "Castle: build 2 Archery Ranges; research Bloodlines + Fletching; start Cavalry Archers", icons: ["archery-range", "bloodlines", "cavalry-archer"] }
-  - { villagers: 27, assign: "Research Bow Saw, Bodkin Arrow, Husbandry; upgrade to Mangudai at the Castle", icons: ["bow-saw", "bodkin-arrow", "husbandry"] }
+  - { assign: "Research Double-Bit Axe; add Horse Collar on closed maps; seed Farms; add 1–4 Spearmen vs. enemy scouts", icons: ["double-bit-axe", "horse-collar", "farm", "spearman"] }
+  - { assign: "At ~15 Farms send 5 → gold + Mining Camp; build a Blacksmith; finish walling fully", icons: ["gold", "mining-camp", "blacksmith"] }
+  - { phase: castle, assign: "Click Castle Age behind a sealed wall", note: "Bank gold and keep Scouts alive for the transition", icons: ["food"] }
+  - { assign: "Castle: build 2 Archery Ranges; research Bloodlines + Fletching; start Cavalry Archers", icons: ["archery-range", "bloodlines"] }
+  - { assign: "Research Bow Saw, Bodkin Arrow, Husbandry; upgrade to Mangudai at the Castle", icons: ["bow-saw", "bodkin-arrow", "husbandry"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

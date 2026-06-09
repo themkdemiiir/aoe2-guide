@@ -2,8 +2,8 @@
 slug: khmer-fc-knights-scorpions
 name: "Khmer Fast Castle Knights and Scorpions"
 difficulty: advanced
-targetAge: castle
-durationMin: 13
+targetAge: feudal
+durationMin: 11
 civsRecommended: [khmer]
 steps:
   - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food"] }
@@ -15,13 +15,13 @@ steps:
   - { villagers: 18, assign: "+4 → berries; add a House (no second Mill needed)", icons: ["food", "house"] }
   - { villagers: 19, assign: "+1 → wood", icons: ["wood"] }
   - { villagers: 20, assign: "+1 → build a Farm", icons: ["farm"] }
-  - { villagers: 23, assign: "+3 → gold (Mining Camp); research Loom", time: "10:55", note: "Click Feudal at 23 pop with 4 wood / 16 food / 3 gold", icons: ["gold", "mining-camp", "loom"] }
-  - { villagers: 23, assign: "Feudal: seed 3 Farms, then click Castle instantly — Khmer build NO Feudal buildings", note: "Khmer need no building to age up; garrison villagers in houses and use your Scout for defense", icons: ["farm", "scout-cavalry"] }
-  - { villagers: 25, assign: "4 hunt/straggler villagers → woodline; +2 → gold", icons: ["wood", "gold"] }
-  - { villagers: 27, assign: "Research Double-Bit Axe; tower only if pressured; berries-out → stragglers + Farms", icons: ["double-bit-axe", "farm"] }
-  - { villagers: 30, assign: "Castle: build Stable + Blacksmith; research +1 cavalry armor", icons: ["stable", "blacksmith", "knight"] }
-  - { villagers: 32, assign: "Pump Knights immediately; add a forward Siege Workshop", icons: ["knight", "siege-workshop"] }
-  - { villagers: 34, assign: "Mix Scorpions with Knights from the forward base", icons: ["scorpion", "knight"] }
+  - { villagers: 23, assign: "+3 → gold (Mining Camp); research Loom", time: "10:55", phase: feudal, note: "Click Feudal at 23 pop with 4 wood / 16 food / 3 gold", icons: ["gold", "mining-camp", "loom"] }
+  - { assign: "Feudal: seed 3 Farms, then click Castle instantly — Khmer build NO Feudal buildings", note: "Khmer need no building to age up; garrison villagers in houses and use your Scout for defense", icons: ["farm", "scout-cavalry"] }
+  - { villagers: 23, assign: "4 hunt/straggler villagers → woodline; +2 → gold", icons: ["wood", "gold"] }
+  - { assign: "Research Double-Bit Axe; tower only if pressured; berries-out → stragglers + Farms", icons: ["double-bit-axe", "farm"] }
+  - { assign: "Castle: build Stable + Blacksmith; research +1 cavalry armor", icons: ["stable", "blacksmith"] }
+  - { assign: "Pump Knights immediately; add a forward Siege Workshop", icons: ["siege-workshop"] }
+  - { assign: "Mix Scorpions with Knights from the forward base", icons: [] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

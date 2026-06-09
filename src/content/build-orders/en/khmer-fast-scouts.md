@@ -3,7 +3,7 @@ slug: khmer-fast-scouts
 name: "Khmer Super Fast Scouts"
 difficulty: advanced
 targetAge: feudal
-durationMin: 7
+durationMin: 8
 civsRecommended: [khmer]
 steps:
   - { villagers: 6, assign: "6 → sheep under the TC", icons: ["food", "town-center"] }
@@ -11,14 +11,14 @@ steps:
   - { villagers: 9, assign: "+2 → the same boar, dragged under the TC", icons: ["food"] }
   - { villagers: 10, assign: "+1 → lure the second boar", icons: ["food"] }
   - { villagers: 11, assign: "+1 → build a house, then return to the boar", icons: ["house", "food"] }
-  - { villagers: 16, assign: "+5 → hunt under the TC, then click up to Feudal", time: "7:35", note: "Land at 16 pop on 0 wood / 16 food — pure food up", icons: ["food"] }
+  - { villagers: 16, assign: "+5 → hunt under the TC, then click up to Feudal", time: "7:35", phase: feudal, note: "Land at 16 pop on 0 wood / 16 food — pure food up", icons: ["food"] }
   - { villagers: 16, assign: "Feudal: send 8 vils to a fresh woodline and build a lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 16, assign: "Drop 1 house near the new woodline to stay above pop", icons: ["house"] }
-  - { villagers: 16, assign: "Build a stable with 2 vils; start Scout Cavalry the moment it finishes", note: "No barracks — Khmer go straight to the stable", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 16, assign: "Place houses next to each resource cluster", note: "Khmer villagers garrison in houses, so houses double as protection", icons: ["house"] }
-  - { villagers: 16, assign: "Research Double-Bit Axe at the lumber camp", icons: ["double-bit-axe"] }
-  - { villagers: 16, assign: "+6 new villagers → berries to fund continuous scout production", icons: ["food"] }
-  - { villagers: 16, assign: "Once you bank 60 wood, start seeding farms; keep scouts flowing", icons: ["farm", "scout-cavalry"] }
+  - { assign: "Drop 1 house near the new woodline to stay above pop", icons: ["house"] }
+  - { assign: "Build a stable with 2 vils; start Scout Cavalry the moment it finishes", note: "No barracks — Khmer go straight to the stable", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Place houses next to each resource cluster", note: "Khmer villagers garrison in houses, so houses double as protection", icons: ["house"] }
+  - { assign: "Research Double-Bit Axe at the lumber camp", icons: ["double-bit-axe"] }
+  - { villagers: 22, assign: "+6 new villagers → berries to fund continuous scout production", icons: ["food"] }
+  - { assign: "Once you bank 60 wood, start seeding farms; keep scouts flowing", icons: ["farm", "scout-cavalry"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

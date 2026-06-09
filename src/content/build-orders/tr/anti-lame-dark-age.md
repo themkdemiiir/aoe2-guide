@@ -12,12 +12,12 @@ steps:
   - { villagers: 10, assign: "+1 → 2. yaban domuzunu çek, TC altında ye", icons: ["food", "town-center"] }
   - { villagers: 11, assign: "+1 → ikinci yaban domuzunu bitir", icons: ["food"] }
   - { villagers: 12, assign: "+1 → ev kur, sonra yabani meyvelerin üzerine değirmen", icons: ["house", "mill", "food"] }
-  - { villagers: 12, assign: "Keşifçi: en az 2 geyiği TC'ye çek", note: "Zorunlu — bu, build'in özüdür", icons: ["food"] }
-  - { villagers: 17, time: "8:25", assign: "+5 → TC altında yemeğe; Loom araştır (ya da +1'i oduna gönder), sonra Feudal'a tıkla", note: "Yaklaşık 8:25'te geçiş (2 odun / 15 yemek)", icons: ["food", "loom"] }
+  - { assign: "Keşifçi: en az 2 geyiği TC'ye çek", note: "Zorunlu — bu, build'in özüdür", icons: ["food"] }
+  - { villagers: 17, time: "8:25", phase: feudal, assign: "+5 → TC altında yemeğe; Loom araştır (ya da +1'i oduna gönder), sonra Feudal'a tıkla", note: "Yaklaşık 8:25'te geçiş (2 odun / 15 yemek)", icons: ["food", "loom"] }
   - { villagers: 17, assign: "Feudal geldi — köylüleri avdan çekip 8 köylü tek bir kütük kampında olana dek oduna al", icons: ["wood", "lumber-camp"] }
   - { villagers: 17, assign: "2 → TC yakınındaki dağınık ağaçlara", icons: ["wood"] }
   - { villagers: 17, assign: "2 → Kışla ve bir ev kur", icons: ["barracks", "house"] }
-  - { villagers: 17, assign: "Okçu açılışı: 4 köylüyü altına gönder; ya da Scout/Mızraklı/Skirmisher yap ve köylüleri yemek ve odunda tut", icons: ["archer", "scout-cavalry"] }
+  - { assign: "Okçu açılışı: 4 köylüyü altına gönder; ya da Scout/Mızraklı/Skirmisher yap ve köylüleri yemek ve odunda tut", icons: ["archer", "scout-cavalry"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

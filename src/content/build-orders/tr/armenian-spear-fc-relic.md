@@ -9,17 +9,17 @@ steps:
   - { villagers: 6,  assign: "6 → TC altındaki koyunlara", icons: ["food", "town-center"] }
   - { villagers: 10, assign: "+4 → oduna (bir Lumber Camp kur)", icons: ["wood", "lumber-camp"] }
   - { villagers: 11, assign: "+1 → ilk domuzu çek", icons: ["food"] }
-  - { villagers: 12, assign: "+1 → House, ardından öne bir Barracks, sonra bir House; yavaş duvar örmeye başla", note: "Spear baskısı için Barracks'ı öne kur", icons: ["house", "barracks"] }
+  - { assign: "+1 → House, ardından öne bir Barracks, sonra bir House; yavaş duvar örmeye başla", note: "Spear baskısı için Barracks'ı öne kur", icons: ["house", "barracks"] }
   - { villagers: 14, assign: "+2 → 1. domuz; Scout ile geyiği çek", icons: ["food", "scout-cavalry"] }
   - { villagers: 15, assign: "+1 → 2. domuz", icons: ["food"] }
   - { villagers: 17, assign: "+2 → domuz / avlanma", icons: ["food"] }
-  - { villagers: 17, assign: "2-3 Spearman üret ve Scout ile birlikte baskı yap", note: "Spear'ler sen yükselişe devam ederken düşman Scout'larını engeller", icons: ["spearman", "scout-cavalry"] }
+  - { assign: "2-3 Spearman üret ve Scout ile birlikte baskı yap", note: "Spear'ler sen yükselişe devam ederken düşman Scout'larını engeller", icons: ["spearman", "scout-cavalry"] }
   - { villagers: 23, assign: "+6 → meyveye (bir Mill kur); 2 avcıyı duvara çek (toplam 3 duvar köylüsü)", icons: ["food", "mill"] }
   - { villagers: 26, assign: "+3 → altına; 5 yemek köylüsünü oduna kaydır (odunda 9); Farm ek", icons: ["gold", "wood", "farm"] }
-  - { villagers: 26, assign: "Loom araştır", icons: ["loom"] }
-  - { villagers: 26, time: "12:10", assign: "Feudal Age'e tıkla", note: "Ekonomi dağılımı ~9 odun / 11 yemek / 3 altın", icons: ["food"] }
+  - { assign: "Loom araştır", icons: ["loom"] }
+  - { villagers: 26, time: "12:10", phase: feudal, assign: "Feudal Age'e tıkla", note: "Ekonomi dağılımı ~9 odun / 11 yemek / 3 altın", icons: ["food"] }
   - { villagers: 26, assign: "Feudal: duvar köylülerini straggler'lara gönder; 3'üyle bir Market + Blacksmith kur", icons: ["market", "blacksmith"] }
-  - { villagers: 28, time: "15:40", assign: "+2 → altına; Castle Age'e tıkla. Double-Bit Axe ve Horse Collar araştır", icons: ["gold", "double-bit-axe", "horse-collar"] }
+  - { villagers: 28, time: "15:40", phase: castle, assign: "+2 → altına; Castle Age'e tıkla. Double-Bit Axe ve Horse Collar araştır", icons: ["gold", "double-bit-axe", "horse-collar"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

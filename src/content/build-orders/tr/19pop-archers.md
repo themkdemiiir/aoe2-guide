@@ -12,15 +12,15 @@ steps:
   - { villagers: 11, assign: "+1 → house kur, ardından mill/meyveye git", icons: ["house", "mill", "food"] }
   - { villagers: 17, assign: "+6 → TC altında ava", note: "İlki bitmeden ikinci domuzu çek", icons: ["food", "town-center"] }
   - { villagers: 19, assign: "+2 → oduna; Loom araştır", icons: ["wood", "loom"] }
-  - { villagers: 19, time: "9:15", assign: "19 köylüde Feudal'a tıkla (5 odun / 14 yiyecek)", icons: ["loom"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "19 köylüde Feudal'a tıkla (5 odun / 14 yiyecek)", icons: ["loom"] }
   - { villagers: 19, assign: "TC'den 5 köylü → yeni woodline'da 2. lumber camp", icons: ["lumber-camp", "wood"] }
   - { villagers: 19, assign: "2 → straggler ağaçlara; 1 → house, sonra barracks, sonra tekrar yiyeceğe", icons: ["wood", "barracks", "house"] }
   - { villagers: 19, assign: "2 → altına, mining camp kur; Double-Bit Axe araştır (Horse Collar'ı atla)", icons: ["gold", "mining-camp", "double-bit-axe"] }
-  - { villagers: 19, assign: "Feudal gelir gelmez Archery Range kur ve Archer üretmeye başla", icons: ["archery-range", "archer"] }
+  - { assign: "Feudal gelir gelmez Archery Range kur ve Archer üretmeye başla", icons: ["archery-range", "archer"] }
   - { villagers: 21, assign: "+2 → altına (toplam 4); Blacksmith kur → Fletching araştır", icons: ["gold", "blacksmith", "fletching"] }
-  - { villagers: 22, assign: "İsteğe bağlı: rakipte Scout görürsen barracks'tan 1–4 Spearman", icons: ["spearman"] }
-  - { villagers: 26, assign: "+4 → meyveye (toplam 5 köylü meyvede); tarla ekmeye başla", icons: ["food", "farm"] }
-  - { villagers: 28, assign: "Üretim oturunca 2–3 köylüyle duvar çek", icons: ["house"] }
+  - { assign: "İsteğe bağlı: rakipte Scout görürsen barracks'tan 1–4 Spearman", icons: ["spearman"] }
+  - { villagers: 21, assign: "+4 → meyveye (toplam 5 köylü meyvede); tarla ekmeye başla", icons: ["food", "farm"] }
+  - { assign: "Üretim oturunca 2–3 köylüyle duvar çek", icons: ["house"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

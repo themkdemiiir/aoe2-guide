@@ -9,17 +9,17 @@ steps:
   - { villagers: 7, assign: "7 → sheep under the TC", icons: ["food", "town-center"] }
   - { villagers: 8, assign: "+1 → lure and kill the first boar", note: "Eat the boar before the sheep run dry", icons: ["food"] }
   - { villagers: 11, assign: "+3 → second boar, luring it under the TC", icons: ["food", "town-center"] }
-  - { villagers: 11, assign: "Lure deer with the scout while the Mule Cart keeps exploring", note: "No new villager — the TC stays on food", icons: ["food"] }
+  - { assign: "Lure deer with the scout while the Mule Cart keeps exploring", note: "No new villager — the TC stays on food", icons: ["food"] }
   - { villagers: 12, assign: "+1 → build a house, then a mill on berries", icons: ["house", "mill"] }
   - { villagers: 13, assign: "+1 → the second pair of boar", icons: ["food"] }
   - { villagers: 16, assign: "+3 → hunt under the TC", icons: ["food"] }
-  - { villagers: 16, assign: "Research Loom (or add one more villager), then click up to Feudal", time: "8:00", note: "Land at 16 pop on a pure 0-wood / 16-food split", icons: ["loom"] }
+  - { villagers: 16, assign: "Research Loom (or add one more villager), then click up to Feudal", time: "8:00", phase: feudal, note: "Land at 16 pop on a pure 0-wood / 16-food split", icons: ["loom"] }
   - { villagers: 16, assign: "Feudal: send 8 off hunt to a woodline with the Mule Cart; move 3 to berries (4 total)", icons: ["wood", "lumber-camp", "food"] }
-  - { villagers: 16, assign: "Send 2 to a barracks at ~50–60% age-up, then build a stable", icons: ["barracks", "stable"] }
-  - { villagers: 16, assign: "Research Double-Bit Axe and wall both sides of your base", icons: ["double-bit-axe"] }
-  - { villagers: 16, assign: "Train Scout Cavalry non-stop and harass with 3 scouts", icons: ["stable", "scout-cavalry"] }
-  - { villagers: 16, assign: "Research Horse Collar and seed farms behind the walls", icons: ["horse-collar", "farm"] }
-  - { villagers: 16, assign: "At 13–14 farms move 7 villagers to gold with the Mule Cart; add a blacksmith", icons: ["gold", "blacksmith"] }
+  - { assign: "Send 2 to a barracks at ~50–60% age-up, then build a stable", icons: ["barracks", "stable"] }
+  - { assign: "Research Double-Bit Axe and wall both sides of your base", icons: ["double-bit-axe"] }
+  - { assign: "Train Scout Cavalry non-stop and harass with 3 scouts", icons: ["stable", "scout-cavalry"] }
+  - { assign: "Research Horse Collar and seed farms behind the walls", icons: ["horse-collar", "farm"] }
+  - { assign: "At 13–14 farms move 7 villagers to gold with the Mule Cart; add a blacksmith", icons: ["gold", "blacksmith"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

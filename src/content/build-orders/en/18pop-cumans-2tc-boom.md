@@ -2,23 +2,23 @@
 slug: 18pop-cumans-2tc-boom
 name: "18 Pop Cumans 2 TC Boom"
 difficulty: intermediate
-targetAge: castle
-durationMin: 19
+targetAge: feudal
+durationMin: 9
 civsRecommended: [cumans]
 steps:
   - { villagers: 6,  assign: "6 → sheep under the TC", icons: ["food", "town-center"] }
   - { villagers: 8,  assign: "+2 → wood; build the first lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 9,  assign: "+1 → lure and eat the first boar", icons: ["food"] }
-  - { villagers: 9,  assign: "Lure the deer in with your scout to stretch the food", note: "No new villager — keep the TC producing", icons: ["food"] }
+  - { assign: "Lure the deer in with your scout to stretch the food", note: "No new villager — keep the TC producing", icons: ["food"] }
   - { villagers: 11, assign: "+2 → hunt; lure the second boar", icons: ["food"] }
   - { villagers: 12, assign: "+1 → build a house, then a mill on the berries", icons: ["house", "mill"] }
   - { villagers: 15, assign: "+3 → hunt", icons: ["food"] }
-  - { villagers: 18, assign: "+3 → berries, then click up to Feudal (~8:50, 2 wood / 16 food)", note: "On closed maps you can skip Loom and click up early", icons: ["food"] }
+  - { villagers: 18, phase: feudal, assign: "+3 → berries, then click up to Feudal (~8:50, 2 wood / 16 food)", note: "On closed maps you can skip Loom and click up early", icons: ["food"] }
   - { villagers: 18, assign: "Feudal: move 6 villagers off hunt → wood on the single lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 18, assign: "Build your 2nd Town Center on the wood line (or on gold/stone if you prefer)", note: "The Cuman Feudal 2nd TC is the whole point of this build", icons: ["town-center"] }
-  - { villagers: 18, assign: "Research Double-Bit Axe; add Horse Collar (skip it on open maps if you feel unsafe)", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 27, assign: "Send fresh TC villagers to wood, the straggler trees, and farms; stabilize non-stop 2-TC production first", icons: ["wood", "farm"] }
-  - { villagers: 27, assign: "Click Castle Age once the two TCs are humming", time: "19:00", note: "Undisturbed, this lands around 19–20 minutes", icons: ["town-center"] }
+  - { assign: "Build your 2nd Town Center on the wood line (or on gold/stone if you prefer)", note: "The Cuman Feudal 2nd TC is the whole point of this build", icons: ["town-center"] }
+  - { assign: "Research Double-Bit Axe; add Horse Collar (skip it on open maps if you feel unsafe)", icons: ["double-bit-axe", "horse-collar"] }
+  - { assign: "Send fresh TC villagers to wood, the straggler trees, and farms; stabilize non-stop 2-TC production first", icons: ["wood", "farm"] }
+  - { assign: "Click Castle Age once the two TCs are humming", time: "19:00", note: "Undisturbed, this lands around 19–20 minutes", icons: ["town-center"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

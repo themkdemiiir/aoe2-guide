@@ -2,8 +2,8 @@
 slug: 18pop-scouts-into-cavalry-archers
 name: "18 Pop Scouts into Cavalry Archers"
 difficulty: intermediate
-targetAge: castle
-durationMin: 17
+targetAge: feudal
+durationMin: 9
 civsRecommended: [huns, mongols, magyars, japanese, tatars]
 steps:
   - { villagers: 6,  assign: "6 → sheep under TC", icons: ["food", "town-center"] }
@@ -11,14 +11,14 @@ steps:
   - { villagers: 9,  assign: "+1 → lure the first boar", icons: ["food"] }
   - { villagers: 10, assign: "+1 → build House, then Mill on berries", icons: ["house", "mill", "food"] }
   - { villagers: 16, assign: "+6 → hunt (lure 2nd boar), shoot deer with the Scout", icons: ["food"] }
-  - { villagers: 18, time: "8:50", assign: "+2 → wood (4 lumberjacks); research Loom; click Feudal", note: "Perfect Feudal landing around 8:50", icons: ["wood", "loom"] }
+  - { villagers: 18, phase: feudal, time: "8:50", assign: "+2 → wood (4 lumberjacks); research Loom; click Feudal", note: "Perfect Feudal landing around 8:50", icons: ["wood", "loom"] }
   - { villagers: 18, assign: "Feudal: 5 hunt vils → wood, build 2nd Lumber Camp (9 on wood)", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "5 hunt vils → berries; 1 builds Barracks; 2 build Stable", icons: ["food", "barracks", "stable"] }
-  - { villagers: 18, assign: "Make Scout Cavalry; Double-Bit Axe; wall with the Stable builders", note: "Horse Collar always on closed maps; optional 1-4 Spearmen vs Scouts", icons: ["scout-cavalry", "double-bit-axe"] }
-  - { villagers: 18, assign: "Seed Farms toward ~15; keep producing Scouts", icons: ["farm"] }
-  - { villagers: 23, assign: "+5 → gold, build Mining Camp; build Blacksmith; finish walling", icons: ["gold", "mining-camp", "blacksmith"] }
-  - { villagers: 30, assign: "Click Castle Age; redistribute eco, add gold; build 2 Archery Ranges", note: "Research Fletching + Bloodlines first", icons: ["archery-range", "bloodlines"] }
-  - { villagers: 30, assign: "Pump Cavalry Archers from both Ranges; research Bow Saw, Bodkin Arrow, Husbandry", icons: ["cavalry-archer", "bow-saw"] }
+  - { assign: "Make Scout Cavalry; Double-Bit Axe; wall with the Stable builders", note: "Horse Collar always on closed maps; optional 1-4 Spearmen vs Scouts", icons: ["scout-cavalry", "double-bit-axe"] }
+  - { assign: "Seed Farms toward ~15; keep producing Scouts", icons: ["farm"] }
+  - { assign: "+5 → gold, build Mining Camp; build Blacksmith; finish walling", icons: ["gold", "mining-camp", "blacksmith"] }
+  - { phase: castle, assign: "Click Castle Age; redistribute eco, add gold; build 2 Archery Ranges", note: "Research Fletching + Bloodlines first", icons: ["archery-range"] }
+  - { assign: "Pump Cavalry Archers from both Ranges; research Bow Saw, Bodkin Arrow, Husbandry" }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

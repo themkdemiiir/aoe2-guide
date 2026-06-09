@@ -10,14 +10,14 @@ steps:
   - { villagers: 9,  assign: "+3 → oduna; ilk köylü Lumber Camp kurar, sonra hepsi toplar", icons: ["wood", "lumber-camp"] }
   - { villagers: 10, assign: "+1 → ilk domuzu çek", icons: ["food"] }
   - { villagers: 11, assign: "+1 → ev kur ve meyvelerin yanına Mill kur", icons: ["house", "mill", "food"] }
-  - { villagers: 11, assign: "Boştaki bir köylüyü geyiği çekmeye yönlendir", note: "Yeni pop yok — mevcut bir köylü kullanılır", icons: ["food"] }
+  - { assign: "Boştaki bir köylüyü geyiği çekmeye yönlendir", note: "Yeni pop yok — mevcut bir köylü kullanılır", icons: ["food"] }
   - { villagers: 14, assign: "+3 → ava (ikinci domuzu çek)", icons: ["food"] }
   - { villagers: 18, assign: "+4 → meyvelere", icons: ["food"] }
   - { villagers: 18, assign: "Tükenen yiyecekten boşalan köylülerle 3 tarla aç", note: "Yeni pop yok — mevcut yiyecek köylüleri yönlendirilir", icons: ["farm"] }
   - { villagers: 23, assign: "+5 → oduna (tek Lumber Camp iki ağaçlığı da kapsar)", icons: ["wood", "lumber-camp"] }
-  - { villagers: 25, assign: "+2 → altına; Gold Mining Camp kur, sonra 25 popta Feudal'a tıkla", note: "Feudal ~11:20'de gelir — çağ atlarken ekonomi: 8 odun / 15 yiyecek / 2 altın", icons: ["gold", "mining-camp"] }
+  - { phase: feudal, villagers: 25, assign: "+2 → altına; Gold Mining Camp kur, sonra 25 popta Feudal'a tıkla", note: "Feudal ~11:20'de gelir — çağ atlarken ekonomi: 8 odun / 15 yiyecek / 2 altın", icons: ["gold", "mining-camp"] }
   - { villagers: 27, assign: "Feudal — koyunlar biter, 4 köylüyü taşa + Mining Camp'e gönder; 3 köylüyü straggler ağaçlarına yönlendir, sonra 1'i Blacksmith ve 2'si Market kurar; +2 (artık 27) → taşa; Double-Bit Axe + Horse Collar araştır", icons: ["stone", "mining-camp", "blacksmith", "market", "double-bit-axe", "horse-collar"] }
-  - { villagers: 27, assign: "Taş toplamayı sürdür, sonra Castle Age'e tıkla — ~14:50'de gelir. Taş köylüleriyle bir Castle kur ve Özel Birimleri yığ; Bow Saw araştır", time: "14:50", icons: ["stone", "castle", "bow-saw"] }
+  - { phase: castle, assign: "Taş toplamayı sürdür, sonra Castle Age'e tıkla — ~14:50'de gelir. Taş köylüleriyle bir Castle kur ve Özel Birimleri yığ; Bow Saw araştır", time: "14:50", icons: ["stone", "castle", "bow-saw"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

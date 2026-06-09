@@ -12,12 +12,12 @@ steps:
   - { villagers: 13, assign: "+1 → bir Ev, ardından bir Liman kur ve kıyı balığına gönder", note: "Limanı kıyı balığı kümesine erişebileceği bir yere yerleştir", icons: ["house", "dock", "food"] }
   - { villagers: 14, assign: "+1 → ikinci yaban domuzunu çek", icons: ["food"] }
   - { villagers: 15, assign: "+1 → ikinci domuzu şehir merkezinin altında al", icons: ["food"] }
-  - { villagers: 15, assign: "Limandan 3'e kadar Balıkçı Gemisi çıkar; ilkinden sonra bir Ev yap", note: "Balıkçı Gemileri Limanda üretilir — köylü nüfusuna dahil değildir", icons: ["dock", "fishing-ship"] }
+  - { assign: "Limandan 3'e kadar Balıkçı Gemisi çıkar; ilkinden sonra bir Ev yap", note: "Balıkçı Gemileri Limanda üretilir — köylü nüfusuna dahil değildir", icons: ["dock", "fishing-ship"] }
   - { villagers: 19, assign: "+4 → şehir merkezinin altındaki yiyeceğe", icons: ["food", "town-center"] }
-  - { villagers: 19, assign: "Loom'u araştır", icons: ["loom"] }
-  - { villagers: 19, time: "9:15", assign: "Feudal Çağı'na tıkla", note: "Yaklaşık 5 köylü odunda, 14 köylü yiyecekte olacak şekilde geç", icons: ["town-center"] }
+  - { assign: "Loom'u araştır", icons: ["loom"] }
+  - { villagers: 19, time: "9:15", phase: feudal, assign: "Feudal Çağı'na tıkla", note: "Yaklaşık 5 köylü odunda, 14 köylü yiyecekte olacak şekilde geç", icons: ["town-center"] }
   - { villagers: 19, assign: "Koyunlardaki 7 köylüyü ikinci bir Kereste Kampı'na taşı", icons: ["wood", "lumber-camp"] }
-  - { villagers: 19, assign: "3 Balıkçı Gemisini de suda tutarak istikrarlı bir yiyecek akışı sağla", icons: ["fishing-ship", "food"] }
+  - { assign: "3 Balıkçı Gemisini de suda tutarak istikrarlı bir yiyecek akışı sağla", icons: ["fishing-ship", "food"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

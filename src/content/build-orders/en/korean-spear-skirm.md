@@ -3,7 +3,7 @@ slug: korean-spear-skirm
 name: "18 Pop Korean Spear Skirm Rush"
 difficulty: beginner
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [koreans, byzantines, lithuanians]
 steps:
   - { villagers: 6,  assign: "6 → sheep under the Town Center", icons: ["food", "town-center"] }
@@ -13,13 +13,13 @@ steps:
   - { villagers: 12, assign: "+1 → build a house, then a mill on berries", icons: ["house", "mill", "food"] }
   - { villagers: 13, assign: "+1 → lure the second boar", note: "Lure deer with your scout to stretch the food", icons: ["food"] }
   - { villagers: 15, assign: "+2 → remaining hunt under the Town Center", icons: ["food"] }
-  - { villagers: 18, assign: "+3 → berries; research Loom and click up to Feudal", time: "8:50", note: "Feudal landing ~8:50 on 2 wood / 16 food", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "+3 → berries; research Loom and click up to Feudal", time: "8:50", phase: feudal, note: "Feudal landing ~8:50 on 2 wood / 16 food", icons: ["food", "loom"] }
   - { villagers: 18, assign: "Send 3 → the first lumber camp and 5 → a second lumber camp", icons: ["wood", "lumber-camp"] }
-  - { villagers: 18, assign: "Build a Barracks and an Archery Range; push Spearmen forward as soon as they pop", icons: ["barracks", "archery-range", "spearman"] }
-  - { villagers: 18, assign: "Research Double-Bit Axe and Horse Collar", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 18, assign: "Train Skirmishers and move them forward; seed 14-16 farms as hunt food runs out", icons: ["skirmisher", "farm"] }
-  - { villagers: 18, assign: "Move 7 villagers → gold and drop a Mining Camp", icons: ["gold", "mining-camp"] }
-  - { villagers: 18, assign: "Build a Blacksmith and research Fletching; wall up, then transition to Castle Age", icons: ["blacksmith", "fletching"] }
+  - { assign: "Build a Barracks and an Archery Range; push Spearmen forward as soon as they pop", icons: ["barracks", "archery-range", "spearman"] }
+  - { assign: "Research Double-Bit Axe and Horse Collar", icons: ["double-bit-axe", "horse-collar"] }
+  - { assign: "Train Skirmishers and move them forward; seed 14-16 farms as hunt food runs out", icons: ["skirmisher", "farm"] }
+  - { assign: "Move 7 villagers → gold and drop a Mining Camp", icons: ["gold", "mining-camp"] }
+  - { assign: "Build a Blacksmith and research Fletching; wall up, then transition to Castle Age", icons: ["blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"

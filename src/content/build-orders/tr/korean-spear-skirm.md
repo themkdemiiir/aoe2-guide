@@ -3,7 +3,7 @@ slug: korean-spear-skirm
 name: "18 Pop Korean Spear Skirm Rush"
 difficulty: beginner
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended: [koreans, byzantines, lithuanians]
 steps:
   - { villagers: 6,  assign: "6 → Town Center altındaki koyunlar", icons: ["food", "town-center"] }
@@ -13,13 +13,13 @@ steps:
   - { villagers: 12, assign: "+1 → bir ev kur, ardından çalıların üstüne değirmen", icons: ["house", "mill", "food"] }
   - { villagers: 13, assign: "+1 → ikinci yaban domuzunu çek", note: "Yiyeceği uzatmak için scout ile geyikleri çek", icons: ["food"] }
   - { villagers: 15, assign: "+2 → Town Center altındaki kalan avı topla", icons: ["food"] }
-  - { villagers: 18, assign: "+3 → çalılar; Loom araştır ve Feudal'a tıkla", time: "8:50", note: "Feudal geçişi ~8:50, 2 odun / 16 yiyecek üzerine", icons: ["food", "loom"] }
+  - { villagers: 18, assign: "+3 → çalılar; Loom araştır ve Feudal'a tıkla", time: "8:50", phase: feudal, note: "Feudal geçişi ~8:50, 2 odun / 16 yiyecek üzerine", icons: ["food", "loom"] }
   - { villagers: 18, assign: "3 köylüyü ilk kereste kampına, 5 köylüyü ikinci kereste kampına gönder", icons: ["wood", "lumber-camp"] }
-  - { villagers: 18, assign: "Bir Barracks ve bir Archery Range kur; mızrakçılar çıkar çıkmaz öne sür", icons: ["barracks", "archery-range", "spearman"] }
-  - { villagers: 18, assign: "Double-Bit Axe ve Horse Collar araştır", icons: ["double-bit-axe", "horse-collar"] }
-  - { villagers: 18, assign: "Skirmisher üret ve öne sür; av yiyeceği biterken 14-16 çiftlik ek", icons: ["skirmisher", "farm"] }
-  - { villagers: 18, assign: "7 köylüyü altına geçir ve bir Mining Camp kur", icons: ["gold", "mining-camp"] }
-  - { villagers: 18, assign: "Bir Blacksmith kur ve Fletching araştır; surları çek, sonra Castle Age'e geç", icons: ["blacksmith", "fletching"] }
+  - { assign: "Bir Barracks ve bir Archery Range kur; mızrakçılar çıkar çıkmaz öne sür", icons: ["barracks", "archery-range", "spearman"] }
+  - { assign: "Double-Bit Axe ve Horse Collar araştır", icons: ["double-bit-axe", "horse-collar"] }
+  - { assign: "Skirmisher üret ve öne sür; av yiyeceği biterken 14-16 çiftlik ek", icons: ["skirmisher", "farm"] }
+  - { assign: "7 köylüyü altına geçir ve bir Mining Camp kur", icons: ["gold", "mining-camp"] }
+  - { assign: "Bir Blacksmith kur ve Fletching araştır; surları çek, sonra Castle Age'e geç", icons: ["blacksmith", "fletching"] }
 source:
   author: "Hera"
   url: "https://www.patreon.com/heraaoe2"
