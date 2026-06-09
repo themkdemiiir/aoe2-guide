@@ -11,10 +11,14 @@ export function getStaticPaths() {
 }
 const lang = Astro.params.lang as Locale;
 
-type Relation = { winner: string; loser: string; why: string };
-type UnitInfo = { strongVs: string[]; weakVs: string[]; note: string };
-const ages = counters.ages as Record<string, { intro: string; relations: Relation[] }>;
+type Localized = string | { en: string; tr: string };
+type Relation = { winner: string; loser: string; why: Localized };
+type UnitInfo = { strongVs: string[]; weakVs: string[]; note: Localized };
+const ages = counters.ages as Record<string, { intro: Localized; relations: Relation[] }>;
 const units = counters.units as Record<string, UnitInfo>;
+
+// counters.json prose is migrating from EN-only strings to { en, tr }; accept both.
+const loc = (v: Localized): string => (typeof v === "string" ? v : (v[lang] ?? v.en));
 
 function displayName(slug: string) {
   return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -32,7 +36,7 @@ const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).local
       return (
         <section class="mt-10">
           <h2 class="font-display text-2xl text-ink">{t(lang, `counters.${ageKey}`)}</h2>
-          <p class="mt-1 max-w-prose text-sm text-stone-700">{age.intro}</p>
+          <p class="mt-1 max-w-prose text-sm text-stone-700">{loc(age.intro)}</p>
           <ul class="mt-4 space-y-2">
             {age.relations.map((r) => (
               <li class="flex flex-wrap items-center gap-x-2 gap-y-1 rounded border border-stone-700/20 bg-parchment p-3">
@@ -43,7 +47,7 @@ const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).local
                 <span class="inline-flex items-center gap-1.5 text-stone-700">
                   <Icon slug={r.loser} kind="unit" size={24} /> {displayName(r.loser)}
                 </span>
-                <span class="w-full text-sm text-stone-700 sm:flex-1 sm:border-l sm:border-stone-700/20 sm:pl-3">{r.why}</span>
+                <span class="w-full text-sm text-stone-700 sm:flex-1 sm:border-l sm:border-stone-700/20 sm:pl-3">{loc(r.why)}</span>
               </li>
             ))}
           </ul>
@@ -90,7 +94,7 @@ const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).local
                   </div>
                 </div>
               </div>
-              <p class="mt-auto pt-3 text-sm text-stone-700">{info.note}</p>
+              <p class="mt-auto pt-3 text-sm text-stone-700">{loc(info.note)}</p>
             </div>
           </li>
         ))}

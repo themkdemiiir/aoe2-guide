@@ -2,87 +2,138 @@
   "patch": "v100.1.84",
   "ages": {
     "feudal": {
-      "intro": "The Feudal Age has one core counter cycle plus Men-at-Arms and towers. Counters here are about pierce armour and speed as much as bonus damage.",
+      "intro": {
+        "en": "The Feudal Age has one core counter cycle plus Men-at-Arms and towers. Counters here are about pierce armour and speed as much as bonus damage.",
+        "tr": "Feodal Çağ'da bir temel counter döngüsü var; buna Men-at-Arms ve kuleler de eklenir. Buradaki counter ilişkileri bonus hasar kadar delici zırh ve hızla da ilgilidir."
+      },
       "relations": [
         {
           "winner": "skirmisher",
           "loser": "archer",
-          "why": "Bonus damage + 3 pierce armour reduces the archer's hit to 1 damage."
+          "why": {
+            "en": "Bonus damage + 3 pierce armour reduces the archer's hit to 1 damage.",
+            "tr": "Bonus hasar ve 3 delici zırh, Archer'ın isabetiyle yapabileceği hasarı 1'e indirir."
+          }
         },
         {
           "winner": "scout-cavalry",
           "loser": "skirmisher",
-          "why": "2 pierce armour (skirm deals 1) and enough speed to chase fleeing skirmishers down."
+          "why": {
+            "en": "2 pierce armour (skirm deals 1) and enough speed to chase fleeing skirmishers down.",
+            "tr": "2 delici zırh (Skirmisher yalnızca 1 hasar verir) ve kaçan Skirmisher'ları yakalamaya yetecek hız."
+          }
         },
         {
           "winner": "spearman",
           "loser": "scout-cavalry",
-          "why": "Large attack bonus vs cavalry — the hardest counter in Feudal, but slow and fragile vs everything else."
+          "why": {
+            "en": "Large attack bonus vs cavalry — the hardest counter in Feudal, but slow and fragile vs everything else.",
+            "tr": "Süvariye karşı büyük saldırı bonusu var — Feodal'ın en sert counter'ı, ama geri her şeye karşı yavaş ve kırılgan."
+          }
         },
         {
           "winner": "archer",
           "loser": "spearman",
-          "why": "Spearmen have low pierce armour and no answer to ranged fire."
+          "why": {
+            "en": "Spearmen have low pierce armour and no answer to ranged fire.",
+            "tr": "Spearman'ların delici zırhı düşük ve menzilli atışa karşı hiçbir cevapları yok."
+          }
         },
         {
           "winner": "skirmisher",
           "loser": "spearman",
-          "why": "Skirmishers also carry a bonus vs spearmen — don't use spears into skirms."
+          "why": {
+            "en": "Skirmishers also carry a bonus vs spearmen — don't use spears into skirms.",
+            "tr": "Skirmisher'ların Spearman'a karşı da bonusu var — Skirmisher'a karşı mızrakçı kullanma."
+          }
         },
         {
           "winner": "man-at-arms",
           "loser": "spearman",
-          "why": "Men-at-Arms beat most Feudal units in a straight fight; only hit-and-run archers trouble them. Safe under a tower."
+          "why": {
+            "en": "Men-at-Arms beat most Feudal units in a straight fight; only hit-and-run archers trouble them. Safe under a tower.",
+            "tr": "Men-at-Arms doğrudan dövüşte Feodal'ın çoğu birimini yener; yalnızca vur-kaç yapan okçular onları zorlar. Kule altında güvenli."
+          }
         }
       ]
     },
     "castle": {
-      "intro": "Castle Age adds compositions: a counter must actually kill its target, do it before the target tech-spikes, and not simply be kited. Knights dominate; Crossbows are the most common answer.",
+      "intro": {
+        "en": "Castle Age adds compositions: a counter must actually kill its target, do it before the target tech-spikes, and not simply be kited. Knights dominate; Crossbows are the most common answer.",
+        "tr": "Kale Çağı kompozisyon getirir: iyi bir counter hedefini gerçekten öldürmeli, bunu hedef teknoloji sıçraması yapmadan önce başarmalı ve kolayca vur-kaça düşmemeli. Knight'lar sahneye hâkim; Crossbow ise en yaygın yanıt."
+      },
       "relations": [
         {
           "winner": "knight",
           "loser": "crossbowman",
-          "why": "Speed + armour close the gap; crossbows need big numbers or a Mangonel to hold."
+          "why": {
+            "en": "Speed + armour close the gap; crossbows need big numbers or a Mangonel to hold.",
+            "tr": "Hız ve zırh mesafeyi kapatıyor; Crossbow'ların tutunmak için büyük sayı ya da bir Mangonel'e ihtiyacı var."
+          }
         },
         {
           "winner": "pikeman",
           "loser": "knight",
-          "why": "Anti-cavalry bonus — but you need numbers, and pikes die to archers/infantry support."
+          "why": {
+            "en": "Anti-cavalry bonus — but you need numbers, and pikes die to archers/infantry support.",
+            "tr": "Süvari karşıtı bonusu var — ama sayıya ihtiyacın var; Pikeman'lar okçu ve piyade desteğine karşı ölür."
+          }
         },
         {
           "winner": "camel-rider",
           "loser": "knight",
-          "why": "Bonus vs cavalry and mobile enough to catch them; the cleanest mobile anti-knight."
+          "why": {
+            "en": "Bonus vs cavalry and mobile enough to catch them; the cleanest mobile anti-knight.",
+            "tr": "Süvariye karşı bonusu var ve onları yakalayacak kadar hızlı; Knight'a karşı en temiz mobil seçenek."
+          }
         },
         {
           "winner": "crossbowman",
           "loser": "pikeman",
-          "why": "Ranged fire shreds low-pierce-armour trash; protect them from cavalry."
+          "why": {
+            "en": "Ranged fire shreds low-pierce-armour trash; protect them from cavalry.",
+            "tr": "Menzilli atış, düşük delici zırhlı trash birimleri parçalar; Crossbow'larını süvariden koru."
+          }
         },
         {
           "winner": "mangonel",
           "loser": "crossbowman",
-          "why": "Splash devastates massed archers — unless they are microed apart."
+          "why": {
+            "en": "Splash devastates massed archers — unless they are microed apart.",
+            "tr": "Alan hasarı yığılmış okçuları biçer — micro ile dağıtılmadıkça."
+          }
         },
         {
           "winner": "light-cavalry",
           "loser": "mangonel",
-          "why": "Fast melee closes and snipes siege; also great vs Monks and raiding."
+          "why": {
+            "en": "Fast melee closes and snipes siege; also great vs Monks and raiding.",
+            "tr": "Hızlı yakın dövüş birimi mesafeyi kapatıp kuşatma makinelerini ayıklar (sniping); Monk'lara karşı ve akın için de harika."
+          }
         },
         {
           "winner": "elite-skirmisher",
           "loser": "cavalry-archer",
-          "why": "High pierce armour hard-counters all archer-line and cavalry archers."
+          "why": {
+            "en": "High pierce armour hard-counters all archer-line and cavalry archers.",
+            "tr": "Yüksek delici zırh, tüm okçu serisi ve Cavalry Archer'ları doğrudan counter'lıyor."
+          }
         },
         {
           "winner": "monk",
           "loser": "knight",
-          "why": "Conversion removes expensive units outright — but Monks die to archers and light cav."
+          "why": {
+            "en": "Conversion removes expensive units outright — but Monks die to archers and light cav.",
+            "tr": "Dönüştürme pahalı birimleri tamamen safdışı eder — ama Monk'lar okçulara ve hafif süvariye karşı ölür."
+          }
         },
         {
           "winner": "eagle-warrior",
           "loser": "monk",
-          "why": "Fast, gold-light, with bonus vs monks/siege/archers; a mesoamerican raiding answer."
+          "why": {
+            "en": "Fast, gold-light, with bonus vs monks/siege/archers; a mesoamerican raiding answer.",
+            "tr": "Hızlı, az altın tüketir; Monk, kuşatma ve okçulara karşı bonusu var — Mesoamerika'nın akın cevabı."
+          }
         }
       ]
     }
@@ -91,82 +142,130 @@
     "archer": {
       "strongVs": ["spearman", "militia", "man-at-arms"],
       "weakVs": ["skirmisher", "scout-cavalry", "knight"],
-      "note": "Cheap ranged DPS; fragile. Fletching/Bodkin are huge power spikes."
+      "note": {
+        "en": "Cheap ranged DPS; fragile. Fletching/Bodkin are huge power spikes.",
+        "tr": "Ucuz menzilli DPS, ama kırılgan. Fletching ve Bodkin büyük güç sıçramaları."
+      }
     },
     "skirmisher": {
       "strongVs": ["archer", "cavalry-archer", "crossbowman", "spearman"],
       "weakVs": ["scout-cavalry", "knight", "militia"],
-      "note": "Trash counter to archers thanks to high pierce armour; useless vs melee."
+      "note": {
+        "en": "Trash counter to archers thanks to high pierce armour; useless vs melee.",
+        "tr": "Yüksek delici zırhı sayesinde okçulara karşı trash counter; yakın dövüşe karşı işe yaramaz."
+      }
     },
     "spearman": {
       "strongVs": ["scout-cavalry", "knight", "camel-rider"],
       "weakVs": ["archer", "skirmisher", "militia"],
-      "note": "Anti-cavalry trash. Slow and fragile to anything ranged or infantry."
+      "note": {
+        "en": "Anti-cavalry trash. Slow and fragile to anything ranged or infantry.",
+        "tr": "Süvari karşıtı trash birim. Menzilli ve piyade birimlere karşı yavaş ve kırılgan."
+      }
     },
     "scout-cavalry": {
       "strongVs": ["skirmisher", "archer", "monk"],
       "weakVs": ["spearman", "camel-rider"],
-      "note": "Fast raider; 2 pierce armour beats skirms. Stopped cold by spears."
+      "note": {
+        "en": "Fast raider; 2 pierce armour beats skirms. Stopped cold by spears.",
+        "tr": "Hızlı akıncı; 2 delici zırh Skirmisher'ları geçer. Mızrakçılar karşısında tamamen durur."
+      }
     },
     "man-at-arms": {
       "strongVs": ["spearman", "skirmisher", "eagle-scout"],
       "weakVs": ["archer", "scout-cavalry"],
-      "note": "Strong early Feudal aggression; safe under a tower. Kited by archers."
+      "note": {
+        "en": "Strong early Feudal aggression; safe under a tower. Kited by archers.",
+        "tr": "Feodal'ın başında güçlü saldırı aracı; kule altında güvenli. Okçular tarafından vur-kaça getirilir."
+      }
     },
     "knight": {
       "strongVs": ["crossbowman", "archer", "mangonel", "skirmisher"],
       "weakVs": ["pikeman", "camel-rider", "monk"],
-      "note": "The dominant Castle-Age unit: HP, attack, armour, speed — at ~2x cost."
+      "note": {
+        "en": "The dominant Castle-Age unit: HP, attack, armour, speed — at ~2x cost.",
+        "tr": "Kale Çağı'nın hâkim birimi: can, saldırı, zırh, hız — yaklaşık 2x maliyetle."
+      }
     },
     "crossbowman": {
       "strongVs": ["spearman", "pikeman", "militia"],
       "weakVs": ["skirmisher", "elite-skirmisher", "knight", "mangonel", "light-cavalry"],
-      "note": "Cheap upgrade from archers; the Xbow+Bodkin spike is unbeatable by Feudal units."
+      "note": {
+        "en": "Cheap upgrade from archers; the Xbow+Bodkin spike is unbeatable by Feudal units.",
+        "tr": "Okçulardan ucuz yükseltme; Crossbow+Bodkin sıçraması Feodal birimi tarafından durdurulamaz."
+      }
     },
     "pikeman": {
       "strongVs": ["knight", "camel-rider", "cavalry-archer", "scout-cavalry"],
       "weakVs": ["archer", "crossbowman", "militia", "mangonel"],
-      "note": "Upgraded anti-cavalry trash; needs numbers and ranged support."
+      "note": {
+        "en": "Upgraded anti-cavalry trash; needs numbers and ranged support.",
+        "tr": "Yükseltilmiş süvari karşıtı trash birim; sayıya ve menzilli desteğe ihtiyaç duyar."
+      }
     },
     "light-cavalry": {
       "strongVs": ["mangonel", "scorpion", "monk", "archer"],
       "weakVs": ["spearman", "pikeman", "camel-rider"],
-      "note": "Fast raider that snipes siege and Monks; trash-line so gold-free."
+      "note": {
+        "en": "Fast raider that snipes siege and Monks; trash-line so gold-free.",
+        "tr": "Kuşatma ve Monk'ları ayıklayan (sniping) hızlı akıncı; trash serisi olduğu için altın gerektirmez."
+      }
     },
     "camel-rider": {
       "strongVs": ["knight", "scout-cavalry", "cavalry-archer"],
       "weakVs": ["pikeman", "militia", "archer"],
-      "note": "Bonus vs cavalry and mobile — the answer to Knight-heavy play."
+      "note": {
+        "en": "Bonus vs cavalry and mobile — the answer to Knight-heavy play.",
+        "tr": "Süvariye karşı bonusu var ve mobil — Knight ağırlıklı oyuna karşı cevap."
+      }
     },
     "cavalry-archer": {
       "strongVs": ["long-swordsman", "spearman", "mangonel"],
       "weakVs": ["skirmisher", "elite-skirmisher", "camel-rider"],
-      "note": "Mobile ranged DPS; expensive and hard-countered by Skirmishers."
+      "note": {
+        "en": "Mobile ranged DPS; expensive and hard-countered by Skirmishers.",
+        "tr": "Mobil menzilli DPS; pahalı ve Skirmisher'lar tarafından doğrudan counter'lanır."
+      }
     },
     "mangonel": {
       "strongVs": ["archer", "crossbowman", "skirmisher", "spearman"],
       "weakVs": ["knight", "light-cavalry"],
-      "note": "Splash murders massed foot; dies to mobile melee and is beaten by micro."
+      "note": {
+        "en": "Splash murders massed foot; dies to mobile melee and is beaten by micro.",
+        "tr": "Alan hasarı yığılmış piyadeleri biçer; mobil yakın dövüş birimlere karşı ölür ve micro ile etkisizleştirilebilir."
+      }
     },
     "scorpion": {
       "strongVs": ["spearman", "skirmisher", "archer"],
       "weakVs": ["mangonel", "knight", "light-cavalry"],
-      "note": "Linear bolt shreds tight formations; immobile and siege-vulnerable."
+      "note": {
+        "en": "Linear bolt shreds tight formations; immobile and siege-vulnerable.",
+        "tr": "Düz ateş sıkı düzenleri parçalar; hareketsiz ve kuşatmaya karşı savunmasız."
+      }
     },
     "monk": {
       "strongVs": ["knight", "cavalier", "war-elephant"],
       "weakVs": ["archer", "light-cavalry", "mangonel"],
-      "note": "Converts single expensive units and heals; very fragile to ranged + speed."
+      "note": {
+        "en": "Converts single expensive units and heals; very fragile to ranged + speed.",
+        "tr": "Tek tek pahalı birimleri dönüştürür ve iyileştirir; menzil ve hıza karşı çok kırılgan."
+      }
     },
     "eagle-warrior": {
       "strongVs": ["monk", "mangonel", "archer", "cavalry-archer"],
       "weakVs": ["militia", "knight"],
-      "note": "Fast, gold-light raider; bonus vs siege/monks/archers but loses to heavy infantry."
+      "note": {
+        "en": "Fast, gold-light raider; bonus vs siege/monks/archers but loses to heavy infantry.",
+        "tr": "Hızlı, az altın tüketen akıncı; kuşatma/monk/okçulara karşı bonusu var ama ağır piyadeye yenik düşer."
+      }
     },
     "battering-ram": {
       "strongVs": ["archer", "skirmisher"],
       "weakVs": ["militia", "monk"],
-      "note": "Demolishes buildings and absorbs arrows for your army; helpless once units swarm it."
+      "note": {
+        "en": "Demolishes buildings and absorbs arrows for your army; helpless once units swarm it.",
+        "tr": "Binaları yıkar ve ordun için okları absorbe eder; birimler üzerine üşüştüğünde tamamen savunmasız kalır."
+      }
     }
   }
 }
