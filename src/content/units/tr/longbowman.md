@@ -9,4 +9,4 @@ Uzunyay Okçusu, Britons'ın özgün birimidir — Yeomen ile birlikte oyundaki 
 
 ## Nasıl kullanılır
 
-Uzunyay Okçularını Tatar Yayı hattının arkasında kitle olarak topla. Tam yükseltmelerle diğer tüm okçuları menzil dışında bırakırlar — Kale ve Emperyal Çağ'da yıkıcıdırlar.
+Uzunyay Okçularını Tatar Yayı hattının arkasında kitle olarak topla. Tam yükseltmelerle diğer tüm okçuları menzil dışında bırakırlar — Kale ve İmparatorluk Çağı'nda yıkıcıdırlar.

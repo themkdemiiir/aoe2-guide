@@ -4,7 +4,7 @@ name: Britons
 tagline: En uzun menzilli Uzunyay Okçusuna sahip yaya okçu uzmanı.
 bonuses:
   - Kale Çağı'ndan itibaren Şehir Merkezleri %50 daha az odun maliyetiyle inşa edilir.
-  - Yaya okçuları (Skirmisher hariç) Kale Çağı'nda +1, Emperyal Çağ'da +2 menzil kazanır.
+  - Yaya okçuları (Skirmisher hariç) Kale Çağı'nda +1, İmparatorluk Çağı'nda +2 menzil kazanır.
   - Çobanlar %25 daha hızlı çalışır.
 teamBonus: Okçu Talimhaneleri %20 daha hızlı çalışır.
 uniqueTechs:
@@ -16,7 +16,7 @@ uniqueTechs:
     effect: Trebuchet'ler birimlere karşı alan hasarı verir ve ıskalamaz.
 ---
 
-Britons, oyunun en güçlü özgün birimlerinden biri olan Uzunyay Okçusuna sahip bir okçu uygarlığıdır. Kale ve Emperyal Çağ'da uzun menzilli yaya okçu kompozisyonunda parlar.
+Britons, oyunun en güçlü özgün birimlerinden biri olan Uzunyay Okçusuna sahip bir okçu uygarlığıdır. Kale ve İmparatorluk Çağı'nda uzun menzilli yaya okçu kompozisyonunda parlar.
 
 ## Oynayış
 
