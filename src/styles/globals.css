@@ -37,8 +37,9 @@
 
 [data-theme="dark"] {
   --color-parchment: oklch(0.17 0.02 50);
-  --color-ink: oklch(0.86 0.12 75);
-  --color-stone-700: oklch(0.5 0.03 55);
+  /* Body text is a neutral warm-light, NOT gold — gold stays on links/accents only. */
+  --color-ink: oklch(0.92 0.012 85);
+  --color-stone-700: oklch(0.72 0.03 60);
   --color-gold-500: oklch(0.8 0.12 80);
 }
 
@@ -81,9 +82,11 @@ body {
   --tw-prose-th-borders: color-mix(in oklch, var(--color-stone-700) 45%, transparent);
   --tw-prose-td-borders: color-mix(in oklch, var(--color-stone-700) 20%, transparent);
 }
-.prose :is(h1, h2, h3, h4) {
+/* Cinzel (display) only on the big headings; h3/h4 stay on Inter for readability. */
+.prose :is(h1, h2) {
   font-family: var(--font-display);
   font-weight: 600;
+  letter-spacing: 0.01em;
 }
 .prose :is(code, kbd, pre, samp) {
   font-family: var(--font-mono);

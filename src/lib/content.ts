@@ -30,15 +30,28 @@ export async function getLocalizedEntries<T extends ContentType>(
 ): Promise<Array<CollectionEntry<T>>> {
   const all = await getCollection(type);
   const fallbackEntries = all.filter((e) => localeFromEntryId(e.id) === defaultLocale);
-  if (locale === defaultLocale) return fallbackEntries;
 
-  const localizedBySlug = new Map(
-    all
-      .filter((e) => localeFromEntryId(e.id) === locale)
-      .map((entry) => [canonicalSlug(entry.id), entry]),
-  );
+  let result: Array<CollectionEntry<T>>;
+  if (locale === defaultLocale) {
+    result = fallbackEntries;
+  } else {
+    const localizedBySlug = new Map(
+      all
+        .filter((e) => localeFromEntryId(e.id) === locale)
+        .map((entry) => [canonicalSlug(entry.id), entry]),
+    );
+    result = fallbackEntries.map((entry) => localizedBySlug.get(canonicalSlug(entry.id)) ?? entry);
+  }
 
-  return fallbackEntries.map((entry) => localizedBySlug.get(canonicalSlug(entry.id)) ?? entry);
+  // Alphabetize the name-keyed list collections (locale-aware so Turkish sorts
+  // correctly). Order-sensitive types (beginner chapters, articles) keep glob order.
+  if (type === "civilizations" || type === "maps") {
+    const collator = new Intl.Collator(locale);
+    const nameOf = (e: CollectionEntry<T>) => String((e.data as { name?: string }).name ?? "");
+    result = [...result].sort((a, b) => collator.compare(nameOf(a), nameOf(b)));
+  }
+
+  return result;
 }
 
 /** Get a single entry by slug in a given locale; falls back to defaultLocale if not found. */
