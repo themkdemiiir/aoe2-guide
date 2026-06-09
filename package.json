@@ -26,6 +26,7 @@
     "import:md": "node scripts/import-from-md.mjs",
     "new:guide": "node scripts/new-guide.mjs",
     "check:translations": "node scripts/check-translations.mjs",
+    "i18n:coverage": "node scripts/i18n-coverage.mjs",
     "sync:game-data": "node scripts/sync-game-data.mjs",
     "build:civilizations": "node scripts/build-civilizations.mjs",
     "build:units": "node scripts/build-units.mjs",
