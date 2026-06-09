@@ -1,15 +1,18 @@
 ---
 import iconMapJson from "@data/icon-map.json";
+import type { Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
 
 interface Step {
-  villagers: number;
+  villagers?: number;
+  phase?: "feudal" | "castle" | "imperial";
   time?: string;
   assign: string;
   note?: string;
   icons?: string[];
 }
-interface Props { steps: Step[]; }
-const { steps } = Astro.props;
+interface Props { steps: Step[]; lang: Locale; }
+const { steps, lang } = Astro.props;
 
 const iconMap = iconMapJson as Record<string, Record<string, string>>;
 
@@ -29,10 +32,6 @@ function resolveIcon(slug: string): string | null {
   return null;
 }
 
-function isPhase(assign: string): boolean {
-  return /\b(Feudal|Castle|Imperial|Kale|Feodal|Emperyal)\s+(arrives?|click|hit|tıkla|geç|geçiş)/i.test(assign);
-}
-
 function titleCase(slug: string): string {
   return slug
     .split("-")
@@ -40,57 +39,73 @@ function titleCase(slug: string): string {
     .join(" ");
 }
 
-function phaseLabel(assign: string): string | null {
-  if (/\b(Imperial|Emperyal|İmparatorluk)\b/i.test(assign)) return "Imperial Age";
-  if (/\b(Castle|Kale)\b/i.test(assign)) return "Castle Age";
-  if (/\b(Feudal|Feodal)\b/i.test(assign)) return "Feudal Age";
+// Prefer the structured `phase` field; fall back to a STRICT "<Age> click/arrives"
+// pattern so prose like "wall before Castle" doesn't trigger a false section break.
+function phaseFromAssign(assign: string): "feudal" | "castle" | "imperial" | null {
+  if (/\b(Imperial|Emperyal|İmparatorluk)\b/i.test(assign)) return "imperial";
+  if (/\b(Castle|Kale)\b/i.test(assign)) return "castle";
+  if (/\b(Feudal|Feodal)\b/i.test(assign)) return "feudal";
   return null;
+}
+function isTransitionAssign(assign: string): boolean {
+  return /\b(Feudal|Castle|Imperial|Kale|Feodal|Emperyal|İmparatorluk)\s+(arrives?|click|hit|reach|tıkla|geç|geçiş|ulaş)/i.test(assign);
 }
 
 interface PhaseSection {
   id: string;
   label: string;
-  steps: Array<Step & { index: number; phase: boolean }>;
+  steps: Array<Step & { index: number; isTransition: boolean }>;
 }
 
-const sections: PhaseSection[] = [{ id: "opening", label: "Opening", steps: [] }];
+const sections: PhaseSection[] = [{ id: "opening", label: t(lang, "builds.opening"), steps: [] }];
 
 for (const [index, step] of steps.entries()) {
-  const phase = isPhase(step.assign);
-  const label = phaseLabel(step.assign);
-  if (label && sections[sections.length - 1]?.label !== label) {
-    sections.push({ id: label.toLowerCase().replace(/\s+/g, "-"), label, steps: [] });
+  const phaseKey =
+    step.phase ?? (isTransitionAssign(step.assign) ? phaseFromAssign(step.assign) : null);
+  const isTransition = phaseKey != null;
+  if (phaseKey) {
+    const label = t(lang, `age.${phaseKey}`);
+    if (sections[sections.length - 1]?.label !== label) {
+      sections.push({ id: phaseKey, label, steps: [] });
+    }
   }
-  sections[sections.length - 1].steps.push({ ...step, index, phase });
+  sections[sections.length - 1].steps.push({ ...step, index, isTransition });
 }
 ---
 <div class="space-y-4">
   {sections.map((section) => {
     const first = section.steps[0];
-    const last = section.steps[section.steps.length - 1];
+    const pops = section.steps.map((s) => s.villagers).filter((v): v is number => v != null);
+    const popRange = pops.length ? ` · ${t(lang, "home.pop")} ${pops[0]}-${pops[pops.length - 1]}` : "";
     return (
       <section class="overflow-hidden rounded border border-stone-700/40 bg-parchment shadow-sm">
         <header class="flex flex-wrap items-end justify-between gap-2 border-b border-stone-700/30 bg-stone-700/10 px-4 py-3">
           <div>
             <h3 class="font-display text-lg text-ink">{section.label}</h3>
             <p class="text-xs text-stone-700">
-              {section.steps.length} steps · pop {first?.villagers ?? "?"}-{last?.villagers ?? "?"}
+              {section.steps.length} {t(lang, "home.steps")}{popRange}
             </p>
           </div>
-          {first?.time && <span class="font-mono text-xs text-stone-700">starts {first.time}</span>}
+          {first?.time && <span class="font-mono text-xs text-stone-700">{first.time}</span>}
         </header>
 
         <ol class="divide-y divide-stone-700/20">
           {section.steps.map((s) => (
             <li class:list={[
               "grid gap-3 px-4 py-3 sm:grid-cols-[5rem_1fr]",
-              s.phase ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
+              s.isTransition ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
             ]}>
               <div class="flex items-center gap-3 sm:block">
-                <div class="inline-flex min-w-12 flex-col rounded border border-stone-700/30 bg-parchment/80 px-2 py-1 text-center">
-                  <span class="text-[0.65rem] uppercase tracking-wide text-stone-700">pop</span>
-                  <span class="font-mono text-lg font-bold leading-none text-ink">{s.villagers}</span>
-                </div>
+                {s.villagers != null ? (
+                  <div class="inline-flex min-w-12 flex-col rounded border border-stone-700/30 bg-parchment/80 px-2 py-1 text-center">
+                    <span class="text-[0.65rem] uppercase tracking-wide text-stone-700">{t(lang, "home.pop")}</span>
+                    <span class="font-mono text-lg font-bold leading-none text-ink">{s.villagers}</span>
+                  </div>
+                ) : (
+                  <div class="inline-flex min-w-12 items-center justify-center rounded border border-dashed border-stone-700/20 bg-parchment/50 px-2 py-2 text-center font-mono text-sm text-stone-700">
+                    #{s.index + 1}
+                  </div>
+                )}
                 <div class="font-mono text-xs text-stone-700 sm:mt-2 sm:text-center">
                   {s.time ?? `#${s.index + 1}`}
                 </div>
@@ -114,7 +129,7 @@ for (const [index, step] of steps.entries()) {
                     })}
                   </div>
                 )}
-                <p class:list={["text-sm leading-relaxed", s.phase ? "font-semibold text-ink" : "text-ink"]}>
+                <p class:list={["text-sm leading-relaxed", s.isTransition ? "font-semibold text-ink" : "text-ink"]}>
                   {s.assign}
                 </p>
                 {s.note && (
