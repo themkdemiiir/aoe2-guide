@@ -103,7 +103,7 @@ function displayName(slug: string): string {
         const uniqueUnitsHtml = (c.uniqueUnits || []).map((uslug) => {
           const uIcon = unitIcons[uslug];
           return '<li class="flex items-center gap-2">'
-               + (uIcon ? '<img src="' + esc(uIcon) + '" alt="" class="h-6 w-6"/>' : '')
+               + (uIcon ? '<img src="' + esc(uIcon) + '" alt="" width="24" height="24" loading="lazy" decoding="async" class="h-6 w-6"/>' : '')
                + '<span>' + esc(displayName(uslug)) + '</span></li>';
         }).join('');
 
@@ -125,7 +125,7 @@ function displayName(slug: string): string {
         return ''
           + '<article class="rounded border border-stone-700/40 bg-parchment p-4">'
           + '  <header class="flex items-center gap-3">'
-          + (icon ? '    <img src="' + esc(icon) + '" alt="" class="h-14 w-14 rounded border border-stone-700/40"/>' : '')
+          + (icon ? '    <img src="' + esc(icon) + '" alt="" width="56" height="56" loading="lazy" decoding="async" class="h-14 w-14 rounded border border-stone-700/40"/>' : '')
           + '    <div>'
           + '      <h2 class="font-display text-2xl text-ink">' + esc(displayName(slug)) + '</h2>'
           + '      <p class="text-sm text-stone-700">' + esc(c.region || '') + ' · ' + esc(c.specialty || '') + '</p>'

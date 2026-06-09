@@ -72,6 +72,9 @@ const jsonLd = {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {/* Preload the self-hosted critical faces (latin subset) for faster first paint. */}
+    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/cinzel-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
     {alternates.map(({ locale: l, path }) => (
       <link rel="alternate" hreflang={l} href={`${site}${path}`} />
