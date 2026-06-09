@@ -7,13 +7,3 @@ lineRank: 2
 ---
 
 The Fire Ship is a anti-ship naval trained at the Dock.
-
-## Stats summary
-
-| HP | Attack | Range | Train time | Cost |
-|----|--------|-------|------------|------|
-| 100 | 2 | 2 | 36s | Free |
-
-## Notes
-
-Standard unit. See the stats table above.

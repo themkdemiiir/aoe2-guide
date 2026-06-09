@@ -7,13 +7,3 @@ lineRank: 3
 ---
 
 The Fast Fire Ship is a anti-ship naval trained at the Dock.
-
-## Stats summary
-
-| HP | Attack | Range | Train time | Cost |
-|----|--------|-------|------------|------|
-| 120 | 3 | 2 | 36s | Free |
-
-## Notes
-
-Standard unit. See the stats table above.
