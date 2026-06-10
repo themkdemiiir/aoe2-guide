@@ -1,0 +1,170 @@
+slug: 30pop-fast-imp-generic
+name:
+  en: 30 Pop Fast Imperial Age (Generic)
+  tr: 30 Köylü Hızlı İmparatorluk (Genel)
+difficulty: advanced
+targetAge: imperial
+durationMin: 21
+civsRecommended: []
+steps:
+  - villagers: 6
+    assign:
+      en: Villagers 1-6 → sheep under TC
+      tr: Köylü 1-6 → TC altındaki koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 10
+    assign:
+      en: Villagers 7-10 → wood (build Lumber Camp)
+      tr: Köylü 7-10 → oduna (Lumber Camp kur)
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: Villager 11 → lure boar to TC
+      tr: Köylü 11 → ilk domuzu TC'ye çek
+    icons:
+      - food
+  - villagers: 14
+    assign:
+      en: Villagers 12-14 → berries (build Mill)
+      tr: Köylü 12-14 → meyveye (Mill kur)
+    icons:
+      - food
+      - mill
+  - villagers: 19
+    assign:
+      en: Villagers 15-19 → more wood + second boar lure
+      tr: Köylü 15-19 → daha fazla odun + ikinci domuz çekme
+    icons:
+      - wood
+      - food
+  - villagers: 24
+    assign:
+      en: Villagers 20-24 → mixed food (sheep / boar / deer)
+      tr: Köylü 20-24 → karışık yiyeceğe (koyun / domuz / geyik)
+    icons:
+      - food
+  - villagers: 30
+    assign:
+      en: Villagers 25-30 → gold (build Mining Camp)
+      tr: Köylü 25-30 → altına (Mining Camp kur)
+    note:
+      en: Click Feudal at 30 pop (~13:00); 6 on gold. Push deer to TC with scout
+      tr: 30 pop'ta Feudal'e tıkla (~13:00); altında 6. İzciyle geyikleri TC'ye sür
+    icons:
+      - gold
+      - mining-camp
+  - villagers: 30
+    assign:
+      en: Feudal arrives — 1 villager builds the Blacksmith, 2 build the Market then return to wood
+      tr: Feudal gelir — 1 köylü Blacksmith kurar, 2 köylü Market kurup sonra oduna döner
+    icons:
+      - blacksmith
+      - market
+  - villagers: 32
+    assign:
+      en: +2 vils → gold (now 8 on gold); click Castle Age (~16:30)
+      tr: +2 köylü → altına (artık altında 8); Castle Age'e tıkla (~16:30)
+    icons:
+      - gold
+  - villagers: 32
+    assign:
+      en: Castle Age — build Monastery + Siege Workshop; transition hunt vils to farms
+      tr: Castle Age — Monastery + Siege Workshop kur; av köylülerini tarlalara geçir
+    icons:
+      - monastery
+      - siege-workshop
+      - farm
+  - villagers: 32
+    assign:
+      en: Click Imperial Age (~21:00); keep food / wood / gold balanced
+      tr: Imperial Age'e tıkla (~21:00); yiyecek / odun / altını dengede tut
+    icons:
+      - food
+      - wood
+      - gold
+intro:
+  en: >-
+    **Goal:** Reach Imperial Age at ~21 minutes through a balanced economy with no Feudal military investment.
+    **Recommended civs:** Any civ with strong Imperial Age units
+  tr: >-
+    **Amaç:** Feudal'de hiç asker yatırımı yapmadan, dengeli bir ekonomiyle ~21. dakikada İmparatorluk Çağı'na ulaşmak.
+    **Önerilen medeniyetler:** Güçlü Imperial Age birimlerine sahip herhangi bir medeniyet
+strategy:
+  en:
+    - Villagers 1-6 on sheep under the Town Center
+    - Villagers 7-10 on wood (build a Lumber Camp)
+    - Villager 11 lures the first boar to the TC
+    - Villagers 12-14 on berries (build a Mill)
+    - Villagers 15-19 on more wood and the second boar lure
+    - Villagers 20-24 on mixed food (sheep / boar / deer)
+    - Villagers 25-30 on gold (build a Mining Camp) — finish with **6 villagers on gold**
+    - Use the scout to push deer toward the TC
+    - 1 villager builds the Blacksmith
+    - 2 villagers build the Market (return to wood when done)
+    - Keep gold mining going to fund the age-ups
+    - >-
+      (Delay) Double-Bit Axe and Horse Collar in Feudal only if time and resources permit — speed to Castle is the
+      priority
+    - Add 2 villagers to gold (now 8 on gold) to bank toward the next age
+    - Click Castle Age (~16:30) — minimize Feudal time
+    - No military production in Feudal Age
+    - Use the Market to sell surplus resources for gold if needed
+    - Build 1 Monastery
+    - Build 1 Siege Workshop
+    - When berries and hunt run out, send those villagers to Farms
+    - Keep the economy balanced; maintain a strong gold count
+    - Click Imperial Age (~21:00)
+    - Keep food, wood, and gold balanced; add Farms and gold as production scales up
+    - Build military as you transition to Imperial Age (Archers, Cavalry, Monks, Siege)
+    - Expand the economy and multiply production buildings
+    - Add military production buildings to match your chosen composition
+    - >-
+      The 30 Pop Fast Imp is a long-term investment strategy. It works best on closed maps where Feudal pressure cannot
+      disrupt the passive economy.
+    - >-
+      **Weak against:** Feudal or Castle Age aggression that reaches your base before walling is complete; any opponent
+      who can apply sustained pressure.
+    - >-
+      **Strong against:** Boom strategies that reach Imperial Age at the same time but with a weaker military; opponents
+      who invest heavily in Castle Age units.
+  tr:
+    - Köylü 1-6 Town Center altındaki koyunlarda
+    - Köylü 7-10 odunda (Lumber Camp kur)
+    - Köylü 11 ilk domuzu TC'ye çeker
+    - Köylü 12-14 meyvede (Mill kur)
+    - Köylü 15-19 daha fazla odunda ve ikinci domuz çekmede
+    - Köylü 20-24 karışık yiyecekte (koyun / domuz / geyik)
+    - Köylü 25-30 altında (Mining Camp kur) — **altında 6 köylüyle** bitir
+    - İzciyle geyikleri TC'ye doğru sür
+    - 1 köylü Blacksmith kurar
+    - 2 köylü Market kurar (bitince oduna geri döner)
+    - Çağ geçişlerini finanse etmek için altın toplamayı sürdür
+    - >-
+      (Geciktir) Double-Bit Axe ve Horse Collar'ı yalnızca zaman ve kaynak yeterse Feudal'de araştır — öncelik Castle'a
+      hızla geçmek
+    - Bir sonraki çağa biriktirmek için altına 2 köylü ekle (artık altında 8)
+    - Castle Age'e tıkla (~16:30) — Feudal'de geçen süreyi en aza indir
+    - Feudal Age'de asker üretme
+    - Gerekirse Market'te fazla kaynakları satıp altın al
+    - 1 Monastery kur
+    - 1 Siege Workshop kur
+    - Meyveler ve av tükendiğinde o köylüleri tarlalara gönder
+    - Ekonomiyi dengede tut; güçlü bir altın seviyesi koru
+    - Imperial Age'e tıkla (~21:00)
+    - Yiyecek, odun ve altını dengede tut; üretim arttıkça tarla ve altın ekle
+    - Imperial Age'e geçerken ordunu kur (okçu, süvari, rahip, kuşatma)
+    - Ekonomiyi genişlet ve üretim binalarını çoğalt
+    - Seçtiğin kompozisyona uygun askeri üretim binaları ekle
+    - >-
+      30 Köylü Fast Imp uzun vadeli bir yatırım stratejisidir. Feudal baskısının pasif ekonomiyi sekteye uğratamadığı
+      kapalı haritalarda en iyi çalışır.
+    - >-
+      **Zayıf olduğu:** Sen duvarlanmayı tamamlamadan üssüne ulaşan Feudal veya Castle Age saldırıları; sürekli baskı
+      uygulayabilen her rakip.
+    - >-
+      **Güçlü olduğu:** Aynı anda Imperial Age'e ulaşan ama daha zayıf orduya sahip boom stratejileri; Castle Age
+      birimlerine ağır yatırım yapan rakipler.

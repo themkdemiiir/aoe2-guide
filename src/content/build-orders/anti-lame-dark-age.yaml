@@ -1,0 +1,144 @@
+slug: anti-lame-dark-age
+name:
+  en: Anti-Lame Fast Up Dark Age
+  tr: Anti-Lame Fast Up Dark Age
+difficulty: advanced
+targetAge: feudal
+durationMin: 8
+civsRecommended: []
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the TC
+      tr: 6 → TC altındaki koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 7
+    assign:
+      en: +1 → lure the first boar
+      tr: +1 → ilk yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 9
+    assign:
+      en: +2 → wood, build lumber camp
+      tr: +2 → oduna, kütük kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → lure 2nd boar, eat it under the TC
+      tr: +1 → 2. yaban domuzunu çek, TC altında ye
+    icons:
+      - food
+      - town-center
+  - villagers: 11
+    assign:
+      en: +1 → finish the second boar
+      tr: +1 → ikinci yaban domuzunu bitir
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build a house, then mill on berries
+      tr: +1 → ev kur, sonra yabani meyvelerin üzerine değirmen
+    icons:
+      - house
+      - mill
+      - food
+  - assign:
+      en: "Scout: lure at least 2 deer to the TC"
+      tr: "Keşifçi: en az 2 geyiği TC'ye çek"
+    note:
+      en: Mandatory — this is the core of the build
+      tr: Zorunlu — bu, build'in özüdür
+    icons:
+      - food
+  - villagers: 17
+    phase: feudal
+    time: "8:25"
+    assign:
+      en: +5 → food under TC; research Loom (or send +1 to wood), then click Feudal
+      tr: +5 → TC altında yemeğe; Loom araştır (ya da +1'i oduna gönder), sonra Feudal'a tıkla
+    note:
+      en: Landing ~8:25 (2 wood / 15 food)
+      tr: Yaklaşık 8:25'te geçiş (2 odun / 15 yemek)
+    icons:
+      - food
+      - loom
+  - villagers: 17
+    assign:
+      en: Feudal arrives — pull villagers off the hunt onto wood until 8 are on one lumber camp
+      tr: Feudal geldi — köylüleri avdan çekip 8 köylü tek bir kütük kampında olana dek oduna al
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 17
+    assign:
+      en: 2 → straggler trees near the TC
+      tr: 2 → TC yakınındaki dağınık ağaçlara
+    icons:
+      - wood
+  - villagers: 17
+    assign:
+      en: 2 → build Barracks plus a house
+      tr: 2 → Kışla ve bir ev kur
+    icons:
+      - barracks
+      - house
+  - assign:
+      en: "Archer opening: send 4 villagers to gold; or run Scouts/Spears/Skirmishers and keep villagers on food and wood"
+      tr: "Okçu açılışı: 4 köylüyü altına gönder; ya da Scout/Mızraklı/Skirmisher yap ve köylüleri yemek ve odunda tut"
+    icons:
+      - archer
+      - scout-cavalry
+intro:
+  en: >-
+    Secure every scrap of your own food — both boars under the Town Center and a mandatory deer lure — so no opponent
+    can lame you out of a reliable, civ-agnostic fast Feudal.
+  tr: >-
+    Kendi yemeğinin her kırıntısını güvene al — iki yaban domuzunu da Şehir Merkezi altında, geyikleri de zorunlu olarak
+    çekerek — ki hiçbir rakip seni lame'leyip güvenilir, uygarlıktan bağımsız hızlı Feudal'ından edemesin.
+strategy:
+  en:
+    - >-
+      The whole point is denial-proofing your eco: eating both boars under the TC and luring deer banks your food where
+      enemy scouts and villagers cannot steal or push it, so your uptime stays consistent no matter who tries to lame
+      you.
+    - >-
+      Because nothing here depends on a civilization bonus, this is a dependable opener on any civ — expect a clean
+      19-pop (no Loom) or 18-pop (with Loom) arrival into Feudal at roughly 8:25.
+    - >-
+      The build deliberately runs lean: it is a short, food-heavy push to Feudal, so do not over-invest in Dark Age
+      extras. Get the hunt in, get up, and let your follow-up define the game.
+    - >-
+      In Feudal, shift the hunt villagers onto a single lumber camp until 8 are chopping, then split 2 to stragglers and
+      2 to a Barracks and house — this gives you the wood and building base for any unit choice.
+    - >-
+      Pick your follow-up based on what you scout: an Archery Range opening wants 4 villagers straight to gold, while a
+      Scout, Spearman, or Skirmisher plan keeps your villagers on food and wood instead.
+    - >-
+      Strongest as an insurance opener against aggressive scouting and laming; if the game goes quiet, you have aged up
+      on time and can transition smoothly into a standard Feudal or Castle plan.
+  tr:
+    - >-
+      Bütün mesele ekonomini engellenemez kılmak: iki yaban domuzunu da TC altında yemek ve geyikleri çekmek, yemeğini
+      düşman keşifçilerinin ve köylülerinin çalamayacağı ya da iteleyemeyeceği bir yere biriktirir; böylece seni kim
+      lame'lemeye kalkarsa kalksın geçiş zamanın tutarlı kalır.
+    - >-
+      Burada hiçbir şey bir uygarlık bonusuna bağlı olmadığı için, bu açılış her uygarlıkta güvenilirdir — Feudal'a
+      yaklaşık 8:25'te temiz bir 19-pop (Loom'suz) ya da 18-pop (Loom'lu) varış bekle.
+    - >-
+      Build bilinçli olarak yalın çalışır: Feudal'a kısa, yemek ağırlıklı bir itiş olduğundan, Dark Age'de fazladan
+      şeylere aşırı yatırım yapma. Avı topla, çık ve oyunu devamının belirlemesine izin ver.
+    - >-
+      Feudal'da av köylülerini tek bir kütük kampına kaydır, 8 köylü odun kesene dek; sonra 2'sini dağınık ağaçlara,
+      2'sini de Kışla ve eve ayır — bu, her birim seçimi için sana odun ve bina temelini verir.
+    - >-
+      Devamını keşifte gördüğüne göre belirle: bir Okçu Menzili açılışı 4 köylüyü doğrudan altına ister, oysa Scout,
+      Mızraklı ya da Skirmisher planı köylülerini bunun yerine yemek ve odunda tutar.
+    - >-
+      Saldırgan keşfe ve lame'lemeye karşı bir sigorta açılışı olarak en güçlüsüdür; oyun sessizleşirse zamanında çıkmış
+      olursun ve standart bir Feudal ya da Castle planına sorunsuzca geçebilirsin.

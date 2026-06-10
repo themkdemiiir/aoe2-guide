@@ -1,0 +1,166 @@
+slug: fc-light-cav-relic
+name:
+  en: Fast Castle Light Cav Relic Control
+  tr: Fast Castle Light Cav Relic Control
+difficulty: intermediate
+targetAge: castle
+durationMin: 15
+civsRecommended: []
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Şehir Merkezi'nin altındaki koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 9
+    assign:
+      en: +3 → wood, drop a Lumber Camp
+      tr: +3 → oduna, bir Kereste Kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → lure and shoot the first boar
+      tr: +1 → ilk yaban domuzunu çek ve vur
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a House, then a Mill on the berries
+      tr: +1 → bir Ev kur, ardından çileklere bir Değirmen
+    icons:
+      - house
+      - mill
+      - food
+  - assign:
+      en: Lure all 3 deer to the Town Center with your scout
+      tr: Atlı kâşifinle 3 geyiği de Şehir Merkezi'ne çek
+    note:
+      en: No new villager — stretch food while eco vils stay on resources
+      tr: Yeni köylü yok — ekonomi köylülerini kaynakta tutarak yiyeceği uzat
+    icons:
+      - food
+      - scout-cavalry
+  - villagers: 14
+    assign:
+      en: +3 → hunt; lure the second boar before the first runs out
+      tr: +3 → ava; ilki bitmeden ikinci yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: +4 → berries; add a House for headroom
+      tr: +4 → çileklere; pop alanı için bir Ev daha ekle
+    icons:
+      - food
+      - house
+  - villagers: 18
+    assign:
+      en: Seed 3 farms with the freed-up sheep villagers
+      tr: Boşalan koyun köylüleriyle 3 tarla kur
+    note:
+      en: Reassignment, not new pop
+      tr: Yeni pop değil, yeniden görevlendirme
+    icons:
+      - farm
+  - villagers: 23
+    assign:
+      en: +5 → wood on a single Lumber Camp
+      tr: +5 → tek bir Kereste Kampı'nda oduna
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 25
+    phase: feudal
+    assign:
+      en: +2 → gold, then click Feudal Age (~11:20 / 8 wood, 15 food, 2 gold)
+      tr: +2 → altına, ardından Kale Çağı'na tıkla (~11:20 / 8 odun, 15 yiyecek, 2 altın)
+    note:
+      en: Keep your gold income flowing for the Monastery
+      tr: Manastır için altın gelirini akışta tut
+    icons:
+      - gold
+  - villagers: 27
+    assign:
+      en: "Feudal: food-out vils → straggler trees; build a Barracks, then a Stable; +2 → wood"
+      tr: "Feudal: yiyeceği biten köylüler → tek ağaçlara; bir Kışla, ardından bir Ahır kur; +2 → oduna"
+    icons:
+      - barracks
+      - stable
+      - wood
+  - assign:
+      en: Add a Market and send 2 villagers to it; balance wood and gold for the Castle click
+      tr: Bir Pazar ekle ve 2 köylü gönder; Kale tıklaması için odun ve altını dengele
+    icons:
+      - market
+  - phase: castle
+    time: "14:50"
+    assign:
+      en: Click Castle Age; research Double-Bit Axe and Horse Collar
+      tr: Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır
+    icons:
+      - double-bit-axe
+      - horse-collar
+  - villagers: 27
+    assign:
+      en: >-
+        Castle: 4 builders → straggler trees; seed more farms; train 2-3 scouts and drop a Monastery immediately; Bow
+        Saw; add a TC when you can afford it; build Light Cav only if contested
+      tr: >-
+        Kale: 4 inşaatçı → tek ağaçlara; daha fazla tarla kur; 2-3 atlı kâşif eğit ve hemen bir Manastır kur; Bow Saw;
+        gücün yettiğinde bir ŞM ekle; yalnızca rekabet varsa Light Cav üret
+    icons:
+      - monastery
+      - bow-saw
+      - town-center
+      - light-cavalry
+      - monk
+intro:
+  en: >-
+    Race to Castle Age behind your walls, then flood the center with monks and a handful of Light Cavalry to scoop up
+    every relic before your opponent reacts.
+  tr: >-
+    Surlarının arkasında Kale Çağı'na koş, ardından merkezi keşişler ve birkaç Light Cavalry ile doldurup rakip daha
+    tepki veremeden tüm kalıntıları kap.
+strategy:
+  en:
+    - >-
+      This is an Arena build first and foremost: you skip all Feudal military, so wall your choke early and treat the
+      open center as the only contested ground.
+    - >-
+      The Stable and Barracks in Feudal exist mainly to unlock Castle Age and give you a fast military option — don't
+      over-invest, just keep clicking toward 14:50.
+    - >-
+      The instant Castle lands, get a Monastery down and start pumping monks. Relics are the whole point: each one is a
+      slow trickle of gold that funds your late game while denying it to the enemy.
+    - >-
+      Build Light Cavalry only when the relic run is contested. A small pack escorts your monks and snipes enemy monks
+      or scouts; if the center is quiet, skip them and pour resources into your economy instead.
+    - >-
+      Bow Saw and a fresh Town Center keep your wood and villager count climbing while the monks work, so you transition
+      into a boom without missing a beat.
+    - >-
+      Aim to control four-plus relics, then choose your follow-up: a knight-and-siege push if you grabbed map control,
+      or a straight boom into Imperial if the game has gone quiet.
+  tr:
+    - >-
+      Bu her şeyden önce bir Arena build order'ıdır: tüm Feudal askerini atladığın için geçidini erken çevir ve açık
+      merkezi tek çekişme alanı olarak gör.
+    - >-
+      Feudal'daki Ahır ve Kışla esas olarak Kale Çağı'nı açmak ve sana hızlı bir askeri seçenek sunmak için var — fazla
+      yatırım yapma, sadece 14:50'ye doğru tıklamaya devam et.
+    - >-
+      Kale iner inmez hemen bir Manastır kur ve keşiş basmaya başla. Asıl mesele kalıntılar: her biri, geç oyununu
+      finanse eden yavaş bir altın akışı sağlarken rakibi de bu gelirden mahrum bırakır.
+    - >-
+      Light Cavalry'yi yalnızca kalıntı yarışı çekişmeliyse üret. Küçük bir grup, keşişlerine eşlik eder ve düşman
+      keşişlerini ya da kâşiflerini avlar; merkez sakinse onları atla ve kaynakları ekonomine yatır.
+    - >-
+      Bow Saw ve yeni bir Şehir Merkezi, keşişler çalışırken odununu ve köylü sayını artırmaya devam eder; böylece hiç
+      aksamadan boom'a geçersin.
+    - >-
+      Dört veya daha fazla kalıntıyı kontrol etmeyi hedefle, sonra devamını seç: harita kontrolünü ele geçirdiysen
+      şövalye-kuşatma baskısı ya da oyun sakinleştiyse doğrudan Imperial'e boom.

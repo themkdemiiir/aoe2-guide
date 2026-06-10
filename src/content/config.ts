@@ -30,30 +30,29 @@ const civilizations = defineCollection({
 
 const buildOrders = defineCollection({
   loader: glob({
-    pattern: "**/*.{md,mdx}",
+    pattern: "*.{yaml,yml}",
     base: "./src/content/build-orders",
-    generateId: pathId,
+    generateId: ({ entry }) => entry.replace(/\.(yaml|yml)$/i, ""),
   }),
   schema: z.object({
     slug: z.string(),
-    name: z.string(),
+    name: localizedString,
     difficulty: z.enum(["beginner", "intermediate", "advanced"]),
     targetAge: z.enum(["feudal", "castle", "imperial"]),
     durationMin: z.number(),
     civsRecommended: z.array(z.string()),
     steps: z.array(
       z.object({
-        // Optional: only set where the source guide's table states a "Vil Pop" number.
-        // Post-landing reassignment / instruction steps that it doesn't number omit it.
         villagers: z.number().optional(),
-        // Optional structured age marker — preferred over prose regex for phase headers.
         phase: z.enum(["feudal", "castle", "imperial"]).optional(),
         time: z.string().optional(),
-        assign: z.string(),
-        note: z.string().optional(),
+        assign: localizedString,
+        note: localizedString.optional(),
         icons: z.array(z.string()).optional(),
       }),
     ),
+    intro: localizedString.optional(),
+    strategy: z.object({ en: z.array(z.string()), tr: z.array(z.string()) }).optional(),
     source: z
       .object({
         author: z.string(),

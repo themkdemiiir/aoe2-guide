@@ -1,0 +1,163 @@
+slug: chinese-fast-feudal
+name:
+  en: Chinese Fast Feudal
+  tr: Chinese Fast Feudal
+difficulty: advanced
+targetAge: feudal
+durationMin: 8
+civsRecommended:
+  - chinese
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center; skip houses thanks to the Chinese extra start
+      tr: 6 → Town Center altında koyunda; Chinese fazladan başlangıç sayesinde ev kurmayı atla
+    note:
+      en: Research Loom immediately
+      tr: Loom'u hemen araştır
+    icons:
+      - food
+      - town-center
+      - loom
+  - villagers: 7
+    assign:
+      en: +1 → sheep under the Town Center
+      tr: +1 → Town Center altında koyunda
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +3 → wood, drop a lumber camp
+      tr: +3 → oduna, lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: +1 → lure and eat the first boar
+      tr: +1 → ilk domuzu çek ve ye
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build 2 houses, then a mill on berries
+      tr: +1 → 2 ev kur, sonra meyvenin yanına mill kur
+    note:
+      en: Lure deer with your scout — food drains fast on this build
+      tr: Scout ile geyikleri sür — bu builde yiyecek hızlı tükenir
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 16
+    assign:
+      en: +4 → hunt under the Town Center; lure the second boar
+      tr: +4 → Town Center altında avda; ikinci domuzu çek
+    icons:
+      - food
+  - villagers: 20
+    phase: feudal
+    time: "8:25"
+    assign:
+      en: +4 → berries, then research the age-up
+      tr: +4 → meyveye, sonra çağ atlamayı araştır
+    note:
+      en: Feudal landing ~8:25 on 3 wood / 17 food
+      tr: Feudal'a ~8:25'te iniş, 3 odun / 17 yiyecek ile
+    icons:
+      - food
+  - villagers: 20
+    assign:
+      en: Pull 2 from the Town Center → reinforce the 1st lumber camp
+      tr: Town Center'dan 2 köylü çek → 1. lumber camp'i güçlendir
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 20
+    assign:
+      en: Pull 5 from the Town Center → drop a 2nd lumber camp on a fresh woodline
+      tr: Town Center'dan 5 köylü çek → yeni bir odun hattına 2. lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - assign:
+      en: Keep the Town Center adding 2 more villagers; build a Barracks when wood allows
+      tr: Town Center'ı 2 köylü daha eklemeye devam ettir; odun yetince Barracks kur
+    icons:
+      - barracks
+  - assign:
+      en: "Scout line: build a Stable, start Scout Cavalry, and prioritize eco upgrades"
+      tr: "Scout hattı: Stable kur, Scout Cavalry üret ve ekonomi yükseltmelerine öncelik ver"
+    icons:
+      - stable
+      - scout-cavalry
+  - assign:
+      en: "Archer line: move 2-3 villagers to gold under a Mining Camp, then add an Archery Range"
+      tr: "Archer hattı: 2-3 köylüyü → altına ve Mining Camp'e taşı, ardından Archery Range ekle"
+    icons:
+      - gold
+      - mining-camp
+      - archery-range
+      - archer
+  - assign:
+      en: "Man-at-Arms line: make ~3 Militia, then research the Man-at-Arms upgrade and Double-Bit Axe"
+      tr: "Man-at-Arms hattı: ~3 Militia yap, sonra Man-at-Arms yükseltmesini ve Double-Bit Axe'i araştır"
+    icons:
+      - barracks
+      - militia
+      - man-at-arms
+      - double-bit-axe
+  - assign:
+      en: "Tower rush: send ~5 villagers forward to build Watch Towers in the enemy economy"
+      tr: "Tower rush: ~5 köylüyü rakibin ekonomisine Watch Tower kurmaya gönder"
+    note:
+      en: Skip the MAA-trush — the build is too poor to support both
+      tr: MAA-trush'ı atla — build ikisini birden taşıyamayacak kadar fakir
+    icons:
+      - watch-tower
+intro:
+  en: >-
+    Exploit the Chinese extra starting villagers and house-free opening to reach Feudal Age fast and pick whichever
+    aggression your scouting demands.
+  tr: >-
+    Chinese'in fazladan başlangıç köylülerinden ve evsiz açılışından yararlanarak Feudal Age'e hızlıca ulaş ve keşfinin
+    gerektirdiği saldırı hattını seç.
+strategy:
+  en:
+    - >-
+      The Chinese start with three extra villagers and no houses to build, so this opener stacks bodies onto food
+      earlier than any other civ and clicks up around 8:25 already two villagers ahead of a standard 20-pop landing.
+    - >-
+      Because the eco lands so far in front, the build is deliberately open-ended: scout your opponent first, then
+      commit to the line their setup punishes least.
+    - >-
+      Scouts are the safe default into uncertainty — pair the Stable with eco upgrades so the lead snowballs while the
+      Cavalry pokes for damage.
+    - >-
+      Archers want a little gold setup first; drop a Mining Camp and pull 2-3 villagers before the Range so production
+      never starves, then layer Fletching on top.
+    - >-
+      Man-at-Arms pressure leans on three quick Militia plus the upgrade and Double-Bit Axe; skip the full
+      MAA-into-tower-rush, since the early eco cannot fund both at once.
+    - >-
+      A pure Tower Rush sends five villagers forward into the enemy gold or wood — devastating when they are unwalled,
+      but only gamble on it once your scout confirms an opening.
+  tr:
+    - >-
+      Chinese üç fazladan köylüyle ve kurulacak ev olmadan başlar, bu yüzden bu açılış diğer tüm uygarlıklardan daha
+      erken köylüyü yiyeceğe yığar ve standart bir 20 pop inişinden iki köylü önde, yaklaşık 8:25'te çağ atlar.
+    - >-
+      Ekonomi bu kadar önde indiği için build bilinçli olarak uçları açık bırakılmıştır: önce rakibini scout et, sonra
+      onun kurulumunun en az cezalandıracağı hatta yönel.
+    - >-
+      Belirsizliğe karşı Scouts güvenli varsayılandır — Stable'ı ekonomi yükseltmeleriyle birlikte kur ki süvari hasar
+      ararken üstünlük kartopu gibi büyüsün.
+    - >-
+      Archers'a geçmeden önce biraz altın kurulumu gerekir; Range'den önce bir Mining Camp kur ve 2-3 köylü çek ki
+      üretim hiç aç kalmasın, ardından üstüne Fletching ekle.
+    - >-
+      Man-at-Arms baskısı üç hızlı Militia'ya, ardından yükseltme ve Double-Bit Axe'e dayanır; tam MAA'dan tower rush'a
+      geçişi atla, çünkü erken ekonomi ikisini birden aynı anda finanse edemez.
+    - >-
+      Saf bir Tower Rush beş köylüyü rakibin altın ya da odununa gönderir — duvarsızken yıkıcıdır, ama buna ancak
+      scout'un bir açık doğruladığında oyna.

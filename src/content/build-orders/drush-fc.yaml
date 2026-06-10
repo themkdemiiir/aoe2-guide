@@ -1,0 +1,166 @@
+slug: drush-fc
+name:
+  en: Drush Fast Castle
+  tr: Drush Fast Castle
+difficulty: advanced
+targetAge: castle
+durationMin: 16
+civsRecommended:
+  - britons
+  - ethiopians
+  - italians
+  - mayans
+  - vikings
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the TC
+      tr: 6 → TC altındaki koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 10
+    assign:
+      en: +4 → wood (build a Lumber Camp)
+      tr: +4 → oduna (bir Lumber Camp kur)
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: +1 → lure the first boar
+      tr: +1 → ilk domuzu çek
+    icons:
+      - food
+  - assign:
+      en: +1 → build 2 houses, then a Barracks; wall with palisades
+      tr: +1 → 2 ev, ardından bir Barracks kur; palisade ile duvar ör
+    note:
+      en: Front-place the Barracks for the Drush
+      tr: Drush için Barracks'ı öne kur
+    icons:
+      - house
+      - barracks
+  - villagers: 13
+    assign:
+      en: +1 → mine 10 gold (Drush money), then to the 2nd boar
+      tr: +1 → 10 altın çıkar (Drush parası), sonra 2. domuza
+    icons:
+      - gold
+      - food
+  - assign:
+      en: Queue 3 Militia and send them forward with your Scout
+      tr: 3 Militia üret ve Scout ile birlikte öne gönder
+    note:
+      en: Pure Drush — do NOT take Men-at-Arms
+      tr: Saf Drush — Men-at-Arms yükseltmesini ASLA yapma
+    icons:
+      - militia
+      - scout-cavalry
+  - villagers: 14
+    assign:
+      en: +1 → 2nd boar
+      tr: +1 → 2. domuz
+    icons:
+      - food
+  - villagers: 19
+    assign:
+      en: +5 → berries (build a Mill)
+      tr: +5 → meyveye (bir Mill kur)
+    icons:
+      - food
+      - mill
+  - villagers: 23
+    assign:
+      en: +4 → wood (1 more Lumber Camp)
+      tr: +4 → oduna (1 Lumber Camp daha)
+    icons:
+      - wood
+      - lumber-camp
+  - assign:
+      en: Research Loom
+      tr: Loom araştır
+    icons:
+      - loom
+  - villagers: 27
+    phase: feudal
+    time: "12:35"
+    assign:
+      en: +4 → gold; click Feudal Age
+      tr: +4 → altına; Feudal Age'e tıkla
+    note:
+      en: Eco split ~8 wood / 14 food / 4 gold
+      tr: Ekonomi dağılımı ~8 odun / 14 yemek / 4 altın
+    icons:
+      - gold
+  - assign:
+      en: "Feudal: finish walling; keep harassing with Militia + Scout"
+      tr: "Feudal: duvarı tamamla; Militia + Scout ile baskıyı sürdür"
+    icons:
+      - militia
+      - scout-cavalry
+  - villagers: 29
+    assign:
+      en: +2 → gold; build 2 Archery Ranges and a Blacksmith
+      tr: +2 → altına; 2 Archery Range ve bir Blacksmith kur
+    icons:
+      - gold
+      - archery-range
+      - blacksmith
+  - phase: castle
+    time: "16:05"
+    assign:
+      en: "Castle: mass Archers; research Double-Bit Axe, Horse Collar, Fletching"
+      tr: "Castle: Archer yığ; Double-Bit Axe, Horse Collar, Fletching araştır"
+    note:
+      en: Castle-first with an eco + tech lead
+      tr: Ekonomi + teknoloji üstünlüğüyle Castle-first
+    icons:
+      - archer
+      - double-bit-axe
+      - fletching
+intro:
+  en: Harass with three Dark Age Militia, then reach Castle Age first with a clean economic and technology lead.
+  tr: >-
+    Üç Dark Age Militia'sıyla baskı yap, ardından temiz bir ekonomi ve teknoloji üstünlüğüyle Castle Age'e ilk ulaşan
+    ol.
+strategy:
+  en:
+    - >-
+      The Drush is the cheap part: three Militia plus the Scout poke the opponent's eco while you commit fully to the
+      climb. Even one or two villager kills forces them off resources, and the panic alone slows their own up-time.
+    - >-
+      This is a true Drush, not a Men-at-Arms rush — never spend on the MAA upgrade. Every spare resource feeds the Fast
+      Castle, so you land Castle Age around 16:05 with the lead intact.
+    - >-
+      Wall as you go. Palisades around the boar and woodlines keep your Militia builders safe and stop the opponent from
+      trading the harassment back onto your own villagers.
+    - >-
+      Out of Castle Age, mass Archers from your two Ranges and follow Double-Bit Axe, Horse Collar, and Fletching to
+      snowball the eco-and-tech advantage into a Crossbow timing.
+    - >-
+      Strong civs here are the archer powers — Britons, Ethiopians, Italians, Mayans, and Vikings — whose cheaper or
+      harder-hitting Archers convert the Castle-first lead directly into a winning unit.
+    - >-
+      If the opponent is already walled and turtling, drop the harassment early and lean on the boom: an early second
+      Town Center behind your walls pulls the eco lead further ahead.
+  tr:
+    - >-
+      Drush, planın ucuz tarafıdır: üç Militia ve Scout düşmanın ekonomisini dürterken sen tamamen yükselişe
+      odaklanırsın. Bir iki köylüyü öldürmek bile rakibi kaynaktan çeker, çıkan panik ise onların kendi çağ atlamasını
+      yavaşlatır.
+    - >-
+      Bu gerçek bir Drush'tır, Men-at-Arms rush değil — MAA yükseltmesine asla harcama yapma. Her artan kaynak Fast
+      Castle'a gider, böylece üstünlük korunmuşken yaklaşık 16:05'te Castle Age'e ulaşırsın.
+    - >-
+      İlerledikçe duvar ör. Domuz ve odun hatlarının çevresindeki palisade'ler Militia inşaatçılarını güvende tutar ve
+      rakibin baskıyı senin köylülerine geri çevirmesini engeller.
+    - >-
+      Castle Age'e geçince iki Range'inden Archer yığ; Double-Bit Axe, Horse Collar ve Fletching ile ekonomi ve
+      teknoloji avantajını bir Crossbow zamanlamasına çevir.
+    - >-
+      Buradaki güçlü medeniyetler okçu güçleridir — Britons, Ethiopians, Italians, Mayans ve Vikings — daha ucuz ya da
+      daha sert vuran Archer'larıyla Castle-first üstünlüğünü doğrudan kazandıran bir birime dönüştürürler.
+    - >-
+      Rakip çoktan duvar örmüş ve turtle yapıyorsa baskıyı erken bırak ve boom'a yaslan: duvarlarının arkasında erken
+      bir ikinci Town Center ekonomi üstünlüğünü daha da öne taşır.

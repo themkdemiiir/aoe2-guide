@@ -1,0 +1,157 @@
+slug: 17pop-teuton-tower-rush
+name:
+  en: 17 Pop Teuton Tower Rush
+  tr: 17 Köylü Teuton Kule Baskını
+difficulty: intermediate
+targetAge: feudal
+durationMin: 8
+civsRecommended:
+  - teutons
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Town Center altında koyunda
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood, drop a lumber camp
+      tr: +2 → oduna, lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure and eat the first boar
+      tr: +1 → ilk domuzu çek ve ye
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → hunt under the Town Center
+      tr: +1 → Town Center altında avda
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a house, then a mill on the berries
+      tr: +1 → house kur, ardından meyvelere mill kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → lure and eat the second boar
+      tr: +1 → ikinci domuzu çek ve ye
+    icons:
+      - food
+  - villagers: 17
+    assign:
+      en: +5 → hunt; keep the eco on food while you scout
+      tr: +5 → avda; scout yaparken ekonomiyi yemekte tut
+    note:
+      en: You MUST find the enemy before you click up — a blind push hits empty map
+      tr: Yukarı tıklamadan önce rakibi MUTLAKA bul — kör bir baskın boş haritaya toslar
+    icons:
+      - food
+  - villagers: 17
+    phase: feudal
+    time: "8:25"
+    assign:
+      en: Research Loom, then click up to Feudal Age
+      tr: Loom araştır, sonra Feudal Age'e tıkla
+    icons:
+      - loom
+  - villagers: 17
+    assign:
+      en: Feudal arrives — move 1 hunter to wood
+      tr: Feudal gelir — 1 avcıyı oduna kaydır
+    icons:
+      - wood
+  - villagers: 17
+    assign:
+      en: Move 2 hunters to stone and drop a mining camp
+      tr: 2 avcıyı taşa al ve mining camp kur
+    icons:
+      - stone
+      - mining-camp
+  - villagers: 17
+    assign:
+      en: Send 10 villagers forward; keep 1 on hunt at home
+      tr: 10 köylüyü ileri yolla; 1 köylüyü evde avda bırak
+    note:
+      en: Skip every eco upgrade for now — stone and bodies come first
+      tr: Şimdilik tüm eko geliştirmelerini atla — önce taş ve köylü gelir
+    icons:
+      - watch-tower
+  - assign:
+      en: +2 new vils → hunt and food; add farms and houses as needed
+      tr: +2 yeni köylü → av ve yemek; gerektikçe tarla ve house ekle
+    icons:
+      - food
+      - farm
+  - assign:
+      en: Build the first tower ~8 tiles from their woodline or berries
+      tr: İlk kuleyi rakibin odun hattına veya meyvelerine ~8 kare mesafede kur
+    icons:
+      - watch-tower
+  - assign:
+      en: +2 forward vils build houses for supply; garrison up to 10 vils per tower
+      tr: +2 ileri köylü tedarik için house kursun; kule başına 10 köylüye kadar içeri al
+    icons:
+      - house
+      - watch-tower
+  - assign:
+      en: Chain new towers 6–8 tiles apart, walking deeper into their economy
+      tr: Yeni kuleleri 6–8 kare aralıkla zincirle, ekonomilerinin içine doğru ilerle
+    icons:
+      - watch-tower
+intro:
+  en: >-
+    Reach Feudal at 17 pop, march ten villagers forward, and choke the enemy economy under a chain of cheap,
+    garrison-stuffed Teuton towers.
+  tr: >-
+    17 köylüde Feudal'e geç, on köylüyü ileri yürüt ve rakibin ekonomisini ucuz, içi köylü dolu Teuton kulelerinden
+    oluşan bir zincirle boğ.
+strategy:
+  en:
+    - >-
+      This is a committal opening, so scouting comes before the click-up: locate the enemy first so your ten forward
+      villagers land on their resources instead of marching into walls or open map.
+    - >-
+      Teutons are the definitive tower civilization — their towers are cheaper, garrison up to ten villagers, and fire
+      back hard, so a Teuton tower reliably wins any tower-versus-tower exchange and is painful to dislodge.
+    - >-
+      Hold every eco upgrade (Double-Bit Axe, Horse Collar) until the first tower is up; standing stone and bodies on
+      the front line matter far more than economy polish this early.
+    - >-
+      Once the first tower stands, keep walking: chain towers 6–8 tiles apart to peel the enemy off each food and wood
+      patch in turn and slowly suffocate their gathering.
+    - >-
+      If they wall up before you arrive, roll the pressure into Castle Age — a forward Stable for Knights or a Siege
+      Workshop with Mangonels behind your tower line keeps them pinned.
+    - >-
+      Pull wounded villagers inside a tower to save them, and never let home production idle; the rush only pays off if
+      your Town Center keeps pumping while the towers go up.
+  tr:
+    - >-
+      Bu, tam bağlılık gerektiren bir açılış olduğundan scout etmek tıklamadan önce gelir: önce rakibi bul ki on ileri
+      köylün duvara ya da boş haritaya değil, doğrudan kaynaklarının üzerine insin.
+    - >-
+      Teutonlar tartışmasız kule medeniyetidir — kuleleri daha ucuzdur, on köylüye kadar içeri alır ve sert karşılık
+      verir; bu yüzden bir Teuton kulesi kuleye karşı kule savaşını güvenle kazanır ve sökülmesi son derece zordur.
+    - >-
+      İlk kule dikilene kadar tüm eko geliştirmelerini (Double-Bit Axe, Horse Collar) beklet; bu erken aşamada cephedeki
+      taş ve köylüler, ekonomi cilasından çok daha önemlidir.
+    - >-
+      İlk kule dikildiğinde ilerlemeyi sürdür: kuleleri 6–8 kare aralıkla zincirleyerek rakibi her yemek ve odun
+      alanından sırayla kopar ve toplamasını yavaşça boğ.
+    - >-
+      Sen gelmeden duvar çekerlerse baskıyı Castle Age'e taşı — ileride bir Stable ile Knight ya da kule hattının
+      arkasında bir Siege Workshop ile Mangonel onları sabit tutar.
+    - >-
+      Yaralı köylüleri kuleye alarak kurtar ve evdeki üretimi asla boş bırakma; bu baskın yalnızca kuleler dikilirken
+      Town Center'ın üretmeye devam ederse karşılığını verir.

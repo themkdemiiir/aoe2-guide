@@ -1,0 +1,162 @@
+slug: 25pop-fast-castle-unique-unit
+name:
+  en: Fast Castle into Unique Unit
+  tr: Hızlı Kale ile Özel Birim
+difficulty: intermediate
+targetAge: castle
+durationMin: 15
+civsRecommended:
+  - spanish
+  - turks
+  - mayans
+  - burgundians
+  - mongols
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → TC altındaki koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 9
+    assign:
+      en: +3 → wood; first villager drops a Lumber Camp, then all gather
+      tr: +3 → oduna; ilk köylü Lumber Camp kurar, sonra hepsi toplar
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → lure the first boar
+      tr: +1 → ilk domuzu çek
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a house and a Mill on the berries
+      tr: +1 → ev kur ve meyvelerin yanına Mill kur
+    icons:
+      - house
+      - mill
+      - food
+  - assign:
+      en: Re-task an idle villager to lure the deer
+      tr: Boştaki bir köylüyü geyiği çekmeye yönlendir
+    note:
+      en: No new pop — uses an existing villager
+      tr: Yeni pop yok — mevcut bir köylü kullanılır
+    icons:
+      - food
+  - villagers: 14
+    assign:
+      en: +3 → hunt (lure the second boar)
+      tr: +3 → ava (ikinci domuzu çek)
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: +4 → berries
+      tr: +4 → meyvelere
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: Seed 3 farms with villagers freed from depleted food
+      tr: Tükenen yiyecekten boşalan köylülerle 3 tarla aç
+    note:
+      en: No new pop — re-task existing food gatherers
+      tr: Yeni pop yok — mevcut yiyecek köylüleri yönlendirilir
+    icons:
+      - farm
+  - villagers: 23
+    assign:
+      en: +5 → wood (single Lumber Camp covers both woodlines)
+      tr: +5 → oduna (tek Lumber Camp iki ağaçlığı da kapsar)
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 25
+    phase: feudal
+    assign:
+      en: +2 → gold; build a Gold Mining Camp, then click Feudal at 25 pop
+      tr: +2 → altına; Gold Mining Camp kur, sonra 25 popta Feudal'a tıkla
+    note:
+      en: "Feudal lands ~11:20 — eco at age-up: 8 wood / 15 food / 2 gold"
+      tr: "Feudal ~11:20'de gelir — çağ atlarken ekonomi: 8 odun / 15 yiyecek / 2 altın"
+    icons:
+      - gold
+      - mining-camp
+  - villagers: 27
+    assign:
+      en: >-
+        Feudal — sheep run out, send 4 to stone + a Mining Camp; re-task 3 onto stragglers, then 1 builds Blacksmith and
+        2 build Market; +2 (now 27) → stone; research Double-Bit Axe + Horse Collar
+      tr: >-
+        Feudal — koyunlar biter, 4 köylüyü taşa + Mining Camp'e gönder; 3 köylüyü straggler ağaçlarına yönlendir, sonra
+        1'i Blacksmith ve 2'si Market kurar; +2 (artık 27) → taşa; Double-Bit Axe + Horse Collar araştır
+    icons:
+      - stone
+      - mining-camp
+      - blacksmith
+      - market
+      - double-bit-axe
+      - horse-collar
+  - phase: castle
+    time: "14:50"
+    assign:
+      en: >-
+        Keep mining stone, then click Castle Age — lands ~14:50. Drop a Castle with the stone villagers and mass Unique
+        Units; research Bow Saw
+      tr: >-
+        Taş toplamayı sürdür, sonra Castle Age'e tıkla — ~14:50'de gelir. Taş köylüleriyle bir Castle kur ve Özel
+        Birimleri yığ; Bow Saw araştır
+    icons:
+      - stone
+      - castle
+      - bow-saw
+intro:
+  en: >-
+    Rush to Castle Age at 25 pop, immediately drop a Castle, and flood Unique Units while the opponent is still
+    scrambling for an answer.
+  tr: 25 popta Castle Age'e koş, hemen bir Castle kur ve rakip henüz cevap ararken Özel Birimleri akıt.
+strategy:
+  en:
+    - >-
+      The payoff is timing: a Castle plus a stream of Unique Units around the 15-minute mark hits before most opponents
+      have a Castle of their own to trade with.
+    - >-
+      This build wants a civ whose un-upgraded Unique Unit is already strong off the production building —
+      Conquistadors, Janissaries, Plumed Archers, Coustilliers, or Mangudai all spike hard the moment the Castle is up.
+    - >-
+      Bank stone aggressively in Feudal. The whole plan collapses if you reach Castle Age and cannot afford the Castle
+      right away, so protect those stone miners.
+    - >-
+      Once the first Castle is producing, decide between a forward Castle to apply pressure or a defensive one at home
+      that lets you add Town Centers behind it.
+    - >-
+      You are light on military until the Castle finishes, so wall your stone and gold and keep the scout alive to spot
+      any early Feudal aggression.
+    - >-
+      If the opponent also Fast Castles, your edge is the Unique Unit itself — out-produce them and force fights on your
+      terms rather than booming passively.
+  tr:
+    - >-
+      Asıl güç zamanlamada: 15. dakika civarında bir Castle ve sürekli akan Özel Birimler, çoğu rakibin takas
+      edebileceği kendi Castle'ı olmadan önce gelir.
+    - >-
+      Bu build, üretim binasından çıkar çıkmaz, yükseltilmemiş haliyle bile güçlü olan bir Özel Birime sahip medeniyet
+      ister — Conquistador, Janissary, Plumed Archer, Coustillier veya Mangudai, Castle dikilir dikilmez sert bir baskı
+      yaratır.
+    - >-
+      Feudal'de taşı agresif biriktir. Castle Age'e ulaşıp Castle'ı hemen karşılayamazsan tüm plan çöker; bu yüzden taş
+      köylülerini koru.
+    - >-
+      İlk Castle üretime geçince ya baskı için ileri bir Castle, ya da arkasında Town Center ekleyebileceğin savunma
+      amaçlı bir Castle arasında karar ver.
+    - >-
+      Castle bitene kadar askeri açıdan zayıfsın; bu yüzden taşını ve altınını duvarla, scout'unu hayatta tut ve erken
+      Feudal saldırılarını gözle.
+    - >-
+      Rakip de Hızlı Kale yapıyorsa avantajın Özel Birimin kendisidir — pasifçe boom yapmak yerine ondan daha fazla üret
+      ve dövüşleri kendi şartlarında zorla.

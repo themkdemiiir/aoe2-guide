@@ -1,0 +1,153 @@
+slug: 18pop-double-barracks-eagles
+name:
+  en: 18 Pop Double Barracks Eagles
+  tr: 18 Köylü Çift Kışla Kartal Baskını
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - aztecs
+  - incas
+  - mayans
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Şehir Merkezi altındaki koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood, drop a Lumber Camp
+      tr: +2 → oduna, Lumber Camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure the first boar to the TC
+      tr: +1 → ilk domuzu Şehir Merkezi'ne çek
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → hunt the boar under the TC
+      tr: +1 → domuzu Şehir Merkezi altında avla
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a House, then a Mill on berries
+      tr: +1 → önce House, sonra meyvelere Mill kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → lure the second boar
+      tr: +1 → ikinci domuzu çek
+    icons:
+      - food
+  - assign:
+      en: Push the deer toward your TC with the scout
+      tr: Scout ile geyikleri Şehir Merkezi'ne doğru sür
+    note:
+      en: Keeps all hunt close so food never idles
+      tr: Tüm avı yakın tutar, böylece yiyecek toplaması hiç boşa düşmez
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    time: "8:50"
+    assign:
+      en: +6 → hunt (16 on food, 2 on wood), then click up to Feudal
+      tr: +6 → ava (16 yemekte, 2 odunda), sonra Feudal'a tıkla
+    note:
+      en: "Aztecs / Incas: research Loom before aging up"
+      tr: "Aztecs / Incas: çağ atlamadan önce Loom araştır"
+    icons:
+      - food
+      - loom
+  - villagers: 18
+    assign:
+      en: Feudal lands — move 5 hunters to wood (7 on the Lumber Camp)
+      tr: Feudal gelir — 5 avcıyı oduna kaydır (Lumber Camp'te 7 köylü)
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 18
+    assign:
+      en: Pull 2 hunters → gold (Mining Camp); 2 hunters build Barracks + House
+      tr: 2 avcıyı → altına çek (Mining Camp); 2 avcı Barracks + House kurar
+    icons:
+      - gold
+      - mining-camp
+      - barracks
+      - house
+  - villagers: 18
+    assign:
+      en: Send 3 hunters → berries; research Double-Bit Axe (Horse Collar optional)
+      tr: 3 avcıyı → meyvelere gönder; Double-Bit Axe araştır (Horse Collar isteğe bağlı)
+    icons:
+      - food
+      - double-bit-axe
+  - assign:
+      en: +4 new villagers → gold; build a 2nd Barracks
+      tr: +4 yeni köylü → altına; 2. Barracks kur
+    icons:
+      - gold
+      - barracks
+  - assign:
+      en: Pump Eagle Scouts from both Barracks (2 Spearmen first vs Scouts)
+      tr: Her iki Barracks'tan Eagle Scout bas (Scout'a karşı önce 2 Spearman)
+    note:
+      en: Add straggler-tree workers and Farms behind the army
+      tr: Ordu arkasına straggler ağaçları ve Farm ekle
+    icons:
+      - eagle-scout
+      - spearman
+  - assign:
+      en: Drop a Blacksmith for Eagle armor and attack upgrades
+      tr: Eagle zırh ve saldırı geliştirmeleri için Blacksmith kur
+    icons:
+      - blacksmith
+intro:
+  en: Land Feudal fast off heavy hunt, then drown the enemy in Eagle Scouts trained from two Barracks at once.
+  tr: Yoğun av ile hızlıca Feudal'a çık, ardından iki Barracks'tan aynı anda bastığın Eagle Scout'larla rakibi boğ.
+strategy:
+  en:
+    - >-
+      This opener belongs to the Mesoamerican civs (Aztecs, Incas, Mayans) — they are the only ones with Eagle Scouts,
+      and their eco bonuses let this heavy-hunt opening land in Feudal cleanly around 8:50.
+    - >-
+      Two Barracks let you keep constant Eagle pressure: their speed and gold-conversion bonus make raiding villagers
+      and snowballing map control easy, so commit to harassment rather than turtling.
+    - Open 2 Spearmen if you scout a Scout Rush, then flip fully to Eagles once the cavalry threat is dealt with.
+    - >-
+      You are strong into Scout, Spear, and Skirmisher openings but soft against Man-at-Arms and Archers — if you see
+      either, slot in a single Archery Range for Skirmishers and lean on walls.
+    - >-
+      Keep gold flowing: it fuels every Eagle, so wall the base and consider a Watch Tower over your mining camp; losing
+      gold here usually ends the game.
+    - >-
+      To transition, add Farms behind the army, bank gold, and use a Market (sell stone if needed) to push a
+      tech-and-eco lead into Castle Age.
+  tr:
+    - >-
+      Bu açılış Mezoamerika medeniyetlerine (Aztecs, Incas, Mayans) özeldir — Eagle Scout'a sahip tek medeniyetler
+      onlardır ve ekonomi bonusları sayesinde bu yoğun av açılışı 8:50 civarında sorunsuzca Feudal'a oturur.
+    - >-
+      İki Barracks sürekli Eagle baskısı sağlar: Eagle'ların hızı ve altına dönüştürme bonusu, köylü avlamayı ve harita
+      kontrolünü çığ gibi büyütmeyi kolaylaştırır; bu yüzden savunmaya çekilmek yerine baskıya yüklen.
+    - Scout Rush gördüysen önce 2 Spearman aç, süvari tehdidi geçtikten sonra tamamen Eagle üretimine dön.
+    - >-
+      Scout, Spear ve Skirmisher açılışlarına karşı güçlüsün ama Man-at-Arms ve Archer'a karşı zayıfsın — herhangi
+      birini görürsen tek bir Archery Range açıp Skirmisher al ve wall'a yaslan.
+    - >-
+      Altın akışını sürdür: her Eagle'ı o besler, bu yüzden üssü wall'la ve mining camp'in üstüne bir Watch Tower
+      kurmayı düşün; burada altını kaybetmek genelde oyunu bitirir.
+    - >-
+      Geçiş için ordu arkasına Farm ekle, altın biriktir ve bir Market kullanarak (gerekirse taş satarak) teknoloji ve
+      ekonomi avantajını Castle Age'e taşı.

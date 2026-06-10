@@ -1,0 +1,152 @@
+slug: romans-5-maa
+name:
+  en: Romans 5 Man-at-Arms Rush
+  tr: Romalılar 5 Man-at-Arms Baskını
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - romans
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Şehir Merkezi altındaki koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 9
+    assign:
+      en: +3 → wood, drop a Lumber Camp
+      tr: +3 → oduna git, Kereste Kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: +2 → lure and eat the first boar
+      tr: +2 → ilk yaban domuzunu çek ve ye
+    note:
+      en: Bring the second boar in when the first is about half eaten
+      tr: İlk domuz yarılanınca ikinci domuzu içeri al
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build a House, then a Mill on berries
+      tr: +1 → bir Ev yap, ardından çileklere Değirmen kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 16
+    assign:
+      en: +4 → berries
+      tr: +4 → çilekler
+    icons:
+      - food
+  - assign:
+      en: +1 → build a Barracks and a House at the front of your base
+      tr: +1 → üssünün ön tarafına bir Kışla ve bir Ev kur
+    icons:
+      - barracks
+      - house
+  - villagers: 19
+    phase: feudal
+    time: "9:15"
+    assign:
+      en: +2 → wood, research Loom, then click up to Feudal
+      tr: +2 → oduna git, Loom'u araştır, sonra Feudal'a tıkla
+    note:
+      en: Land with roughly 5 on wood and 13 on food
+      tr: Yaklaşık 5 odunda, 13 yiyecekte iken çağ atla
+    icons:
+      - wood
+      - loom
+  - villagers: 19
+    assign:
+      en: Move 2 off food → gold, then shift 7 off food → wood
+      tr: Yiyecekten 2 kişiyi → altına, ardından 7 kişiyi yiyecekten → oduna kaydır
+    icons:
+      - gold
+      - wood
+  - assign:
+      en: Pump Militia up to 5 and walk them at the opponent
+      tr: Milisi 5'e kadar bas ve rakibe doğru yürüt
+    note:
+      en: These 5 are the core of the push — keep them alive
+      tr: Bu 5 birim baskının çekirdeği — onları hayatta tut
+    icons:
+      - militia
+  - assign:
+      en: As the hunt runs out, send those Villagers to the straggler trees and seed 5 farms
+      tr: Av tükenince o Köylüleri sapan ağaçlara gönder ve 5 tarla ek
+    icons:
+      - farm
+      - wood
+  - assign:
+      en: Research Man-at-Arms, then Double-Bit Axe
+      tr: Man-at-Arms'ı, ardından Double-Bit Axe'ı araştır
+    icons:
+      - man-at-arms
+      - double-bit-axe
+  - assign:
+      en: Send new Villagers onto the straggler trees; build a Blacksmith once 5 farms are down
+      tr: Yeni Köylüleri sapan ağaçlara gönder; 5 tarla kurulunca bir Demirci kur
+    icons:
+      - blacksmith
+      - wood
+  - assign:
+      en: Research Infantry armor (+2) at the Blacksmith — Roman armor makes this huge
+      tr: Demirci'de Piyade zırhını (+2) araştır — Roma zırhı bunu çok güçlü kılar
+    icons:
+      - blacksmith
+  - assign:
+      en: Pressure with your Scout plus the Man-at-Arms together; pick fights you win
+      tr: Scout ile Man-at-Arms'ı birlikte kullanarak baskı yap; sadece kazanacağın savaşlara gir
+    icons:
+      - scout-cavalry
+      - man-at-arms
+intro:
+  en: >-
+    Reach Feudal Age around 9:15 with five Militia ready, then convert them to Man-at-Arms and lean on the Roman
+    infantry armor bonus to grind down the opponent.
+  tr: >-
+    Yaklaşık 9:15'te Feudal Çağ'a ulaş, beş Milis hazır olsun; ardından onları Man-at-Arms'a dönüştür ve Roma piyade
+    zırhı bonusuna yaslanarak rakibi aşındır.
+strategy:
+  en:
+    - >-
+      The whole opener is built around five Man-at-Arms backed by the Roman +2 infantry armor — that extra armor makes
+      each unit far more resilient, so your group trades up against archers, Scouts, and other early infantry.
+    - >-
+      Get the Militia out early and keep all five alive; the damage they do to undefended Villagers and Houses is what
+      buys time for your slightly slower economy to catch up.
+    - >-
+      Pair the Man-at-Arms with your Scout so you can chase down stragglers and pin the enemy in their base while you
+      finish the Blacksmith upgrades.
+    - >-
+      React to what they build: add an Archery Range with Skirmishers if they go Archers, and keep walling and dropping
+      farms behind the aggression so you do not stall.
+    - >-
+      This opening stays flexible into Castle Age — fold the farms into a fast Castle behind a Market and wall, then
+      continue with Long Swordsmen and Scorpions, switch to Knights, or simply boom and grab Relics if the rush has
+      bought you the lead.
+  tr:
+    - >-
+      Tüm açılış, Roma +2 piyade zırhıyla desteklenen beş Man-at-Arms üzerine kuruludur — bu ekstra zırh her birimi çok
+      daha dayanıklı yapar, böylece grubun okçulara, Scout'lara ve diğer erken piyadelere karşı avantajlı takaslar
+      yapar.
+    - >-
+      Milisleri erkenden çıkar ve beşini de hayatta tut; korumasız Köylülere ve Evlere verdikleri hasar, biraz daha
+      yavaş olan ekonominin toparlanması için sana zaman kazandıran şeydir.
+    - >-
+      Man-at-Arms'ı Scout'unla eşleştir ki dağılmış birimleri kovalayabilesin ve Demirci yükseltmelerini bitirirken
+      düşmanı üssüne sıkıştırasın.
+    - >-
+      Rakibin yaptığına göre tepki ver: okçuya giderse Okçu Menzili ve Skirmisher ekle, baskının arkasında duvar örmeyi
+      ve tarla kurmayı sürdür ki ekonomik olarak tıkanmayasın.
+    - >-
+      Bu açılış Castle Çağı'na esnek geçer — tarlaları bir Market ve duvarın arkasında hızlı bir Castle'a dönüştür,
+      sonra Long Swordsman ve Scorpion ile devam et, Knight'a geç ya da baskı seni öne geçirdiyse sadece boom yapıp
+      Relic topla.

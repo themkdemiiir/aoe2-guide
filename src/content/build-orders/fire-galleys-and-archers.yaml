@@ -1,0 +1,155 @@
+slug: fire-galleys-and-archers
+name:
+  en: Fire Galleys and Archers
+  tr: Fire Galleys and Archers
+difficulty: intermediate
+targetAge: castle
+durationMin: 17
+civsRecommended:
+  - italians
+  - japanese
+  - vikings
+  - byzantines
+  - portuguese
+steps:
+  - villagers: 6
+    assign:
+      en: 3 → houses then sheep; queue villagers non-stop at TC
+      tr: 3 → evler sonra koyunlar; TC'de köylü üretimini durdurmadan sürdür
+    icons:
+      - food
+      - house
+  - villagers: 10
+    assign:
+      en: +4 → wood, build Lumber Camp
+      tr: +4 → odun, Lumber Camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 12
+    assign:
+      en: lure 1st boar; build Dock near deep fish + 2nd house
+      tr: 1. domuzu çek; derin balığın yanına Dock kur + 2. ev
+    icons:
+      - food
+      - dock
+  - villagers: 12
+    assign:
+      en: queue 4 Fishing Ships from the Dock onto deep fish
+      tr: Dock'tan 4 Fishing Ship üret, derin balıklara gönder
+    icons:
+      - fishing-ship
+      - food
+  - villagers: 15
+    assign:
+      en: + wood; lure 2nd boar; distribute spare vills to sheep/boar
+      tr: + odun; 2. domuzu çek; artık köylüleri koyun/domuz arasında dağıt
+    icons:
+      - wood
+      - food
+  - villagers: 21
+    assign:
+      en: Loom, then click Feudal; build 2nd Lumber Camp, Gold Mining Camp (4) + Barracks
+      tr: Loom araştır, sonra Feudal'a tıkla; 2. Lumber Camp, Gold Mining Camp (4 köylü) ve Barracks kur
+    icons:
+      - loom
+      - mining-camp
+      - gold
+      - barracks
+  - villagers: 21
+    assign:
+      en: "Feudal: Double-Bit Axe; Fire Galleys from Dock; build 2 Archery Ranges + house"
+      tr: "Feudal: Double-Bit Axe araştır; Dock'tan Fire Galley üret; 2 Archery Range + ev kur"
+    icons:
+      - double-bit-axe
+      - fire-galley
+      - archery-range
+  - villagers: 24
+    assign:
+      en: train Archers non-stop; +3 new vills → gold
+      tr: Archer üretimini kesme; +3 yeni köylü → altın
+    icons:
+      - archer
+      - gold
+  - villagers: 28
+    assign:
+      en: Mill on berries; Blacksmith + Fletching; +vills → berries
+      tr: Çileklere Mill kur; Blacksmith + Fletching araştır; +köylüler → çilek
+    icons:
+      - mill
+      - fletching
+      - food
+  - villagers: 34
+    assign:
+      en: Wheelbarrow; pull wood vills to Farms; new vills → farms
+      tr: Wheelbarrow araştır; odun köylülerini Tarlalara çek; yeni köylüler → tarlalar
+    icons:
+      - wheelbarrow
+      - farm
+  - villagers: 35
+    assign:
+      en: +1 → gold; click Castle Age with Fire Galleys + Archers pushing
+      tr: +1 → altın; Fire Galley ve Archer baskısıyla Kale Çağı'na tıkla
+    icons:
+      - gold
+      - fire-galley
+intro:
+  en: >-
+    **Goal:** Control the water with Fire Galleys while applying land pressure with Archers, using a Fishing Ship
+    economy to fund a smooth two-front push into Castle Age. **Recommended civs:** Italians (cheaper Docks + ships,
+    cheaper Fire Galleys), Japanese (faster-training warships, strong archers), Vikings (cheaper, tankier navy),
+    Byzantines (cheap counter-units, strong Fire Ship line), Portuguese (+HP ships, gold discount)
+  tr: >-
+    **Hedef:** Fire Galley'lerle suyu kontrol ederken Archer'larla karada baskı kur; iki cepheli bu hamleyi Kale Çağı'na
+    kadar finanse etmek için Fishing Ship ekonomisini kullan. **Önerilen uygarlıklar:** Italians (daha ucuz Dock + gemi,
+    daha ucuz Fire Galley), Japanese (daha hızlı üretilen savaş gemileri, güçlü okçular), Vikings (daha ucuz ve
+    dayanıklı deniz kuvvetleri), Byzantines (ucuz counter birimleri, güçlü Fire Ship hattı), Portuguese (+can gemiler,
+    altın indirimi)
+strategy:
+  en:
+    - 3 villagers build 2 houses, then to sheep; queue villagers non-stop at the Town Center
+    - 4 villagers to wood with a Lumber Camp
+    - Lure the first boar around 11–12; build a Dock near deep fish plus a second house
+    - Queue 4 Fishing Ships from the Dock onto the deep fish
+    - More villagers to wood; lure the second boar; spread spare villagers across sheep and boar
+    - Research Loom, then click Feudal Age at 21 population
+    - >-
+      While advancing: pull a second Lumber Camp from straggler trees, build a Gold Mining Camp (4 villagers), and place
+      a Barracks toward your front
+    - Research Double-Bit Axe in the Lumber Camp
+    - Train Fire Galleys from the Dock to take water control
+    - Build a house and 2 Archery Ranges near your front; train Archers non-stop
+    - New villagers to gold (toward 24); add a Mill on berries
+    - Build a Blacksmith and research Fletching for archer range
+    - Research Wheelbarrow; transition wood villagers onto Farms as fish/boar deplete
+    - Add a final villager to gold and click Castle Age at ~35 population
+    - >-
+      **Weak against:** Dedicated Galley floods that out-mass your Fire Galleys before they tech up; heavy Skirmisher
+      civs that shut down the Archer half on land; opponents who out-boom on a closed map where your navy adds little.
+    - >-
+      **Strong against:** Greedy Fast Castle players who skip Feudal military; pure-water builds caught without Fire
+      Ship counters; land-focused civs forced to split attention between shore and front.
+  tr:
+    - 3 köylü 2 ev inşa eder, ardından koyunlara geçer; Town Center'da köylü üretimini hiç kesme
+    - 4 köylü Lumber Camp kurarak oduna gider
+    - 11–12. köylüde ilk domuzu çek; derin balığın yanına Dock ve ikinci evi kur
+    - Dock'tan 4 Fishing Ship üretip derin balıklara gönder
+    - Daha fazla köylüyü oduna yönlendir; ikinci domuzu çek; artık köylüleri koyun ve domuz arasında dağıt
+    - Loom araştır, ardından 21 nüfusta Feodal Çağ'a tıkla
+    - >-
+      Çağ atlarken: ıssız ağaçlardan ikinci bir Lumber Camp çek, 4 köylüyle Gold Mining Camp kur ve cephe hattına
+      Barracks yerleştir
+    - Lumber Camp'te Double-Bit Axe araştır
+    - Dock'tan Fire Galley üretip su kontrolünü ele geçir
+    - Cephe hattına yakın bir ev ve 2 Archery Range kur; Archer üretimini hiç kesme
+    - Yeni köylüleri altına yönlendir (24'e doğru); çileklere Mill ekle
+    - Blacksmith kur ve okçu menzili için Fletching araştır
+    - Wheelbarrow araştır; balık ve domuz azaldıkça odun köylülerini Tarlalara aktar
+    - Son bir köylüyü altına ekle ve yaklaşık 35 nüfusta Kale Çağı'na tıkla
+    - >-
+      **Zayıf olduğu durumlar:** Galley seli ile Fire Galley'lerini teknik geliştirme yapamadan bastıran rakipler;
+      karadaki Archer yarısını kapatan ağır Skirmisher medeniyetleri; deniz kuvvetlerinin pek katkı sunmadığı kapalı
+      haritalarda daha hızlı boom yapan rakipler.
+    - >-
+      **Güçlü olduğu durumlar:** Feodal askeri atlayan açgözlü Fast Castle oyuncuları; Fire Ship counter'ı olmadan
+      yakalanan saf su yapıları; sahil ve cephe arasında dikkat bölmek zorunda kalan kara odaklı medeniyetler.

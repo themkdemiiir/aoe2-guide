@@ -1,0 +1,165 @@
+slug: khmer-fc-knights-scorpions
+name:
+  en: Khmer Fast Castle Knights and Scorpions
+  tr: Khmer Fast Castle Knights ve Scorpions
+difficulty: advanced
+targetAge: feudal
+durationMin: 11
+civsRecommended:
+  - khmer
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under TC
+      tr: 6 → TC altında koyunda
+    icons:
+      - food
+  - villagers: 9
+    assign:
+      en: +3 → wood, build Lumber Camp
+      tr: +3 → oduna, Lumber Camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: +2 → first boar
+      tr: +2 → ilk domuza
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build House + Mill, then berries
+      tr: +1 → House + Mill kur, ardından meyveye
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 13
+    assign:
+      en: +1 → berries
+      tr: +1 → meyveye
+    icons:
+      - food
+  - villagers: 14
+    assign:
+      en: +1 → second boar
+      tr: +1 → ikinci domuza
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: +4 → berries; add a House (no second Mill needed)
+      tr: +4 → meyveye; bir House ekle (ikinci Mill gerekmez)
+    icons:
+      - food
+      - house
+  - villagers: 19
+    assign:
+      en: +1 → wood
+      tr: +1 → oduna
+    icons:
+      - wood
+  - villagers: 20
+    assign:
+      en: +1 → build a Farm
+      tr: +1 → bir Farm kur
+    icons:
+      - farm
+  - villagers: 23
+    phase: feudal
+    time: "10:55"
+    assign:
+      en: +3 → gold (Mining Camp); research Loom
+      tr: +3 → altına (Mining Camp); Loom araştır
+    note:
+      en: Click Feudal at 23 pop with 4 wood / 16 food / 3 gold
+      tr: 23 köylüyle Feudal Age'e tıkla — 4 odun / 16 yiyecek / 3 altın
+    icons:
+      - gold
+      - mining-camp
+      - loom
+  - assign:
+      en: "Feudal: seed 3 Farms, then click Castle instantly — Khmer build NO Feudal buildings"
+      tr: "Feudal: 3 Farm kur, sonra anında Castle'a tıkla — Khmer Feudal'da HİÇBİR bina kurmaz"
+    note:
+      en: Khmer need no building to age up; garrison villagers in houses and use your Scout for defense
+      tr: Khmer çağ atlamak için binaya ihtiyaç duymaz; köylüleri evlere yerleştir ve savunmada Scout kullan
+    icons:
+      - farm
+      - scout-cavalry
+  - villagers: 23
+    assign:
+      en: 4 hunt/straggler villagers → woodline; +2 → gold
+      tr: 4 avcı/straggler köylü → ağaç hattına; +2 → altına
+    icons:
+      - wood
+      - gold
+  - assign:
+      en: Research Double-Bit Axe; tower only if pressured; berries-out → stragglers + Farms
+      tr: Double-Bit Axe araştır; baskı varsa kule dik; meyve biter → straggler + Farm
+    icons:
+      - double-bit-axe
+      - farm
+  - assign:
+      en: "Castle: build Stable + Blacksmith; research +1 cavalry armor"
+      tr: "Castle: Stable + Blacksmith kur; +1 süvari zırhı araştır"
+    icons:
+      - stable
+      - blacksmith
+  - assign:
+      en: Pump Knights immediately; add a forward Siege Workshop
+      tr: Hemen Knight üret; ileri bir Siege Workshop ekle
+    icons:
+      - siege-workshop
+  - assign:
+      en: Mix Scorpions with Knights from the forward base
+      tr: İleri üsten Knight'larla birlikte Scorpion üret
+intro:
+  en: >-
+    **Goal:** Exploit Khmer's no-building-prerequisite bonus to skip Feudal structures entirely and slam into Castle Age
+    (~13:30) with an aggressive Knight-and-Scorpion push.
+  tr: >-
+    **Amaç:** Khmer'in bina ön koşulu gerektirmeyen bonusunu kullanarak Feudal binalarını tamamen atla ve agresif bir
+    Knight-Scorpion baskısıyla Castle Age'e (~13:30) gir.
+strategy:
+  en:
+    - >-
+      Khmer's signature trick: villagers never need to walk to a building to advance, so you click Castle the instant
+      Feudal finishes without spending wood on a Barracks or Stable. That saved time and resources is the whole point of
+      this build.
+    - >-
+      Defend the dangerous Feudal-to-Castle window with hidden houses and your Scout — you have no military yet, so
+      position your Town Center and walls to deny easy villager kills.
+    - >-
+      The moment you reach Castle, build a Stable and Blacksmith together, take +1 cavalry armor, and start non-stop
+      Knights; a forward Siege Workshop lets Scorpions clear massed archers and add map pressure.
+    - >-
+      Scorpions are the Khmer power spike here — their bonus damage shreds infantry and archer clumps while Knights
+      punish anything that tries to close in.
+    - >-
+      **Weak against:** Camel and Pikeman compositions that hard-counter cavalry; an opponent who walls perfectly and
+      matches your Castle timing with Crossbows plus Pikes.
+    - >-
+      **Follow-up:** Add Town Centers behind the push if it stalls, then transition toward Elite Battle Elephants or a
+      relic-backed Monk play in the late game.
+  tr:
+    - >-
+      Khmer'in imza numarası: köylülerin çağ atlamak için bir binaya yürümesi gerekmez, bu yüzden Feudal biter bitmez
+      Barracks ya da Stable için odun harcamadan Castle'a tıklarsın. Kazanılan bu zaman ve kaynak, build'in tüm
+      mantığını oluşturur.
+    - >-
+      Tehlikeli Feudal-Castle geçiş penceresini gizli evler ve Scout'unla savun — henüz askerin yok, bu yüzden Town
+      Center ve duvarlarını köylü kaybını zorlaştıracak şekilde konumlandır.
+    - >-
+      Castle'a ulaşır ulaşmaz Stable ve Blacksmith'i birlikte kur, +1 süvari zırhı al ve durmadan Knight üretmeye başla;
+      ileri bir Siege Workshop, Scorpion'ların okçu yığınlarını temizlemesini ve harita baskısı kurmasını sağlar.
+    - >-
+      Buradaki Khmer güç sıçraması Scorpion'lardır — bonus hasarları piyade ve okçu kümelerini biçerken Knight'lar
+      yaklaşmaya çalışan her şeyi cezalandırır.
+    - >-
+      **Zayıf olduğu:** Süvariyi sert sayan Camel ve Pikeman kompozisyonları; mükemmel duvar çekip Crossbow + Pike ile
+      senin Castle zamanlamana yetişen rakipler.
+    - >-
+      **Devamı:** Baskı tıkanırsa arkaya ek Town Center kur, ardından geç oyunda Elite Battle Elephant veya relic
+      destekli Monk oyununa geçiş yap.

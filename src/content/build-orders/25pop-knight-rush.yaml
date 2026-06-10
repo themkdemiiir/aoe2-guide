@@ -1,0 +1,156 @@
+slug: 25pop-knight-rush
+name:
+  en: Knight Rush (Beginner)
+  tr: Knight Rush (Başlangıç)
+difficulty: beginner
+targetAge: castle
+durationMin: 16
+civsRecommended:
+  - franks
+  - magyars
+  - slavs
+  - berbers
+  - huns
+steps:
+  - villagers: 6
+    assign:
+      en: Build 2 Houses with the first 3, then all 6 onto sheep under the TC
+      tr: İlk 3 köylüyle 2 Ev dik, sonra 6 köylüyü de TC altındaki koyunlara al
+    icons:
+      - house
+      - food
+      - town-center
+  - villagers: 9
+    assign:
+      en: +3 → build Lumber Camp, then chop wood
+      tr: +3 → Kereste Kampı dik, ardından odun kes
+    icons:
+      - lumber-camp
+      - wood
+  - villagers: 10
+    assign:
+      en: +1 → lure and shoot the first boar
+      tr: +1 → ilk yaban domuzunu çek ve vur
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build 2 Houses, then a Mill on the berries and start gathering
+      tr: +1 → 2 Ev dik, sonra meyvelere Değirmen kur ve toplamaya başla
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → hunt (deer/straggler food)
+      tr: +1 → ava git (geyik/artık yiyecek)
+    icons:
+      - food
+  - villagers: 13
+    assign:
+      en: +1 → lure the 2nd boar
+      tr: +1 → 2. yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 17
+    assign:
+      en: +4 → berries
+      tr: +4 → meyveler
+    icons:
+      - food
+  - villagers: 22
+    assign:
+      en: +5 → wood, building a House when housed
+      tr: +5 → odun; nüfus dolunca araya bir Ev dik
+    icons:
+      - wood
+      - house
+  - villagers: 25
+    phase: feudal
+    assign:
+      en: +3 → build Mining Camp and mine gold, then research Loom and click up
+      tr: +3 → Maden Kampı dik ve altın çıkar, ardından Loom araştır ve çağı tıkla
+    note:
+      en: Feudal lands ~11:45 with about 8 on wood, 14 on food, 3 on gold
+      tr: Feudal ~11:45'te gelir; yaklaşık 8 odunda, 14 yiyecekte, 3 altında
+    icons:
+      - mining-camp
+      - gold
+      - loom
+  - assign:
+      en: "In Feudal: build Barracks + House, optionally wall; shift depleted food vils to Farms and wood"
+      tr: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır"
+    icons:
+      - barracks
+      - house
+      - farm
+  - assign:
+      en: +2 → build Stable and Market
+      tr: +2 → Ahır ve Pazar dik
+    icons:
+      - stable
+      - market
+  - villagers: 29
+    phase: castle
+    time: "16:05"
+    assign:
+      en: +4 → gold; research Double-Bit Axe; click Castle Age
+      tr: +4 → altın; Double-Bit Axe araştır; Castle çağını tıkla
+    note:
+      en: Build a 2nd Stable as you advance
+      tr: Çağ atlarken 2. Ahırı dik
+    icons:
+      - gold
+      - double-bit-axe
+      - stable
+  - assign:
+      en: "In Castle Age: research Horse Collar and Bow Saw; pump Knights from both Stables"
+      tr: "Castle çağında: Horse Collar ve Bow Saw araştır; iki Ahırdan da Şövalye bas"
+    icons:
+      - horse-collar
+      - bow-saw
+      - knight
+intro:
+  en: Reach Castle Age on a clean economy and flood Knights from two Stables for a forgiving, high-impact attack.
+  tr: Temiz bir ekonomiyle Castle çağına geç ve iki Ahırdan Şövalye yağdırarak affedici, yüksek etkili bir saldırı kur.
+strategy:
+  en:
+    - >-
+      This is the most beginner-friendly aggressive opener: your eco runs on a tidy sheep-boar-berry-then-farms loop, so
+      you can focus on macro instead of micro while you bank toward Castle Age.
+    - >-
+      Two Stables let you keep Knights coming non-stop. Knights are tanky, fast, and punish unwalled lumber camps and
+      gold miners, so raid the moment the first one pops.
+    - >-
+      Get Double-Bit Axe and Horse Collar to keep wood and farm income healthy, then add Bow Saw — sustained eco
+      upgrades matter more than rushing extra military buildings here.
+    - >-
+      Bloodlines is a big Knight power spike for most of these civs; Franks skip it because their team-wide +20% Knight
+      HP already covers the gap.
+    - >-
+      Knights fold to Pikemen and Camel Riders, so scout for spears. When you see mass anti-cavalry, stop force-feeding
+      Knights and mix in Skirmishers, a Siege Workshop, or a second Town Center to out-boom instead.
+    - >-
+      Magyars, Slavs, Berbers, and Huns each sweeten the plan (cheaper or faster Knights, free Houses, cheaper eco), but
+      the order is identical for all five.
+  tr:
+    - >-
+      Bu, yeni başlayanlar için en uygun saldırı açılışıdır: ekonomin düzenli bir koyun-domuz-meyve-sonra-tarla
+      döngüsünde döner, böylece Castle çağına para biriktirirken mikro yerine makroya odaklanabilirsin.
+    - >-
+      İki Ahır, Şövalyelerin durmadan gelmesini sağlar. Şövalyeler dayanıklı ve hızlıdır; duvarsız kereste kamplarını ve
+      altın madencilerini cezalandırır, bu yüzden ilk Şövalye çıkar çıkmaz baskına git.
+    - >-
+      Odun ve tarla gelirini sağlam tutmak için Double-Bit Axe ile Horse Collar al, ardından Bow Saw ekle — burada
+      ekstra askeri bina dikmekten çok sürekli ekonomi yükseltmeleri önemlidir.
+    - >-
+      Bloodlines çoğu uygarlık için büyük bir Şövalye güç sıçramasıdır; Franks bunu atlar çünkü takım geneli +%20
+      Şövalye canı bu açığı zaten kapatır.
+    - >-
+      Şövalyeler Mızraklılara (Pikeman) ve Develilere (Camel Rider) karşı erir, bu yüzden mızrak birimleri için keşif
+      yap. Yığınla süvari karşıtı birim görünce Şövalye basmayı zorlamayı bırak; Skirmisher, bir Kuşatma Atölyesi ya da
+      ikinci bir Ana Bina ile booma geçerek üstünlük kur.
+    - >-
+      Magyars, Slavs, Berbers ve Huns'un her biri planı tatlandırır (daha ucuz ya da daha hızlı Şövalye, bedava Ev, daha
+      ucuz ekonomi), ama düzen beşinde de aynıdır.

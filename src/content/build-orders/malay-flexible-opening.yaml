@@ -1,0 +1,158 @@
+slug: malay-flexible-opening
+name:
+  en: 21 Vils Malay Flexible Opening
+  tr: 21 Köylü Malay Esnek Açılış
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - malay
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Town Center altında koyunda
+    icons:
+      - food
+      - town-center
+  - villagers: 9
+    assign:
+      en: +3 → wood, drop a lumber camp
+      tr: +3 → oduna, lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → lure and eat the first boar
+      tr: +1 → ilk domuzu çek ve ye
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a house, then a mill on berries
+      tr: +1 → bir ev, sonra meyvenin yanına mill kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 16
+    assign:
+      en: +5 → hunt under the Town Center
+      tr: +5 → Town Center altında avda
+    note:
+      en: Lure the deer with your scout and bring in the second boar to stretch your food
+      tr: Yiyeceği uzatmak için scout ile geyikleri sür ve ikinci domuzu da getir
+    icons:
+      - food
+  - villagers: 19
+    assign:
+      en: +3 → berries
+      tr: +3 → meyveye
+    icons:
+      - food
+  - villagers: 21
+    phase: feudal
+    time: "9:13"
+    assign:
+      en: +2 → wood; research Loom and click up to Feudal
+      tr: +2 → oduna; Loom araştır ve Feudal'a çağ atla
+    note:
+      en: Feudal landing ~9:13 on 5 wood / 16 food — Malay's faster age-up buys you roughly a +2 villager lead
+      tr: >-
+        Feudal'a ~9:13'te iniş, 5 odun / 16 yiyecek ile — Malay'ın hızlı çağ atlaması sana kabaca +2 köylü avantajı
+        kazandırır
+    icons:
+      - wood
+      - loom
+  - villagers: 21
+    assign:
+      en: Send 5 from hunt → wood, dropping a second lumber camp
+      tr: Avdan 5 köylüyü → oduna gönder, ikinci bir lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - assign:
+      en: Pull 1 from hunt to build a Barracks early so a follow-up is ready the moment you decide
+      tr: Avdan 1 köylü al, erkenden bir Barracks kur ki karar verdiğin an devamı hazır olsun
+    icons:
+      - barracks
+  - assign:
+      en: "Fork A — Archers: build one Archery Range and start Archers, moving 4 villagers → gold"
+      tr: "Yol A — Archers: bir Archery Range kur ve Archers üret, 4 köylüyü → altına taşı"
+    icons:
+      - archery-range
+      - archer
+      - gold
+  - assign:
+      en: "Fork B — Scouts: build a Stable and pump Scout Cavalry to harass the eco"
+      tr: "Yol B — Scouts: bir Stable kur ve rakibin ekonomisini taciz etmek için Scout Cavalry bas"
+    icons:
+      - stable
+      - scout-cavalry
+  - assign:
+      en: "Fork C — Spear-Skirm: produce Spearmen and Skirmishers, leaning on Malay's free infantry armor"
+      tr: "Yol C — Spear-Skirm: Malay'ın bedava piyade zırhına dayanarak Spearman ve Skirmisher üret"
+    icons:
+      - spearman
+      - skirmisher
+  - assign:
+      en: Add farms as the hunt runs out and research Double-Bit Axe to keep wood flowing
+      tr: Av tükenirken tarla ekle ve odunu akıtmak için Double-Bit Axe araştır
+    icons:
+      - farm
+      - double-bit-axe
+  - assign:
+      en: Build a Blacksmith and research Fletching once your chosen military is online
+      tr: Seçtiğin ordu hazır olunca bir Blacksmith kur ve Fletching araştır
+    icons:
+      - blacksmith
+      - fletching
+intro:
+  en: >-
+    Reach Feudal a step ahead of the field on Malay's faster age-up, then commit to Archers, Scouts, or Spear-Skirm only
+    after you read what the opponent is doing.
+  tr: >-
+    Malay'ın hızlı çağ atlamasıyla Feudal'a rakiplerinden bir adım önde ulaş, ardından rakibin ne yaptığını okuduktan
+    sonra Archers, Scouts ya da Spear-Skirm'e karar ver.
+strategy:
+  en:
+    - >-
+      Malay's cheaper, faster age-up is the whole point: the same villager flow lands Feudal around 9:13 while leaving
+      you roughly two villagers ahead of a standard opener, and that surplus is what funds the early Barracks and the
+      follow-up of your choice.
+    - >-
+      Keep your options open through the early Barracks — it is built before you have decided anything, so whichever
+      fork you pick is producing the moment you spot the enemy's plan.
+    - >-
+      Fork A (Archers): drop a single Range and shift four villagers to gold for a clean Archer line; this is the
+      default answer when the opponent leans on infantry or stays passive.
+    - >-
+      Fork B (Scouts): a Stable and Scout Cavalry punish greedy economies and unwalled flanks, buying time to transition
+      once the harass has done its work.
+    - >-
+      Fork C (Spear-Skirm): Malay's free infantry armor makes Spearman-plus-Skirmisher unusually durable, a cheap
+      gold-light wall against enemy Archers and Scouts.
+    - >-
+      Whichever branch you take, the +2 villager edge compounds: farms in behind a fast Blacksmith and Fletching let you
+      spike into a faster Castle or Imperial Age than your opponent can match.
+  tr:
+    - >-
+      Malay'ın daha ucuz ve daha hızlı çağ atlaması işin tüm özüdür: aynı köylü akışı Feudal'a yaklaşık 9:13'te indirir
+      ve seni standart bir açılışa göre kabaca iki köylü önde bırakır; bu fazlalık erken Barracks'ı ve seçtiğin devamı
+      finanse eder.
+    - >-
+      Seçeneklerini erken Barracks ile açık tut — daha hiçbir şeye karar vermeden kurulur, böylece hangi yolu seçersen
+      seç rakibin planını gördüğün an üretim başlar.
+    - >-
+      Yol A (Archers): tek bir Range kur ve temiz bir Archer hattı için dört köylüyü altına kaydır; bu, rakip piyadeye
+      yaslandığında ya da pasif kaldığında varsayılan yanıttır.
+    - >-
+      Yol B (Scouts): bir Stable ve Scout Cavalry, açgözlü ekonomileri ve duvarsız kanatları cezalandırır; taciz işini
+      görene kadar geçiş için zaman kazandırır.
+    - >-
+      Yol C (Spear-Skirm): Malay'ın bedava piyade zırhı, Spearman artı Skirmisher kombinasyonunu olağandışı derecede
+      dayanıklı kılar; rakip Archers ve Scouts'a karşı ucuz, az altın gerektiren bir duvardır.
+    - >-
+      Hangi yolu seçersen seç, +2 köylü avantajı katlanarak büyür: hızlı bir Blacksmith ve Fletching arkasına ekilen
+      tarlalar, rakibinin yetişemeyeceği kadar hızlı bir Castle veya Imperial çağ sıçraması yapmanı sağlar.

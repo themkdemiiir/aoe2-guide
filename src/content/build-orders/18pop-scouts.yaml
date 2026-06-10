@@ -1,0 +1,154 @@
+slug: 18pop-scouts
+name:
+  en: 1-Stable Scouts
+  tr: Tek Ahırlı Atlı Keşifçiler
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - franks
+  - huns
+  - lithuanians
+  - magyars
+  - malians
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the TC
+      tr: 6 → TC altında koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood on the first woodline; build a lumber camp
+      tr: +2 → ilk ormanda odun; bir kereste kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure and kill the first boar
+      tr: +1 → ilk yaban domuzunu çek ve avla
+    note:
+      en: Eat the boar before the sheep run out
+      tr: Koyunlar bitmeden domuzu yiyip bitir
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → build a house, then a mill on the berries
+      tr: +1 → bir ev, ardından çilek üzerine değirmen kur
+    icons:
+      - house
+      - mill
+  - assign:
+      en: Lure deer in with the scout to stretch your food
+      tr: Yiyeceği uzatmak için keşifçiyle geyikleri içeri çek
+    note:
+      en: No new villager — keep producing from the TC
+      tr: Yeni köylü yok — TC'den üretime devam et
+    icons:
+      - food
+  - villagers: 16
+    assign:
+      en: +6 → hunt under the TC; lure the second boar
+      tr: +6 → TC altında avlanma; ikinci domuzu çek
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    time: "8:50"
+    assign:
+      en: +2 → wood; research Loom, then click up to Feudal
+      tr: +2 → odun; Loom'u araştır, sonra Feudal'a tıkla
+    note:
+      en: Land at 18 pop with a 4-wood / 14-food split
+      tr: 18 nüfusta 4 odun / 14 yiyecek dağılımıyla geç
+    icons:
+      - wood
+      - loom
+  - villagers: 18
+    assign:
+      en: >-
+        Feudal: send 4 vils to the initial lumber camp (aggressive, 8 on wood) or 5 to a fresh camp (defensive, 9 on
+        wood)
+      tr: "Feudal: 4 köylüyü ilk kereste kampına gönder (agresif, odunda 8) ya da 5'ini yeni bir kampa (defansif, odunda 9)"
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 18
+    assign:
+      en: Move 4 vils off food → berries; send 1 vil to a barracks at 60% age-up
+      tr: Yiyecekten 4 köylüyü → çileğe al; çağ atlama %60'tayken 1 köylüyü kışlaya gönder
+    icons:
+      - food
+      - barracks
+  - villagers: 18
+    assign:
+      en: Build a stable with 2 vils; train Scout Cavalry as soon as it finishes
+      tr: 2 köylüyle ahır kur; biter bitmez Atlı Keşifçi üret
+    icons:
+      - stable
+      - scout-cavalry
+  - assign:
+      en: Research Double-Bit Axe and Horse Collar; seed farms
+      tr: Double-Bit Axe ve Horse Collar'ı araştır; tarlaları ek
+    icons:
+      - double-bit-axe
+      - horse-collar
+      - farm
+  - assign:
+      en: Wall with the 2 stable builders; keep adding scouts non-stop
+      tr: Ahırı kuran 2 köylüyle sur ör; durmadan keşifçi eklemeye devam et
+    icons:
+      - scout-cavalry
+  - assign:
+      en: Add 1–4 Spearmen if the opponent also opens with scouts
+      tr: Rakip de keşifçiyle açarsa 1–4 Mızraklı ekle
+    note:
+      en: Skip the spears versus archers
+      tr: Okçulara karşı mızraklıları atla
+    icons:
+      - spearman
+intro:
+  en: >-
+    Land in Feudal at 18 pop around 8:50 with a single stable, then pump Scout Cavalry to harass enemy villagers while
+    your economy snowballs.
+  tr: >-
+    8:50 civarında 18 nüfusla ve tek bir ahırla Feudal'a geç, sonra ekonomin büyürken Atlı Keşifçiler basarak rakibin
+    köylülerini taciz et.
+strategy:
+  en:
+    - >-
+      Production is everything: a scout should leave the stable the moment you have the food, and your TC should never
+      sit idle. The 18-pop landing buys you tempo, so spend it pressuring the opponent rather than sitting at home.
+    - >-
+      React to what your scout sees. Versus archers or spears, add an archery range and skirmishers; versus enemy
+      scouts, add your own scouts plus spears until you are fully walled.
+    - >-
+      Tech up your cavalry once it is rolling. Build a blacksmith, and research Bloodlines after 7–8 scouts are on the
+      field so you are not delaying military for it.
+    - >-
+      Default Castle Age plan is 2-stable Knights for sustained pressure. Against a crossbow mass, peel a single range
+      into elite skirmishers; on open maps where you just need map control, light cavalry keeps the harass alive.
+    - >-
+      Civ notes: Franks lack Bloodlines, so lean on Husbandry for speed; Huns need no houses, freeing wood to start the
+      stable a touch earlier.
+  tr:
+    - >-
+      Üretim her şeydir: yeterli yiyeceğin olur olmaz ahırdan bir keşifçi çıkmalı ve TC asla boş durmamalı. 18 nüfuslu
+      geçiş sana tempo kazandırır, bu yüzden evde oturmak yerine bu avantajı rakibe baskı kurmak için harca.
+    - >-
+      Keşifçinin gördüğüne göre tepki ver. Okçulara veya mızraklılara karşı bir okçu menzili ve sıyırıcı (skirmisher)
+      ekle; rakip keşifçilerine karşı tamamen surla çevrilene kadar kendi keşifçilerini ve mızraklılarını ekle.
+    - >-
+      Süvarin akmaya başlayınca onu geliştir. Bir demirci kur ve sahada 7–8 keşifçi olduktan sonra Bloodlines'ı araştır
+      ki askeri üretimi bunun için geciktirmeyesin.
+    - >-
+      Varsayılan Castle çağı planı sürekli baskı için 2 ahırlı Şövalye'dir. Yoğun bir crossbow kütlesine karşı tek bir
+      menzili elit sıyırıcıya çevir; sadece harita kontrolü gereken açık haritalarda ise hafif süvari taciz akışını
+      sürdürür.
+    - >-
+      Uygarlık notları: Franks'te Bloodlines yoktur, bu yüzden hız için Husbandry'ye yüklen; Huns'ta ev gerekmediği için
+      açılan odunla ahırı biraz daha erken kurabilirsin.

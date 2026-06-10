@@ -7,8 +7,8 @@ interface Step {
   villagers?: number;
   phase?: "feudal" | "castle" | "imperial";
   time?: string;
-  assign: string;
-  note?: string;
+  assign: { en: string; tr: string };
+  note?: { en: string; tr: string };
   icons?: string[];
 }
 interface Props { steps: Step[]; lang: Locale; slug: string; }
@@ -65,7 +65,7 @@ const sections: PhaseSection[] = [{ id: "opening", label: t(lang, "builds.openin
 let lastPop: number | undefined;
 for (const [index, step] of steps.entries()) {
   const phaseKey =
-    step.phase ?? (isTransitionAssign(step.assign) ? phaseFromAssign(step.assign) : null);
+    step.phase ?? (isTransitionAssign(step.assign[lang]) ? phaseFromAssign(step.assign[lang]) : null);
   const isTransition = phaseKey != null;
   if (phaseKey) {
     const label = t(lang, `age.${phaseKey}`);
@@ -122,7 +122,7 @@ for (const [index, step] of steps.entries()) {
               data-step={s.index}
               data-time={s.time ?? ""}
               data-pop={s.villagers ?? ""}
-              data-assign={s.assign}
+              data-assign={s.assign[lang]}
               tabindex="0"
               class:list={[
               "group grid cursor-pointer gap-3 px-4 py-3 scroll-mt-24 sm:grid-cols-[5rem_1fr]",
@@ -163,11 +163,11 @@ for (const [index, step] of steps.entries()) {
                   </div>
                 )}
                 <p class:list={["text-sm leading-relaxed", s.isTransition ? "font-semibold text-ink" : "text-ink"]}>
-                  {s.assign}
+                  {s.assign[lang]}
                 </p>
-                {s.note && (
+                {s.note?.[lang] && (
                   <p class="rounded border-l-2 border-gold-500 bg-gold-500/10 px-3 py-2 text-xs text-stone-700">
-                    {s.note}
+                    {s.note[lang]}
                   </p>
                 )}
               </div>

@@ -1,0 +1,162 @@
+slug: portuguese-monk-rush
+name:
+  en: Portuguese Monk Rush
+  tr: Portekiz Keşiş Baskını
+difficulty: advanced
+targetAge: castle
+durationMin: 13
+civsRecommended:
+  - portuguese
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under TC
+      tr: 6 → TC altındaki koyunlar
+    icons:
+      - food
+  - villagers: 9
+    assign:
+      en: +3 → wood, build lumber camp
+      tr: +3 → oduna, kereste kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → first boar (lure with scout)
+      tr: +1 → ilk yaban domuzu (atlıyla çek)
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → hunt / deer
+      tr: +1 → av / geyik
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build 2 houses + mill
+      tr: +1 → 2 ev + değirmen kur
+    icons:
+      - house
+      - mill
+  - villagers: 13
+    assign:
+      en: +1 → second boar
+      tr: +1 → ikinci yaban domuzu
+    note:
+      en: Lure deer or mill chickens to stretch food
+      tr: Yiyeceği uzatmak için geyikleri çek ya da tavukları değirmene topla
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: +5 → berries
+      tr: +5 → çilekler
+    icons:
+      - food
+  - villagers: 19
+    assign:
+      en: +1 → wood
+      tr: +1 → oduna
+    icons:
+      - wood
+  - villagers: 21
+    phase: feudal
+    assign:
+      en: +2 → gold (mining camp); click Feudal at ~9:40 (4 wood / 15 food / 2 gold)
+      tr: +2 → altın (madencilik kampı); ~9:40'ta Feudal'a tıkla (4 odun / 15 yiyecek / 2 altın)
+    icons:
+      - gold
+      - mining-camp
+  - villagers: 22
+    assign:
+      en: "Feudal: 3 wood → Market + Blacksmith; +1 → wood; research Loom"
+      tr: "Feudal: 3 odun → Pazar + Demirci; +1 → oduna; Loom araştır"
+    icons:
+      - market
+      - blacksmith
+      - loom
+  - assign:
+      en: Sell 200 stone, buy 100 food to fund the Castle click
+      tr: Castle tıklamasını finanse etmek için 200 taş sat, 100 yiyecek al
+    icons:
+      - market
+      - stone
+  - phase: castle
+    time: "13:10"
+    assign:
+      en: Castle Age
+      tr: Castle Çağı
+    note:
+      en: Research Double-Bit Axe; move hunt/berries onto wood + gold
+      tr: Double-Bit Axe araştır; avı/çilekleri oduna ve altına kaydır
+    icons:
+      - wood
+      - gold
+  - assign:
+      en: Barracks + 2 spearmen; send 2 vils + scout toward center
+      tr: Kışla + 2 mızrakçı; 2 köylü + atlıyı merkeze gönder
+    icons:
+      - barracks
+      - spearman
+      - scout-cavalry
+  - assign:
+      en: Build 2 Monasteries near map center; start producing Monks; grab relics
+      tr: Harita merkezine yakın 2 Manastır kur; Keşiş üretmeye başla; kalıntıları topla
+    icons:
+      - monastery
+      - monk
+  - assign:
+      en: Stragglers → farms; add Siege Workshop + Battering Ram for relic escort
+      tr: Artan köylüler → tarlalar; kalıntı koruması için Kuşatma Atölyesi + Koçbaşı ekle
+    icons:
+      - farm
+      - siege-workshop
+      - battering-ram
+intro:
+  en: >-
+    Reach Castle Age fast on the cheap Portuguese economy, flood the map center with Monks, and seize every relic before
+    your opponent can react.
+  tr: >-
+    Ucuz Portekiz ekonomisiyle hızlıca Castle Çağı'na çık, harita merkezini Keşişlerle doldur ve rakibin tepki vermesine
+    fırsat kalmadan tüm kalıntıları ele geçir.
+strategy:
+  en:
+    - >-
+      The whole plan hinges on relic control: two Monasteries near the center let you produce Monks in parallel and
+      snatch relics first, turning the map into a permanent gold faucet.
+    - >-
+      Use the spearmen, scout, and a couple of escort villagers to screen your Monks while they walk relics home — an
+      unguarded Monk is free food for enemy cavalry.
+    - >-
+      The 200-stone market sale is intentional: you trade unused stone for the food that buys your fast Castle click, so
+      do not bank stone for towers here.
+    - >-
+      Once relics are secured, the gold income comfortably funds a Fast Imperial push; Portuguese Feitoria and
+      discounted gold-cost units let you transition without ever mining out.
+    - >-
+      Weak against early Feudal pressure (archers or scout rushes) that arrives before your Monks and spears are ready —
+      wall key approaches and keep your Town Center garrisoned if scouted.
+    - >-
+      Strong against greedy boom openings and knight-heavy plans, since Monks convert expensive cavalry and the relic
+      lead snowballs.
+  tr:
+    - >-
+      Planın tamamı kalıntı kontrolüne dayanır: merkeze yakın iki Manastır, Keşişleri paralel üretmeni ve kalıntıları
+      önce kapmanı sağlar; bu da haritayı kalıcı bir altın çeşmesine çevirir.
+    - >-
+      Mızrakçıları, atlıyı ve birkaç refakatçi köylüyü, Keşişler kalıntıları eve taşırken onları korumak için kullan —
+      korumasız bir Keşiş, düşman süvarisine bedava yem olur.
+    - >-
+      200 taş satışı bilinçlidir: kullanılmayan taşı, hızlı Castle tıklamasını finanse eden yiyeceğe dönüştürürsün; bu
+      yüzden burada kule için taş biriktirme.
+    - >-
+      Kalıntılar güvenceye alındıktan sonra gelen altın geliri rahatça bir Fast Imperial atağını finanse eder;
+      Portekiz'in Feitoria'sı ve indirimli altın maliyetli birimleri, altının asla tükenmediği bir geçiş sunar.
+    - >-
+      Keşişlerin ve mızrakçıların hazır olmasından önce gelen erken Feudal baskısına (okçu ya da atlı baskınları) karşı
+      zayıftır — kritik geçişleri duvarla kapat ve keşfedilirsen TC'ni köylülerle doldur.
+    - >-
+      Açgözlü boom açılışlarına ve şövalye ağırlıklı planlara karşı güçlüdür; çünkü Keşişler pahalı süvarileri kendi
+      tarafına çevirir ve kalıntı üstünlüğü çığ gibi büyür.

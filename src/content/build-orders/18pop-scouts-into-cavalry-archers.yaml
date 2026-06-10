@@ -1,0 +1,148 @@
+slug: 18pop-scouts-into-cavalry-archers
+name:
+  en: 18 Pop Scouts into Cavalry Archers
+  tr: 18 Köylü Scouts into Cavalry Archers
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - huns
+  - mongols
+  - magyars
+  - japanese
+  - tatars
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under TC
+      tr: 6 → TC altında koyuna
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood, build Lumber Camp
+      tr: +2 → oduna, Lumber Camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure the first boar
+      tr: +1 → ilk domuzu çek
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → build House, then Mill on berries
+      tr: +1 → House kur, ardından meyvelerin yanına Mill kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 16
+    assign:
+      en: +6 → hunt (lure 2nd boar), shoot deer with the Scout
+      tr: +6 → avda (2. domuzu çek), Scout ile geyikleri vur
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    time: "8:50"
+    assign:
+      en: +2 → wood (4 lumberjacks); research Loom; click Feudal
+      tr: +2 → oduna (4 oduncu); Loom araştır; Feudal'e tıkla
+    note:
+      en: Perfect Feudal landing around 8:50
+      tr: Mükemmel Feudal varışı yaklaşık 8:50
+    icons:
+      - wood
+      - loom
+  - villagers: 18
+    assign:
+      en: "Feudal: 5 hunt vils → wood, build 2nd Lumber Camp (9 on wood)"
+      tr: "Feudal: 5 av köylüsü → oduna, 2. Lumber Camp kur (odunda 9)"
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 18
+    assign:
+      en: 5 hunt vils → berries; 1 builds Barracks; 2 build Stable
+      tr: 5 av köylüsü → meyveye; 1 köylü Barracks; 2 köylü Stable kurar
+    icons:
+      - food
+      - barracks
+      - stable
+  - assign:
+      en: Make Scout Cavalry; Double-Bit Axe; wall with the Stable builders
+      tr: Scout Cavalry üret; Double-Bit Axe; Stable kuranlarla duvar ör
+    note:
+      en: Horse Collar always on closed maps; optional 1-4 Spearmen vs Scouts
+      tr: Kapalı haritada Horse Collar şart; Scout'a karşı isteğe bağlı 1-4 Spearman
+    icons:
+      - scout-cavalry
+      - double-bit-axe
+  - assign:
+      en: Seed Farms toward ~15; keep producing Scouts
+      tr: ~15'e doğru Farm ek; Scout üretmeye devam et
+    icons:
+      - farm
+  - assign:
+      en: +5 → gold, build Mining Camp; build Blacksmith; finish walling
+      tr: +5 → altına, Mining Camp kur; Blacksmith kur; duvarı tamamla
+    icons:
+      - gold
+      - mining-camp
+      - blacksmith
+  - phase: castle
+    assign:
+      en: Click Castle Age; redistribute eco, add gold; build 2 Archery Ranges
+      tr: Castle Age'e tıkla; ekonomiyi yeniden dağıt, altın ekle; 2 Archery Range kur
+    note:
+      en: Research Fletching + Bloodlines first
+      tr: Önce Fletching + Bloodlines araştır
+    icons:
+      - archery-range
+  - assign:
+      en: Pump Cavalry Archers from both Ranges; research Bow Saw, Bodkin Arrow, Husbandry
+      tr: Her iki Range'den Cavalry Archers bas; Bow Saw, Bodkin Arrow, Husbandry araştır
+intro:
+  en: >-
+    Open with Scouts for map control, wall up safely behind them, then hide a Cavalry Archer mass behind your walls in
+    Castle Age.
+  tr: >-
+    Harita kontrolü için Scout ile aç, onların arkasında güvenle duvarlan, ardından Castle Age'de duvarlarının arkasına
+    bir Cavalry Archer yığını gizle.
+strategy:
+  en:
+    - >-
+      The Scouts in Feudal are a screen, not the win condition — they buy time and map control while you wall completely
+      and tech toward the real payoff.
+    - >-
+      Walling is non-negotiable: a sealed base lets you transition greedily into Cavalry Archers without dying to a
+      counterattack.
+    - >-
+      In Castle Age redistribute your economy, add gold and a second Range, and research Gold Mining, Bow Saw, Bodkin
+      Arrow, and Husbandry so the Cavalry Archers hit hard and ride fast.
+    - >-
+      Strong against static, defensive opponents and slow armies that cannot chase mobile ranged units; weak against a
+      heavy Skirmisher response, so keep some Spearmen and never overcommit Scouts.
+    - >-
+      Late game, fold into Cavalry Archers plus Hussars or Cavalry Archers plus Halberdiers, backed by Siege, for a
+      flexible mid- and post-imperial composition.
+  tr:
+    - >-
+      Feudal'deki Scout'lar kazanma koşulu değil, bir perdedir; tam duvarlanıp asıl ödüle doğru tech basarken sana zaman
+      ve harita kontrolü kazandırırlar.
+    - >-
+      Duvarlanmak tartışmaya kapalıdır: kapalı bir üs, karşı saldırıya yenilmeden Cavalry Archers'a açgözlüce geçiş
+      yapmanı sağlar.
+    - >-
+      Castle Age'de ekonomini yeniden dağıt, altın ve 2. Range ekle; Gold Mining, Bow Saw, Bodkin Arrow ve Husbandry
+      araştır ki Cavalry Archers sert vursun ve hızlı koşsun.
+    - >-
+      Statik, savunmacı rakiplere ve mobil menzilli birimleri kovalayamayan yavaş ordulara karşı güçlüdür; ağır
+      Skirmisher yanıtına karşı zayıftır, bu yüzden birkaç Spearman tut ve Scout'ları asla fazla riske atma.
+    - >-
+      Geç oyunda Cavalry Archers + Hussar ya da Cavalry Archers + Halberdier kompozisyonuna geç; Siege ile desteklersen
+      esnek bir orta ve imparatorluk sonrası gücün olur.

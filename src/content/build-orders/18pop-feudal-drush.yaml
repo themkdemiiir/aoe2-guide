@@ -1,0 +1,147 @@
+slug: 18pop-feudal-drush
+name:
+  en: 18 Pop Feudal Drush
+  tr: 18 Köylü Feudal Drush
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - malians
+  - lithuanians
+  - japanese
+  - britons
+  - vikings
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under TC
+      tr: 6 → TC altında koyunda
+    icons:
+      - food
+  - villagers: 9
+    assign:
+      en: +3 → wood, build lumber camp
+      tr: +3 → oduna, lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → lure first boar
+      tr: +1 → ilk domuzu çek
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build house, then hunt
+      tr: +1 → ev kur, sonra ava
+    note:
+      en: Lure deer with the scout
+      tr: Scout ile geyikleri çek
+    icons:
+      - house
+      - food
+  - villagers: 15
+    assign:
+      en: +4 → hunt; lure 2nd boar
+      tr: +4 → ava; 2. domuzu çek
+    icons:
+      - food
+  - assign:
+      en: +1 → build Barracks at front of base, then house
+      tr: +1 → üssün ön tarafına barracks kur, sonra ev
+    icons:
+      - barracks
+      - house
+  - villagers: 17
+    assign:
+      en: +1 → hunt
+      tr: +1 → ava
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    time: "8:50"
+    assign:
+      en: +1 → wood; research Loom, then click Feudal Age
+      tr: +1 → oduna; Loom araştır, sonra Feudal Age'e tıkla
+    note:
+      en: Landing ~8:50 (4 wood / 13 food)
+      tr: Geçiş ~8:50 (4 odun / 13 yemek)
+    icons:
+      - wood
+      - loom
+  - assign:
+      en: Feudal arrives — produce 2 Militia and send them to the enemy base
+      tr: Feudal gelir — 2 Militia üret ve düşman üssüne gönder
+    icons:
+      - militia
+      - barracks
+  - villagers: 18
+    assign:
+      en: 4 vils from TC → initial lumber camp
+      tr: TC'den 4 köylü → ilk lumber camp
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 18
+    assign:
+      en: +1 from TC → berries, build Mill; research Double-Bit Axe
+      tr: TC'den +1 → meyveye, mill kur; Double-Bit Axe araştır
+    note:
+      en: Horse Collar optional
+      tr: Horse Collar isteğe bağlı
+    icons:
+      - food
+      - mill
+      - double-bit-axe
+  - assign:
+      en: +2 → follow-up military by scouting opponent; slow-wall
+      tr: +2 → rakibi gözleyerek takip askeri; yavaş duvar çek
+    icons:
+      - scout-cavalry
+      - barracks
+intro:
+  en: >-
+    Reach Feudal at 18 population, push 2 Militia plus your scout into the enemy base, and keep the pressure on while
+    your economy ticks along behind a slow wall.
+  tr: >-
+    18 köylüde Feudal'a yüksel, 2 Militia ile scout'unu düşman üssüne sok ve ekonomin yavaş duvarın arkasında ilerlerken
+    baskıyı sürdür.
+strategy:
+  en:
+    - >-
+      This is a light, low-commitment aggression: the Militia leave during the Feudal transition rather than in the Dark
+      Age, so your economy barely pays for the harass while still forcing the opponent to react.
+    - >-
+      The scout and 2 Militia together are the threat — chase fleeing villagers, deny lumber camps, and pull workers off
+      resources. Killing even 1-3 villagers banks a tempo lead.
+    - >-
+      Decide your follow-up by scouting: add Scout Cavalry from a Stable if they lack Spearmen, or open an Archery Range
+      and mass Archers (strong on Britons and Vikings with their archer and economy bonuses).
+    - >-
+      Take Double-Bit Axe immediately and slow-wall your base; Horse Collar is optional depending on how much you commit
+      to food.
+    - >-
+      Strong into greedy, slow-to-wall openings; weak into players who wall fast or produce their own Scouts to
+      intercept the Militia.
+    - >-
+      If the harass stalls against a defended base, do not feed Militia in — you have aged up on time and can simply
+      transition into a normal Feudal or Castle plan.
+  tr:
+    - >-
+      Bu hafif ve düşük riskli bir baskıdır: Militia, Dark Age'de değil Feudal geçişi sırasında yola çıkar; böylece
+      ekonomin harass için neredeyse hiçbir bedel ödemezken rakibi yine de tepki vermeye zorlarsın.
+    - >-
+      Asıl tehdit scout ile 2 Militia'nın birlikteliğidir: kaçan köylüleri kovala, lumber camp'leri engelle ve işçileri
+      kaynaklardan uzaklaştır. 1-3 köylü öldürmek bile sana tempo avantajı kazandırır.
+    - >-
+      Takibini rakibi gözleyerek seç: Spearmen'ları yoksa Stable'dan Scout Cavalry ekle, ya da Archery Range açıp
+      Archers yığ (archer ve ekonomi bonuslarıyla Britons ve Vikings'te güçlüdür).
+    - Hemen Double-Bit Axe al ve üssünü yavaş duvarla; yemeğe ne kadar yüklendiğine göre Horse Collar isteğe bağlıdır.
+    - >-
+      Açgözlü, geç duvar çeken açılışlara karşı güçlü; hızlı duvar çeken ya da Militia'yı durdurmak için kendi
+      Scout'larını üreten rakiplere karşı zayıftır.
+    - >-
+      Savunulan bir üsse karşı harass tıkanırsa Militia'yı içeri besleme — zamanında yükselmişsindir ve sorunsuzca
+      normal bir Feudal veya Castle planına geçebilirsin.

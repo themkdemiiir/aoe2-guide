@@ -1,0 +1,119 @@
+slug: galley-rush
+name:
+  en: Feudal Galley Rush
+  tr: Feudal Galley Rush
+difficulty: intermediate
+targetAge: feudal
+durationMin: 10
+civsRecommended:
+  - vikings
+  - portuguese
+  - italians
+  - byzantines
+  - malay
+steps:
+  - villagers: 4
+    assign:
+      en: 4 → sheep under TC
+      tr: 4 → TC altında koyunlar
+    icons:
+      - food
+  - villagers: 6
+    assign:
+      en: +2 → wood, lumber camp near shore
+      tr: +2 → odun; sahil yakınında kereste kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 7
+    assign:
+      en: +1 → build Dock on shoreline
+      tr: +1 → sahil şeridine Dock yap
+    icons:
+      - dock
+  - villagers: 9
+    assign:
+      en: +2 → fish; queue Fishing Ships for food economy
+      tr: +2 → balık; Fishing Ship'leri Yiyecek ekonomisi için sıraya al
+    icons:
+      - food
+      - fishing-ship
+  - villagers: 11
+    assign:
+      en: +2 → berries, build mill
+      tr: +2 → çilek; Mill kur
+    icons:
+      - food
+      - mill
+  - villagers: 14
+    assign:
+      en: +3 → wood; keep Fishing Ships queued
+      tr: +3 → odun; Fishing Ship üretimini sürdür
+    icons:
+      - wood
+  - villagers: 17
+    assign:
+      en: +3; click Feudal at 17 pop
+      tr: +3; 17 nüfusta Feodal Çağ'a tıkla
+    icons:
+      - food
+  - villagers: 17
+    assign:
+      en: "Feudal: build 2nd Dock; research Fletching; Galleys non-stop"
+      tr: "Feodal: 2. Dock kur; Fletching araştır; durmadan Galley üret"
+    icons:
+      - dock
+      - galley
+  - villagers: 20
+    assign:
+      en: +3 → wood; use Galleys to deny enemy Docks
+      tr: +3 → odun; düşman Dock'larını Galley'lerle engelle
+    icons:
+      - wood
+intro:
+  en: >-
+    **Goal:** Reach Feudal Age quickly and flood Galleys from 2 Docks to destroy enemy Fishing Ships and deny water
+    resources. **Recommended civs:** Vikings (+10% wood from docks), Portuguese (slower ship death), Italians (cheaper
+    Docks + Galleys), Byzantines (Greek Fire Ships in Castle), Malay (cheaper ships overall)
+  tr: >-
+    **Hedef:** Feodal Çağ'a hızlıca ulaş ve 2 Dock'tan Galley'ler göndererek düşmanın Fishing Ship'lerini yok et, su
+    kaynaklarını ele geçir. **Önerilen uygarlıklar:** Vikings (Dock'lardan %10 fazla odun), Portuguese (gemiler daha
+    yavaş ölür), Italians (daha ucuz Dock + Galley), Byzantines (Kale Çağı'nda Greek Fire Ships), Malay (tüm gemiler
+    genel olarak daha ucuz)
+strategy:
+  en:
+    - 4 villagers on sheep
+    - 2 villagers on wood; Lumber Camp near water
+    - 1 villager builds Dock on shoreline immediately
+    - 2 villagers fish (or berries if no shore fish); queue Fishing Ships for food economy
+    - 2 villagers to berries; Mill
+    - 3 more villagers to wood
+    - 3 more villagers to food/wood (17 total)
+    - Build 2nd Dock from a shore villager
+    - Research Fletching in Blacksmith (+1 Galley range)
+    - Produce Galleys non-stop from both Docks
+    - 3 new TC villagers to wood
+    - Contest enemy Docks with Galley group
+    - >-
+      **Weak against:** Opponents who also double-dock and match Galley count; Fire Ships hard-counter Galleys in Castle
+      Age.
+    - >-
+      **Strong against:** Land civs forced onto water; opponents who don't build a Dock; Fishing Ship-dependent
+      economies.
+  tr:
+    - 4 köylü koyunlarda
+    - 2 köylü odunda; su kenarında Lumber Camp
+    - 1 köylü hemen sahil şeridine Dock kur
+    - 2 köylü balık avla (sahilde balık yoksa çilek); Yiyecek ekonomisi için Fishing Ship sıraya al
+    - 2 köylü çilek; Mill
+    - 3 köylü daha oduna
+    - 3 köylü daha yiyecek/odun (toplam 17)
+    - Sahildeki bir köylüyle 2. Dock kur
+    - Blacksmith'te Fletching araştır (+1 Galley menzili)
+    - Her iki Dock'tan da durmadan Galley üret
+    - TC'den 3 yeni köylüyü oduna gönder
+    - Galley grubuyla düşman Dock'larını ele geçir
+    - >-
+      **Zayıf yönü:** Rakip de çift Dock açar ve Galley sayısını tutturur; Fire Ship'ler Kale Çağı'nda Galley'lere karşı
+      sert counter'dır.
+    - "**Güçlü yönü:** Suya zorla sürülen kara uygarlıkları; Dock kurmayan rakipler; Fishing Ship'e bağımlı ekonomiler."

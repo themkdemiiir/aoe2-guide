@@ -1,0 +1,158 @@
+slug: win-water
+name:
+  en: Win Water
+  tr: Win Water
+difficulty: intermediate
+targetAge: feudal
+durationMin: 11
+civsRecommended:
+  - vikings
+  - italians
+  - portuguese
+  - malay
+  - japanese
+  - byzantines
+steps:
+  - villagers: 3
+    assign:
+      en: 3 → sheep under TC; queue Villagers non-stop
+      tr: 3 → TC altında koyunlar; durmadan köylü üret
+    icons:
+      - food
+      - town-center
+  - villagers: 6
+    assign:
+      en: +3 → sheep; first 2 Villagers build Houses on the way
+      tr: +3 → koyunlar; ilk 2 köylü yolda ev inşa etsin
+    icons:
+      - food
+      - house
+  - villagers: 10
+    assign:
+      en: +4 → wood, Lumber Camp on nearest trees
+      tr: +4 → odun; en yakın ağaçlara Lumber Camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: +1 → lure nearest Boar to the TC
+      tr: +1 → en yakın Boar'ı TC'ye çek
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build Dock by deep fish, then a House; queue 4x Fishing Ships
+      tr: +1 → derin balık yanına Dock kur, sonra bir ev; 4 Fishing Ship sıraya al
+    icons:
+      - dock
+      - fishing-ship
+  - villagers: 14
+    assign:
+      en: +2 → wood at the Lumber Camp
+      tr: +2 → Lumber Camp'te odun
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 15
+    assign:
+      en: +1 → lure 2nd Boar to the TC
+      tr: +1 → 2. Boar'ı TC'ye çek
+    icons:
+      - food
+  - villagers: 20
+    assign:
+      en: +5 → sheep / Boar meat under TC
+      tr: +5 → TC altında koyun / Boar eti
+    icons:
+      - food
+  - villagers: 21
+    assign:
+      en: +1 → sheep; research Loom; click Feudal Age
+      tr: +1 → koyunlar; Loom araştır; Feodal Çağ'a tıkla
+    note:
+      en: Wall up while uphill
+      tr: Çağ atlarken surları tamamla
+    icons:
+      - loom
+      - feudal-age
+  - villagers: 21
+    assign:
+      en: "Feudal: research Double-Bit Axe; queue 2 Fire Galleys from the Dock"
+      tr: "Feodal: Lumber Camp'te Double-Bit Axe araştır; Dock'tan 2 Fire Galley sıraya al"
+    icons:
+      - double-bit-axe
+      - fire-galley
+  - villagers: 23
+    assign:
+      en: +2 → gold, build Mining Camp
+      tr: +2 → altın madenciliği; Mining Camp kur
+    icons:
+      - gold
+      - mining-camp
+  - villagers: 25
+    assign:
+      en: +1 Mill on Berries, +1 → Berries; build 2nd Dock
+      tr: +1 çileğe Mill kur, +1 → çilekler; 2. Dock'u inşa et
+    icons:
+      - mill
+      - food
+      - dock
+intro:
+  en: >-
+    **Goal:** Open a strong fishing economy behind defensive walls, take Feudal Age at 21 villagers, and contest the
+    water with Fire Galleys from two Docks while booming on fish. **Recommended civs:** Vikings (cheaper Fishing Ships,
+    +10% wood from Docks, free Bloodlines), Italians (cheaper Docks and ships, cheaper Dock techs), Portuguese (ships
+    die slower, gold discount), Malay (cheaper Fishing Ships and a faster Fish Trap line), Japanese (cheaper Docks, +HP
+    warships), Byzantines (cheaper Town Watch / Fire Ships line)
+  tr: >-
+    **Hedef:** Savunma surları arkasında güçlü bir balıkçı ekonomisi kur, 21 köylüde Feodal Çağ'a geç ve iki Dock'tan
+    Fire Galley'lerle suya hâkim ol; balıkla boomla. **Önerilen uygarlıklar:** Vikings (daha ucuz Fishing Ship'ler,
+    Dock'lardan +%10 odun, ücretsiz Bloodlines), Italians (daha ucuz Dock'lar ve gemiler, daha ucuz Dock teknolojileri),
+    Portuguese (gemiler daha yavaş ölür, altın indirimi), Malay (daha ucuz Fishing Ship'ler ve daha hızlı Fish Trap
+    hattı), Japanese (daha ucuz Dock'lar, +can savaş gemileri), Byzantines (daha ucuz Town Watch / Fire Ship hattı)
+strategy:
+  en:
+    - >-
+      3 villagers to sheep under the Town Center; queue Villagers non-stop and build 2 Houses with the first scouts off
+      the TC
+    - 4–6 villagers to sheep
+    - 7–10 villagers to wood; drop a Lumber Camp on the nearest trees
+    - 11th villager lures the nearest Boar to the Town Center
+    - 12th villager builds a Dock by the deep fish, then a House, and queues 4 Fishing Ships
+    - 13–14 villagers to wood
+    - 15th villager lures the 2nd Boar
+    - 16–20 villagers to sheep / Boar meat
+    - 21st villager to sheep; research Loom and click Feudal Age
+    - Research Double-Bit Axe at the Lumber Camp (+wood gather rate)
+    - Queue 2 Fire Galleys from the Dock to contest enemy fish and ships
+    - 22–23 villagers to gold mining
+    - 24th villager builds a Mill on Berries
+    - 25th villager to Berries
+    - >-
+      **Weak against:** Opponents who match your Dock count and out-micro your Galleys; Fire Ships hard-counter the
+      Galley line once Castle Age begins; an undefended land wall against an early land push.
+    - >-
+      **Strong against:** Players who skip or delay their Dock; greedy fish booms with no warships; land civs forced to
+      fight on water.
+  tr:
+    - 3 köylüyü Town Center altındaki koyunlara gönder; durmadan köylü üret ve TC'den çıkan ilk keşifçilerle 2 ev yap
+    - 4–6 köylüyü koyunlara gönder
+    - 7–10 köylüyü oduna gönder; en yakın ağaçlara Lumber Camp kur
+    - 11. köylü en yakın Boar'ı Town Center'a çeker
+    - 12. köylü derin balık yanına Dock kurar, sonra bir ev yapar ve 4 Fishing Ship sıraya alır
+    - 13–14 köylüyü oduna gönder
+    - 15. köylü 2. Boar'ı çeker
+    - 16–20 köylüyü koyun / Boar etine gönder
+    - 21. köylüyü koyunlara gönder; Loom araştır ve Feodal Çağ'a tıkla
+    - Lumber Camp'te Double-Bit Axe araştır (odun toplama hızı artar)
+    - Düşman balık ve gemilerini engellemeye Dock'tan 2 Fire Galley sıraya al
+    - 22–23 köylüyü altın madenciliğine gönder
+    - 24. köylü çileğe Mill kurar
+    - 25. köylüyü çileklere gönder
+    - >-
+      **Zayıf olduğu durumlar:** Dock sayını eşitleyen ve Galley'lerini micro'da geçen rakipler; Kale Çağı başlayınca
+      Fire Ship'ler Galley hattını sert counter'lar; erken kara baskısına karşı savunmasız kalan sur.
+    - >-
+      **Güçlü olduğu durumlar:** Dock'u atlayan veya geciktiren oyuncular; savaş gemisi olmayan açgözlü balık boom'ları;
+      suda savaşmak zorunda kalan kara uygarlıkları.

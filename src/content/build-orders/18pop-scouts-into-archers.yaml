@@ -1,0 +1,165 @@
+slug: 18pop-scouts-into-archers
+name:
+  en: 18 Pop Scouts into Archers
+  tr: 18 Köylü Scouts into Archers
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - chinese
+  - huns
+  - malians
+  - portuguese
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Town Center altında koyunda
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood, drop a lumber camp
+      tr: +2 → oduna, lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure and eat the first boar
+      tr: +1 → ilk domuzu çek ve ye
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → hunt under the Town Center
+      tr: +1 → Town Center altında avda
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a house, then a mill on berries
+      tr: +1 → bir ev, sonra meyvenin yanına mill kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → lure the second boar
+      tr: +1 → ikinci domuzu çek
+    note:
+      en: Lure deer with your scout to stretch the food
+      tr: Yiyeceği uzatmak için scout ile geyikleri sür
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    time: "8:50"
+    assign:
+      en: +6 → hunt under the Town Center; research Loom and click up
+      tr: +6 → Town Center altında avda; Loom araştır ve çağ atla
+    note:
+      en: Feudal landing ~8:50 on 2 wood / 16 food
+      tr: Feudal'a ~8:50'de iniş, 2 odun / 16 yiyecek ile
+    icons:
+      - food
+      - loom
+  - villagers: 18
+    assign:
+      en: Send 6 from hunt → wood (8 total on lumber, or split a second camp)
+      tr: Avdan 6 köylüyü → oduna gönder (toplam 8 oduncu, ya da ikinci kampa böl)
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 18
+    assign:
+      en: Send 4 from hunt → berries
+      tr: Avdan 4 köylüyü → meyveye gönder
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: "Pull 2 from hunt: one builds a Barracks, one builds a House"
+      tr: "Avdan 2 köylü al: biri Barracks, biri House kursun"
+    icons:
+      - barracks
+      - house
+  - assign:
+      en: Build a Stable, start Scout Cavalry, add 1+ Spearman; research Double-Bit Axe (Horse Collar optional)
+      tr: Stable kur, Scout Cavalry üret, 1+ Spearman ekle; Double-Bit Axe araştır (Horse Collar isteğe bağlı)
+    icons:
+      - stable
+      - scout-cavalry
+      - spearman
+      - double-bit-axe
+  - assign:
+      en: Seed roughly 8 farms as the hunt food winds down
+      tr: Av yiyeceği azalırken yaklaşık 8 tarla ek
+    icons:
+      - farm
+  - assign:
+      en: Move 8 Town Center villagers → gold, build a Mining Camp
+      tr: 8 Town Center köylüsünü → altına taşı, Mining Camp kur
+    icons:
+      - gold
+      - mining-camp
+  - assign:
+      en: Build 2 Archery Ranges and switch into Archers
+      tr: 2 Archery Range kur ve Archers'a geç
+    icons:
+      - archery-range
+      - archer
+  - assign:
+      en: Build a Blacksmith and research Fletching
+      tr: Blacksmith kur ve Fletching araştır
+    icons:
+      - blacksmith
+      - fletching
+intro:
+  en: >-
+    Open with Scout Cavalry pressure off an 18-pop Feudal landing, then surprise the opponent with an Archer switch once
+    the harass has them committed to anti-cavalry play.
+  tr: >-
+    18 köylülük bir Feudal inişiyle Scout Cavalry baskısı başlat, ardından rakip süvariye karşı oyununu kurduğunda onu
+    sürpriz bir Archer geçişiyle yakala.
+strategy:
+  en:
+    - >-
+      The plan baits an over-reaction: early Scouts push the enemy toward Spearmen and walls, and the moment they
+      over-invest in anti-cavalry you flip to Archers from two Ranges, which their Spears cannot answer.
+    - >-
+      Keep at least one Spearman of your own in production to screen against mirror Scout play while your economy
+      reslots onto wood and gold for the Archer phase.
+    - >-
+      Time the gold move carefully: pull the 8 Town Center villagers onto gold and a Mining Camp only once farms and
+      berries cover food, so Archer production never stalls.
+    - >-
+      Blacksmith into Fletching is the key Archer power-spike here; prioritize it over extra eco upgrades once arrows
+      start flying.
+    - >-
+      Chinese, Huns, Malians, and Portuguese all suit this build: Chinese for the extra starting villagers, Huns for
+      skipping houses, Malians for cheaper farm upgrades, and Portuguese for cheaper gold-cost units.
+    - >-
+      From here you can all-in Feudal with a second Stable plus Bloodlines, or stabilize the economy and carry the
+      Archer mass into a strong Castle Age Crossbow timing.
+  tr:
+    - >-
+      Plan, rakibi aşırı tepki vermeye kışkırtır: erken Scouts onu Spearman ve duvarlara yönlendirir; süvari karşıtı
+      birimlere aşırı yatırım yaptığı anda iki Range'den Archers'a geçersin ve Spearman'ları buna yanıt veremez.
+    - >-
+      Aynı tarz Scout oyununa karşı korunmak için kendi tarafında da en az bir Spearman üretmeyi sürdür; bu sırada
+      ekonomiyi Archer aşaması için oduna ve altına kaydır.
+    - >-
+      Altına geçişi dikkatli zamanla: 8 Town Center köylüsünü altına ve Mining Camp'e ancak tarlalar ve meyve yiyeceği
+      karşıladığında çek; böylece Archer üretimi hiç durmaz.
+    - >-
+      Blacksmith ardından Fletching, buradaki kilit Archer güç sıçramasıdır; oklar uçmaya başladığında onu fazladan
+      ekonomi yükseltmelerinin önüne al.
+    - >-
+      Chinese, Huns, Malians ve Portuguese bu builde uygundur: Chinese fazladan başlangıç köylüsü için, Huns ev kurmayı
+      atladığı için, Malians ucuz tarla yükseltmeleri için, Portuguese ucuz altın-maliyetli birimler için.
+    - >-
+      Buradan ya ikinci bir Stable ve Bloodlines ile Feudal All-In yaparsın ya da ekonomiyi dengeleyip Archer kütlesini
+      güçlü bir Castle Age Crossbow timing'ine taşırsın.

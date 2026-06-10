@@ -1,0 +1,169 @@
+slug: scouts-into-skirms
+name:
+  en: 18 Pop Scouts into Skirms
+  tr: 18 Köylü Scouts into Skirms
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - franks
+  - huns
+  - malians
+  - lithuanians
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Town Center altında koyunda
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood, drop a lumber camp
+      tr: +2 → oduna, lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure and eat the first boar
+      tr: +1 → ilk domuzu çek ve ye
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → hunt under the Town Center
+      tr: +1 → Town Center altında avda
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a house, then a mill on berries
+      tr: +1 → bir ev, sonra meyvenin yanına mill kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → lure the second boar
+      tr: +1 → ikinci domuzu çek
+    note:
+      en: Lure deer with your scout to stretch the food
+      tr: Yiyeceği uzatmak için scout ile geyikleri sür
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    time: "8:50"
+    assign:
+      en: +6 → hunt under the Town Center; research Loom and click up
+      tr: +6 → Town Center altında avda; Loom araştır ve çağ atla
+    note:
+      en: Feudal landing ~8:50 on 2 wood / 16 food
+      tr: Feudal'a ~8:50'de iniş, 2 odun / 16 yiyecek ile
+    icons:
+      - food
+      - loom
+  - villagers: 18
+    assign:
+      en: Send 6 from hunt → wood (8 total on one lumber camp)
+      tr: Avdan 6 köylüyü → oduna gönder (tek lumber camp üzerinde toplam 8 oduncu)
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 18
+    assign:
+      en: Send 4 from hunt → berries
+      tr: Avdan 4 köylüyü → meyveye gönder
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: "Pull 2 from hunt: one builds a Barracks, one builds a House"
+      tr: "Avdan 2 köylü al: biri Barracks, biri House kursun"
+    icons:
+      - barracks
+      - house
+  - assign:
+      en: Build a Stable with 2 villagers, then send them to wall and wood; start Scout Cavalry
+      tr: 2 köylüyle Stable kur, sonra onları duvar ve oduna gönder; Scout Cavalry üretmeye başla
+    icons:
+      - stable
+      - scout-cavalry
+  - assign:
+      en: Research Double-Bit Axe (Horse Collar optional); seed farms as the hunt runs dry
+      tr: Double-Bit Axe araştır (Horse Collar isteğe bağlı); av tükenirken tarla ek
+    icons:
+      - double-bit-axe
+      - farm
+  - assign:
+      en: When the opponent commits to Archers, drop a Range fast; move 2 to the woodline and start Skirmishers
+      tr: Rakip Archers'a tam yöneldiğinde hızlıca Range kur; 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla
+    icons:
+      - archery-range
+      - skirmisher
+      - wood
+  - assign:
+      en: Build a Blacksmith; research Fletching and infantry armor
+      tr: Blacksmith kur; Fletching ve piyade zırhını araştır
+    icons:
+      - blacksmith
+      - fletching
+  - assign:
+      en: Berries out → 2nd lumber camp; move 6 → gold with a Mining Camp; research Wheelbarrow
+      tr: Meyve bitince → ikinci lumber camp; 6 köylüyü → altına ve Mining Camp'e taşı; Wheelbarrow araştır
+    icons:
+      - lumber-camp
+      - gold
+      - mining-camp
+      - wheelbarrow
+intro:
+  en: >-
+    Open with Scout Cavalry off an 18-pop Feudal landing, then layer in Skirmishers the moment the opponent shows
+    Archers, giving you a cheap answer to both ranged play and Spearman responses.
+  tr: >-
+    18 köylülük bir Feudal inişiyle Scout Cavalry baskısı başlat, ardından rakip Archers gösterir göstermez Skirmisher
+    ekleyerek hem menzilli oyuna hem de Spearman tepkisine ucuz bir yanıt elde et.
+strategy:
+  en:
+    - >-
+      Scouts come first to pressure villagers and force a reaction; the Skirmisher switch is reactive, so only commit to
+      the Range once you actually see the enemy leaning on Archers.
+    - >-
+      Skirmishers are gold-free and hard-counter Archers, so this opening shrugs off the most common Feudal aggression
+      while your Scouts keep punishing anything that steps outside walls.
+    - >-
+      Keep the economy on wood and food early — Skirmishers and Scouts cost no gold, which lets you delay the gold move
+      until berries are spent and you split 6 onto a Mining Camp.
+    - >-
+      Blacksmith into Fletching plus infantry armor is the key power-spike: it lifts your Skirmishers above the enemy's
+      Archers and keeps your Scouts alive in the skirmish.
+    - >-
+      Franks, Huns, Malians, and Lithuanians all fit: Franks for hardier cavalry and free farm upgrades, Huns for
+      skipping houses, Malians for cheaper farming, and Lithuanians for the early food bonus that speeds the whole
+      opening.
+    - >-
+      In Castle Age this transitions cleanly into Elite Skirmishers backed by Knights — the Skirmishers screen against
+      Crossbows while the Knights provide the punch your gold-light Feudal lacked.
+  tr:
+    - >-
+      Önce Scouts gelir; köylülere baskı yapıp rakibi tepki vermeye zorlar. Skirmisher geçişi tepkiseldir, bu yüzden
+      Range'i ancak rakibin gerçekten Archers'a yaslandığını gördüğünde kur.
+    - >-
+      Skirmisher'lar altın gerektirmez ve Archers'ı sert şekilde sayar; böylece bu açılış en yaygın Feudal saldırısını
+      rahatça savuşturur, bu sırada Scouts duvar dışına çıkan her şeyi cezalandırmaya devam eder.
+    - >-
+      Ekonomiyi erken dönemde odun ve yiyecekte tut — Skirmisher ve Scouts hiç altın harcamaz, bu da altına geçişi meyve
+      tükenip 6 köylüyü Mining Camp'e bölene kadar ertelemene izin verir.
+    - >-
+      Blacksmith'in ardından Fletching ve piyade zırhı asıl güç sıçramasıdır: Skirmisher'larını rakibin Archers'ının
+      üzerine çıkarır ve çatışmada Scouts'unu hayatta tutar.
+    - >-
+      Franks, Huns, Malians ve Lithuanians bu açılışa uyar: Franks daha dayanıklı süvari ve bedava tarla yükseltmeleri
+      için, Huns ev kurmayı atladığı için, Malians ucuz tarımı için, Lithuanians ise tüm açılışı hızlandıran erken
+      yiyecek bonusu için.
+    - >-
+      Castle Age'de bu, Knights destekli Elite Skirmisher'a temiz şekilde geçer — Skirmisher'lar Crossbow'lara karşı
+      perde olurken, Knights altın-fakiri Feudal'ında eksik kalan vurucu gücü sağlar.

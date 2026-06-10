@@ -5,26 +5,19 @@ import Badge from "@/components/ui/Badge.astro";
 import Icon from "@/components/ui/Icon.astro";
 import Stat from "@/components/ui/Stat.astro";
 import civDataJson from "@data/civilizations.json";
-import { render } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
-import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 
 export async function getStaticPaths() {
-  const paths: Array<{ params: { lang: string; build: string } }> = [];
-  for (const lang of locales) {
-    const builds = await getLocalizedEntries("build-orders", lang);
-    for (const b of builds) paths.push({ params: { lang, build: canonicalSlug(b.id) } });
-  }
-  return paths;
+  const builds = await getCollection("build-orders");
+  return locales.flatMap((lang) => builds.map((b) => ({ params: { lang, build: b.id } })));
 }
 
 const lang = Astro.params.lang as Locale;
 const slug = Astro.params.build as string;
-const found = await getLocalizedEntry("build-orders", slug, lang);
-if (!found) return Astro.redirect("/404");
-const { entry, fallback } = found;
-const { Content } = await render(entry);
+const entry = (await getCollection("build-orders")).find((b) => b.id === slug);
+if (!entry) return Astro.redirect("/404");
 
 const civs = (civDataJson as { civs: Array<{ slug: string; specialty?: string; meta?: { tier?: string | null } }> }).civs;
 const civBySlug = new Map(civs.map((civ) => [civ.slug, civ]));
@@ -36,40 +29,33 @@ const recommendedCivs = entry.data.civsRecommended.map((civSlug) => ({
 const difficultyVariant = entry.data.difficulty === "beginner" ? "success" : entry.data.difficulty === "advanced" ? "destructive" : "default";
 const civName = (s: string) => s.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 const minutes = t(lang, "home.minutes");
-// First/Final pop from the steps that actually carry a count (later instruction
-// steps omit villagers, so steps.at(-1) can be empty → don't show a dash).
 const popValues = entry.data.steps.map((s) => s.villagers).filter((v): v is number => v != null);
 const firstPop = popValues[0] ?? "-";
 const finalPop = popValues.at(-1) ?? "-";
 
 const ageLabel: Record<string, string> = { feudal: "Feudal Age", castle: "Castle Age", imperial: "Imperial Age" };
 const difficultyLabel: Record<string, string> = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
-const description = `${entry.data.name} — ${difficultyLabel[entry.data.difficulty]} AoE2 build order targeting ${ageLabel[entry.data.targetAge]} in ~${entry.data.durationMin} minutes. Step-by-step villager assignments.`;
+const description = `${entry.data.name[lang]} — ${difficultyLabel[entry.data.difficulty]} AoE2 build order targeting ${ageLabel[entry.data.targetAge]} in ~${entry.data.durationMin} minutes. Step-by-step villager assignments.`;
 
 const howToLd = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  name: entry.data.name,
+  name: entry.data.name[lang],
   description,
   totalTime: `PT${entry.data.durationMin}M`,
   step: entry.data.steps.map((step, i) => ({
     "@type": "HowToStep",
     position: i + 1,
-    name: step.assign,
-    text: step.note ? `${step.assign} — ${step.note}` : step.assign,
+    name: step.assign[lang],
+    text: step.note?.[lang] ? `${step.assign[lang]} — ${step.note[lang]}` : step.assign[lang],
   })),
 };
 ---
-<BaseLayout title={entry.data.name} description={description} canonicalPath={`/builds/${slug}`}>
+<BaseLayout title={entry.data.name[lang]} description={description} canonicalPath={`/builds/${slug}`}>
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(howToLd).replace(/</g, "\\u003c")} />
   </Fragment>
   <article class="mx-auto max-w-6xl px-4 py-10">
-    {fallback && (
-      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
-        {t(lang, "ui.translation.missing")}
-      </div>
-    )}
     <header class="rounded border border-stone-700/40 bg-parchment p-5 shadow-sm">
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div>
@@ -78,7 +64,7 @@ const howToLd = {
             <Badge variant="outline">{t(lang, `age.${entry.data.targetAge}`)} {t(lang, "builds.targetBadge")}</Badge>
             <Badge variant="secondary">~{entry.data.durationMin} {minutes}</Badge>
           </div>
-          <h1 class="mt-4 font-display text-4xl text-ink sm:text-5xl">{entry.data.name}</h1>
+          <h1 class="mt-4 font-display text-4xl text-ink sm:text-5xl">{entry.data.name[lang]}</h1>
           {entry.data.source && (
             <p class="mt-3 text-sm text-stone-700">
               {t(lang, "builds.source")}: {entry.data.source.url
@@ -137,9 +123,16 @@ const howToLd = {
       </aside>
     </div>
 
-    <section class="prose prose-stone mt-10 max-w-none rounded border border-stone-700/30 bg-parchment px-5 py-6 [&_h1:first-child]:hidden">
+    <section class="prose prose-stone mt-10 max-w-none rounded border border-stone-700/30 bg-parchment px-5 py-6">
       <h2 class="font-display text-3xl text-ink">{t(lang, "builds.strategyNotes")}</h2>
-      <Content />
+      {entry.data.intro?.[lang] && (
+        <p class="mt-2 text-stone-700">{entry.data.intro[lang]}</p>
+      )}
+      {entry.data.strategy?.[lang] && (
+        <ul class="mt-4 list-inside list-disc space-y-2 text-ink">
+          {entry.data.strategy[lang].map((point) => <li>{point}</li>)}
+        </ul>
+      )}
     </section>
   </article>
 </BaseLayout>

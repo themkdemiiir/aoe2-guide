@@ -1,0 +1,146 @@
+slug: 18pop-cumans-2tc-boom
+name:
+  en: 18 Pop Cumans 2 TC Boom
+  tr: 18 Nüfus Cumans 2 Şehir Merkezi Boom
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - cumans
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the TC
+      tr: 6 → Şehir Merkezi'nin altındaki koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood; build the first lumber camp
+      tr: +2 → odun; ilk kereste kampını kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure and eat the first boar
+      tr: +1 → ilk yaban domuzunu çek ve ye
+    icons:
+      - food
+  - assign:
+      en: Lure the deer in with your scout to stretch the food
+      tr: Yiyeceği uzatmak için scout ile geyikleri içeri çek
+    note:
+      en: No new villager — keep the TC producing
+      tr: Yeni köylü yok — Şehir Merkezi üretimi durmasın
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +2 → hunt; lure the second boar
+      tr: +2 → av eti; ikinci yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build a house, then a mill on the berries
+      tr: +1 → bir ev, ardından çalıların yanına değirmen kur
+    icons:
+      - house
+      - mill
+  - villagers: 15
+    assign:
+      en: +3 → hunt
+      tr: +3 → av eti
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    assign:
+      en: +3 → berries, then click up to Feudal (~8:50, 2 wood / 16 food)
+      tr: +3 → çalılar, sonra Feodal Çağ'a tıkla (~8:50, 2 odun / 16 yiyecek)
+    note:
+      en: On closed maps you can skip Loom and click up early
+      tr: Kapalı haritalarda Loom'u atlayıp erken çıkabilirsin
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: "Feudal: move 6 villagers off hunt → wood on the single lumber camp"
+      tr: "Feodal: 6 köylüyü avdan al → tek kereste kampında odun"
+    icons:
+      - wood
+      - lumber-camp
+  - assign:
+      en: Build your 2nd Town Center on the wood line (or on gold/stone if you prefer)
+      tr: 2. Şehir Merkezi'ni odun hattına kur (istersen altın/taşa da olur)
+    note:
+      en: The Cuman Feudal 2nd TC is the whole point of this build
+      tr: Cuman'ların Feodal 2. Şehir Merkezi'i bu build'in tüm amacıdır
+    icons:
+      - town-center
+  - assign:
+      en: Research Double-Bit Axe; add Horse Collar (skip it on open maps if you feel unsafe)
+      tr: Double-Bit Axe'i araştır; Horse Collar ekle (açık haritada tedirginsen atla)
+    icons:
+      - double-bit-axe
+      - horse-collar
+  - assign:
+      en: Send fresh TC villagers to wood, the straggler trees, and farms; stabilize non-stop 2-TC production first
+      tr: Yeni köylüleri oduna, dağınık ağaçlara ve tarlalara gönder; önce iki merkezde kesintisiz üretimi oturt
+    icons:
+      - wood
+      - farm
+  - time: "19:00"
+    assign:
+      en: Click Castle Age once the two TCs are humming
+      tr: İki merkez de tıkır tıkır çalışınca Kale Çağı'na tıkla
+    note:
+      en: Undisturbed, this lands around 19–20 minutes
+      tr: Rahatsız edilmezsen yaklaşık 19–20. dakikada gelir
+    icons:
+      - town-center
+intro:
+  en: >-
+    Drop a second Town Center the moment you hit Feudal so your villager count snowballs ahead of any opponent who is
+    still on one TC.
+  tr: >-
+    Feodal Çağ'a basar basmaz ikinci bir Şehir Merkezi dik; böylece köylü sayın tek merkezde kalan rakibin önüne hızla
+    geçer.
+strategy:
+  en:
+    - >-
+      The defining move is the Feudal second TC — a trick only Cumans can pull off. Get both Town Centers producing
+      villagers without a single idle second, because every gap erases the eco lead you opened the build to chase.
+    - >-
+      Resist the urge to add military or extra buildings early. This is a pure boom: keep new villagers flowing onto
+      wood, stragglers, and farms, and stabilize two-TC production before you spend resources on anything else.
+    - >-
+      Eco upgrades carry the build. Double-Bit Axe is mandatory; take Horse Collar too whenever the map feels safe, and
+      skip it on open maps only if you are genuinely worried about a raid.
+    - >-
+      Your one weakness is the window before the second TC pays off. A Feudal scout or man-at-arms rush can punish
+      exposed villagers, so wall your wood and food lines early on open maps and keep your scout watching the opponent.
+    - >-
+      Undisturbed, you reach Castle Age around 19–20 minutes with a villager count nobody on one TC can match. From
+      there you can flood Knights, transition into whatever the matchup demands, or simply keep booming on the back of
+      your eco lead.
+  tr:
+    - >-
+      Bu build'in kalbi Feodal'deki ikinci Şehir Merkezi — yalnızca Cumans'ın yapabildiği bir numara. İki merkezi de tek
+      bir saniye boşta kalmadan köylü üretir tutman gerekir; her boşluk, açtığın ekonomi farkını siler.
+    - >-
+      Erken askeri birim ya da fazladan bina yapma dürtüsüne kapılma. Bu saf bir boom: yeni köylüleri oduna, dağınık
+      ağaçlara ve tarlalara akıt, başka bir şeye harcamadan önce iki merkezin üretimini oturt.
+    - >-
+      Build'i ekonomi yükseltmeleri taşır. Double-Bit Axe zorunlu; harita güvenli hissettiğinde Horse Collar'ı da al,
+      yalnızca açık haritada bir baskından gerçekten korkuyorsan atla.
+    - >-
+      Tek zayıf nokta, ikinci merkezin kendini ödediği ana kadarki süredir. Feodal bir scout ya da man-at-arms baskını
+      açıktaki köylüleri cezalandırabilir; bu yüzden açık haritalarda odun ve yiyecek hattını erkenden duvarla ve
+      scout'unla rakibi izlemeyi sürdür.
+    - >-
+      Rahatsız edilmezsen yaklaşık 19–20. dakikada, tek merkezdeki hiç kimsenin yakalayamayacağı bir köylü sayısıyla
+      Kale Çağı'na ulaşırsın. Oradan Şövalye yağdırabilir, eşleşmenin gerektirdiği yöne geçebilir ya da ekonomi farkına
+      yaslanıp boom'a devam edebilirsin.

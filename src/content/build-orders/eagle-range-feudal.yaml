@@ -1,0 +1,172 @@
+slug: eagle-range-feudal
+name:
+  en: Eagle and Range Feudal Rush
+  tr: Eagle and Range Feudal Rush
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - aztecs
+  - incas
+  - mayans
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Şehir Merkezi'nin altındaki koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood, drop a Lumber Camp
+      tr: +2 → odun, bir Kereste Kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure the first boar to the TC
+      tr: +1 → ilk yaban domuzunu Şehir Merkezi'ne çek
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +2 → hunt the boar under the TC
+      tr: +2 → Şehir Merkezi'nin altındaki yaban domuzunu avla
+    icons:
+      - food
+  - assign:
+      en: Lure 3 deer toward the TC with your scout
+      tr: İzciyle 3 geyiği Şehir Merkezi'ne doğru çek
+    note:
+      en: Keeps food close so collectors never walk far
+      tr: Yiyeceği yakın tutar, toplayıcılar uzağa yürümez
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build a House, then a Mill on berries
+      tr: +1 → bir Ev, ardından meyvelerin üstüne Değirmen kur
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 16
+    assign:
+      en: +4 → hunt (lure the second boar in)
+      tr: +4 → av (ikinci yaban domuzunu içeri çek)
+    icons:
+      - food
+  - villagers: 17
+    assign:
+      en: +1 → berries
+      tr: +1 → meyveler
+    icons:
+      - food
+  - villagers: 19
+    phase: feudal
+    time: "9:15"
+    assign:
+      en: +2 → wood, research Loom, then click up to Feudal
+      tr: +2 → odun, Loom araştır, sonra Feodal'e tıkla
+    note:
+      en: Land Feudal around 9:15 on 4 wood / 15 food
+      tr: Feodal'e 4 odun / 15 yiyecekle 9:15 civarında geç
+    icons:
+      - wood
+      - loom
+  - villagers: 19
+    assign:
+      en: Feudal lands — send 5 hunters to a 2nd Lumber Camp, 1 back to the starting woodline
+      tr: Feodal geldi — 5 avcıyı 2. Kereste Kampı'na, 1 avcıyı başlangıç odun hattına gönder
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 19
+    assign:
+      en: 2 hunters → berries; 1 hunter builds a Barracks (start it ~50% into Feudal)
+      tr: 2 avcı → meyveler; 1 avcı Kışla kursun (Feodal'in ~%50'sinde başlat)
+    icons:
+      - food
+      - barracks
+  - villagers: 19
+    assign:
+      en: 3 hunters → gold (Mining Camp); research Double-Bit Axe and skip Horse Collar
+      tr: 3 avcı → altın (Maden Kampı); Double-Bit Axe araştır, Horse Collar'ı atla
+    icons:
+      - gold
+      - mining-camp
+      - double-bit-axe
+  - assign:
+      en: Train Eagle Scouts from the Barracks; add an Archery Range with 2 villagers
+      tr: Kışla'dan Kartal İzcisi bas; 2 köylüyle bir Okçu Menzili ekle
+    note:
+      en: Wall the gaps with the Range builders using Houses and palisades
+      tr: Menzil işçileriyle boşlukları Ev ve palisad ile kapat
+    icons:
+      - eagle-scout
+      - archery-range
+  - assign:
+      en: >-
+        DECISION — vs archers send +4 TC villagers to gold for Archers; vs skirmishers send +4 to straggler wood for
+        Skirmishers
+      tr: >-
+        KARAR — okçulara karşı +4 ŞM köylüsünü altına gönderip Okçu bas; nişancılara karşı +4'ü artık ağaç odununa
+        gönderip Nişancı bas
+    icons:
+      - archer
+      - skirmisher
+  - assign:
+      en: Seed Farms behind the eco; drop a Blacksmith and research Fletching
+      tr: Ekonominin arkasına Tarla ek; bir Demirci kur ve Fletching araştır
+    icons:
+      - farm
+      - blacksmith
+      - fletching
+intro:
+  en: >-
+    Hit Feudal fast off a heavy hunt, then apply two-pronged pressure with Eagle Scouts plus an Archery Range backing
+    them up.
+  tr: >-
+    Yoğun avla Feodal'e hızlı geç, sonra Kartal İzcileri ve onları destekleyen bir Okçu Menzili ile iki koldan baskı
+    uygula.
+strategy:
+  en:
+    - >-
+      This is a Mesoamerican-only opener (Aztecs, Incas, Mayans): they are the civs with Eagle Scouts, and their food
+      bonuses let the boar-and-deer-heavy collection land Feudal near 9:15.
+    - >-
+      The whole idea is two threats at once — Eagles run down stragglers and raid villagers while your Range adds ranged
+      damage the enemy must also answer, splitting their defense.
+    - >-
+      Read your opponent before committing the second unit: against an archer or scout opening, mass your own Archers;
+      against a skirmisher wall, switch the same villagers to Skirmishers so you out-trade them.
+    - >-
+      Wall early with the Range and Barracks builders — Houses and palisades close the gaps so your raiders stay safe
+      and the enemy cannot counter-raid your exposed gold.
+    - >-
+      Take Double-Bit Axe but skip Horse Collar here: wood feeds the Range and walls, and your hunt covers food long
+      enough to delay Farm tech.
+    - >-
+      To transition, seed Farms behind the army, keep gold flowing for Eagles, and add Fletching plus Blacksmith
+      upgrades before deciding whether to keep pressuring or boom into Castle Age.
+  tr:
+    - >-
+      Bu yalnızca Mezoamerika uygarlıklarına özgü bir açılış (Aztekler, İnkalar, Mayalar): Kartal İzcisine sahip
+      uygarlıklar bunlar ve yiyecek bonusları, yaban domuzu ve geyik ağırlıklı toplamayı 9:15 civarında Feodal'e taşır.
+    - >-
+      Tüm fikir aynı anda iki tehdit oluşturmaktır — Kartallar kaçan köylüleri kovalayıp baskın yaparken, Menzil rakibin
+      yine cevap vermek zorunda kalacağı menzilli hasar ekler ve savunmasını böler.
+    - >-
+      İkinci birime karar vermeden önce rakibini oku: okçu veya izci açılışına karşı kendi Okçularını yığ; nişancı
+      duvarına karşı aynı köylüleri Nişancıya çevirip takasta öne geç.
+    - >-
+      Menzil ve Kışla işçileriyle erkenden duvar ör — Evler ve palisadlar boşlukları kapatır, böylece baskıncıların
+      güvende kalır ve rakip açıktaki altınına karşı baskın yapamaz.
+    - >-
+      Burada Double-Bit Axe al ama Horse Collar'ı atla: odun Menzili ve duvarları besler, avın ise Tarla teknolojisini
+      geciktirecek kadar yiyecek sağlar.
+    - >-
+      Geçiş için ordunun arkasına Tarlalar ek, Kartallar için altını akıtmaya devam et ve baskıya devam mı edeceğine
+      yoksa Kale Çağı'na boom mu yapacağına karar vermeden önce Fletching ile Demirci yükseltmelerini al.

@@ -1,0 +1,177 @@
+slug: maa-into-skirms
+name:
+  en: Man-at-Arms Into Skirms
+  tr: Man-at-Arms Into Skirms
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended: []
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Şehir Merkezi'nin altındaki koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 9
+    assign:
+      en: +3 → wood, drop a Lumber Camp
+      tr: +3 → odun, bir Kereste Kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → lure and eat the first boar
+      tr: +1 → ilk yaban domuzunu çek ve ye
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a House, then a Mill on the chickens or berries
+      tr: +1 → bir Ev, ardından tavuklara ya da çalılara bir Değirmen kur
+    icons:
+      - house
+      - mill
+      - food
+  - assign:
+      en: Lure one or two deer into the Mill range with your Scout
+      tr: Scout'unla bir iki geyiği Değirmen menziline çek
+    note:
+      en: Free food that keeps your eco on hunt longer
+      tr: Ekonomiyi daha uzun süre avda tutan bedava yiyecek
+    icons:
+      - scout-cavalry
+      - food
+  - villagers: 13
+    assign:
+      en: +2 → Mill (berries)
+      tr: +2 → Değirmen (çalı meyveleri)
+    icons:
+      - mill
+      - food
+  - villagers: 14
+    assign:
+      en: +1 → lure and eat the second boar
+      tr: +1 → ikinci yaban domuzunu çek ve ye
+    note:
+      en: Bring it in as the first boar runs low
+      tr: İlk domuz azalmaya başlayınca ikincisini getir
+    icons:
+      - food
+  - villagers: 16
+    assign:
+      en: +2 → hunt (boar and deer)
+      tr: +2 → av (domuz ve geyik)
+    icons:
+      - food
+  - assign:
+      en: +1 → build a Barracks and a House at the front of your base
+      tr: +1 → üssünün ön tarafına bir Kışla ve bir Ev kur
+    icons:
+      - barracks
+      - house
+  - villagers: 19
+    phase: feudal
+    time: "9:15"
+    assign:
+      en: +2 → hunt, research Loom, then click up to Feudal
+      tr: +2 → av, Loom araştır, sonra Feudal'a tıkla
+    note:
+      en: Land with roughly 3 on wood and 15 on food
+      tr: Çağ atladığında yaklaşık 3 odunda, 15 yiyecekte ol
+    icons:
+      - food
+      - loom
+  - villagers: 19
+    assign:
+      en: Move 2 off food → gold and drop a Mining Camp; get 3 Militia out
+      tr: Yiyecekten 2 kişiyi → altına al, bir Maden Kampı kur; 3 Milis çıkar
+    icons:
+      - gold
+      - mining-camp
+      - militia
+  - villagers: 19
+    assign:
+      en: Send 5 off the hunt → wood and 3 off the hunt → berries
+      tr: Avdan 5 kişiyi → oduna, 3 kişiyi → çalılara gönder
+    icons:
+      - wood
+      - food
+  - assign:
+      en: Research Man-at-Arms, then Double-Bit Axe (Horse Collar optional)
+      tr: Man-at-Arms, ardından Double-Bit Axe araştır (Horse Collar opsiyonel)
+    icons:
+      - man-at-arms
+      - double-bit-axe
+      - horse-collar
+  - assign:
+      en: Build an Archery Range at the front; send the straggler-tree Villager onto farms; start Skirmishers
+      tr: >-
+        Ön tarafa bir Okçuluk Menzili kur; üs çevresindeki tek tük ağaçtan kesen Köylü'yü tarlalara al; Skirmiş üretmeye
+        başla
+    icons:
+      - archery-range
+      - skirmisher
+      - farm
+  - assign:
+      en: Build a Blacksmith, research Fletching, and keep adding Man-at-Arms
+      tr: Bir Demirci kur, Fletching araştır ve Man-at-Arms eklemeye devam et
+    icons:
+      - blacksmith
+      - fletching
+      - man-at-arms
+  - assign:
+      en: Research Arson once you have 7-8 Man-at-Arms, then Infantry and Skirmisher armor; Wheelbarrow at 14-16 farms
+      tr: 7-8 Man-at-Arms olunca Arson araştır, sonra Piyade ve Skirmiş zırhı; 14-16 tarlada Wheelbarrow al
+    icons:
+      - arson
+      - wheelbarrow
+      - farm
+intro:
+  en: >-
+    Hit Feudal Age around 9:15 with Militia already walking out, upgrade to Man-at-Arms, and back them with Skirmishers
+    for a full-Feudal composition that beats most early army mixes.
+  tr: >-
+    Feudal Çağı'na 9:15 civarında Milisler çıkmış halde gir, onları Man-at-Arms'a yükselt ve Skirmişlerle destekleyerek
+    erken ordu karışımlarının çoğunu yenen tam Feudal bir kompozisyon kur.
+strategy:
+  en:
+    - >-
+      This is a pure Feudal Age power play: Man-at-Arms do the damage while Skirmishers shield them from enemy Archers,
+      giving you an army that answers almost anything an opponent can field before Castle Age.
+    - >-
+      Get the first three Militia out the moment you age up and start poking at the enemy's Villagers and woodlines —
+      early pressure forces them onto defense and buys time for your eco to rebound from the aggressive opener.
+    - >-
+      Lead with Man-at-Arms and Double-Bit Axe, then layer in Skirmishers as soon as you see Archers; the two units
+      cover each other's weaknesses, so keep the front line of melee in front of your ranged support.
+    - >-
+      Tech up steadily at the Blacksmith — Fletching first, then Infantry and Skirmisher armor — and add Arson once you
+      have seven or eight Man-at-Arms so they tear through buildings and snowball any push.
+    - >-
+      Do not forget the economy behind the fight: seed farms off the dwindling hunt, take Wheelbarrow at 14-16 farms,
+      and keep walling so the constant unit production never stalls your food or wood.
+    - >-
+      From a winning Feudal position you can keep grinding in Feudal or transition smoothly to Castle Age, folding the
+      army and farm economy into Crossbows, Pikemen, or a Knight switch depending on the matchup.
+  tr:
+    - >-
+      Bu saf bir Feudal Çağı güç hamlesidir: Hasarı Man-at-Arms verir, Skirmişler ise onları düşman Okçularından korur;
+      böylece elinde, rakibin Kale Çağı'ndan önce ortaya koyabileceği hemen her şeye cevap verebilen bir ordu olur.
+    - >-
+      Çağ atlar atlamaz ilk üç Milis'i çıkar ve rakibin Köylülerini ve odun hatlarını dürtmeye başla — erken baskı onu
+      savunmaya iter ve agresif açılıştan sonra ekonominin toparlanması için zaman kazandırır.
+    - >-
+      Önce Man-at-Arms ve Double-Bit Axe ile başla, Okçu görür görmez Skirmiş ekle; iki birim birbirinin zayıf yönünü
+      kapatır, bu yüzden yakın dövüş hattını menzilli desteğin önünde tut.
+    - >-
+      Demirci'de istikrarlı tech çek — önce Fletching, sonra Piyade ve Skirmiş zırhı — ve yedi sekiz Man-at-Arms'a
+      ulaşınca Arson al ki binaları parçalasınlar ve her baskıyı çığ gibi büyütsünler.
+    - >-
+      Savaşın arkasındaki ekonomiyi unutma: Azalan avdan tarlalar kur, 14-16 tarlada Wheelbarrow al ve sürekli birim
+      üretimi yiyecek ya da odununu tıkamasın diye duvar örmeye devam et.
+    - >-
+      Kazanan bir Feudal konumdan Feudal'da öğütmeye devam edebilir ya da orduyu ve tarla ekonomisini eşleşmeye göre
+      Crossbow, Pikeman veya bir Knight geçişine katarak akıcı bir şekilde Kale Çağı'na geçebilirsin.

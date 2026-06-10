@@ -8,6 +8,7 @@ import { Icon as UIIcon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
+import { type CollectionEntry } from "astro:content";
 import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
@@ -18,7 +19,7 @@ const lang = Astro.params.lang as Locale;
 // --- Live content (drives the action-tile counts, the top-civ strip, and the
 // featured build/map rows). getLocalizedEntries falls back to EN for missing TR. ---
 const civs = await getCollection("civilizations");
-const builds = await getLocalizedEntries("build-orders", lang);
+const builds: CollectionEntry<"build-orders">[] = await getCollection("build-orders");
 const maps = await getLocalizedEntries("maps", lang);
 
 // --- Top civilizations: rank by live meta win rate, then join back to the
@@ -251,7 +252,7 @@ const more = [
         {featuredBuilds.map((b) => (
           <li class="h-full">
             <a
-              href={localizedPath(`/builds/${canonicalSlug(b.id)}`, lang)}
+              href={localizedPath(`/builds/${b.id}`, lang)}
               class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500"
             >
               <div class="flex flex-wrap gap-2">
@@ -263,7 +264,7 @@ const more = [
                   ~{b.data.durationMin} {t(lang, "home.minutes")}
                 </Badge>
               </div>
-              <h3 class="mt-3 font-display text-xl text-ink">{b.data.name}</h3>
+              <h3 class="mt-3 font-display text-xl text-ink">{b.data.name[lang]}</h3>
               {b.data.civsRecommended.length > 0 && (
                 <div class="mt-4 flex flex-wrap gap-1.5">
                   {b.data.civsRecommended.slice(0, 5).map((civSlug) => (

@@ -3,9 +3,9 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Badge from "@/components/ui/Badge.astro";
 import FilterBar from "@/components/ui/FilterBar.astro";
 import Icon from "@/components/ui/Icon.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
-import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 function difficultyVariant(difficulty: string) {
   if (difficulty === "beginner") return "success";
@@ -17,7 +17,7 @@ export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
-const builds = await getLocalizedEntries("build-orders", lang);
+const builds: CollectionEntry<"build-orders">[] = await getCollection("build-orders");
 
 const facets = [
   {
@@ -58,18 +58,18 @@ const facets = [
             <li
               class="h-full"
               data-filter-item
-              data-search={`${b.data.name} ${b.data.civsRecommended.join(" ")}`.toLowerCase()}
+              data-search={`${b.data.name[lang]} ${b.data.civsRecommended.join(" ")}`.toLowerCase()}
               data-difficulty={b.data.difficulty}
               data-age={b.data.targetAge}
             >
-              <a href={localizedPath(`/builds/${canonicalSlug(b.id)}`, lang)}
+              <a href={localizedPath(`/builds/${b.id}`, lang)}
                  class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500">
                 <div class="flex flex-wrap gap-2">
                   <Badge variant={difficultyVariant(b.data.difficulty)}>{t(lang, `difficulty.${b.data.difficulty}`)}</Badge>
                   <Badge variant="outline">{t(lang, `age.${b.data.targetAge}`)}</Badge>
                   <Badge variant="secondary">~{b.data.durationMin} {t(lang, "home.minutes")}</Badge>
                 </div>
-                <h3 class="mt-3 font-display text-xl text-ink">{b.data.name}</h3>
+                <h3 class="mt-3 font-display text-xl text-ink">{b.data.name[lang]}</h3>
                 {b.data.civsRecommended.length > 0 && (
                   <div class="mt-4 flex flex-wrap gap-1.5">
                     {b.data.civsRecommended.slice(0, 5).map((civSlug) => (

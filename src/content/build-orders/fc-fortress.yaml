@@ -1,0 +1,152 @@
+slug: fc-fortress
+name:
+  en: Fast Castle on Fortress
+  tr: Fortress'ta Hızlı Kale (Fast Castle)
+difficulty: intermediate
+targetAge: castle
+durationMin: 11
+civsRecommended: []
+steps:
+  - villagers: 4
+    assign:
+      en: "Fortress start (10 vils): 4 → berries and build a Mill"
+      tr: "Fortress başlangıcı (10 köylü): 4 → meyveye ve bir Değirmen (Mill) kur"
+    note:
+      en: Keep the Town Center queuing villagers throughout
+      tr: Şehir Merkezi build boyunca sürekli köylü üretmeye devam etsin
+    icons:
+      - food
+      - mill
+      - town-center
+  - villagers: 7
+    assign:
+      en: 3 → wood, drop a Lumber Camp
+      tr: 3 → oduna, bir Kereste Kampı (Lumber Camp) bırak
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: 3 → farms; use the 5 pre-built farms by the Town Center
+      tr: 3 → tarlalara; ŞM yanındaki 5 hazır tarlayı kullan
+    icons:
+      - farm
+  - assign:
+      en: Lure the first boar with the scout; eat it under the TC
+      tr: İlk yaban domuzunu scout ile çek; ŞM altında ye
+    note:
+      en: Send the first 1-2 trained villagers onto farms as it runs out
+      tr: Domuz biterken üretilen ilk 1-2 köylüyü tarlalara gönder
+    icons:
+      - food
+  - villagers: 16
+    assign:
+      en: +6 → food under the TC (about 9 on food, 4 on berries)
+      tr: +6 → ŞM altında yiyeceğe (yaklaşık 9'u yiyecekte, 4'ü meyvede)
+    icons:
+      - food
+  - assign:
+      en: Lure the second boar to keep food flowing
+      tr: Yiyeceği akışta tutmak için ikinci domuzu çek
+    note:
+      en: No new pop — keep eco vils busy
+      tr: Yeni nüfus yok — eko köylülerini meşgul tut
+    icons:
+      - food
+  - villagers: 20
+    assign:
+      en: +4 → wood as the wood economy tightens
+      tr: +4 → oduna, çünkü odun ekonomisi sıkışmaya başlar
+    icons:
+      - wood
+  - assign:
+      en: When the boar is gone, push food villagers onto farms (seed 4)
+      tr: Domuz bitince yiyecek köylülerini tarlalara aktar (4 tarla aç)
+    note:
+      en: Reassignment, not new pop
+      tr: Yeni nüfus değil, görev değişimi
+    icons:
+      - farm
+  - villagers: 22
+    phase: feudal
+    assign:
+      en: +2 → gold, then click Feudal Age (~7:10 / 7 wood, 13 food, 2 gold)
+      tr: +2 → altına, sonra Feudal Çağ'a tıkla (~7:10 / 7 odun, 13 yiyecek, 2 altın)
+    note:
+      en: Spend as little time in Feudal as possible
+      tr: Feudal'da olabildiğince az vakit harca
+    icons:
+      - gold
+  - villagers: 24
+    assign:
+      en: "Feudal: heal the scout, then scout relics and the opponent; move +2 → wood"
+      tr: "Feudal: scout'u iyileştir, sonra kalıntıları ve rakibi keşfet; +2 → oduna kaydır"
+    icons:
+      - scout-cavalry
+      - wood
+  - assign:
+      en: Pull 3 wood villagers → Market (2) and Blacksmith (1)
+      tr: 3 odun köylüsünü çek → Pazar (Market) (2) ve Demirci (Blacksmith) (1)
+    icons:
+      - market
+      - blacksmith
+  - phase: castle
+    time: "10:40"
+    assign:
+      en: Click Castle Age; research Double-Bit Axe and Horse Collar
+      tr: Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır
+    icons:
+      - double-bit-axe
+      - horse-collar
+  - assign:
+      en: "Castle: as the berries run out, send those villagers to your first extra Town Center spot"
+      tr: "Kale: meyve biterken o köylüleri ilk ek Şehir Merkezi noktasına gönder"
+    icons:
+      - town-center
+      - farm
+intro:
+  en: >-
+    Reach Castle Age around 10:40 from the Fortress map's pre-built start, using its free walls and towers as cover
+    while your eco snowballs.
+  tr: >-
+    Fortress haritasının hazır başlangıcından, bedava sur ve kulelerini siper alarak yaklaşık 10:40'ta Kale Çağı'na ulaş
+    ve ekonomini büyüt.
+strategy:
+  en:
+    - >-
+      The Fortress map hands you a ready-made base — 10 villagers, a scout, five farms, a barracks, a castle, four
+      houses, four towers, and stone walls — so you start safe and never spend wood on defenses. Lean on that to commit
+      fully to the economy.
+    - >-
+      Keep the boar and deer flowing into the Town Center: tight food management is what lets this build hit Feudal near
+      7:10 with only seven villagers on wood.
+    - >-
+      Feudal is just a transit age. Drop a Market and Blacksmith with three wood villagers, heal your scout, and click
+      Castle immediately — Double-Bit Axe and Horse Collar go down the moment you arrive.
+    - >-
+      As berries deplete in Castle Age, walk those villagers straight to your first extra Town Center site so your boom
+      never stalls.
+    - >-
+      Use the free castle and towers to deter raids while you out-eco the opponent; you are trading early aggression for
+      a lead you must convert in Castle Age.
+    - >-
+      From here, lean into your civ's Castle-Age power spike — knights for Franks or Persians, monks and relics behind
+      the walls, or extra Town Centers into Imperial if the game goes long.
+  tr:
+    - >-
+      Fortress haritası sana hazır bir üs verir — 10 köylü, bir scout, beş tarla, bir kışla, bir kale, dört ev, dört
+      kule ve taş surlar — yani güvenli başlarsın ve savunmaya hiç odun harcamazsın. Bunu kullanıp tamamen ekonomiye
+      odaklan.
+    - >-
+      Yaban domuzunu ve geyikleri sürekli Şehir Merkezi'ne akıt: sıkı yiyecek yönetimi, bu build'in oduna sadece yedi
+      köylü koyarak Feudal'a 7:10 civarında ulaşmasını sağlayan şeydir.
+    - >-
+      Feudal sadece bir geçiş çağıdır. Üç odun köylüsüyle Pazar ve Demirci kur, scout'unu iyileştir ve hemen Kale'ye
+      tıkla — Double-Bit Axe ve Horse Collar geldiğin an araştırılır.
+    - Kale Çağı'nda meyve tükenirken o köylüleri doğrudan ilk ek Şehir Merkezi noktasına yürüt ki boom'un asla durmasın.
+    - >-
+      Bedava kale ve kuleleri akınları caydırmak için kullanırken rakibi ekonomide geç; erken saldırganlığı, Kale
+      Çağı'nda paraya çevirmen gereken bir avantajla takas ediyorsun.
+    - >-
+      Buradan sonra uygarlığının Kale Çağı güç patlamasına yüklen — Franks veya Persians için şövalyeler (knight),
+      surların ardında keşişler ve kalıntılar, ya da oyun uzarsa Imperial'a doğru ek Şehir Merkezleri.

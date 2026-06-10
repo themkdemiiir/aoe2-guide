@@ -2,7 +2,6 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 
 type ContentType =
-  | "build-orders"
   | "units"
   | "maps"
   | "beginner"

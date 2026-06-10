@@ -1,0 +1,179 @@
+slug: men-at-arms-towers
+name:
+  en: Men-at-Arms + Tower Rush
+  tr: Men-at-Arms + Tower Rush
+difficulty: advanced
+targetAge: feudal
+durationMin: 10
+civsRecommended:
+  - koreans
+  - incas
+  - japanese
+  - ethiopians
+  - vikings
+steps:
+  - villagers: 6
+    assign:
+      en: Queue villagers; build 2 Houses (2 vils build one, 1 builds the other), then to sheep until 6
+      tr: Köylü üret; 2 House inşa et (2 köylü birini, 1 köylü diğerini yapar), sonra 6'ya ulaşana kadar koyunlara git
+    icons:
+      - food
+      - house
+      - town-center
+  - villagers: 7
+    assign:
+      en: +1 → build Lumber Camp
+      tr: +1 → Lumber Camp inşa et
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +3 → collect wood
+      tr: +3 → Odun topla
+    icons:
+      - wood
+  - villagers: 11
+    assign:
+      en: +1 → lure the nearest boar
+      tr: +1 → En yakın domuzu çek
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build 2 Houses near the berries
+      tr: +1 → Meyvelerin yanına 2 House inşa et
+    icons:
+      - house
+  - villagers: 13
+    assign:
+      en: +1 → build Mill next to berries
+      tr: +1 → Meyvelerin yanına Mill inşa et
+    icons:
+      - mill
+      - food
+  - villagers: 15
+    assign:
+      en: +2 → berries; lure 2nd boar
+      tr: +2 → meyveler; 2. domuzu çek
+    icons:
+      - food
+  - villagers: 18
+    assign:
+      en: +3 → sheep or boar food
+      tr: +3 → koyun veya domuz Yiyeceği
+    icons:
+      - food
+  - villagers: 19
+    assign:
+      en: +1 → build Barracks, train 3 Militia, then mine Stone
+      tr: +1 → Barracks inşa et, 3 Militia eğit, ardından Taş topla
+    icons:
+      - barracks
+      - militia
+      - stone
+  - villagers: 20
+    assign:
+      en: +1 → build Mining Camp next to gold
+      tr: +1 → Altın yanına Mining Camp inşa et
+    icons:
+      - mining-camp
+      - gold
+  - villagers: 21
+    assign:
+      en: +1 → mine gold; research Loom; advance to Feudal Age
+      tr: +1 → Altın topla; Loom araştır; Feodal Çağ'a geç
+    note:
+      en: Research Loom in your Town Center
+      tr: Town Center'da Loom araştır
+    icons:
+      - gold
+      - loom
+      - feudal-age
+  - villagers: 21
+    assign:
+      en: "Feudal: upgrade Militia to Men-at-Arms; send the Militia plus your Stone/Gold villagers forward"
+      tr: "Feodal: Militia'yı Men-at-Arms'a yükselt; Militia ile Taş/Altın köylülerini öne gönder"
+    icons:
+      - man-at-arms
+      - watch-tower
+intro:
+  en: >-
+    **Goal:** Control your opponent's access to resources by placing towers in strategic locations in their base and
+    severely restrict their economy. **Recommended civs:** The source guide is civ-agnostic — any civ can run it. It
+    works best with civilizations that have cheap or strong towers (Koreans, Incas, Japanese) or extra resources to fund
+    the forward commitment (Ethiopians, Vikings).
+  tr: >-
+    **Hedef:** Rakibinin üssünde stratejik noktalara tower'lar dikerek kaynaklarına erişimini kes ve ekonomisini ciddi
+    ölçüde kısıtla. **Önerilen uygarlıklar:** Kaynak kılavuzu uygarlıktan bağımsızdır — her uygarlık bu build order'ı
+    uygulayabilir. Ucuz veya güçlü tower'lara sahip uygarlıklarla (Koreans, Incas, Japanese) ya da öne atılma masrafını
+    karşılayacak ekstra kaynakları olanlarla (Ethiopians, Vikings) en iyi sonucu alırsın.
+strategy:
+  en:
+    - Queue villagers continuously and build 2 Houses at the start
+    - Send villagers to sheep until you have 6
+    - 1 villager builds a Lumber Camp; +3 villagers collect wood
+    - 1 villager lures the nearest boar
+    - 1 villager builds 2 Houses near the berries; 1 villager builds a Mill next to them
+    - +2 villagers to berries; lure the 2nd boar
+    - +3 villagers to sheep or boar food
+    - 1 villager builds a Barracks, trains 3 Militia, then goes to mine Stone
+    - 1 villager builds a Mining Camp next to your gold; 1 villager mines gold
+    - Scout your opponent's base well to find their main gold and woodlines before going forward
+    - Upgrade Militia to Men-at-Arms as soon as Feudal arrives
+    - Send the Militia/Men-at-Arms plus your Stone and Gold villagers forward toward the enemy base
+    - Build your first tower out of your opponent's reach — it becomes the defense for your second tower
+    - Place towers on the enemy's gold and wood lines to deny those resources
+    - Use Men-at-Arms to chase isolated villagers and to screen your tower builders
+    - Pull low-HP villagers into a finished tower to garrison and shoot
+    - Build Houses forward if you run short on population space
+    - >-
+      **Weak against:** Quick reactions — this attack requires a large commitment (around 5 villagers not gathering
+      resources) and leaves you with a big economic setback if it fails. Opponents who scout early and wall before your
+      villagers arrive blunt the whole plan.
+    - >-
+      **Strong against:** Greedy and passive openings that cannot respond to forward aggression in time, and economies
+      clustered on exposed gold or wood lines.
+    - Scout your opponent's base well to find their main gold and woodlines before going forward.
+    - The first tower you build will be your second tower's defense, so try to build it out of your opponent's reach.
+    - >-
+      This is a fairly complex build that needs practice to execute properly; it gets especially tricky micro-managing
+      forward villagers and military while expanding your economy at home.
+    - >-
+      The large commitment means a failed rush is a significant economic setback — only commit once you have scouted a
+      good target.
+  tr:
+    - Sürekli köylü üret ve başlangıçta 2 House inşa et
+    - 6 köylüye ulaşana kadar köylüleri koyunlara gönder
+    - 1 köylü Lumber Camp inşa eder; +3 köylü Odun toplar
+    - 1 köylü en yakın domuzu çeker
+    - 1 köylü meyvelerin yanına 2 House inşa eder; 1 köylü yanlarına Mill kurar
+    - +2 köylü meyvelere; 2. domuzu çek
+    - +3 köylü koyun veya domuz Yiyeceğine
+    - 1 köylü Barracks inşa eder, 3 Militia eğitir, ardından Taş toplamaya geçer
+    - 1 köylü Altın yanına Mining Camp kurar; 1 köylü Altın toplar
+    - Öne gitmeden önce rakibinin üssünü iyi scout'la; ana Altın ve Odun hatlarını bul
+    - Feodal Çağ gelir gelmez Militia'yı Men-at-Arms'a yükselt
+    - Militia/Men-at-Arms ile Taş ve Altın köylülerini düşman üssüne doğru öne gönder
+    - İlk tower'ı rakibinin erişemeyeceği bir yere kur — bu tower, ikinci tower'ının savunması olur
+    - Tower'ları düşmanın Altın ve Odun hatlarının üzerine koy; o kaynakları engelle
+    - Men-at-Arms'ı yalnız köylüleri kovalamak ve tower inşaatçılarını korumak için kullan
+    - Canı azalmış köylüleri bitmiş tower'a çekerek garnizona al ve ateş aç
+    - Nüfus alanı azalırsa öne House inşa et
+    - >-
+      **Zayıf olduğu durumlar:** Hızlı tepkiler — bu saldırı büyük bir taahhüt gerektirir (kaynak toplamayan yaklaşık 5
+      köylü) ve başarısız olursa ekonomin ciddi zarar görür. Erken scout yapan ve köylülerin gelmeden duvar ören
+      rakipler tüm planı bozar.
+    - >-
+      **Güçlü olduğu durumlar:** Öne atılan saldırıya zamanında yanıt veremeyen açgözlü ve pasif açılışlar ile açıkta
+      kalan Altın veya Odun hatlarına kümelenmiş ekonomiler.
+    - Öne gitmeden önce rakibinin üssünü iyi scout'la; ana Altın ve Odun hatlarını bul.
+    - >-
+      İnşa ettiğin ilk tower ikinci tower'ının savunması olacaktır; bu yüzden onu rakibinin erişemeyeceği bir noktaya
+      kurmaya çalış.
+    - >-
+      Bu oldukça karmaşık bir build; düzgün uygulamak için pratik gerektirir. Özellikle öne giden köylüleri ve askeri
+      micro yaparken evdeki ekonomini büyütmek zorunda kalmak işleri güçleştirir.
+    - >-
+      Büyük taahhüt, başarısız bir rush'ın ciddi bir ekonomik kayba yol açacağı anlamına gelir — yalnızca iyi bir hedef
+      scout'ladıktan sonra taahhütte bulun.

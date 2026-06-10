@@ -1,0 +1,168 @@
+slug: jurchens-fc-fire-lancer
+name:
+  en: Jurchens Fast Castle Fire Lancer Rush
+  tr: Jurchens Fast Castle Fire Lancer Rush
+difficulty: advanced
+targetAge: castle
+durationMin: 14
+civsRecommended:
+  - jurchens
+  - koreans
+  - vietnamese
+  - chinese
+  - khitans
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Şehir Merkezi'nin altındaki koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 10
+    assign:
+      en: +4 → wood; first builds the Lumber Camp, then all gather wood
+      tr: +4 → odun; ilki Kereste Kampı'nı kurar, sonra hepsi odun toplar
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: +1 → lure and gather the first boar
+      tr: +1 → ilk yaban domuzunu çekip topla
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build a House, then a Mill near the berries
+      tr: +1 → bir Ev kur, sonra meyvelerin yanına Değirmen yap
+    icons:
+      - house
+      - mill
+  - villagers: 13
+    assign:
+      en: +1 → lure the second boar
+      tr: +1 → ikinci yaban domuzunu çek
+    icons:
+      - food
+  - assign:
+      en: Lure at least 2 deer to the boar/sheep pile (re-task, no new villager)
+      tr: En az 2 geyiği domuz/koyun yığınına çek (yeniden görevlendirme, yeni köylü yok)
+    note:
+      en: Pop stays at 13 — this is a re-task
+      tr: Nüfus 13'te kalır — bu bir yeniden görevlendirmedir
+    icons:
+      - food
+  - villagers: 15
+    assign:
+      en: +2 → hunt (deer and remaining boar meat)
+      tr: +2 → av (geyik ve kalan domuz eti)
+    icons:
+      - food
+  - villagers: 19
+    assign:
+      en: +4 → berries
+      tr: +4 → meyveler
+    icons:
+      - food
+  - villagers: 22
+    assign:
+      en: +3 → gold; build the Mining Camp, then mine
+      tr: +3 → altın; Maden Kampı kur, sonra altın çıkar
+    icons:
+      - gold
+      - mining-camp
+  - villagers: 22
+    phase: feudal
+    time: "10:30"
+    assign:
+      en: Research Loom, then click Feudal Age
+      tr: Loom'u araştır, sonra Feudal Çağı'na tıkla
+    note:
+      en: Land with roughly 4 wood / 15 food / 3 gold
+      tr: Yaklaşık 4 odun / 15 yemek / 3 altın ile çık
+    icons:
+      - loom
+  - assign:
+      en: "Feudal: re-task 3 from wood → Market + Blacksmith; small-wall your wood and gold lines"
+      tr: "Feudal: odundan 3 köylüyü yeniden görevlendir → Pazar + Demirci; odun ve altın hatlarını kısmen duvarla"
+    icons:
+      - market
+      - blacksmith
+  - villagers: 24
+    assign:
+      en: +2 → wood to fuel the age-up
+      tr: +2 → çağ atlamayı beslemek için odun
+    icons:
+      - wood
+  - phase: castle
+    time: "14:00"
+    assign:
+      en: Click Castle Age — do NOT sell stone, you may need a defensive Tower
+      tr: Castle Age'e (Kale) tıkla — taşını SATMA, savunma için Gözcü Kulesi gerekebilir
+    icons:
+      - watch-tower
+  - villagers: 24
+    assign:
+      en: "Castle: pull ~10 from the Town Center → wood + a 2nd Lumber Camp; add 2 Barracks"
+      tr: "Castle: Şehir Merkezi'nden ~10 köylüyü çek → odun + 2. Kereste Kampı; 2 Kışla ekle"
+    icons:
+      - lumber-camp
+      - barracks
+  - assign:
+      en: >-
+        Research infantry armor (skip eco techs); pump Fire Lancers from both Barracks; add a forward Siege Workshop;
+        seed Farms; research Squires
+      tr: >-
+        Piyade zırhını araştır (ekonomi teknolojilerini atla); iki Kışla'dan da Fire Lancer bas; öne bir Kuşatma
+        Atölyesi ekle; Çiftlik dikmeye başla; Squires araştır
+    icons:
+      - barracks
+      - siege-workshop
+      - farm
+intro:
+  en: >-
+    A greedy Fast Castle that skips Feudal military and lands on the Jurchens' food-free Fire Lancers and siege for a
+    relentless mid-game push.
+  tr: >-
+    Feudal askerini atlayıp Jurchens'in yemek gerektirmeyen Fire Lancer ve kuşatmasına inen, açgözlü bir Fast Castle ile
+    durdurulamaz bir orta oyun baskısı.
+strategy:
+  en:
+    - >-
+      Play the Dark and Feudal Age safe and economic — small-wall your wood and gold lines and add a defensive Tower if
+      pressured rather than committing to military before Castle Age.
+    - >-
+      The whole plan hinges on the ~14:00 Castle timing. Hold your stone instead of selling it, because a Tower can buy
+      the time you need against an aggressive opponent.
+    - >-
+      After aging up, double down on wood: pull villagers off the Town Center, add a 2nd Lumber Camp, and put up 2
+      Barracks so both can produce Fire Lancers at once.
+    - >-
+      Research infantry armor and skip the economy upgrades — Fire Lancers and siege both cost no food, so wood and gold
+      are what actually power your army.
+    - >-
+      Push out with a forward Siege Workshop alongside the Fire Lancers; the combination melts buildings and clusters
+      while keeping your food banked for a follow-up.
+    - >-
+      This is aggressive but not a full all-in — keep around 5 villagers on food so you can recover and transition if
+      the rush stalls.
+  tr:
+    - >-
+      Karanlık ve Feudal Çağı güvenli ve ekonomik oyna — odun ve altın hatlarını kısmen duvarla, baskı görürsen Kale
+      Çağı'ndan önce askere yatırım yapmak yerine savunma Kulesi dik.
+    - >-
+      Tüm plan ~14:00 Castle zamanlamasına bağlı. Taşını satmak yerine elinde tut, çünkü bir Kule agresif bir rakibe
+      karşı ihtiyacın olan zamanı kazandırabilir.
+    - >-
+      Çağ atladıktan sonra oduna yüklen: köylüleri Şehir Merkezi'nden çek, 2. Kereste Kampı kur ve 2 Kışla dik ki ikisi
+      de aynı anda Fire Lancer üretsin.
+    - >-
+      Piyade zırhını araştır ve ekonomi yükseltmelerini atla — Fire Lancer ve kuşatma yemek gerektirmediği için ordunu
+      asıl besleyen şey odun ve altındır.
+    - >-
+      Fire Lancer'larla birlikte öne bir Kuşatma Atölyesi çıkar; bu kombinasyon binaları ve yığılmış birlikleri
+      eritirken yemeğini bir sonraki hamle için bankada tutar.
+    - >-
+      Bu agresif ama tam bir all-in değil — yaklaşık 5 köylüyü yemekte tut ki rush takılırsa toparlanıp geçiş
+      yapabilesin.

@@ -13,45 +13,32 @@
 
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import yaml from "js-yaml";
 
 const FACTS = path.resolve("src/data/game-facts.json");
-const BUILDS = path.resolve("src/content/build-orders/en");
-
-function frontmatter(md) {
-  const m = md.match(/^---\n([\s\S]*?)\n---/);
-  return m ? m[1] : "";
-}
-
-function getTargetAge(fm) {
-  const m = fm.match(/^targetAge:\s*(\w+)/m);
-  return m ? m[1].trim() : null;
-}
-
-function getIconSlugs(fm) {
-  const slugs = new Set();
-  for (const arr of fm.matchAll(/icons:\s*\[([^\]]*)\]/g)) {
-    for (const q of arr[1].matchAll(/"([^"]+)"/g)) slugs.add(q[1]);
-  }
-  return [...slugs];
-}
+const BUILDS = path.resolve("src/content/build-orders");
 
 async function run() {
   const facts = JSON.parse(await readFile(FACTS, "utf8"));
   const { ageRank, units } = facts;
 
-  const files = (await readdir(BUILDS)).filter((f) => f.endsWith(".md"));
+  const files = (await readdir(BUILDS)).filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"));
   const violations = [];
   let checked = 0;
 
   for (const file of files) {
-    const fm = frontmatter(await readFile(path.join(BUILDS, file), "utf8"));
-    const targetAge = getTargetAge(fm);
+    const raw = await readFile(path.join(BUILDS, file), "utf8");
+    const data = yaml.load(raw);
+    const targetAge = data?.targetAge;
     if (!targetAge || !(targetAge in ageRank)) continue;
     checked++;
     const limit = ageRank[targetAge];
-    for (const slug of getIconSlugs(fm)) {
+    const iconSlugs = new Set(
+      (data?.steps ?? []).flatMap((s) => s.icons ?? []),
+    );
+    for (const slug of iconSlugs) {
       const unit = units[slug];
-      if (!unit) continue; // not a tracked unit (resource/building/tech) — skip
+      if (!unit) continue;
       if (ageRank[unit.age] > limit) {
         violations.push(
           `${file}: "${slug}" is a ${unit.age}-age unit but the build targetAge is ${targetAge} ` +

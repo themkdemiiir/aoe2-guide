@@ -1,0 +1,148 @@
+slug: fishing-ship-build
+name:
+  en: 19 Pop + 3 Fishing Ship Build
+  tr: 19 Nüfus + 3 Balıkçı Gemisi Düzeni
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - italians
+  - japanese
+  - vikings
+  - lithuanians
+  - malians
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → şehir merkezinin altındaki koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 11
+    assign:
+      en: +5 → wood, drop a Lumber Camp
+      tr: +5 → oduna, bir Kereste Kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 12
+    assign:
+      en: +1 → lure the first boar
+      tr: +1 → ilk yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 13
+    assign:
+      en: +1 → build a House, then a Dock and put it on shore fish
+      tr: +1 → bir Ev, ardından bir Liman kur ve kıyı balığına gönder
+    note:
+      en: Place the Dock where it can reach the shore-fish patch
+      tr: Limanı kıyı balığı kümesine erişebileceği bir yere yerleştir
+    icons:
+      - house
+      - dock
+      - food
+  - villagers: 14
+    assign:
+      en: +1 → lure the second boar
+      tr: +1 → ikinci yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 15
+    assign:
+      en: +1 → take the second boar under the Town Center
+      tr: +1 → ikinci domuzu şehir merkezinin altında al
+    icons:
+      - food
+  - assign:
+      en: From the Dock, queue Fishing Ships up to 3; build a House after the first one
+      tr: Limandan 3'e kadar Balıkçı Gemisi çıkar; ilkinden sonra bir Ev yap
+    note:
+      en: Fishing Ships are made at the Dock — they do not count toward your villager pop
+      tr: Balıkçı Gemileri Limanda üretilir — köylü nüfusuna dahil değildir
+    icons:
+      - dock
+      - fishing-ship
+  - villagers: 19
+    assign:
+      en: +4 → food under the Town Center
+      tr: +4 → şehir merkezinin altındaki yiyeceğe
+    icons:
+      - food
+      - town-center
+  - assign:
+      en: Research Loom
+      tr: Loom'u araştır
+    icons:
+      - loom
+  - villagers: 19
+    phase: feudal
+    time: "9:15"
+    assign:
+      en: Click up to Feudal Age
+      tr: Feudal Çağı'na tıkla
+    note:
+      en: Land with roughly 5 on wood and 14 on food
+      tr: Yaklaşık 5 köylü odunda, 14 köylü yiyecekte olacak şekilde geç
+    icons:
+      - town-center
+  - villagers: 19
+    assign:
+      en: Move 7 from the sheep over to a second Lumber Camp
+      tr: Koyunlardaki 7 köylüyü ikinci bir Kereste Kampı'na taşı
+    icons:
+      - wood
+      - lumber-camp
+  - assign:
+      en: Keep all 3 Fishing Ships working the water for a steady food trickle
+      tr: 3 Balıkçı Gemisini de suda tutarak istikrarlı bir yiyecek akışı sağla
+    icons:
+      - fishing-ship
+      - food
+intro:
+  en: >-
+    Use the extra food from three Fishing Ships to reach Feudal Age around 9:15 with a faster, water-fed economy on
+    hybrid and water maps.
+  tr: >-
+    Üç Balıkçı Gemisinden gelen ekstra yiyecekle, hibrit ve su haritalarında suyla beslenen daha hızlı bir ekonomi
+    kurarak Feudal Çağı'na yaklaşık 9:15'te ulaş.
+strategy:
+  en:
+    - >-
+      The whole point of this opening is the Dock: three Fishing Ships add a fat, uninterruptable food stream that your
+      land villagers cannot match, so your boom snowballs without crowding your sheep and boar.
+    - >-
+      It shines on hybrid and water maps where the shore fish and deep fish go uncontested; on a closed map like Four
+      Lakes you can flex into a Barracks with Archers or Scouts off the same eco.
+    - >-
+      Once Feudal lands, pick your water plan early — Galleys or Fire Galleys (around three to five villagers on gold)
+      to fight for the lake, or stay economic and keep fishing if the water is safe.
+    - >-
+      This build leans into Castle Age power: sell stone at the Market to rush up, and remember that Demolition Ships
+      are brutally strong once you reach Castle, so plan to contest the water hard there.
+    - >-
+      Defend your Dock and Fishing Ships as you would your Town Center — losing the ships erases the entire advantage
+      this opening was built around.
+    - >-
+      Civilizations with water bonuses (Italians, Japanese, Vikings, Lithuanians, Malians) squeeze the most value out of
+      the fishing, but any civ can run it if the map gives you the water.
+  tr:
+    - >-
+      Bu açılışın tüm amacı Liman: üç Balıkçı Gemisi, kara köylülerinin sağlayamayacağı kesintisiz ve bol bir yiyecek
+      akışı ekler; böylece koyunlarını ve domuzlarını tıka basa doldurmadan boom'un katlanarak büyür.
+    - >-
+      En çok hibrit ve su haritalarında, kıyı balığı ile derin balığın rakipsiz olduğu yerlerde parlar; Four Lakes gibi
+      kapalı bir haritada aynı ekonomiyle Kışla'ya geçip Archer ya da Scout çıkarabilirsin.
+    - >-
+      Feudal'e geçer geçmez su planını erken seç — gölü ele geçirmek için Galley ya da Fire Galley (altın madeninde
+      yaklaşık üç ila beş köylü), ya da su güvenliyse ekonomik kalıp balık tutmaya devam et.
+    - >-
+      Bu düzen Castle Çağı gücüne yaslanır: hızlı yükselmek için Pazar'da taş sat ve Castle'a ulaştığında Demolition
+      Ship'lerin acımasız derecede güçlü olduğunu unutma — suyu orada sert biçimde çekişmeyi planla.
+    - >-
+      Limanını ve Balıkçı Gemilerini şehir merkezin gibi koru — gemileri kaybetmek, bu açılışın üzerine kurulduğu tüm
+      avantajı siler.
+    - >-
+      Su bonusu olan uygarlıklar (Italians, Japanese, Vikings, Lithuanians, Malians) balıkçılıktan en çok değeri
+      çıkarır, ama harita sana suyu verdiği sürece herhangi bir uygarlık bu düzeni oynayabilir.

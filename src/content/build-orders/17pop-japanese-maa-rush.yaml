@@ -1,0 +1,162 @@
+slug: 17pop-japanese-maa-rush
+name:
+  en: 17 Pop Japanese Man-at-Arms Rush
+  tr: 17 Pop Japon Man-at-Arms Baskını
+difficulty: intermediate
+targetAge: feudal
+durationMin: 8
+civsRecommended:
+  - japanese
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the Town Center
+      tr: 6 → Şehir Merkezi altındaki koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood, drop a Lumber Camp
+      tr: +2 → oduna git, Kereste Kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure the first boar
+      tr: +1 → ilk yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → lure the second boar under the Town Center
+      tr: +1 → ikinci yaban domuzunu Şehir Merkezi altına çek
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a House, then move to the hunt
+      tr: +1 → Ev yap, sonra ava katıl
+    note:
+      en: Lure at least 2 deer — this is mandatory
+      tr: En az 2 geyik çek — bu zorunlu
+    icons:
+      - house
+      - food
+  - villagers: 13
+    assign:
+      en: +2 → hunt (eat through the second boar)
+      tr: +2 → av (ikinci yaban domuzunu yiyerek bitir)
+    icons:
+      - food
+  - assign:
+      en: +1 → build a Barracks at the front of your base
+      tr: +1 → üssünün ön tarafına Kışla kur
+    icons:
+      - barracks
+  - villagers: 16
+    assign:
+      en: +2 → food under the Town Center
+      tr: +2 → Şehir Merkezi altında yiyecek
+    icons:
+      - food
+  - villagers: 17
+    phase: feudal
+    time: "8:25"
+    assign:
+      en: +1 → wood, research Loom, then click up to Feudal
+      tr: +1 → oduna git, Loom'u araştır, sonra Feudal'a tıkla
+    note:
+      en: Land with roughly 3 on wood and 13 on food
+      tr: Yaklaşık 3 odunda, 13 yiyecekte iken çağ atla
+    icons:
+      - wood
+      - loom
+  - villagers: 17
+    assign:
+      en: 2 from the hunt → gold, drop a Mining Camp
+      tr: Avdan 2 kişi → altına git, Maden Kampı kur
+    icons:
+      - gold
+      - mining-camp
+  - assign:
+      en: Pump 3 Militia and walk them across the map
+      tr: 3 Milis bas ve haritanın karşısına yürüt
+    icons:
+      - militia
+  - villagers: 17
+    assign:
+      en: 4 off the Town Center → wood at the Lumber Camp
+      tr: Şehir Merkezi'nden 4 kişi → Kereste Kampı'nda oduna
+    icons:
+      - wood
+      - lumber-camp
+  - assign:
+      en: Build an Archery Range and start Archers; research Man-at-Arms
+      tr: Okçu Menzili kur ve Okçu basmaya başla; Man-at-Arms'ı araştır
+    icons:
+      - archery-range
+      - archer
+      - man-at-arms
+  - assign:
+      en: Add a Blacksmith; research Double-Bit Axe
+      tr: Demirci ekle; Double-Bit Axe'ı araştır
+    icons:
+      - blacksmith
+      - double-bit-axe
+  - villagers: 20
+    assign:
+      en: +2 → gold; 1 → berries and build a Mill
+      tr: +2 → altın; 1 → çilekler ve Değirmen kur
+    icons:
+      - gold
+      - food
+      - mill
+  - assign:
+      en: Research Fletching; send Archers and Man-at-Arms across the map together
+      tr: Fletching'i araştır; Okçuları ve Man-at-Arms'ı birlikte haritanın karşısına gönder
+    icons:
+      - fletching
+      - archer
+      - man-at-arms
+intro:
+  en: >-
+    Reach Feudal Age around 8:25 and apply the fastest possible Man-at-Arms pressure, layering in Archers right behind
+    the Militia.
+  tr: >-
+    Yaklaşık 8:25'te Feudal Çağ'a ulaş ve mümkün olan en hızlı Man-at-Arms baskısını uygula; Milislerin hemen arkasına
+    Okçuları da ekle.
+strategy:
+  en:
+    - >-
+      This is the quickest Man-at-Arms timing in the game — Japanese infantry attack faster, so even a small group of
+      Militia and Man-at-Arms punishes an unwalled opponent hard.
+    - >-
+      The plan front-loads aggression: send the 3 Militia out the moment Feudal lands, then convert them to Man-at-Arms
+      and reinforce with Archers and Fletching to keep the push rolling.
+    - >-
+      Your economy is deliberately thin, so the early damage has to pay for itself; idle enemy villagers and a slow wall
+      are exactly what you are hunting for.
+    - >-
+      Late game is the weakness of this opening — commit to finishing the fight in Feudal rather than coasting, because
+      a contained rush leaves you behind on eco.
+    - >-
+      If the opponent walls fast or counters with Scouts, ease off, secure your gold and wood, and transition cleanly
+      into Castle Age Crossbows instead of throwing units away.
+  tr:
+    - >-
+      Bu, oyundaki en hızlı Man-at-Arms zamanlamasıdır — Japon piyadeleri daha hızlı saldırdığı için küçük bir Milis ve
+      Man-at-Arms grubu bile duvarsız bir rakibi ağır cezalandırır.
+    - >-
+      Plan tüm ağırlığını erken saldırıya verir: Feudal gelir gelmez 3 Milisi dışarı yürüt, ardından onları
+      Man-at-Arms'a dönüştür ve Okçular ile Fletching ekleyerek baskıyı sürdür.
+    - >-
+      Ekonomin bilerek zayıf tutulur, bu yüzden erken hasarın kendini ödemesi gerekir; aradığın şey tam olarak boşta
+      duran düşman köylüleri ve yavaş örülen duvardır.
+    - >-
+      Bu açılışın zayıf noktası geç oyundur — savuşturulan bir baskı seni ekonomide geride bırakacağından, oyalanmak
+      yerine savaşı Feudal'da bitirmeye odaklan.
+    - >-
+      Rakip hızlı duvar örerse veya Scout'larla karşılık verirse baskıyı gevşet, altın ve odununu güvene al ve
+      birlikleri ziyan etmek yerine temiz bir şekilde Castle Çağı Crossbow'larına geçiş yap.

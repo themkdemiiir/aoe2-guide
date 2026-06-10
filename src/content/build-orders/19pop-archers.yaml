@@ -1,0 +1,164 @@
+slug: 19pop-archers
+name:
+  en: 19 Pop 1-Range Archers
+  tr: 19 Köylü Tek Range Okçu
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - britons
+  - mayans
+  - ethiopians
+  - tatars
+  - vikings
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the TC
+      tr: 6 → TC altında koyunda
+    icons:
+      - food
+      - town-center
+  - villagers: 9
+    assign:
+      en: +3 → wood, build a lumber camp
+      tr: +3 → oduna, lumber camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 10
+    assign:
+      en: +1 → lure the first boar
+      tr: +1 → ilk domuzu çek
+    icons:
+      - food
+  - villagers: 11
+    assign:
+      en: +1 → build a house, then go to mill/berries
+      tr: +1 → house kur, ardından mill/meyveye git
+    icons:
+      - house
+      - mill
+      - food
+  - villagers: 17
+    assign:
+      en: +6 → hunt under the TC
+      tr: +6 → TC altında ava
+    note:
+      en: Lure the second boar before the first runs dry
+      tr: İlki bitmeden ikinci domuzu çek
+    icons:
+      - food
+      - town-center
+  - villagers: 19
+    assign:
+      en: +2 → wood; research Loom
+      tr: +2 → oduna; Loom araştır
+    icons:
+      - wood
+      - loom
+  - villagers: 19
+    phase: feudal
+    time: "9:15"
+    assign:
+      en: Click up to Feudal at 19 pop (5 wood / 14 food)
+      tr: 19 köylüde Feudal'a tıkla (5 odun / 14 yiyecek)
+    icons:
+      - loom
+  - villagers: 19
+    assign:
+      en: 5 vils from the TC → 2nd lumber camp on a new woodline
+      tr: TC'den 5 köylü → yeni woodline'da 2. lumber camp
+    icons:
+      - lumber-camp
+      - wood
+  - villagers: 19
+    assign:
+      en: 2 → straggler trees; 1 → house, then barracks, then back to food
+      tr: 2 → straggler ağaçlara; 1 → house, sonra barracks, sonra tekrar yiyeceğe
+    icons:
+      - wood
+      - barracks
+      - house
+  - villagers: 19
+    assign:
+      en: 2 → gold, build a mining camp; research Double-Bit Axe (skip Horse Collar)
+      tr: 2 → altına, mining camp kur; Double-Bit Axe araştır (Horse Collar'ı atla)
+    icons:
+      - gold
+      - mining-camp
+      - double-bit-axe
+  - assign:
+      en: Build an Archery Range and start Archers as soon as Feudal lands
+      tr: Feudal gelir gelmez Archery Range kur ve Archer üretmeye başla
+    icons:
+      - archery-range
+      - archer
+  - villagers: 21
+    assign:
+      en: +2 → gold (4 total); build a Blacksmith → research Fletching
+      tr: +2 → altına (toplam 4); Blacksmith kur → Fletching araştır
+    icons:
+      - gold
+      - blacksmith
+      - fletching
+  - assign:
+      en: "Optional: 1–4 Spearmen from the barracks if you spot enemy Scouts"
+      tr: "İsteğe bağlı: rakipte Scout görürsen barracks'tan 1–4 Spearman"
+    icons:
+      - spearman
+  - villagers: 21
+    assign:
+      en: +4 → berries (5 on berries total); seed farms
+      tr: +4 → meyveye (toplam 5 köylü meyvede); tarla ekmeye başla
+    icons:
+      - food
+      - farm
+  - assign:
+      en: Wall with 2–3 vils using a mix of houses and palisades
+      tr: Üretim oturunca 2–3 köylüyle duvar çek
+    icons:
+      - house
+intro:
+  en: >-
+    Land in Feudal at 19 pop, throw down a single Archery Range, and pump Fletching-backed Archers before your opponent
+    has a counter ready.
+  tr: >-
+    19 köylüde Feudal'a çık, tek bir Archery Range kur ve rakip karşılığını hazırlayamadan Fletching destekli
+    Archer'ları üretmeye başla.
+strategy:
+  en:
+    - >-
+      This is the bread-and-butter ranged opening: one range, Double-Bit Axe to feed wood into Archers, and an early
+      Blacksmith so Fletching is done before your first volley connects. Skip Horse Collar in Feudal — you want the wood
+      and food going into military, not farm upgrades yet.
+    - >-
+      Keep gold healthy. Two miners go down on the click-up, two more follow shortly after; four on gold is enough to
+      sustain steady Archer production without starving your wood line.
+    - >-
+      React to what you see. If the enemy commits to Scouts, a handful of Spearmen from the barracks plugs the hole
+      cheaply; if they go Skirmishers, do not over-invest in Archers — bank resources and lean on the Castle transition
+      instead.
+    - >-
+      Default follow-up is Castle Age with 10–15 Archers, then Crossbow plus Bodkin Arrow for a hard timing attack. Add
+      a second Archery Range or a Stable depending on the matchup.
+    - >-
+      Britons can lean hardest into this: extra range from the civ bonus means a third range and Thumb Ring in Castle
+      Age turn the Archer mass into a snowball.
+  tr:
+    - >-
+      Bu, menzilli açılışın temel kalıbıdır: tek range, oduna akan üretimi besleyen Double-Bit Axe ve ilk yaylım ateşin
+      hedefe varmadan Fletching'i bitirecek kadar erken bir Blacksmith. Feudal'da Horse Collar'ı atla — odun ve yiyecek
+      tarla yükseltmesine değil askere gitsin.
+    - >-
+      Altını sağlam tut. İki madenci tıklamada, iki madenci hemen ardından iner; oduncuları aç bırakmadan sürekli Archer
+      üretimini sürdürmek için altında dört köylü yeterli.
+    - >-
+      Gördüğüne göre tepki ver. Rakip Scout'a yüklenirse barracks'tan birkaç Spearman açığı ucuza kapatır; Skirmisher'a
+      giderse Archer'a fazla yatırım yapma — kaynak biriktir ve Castle geçişine yaslan.
+    - >-
+      Varsayılan devamı, 10–15 Archer'la Castle Age'e çıkmak, ardından sert bir timing saldırısı için Crossbow ve Bodkin
+      Arrow'dur. Eşleşmeye göre ikinci bir Archery Range veya Stable ekle.
+    - >-
+      Britons buna en çok yaslanabilir: medeniyet bonusundan gelen ekstra menzille Castle Age'de üçüncü range ve Thumb
+      Ring, Archer kütlesini çığ gibi büyütür.

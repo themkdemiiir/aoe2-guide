@@ -1,0 +1,176 @@
+slug: double-stable-scouts
+name:
+  en: Double Stable Scouts
+  tr: Çift Ahırlı Atlı Keşifçiler
+difficulty: intermediate
+targetAge: feudal
+durationMin: 9
+civsRecommended:
+  - franks
+  - huns
+  - magyars
+  - lithuanians
+  - persians
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the TC
+      tr: 6 → TC altında koyunlar
+    icons:
+      - food
+      - town-center
+  - villagers: 8
+    assign:
+      en: +2 → wood on the first woodline; build a lumber camp
+      tr: +2 → odun; ilk ormanda bir kereste kampı kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 9
+    assign:
+      en: +1 → lure and kill the first boar
+      tr: +1 → ilk yaban domuzunu çek ve avla
+    note:
+      en: Eat the boar before the sheep run out
+      tr: Koyunlar bitmeden domuzu yiyip bitir
+    icons:
+      - food
+  - villagers: 10
+    assign:
+      en: +1 → build a house, then a mill on the berries
+      tr: +1 → bir ev, ardından çilek üzerine değirmen kur
+    icons:
+      - house
+      - mill
+  - assign:
+      en: Lure deer in with the scout to stretch your food
+      tr: Yiyeceği uzatmak için keşifçiyle geyikleri içeri çek
+    note:
+      en: No new villager — keep the TC producing
+      tr: Yeni köylü yok — TC'yi üretimde tut
+    icons:
+      - food
+  - villagers: 16
+    assign:
+      en: +6 → hunt under the TC; lure the second boar
+      tr: +6 → TC altında avlanma; ikinci domuzu çek
+    icons:
+      - food
+  - villagers: 18
+    phase: feudal
+    time: "8:50"
+    assign:
+      en: +2 → wood; research Loom, then click up to Feudal
+      tr: +2 → odun; Loom'u araştır, sonra Feudal'a tıkla
+    note:
+      en: Land at 18 pop with a 4-wood / 14-food split
+      tr: 18 nüfusta 4 odun / 14 yiyecek dağılımıyla geç
+    icons:
+      - wood
+      - loom
+  - villagers: 18
+    assign:
+      en: "Feudal: move 5 hunters → wood and drop a 2nd lumber camp"
+      tr: "Feudal: 5 avcıyı → oduna al ve 2. kereste kampını kur"
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 18
+    assign:
+      en: Pull 4 vils off the TC food → berries; send 1 vil to a barracks
+      tr: TC yiyeceğinden 4 köylüyü → çileğe çek; 1 köylüyü kışlaya gönder
+    icons:
+      - food
+      - barracks
+  - villagers: 18
+    assign:
+      en: Build a stable with 2 vils; start Scout Cavalry the moment it finishes
+      tr: 2 köylüyle ahır kur; biter bitmez Atlı Keşifçi basmaya başla
+    icons:
+      - stable
+      - scout-cavalry
+  - assign:
+      en: Research Double-Bit Axe and Horse Collar; wall with the stable builders and seed farms
+      tr: Double-Bit Axe ve Horse Collar'ı araştır; ahırı kuran köylülerle sur ör ve tarlaları ek
+    icons:
+      - double-bit-axe
+      - horse-collar
+      - farm
+  - assign:
+      en: Pump scouts non-stop; add 1–4 Spearmen only if the opponent also goes scouts
+      tr: Durmadan keşifçi bas; rakip de keşifçiye giderse yalnızca 1–4 Mızraklı ekle
+    note:
+      en: Skip the spears versus archers
+      tr: Okçulara karşı mızraklıları atla
+    icons:
+      - scout-cavalry
+      - spearman
+  - assign:
+      en: Around 15 farms, build the 2nd stable so you produce from both
+      tr: Yaklaşık 15 tarlada 2. ahırı kur ki ikisinden birden üret
+    icons:
+      - stable
+      - farm
+  - villagers: 20
+    assign:
+      en: +2 → gold; research Bloodlines and pick up Blacksmith armor/attack
+      tr: +2 → altın; Bloodlines'ı araştır ve Demirci zırh/saldırı geliştirmelerini al
+    icons:
+      - gold
+      - bloodlines
+      - blacksmith
+  - assign:
+      en: At ~20 farms, research Wheelbarrow to keep the eco scaling with two stables
+      tr: ~20 tarlada Wheelbarrow'u araştır ki iki ahırla ekonomi ölçeklenmeye devam etsin
+    icons:
+      - farm
+intro:
+  en: >-
+    Land in Feudal at 18 pop around 8:50, then ramp into two stables so a steady stream of Scout Cavalry overwhelms the
+    opponent's economy.
+  tr: >-
+    8:50 civarında 18 nüfusla Feudal'a geç, sonra iki ahıra çıkarak sürekli Atlı Keşifçi akışıyla rakibin ekonomisini
+    ez.
+strategy:
+  en:
+    - >-
+      This is the higher-commitment cousin of the single-stable opening: the second stable doubles your scout output, so
+      the build only pays off if you keep both queues full and your TC busy at the same time. Floating resources here
+      means you bought the extra stable for nothing.
+    - >-
+      Use the first wave of scouts to find the enemy economy and harass exposed villagers, then time the second stable
+      to land just as your farm transition gives you the food to sustain double production.
+    - >-
+      Bloodlines and Blacksmith upgrades are the spikes that win these fights — fold them in once 7–8 scouts are already
+      out so you never stall military for tech.
+    - >-
+      Read your scout before adding spears: against an enemy scout opening, a handful of Spearmen plus your own scouts
+      win the trade, but against archers skip them and lean on numbers and walls instead.
+    - >-
+      Civ notes: Franks lack Bloodlines, so lean on Husbandry for speed and raw numbers; Huns skip houses entirely,
+      freeing wood to start the stables earlier; Magyars get cheaper scouts and a free attack upgrade that makes the
+      mass hit harder.
+    - >-
+      Default Castle Age follow-up is a smooth transition into Knights from the same two stables; keep the gold flowing
+      and add a third TC or more farms once the raiding has bought you map control.
+  tr:
+    - >-
+      Bu, tek ahırlı açılışın daha çok yatırım isteyen kuzenidir: ikinci ahır keşifçi üretimini ikiye katlar, bu yüzden
+      build ancak iki kuyruğu da dolu tutarsan ve aynı anda TC'yi meşgul edersen karşılığını verir. Burada kaynak
+      biriktirip durmak, fazladan ahırı boşuna kurdun demektir.
+    - >-
+      İlk keşifçi dalgasını rakibin ekonomisini bulmak ve açıktaki köylüleri taciz etmek için kullan; ardından ikinci
+      ahırı, tarla geçişinin çift üretimi besleyecek yiyeceği sağladığı ana denk getir.
+    - >-
+      Bloodlines ve Demirci geliştirmeleri bu çatışmaları kazandıran sıçramalardır — sahada zaten 7–8 keşifçi varken
+      bunları araya sok ki teknoloji için askeri üretimini asla durdurma.
+    - >-
+      Mızraklı eklemeden önce keşifçinin gördüğünü oku: rakip keşifçiyle açıyorsa bir avuç Mızraklı artı kendi
+      keşifçilerin takası kazanır, ama okçulara karşı mızraklıları atla ve sayı ile surlara güven.
+    - >-
+      Uygarlık notları: Franks'te Bloodlines yoktur, bu yüzden hız ve sayı üstünlüğü için Husbandry'ye yüklen; Huns ev
+      kurmadığı için açılan odunla ahırları daha erken başlatabilirsin; Magyars daha ucuz keşifçi ve kalabalığını daha
+      sert vurduran bedava bir saldırı geliştirmesi alır.
+    - >-
+      Varsayılan Castle çağı devamı, aynı iki ahırdan Şövalye'ye yumuşak bir geçiştir; altını akıtmaya devam et ve taciz
+      sana harita kontrolü kazandırdığında üçüncü bir TC veya daha fazla tarla ekle.

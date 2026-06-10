@@ -1,0 +1,160 @@
+slug: 28pop-turks-fast-imp
+name:
+  en: 28 Pop Turks Fast Imperial
+  tr: 28 Köylü Türkler Erken İmparatorluk
+difficulty: advanced
+targetAge: imperial
+durationMin: 20
+civsRecommended:
+  - turks
+steps:
+  - villagers: 6
+    assign:
+      en: 6 → sheep under the TC
+      tr: 6 → TC altında koyunlara
+    icons:
+      - food
+      - town-center
+  - villagers: 10
+    assign:
+      en: +4 → wood, build Lumber Camp
+      tr: +4 → oduna, Lumber Camp kur
+    icons:
+      - wood
+      - lumber-camp
+  - villagers: 11
+    assign:
+      en: +1 → lure the first boar to the TC
+      tr: +1 → ilk domuzu TC'ye çek
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build House then Mill, gather berries
+      tr: +1 → House sonra Mill kur, meyve topla
+    icons:
+      - mill
+      - food
+  - villagers: 14
+    assign:
+      en: +2 → berries
+      tr: +2 → meyveye
+    icons:
+      - food
+  - villagers: 15
+    assign:
+      en: +1 → lure the second boar (also push 3 deer to the TC)
+      tr: +1 → ikinci domuzu çek (ayrıca 3 geyiği TC'ye it)
+    icons:
+      - food
+  - villagers: 16
+    assign:
+      en: +1 → build House then add to berries (4 total)
+      tr: +1 → House kur sonra meyveye ekle (toplam 4)
+    icons:
+      - house
+      - food
+  - villagers: 19
+    assign:
+      en: +3 → food under the TC (eat through hunt and sheep)
+      tr: +3 → TC altında yiyeceğe (av ve koyunu tüket)
+    icons:
+      - food
+  - villagers: 23
+    assign:
+      en: +4 → wood; seed Farms as the sheep run out
+      tr: +4 → oduna; koyun bitince Farm ekmeye başla
+    icons:
+      - wood
+      - farm
+  - villagers: 28
+    phase: feudal
+    time: "12:35"
+    assign:
+      en: +5 → gold, click Feudal Age
+      tr: +5 → altına, Feudal Age'e tıkla
+    note:
+      en: Land Feudal ~12:35 with roughly 8 wood / 15 food / 5 gold
+      tr: ~12:35'te yaklaşık 8 odun / 15 yiyecek / 5 altın ile Feudal'a geç
+    icons:
+      - gold
+      - feudal-age
+  - villagers: 30
+    assign:
+      en: "Feudal: 1 → Blacksmith, 2 → Market; +2 → gold; research Double-Bit Axe"
+      tr: "Feudal: 1 → Blacksmith, 2 → Market; +2 → altına; Double-Bit Axe araştır"
+    icons:
+      - blacksmith
+      - market
+      - double-bit-axe
+  - phase: castle
+    time: "16:05"
+    assign:
+      en: Sell 200 stone, click Castle Age
+      tr: 200 taş sat, Castle Age'e tıkla
+    icons:
+      - castle-age
+      - gold
+  - villagers: 32
+    assign:
+      en: "Castle: builders → Farms, research Gold Mining; build Siege Workshop + Monastery"
+      tr: "Castle: inşaatçılar → Farm, Gold Mining araştır; Siege Workshop + Manastır kur"
+    icons:
+      - siege-workshop
+      - monastery
+      - gold-mining
+  - phase: imperial
+    time: "20:05"
+    assign:
+      en: Add a second Mining Camp, click Imperial Age
+      tr: İkinci Mining Camp kur, Imperial Age'e tıkla
+    icons:
+      - imperial-age
+      - mining-camp
+  - assign:
+      en: "Imperial: buy wood, build Barracks + 2 Archery Ranges; mass Hand Cannoneers + 1-2 Bombard Cannons"
+      tr: "Imperial: odun al, Barracks + 2 Archery Range kur; El Topçusu + 1-2 Bombard Cannon yığ"
+    icons:
+      - archery-range
+      - hand-cannoneer
+      - bombard-cannon
+intro:
+  en: Rush to Imperial Age around the 20-minute mark and flood the field with instant gunpowder.
+  tr: Yaklaşık 20. dakikada İmparatorluk Çağı'na koş ve sahayı anında barutlu birliklerle doldur.
+strategy:
+  en:
+    - >-
+      This is a greedy, economy-first plan: no Feudal or Castle military, just a clean climb to Imperial powered by
+      selling stone and a fast gold transition. It rewards a safe or walled base where the passive economy is hard to
+      punish.
+    - >-
+      Turks get Chemistry for free, so Hand Cannoneers and Bombard Cannons arrive the instant you hit Imperial — there
+      is no awkward gunpowder research delay. Pump Hand Cannoneers from the two Archery Ranges and add one or two
+      Bombard Cannons for siege.
+    - >-
+      Keep buying wood and seeding Farms through the transition; your bottleneck is wood for production buildings, not
+      food. The free, faster gold mining keeps a heavy gunpowder army affordable.
+    - >-
+      Use the Monastery to heal damaged Hand Cannoneers and pick up a relic or two for trickle gold. Protect the Bombard
+      Cannons at all costs — losing them stalls your siege answer.
+    - >-
+      Weak to early Feudal or Castle aggression that cracks the unwalled economy, and to mass Mangonels or Siege Onagers
+      that punish clumped Hand Cannoneers. Spread your gunpowder and add Light Cavalry to snipe enemy siege.
+  tr:
+    - >-
+      Bu açgözlü, ekonomi öncelikli bir plandır: Feudal veya Castle'da asker yoktur, sadece taş satışı ve hızlı altın
+      geçişiyle desteklenen temiz bir İmparatorluk tırmanışı vardır. Pasif ekonominin cezalandırılmasının zor olduğu
+      güvenli veya duvarlı bir üs ister.
+    - >-
+      Türkler Chemistry'yi ücretsiz aldığı için, İmparatorluk'a basar basmaz El Topçusu ve Bombard Cannon hazır gelir —
+      barut araştırması için sıkıntılı bir bekleme yoktur. İki Archery Range'den El Topçusu bas, kuşatma için bir veya
+      iki Bombard Cannon ekle.
+    - >-
+      Geçiş boyunca odun almaya ve Farm ekmeye devam et; darboğazın yiyecek değil, üretim binaları için odundur.
+      Ücretsiz ve daha hızlı altın madenciliği, ağır barut ordusunu karşılanabilir kılar.
+    - >-
+      Hasarlı El Topçularını iyileştirmek için Manastır'ı kullan ve damlama altın için bir iki kalıntı topla. Bombard
+      Cannon'ları ne pahasına olursa olsun koru — onları kaybetmek kuşatma cevabını durdurur.
+    - >-
+      Duvarsız ekonomiyi kıran erken Feudal veya Castle saldırılarına ve kümelenmiş El Topçularını cezalandıran toplu
+      Mangonel veya Siege Onager'a karşı zayıftır. Barutunu yay ve düşman kuşatmasını avlamak için Light Cavalry ekle.
