@@ -177,7 +177,7 @@ const more = [
               <span class="mt-3 block text-sm font-medium text-stone-700">
                 {a.count !== null ? (
                   <>
-                    <span class="font-mono text-gold-500">{a.count}</span> {t(lang, a.countLabel)}
+                    <span class="font-mono text-gold-700">{a.count}</span> {t(lang, a.countLabel)}
                   </>
                 ) : (
                   t(lang, a.countLabel)
@@ -201,7 +201,7 @@ const more = [
         </div>
         <a
           href={localizedPath("/civs", lang)}
-          class="inline-flex items-center gap-1 text-sm font-medium text-gold-500 hover:underline"
+          class="inline-flex items-center gap-1 text-sm font-medium text-gold-700 hover:underline"
         >
           {t(lang, "home.viewAll")}
           <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
@@ -219,7 +219,7 @@ const more = [
             />
             {meta?.tier && (
               <p class="px-1 text-xs text-stone-700">
-                <span class="font-mono text-gold-500">
+                <span class="font-mono text-gold-700">
                   {t(lang, "matchups.tier")} {meta.tier}
                 </span>
               </p>
@@ -241,7 +241,7 @@ const more = [
         </div>
         <a
           href={localizedPath("/builds", lang)}
-          class="inline-flex items-center gap-1 text-sm font-medium text-gold-500 hover:underline"
+          class="inline-flex items-center gap-1 text-sm font-medium text-gold-700 hover:underline"
         >
           {t(lang, "home.viewAll")}
           <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
@@ -294,7 +294,7 @@ const more = [
         </div>
         <a
           href={localizedPath("/maps", lang)}
-          class="inline-flex items-center gap-1 text-sm font-medium text-gold-500 hover:underline"
+          class="inline-flex items-center gap-1 text-sm font-medium text-gold-700 hover:underline"
         >
           {t(lang, "home.viewAll")}
           <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
