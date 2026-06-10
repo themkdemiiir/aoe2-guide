@@ -1,17 +1,21 @@
 /*
   X-Content-Type-Options: nosniff
+  X-XSS-Protection: 0
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Cross-Origin-Opener-Policy: same-origin
+  # Enforcing CSP — was Report-Only. 'unsafe-inline' in script-src is required for
+  # Astro's inline scripts (theme detection, pages.dev redirect). script-src-attr
+  # 'none' blocks inline HTML event-handler attributes as a separate attack vector.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 # Astro fingerprints these filenames by content hash → safe to cache forever.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Static icon/image assets — not content-hashed, but stable; cache 30 days and
-# revalidate in the background so repeat visits don't re-fetch every PNG.
+# Static assets — not content-hashed but stable; 30-day cache with background revalidation.
 /images/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 /og/*
@@ -20,7 +24,6 @@
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
-# Favicon/app icons — immutable (change the filename to bust cache)
 /favicon.svg
   Cache-Control: public, max-age=31536000, immutable
 /favicon.png
