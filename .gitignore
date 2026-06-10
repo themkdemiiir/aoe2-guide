@@ -3,6 +3,8 @@ dist/
 .astro/
 # Generated build-time Open Graph cards (scripts/build-og.mjs) — regenerated each build.
 public/og/
+# Generated WebP variants of civ icons (scripts/optimize-images.mjs) — regenerated each build.
+public/images/aoe2/Civs/*.webp
 .env
 .env.*
 !.env.example

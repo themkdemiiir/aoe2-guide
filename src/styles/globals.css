@@ -1,6 +1,5 @@
 /* Critical faces (Inter 400, Cinzel 600) are self-hosted below + preloaded in
    BaseLayout; the rest stay on @fontsource. */
-@import "@fontsource/cinzel/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/700.css";
 @import "@fontsource/jetbrains-mono/400.css";

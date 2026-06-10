@@ -20,7 +20,18 @@ const frameSize = size + 6;
 {src ? (
   <span class={`inline-flex items-center justify-center align-middle ${framed ? "rounded border border-stone-700/40 bg-parchment/40 p-0.5" : ""}`}
         style={`width:${frameSize}px;height:${frameSize}px;`}>
-    <img src={src} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+    {kind === "civ" ? (
+      <picture>
+        <source
+          type="image/webp"
+          srcset={`${src.replace('.png', '-24.webp')} 24w, ${src.replace('.png', '-64.webp')} 64w, ${src.replace('.png', '-108.webp')} 108w`}
+          sizes={`${size}px`}
+        />
+        <img src={src} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+      </picture>
+    ) : (
+      <img src={src} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+    )}
   </span>
 ) : (
   <span class="inline-flex items-center justify-center rounded border border-dashed border-royal/50 bg-parchment/30 px-1 align-middle text-xs text-royal"
