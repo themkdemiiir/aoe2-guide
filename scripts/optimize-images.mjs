@@ -1,8 +1,6 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const sharp = require("sharp");
-import { readdirSync } from "fs";
-import { join } from "path";
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+import sharp from "sharp";
 
 const CIVS_DIR = "public/images/aoe2/Civs";
 const SIZES = [24, 64, 108];
