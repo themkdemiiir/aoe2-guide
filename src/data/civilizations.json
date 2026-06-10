@@ -2,10 +2,38 @@
   "patch": "v100.1.84",
   "civs": [
     {
+      "slug": "achaemenids",
+      "region": "Ancient Middle Eastern",
+      "specialty": "Cavalry",
+      "uniqueUnits": [
+        "immortal"
+      ],
+      "civBonuses": [
+        "Stable units -15% cost",
+        "Cavalry +2 LOS",
+        "Town Centers support +5 population",
+        "Fishing Ships +2 HP per second"
+      ],
+      "teamBonus": "Cavalry +1 armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Persian Nobility",
+          "effect": "Knight line +2 attack"
+        },
+        "imperial": {
+          "name": "Royal Tithe",
+          "effect": "Relics generate +100% gold"
+        }
+      },
+      "regionNoun": "the Ancient Middle East"
+    },
+    {
       "slug": "armenians",
       "region": "Caucasian",
       "specialty": "Infantry and Cavalry",
-      "uniqueUnits": ["composite-bowman"],
+      "uniqueUnits": [
+        "composite-bowman"
+      ],
       "civBonuses": [
         "Mule Carts cost -25%",
         "Mule Cart technologies are +40% more effective",
@@ -17,28 +45,48 @@
       "uniqueTechs": {
         "castle": {
           "name": "Cilician Fleet",
-          "effect": "Galleys +2 range"
+          "effect": "Demolition Ships +20% blast radius; Galley-line and Dromons +1 range"
         },
         "imperial": {
-          "name": "Fereters",
-          "effect": "Monks walk faster and carry Relics at full speed"
+          "name": "Fereters (Infantry (except Spearman-line) +30 HP; Warrior Priests heal +100% faster)",
+          "effect": ""
         }
       },
-      "meta": {
-        "winRate": 51.62,
-        "playRate": 1.98,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      },
       "regionNoun": "the Caucasus"
+    },
+    {
+      "slug": "athenians",
+      "region": "Ancient Mediterranean",
+      "specialty": "Naval and Archer",
+      "uniqueUnits": [
+        "hoplite"
+      ],
+      "civBonuses": [
+        "Ships +2 armor",
+        "Docks work 20% faster",
+        "Archers +1 attack",
+        "Town Centers +5 LOS"
+      ],
+      "teamBonus": "Docks work 10% faster",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Athenian Democracy",
+          "effect": "Archers +1 range"
+        },
+        "imperial": {
+          "name": "Themistocles",
+          "effect": "War Galleys attack 15% faster"
+        }
+      },
+      "regionNoun": "the Ancient Mediterranean"
     },
     {
       "slug": "aztecs",
       "region": "Mesoamerican",
       "specialty": "Infantry and Monk",
-      "uniqueUnits": ["jaguar-warrior"],
+      "uniqueUnits": [
+        "jaguar-warrior"
+      ],
       "civBonuses": [
         "Start with +50 gold",
         "Villagers carry +3",
@@ -48,21 +96,13 @@
       "teamBonus": "Relics generate +33% gold",
       "uniqueTechs": {
         "castle": {
-          "name": "Garland Wars",
-          "effect": "Infantry +4 attack"
-        },
-        "imperial": {
           "name": "Atlatl",
           "effect": "Skirmishers +1 attack, +1 range"
+        },
+        "imperial": {
+          "name": "Garland Wars",
+          "effect": "Infantry +4 attack"
         }
-      },
-      "meta": {
-        "winRate": 48.86,
-        "playRate": 1.55,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Mesoamerica"
     },
@@ -70,7 +110,9 @@
       "slug": "bengalis",
       "region": "South Asian",
       "specialty": "Elephant and Naval",
-      "uniqueUnits": ["ratha"],
+      "uniqueUnits": [
+        "ratha"
+      ],
       "civBonuses": [
         "Town Centers spawn 2 Villagers when the next Age is reached",
         "Cavalry +2 attack vs. Skirmishers",
@@ -82,20 +124,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Paiks",
-          "effect": "Ratha and Elephant Archer attack 18% faster"
+          "effect": "Rathas and Elephant Units attack +20% faster"
         },
         "imperial": {
           "name": "Mahayana",
-          "effect": "Villagers take up 0.5 less population"
+          "effect": "Villagers and Monks take -10% population space"
         }
-      },
-      "meta": {
-        "winRate": 50.01,
-        "playRate": 0.99,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South Asia"
     },
@@ -103,7 +137,10 @@
       "slug": "berbers",
       "region": "North African",
       "specialty": "Cavalry and Naval",
-      "uniqueUnits": ["camel-archer", "genitour"],
+      "uniqueUnits": [
+        "camel-archer",
+        "genitour"
+      ],
       "civBonuses": [
         "Villagers move +5% faster in Dark Age, +10% faster starting in Feudal Age",
         "Stable Units cost -15/20% in Castle/Imperial Age",
@@ -113,20 +150,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Kasbah",
-          "effect": ""
+          "effect": "Team Castles work +25% faster"
         },
         "imperial": {
-          "name": "Maghrabi Camels",
-          "effect": ""
+          "name": "Maghrebi Camels",
+          "effect": "Camel Units regenerate 15 HP per minute"
         }
-      },
-      "meta": {
-        "winRate": 48.95,
-        "playRate": 1.37,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "North Africa"
     },
@@ -134,7 +163,9 @@
       "slug": "bohemians",
       "region": "Eastern European",
       "specialty": "Gunpowder and Monk",
-      "uniqueUnits": ["hussite-wagon"],
+      "uniqueUnits": [
+        "hussite-wagon"
+      ],
       "civBonuses": [
         "Mining Camp technologies free",
         "Blacksmiths and Universities cost -100 wood",
@@ -146,28 +177,22 @@
       "uniqueTechs": {
         "castle": {
           "name": "Wagenburg Tactics",
-          "effect": "Gunpowder units +1 speed"
+          "effect": "Gunpowder Units move +15% faster"
         },
         "imperial": {
           "name": "Hussite Reforms",
-          "effect": "Monks and Monasteries provide gold like a Relic"
+          "effect": "Monks and Monastery technologies gold cost is replaced by food cost"
         }
-      },
-      "meta": {
-        "winRate": 49.56,
-        "playRate": 1.97,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Eastern Europe"
     },
     {
       "slug": "britons",
       "region": "Western European",
-      "specialty": "Archer",
-      "uniqueUnits": ["longbowman"],
+      "specialty": "Foot Archer",
+      "uniqueUnits": [
+        "longbowman"
+      ],
       "civBonuses": [
         "Shepherds work +25% faster",
         "Town Centers cost -50% wood starting in Castle Age",
@@ -177,20 +202,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Yeomen",
-          "effect": "Foot archers +1 range; Towers +2 attack"
+          "effect": "Foot Archers and Skirmisher-line +1 range; Watch Tower-line +2 attack"
         },
         "imperial": {
           "name": "Warwolf",
-          "effect": "Trebuchets do blast damage; never miss against units"
+          "effect": "Trebuchets deal blast damage and are more accurate"
         }
-      },
-      "meta": {
-        "winRate": 47.22,
-        "playRate": 3.12,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Western Europe"
     },
@@ -198,7 +215,9 @@
       "slug": "bulgarians",
       "region": "Eastern European",
       "specialty": "Cavalry and Siege",
-      "uniqueUnits": ["konnik"],
+      "uniqueUnits": [
+        "konnik"
+      ],
       "civBonuses": [
         "Militia-line upgrades free",
         "Blacksmith and Siege Workshop technologies cost -50% food",
@@ -209,20 +228,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Stirrups",
-          "effect": "Cavalry units attack 33% faster"
+          "effect": "Cavalry attacks +33% faster"
         },
         "imperial": {
           "name": "Bagains",
-          "effect": "Militia line +5 melee armor"
+          "effect": "Militia-line +5 melee armor"
         }
-      },
-      "meta": {
-        "winRate": 53.41,
-        "playRate": 2.21,
-        "tier": "S",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Eastern Europe"
     },
@@ -230,7 +241,9 @@
       "slug": "burgundians",
       "region": "Western European",
       "specialty": "Cavalry",
-      "uniqueUnits": ["coustillier"],
+      "uniqueUnits": [
+        "coustillier"
+      ],
       "civBonuses": [
         "Economic upgrades available one age earlier and cost -33% food",
         "Stable technologies cost -50%",
@@ -241,20 +254,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Burgundian Vineyards",
-          "effect": "Farms slowly generate gold in addition to food"
+          "effect": "Farmers slowly generate gold in addition to food"
         },
         "imperial": {
           "name": "Flemish Revolution",
-          "effect": "Instantly convert all Villagers into Flemish Militia; Flemish Militia available at Barracks"
+          "effect": "All existing Villagers are transformed to Flemish Militia"
         }
-      },
-      "meta": {
-        "winRate": 49,
-        "playRate": 2.2,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Western Europe"
     },
@@ -262,7 +267,9 @@
       "slug": "burmese",
       "region": "Southeast Asian",
       "specialty": "Monk and Elephant",
-      "uniqueUnits": ["arambai"],
+      "uniqueUnits": [
+        "arambai"
+      ],
       "civBonuses": [
         "Lumber Camp technologies free",
         "Infantry +1/+2/+3 attack in Feudal/Castle/Imperial Age",
@@ -272,21 +279,13 @@
       "teamBonus": "Relics visible on the map at the start of the game",
       "uniqueTechs": {
         "castle": {
-          "name": "Howdah",
-          "effect": ""
+          "name": "Manipur Cavalry",
+          "effect": "Cavalry +4 attack vs. Ranged Soldiers"
         },
         "imperial": {
-          "name": "Manipur Cavalry",
-          "effect": ""
+          "name": "Howdah",
+          "effect": "Battle Elephants +1 melee/+1 pierce armor"
         }
-      },
-      "meta": {
-        "winRate": 48.53,
-        "playRate": 0.98,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Southeast Asia"
     },
@@ -294,7 +293,9 @@
       "slug": "byzantines",
       "region": "Eastern Mediterranean",
       "specialty": "Defensive",
-      "uniqueUnits": ["cataphract"],
+      "uniqueUnits": [
+        "cataphract"
+      ],
       "civBonuses": [
         "Buildings +10/20/30/40% HP in Dark/Feudal/Castle/Imperial Age",
         "Camel Riders, Skirmishers and Spearman-line cost -25%",
@@ -306,20 +307,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Greek Fire",
-          "effect": "Fire Ships +1 range"
+          "effect": "Fire Ships +1 range; Dromons and Bombard Towers increased blast radius"
         },
         "imperial": {
           "name": "Logistica",
-          "effect": "Cataphracts deal trample damage; +6 attack vs. infantry"
+          "effect": "Cataphracts deal trample damage, +6 attack vs. Infantry"
         }
-      },
-      "meta": {
-        "winRate": 46.98,
-        "playRate": 2.61,
-        "tier": "D",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "the Eastern Mediterranean"
     },
@@ -327,7 +320,9 @@
       "slug": "celts",
       "region": "Western European",
       "specialty": "Infantry",
-      "uniqueUnits": ["woad-raider"],
+      "uniqueUnits": [
+        "woad-raider"
+      ],
       "civBonuses": [
         "Lumberjacks work +15% faster",
         "Livestock animals within Celt unit line of sight cannot be stolen",
@@ -337,21 +332,13 @@
       "teamBonus": "Siege Workshops work +20% faster",
       "uniqueTechs": {
         "castle": {
-          "name": "Furor Celtica",
-          "effect": ""
+          "name": "Stronghold",
+          "effect": "Castles and Watch Tower-line attack +33% faster; Castles heal allied Infantry in a 7 tile radius"
         },
         "imperial": {
-          "name": "Stronghold",
-          "effect": "Castles and Towers fire twice as fast"
+          "name": "Furor Celtica",
+          "effect": "Siege Weapons +40% HP"
         }
-      },
-      "meta": {
-        "winRate": 50.04,
-        "playRate": 1.76,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Western Europe"
     },
@@ -359,7 +346,9 @@
       "slug": "chinese",
       "region": "East Asian",
       "specialty": "Archer",
-      "uniqueUnits": ["chu-ko-nu"],
+      "uniqueUnits": [
+        "chu-ko-nu"
+      ],
       "civBonuses": [
         "Start with +3 Villagers, but -50 wood and -200 food",
         "Technologies cost -5/10/15% in Feudal/Castle/Imperial Age",
@@ -369,21 +358,13 @@
       "teamBonus": "Farms +10% food",
       "uniqueTechs": {
         "castle": {
-          "name": "Rocketry",
-          "effect": ""
+          "name": "Great Wall",
+          "effect": "Walls, Watch Tower-line and Bombard Towers +30% HP"
         },
         "imperial": {
           "name": "Rocketry",
-          "effect": "Chu Ko Nu +2 attack; Scorpions +4 attack"
+          "effect": "Scorpions, Rocket Carts and Lou Chuans +25% attack; Lou Chuans fire rockets"
         }
-      },
-      "meta": {
-        "winRate": 48.9,
-        "playRate": 2.03,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
@@ -391,7 +372,9 @@
       "slug": "cumans",
       "region": "Central Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": ["kipchak"],
+      "uniqueUnits": [
+        "kipchak"
+      ],
       "civBonuses": [
         "One additional Town Center can be built in Feudal Age",
         "Mounted Units move +5/10/15% faster in Feudal/",
@@ -402,20 +385,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Steppe Husbandry",
-          "effect": "Scout Cavalry line and Kipchaks train +100% faster"
+          "effect": "Scout Cavalry-line, Steppe Lancers and Cavalry Archers train +100% faster"
         },
         "imperial": {
           "name": "Cuman Mercenaries",
-          "effect": "Team can build 10 free Kipchaks (once)"
+          "effect": "All team members can train 5 free Elite Kipchaks per Castle"
         }
-      },
-      "meta": {
-        "winRate": 48.98,
-        "playRate": 2.03,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Central Asia"
     },
@@ -423,7 +398,9 @@
       "slug": "dravidians",
       "region": "South Asian",
       "specialty": "Infantry and Naval",
-      "uniqueUnits": ["urumi-swordsman"],
+      "uniqueUnits": [
+        "urumi-swordsman"
+      ],
       "civBonuses": [
         "Fishermen and Fishing Ships carry +15",
         "Receive +200 wood when advancing to the next Age",
@@ -435,20 +412,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Medical Corps",
-          "effect": "Battle Elephants regenerate HP"
+          "effect": "Elephant Units regenerate 30 HP per minute"
         },
         "imperial": {
           "name": "Wootz Steel",
-          "effect": "Melee infantry and cavalry attacks ignore armor"
+          "effect": "Infantry and Cavalry attacks ignore armor"
         }
-      },
-      "meta": {
-        "winRate": 48.94,
-        "playRate": 0.85,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South Asia"
     },
@@ -456,7 +425,9 @@
       "slug": "ethiopians",
       "region": "East African",
       "specialty": "Archer",
-      "uniqueUnits": ["shotel-warrior"],
+      "uniqueUnits": [
+        "shotel-warrior"
+      ],
       "civBonuses": [
         "Receive +100 gold and +100 food when advancing to the next Age",
         "Foot Archers attack +18% faster",
@@ -465,21 +436,13 @@
       "teamBonus": "Outposts +3 line of sight and cost no stone",
       "uniqueTechs": {
         "castle": {
-          "name": "Royals Heirs",
-          "effect": ""
+          "name": "Royal Heirs",
+          "effect": "Shotel Warriors and Camel Riders receive -3 damage from Mounted Units"
         },
         "imperial": {
           "name": "Torsion Engines",
-          "effect": ""
+          "effect": "Siege Workshop Units' blast radius increased"
         }
-      },
-      "meta": {
-        "winRate": 50.15,
-        "playRate": 2.54,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Africa"
     },
@@ -487,7 +450,9 @@
       "slug": "franks",
       "region": "Western European",
       "specialty": "Cavalry",
-      "uniqueUnits": ["throwing-axeman"],
+      "uniqueUnits": [
+        "throwing-axeman"
+      ],
       "civBonuses": [
         "Foragers work +15% faster",
         "Mill technologies free",
@@ -498,20 +463,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Bearded Axe",
-          "effect": ""
+          "effect": "Throwing Axemen +2 range"
         },
         "imperial": {
           "name": "Chivalry",
-          "effect": "Stables work 40% faster"
+          "effect": "Stables work +40% faster"
         }
-      },
-      "meta": {
-        "winRate": 50.2,
-        "playRate": 4.93,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Western Europe"
     },
@@ -519,7 +476,9 @@
       "slug": "georgians",
       "region": "Caucasian",
       "specialty": "Infantry and Cavalry",
-      "uniqueUnits": ["monaspa"],
+      "uniqueUnits": [
+        "monaspa"
+      ],
       "civBonuses": [
         "Start with a Mule Cart",
         "Units and buildings receive -15% damage when located on higher elevation",
@@ -530,20 +489,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Svan Towers",
-          "effect": "Towers +1 attack per 2 garrisoned units"
+          "effect": "Fortifications +2 attack; Watch Tower-line deals pass through damage"
         },
         "imperial": {
           "name": "Aznauri Cavalry",
-          "effect": "Monaspa heal nearby cavalry"
+          "effect": "Mounted Units take -20% population space"
         }
-      },
-      "meta": {
-        "winRate": 46.78,
-        "playRate": 1,
-        "tier": "D",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "the Caucasus"
     },
@@ -551,7 +502,9 @@
       "slug": "goths",
       "region": "Northern European",
       "specialty": "Infantry",
-      "uniqueUnits": ["huskarl"],
+      "uniqueUnits": [
+        "huskarl"
+      ],
       "civBonuses": [
         "Loom is researched instantly",
         "Hunters carry +15; hunted animals last +20% longer",
@@ -563,20 +516,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Anarchy",
-          "effect": ""
+          "effect": "Huskarls can be trained at Barracks"
         },
         "imperial": {
           "name": "Perfusion",
-          "effect": ""
+          "effect": "Barracks work +100% faster"
         }
-      },
-      "meta": {
-        "winRate": 50.17,
-        "playRate": 2.17,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Northern Europe"
     },
@@ -584,7 +529,9 @@
       "slug": "gurjaras",
       "region": "South Asian",
       "specialty": "Cavalry and Naval",
-      "uniqueUnits": ["shrivamsha-rider"],
+      "uniqueUnits": [
+        "shrivamsha-rider"
+      ],
       "civBonuses": [
         "Start with 2 Forage Bushes",
         "Can garrison livestock in Mills to passively produce food",
@@ -595,20 +542,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Kshatriyas",
-          "effect": "Military units cost -25% food"
+          "effect": "Military Units cost -25% food"
         },
         "imperial": {
           "name": "Frontier Guards",
           "effect": "Camel Riders and Elephant Archers +4 melee armor"
         }
-      },
-      "meta": {
-        "winRate": 47.2,
-        "playRate": 1.02,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South Asia"
     },
@@ -616,7 +555,10 @@
       "slug": "hindustanis",
       "region": "South Asian",
       "specialty": "Gunpowder and Cavalry",
-      "uniqueUnits": ["elephant-archer", "imperial-camel"],
+      "uniqueUnits": [
+        "elephant-archer",
+        "imperial-camel"
+      ],
       "civBonuses": [
         "Villagers cost -8/13/18/23% in Dark/Feudal/Castle/",
         "Camel Riders attack +20% faster",
@@ -626,21 +568,13 @@
       "teamBonus": "Scout Cavalry-line and Camel Units +2 attack vs. buildings",
       "uniqueTechs": {
         "castle": {
-          "name": "Sultans",
-          "effect": ""
+          "name": "Grand Trunk Road",
+          "effect": "All gold income +10% faster; Market trading fee reduced to 10%"
         },
         "imperial": {
           "name": "Shatagni",
-          "effect": ""
+          "effect": "Hand Cannoneers +2 range"
         }
-      },
-      "meta": {
-        "winRate": 51.99,
-        "playRate": 1.89,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South Asia"
     },
@@ -648,7 +582,9 @@
       "slug": "huns",
       "region": "Central Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": ["tarkan"],
+      "uniqueUnits": [
+        "tarkan"
+      ],
       "civBonuses": [
         "Do not need houses, but start with -100 wood",
         "Cavalry Archers cost -10/20% in Castle/Imperial Age",
@@ -658,21 +594,13 @@
       "teamBonus": "Stables work +20% faster",
       "uniqueTechs": {
         "castle": {
-          "name": "Atheism",
-          "effect": ""
-        },
-        "imperial": {
           "name": "Marauders",
           "effect": "Tarkans can be trained at Stables"
+        },
+        "imperial": {
+          "name": "Atheism",
+          "effect": "Enemy Relics generate -50% resources; Wonder and Relic victory takes +100 years"
         }
-      },
-      "meta": {
-        "winRate": 50.28,
-        "playRate": 2.52,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Central Asia"
     },
@@ -680,7 +608,10 @@
       "slug": "incas",
       "region": "South American",
       "specialty": "Infantry",
-      "uniqueUnits": ["kamayuk", "slinger"],
+      "uniqueUnits": [
+        "kamayuk",
+        "slinger"
+      ],
       "civBonuses": [
         "Houses and Settlements provide +5 population space",
         "Buildings cost -15% stone",
@@ -690,21 +621,13 @@
       "teamBonus": "Start with a free Llama",
       "uniqueTechs": {
         "castle": {
-          "name": "Couriers",
-          "effect": ""
+          "name": "Andean Sling",
+          "effect": "Skirmishers and Slingers no minimum range; Slingers +1 attack"
         },
         "imperial": {
-          "name": "Andean Sling",
-          "effect": ""
+          "name": "Fabric Shields",
+          "effect": "Kamayuks, Slingers and Champi Warriors +1 melee/+1 pierce armor"
         }
-      },
-      "meta": {
-        "winRate": 51.05,
-        "playRate": 1.38,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South America"
     },
@@ -712,7 +635,10 @@
       "slug": "italians",
       "region": "Southern European",
       "specialty": "Archer and Naval",
-      "uniqueUnits": ["genoese-crossbowman", "condottiero"],
+      "uniqueUnits": [
+        "genoese-crossbowman",
+        "condottiero"
+      ],
       "civBonuses": [
         "Advancing to the next Age costs -15%",
         "Foot Archers and Condottieri +1 melee/+1 pierce armor",
@@ -723,21 +649,13 @@
       "teamBonus": "Condottiero available at the Barracks in Imperial Age",
       "uniqueTechs": {
         "castle": {
-          "name": "Pavise",
-          "effect": ""
+          "name": "Silk Road",
+          "effect": "Trade Units cost -50%"
         },
         "imperial": {
-          "name": "Silk Road",
-          "effect": ""
+          "name": "Pirotechnia",
+          "effect": "Hand Cannoneers deal +15% pass through damage and are more accurate"
         }
-      },
-      "meta": {
-        "winRate": 49.85,
-        "playRate": 1.68,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Southern Europe"
     },
@@ -745,7 +663,9 @@
       "slug": "japanese",
       "region": "East Asian",
       "specialty": "Infantry",
-      "uniqueUnits": ["samurai"],
+      "uniqueUnits": [
+        "samurai"
+      ],
       "civBonuses": [
         "Mills, Lumber- and Mining Camps cost -50%",
         "Infantry attacks +33% faster starting in Feudal Age",
@@ -755,21 +675,13 @@
       "teamBonus": "Galley-line +4 line of sight",
       "uniqueTechs": {
         "castle": {
-          "name": "Kataparuto",
-          "effect": ""
+          "name": "Yasama",
+          "effect": "Watch Tower-line fires additional arrows"
         },
         "imperial": {
-          "name": "Yasama",
-          "effect": "Towers can fire extra arrows"
+          "name": "Kataparuto",
+          "effect": "Trebuchets attack and pack/unpack faster"
         }
-      },
-      "meta": {
-        "winRate": 51.67,
-        "playRate": 2.55,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
@@ -777,7 +689,9 @@
       "slug": "jurchens",
       "region": "East Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": ["jurchen-knight"],
+      "uniqueUnits": [
+        "jurchen-knight"
+      ],
       "civBonuses": [
         "Meat of hunted and livestock animals doesn't decay",
         "Mounted Units and Fire Lancers attack +25% faster starting in Feudal Age",
@@ -788,29 +702,24 @@
       "teamBonus": "Gunpowder Units +2 line of sight",
       "uniqueTechs": {
         "castle": {
-          "name": "Jurchen Tactics",
-          "effect": "Cavalry +1 attack"
+          "name": "Fortified Bastions",
+          "effect": "Fortifications regenerate 500 HP per minute"
         },
         "imperial": {
-          "name": "Iron Riders",
-          "effect": "Cavalry Archers +2 attack"
+          "name": "Thunderclap Bombs",
+          "effect": "Rocket Carts, Grenadiers and Lou Chuans detonate when defeated; projectiles produce additional explosions"
         }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
     {
       "slug": "khitans",
       "region": "East Asian",
-      "specialty": "Cavalry Archer",
-      "uniqueUnits": ["khitan-lancer"],
+      "specialty": "Infantry and Cavalry",
+      "uniqueUnits": [
+        "liao-dao",
+        "mounted-trebuchet"
+      ],
       "civBonuses": [
         "Pastures replace Farms",
         "Melee attack upgrade effects are doubled",
@@ -820,21 +729,13 @@
       "teamBonus": "Infantry +2 attack vs. Ranged Soldiers",
       "uniqueTechs": {
         "castle": {
-          "name": "Khitan Cavalry",
-          "effect": "Cavalry +1 speed"
+          "name": "Lamellar Armor",
+          "effect": "Infantry and Skirmishers reflect 25% melee damage back to the attacker"
         },
         "imperial": {
-          "name": "Steppe Tactics",
-          "effect": "Cavalry Archers attack 15% faster"
+          "name": "Ordo Cavalry",
+          "effect": "Cavalry regenerates HP in combat"
         }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
@@ -842,7 +743,9 @@
       "slug": "khmer",
       "region": "Southeast Asian",
       "specialty": "Siege and Elephant",
-      "uniqueUnits": ["ballista-elephant"],
+      "uniqueUnits": [
+        "ballista-elephant"
+      ],
       "civBonuses": [
         "No buildings required to advance to the next Age or to unlock other buildings",
         "Farmers don't require Mills or Town Centers to drop off food",
@@ -853,20 +756,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Tusk Swords",
-          "effect": ""
+          "effect": "Battle Elephants +3 attack"
         },
         "imperial": {
           "name": "Double Crossbow",
-          "effect": ""
+          "effect": "Ballista Elephants and Scorpions fire an additional projectile"
         }
-      },
-      "meta": {
-        "winRate": 48.82,
-        "playRate": 3.09,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Southeast Asia"
     },
@@ -874,7 +769,10 @@
       "slug": "koreans",
       "region": "East Asian",
       "specialty": "Tower and Naval",
-      "uniqueUnits": ["war-wagon", "turtle-ship"],
+      "uniqueUnits": [
+        "war-wagon",
+        "turtle-ship"
+      ],
       "civBonuses": [
         "Stone miners work +20% faster",
         "Ranged Soldiers and Infantry cost -50% wood",
@@ -884,21 +782,13 @@
       "teamBonus": "Villagers +3 line of sight",
       "uniqueTechs": {
         "castle": {
-          "name": "Shinkichon",
-          "effect": ""
+          "name": "Eupseong",
+          "effect": "Watch Tower-line +2 range"
         },
         "imperial": {
-          "name": "Eupseong",
-          "effect": "Watch Towers and Guard Towers +2 range"
+          "name": "Shinkichon",
+          "effect": "Rocket Carts and Turtle Ships +1 range, fire additional projectiles"
         }
-      },
-      "meta": {
-        "winRate": 48.8,
-        "playRate": 1.9,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
@@ -906,7 +796,9 @@
       "slug": "lithuanians",
       "region": "Eastern European",
       "specialty": "Cavalry and Monk",
-      "uniqueUnits": ["leitis"],
+      "uniqueUnits": [
+        "leitis"
+      ],
       "civBonuses": [
         "Each Town Center provides +100 food",
         "Spearman-line and Skirmisher-line move +10% faster",
@@ -916,28 +808,48 @@
       "uniqueTechs": {
         "castle": {
           "name": "Hill Forts",
-          "effect": "Town Centers +3 attack"
+          "effect": "Town Centers +3 range"
         },
         "imperial": {
           "name": "Tower Shields",
-          "effect": "Spearman line and Skirmishers +2 pierce armor"
+          "effect": "Spearman-line and Skirmishers +2 pierce armor"
         }
       },
-      "meta": {
-        "winRate": 48.83,
-        "playRate": 2.31,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      },
       "regionNoun": "Eastern Europe"
+    },
+    {
+      "slug": "macedonians",
+      "region": "Ancient Mediterranean",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "phalangite"
+      ],
+      "civBonuses": [
+        "Infantry +10 HP",
+        "Siege units -15% cost",
+        "Scout line +2 LOS",
+        "Monks require 4 units to convert"
+      ],
+      "teamBonus": "Infantry +1 pierce armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Sarissa",
+          "effect": "Spearman line +2 melee armor"
+        },
+        "imperial": {
+          "name": "Argyraspids",
+          "effect": "Infantry attack 10% faster"
+        }
+      },
+      "regionNoun": "the Ancient Mediterranean"
     },
     {
       "slug": "magyars",
       "region": "Eastern European",
       "specialty": "Cavalry and Infantry",
-      "uniqueUnits": ["magyar-huszar"],
+      "uniqueUnits": [
+        "magyar-huszar"
+      ],
       "civBonuses": [
         "Villagers defeat wolves with one strike",
         "Scout Cavalry-line costs -15%",
@@ -946,21 +858,13 @@
       "teamBonus": "Mounted Archers train +25% faster",
       "uniqueTechs": {
         "castle": {
-          "name": "Mercenaries",
-          "effect": ""
+          "name": "Corvinian Army",
+          "effect": "Magyar Huszar gold cost is replaced by additional food cost"
         },
         "imperial": {
-          "name": "Recursive Bow",
-          "effect": ""
+          "name": "Recurve Bow",
+          "effect": "Mounted Archers +1 attack, +1 range"
         }
-      },
-      "meta": {
-        "winRate": 50.49,
-        "playRate": 3.31,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Eastern Europe"
     },
@@ -968,7 +872,9 @@
       "slug": "malay",
       "region": "Southeast Asian",
       "specialty": "Naval",
-      "uniqueUnits": ["karambit-warrior"],
+      "uniqueUnits": [
+        "karambit-warrior"
+      ],
       "civBonuses": [
         "Advancing to the next Age is +66% faster",
         "Infantry armor upgrades free",
@@ -979,20 +885,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Thalassocracy",
-          "effect": ""
+          "effect": "Docks are upgraded to Harbors"
         },
         "imperial": {
           "name": "Forced Levy",
-          "effect": ""
+          "effect": "Militia-line gold cost is replaced by additional food cost"
         }
-      },
-      "meta": {
-        "winRate": 52.16,
-        "playRate": 1.46,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Southeast Asia"
     },
@@ -1000,7 +898,9 @@
       "slug": "malians",
       "region": "West African",
       "specialty": "Infantry",
-      "uniqueUnits": ["gbeto"],
+      "uniqueUnits": [
+        "gbeto"
+      ],
       "civBonuses": [
         "Buildings cost -15% wood",
         "Villagers drop off +10% more gold",
@@ -1010,20 +910,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Tigui",
-          "effect": ""
+          "effect": "Town Centers fire arrows without garrison"
         },
         "imperial": {
           "name": "Farimba",
-          "effect": ""
+          "effect": "Cavalry +5 attack"
         }
-      },
-      "meta": {
-        "winRate": 52.11,
-        "playRate": 1.62,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "West Africa"
     },
@@ -1031,7 +923,9 @@
       "slug": "mapuche",
       "region": "South American",
       "specialty": "Infantry",
-      "uniqueUnits": ["mapuche-chief"],
+      "uniqueUnits": [
+        "mapuche-chief"
+      ],
       "civBonuses": [
         "Foragers drop off +20% food",
         "Settlements can train Spearman-line and Skirmishers",
@@ -1042,21 +936,13 @@
       "teamBonus": "Spearman-line and Skirmishers +2 line of sight",
       "uniqueTechs": {
         "castle": {
-          "name": "Toquis",
-          "effect": "Infantry attacks 10% faster when not garrisoned near a building"
+          "name": "Malon",
+          "effect": "Bolas Riders, Slingers and Skirmishers deal pass through damage"
         },
         "imperial": {
-          "name": "Ironworks",
-          "effect": "Infantry and cavalry +8 attack"
+          "name": "Butalmapu",
+          "effect": "Team Castle Unique Units and Bolas Riders cost -15%"
         }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South America"
     },
@@ -1064,7 +950,9 @@
       "slug": "mayans",
       "region": "Mesoamerican",
       "specialty": "Archer",
-      "uniqueUnits": ["plumed-archer"],
+      "uniqueUnits": [
+        "plumed-archer"
+      ],
       "civBonuses": [
         "Start with +1 Villager, but -50 food",
         "Resources last +15% longer",
@@ -1073,21 +961,13 @@
       "teamBonus": "Walls cost -50%",
       "uniqueTechs": {
         "castle": {
-          "name": "El Dorado",
-          "effect": ""
+          "name": "Hul'che Javelineers",
+          "effect": "Skirmishers fire an additional projectile"
         },
         "imperial": {
-          "name": "Hul'che Javelineers",
-          "effect": "Skirmishers throw 2 javelins"
+          "name": "Holcans",
+          "effect": "Eagle Warriors +40 HP"
         }
-      },
-      "meta": {
-        "winRate": 49.45,
-        "playRate": 1.81,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Mesoamerica"
     },
@@ -1095,7 +975,9 @@
       "slug": "mongols",
       "region": "East Asian",
       "specialty": "Cavalry Archer",
-      "uniqueUnits": ["mangudai"],
+      "uniqueUnits": [
+        "mangudai"
+      ],
       "civBonuses": [
         "Hunters work +40% faster",
         "Cavalry Archers attack +25% faster",
@@ -1104,21 +986,13 @@
       "teamBonus": "Scout Cavalry-line +2 line of sight",
       "uniqueTechs": {
         "castle": {
-          "name": "Drill",
-          "effect": ""
+          "name": "Nomads",
+          "effect": "Lost Houses do not decrease population space"
         },
         "imperial": {
-          "name": "Nomads",
-          "effect": "Houses don't need to be rebuilt; +10 population cap"
+          "name": "Drill",
+          "effect": "Siege Workshop Units move +50% faster"
         }
-      },
-      "meta": {
-        "winRate": 50.7,
-        "playRate": 5.65,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
@@ -1126,7 +1000,9 @@
       "slug": "muisca",
       "region": "South American",
       "specialty": "Gold and Infantry",
-      "uniqueUnits": ["muisca-chief"],
+      "uniqueUnits": [
+        "muisca-chief"
+      ],
       "civBonuses": [
         "Advancing to the next Age costs -50% gold",
         "Settlements cost -25% and heal nearby units",
@@ -1137,21 +1013,13 @@
       "teamBonus": "Natural gold sources last +15% longer",
       "uniqueTechs": {
         "castle": {
-          "name": "Zipa's Authority",
-          "effect": "Infantry +1 attack"
+          "name": "Herbalism",
+          "effect": "Archer-line and Champi Warriors move +15% faster"
         },
         "imperial": {
-          "name": "El Dorado Myth",
-          "effect": "Infantry +10 HP"
+          "name": "Huaracas",
+          "effect": "Slingers +1 range; train +25% faster"
         }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South America"
     },
@@ -1159,7 +1027,9 @@
       "slug": "persians",
       "region": "Middle Eastern",
       "specialty": "Cavalry",
-      "uniqueUnits": ["war-elephant"],
+      "uniqueUnits": [
+        "war-elephant"
+      ],
       "civBonuses": [
         "Start with +50 wood and +50 food",
         "Town Centers and Docks +100% HP and work +5/10/15/20% faster in Dark/Feudal/Castle/Imperial Age",
@@ -1169,21 +1039,13 @@
       "teamBonus": "Knight-line +2 attack vs. Ranged Soldiers",
       "uniqueTechs": {
         "castle": {
-          "name": "Mahouts",
-          "effect": ""
+          "name": "Kamandaran",
+          "effect": "Archer-line gold cost replaced by additional wood cost"
         },
         "imperial": {
-          "name": "Chamber of Power",
-          "effect": "Town Centers fire 50% faster"
+          "name": "Citadels",
+          "effect": "Castles +4 attack, +3 vs. Rams, +3 vs. Infantry and receive -25% bonus damage"
         }
-      },
-      "meta": {
-        "winRate": 50.92,
-        "playRate": 3.9,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "the Middle East"
     },
@@ -1191,7 +1053,9 @@
       "slug": "poles",
       "region": "Eastern European",
       "specialty": "Cavalry",
-      "uniqueUnits": ["obuch"],
+      "uniqueUnits": [
+        "obuch"
+      ],
       "civBonuses": [
         "Folwark replaces Mill",
         "Villagers regenerate 10/15/20 HP in Feudal/Castle/Imperial Age",
@@ -1202,20 +1066,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Szlachta Privileges",
-          "effect": "Knight line -60% gold cost"
+          "effect": "Knight-line costs -60% gold"
         },
         "imperial": {
           "name": "Lechitic Legacy",
-          "effect": "Light Cavalry and Winged Hussar deal trample damage"
+          "effect": "Scout Cavalry-line deals trample damage"
         }
-      },
-      "meta": {
-        "winRate": 49.61,
-        "playRate": 1.81,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Eastern Europe"
     },
@@ -1223,7 +1079,10 @@
       "slug": "portuguese",
       "region": "Southern European",
       "specialty": "Naval and Gunpowder",
-      "uniqueUnits": ["caravel", "organ-gun"],
+      "uniqueUnits": [
+        "caravel",
+        "organ-gun"
+      ],
       "civBonuses": [
         "Foragers generate wood in addition to food",
         "All units cost -20% gold",
@@ -1233,29 +1092,49 @@
       "teamBonus": "Technologies research +25% faster",
       "uniqueTechs": {
         "castle": {
-          "name": "Carrack",
-          "effect": ""
+          "name": "Circumnavigation",
+          "effect": "Sets the entire map to explored; Ships train +33% faster"
         },
         "imperial": {
           "name": "Arquebus",
-          "effect": ""
+          "effect": "Gunpowder Units fire more accurately at moving targets"
         }
       },
-      "meta": {
-        "winRate": 49.14,
-        "playRate": 2.25,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      },
       "regionNoun": "Southern Europe"
+    },
+    {
+      "slug": "puru",
+      "region": "South American",
+      "specialty": "War Elephant",
+      "uniqueUnits": [
+        "war-elephant"
+      ],
+      "civBonuses": [
+        "Elephants cost -20%",
+        "Battle Elephants +2 attack",
+        "Farms cost -10%",
+        "Stable units +1 pierce armor"
+      ],
+      "teamBonus": "Elephants +2 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Amazon Warriors",
+          "effect": "Elephants +1 armor"
+        },
+        "imperial": {
+          "name": "Puru Rampage",
+          "effect": "Battle Elephants attack 15% faster"
+        }
+      },
+      "regionNoun": "South America"
     },
     {
       "slug": "romans",
       "region": "Ancient Mediterranean",
       "specialty": "Infantry",
-      "uniqueUnits": ["legionary"],
+      "uniqueUnits": [
+        "legionary"
+      ],
       "civBonuses": [
         "Villagers gather, build, and repair +5% faster",
         "Infantry armor upgrade effects are doubled",
@@ -1266,20 +1145,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Ballistas",
-          "effect": "Ballista Towers deal extra damage"
+          "effect": "Scorpions attack +33% faster; Galley-line +2 attack"
         },
         "imperial": {
           "name": "Comitatenses",
-          "effect": "Non-militia infantry +8 HP"
+          "effect": "Militia-line, Knight-line, and Centurions train +50% faster and receive a charge attack"
         }
-      },
-      "meta": {
-        "winRate": 54.14,
-        "playRate": 1.81,
-        "tier": "S",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "the Ancient Mediterranean"
     },
@@ -1287,7 +1158,9 @@
       "slug": "saracens",
       "region": "Middle Eastern",
       "specialty": "Camel and Naval",
-      "uniqueUnits": ["mameluke"],
+      "uniqueUnits": [
+        "mameluke"
+      ],
       "civBonuses": [
         "Market trading fee only 5%; Markets cost -100 wood",
         "Camel Units +25% HP",
@@ -1297,21 +1170,13 @@
       "teamBonus": "Foot Archers and Skirmishers +2 attack vs. buildings",
       "uniqueTechs": {
         "castle": {
-          "name": "Zealotry",
-          "effect": ""
+          "name": "Bimaristan",
+          "effect": "Monks passively heal multiple nearby units"
         },
         "imperial": {
           "name": "Counterweights",
-          "effect": "Trebuchet and Mangonel projectiles have more blast radius"
+          "effect": "Trebuchets and Mangonel-line +15% attack"
         }
-      },
-      "meta": {
-        "winRate": 47.91,
-        "playRate": 1.54,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "the Middle East"
     },
@@ -1319,7 +1184,9 @@
       "slug": "shu",
       "region": "East Asian",
       "specialty": "Infantry",
-      "uniqueUnits": ["tiger-cavalry"],
+      "uniqueUnits": [
+        "tiger-cavalry"
+      ],
       "civBonuses": [
         "Lumberjacks generate food in addition to wood",
         "Archery Unit technologies at the Archery Range and Blacksmith cost -25%",
@@ -1328,21 +1195,13 @@
       "teamBonus": "Foot Archers +2 line of sight",
       "uniqueTechs": {
         "castle": {
-          "name": "Shu Strategy",
-          "effect": "Infantry +1 attack"
+          "name": "Coiled Serpent Array",
+          "effect": "Spearman-line and White Feather Guards gain additional HP when near each other"
         },
         "imperial": {
-          "name": "Tiger Warriors",
-          "effect": "Infantry attack 10% faster"
+          "name": "Bolt Magazine",
+          "effect": "Archer-line, War Chariots and Lou Chuans fire additional projectiles"
         }
-      },
-      "meta": {
-        "winRate": 49.46,
-        "playRate": 0.73,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
@@ -1350,7 +1209,9 @@
       "slug": "sicilians",
       "region": "Southern European",
       "specialty": "Infantry and Cavalry",
-      "uniqueUnits": ["serjeant"],
+      "uniqueUnits": [
+        "serjeant"
+      ],
       "civBonuses": [
         "Start with +100 stone",
         "Farm upgrades provide +125% additional food",
@@ -1362,20 +1223,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "First Crusade",
-          "effect": "Each Town Center spawns 1 Serjeant; Serjeants have +4 attack and +3/+3 armor"
+          "effect": "Up to 5 Town Centers spawn 5 Serjeants each; units more resistant to conversion"
         },
         "imperial": {
-          "name": "Scutage",
-          "effect": "Each enemy Feudal-age unit you convert spawns a Serjeant"
+          "name": "Hauberk",
+          "effect": "Knight-line +1 melee/+2 pierce armor"
         }
-      },
-      "meta": {
-        "winRate": 51.99,
-        "playRate": 1.83,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Southern Europe"
     },
@@ -1383,7 +1236,9 @@
       "slug": "slavs",
       "region": "Eastern European",
       "specialty": "Cavalry",
-      "uniqueUnits": ["boyars"],
+      "uniqueUnits": [
+        "boyars"
+      ],
       "civBonuses": [
         "Farmers work +15% faster",
         "Arson, Gambesons free",
@@ -1393,21 +1248,13 @@
       "teamBonus": "Military buildings (except Castles) provide +5 population space",
       "uniqueTechs": {
         "castle": {
-          "name": "Orthodoxy",
-          "effect": ""
+          "name": "Detinets",
+          "effect": "Replaces 40% of Castle and Watch Tower-line stone cost with additional wood cost"
         },
         "imperial": {
           "name": "Druzhina",
-          "effect": ""
+          "effect": "Infantry deals trample damage"
         }
-      },
-      "meta": {
-        "winRate": 49.21,
-        "playRate": 1.34,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Eastern Europe"
     },
@@ -1415,7 +1262,10 @@
       "slug": "spanish",
       "region": "Southern European",
       "specialty": "Gunpowder and Monk",
-      "uniqueUnits": ["conquistador", "missionary"],
+      "uniqueUnits": [
+        "conquistador",
+        "missionary"
+      ],
       "civBonuses": [
         "Builders work +30% faster",
         "Receive +20 gold for each technology researched",
@@ -1426,29 +1276,49 @@
       "teamBonus": "Trade Units generate +25% gold",
       "uniqueTechs": {
         "castle": {
-          "name": "Supremacy",
-          "effect": ""
+          "name": "Inquisition",
+          "effect": "Monks and Missionaries convert faster; Missionaries +1 range"
         },
         "imperial": {
-          "name": "Inquisition",
-          "effect": "Monks convert faster"
+          "name": "Supremacy",
+          "effect": "Villagers +40 HP, +6 attack, +2 melee/+2 pierce armor"
         }
       },
-      "meta": {
-        "winRate": 50.83,
-        "playRate": 3.27,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      },
       "regionNoun": "Southern Europe"
+    },
+    {
+      "slug": "spartans",
+      "region": "Ancient Mediterranean",
+      "specialty": "Infantry",
+      "uniqueUnits": [
+        "spartan-warrior"
+      ],
+      "civBonuses": [
+        "Infantry +2 attack",
+        "Barracks work 20% faster",
+        "No houses required for population",
+        "Militia line upgrades free"
+      ],
+      "teamBonus": "Infantry +1 attack",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Spartan Discipline",
+          "effect": "Infantry +1 armor"
+        },
+        "imperial": {
+          "name": "Agoge",
+          "effect": "Infantry attack 15% faster"
+        }
+      },
+      "regionNoun": "the Ancient Mediterranean"
     },
     {
       "slug": "tatars",
       "region": "Central Asian",
       "specialty": "Cavalry Archer",
-      "uniqueUnits": ["keshik"],
+      "uniqueUnits": [
+        "keshik"
+      ],
       "civBonuses": [
         "Livestock animals last +50% longer",
         "Units deal +25% damage when fighting from higher elevation",
@@ -1459,20 +1329,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Silk Armor",
-          "effect": "Scout line, Cavalry Archers, and Steppe Lancers +1/+1 armor"
+          "effect": "Scout Cavalry-line, Steppe Lancers and Cavalry Archers +1 melee/+1 pierce armor"
         },
         "imperial": {
           "name": "Timurid Siegecraft",
-          "effect": "Trebuchets have +2 range; Flaming Camels available"
+          "effect": "Trebuchets +2 range"
         }
-      },
-      "meta": {
-        "winRate": 48.56,
-        "playRate": 1.3,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Central Asia"
     },
@@ -1480,7 +1342,9 @@
       "slug": "teutons",
       "region": "Central European",
       "specialty": "Infantry",
-      "uniqueUnits": ["teutonic-knight"],
+      "uniqueUnits": [
+        "teutonic-knight"
+      ],
       "civBonuses": [
         "Farms cost -40%",
         "Town Centers +10 garrison capacity; Towers +5 garrison capacity",
@@ -1491,29 +1355,49 @@
       "teamBonus": "Units more resistant to conversion",
       "uniqueTechs": {
         "castle": {
-          "name": "Crenellations",
-          "effect": ""
+          "name": "Ironclad",
+          "effect": "Siege Weapons +4 melee armor"
         },
         "imperial": {
-          "name": "Ironclad",
-          "effect": "Siege weapons +4 melee armor"
+          "name": "Crenellations",
+          "effect": "Castles +3 range, garrisoned Infantry fires arrows"
         }
       },
-      "meta": {
-        "winRate": 49.91,
-        "playRate": 2.7,
-        "tier": "B",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
-      },
       "regionNoun": "Central Europe"
+    },
+    {
+      "slug": "thracians",
+      "region": "Ancient Mediterranean",
+      "specialty": "Infantry and Cavalry",
+      "uniqueUnits": [
+        "thracian-warrior"
+      ],
+      "civBonuses": [
+        "Barracks units +1 melee armor",
+        "Stable work 15% faster",
+        "Farms cost -15%",
+        "Infantry +10% speed"
+      ],
+      "teamBonus": "Barracks units +1 pierce armor",
+      "uniqueTechs": {
+        "castle": {
+          "name": "Odrysian Tactics",
+          "effect": "Cavalry +1 attack"
+        },
+        "imperial": {
+          "name": "Thracian Shock",
+          "effect": "Infantry +10 HP"
+        }
+      },
+      "regionNoun": "the Ancient Mediterranean"
     },
     {
       "slug": "tupi",
       "region": "South American",
       "specialty": "Archer and Raiding",
-      "uniqueUnits": ["tupi-warrior"],
+      "uniqueUnits": [
+        "tupi-warrior"
+      ],
       "civBonuses": [
         "Start with +25 of each resource",
         "Villagers can garrison in Settlements",
@@ -1523,21 +1407,13 @@
       "teamBonus": "Towers and Castles provide +10 population space",
       "uniqueTechs": {
         "castle": {
-          "name": "Ambush",
-          "effect": "Archers +1 range in forests"
+          "name": "Caciques",
+          "effect": "Champi Warriors and Slingers attack +25% faster"
         },
         "imperial": {
-          "name": "Tupi Survival",
-          "effect": "Infantry +2 attack in forests"
+          "name": "Curare",
+          "effect": "Foot Archers and Fortifications deal poison damage"
         }
-      },
-      "meta": {
-        "winRate": null,
-        "playRate": null,
-        "tier": null,
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "South America"
     },
@@ -1545,7 +1421,9 @@
       "slug": "turks",
       "region": "Middle Eastern",
       "specialty": "Gunpowder",
-      "uniqueUnits": ["janissary"],
+      "uniqueUnits": [
+        "janissary"
+      ],
       "civBonuses": [
         "Gold miners work +25% faster",
         "Scout Cavalry-line +1 pierce armor and upgrades free",
@@ -1555,21 +1433,13 @@
       "teamBonus": "Gunpowder Units train +25% faster",
       "uniqueTechs": {
         "castle": {
-          "name": "Artillery",
-          "effect": ""
+          "name": "Sipahi",
+          "effect": "Mounted Archers +20 HP"
         },
         "imperial": {
-          "name": "Sipahi",
-          "effect": "Cavalry Archers +20 HP; Janissaries +5 HP"
+          "name": "Artillery",
+          "effect": "Bombard Towers, Bombard Cannons, Cannon Galleons +2 range"
         }
-      },
-      "meta": {
-        "winRate": 51.43,
-        "playRate": 2.27,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "the Middle East"
     },
@@ -1577,7 +1447,9 @@
       "slug": "vietnamese",
       "region": "Southeast Asian",
       "specialty": "Archer",
-      "uniqueUnits": ["rattan-archer"],
+      "uniqueUnits": [
+        "rattan-archer"
+      ],
       "civBonuses": [
         "Enemy Town Centers are revealed at the start of the game",
         "Economic upgrades cost no wood and research +100% faster",
@@ -1588,20 +1460,12 @@
       "uniqueTechs": {
         "castle": {
           "name": "Chatras",
-          "effect": ""
+          "effect": "Battle Elephants +100 HP"
         },
         "imperial": {
           "name": "Paper Money",
-          "effect": ""
+          "effect": "Lumberjacks slowly generate gold in addition to wood"
         }
-      },
-      "meta": {
-        "winRate": 47.38,
-        "playRate": 3.09,
-        "tier": "C",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Southeast Asia"
     },
@@ -1609,7 +1473,10 @@
       "slug": "vikings",
       "region": "Northern European",
       "specialty": "Infantry and Naval",
-      "uniqueUnits": ["berserk", "longboat"],
+      "uniqueUnits": [
+        "berserk",
+        "longboat"
+      ],
       "civBonuses": [
         "Wheelbarrow, Hand Cart free",
         "Infantry +20% HP starting in Feudal Age",
@@ -1618,21 +1485,13 @@
       "teamBonus": "Docks cost -15%",
       "uniqueTechs": {
         "castle": {
-          "name": "Berserkergang",
-          "effect": ""
+          "name": "Chieftains",
+          "effect": "Infantry +5 attack vs. Cavalry, +4 vs. Camel Units; generate +5 gold when defeating Villagers, Trade Units and Monks"
         },
         "imperial": {
-          "name": "Chieftains",
-          "effect": "Infantry +4 attack vs. cavalry; +3 vs. camels"
+          "name": "Bogsveigar",
+          "effect": "Archer-line and Longboats +1 attack"
         }
-      },
-      "meta": {
-        "winRate": 52.46,
-        "playRate": 1.66,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "Northern Europe"
     },
@@ -1640,7 +1499,9 @@
       "slug": "wei",
       "region": "East Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": ["heavy-cavalry"],
+      "uniqueUnits": [
+        "heavy-cavalry"
+      ],
       "civBonuses": [
         "Receive one free Villager for each economic upgrade researched",
         "Hei Guang Cavalry and Xianbei Raider +20/30% HP in Castle/Imperial Age",
@@ -1649,21 +1510,13 @@
       "teamBonus": "Cavalry +2 attack vs. Siege Weapons",
       "uniqueTechs": {
         "castle": {
-          "name": "Wei Formation",
-          "effect": "Cavalry +1 armor"
+          "name": "Tuntian",
+          "effect": "Soldiers passively produce food"
         },
         "imperial": {
-          "name": "Iron Horses",
-          "effect": "Cavalry attack 15% faster"
+          "name": "Ming Guang Armor",
+          "effect": "Mounted Units +4 melee armor"
         }
-      },
-      "meta": {
-        "winRate": 51.14,
-        "playRate": 1.33,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     },
@@ -1671,7 +1524,9 @@
       "slug": "wu",
       "region": "East Asian",
       "specialty": "Naval",
-      "uniqueUnits": ["louchuan"],
+      "uniqueUnits": [
+        "louchuan"
+      ],
       "civBonuses": [
         "Military production buildings and Docks provide +55 food",
         "Infantry regenerates 10/15/30 HP per minute in Feudal/Castle/Imperial Age",
@@ -1681,26 +1536,15 @@
       "teamBonus": "Houses built +100% faster",
       "uniqueTechs": {
         "castle": {
-          "name": "Wu Shipbuilding",
-          "effect": "Ships +1 attack"
+          "name": "Red Cliffs Tactics",
+          "effect": "Demolition Ships and Fire Archers deal fire damage to ships and buildings"
         },
         "imperial": {
-          "name": "Eastern Fleet",
-          "effect": "War Galley line attack 15% faster"
+          "name": "Sitting Tiger",
+          "effect": "Traction Trebuchets and Lou Chuan trebuchet weapons fire additional projectiles"
         }
-      },
-      "meta": {
-        "winRate": 52.12,
-        "playRate": 0.69,
-        "tier": "A",
-        "sample": "1v1 RM, ALL ratings",
-        "lastFetched": "2026-05-23",
-        "source": "aoestats.io"
       },
       "regionNoun": "East Asia"
     }
-  ],
-  "metaLastFetched": "2026-05-23",
-  "metaSource": "aoestats.io",
-  "tierMethod": "Derived from win rate: ≥53% → S | 51-53% → A | 49-51% → B | 47-49% → C | <47% → D"
+  ]
 }

@@ -1,0 +1,65 @@
+slug: shu
+name:
+  en: Shu
+  tr: Shu
+tagline:
+  en: Shu — an Infantry civilization from East Asia.
+  tr: Shu — Doğu Asya'dan gelen bir Piyade uygarlığı.
+bonuses:
+  en:
+    - Lumberjacks generate food in addition to wood
+    - Archery Unit technologies at the Archery Range and Blacksmith cost -25%
+    - Siege Weapons and Siege Warships move +10/15% faster in Castle/Imperial Age
+  tr:
+    - Oduncular oduna ek olarak Yiyecek üretir
+    - Archery Range ve Blacksmith'teki menzilli birlik teknolojileri %25 daha az maliyete gelir
+    - Kuşatma silahları ve Kuşatma Savaş Gemileri Kale/İmparatorluk Çağı'nda %10/15 daha hızlı hareket eder
+teamBonus:
+  en: Foot Archers +2 line of sight
+  tr: Yaya Archer'lar +2 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Coiled Serpent Array
+      tr: Coiled Serpent Array
+    effect:
+      en: Spearman-line and White Feather Guards gain additional HP when near each other
+      tr: Spearman-line and White Feather Guards gain additional HP when near each other
+  imperial:
+    name:
+      en: Bolt Magazine
+      tr: Bolt Magazine
+    effect:
+      en: Archer-line, War Chariots and Lou Chuans fire additional projectiles
+      tr: Archer-line, War Chariots and Lou Chuans fire additional projectiles
+strategy:
+  en: >-
+    Shu are an Infantry civilization from East Asia.
+
+
+    ## How to Play Shu
+
+
+    **Ideal opening (Dark → Castle):** As an infantry-bonus civ (Shu Strategy gives infantry +1 attack), open with a
+    Man-at-Arms rush or a Feudal drush, then transition into Long Swordsmen and your Tiger Cavalry in Castle Age.
+
+
+    **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+
+
+    *Opening synthesized from this Three Kingdoms civ's bonuses; a fuller guide is coming.*
+  tr: >-
+    Shu, Doğu Asya'dan gelen bir Piyade uygarlığıdır.
+
+
+    ## Shu Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Piyade bonuslu bir uygarlık olarak (Shu Strategy piyadelerine +1 saldırı verir),
+    Man-at-Arms rush ya da Feodal drush ile açılış yap; ardından Kale Çağı'nda Long Swordsmen'a ve Tiger Cavalry'ye geç.
+
+
+    **Önerilen build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+
+
+    *Açılış, bu Üç Krallık uygarlığının bonuslarından sentezlenmiştir; daha kapsamlı bir rehber yakında.*

@@ -1,0 +1,81 @@
+slug: goths
+name:
+  en: Goths
+  tr: Goths
+tagline:
+  en: Goths — an Infantry civilization from Northern Europe.
+  tr: Goths — Kuzey Avrupa kökenli bir Piyade uygarlığı.
+bonuses:
+  en:
+    - Loom is researched instantly
+    - Hunters carry +15; hunted animals last +20% longer
+    - Infantry costs -15/20/25/30% in Dark/Feudal/Castle/
+    - Infantry +1/+2/+3 attack vs. buildings in Feudal/
+    - +10 population space in Imperial Age
+  tr:
+    - Loom anında araştırılır
+    - Avcılar +15 taşır; avlanan hayvanlar %20 daha uzun sürer
+    - Piyade maliyeti Karanlık/Feodal/Kale'de -%15/20/25/30
+    - Feodal Çağ'da piyade binalara karşı +1/+2/+3 saldırı kazanır
+    - İmparatorluk Çağı'nda +10 nüfus alanı
+teamBonus:
+  en: Barracks work +20% faster
+  tr: Barracks %20 daha hızlı çalışır
+uniqueTechs:
+  castle:
+    name:
+      en: Anarchy
+      tr: Anarchy
+    effect:
+      en: Huskarls can be trained at Barracks
+      tr: Oyun içi teknoloji ağacına bak
+  imperial:
+    name:
+      en: Perfusion
+      tr: Perfusion
+    effect:
+      en: Barracks work +100% faster
+      tr: Oyun içi teknoloji ağacına bak
+strategy:
+  en: >-
+    Goths are an Infantry civilization from Northern Europe.
+
+
+    ## How to Play Goths
+
+
+    **Ideal opening (Dark → Castle):** Lean on cheap infantry. Open with a two-militia drush or a Men-at-Arms push, or
+    go Scouts backed by inexpensive Spearmen to pressure the enemy economy while you transition into the Castle Age.
+
+
+    **Ideal late-game composition:** Field Halberdiers as your trash backbone, mass Huskarls as your gold-cost striking
+    force, and back them with Bombard Cannons or Trebuchets for siege — swap in Hand Cannoneers when the enemy leans on
+    infantry. Goths thrive on relentless production, so spam units and raid constantly.
+
+
+    **Deathball composition (closed maps / team games):** Stack Huskarls and Halberdiers as the core melee block, add
+    Heavy Scorpions for area damage, and bring Bombard Cannons to break fortifications.
+
+
+    **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+  tr: >-
+    Goths, Kuzey Avrupa kökenli bir Piyade uygarlığıdır.
+
+
+    ## Goths Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ucuz piyadeye yaslan. İki milisli drush veya Men-at-Arms baskısıyla aç; ya da
+    düşman ekonomisine baskı yaparken Kale Çağı'na geçmek için ucuz Spearman desteğiyle Scout kullan.
+
+
+    **İdeal geç oyun kompozisyonu:** Halberdier'leri trash omurgası olarak kullan, Huskarl'ları altın maliyetli vurucu
+    güç olarak kalabalıklaştır, kuşatma için Bombard Cannon veya Trebuchet ekle — düşman piyadeye yaslandığında Hand
+    Cannoneer'a geç. Goths, durmadan üretimle güçlenir; birim spam'le sürekli akın et.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Huskarl ve Halberdier'leri yakın dövüş bloğu olarak
+    yığ, alan hasarı için Heavy Scorpion ekle, tahkimatları kırmak için Bombard Cannon getir.
+
+
+    **Önerilen build:** [18 Pop Feudal Drush](/tr/builds/18pop-feudal-drush)

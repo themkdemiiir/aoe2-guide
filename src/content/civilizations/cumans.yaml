@@ -1,0 +1,80 @@
+slug: cumans
+name:
+  en: Cumans
+  tr: Cumans
+tagline:
+  en: Cumans — a Cavalry civilization from Central Asia.
+  tr: Cumans — Orta Asya kökenli bir Süvari uygarlığı.
+bonuses:
+  en:
+    - One additional Town Center can be built in Feudal Age
+    - Mounted Units move +5/10/15% faster in Feudal/
+    - Archery Ranges and Stables cost -75 wood
+    - Siege Workshop and Battering Ram available in Feudal Age; Capped Ram available in Castle Age
+  tr:
+    - Feodal Çağ'da ekstra bir Town Center inşa edilebilir
+    - Binek birimi hareketi Feodal/Kale/İmparatorluk Çağları'nda +%5/10/15 daha hızlı
+    - Archery Range ve Stable'lar -75 odun maliyetiyle inşa edilir
+    - Siege Workshop ve Battering Ram Feodal Çağ'da; Capped Ram Kale Çağı'nda kullanılabilir
+teamBonus:
+  en: Palisade Walls +33% HP
+  tr: Palisade Wall'ların canı +%33
+uniqueTechs:
+  castle:
+    name:
+      en: Steppe Husbandry
+      tr: Steppe Husbandry
+    effect:
+      en: Scout Cavalry-line, Steppe Lancers and Cavalry Archers train +100% faster
+      tr: Scout Cavalry hattı ve Kipchaklar %100 daha hızlı eğitilir
+  imperial:
+    name:
+      en: Cuman Mercenaries
+      tr: Cuman Mercenaries
+    effect:
+      en: All team members can train 5 free Elite Kipchaks per Castle
+      tr: Takım üyeleri 10 ücretsiz Kipchak inşa edebilir (bir kez)
+strategy:
+  en: >-
+    Cumans are a Cavalry civilization from Central Asia.
+
+
+    ## How to Play Cumans
+
+
+    **Ideal opening (Dark → Castle):** Lean on the signature Feudal-Age second Town Center to run a 2 TC boom — your
+    villager count outpaces opponents while you wall up and stay safe, then convert that economy into a powerful
+    Castle-Age push.
+
+
+    **Ideal late-game composition:** Mass Elite Kipchaks as your gold-based ranged threat, screen them with cheap trash
+    Hussars for raiding and to absorb hits, and add Bombard Cannons to break formations and crack down on siege.
+
+
+    **Deathball composition (closed maps / team games):** Combine Kipchaks with Paladins for raw mobility and punch, and
+    round out the army with Siege Rams or Trebuchets to demolish walls and buildings as you grind forward.
+
+
+    **Recommended build:** [18 Pop Cumans 2 TC Boom](/en/builds/18pop-cumans-2tc-boom)
+  tr: >-
+    Cumans, Orta Asya kökenli bir Süvari uygarlığıdır.
+
+
+    ## Cumans Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** İmza özelliğin olan Feodal Çağ'daki ikinci Town Center'ı kullanarak 2 TC boom
+    yap — köylü sayın rakiplerini geçerken duvarlarını kapat ve güvende kal, ardından bu ekonomiyi güçlü bir Kale Çağı
+    atağına dönüştür.
+
+
+    **İdeal geç oyun kompozisyonu:** Altın bazlı menzilli tehdidin için toplu Elite Kipchak yap, baskın ve hasar emici
+    olarak ucuz trash Hussar'larla destekle, formasyonları dağıtmak ve kuşatma araçlarını temizlemek için Bombard Cannon
+    ekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ham hız ve güç için Kipchakları Paladin'lerle
+    birleştir; duvarları ve binaları yıkmak için Siege Ram veya Trebuchet ile tamamla.
+
+
+    **Önerilen build:** [18 Pop Cumans 2 TC Boom](/tr/builds/18pop-cumans-2tc-boom)

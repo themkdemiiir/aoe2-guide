@@ -1,0 +1,81 @@
+slug: malay
+name:
+  en: Malay
+  tr: Malay
+tagline:
+  en: Malay — a Naval civilization from Southeast Asia.
+  tr: Malay — Güneydoğu Asya'dan bir Deniz uygarlığı.
+bonuses:
+  en:
+    - Advancing to the next Age is +66% faster
+    - Infantry armor upgrades free
+    - Battle Elephants cost -25/35% in Castle/Imperial Age
+    - Fish Traps cost -33% and provide +200% food
+  tr:
+    - Bir sonraki Çağ'a geçiş %66 daha hızlı
+    - Piyade zırh yükseltmeleri ücretsiz
+    - Battle Elephant'lar Kale/İmparatorluk Çağı'nda -%25/35 daha ucuz
+    - Fish Trap'ler %33 daha ucuz ve %200 daha fazla yiyecek sağlar
+teamBonus:
+  en: Docks +6 line of sight
+  tr: Dock'lar +6 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Thalassocracy
+      tr: Thalassocracy
+    effect:
+      en: Docks are upgraded to Harbors
+      tr: Oyun içi teknoloji ağacına bakınız
+  imperial:
+    name:
+      en: Forced Levy
+      tr: Forced Levy
+    effect:
+      en: Militia-line gold cost is replaced by additional food cost
+      tr: Oyun içi teknoloji ağacına bakınız
+strategy:
+  en: >-
+    Malay are a Naval civilization from Southeast Asia.
+
+
+    ## How to Play Malay
+
+
+    **Ideal opening (Dark → Castle):** Lean on the free infantry armor and open with a two-militia drush, then push
+    forward with Spearmen to apply early pressure. Use the lightning-fast aging bonus to reach Castle Age and transition
+    into Battle Elephants or a ranged follow-up.
+
+
+    **Ideal late-game composition:** Anchor the army with Halberdiers as your trash backbone, add Arbalest for your
+    gold-based ranged punch, and bring Bombard Cannon for siege. Cheap elephants are a situational extra — Malay want to
+    close out games rather than drag them on.
+
+
+    **Deathball composition (closed maps / team games):** Mass discounted Battle Elephants as the frontline, support
+    them with Arbalest, sustain with Monks, and clear key targets with Bombard Cannon.
+
+
+    **Recommended build:** [Malay Flexible Opening](/en/builds/malay-flexible-opening)
+  tr: >-
+    Malay, Güneydoğu Asya'dan bir Deniz uygarlığıdır.
+
+
+    ## Malay Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ücretsiz piyade zırh yükseltmelerine yaslan ve iki militia drush ile aç,
+    ardından erken baskı uygulamak için Spearmen ile öne geç. Feodal Çağ'a yıldırım hızıyla geçiş bonusunu kullanarak
+    Kale Çağı'na ulaş ve Battle Elephant'lara ya da menzilli bir takip stratejisine geç.
+
+
+    **İdeal geç oyun kompozisyonu:** Ordunun trash omurgası olarak Halberdier'ları kullan, altın bazlı menzilli gücün
+    için Arbalest ekle, kuşatma için Bombard Cannon getir. Ucuz filler duruma göre kullanılabilir — Malay oyunları
+    uzatmak yerine kapatmak ister.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ön hat olarak iskontolu Battle Elephant'ları toplu
+    yığ, Arbalest ile destekle, Monk ile sürdür ve kilit hedefleri Bombard Cannon ile temizle.
+
+
+    **Önerilen build:** [Malay Flexible Opening](/en/builds/malay-flexible-opening)

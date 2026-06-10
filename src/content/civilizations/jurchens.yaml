@@ -1,0 +1,75 @@
+slug: jurchens
+name:
+  en: Jurchens
+  tr: Jurchens
+tagline:
+  en: Jurchens — a Cavalry civilization from East Asia.
+  tr: Jurchens — Doğu Asya'dan bir Süvari uygarlığı.
+bonuses:
+  en:
+    - Meat of hunted and livestock animals doesn't decay
+    - Mounted Units and Fire Lancers attack +25% faster starting in Feudal Age
+    - Siege Engineers available in Castle Age
+    - Siege and Fortification upgrades cost -75% wood and research +100% faster
+    - Units receive -50% friendly fire damage
+  tr:
+    - Avlanan ve çiftlik hayvanlarının eti bozulmaz
+    - Binekli Birimler ve Fire Lancer'lar Feodal Çağ'dan itibaren %25 daha hızlı saldırır
+    - Siege Engineers Kale Çağı'nda kullanılabilir
+    - Kuşatma ve Tahkimat yükseltmeleri %75 daha az Odun gerektirir ve %100 daha hızlı araştırılır
+    - Birimler dost ateşinden %50 daha az hasar alır
+teamBonus:
+  en: Gunpowder Units +2 line of sight
+  tr: Barut Birimleri +2 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Fortified Bastions
+      tr: Fortified Bastions
+    effect:
+      en: Fortifications regenerate 500 HP per minute
+      tr: Fortifications regenerate 500 HP per minute
+  imperial:
+    name:
+      en: Thunderclap Bombs
+      tr: Thunderclap Bombs
+    effect:
+      en: Rocket Carts, Grenadiers and Lou Chuans detonate when defeated; projectiles produce additional explosions
+      tr: Rocket Carts, Grenadiers and Lou Chuans detonate when defeated; projectiles produce additional explosions
+strategy:
+  en: >-
+    Jurchens are a Cavalry civilization from East Asia.
+
+
+    ## How to Play Jurchens
+
+
+    **Ideal opening (Dark → Castle):** Lean on the Jurchens' cavalry identity and head for a Fast Castle. Skip heavy
+    Feudal aggression, secure your economy and wall up, then reach Castle Age to flood out of your faster-working
+    Stables. With +2 cavalry armor, cheaper Blacksmith upgrades, and the Jurchen Knight on hand, you arrive in Castle
+    with a tanky mounted force that snowballs map control — transitioning naturally into the Fire Lancer once you can
+    support it.
+
+
+    **Recommended build:** [Jurchens Fast Castle Fire Lancer](/en/builds/jurchens-fc-fire-lancer)
+
+
+    *(Late-game and deathball compositions not yet covered for this civ.)*
+  tr: >-
+    Jurchens, Doğu Asya'dan bir Süvari uygarlığıdır.
+
+
+    ## Jurchens Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Jurchens'ın süvari kimliğine yaslan ve Fast Castle'ı hedefle. Feodal Çağ'da ağır
+    saldırıdan kaçın, ekonomini güçlendir ve duvarlarını örn; ardından Kale Çağı'na ulaşınca hızlı çalışan
+    Stable'larından Knight'ları sökül. +2 süvari zırhı, daha ucuz Blacksmith yükseltmeleri ve Jurchen Knight sayesinde
+    Kale'ye sağlam bir binekli kuvvetle girersin — bu harita kontrolünü kartopu gibi büyütür ve destekleyebildiğinde
+    doğal olarak Fire Lancer'a geçiş sağlar.
+
+
+    **Önerilen build:** [Jurchens Fast Castle Fire Lancer](/en/builds/jurchens-fc-fire-lancer)
+
+
+    *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz kapsanmamıştır.)*

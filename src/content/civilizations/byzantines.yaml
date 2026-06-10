@@ -1,0 +1,87 @@
+slug: byzantines
+name:
+  en: Byzantines
+  tr: Byzantines
+tagline:
+  en: Byzantines — a Defensive civilization from the Eastern Mediterranean.
+  tr: Byzantines — Doğu Akdeniz'den savunmacı bir uygarlık.
+bonuses:
+  en:
+    - Buildings +10/20/30/40% HP in Dark/Feudal/Castle/Imperial Age
+    - Camel Riders, Skirmishers and Spearman-line cost -25%
+    - Town Watch, Town Patrol free
+    - Advancing to Imperial Age costs -33%
+    - Fire Ships and Dromons attack +25% faster
+  tr:
+    - Binalar Karanlık/Feodal/Kale/İmparatorluk Çağı'nda +%10/20/30/40 can kazanır
+    - Camel Rider'lar, Skirmisher'lar ve Spearman hattı %25 daha ucuz
+    - Town Watch, Town Patrol ücretsiz
+    - İmparatorluk Çağı'na geçiş %33 daha az maliyetli
+    - Fire Ship'ler ve Dromon'lar %25 daha hızlı saldırır
+teamBonus:
+  en: Monks heal +100% faster
+  tr: Monk'lar %100 daha hızlı iyileştirir
+uniqueTechs:
+  castle:
+    name:
+      en: Greek Fire
+      tr: Greek Fire
+    effect:
+      en: Fire Ships +1 range; Dromons and Bombard Towers increased blast radius
+      tr: Fire Ships +1 range; Dromons and Bombard Towers increased blast radius
+  imperial:
+    name:
+      en: Logistica
+      tr: Logistica
+    effect:
+      en: Cataphracts deal trample damage, +6 attack vs. Infantry
+      tr: Cataphracts deal trample damage, +6 attack vs. Infantry
+strategy:
+  en: >-
+    Byzantines are a Defensive civilization from the Eastern Mediterranean.
+
+
+    ## How to Play Byzantines
+
+
+    **Ideal opening (Dark → Castle):** Pressure in Feudal with a Skirmisher-and-Spearman rush, leaning on your 25%
+    discount to flood the field with cheap counter units. Carry that into Castle Age, where discounted Skirmishers,
+    Spearmen, and Camels let you answer almost anything your opponent throws at you for a fraction of the usual cost.
+
+
+    **Ideal late-game composition:** Build around Halberdiers and Skirmishers as your cut-rate trash core, fold in Siege
+    to break formations and buildings, and use your +50% heal-speed Monks to reclaim relics and recover units. Top it
+    off with a flexible gold unit — Cataphracts, Hand Cannoneers, or Heavy Camels — depending on what the matchup
+    demands.
+
+
+    **Deathball composition (closed maps / team games):** March forward behind a wall of Cataphracts, back them with
+    Bombard Cannons to shell enemy positions, and keep Monks in the mix for healing and conversions; Bombard Towers
+    anchor the line on defense thanks to your cheap, extra-tough buildings.
+
+
+    **Recommended build:** [Spearman + Skirmisher](/en/builds/korean-spear-skirm)
+  tr: >-
+    Byzantines, Doğu Akdeniz'den savunmacı bir uygarlıktır.
+
+
+    ## Byzantines Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Feodal Çağ'da Skirmisher ve Spearman rush'ıyla baskı uygula; %25 indiriminden
+    yararlanarak alanı ucuz counter birimleriyle doldur. Bunu Kale Çağı'na taşı — indirimli Skirmisher'lar, Spearman'lar
+    ve Camel Rider'lar, rakibinin hemen her hamlesine olağandan çok daha düşük bir maliyetle yanıt vermeni sağlar.
+
+
+    **İdeal geç oyun kompozisyonu:** Ucuz trash çekirdeğin olarak Halberdier ve Skirmisher'ları kullan, birlikleri ve
+    binaları kırmak için Siege ekle; rölikleri geri almak ve birimleri iyileştirmek için %50 daha hızlı iyileştiren
+    Monk'lardan yararlan. Üstüne maç durumuna göre esnek bir Altın birimi — Cataphract, Hand Cannoneer ya da Heavy Camel
+    Rider — ekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Cataphract duvarının arkasında ilerle, düşman
+    mevzilerini dökmek için Bombard Cannon ekle ve iyileştirme ile dönüştürme için Monk'ları birlikte tut; ucuz ve
+    ekstra dayanıklı binaların sayesinde Bombard Tower'lar savunma hattını sabitlemeye yarar.
+
+
+    **Önerilen build:** [Spearman + Skirmisher](/en/builds/korean-spear-skirm)

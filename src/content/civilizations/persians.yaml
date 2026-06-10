@@ -1,0 +1,82 @@
+slug: persians
+name:
+  en: Persians
+  tr: Persians
+tagline:
+  en: Persians — a Cavalry civilization from the Middle East.
+  tr: Persians — Orta Doğu'dan bir Süvari uygarlığı.
+bonuses:
+  en:
+    - Start with +50 wood and +50 food
+    - Town Centers and Docks +100% HP and work +5/10/15/20% faster in Dark/Feudal/Castle/Imperial Age
+    - Parthian Tactics available in Castle Age
+    - Can build Caravanserai in Imperial Age
+  tr:
+    - +50 odun ve +50 yiyecekle başla
+    - >-
+      Town Centers ve Dock'lar +100% can kazanır ve Karanlık/Feodal/Kale/İmparatorluk Çağı'nda %5/10/15/20 daha hızlı
+      çalışır
+    - Parthian Tactics Kale Çağı'nda kullanılabilir
+    - İmparatorluk Çağı'nda Caravanserai inşa edebilirsin
+teamBonus:
+  en: Knight-line +2 attack vs. Ranged Soldiers
+  tr: Knight sınırı Menzilli Askerlere karşı +2 saldırı kazanır
+uniqueTechs:
+  castle:
+    name:
+      en: Kamandaran
+      tr: Kamandaran
+    effect:
+      en: Archer-line gold cost replaced by additional wood cost
+      tr: Archer-line gold cost replaced by additional wood cost
+  imperial:
+    name:
+      en: Citadels
+      tr: Citadels
+    effect:
+      en: Castles +4 attack, +3 vs. Rams, +3 vs. Infantry and receive -25% bonus damage
+      tr: Castles +4 attack, +3 vs. Rams, +3 vs. Infantry and receive -25% bonus damage
+strategy:
+  en: >-
+    Persians are a Cavalry civilization from the Middle East.
+
+
+    ## How to Play Persians
+
+
+    **Ideal opening (Dark → Castle):** Lean on the bonus economy and open with a Scout Rush, then transition into
+    Knights, camels, or light cavalry as the matchup demands. The faster Town Centers let you boom hard on the way to
+    Savar in the late game — skip Cavalry Archers, as they don't pay off for this civ.
+
+
+    **Ideal late-game composition:** Pair Paladins with Trash-Bows for a Halberdier, Trash-Bow, and Skirmisher core,
+    adding Hussar when you need to clear out enemy Monks. Round it out with Bombard Cannons or Trebuchets for siege.
+
+
+    **Deathball composition (closed maps / team games):** Mass War Elephants behind a wall of Trash-Bows and Hussar,
+    supported by Cedrum siege or Bombard Cannons to crack fortified positions.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Persians, Orta Doğu'dan gelen bir Süvari uygarlığıdır.
+
+
+    ## Persians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Bonus ekonomiye yaslan ve Scout Rush ile aç; ardından maça göre Knight, Camel
+    Rider ya da hafif süvariye geç. Hızlı Town Center'lar, geç oyunda Savar'a giden yolda güçlü bir boom yapmanı sağlar
+    — Cavalry Archer'lara para harcama, bu uygarlık için verimli değil.
+
+
+    **İdeal geç oyun kompozisyonu:** Paladin'leri Trash okçularıyla eşleştirerek Halberdier, Trash okçusu ve Skirmisher
+    çekirdeği kur; düşman Monk'larını temizlemen gerektiğinde Hussar ekle. Kuşatma için Bombard Cannon veya Trebuchet
+    ile tamamla.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Trash okçusu ve Hussar duvarının arkasında kitlesel
+    War Elephant kullan; tahkimli mevzileri kırmak için Cedrum kuşatma araçları veya Bombard Cannon ekle.
+
+
+    **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)

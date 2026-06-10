@@ -1,0 +1,71 @@
+slug: armenians
+name:
+  en: Armenians
+  tr: Armenians
+tagline:
+  en: Armenians — an Infantry and Cavalry civilization from the Caucasus.
+  tr: Armenians — Kafkasya'dan gelen bir Piyade ve Süvari uygarlığı.
+bonuses:
+  en:
+    - Mule Carts cost -25%
+    - Mule Cart technologies are +40% more effective
+    - Spearman- and Militia-line upgrades (except Man-at-Arms) available one age earlier
+    - First Fortified Church receives a free Relic
+    - Galley-line and Dromons fire an additional projectile
+  tr:
+    - Mule Cart'lar %25 daha az maliyete gelir
+    - Mule Cart teknolojileri %40 daha etkilidir
+    - Spearman ve Militia hattı yükseltmeleri (Man-at-Arms hariç) bir çağ öncesinden erişilebilir
+    - İlk Fortified Church ücretsiz bir Relic alır
+    - Galley hattı ve Dromon'lar bir ek mermi atar
+teamBonus:
+  en: Infantry +2 line of sight
+  tr: Piyade +2 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Cilician Fleet
+      tr: Cilician Fleet
+    effect:
+      en: Demolition Ships +20% blast radius; Galley-line and Dromons +1 range
+      tr: Galley'ler +2 menzil kazanır
+  imperial:
+    name:
+      en: Fereters (Infantry (except Spearman-line) +30 HP; Warrior Priests heal +100% faster)
+      tr: Fereters (Infantry (except Spearman-line) +30 HP; Warrior Priests heal +100% faster)
+    effect:
+      en: ''
+      tr: ''
+strategy:
+  en: >-
+    Armenians are an Infantry and Cavalry civilization from the Caucasus.
+
+
+    ## How to Play Armenians
+
+
+    **Ideal opening (Dark → Castle):** Pressure with a Scout Rush backed by early Spearmen built straight out of the
+    Dark Age Barracks, then transition to a fast Castle Age. Once there, lean on your Fortified Church and Warrior
+    Priests to seize relic control before adding Knights and rolling into your unique unit or Champions.
+
+
+    **Recommended build:** [Armenian Spear into Fast Castle Relic](/en/builds/armenian-spear-fc-relic)
+
+
+    *(Late-game and deathball compositions not yet covered for this civ.)*
+  tr: >-
+    Armenians, Kafkasya'dan gelen bir Piyade ve Süvari uygarlığıdır.
+
+
+    ## Armenians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Karanlık Çağ'dan Barracks'tan doğrudan üretilen erken Spearman'larla desteklenen
+    bir Scout Rush ile baskı kur; ardından hızlı Kale Çağı'na geç. Buraya ulaştığında, Knight ekleyip özgün birimini ya
+    da Champion'larına geçmeden önce Fortified Church ve Warrior Priest'lerinle relic kontrolünü ele geçir.
+
+
+    **Önerilen build:** [Armenian Spear into Fast Castle Relic](/en/builds/armenian-spear-fc-relic)
+
+
+    *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz kapsanmamıştır.)*

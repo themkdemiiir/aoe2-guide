@@ -1,0 +1,85 @@
+slug: vikings
+name:
+  en: Vikings
+  tr: Vikings
+tagline:
+  en: Vikings — an Infantry and Naval civilization from Northern Europe.
+  tr: Vikings — Kuzey Avrupa'dan bir Piyade ve Denizcilik uygarlığı.
+bonuses:
+  en:
+    - Wheelbarrow, Hand Cart free
+    - Infantry +20% HP starting in Feudal Age
+    - Warships cost -10/15/20% in Feudal/Castle/Imperial Age
+  tr:
+    - Wheelbarrow, Hand Cart ücretsiz
+    - Feodal Çağ'dan itibaren Piyade +%20 can
+    - Savaş gemileri Feodal/Kale/İmparatorluk Çağı'nda %-10/15/20 maliyet
+teamBonus:
+  en: Docks cost -15%
+  tr: Dock'lar %-15 maliyet
+uniqueTechs:
+  castle:
+    name:
+      en: Chieftains
+      tr: Chieftains
+    effect:
+      en: >-
+        Infantry +5 attack vs. Cavalry, +4 vs. Camel Units; generate +5 gold when defeating Villagers, Trade Units and
+        Monks
+      tr: >-
+        Infantry +5 attack vs. Cavalry, +4 vs. Camel Units; generate +5 gold when defeating Villagers, Trade Units and
+        Monks
+  imperial:
+    name:
+      en: Bogsveigar
+      tr: Bogsveigar
+    effect:
+      en: Archer-line and Longboats +1 attack
+      tr: Archer-line and Longboats +1 attack
+strategy:
+  en: >-
+    Vikings are an Infantry and Naval civilization from Northern Europe.
+
+
+    ## How to Play Vikings
+
+
+    **Ideal opening (Dark → Castle):** Lean on the infantry HP bonus and open with a two-militia drush in Feudal to
+    pressure your opponent's economy, then settle into a calm, defensive Feudal Age while you rush to Imperial. Vikings
+    reward an aggressive early game and a fast push to Imp — their late game is weaker, so the plan is to close out
+    games before the opponent stabilizes.
+
+
+    **Ideal late-game composition:** Pair Skirmishers as your trash core with Berserks as your gold-line punch, backed
+    by Trebuchets (or Castle-dropped siege) for buildings. Note that Vikings lack Thumb Ring, so their ranged units are
+    a support layer rather than the centerpiece.
+
+
+    **Deathball composition (closed maps / team games):** Mass Berserks as the frontline, add Heavy Scorpions to shred
+    clumped units and infantry, and bring Trebuchets to demolish buildings as you grind forward.
+
+
+    **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+  tr: >-
+    Vikings, Kuzey Avrupa'dan bir Piyade ve Denizcilik uygarlığıdır.
+
+
+    ## Vikings Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Piyadenin can bonusuna yaslan; Feodal Çağ'da rakibinin ekonomisine baskı yapmak
+    için iki milisli drush ile aç, ardından sakin ve savunmacı bir Feodal Çağ geçirerek İmparatorluk'a hızlıca koş.
+    Vikings, agresif bir erken oyun ve hızlı Imp push'unu ödüllendirir — geç oyunları daha zayıf olduğundan hedef, rakip
+    toparlanmadan maçı kapatmaktır.
+
+
+    **İdeal geç oyun kompozisyonu:** Skirmisher'ları trash core'un olarak kullan, Berserk'leri altın hattı vuruşu için
+    ekle, binalara karşı Trebuchet'ler (ya da Castle drop kuşatması) getir. Vikings'in Thumb Ring'i olmadığına dikkat
+    et; bu yüzden menzilli birimler ana güç değil, destek katmanıdır.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ön cephe olarak Berserk kalabalığı kur, yığılmış
+    birlikleri ve piyadeleyi parçalamak için Heavy Scorpion ekle, ilerlerken binaları yıkmak için Trebuchet'ler getir.
+
+
+    **Önerilen build:** [18 Pop Feudal Drush](/tr/builds/18pop-feudal-drush)

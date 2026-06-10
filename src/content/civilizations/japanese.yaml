@@ -1,0 +1,83 @@
+slug: japanese
+name:
+  en: Japanese
+  tr: Japanese
+tagline:
+  en: Japanese — an Infantry civilization from East Asia.
+  tr: Japanese — Doğu Asya'dan bir Piyade uygarlığı.
+bonuses:
+  en:
+    - Mills, Lumber- and Mining Camps cost -50%
+    - Infantry attacks +33% faster starting in Feudal Age
+    - Cavalry Archers +2 attack vs. Ranged Soldiers (except Skirmishers)
+    - Fishing Ships work +5/10/15/20% faster in Dark/Feudal/Castle/Imperial Age; +100% HP
+  tr:
+    - Mill, Lumber Camp ve Mining Camp'lar %50 daha ucuz
+    - Piyade saldırıları Feodal Çağ'dan itibaren %33 daha hızlı
+    - Cavalry Archer'lar Menzilli Askerlere (Skirmisher'lar hariç) +2 saldırı
+    - Balıkçı Gemileri Karanlık/Feodal/Kale/İmparatorluk Çağı'nda %5/10/15/20 daha hızlı çalışır; +%100 can
+teamBonus:
+  en: Galley-line +4 line of sight
+  tr: Galley-line +4 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Yasama
+      tr: Yasama
+    effect:
+      en: Watch Tower-line fires additional arrows
+      tr: Watch Tower-line fires additional arrows
+  imperial:
+    name:
+      en: Kataparuto
+      tr: Kataparuto
+    effect:
+      en: Trebuchets attack and pack/unpack faster
+      tr: Trebuchets attack and pack/unpack faster
+strategy:
+  en: >-
+    Japanese are an Infantry civilization from East Asia.
+
+
+    ## How to Play Japanese
+
+
+    **Ideal opening (Dark → Castle):** Lean on the fast-attacking infantry bonus and open with a Man-at-Arms rush, then
+    transition straight into an early Archery Range to keep the pressure on. Japanese fall off in the late game, so aim
+    to convert this aggression into a decisive lead and close the match out before opponents stabilize.
+
+
+    **Ideal late-game composition:** Pair Halberdiers (your trash anti-cavalry line) with Arbalest as the gold-spending
+    core, and back them up with Trebuchets. Yasama-boosted Towers give your defensive line extra reach, helping you hold
+    positions while the Arbalest fire.
+
+
+    **Deathball composition (closed maps / team games):** Mass Halberdier and Arbalest behind a wall of Onagers, with
+    Trebuchets to crack buildings. The Siege Engineers bonus extends siege range, letting your Onagers and Trebs
+    out-range enemy fortifications as the ball rolls forward.
+
+
+    **Recommended build:** [17 Pop Japanese Man-at-Arms Rush](/en/builds/17pop-japanese-maa-rush)
+  tr: >-
+    Japanese, Doğu Asya'dan bir Piyade uygarlığıdır.
+
+
+    ## Japanese Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Hızlı saldıran piyade bonusuna yaslan ve Man-at-Arms rush ile aç, ardından
+    baskıyı sürdürmek için erken bir Archery Range'e geç. Japanese geç oyunda zayıflar; bu yüzden saldırganlığını
+    belirleyici bir avantaja dönüştür ve rakipler toparlanmadan maçı kapat.
+
+
+    **İdeal geç oyun kompozisyonu:** Halberdier'ları (altın harcamayan anti-süvari hattın) Arbalest ile eşleştir ve
+    Trebuchet'lerle destekle. Yasama ile güçlendirilmiş Tower'lar savunma hattına ekstra menzil kazandırır; Arbalest
+    ateş ederken pozisyonları tutmana yardımcı olur.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Onager duvarının arkasında kalabalık Halberdier ve
+    Arbalest yığ; binaları yıkmak için Trebuchet ekle. Siege Engineers bonusu menzili uzatır, böylece Onager'ların ve
+    Treb'lerin top ilerlerken düşman tahkimatlarını daha uzaktan iter.
+
+
+    **Önerilen build:** [17 Pop Japanese Man-at-Arms Rush](/en/builds/17pop-japanese-maa-rush)

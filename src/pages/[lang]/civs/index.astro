@@ -5,26 +5,29 @@ import FilterBar from "@/components/ui/FilterBar.astro";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
-import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 
 const lang = Astro.params.lang as Locale;
-const civs = await getLocalizedEntries("civilizations", lang);
-
-// Join civ-data for tier/region facets (text lives in `civilizations`, meta in `civ-data`).
+const allCivs = await getCollection("civilizations");
 const civData = await getCollection("civ-data");
 const metaBySlug = new Map(civData.map((c) => [c.data.slug, c.data]));
 
 const regionSlug = (r: string) => r.toLowerCase().replace(/\s+/g, "-");
 const tierRank: Record<string, number> = { S: 0, A: 1, B: 2, C: 3, D: 4, F: 5 };
 
+// Sort alphabetically by localized name
+const collator = new Intl.Collator(lang);
+const civs = [...allCivs].sort((a, b) =>
+  collator.compare(a.data.name[lang], b.data.name[lang])
+);
+
 const tierSet = new Set<string>();
-const regionMap = new Map<string, string>(); // slug -> label
+const regionMap = new Map<string, string>();
 for (const c of civs) {
-  const m = metaBySlug.get(canonicalSlug(c.id));
+  const m = metaBySlug.get(c.id);
   if (m?.meta?.tier) tierSet.add(m.meta.tier);
   if (m?.region) regionMap.set(regionSlug(m.region), m.region);
 }
@@ -59,21 +62,20 @@ const facets = [
     />
     <ul class="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {civs.map((c) => {
-        const slug = canonicalSlug(c.id);
-        const m = metaBySlug.get(slug);
+        const m = metaBySlug.get(c.id);
         return (
           <li
             class="h-full"
             data-filter-item
-            data-search={`${c.data.name} ${c.data.tagline}`.toLowerCase()}
+            data-search={`${c.data.name[lang]} ${c.data.tagline[lang]}`.toLowerCase()}
             data-tier={m?.meta?.tier ?? ""}
             data-region={m?.region ? regionSlug(m.region) : ""}
           >
             <CivCard
-              slug={slug}
-              name={c.data.name}
-              tagline={c.data.tagline}
-              bonuses={c.data.bonuses}
+              slug={c.id}
+              name={c.data.name[lang]}
+              tagline={c.data.tagline[lang]}
+              bonuses={c.data.bonuses[lang]}
               locale={lang}
             />
           </li>

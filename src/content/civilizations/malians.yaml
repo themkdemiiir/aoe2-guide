@@ -1,0 +1,80 @@
+slug: malians
+name:
+  en: Malians
+  tr: Malians
+tagline:
+  en: Malians — an Infantry civilization from West Africa.
+  tr: Malians — Batı Afrika'dan bir Piyade uygarlığı.
+bonuses:
+  en:
+    - Buildings cost -15% wood
+    - Villagers drop off +10% more gold
+    - Barracks Units +1/+2/+3 pierce armor in Feudal/
+  tr:
+    - Binalar %15 daha az Odun harcar
+    - Köylüler %10 daha fazla Altın bırakır
+    - Barracks Birimleri Feodal/Kale/İmparatorluk Çağı'nda +1/+2/+3 delici zırh kazanır
+teamBonus:
+  en: Universities work +80% faster
+  tr: Universities %80 daha hızlı çalışır
+uniqueTechs:
+  castle:
+    name:
+      en: Tigui
+      tr: Tigui
+    effect:
+      en: Town Centers fire arrows without garrison
+      tr: Oyun içi teknoloji ağacına bak
+  imperial:
+    name:
+      en: Farimba
+      tr: Farimba
+    effect:
+      en: Cavalry +5 attack
+      tr: Oyun içi teknoloji ağacına bak
+strategy:
+  en: >-
+    Malians are an Infantry civilization from West Africa.
+
+
+    ## How to Play Malians
+
+
+    **Ideal opening (Dark → Castle):** Open with single-range Archers in Feudal Age — the Malian barracks/archery
+    pierce-armor bonus and cheap buildings let your ranged units trade up. Push into Castle Age and transition those
+    Archers into Crossbowmen, supported by gold-cost units as you tech up.
+
+
+    **Ideal late-game composition:** Lean on Hussars as your trash-line screen, place Hand Cannoneers (or Gbeto) as your
+    gold-cost damage core, and back the line with Bombard Cannons for siege. The free gold-mining upgrades keep your two
+    gold units affordable deep into the game.
+
+
+    **Deathball composition (closed maps / team games):** Mass Gbeto behind a wall of Siege Onagers, fold in
+    Farimba-buffed Camels for a hard-hitting melee punch, and round out the push with Bombard Cannons or Trebuchets to
+    crack fortifications.
+
+
+    **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
+  tr: >-
+    Malians, Batı Afrika'dan bir Piyade uygarlığıdır.
+
+
+    ## Malians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Feodal Çağ'da tek Archery Range ile Archer açılışı yap — Malian kışla/okçu
+    delici zırh bonusu ve ucuz binalar, menzilli birimlerinin daha verimli takas yapmasını sağlar. Kale Çağı'na geç ve
+    bu Archer'ları Crossbowmen'e dönüştür; yükseltme yaparken Altın maliyetli birimlerle destekle.
+
+
+    **İdeal geç oyun kompozisyonu:** Hussar'ları trash-line ekran olarak kullan, Hand Cannoneers (ya da Gbeto) ile Altın
+    maliyetli hasar çekirdeği oluştur ve arkayı Bombard Cannon'larla destekle. Ücretsiz Altın madenciliği yükseltmeleri,
+    iki Altın birimini oyun boyunca uygun fiyatlı tutar.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Siege Onager duvarının arkasında yığın Gbeto kullan,
+    Farimba güçlendirmeli Camel'larla sert yakın dövüş vur ve Bombard Cannon ya da Trebuchet'lerle tahkimatları kır.
+
+
+    **Önerilen build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)

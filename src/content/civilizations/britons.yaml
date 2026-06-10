@@ -1,0 +1,113 @@
+slug: britons
+name:
+  en: Britons
+  tr: Britons
+tagline:
+  en: Britons — a Foot Archer civilization from Western Europe.
+  tr: Britons — a Foot Archer civilization from Western Europe.
+bonuses:
+  en:
+    - Shepherds work +25% faster
+    - Town Centers cost -50% wood starting in Castle Age
+    - Foot Archers +1/+2 range in Castle/Imperial Age
+  tr:
+    - Kale Çağı'ndan itibaren Şehir Merkezleri %50 daha az odun maliyetiyle inşa edilir.
+    - Yaya okçuları (Skirmisher hariç) Kale Çağı'nda +1, İmparatorluk Çağı'nda +2 menzil kazanır.
+    - Çobanlar %25 daha hızlı çalışır.
+teamBonus:
+  en: Archery Ranges work +10% faster
+  tr: Okçu Talimhaneleri %20 daha hızlı çalışır.
+uniqueTechs:
+  castle:
+    name:
+      en: Yeomen
+      tr: Yeomen
+    effect:
+      en: Foot Archers and Skirmisher-line +1 range; Watch Tower-line +2 attack
+      tr: Yaya okçuları +1 menzil; Kuleler +2 saldırı kazanır.
+  imperial:
+    name:
+      en: Warwolf
+      tr: Warwolf
+    effect:
+      en: Trebuchets deal blast damage and are more accurate
+      tr: Trebuchet'ler birimlere karşı alan hasarı verir ve ıskalamaz.
+strategy:
+  en: >-
+    Britons are an Archer civilization from Western Europe.
+
+
+    ## Playstyle
+
+
+    Britons want to reach Castle Age fast with a strong wood economy (Town Center bonus), then mass Crossbowmen behind
+    Longbowman support. The combination of range bonus + Yeomen turns them into the longest-range archer civ in the
+    game.
+
+
+    ## When to play Britons
+
+
+    - Closed maps where you can boom safely.
+
+    - Late-game team games where Longbowmen + Trebuchets break sieges.
+
+
+    ## How to Play Britons
+
+
+    **Ideal opening (Dark → Castle):** Open with a single Archery Range and play passively while your wood economy
+    snowballs off the cheap Town Centers. Transition smoothly into Castle Age, where your +1 range Crossbowmen become
+    the backbone of your army.
+
+
+    **Ideal late-game composition:** Pair Longbowmen (or Arbalests when you want a cheaper, faster-firing line) with
+    Halberdiers to screen against cavalry, and add Warwolf Trebuchets to flatten buildings and clumps of units without
+    missing.
+
+
+    **Deathball composition (closed maps / team games):** Stack 12-range Longbowmen behind a wall of Halberdiers and
+    roll forward with Trebuchets — the unmatched range lets you out-shoot everything before the enemy closes.
+
+
+    **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
+  tr: >-
+    Britons, oyunun en güçlü özgün birimlerinden biri olan Uzunyay Okçusuna sahip bir okçu uygarlığıdır. Kale ve
+    İmparatorluk Çağı'nda uzun menzilli yaya okçu kompozisyonunda parlar.
+
+
+    ## Oynayış
+
+
+    Britons güçlü bir odun ekonomisiyle (Şehir Merkezi bonusu) hızlı Kale Çağı'na geçer; ardından Uzunyay Okçusu
+    desteğiyle Tatar Yayı kalabalığı kurar. Menzil bonusu + Yeomen, Britons'ı oyundaki en uzun menzilli okçu uygarlığı
+    yapar.
+
+
+    ## Britons ne zaman oynanır
+
+
+    - Güvenle ekonomi büyütebileceğin kapalı haritalar.
+
+    - Uzunyay Okçusu + Trebuchet'lerin kuşatma savunmasını kıracağı geç oyun takım maçları.
+
+
+    ## Britons Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Tek bir Okçu Talimhanesi ile aç ve ucuz Şehir Merkezleri sayesinde odun ekonomin
+    katlanırken pasif oyna. Akıcı bir şekilde Kale Çağı'na geç; burada +1 menzilli Tatar Yayların ordunun belkemiği
+    olur.
+
+
+    **İdeal geç oyun kompozisyonu:** Uzunyay Okçularını (ya da daha ucuz ve hızlı ateş eden bir hat istediğinde
+    Arbalest) süvariye karşı perde görevi gören Halberdier'lerle birleştir; binaları ve birim yığınlarını ıskalamadan
+    ezmek için Warwolf Trebuchet ekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** 12 menzilli Uzunyay Okçularını bir Halberdier
+    duvarının arkasına diz ve Trebuchet'lerle öne doğru ilerle — eşsiz menzil, düşman yaklaşamadan her şeyi alt etmeni
+    sağlar.
+
+
+    **Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)

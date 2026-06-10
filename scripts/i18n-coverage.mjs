@@ -48,7 +48,11 @@ if (!existsSync(CONTENT_ROOT)) {
 }
 
 // ---------- 1) content collections ----------
-const enFiles = walk(CONTENT_ROOT).filter((f) => f.includes(EN_SEG));
+// Exclude collections that use single bilingual files (no en/tr pair needed).
+const BILINGUAL_COLLECTIONS = ["civilizations"];
+const enFiles = walk(CONTENT_ROOT)
+  .filter((f) => f.includes(EN_SEG))
+  .filter((f) => !BILINGUAL_COLLECTIONS.some((c) => f.includes(`${sep}${c}${sep}`)));
 const missing = [];
 const untranslated = [];
 

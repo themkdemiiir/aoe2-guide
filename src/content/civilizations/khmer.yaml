@@ -1,0 +1,79 @@
+slug: khmer
+name:
+  en: Khmer
+  tr: Khmer
+tagline:
+  en: Khmer — a Siege and Elephant civilization from Southeast Asia.
+  tr: Khmer — Güneydoğu Asya'dan bir Kuşatma ve Fil uygarlığı.
+bonuses:
+  en:
+    - No buildings required to advance to the next Age or to unlock other buildings
+    - Farmers don't require Mills or Town Centers to drop off food
+    - Villagers can garrison in Houses
+    - Battle Elephants move +10% faster
+  tr:
+    - Bir sonraki Çağ'a ilerlemek veya diğer binaları açmak için ön bina gerekmez
+    - Çiftçiler yiyecek bırakmak için Mill veya Town Center'a ihtiyaç duymaz
+    - Köylüler House'lara garnizon kurabilir
+    - Battle Elephant'lar %10 daha hızlı hareket eder
+teamBonus:
+  en: Scorpions +1 range
+  tr: Scorpion'lar +1 menzil
+uniqueTechs:
+  castle:
+    name:
+      en: Tusk Swords
+      tr: Tusk Swords
+    effect:
+      en: Battle Elephants +3 attack
+      tr: Oyun içi teknoloji ağacına bak
+  imperial:
+    name:
+      en: Double Crossbow
+      tr: Double Crossbow
+    effect:
+      en: Ballista Elephants and Scorpions fire an additional projectile
+      tr: Oyun içi teknoloji ağacına bak
+strategy:
+  en: >-
+    Khmer are a Siege and Elephant civilization from Southeast Asia.
+
+
+    ## How to Play Khmer
+
+
+    **Ideal opening (Dark → Castle):** Lean on the building-prerequisite bonus to skip the barracks and fully wall your
+    base early, while fast-farming farms keep your food count high. Open with Scouts behind that wall, then flow into
+    Scouts, Knights, or Light Cavalry as you push into Castle Age.
+
+
+    **Ideal late-game composition:** Spam Hussar as your trash backbone, add a gold core of Heavy Scorpions or Ballista
+    Elephants (Arbalest works as an alternative), and finish the mix with Trebuchets for siege.
+
+
+    **Deathball composition (closed maps / team games):** Stack Heavy Scorpions with Ballista Elephants and back them
+    with Trebuchets for a slow but devastating push.
+
+
+    **Recommended build:** [Khmer Fast Castle into Knights + Scorpions](/en/builds/khmer-fc-knights-scorpions)
+  tr: >-
+    Khmer, Güneydoğu Asya'dan bir Kuşatma ve Fil uygarlığıdır.
+
+
+    ## Khmer Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ön bina gerektirmeyen bonus sayesinde kışlayı atlayıp üssünü erken çitle; aynı
+    zamanda hızlı çiftçilik ile yiyecek sayını yüksek tut. Scout'larla başla, ardından Kale Çağı'na girerken Scout,
+    Knight veya Light Cavalry'ye geç.
+
+
+    **İdeal geç oyun kompozisyonu:** Trash omurgası olarak Hussar'ları yığ; altın için Heavy Scorpion veya Ballista
+    Elephant ekle (Arbalest alternatif olarak işe yarar), ardından kuşatma için Trebuchet ile karışımı tamamla.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Heavy Scorpion'ları Ballista Elephant'larla yığ ve
+    yavaş ama yıkıcı bir ilerleme için Trebuchet ile destekle.
+
+
+    **Önerilen build:** [Khmer Fast Castle into Knights + Scorpions](/en/builds/khmer-fc-knights-scorpions)

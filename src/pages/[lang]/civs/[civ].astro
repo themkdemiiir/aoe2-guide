@@ -1,47 +1,36 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import UniqueUnitBlock from "@/components/content/UniqueUnitBlock.astro";
-import Alert from "@/components/ui/Alert.astro";
 import Icon from "@/components/ui/Icon.astro";
-import { getEntry, render } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
-import { t } from "@/i18n/utils";
-import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 
 export async function getStaticPaths() {
-  const paths: Array<{ params: { lang: string; civ: string } }> = [];
-  for (const lang of locales) {
-    const civs = await getLocalizedEntries("civilizations", lang);
-    for (const c of civs) {
-      paths.push({ params: { lang, civ: canonicalSlug(c.id) } });
-    }
-  }
-  return paths;
+  const civs = await getCollection("civilizations");
+  return locales.flatMap((lang) =>
+    civs.map((c) => ({ params: { lang, civ: c.id } }))
+  );
 }
 
 const lang = Astro.params.lang as Locale;
 const civSlug = Astro.params.civ as string;
-const found = await getLocalizedEntry("civilizations", civSlug, lang);
-if (!found) return Astro.redirect("/404");
+const civs = await getCollection("civilizations");
+const entry = civs.find((c) => c.id === civSlug);
+if (!entry) return Astro.redirect("/404");
 
-const { entry, fallback } = found;
-const { Content } = await render(entry);
 const civDataEntry = await getEntry("civ-data", civSlug);
 const meta = civDataEntry?.data;
-const description = `${entry.data.name} civilization guide for Age of Empires II — ${entry.data.tagline}`;
+const name = entry.data.name[lang];
+const tagline = entry.data.tagline[lang];
+const description = `${name} civilization guide for Age of Empires II — ${tagline}`;
 ---
-<BaseLayout title={entry.data.name} description={description} canonicalPath={`/civs/${civSlug}`}>
+<BaseLayout title={name} description={description} canonicalPath={`/civs/${civSlug}`}>
   <article class="mx-auto max-w-prose px-4 py-12">
-    {fallback && (
-      <Alert variant="warning" class="mb-6">
-        {t(lang, "ui.translation.missing")}
-      </Alert>
-    )}
     <header class="flex items-center gap-4">
       <Icon slug={civSlug} kind="civ" size={104} />
       <div>
-        <h1 class="font-display text-4xl text-ink">{entry.data.name}</h1>
-        <p class="text-stone-700">{entry.data.tagline}</p>
+        <h1 class="font-display text-4xl text-ink">{name}</h1>
+        <p class="text-stone-700">{tagline}</p>
       </div>
     </header>
 
@@ -56,9 +45,9 @@ const description = `${entry.data.name} civilization guide for Age of Empires II
     <section class="mt-8">
       <h2 class="font-display text-2xl text-ink">Bonuses</h2>
       <ul class="mt-2 list-inside list-disc space-y-1 text-ink">
-        {entry.data.bonuses.map((b: string) => <li>{b}</li>)}
+        {entry.data.bonuses[lang].map((b: string) => <li>{b}</li>)}
       </ul>
-      <p class="mt-3 text-sm text-stone-700"><strong>Team:</strong> {entry.data.teamBonus}</p>
+      <p class="mt-3 text-sm text-stone-700"><strong>Team:</strong> {entry.data.teamBonus[lang]}</p>
     </section>
 
     {meta && meta.uniqueUnits.length > 0 && (
@@ -73,13 +62,16 @@ const description = `${entry.data.name} civilization guide for Age of Empires II
     <section class="mt-8">
       <h2 class="font-display text-2xl text-ink">Unique Techs</h2>
       <ul class="mt-2 space-y-2 text-ink">
-        <li><strong>{entry.data.uniqueTechs.castle.name}</strong> — {entry.data.uniqueTechs.castle.effect}</li>
-        <li><strong>{entry.data.uniqueTechs.imperial.name}</strong> — {entry.data.uniqueTechs.imperial.effect}</li>
+        <li><strong>{entry.data.uniqueTechs.castle.name[lang]}</strong> — {entry.data.uniqueTechs.castle.effect[lang]}</li>
+        <li><strong>{entry.data.uniqueTechs.imperial.name[lang]}</strong> — {entry.data.uniqueTechs.imperial.effect[lang]}</li>
       </ul>
     </section>
 
-    <section class="prose prose-stone mt-10 max-w-none">
-      <Content />
-    </section>
+    {entry.data.strategy?.[lang] && (
+      <section class="prose prose-stone mt-10 max-w-none rounded border border-stone-700/30 bg-parchment px-5 py-6">
+        <h2 class="font-display text-2xl text-ink">Strategy</h2>
+        <p class="mt-3 whitespace-pre-wrap text-ink">{entry.data.strategy[lang]}</p>
+      </section>
+    )}
   </article>
 </BaseLayout>

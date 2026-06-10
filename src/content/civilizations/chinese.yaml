@@ -1,0 +1,83 @@
+slug: chinese
+name:
+  en: Chinese
+  tr: Chinese
+tagline:
+  en: Chinese — an Archer civilization from East Asia.
+  tr: Chinese — Doğu Asya'dan bir Archer uygarlığı.
+bonuses:
+  en:
+    - Start with +3 Villagers, but -50 wood and -200 food
+    - Technologies cost -5/10/15% in Feudal/Castle/Imperial Age
+    - Town Centers +7 line of sight and provide +15 population space
+    - Fire Lancers and Fire Ships move +5/10% faster in Castle/Imperial Age
+  tr:
+    - +3 Villager ile başlarsın ama -50 odun ve -200 yiyecek
+    - Teknolojiler Feodal/Kale/İmparatorluk Çağı'nda -%5/10/15 maliyet
+    - Town Center'lar +7 görüş alanı sağlar ve +15 nüfus kapasitesi verir
+    - Fire Lancer'lar ve Fire Ship'ler Kale/İmparatorluk Çağı'nda %5/10 daha hızlı hareket eder
+teamBonus:
+  en: Farms +10% food
+  tr: Çiftlikler %10 fazla Yiyecek üretir
+uniqueTechs:
+  castle:
+    name:
+      en: Great Wall
+      tr: Great Wall
+    effect:
+      en: Walls, Watch Tower-line and Bombard Towers +30% HP
+      tr: Walls, Watch Tower-line and Bombard Towers +30% HP
+  imperial:
+    name:
+      en: Rocketry
+      tr: Rocketry
+    effect:
+      en: Scorpions, Rocket Carts and Lou Chuans +25% attack; Lou Chuans fire rockets
+      tr: Scorpions, Rocket Carts and Lou Chuans +25% attack; Lou Chuans fire rockets
+strategy:
+  en: >-
+    Chinese are an Archer civilization from East Asia.
+
+
+    ## How to Play Chinese
+
+
+    **Ideal opening (Dark → Castle):** Lean on the three extra starting villagers and open with a Scout Rush. The
+    economy lead lets you stay flexible — apply early Feudal pressure, weather whatever your opponent throws back, and
+    then let the head-start in villager numbers snowball you into a strong Castle Age.
+
+
+    **Ideal late-game composition:** Anchor your army on massed Arbalests or Chu Ko Nu for ranged firepower, screen them
+    with cheap Light Cavalry to chase down skirmishers and raiders, and add Trebuchets to crack down standing buildings
+    and defenses.
+
+
+    **Deathball composition (closed maps / team games):** Build a slow, grinding ball of Heavy Scorpions and Chu Ko Nu
+    for overlapping volleys, push it forward behind Cavalier as a melee shield, and bring Trebuchets to demolish
+    fortifications as you advance.
+
+
+    **Recommended build:** [Chinese Fast Feudal](/en/builds/chinese-fast-feudal)
+  tr: >-
+    Chinese, Doğu Asya'dan bir Archer uygarlığıdır.
+
+
+    ## Chinese Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Başlangıçtaki üç ekstra Villager'a dayan ve Scout Rush ile aç. Ekonomi avantajı
+    sana esneklik kazandırır — erken Feodal baskı uygula, rakibinin karşılıklarını göğüsle ve Villager sayısındaki ön
+    atlamanın seni güçlü bir Kale Çağı'na taşımasına izin ver.
+
+
+    **İdeal geç oyun kompozisyonu:** Menzilli ateş gücü için kitlesel Arbalest'ler veya Chu Ko Nu'lar üzerine kur
+    ordunu; Skirmisher'ları ve akıncıları kovalarken ucuz Light Cavalry'lerle perdele ve ayakta duran binaları ve
+    savunmaları yıkmak için Trebuchet ekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Örtüşen atış yağmuru için yavaş, öğütücü bir Heavy
+    Scorpion ve Chu Ko Nu kitlesi kur; melee kalkanı olarak Cavalier'ın arkasına yerleştir ve ilerlerken tahkimatları
+    yıkmak için Trebuchet getir.
+
+
+    **Önerilen build:** [Chinese Fast Feudal](/en/builds/chinese-fast-feudal)

@@ -10,12 +10,15 @@
 //   Supplemental (22+): SiegeEngineers/aoe2techtree     MIT
 //   Hand-coded fallback for newer DLC civs not fully covered by either source.
 
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import yaml from "js-yaml";
 
 const CACHE_DIR = path.resolve(".cache/aoe2-data");
 const DATA_OUT = path.resolve("src/data/civilizations.json");
-const CONTENT_EN = path.resolve("src/content/civilizations/en");
+const CONTENT_CIVS = path.resolve("src/content/civilizations");
+const CONTENT_EN_DIR = path.resolve("src/content/civilizations/en");
+const CONTENT_TR_DIR = path.resolve("src/content/civilizations/tr");
 const ICON_MAP = path.resolve("src/data/icon-map.json");
 
 // ---------------------------------------------------------------------------
@@ -37,21 +40,23 @@ function slugify(str) {
 function parseHelpBonuses(raw) {
   if (typeof raw !== "string") return null;
   const lines = raw.split(/<br\s*\/?>/i).map((l) => l.replace(/<\/?[a-z]+>/gi, "").trim());
-  const out = { civBonuses: [], teamBonus: "" };
+  const out = { civBonuses: [], teamBonus: "", uniqueTechs: [] };
   let section = "bonuses";
   for (const l of lines) {
     if (!l || /civilization$/i.test(l)) continue;
-    if (/^Unique Unit/i.test(l) || /^Unique Tech/i.test(l)) {
-      section = "skip";
-      continue;
-    }
-    if (/^Team Bonus/i.test(l)) {
-      section = "team";
-      continue;
-    }
+    if (/^Unique Unit/i.test(l)) { section = "skip"; continue; }
+    if (/^Unique Tech/i.test(l)) { section = "techs"; continue; }
+    if (/^Team Bonus/i.test(l)) { section = "team"; continue; }
     const text = l.replace(/^•\s*/, "").trim();
-    if (section === "bonuses" && l.startsWith("•")) out.civBonuses.push(text);
-    else if (section === "team") out.teamBonus = out.teamBonus ? `${out.teamBonus} ${text}` : text;
+    if (section === "bonuses" && l.startsWith("•")) {
+      out.civBonuses.push(text);
+    } else if (section === "team") {
+      out.teamBonus = out.teamBonus ? `${out.teamBonus} ${text}` : text;
+    } else if (section === "techs" && l.startsWith("•")) {
+      // "TechName (effect description)" — parenthetical is the effect
+      const m = text.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
+      out.uniqueTechs.push(m ? { name: m[1].trim(), effect: m[2].trim() } : { name: text, effect: "" });
+    }
   }
   return out.civBonuses.length ? out : null;
 }
@@ -558,18 +563,19 @@ const SUPPLEMENTAL = {
   },
   khitans: {
     region: "East Asian",
-    specialty: "Cavalry Archer",
-    uniqueUnits: ["khitan-lancer"],
+    specialty: "Infantry and Cavalry",
+    uniqueUnits: ["liao-dao", "mounted-trebuchet"],
+    // civBonuses + teamBonus + uniqueTechs all sourced from aoe2techtree help string at build time
     civBonuses: [
-      "Cavalry Archers cost -10%",
-      "Archery Range units +1 attack",
-      "Stables work 20% faster",
-      "Hunters carry +10 meat",
+      "Pastures replace Farms",
+      "Melee attack upgrade effects are doubled",
+      "Skirmishers, Spearman-, and Scout Cavalry-line train and upgrade +15% faster",
+      "Heavy Cavalry Archer upgrade available in Castle Age and costs -50%",
     ],
-    teamBonus: "Cavalry Archers +1 range",
+    teamBonus: "Infantry +2 attack vs. Ranged Soldiers",
     uniqueTechs: {
-      castle: { name: "Khitan Cavalry", effect: "Cavalry +1 speed" },
-      imperial: { name: "Steppe Tactics", effect: "Cavalry Archers attack 15% faster" },
+      castle: { name: "Lamellar Armor", effect: "Infantry and Skirmishers reflect 25% melee damage back to the attacker" },
+      imperial: { name: "Ordo Cavalry", effect: "Cavalry regenerates HP in combat" },
     },
   },
   macedonians: {
@@ -872,16 +878,9 @@ async function run() {
     existingData = JSON.parse(existing);
   } catch (_) {}
 
-  // Build map of existing civ entries (hand-written data to preserve)
-  const existingCivMap = {};
-  for (const civ of existingData.civs || []) {
-    existingCivMap[civ.slug] = civ;
-  }
-
-  await mkdir(CONTENT_EN, { recursive: true });
+  await mkdir(CONTENT_CIVS, { recursive: true });
 
   const civEntries = [];
-  let skipped = 0;
   let written = 0;
 
   // Process civs in sorted order
@@ -905,34 +904,6 @@ async function run() {
 
     // Build the entry
     let entry;
-
-    if (slug === "britons" && existingCivMap.britons) {
-      // Preserve existing hand-written Britons data exactly
-      const existing = existingCivMap.britons;
-      entry = {
-        slug: "britons",
-        region: existing.region || "Western European",
-        specialty: existing.specialty || "Foot Archers",
-        uniqueUnits: existing.uniqueUnits || ["longbowman"],
-        civBonuses: existing.civBonuses || [
-          "Town Centers cost 50% less wood from Castle Age",
-          "Foot archers (except Skirmishers) +1 range Castle Age, +2 Imperial Age",
-          "Shepherds work 25% faster",
-        ],
-        teamBonus: existing.teamBonus || "Archery Ranges work 20% faster",
-        uniqueTechs: existing.uniqueTechs || {
-          castle: { name: "Yeomen", effect: "Foot archers +1 range; Towers +2 attack" },
-          imperial: {
-            name: "Warwolf",
-            effect: "Trebuchets do blast damage; never miss against units",
-          },
-        },
-      };
-      // Remove non-schema fields from existing data (era, tier, etc.)
-      civEntries.push(entry);
-      skipped++; // content file will be skipped
-      continue;
-    }
 
     if (aalises) {
       // Use aalises data as primary
@@ -998,42 +969,29 @@ async function run() {
     entry.specialty = fixSpecialty(entry.specialty);
     entry.regionNoun = REGION_NOUN[entry.region] ?? entry.region;
 
-    civEntries.push(entry);
-
-    // Write content file (skip if exists)
-    const mdPath = path.join(CONTENT_EN, `${slug}.md`);
-    let exists = false;
-    try {
-      await access(mdPath);
-      exists = true;
-    } catch (_) {}
-
-    if (exists) {
-      console.log(`  [SKIP] ${mdPath} (already exists)`);
-      skipped++;
-    } else {
-      const md = buildMarkdown(entry, displayName);
-      await writeFile(mdPath, md, "utf8");
-      console.log(`  [WRITE] ${mdPath}`);
-      written++;
-    }
-  }
-
-  // Re-source civBonuses + teamBonus from aoe2techtree locale strings (authoritative,
-  // current at the pinned SHA) — overrides stale hand-coded / aalises bonus text.
-  // Structured uniqueUnits (slugs) + uniqueTechs are left untouched.
-  let reSourced = 0;
-  for (const entry of civEntries) {
+    // Re-source bonuses + uniqueTechs from aoe2techtree help strings BEFORE writing the MD file.
     const helpId = helpIdBySlug[entry.slug];
-    const parsed =
-      helpId != null ? parseHelpBonuses(strings[helpId] ?? strings[String(helpId)]) : null;
+    const parsed = helpId != null ? parseHelpBonuses(strings[helpId] ?? strings[String(helpId)]) : null;
     if (parsed) {
       entry.civBonuses = parsed.civBonuses;
       if (parsed.teamBonus) entry.teamBonus = parsed.teamBonus;
-      reSourced++;
+      if (parsed.uniqueTechs?.length >= 1) entry.uniqueTechs.castle = parsed.uniqueTechs[0];
+      if (parsed.uniqueTechs?.length >= 2) entry.uniqueTechs.imperial = parsed.uniqueTechs[1];
     }
+
+    civEntries.push(entry);
+
+    // Read existing EN + TR files for prose/translation carryover
+    const enData = await readExistingCivFile(path.join(CONTENT_EN_DIR, `${slug}.md`));
+    const trData = await readExistingCivFile(path.join(CONTENT_TR_DIR, `${slug}.md`));
+
+    // Always regenerate — never skip; stale files were the root cause of wrong content.
+    const mdPath = path.join(CONTENT_CIVS, `${slug}.yaml`);
+    const md = buildMarkdown(entry, displayName, trData, enData);
+    await writeFile(mdPath, md, "utf8");
+    console.log(`  [WRITE] ${mdPath}`);
+    written++;
   }
-  console.log(`  Bonuses re-sourced from aoe2techtree strings: ${reSourced}/${civEntries.length}`);
 
   // Write civilizations.json
   const output = {
@@ -1046,7 +1004,6 @@ async function run() {
   console.log(`\nDone.`);
   console.log(`  Civs in JSON:          ${civEntries.length}`);
   console.log(`  Content files written: ${written}`);
-  console.log(`  Content files skipped: ${skipped}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -1054,6 +1011,7 @@ async function run() {
 // ---------------------------------------------------------------------------
 const REGION_NOUN = {
   "Ancient Mediterranean": "the Ancient Mediterranean",
+  "Ancient Middle Eastern": "the Ancient Middle East",
   Caucasian: "the Caucasus",
   "Central Asian": "Central Asia",
   "Central European": "Central Europe",
@@ -1088,38 +1046,68 @@ function fixSpecialty(s) {
   return x;
 }
 
-function buildMarkdown(entry, displayName) {
+async function readExistingCivFile(filePath) {
+  try {
+    const text = await readFile(filePath, "utf8");
+    const m = text.match(/^---\n([\s\S]*?)\n---(?:\n|$)([\s\S]*)$/);
+    if (!m) return { fm: null, body: "" };
+    return { fm: yaml.load(m[1]), body: m[2].trim() };
+  } catch (_) {
+    return { fm: null, body: "" };
+  }
+}
+
+function buildMarkdown(entry, displayName, trData, enData) {
   const { slug, region, regionNoun, specialty, civBonuses, teamBonus, uniqueTechs } = entry;
-
-  const castleName = uniqueTechs.castle.name || "Castle Age Unique Tech";
-  const castleEffect = uniqueTechs.castle.effect || "See in-game tech tree";
-  const imperialName = uniqueTechs.imperial.name || "Imperial Age Unique Tech";
-  const imperialEffect = uniqueTechs.imperial.effect || "See in-game tech tree";
-
   const place = regionNoun || region;
   const art = /^[aeiou]/i.test(specialty) ? "an" : "a";
-  const tagline = `${displayName} — ${art} ${specialty} civilization from ${place}.`;
+  const taglineEn = `${displayName} — ${art} ${specialty} civilization from ${place}.`;
 
-  // Bonuses, team bonus, unique units, and unique techs render structurally from
-  // this frontmatter on the civ page — do NOT duplicate them as body sections.
-  return `---
-slug: ${slug}
-name: "${displayName}"
-tagline: "${tagline}"
-bonuses:
-${civBonuses.map((b) => `  - "${b.replace(/"/g, '\\"')}"`).join("\n")}
-teamBonus: "${teamBonus.replace(/"/g, '\\"')}"
-uniqueTechs:
-  castle:
-    name: "${castleName.replace(/"/g, '\\"')}"
-    effect: "${castleEffect.replace(/"/g, '\\"')}"
-  imperial:
-    name: "${imperialName.replace(/"/g, '\\"')}"
-    effect: "${imperialEffect.replace(/"/g, '\\"')}"
----
+  const trFm = trData?.fm ?? {};
+  const enFm = enData?.fm ?? {};
 
-${displayName} are ${art} ${specialty} civilization from ${place}.
-`;
+  // For each translated field: carry TR only when the old EN matches the new EN.
+  const trName = String(trFm.name ?? displayName);
+  const taglineChanged = String(enFm.tagline ?? "") !== taglineEn;
+  const trTagline = String(taglineChanged ? taglineEn : (trFm.tagline ?? taglineEn));
+
+  // Always use a fresh array copy to avoid js-yaml YAML anchors.
+  const bonusesChanged = JSON.stringify(enFm.bonuses) !== JSON.stringify(civBonuses);
+  const trBonuses = bonusesChanged ? [...civBonuses] : (trFm.bonuses ? [...trFm.bonuses] : [...civBonuses]);
+
+  const teamBonusChanged = enFm.teamBonus !== teamBonus;
+  const trTeamBonus = String(teamBonusChanged ? teamBonus : (trFm.teamBonus ?? teamBonus));
+
+  const castleChanged = enFm.uniqueTechs?.castle?.name !== uniqueTechs.castle.name;
+  const imperialChanged = enFm.uniqueTechs?.imperial?.name !== uniqueTechs.imperial.name;
+  const trCastleName   = String(castleChanged   ? uniqueTechs.castle.name   : (trFm.uniqueTechs?.castle?.name   ?? uniqueTechs.castle.name));
+  const trCastleEffect = String(castleChanged   ? uniqueTechs.castle.effect : (trFm.uniqueTechs?.castle?.effect ?? uniqueTechs.castle.effect));
+  const trImperialName   = String(imperialChanged ? uniqueTechs.imperial.name   : (trFm.uniqueTechs?.imperial?.name   ?? uniqueTechs.imperial.name));
+  const trImperialEffect = String(imperialChanged ? uniqueTechs.imperial.effect : (trFm.uniqueTechs?.imperial?.effect ?? uniqueTechs.imperial.effect));
+
+  const enStrategy = enData?.body ?? "";
+  const trStrategy = trData?.body ?? "";
+
+  const fm = {
+    slug,
+    name: { en: displayName, tr: trName },
+    tagline: { en: taglineEn, tr: trTagline },
+    bonuses: { en: civBonuses, tr: Array.isArray(trBonuses) ? trBonuses : civBonuses },
+    teamBonus: { en: teamBonus, tr: trTeamBonus },
+    uniqueTechs: {
+      castle: {
+        name:   { en: uniqueTechs.castle.name,   tr: trCastleName },
+        effect: { en: uniqueTechs.castle.effect, tr: trCastleEffect },
+      },
+      imperial: {
+        name:   { en: uniqueTechs.imperial.name,   tr: trImperialName },
+        effect: { en: uniqueTechs.imperial.effect, tr: trImperialEffect },
+      },
+    },
+    ...(enStrategy || trStrategy ? { strategy: { en: enStrategy, tr: trStrategy } } : {}),
+  };
+
+  return yaml.dump(fm, { lineWidth: 120 });
 }
 
 run().catch((e) => {

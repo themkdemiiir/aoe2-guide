@@ -1,0 +1,85 @@
+slug: vietnamese
+name:
+  en: Vietnamese
+  tr: Vietnamese
+tagline:
+  en: Vietnamese — an Archer civilization from Southeast Asia.
+  tr: Vietnamese — Güneydoğu Asya kökenli bir Archer uygarlığı.
+bonuses:
+  en:
+    - Enemy Town Centers are revealed at the start of the game
+    - Economic upgrades cost no wood and research +100% faster
+    - Archery Range units and Fire Lancers +20% HP
+    - Conscription free
+  tr:
+    - Düşman Şehir Merkezleri oyunun başında haritada gösterilir
+    - Ekonomik yükseltmeler odun maliyeti olmaksızın araştırılır ve %100 daha hızlı tamamlanır
+    - Archery Range birimleri ve Fire Lancers %20 daha fazla can'a sahiptir
+    - Conscription ücretsizdir
+teamBonus:
+  en: Imperial Skirmisher upgrade available in Imperial Age
+  tr: İmparatorluk Çağı'nda Imperial Skirmisher yükseltmesi kullanılabilir
+uniqueTechs:
+  castle:
+    name:
+      en: Chatras
+      tr: Chatras
+    effect:
+      en: Battle Elephants +100 HP
+      tr: Oyun içi teknoloji ağacına bakınız
+  imperial:
+    name:
+      en: Paper Money
+      tr: Paper Money
+    effect:
+      en: Lumberjacks slowly generate gold in addition to wood
+      tr: Oyun içi teknoloji ağacına bakınız
+strategy:
+  en: >-
+    Vietnamese are an Archer civilization from Southeast Asia.
+
+
+    ## How to Play Vietnamese
+
+
+    **Ideal opening (Dark → Castle):** Lean on a Scouts opening that flows into Skirmishers, or run a
+    Spearman-Skirmisher mix to apply early pressure cheaply. A Scouts-into-Cavalry-Archer line is also viable. Avoid
+    committing to a one-range Archer opening — Vietnamese have no Camel to back up an Archer-heavy game, so the more
+    flexible Scout-and-trash transitions serve you better.
+
+
+    **Ideal late-game composition:** Center your army on Rattan Archers (their pierce armor shrugs off enemy archer
+    fire) supported by Halberdiers as your trash anti-cavalry, with Bombard Cannons for siege and demolition. If you
+    need to economize on gold, Arbalests can stand in for some of the Rattan Archers.
+
+
+    **Deathball composition (closed maps / team games):** Mass Rattan Archers as the ranged core, screen them with
+    Battle Elephants as a durable frontline meatshield, and add Bombard Cannons to clear buildings and enemy siege as
+    you push.
+
+
+    **Recommended build:** [Scouts into Skirmishers](/en/builds/scouts-into-skirms)
+  tr: >-
+    Vietnamese, Güneydoğu Asya kökenli bir Archer uygarlığıdır.
+
+
+    ## Vietnamese Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Scout'larla aç ve Skirmisher'lara geç ya da ucuz baskı için Spearman-Skirmisher
+    karışımı kullan. Scout'tan Cavalry Archer hattına geçiş de işe yarar. Tek Archery Range ile Archer ağırlıklı açılışa
+    bağlanma — Vietnamese'nin Archer ağırlıklı oyunu destekleyecek Camel'ı yoktur; Scout ve trash geçişleri sana daha
+    fazla esneklik sağlar.
+
+
+    **İdeal geç oyun kompozisyonu:** Ordunu Rattan Archer'lar üzerine kur (delici zırhları düşman okçu saldırılarını
+    göğüsler); süvariye karşı trash olarak Halberdier ekle, kuşatma ve yıkım için Bombard Cannon kullan. Altın tasarrufu
+    gerekiyorsa Arbalest'ler bazı Rattan Archer'ların yerini alabilir.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Menzilli çekirdek olarak kalabalık Rattan Archer kur,
+    önlerine dayanıklı bir ön hat olarak Battle Elephant'lar diz ve ilerleme sırasında bina ile düşman kuşatma
+    makinelerini temizlemek için Bombard Cannon ekle.
+
+
+    **Önerilen build:** [Scouts into Skirmishers](/en/builds/scouts-into-skirms)

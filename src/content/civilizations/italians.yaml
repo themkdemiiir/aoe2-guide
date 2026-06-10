@@ -1,0 +1,82 @@
+slug: italians
+name:
+  en: Italians
+  tr: Italians
+tagline:
+  en: Italians — an Archer and Naval civilization from Southern Europe.
+  tr: Italians — Güney Avrupa'dan bir Okçu ve Denizcilik uygarlığı.
+bonuses:
+  en:
+    - Advancing to the next Age costs -15%
+    - Foot Archers and Condottieri +1 melee/+1 pierce armor
+    - Dock and University technologies cost -25%
+    - Gunpowder Units cost -20%
+    - Fishing Ships cost -15%
+  tr:
+    - Bir sonraki çağa geçmek -%15 daha ucuz
+    - Yaya Archer'lar ve Condottieri +1 yakın dövüş / +1 delici zırh kazanır
+    - Dock ve University teknolojileri -%25 daha ucuz
+    - Barut Birimleri -%20 daha ucuz
+    - Fishing Ship'ler -%15 daha ucuz
+teamBonus:
+  en: Condottiero available at the Barracks in Imperial Age
+  tr: İmparatorluk Çağı'nda Barracks'ta Condottiero erişilebilir
+uniqueTechs:
+  castle:
+    name:
+      en: Silk Road
+      tr: Silk Road
+    effect:
+      en: Trade Units cost -50%
+      tr: Trade Units cost -50%
+  imperial:
+    name:
+      en: Pirotechnia
+      tr: Pirotechnia
+    effect:
+      en: Hand Cannoneers deal +15% pass through damage and are more accurate
+      tr: Hand Cannoneers deal +15% pass through damage and are more accurate
+strategy:
+  en: >-
+    Italians are an Archer and Naval civilization from Southern Europe.
+
+
+    ## How to Play Italians
+
+
+    **Ideal opening (Dark → Castle):** Italians are flexible early — open either with a Scout Rush or with single-range
+    Archers, since both scale into the mid-game thanks to the cheaper age-up. Avoid committing to infantry and instead
+    prioritize reaching the Castle Age quickly to unlock your stronger gold units.
+
+
+    **Ideal late-game composition:** Lean on Genoese Crossbowmen as your gold core, backed by Hussars as your trash
+    line, with Bombard Cannons providing siege.
+
+
+    **Deathball composition (closed maps / team games):** Build around massed Genoese Crossbowmen with Condottieri to
+    absorb and counter enemy gold units, add Monks for support, and round it out with Bombard Cannons for siege power.
+
+
+    **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
+  tr: >-
+    Italians, Güney Avrupa'dan bir Okçu ve Denizcilik uygarlığıdır.
+
+
+    ## Italians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Italians, erken oyunda esnektir — ucuz çağ atlama sayesinde her ikisi de orta
+    oyuna taşındığından Scout Rush veya tek talimhaneli Archer ile aç. Piyadeye bağlanmaktan kaçın; daha güçlü altın
+    birimlerini açmak için Kale Çağı'na hızlı ulaşmayı önceliklendir.
+
+
+    **İdeal geç oyun kompozisyonu:** Altın çekirdeğin olarak Genoese Crossbowmen'a yaslan; trash hattın olarak
+    Hussar'larla destekle ve kuşatma için Bombard Cannon ekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Düşman altın birimlerini absorbe etmek ve
+    counter'lamak için Condottieri ile desteklenen kitlevi Genoese Crossbowmen üzerine kur; destek için Monk ekle ve
+    kuşatma gücü için Bombard Cannon ile tamamla.
+
+
+    **Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)

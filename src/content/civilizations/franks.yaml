@@ -1,0 +1,81 @@
+slug: franks
+name:
+  en: Franks
+  tr: Franks
+tagline:
+  en: Franks — a Cavalry civilization from Western Europe.
+  tr: Franks — Batı Avrupa'dan bir Süvari uygarlığı.
+bonuses:
+  en:
+    - Foragers work +15% faster
+    - Mill technologies free
+    - Mounted Units +20% HP starting in Feudal Age
+    - Castles cost -15/25% in Castle/Imperial Age
+  tr:
+    - Yiyecek toplayıcılar %15 daha hızlı çalışır
+    - Mill teknolojileri ücretsiz
+    - Binekli Birimler Feodal Çağ'dan itibaren %20 daha fazla can'a sahip
+    - Castle'lar Kale/İmparatorluk Çağı'nda %15/25 daha ucuz
+teamBonus:
+  en: Knight-line +2 line of sight
+  tr: Knight-line +2 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Bearded Axe
+      tr: Bearded Axe
+    effect:
+      en: Throwing Axemen +2 range
+      tr: Oyun içi teknoloji ağacına bak
+  imperial:
+    name:
+      en: Chivalry
+      tr: Chivalry
+    effect:
+      en: Stables work +40% faster
+      tr: Stables work +40% faster
+strategy:
+  en: >-
+    Franks are a Cavalry civilization from Western Europe.
+
+
+    ## How to Play Franks
+
+
+    **Ideal opening (Dark → Castle):** Begin with a Scout opening to pressure the enemy economy, then transition
+    straight into Knights once you reach Castle Age — the +20% HP bonus makes them brutally efficient. Snowball that
+    lead by upgrading into Paladin as the game pushes toward Imperial.
+
+
+    **Ideal late-game composition:** Lean on massed Paladin as your core; their durability lets them trade favorably
+    even into Halberdiers. Round the army out with a ranged answer (Skirmishers, Throwing Axemen, or Hand Cannoneers)
+    plus your own Halberdiers to cover against enemy cavalry.
+
+
+    **Deathball composition (closed maps / team games):** Stack Paladin in front, back them with Heavy Scorpions to
+    shred clumped infantry, and add Trebuchets (plus Bombard Cannons) to break down defenses as you grind forward.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Franks, Batı Avrupa'dan bir Süvari uygarlığıdır.
+
+
+    ## Franks Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Scout rush ile düşman ekonomisine baskı yap, ardından Kale Çağı'na ulaşınca
+    doğrudan Knight'lara geç — %20 bonus can onları son derece verimli kılar. Knight'ları Paladin'e yükselterek
+    İmparatorluk Çağı'na doğru bu avantajı kartopu gibi büyüt.
+
+
+    **İdeal geç oyun kompozisyonu:** Kalabalık Paladin'i ana gücün olarak kullan; dayanıklılıkları Halberdier'lara karşı
+    bile avantajlı çatışma sağlar. Orduyu menzilli bir cevapla (Skirmisher'lar, Throwing Axemen veya Hand Cannoneers) ve
+    düşman süvarisine karşı kendi Halberdier'larınla tamamla.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Paladin'i öne koy, Heavy Scorpion'larla toplu
+    piyadeleri tarayarak arkalarında destekle; ilerlerken savunmaları yıkmak için Trebuchet (ve Bombard Cannon) ekle.
+
+
+    **Önerilen build:** [Scout Rush](/en/builds/18pop-scouts)

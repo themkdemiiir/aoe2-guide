@@ -1,0 +1,41 @@
+slug: khitans
+name:
+  en: Khitans
+  tr: Khitans
+tagline:
+  en: Khitans — an Infantry and Cavalry civilization from East Asia.
+  tr: Khitans — an Infantry and Cavalry civilization from East Asia.
+bonuses:
+  en:
+    - Pastures replace Farms
+    - Melee attack upgrade effects are doubled
+    - Skirmishers, Spearman-, and Scout Cavalry-line train and upgrade +15% faster
+    - Heavy Cavalry Archer upgrade available in Castle Age and costs -50%
+  tr:
+    - Pasture'lar Farm'ların yerini alır
+    - Yakın dövüş saldırı yükseltmelerinin etkileri iki katına çıkar
+    - Skirmisher'lar, Spearman- ve Scout Cavalry-line %15 daha hızlı eğitilir ve yükseltilir
+    - Heavy Cavalry Archer yükseltmesi Kale Çağı'nda kullanılabilir ve -%50 maliyetle gelir
+teamBonus:
+  en: Infantry +2 attack vs. Ranged Soldiers
+  tr: Infantry, Ranged Soldier'lara karşı +2 saldırı kazanır
+uniqueTechs:
+  castle:
+    name:
+      en: Lamellar Armor
+      tr: Lamellar Armor
+    effect:
+      en: Infantry and Skirmishers reflect 25% melee damage back to the attacker
+      tr: Infantry and Skirmishers reflect 25% melee damage back to the attacker
+  imperial:
+    name:
+      en: Ordo Cavalry
+      tr: Ordo Cavalry
+    effect:
+      en: Cavalry regenerates HP in combat
+      tr: Cavalry regenerates HP in combat
+strategy:
+  en: >-
+    *(Strategy not yet written — bonuses and unique unit data need verification against current patch before prose can
+    be added.)*
+  tr: '*(Strateji henüz yazılmadı — güncel yama ile doğrulanması gerekiyor.)*'

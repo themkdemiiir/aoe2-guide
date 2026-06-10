@@ -1,0 +1,65 @@
+slug: wei
+name:
+  en: Wei
+  tr: Wei
+tagline:
+  en: Wei — a Cavalry civilization from East Asia.
+  tr: Wei — Doğu Asya'dan gelen bir Süvari uygarlığı.
+bonuses:
+  en:
+    - Receive one free Villager for each economic upgrade researched
+    - Hei Guang Cavalry and Xianbei Raider +20/30% HP in Castle/Imperial Age
+    - Traction Trebuchets and Lou Chuans cost -25%
+  tr:
+    - Araştırılan her ekonomik yükseltme için bir ücretsiz köylü kazanırsın
+    - Hei Guang Cavalry ve Xianbei Raider, Kale/İmparatorluk Çağı'nda +%20/30 can kazanır
+    - Traction Trebuchet'ler ve Lou Chuanlar -%25 maliyete gelir
+teamBonus:
+  en: Cavalry +2 attack vs. Siege Weapons
+  tr: Süvari, Siege Weapon'lara karşı +2 saldırı kazanır
+uniqueTechs:
+  castle:
+    name:
+      en: Tuntian
+      tr: Tuntian
+    effect:
+      en: Soldiers passively produce food
+      tr: Soldiers passively produce food
+  imperial:
+    name:
+      en: Ming Guang Armor
+      tr: Ming Guang Armor
+    effect:
+      en: Mounted Units +4 melee armor
+      tr: Mounted Units +4 melee armor
+strategy:
+  en: >-
+    Wei are a Cavalry civilization from East Asia.
+
+
+    ## How to Play Wei
+
+
+    **Ideal opening (Dark → Castle):** As a cavalry-bonus civ (Wei Formation gives cavalry +1 armour), open with a Scout
+    Rush and play toward Knights and your Heavy Cavalry in Castle Age.
+
+
+    **Recommended build:** [18 Pop Scout Rush](/en/builds/18pop-scouts)
+
+
+    *Opening synthesized from this Three Kingdoms civ's bonuses; a fuller guide is coming.*
+  tr: >-
+    Wei, Doğu Asya'dan gelen bir Süvari uygarlığıdır.
+
+
+    ## Wei Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Süvari bonuslu bir uygarlık olarak (Wei Formation süvarilerine +1 zırh verir),
+    Scout Rush ile açılış yap ve Kale Çağı'nda Knight'lara ve Ağır Süvari birimlerine geç.
+
+
+    **Önerilen build:** [18 Pop Scout Rush](/en/builds/18pop-scouts)
+
+
+    *Açılış, bu Üç Krallık uygarlığının bonuslarından sentezlenmiştir; daha kapsamlı bir rehber yakında.*

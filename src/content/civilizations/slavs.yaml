@@ -1,0 +1,79 @@
+slug: slavs
+name:
+  en: Slavs
+  tr: Slavs
+tagline:
+  en: Slavs — a Cavalry civilization from Eastern Europe.
+  tr: Slavlar — Doğu Avrupa'dan bir Süvari uygarlığı.
+bonuses:
+  en:
+    - Farmers work +15% faster
+    - Arson, Gambesons free
+    - Siege Workshop Units cost -15%
+    - Monks move +20% faster
+  tr:
+    - Çiftçiler %15 daha hızlı çalışır
+    - Arson, Gambesons ücretsiz
+    - Siege Workshop birimleri %15 daha az maliyetlidir
+    - Monk'lar %20 daha hızlı hareket eder
+teamBonus:
+  en: Military buildings (except Castles) provide +5 population space
+  tr: Askeri binalar (Castle'lar hariç) +5 nüfus alanı sağlar
+uniqueTechs:
+  castle:
+    name:
+      en: Detinets
+      tr: Detinets
+    effect:
+      en: Replaces 40% of Castle and Watch Tower-line stone cost with additional wood cost
+      tr: Replaces 40% of Castle and Watch Tower-line stone cost with additional wood cost
+  imperial:
+    name:
+      en: Druzhina
+      tr: Druzhina
+    effect:
+      en: Infantry deals trample damage
+      tr: Oyun içi teknoloji ağacına bakın
+strategy:
+  en: >-
+    Slavs are a Cavalry civilization from Eastern Europe.
+
+
+    ## How to Play Slavs
+
+
+    **Ideal opening (Dark → Castle):** Begin with a Scout Rush to pressure the enemy economy, then transition into
+    either Supplies-backed Longswords for an infantry push or commit to a Cavalry-plus-Siege composition that leans on
+    your cheaper siege workshop units as you reach Castle Age.
+
+
+    **Ideal late-game composition:** Pair Halberdiers as your trash backbone with your discounted Siege Onagers or Siege
+    Rams for the gold-heavy punch, and fold in Hussars to clean up and raid.
+
+
+    **Deathball composition (closed maps / team games):** Anchor a slow push with Halberdiers in front, mass Siege
+    Onagers or Heavy Scorpions for area damage behind them, and add Trebuchets to break down fortifications.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Slavlar, Doğu Avrupa'dan bir Süvari uygarlığıdır.
+
+
+    ## Slavlar Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Scout Rush ile düşman ekonomisine baskı yaparak başla, ardından Supplies
+    destekli Longsword'larla piyade atağına geç ya da Kale Çağı'na ulaştığında daha ucuz Siege Workshop birimlerine
+    dayanan bir Cavalry ve Siege kompozisyonuna yatırım yap.
+
+
+    **İdeal geç oyun kompozisyonu:** Halberdier'ları trash omurgası olarak kullan, indirimli Siege Onager'larını veya
+    Siege Ram'larını altın ağırlıklı güç için ekle ve baskın yapmak üzere Hussar'larla tamamla.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Önde Halberdier'larla yavaş bir ilerleme kur,
+    arkalarında alan hasarı için toplu Siege Onager veya Heavy Scorpion diz ve tahkimatları yıkmak için Trebuchet ekle.
+
+
+    **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)

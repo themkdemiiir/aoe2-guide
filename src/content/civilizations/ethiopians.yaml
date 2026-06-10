@@ -1,0 +1,81 @@
+slug: ethiopians
+name:
+  en: Ethiopians
+  tr: Ethiopians
+tagline:
+  en: Ethiopians — an Archer civilization from East Africa.
+  tr: Ethiopians — Doğu Afrika'dan bir Archer uygarlığı.
+bonuses:
+  en:
+    - Receive +100 gold and +100 food when advancing to the next Age
+    - Foot Archers attack +18% faster
+    - Pikeman upgrade free
+  tr:
+    - Bir sonraki Çağ'a geçerken +100 Altın ve +100 Yiyecek alırsın
+    - Yaya Archer'ların saldırısı %18 daha hızlı
+    - Pikeman yükseltmesi ücretsiz
+teamBonus:
+  en: Outposts +3 line of sight and cost no stone
+  tr: Karakollar +3 görüş alanı kazanır ve Taş'a mal olmaz
+uniqueTechs:
+  castle:
+    name:
+      en: Royal Heirs
+      tr: Royal Heirs
+    effect:
+      en: Shotel Warriors and Camel Riders receive -3 damage from Mounted Units
+      tr: Shotel Warriors and Camel Riders receive -3 damage from Mounted Units
+  imperial:
+    name:
+      en: Torsion Engines
+      tr: Torsion Engines
+    effect:
+      en: Siege Workshop Units' blast radius increased
+      tr: Oyun içi teknoloji ağacına bak
+strategy:
+  en: >-
+    Ethiopians are an Archer civilization from East Africa.
+
+
+    ## How to Play Ethiopians
+
+
+    **Ideal opening (Dark → Castle):** Lean on the archer line from the start with a single-range Feudal opening, then
+    transition into Castle Age Crossbows and quickly Arbalest. Their faster archers and the free age-up resources make
+    pressure cheap to sustain. If you want extra punch, add a stable for a few Knights to ride forward and screen your
+    shots or pick off enemy siege.
+
+
+    **Ideal late-game composition:** A practical Imperial army is Arbalest for damage, Halberdier as your free trash
+    meatshield against cavalry, and Bombard Cannons supercharged by Torsion Engines to clear buildings and enemy siege.
+
+
+    **Deathball composition (closed maps / team games):** Center the ball on Torsion Engine Bombard Cannons backed by
+    Halberdiers to protect them, with Arbalest mixed in to add ranged volume as you grind forward.
+
+
+    **Recommended build:** [Ethiopian 2-Range Archers](/en/builds/ethiopian-2range-archers)
+  tr: >-
+    Ethiopians, Doğu Afrika'dan bir Archer uygarlığıdır.
+
+
+    ## Ethiopians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Tek bir Okçu Talimhanesiyle açılış yap; hızlı Archer'larla ve ücretsiz çağ
+    atlama kaynakları sayesinde baskıyı ucuza sürdürebilirsin. Feodal Çağ'dan itibaren Archer'lara yaslan, Kale Çağı'nda
+    Crossbow'a ve ardından hızlıca Arbalest'e geç. Ekstra güç istiyorsan birkaç Knight'ı öne sürerek Archer'larına perde
+    oluşturmak ya da düşman siege'ini ayıklamak için Stable ekle.
+
+
+    **İdeal geç oyun kompozisyonu:** Pratik bir İmparatorluk Çağı ordusu şunlardan oluşur: hasar için Arbalest, süvariye
+    karşı ücretsiz trash olarak Halberdier ve Torsion Engines ile güçlendirilmiş Bombard Cannon — bina ve düşman
+    siege'ini temizlemek için idealdir.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Topunu Torsion Engines'li Bombard Cannon'lar
+    etrafında kur; onları korumak için Halberdier'larla destekle ve öne doğru ilerlerken menzilli hacmi artırmak için
+    Arbalest karıştır.
+
+
+    **Önerilen build:** [Ethiopian 2-Range Archers](/en/builds/ethiopian-2range-archers)

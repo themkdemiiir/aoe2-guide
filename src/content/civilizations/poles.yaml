@@ -1,0 +1,80 @@
+slug: poles
+name:
+  en: Poles
+  tr: Poles
+tagline:
+  en: Poles — a Cavalry civilization from Eastern Europe.
+  tr: Poles — Doğu Avrupa'dan bir Süvari uygarlığı.
+bonuses:
+  en:
+    - Folwark replaces Mill
+    - Villagers regenerate 10/15/20 HP in Feudal/Castle/Imperial Age
+    - Stone Miners generate gold in addition to stone
+    - Bloodlines and Scout Cavalry-line upgrades cost -50% food
+  tr:
+    - Folwark, Mill'in yerini alır
+    - Köylüler Feodal/Kale/İmparatorluk Çağı'nda 10/15/20 can yeniler
+    - Taş Madencileri taşa ek olarak altın üretir
+    - Bloodlines ve Scout Cavalry hat yükseltmeleri %50 daha az Yiyecek maliyetiyle gelir
+teamBonus:
+  en: Scout Cavalry-line +1 attack vs. Ranged Soldiers
+  tr: Scout Cavalry hattı Menzilli Askerlere karşı +1 saldırı kazanır
+uniqueTechs:
+  castle:
+    name:
+      en: Szlachta Privileges
+      tr: Szlachta Privileges
+    effect:
+      en: Knight-line costs -60% gold
+      tr: Knight hattı %60 daha az Altın maliyetiyle gelir
+  imperial:
+    name:
+      en: Lechitic Legacy
+      tr: Lechitic Legacy
+    effect:
+      en: Scout Cavalry-line deals trample damage
+      tr: Light Cavalry ve Winged Hussar alan hasarı verir
+strategy:
+  en: >-
+    Poles are a Cavalry civilization from Eastern Europe.
+
+
+    ## How to Play Poles
+
+
+    **Ideal opening (Dark → Castle):** Lean on the free Scout upgrades and pressure with a Scout Rush while your farms
+    quietly stack stone, or commit to a forward Tower Rush (scouts plus walling also works). From there transition into
+    a boom and exploit the cheap Knight line tech for an all-in Knight push.
+
+
+    **Ideal late-game composition:** Pair Obuch as your gold core with Skirmishers as the trash counter and back them up
+    with siege — Trebuchets or Bombard Cannons.
+
+
+    **Deathball composition (closed maps / team games):** Stack Obuch with Arbalests and Bombard Cannons, then round it
+    out with Monks and Winged Hussar for the final push.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Poles, Doğu Avrupa'dan bir Süvari uygarlığıdır.
+
+
+    ## Poles Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ücretsiz Scout yükseltmelerine yaslan ve Scout Rush ile baskı uygularken
+    çiftliklerin sessiz sedasız taş biriktirmesini sağla; ya da öne doğru bir Tower Rush'a odaklan (Scout'larla
+    çevreleme de işe yarar). Ardından boom yaparak geçiş yap ve ucuz Knight hat teknolojisini kullanarak tam güçte bir
+    Knight saldırısı başlat.
+
+
+    **İdeal geç oyun kompozisyonu:** Altın gücün olarak Obuch'u, trash counter olarak Skirmisher'ları ve arkalarında
+    kuşatma makinelerini — Trebuchet veya Bombard Cannon — birleştir.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Obuch'u Arbalest'ler ve Bombard Cannon'larla yığ; son
+    atılım için Monk'lar ve Winged Hussar ile tamamla.
+
+
+    **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)

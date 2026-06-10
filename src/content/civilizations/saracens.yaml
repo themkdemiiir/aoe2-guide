@@ -1,0 +1,81 @@
+slug: saracens
+name:
+  en: Saracens
+  tr: Saracens
+tagline:
+  en: Saracens — a Camel and Naval civilization from the Middle East.
+  tr: Saracens — Orta Doğu'dan bir Camel ve Denizcilik uygarlığı.
+bonuses:
+  en:
+    - Market trading fee only 5%; Markets cost -100 wood
+    - Camel Units +25% HP
+    - Galley-line attacks +25% faster
+    - Transport Ships +100% HP, +20 carry capacity
+  tr:
+    - Market işlem ücreti yalnızca %5; Market'lar -100 Odun
+    - Camel Birimleri +%25 can
+    - Galley hattı saldırıları +%25 daha hızlı
+    - Transport Ship'ler +%100 can, +20 taşıma kapasitesi
+teamBonus:
+  en: Foot Archers and Skirmishers +2 attack vs. buildings
+  tr: Foot Archer'lar ve Skirmisher'lar binalara karşı +2 saldırı
+uniqueTechs:
+  castle:
+    name:
+      en: Bimaristan
+      tr: Bimaristan
+    effect:
+      en: Monks passively heal multiple nearby units
+      tr: Monks passively heal multiple nearby units
+  imperial:
+    name:
+      en: Counterweights
+      tr: Counterweights
+    effect:
+      en: Trebuchets and Mangonel-line +15% attack
+      tr: Trebuchets and Mangonel-line +15% attack
+strategy:
+  en: >-
+    Saracens are a Camel and Naval civilization from the Middle East.
+
+
+    ## How to Play Saracens
+
+
+    **Ideal opening (Dark → Castle):** Begin with a single-range Archer opening in Feudal, then leverage the dirt-cheap
+    5% Market to fast-Castle. From there you have two strong directions — keep applying pressure with an
+    Archer-and-Siege push, or transition into Crossbows backed by Camels to stay flexible against cavalry.
+
+
+    **Ideal late-game composition:** A practical Imperial army pairs Arbalests with Hussars for the trash backbone,
+    though Heavy Camels with Skirmishers (or even a pure Mameluke mass) are viable swaps; round it out with Siege
+    Onagers or Trebuchets for the siege punch.
+
+
+    **Deathball composition (closed maps / team games):** Stack Mamelukes with Siege Onagers and Trebuchets, adding a
+    few Hussars to deal with enemy Monks.
+
+
+    **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
+  tr: >-
+    Saracens, Orta Doğu'dan bir Camel ve Denizcilik uygarlığıdır.
+
+
+    ## Saracens Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Feodal Çağ'da tek Archery Range'la Archer açılışı yap, ardından son derece ucuz
+    %5 Market'i kullanarak hızlı Kale Çağı'na geç. Oradan iki güçlü yol açılıyor — Archer ve Siege baskısını sürdür ya
+    da süvari karşısında esnek kalmak için Camel desteğiyle Crossbow'lara geç.
+
+
+    **İdeal geç oyun kompozisyonu:** Pratik bir İmparatorluk Çağı ordusu için trash omurgası olarak Arbalest'leri
+    Hussar'larla eşleştir; Heavy Camel'ları Skirmisher'larla (ya da saf Mameluke kalabalığıyla) takas edebilirsin.
+    Kuşatma gücü için Siege Onager veya Trebuchet ekleyerek tamamla.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Mameluke'ları Siege Onager'lar ve Trebuchet'lerle
+    yığ; düşman Monk'larıyla başa çıkmak için birkaç Hussar ekle.
+
+
+    **Önerilen build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)

@@ -1,0 +1,36 @@
+slug: thracians
+name:
+  en: Thracians
+  tr: Thracians
+tagline:
+  en: Thracians — an Infantry and Cavalry civilization from the Ancient Mediterranean.
+  tr: Thracians — an Infantry and Cavalry civilization from the Ancient Mediterranean.
+bonuses:
+  en:
+    - Barracks units +1 melee armor
+    - Stable work 15% faster
+    - Farms cost -15%
+    - Infantry +10% speed
+  tr:
+    - Barracks units +1 melee armor
+    - Stable work 15% faster
+    - Farms cost -15%
+    - Infantry +10% speed
+teamBonus:
+  en: Barracks units +1 pierce armor
+  tr: Barracks units +1 pierce armor
+uniqueTechs:
+  castle:
+    name:
+      en: Odrysian Tactics
+      tr: Odrysian Tactics
+    effect:
+      en: Cavalry +1 attack
+      tr: Cavalry +1 attack
+  imperial:
+    name:
+      en: Thracian Shock
+      tr: Thracian Shock
+    effect:
+      en: Infantry +10 HP
+      tr: Infantry +10 HP

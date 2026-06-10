@@ -1,0 +1,82 @@
+slug: tatars
+name:
+  en: Tatars
+  tr: Tatars
+tagline:
+  en: Tatars — a Cavalry Archer civilization from Central Asia.
+  tr: Tatars — Orta Asya kökenli bir Cavalry Archer uygarlığı.
+bonuses:
+  en:
+    - Livestock animals last +50% longer
+    - Units deal +25% damage when fighting from higher elevation
+    - New Town Centers spawn 2 Sheep starting in Castle Age
+    - Thumb Ring, Parthian Tactics free
+  tr:
+    - Çiftlik hayvanları %50 daha uzun süre dayanır
+    - Birimler yüksek rakımdan savaşırken %25 daha fazla hasar verir
+    - Kale Çağı'ndan itibaren yeni Town Center'lar 2 Sheep üretir
+    - Thumb Ring ve Parthian Tactics ücretsiz
+teamBonus:
+  en: Mounted Archers +2 line of sight
+  tr: Atlı Okçular +2 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Silk Armor
+      tr: Silk Armor
+    effect:
+      en: Scout Cavalry-line, Steppe Lancers and Cavalry Archers +1 melee/+1 pierce armor
+      tr: Scout hattı, Cavalry Archer'lar ve Steppe Lancer'lar +1/+1 zırh kazanır
+  imperial:
+    name:
+      en: Timurid Siegecraft
+      tr: Timurid Siegecraft
+    effect:
+      en: Trebuchets +2 range
+      tr: Trebuchet'ler +2 menzil kazanır; Flaming Camel'lar kullanılabilir hale gelir
+strategy:
+  en: >-
+    Tatars are a Cavalry Archer civilization from Central Asia.
+
+
+    ## How to Play Tatars
+
+
+    **Ideal opening (Dark → Castle):** Pressure with a Scout Rush in Feudal, then transition into Cavalry Archers in
+    Castle Age — your free Thumb Ring makes them accurate immediately. Steppe Lancers, Camels, or Light Cavalry are
+    flexible alternatives depending on what your opponent fields.
+
+
+    **Ideal late-game composition:** Heavy Cavalry Archers backed by Hussars (their armor benefits from your unique
+    tech) and Trebuchets. A Keshik, Skirmisher, and Trebuchet mix is the strong second option when you need to grind out
+    a longer game.
+
+
+    **Deathball composition (closed maps / team games):** Long-range Trebuchets — 18 tiles with Siege Engineers plus
+    your unique tech — paired with Heavy Cavalry Archers and Keshiks to shred buildings and armies from a safe distance.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Tatars, Orta Asya kökenli bir Cavalry Archer uygarlığıdır.
+
+
+    ## Tatars Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Feodal Çağ'da Scout Rush ile baskı uygula, ardından Kale Çağı'nda Cavalry
+    Archer'lara geç — ücretsiz Thumb Ring onları anında isabetli yapar. Scout, Camel Rider veya Light Cavalry, rakibinin
+    ne çıkardığına göre esnek alternatiflerdir.
+
+
+    **İdeal geç oyun kompozisyonu:** Hussar desteğiyle Heavy Cavalry Archer'lar (zırhları özgün teknolojinden
+    yararlanır) ve Trebuchet'ler. Keshik, Skirmisher ve Trebuchet karışımı, uzun soluklu bir oyun gerektiğinde güçlü
+    ikinci seçenektir.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Siege Engineers artı özgün teknolojinle 18 karo
+    menzile ulaşan uzun menzilli Trebuchet'ler — Heavy Cavalry Archer'lar ve Keshik'lerle eşleştirerek binaları ve
+    orduları güvenli bir mesafeden ezip geç.
+
+
+    **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)

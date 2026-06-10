@@ -17,7 +17,7 @@ const lang = Astro.params.lang as Locale;
 
 // --- Live content (drives the action-tile counts, the top-civ strip, and the
 // featured build/map rows). getLocalizedEntries falls back to EN for missing TR. ---
-const civs = await getLocalizedEntries("civilizations", lang);
+const civs = await getCollection("civilizations");
 const builds = await getLocalizedEntries("build-orders", lang);
 const maps = await getLocalizedEntries("maps", lang);
 
@@ -27,7 +27,7 @@ const maps = await getLocalizedEntries("maps", lang);
 // no meta. Join the two, filter to slugs present in BOTH collections so CivCard
 // never receives an undefined name, and carry the FULL meta through so the
 // caption can show win/play rate (answers "why these six?"). ---
-const civBySlug = new Map(civs.map((c) => [canonicalSlug(c.id), c]));
+const civBySlug = new Map(civs.map((c) => [c.id, c]));
 const civData = await getCollection("civ-data");
 // Rank by editorial tier (best first). The aoestats winRate is a stale Dec-2025
 // (patch 162286) snapshot, so it is neither used for ranking nor shown — only the
@@ -211,10 +211,10 @@ const more = [
         {topCivs.map(({ entry, meta }) => (
           <li class="flex h-full flex-col gap-2">
             <CivCard
-              slug={canonicalSlug(entry.id)}
-              name={entry.data.name}
-              tagline={entry.data.tagline}
-              bonuses={entry.data.bonuses}
+              slug={entry.id}
+              name={entry.data.name[lang]}
+              tagline={entry.data.tagline[lang]}
+              bonuses={entry.data.bonuses[lang]}
               locale={lang}
             />
             {meta?.tier && (

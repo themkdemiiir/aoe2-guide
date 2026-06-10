@@ -1,0 +1,83 @@
+slug: portuguese
+name:
+  en: Portuguese
+  tr: Portuguese
+tagline:
+  en: Portuguese — a Naval and Gunpowder civilization from Southern Europe.
+  tr: Portuguese — Güney Avrupa'dan bir Denizcilik ve Barut uygarlığı.
+bonuses:
+  en:
+    - Foragers generate wood in addition to food
+    - All units cost -20% gold
+    - Can build Feitoria in Imperial Age
+    - Ships +10/15/20% HP in Feudal/Castle/Imperial Age
+  tr:
+    - Toplayıcılar yiyeceğe ek olarak odun da üretir
+    - Tüm birimler -%20 altın maliyetiyle üretilir
+    - İmparatorluk Çağı'nda Feitoria inşa edebilir
+    - Gemiler Feodal/Kale/İmparatorluk Çağı'nda +%10/%15/%20 can kazanır
+teamBonus:
+  en: Technologies research +25% faster
+  tr: Teknolojiler %25 daha hızlı araştırılır
+uniqueTechs:
+  castle:
+    name:
+      en: Circumnavigation
+      tr: Circumnavigation
+    effect:
+      en: Sets the entire map to explored; Ships train +33% faster
+      tr: Sets the entire map to explored; Ships train +33% faster
+  imperial:
+    name:
+      en: Arquebus
+      tr: Arquebus
+    effect:
+      en: Gunpowder Units fire more accurately at moving targets
+      tr: Oyun içi teknoloji ağacına bakın
+strategy:
+  en: >-
+    Portuguese are a Naval and Gunpowder civilization from Southern Europe.
+
+
+    ## How to Play Portuguese
+
+
+    **Ideal opening (Dark → Castle):** Begin with a single-range Archer push backed by your gold-based units — the -15%
+    gold discount lets you afford a heavier gold composition than most civs at the same number of villagers. Keep
+    pressure up while transitioning smoothly into the Castle Age.
+
+
+    **Ideal late-game composition:** Settle on Arbalest (or Organ Gun if you commit to gunpowder) for ranged power,
+    Halberdiers or Light Cavalry to soak up gold-free trades, and Bombard Cannon plus Bombard Towers for siege and
+    defensive presence. Lean on the Feitoria once your gold mines run dry to keep this composition fueled.
+
+
+    **Deathball composition (closed maps / team games):** Mass Organ Guns behind a wall of Bombard Cannon, with Cavalier
+    providing melee protection for the gunpowder core — a slow, grinding push that excels on arena-style and team-game
+    maps.
+
+
+    **Recommended build:** [Portuguese Monk Rush](/en/builds/portuguese-monk-rush)
+  tr: >-
+    Portuguese, Güney Avrupa'dan bir Denizcilik ve Barut uygarlığıdır.
+
+
+    ## Portuguese Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Tek bir Okçu Talimhanesi'nden Archer atağıyla başla; altın bazlı birimlerdeki
+    -%15 indirim, aynı köylü sayısıyla çoğu uygarlıktan daha ağır altın kompozisyon kurmanı sağlar. Baskını sürdürürken
+    Kale Çağı'na akıcı biçimde geç.
+
+
+    **İdeal geç oyun kompozisyonu:** Menzilli güç için Arbalest (ya da barutu tercih edersen Organ Gun), altınsız
+    takaslar için Halberdier veya Light Cavalry, kuşatma ve savunma varlığı için Bombard Cannon ile Bombard Tower
+    kullan. Altın madenlerin tükenince bu kompozisyonu beslemek için Feitoria'ya yaslan.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Bombard Cannon duvarının arkasına Organ Gun'ları yığ;
+    barut çekirdeğini yakın dövüşten korumak için Cavalier ekle — bu yavaş, ezici bir ataktır, arena tarzı ve takım maçı
+    haritalarında üstündür.
+
+
+    **Önerilen build:** [Portuguese Monk Rush](/en/builds/portuguese-monk-rush)

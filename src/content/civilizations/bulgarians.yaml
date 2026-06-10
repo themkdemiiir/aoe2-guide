@@ -1,0 +1,81 @@
+slug: bulgarians
+name:
+  en: Bulgarians
+  tr: Bulgarians
+tagline:
+  en: Bulgarians — a Cavalry and Siege civilization from Eastern Europe.
+  tr: Bulgarians — Doğu Avrupa'dan bir Süvari ve Kuşatma uygarlığı.
+bonuses:
+  en:
+    - Militia-line upgrades free
+    - Blacksmith and Siege Workshop technologies cost -50% food
+    - Town Centers cost -50% stone
+    - Can build Krepost in Castle Age
+  tr:
+    - Militia hattı yükseltmeleri ücretsizdir
+    - Blacksmith ve Siege Workshop teknolojileri %50 daha az Yiyecek maliyetiyle araştırılır
+    - Town Center'lar %50 daha az Taş maliyetiyle inşa edilir
+    - Kale Çağı'nda Krepost inşa edebilir
+teamBonus:
+  en: Blacksmiths work +80% faster
+  tr: Blacksmith'ler %80 daha hızlı çalışır
+uniqueTechs:
+  castle:
+    name:
+      en: Stirrups
+      tr: Stirrups
+    effect:
+      en: Cavalry attacks +33% faster
+      tr: Süvari birimleri %33 daha hızlı saldırır
+  imperial:
+    name:
+      en: Bagains
+      tr: Bagains
+    effect:
+      en: Militia-line +5 melee armor
+      tr: Militia hattı +5 yakın dövüş zırhı kazanır
+strategy:
+  en: >-
+    Bulgarians are a Cavalry and Siege civilization from Eastern Europe.
+
+
+    ## How to Play Bulgarians
+
+
+    **Ideal opening (Dark → Castle):** Lean on the free Militia-line upgrades to throw down an early Men-at-Arms rush,
+    then follow up quickly with a Barracks-supporting Range or Stable. As you reach Castle Age, plant a Krepost to keep
+    pressure and contest map control while your military spills out faster than your opponent can match.
+
+
+    **Ideal late-game composition:** Field upgraded Hussar — supercharged by Stirrups — backed by Siege Onagers or Siege
+    Rams, and round it out with Halberdiers to cover against enemy cavalry.
+
+
+    **Deathball composition (closed maps / team games):** Mass Konniks as the core, screen them with skirmisher-style
+    Genitours and Halberdiers for trash protection, and add Trebuchets to crack down fortifications and grind out the
+    push.
+
+
+    **Recommended build:** [Men-at-Arms into Archers](/en/builds/maa-archers)
+  tr: >-
+    Bulgarians, Doğu Avrupa'dan bir Süvari ve Kuşatma uygarlığıdır.
+
+
+    ## Bulgarians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ücretsiz Militia hattı yükseltmelerinden yararlanarak erken bir Man-at-Arms
+    rush'ı yap; ardından Barracks'ı destekleyen bir Range veya Stable ile hızla takip et. Kale Çağı'na ulaştığında bir
+    Krepost kur; bu yapı baskını sürdürmeni ve rakibinin karşılayamayacağı hızda harita kontrolünü ele geçirmeni sağlar.
+
+
+    **İdeal geç oyun kompozisyonu:** Stirrups ile güçlendirilmiş yükseltilmiş Hussar'ları Siege Onager'lar veya Siege
+    Ram'lerle destekle; düşman süvarilerine karşı koruma için Halberdier ekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Çekirdek olarak Konnik kalabalığı oluştur; trash
+    koruması için Skirmisher tarzı Genitour'lar ve Halberdier'lerle ekrana al; tahkimatları kırmak ve ilerleyişi
+    sürdürmek için Trebuchet ekle.
+
+
+    **Önerilen build:** [Men-at-Arms into Archers](/en/builds/maa-archers)

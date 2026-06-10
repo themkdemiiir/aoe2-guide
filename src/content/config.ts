@@ -6,22 +6,25 @@ function pathId({ entry }: { entry: string }): string {
   return entry.replace(/\.(md|mdx)$/i, "");
 }
 
+const localizedString = z.object({ en: z.string(), tr: z.string() });
+
 const civilizations = defineCollection({
   loader: glob({
-    pattern: "**/*.{md,mdx}",
+    pattern: "*.{yaml,yml}",
     base: "./src/content/civilizations",
-    generateId: pathId,
+    generateId: ({ entry }) => entry.replace(/\.(yaml|yml)$/i, ""),
   }),
   schema: z.object({
     slug: z.string(),
-    name: z.string(),
-    tagline: z.string(),
-    bonuses: z.array(z.string()),
-    teamBonus: z.string(),
+    name: localizedString,
+    tagline: localizedString,
+    bonuses: z.object({ en: z.array(z.string()), tr: z.array(z.string()) }),
+    teamBonus: localizedString,
     uniqueTechs: z.object({
-      castle: z.object({ name: z.string(), effect: z.string() }),
-      imperial: z.object({ name: z.string(), effect: z.string() }),
+      castle: z.object({ name: localizedString, effect: localizedString }),
+      imperial: z.object({ name: localizedString, effect: localizedString }),
     }),
+    strategy: z.object({ en: z.string(), tr: z.string() }).optional(),
   }),
 });
 

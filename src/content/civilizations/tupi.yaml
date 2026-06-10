@@ -1,0 +1,71 @@
+slug: tupi
+name:
+  en: Tupi
+  tr: Tupi
+tagline:
+  en: Tupi — an Archer and Raiding civilization from South America.
+  tr: Tupi — Güney Amerika'dan bir Archer ve baskın uygarlığı.
+bonuses:
+  en:
+    - Start with +25 of each resource
+    - Villagers can garrison in Settlements
+    - Fallen units return 15% of their cost
+    - Archery Range and Barracks upgrades cost -50% food
+  tr:
+    - Her kaynaktan +25 ile başla
+    - Köylüler Settlement'lara garnizon yapabilir
+    - Düşen birimler, maliyetlerinin %15'ini geri kazandırır
+    - Archery Range ve Barracks yükseltmeleri -%50 Yiyecek maliyeti
+teamBonus:
+  en: Towers and Castles provide +10 population space
+  tr: Tower ve Castle'lar +10 nüfus alanı sağlar
+uniqueTechs:
+  castle:
+    name:
+      en: Caciques
+      tr: Caciques
+    effect:
+      en: Champi Warriors and Slingers attack +25% faster
+      tr: Champi Warriors and Slingers attack +25% faster
+  imperial:
+    name:
+      en: Curare
+      tr: Curare
+    effect:
+      en: Foot Archers and Fortifications deal poison damage
+      tr: Foot Archers and Fortifications deal poison damage
+strategy:
+  en: >-
+    Tupi are an Archer and Raiding civilization from South America.
+
+
+    ## How to Play Tupi
+
+
+    **Ideal opening (Dark → Castle):** Lean on the archer identity early — push through Feudal with a one-range archer
+    opening, since the +1 attack versus cavalry and the team bonus make your bowmen punch above their cost. Transition
+    into Castle Age crossbows while using forests as a defensive crutch, where Ambush gives your archers extra range to
+    win woodline fights.
+
+
+    **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
+
+
+    *(Late-game and deathball compositions not yet covered for this civ.)*
+  tr: >-
+    Tupi, Güney Amerika'dan bir Archer ve baskın uygarlığıdır.
+
+
+    ## Tupi Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Erken dönemde okçu kimliğine yaslan — süvari karşısındaki +1 saldırısı ve takım
+    bonusu sayesinde okçuların maliyetinin üzerinde güç verir; tek menzil okçu açılışıyla Feodal Çağ'ı geç. Kale
+    Çağı'nda crossbow'a geç, ormanlara savunma kalkanı olarak yaslan; Ambush sayesinde okçuların ağaçlık savaşlarını
+    kazanmak için ekstra menzil kazanır.
+
+
+    **Önerilen build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
+
+
+    *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz kapsanmamıştır.)*

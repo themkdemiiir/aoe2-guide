@@ -1,0 +1,73 @@
+slug: muisca
+name:
+  en: Muisca
+  tr: Muisca
+tagline:
+  en: Muisca — a Gold and Infantry civilization from South America.
+  tr: Muisca — Güney Amerika'dan bir Altın ve Piyade uygarlığı.
+bonuses:
+  en:
+    - Advancing to the next Age costs -50% gold
+    - Settlements cost -25% and heal nearby units
+    - Champi Warriors and Archery Range Units +1/2/3 melee armor in Feudal/Castle/Imperial Age
+    - Monks regain faith +50% faster
+    - Caravan, Guilds free
+  tr:
+    - Bir sonraki Çağ'a geçmek -%50 Altın gerektirir
+    - Settlement'lar -%25 maliyetli ve yakınındaki birimleri iyileştirir
+    - Champi Warriors ve Archery Range Birimleri Feodal/Kale/İmparatorluk Çağı'nda +1/2/3 yakın dövüş zırhı kazanır
+    - Monks inancını %50 daha hızlı yeniler
+    - Caravan, Guilds ücretsiz
+teamBonus:
+  en: Natural gold sources last +15% longer
+  tr: Doğal Altın kaynakları %15 daha uzun süre dayanır
+uniqueTechs:
+  castle:
+    name:
+      en: Herbalism
+      tr: Herbalism
+    effect:
+      en: Archer-line and Champi Warriors move +15% faster
+      tr: Archer-line and Champi Warriors move +15% faster
+  imperial:
+    name:
+      en: Huaracas
+      tr: Huaracas
+    effect:
+      en: Slingers +1 range; train +25% faster
+      tr: Slingers +1 range; train +25% faster
+strategy:
+  en: >-
+    Muisca are a Gold and Infantry civilization from South America.
+
+
+    ## How to Play Muisca
+
+
+    **Ideal opening (Dark → Castle):** Lean on the cheap, durable barracks line and the strong gold economy. Open with
+    Men-at-Arms or Eagle Warriors backed by your faster gold income, since the -10% gold cost and +5 HP make early
+    infantry trades favorable; pair them with a Range or extra Barracks pressure and transition into a Castle where
+    Zipa's Authority turns your infantry into a real threat.
+
+
+    **Recommended build:** [18 Pop Double Barracks Eagles](/en/builds/18pop-double-barracks-eagles)
+
+
+    *(Late-game and deathball compositions not yet covered for this civ.)*
+  tr: >-
+    Muisca, Güney Amerika'dan bir Altın ve Piyade uygarlığıdır.
+
+
+    ## Muisca Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ucuz ve dayanıklı barracks hattına ve güçlü Altın ekonomisine yaslan. Daha hızlı
+    Altın gelirinle Men-at-Arms veya Eagle Warriors açılışı yap; -%10 Altın maliyeti ve +5 can, erken piyade takaslarını
+    senin lehine çevirir. Bunu bir Range ya da ekstra Barracks baskısıyla destekle ve Kale Çağı'na geç; orada Zipa's
+    Authority piyadelerini gerçek bir tehdide dönüştürür.
+
+
+    **Önerilen build:** [18 Pop Double Barracks Eagles](/en/builds/18pop-double-barracks-eagles)
+
+
+    *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz eklenmedi.)*

@@ -1,0 +1,83 @@
+slug: hindustanis
+name:
+  en: Hindustanis
+  tr: Hindustanis
+tagline:
+  en: Hindustanis — a Gunpowder and Cavalry civilization from South Asia.
+  tr: Hindustanis — Güney Asya kökenli bir Barut ve Süvari uygarlığı.
+bonuses:
+  en:
+    - Villagers cost -8/13/18/23% in Dark/Feudal/Castle/
+    - Camel Riders attack +20% faster
+    - Gunpowder Units +1 melee/+1 pierce armor
+    - Can build Caravanserai in Imperial Age
+  tr:
+    - Köylüler Karanlık/Feodal/Kale/İmparatorluk Çağı'nda -%8/13/18/23 maliyetle üretilir
+    - Camel Rider'lar %20 daha hızlı saldırır
+    - Barut Birimleri +1 yakın dövüş / +1 delici zırh kazanır
+    - İmparatorluk Çağı'nda Caravanserai inşa edilebilir
+teamBonus:
+  en: Scout Cavalry-line and Camel Units +2 attack vs. buildings
+  tr: Scout Cavalry hattı ve Camel Birimleri binalara karşı +2 saldırı kazanır
+uniqueTechs:
+  castle:
+    name:
+      en: Grand Trunk Road
+      tr: Grand Trunk Road
+    effect:
+      en: All gold income +10% faster; Market trading fee reduced to 10%
+      tr: All gold income +10% faster; Market trading fee reduced to 10%
+  imperial:
+    name:
+      en: Shatagni
+      tr: Shatagni
+    effect:
+      en: Hand Cannoneers +2 range
+      tr: Oyun içi teknoloji ağacına bakınız
+strategy:
+  en: >-
+    Hindustanis are a Gunpowder and Cavalry civilization from South Asia.
+
+
+    ## How to Play Hindustanis
+
+
+    **Ideal opening (Dark → Castle):** Open with a flexible Scout Rush to apply early pressure and keep your options
+    open. Transition based on what your opponent does: lean into archers when you need to punish forward buildings, or
+    shift to camels and light cavalry to dominate the cavalry war and shut down enemy mounted units.
+
+
+    **Ideal late-game composition:** A realistic, sustainable mix pairs Hand Cannoneers for ranged damage with Hussar as
+    your trash frontline, all backed by Bombard Cannons or Trebuchets for siege. Swapping in Imperial Camels with
+    Skirmishers is a strong alternative when you face heavy cavalry.
+
+
+    **Deathball composition (closed maps / team games):** Mass Imperial Camels as a durable, hard-hitting core, screen
+    them with the 9-range Hand Cannoneers that Shatagni enables, and add Bombard Cannons to level buildings and
+    out-range enemy siege.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Hindustanis, Güney Asya kökenli bir Barut ve Süvari uygarlığıdır.
+
+
+    ## Hindustanis Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Esnek bir Scout Rush ile aç; erken baskı uygula ve seçeneklerini açık tut.
+    Rakibine göre yön belirle: ileri binaları cezalandırmak için Archer'lara yönel ya da süvari savaşına hâkim olmak ve
+    düşman binekli birimlerini durdurmak için Camel ve hafif süvariye geç.
+
+
+    **İdeal geç oyun kompozisyonu:** Gerçekçi ve sürdürülebilir bir karışım: menzilli hasar için Hand Cannoneer'lar, ön
+    hat trash birimi olarak Hussar; kuşatma için Bombard Cannon veya Trebuchet desteğiyle. Ağır süvariyle karşılaşırsan
+    Skirmisher'larla birlikte Imperial Camel'a geçmek güçlü bir alternatiftir.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Imperial Camel'ları dayanıklı ve sert vuran bir
+    çekirdek olarak yığ; Shatagni'nin sağladığı 9 menzilli Hand Cannoneer'larla ekranla; binaları yıkmak ve düşman
+    kuşatmasını geçmek için Bombard Cannon ekle.
+
+
+    **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)

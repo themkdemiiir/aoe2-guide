@@ -2,7 +2,6 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 
 type ContentType =
-  | "civilizations"
   | "build-orders"
   | "units"
   | "maps"
@@ -19,7 +18,7 @@ export function localeFromEntryId(id: string): Locale {
 /** Extract the canonical (locale-stripped) slug from an entry id: "en/britons" → "britons". */
 export function canonicalSlug(id: string): string {
   const segs = id.split("/");
-  segs.shift();
+  if (segs[0] === "en" || segs[0] === "tr") segs.shift();
   return segs.join("/").replace(/\.(md|mdx)$/i, "");
 }
 
@@ -45,7 +44,7 @@ export async function getLocalizedEntries<T extends ContentType>(
 
   // Alphabetize the name-keyed list collections (locale-aware so Turkish sorts
   // correctly). Order-sensitive types (beginner chapters, articles) keep glob order.
-  if (type === "civilizations" || type === "maps") {
+  if (type === "maps") {
     const collator = new Intl.Collator(locale);
     const nameOf = (e: CollectionEntry<T>) => String((e.data as { name?: string }).name ?? "");
     result = [...result].sort((a, b) => collator.compare(nameOf(a), nameOf(b)));

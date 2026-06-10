@@ -1,0 +1,87 @@
+slug: bohemians
+name:
+  en: Bohemians
+  tr: Bohemians
+tagline:
+  en: Bohemians — a Gunpowder and Monk civilization from Eastern Europe.
+  tr: Bohemians — Doğu Avrupa'dan bir Barut ve Keşiş uygarlığı.
+bonuses:
+  en:
+    - Mining Camp technologies free
+    - Blacksmiths and Universities cost -100 wood
+    - Spearman-line deals +25% bonus damage
+    - Fervor and Sanctity affect Villagers
+    - Chemistry and Hand Cannoneer available in Castle Age
+  tr:
+    - Madencilik Kampı teknolojileri ücretsiz
+    - Blacksmith ve Üniversiteler -100 odun maliyetiyle inşa edilir
+    - Spearman hattı +%25 bonus hasar verir
+    - Fervor ve Sanctity köylüleri etkiler
+    - Chemistry ve Hand Cannoneer Kale Çağı'nda kullanılabilir
+teamBonus:
+  en: Markets work +80% faster
+  tr: Market'lar %80 daha hızlı çalışır
+uniqueTechs:
+  castle:
+    name:
+      en: Wagenburg Tactics
+      tr: Wagenburg Tactics
+    effect:
+      en: Gunpowder Units move +15% faster
+      tr: Barut birimleri +1 hız kazanır
+  imperial:
+    name:
+      en: Hussite Reforms
+      tr: Hussite Reforms
+    effect:
+      en: Monks and Monastery technologies gold cost is replaced by food cost
+      tr: Monk ve Monastery'ler, Emanet gibi altın üretir
+strategy:
+  en: >-
+    Bohemians are a Gunpowder and Monk civilization from Eastern Europe.
+
+
+    ## How to Play Bohemians
+
+
+    **Ideal opening (Dark → Castle):** Open with Archers backed by Spearmen and play a passive Feudal Age rather than
+    committing to early aggression. Wall up, defend, and push for a fast Castle Age, where you transition into your
+    gunpowder identity — Hand Cannoneers (boosted by your +25% accuracy) or Chemistry-enabled Crossbows to start
+    grinding down opponents.
+
+
+    **Ideal late-game composition:** Halberdiers as your trash line, Houfnice (your unique upgraded Bombard Cannon) for
+    siege, and Arbalests to round out the ranged gold damage. This gives you a balanced 1 trash + 1 gold + 1 siege mix
+    that leans on Bohemia's strong artillery.
+
+
+    **Deathball composition (closed maps / team games):** Stack Houfnice and Hand Cannoneers for overwhelming gunpowder
+    firepower, support with Halberdiers to screen against cavalry, and add Monks — which generate gold through Hussite
+    Reforms — to convert and sustain the push.
+
+
+    **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
+  tr: >-
+    Bohemians, Doğu Avrupa'dan bir Barut ve Keşiş uygarlığıdır.
+
+
+    ## Bohemians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Spearman'larla desteklenmiş Archer'larla aç ve erken saldırıya girişmek yerine
+    pasif bir Feodal Çağ oyna. Duvar kur, savun ve hızlı Kale Çağı'na atla; burada barut kimliğine geç — Hand
+    Cannoneer'lar (+%25 doğruluk bonusunla güçlendirilmiş) ya da Chemistry destekli Crossbow'larla rakibi yıpratmaya
+    başla.
+
+
+    **İdeal geç oyun kompozisyonu:** trash hattın için Halberdier, kuşatma için Houfnice (özgün yükseltilmiş Bombard
+    Cannon'un) ve menzilli altın hasarını tamamlamak için Arbalest. Bu, Bohemia'nın güçlü topçusuna dayanan dengeli 1
+    trash + 1 altın + 1 kuşatma karışımı sunar.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ezici barut ateş gücü için Houfnice ve Hand Cannoneer
+    yığ, süvariye karşı perde olması için Halberdier ekle; Hussite Reforms sayesinde altın üreten Monk'ları da koy —
+    bunlar dönüştürme yaparak atılımı sürdürür.
+
+
+    **Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)

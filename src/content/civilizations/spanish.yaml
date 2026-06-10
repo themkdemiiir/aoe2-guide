@@ -1,0 +1,85 @@
+slug: spanish
+name:
+  en: Spanish
+  tr: Spanish
+tagline:
+  en: Spanish — a Gunpowder and Monk civilization from Southern Europe.
+  tr: Spanish — Güney Avrupa'dan bir Barut ve Keşiş uygarlığı.
+bonuses:
+  en:
+    - Builders work +30% faster
+    - Receive +20 gold for each technology researched
+    - Blacksmith upgrades cost no gold
+    - Gunpowder Units attack +18% faster
+    - Cannon Galleons fire more accurately at moving targets
+  tr:
+    - İnşaatçılar %30 daha hızlı çalışır
+    - Araştırılan her teknoloji için +20 Altın alınır
+    - Blacksmith yükseltmeleri Altın gerektirmez
+    - Barut Birimleri %18 daha hızlı saldırır
+    - Cannon Galleon'lar hareketli hedeflere daha isabetli ateş eder
+teamBonus:
+  en: Trade Units generate +25% gold
+  tr: Ticaret Birimleri %25 daha fazla Altın üretir
+uniqueTechs:
+  castle:
+    name:
+      en: Inquisition
+      tr: Inquisition
+    effect:
+      en: Monks and Missionaries convert faster; Missionaries +1 range
+      tr: Monks and Missionaries convert faster; Missionaries +1 range
+  imperial:
+    name:
+      en: Supremacy
+      tr: Supremacy
+    effect:
+      en: Villagers +40 HP, +6 attack, +2 melee/+2 pierce armor
+      tr: Villagers +40 HP, +6 attack, +2 melee/+2 pierce armor
+strategy:
+  en: >-
+    Spanish are a Gunpowder and Monk civilization from Southern Europe.
+
+
+    ## How to Play Spanish
+
+
+    **Ideal opening (Dark → Castle):** Spanish are flexible in the early game — open with whatever suits the map,
+    whether scouts, a spear-skirmisher mix, or archers. The priority is securing your stone reserves, since the Castle
+    Age plan revolves around massing Conquistadors out of one or more Castles.
+
+
+    **Ideal late-game composition:** Transition into a Supremacy-style army of buffed villagers backing up Bombard
+    Towers for defense, with Halberdiers to stop cavalry and Hussars to clean up skirmishers and raid. The free
+    Blacksmith upgrades keep this trash-heavy mix surprisingly resilient.
+
+
+    **Deathball composition (closed maps / team games):** Roll forward with Conquistadors and Paladins as the core,
+    supported by Inquisition-boosted Monks for conversions and healing, plus Trebuchets and Bombard Cannons to crack
+    buildings and siege from range.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Spanish, Güney Avrupa'dan bir Barut ve Keşiş uygarlığıdır.
+
+
+    ## Spanish Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Spanish erken oyunda esnektir — haritaya göre scout'lar, mızrakçı-Skirmisher
+    karışımı ya da okçularla aç. Öncelik taş rezervlerini güvence altına almaktır; Kale Çağı planı bir veya daha fazla
+    Castle'dan Conquistador yığmaya dayanır.
+
+
+    **İdeal geç oyun kompozisyonu:** Supremacy ile güçlendirilmiş köylüleri savunma için Bombard Tower'larla destekleyen
+    bir orduya geç; süvariye karşı Halberdier, Skirmisher'ları temizleyip baskı yapmak için Hussar kullan. Ücretsiz
+    Blacksmith yükseltmeleri bu trash ağırlıklı karışımı şaşırtıcı biçimde dayanıklı kılar.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Conquistador ve Paladin'i çekirdek olarak öne sür;
+    Inquisition'la güçlendirilmiş dönüştürme ve iyileştirme için Monk'lar ekle, binalara ve menzilli kuşatmaya karşı
+    Trebuchet ile Bombard Cannon kullan.
+
+
+    **Önerilen build:** [Scout Rush](/en/builds/18pop-scouts)

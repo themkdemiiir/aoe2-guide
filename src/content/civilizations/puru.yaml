@@ -1,0 +1,36 @@
+slug: puru
+name:
+  en: Puru
+  tr: Puru
+tagline:
+  en: Puru — a War Elephant civilization from South America.
+  tr: Puru — a War Elephant civilization from South America.
+bonuses:
+  en:
+    - Elephants cost -20%
+    - Battle Elephants +2 attack
+    - Farms cost -10%
+    - Stable units +1 pierce armor
+  tr:
+    - Elephants cost -20%
+    - Battle Elephants +2 attack
+    - Farms cost -10%
+    - Stable units +1 pierce armor
+teamBonus:
+  en: Elephants +2 attack
+  tr: Elephants +2 attack
+uniqueTechs:
+  castle:
+    name:
+      en: Amazon Warriors
+      tr: Amazon Warriors
+    effect:
+      en: Elephants +1 armor
+      tr: Elephants +1 armor
+  imperial:
+    name:
+      en: Puru Rampage
+      tr: Puru Rampage
+    effect:
+      en: Battle Elephants attack 15% faster
+      tr: Battle Elephants attack 15% faster

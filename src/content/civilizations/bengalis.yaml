@@ -1,0 +1,81 @@
+slug: bengalis
+name:
+  en: Bengalis
+  tr: Bengalis
+tagline:
+  en: Bengalis — an Elephant and Naval civilization from South Asia.
+  tr: Bengalis — Güney Asya'dan bir Fil ve Denizcilik uygarlığı.
+bonuses:
+  en:
+    - Town Centers spawn 2 Villagers when the next Age is reached
+    - Cavalry +2 attack vs. Skirmishers
+    - Elephant Units receive -25% bonus damage and are more resistant to conversion
+    - Monks +3 melee/+3 pierce armor
+    - Ships regenerate 15 HP per minute
+  tr:
+    - Town Center'lar bir sonraki çağa ulaşıldığında 2 köylü daha üretir
+    - Süvari, Skirmisher'lara karşı +2 saldırı kazanır
+    - Fil birimleri %25 daha az bonus hasar alır ve dönüştürmeye daha dirençlidir
+    - Monk'lar +3 yakın dövüş / +3 delici zırh kazanır
+    - Gemiler dakikada 15 can yeniler
+teamBonus:
+  en: Trade Units generate +10% food in addition to gold
+  tr: Ticaret birimleri, Altın'a ek olarak %10 daha fazla Yiyecek üretir
+uniqueTechs:
+  castle:
+    name:
+      en: Paiks
+      tr: Paiks
+    effect:
+      en: Rathas and Elephant Units attack +20% faster
+      tr: Ratha ve Elephant Archer %18 daha hızlı saldırır
+  imperial:
+    name:
+      en: Mahayana
+      tr: Mahayana
+    effect:
+      en: Villagers and Monks take -10% population space
+      tr: Köylüler 0,5 daha az nüfus yer
+strategy:
+  en: >-
+    Bengalis are an Elephant and Naval civilization from South Asia.
+
+
+    ## How to Play Bengalis
+
+
+    **Ideal opening (Dark → Castle):** Lean on the two free starting villagers to reach Feudal with a stronger economy,
+    then pressure with either Scouts or Archers — skip infantry entirely. Carry that aggression into Castle Age, where
+    Monks become a major part of your plan.
+
+
+    **Ideal late-game composition:** Mass Ratha as your core gold unit, screen them with Skirmishers or Light Cavalry as
+    your trash line, and add Trebuchets (or Armored Elephants) for siege.
+
+
+    **Deathball composition (closed maps / team games):** Build around Monks for conversions and healing, pair them with
+    Elephant Archers or Ratha for damage, and bring Trebuchets to crack down fortifications.
+
+
+    **Recommended build:** [18 Pop Scouts into Archers](/en/builds/18pop-scouts-into-archers)
+  tr: >-
+    Bengalis, Güney Asya'dan bir Fil ve Denizcilik uygarlığıdır.
+
+
+    ## Bengalis Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ücretsiz gelen iki köylünün avantajıyla daha güçlü bir ekonomiyle Feodal Çağ'a
+    geç; ardından Scout ya da Archer baskısı uygula — piyadeyi tamamen atla. Bu baskıyı Kale Çağı'na taşı; orada
+    Monk'lar planının büyük bir parçası olur.
+
+
+    **İdeal geç oyun kompozisyonu:** Ana Altın birimin olarak toplu Ratha kur, çöp hattın olarak Skirmisher ya da Light
+    Cavalry'yle perdeleri ve kuşatma için Trebuchet (ya da Armored Elephant) ekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Dönüştürme ve iyileştirme için Monk'lar etrafında
+    kompozisyon kur, hasar için Elephant Archer ya da Ratha ile birleştir, tahkimatları yıkmak için Trebuchet getir.
+
+
+    **Önerilen build:** [18 Pop Scouts into Archers](/tr/builds/18pop-scouts-into-archers)

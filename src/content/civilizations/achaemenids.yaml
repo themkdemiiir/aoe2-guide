@@ -1,0 +1,36 @@
+slug: achaemenids
+name:
+  en: Achaemenids
+  tr: Achaemenids
+tagline:
+  en: Achaemenids — a Cavalry civilization from the Ancient Middle East.
+  tr: Achaemenids — a Cavalry civilization from the Ancient Middle East.
+bonuses:
+  en:
+    - Stable units -15% cost
+    - Cavalry +2 LOS
+    - Town Centers support +5 population
+    - Fishing Ships +2 HP per second
+  tr:
+    - Stable units -15% cost
+    - Cavalry +2 LOS
+    - Town Centers support +5 population
+    - Fishing Ships +2 HP per second
+teamBonus:
+  en: Cavalry +1 armor
+  tr: Cavalry +1 armor
+uniqueTechs:
+  castle:
+    name:
+      en: Persian Nobility
+      tr: Persian Nobility
+    effect:
+      en: Knight line +2 attack
+      tr: Knight line +2 attack
+  imperial:
+    name:
+      en: Royal Tithe
+      tr: Royal Tithe
+    effect:
+      en: Relics generate +100% gold
+      tr: Relics generate +100% gold

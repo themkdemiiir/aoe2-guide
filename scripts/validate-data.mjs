@@ -11,6 +11,7 @@ import * as v from "valibot";
 const FILE = "src/data/civilizations.json";
 const REGIONS = [
   "Ancient Mediterranean",
+  "Ancient Middle Eastern",
   "Caucasian",
   "Central Asian",
   "Central European",

@@ -1,0 +1,72 @@
+slug: wu
+name:
+  en: Wu
+  tr: Wu
+tagline:
+  en: Wu — a Naval civilization from East Asia.
+  tr: Wu — Doğu Asya'dan bir Denizci uygarlığı.
+bonuses:
+  en:
+    - Military production buildings and Docks provide +55 food
+    - Infantry regenerates 10/15/30 HP per minute in Feudal/Castle/Imperial Age
+    - Jian Swordsmen and Hei Guang Cavalry +2 attack in Imperial Age
+    - Careening, Dry Dock free
+  tr:
+    - Askeri üretim binaları ve Dock'lar +55 yiyecek sağlar
+    - Piyade Feodal/Kale/İmparatorluk Çağı'nda dakikada 10/15/30 can yeniler
+    - Jian Swordsmen ve Hei Guang Cavalry İmparatorluk Çağı'nda +2 saldırı kazanır
+    - Careening, Dry Dock ücretsizdir
+teamBonus:
+  en: Houses built +100% faster
+  tr: Evler %100 daha hızlı inşa edilir
+uniqueTechs:
+  castle:
+    name:
+      en: Red Cliffs Tactics
+      tr: Red Cliffs Tactics
+    effect:
+      en: Demolition Ships and Fire Archers deal fire damage to ships and buildings
+      tr: Demolition Ships and Fire Archers deal fire damage to ships and buildings
+  imperial:
+    name:
+      en: Sitting Tiger
+      tr: Sitting Tiger
+    effect:
+      en: Traction Trebuchets and Lou Chuan trebuchet weapons fire additional projectiles
+      tr: Traction Trebuchets and Lou Chuan trebuchet weapons fire additional projectiles
+strategy:
+  en: >-
+    Wu are a Naval civilization from East Asia.
+
+
+    ## How to Play Wu
+
+
+    **Ideal opening (Dark → Castle):** Lean on the water from the start. Wu's cheaper ships and faster Docks let you
+    out-fish and out-build any opponent on a hybrid or water map — open with an early Dock, secure deep fish, then
+    contest the lake with Fire Ships (which hit harder thanks to the +2 attack bonus) backed by Galleys. On land, keep a
+    light Archer presence to defend while your naval economy and fleet snowball into Castle Age.
+
+
+    **Recommended build:** [Fire Galleys and Archers](/en/builds/fire-galleys-and-archers)
+
+
+    *(Late-game and deathball compositions not yet covered for this civ.)*
+  tr: >-
+    Wu, Doğu Asya'dan bir Denizci uygarlığıdır.
+
+
+    ## Wu Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Başından itibaren suya yaslan. Wu'nun daha ucuz gemileri ve daha hızlı
+    Dock'ları, hibrit veya su haritasındaki her rakibi balık avında ve inşaatta geride bırakmanı sağlar — erken bir Dock
+    aç, derin balıkları ele geçir, ardından gölü +2 saldırı bonusundan güç alan Fire Ship'ler ve Galley'lerle kontrol
+    altına al. Karada, deniz ekonomin ve filonun Kale Çağı'na kartopu gibi büyürken savunmayı korumak için hafif bir
+    Archer varlığı sürdür.
+
+
+    **Önerilen build:** [Fire Galleys and Archers](/en/builds/fire-galleys-and-archers)
+
+
+    *(Geç oyun ve deathball kompozisyonları bu uygarlık için henüz kapsanmamıştır.)*

@@ -1,0 +1,78 @@
+slug: magyars
+name:
+  en: Magyars
+  tr: Magyars
+tagline:
+  en: Magyars — a Cavalry and Infantry civilization from Eastern Europe.
+  tr: Magyars — Doğu Avrupa'dan bir Süvari ve Piyade uygarlığı.
+bonuses:
+  en:
+    - Villagers defeat wolves with one strike
+    - Scout Cavalry-line costs -15%
+    - Melee attack upgrades free
+  tr:
+    - Köylüler kurdu tek vuruşla öldürür
+    - Scout Cavalry-line %15 daha ucuz
+    - Yakın dövüş saldırı yükseltmeleri ücretsiz
+teamBonus:
+  en: Mounted Archers train +25% faster
+  tr: Mounted Archer'lar %25 daha hızlı eğitilir
+uniqueTechs:
+  castle:
+    name:
+      en: Corvinian Army
+      tr: Corvinian Army
+    effect:
+      en: Magyar Huszar gold cost is replaced by additional food cost
+      tr: Magyar Huszar gold cost is replaced by additional food cost
+  imperial:
+    name:
+      en: Recurve Bow
+      tr: Recurve Bow
+    effect:
+      en: Mounted Archers +1 attack, +1 range
+      tr: Mounted Archers +1 attack, +1 range
+strategy:
+  en: >-
+    Magyars are a Cavalry and Infantry civilization from Eastern Europe.
+
+
+    ## How to Play Magyars
+
+
+    **Ideal opening (Dark → Castle):** Lean on the -15% cheaper Scout Cavalry and free Forging to launch an early Scout
+    Rush in Feudal, then transition into Light Cavalry or Knights as you reach Castle Age — or pivot to Cavalry Archers
+    if you want more range.
+
+
+    **Ideal late-game composition:** Pair Heavy Cavalry Archers (boosted by the Recurve Bow unique tech) with your
+    trash-tier Magyar Hussar, and back them with Trebuchets to crack down buildings and defensive structures.
+
+
+    **Deathball composition (closed maps / team games):** Combine Paladins for the heavy front line with Heavy Cavalry
+    Archers for ranged punch, supported by Trebuchets — a mobile hybrid ball that can reposition quickly while still
+    sieging down enemy fortifications.
+
+
+    **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
+  tr: >-
+    Magyars, Doğu Avrupa'dan bir Süvari ve Piyade uygarlığıdır.
+
+
+    ## Magyars Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** %15 ucuz Scout Cavalry ve ücretsiz Forging avantajından yararlanarak Feodal
+    Çağ'da erken Scout Rush başlat; ardından Kale Çağı'na ulaşınca Light Cavalry veya Knight'lara geç — ya da daha fazla
+    menzil istiyorsan Cavalry Archer'a dön.
+
+
+    **İdeal geç oyun kompozisyonu:** Heavy Cavalry Archer'ları (Recurve Bow özgün teknolojiyle güçlendirilmiş)
+    trash-tier Magyar Hussar ile eşleştir; binalara ve savunma yapılarına karşı Trebuchet'lerle destekle.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Ağır ön hat için Paladin, menzilli güç için Heavy
+    Cavalry Archer ve Trebuchet'ler — düşman tahkimatlarını kuşatırken hızla yeniden konuşlanan mobil bir karma top.
+
+
+    **Önerilen build:** [Scout Rush](/en/builds/18pop-scouts)

@@ -1,0 +1,55 @@
+slug: mapuche
+name:
+  en: Mapuche
+  tr: Mapuche
+tagline:
+  en: Mapuche — an Infantry civilization from South America.
+  tr: Mapuche — Güney Amerika'dan bir Piyade uygarlığı.
+bonuses:
+  en:
+    - Foragers drop off +20% food
+    - Settlements can train Spearman-line and Skirmishers
+    - Infantry, Slingers and Skirmishers +5/10/15 HP in Feudal/Castle/Imperial Age
+    - Mounted Units generate +3 gold when defeating military units
+    - Enemy Castles are revealed on the map
+  tr:
+    - Toplayıcılar %20 daha fazla Yiyecek bırakır
+    - Yerleşim Yerleri Spearman serisi ve Skirmisher eğitebilir
+    - Piyade, Slingers ve Skirmisher'lar Feodal/Kale/İmparatorluk Çağı'nda +5/10/15 can kazanır
+    - Atlı Birimler askeri birimleri yendiklerinde +3 Altın üretir
+    - Düşman Kale'leri haritada görünür hale gelir
+teamBonus:
+  en: Spearman-line and Skirmishers +2 line of sight
+  tr: Spearman serisi ve Skirmisher'lar +2 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Malon
+      tr: Malon
+    effect:
+      en: Bolas Riders, Slingers and Skirmishers deal pass through damage
+      tr: Bolas Riders, Slingers and Skirmishers deal pass through damage
+  imperial:
+    name:
+      en: Butalmapu
+      tr: Butalmapu
+    effect:
+      en: Team Castle Unique Units and Bolas Riders cost -15%
+      tr: Team Castle Unique Units and Bolas Riders cost -15%
+strategy:
+  en: |-
+    Mapuche are an Infantry civilization from South America.
+
+    ## How to Play Mapuche
+
+    **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+
+    *(A detailed opening / late-game / deathball guide for this civ is coming soon.)*
+  tr: |-
+    Mapuche, Güney Amerika'dan bir Piyade uygarlığıdır.
+
+    ## Mapuche Nasıl Oynanır
+
+    **Önerilen build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
+
+    *(Bu uygarlık için ayrıntılı açılış / geç oyun / deathball rehberi yakında eklenecek.)*

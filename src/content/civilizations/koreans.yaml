@@ -1,0 +1,82 @@
+slug: koreans
+name:
+  en: Koreans
+  tr: Koreans
+tagline:
+  en: Koreans — a Tower and Naval civilization from East Asia.
+  tr: Koreans — Doğu Asya'dan bir Kule ve Denizcilik uygarlığı.
+bonuses:
+  en:
+    - Stone miners work +20% faster
+    - Ranged Soldiers and Infantry cost -50% wood
+    - Archer armor and tower upgrades free (Bombard Tower requires Chemistry)
+    - Warships cost -20% wood
+  tr:
+    - Taş madencileri %20 daha hızlı çalışır
+    - Menzilli Askerler ve Piyade %50 daha az Odun'a mal olur
+    - Archer zırhı ve kule yükseltmeleri ücretsiz (Bombard Tower, Chemistry gerektirir)
+    - Savaş gemileri %20 daha az Odun'a mal olur
+teamBonus:
+  en: Villagers +3 line of sight
+  tr: Köylüler +3 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Eupseong
+      tr: Eupseong
+    effect:
+      en: Watch Tower-line +2 range
+      tr: Watch Tower-line +2 range
+  imperial:
+    name:
+      en: Shinkichon
+      tr: Shinkichon
+    effect:
+      en: Rocket Carts and Turtle Ships +1 range, fire additional projectiles
+      tr: Rocket Carts and Turtle Ships +1 range, fire additional projectiles
+strategy:
+  en: >-
+    Koreans are a Tower and Naval civilization from East Asia.
+
+
+    ## How to Play Koreans
+
+
+    **Ideal opening (Dark → Castle):** Lean on wood-based units rather than infantry or scouts — Koreans get no help
+    there. Open with a Spear-Skirmisher mix or one-range Archers, then keep producing the units your lumber camps can
+    sustain as you transition into Castle Age.
+
+
+    **Ideal late-game composition:** Field Halberdiers as your trash backbone, back them with a gold core of Arbalests
+    or War Wagons, and add Bombard Cannons or Trebuchets for siege. Your free Tower upgrades and ranged-tower bonus make
+    defensive Yasama Tower lines a strong addition.
+
+
+    **Deathball composition (closed maps / team games):** Stack War Wagons and Halberdiers behind long-range genitours
+    (10 range) and finish with Trebuchets or Bombard Cannons, leaning on Korea's signature ranged firepower.
+
+
+    **Recommended build:** [Korean Spear-Skirm](/en/builds/korean-spear-skirm)
+  tr: >-
+    Koreans, Doğu Asya'dan bir Kule ve Denizcilik uygarlığıdır.
+
+
+    ## Koreans Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Piyade veya Scout yerine Odun bazlı birimlere yaslan — Koreans'ın bu konuda
+    herhangi bir bonusu yok. Spear-Skirmisher karışımı veya tek menzilli Archer'larla başla, ardından Kale Çağı'na
+    geçerken kereste kamplarının sürdürebildiği birimleri üretmeye devam et.
+
+
+    **İdeal geç oyun kompozisyonu:** Halberdier'ları trash omurgası olarak kullan, arkalarını Arbalest veya War
+    Wagon'lardan oluşan altın bir çekirdekle destekle ve kuşatma için Bombard Cannon ya da Trebuchet ekle. Ücretsiz Kule
+    yükseltmelerin ve menzilli kule bonusun, savunma amaçlı Yasama Tower hatlarını güçlü bir seçenek haline getirir.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Uzun menzilli (10 menzil) genitour'ların arkasına
+    War Wagon ve Halberdier yığ, ardından Trebuchet veya Bombard Cannon ile bitir; Koreans'ın menzilli ateş gücünden
+    yararlan.
+
+
+    **Önerilen build:** [Korean Spear-Skirm](/en/builds/korean-spear-skirm)

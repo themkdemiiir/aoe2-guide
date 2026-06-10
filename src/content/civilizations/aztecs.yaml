@@ -1,0 +1,86 @@
+slug: aztecs
+name:
+  en: Aztecs
+  tr: Aztecs
+tagline:
+  en: Aztecs — an Infantry and Monk civilization from Mesoamerica.
+  tr: Aztecs — Mezoamerika'dan bir Piyade ve Keşiş uygarlığı.
+bonuses:
+  en:
+    - Start with +50 gold
+    - Villagers carry +3
+    - Military Units train +15% faster
+    - Monks gain +5 HP for each researched Monastery technology
+  tr:
+    - +50 Altın ile başla
+    - Köylüler +3 taşır
+    - Askeri Birimler %15 daha hızlı eğitilir
+    - Monks, araştırılan her Monastery teknolojisi için +5 can kazanır
+teamBonus:
+  en: Relics generate +33% gold
+  tr: Kutsal Emanetler %33 daha fazla Altın üretir
+uniqueTechs:
+  castle:
+    name:
+      en: Atlatl
+      tr: Atlatl
+    effect:
+      en: Skirmishers +1 attack, +1 range
+      tr: Skirmishers +1 attack, +1 range
+  imperial:
+    name:
+      en: Garland Wars
+      tr: Garland Wars
+    effect:
+      en: Infantry +4 attack
+      tr: Infantry +4 attack
+strategy:
+  en: >-
+    Aztecs are an Infantry and Monk civilization from Mesoamerica.
+
+
+    ## How to Play Aztecs
+
+
+    **Ideal opening (Dark → Castle):** Lean on a combined Eagle Warrior and Archery Range opening. Pair Eagles with
+    Skirmishers when your opponent commits to archers, and back them with archers of your own against most other
+    openings. Carry that pressure into Castle Age, where Eagles, Pikemen, and your bonus-boosted Monks let you trade
+    efficiently and contest relics.
+
+
+    **Ideal late-game composition:** Transition to Elite Eagle Warriors backed by Skirmishers (with Atlatl upgrading
+    their attack and range), and round the army out with Monks and a Trebuchet for siege. This gives you a mobile,
+    gold-light core that still has answers to most threats.
+
+
+    **Deathball composition (closed maps / team games):** Stack heavy Garland Wars infantry — Champions, Jaguar
+    Warriors, and Pikemen — in front, supported by Monks for relics and conversions. Add Siege Workshop genitours or
+    Trebuchets for ranged punch, and Bombard Cannons to crack buildings and siege.
+
+
+    **Recommended build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)
+  tr: >-
+    Aztecs, Mezoamerika'dan bir Piyade ve Keşiş uygarlığıdır.
+
+
+    ## Aztecs Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Eagle Warrior ve Archery Range açılışını birleştir. Rakibin okçuya yatırım
+    yaparsa Eagle'larla Skirmisher'ları eşleştir; diğer açılışlara karşı kendi okçularınla destekle. Bu baskıyı Kale
+    Çağı'na taşı; burada Eagle'lar, Pikemen'ler ve bonus-güçlü Monk'ların verimli takas yapmanı ve kutsal emanetleri ele
+    geçirmeni sağlar.
+
+
+    **İdeal geç oyun kompozisyonu:** Elite Eagle Warrior'lara Skirmisher desteği ekle (Atlatl saldırı ve menzillerini
+    yükseltir), orduyu Monk'lar ve kuşatma için bir Trebuchet ile tamamla. Bu sana altın tüketimi düşük ama çoğu tehdide
+    yanıt verebilen hareketli bir çekirdek sağlar.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ön safta ağır Garland Wars piyadeleri — Champion'lar,
+    Jaguar Warrior'lar ve Pikemen'ler — yığ; arkalarına kutsal emanet ve dönüştürme için Monk'lar koy. Menzilli vuruş
+    için Siege Workshop genitour'ları ya da Trebuchet ekle; bina ve kuşatma araçlarını kırmak için Bombard Cannon
+    kullan.
+
+
+    **Önerilen build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)

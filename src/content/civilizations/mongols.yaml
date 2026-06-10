@@ -1,0 +1,79 @@
+slug: mongols
+name:
+  en: Mongols
+  tr: Mongols
+tagline:
+  en: Mongols — a Cavalry Archer civilization from East Asia.
+  tr: Mongols — Doğu Asya'dan bir Cavalry Archer uygarlığı.
+bonuses:
+  en:
+    - Hunters work +40% faster
+    - Cavalry Archers attack +25% faster
+    - Scout Cavalry-line and Steppe Lancers +20/30% HP in Castle/Imperial Age
+  tr:
+    - Avcılar %40 daha hızlı çalışır
+    - Cavalry Archer'lar %25 daha hızlı saldırır
+    - Scout Cavalry-line ve Steppe Lancer'lar Kale/İmparatorluk Çağı'nda %20/30 daha fazla can'a sahip
+teamBonus:
+  en: Scout Cavalry-line +2 line of sight
+  tr: Scout Cavalry-line +2 görüş alanı
+uniqueTechs:
+  castle:
+    name:
+      en: Nomads
+      tr: Nomads
+    effect:
+      en: Lost Houses do not decrease population space
+      tr: Lost Houses do not decrease population space
+  imperial:
+    name:
+      en: Drill
+      tr: Drill
+    effect:
+      en: Siege Workshop Units move +50% faster
+      tr: Siege Workshop Units move +50% faster
+strategy:
+  en: >-
+    Mongols are a Cavalry Archer civilization from East Asia.
+
+
+    ## How to Play Mongols
+
+
+    **Ideal opening (Dark → Castle):** Open with Scouts and transition into Steppe Lancers, which is the strongest line
+    for the civ; a Fast Castle straight into Steppe Lancers also works as a cheesy aggressive option. Scouts into
+    Cavalry Archers or Men-at-Arms are solid alternatives depending on what your opponent commits to.
+
+
+    **Ideal late-game composition:** Lean on Mangudai backed by Hussars, with Siege Rams or Siege Onagers (boosted by
+    Drill) rounding out the army — Mangudai handle gold-cost firepower, Hussars provide cheap trash meatshields, and the
+    siege breaks through buildings and clumps.
+
+
+    **Deathball composition (closed maps / team games):** Stack Mangudai with Drill-powered Siege Onagers and a screen
+    of Hussars, pushing a mobile, high-damage ball that shreds both units and structures.
+
+
+    **Recommended build:** [Mongol Scouts into Cavalry Archers](/en/builds/mongol-scouts-ca)
+  tr: >-
+    Mongols, Doğu Asya'dan bir Cavalry Archer uygarlığıdır.
+
+
+    ## Mongols Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Scout rush ile aç, ardından Steppe Lancer'lara geç — bu uygarlık için en güçlü
+    hat bunlardır; Kale Çağı'na direkt atlayıp Steppe Lancer'lara geçmek agresif bir seçenek olarak da işe yarar.
+    Scout'lardan Cavalry Archer'lara veya Man-at-Arms'a geçiş de rakibinin tercihine göre sağlam alternatiflerdir.
+
+
+    **İdeal geç oyun kompozisyonu:** Hussar desteğiyle Mangudai'yi ana güç olarak kullan; Drill ile güçlendirilmiş Siege
+    Ram veya Siege Onager'lar orduyu tamamlar — Mangudai Altın gerektiren ateş gücünü sağlar, Hussar'lar ucuz trash
+    kalkanı görevi görür, siege ise binaları ve toplu birimleri ezer.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Mangudai'yi Drill'li Siege Onager'larla ve önünde
+    bir Hussar ekranıyla yığ; hem birimleri hem yapıları parçalayan hareketli, yüksek hasarlı bir top oluştur.
+
+
+    **Önerilen build:** [Mongol Scouts into Cavalry Archers](/en/builds/mongol-scouts-ca)

@@ -1,0 +1,85 @@
+slug: incas
+name:
+  en: Incas
+  tr: Incas
+tagline:
+  en: Incas — an Infantry civilization from South America.
+  tr: Incas — Güney Amerika'dan bir Piyade uygarlığı.
+bonuses:
+  en:
+    - Houses and Settlements provide +5 population space
+    - Buildings cost -15% stone
+    - Military Units cost -5/10/15/20% food in Dark/Feudal/Castle/Imperial Age
+    - Villagers affected by Infantry Blacksmith upgrades starting in Castle Age
+  tr:
+    - Evler ve Yerleşimler +5 nüfus alanı sağlar
+    - Binalar %15 daha az Taş'a mal olur
+    - Askeri Birimler Karanlık/Feodal/Kale/İmparatorluk Çağı'nda %5/10/15/20 daha az Yiyecek harcar
+    - Kale Çağı'ndan itibaren köylüler Piyade Blacksmith yükseltmelerinden yararlanır
+teamBonus:
+  en: Start with a free Llama
+  tr: Ücretsiz bir Llama ile başla
+uniqueTechs:
+  castle:
+    name:
+      en: Andean Sling
+      tr: Andean Sling
+    effect:
+      en: Skirmishers and Slingers no minimum range; Slingers +1 attack
+      tr: Skirmishers and Slingers no minimum range; Slingers +1 attack
+  imperial:
+    name:
+      en: Fabric Shields
+      tr: Fabric Shields
+    effect:
+      en: Kamayuks, Slingers and Champi Warriors +1 melee/+1 pierce armor
+      tr: Kamayuks, Slingers and Champi Warriors +1 melee/+1 pierce armor
+strategy:
+  en: >-
+    Incas are an Infantry civilization from South America.
+
+
+    ## How to Play Incas
+
+
+    **Ideal opening (Dark → Castle):** Lean on the cheaper food economy to mix Eagle Warriors with a Skirmisher-heavy
+    Archery Range — Eagles pressure the enemy and pick off vulnerable units while Skirmishers shred any archer response.
+    A defensive Skirmisher-plus-Spearman setup is a solid alternative when you simply need to hold ground before
+    transitioning into the Castle Age.
+
+
+    **Ideal late-game composition:** Pair Kamayuks (or Elite Eagle Warriors) as your gold-and-melee core with mass
+    Skirmishers as the cheap trash backbone, then add Trebuchets — or Caltrop-laced siege — to crack buildings and break
+    stalemates.
+
+
+    **Deathball composition (closed maps / team games):** Stack Kamayuks for their reach against cavalry and stacked
+    formations, support them with Monks for relics and conversions, and roll Trebuchets forward to demolish fortified
+    positions.
+
+
+    **Recommended build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)
+  tr: >-
+    Incas, Güney Amerika'dan bir Piyade uygarlığıdır.
+
+
+    ## Incas Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Ucuzlayan Yiyecek ekonomisine yaslanarak Eagle Warrior'ları Skirmisher ağırlıklı
+    Archery Range ile karıştır — Eagle'lar düşmanı baskılar ve savunmasız birimleri etkisiz hale getirirken
+    Skirmisher'lar okçu yanıtını parçalar. Kale Çağı'na geçmeden önce sadece tutunman gerekiyorsa Skirmisher ve
+    Spearman'dan oluşan savunma kurulumu sağlam bir alternatiftir.
+
+
+    **İdeal geç oyun kompozisyonu:** Kamayuk'ları (ya da Elite Eagle Warrior'ları) altın-yakın dövüş çekirdeği olarak
+    kullan, ucuz trash omurgası için toplu Skirmisher ekle; binaları kırmak ve durgunluğu kırmak için Trebuchet'ler ya
+    da Caltrop destekli kuşatma araçları kullan.
+
+
+    **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Kamayuk'ları süvariye ve yığılmış düzenlere karşı
+    olan menzilleri için yığ, kutsal emanetler ve dönüştürme için Monk'larla destekle, ardından tahkimatlı mevzileri
+    yerle bir etmek için Trebuchet'leri ilerlet.
+
+
+    **Önerilen build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)

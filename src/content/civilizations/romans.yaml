@@ -1,0 +1,70 @@
+slug: romans
+name:
+  en: Romans
+  tr: Romans
+tagline:
+  en: Romans — an Infantry civilization from the Ancient Mediterranean.
+  tr: Romans — Antik Akdeniz'den bir Piyade uygarlığı.
+bonuses:
+  en:
+    - Villagers gather, build, and repair +5% faster
+    - Infantry armor upgrade effects are doubled
+    - Scorpions cost -50% gold
+    - Galley-line and Dromons +1 melee/+1 pierce armor
+  tr:
+    - Köylüler %5 daha hızlı toplar, inşa eder ve onarır
+    - Piyade zırh yükseltmelerinin etkileri iki katına çıkar
+    - Scorpion'lar %50 daha az Altın maliyetiyle üretilir
+    - Galley hattı ve Dromon'lar +1 yakın dövüş / +1 delici zırh kazanır
+teamBonus:
+  en: Scorpions minimum range reduced
+  tr: Scorpion'ların minimum menzili azalır
+uniqueTechs:
+  castle:
+    name:
+      en: Ballistas
+      tr: Ballistas
+    effect:
+      en: Scorpions attack +33% faster; Galley-line +2 attack
+      tr: Ballista Kuleleri ekstra hasar verir
+  imperial:
+    name:
+      en: Comitatenses
+      tr: Comitatenses
+    effect:
+      en: Militia-line, Knight-line, and Centurions train +50% faster and receive a charge attack
+      tr: Milis olmayan piyadeler +8 can kazanır
+strategy:
+  en: >-
+    Romans are an Infantry civilization from the Ancient Mediterranean.
+
+
+    ## How to Play Romans
+
+
+    **Ideal opening (Dark → Castle):** A Scout Rush is the strongest line — the Romans' powerful economy lets you
+    pressure early while staying ahead on villagers. Transition into Long Swordsmen once you reach the Castle Age to
+    lean on the infantry attack bonus. A Men-at-Arms opening is viable but tends to over-commit and can stall your
+    economy.
+
+
+    **Recommended build:** [Romans 5 Men-at-Arms](/en/builds/romans-5-maa)
+
+
+    *(Late-game and deathball compositions not yet covered for this civ.)*
+  tr: >-
+    Romans, Antik Akdeniz'den gelen bir Piyade uygarlığıdır.
+
+
+    ## Romans Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Scout Rush en güçlü seçenek — Romans'ın güçlü ekonomisi erken baskı yaparken
+    köylü sayısında önde kalmanı sağlar. Kale Çağı'na ulaştığında piyade saldırı bonusundan yararlanmak için Long
+    Swordsmen'e geç. Men-at-Arms açılışı mümkündür ama ekonomini yavaşlatabilir.
+
+
+    **Önerilen build:** [Romans 5 Men-at-Arms](/tr/builds/romans-5-maa)
+
+
+    *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz eklenmedi.)*

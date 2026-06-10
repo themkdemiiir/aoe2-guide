@@ -1,0 +1,71 @@
+slug: georgians
+name:
+  en: Georgians
+  tr: Georgians
+tagline:
+  en: Georgians — an Infantry and Cavalry civilization from the Caucasus.
+  tr: Georgians — Kafkasya'dan bir Piyade ve Süvari uygarlığı.
+bonuses:
+  en:
+    - Start with a Mule Cart
+    - Units and buildings receive -15% damage when located on higher elevation
+    - Mounted Units regenerate 2/8/14 HP per minute in Feudal/Castle/Imperial Age
+    - Fortified Churches provide Villagers in a 9 tiles radius with +10% work rate
+  tr:
+    - Bir Mule Cart ile başla
+    - Daha yüksek konumda bulunan birlik ve binalar -%15 hasar alır
+    - Binekli Birlikler Feodal/Kale/İmparatorluk Çağı'nda dakikada 2/8/14 can yeniler
+    - Fortified Church'ler, 9 karo yarıçapındaki köylülere +%10 çalışma hızı sağlar
+teamBonus:
+  en: Building repairs cost -25%
+  tr: Bina onarım maliyeti -%25
+uniqueTechs:
+  castle:
+    name:
+      en: Svan Towers
+      tr: Svan Towers
+    effect:
+      en: Fortifications +2 attack; Watch Tower-line deals pass through damage
+      tr: Tower'lar her 2 garnizon birimi başına +1 saldırı kazanır
+  imperial:
+    name:
+      en: Aznauri Cavalry
+      tr: Aznauri Cavalry
+    effect:
+      en: Mounted Units take -20% population space
+      tr: Monaspa yakınındaki süvari birliklerini iyileştirir
+strategy:
+  en: >-
+    Georgians are an Infantry and Cavalry civilization from the Caucasus.
+
+
+    ## How to Play Georgians
+
+
+    **Ideal opening (Dark → Castle):** Open with a Scout Rush, leaning on the civ's quick uptime. Your self-healing
+    Scouts excel at hit-and-run raids — poke at enemy villagers, retreat to recover, and repeat without bleeding
+    resources on repairs. Transition into massed Monaspa once you reach the Castle Age while your economy snowballs
+    behind cheap Monasteries and extra Town Centers.
+
+
+    **Recommended build:** [Georgians Healing Scouts](/en/builds/georgians-healing-scouts)
+
+
+    *(Late-game and deathball compositions not yet covered for this civ.)*
+  tr: >-
+    Georgians, Kafkasya'dan bir Piyade ve Süvari uygarlığıdır.
+
+
+    ## Georgians Nasıl Oynanır
+
+
+    **İdeal açılış (Karanlık → Kale):** Scout Rush ile aç ve uygarlığın hızlı geçiş potansiyelinden yararlan.
+    Kendiliğinden iyileşen Scout'ların vur-kaç baskısında mükemmeldir — düşman köylülerine saldır, geri çekil, kaynak
+    harcamadan iyileş ve tekrarla. Ucuz Monastery'ler ve ek Town Center'larla ekonomin büyürken Kale Çağı'na ulaşınca
+    kitlesel Monaspa'ya geç.
+
+
+    **Önerilen build:** [Georgians Healing Scouts](/tr/builds/georgians-healing-scouts)
+
+
+    *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz eklenmedi.)*
