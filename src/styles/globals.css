@@ -60,6 +60,8 @@
   --color-stone-700: oklch(0.34 0.02 50);
   --color-gold-500: oklch(0.73 0.13 80);
   --color-gold-400: oklch(0.80 0.12 80);
+  /* Dark gold for text on light (parchment) backgrounds — passes WCAG AA 4.5:1. */
+  --color-gold-700: oklch(0.44 0.13 75);
   --color-royal: oklch(0.42 0.18 25);
   --color-forest: oklch(0.50 0.10 145);
   --color-steel: oklch(0.50 0.05 240);
