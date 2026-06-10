@@ -1,0 +1,12 @@
+slug: mangonel
+name:
+  en: Mangonel
+  tr: Mangonel
+role:
+  en: siege
+  tr: kuşatma
+line: mangonel-line
+lineRank: 1
+description:
+  en: The Mangonel is a siege trained at the Siege Workshop.
+  tr: Mangonel, Siege Workshop'ta eğitilen bir kuşatma silahıdır.

@@ -1,0 +1,12 @@
+slug: elite-skirmisher
+name:
+  en: Elite Skirmisher
+  tr: Elite Skirmisher
+role:
+  en: anti-archer ranged
+  tr: archer karşıtı menzilli
+line: skirmisher-line
+lineRank: 2
+description:
+  en: The Elite Skirmisher is a anti-archer ranged trained at the Archery Range.
+  tr: Elite Skirmisher, Archery Range'de eğitilen archer karşıtı bir menzilli birimdir.

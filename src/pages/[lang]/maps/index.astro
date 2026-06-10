@@ -1,15 +1,15 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import FilterBar from "@/components/ui/FilterBar.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
-import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
-const maps = await getLocalizedEntries("maps", lang);
+const maps: CollectionEntry<"maps">[] = await getCollection("maps");
 
 const mapTypes = ["open", "closed", "hybrid", "water", "nomad"] as const;
 const facets = [
@@ -40,12 +40,12 @@ const facets = [
             <li
               class="h-full"
               data-filter-item
-              data-search={m.data.name.toLowerCase()}
+              data-search={m.data.name[lang].toLowerCase()}
               data-type={m.data.type}
             >
-              <a href={localizedPath(`/maps/${canonicalSlug(m.id)}`, lang)}
+              <a href={localizedPath(`/maps/${m.id}`, lang)}
                  class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 hover:border-gold-500">
-                <h3 class="font-display text-xl text-ink">{m.data.name}</h3>
+                <h3 class="font-display text-xl text-ink">{m.data.name[lang]}</h3>
                 <p class="mt-auto pt-2 text-xs capitalize text-stone-700">
                   {t(lang, `mapType.${m.data.type}`)}{m.data.size ? ` · ${m.data.size}` : ""}
                 </p>

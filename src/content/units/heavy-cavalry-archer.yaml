@@ -1,0 +1,12 @@
+slug: heavy-cavalry-archer
+name:
+  en: Heavy Cavalry Archer
+  tr: Heavy Cavalry Archer
+role:
+  en: mounted archer
+  tr: atlı okçu
+line: cavalry-archer-line
+lineRank: 2
+description:
+  en: The Heavy Cavalry Archer is a mounted archer trained at the Archery Range.
+  tr: Heavy Cavalry Archer, Archery Range'de eğitilen bir atlı okçudur.

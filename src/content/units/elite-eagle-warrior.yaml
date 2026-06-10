@@ -1,0 +1,13 @@
+slug: elite-eagle-warrior
+name:
+  en: Elite Eagle Warrior
+  tr: Elite Eagle Warrior
+role:
+  en: light infantry
+  tr: hafif piyade
+civ: aztecs
+line: eagle-line
+lineRank: 3
+description:
+  en: The Elite Eagle Warrior is a light infantry trained at the Barracks.
+  tr: Elite Eagle Warrior, Barracks'ta eğitilen bir hafif piyade birimidir.

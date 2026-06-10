@@ -2,10 +2,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 
 type ContentType =
-  | "units"
-  | "maps"
   | "beginner"
-  | "glossary"
   | "articles";
 
 /** Extract locale from a Content Layer entry id like "en/britons" → "en". */

@@ -1,0 +1,161 @@
+slug: arabia
+name:
+  en: Arabia
+  tr: Arabia
+type: open
+recommendedCivs:
+  - aztecs
+  - franks
+  - lithuanians
+  - mayans
+  - mongols
+teamComps:
+  2v2:
+    flank:
+      civs:
+        - britons
+        - ethiopians
+        - vietnamese
+        - mayans
+      strategy:
+        en: >-
+          Archer civs applying 19–21 pop feudal pressure. Protect the pocket's boom with palisade walls and Skirmishers.
+          Britons and Ethiopians have the best archer stats at all stages.
+        tr: >-
+          19–21 nüfuslu Feodal baskı uygulayan Archer uygarlıkları. Pocket'ın boom'unu çit duvarlar ve Skirmisher'larla
+          koru. Britons ve Ethiopians tüm aşamalarda en iyi Archer istatistiklerine sahip.
+    pocket:
+      civs:
+        - franks
+        - lithuanians
+        - berbers
+        - huns
+      strategy:
+        en: >-
+          Fast Castle knight civs who boom to 3 TC and flood Knights in Castle Age. Huns skip houses for faster
+          production. Lithuanians gain attack from relics.
+        tr: >-
+          3 Town Center'a boom yapıp Kale Çağı'nda Knight selen hızlı Kale uygarlıkları. Huns, daha hızlı üretim için
+          evi atlar. Lithuanians röliklerden saldırı kazanır.
+  4v4:
+    flank:
+      civs:
+        - britons
+        - ethiopians
+        - mongols
+        - vietnamese
+      strategy:
+        en: >-
+          High-range archer civs. Both flanks open 19–21 pop archers for early pressure. Coordinated double-archer
+          flanks can overwhelm one enemy side before they wall effectively.
+        tr: >-
+          Yüksek menzilli Archer uygarlıkları. Her iki flank, erken baskı için 19–21 nüfuslu Archer açılışı yapar.
+          Koordineli çift Archer flank'ı, karşı taraf duvar kurmadan önce bir düşman kanadını çökertebilir.
+    pocket:
+      civs:
+        - franks
+        - berbers
+        - lithuanians
+        - cumans
+      strategy:
+        en: >-
+          Cavalry pocket civs who boom to 4 TC and push with massed Knights. Cumans can 2TC in Feudal Age for an
+          explosive economic lead. Franks with Chivalry are the safest choice.
+        tr: >-
+          4 Town Center'a boom yapıp yığın Knight'la baskı kuran süvari pocket uygarlıkları. Cumans, Feodal Çağ'da 2TC
+          yaparak patlayıcı bir ekonomik avantaj sağlar. Chivalry teknolojisiyle Franks en güvenli seçimdir.
+body:
+  en: >-
+    Arabia is the canonical competitive 1v1 map and the most balanced in the game's history. It features an open
+    landscape with randomized starting positions and resources — grass variants offer denser trees and easier walling,
+    desert variants are sparser. Games reward aggression: the player who creates and snowballs an early advantage almost
+    always wins, while passive play is consistently punished. Matches commonly end in Castle Age or early Imperial
+    rather than reaching a full late-game.
+
+
+    ## Opening
+
+
+    Standard opening is a 21–22 villager Fast Feudal with 1–2 forward scouts harassing enemy sheep or scouting gold,
+    stone, and wood. Two dominant Feudal openings exist: Scout Rush (mass stables, push with 4–6 scouts + spears) and
+    Archer Rush / Men-at-Arms → Archers (forward barracks + archery range, push into enemy wood lines). Walling is
+    contested — partial walls for gold and stone are advisable, but over-investment in walls delays military. Even minor
+    harassment (2–3 villagers killed) compounds into a major economic lead by mid-game.
+
+
+    ## Mid game
+
+
+    Castle Age typically transitions to a Knight Rush (stable → knights) or continued archer-skirmisher pressure.
+    Knights are dominant on Arabia — fast, raid-effective, and able to one-shot villagers without upgrades. Strong
+    archer civs (Britons, Mayans, Ethiopians) can opt for an archer-heavy Feudal push then Crossbow + Siege into Castle
+    Age. Map control — gold mines particularly — is the dominant mid-game concern. Relics matter more than many players
+    expect; 1–2 relics tilt gold income significantly in the late game. Fast Imperial transitions are common if Castle
+    Age trades evenly.
+
+
+    ## Watch out for
+
+
+    - **Laming** — enemy scout stealing your sheep or boars in the first few minutes causes a severe Dark Age food
+    deficit.
+
+    - **Forward gold towers** — opponent sneaks a Tower onto your gold mine in late Dark or early Feudal Age.
+
+    - **Over-walling** — too many villager-seconds on palisades delays your Feudal Age timing and military output.
+
+    - **Missing enemy gold location** — if you did not scout it in Dark Age, you will never contest it effectively.
+
+    - **Going Castle Age while behind** — arriving in Castle Age late against an opponent already raiding with knights
+    is very hard to recover from.
+
+    - **Ignoring relics** — leaving all 5 relics to the opponent gives them a permanent gold-income advantage late game.
+  tr: >-
+    Arabia, 1v1 için en temel rekabetçi harita ve oyun tarihinin en dengeli haritasıdır. Rastgele başlangıç konumları ve
+    kaynaklarıyla açık bir manzara sunar — çimli varyantlar daha yoğun ağaçlar ve daha kolay walling sağlar, çöl
+    varyantları daha seyrektir. Oyunlar saldırganlığı ödüllendirir: erken avantaj yaratıp bunu katlayan oyuncu neredeyse
+    her zaman kazanır, pasif oyun ise sürekli cezalandırılır. Maçlar genellikle Kale Çağı'nda veya erken İmparatorluk
+    Çağı'nda biter, tam geç oyuna nadiren ulaşılır.
+
+
+    ## Açılış
+
+
+    Standart açılış, düşmanın koyunlarını rahatsız eden veya altın, taş ve odunu keşfeden 1–2 ileri Scout'la birlikte
+    21–22 köylülük hızlı Feodal'dır. İki baskın Feodal açılışı vardır: Scout Rush (toplu Stable, 4–6 Scout + mızrak
+    askeriyle baskı) ve Archer Rush / Man-at-Arms → Archers (ileri Barracks + Archery Range, düşman odun hatlarına
+    baskı). Walling tartışmalıdır — altın ve taş için kısmi duvarlar önerilir, ancak duvara fazla yatırım askeri birimi
+    geciktirir. Küçük rahatsızlıklar bile (2–3 köylü kaybı) orta oyuna kadar büyük bir ekonomik avantaja dönüşür.
+
+
+    ## Orta Oyun
+
+
+    Kale Çağı genellikle Knight Rush'a (Stable → Knight'lar) ya da süregelen Archer-Skirmisher baskısına geçer.
+    Knight'lar Arabia'da baskındır — hızlı, raid etkili ve yükseltme olmadan köylüleri tek vuruşta öldürebilir. Güçlü
+    Archer uygarlıkları (Britons, Mayans, Ethiopians) Feodal'da ağır Archer baskısı yapıp Kale Çağı'nda Crossbow +
+    Siege'e geçmeyi tercih edebilir. Harita kontrolü — özellikle altın madenleri — orta oyunun temel kaygısıdır.
+    Rölikler birçok oyuncunun sandığından daha önemlidir; 1–2 rölik geç oyunda altın gelirini belirgin biçimde etkiler.
+    Kale Çağı takasları dengeli giderse hızlı İmparatorluk Çağı geçişleri yaygındır.
+
+
+    ## Dikkat Edilecekler
+
+
+    - **Laming** — düşmanın Scout'u ilk birkaç dakikada koyunlarını veya domuzlarını çalarsa ciddi bir Karanlık Çağ
+    yiyecek açığı oluşur.
+
+    - **İleri altın Tower'ları** — rakip geç Karanlık Çağ veya erken Feodal Çağ'da altın madeninin üzerine bir Tower
+    sızdırır.
+
+    - **Aşırı walling** — çit duvarlara çok fazla köylü-saniye harcamak Feodal Çağ zamanlamanı ve askeri çıktını
+    geciktirir.
+
+    - **Düşman altın konumunu gözden kaçırmak** — Karanlık Çağ'da keşfetmediysen, bunu etkili biçimde hiçbir zaman ele
+    geçiremezsin.
+
+    - **Geride kalırken Kale Çağı'na geçmek** — Knight'larla akın yapan bir rakibe karşı geç Kale Çağı'na ulaşmaktan
+    kurtulmak çok zordur.
+
+    - **Rölikleri görmezden gelmek** — 5 röliki de rakibe bırakmak ona geç oyunda kalıcı bir altın geliri avantajı
+    verir.

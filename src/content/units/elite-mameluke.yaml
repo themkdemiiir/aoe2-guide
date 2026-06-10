@@ -1,0 +1,13 @@
+slug: elite-mameluke
+name:
+  en: Elite Mameluke
+  tr: Elite Mameluke
+role:
+  en: unique unit
+  tr: özgün birim
+civ: saracens
+line: mameluke-line
+lineRank: 2
+description:
+  en: The Elite Mameluke is a unique unit trained at the Castle.
+  tr: Elite Mameluke, Castle'da eğitilen bir özgün birimdir.

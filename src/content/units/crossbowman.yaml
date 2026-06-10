@@ -1,0 +1,12 @@
+slug: crossbowman
+name:
+  en: Crossbowman
+  tr: Crossbowman
+role:
+  en: ranged infantry
+  tr: menzilli piyade
+line: archer-line
+lineRank: 2
+description:
+  en: The Crossbowman is a ranged infantry trained at the Archery Range.
+  tr: Crossbowman, Archery Range'de eğitilen menzilli bir piyadedir.

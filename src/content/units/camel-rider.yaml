@@ -1,0 +1,12 @@
+slug: camel-rider
+name:
+  en: Camel
+  tr: Camel
+role:
+  en: anti-cavalry cavalry
+  tr: süvari karşıtı süvari
+line: camel-line
+lineRank: 1
+description:
+  en: The Camel is a anti-cavalry cavalry trained at the Stable.
+  tr: Camel Rider, Stable'da eğitilen süvari karşıtı bir süvaridir.

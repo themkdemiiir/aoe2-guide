@@ -1,0 +1,13 @@
+slug: eagle-warrior
+name:
+  en: Eagle Warrior
+  tr: Eagle Warrior
+role:
+  en: light infantry
+  tr: hafif piyade
+civ: aztecs
+line: eagle-line
+lineRank: 2
+description:
+  en: The Eagle Warrior is a light infantry trained at the Barracks.
+  tr: Eagle Warrior, Barracks'ta eğitilen bir hafif piyade birimidir.

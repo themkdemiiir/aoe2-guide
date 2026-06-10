@@ -1,0 +1,136 @@
+slug: steppe
+name:
+  en: Steppe
+  tr: Steppe
+type: open
+recommendedCivs:
+  - mongols
+  - cumans
+  - huns
+  - tatars
+  - berbers
+teamComps:
+  2v2:
+    flank:
+      civs:
+        - mongols
+        - cumans
+        - huns
+        - berbers
+      strategy:
+        en: >-
+          Pure cavalry flank — there is no walling on Steppe, so flood Scouts then Knights and raid relentlessly from
+          any angle. Huns skip houses for earlier military.
+        tr: >-
+          Tam süvari flank — Steppe'de duvar kurmak mümkün değil; Scout ardından Knight yığ ve her açıdan aralıksız
+          baskın yap. Huns'lar daha erken asker için ev inşa etmeyi atlar.
+    pocket:
+      civs:
+        - cumans
+        - tatars
+        - mongols
+        - magyars
+      strategy:
+        en: >-
+          Cavalry pocket booms with Cuman 2TC or Tatar food bonus, then converts the lead into Knights and Cavalry
+          Archers that the open terrain heavily favors.
+        tr: >-
+          Süvari pocket, Cuman 2TC veya Tatar Yiyecek bonusunun sağladığı avantajla boom yapar; ardından öndeki
+          üstünlüğü açık arazinin güçlü biçimde desteklediği Knight'lara ve Cavalry Archer'lara çevirir.
+  4v4:
+    flank:
+      civs:
+        - mongols
+        - huns
+        - cumans
+        - berbers
+      strategy:
+        en: >-
+          Flanks ride out immediately to contest the open map and the scattered relics. Speed bonuses (Berbers, Cumans)
+          let them cover ground the enemy can't.
+        tr: >-
+          Flank'lar açık haritayı ve dağınık emanetleri ele geçirmek için hemen süvar eder. Hız bonusları (Berbers,
+          Cumans) rakibin ulaşamadığı mesafeleri kapsamalarını sağlar.
+    pocket:
+      civs:
+        - cumans
+        - tatars
+        - magyars
+        - mongols
+      strategy:
+        en: >-
+          Pockets boom hard and mass Knights or Mangudai. With no chokepoints, the team with more mobile units wins
+          every engagement.
+        tr: >-
+          Pocket'lar yoğun boom yapar ve Knight veya Mangudai yığar. Dar geçit olmadığından daha mobil birliklere sahip
+          takım her çarpışmayı kazanır.
+body:
+  en: >-
+    Steppe is a fully open map with almost no trees near starting positions. Resources are spread with minimal cover;
+    walling is slow and expensive. Cavalry civs dominate completely — the open terrain lets Scouts and Knights raid from
+    any angle without terrain obstruction. Civs that rely on walling or terrain defense are severely disadvantaged.
+
+
+    ## Opening
+
+
+    The 18-pop Scout Rush is the standard opener. Virtually any fast Feudal works since walling is impractical — many
+    players skip walls entirely and invest directly in military production. Civs with inherent speed bonuses (Cumans,
+    Mongols, Berbers, Huns) cover the full map rapidly before the opponent can react.
+
+
+    ## Mid game
+
+
+    Castle Age is a constant cavalry raid war. Relics scattered across the map are heavily contested; mounted Monks and
+    fast cavalry fight for relic positions throughout Castle Age. Siege is difficult to defend since cavalry can
+    circumvent it from any direction. Camel civs are notably disadvantaged — their primary counter unit doesn't
+    translate to the cavalry-centric meta.
+
+
+    ## Watch out for
+
+
+    - **Exposed economy** — assume your economy will be raided. Garrison sheep under TC early; prioritize Bloodlines and
+    Scout production even in non-cavalry civs.
+
+    - **Relic neglect** — with 5 relics available and cavalry to grab them, neglecting relics loses the economic game
+    rapidly.
+
+    - **Siege positioning** — Scorpions and Mangonels die instantly to 4+ cavalry; they need heavy escort or will not
+    survive.
+  tr: >-
+    Steppe, başlangıç konumlarının yakınında neredeyse hiç ağaç bulunmayan tamamen açık bir haritadır. Kaynaklar minimum
+    örtüyle dağılmıştır; duvar kurmak yavaş ve pahalıdır. Süvari medeniyetleri haritaya tamamen hâkimdir — açık arazi,
+    Scout'ların ve Knight'ların arazi engeli olmaksızın her açıdan baskın yapmasına olanak tanır. Duvar veya arazi
+    savunmasına dayanan medeniyetler ciddi dezavantajdadır.
+
+
+    ## Açılış
+
+
+    18 nüfuslu Scout Rush standart açılıştır. Duvar kurmak pratik olmadığından neredeyse her hızlı Feodal Çağ stratejisi
+    işe yarar — pek çok oyuncu duvarı tamamen atlar ve doğrudan asker üretimine yatırım yapar. Doğal hız bonusuna sahip
+    medeniyetler (Cumans, Mongols, Berbers, Huns) tüm haritayı rakip tepki vermeden önce hızla kapsar.
+
+
+    ## Orta Oyun
+
+
+    Kale Çağı, sürekli bir süvari baskın savaşına dönüşür. Haritaya dağılmış emanetler yoğun biçimde çekişilir; binekli
+    Monk'lar ve hızlı süvariler tüm Kale Çağı boyunca emanet konumları için savaşır. Süvari her yönden çevresini
+    sardığından kuşatma makinelerini savunmak güçtür. Camel medeniyetleri belirgin biçimde dezavantajlıdır — başlıca
+    counter birimleri, süvari odaklı meta'ya uyum sağlayamaz.
+
+
+    ## Dikkat Edilmesi Gerekenler
+
+
+    - **Açıkta kalan ekonomi** — ekonominin baskına uğrayacağını varsay. Koyunları erken TC altına garnizon et; süvari
+    olmayan medeniyetlerde bile Bloodlines ve Scout üretimine öncelik ver.
+
+    - **Emanet ihmalı** — 5 emanet mevcutken ve süvari kapma olanağı varken, emanetleri göz ardı etmek ekonomik oyunu
+    hızla kaybettirir.
+
+    - **Kuşatma konumlandırması** — Scorpion'lar ve Mangonel'ler 4 veya daha fazla süvariye karşı anında yok olur; ağır
+    eskort olmadan hayatta kalamazlar.

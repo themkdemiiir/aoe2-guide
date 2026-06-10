@@ -1,0 +1,13 @@
+slug: elite-turtle-ship
+name:
+  en: Elite Turtle Ship
+  tr: Elite Turtle Ship
+role:
+  en: unique unit
+  tr: unique unit
+civ: koreans
+line: turtle-ship-line
+lineRank: 2
+description:
+  en: The Elite Turtle Ship is a unique unit trained at the Dock.
+  tr: Elite Turtle Ship, Dock'ta eğitilen özgün bir birimdir.

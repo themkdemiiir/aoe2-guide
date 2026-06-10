@@ -1,0 +1,12 @@
+slug: heavy-camel-rider
+name:
+  en: Heavy Camel
+  tr: Heavy Camel
+role:
+  en: anti-cavalry cavalry
+  tr: süvari karşıtı süvari
+line: camel-line
+lineRank: 2
+description:
+  en: The Heavy Camel is a anti-cavalry cavalry trained at the Stable.
+  tr: Heavy Camel, Stable'da eğitilen süvari karşıtı bir süvaridir.

@@ -1,0 +1,13 @@
+slug: elite-teutonic-knight
+name:
+  en: Elite Teutonic Knight
+  tr: Elite Teutonic Knight
+role:
+  en: unique unit
+  tr: özgün birlik
+civ: teutons
+line: teutonic-knight-line
+lineRank: 2
+description:
+  en: The Elite Teutonic Knight is a unique unit trained at the Castle.
+  tr: Elite Teutonic Knight, Castle'da eğitilen özgün bir birliktir.

@@ -1,0 +1,13 @@
+slug: longboat
+name:
+  en: Longboat
+  tr: Longboat
+role:
+  en: unique unit
+  tr: unique unit
+civ: vikings
+line: longboat-line
+lineRank: 1
+description:
+  en: The Longboat is a unique unit trained at the Dock.
+  tr: Longboat, Dock'ta eğitilen özgün bir birlikdir.

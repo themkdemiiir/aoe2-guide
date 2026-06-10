@@ -1,0 +1,12 @@
+slug: pikeman
+name:
+  en: Pikeman
+  tr: Pikeman
+role:
+  en: anti-cavalry infantry
+  tr: süvari karşıtı piyade
+line: spearman-line
+lineRank: 2
+description:
+  en: The Pikeman is a anti-cavalry infantry trained at the Barracks.
+  tr: Pikeman, Barracks'ta eğitilen bir süvari karşıtı piyadedir.

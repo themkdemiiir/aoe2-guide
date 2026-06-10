@@ -1,0 +1,13 @@
+slug: war-wagon
+name:
+  en: War Wagon
+  tr: War Wagon
+role:
+  en: unique unit
+  tr: özgün birlik
+civ: koreans
+line: war-wagon-line
+lineRank: 1
+description:
+  en: The War Wagon is a unique unit trained at the Castle.
+  tr: War Wagon, Castle'da eğitilen özgün bir birliktir.

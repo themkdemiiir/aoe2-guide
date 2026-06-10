@@ -1,0 +1,12 @@
+slug: elite-cannon-galleon
+name:
+  en: Elite Cannon Galleon
+  tr: Elite Cannon Galleon
+role:
+  en: naval siege
+  tr: deniz kuşatma
+line: cannon-galleon-line
+lineRank: 2
+description:
+  en: The Elite Cannon Galleon is a naval siege trained at the Dock.
+  tr: Elite Cannon Galleon, Dock'ta eğitilen bir deniz kuşatma birimidir.

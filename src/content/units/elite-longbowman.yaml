@@ -1,0 +1,13 @@
+slug: elite-longbowman
+name:
+  en: Elite Longbowman
+  tr: Elite Longbowman
+role:
+  en: unique unit
+  tr: unique unit
+civ: britons
+line: longbowman-line
+lineRank: 2
+description:
+  en: The Elite Longbowman is a unique unit trained at the Castle.
+  tr: Elite Longbowman, Castle'da eğitilen özgün bir birlikdir.

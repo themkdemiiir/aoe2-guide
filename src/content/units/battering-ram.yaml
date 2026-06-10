@@ -1,0 +1,12 @@
+slug: battering-ram
+name:
+  en: Battering Ram
+  tr: Battering Ram
+role:
+  en: siege
+  tr: siege
+line: ram-line
+lineRank: 1
+description:
+  en: The Battering Ram is a siege trained at the Siege Workshop.
+  tr: Battering Ram, Siege Workshop'ta eğitilen bir kuşatma birimidir.

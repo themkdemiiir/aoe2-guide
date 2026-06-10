@@ -1,0 +1,12 @@
+slug: cannon-galleon
+name:
+  en: Cannon Galleon
+  tr: Cannon Galleon
+role:
+  en: naval siege
+  tr: deniz kuşatma
+line: cannon-galleon-line
+lineRank: 1
+description:
+  en: The Cannon Galleon is a naval siege trained at the Dock.
+  tr: Cannon Galleon, Dock'ta eğitilen bir deniz kuşatma birimidir.

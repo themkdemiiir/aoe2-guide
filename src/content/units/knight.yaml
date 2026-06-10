@@ -1,0 +1,12 @@
+slug: knight
+name:
+  en: Knight
+  tr: Knight
+role:
+  en: heavy cavalry
+  tr: ağır süvari
+line: knight-line
+lineRank: 1
+description:
+  en: The Knight is a heavy cavalry trained at the Stable.
+  tr: Knight, Stable'da eğitilen ağır bir süvaridir.

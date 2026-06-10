@@ -1,0 +1,13 @@
+slug: elite-janissary
+name:
+  en: Elite Janissary
+  tr: Elite Janissary
+role:
+  en: unique unit
+  tr: unique unit
+civ: turks
+line: janissary-line
+lineRank: 2
+description:
+  en: The Elite Janissary is a unique unit trained at the Castle.
+  tr: Elite Janissary, Castle'da eğitilen özgün bir birlikdir.

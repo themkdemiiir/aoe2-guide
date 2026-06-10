@@ -1,0 +1,160 @@
+slug: arena
+name:
+  en: Arena
+  tr: Arena
+type: closed
+recommendedCivs:
+  - teutons
+  - turks
+  - burgundians
+  - bohemians
+  - aztecs
+teamComps:
+  2v2:
+    flank:
+      civs:
+        - franks
+        - chinese
+        - slavs
+        - celts
+      strategy:
+        en: >-
+          Fast Castle flank civs who boom and push with Knights or Rams in Castle Age. Franks' Chivalry gives Knights
+          extra HP; Celts get faster siege production.
+        tr: >-
+          Kale Çağı'nda boom yapıp Knight'lar veya Ram'lerle baskı kuran Fast Castle flank uygarlıkları. Franks'ın
+          Chivalry teknolojisi Knight'lara ekstra can verir; Celts daha hızlı kuşatma üretimi sağlar.
+    pocket:
+      civs:
+        - aztecs
+        - byzantines
+        - turks
+        - bohemians
+      strategy:
+        en: >-
+          Monk + siege pocket. Aztecs get +5 relic gold/sec; Byzantines have cheap Greek Fire and Cataphracts; Turks
+          fast imperial with Janissaries; Bohemians have cheaper Chemistry.
+        tr: >-
+          Monk + kuşatma pocket. Aztecs her relic için saniyede +5 Altın alır; Byzantines'ın ucuz Greek Fire ve
+          Cataphract'ları vardır; Turks hızlı İmparatorluk Çağı'na Janissary'lerle geçer; Bohemians daha ucuz
+          Chemistry'ye sahiptir.
+  4v4:
+    flank:
+      civs:
+        - franks
+        - cumans
+        - chinese
+        - slavs
+      strategy:
+        en: >-
+          Flanks boom into Castle Age and push with cavalry + Battering Rams. Cumans 2TC Feudal boom gives the largest
+          economic advantage of any civ on Arena.
+        tr: >-
+          Flank'lar Kale Çağı'na boom yaparak süvari ve Battering Ram'lerle baskıya geçer. Cumans'ın 2TC Feodal Çağ
+          boom'u, Arena'daki tüm uygarlıklar arasında en büyük ekonomik avantajı sunar.
+    pocket:
+      civs:
+        - aztecs
+        - turks
+        - bohemians
+        - burgundians
+      strategy:
+        en: >-
+          Pocket focuses on monks, relics, and Castle Age siege push. Turks go fast Imperial with gunpowder; Bohemians'
+          cheaper Chemistry means faster Cannon Galleons and Hand Cannoneers.
+        tr: >-
+          Pocket, Monk'lara, relic'lere ve Kale Çağı kuşatma baskısına odaklanır. Turks barut birimleriyle hızlı
+          İmparatorluk Çağı'na geçer; Bohemians'ın ucuz Chemistry'si daha hızlı Cannon Galleon ve Hand Cannoneer sağlar.
+body:
+  en: >-
+    Arena is the canonical closed map. Every player starts inside a ring of stone walls that fully encloses their base
+    resources. No Feudal aggression is possible from outside the walls, making the default strategy Fast Castle into
+    Boom. Games extend into late Castle Age or Imperial Age and are decided by relic control, army composition, and
+    economic macro rather than early pressure. Monk-and-siege armies are common and highly effective.
+
+
+    ## Opening
+
+
+    Standard opener is a 23-villager Fast Castle. Advance on exactly 23 villagers, adding 2 more during the transition,
+    then immediately research Castle Age. Most players produce no Feudal military and focus entirely on villager
+    production. An alternative is a 22-villager slightly faster Feudal advance with 1–2 scouts produced during
+    transition to grab relics outside the walls. Relic scouts are critical — whichever player sends their scout out of
+    the gate first can often grab 2–3 relics before the enemy even reaches Feudal Age. On reaching Castle Age,
+    priorities are additional Town Centers (boom to 3–4 TCs), a Monastery, and a University.
+
+
+    ## Mid game
+
+
+    Castle Age is dominated by monk-and-knight or monk-and-siege combinations. Unique units shine here — the economy is
+    safe enough to afford them. Teutonic Knights, Janissaries, Huskarls, and Coustilliers all excel. Breaking enemy
+    stone walls requires siege — Rams in early Castle Age, Trebuchets and Onagers in late Castle and Imperial. Gunpowder
+    civs (Turks, Portuguese, Bohemians) benefit especially in Imperial Age. Produce 60–80 farms for sustained food. When
+    gold runs low, the market becomes a key resource equalizer. Maintain and repair stone walls actively throughout the
+    game.
+
+
+    ## Watch out for
+
+
+    - **Losing the relic race** — if you do not send your scout out the gate immediately, the opponent grabs 4–5 relics
+    and wins a slow gold war.
+
+    - **Over-booming without pressure awareness** — Arena is safe but not impenetrable; a well-timed Castle Age castle
+    drop near your wall can collapse the position.
+
+    - **Forgetting Masonry and Architecture** — stone walls have low HP without these upgrades and are trivial to raze
+    with Battering Rams.
+
+    - **Being out-teched in Imperial Age** — Arena frequently reaches late-game states where Blacksmith and University
+    upgrades matter enormously.
+
+    - **Conversion vulnerability** — monks converting your knights without Redemption researched is a common game-losing
+    scenario.
+  tr: >-
+    Arena, kapalı haritaların en tipik örneğidir. Her oyuncu, üs kaynaklarını tamamen çevreleyen taş duvarların içinde
+    başlar. Duvarların dışından Feodal Çağ saldırısı mümkün değildir; bu yüzden standart strateji Fast Castle'dan boom'a
+    geçmektir. Oyunlar geç Kale Çağı'na veya İmparatorluk Çağı'na uzar; sonucu erken baskı değil, relic kontrolü, ordu
+    kompozisyonu ve ekonomik macro belirler. Monk ve kuşatma orduları yaygın ve son derece etkilidir.
+
+
+    ## Açılış
+
+
+    Standart açılış, 23 köylülük Fast Castle'dır. Tam 23 köylüde çağ atlama başlatırsın, geçiş sırasında 2 köylü daha
+    ekler ve hemen Kale Çağı araştırırsın. Çoğu oyuncu Feodal Çağ'da hiç asker üretmez ve tamamen köylü üretimine
+    odaklanır. Alternatif olarak, 22 köylülük biraz daha hızlı bir Feodal Çağ geçişiyle geçiş sırasında 1–2 Scout üretip
+    duvarların dışındaki relic'leri kapabilirsin. Scout'ları relic almak için göndermek kritik önem taşır — kapıdan önce
+    çıkan oyuncu, rakip Feodal Çağ'a bile ulaşmadan genellikle 2–3 relic kapabilir. Kale Çağı'na ulaşınca öncelikler
+    şunlardır: ek Town Center'lar (3–4 TC'ye boom), bir Monastery ve bir University.
+
+
+    ## Orta Oyun
+
+
+    Kale Çağı, Monk + Knight veya Monk + kuşatma kombinasyonlarının hâkimiyetindedir. Özgün birimler burada parlar —
+    ekonomi onları karşılayacak kadar güvende olur. Teutonic Knight'lar, Janissary'ler, Huskarl'lar ve Coustillier'lar
+    özellikle başarılıdır. Düşman taş duvarlarını yıkmak için kuşatma gerekir: erken Kale Çağı'nda Ram'ler, geç Kale ve
+    İmparatorluk'ta Trebuchet'ler ve Onager'lar. Barut uygarlıkları (Turks, Portuguese, Bohemians) İmparatorluk Çağı'nda
+    özellikle güçlenir. Sürekli yiyecek için 60–80 çiftlik üret. Altın azaldığında Market, kaynakları dengelemede kilit
+    rol oynar. Oyun boyunca taş duvarları aktif olarak koru ve onar.
+
+
+    ## Dikkat Et
+
+
+    - **Relic yarışını kaybetmek** — Scout'unu kapıdan hemen dışarı göndermezsen, rakip 4–5 relic kaparak yavaş bir
+    Altın savaşını kazanır.
+
+    - **Baskı farkındalığı olmadan aşırı boom yapmak** — Arena güvenli ama geçilmez değildir; iyi zamanlanmış bir Kale
+    Çağı castle drop duvarının yanına düşebilir ve konumunu çökertebilir.
+
+    - **Masonry ve Architecture'ı unutmak** — taş duvarlar bu yükseltmeler olmadan düşük cana sahiptir ve Battering
+    Ram'lerle kolayca yıkılır.
+
+    - **İmparatorluk Çağı'nda teknoloji gerisinde kalmak** — Arena sık sık geç oyun aşamasına ulaşır; burada Blacksmith
+    ve University yükseltmeleri büyük önem taşır.
+
+    - **Dönüştürme açığı** — Redemption araştırılmadan düşman Monk'larının Knight'larını dönüştürmesi oyunu kaybettiren
+    yaygın bir senaryodur.

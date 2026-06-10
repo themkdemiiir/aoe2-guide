@@ -1,0 +1,44 @@
+slug: wall
+term:
+  en: Wall
+  tr: Wall
+letter: W
+definition:
+  en: >-
+    Defensive barriers built from wood (Palisade Wall) or stone (Stone Wall, Fortified Wall in Imperial Age). Walls are
+    essential on most maps to deny opponent access to your villagers and force them to commit siege units to break in.
+
+
+    **Palisade Walls** are cheap (2 wood each) and available from Dark Age but have low HP and can be destroyed quickly
+    by Battering Rams. **Stone Walls** unlock in Castle Age, cost 5 stone each, and resist siege significantly better.
+    **Fortified Walls** are the Imperial Age upgrade, with the highest HP and armor.
+
+
+    **Tactical notes:**
+
+    - Always leave a **sally gate** in your wall to flee villagers under attack.
+
+    - **Full walls** on Arabia are usually impractical and slow your Feudal timing — partial walls covering the most
+    exposed flank are the norm.
+
+    - Wall **chokepoints** (between trees) before the open spaces — chokepoint walls do most of the defensive work.
+  tr: >-
+    Tahtadan (Palisade Wall) veya taştan (Stone Wall, Imperial Age'de Fortified Wall) inşa edilen savunma engelleri.
+    Duvarlar çoğu haritada rakibin köylülerinize erişimini engellemek ve onu içeri girmek için kuşatma birimi kullanmaya
+    zorlamak için gereklidir.
+
+
+    **Palisade Wall'lar** ucuzdur (her biri 2 tahta) ve Dark Age'den itibaren kullanılabilir; ancak düşük canlıdır ve
+    Battering Ram'lerle hızlıca yıkılabilir. **Stone Wall'lar** Castle Age'de açılır, her biri 5 taşa mal olur ve
+    kuşatmaya çok daha iyi direnir. **Fortified Wall'lar** Imperial Age yükseltmesidir; en yüksek can ve zırha sahiptir.
+
+
+    **Taktiksel notlar:**
+
+    - Saldırı altındaki köylüleri kaçırmak için duvarınızda her zaman bir **sally gate** (çıkış kapısı) bırakın.
+
+    - Arabia'da **tam duvar** genellikle pratik değildir ve Feudal zamanlamanızı yavaşlatır; en açık olan flank'ı
+    kapatan kısmi duvarlar normdur.
+
+    - Açık alanlardan önce **chokepoint'leri** (ağaçların arasını) duvarlayın; chokepoint duvarları savunma işinin
+    çoğunu yapar.

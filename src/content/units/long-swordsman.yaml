@@ -1,0 +1,12 @@
+slug: long-swordsman
+name:
+  en: Long Swordsman
+  tr: Long Swordsman
+role:
+  en: melee infantry
+  tr: yakın dövüş piyadesi
+line: militia-line
+lineRank: 3
+description:
+  en: The Long Swordsman is a melee infantry trained at the Barracks.
+  tr: Long Swordsman, Barracks'ta eğitilen bir yakın dövüş piyadesidir.

@@ -1,0 +1,12 @@
+slug: galleon
+name:
+  en: Galleon
+  tr: Galleon
+role:
+  en: naval
+  tr: deniz
+line: galley-line
+lineRank: 3
+description:
+  en: The Galleon is a naval trained at the Dock.
+  tr: Galleon, Dock'ta eğitilen bir deniz birimidir.

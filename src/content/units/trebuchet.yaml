@@ -1,0 +1,12 @@
+slug: trebuchet
+name:
+  en: Trebuchet
+  tr: Trebuchet
+role:
+  en: siege long-range
+  tr: kuşatma uzun menzilli
+line: trebuchet-line
+lineRank: 1
+description:
+  en: The Trebuchet is a siege long-range trained at the Castle.
+  tr: Trebuchet, Castle'da eğitilen uzun menzilli bir kuşatma silahıdır.

@@ -1,0 +1,13 @@
+slug: karambit-warrior
+name:
+  en: Karambit Warrior
+  tr: Karambit Warrior
+role:
+  en: unique unit
+  tr: özgün birlik
+civ: malay
+line: karambit-warrior-line
+lineRank: 1
+description:
+  en: The Karambit Warrior is a unique unit trained at the Castle.
+  tr: Karambit Warrior, Castle'da eğitilen özgün bir birliktir.

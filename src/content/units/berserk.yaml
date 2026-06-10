@@ -1,0 +1,13 @@
+slug: berserk
+name:
+  en: Berserk
+  tr: Berserk
+role:
+  en: unique unit
+  tr: özgün birim
+civ: vikings
+line: berserk-line
+lineRank: 1
+description:
+  en: The Berserk is a unique unit trained at the Castle.
+  tr: Berserk, Castle'da eğitilen bir özgün birimdir.

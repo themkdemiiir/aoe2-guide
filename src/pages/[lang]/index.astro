@@ -9,7 +9,7 @@ import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
 import { type CollectionEntry } from "astro:content";
-import { getLocalizedEntries, canonicalSlug } from "@/lib/content";
+import { type CollectionEntry as _CE } from "astro:content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -17,10 +17,10 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Locale;
 
 // --- Live content (drives the action-tile counts, the top-civ strip, and the
-// featured build/map rows). getLocalizedEntries falls back to EN for missing TR. ---
+// featured build/map rows). ---
 const civs = await getCollection("civilizations");
 const builds: CollectionEntry<"build-orders">[] = await getCollection("build-orders");
-const maps = await getLocalizedEntries("maps", lang);
+const maps: CollectionEntry<"maps">[] = await getCollection("maps");
 
 // --- Top civilizations: rank by live meta win rate, then join back to the
 // localized civ entry for name/tagline/bonuses. civ-data carries the meta but
@@ -304,13 +304,13 @@ const more = [
       <ul class="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {featuredMaps.map((m) => (
           <li class="h-full">
-            <Card href={localizedPath(`/maps/${canonicalSlug(m.id)}`, lang)} interactive class="group">
+            <Card href={localizedPath(`/maps/${m.id}`, lang)} interactive class="group">
               <div class="flex items-center gap-3">
                 <span class="rounded bg-gold-500/15 p-2 text-gold-500">
                   <UIIcon name="lucide:map" class="h-6 w-6" />
                 </span>
                 <div>
-                  <h3 class="font-display text-lg text-ink group-hover:text-gold-500">{m.data.name}</h3>
+                  <h3 class="font-display text-lg text-ink group-hover:text-gold-500">{m.data.name[lang]}</h3>
                   <p class="mt-0.5 text-sm text-stone-700">{t(lang, `mapType.${m.data.type}`)}</p>
                 </div>
               </div>

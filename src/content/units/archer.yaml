@@ -1,0 +1,12 @@
+slug: archer
+name:
+  en: Archer
+  tr: Archer
+role:
+  en: ranged infantry
+  tr: menzilli piyade
+line: archer-line
+lineRank: 1
+description:
+  en: The Archer is a ranged infantry trained at the Archery Range.
+  tr: Archer, Archery Range'de eğitilen menzilli bir piyadedir.

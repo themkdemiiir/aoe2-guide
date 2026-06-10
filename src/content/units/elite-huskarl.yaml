@@ -1,0 +1,13 @@
+slug: elite-huskarl
+name:
+  en: Elite Huskarl
+  tr: Elite Huskarl
+role:
+  en: unique unit
+  tr: unique unit
+civ: goths
+line: huskarl-line
+lineRank: 2
+description:
+  en: The Elite Huskarl is a unique unit trained at the Castle.
+  tr: Elite Huskarl, Castle'da eğitilen özgün bir birlikdir.

@@ -1,0 +1,154 @@
+slug: islands
+name:
+  en: Islands
+  tr: Islands
+type: water
+recommendedCivs:
+  - vikings
+  - italians
+  - malay
+  - portuguese
+  - persians
+teamComps:
+  2v2:
+    flank:
+      civs:
+        - vikings
+        - portuguese
+        - italians
+        - byzantines
+      strategy:
+        en: >-
+          Navy flank. Vikings' Longboats devastate enemy fleets; Portuguese Fire Ships deal massive damage; Italians get
+          cheaper Docks and Cannon Galleons.
+        tr: >-
+          Deniz filosu flankı. Vikings'in Longboat'ları düşman filolarını yerle bir eder; Portuguese'in Fire Ship'leri
+          büyük hasar verir; Italians daha ucuz Dock ve Cannon Galleon'a sahiptir.
+    pocket:
+      civs:
+        - portuguese
+        - malay
+        - italians
+        - spanish
+      strategy:
+        en: >-
+          Economic navy pocket — Fishing Ships for food, Cannon Galleons for Imperial push. Portuguese Carrack gives
+          Cannon Galleons extra armor.
+        tr: >-
+          Ekonomik deniz pocket'ı — Yiyecek için Fishing Ship'ler, İmparatorluk baskısı için Cannon Galleon'lar.
+          Portuguese'in Carrack'ı Cannon Galleon'lara ekstra zırh sağlar.
+  4v4:
+    flank:
+      civs:
+        - vikings
+        - portuguese
+        - italians
+        - byzantines
+      strategy:
+        en: >-
+          Water combat flanks. Each flank must control their portion of the ocean; coordinated Galleon + Fire Ship
+          pushes destroy enemy navy.
+        tr: >-
+          Su savaşı flankları. Her flank kendi okyanus bölgesini kontrol etmek zorundadır; koordineli Galleon + Fire
+          Ship atakları düşman filosunu imha eder.
+    pocket:
+      civs:
+        - malay
+        - portuguese
+        - italians
+        - spanish
+      strategy:
+        en: >-
+          Cannon Galleon pocket. Spanish Cannon Galleons fire 25% faster; Portuguese have extra range and HP on theirs.
+          Cannon Galleons shell land targets through enemy walls.
+        tr: >-
+          Cannon Galleon pocket'ı. Spanish'in Cannon Galleon'ları %25 daha hızlı ateşler; Portuguese'inkilerinin menzili
+          ve canı fazladır. Cannon Galleon'lar, kara hedeflerini düşman surlarının arkasından top atışıyla vurur.
+body:
+  en: >-
+    Islands is the canonical pure water map. Every player starts on a separate island, making naval supremacy the
+    prerequisite for any land action. Controlling the water means controlling fishing (the main food and economic
+    source), blocking enemy transports, and enabling landing parties. Civs with strong navies dominate;
+    landlocked-specialist civs such as Aztecs and Huns are very weak here.
+
+
+    ## Opening
+
+
+    Place a Dock immediately in Dark Age around villager 6–8, queue 2–3 Fishing Ships, and continue villager production
+    on land. The first critical decision is whether to rush with Fire Galleys in Feudal Age to contest fishing, or delay
+    for a stronger Castle Age fleet. A fast Fire Galley Rush — building a forward Dock near the enemy and launching
+    galleys before their dock completes — can cripple their fishing economy. The alternative is a conservative
+    multi-dock galley flood in Feudal Age. During Feudal Age, load 2 villagers and your scout onto a Transport Ship and
+    circle to land on the back of the enemy's island for a Tower threat.
+
+
+    ## Mid game
+
+
+    Naval control in Castle Age centers on Galleons and Fire Ships. A mixed fleet is the standard composition — Galleons
+    for ranged damage, Fire Ships to counter enemy Galleons in melee range. Exploit every small island for additional
+    fishing. Landing parties become viable in Castle Age: transport archers (preferred over infantry due to ranged
+    damage on landing) with a Galleon escort. In Imperial Age, Cannon Galleons are required for landing in defended
+    locations with tower and castle coverage.
+
+
+    ## Watch out for
+
+
+    - **Unescorted fishing ships** — a single enemy Galley can wipe your entire fishing fleet and collapse food economy
+    in under a minute.
+
+    - **Losing water control and doing nothing** — you must commit to retaking the water before the loss becomes
+    permanent.
+
+    - **Landing archers into towers** — never transport into a defended coast without clearing shore towers first.
+
+    - **Ignoring small islets** — neutral islands between bases are strategic assets that many players fail to contest.
+
+    - **Not building enough docks** — single-dock navy output is too slow against an opponent running 2–3 docks.
+  tr: >-
+    Islands, kanonik saf su haritasıdır. Her oyuncu ayrı bir adada başlar; bu yüzden deniz hâkimiyeti, herhangi bir kara
+    harekâtının ön koşuludur. Suyu kontrol etmek; balıkçılığı (ana Yiyecek ve ekonomi kaynağı) kontrol etmek, düşman
+    Transport Ship'lerini engellemek ve çıkarma birliklerine zemin hazırlamak demektir. Güçlü donanmalı medeniyetler
+    burada öne çıkar; Aztecs ve Huns gibi kara uzmanı medeniyetler ise çok zayıf kalır.
+
+
+    ## Açılış
+
+
+    Karanlık Çağ'da 6–8. köylü civarında hemen bir Dock inşa et, 2–3 Fishing Ship üret ve kara köylü üretimine devam et.
+    İlk kritik karar, Feodal Çağ'da balıkçılığa meydan okumak için Fire Galley rush yapmak mı yoksa daha güçlü bir Kale
+    Çağı filosu için beklemek mi olduğudur. Hızlı bir Fire Galley Rush — düşmana yakın ileri bir Dock kurup onların
+    Dock'u tamamlanmadan önce Galley saldırısı başlatmak — rakibin balıkçı ekonomisini çökertebilir. Alternatif olarak
+    Feodal Çağ'da temkinli çok Dock'lu Galley baskını yapılabilir. Feodal Çağ boyunca 2 köylü ile scout'unu Transport
+    Ship'e yükle ve düşman adasının arkasına çıkarma yaparak Watch Tower tehdidi oluştur.
+
+
+    ## Orta Oyun
+
+
+    Kale Çağı'nda deniz kontrolü, Galleon ve Fire Ship'ler üzerine kuruludur. Karma filo standart kompozisyondur —
+    menzilli hasar için Galleon'lar, yakın mesafede düşman Galleon'larını counter'lamak için Fire Ship'ler. Ek
+    balıkçılık için her küçük adayı değerlendir. Kale Çağı'nda çıkarma partileri uygulanabilir hale gelir: Galleon
+    eskortlu Archer'lar taşı (çıkarma sırasında menzilli hasar nedeniyle piyadelere tercih edilir). İmparatorluk
+    Çağı'nda Watch Tower ve Castle koruması altındaki savunmalı noktalara çıkarma yapabilmek için Cannon Galleon
+    zorunludur.
+
+
+    ## Dikkat Edilecekler
+
+
+    - **Eskort olmayan Fishing Ship'ler** — tek bir düşman Galley'i tüm balıkçı filonu bir dakika içinde yok edip
+    Yiyecek ekonomisini çökertebilir.
+
+    - **Deniz kontrolünü kaybedip hareketsiz kalmak** — kayıp kalıcı hale gelmeden önce suyu geri almaya kararlı şekilde
+    girişmelisin.
+
+    - **Archer'ları Watch Tower'lara taşımak** — kıyı Watch Tower'larını temizlemeden savunulan bir kıyıya kesinlikle
+    çıkarma yapma.
+
+    - **Küçük adacıkları görmezden gelmek** — üsler arasındaki tarafsız adalar, pek çok oyuncunun ihmal ettiği stratejik
+    varlıklardır.
+
+    - **Yeterli Dock kurmamak** — tek Dock'lu donanma çıktısı, 2–3 Dock işleten rakibe karşı yetersiz kalır.

@@ -1,0 +1,12 @@
+slug: siege-ram
+name:
+  en: Siege Ram
+  tr: Siege Ram
+role:
+  en: siege
+  tr: siege
+line: ram-line
+lineRank: 3
+description:
+  en: The Siege Ram is a siege trained at the Siege Workshop.
+  tr: Siege Ram, Siege Workshop'ta eğitilen bir kuşatma birimidir.

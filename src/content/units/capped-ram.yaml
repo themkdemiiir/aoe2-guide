@@ -1,0 +1,12 @@
+slug: capped-ram
+name:
+  en: Capped Ram
+  tr: Capped Ram
+role:
+  en: siege
+  tr: siege
+line: ram-line
+lineRank: 2
+description:
+  en: The Capped Ram is a siege trained at the Siege Workshop.
+  tr: Capped Ram, Siege Workshop'ta eğitilen bir kuşatma birimidir.

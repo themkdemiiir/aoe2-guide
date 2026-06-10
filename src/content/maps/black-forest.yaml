@@ -1,0 +1,156 @@
+slug: black-forest
+name:
+  en: Black Forest
+  tr: Black Forest
+type: closed
+size: large
+recommendedCivs:
+  - celts
+  - koreans
+  - teutons
+  - spanish
+  - byzantines
+teamComps:
+  2v2:
+    flank:
+      civs:
+        - goths
+        - celts
+        - teutons
+        - slavs
+      strategy:
+        en: >-
+          Infantry mass in the forest chokepoints. Goths produce cheap infantry endlessly; Teutonic Knights are nearly
+          unkillable in narrow forest corridors.
+        tr: >-
+          Ormandaki dar geçitlerde yoğun piyade kitleleri. Goths'lar ucuz piyade üretimini kesintisiz sürdürür; Teutonic
+          Knight'lar dar orman koridorlarında neredeyse durdurulamazdır.
+    pocket:
+      civs:
+        - aztecs
+        - byzantines
+        - chinese
+        - bohemians
+      strategy:
+        en: >-
+          Boom into Imperial and mass unique units or gunpowder. Aztecs' Monks + unique units are dominant; Chinese get
+          discounted tech; Bohemians get powerful gunpowder late game.
+        tr: >-
+          İmparatorluk Çağı'na boom yap ve özgün birlikleri ya da barut silahlarını yığ. Aztecs'lerin Monk'ları + özgün
+          birimleri baskındır; Chinese indirimli tech alır; Bohemians oyun sonu güçlü barut silahlarına sahiptir.
+  4v4:
+    flank:
+      civs:
+        - goths
+        - celts
+        - koreans
+        - teutons
+      strategy:
+        en: >-
+          Infantry + siege at chokepoints. Koreans get cheaper towers for chokepoint fortification; Celts produce Siege
+          Rams faster.
+        tr: >-
+          Dar geçitlerde piyade + kuşatma makineleri. Koreans daha ucuz tower'larla dar geçitleri tahkim eder; Celts
+          Siege Ram'leri daha hızlı üretir.
+    pocket:
+      civs:
+        - chinese
+        - aztecs
+        - byzantines
+        - slavs
+      strategy:
+        en: >-
+          Deep boom into Imperial Age. Slavs farm faster; Chinese have tech discounts. Mass unique units or gunpowder
+          for a coordinated Imperial push.
+        tr: >-
+          İmparatorluk Çağı'na derin boom yap. Slavs çiftlikleri daha hızlı işler; Chinese tech indirimlerine sahiptir.
+          Koordineli bir İmparatorluk Çağı atağı için özgün birlikleri veya barut silahlarını yığ.
+body:
+  en: >-
+    Black Forest is defined by dense, nearly impassable tree coverage that creates natural chokepoints between bases. It
+    strongly favors defensive booming — once the narrow gaps between forests are walled, bases become nearly
+    impregnable. Games are slow and decided by whichever side breaks through with the strongest siege-and-army
+    combination. Aggressive Castle drops and monk-siege rushes that bypass walls are the primary counters to a fortified
+    position.
+
+
+    ## Opening
+
+
+    Walling chokepoints is the single most important early priority. Research Loom immediately and send forward
+    villagers to block gaps — some high-level players send 2–3 starting villagers straight to the nearest gap before
+    building any farms. In team games, coordinate gap assignments between players. Palisade walls suffice initially;
+    upgrade to stone in mid-game. Once walls are secured, boom: build additional Town Centers, maximize villager
+    production, and target a fast Imperial Age (around 30–32 minutes in skilled play). Economy upgrades (Horse Collar →
+    Heavy Plow, Wheelbarrow → Hand Cart) take full priority. Mine gold and stone from within the safe enclosed area.
+
+
+    ## Mid game
+
+
+    The Castle Age is primarily a preparation phase — build economy, accumulate army, and reach Imperial Age upgrades
+    before pushing. Trebuchets are the essential offensive tool and nearly always pivot any assault. Onagers and Bombard
+    Cannons supplement Trebs for counter-siege. A common aggressive option in Castle Age is the castle drop: transport a
+    villager near the enemy wall and fast-drop a Castle to threaten the chokepoint. Monk rushes (3 monks + 1–2
+    Mangonels) through a thin gap can be devastating if the wall is not fully sealed.
+
+
+    ## Watch out for
+
+
+    - **Leaving a 1-tile gap unwalled** — scouts will find it and exploit it with a ram rush.
+
+    - **Forgetting team gap assignments** — leads to permanent vulnerabilities on shared wall sections.
+
+    - **Castle drops near your chokepoints** — opponent places a Castle just beyond sight range, then sieges the wall
+    with Trebuchets.
+
+    - **Monk-and-mangonel sneaks** — a small mobile force fits through partial gaps before you finish walling.
+
+    - **Booming into no military** — if your wall is breached before you have an army assembled, your boom is useless.
+
+    - **Not transitioning to stone walls** — all-palisade defenses collapse quickly to Battering Rams in Castle Age.
+  tr: >-
+    Black Forest, doğal dar geçitler oluşturan yoğun ve neredeyse geçilmez ağaç örtüsüyle tanımlanır. Savunma amaçlı
+    boom'u güçlü biçimde destekler — ormanlar arasındaki dar boşluklar duvarlanınca üsler neredeyse ele geçirilemez hale
+    gelir. Oyunlar yavaş ilerler ve en güçlü kuşatma-ordu kombinasyonunu getiren taraf kazanır. Duvarları aşan saldırgan
+    Castle düşürmeleri ve monk-kuşatma rush'ları, tahkimatlı bir konuma karşı başlıca counter'lardır.
+
+
+    ## Açılış
+
+
+    Dar geçitleri duvarlamak erken oyundaki en önemli tek önceliktir. Hemen Loom araştır ve köylüleri boşlukları
+    kapatmaya gönder — bazı üst düzey oyuncular 2–3 başlangıç köylüsünü çiftlik kurmadan doğrudan en yakın boşluğa
+    yönlendirir. Takım oyunlarında boşluk görevlerini oyuncular arasında koordine et. Başlangıçta Palisade duvarları
+    yeterlidir; orta oyunda taş duvara geç. Duvarlar güvence altına alındıktan sonra boom yap: ek Town Center'lar inşa
+    et, köylü üretimini maksimuma çıkar ve hızlı İmparatorluk Çağı'nı hedefle (yetenekli oyunda yaklaşık 30–32 dakika).
+    Ekonomi yükseltmeleri (Horse Collar → Heavy Plow, Wheelbarrow → Hand Cart) tam öncelik taşır. Güvenli kapalı alan
+    içinden Altın ve Taş çıkar.
+
+
+    ## Orta Oyun
+
+
+    Kale Çağı esas olarak bir hazırlık fazıdır — ekonomi kur, ordu biriktir ve atağa geçmeden önce İmparatorluk Çağı
+    yükseltmelerine ulaş. Trebuchet'ler vazgeçilmez saldırı aracıdır ve hemen her taarruzu dönüştürür. Onager'lar ve
+    Bombard Cannon'lar, counter-kuşatma için Trebuchet'leri destekler. Kale Çağı'nda yaygın bir saldırgan seçenek castle
+    drop'tur: düşman duvarının yakınına bir köylü taşı ve dar geçidi tehdit etmek için hızla Castle inşa et. Ince bir
+    boşluktan yapılan Monk rush'ları (3 Monk + 1–2 Mangonel) duvar tam kapanmamışsa yıkıcı olabilir.
+
+
+    ## Dikkat Edilmesi Gerekenler
+
+
+    - **1 karo boşluk bırakmak** — Scout'lar bunu bulur ve ram rush ile istismar eder.
+
+    - **Takım boşluk görevlerini unutmak** — paylaşılan duvar bölümlerinde kalıcı açıklar oluşturur.
+
+    - **Dar geçitlerin yanına castle drop** — rakip görüş alanının hemen dışına bir Castle yerleştirir, ardından
+    Trebuchet'lerle duvarı yıkar.
+
+    - **Monk ve Mangonel sızmaları** — küçük bir mobil kuvvet, duvarlamayı bitirmeden kısmi boşluklardan geçer.
+
+    - **Ordu kurmadan boom yapmak** — duvarın delinmesi sırasında askerin yoksa boom'un bir değeri kalmaz.
+
+    - **Taş duvara geçmemek** — tamamen palisade savunması Kale Çağı'nda Battering Ram'lere karşı hızla çöker.

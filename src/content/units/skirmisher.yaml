@@ -1,0 +1,12 @@
+slug: skirmisher
+name:
+  en: Skirmisher
+  tr: Skirmisher
+role:
+  en: anti-archer ranged
+  tr: archer counter menzilli
+line: skirmisher-line
+lineRank: 1
+description:
+  en: The Skirmisher is a anti-archer ranged trained at the Archery Range.
+  tr: Skirmisher, Archery Range'de eğitilen archer counter'ı bir menzilli birimdir.

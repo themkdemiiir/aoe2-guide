@@ -1,0 +1,12 @@
+slug: fire-ship
+name:
+  en: Fire Ship
+  tr: Fire Ship
+role:
+  en: anti-ship naval
+  tr: gemi karşıtı deniz
+line: fire-ship-line
+lineRank: 2
+description:
+  en: The Fire Ship is a anti-ship naval trained at the Dock.
+  tr: Fire Ship, Dock'ta eğitilen bir gemi karşıtı deniz birimidir.

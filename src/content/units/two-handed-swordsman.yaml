@@ -1,0 +1,12 @@
+slug: two-handed-swordsman
+name:
+  en: Two-Handed Swordsman
+  tr: Two-Handed Swordsman
+role:
+  en: melee infantry
+  tr: yakın dövüş piyadesi
+line: militia-line
+lineRank: 4
+description:
+  en: The Two-Handed Swordsman is a melee infantry trained at the Barracks.
+  tr: Two-Handed Swordsman, Barracks'ta eğitilen bir yakın dövüş piyadesidir.

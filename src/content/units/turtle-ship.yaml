@@ -1,0 +1,13 @@
+slug: turtle-ship
+name:
+  en: Turtle Ship
+  tr: Turtle Ship
+role:
+  en: unique unit
+  tr: unique unit
+civ: koreans
+line: turtle-ship-line
+lineRank: 1
+description:
+  en: The Turtle Ship is a unique unit trained at the Dock.
+  tr: Turtle Ship, Dock'ta eğitilen özgün bir birimdir.

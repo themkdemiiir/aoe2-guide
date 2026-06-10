@@ -1,0 +1,12 @@
+slug: hand-cannoneer
+name:
+  en: Hand Cannoneer
+  tr: Hand Cannoneer
+role:
+  en: gunpowder ranged
+  tr: barutlu menzilli
+line: hand-cannoneer-line
+lineRank: 1
+description:
+  en: The Hand Cannoneer is a gunpowder ranged trained at the Archery Range.
+  tr: Hand Cannoneer, Archery Range'de eğitilen barutlu menzilli bir birimdir.

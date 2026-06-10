@@ -1,0 +1,12 @@
+slug: paladin
+name:
+  en: Paladin
+  tr: Paladin
+role:
+  en: heavy cavalry
+  tr: ağır süvari
+line: knight-line
+lineRank: 3
+description:
+  en: The Paladin is a heavy cavalry trained at the Stable.
+  tr: Paladin, Stable'da eğitilen ağır bir süvaridir.

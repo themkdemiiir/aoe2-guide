@@ -1,0 +1,12 @@
+slug: heavy-scorpion
+name:
+  en: Heavy Scorpion
+  tr: Heavy Scorpion
+role:
+  en: siege
+  tr: siege
+line: scorpion-line
+lineRank: 2
+description:
+  en: The Heavy Scorpion is a siege trained at the Siege Workshop.
+  tr: Heavy Scorpion, Siege Workshop'ta eğitilen bir kuşatma birimidir.

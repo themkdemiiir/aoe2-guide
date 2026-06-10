@@ -1,0 +1,13 @@
+slug: plumed-archer
+name:
+  en: Plumed Archer
+  tr: Plumed Archer
+role:
+  en: unique unit
+  tr: unique unit
+civ: mayans
+line: plumed-archer-line
+lineRank: 1
+description:
+  en: The Plumed Archer is a unique unit trained at the Castle.
+  tr: Plumed Archer, Castle'da eğitilen özgün bir birliktir.

@@ -1,0 +1,12 @@
+slug: light-cavalry
+name:
+  en: Light Cavalry
+  tr: Light Cavalry
+role:
+  en: light cavalry
+  tr: hafif süvari
+line: scout-line
+lineRank: 2
+description:
+  en: The Light Cavalry is a light cavalry trained at the Stable.
+  tr: Light Cavalry, Stable'da eğitilen hafif bir süvaridir.

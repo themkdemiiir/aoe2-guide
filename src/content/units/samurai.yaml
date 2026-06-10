@@ -1,0 +1,13 @@
+slug: samurai
+name:
+  en: Samurai
+  tr: Samurai
+role:
+  en: unique unit
+  tr: unique unit
+civ: japanese
+line: samurai-line
+lineRank: 1
+description:
+  en: The Samurai is a unique unit trained at the Castle.
+  tr: Samurai, Castle'da eğitilen özgün bir birlikdir.

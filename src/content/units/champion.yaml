@@ -1,0 +1,12 @@
+slug: champion
+name:
+  en: Champion
+  tr: Champion
+role:
+  en: melee infantry
+  tr: yakın dövüş piyade
+line: militia-line
+lineRank: 5
+description:
+  en: The Champion is a melee infantry trained at the Barracks.
+  tr: Champion, Barracks'ta eğitilen bir yakın dövüş piyadesidir.

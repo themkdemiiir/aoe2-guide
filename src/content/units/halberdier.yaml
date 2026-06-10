@@ -1,0 +1,12 @@
+slug: halberdier
+name:
+  en: Halberdier
+  tr: Halberdier
+role:
+  en: anti-cavalry infantry
+  tr: süvari karşıtı piyade
+line: spearman-line
+lineRank: 3
+description:
+  en: The Halberdier is a anti-cavalry infantry trained at the Barracks.
+  tr: Halberdier, Barracks'ta eğitilen bir süvari karşıtı piyadedir.

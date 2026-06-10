@@ -1,0 +1,147 @@
+slug: migration
+name:
+  en: Migration
+  tr: Migration
+type: hybrid
+recommendedCivs:
+  - vikings
+  - malay
+  - cumans
+  - italians
+  - franks
+teamComps:
+  2v2:
+    flank:
+      civs:
+        - vikings
+        - italians
+        - malay
+        - portuguese
+      strategy:
+        en: >-
+          Navy flank controls the water between islands and raids Transport Ships. Vikings' cheaper boats and Malay's
+          faster Fish Traps fund an early water edge.
+        tr: >-
+          Flank donanması adalar arasındaki suyu kontrol eder ve Transport Ship'lere baskın yapar. Vikings'in daha ucuz
+          gemileri ve Malay'ın daha hızlı Fish Trap'leri erken su üstünlüğü sağlar.
+    pocket:
+      civs:
+        - franks
+        - cumans
+        - lithuanians
+        - berbers
+      strategy:
+        en: >-
+          Pocket transports to the mainland fast and booms on the open land, then pushes with Knights. Cumans' Feudal
+          2TC boom is brutal once safely migrated.
+        tr: >-
+          Pocket anakaraya hızlıca geçer ve açık arazide boom yapar, ardından Knight'larla baskı uygular. Cumans'ın
+          Feodal 2TC boom'u, göç güvenle tamamlandığında çok etkilidir.
+  4v4:
+    flank:
+      civs:
+        - vikings
+        - italians
+        - portuguese
+        - malay
+      strategy:
+        en: Flanks fight for water control so the team's transports land safely; navy denies enemy migration and fishing.
+        tr: >-
+          Flank'lar su kontrolü için savaşır; böylece takımın transport gemileri sağ salim karaya çıkar ve donanma
+          düşmanın göçünü ile balık avını engeller.
+    pocket:
+      civs:
+        - franks
+        - cumans
+        - lithuanians
+        - mongols
+      strategy:
+        en: >-
+          Pockets migrate to the mainland and boom into a massed cavalry push. Whoever establishes the bigger land
+          economy after migration wins.
+        tr: >-
+          Pocket'lar anakaraya göç eder, boom yapar ve toplu süvari baskısına geçer. Göçten sonra daha büyük kara
+          ekonomisini kim kurarsa maçı o kazanır.
+body:
+  en: >-
+    Migration places each player on a small island with limited resources — one gold and one stone patch, berries,
+    sheep, and forest — that runs dry relatively quickly. The large central continent holds abundant resources,
+    especially wood. The map forces a transition: build a fleet, fish to sustain economy, then migrate to the mainland
+    before island resources exhaust. Naval skirmishing and landing timing are the central skills this map tests.
+
+
+    ## Opening
+
+
+    Build a Dock in Dark Age and queue 8–12 Fishing Ships across 1–2 Docks. Deep fish last longer than shore fish —
+    prioritize them. Build Galleys simultaneously to protect the fishing fleet. Prioritize migrating to the mainland
+    early: Cumans can build a second TC in Feudal Age and land on the continent while still Feudal, giving a significant
+    tempo advantage. Most other civs migrate in Castle Age after securing water control. When migrating, land near the
+    mainland coast and establish a TC in a defensible position with access to inland gold and stone.
+
+
+    ## Mid game
+
+
+    Once established on the mainland, the game transitions to a land-focused mid-game. Civs with strong land bonuses for
+    food (Franks with forager bonus, Maya with lasting resources, Tatars with herd animals) gain advantages after
+    migration. The central continent is contested — players who arrive early establish better interior positions. Castle
+    Age is typically reached on the mainland, with knights or archer-line armies defining the primary engagements.
+
+
+    ## Watch out for
+
+
+    - **Fishing ship vulnerability** — losing your fishing fleet is the single most common early economic collapse on
+    this map.
+
+    - **Migrating too late** — island resources run out before you land, stalling your economy at a critical moment.
+
+    - **Migrating too early without water control** — transport ships destroyed in transit before reaching mainland.
+
+    - **Poor mainland TC location** — landing far from gold or too close to an enemy creates a permanent positional
+    disadvantage.
+
+    - **Playing weak-navy civs without adaptation** — Aztecs need specific tactics such as an early aggressive land rush
+    via transport before enemy navy completes to compensate for naval weakness.
+  tr: >-
+    Migration, her oyuncuyu sınırlı kaynaklara sahip küçük bir adaya yerleştirir — bir altın ve bir taş yatağı,
+    böğürtlenler, koyunlar ve orman — bu kaynaklar nispeten çabuk tükenir. Geniş merkezi kıta, özellikle odun olmak
+    üzere bol kaynak barındırır. Harita bir geçişi zorunlu kılar: bir filo kur, ekonomini sürdürmek için balık avla,
+    ardından ada kaynakları tükenmeden anakaraya göç et. Deniz çatışması ve karaya çıkış zamanlaması, bu haritanın test
+    ettiği temel becerilerdir.
+
+
+    ## Açılış
+
+
+    Karanlık Çağ'da bir Dock inşa et ve 1–2 Dock'ta 8–12 Fishing Ship sıraya koy. Derin balıklar kıyı balıklarından daha
+    uzun sürer — onlara öncelik ver. Balık filonuzu korumak için aynı anda Galley'ler inşa et. Anakaraya erken göçü
+    önceliklendir: Cumans, Feodal Çağ'da ikinci bir TC inşa edebilir ve hâlâ Feodal'dayken kıtaya çıkabilir; bu da
+    önemli bir tempo avantajı sağlar. Diğer medeniyetlerin çoğu, su kontrolünü sağladıktan sonra Kale Çağı'nda göç eder.
+    Göç ederken kıta kıyısına in ve iç bölgelerdeki altın ile taşa erişimi olan savunulabilir bir konumda TC kur.
+
+
+    ## Orta Oyun
+
+
+    Anakarada yerleştikten sonra oyun kara odaklı bir orta oyuna dönüşür. Yiyecek için güçlü kara bonuslarına sahip
+    medeniyetler — Franks'ın toplayıcı bonusu, Maya'nın uzun süren kaynakları, Tatars'ın sürü hayvanları — göçten sonra
+    avantaj kazanır. Merkezi kıta çekişmeli bir bölgedir; erken varan oyuncular daha iyi iç mevziler edinir. Kale
+    Çağı'na genellikle anakarada ulaşılır; Knight'lar ya da okçu hattı orduları temel çatışmaları belirler.
+
+
+    ## Dikkat Et
+
+
+    - **Fishing Ship savunmasızlığı** — balık filonunu kaybetmek bu haritadaki en yaygın erken ekonomik çöküşün tek
+    sebebidir.
+
+    - **Geç göç** — ada kaynakları karaya çıkmadan önce tükenir ve ekonomin kritik bir anda durur.
+
+    - **Su kontrolü olmadan erken göç** — transport gemileri anakaraya ulaşmadan yolda imha edilir.
+
+    - **Kötü anakarada TC konumu** — altından uzak ya da düşmana çok yakın inmek kalıcı bir konum dezavantajı yaratır.
+
+    - **Zayıf donanma medeniyetlerini adaptasyon yapmadan oynamak** — Aztekler, deniz zayıflığını telafi etmek için
+    transport aracılığıyla düşman donanması tamamlanmadan erken agresif bir kara rush gibi özel taktikler gerektirir.

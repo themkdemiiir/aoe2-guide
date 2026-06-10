@@ -1,24 +1,29 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { render } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t as tt } from "@/i18n/utils";
-import { getLocalizedEntries } from "@/lib/content";
+import { marked } from "marked";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
 
-const terms = (await getLocalizedEntries("glossary", lang)).sort((a, b) =>
-  a.data.term.localeCompare(b.data.term),
-);
+const allTerms: CollectionEntry<"glossary">[] = await getCollection("glossary");
+const terms = allTerms.sort((a, b) => a.data.term[lang].localeCompare(b.data.term[lang]));
 
-const rendered = await Promise.all(
-  terms.map(async (term) => ({ data: term.data, ...(await render(term)) })),
-);
+interface RenderedTerm {
+  data: CollectionEntry<"glossary">["data"];
+  html: string;
+}
 
-const grouped = new Map<string, typeof rendered>();
+const rendered: RenderedTerm[] = terms.map((term) => ({
+  data: term.data,
+  html: marked.parse(term.data.definition[lang]) as string,
+}));
+
+const grouped = new Map<string, RenderedTerm[]>();
 for (const term of rendered) {
   const list = grouped.get(term.data.letter) ?? [];
   list.push(term);
@@ -46,8 +51,8 @@ const letters = [...grouped.keys()].sort();
             <dl class="mt-2 space-y-3">
               {grouped.get(l)!.map((term) => (
                 <div>
-                  <dt class="font-display text-lg text-ink">{term.data.term}</dt>
-                  <dd class="prose prose-stone max-w-none"><term.Content /></dd>
+                  <dt class="font-display text-lg text-ink">{term.data.term[lang]}</dt>
+                  <dd class="prose prose-stone max-w-none" set:html={term.html} />
                 </div>
               ))}
             </dl>

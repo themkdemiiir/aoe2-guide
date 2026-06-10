@@ -1,0 +1,12 @@
+slug: war-galley
+name:
+  en: War Galley
+  tr: War Galley
+role:
+  en: naval
+  tr: deniz
+line: galley-line
+lineRank: 2
+description:
+  en: The War Galley is a naval trained at the Dock.
+  tr: War Galley, Dock'ta eğitilen bir deniz birimidir.

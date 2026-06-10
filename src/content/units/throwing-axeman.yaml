@@ -1,0 +1,13 @@
+slug: throwing-axeman
+name:
+  en: Throwing Axeman
+  tr: Throwing Axeman
+role:
+  en: unique unit
+  tr: unique unit
+civ: franks
+line: throwing-axeman-line
+lineRank: 1
+description:
+  en: The Throwing Axeman is a unique unit trained at the Castle.
+  tr: Throwing Axeman, Castle'da eğitilen özgün bir biriktir.

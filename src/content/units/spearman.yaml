@@ -1,0 +1,12 @@
+slug: spearman
+name:
+  en: Spearman
+  tr: Spearman
+role:
+  en: anti-cavalry infantry
+  tr: süvari karşıtı piyade
+line: spearman-line
+lineRank: 1
+description:
+  en: The Spearman is a anti-cavalry infantry trained at the Barracks.
+  tr: Spearman, Barracks'ta eğitilen süvari karşıtı bir piyadedir.

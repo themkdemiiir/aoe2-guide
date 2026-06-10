@@ -1,0 +1,13 @@
+slug: jaguar-warrior
+name:
+  en: Jaguar Warrior
+  tr: Jaguar Warrior
+role:
+  en: unique unit
+  tr: unique unit
+civ: aztecs
+line: jaguar-warrior-line
+lineRank: 1
+description:
+  en: The Jaguar Warrior is a unique unit trained at the Castle.
+  tr: Jaguar Warrior, Castle'da eğitilen özgün bir birlikdir.

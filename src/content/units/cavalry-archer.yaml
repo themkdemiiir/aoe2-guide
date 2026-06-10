@@ -1,0 +1,12 @@
+slug: cavalry-archer
+name:
+  en: Cavalry Archer
+  tr: Cavalry Archer
+role:
+  en: mounted archer
+  tr: atlı okçu
+line: cavalry-archer-line
+lineRank: 1
+description:
+  en: The Cavalry Archer is a mounted archer trained at the Archery Range.
+  tr: Cavalry Archer, Archery Range'de eğitilen bir atlı okçudur.

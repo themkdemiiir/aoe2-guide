@@ -63,29 +63,38 @@ const buildOrders = defineCollection({
 });
 
 const units = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/units", generateId: pathId }),
+  loader: glob({
+    pattern: "*.{yaml,yml}",
+    base: "./src/content/units",
+    generateId: ({ entry }) => entry.replace(/\.(yaml|yml)$/i, ""),
+  }),
   schema: z.object({
     slug: z.string(),
-    name: z.string(),
-    role: z.string(),
+    name: localizedString,
+    role: localizedString,
     civ: z.string().optional(),
     line: z.string().optional(),
     lineRank: z.number().optional(),
+    description: localizedString.optional(),
   }),
 });
 
 const teamCompSlot = z
   .object({
     civs: z.array(z.string()),
-    strategy: z.string(),
+    strategy: localizedString,
   })
   .optional();
 
 const maps = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/maps", generateId: pathId }),
+  loader: glob({
+    pattern: "*.{yaml,yml}",
+    base: "./src/content/maps",
+    generateId: ({ entry }) => entry.replace(/\.(yaml|yml)$/i, ""),
+  }),
   schema: z.object({
     slug: z.string(),
-    name: z.string(),
+    name: localizedString,
     type: z.enum(["open", "closed", "hybrid", "water", "nomad"]),
     size: z.enum(["tiny", "small", "medium", "large"]).optional(),
     recommendedCivs: z.array(z.string()),
@@ -95,6 +104,7 @@ const maps = defineCollection({
         "4v4": z.object({ flank: teamCompSlot, pocket: teamCompSlot }).optional(),
       })
       .optional(),
+    body: localizedString.optional(),
   }),
 });
 
@@ -109,11 +119,16 @@ const beginner = defineCollection({
 });
 
 const glossary = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/glossary", generateId: pathId }),
+  loader: glob({
+    pattern: "*.{yaml,yml}",
+    base: "./src/content/glossary",
+    generateId: ({ entry }) => entry.replace(/\.(yaml|yml)$/i, ""),
+  }),
   schema: z.object({
     slug: z.string(),
-    term: z.string(),
+    term: localizedString,
     letter: z.string(),
+    definition: localizedString,
   }),
 });
 

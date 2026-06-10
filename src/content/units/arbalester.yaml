@@ -1,0 +1,12 @@
+slug: arbalester
+name:
+  en: Arbalest
+  tr: Arbalest
+role:
+  en: ranged infantry
+  tr: menzilli piyade
+line: archer-line
+lineRank: 3
+description:
+  en: The Arbalest is a ranged infantry trained at the Archery Range.
+  tr: Arbalest, Archery Range'de eğitilen menzilli bir piyadedir.

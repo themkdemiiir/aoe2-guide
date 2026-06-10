@@ -1,0 +1,12 @@
+slug: heavy-demolition-ship
+name:
+  en: Heavy Demolition Ship
+  tr: Heavy Demolition Ship
+role:
+  en: naval suicide
+  tr: deniz intihar
+line: demolition-line
+lineRank: 3
+description:
+  en: The Heavy Demolition Ship is a naval suicide trained at the Dock.
+  tr: Heavy Demolition Ship, Dock'ta eğitilen bir deniz intihar birimidir.

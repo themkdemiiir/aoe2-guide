@@ -1,0 +1,13 @@
+slug: huskarl
+name:
+  en: Huskarl
+  tr: Huskarl
+role:
+  en: unique unit
+  tr: özgün birim
+civ: goths
+line: huskarl-line
+lineRank: 1
+description:
+  en: The Huskarl is a unique unit trained at the Castle.
+  tr: Huskarl, Castle'da eğitilen bir özgün birimdir.

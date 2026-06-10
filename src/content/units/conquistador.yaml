@@ -1,0 +1,13 @@
+slug: conquistador
+name:
+  en: Conquistador
+  tr: Conquistador
+role:
+  en: unique unit
+  tr: özgün birim
+civ: spanish
+line: conquistador-line
+lineRank: 1
+description:
+  en: The Conquistador is a unique unit trained at the Castle.
+  tr: Conquistador, Castle'da eğitilen bir özgün birimdir.

@@ -1,0 +1,12 @@
+slug: onager
+name:
+  en: Onager
+  tr: Onager
+role:
+  en: siege
+  tr: kuşatma
+line: mangonel-line
+lineRank: 2
+description:
+  en: The Onager is a siege trained at the Siege Workshop.
+  tr: Onager, Siege Workshop'ta eğitilen bir kuşatma silahıdır.

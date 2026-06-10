@@ -1,0 +1,12 @@
+slug: bombard-cannon
+name:
+  en: Bombard Cannon
+  tr: Bombard Cannon
+role:
+  en: siege gunpowder
+  tr: barut kuşatma silahı
+line: bombard-cannon-line
+lineRank: 1
+description:
+  en: The Bombard Cannon is a siege gunpowder trained at the Siege Workshop.
+  tr: Bombard Cannon, Siege Workshop'ta eğitilen bir barut kuşatma silahıdır.

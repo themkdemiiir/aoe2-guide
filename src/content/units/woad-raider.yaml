@@ -1,0 +1,13 @@
+slug: woad-raider
+name:
+  en: Woad Raider
+  tr: Woad Raider
+role:
+  en: unique unit
+  tr: unique unit
+civ: celts
+line: woad-raider-line
+lineRank: 1
+description:
+  en: The Woad Raider is a unique unit trained at the Castle.
+  tr: Woad Raider, Castle'da eğitilen özgün bir birlikdir.

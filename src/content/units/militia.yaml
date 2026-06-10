@@ -1,0 +1,12 @@
+slug: militia
+name:
+  en: Militia
+  tr: Militia
+role:
+  en: melee infantry
+  tr: yakın dövüş piyadesi
+line: militia-line
+lineRank: 1
+description:
+  en: The Militia is a melee infantry trained at the Barracks.
+  tr: Militia, Barracks'ta eğitilen bir yakın dövüş piyadesidir.

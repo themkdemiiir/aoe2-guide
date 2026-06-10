@@ -1,0 +1,13 @@
+slug: janissary
+name:
+  en: Janissary
+  tr: Janissary
+role:
+  en: unique unit
+  tr: unique unit
+civ: turks
+line: janissary-line
+lineRank: 1
+description:
+  en: The Janissary is a unique unit trained at the Castle.
+  tr: Janissary, Castle'da eğitilen özgün bir birlikdir.

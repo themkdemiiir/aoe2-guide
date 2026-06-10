@@ -1,0 +1,12 @@
+slug: fishing-ship
+name:
+  en: Fishing Ship
+  tr: Fishing Ship
+role:
+  en: economic naval
+  tr: ekonomik deniz
+line: fishing-ship-line
+lineRank: 1
+description:
+  en: The Fishing Ship is a economic naval trained at the Dock.
+  tr: Fishing Ship, Dock'ta eğitilen ekonomik bir deniz birimidir.

@@ -1,0 +1,12 @@
+slug: fast-fire-ship
+name:
+  en: Fast Fire Ship
+  tr: Fast Fire Ship
+role:
+  en: anti-ship naval
+  tr: gemi karşıtı deniz
+line: fire-ship-line
+lineRank: 3
+description:
+  en: The Fast Fire Ship is a anti-ship naval trained at the Dock.
+  tr: Fast Fire Ship, Dock'ta eğitilen bir gemi karşıtı deniz birimidir.

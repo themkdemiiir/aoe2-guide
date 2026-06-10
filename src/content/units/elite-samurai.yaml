@@ -1,0 +1,13 @@
+slug: elite-samurai
+name:
+  en: Elite Samurai
+  tr: Elite Samurai
+role:
+  en: unique unit
+  tr: unique unit
+civ: japanese
+line: samurai-line
+lineRank: 2
+description:
+  en: The Elite Samurai is a unique unit trained at the Castle.
+  tr: Elite Samurai, Castle'da eğitilen özgün bir birlikdir.

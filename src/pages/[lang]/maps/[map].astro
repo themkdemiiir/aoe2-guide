@@ -1,42 +1,32 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { render } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
-import { getLocalizedEntries, canonicalSlug, getLocalizedEntry } from "@/lib/content";
 import iconMap from "@data/icon-map.json";
+import { marked } from "marked";
 
 export async function getStaticPaths() {
-  const paths: Array<{ params: { lang: string; map: string } }> = [];
-  for (const lang of locales) {
-    const maps = await getLocalizedEntries("maps", lang);
-    for (const m of maps) paths.push({ params: { lang, map: canonicalSlug(m.id) } });
-  }
-  return paths;
+  const maps: CollectionEntry<"maps">[] = await getCollection("maps");
+  return locales.flatMap((lang) => maps.map((m) => ({ params: { lang, map: m.id } })));
 }
 
 const lang = Astro.params.lang as Locale;
 const slug = Astro.params.map as string;
-const found = await getLocalizedEntry("maps", slug, lang);
-if (!found) return Astro.redirect("/404");
-const { entry, fallback } = found;
-const { Content } = await render(entry);
+const entry = (await getCollection("maps") as CollectionEntry<"maps">[]).find((m) => m.id === slug);
+if (!entry) return Astro.redirect("/404");
+
+const bodyHtml = entry.data.body?.[lang] ? (marked.parse(entry.data.body[lang]) as string) : "";
 const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
 
 function displayName(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ");
 }
 ---
-<BaseLayout title={entry.data.name} canonicalPath={`/maps/${slug}`}>
+<BaseLayout title={entry.data.name[lang]} canonicalPath={`/maps/${slug}`}>
   <article class="mx-auto max-w-3xl px-4 py-12">
-    {fallback && (
-      <div class="mb-6 rounded border border-royal/40 bg-royal/10 px-3 py-2 text-sm text-royal">
-        {t(lang, "ui.translation.missing")}
-      </div>
-    )}
-
     <header class="mb-8">
-      <h1 class="font-display text-4xl text-ink">{entry.data.name}</h1>
+      <h1 class="font-display text-4xl text-ink">{entry.data.name[lang]}</h1>
       <p class="mt-1 text-sm capitalize text-stone-700">
         {entry.data.type}{entry.data.size ? ` · ${entry.data.size}` : ""}
       </p>
@@ -92,7 +82,7 @@ function displayName(s: string) {
                           </li>
                         ))}
                       </ul>
-                      <p class="text-sm leading-relaxed text-stone-700">{data.strategy}</p>
+                      <p class="text-sm leading-relaxed text-stone-700">{data.strategy[lang]}</p>
                     </div>
                   ) : null,
                 )}
@@ -103,6 +93,8 @@ function displayName(s: string) {
       </section>
     )}
 
-    <section class="prose prose-stone max-w-none"><Content /></section>
+    {bodyHtml && (
+      <section class="prose prose-stone max-w-none" set:html={bodyHtml} />
+    )}
   </article>
 </BaseLayout>

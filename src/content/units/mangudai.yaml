@@ -1,0 +1,13 @@
+slug: mangudai
+name:
+  en: Mangudai
+  tr: Mangudai
+role:
+  en: unique unit
+  tr: unique unit
+civ: mongols
+line: mangudai-line
+lineRank: 1
+description:
+  en: The Mangudai is a unique unit trained at the Castle.
+  tr: Mangudai, Castle'da eğitilen özgün bir birliktir.

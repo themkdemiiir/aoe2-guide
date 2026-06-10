@@ -1,0 +1,12 @@
+slug: galley
+name:
+  en: Galley
+  tr: Galley
+role:
+  en: naval
+  tr: deniz
+line: galley-line
+lineRank: 1
+description:
+  en: The Galley is a naval trained at the Dock.
+  tr: Galley, Dock'ta eğitilen bir deniz birimidir.

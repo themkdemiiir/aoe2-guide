@@ -1,0 +1,12 @@
+slug: scout-cavalry
+name:
+  en: Scout Cavalry
+  tr: Scout Cavalry
+role:
+  en: light cavalry
+  tr: hafif süvari
+line: scout-line
+lineRank: 1
+description:
+  en: The Scout Cavalry is a light cavalry trained at the Stable.
+  tr: Scout Cavalry, Stable'da eğitilen hafif bir süvaridir.

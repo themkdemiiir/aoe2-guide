@@ -1,0 +1,12 @@
+slug: transport-ship
+name:
+  en: Transport Ship
+  tr: Transport Ship
+role:
+  en: utility naval
+  tr: yardımcı deniz
+line: transport-ship-line
+lineRank: 1
+description:
+  en: The Transport Ship is a utility naval trained at the Dock.
+  tr: Transport Ship, Dock'ta eğitilen yardımcı bir deniz birimidir.

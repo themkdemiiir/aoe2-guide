@@ -1,0 +1,155 @@
+slug: hill-fort
+name:
+  en: Hill Fort
+  tr: Hill Fort
+type: hybrid
+recommendedCivs:
+  - aztecs
+  - britons
+  - teutons
+  - lithuanians
+  - bohemians
+teamComps:
+  2v2:
+    flank:
+      civs:
+        - britons
+        - mayans
+        - ethiopians
+        - celts
+      strategy:
+        en: >-
+          Archer civs use the elevated terrain for bonus damage. Holding the high ground with Crossbows makes any uphill
+          assault very costly for the enemy.
+        tr: >-
+          Okçu uygarlıkları yüksek araziyi bonus hasar için kullanır. Crossbow'larla yüksek zemini tutmak, düşmanın
+          yukarı doğru saldırısını çok maliyetli hale getirir.
+    pocket:
+      civs:
+        - franks
+        - lithuanians
+        - aztecs
+        - bohemians
+      strategy:
+        en: >-
+          Pocket booms on the fortified hill and pushes with Knights or unique units. Lithuanians and Franks field the
+          strongest cavalry to exploit the safe economy.
+        tr: >-
+          Pocket, tahkimatlı tepede boom yapıp Knight'lar veya özgün birimlerle baskı kurar. Lithuanians ve Franks,
+          güvenli ekonomiyi sömürmek için en güçlü süvariyi çıkarır.
+  4v4:
+    flank:
+      civs:
+        - britons
+        - mayans
+        - ethiopians
+        - koreans
+      strategy:
+        en: >-
+          Flanks hold the high ground with massed archers and towers — elevation gives a permanent damage edge in every
+          fight.
+        tr: >-
+          Flanklar yüksek zemini yığın okçular ve kulelerle tutar — yükselti her savaşta kalıcı bir hasar avantajı
+          sağlar.
+    pocket:
+      civs:
+        - franks
+        - lithuanians
+        - bohemians
+        - aztecs
+      strategy:
+        en: Pockets boom hard on the hill and convert the lead into Knights, unique units, or Imperial gunpowder.
+        tr: >-
+          Pocket'lar tepede sert boom yapar ve bu avantajı Knight'lara, özgün birimlere ya da İmparatorluk çağı barut
+          birliklerine çevirir.
+body:
+  en: >-
+    Hill Fort places each player on top of a hill enclosed by Fortified Palisade Walls — a special variant that cannot
+    be rebuilt by players once destroyed. High ground provides an attack bonus for units shooting or firing downward.
+    Two strategic arcs exist: fast Castle boom with a defensive posture exploiting high ground, or an early Feudal Age
+    archer and Men-at-Arms push designed specifically to crack the Fortified Palisade Walls before the enemy booms
+    safely. Map control below the hills becomes the contested mid-game battleground.
+
+
+    ## Opening
+
+
+    Fortified Palisades provide a safety window similar to Hideout, enabling a Fast Castle approach. However, the
+    special walls cannot be rebuilt — this makes Feudal aggression potentially more decisive than on other closed maps.
+    An archer plus Men-at-Arms combination in Feudal Age can breach the wall, and once it is gone the opponent's hill
+    advantage is significantly mitigated. Scout to identify whether the enemy is investing in Feudal military or pure
+    economy. Relic locations and gold sources outside the hill area are key Dark Age scouting objectives.
+
+
+    ## Mid game
+
+
+    Castle Age involves knight raids off the hill to contest lower-ground resources, combined with a Castle placed at
+    the hill's edge covering wall breach points. Civs with strong unique units benefit from high-ground positioning —
+    Teutons (cheap farms, conversion resistance), Britons (downhill crossbow range), Bohemians (monk-and-siege). In
+    Imperial Age, Trebuchets become the primary push tool, lobbing shots from the elevation bonus provided by the hill.
+
+
+    ## Watch out for
+
+
+    - **Not defending Feudal archer and MAA breaches** — the Fortified Palisade cannot be rebuilt; losing it in Feudal
+    Age means fighting from Imperial Age without your hill enclosure.
+
+    - **Overcommitting to a downhill rush** — attacking off your hill means sacrificing the elevation attack bonus that
+    defines your defensive strength.
+
+    - **Playing weak-wall cavalry civs (Berbers, Huns, Tatars)** — these struggle specifically because the map punishes
+    poor wall defense and rewards elevation bonuses they cannot exploit.
+
+    - **Losing map control below the hill** — an opponent settling lowland resources can siege your position from close
+    range with Trebuchets.
+
+    - **Ignoring relic pickup in the lowlands** — relics are outside the starting enclosure and require active cavalry
+    collection on Castle Age arrival.
+  tr: >-
+    Hill Fort, her oyuncuyu Fortified Palisade Walls ile çevrili bir tepenin üzerine yerleştirir — bu özel duvarlar bir
+    kez yıkıldığında oyuncular tarafından yeniden inşa edilemez. Yüksek zemin, aşağıya doğru ateş eden birimlere saldırı
+    bonusu sağlar. İki stratejik yol vardır: yüksek zemini kullanan savunma ağırlıklı hızlı Castle boom'u ya da
+    Fortified Palisade Walls'ı düşman güvenle boom yapmadan kırmak için tasarlanmış erken Feodal Çağ okçu ve Man-at-Arms
+    baskısı. Tepelerin altındaki harita kontrolü, çekişmeli orta oyun savaş alanına dönüşür.
+
+
+    ## Açılış
+
+
+    Fortified Palisade'ler, Hideout'a benzer bir güvenlik penceresi sağlar ve Hızlı Castle yaklaşımına olanak tanır.
+    Ancak özel duvarlar yeniden inşa edilemez — bu durum, Feodal saldırganlığı diğer kapalı haritalara kıyasla çok daha
+    belirleyici kılar. Feodal Çağ'da okçu ile Man-at-Arms kombinasyonu duvarı delebilir; duvar düştüğünde rakibin tepe
+    avantajı önemli ölçüde azalır. Düşmanın Feodal askeri mi yoksa salt ekonomiye mi yatırım yaptığını anlamak için
+    keşif yap. Relic konumları ve tepe dışındaki altın kaynakları, Karanlık Çağ keşfinin temel hedefleridir.
+
+
+    ## Orta Oyun
+
+
+    Kale Çağı, düşük zemindeki kaynakları ele geçirmek için tepeden Knight akıncı baskıları ve tepenin kenarına
+    yerleştirilen bir Castle'ın duvar açık noktalarını kapatmasını içerir. Güçlü özgün birimlere sahip uygarlıklar
+    yüksek zemin konumlandırmasından yararlanır — Teutons (ucuz tarlalar, dönüştürme direnci), Britons (aşağı doğru
+    Crossbow menzili), Bohemians (rahip ve mancınık). İmparatorluk Çağı'nda Trebuchet'ler, tepenin sağladığı yükselti
+    bonusundan faydalanarak atış yapan birincil baskı aracı haline gelir.
+
+
+    ## Dikkat Edilmesi Gerekenler
+
+
+    - **Feodal okçu ve MAA açıklarını savunmamak** — Fortified Palisade yeniden inşa edilemez; Feodal Çağ'da
+    kaybedilirse İmparatorluk Çağı'nı tepe çevresi olmadan geçirmek zorunda kalırsın.
+
+    - **Aşağı doğru rush'a aşırı kaynak ayırmak** — tependen aşağı saldırmak, savunma gücünü tanımlayan yükselti saldırı
+    bonusunu feda etmek demektir.
+
+    - **Zayıf duvarlı süvari uygarlıkları oynamak (Berbers, Huns, Tatars)** — harita zayıf duvar savunmasını
+    cezalandırdığından ve bu uygarlıkların sömüremeyeceği yükselti bonusunu ödüllendirdiğinden bu uygarlıklar özellikle
+    zorlanır.
+
+    - **Tepe altındaki harita kontrolünü kaybetmek** — alçak arazideki kaynakları ele geçiren bir rakip, yakın mesafeden
+    Trebuchet'lerle konumunu kuşatabilir.
+
+    - **Alçak arazideki relic'leri toplamayı ihmal etmek** — relic'ler başlangıç çevresinin dışındadır ve Kale Çağı'na
+    ulaşınca aktif süvari koleksiyonu gerektirir.

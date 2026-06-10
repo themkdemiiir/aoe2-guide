@@ -1,0 +1,12 @@
+slug: hussar
+name:
+  en: Hussar
+  tr: Hussar
+role:
+  en: light cavalry
+  tr: hafif süvari
+line: scout-line
+lineRank: 3
+description:
+  en: The Hussar is a light cavalry trained at the Stable.
+  tr: Hussar, Stable'da eğitilen hafif bir süvaridir.

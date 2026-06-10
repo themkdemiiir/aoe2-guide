@@ -1,0 +1,12 @@
+slug: scorpion
+name:
+  en: Scorpion
+  tr: Scorpion
+role:
+  en: siege
+  tr: siege
+line: scorpion-line
+lineRank: 1
+description:
+  en: The Scorpion is a siege trained at the Siege Workshop.
+  tr: Scorpion, Siege Workshop'ta eğitilen bir kuşatma birimidir.

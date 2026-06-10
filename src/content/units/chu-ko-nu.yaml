@@ -1,0 +1,13 @@
+slug: chu-ko-nu
+name:
+  en: Chu Ko Nu
+  tr: Chu Ko Nu
+role:
+  en: unique unit
+  tr: unique unit
+civ: chinese
+line: chu-ko-nu-line
+lineRank: 1
+description:
+  en: The Chu Ko Nu is a unique unit trained at the Castle.
+  tr: Chu Ko Nu, Castle'da eğitilen bir özgün birimdir.

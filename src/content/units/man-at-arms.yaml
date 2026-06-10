@@ -1,0 +1,12 @@
+slug: man-at-arms
+name:
+  en: Man-at-Arms
+  tr: Man-at-Arms
+role:
+  en: melee infantry
+  tr: yakın dövüş piyadesi
+line: militia-line
+lineRank: 2
+description:
+  en: The Man-at-Arms is a melee infantry trained at the Barracks.
+  tr: Man-at-Arms, Barracks'ta eğitilen bir yakın dövüş piyadesidir.

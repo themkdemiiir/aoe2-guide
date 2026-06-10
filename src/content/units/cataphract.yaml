@@ -1,0 +1,13 @@
+slug: cataphract
+name:
+  en: Cataphract
+  tr: Cataphract
+role:
+  en: unique unit
+  tr: özgün birlik
+civ: byzantines
+line: cataphract-line
+lineRank: 1
+description:
+  en: The Cataphract is a unique unit trained at the Castle.
+  tr: Cataphract, Castle'da eğitilen özgün bir birliktir.
