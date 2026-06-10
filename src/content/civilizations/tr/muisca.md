@@ -26,6 +26,4 @@ Muisca, Güney Amerika'dan bir Altın ve Piyade uygarlığıdır.
 
 **Önerilen build:** [18 Pop Double Barracks Eagles](/en/builds/18pop-double-barracks-eagles)
 
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*
-
 *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz eklenmedi.)*

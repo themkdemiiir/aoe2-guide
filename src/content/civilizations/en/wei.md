@@ -24,4 +24,4 @@ Wei are a Cavalry civilization from East Asia.
 
 **Recommended build:** [18 Pop Scout Rush](/en/builds/18pop-scouts)
 
-*Hera's "every civ" guides don't yet cover this Three Kingdoms civ — opening synthesized from its bonuses.*
+*Opening synthesized from this Three Kingdoms civ's bonuses; a fuller guide is coming.*

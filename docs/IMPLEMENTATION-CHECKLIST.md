@@ -14,7 +14,7 @@
 6. **Measured i18n gap:** 70/232 TR files translated → **162 missing** (89 units, 52 civs, 13 maps, 8 build-orders). `src/content/civilizations/tr/` contains only `britons.md`. Zero byte-identical files currently (the fallback gap is *missing files* + *data-JSON strings*).
 
 ## Already good — do NOT touch
-`output: static` · ClientRouter + hover prefetch · theme-before-paint inline script · `_headers` (immutable `/_astro/*`, `/images/*` 30d SWR, `/fonts/*` immutable, security headers, CSP report-only) · Cloudflare Web Analytics · Biome · Knip · Vitest · Playwright (local) · `validate-icons` / `verify-build-facts` prebuild · `check:translations` script · `tsconfig` extends `astro/tsconfigs/strict` · `.github/prompts/` convention (`translation-audit.prompt.md` etc.) · 36 build orders re-sourced from Hera (EN+TR) · per-civ "How to Play" (53 civs).
+`output: static` · ClientRouter + hover prefetch · theme-before-paint inline script · `_headers` (immutable `/_astro/*`, `/images/*` 30d SWR, `/fonts/*` immutable, security headers, CSP report-only) · Cloudflare Web Analytics · Biome · Knip · Vitest · Playwright (local) · `validate-icons` / `verify-build-facts` prebuild · `check:translations` script · `tsconfig` extends `astro/tsconfigs/strict` · `.github/prompts/` convention (`translation-audit.prompt.md` etc.) · 36 build orders re-sourced from a pro player's build guide (EN+TR) · per-civ "How to Play" (53 civs).
 
 ---
 
@@ -41,7 +41,7 @@
 ## Epic 4 — Meta/tier data & patch currency
 
 - [ ] **P0·S [OPEN]** Stop the homepage claiming "current". `src/i18n/ui.ts:66` `home.topCivs.subtitle: "Ranked by current ladder win rate."` and `:195` TR `"Güncel sıralama…"`. Given delta #1, decide:
-  - **(a) Editorial tier** (recommended): hand-set tiers (you already synthesize from Hera), reword to "Editorial tier list — updated for patch 177723", drop the winRate ranking on the homepage; **or**
+  - **(a) Editorial tier** (recommended): hand-set tiers (you already synthesize from a pro player's build guide), reword to "Editorial tier list — updated for patch 177723", drop the winRate ranking on the homepage; **or**
   - **(b) Honest snapshot**: keep the scraped numbers but stamp them "patch 162286 snapshot (Dec 2025)" — and accept that the Naval Overhaul + Last Chieftains make a Dec-2025 winrate ranking actively misleading in June 2026. (a) is the defensible choice.
 - [ ] **P0·S [NEW]** Fix the misleading stamp either way: `metaLastFetched: 2026-05-23` in `civilizations.json` is a scrape date on frozen patch-162286 data. Rename/split: `metaPatch: "162286"`, `metaDataThrough: "~2026-02-08"`, `scrapedAt: "2026-05-23"`. Distinguish from the game-data patch (`patch: v100.1.84` from techtree).
 - [ ] **P0·M [NEW]** **Patch-currency sweep to build 177723.** Re-run `sync:game-data` / `build:units` / `build:facts` against current `aoe2techtree` data (confirm upstream is updated for 177723 first), then audit **naval content specifically**: update 169123's Naval Overhaul (Hulk line vs Fire Ships, Catapult Galleons, dock bonuses) touches unit lines, counters, and any water build orders the site documents. Add a CI-visible "data synced for patch X" stamp to the footer or About page.

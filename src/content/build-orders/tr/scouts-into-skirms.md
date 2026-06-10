@@ -21,9 +21,6 @@ steps:
   - { assign: "Rakip Archers'a tam yöneldiğinde hızlıca Range kur; 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla", icons: ["archery-range", "skirmisher", "wood"] }
   - { assign: "Blacksmith kur; Fletching ve piyade zırhını araştır", icons: ["blacksmith", "fletching"] }
   - { assign: "Meyve bitince → ikinci lumber camp; 6 köylüyü → altına ve Mining Camp'e taşı; Wheelbarrow araştır", icons: ["lumber-camp", "gold", "mining-camp", "wheelbarrow"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Köylü Scouts into Skirms

@@ -28,5 +28,3 @@ Burmese, Güneydoğu Asya kökenli bir Rahip ve Fil uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Hasar çekirdeği olarak Arambai duvarı yığ, önlerine Halberdier'larla ekran kur, Monk'larla destek ver ve binaları kırmak için Bombard Cannon getir — daha ağır bir ön hat istediğinde Battle Elephant'lar güçlü bir alternatif çapa olabilir.
 
 **Önerilen build:** [18 Pop Feudal Drush](/tr/builds/18pop-feudal-drush)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

@@ -21,9 +21,6 @@ steps:
   - { assign: "Build the first tower ~8 tiles from their woodline or berries", icons: ["watch-tower"] }
   - { assign: "+2 forward vils build houses for supply; garrison up to 10 vils per tower", icons: ["house", "watch-tower"] }
   - { assign: "Chain new towers 6–8 tiles apart, walking deeper into their economy", icons: ["watch-tower"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 17 Pop Teuton Tower Rush

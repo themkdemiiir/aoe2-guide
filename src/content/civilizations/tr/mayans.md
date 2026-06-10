@@ -27,5 +27,3 @@ Mayans, Mezoamerika'dan bir Okçu uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** El Dorado ile güçlendirilmiş Elite Eagle Warrior'ları dayanıklı ve etkili akıncı olarak kullan, yığın Plumed Archer'larla menzilli ateş gücü ekle ve duvarlarla tahkimatları aşmak için Siege Ram ya da Trebuchet koy.
 
 **Önerilen build:** [Eagle Range Feudal](/en/builds/eagle-range-feudal)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

@@ -26,6 +26,4 @@ Armenians, Kafkasya'dan gelen bir Piyade ve Süvari uygarlığıdır.
 
 **Önerilen build:** [Armenian Spear into Fast Castle Relic](/en/builds/armenian-spear-fc-relic)
 
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*
-
 *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz kapsanmamıştır.)*

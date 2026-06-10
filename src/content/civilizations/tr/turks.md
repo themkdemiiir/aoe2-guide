@@ -28,5 +28,3 @@ Turks, Orta Doğu'dan bir Barut uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Hussar'larla korunan ve Bombard Cannon'larla desteklenen Heavy Cavalry Archer'larla ilerle — statik savunmaları ezen dayanıklı, çok hasarlı bir top.
 
 **Önerilen build:** [28 Pop Turks Fast Imp](/en/builds/28pop-turks-fast-imp)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

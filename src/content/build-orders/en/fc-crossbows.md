@@ -15,8 +15,6 @@ steps:
   - { villagers: 26, assign: "+6; click Castle Age at ~26 pop; add farms during", icons: ["farm"] }
   - { villagers: 28, assign: "Castle: build 2 Archery Ranges; research Crossbow immediately", icons: ["archery-range", "crossbowman"] }
   - { villagers: 30, assign: "+2 → gold; add farms continuously", icons: ["gold", "farm"] }
-source:
-  author: "Hera"
 ---
 
 # Fast Castle into Crossbows

@@ -28,5 +28,3 @@ Poles, Doğu Avrupa'dan bir Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Obuch'u Arbalest'ler ve Bombard Cannon'larla yığ; son atılım için Monk'lar ve Winged Hussar ile tamamla.
 
 **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

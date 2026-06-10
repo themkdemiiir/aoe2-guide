@@ -29,5 +29,3 @@ Dravidians, Güney Asya'dan bir Yaya ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Kapalı haritalarda Halberdier duvarının arkasına kitlesel Elephant Archer (Okçu Talimhanesi'nden alınabilir) diz, Urumi Swordsman ekle ve düşman düzenini bozmak için Siege Onager, Trebuchet ya da Bombard Cannon getir.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

@@ -20,9 +20,6 @@ steps:
   - { assign: "Train Skirmishers and move them forward; seed 14-16 farms as hunt food runs out", icons: ["skirmisher", "farm"] }
   - { assign: "Move 7 villagers → gold and drop a Mining Camp", icons: ["gold", "mining-camp"] }
   - { assign: "Build a Blacksmith and research Fletching; wall up, then transition to Castle Age", icons: ["blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Korean Spear Skirm Rush

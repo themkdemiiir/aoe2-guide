@@ -17,9 +17,6 @@ steps:
   - { villagers: 28, assign: "Mill on berries; Blacksmith + Fletching; +vills → berries", icons: ["mill", "fletching", "food"] }
   - { villagers: 34, assign: "Wheelbarrow; pull wood vills to Farms; new vills → farms", icons: ["wheelbarrow", "farm"] }
   - { villagers: 35, assign: "+1 → gold; click Castle Age with Fire Galleys + Archers pushing", icons: ["gold", "fire-galley"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/fire-galleys-and-archers"
 ---
 
 # Fire Galleys and Archers

@@ -69,7 +69,7 @@ Button serializing steps to plain text (`6 vill — 6 → sheep under the TC …
 ## P2 — needs a (small) data addition
 
 ### 2.1 Eco-allocation bar
-A sticky "13 food / 3 wood / 0 gold" bar per phase. The allocation exists only in prose today (`note: "Land with roughly 3 on wood and 13 on food"`) — **do not parse prose for numbers** (accuracy rule). Add an optional `eco: { food?, wood?, gold?, stone? }` field on age-landing steps only; render the bar when present. Backfill from Hera's source during the Epic 9 translation pass (you're touching every file anyway).
+A sticky "13 food / 3 wood / 0 gold" bar per phase. The allocation exists only in prose today (`note: "Land with roughly 3 on wood and 13 on food"`) — **do not parse prose for numbers** (accuracy rule). Add an optional `eco: { food?, wood?, gold?, stone? }` field on age-landing steps only; render the bar when present. Backfill from the source guide's source during the Epic 9 translation pass (you're touching every file anyway).
 
 ### 2.2 PWA / offline builds (optional library: `@vite-pwa/astro`, MIT, free)
 Service worker precaching `/builds/**` + icons so the trainer works offline at LANs. The **only** library this whole document needs, and it's optional. Defer until after 1.1–1.4 prove out.

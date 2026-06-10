@@ -28,5 +28,3 @@ Malay, Güneydoğu Asya'dan bir Deniz uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ön hat olarak iskontolu Battle Elephant'ları toplu yığ, Arbalest ile destekle, Monk ile sürdür ve kilit hedefleri Bombard Cannon ile temizle.
 
 **Önerilen build:** [Malay Flexible Opening](/en/builds/malay-flexible-opening)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

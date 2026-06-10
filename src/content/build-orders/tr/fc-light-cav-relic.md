@@ -20,9 +20,6 @@ steps:
   - { assign: "Bir Pazar ekle ve 2 köylü gönder; Kale tıklaması için odun ve altını dengele", icons: ["market"] }
   - { phase: castle, time: "14:50", assign: "Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır", icons: ["double-bit-axe", "horse-collar"] }
   - { villagers: 27, assign: "Kale: 4 inşaatçı → tek ağaçlara; daha fazla tarla kur; 2-3 atlı kâşif eğit ve hemen bir Manastır kur; Bow Saw; gücün yettiğinde bir ŞM ekle; yalnızca rekabet varsa Light Cav üret", icons: ["monastery", "bow-saw", "town-center", "light-cavalry", "monk"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Fast Castle Light Cav Relic Control

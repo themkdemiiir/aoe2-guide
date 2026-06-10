@@ -24,4 +24,4 @@ Shu are an Infantry civilization from East Asia.
 
 **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
 
-*Hera's "every civ" guides don't yet cover this Three Kingdoms civ — opening synthesized from its bonuses.*
+*Opening synthesized from this Three Kingdoms civ's bonuses; a fuller guide is coming.*

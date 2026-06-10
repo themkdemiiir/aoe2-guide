@@ -27,5 +27,3 @@ Vikings, Kuzey Avrupa'dan bir Piyade ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ön cephe olarak Berserk kalabalığı kur, yığılmış birlikleri ve piyadeleyi parçalamak için Heavy Scorpion ekle, ilerlerken binaları yıkmak için Trebuchet'ler getir.
 
 **Önerilen build:** [18 Pop Feudal Drush](/tr/builds/18pop-feudal-drush)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

@@ -28,5 +28,3 @@ Aztecs, Mezoamerika'dan bir Piyade ve Keşiş uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ön safta ağır Garland Wars piyadeleri — Champion'lar, Jaguar Warrior'lar ve Pikemen'ler — yığ; arkalarına kutsal emanet ve dönüştürme için Monk'lar koy. Menzilli vuruş için Siege Workshop genitour'ları ya da Trebuchet ekle; bina ve kuşatma araçlarını kırmak için Bombard Cannon kullan.
 
 **Önerilen build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

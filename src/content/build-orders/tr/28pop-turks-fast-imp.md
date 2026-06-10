@@ -21,9 +21,6 @@ steps:
   - { villagers: 32, assign: "Castle: inşaatçılar → Farm, Gold Mining araştır; Siege Workshop + Manastır kur", icons: ["siege-workshop", "monastery", "gold-mining"] }
   - { time: "20:05", phase: imperial, assign: "İkinci Mining Camp kur, Imperial Age'e tıkla", icons: ["imperial-age", "mining-camp"] }
   - { assign: "Imperial: odun al, Barracks + 2 Archery Range kur; El Topçusu + 1-2 Bombard Cannon yığ", icons: ["archery-range", "hand-cannoneer", "bombard-cannon"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 28 Köylü Türkler Erken İmparatorluk

@@ -28,5 +28,3 @@ Japanese are an Infantry civilization from East Asia.
 **Deathball composition (closed maps / team games):** Mass Halberdier and Arbalest behind a wall of Onagers, with Trebuchets to crack buildings. The Siege Engineers bonus extends siege range, letting your Onagers and Trebs out-range enemy fortifications as the ball rolls forward.
 
 **Recommended build:** [17 Pop Japanese Man-at-Arms Rush](/en/builds/17pop-japanese-maa-rush)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

@@ -28,5 +28,3 @@ Portuguese are a Naval and Gunpowder civilization from Southern Europe.
 **Deathball composition (closed maps / team games):** Mass Organ Guns behind a wall of Bombard Cannon, with Cavalier providing melee protection for the gunpowder core — a slow, grinding push that excels on arena-style and team-game maps.
 
 **Recommended build:** [Portuguese Monk Rush](/en/builds/portuguese-monk-rush)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

@@ -21,9 +21,6 @@ steps:
   - { assign: "When the opponent commits to Archers, drop a Range fast; move 2 to the woodline and start Skirmishers", icons: ["archery-range", "skirmisher", "wood"] }
   - { assign: "Build a Blacksmith; research Fletching and infantry armor", icons: ["blacksmith", "fletching"] }
   - { assign: "Berries out → 2nd lumber camp; move 6 → gold with a Mining Camp; research Wheelbarrow", icons: ["lumber-camp", "gold", "mining-camp", "wheelbarrow"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Scouts into Skirms

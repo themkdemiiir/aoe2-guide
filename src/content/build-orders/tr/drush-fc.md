@@ -20,9 +20,6 @@ steps:
   - { assign: "Feudal: duvarı tamamla; Militia + Scout ile baskıyı sürdür", icons: ["militia", "scout-cavalry"] }
   - { villagers: 29, assign: "+2 → altına; 2 Archery Range ve bir Blacksmith kur", icons: ["gold", "archery-range", "blacksmith"] }
   - { time: "16:05", phase: castle, assign: "Castle: Archer yığ; Double-Bit Axe, Horse Collar, Fletching araştır", note: "Ekonomi + teknoloji üstünlüğüyle Castle-first", icons: ["archer", "double-bit-axe", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Drush Fast Castle

@@ -22,9 +22,6 @@ steps:
   - { assign: "Ön tarafa bir Okçuluk Menzili kur; üs çevresindeki tek tük ağaçtan kesen Köylü'yü tarlalara al; Skirmiş üretmeye başla", icons: ["archery-range", "skirmisher", "farm"] }
   - { assign: "Bir Demirci kur, Fletching araştır ve Man-at-Arms eklemeye devam et", icons: ["blacksmith", "fletching", "man-at-arms"] }
   - { assign: "7-8 Man-at-Arms olunca Arson araştır, sonra Piyade ve Skirmiş zırhı; 14-16 tarlada Wheelbarrow al", icons: ["arson", "wheelbarrow", "farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Man-at-Arms Into Skirms

@@ -28,5 +28,3 @@ Burgundians are a Cavalry civilization from Western Europe.
 **Deathball composition (closed maps / team games):** Mass Coustillier and Hand Cannoneers with Bombard Cannon support — a gold-heavy ball that grinds through fortified positions on closed maps and in team games.
 
 **Recommended build:** [Fast Castle 2-Stable Knights (Pocket)](/en/builds/fc-knights-pocket)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

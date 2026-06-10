@@ -20,9 +20,6 @@ steps:
   - { assign: "Archer hattı: 2-3 köylüyü → altına ve Mining Camp'e taşı, ardından Archery Range ekle", icons: ["gold", "mining-camp", "archery-range", "archer"] }
   - { assign: "Man-at-Arms hattı: ~3 Militia yap, sonra Man-at-Arms yükseltmesini ve Double-Bit Axe'i araştır", icons: ["barracks", "militia", "man-at-arms", "double-bit-axe"] }
   - { assign: "Tower rush: ~5 köylüyü rakibin ekonomisine Watch Tower kurmaya gönder", note: "MAA-trush'ı atla — build ikisini birden taşıyamayacak kadar fakir", icons: ["watch-tower"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Chinese Fast Feudal

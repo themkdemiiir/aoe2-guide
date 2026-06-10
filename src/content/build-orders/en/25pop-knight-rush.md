@@ -19,9 +19,6 @@ steps:
   - { assign: "+2 → build Stable and Market", icons: ["stable", "market"] }
   - { villagers: 29, phase: castle, assign: "+4 → gold; research Double-Bit Axe; click Castle Age", time: "16:05", note: "Build a 2nd Stable as you advance", icons: ["gold", "double-bit-axe", "stable"] }
   - { assign: "In Castle Age: research Horse Collar and Bow Saw; pump Knights from both Stables", icons: ["horse-collar", "bow-saw", "knight"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Knight Rush (Beginner)

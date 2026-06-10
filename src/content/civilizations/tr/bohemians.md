@@ -29,5 +29,3 @@ Bohemians, Doğu Avrupa'dan bir Barut ve Keşiş uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ezici barut ateş gücü için Houfnice ve Hand Cannoneer yığ, süvariye karşı perde olması için Halberdier ekle; Hussite Reforms sayesinde altın üreten Monk'ları da koy — bunlar dönüştürme yaparak atılımı sürdürür.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

@@ -15,8 +15,6 @@ steps:
   - { villagers: 28, assign: "+5; click Castle Age; add farms during transition", icons: ["farm"] }
   - { villagers: 30, assign: "Castle: build 2 Stables; produce Knights non-stop", icons: ["stable", "knight"] }
   - { villagers: 32, assign: "+2 → gold; research Bloodlines + Forging", icons: ["gold", "bloodlines"] }
-source:
-  author: "Hera"
 ---
 
 # Fast Castle 2-Stable Knights (Pocket)

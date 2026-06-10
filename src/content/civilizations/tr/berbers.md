@@ -27,5 +27,3 @@ Berbers, Kuzey Afrika'dan bir Süvari ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Kitlesel piyade ve Archer'ları parçalamak için Heavy Scorpion duvarının arkasına Camel Archer diz; top yuvarlayarak ilerlerken tahkimatları ve düşman kuşatmalarını Bombard Cannon'la temizle.
 
 **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

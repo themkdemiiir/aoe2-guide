@@ -25,6 +25,4 @@ Wu are a Naval civilization from East Asia.
 
 **Recommended build:** [Fire Galleys and Archers](/en/builds/fire-galleys-and-archers)
 
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
-
 *(Late-game and deathball compositions not yet covered for this civ.)*

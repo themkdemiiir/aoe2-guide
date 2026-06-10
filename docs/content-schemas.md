@@ -46,7 +46,7 @@ steps:                                           # 6–12 entries recommended
   - { villagers: 9,  time: "1:05",  assign: "+3 → wood, build lumber camp" }
   - { villagers: 19, time: "4:20",  assign: "+2 → wood", note: "Research Loom; click Feudal" }
 source:
-  author: Hera
+  author: a pro player's build guide
   url: https://aoecompanion.com/...
 ---
 

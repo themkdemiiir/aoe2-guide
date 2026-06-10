@@ -40,8 +40,8 @@ const buildOrders = defineCollection({
     civsRecommended: z.array(z.string()),
     steps: z.array(
       z.object({
-        // Optional: only set where Hera's table states a "Vil Pop" number. Post-landing
-        // reassignment / instruction steps that Hera doesn't number omit it (no guessing).
+        // Optional: only set where the source guide's table states a "Vil Pop" number.
+        // Post-landing reassignment / instruction steps that it doesn't number omit it.
         villagers: z.number().optional(),
         // Optional structured age marker — preferred over prose regex for phase headers.
         phase: z.enum(["feudal", "castle", "imperial"]).optional(),
@@ -51,10 +51,12 @@ const buildOrders = defineCollection({
         icons: z.array(z.string()).optional(),
       }),
     ),
-    source: z.object({
-      author: z.string(),
-      url: z.string().url().optional(),
-    }),
+    source: z
+      .object({
+        author: z.string(),
+        url: z.string().url().optional(),
+      })
+      .optional(),
   }),
 });
 

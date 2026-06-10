@@ -20,9 +20,6 @@ steps:
   - { assign: "Yol C — Spear-Skirm: Malay'ın bedava piyade zırhına dayanarak Spearman ve Skirmisher üret", icons: ["spearman", "skirmisher"] }
   - { assign: "Av tükenirken tarla ekle ve odunu akıtmak için Double-Bit Axe araştır", icons: ["farm", "double-bit-axe"] }
   - { assign: "Seçtiğin ordu hazır olunca bir Blacksmith kur ve Fletching araştır", icons: ["blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 21 Köylü Malay Esnek Açılış

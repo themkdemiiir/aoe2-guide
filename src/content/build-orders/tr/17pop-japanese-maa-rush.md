@@ -22,9 +22,6 @@ steps:
   - { assign: "Demirci ekle; Double-Bit Axe'ı araştır", icons: ["blacksmith", "double-bit-axe"] }
   - { villagers: 20, assign: "+2 → altın; 1 → çilekler ve Değirmen kur", icons: ["gold", "food", "mill"] }
   - { assign: "Fletching'i araştır; Okçuları ve Man-at-Arms'ı birlikte haritanın karşısına gönder", icons: ["fletching", "archer", "man-at-arms"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 17 Pop Japon Man-at-Arms Baskını

@@ -26,6 +26,4 @@ Jurchens are a Cavalry civilization from East Asia.
 
 **Recommended build:** [Jurchens Fast Castle Fire Lancer](/en/builds/jurchens-fc-fire-lancer)
 
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
-
 *(Late-game and deathball compositions not yet covered for this civ.)*

@@ -29,5 +29,3 @@ Bengalis, Güney Asya'dan bir Fil ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Dönüştürme ve iyileştirme için Monk'lar etrafında kompozisyon kur, hasar için Elephant Archer ya da Ratha ile birleştir, tahkimatları yıkmak için Trebuchet getir.
 
 **Önerilen build:** [18 Pop Scouts into Archers](/tr/builds/18pop-scouts-into-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

@@ -19,9 +19,6 @@ steps:
   - { assign: "+5 → gold, build Mining Camp; build Blacksmith; finish walling", icons: ["gold", "mining-camp", "blacksmith"] }
   - { phase: castle, assign: "Click Castle Age; redistribute eco, add gold; build 2 Archery Ranges", note: "Research Fletching + Bloodlines first", icons: ["archery-range"] }
   - { assign: "Pump Cavalry Archers from both Ranges; research Bow Saw, Bodkin Arrow, Husbandry" }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Scouts into Cavalry Archers

@@ -28,5 +28,3 @@ Gurjaras are a Cavalry and Naval civilization from South Asia.
 **Deathball composition (closed maps / team games):** Mass Chakram Throwers behind a wall of Heavy Camel Riders, with Bombard Cannons providing the long-range punch to break through fortified positions.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

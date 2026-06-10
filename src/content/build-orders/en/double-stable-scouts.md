@@ -21,9 +21,6 @@ steps:
   - { assign: "Around 15 farms, build the 2nd stable so you produce from both", icons: ["stable", "farm"] }
   - { villagers: 20, assign: "+2 → gold; research Bloodlines and pick up Blacksmith armor/attack", icons: ["gold", "bloodlines", "blacksmith"] }
   - { assign: "At ~20 farms, research Wheelbarrow to keep the eco scaling with two stables", icons: ["farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Double Stable Scouts

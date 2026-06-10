@@ -28,7 +28,7 @@ You don't have to reinvent the wheel to improve at Age of Empires II — the com
 ## Strategy & improvement
 
 - **[r/aoe2 wiki](https://www.reddit.com/r/aoe2/wiki/index/)** — a hub linking community guides, counter cheat-sheets, and beginner material.
-- **Hera, T90Official, ViBE (YouTube)** — pro and educational creators whose build guides and coaching content are gold for ladder players.
+- **T90Official, ViBE (YouTube)** — pro and educational creators whose build guides and coaching content are gold for ladder players.
 
 ## How to actually use them
 

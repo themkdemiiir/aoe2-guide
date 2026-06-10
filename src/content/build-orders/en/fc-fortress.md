@@ -19,9 +19,6 @@ steps:
   - { assign: "Pull 3 wood villagers → Market (2) and Blacksmith (1)", icons: ["market", "blacksmith"] }
   - { phase: castle, assign: "Click Castle Age; research Double-Bit Axe and Horse Collar", time: "10:40", icons: ["double-bit-axe", "horse-collar"] }
   - { assign: "Castle: as the berries run out, send those villagers to your first extra Town Center spot", icons: ["town-center", "farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Fast Castle on Fortress

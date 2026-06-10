@@ -20,9 +20,6 @@ steps:
   - { assign: "Yeni Köylüleri sapan ağaçlara gönder; 5 tarla kurulunca bir Demirci kur", icons: ["blacksmith", "wood"] }
   - { assign: "Demirci'de Piyade zırhını (+2) araştır — Roma zırhı bunu çok güçlü kılar", icons: ["blacksmith"] }
   - { assign: "Scout ile Man-at-Arms'ı birlikte kullanarak baskı yap; sadece kazanacağın savaşlara gir", icons: ["scout-cavalry", "man-at-arms"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Romalılar 5 Man-at-Arms Baskını

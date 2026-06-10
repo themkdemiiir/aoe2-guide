@@ -21,9 +21,6 @@ steps:
   - { phase: castle, assign: "Castle Age'e (Kale) tıkla — taşını SATMA, savunma için Gözcü Kulesi gerekebilir", time: "14:00", icons: ["watch-tower"] }
   - { villagers: 24, assign: "Castle: Şehir Merkezi'nden ~10 köylüyü çek → odun + 2. Kereste Kampı; 2 Kışla ekle", icons: ["lumber-camp", "barracks"] }
   - { assign: "Piyade zırhını araştır (ekonomi teknolojilerini atla); iki Kışla'dan da Fire Lancer bas; öne bir Kuşatma Atölyesi ekle; Çiftlik dikmeye başla; Squires araştır", icons: ["barracks", "siege-workshop", "farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Jurchens Fast Castle Fire Lancer Rush

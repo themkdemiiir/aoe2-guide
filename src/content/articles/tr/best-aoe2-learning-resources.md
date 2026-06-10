@@ -28,7 +28,7 @@ Age of Empires II'de gelişmek için tekerleği yeniden icat etmenize gerek yok 
 ## Strateji ve gelişim
 
 - **[r/aoe2 wiki](https://www.reddit.com/r/aoe2/wiki/index/)** — topluluk rehberlerini, counter kopya kâğıtlarını ve başlangıç materyalini bir araya getiren merkez.
-- **Hera, T90Official, ViBE (YouTube)** — yapım rehberleri ve koçluk içerikleri merdiven oyuncuları için altın değerinde profesyonel/eğitici üreticiler.
+- **T90Official, ViBE (YouTube)** — yapım rehberleri ve koçluk içerikleri merdiven oyuncuları için altın değerinde profesyonel/eğitici üreticiler.
 
 ## Bunları nasıl kullanmalı
 

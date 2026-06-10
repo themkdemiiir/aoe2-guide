@@ -28,5 +28,3 @@ Burgundians, Batı Avrupa'dan bir Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Bombard Cannon desteğiyle Coustillier ve Hand Cannoneers yığını — kapalı haritalarda ve takım oyunlarında tahkimatlı mevzileri yavaş yavaş ezip geçen, Altın ağırlıklı bir top.
 
 **Önerilen build order:** [Fast Castle 2-Stable Knights (Pocket)](/en/builds/fc-knights-pocket)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlendi.*

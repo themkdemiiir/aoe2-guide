@@ -21,9 +21,6 @@ steps:
   - { phase: castle, assign: "Click Castle Age — do NOT sell stone, you may need a defensive Tower", time: "14:00", icons: ["watch-tower"] }
   - { villagers: 24, assign: "Castle: pull ~10 from the Town Center → wood + a 2nd Lumber Camp; add 2 Barracks", icons: ["lumber-camp", "barracks"] }
   - { assign: "Research infantry armor (skip eco techs); pump Fire Lancers from both Barracks; add a forward Siege Workshop; seed Farms; research Squires", icons: ["barracks", "siege-workshop", "farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Jurchens Fast Castle Fire Lancer Rush

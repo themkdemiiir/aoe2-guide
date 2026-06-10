@@ -28,5 +28,3 @@ Tatars, Orta Asya kökenli bir Cavalry Archer uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Siege Engineers artı özgün teknolojinle 18 karo menzile ulaşan uzun menzilli Trebuchet'ler — Heavy Cavalry Archer'lar ve Keshik'lerle eşleştirerek binaları ve orduları güvenli bir mesafeden ezip geç.
 
 **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

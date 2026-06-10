@@ -18,9 +18,6 @@ steps:
   - { villagers: 21, assign: "Feodal: Lumber Camp'te Double-Bit Axe araştır; Dock'tan 2 Fire Galley sıraya al", icons: ["double-bit-axe", "fire-galley"] }
   - { villagers: 23, assign: "+2 → altın madenciliği; Mining Camp kur", icons: ["gold", "mining-camp"] }
   - { villagers: 25, assign: "+1 çileğe Mill kur, +1 → çilekler; 2. Dock'u inşa et", icons: ["mill", "food", "dock"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/win-water"
 ---
 
 # Win Water

@@ -20,9 +20,6 @@ steps:
   - { assign: "Add a Market and send 2 villagers to it; balance wood and gold for the Castle click", icons: ["market"] }
   - { phase: castle, time: "14:50", assign: "Click Castle Age; research Double-Bit Axe and Horse Collar", icons: ["double-bit-axe", "horse-collar"] }
   - { villagers: 27, assign: "Castle: 4 builders → straggler trees; seed more farms; train 2-3 scouts and drop a Monastery immediately; Bow Saw; add a TC when you can afford it; build Light Cav only if contested", icons: ["monastery", "bow-saw", "town-center", "light-cavalry", "monk"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Fast Castle Light Cav Relic Control

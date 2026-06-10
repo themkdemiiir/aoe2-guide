@@ -28,5 +28,3 @@ Cumans, Orta Asya kökenli bir Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ham hız ve güç için Kipchakları Paladin'lerle birleştir; duvarları ve binaları yıkmak için Siege Ram veya Trebuchet ile tamamla.
 
 **Önerilen build:** [18 Pop Cumans 2 TC Boom](/tr/builds/18pop-cumans-2tc-boom)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

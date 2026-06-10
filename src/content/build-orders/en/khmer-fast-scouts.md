@@ -19,9 +19,6 @@ steps:
   - { assign: "Research Double-Bit Axe at the lumber camp", icons: ["double-bit-axe"] }
   - { villagers: 22, assign: "+6 new villagers → berries to fund continuous scout production", icons: ["food"] }
   - { assign: "Once you bank 60 wood, start seeding farms; keep scouts flowing", icons: ["farm", "scout-cavalry"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Khmer Super Fast Scouts

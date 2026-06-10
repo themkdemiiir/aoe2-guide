@@ -15,8 +15,6 @@ steps:
   - { villagers: 17, assign: "+3; click Feudal at 17 pop", icons: ["food"] }
   - { villagers: 17, assign: "Feudal: build 2nd Dock; research Fletching; Galleys non-stop", icons: ["dock", "galley"] }
   - { villagers: 20, assign: "+3 → wood; use Galleys to deny enemy Docks", icons: ["wood"] }
-source:
-  author: "Spirit of the Law"
 ---
 
 # Feudal Galley Rush

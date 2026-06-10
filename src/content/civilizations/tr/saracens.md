@@ -28,5 +28,3 @@ Saracens, Orta Doğu'dan bir Camel ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Mameluke'ları Siege Onager'lar ve Trebuchet'lerle yığ; düşman Monk'larıyla başa çıkmak için birkaç Hussar ekle.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

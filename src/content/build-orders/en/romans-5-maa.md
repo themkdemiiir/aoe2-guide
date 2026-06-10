@@ -20,9 +20,6 @@ steps:
   - { assign: "Send new Villagers onto the straggler trees; build a Blacksmith once 5 farms are down", icons: ["blacksmith", "wood"] }
   - { assign: "Research Infantry armor (+2) at the Blacksmith — Roman armor makes this huge", icons: ["blacksmith"] }
   - { assign: "Pressure with your Scout plus the Man-at-Arms together; pick fights you win", icons: ["scout-cavalry", "man-at-arms"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Romans 5 Man-at-Arms Rush

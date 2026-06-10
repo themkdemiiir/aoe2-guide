@@ -21,9 +21,6 @@ steps:
   - { assign: "Kışla + 2 mızrakçı; 2 köylü + atlıyı merkeze gönder", icons: ["barracks", "spearman", "scout-cavalry"] }
   - { assign: "Harita merkezine yakın 2 Manastır kur; Keşiş üretmeye başla; kalıntıları topla", icons: ["monastery", "monk"] }
   - { assign: "Artan köylüler → tarlalar; kalıntı koruması için Kuşatma Atölyesi + Koçbaşı ekle", icons: ["farm", "siege-workshop", "battering-ram"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Portekiz Keşiş Baskını

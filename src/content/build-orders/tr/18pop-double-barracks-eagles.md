@@ -20,9 +20,6 @@ steps:
   - { assign: "+4 yeni köylü → altına; 2. Barracks kur", icons: ["gold", "barracks"] }
   - { assign: "Her iki Barracks'tan Eagle Scout bas (Scout'a karşı önce 2 Spearman)", note: "Ordu arkasına straggler ağaçları ve Farm ekle", icons: ["eagle-scout", "spearman"] }
   - { assign: "Eagle zırh ve saldırı geliştirmeleri için Blacksmith kur", icons: ["blacksmith"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Köylü Çift Kışla Kartal Baskını

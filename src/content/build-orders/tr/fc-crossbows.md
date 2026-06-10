@@ -15,8 +15,6 @@ steps:
   - { villagers: 26, assign: "+6; ~26 nüfusta Kale Çağı'na tıkla; arada tarla aç", icons: ["farm"] }
   - { villagers: 28, assign: "Kale: 2 Archery Range kur; hemen Crossbow araştır", icons: ["archery-range", "crossbowman"] }
   - { villagers: 30, assign: "+2 → altına; sürekli tarla açmaya devam et", icons: ["gold", "farm"] }
-source:
-  author: "Hera"
 ---
 
 # Fast Castle into Crossbows

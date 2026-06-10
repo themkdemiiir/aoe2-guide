@@ -28,5 +28,3 @@ Incas are an Infantry civilization from South America.
 **Deathball composition (closed maps / team games):** Stack Kamayuks for their reach against cavalry and stacked formations, support them with Monks for relics and conversions, and roll Trebuchets forward to demolish fortified positions.
 
 **Recommended build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

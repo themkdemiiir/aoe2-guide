@@ -27,5 +27,3 @@ Lithuanians, Doğu Avrupa'dan bir Süvari ve Keşiş uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Kitlesel Leitis'in arkasına geç; piyadelere karşı menzilli ateş gücü için Hand Cannoneer ekle ve duvarları ve düşman kuşatmasını yıkarken savunma yapılarını yıkmak için Bombard Cannon kullan.
 
 **Önerilen build:** [Spearman + Skirmisher](/en/builds/korean-spear-skirm)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

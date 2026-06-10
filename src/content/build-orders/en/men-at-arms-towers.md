@@ -18,9 +18,6 @@ steps:
   - { villagers: 20, assign: "+1 → build Mining Camp next to gold", icons: ["mining-camp", "gold"] }
   - { villagers: 21, assign: "+1 → mine gold; research Loom; advance to Feudal Age", note: "Research Loom in your Town Center", icons: ["gold", "loom", "feudal-age"] }
   - { villagers: 21, assign: "Feudal: upgrade Militia to Men-at-Arms; send the Militia plus your Stone/Gold villagers forward", icons: ["man-at-arms", "watch-tower"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/men-at-arms-towers"
 ---
 
 # Men-at-Arms + Tower Rush

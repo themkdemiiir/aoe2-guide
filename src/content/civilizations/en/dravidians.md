@@ -29,5 +29,3 @@ Dravidians are an Infantry and Naval civilization from South Asia.
 **Deathball composition (closed maps / team games):** On closed maps, mass Elephant Archers (available from the Archery Range) behind a wall of Halberdiers, sprinkle in Urumi Swordsmen, and bring Siege Onagers, Trebuchets, or Bombard Cannons to break enemy formations.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

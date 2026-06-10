@@ -19,9 +19,6 @@ steps:
   - { assign: "Double-Bit Axe'i araştır; Horse Collar ekle (açık haritada tedirginsen atla)", icons: ["double-bit-axe", "horse-collar"] }
   - { assign: "Yeni köylüleri oduna, dağınık ağaçlara ve tarlalara gönder; önce iki merkezde kesintisiz üretimi oturt", icons: ["wood", "farm"] }
   - { assign: "İki merkez de tıkır tıkır çalışınca Kale Çağı'na tıkla", time: "19:00", note: "Rahatsız edilmezsen yaklaşık 19–20. dakikada gelir", icons: ["town-center"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Nüfus Cumans 2 Şehir Merkezi Boom

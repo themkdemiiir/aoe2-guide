@@ -28,5 +28,3 @@ Hindustanis are a Gunpowder and Cavalry civilization from South Asia.
 **Deathball composition (closed maps / team games):** Mass Imperial Camels as a durable, hard-hitting core, screen them with the 9-range Hand Cannoneers that Shatagni enables, and add Bombard Cannons to level buildings and out-range enemy siege.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

@@ -17,9 +17,6 @@ steps:
   - { villagers: 32, assign: "+2 vils → gold (now 8 on gold); click Castle Age (~16:30)", icons: ["gold"] }
   - { villagers: 32, assign: "Castle Age — build Monastery + Siege Workshop; transition hunt vils to farms", icons: ["monastery", "siege-workshop", "farm"] }
   - { villagers: 32, assign: "Click Imperial Age (~21:00); keep food / wood / gold balanced", icons: ["food", "wood", "gold"] }
-source:
-  author: "Hera, AoE Companion"
-  url: "https://aoecompanion.com/build-guides/fast-imperial"
 
 ---
 

@@ -17,9 +17,6 @@ steps:
   - { villagers: 18, phase: feudal, assign: "+3 → TC altındaki ava; Loom araştır, sonra Feudal'a tıkla", time: "8:50", note: "18 nüfusta, 4 odun / 14 yiyecek dağılımıyla geç", icons: ["food", "loom"] }
   - { assign: "Feudal: 6 köylüyü değirmenle çilek çalılarına götür ki yiyecek akmaya devam etsin", icons: ["food", "mill"] }
   - { assign: "Feudal açılışını scout'unun gördüğüne göre seç — scout, okçu veya man-at-arms hepsi buradan çalışır", icons: ["scout-cavalry", "archer"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Fast Chickens Dark Age

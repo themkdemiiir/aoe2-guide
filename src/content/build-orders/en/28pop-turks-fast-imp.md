@@ -21,9 +21,6 @@ steps:
   - { villagers: 32, assign: "Castle: builders → Farms, research Gold Mining; build Siege Workshop + Monastery", icons: ["siege-workshop", "monastery", "gold-mining"] }
   - { time: "20:05", phase: imperial, assign: "Add a second Mining Camp, click Imperial Age", icons: ["imperial-age", "mining-camp"] }
   - { assign: "Imperial: buy wood, build Barracks + 2 Archery Ranges; mass Hand Cannoneers + 1-2 Bombard Cannons", icons: ["archery-range", "hand-cannoneer", "bombard-cannon"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 28 Pop Turks Fast Imperial

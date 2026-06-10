@@ -24,4 +24,4 @@ Shu, Doğu Asya'dan gelen bir Piyade uygarlığıdır.
 
 **Önerilen build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
 
-*Hera'nın "her uygarlık için" rehberleri bu Üç Krallık uygarlığını henüz kapsamamıştır — açılış, uygarlığın bonuslarından sentezlenmiştir.*
+*Açılış, bu Üç Krallık uygarlığının bonuslarından sentezlenmiştir; daha kapsamlı bir rehber yakında.*

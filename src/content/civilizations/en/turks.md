@@ -28,5 +28,3 @@ Turks are a Gunpowder civilization from the Middle East.
 **Deathball composition (closed maps / team games):** Roll forward with Heavy Cavalry Archers shielded by Hussars and supported by Bombard Cannons — a durable, hard-hitting ball that grinds through static defenses.
 
 **Recommended build:** [28 Pop Turks Fast Imp](/en/builds/28pop-turks-fast-imp)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

@@ -19,9 +19,6 @@ steps:
   - { assign: "Kereste kampında Double-Bit Axe'ı araştır", icons: ["double-bit-axe"] }
   - { villagers: 22, assign: "+6 yeni köylü → sürekli keşifçi üretimini beslemek için çileğe", icons: ["food"] }
   - { assign: "60 odun biriktirince tarla ekmeye başla; keşifçileri akıtmaya devam et", icons: ["farm", "scout-cavalry"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Khmer Süper Hızlı Atlı Keşifçiler

@@ -22,9 +22,6 @@ steps:
   - { assign: "Castle: build Stable + Blacksmith; research +1 cavalry armor", icons: ["stable", "blacksmith"] }
   - { assign: "Pump Knights immediately; add a forward Siege Workshop", icons: ["siege-workshop"] }
   - { assign: "Mix Scorpions with Knights from the forward base", icons: [] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Khmer Fast Castle Knights and Scorpions

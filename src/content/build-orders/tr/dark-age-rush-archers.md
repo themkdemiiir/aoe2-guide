@@ -20,9 +20,6 @@ steps:
   - { villagers: 25, assign: "+1 → Farm kur; Loom araştır; Feodal Çağ'a tıkla", note: "25 nüfusta çağ atla (~12:00)", icons: ["farm", "loom"] }
   - { villagers: 25, assign: "Feodal gelince — 7 köylü koyun → odun, 4 köylü koyun → Mining Camp'te Altın", icons: ["wood", "gold", "mining-camp"] }
   - { villagers: 29, assign: "2 Archery Range + Blacksmith kur; +4 yeni köylü → Altın; Fletching araştır", icons: ["archery-range", "blacksmith", "gold", "fletching"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/dark-age-rush-archers"
 
 ---
 

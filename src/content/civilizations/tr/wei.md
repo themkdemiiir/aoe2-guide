@@ -24,4 +24,4 @@ Wei, Doğu Asya'dan gelen bir Süvari uygarlığıdır.
 
 **Önerilen build:** [18 Pop Scout Rush](/en/builds/18pop-scouts)
 
-*Hera'nın "her uygarlık için" rehberleri bu Üç Krallık uygarlığını henüz kapsamamıştır — açılış, uygarlığın bonuslarından sentezlenmiştir.*
+*Açılış, bu Üç Krallık uygarlığının bonuslarından sentezlenmiştir; daha kapsamlı bir rehber yakında.*

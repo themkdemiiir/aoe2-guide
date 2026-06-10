@@ -18,9 +18,6 @@ steps:
   - { villagers: 17, assign: "2 → straggler trees near the TC", icons: ["wood"] }
   - { villagers: 17, assign: "2 → build Barracks plus a house", icons: ["barracks", "house"] }
   - { assign: "Archer opening: send 4 villagers to gold; or run Scouts/Spears/Skirmishers and keep villagers on food and wood", icons: ["archer", "scout-cavalry"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Anti-Lame Fast Up Dark Age

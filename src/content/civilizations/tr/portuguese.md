@@ -28,5 +28,3 @@ Portuguese, Güney Avrupa'dan bir Denizcilik ve Barut uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Bombard Cannon duvarının arkasına Organ Gun'ları yığ; barut çekirdeğini yakın dövüşten korumak için Cavalier ekle — bu yavaş, ezici bir ataktır, arena tarzı ve takım maçı haritalarında üstündür.
 
 **Önerilen build:** [Portuguese Monk Rush](/en/builds/portuguese-monk-rush)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

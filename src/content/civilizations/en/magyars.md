@@ -27,5 +27,3 @@ Magyars are a Cavalry and Infantry civilization from Eastern Europe.
 **Deathball composition (closed maps / team games):** Combine Paladins for the heavy front line with Heavy Cavalry Archers for ranged punch, supported by Trebuchets — a mobile hybrid ball that can reposition quickly while still sieging down enemy fortifications.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

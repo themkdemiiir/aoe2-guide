@@ -18,9 +18,6 @@ steps:
   - { villagers: 18, assign: "4 vils from TC → initial lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "+1 from TC → berries, build Mill; research Double-Bit Axe", note: "Horse Collar optional", icons: ["food", "mill", "double-bit-axe"] }
   - { assign: "+2 → follow-up military by scouting opponent; slow-wall", icons: ["scout-cavalry", "barracks"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Feudal Drush

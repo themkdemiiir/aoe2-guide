@@ -19,9 +19,6 @@ steps:
   - { assign: "Double-Bit Axe ve Horse Collar'ı araştır; tarlaları ek", icons: ["double-bit-axe", "horse-collar", "farm"] }
   - { assign: "Ahırı kuran 2 köylüyle sur ör; durmadan keşifçi eklemeye devam et", icons: ["scout-cavalry"] }
   - { assign: "Rakip de keşifçiyle açarsa 1–4 Mızraklı ekle", note: "Okçulara karşı mızraklıları atla", icons: ["spearman"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Tek Ahırlı Atlı Keşifçiler

@@ -21,9 +21,6 @@ steps:
   - { assign: "Train Eagle Scouts from the Barracks; add an Archery Range with 2 villagers", note: "Wall the gaps with the Range builders using Houses and palisades", icons: ["eagle-scout", "archery-range"] }
   - { assign: "DECISION — vs archers send +4 TC villagers to gold for Archers; vs skirmishers send +4 to straggler wood for Skirmishers", icons: ["archer", "skirmisher"] }
   - { assign: "Seed Farms behind the eco; drop a Blacksmith and research Fletching", icons: ["farm", "blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Eagle and Range Feudal Rush

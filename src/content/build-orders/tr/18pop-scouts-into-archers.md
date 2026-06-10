@@ -21,9 +21,6 @@ steps:
   - { assign: "8 Town Center köylüsünü → altına taşı, Mining Camp kur", icons: ["gold", "mining-camp"] }
   - { assign: "2 Archery Range kur ve Archers'a geç", icons: ["archery-range", "archer"] }
   - { assign: "Blacksmith kur ve Fletching araştır", icons: ["blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Köylü Scouts into Archers

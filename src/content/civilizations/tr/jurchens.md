@@ -26,6 +26,4 @@ Jurchens, Doğu Asya'dan bir Süvari uygarlığıdır.
 
 **Önerilen build:** [Jurchens Fast Castle Fire Lancer](/en/builds/jurchens-fc-fire-lancer)
 
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*
-
 *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz kapsanmamıştır.)*

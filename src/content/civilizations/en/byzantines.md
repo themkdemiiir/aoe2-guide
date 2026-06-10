@@ -29,5 +29,3 @@ Byzantines are a Defensive civilization from the Eastern Mediterranean.
 **Deathball composition (closed maps / team games):** March forward behind a wall of Cataphracts, back them with Bombard Cannons to shell enemy positions, and keep Monks in the mix for healing and conversions; Bombard Towers anchor the line on defense thanks to your cheap, extra-tough buildings.
 
 **Recommended build:** [Spearman + Skirmisher](/en/builds/korean-spear-skirm)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

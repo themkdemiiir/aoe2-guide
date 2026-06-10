@@ -26,5 +26,3 @@ Georgians are an Infantry and Cavalry civilization from the Caucasus.
 **Recommended build:** [Georgians Healing Scouts](/en/builds/georgians-healing-scouts)
 
 *(Late-game and deathball compositions not yet covered for this civ.)*
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

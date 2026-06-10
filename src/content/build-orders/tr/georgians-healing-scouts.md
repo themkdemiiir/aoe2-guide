@@ -20,9 +20,6 @@ steps:
   - { assign: "Durmadan Scout Cavalry bas ve 3 scout ile taciz et", icons: ["stable", "scout-cavalry"] }
   - { assign: "Horse Collar araştır ve duvarların arkasına tarlalar ek", icons: ["horse-collar", "farm"] }
   - { assign: "13–14 tarlada 7 köylüyü Mule Cart ile altına geçir; bir demirci ekle", icons: ["gold", "blacksmith"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Georgians Healing Scout Rush

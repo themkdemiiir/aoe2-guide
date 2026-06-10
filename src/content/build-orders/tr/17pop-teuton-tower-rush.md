@@ -21,9 +21,6 @@ steps:
   - { assign: "İlk kuleyi rakibin odun hattına veya meyvelerine ~8 kare mesafede kur", icons: ["watch-tower"] }
   - { assign: "+2 ileri köylü tedarik için house kursun; kule başına 10 köylüye kadar içeri al", icons: ["house", "watch-tower"] }
   - { assign: "Yeni kuleleri 6–8 kare aralıkla zincirle, ekonomilerinin içine doğru ilerle", icons: ["watch-tower"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 17 Köylü Teuton Kule Baskını

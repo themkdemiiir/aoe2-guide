@@ -21,9 +21,6 @@ steps:
   - { villagers: 25, assign: "Bir Okçu Menzili kur; +2 → altın", icons: ["archery-range", "gold"] }
   - { assign: "Duvar ör ve gerektiğinde Okçu, Mızrakçı veya kule ekle", icons: ["archer", "spearman", "watch-tower"] }
   - { assign: "Bir Demirci ekle; Fletching araştır, sonra Okçuları saldırıya gönder", icons: ["blacksmith", "fletching", "archer"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Köylü Genel Man-at-Arms Baskını

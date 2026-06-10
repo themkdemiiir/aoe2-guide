@@ -20,9 +20,6 @@ steps:
   - { assign: "Fork C — Spear-Skirm: produce Spearmen and Skirmishers, leaning on Malay's free infantry armor", icons: ["spearman", "skirmisher"] }
   - { assign: "Add farms as the hunt runs out and research Double-Bit Axe to keep wood flowing", icons: ["farm", "double-bit-axe"] }
   - { assign: "Build a Blacksmith and research Fletching once your chosen military is online", icons: ["blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 21 Vils Malay Flexible Opening

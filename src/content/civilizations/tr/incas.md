@@ -28,5 +28,3 @@ Incas, Güney Amerika'dan bir Piyade uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Kamayuk'ları süvariye ve yığılmış düzenlere karşı olan menzilleri için yığ, kutsal emanetler ve dönüştürme için Monk'larla destekle, ardından tahkimatlı mevzileri yerle bir etmek için Trebuchet'leri ilerlet.
 
 **Önerilen build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

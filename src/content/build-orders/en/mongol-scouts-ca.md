@@ -21,9 +21,6 @@ steps:
   - { phase: castle, assign: "Click Castle Age behind a sealed wall", note: "Bank gold and keep Scouts alive for the transition", icons: ["food"] }
   - { assign: "Castle: build 2 Archery Ranges; research Bloodlines + Fletching; start Cavalry Archers", icons: ["archery-range", "bloodlines"] }
   - { assign: "Research Bow Saw, Bodkin Arrow, Husbandry; upgrade to Mangudai at the Castle", icons: ["bow-saw", "bodkin-arrow", "husbandry"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Scouts into Cavalry Archers

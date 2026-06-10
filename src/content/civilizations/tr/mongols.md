@@ -27,5 +27,3 @@ Mongols, Doğu Asya'dan bir Cavalry Archer uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Mangudai'yi Drill'li Siege Onager'larla ve önünde bir Hussar ekranıyla yığ; hem birimleri hem yapıları parçalayan hareketli, yüksek hasarlı bir top oluştur.
 
 **Önerilen build:** [Mongol Scouts into Cavalry Archers](/en/builds/mongol-scouts-ca)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

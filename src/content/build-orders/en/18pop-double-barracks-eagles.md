@@ -20,9 +20,6 @@ steps:
   - { assign: "+4 new villagers → gold; build a 2nd Barracks", icons: ["gold", "barracks"] }
   - { assign: "Pump Eagle Scouts from both Barracks (2 Spearmen first vs Scouts)", note: "Add straggler-tree workers and Farms behind the army", icons: ["eagle-scout", "spearman"] }
   - { assign: "Drop a Blacksmith for Eagle armor and attack upgrades", icons: ["blacksmith"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Double Barracks Eagles

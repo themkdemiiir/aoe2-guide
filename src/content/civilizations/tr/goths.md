@@ -29,5 +29,3 @@ Goths, Kuzey Avrupa kökenli bir Piyade uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Huskarl ve Halberdier'leri yakın dövüş bloğu olarak yığ, alan hasarı için Heavy Scorpion ekle, tahkimatları kırmak için Bombard Cannon getir.
 
 **Önerilen build:** [18 Pop Feudal Drush](/tr/builds/18pop-feudal-drush)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

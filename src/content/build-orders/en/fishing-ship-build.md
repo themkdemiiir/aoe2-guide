@@ -18,9 +18,6 @@ steps:
   - { villagers: 19, time: "9:15", phase: feudal, assign: "Click up to Feudal Age", note: "Land with roughly 5 on wood and 14 on food", icons: ["town-center"] }
   - { villagers: 19, assign: "Move 7 from the sheep over to a second Lumber Camp", icons: ["wood", "lumber-camp"] }
   - { assign: "Keep all 3 Fishing Ships working the water for a steady food trickle", icons: ["fishing-ship", "food"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 19 Pop + 3 Fishing Ship Build

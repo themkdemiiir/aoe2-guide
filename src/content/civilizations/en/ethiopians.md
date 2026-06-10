@@ -27,5 +27,3 @@ Ethiopians are an Archer civilization from East Africa.
 **Deathball composition (closed maps / team games):** Center the ball on Torsion Engine Bombard Cannons backed by Halberdiers to protect them, with Arbalest mixed in to add ranged volume as you grind forward.
 
 **Recommended build:** [Ethiopian 2-Range Archers](/en/builds/ethiopian-2range-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

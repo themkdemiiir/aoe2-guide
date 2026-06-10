@@ -29,7 +29,7 @@ CSS-first, EN/TR). Source-derived data only (see [SOURCES.md](./SOURCES.md)).
 - [ ] **Merge the facts data** into one source-attributed unit dataset (`game-facts` + `unit-stats` + counters), each field tagged with its origin; update scripts + `SOURCES.md`; keep `verify:facts` green.
 
 ### Content
-- [ ] **Add Hera-sourced builds** (start: *19 Vils Romans 5 MAA Rush* from Hera's strategy guide PDF) with proper citations + higher-confidence `source`.
+- [ ] **Add a pro player's build guide-sourced builds** (start: *19 Vils Romans 5 MAA Rush* from the source guide's strategy guide PDF) with proper citations + higher-confidence `source`.
 - [ ] **Correct all build orders (deferred — "later").** Finish the editorial accuracy pass: the ~80 subjective/strategy claims the sweep flagged (civ recommendations, "best/strongest" wording, timings) need an expert eye. Objective errors already fixed.
 
 ## Constraints

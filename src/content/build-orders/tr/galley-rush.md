@@ -15,8 +15,6 @@ steps:
   - { villagers: 17, assign: "+3; 17 nüfusta Feodal Çağ'a tıkla", icons: ["food"] }
   - { villagers: 17, assign: "Feodal: 2. Dock kur; Fletching araştır; durmadan Galley üret", icons: ["dock", "galley"] }
   - { villagers: 20, assign: "+3 → odun; düşman Dock'larını Galley'lerle engelle", icons: ["wood"] }
-source:
-  author: "Spirit of the Law"
 ---
 
 # Feudal Galley Rush

@@ -28,5 +28,3 @@ Slavlar, Doğu Avrupa'dan bir Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Önde Halberdier'larla yavaş bir ilerleme kur, arkalarında alan hasarı için toplu Siege Onager veya Heavy Scorpion diz ve tahkimatları yıkmak için Trebuchet ekle.
 
 **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

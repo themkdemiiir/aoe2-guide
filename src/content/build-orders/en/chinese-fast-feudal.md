@@ -20,9 +20,6 @@ steps:
   - { assign: "Archer line: move 2-3 villagers to gold under a Mining Camp, then add an Archery Range", icons: ["gold", "mining-camp", "archery-range", "archer"] }
   - { assign: "Man-at-Arms line: make ~3 Militia, then research the Man-at-Arms upgrade and Double-Bit Axe", icons: ["barracks", "militia", "man-at-arms", "double-bit-axe"] }
   - { assign: "Tower rush: send ~5 villagers forward to build Watch Towers in the enemy economy", note: "Skip the MAA-trush — the build is too poor to support both", icons: ["watch-tower"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Chinese Fast Feudal

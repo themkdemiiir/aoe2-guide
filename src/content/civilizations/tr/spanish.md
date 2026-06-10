@@ -29,5 +29,3 @@ Spanish, Güney Avrupa'dan bir Barut ve Keşiş uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Conquistador ve Paladin'i çekirdek olarak öne sür; Inquisition'la güçlendirilmiş dönüştürme ve iyileştirme için Monk'lar ekle, binalara ve menzilli kuşatmaya karşı Trebuchet ile Bombard Cannon kullan.
 
 **Önerilen build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

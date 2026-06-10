@@ -28,5 +28,3 @@ Huns are a Cavalry civilization from Central Asia.
 **Deathball composition (closed maps / team games):** Mass Elite Tarkans to tear through fortifications, pair them with Heavy Cavalry Archers for ranged damage, and add Siege Rams to flatten anything left standing.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

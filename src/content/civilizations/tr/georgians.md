@@ -26,5 +26,3 @@ Georgians, Kafkasya'dan bir Piyade ve Süvari uygarlığıdır.
 **Önerilen build:** [Georgians Healing Scouts](/tr/builds/georgians-healing-scouts)
 
 *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz eklenmedi.)*
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

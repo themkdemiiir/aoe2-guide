@@ -28,5 +28,3 @@ Cumans are a Cavalry civilization from Central Asia.
 **Deathball composition (closed maps / team games):** Combine Kipchaks with Paladins for raw mobility and punch, and round out the army with Siege Rams or Trebuchets to demolish walls and buildings as you grind forward.
 
 **Recommended build:** [18 Pop Cumans 2 TC Boom](/en/builds/18pop-cumans-2tc-boom)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

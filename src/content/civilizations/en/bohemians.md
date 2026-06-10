@@ -29,5 +29,3 @@ Bohemians are a Gunpowder and Monk civilization from Eastern Europe.
 **Deathball composition (closed maps / team games):** Stack Houfnice and Hand Cannoneers for overwhelming gunpowder firepower, support with Halberdiers to screen against cavalry, and add Monks — which generate gold through Hussite Reforms — to convert and sustain the push.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

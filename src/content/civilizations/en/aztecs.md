@@ -28,5 +28,3 @@ Aztecs are an Infantry and Monk civilization from Mesoamerica.
 **Deathball composition (closed maps / team games):** Stack heavy Garland Wars infantry — Champions, Jaguar Warriors, and Pikemen — in front, supported by Monks for relics and conversions. Add Siege Workshop genitours or Trebuchets for ranged punch, and Bombard Cannons to crack buildings and siege.
 
 **Recommended build:** [Eagle + Range (Feudal)](/en/builds/eagle-range-feudal)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

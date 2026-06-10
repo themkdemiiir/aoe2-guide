@@ -18,9 +18,6 @@ steps:
   - { phase: feudal, villagers: 25, assign: "+2 → gold; build a Gold Mining Camp, then click Feudal at 25 pop", note: "Feudal lands ~11:20 — eco at age-up: 8 wood / 15 food / 2 gold", icons: ["gold", "mining-camp"] }
   - { villagers: 27, assign: "Feudal — sheep run out, send 4 to stone + a Mining Camp; re-task 3 onto stragglers, then 1 builds Blacksmith and 2 build Market; +2 (now 27) → stone; research Double-Bit Axe + Horse Collar", icons: ["stone", "mining-camp", "blacksmith", "market", "double-bit-axe", "horse-collar"] }
   - { phase: castle, assign: "Keep mining stone, then click Castle Age — lands ~14:50. Drop a Castle with the stone villagers and mass Unique Units; research Bow Saw", time: "14:50", icons: ["stone", "castle", "bow-saw"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Fast Castle into Unique Unit

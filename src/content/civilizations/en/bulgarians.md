@@ -28,5 +28,3 @@ Bulgarians are a Cavalry and Siege civilization from Eastern Europe.
 **Deathball composition (closed maps / team games):** Mass Konniks as the core, screen them with skirmisher-style Genitours and Halberdiers for trash protection, and add Trebuchets to crack down fortifications and grind out the push.
 
 **Recommended build:** [Men-at-Arms into Archers](/en/builds/maa-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

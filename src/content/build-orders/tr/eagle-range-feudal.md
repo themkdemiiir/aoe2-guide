@@ -21,9 +21,6 @@ steps:
   - { assign: "Kışla'dan Kartal İzcisi bas; 2 köylüyle bir Okçu Menzili ekle", note: "Menzil işçileriyle boşlukları Ev ve palisad ile kapat", icons: ["eagle-scout", "archery-range"] }
   - { assign: "KARAR — okçulara karşı +4 ŞM köylüsünü altına gönderip Okçu bas; nişancılara karşı +4'ü artık ağaç odununa gönderip Nişancı bas", icons: ["archer", "skirmisher"] }
   - { assign: "Ekonominin arkasına Tarla ek; bir Demirci kur ve Fletching araştır", icons: ["farm", "blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Eagle and Range Feudal Rush

@@ -27,5 +27,3 @@ Lithuanians are a Cavalry and Monk civilization from Eastern Europe.
 **Deathball composition (closed maps / team games):** Push forward behind a mass of Leitis, layer in Hand Cannoneers for ranged firepower against infantry, and use Bombard Cannons to demolish defensive structures and enemy siege as you grind through walls.
 
 **Recommended build:** [Spearman + Skirmisher](/en/builds/korean-spear-skirm)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

@@ -17,9 +17,6 @@ steps:
   - { villagers: 28, assign: "Çileklere Mill kur; Blacksmith + Fletching araştır; +köylüler → çilek", icons: ["mill", "fletching", "food"] }
   - { villagers: 34, assign: "Wheelbarrow araştır; odun köylülerini Tarlalara çek; yeni köylüler → tarlalar", icons: ["wheelbarrow", "farm"] }
   - { villagers: 35, assign: "+1 → altın; Fire Galley ve Archer baskısıyla Kale Çağı'na tıkla", icons: ["gold", "fire-galley"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/fire-galleys-and-archers"
 ---
 
 # Fire Galleys and Archers

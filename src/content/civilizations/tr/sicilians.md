@@ -29,5 +29,3 @@ Sicilians, Güney Avrupa'dan bir Piyade ve Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Ön hat olarak kitlesel Serjeant'lar kullan, onları menzilli destek için Scorpion-Corps genitour'larıyla perdele ve ilerlerken tahkimatları yıkmak için Trebuchet ekle.
 
 **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

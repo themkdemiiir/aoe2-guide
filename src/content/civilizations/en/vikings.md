@@ -27,5 +27,3 @@ Vikings are an Infantry and Naval civilization from Northern Europe.
 **Deathball composition (closed maps / team games):** Mass Berserks as the frontline, add Heavy Scorpions to shred clumped units and infantry, and bring Trebuchets to demolish buildings as you grind forward.
 
 **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

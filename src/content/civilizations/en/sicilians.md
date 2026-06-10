@@ -29,5 +29,3 @@ Sicilians are an Infantry and Cavalry civilization from Southern Europe.
 **Deathball composition (closed maps / team games):** Mass Serjeants as the frontline, screen them with Scorpion-Corps genitours for ranged support, and add Trebuchets to dismantle fortifications as you grind forward.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

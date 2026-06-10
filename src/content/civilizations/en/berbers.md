@@ -27,5 +27,3 @@ Berbers are a Cavalry and Naval civilization from North Africa.
 **Deathball composition (closed maps / team games):** Pack Camel Archers behind a wall of Heavy Scorpions to shred massed infantry and archers, with Bombard Cannons clearing fortifications and enemy siege as the ball rolls forward.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

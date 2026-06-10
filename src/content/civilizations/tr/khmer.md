@@ -28,5 +28,3 @@ Khmer, Güneydoğu Asya'dan bir Kuşatma ve Fil uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Heavy Scorpion'ları Ballista Elephant'larla yığ ve yavaş ama yıkıcı bir ilerleme için Trebuchet ile destekle.
 
 **Önerilen build:** [Khmer Fast Castle into Knights + Scorpions](/en/builds/khmer-fc-knights-scorpions)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

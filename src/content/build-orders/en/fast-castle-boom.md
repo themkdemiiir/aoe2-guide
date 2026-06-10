@@ -19,9 +19,6 @@ steps:
   - { villagers: 28, assign: "Click Castle Age at 28 pop; buy 100 stone at Market for a 4th TC if desired", icons: ["market"] }
   - { villagers: 28, assign: "Castle Age — pull 4 vils from each woodline to build 2 additional Town Centers", icons: ["town-center"] }
   - { villagers: 40, assign: "Research Horse Collar in the Mill; economy boomed, begin military from your chosen buildings", icons: ["horse-collar", "barracks", "stable", "archery-range"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/fast-castle-boom"
 
 ---
 

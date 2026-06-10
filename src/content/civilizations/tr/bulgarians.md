@@ -28,5 +28,3 @@ Bulgarians, Doğu Avrupa'dan bir Süvari ve Kuşatma uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Çekirdek olarak Konnik kalabalığı oluştur; trash koruması için Skirmisher tarzı Genitour'lar ve Halberdier'lerle ekrana al; tahkimatları kırmak ve ilerleyişi sürdürmek için Trebuchet ekle.
 
 **Önerilen build:** [Men-at-Arms into Archers](/en/builds/maa-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

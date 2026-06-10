@@ -29,5 +29,3 @@ Goths are an Infantry civilization from Northern Europe.
 **Deathball composition (closed maps / team games):** Stack Huskarls and Halberdiers as the core melee block, add Heavy Scorpions for area damage, and bring Bombard Cannons to break fortifications.
 
 **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

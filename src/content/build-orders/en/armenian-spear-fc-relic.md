@@ -20,9 +20,6 @@ steps:
   - { villagers: 26, time: "12:10", phase: feudal, assign: "Click Feudal Age", note: "Eco split ~9 wood / 11 food / 3 gold", icons: ["food"] }
   - { villagers: 26, assign: "Feudal: send walling villagers to stragglers; build a Market + Blacksmith with 3 of them", icons: ["market", "blacksmith"] }
   - { villagers: 28, time: "15:40", phase: castle, assign: "+2 → gold; click Castle Age. Research Double-Bit Axe and Horse Collar", icons: ["gold", "double-bit-axe", "horse-collar"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Armenian Spear Rush into Fast Castle Relic Control

@@ -20,9 +20,6 @@ steps:
   - { assign: "Skirmisher üret ve öne sür; av yiyeceği biterken 14-16 çiftlik ek", icons: ["skirmisher", "farm"] }
   - { assign: "7 köylüyü altına geçir ve bir Mining Camp kur", icons: ["gold", "mining-camp"] }
   - { assign: "Bir Blacksmith kur ve Fletching araştır; surları çek, sonra Castle Age'e geç", icons: ["blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Korean Spear Skirm Rush

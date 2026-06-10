@@ -28,5 +28,3 @@ Burmese are a Monk and Elephant civilization from Southeast Asia.
 **Deathball composition (closed maps / team games):** Stack a wall of Arambai as the damage core, screen them with Halberdiers, support with Monks, and bring Bombard Cannon to crack buildings — Battle Elephants are a strong alternative anchor when you want a heavier front line.
 
 **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

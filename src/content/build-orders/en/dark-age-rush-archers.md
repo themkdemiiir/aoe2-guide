@@ -20,9 +20,6 @@ steps:
   - { villagers: 25, assign: "+1 → build Farm; research Loom; click Feudal Age", note: "Advance at 25 pop (~12:00)", icons: ["farm", "loom"] }
   - { villagers: 25, assign: "Feudal arrives — 7 vils sheep → wood, 4 vils sheep → gold Mining Camp", icons: ["wood", "gold", "mining-camp"] }
   - { villagers: 29, assign: "Build 2 Archery Ranges + Blacksmith; +4 new vils → gold; research Fletching", icons: ["archery-range", "blacksmith", "gold", "fletching"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/dark-age-rush-archers"
 
 ---
 

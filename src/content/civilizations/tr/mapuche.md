@@ -24,4 +24,4 @@ Mapuche, Güney Amerika'dan bir Piyade uygarlığıdır.
 
 **Önerilen build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
 
-*(Hera'nın uygarlık strateji rehberleri henüz Mapuche'yi kapsamıyor; bu nedenle açılış, geç oyun veya deathball kompozisyonu burada sentezlenmedi.)*
+*(Bu uygarlık için ayrıntılı açılış / geç oyun / deathball rehberi yakında eklenecek.)*

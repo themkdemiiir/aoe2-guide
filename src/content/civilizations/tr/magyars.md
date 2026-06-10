@@ -27,5 +27,3 @@ Magyars, Doğu Avrupa'dan bir Süvari ve Piyade uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Ağır ön hat için Paladin, menzilli güç için Heavy Cavalry Archer ve Trebuchet'ler — düşman tahkimatlarını kuşatırken hızla yeniden konuşlanan mobil bir karma top.
 
 **Önerilen build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

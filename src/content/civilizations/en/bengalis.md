@@ -29,5 +29,3 @@ Bengalis are an Elephant and Naval civilization from South Asia.
 **Deathball composition (closed maps / team games):** Build around Monks for conversions and healing, pair them with Elephant Archers or Ratha for damage, and bring Trebuchets to crack down fortifications.
 
 **Recommended build:** [18 Pop Scouts into Archers](/en/builds/18pop-scouts-into-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

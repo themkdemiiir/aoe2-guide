@@ -21,9 +21,6 @@ steps:
   - { phase: castle, assign: "Kapalı duvarın arkasında Castle çağa tıkla", note: "Altın biriktir ve geçiş için Süvarileri hayatta tut", icons: ["food"] }
   - { assign: "Castle: 2 Okçu Menzili kur; Bloodlines + Fletching araştır; Atlı Okçu üretmeye başla", icons: ["archery-range", "bloodlines"] }
   - { assign: "Bow Saw, Bodkin Arrow, Husbandry araştır; Kale'de Mangudai'ye yükselt", icons: ["bow-saw", "bodkin-arrow", "husbandry"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Süvarilerden Atlı Okçulara

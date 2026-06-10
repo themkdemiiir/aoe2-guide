@@ -22,9 +22,6 @@ steps:
   - { assign: "Add a Blacksmith; research Double-Bit Axe", icons: ["blacksmith", "double-bit-axe"] }
   - { villagers: 20, assign: "+2 → gold; 1 → berries and build a Mill", icons: ["gold", "food", "mill"] }
   - { assign: "Research Fletching; send Archers and Man-at-Arms across the map together", icons: ["fletching", "archer", "man-at-arms"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 17 Pop Japanese Man-at-Arms Rush

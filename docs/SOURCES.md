@@ -30,23 +30,23 @@ icons against `game-facts.json`: **no build may reference a unit whose real Age 
 build's `targetAge`** (e.g. a Castle-Age Cavalry Archer or Light Cavalry in a Feudal build). This is
 the objective "unit produced before it exists" class and is the authoritative gate for that error.
 
-## Build orders & per-civ strategy — Hera's guides (synthesized, cited)
+## Build orders & per-civ strategy — the source guide's guides (synthesized, cited)
 
 Build-order data (villager counts, timings, recommended civs) and the per-civ "How to play"
 sections (openings, late-game compositions, deathball compositions) are derived from
-**[Hera](https://www.patreon.com/heraaoe2)**'s December 2025 Strategy Guide and his "ideal
+**[a pro player's build guide](https://www.the source guide)**'s December 2025 Strategy Guide and his "ideal
 strategy / composition for every civ" videos.
 
 - These are **facts/methods** (not copyrightable) re-expressed in **our own synthesized prose** —
-  no verbatim text from Hera's guide or video transcripts is published.
-- Hera's source material (the PDF + transcripts) is kept **local-only and gitignored**
-  (`md/reference/hera-*`) — never committed or redistributed; we cite Hera and link his channels.
-- Builds carry `source.author: "Hera"` + the Patreon link.
+  no verbatim text from the source guide's guide or video transcripts is published.
+- the source guide's source material (the PDF + transcripts) is kept **local-only and gitignored**
+  (`md/reference/hera-*`) — never committed or redistributed; we cite a pro player's build guide and link his channels.
+- Builds carry `source.author: "a pro player's build guide"` + the Patreon link.
 
 ## What is NOT source-verified (and must be treated as editorial)
 
 - **Strategy prose tone** (matchup framing, "best/strongest" wording) remains opinion, synthesized
-  from Hera's guidance — read it as a strong recommendation, not gospel.
+  from the source guide's guidance — read it as a strong recommendation, not gospel.
 - **Counter / "strong vs / weak vs" claims.** Informed by the r/aoe2 wiki and Spirit of the Law
   (see `md/reference/unit-counters-SOURCE.md`) and cross-referenced with the attack-bonus data, but
   counters also depend on armour, speed and micro — they are not reducible to a single data field,

@@ -15,8 +15,6 @@ steps:
   - { villagers: 28, assign: "+5; Kale Çağı'na tıkla; geçiş sırasında çiftlik ekle", icons: ["farm"] }
   - { villagers: 30, assign: "Kale: 2 Stable kur; Knight üretimini kesme", icons: ["stable", "knight"] }
   - { villagers: 32, assign: "+2 → altın; Bloodlines + Forging araştır", icons: ["gold", "bloodlines"] }
-source:
-  author: "Hera"
 ---
 
 # Fast Castle 2-Stable Knights (Pocket)

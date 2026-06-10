@@ -28,5 +28,3 @@ Franks are a Cavalry civilization from Western Europe.
 **Deathball composition (closed maps / team games):** Stack Paladin in front, back them with Heavy Scorpions to shred clumped infantry, and add Trebuchets (plus Bombard Cannons) to break down defenses as you grind forward.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

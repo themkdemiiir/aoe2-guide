@@ -21,9 +21,6 @@ steps:
   - { villagers: 25, assign: "Build an Archery Range; +2 → gold", icons: ["archery-range", "gold"] }
   - { assign: "Wall up and add Archers, Spearmen, or a tower as needed", icons: ["archer", "spearman", "watch-tower"] }
   - { assign: "Add a Blacksmith; research Fletching, then send Archers in to attack", icons: ["blacksmith", "fletching", "archer"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Generic Man-at-Arms Rush

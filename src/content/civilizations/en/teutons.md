@@ -29,5 +29,3 @@ Teutons are an Infantry civilization from Central Europe.
 **Deathball composition (closed maps / team games):** Mass Teutonic Knights as the unbreakable melee core, screen them with Halberdiers against cavalry, and pile on Ironclad Siege Onagers plus Bombard Cannons to grind through defenses and clumped armies.
 
 **Recommended build:** [17 Pop Teuton Tower Rush](/en/builds/17pop-teuton-tower-rush)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

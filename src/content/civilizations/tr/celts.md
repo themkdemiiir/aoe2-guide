@@ -28,5 +28,3 @@ Celts, Batı Avrupa'dan bir Yaya uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Woad Raider'ları perdelemek için öne Halberdier'ları sür, ardından Siege Ram'ler ve Siege Onager'larla push'u destekle — durdurulamaz bir yaya-siege topu oluşturursun.
 
 **Önerilen build:** [18 Pop Feudal Drush](/tr/builds/18pop-feudal-drush)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

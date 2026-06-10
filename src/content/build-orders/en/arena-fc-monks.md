@@ -16,8 +16,6 @@ steps:
   - { villagers: 28, assign: "+5; click Castle Age; keep booming", icons: ["castle-age"] }
   - { villagers: 30, assign: "Castle: build Monastery + Castle; produce Monks; grab all relics", icons: ["monastery", "monk", "castle"] }
   - { villagers: 32, assign: "+2; build 2nd TC; Siege Workshop for Battering Rams", icons: ["town-center", "siege-workshop"] }
-source:
-  author: "T90Official"
 ---
 
 # Arena Fast Castle with Monk Rush

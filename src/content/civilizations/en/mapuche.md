@@ -24,4 +24,4 @@ Mapuche are an Infantry civilization from South America.
 
 **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
 
-*(Hera's civ-strategy guides do not yet cover Mapuche, so no opening, late-game, or deathball composition is synthesized here.)*
+*(A detailed opening / late-game / deathball guide for this civ is coming soon.)*

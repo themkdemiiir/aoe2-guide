@@ -28,5 +28,3 @@ Saracens are a Camel and Naval civilization from the Middle East.
 **Deathball composition (closed maps / team games):** Stack Mamelukes with Siege Onagers and Trebuchets, adding a few Hussars to deal with enemy Monks.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

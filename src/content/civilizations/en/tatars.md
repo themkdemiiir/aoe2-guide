@@ -28,5 +28,3 @@ Tatars are a Cavalry Archer civilization from Central Asia.
 **Deathball composition (closed maps / team games):** Long-range Trebuchets — 18 tiles with Siege Engineers plus your unique tech — paired with Heavy Cavalry Archers and Keshiks to shred buildings and armies from a safe distance.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

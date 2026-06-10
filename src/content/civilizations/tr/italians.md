@@ -29,5 +29,3 @@ Italians, Güney Avrupa'dan bir Okçu ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Düşman altın birimlerini absorbe etmek ve counter'lamak için Condottieri ile desteklenen kitlevi Genoese Crossbowmen üzerine kur; destek için Monk ekle ve kuşatma gücü için Bombard Cannon ile tamamla.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

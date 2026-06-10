@@ -28,5 +28,3 @@ Franks, Batı Avrupa'dan bir Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Paladin'i öne koy, Heavy Scorpion'larla toplu piyadeleri tarayarak arkalarında destekle; ilerlerken savunmaları yıkmak için Trebuchet (ve Bombard Cannon) ekle.
 
 **Önerilen build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

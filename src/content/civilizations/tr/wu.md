@@ -25,6 +25,4 @@ Wu, Doğu Asya'dan bir Denizci uygarlığıdır.
 
 **Önerilen build:** [Fire Galleys and Archers](/en/builds/fire-galleys-and-archers)
 
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*
-
 *(Geç oyun ve deathball kompozisyonları bu uygarlık için henüz kapsanmamıştır.)*

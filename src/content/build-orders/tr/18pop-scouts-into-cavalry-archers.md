@@ -19,9 +19,6 @@ steps:
   - { assign: "+5 → altına, Mining Camp kur; Blacksmith kur; duvarı tamamla", icons: ["gold", "mining-camp", "blacksmith"] }
   - { phase: castle, assign: "Castle Age'e tıkla; ekonomiyi yeniden dağıt, altın ekle; 2 Archery Range kur", note: "Önce Fletching + Bloodlines araştır", icons: ["archery-range"] }
   - { assign: "Her iki Range'den Cavalry Archers bas; Bow Saw, Bodkin Arrow, Husbandry araştır" }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Köylü Scouts into Cavalry Archers

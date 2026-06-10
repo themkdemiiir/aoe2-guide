@@ -25,6 +25,4 @@ Tupi are an Archer and Raiding civilization from South America.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
 
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
-
 *(Late-game and deathball compositions not yet covered for this civ.)*

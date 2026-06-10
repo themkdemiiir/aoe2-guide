@@ -18,9 +18,6 @@ steps:
   - { villagers: 20, assign: "+1 → Altın yanına Mining Camp inşa et", icons: ["mining-camp", "gold"] }
   - { villagers: 21, assign: "+1 → Altın topla; Loom araştır; Feodal Çağ'a geç", note: "Town Center'da Loom araştır", icons: ["gold", "loom", "feudal-age"] }
   - { villagers: 21, assign: "Feodal: Militia'yı Men-at-Arms'a yükselt; Militia ile Taş/Altın köylülerini öne gönder", icons: ["man-at-arms", "watch-tower"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/men-at-arms-towers"
 ---
 
 # Men-at-Arms + Tower Rush

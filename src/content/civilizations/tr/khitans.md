@@ -25,6 +25,4 @@ Khitans, Doğu Asya'dan bir Cavalry Archer uygarlığıdır.
 
 **Önerilen build:** [18 Pop Scouts into Cavalry Archers](/en/builds/18pop-scouts-into-cavalry-archers)
 
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*
-
 *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz eklenmedi.)*

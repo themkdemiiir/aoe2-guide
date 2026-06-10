@@ -21,9 +21,6 @@ steps:
   - { assign: "İsteğe bağlı: rakipte Scout görürsen barracks'tan 1–4 Spearman", icons: ["spearman"] }
   - { villagers: 21, assign: "+4 → meyveye (toplam 5 köylü meyvede); tarla ekmeye başla", icons: ["food", "farm"] }
   - { assign: "Üretim oturunca 2–3 köylüyle duvar çek", icons: ["house"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 19 Köylü Tek Range Okçu

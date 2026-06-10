@@ -25,6 +25,4 @@ Romans, Antik Akdeniz'den gelen bir Piyade uygarlığıdır.
 
 **Önerilen build:** [Romans 5 Men-at-Arms](/tr/builds/romans-5-maa)
 
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*
-
 *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz eklenmedi.)*

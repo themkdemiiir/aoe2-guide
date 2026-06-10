@@ -22,9 +22,6 @@ steps:
   - { assign: "Castle'a tıkla; Double-Bit Axe araştır ve altın madenciliğine başla", icons: ["double-bit-axe", "gold"] }
   - { assign: "Castle: Crossbow + Bodkin Arrow; isteğe bağlı Horse Collar; Bow Saw" }
   - { assign: "Üretimi kesintisiz sürdürmek için 6 köylüyle 2. kütük kampı bırak", icons: ["lumber-camp", "wood"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Takım Oyunları için Etiyopya 2 Menzilli Okçu

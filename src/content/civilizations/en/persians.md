@@ -28,5 +28,3 @@ Persians are a Cavalry civilization from the Middle East.
 **Deathball composition (closed maps / team games):** Mass War Elephants behind a wall of Trash-Bows and Hussar, supported by Cedrum siege or Bombard Cannons to crack fortified positions.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

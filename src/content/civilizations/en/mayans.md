@@ -27,5 +27,3 @@ Mayans are an Archer civilization from Mesoamerica.
 **Deathball composition (closed maps / team games):** Build around Elite Eagle Warriors supercharged by El Dorado for durable, hard-hitting raiders, massed Plumed Archers for ranged firepower, and Siege Rams or Trebuchets to push through walls and fortifications.
 
 **Recommended build:** [Eagle Range Feudal](/en/builds/eagle-range-feudal)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

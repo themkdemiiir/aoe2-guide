@@ -27,5 +27,3 @@ Ethiopians, Doğu Afrika'dan bir Archer uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Topunu Torsion Engines'li Bombard Cannon'lar etrafında kur; onları korumak için Halberdier'larla destekle ve öne doğru ilerlerken menzilli hacmi artırmak için Arbalest karıştır.
 
 **Önerilen build:** [Ethiopian 2-Range Archers](/en/builds/ethiopian-2range-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

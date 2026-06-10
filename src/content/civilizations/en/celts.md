@@ -28,5 +28,3 @@ Celts are an Infantry civilization from Western Europe.
 **Deathball composition (closed maps / team games):** Roll forward with Halberdiers screening Woad Raiders, then back the push with Siege Rams and Siege Onagers for an unkillable infantry-and-siege ball.
 
 **Recommended build:** [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

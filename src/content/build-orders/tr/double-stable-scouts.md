@@ -21,9 +21,6 @@ steps:
   - { assign: "Yaklaşık 15 tarlada 2. ahırı kur ki ikisinden birden üret", icons: ["stable", "farm"] }
   - { villagers: 20, assign: "+2 → altın; Bloodlines'ı araştır ve Demirci zırh/saldırı geliştirmelerini al", icons: ["gold", "bloodlines", "blacksmith"] }
   - { assign: "~20 tarlada Wheelbarrow'u araştır ki iki ahırla ekonomi ölçeklenmeye devam etsin", icons: ["farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Çift Ahırlı Atlı Keşifçiler

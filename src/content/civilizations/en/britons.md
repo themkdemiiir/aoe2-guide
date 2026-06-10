@@ -36,5 +36,3 @@ Britons want to reach Castle Age fast with a strong wood economy (Town Center bo
 **Deathball composition (closed maps / team games):** Stack 12-range Longbowmen behind a wall of Halberdiers and roll forward with Trebuchets — the unmatched range lets you out-shoot everything before the enemy closes.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

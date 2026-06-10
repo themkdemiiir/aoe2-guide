@@ -24,7 +24,7 @@
 **Effort:** M (diff engine S, rendering S, patch-note linking M). **Depends on:** Epic 4 patch sweep.
 
 ## 2. Build-order trainer with bilingual audio (the flagship)
-**What:** In-browser timed trainer over the existing 36 Hera builds: play/pause clock, steps advance on schedule, **TTS audio cues (Web Speech API — EN and TR voices)**, keyboard space-bar/voice "next" for off-schedule play, adjustable speed (0.9×–1.2× for slower eco), end-of-run self-grade. PWA/offline so it works mid-LAN.
+**What:** In-browser timed trainer over the existing 36 a pro player's build guide builds: play/pause clock, steps advance on schedule, **TTS audio cues (Web Speech API — EN and TR voices)**, keyboard space-bar/voice "next" for off-schedule play, adjustable speed (0.9×–1.2× for slower eco), end-of-run self-grade. PWA/offline so it works mid-LAN.
 **Why it wins:** Cicero's trainer proves demand but lives in-game; buildorderguide is static text; AoE4 has audio apps, **AoE2 web has nothing with audio** — and a **Turkish audio build-order trainer exists nowhere on earth**. This is the feature that makes the bilingual angle a moat instead of a chore.
 **Stack fit:** One Astro island, vanilla TS, `speechSynthesis` (free, on-device), build data already structured (steps have timings/villager counts). No backend.
 **Effort:** M. **Depends on:** nothing — build data is ready today. Differentiates hard against aoe2.guide's "interactive" builds.

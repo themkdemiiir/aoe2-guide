@@ -28,5 +28,3 @@ Chinese, Doğu Asya'dan bir Archer uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Örtüşen atış yağmuru için yavaş, öğütücü bir Heavy Scorpion ve Chu Ko Nu kitlesi kur; melee kalkanı olarak Cavalier'ın arkasına yerleştir ve ilerlerken tahkimatları yıkmak için Trebuchet getir.
 
 **Önerilen build:** [Chinese Fast Feudal](/en/builds/chinese-fast-feudal)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

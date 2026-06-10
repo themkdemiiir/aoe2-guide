@@ -28,5 +28,3 @@ Koreans, Doğu Asya'dan bir Kule ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Uzun menzilli (10 menzil) genitour'ların arkasına War Wagon ve Halberdier yığ, ardından Trebuchet veya Bombard Cannon ile bitir; Koreans'ın menzilli ateş gücünden yararlan.
 
 **Önerilen build:** [Korean Spear-Skirm](/en/builds/korean-spear-skirm)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

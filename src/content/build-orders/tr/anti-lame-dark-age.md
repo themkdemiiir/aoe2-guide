@@ -18,9 +18,6 @@ steps:
   - { villagers: 17, assign: "2 → TC yakınındaki dağınık ağaçlara", icons: ["wood"] }
   - { villagers: 17, assign: "2 → Kışla ve bir ev kur", icons: ["barracks", "house"] }
   - { assign: "Okçu açılışı: 4 köylüyü altına gönder; ya da Scout/Mızraklı/Skirmisher yap ve köylüleri yemek ve odunda tut", icons: ["archer", "scout-cavalry"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Anti-Lame Fast Up Dark Age

@@ -28,5 +28,3 @@ Koreans are a Tower and Naval civilization from East Asia.
 **Deathball composition (closed maps / team games):** Stack War Wagons and Halberdiers behind long-range genitours (10 range) and finish with Trebuchets or Bombard Cannons, leaning on Korea's signature ranged firepower.
 
 **Recommended build:** [Korean Spear-Skirm](/en/builds/korean-spear-skirm)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

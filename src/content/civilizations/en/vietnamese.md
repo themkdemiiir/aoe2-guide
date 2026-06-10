@@ -28,5 +28,3 @@ Vietnamese are an Archer civilization from Southeast Asia.
 **Deathball composition (closed maps / team games):** Mass Rattan Archers as the ranged core, screen them with Battle Elephants as a durable frontline meatshield, and add Bombard Cannons to clear buildings and enemy siege as you push.
 
 **Recommended build:** [Scouts into Skirmishers](/en/builds/scouts-into-skirms)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

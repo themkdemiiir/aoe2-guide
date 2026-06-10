@@ -20,9 +20,6 @@ steps:
   - { villagers: 26, time: "12:10", phase: feudal, assign: "Feudal Age'e tıkla", note: "Ekonomi dağılımı ~9 odun / 11 yemek / 3 altın", icons: ["food"] }
   - { villagers: 26, assign: "Feudal: duvar köylülerini straggler'lara gönder; 3'üyle bir Market + Blacksmith kur", icons: ["market", "blacksmith"] }
   - { villagers: 28, time: "15:40", phase: castle, assign: "+2 → altına; Castle Age'e tıkla. Double-Bit Axe ve Horse Collar araştır", icons: ["gold", "double-bit-axe", "horse-collar"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Armenian Spear Rush into Fast Castle Relic Control

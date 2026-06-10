@@ -28,5 +28,3 @@ Poles are a Cavalry civilization from Eastern Europe.
 **Deathball composition (closed maps / team games):** Stack Obuch with Arbalests and Bombard Cannons, then round it out with Monks and Winged Hussar for the final push.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

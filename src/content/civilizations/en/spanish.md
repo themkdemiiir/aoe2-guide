@@ -29,5 +29,3 @@ Spanish are a Gunpowder and Monk civilization from Southern Europe.
 **Deathball composition (closed maps / team games):** Roll forward with Conquistadors and Paladins as the core, supported by Inquisition-boosted Monks for conversions and healing, plus Trebuchets and Bombard Cannons to crack buildings and siege from range.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

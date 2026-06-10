@@ -20,9 +20,6 @@ steps:
   - { assign: "Click Castle Age; research Double-Bit Axe and Horse Collar", phase: castle, time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
   - { villagers: 25, assign: "Castle: drop your 1st extra Town Center on the wood line; research Bow Saw; seed more farms", icons: ["town-center", "bow-saw", "farm"] }
   - { assign: "2nd extra TC on gold/stone; Wheelbarrow at ~18 farms, then Hand Cart; buy food/wood at Market as needed", icons: ["town-center", "wheelbarrow"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 23 Pop Fast Castle Boom — Arena

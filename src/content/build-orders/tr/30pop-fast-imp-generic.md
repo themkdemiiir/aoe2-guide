@@ -17,8 +17,6 @@ steps:
   - { villagers: 32, assign: "+2 köylü → altına (artık altında 8); Castle Age'e tıkla (~16:30)", icons: ["gold"] }
   - { villagers: 32, assign: "Castle Age — Monastery + Siege Workshop kur; av köylülerini tarlalara geçir", icons: ["monastery", "siege-workshop", "farm"] }
   - { villagers: 32, assign: "Imperial Age'e tıkla (~21:00); yiyecek / odun / altını dengede tut", icons: ["food", "wood", "gold"] }
-source:
-  author: "Hera"
 
 ---
 

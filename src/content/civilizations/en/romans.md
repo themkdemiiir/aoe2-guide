@@ -25,6 +25,4 @@ Romans are an Infantry civilization from the Ancient Mediterranean.
 
 **Recommended build:** [Romans 5 Men-at-Arms](/en/builds/romans-5-maa)
 
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
-
 *(Late-game and deathball compositions not yet covered for this civ.)*

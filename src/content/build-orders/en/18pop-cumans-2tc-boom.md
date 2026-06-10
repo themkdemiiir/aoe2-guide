@@ -19,9 +19,6 @@ steps:
   - { assign: "Research Double-Bit Axe; add Horse Collar (skip it on open maps if you feel unsafe)", icons: ["double-bit-axe", "horse-collar"] }
   - { assign: "Send fresh TC villagers to wood, the straggler trees, and farms; stabilize non-stop 2-TC production first", icons: ["wood", "farm"] }
   - { assign: "Click Castle Age once the two TCs are humming", time: "19:00", note: "Undisturbed, this lands around 19–20 minutes", icons: ["town-center"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Cumans 2 TC Boom

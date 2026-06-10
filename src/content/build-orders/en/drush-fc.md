@@ -20,9 +20,6 @@ steps:
   - { assign: "Feudal: finish walling; keep harassing with Militia + Scout", icons: ["militia", "scout-cavalry"] }
   - { villagers: 29, assign: "+2 → gold; build 2 Archery Ranges and a Blacksmith", icons: ["gold", "archery-range", "blacksmith"] }
   - { time: "16:05", phase: castle, assign: "Castle: mass Archers; research Double-Bit Axe, Horse Collar, Fletching", note: "Castle-first with an eco + tech lead", icons: ["archer", "double-bit-axe", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Drush Fast Castle

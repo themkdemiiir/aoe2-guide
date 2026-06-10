@@ -28,5 +28,3 @@ Japanese, Doğu Asya'dan bir Piyade uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Onager duvarının arkasında kalabalık Halberdier ve Arbalest yığ; binaları yıkmak için Trebuchet ekle. Siege Engineers bonusu menzili uzatır, böylece Onager'ların ve Treb'lerin top ilerlerken düşman tahkimatlarını daha uzaktan iter.
 
 **Önerilen build:** [17 Pop Japanese Man-at-Arms Rush](/en/builds/17pop-japanese-maa-rush)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

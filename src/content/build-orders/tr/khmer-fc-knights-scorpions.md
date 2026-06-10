@@ -22,9 +22,6 @@ steps:
   - { assign: "Castle: Stable + Blacksmith kur; +1 süvari zırhı araştır", icons: ["stable", "blacksmith"] }
   - { assign: "Hemen Knight üret; ileri bir Siege Workshop ekle", icons: ["siege-workshop"] }
   - { assign: "İleri üsten Knight'larla birlikte Scorpion üret", icons: [] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Khmer Fast Castle Knights ve Scorpions

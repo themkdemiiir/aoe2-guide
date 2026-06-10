@@ -29,5 +29,3 @@ Teutons, Orta Avrupa'dan bir Piyade uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Kırılmaz yakın dövüş özü olarak kalabalık Teutonic Knight kur, süvariye karşı onları Halberdier'larla ört; savunmaları ve yığılmış orduları yıpratmak için Ironclad Siege Onager ile Bombard Cannon yığ.
 
 **Önerilen build:** [17 Pop Teuton Tower Rush](/en/builds/17pop-teuton-tower-rush)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

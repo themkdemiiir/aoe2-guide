@@ -19,9 +19,6 @@ steps:
   - { assign: "+2 → Ahır ve Pazar dik", icons: ["stable", "market"] }
   - { villagers: 29, phase: castle, assign: "+4 → altın; Double-Bit Axe araştır; Castle çağını tıkla", time: "16:05", note: "Çağ atlarken 2. Ahırı dik", icons: ["gold", "double-bit-axe", "stable"] }
   - { assign: "Castle çağında: Horse Collar ve Bow Saw araştır; iki Ahırdan da Şövalye bas", icons: ["horse-collar", "bow-saw", "knight"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Knight Rush (Başlangıç)

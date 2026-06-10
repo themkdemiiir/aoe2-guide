@@ -25,6 +25,4 @@ Khitans are a Cavalry Archer civilization from East Asia.
 
 **Recommended build:** [18 Pop Scouts into Cavalry Archers](/en/builds/18pop-scouts-into-cavalry-archers)
 
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
-
 *(Late-game and deathball compositions not yet covered for this civ.)*

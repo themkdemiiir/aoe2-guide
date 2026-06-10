@@ -20,9 +20,6 @@ steps:
   - { assign: "Train Scout Cavalry non-stop and harass with 3 scouts", icons: ["stable", "scout-cavalry"] }
   - { assign: "Research Horse Collar and seed farms behind the walls", icons: ["horse-collar", "farm"] }
   - { assign: "At 13–14 farms move 7 villagers to gold with the Mule Cart; add a blacksmith", icons: ["gold", "blacksmith"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Georgians Healing Scout Rush

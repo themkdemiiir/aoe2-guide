@@ -28,5 +28,3 @@ Persians, Orta Doğu'dan gelen bir Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Trash okçusu ve Hussar duvarının arkasında kitlesel War Elephant kullan; tahkimli mevzileri kırmak için Cedrum kuşatma araçları veya Bombard Cannon ekle.
 
 **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

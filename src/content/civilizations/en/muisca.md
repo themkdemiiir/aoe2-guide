@@ -26,6 +26,4 @@ Muisca are a Gold and Infantry civilization from South America.
 
 **Recommended build:** [18 Pop Double Barracks Eagles](/en/builds/18pop-double-barracks-eagles)
 
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
-
 *(Late-game and deathball compositions not yet covered for this civ.)*

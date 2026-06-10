@@ -26,6 +26,4 @@ Armenians are an Infantry and Cavalry civilization from the Caucasus.
 
 **Recommended build:** [Armenian Spear into Fast Castle Relic](/en/builds/armenian-spear-fc-relic)
 
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*
-
 *(Late-game and deathball compositions not yet covered for this civ.)*

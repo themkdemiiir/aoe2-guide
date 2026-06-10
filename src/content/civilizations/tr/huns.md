@@ -28,5 +28,3 @@ Huns, Orta Asya'dan bir Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Fortifikasyonları yıkmak için kalabalık Elite Tarkan kullan, menzilli hasar için Heavy Cavalry Archer'larla eşleştir ve geri kalanını düzlemek için Siege Ram ekle.
 
 **Önerilen build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden derlenerek oluşturulmuştur.*

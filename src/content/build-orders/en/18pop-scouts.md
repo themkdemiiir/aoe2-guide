@@ -19,9 +19,6 @@ steps:
   - { assign: "Research Double-Bit Axe and Horse Collar; seed farms", icons: ["double-bit-axe", "horse-collar", "farm"] }
   - { assign: "Wall with the 2 stable builders; keep adding scouts non-stop", icons: ["scout-cavalry"] }
   - { assign: "Add 1–4 Spearmen if the opponent also opens with scouts", note: "Skip the spears versus archers", icons: ["spearman"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 1-Stable Scouts

@@ -27,5 +27,3 @@ Malians are an Infantry civilization from West Africa.
 **Deathball composition (closed maps / team games):** Mass Gbeto behind a wall of Siege Onagers, fold in Farimba-buffed Camels for a hard-hitting melee punch, and round out the push with Bombard Cannons or Trebuchets to crack fortifications.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

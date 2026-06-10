@@ -21,9 +21,6 @@ steps:
   - { assign: "Move 8 Town Center villagers → gold, build a Mining Camp", icons: ["gold", "mining-camp"] }
   - { assign: "Build 2 Archery Ranges and switch into Archers", icons: ["archery-range", "archer"] }
   - { assign: "Build a Blacksmith and research Fletching", icons: ["blacksmith", "fletching"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Pop Scouts into Archers

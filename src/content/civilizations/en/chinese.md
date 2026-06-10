@@ -28,5 +28,3 @@ Chinese are an Archer civilization from East Asia.
 **Deathball composition (closed maps / team games):** Build a slow, grinding ball of Heavy Scorpions and Chu Ko Nu for overlapping volleys, push it forward behind Cavalier as a melee shield, and bring Trebuchets to demolish fortifications as you advance.
 
 **Recommended build:** [Chinese Fast Feudal](/en/builds/chinese-fast-feudal)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

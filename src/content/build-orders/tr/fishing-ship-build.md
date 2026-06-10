@@ -18,9 +18,6 @@ steps:
   - { villagers: 19, time: "9:15", phase: feudal, assign: "Feudal Çağı'na tıkla", note: "Yaklaşık 5 köylü odunda, 14 köylü yiyecekte olacak şekilde geç", icons: ["town-center"] }
   - { villagers: 19, assign: "Koyunlardaki 7 köylüyü ikinci bir Kereste Kampı'na taşı", icons: ["wood", "lumber-camp"] }
   - { assign: "3 Balıkçı Gemisini de suda tutarak istikrarlı bir yiyecek akışı sağla", icons: ["fishing-ship", "food"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 19 Nüfus + 3 Balıkçı Gemisi Düzeni

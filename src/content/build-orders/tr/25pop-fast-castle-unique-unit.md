@@ -18,9 +18,6 @@ steps:
   - { phase: feudal, villagers: 25, assign: "+2 → altına; Gold Mining Camp kur, sonra 25 popta Feudal'a tıkla", note: "Feudal ~11:20'de gelir — çağ atlarken ekonomi: 8 odun / 15 yiyecek / 2 altın", icons: ["gold", "mining-camp"] }
   - { villagers: 27, assign: "Feudal — koyunlar biter, 4 köylüyü taşa + Mining Camp'e gönder; 3 köylüyü straggler ağaçlarına yönlendir, sonra 1'i Blacksmith ve 2'si Market kurar; +2 (artık 27) → taşa; Double-Bit Axe + Horse Collar araştır", icons: ["stone", "mining-camp", "blacksmith", "market", "double-bit-axe", "horse-collar"] }
   - { phase: castle, assign: "Taş toplamayı sürdür, sonra Castle Age'e tıkla — ~14:50'de gelir. Taş köylüleriyle bir Castle kur ve Özel Birimleri yığ; Bow Saw araştır", time: "14:50", icons: ["stone", "castle", "bow-saw"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Hızlı Kale ile Özel Birim

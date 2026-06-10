@@ -22,9 +22,6 @@ steps:
   - { assign: "Build an Archery Range at the front; send the straggler-tree Villager onto farms; start Skirmishers", icons: ["archery-range", "skirmisher", "farm"] }
   - { assign: "Build a Blacksmith, research Fletching, and keep adding Man-at-Arms", icons: ["blacksmith", "fletching", "man-at-arms"] }
   - { assign: "Research Arson once you have 7-8 Man-at-Arms, then Infantry and Skirmisher armor; Wheelbarrow at 14-16 farms", icons: ["arson", "wheelbarrow", "farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Man-at-Arms Into Skirms

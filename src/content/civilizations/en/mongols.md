@@ -27,5 +27,3 @@ Mongols are a Cavalry Archer civilization from East Asia.
 **Deathball composition (closed maps / team games):** Stack Mangudai with Drill-powered Siege Onagers and a screen of Hussars, pushing a mobile, high-damage ball that shreds both units and structures.
 
 **Recommended build:** [Mongol Scouts into Cavalry Archers](/en/builds/mongol-scouts-ca)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

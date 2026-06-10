@@ -27,5 +27,3 @@ Malians, Batı Afrika'dan bir Piyade uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Siege Onager duvarının arkasında yığın Gbeto kullan, Farimba güçlendirmeli Camel'larla sert yakın dövüş vur ve Bombard Cannon ya da Trebuchet'lerle tahkimatları kır.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

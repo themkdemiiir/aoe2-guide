@@ -28,5 +28,3 @@ Khmer are a Siege and Elephant civilization from Southeast Asia.
 **Deathball composition (closed maps / team games):** Stack Heavy Scorpions with Ballista Elephants and back them with Trebuchets for a slow but devastating push.
 
 **Recommended build:** [Khmer Fast Castle into Knights + Scorpions](/en/builds/khmer-fc-knights-scorpions)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

@@ -18,9 +18,6 @@ steps:
   - { villagers: 18, assign: "TC'den 4 köylü → ilk lumber camp", icons: ["wood", "lumber-camp"] }
   - { villagers: 18, assign: "TC'den +1 → meyveye, mill kur; Double-Bit Axe araştır", note: "Horse Collar isteğe bağlı", icons: ["food", "mill", "double-bit-axe"] }
   - { assign: "+2 → rakibi gözleyerek takip askeri; yavaş duvar çek", icons: ["scout-cavalry", "barracks"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 18 Köylü Feudal Drush

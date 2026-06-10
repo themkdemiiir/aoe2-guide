@@ -28,5 +28,3 @@ Slavs are a Cavalry civilization from Eastern Europe.
 **Deathball composition (closed maps / team games):** Anchor a slow push with Halberdiers in front, mass Siege Onagers or Heavy Scorpions for area damage behind them, and add Trebuchets to break down fortifications.
 
 **Recommended build:** [Scout Rush](/en/builds/18pop-scouts)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

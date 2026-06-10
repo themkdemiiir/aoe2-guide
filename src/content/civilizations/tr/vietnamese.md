@@ -28,5 +28,3 @@ Vietnamese, Güneydoğu Asya kökenli bir Archer uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Menzilli çekirdek olarak kalabalık Rattan Archer kur, önlerine dayanıklı bir ön hat olarak Battle Elephant'lar diz ve ilerleme sırasında bina ile düşman kuşatma makinelerini temizlemek için Bombard Cannon ekle.
 
 **Önerilen build:** [Scouts into Skirmishers](/en/builds/scouts-into-skirms)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

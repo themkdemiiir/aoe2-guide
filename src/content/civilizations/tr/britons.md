@@ -36,5 +36,3 @@ Britons güçlü bir odun ekonomisiyle (Şehir Merkezi bonusu) hızlı Kale Ça�
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** 12 menzilli Uzunyay Okçularını bir Halberdier duvarının arkasına diz ve Trebuchet'lerle öne doğru ilerle — eşsiz menzil, düşman yaklaşamadan her şeyi alt etmeni sağlar.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/tr/builds/19pop-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

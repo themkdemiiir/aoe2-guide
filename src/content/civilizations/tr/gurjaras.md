@@ -28,5 +28,3 @@ Gurjaras, Güney Asya'dan gelen bir Süvari ve Denizcilik uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım oyunları):** Heavy Camel Rider'lardan oluşan bir duvarın arkasına Chakram Thrower kitle; tahkimatlı mevzileri kırmak için uzun menzilli güç olarak Bombard Cannon kullan.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

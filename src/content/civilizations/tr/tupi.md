@@ -25,6 +25,4 @@ Tupi, Güney Amerika'dan bir Archer ve baskın uygarlığıdır.
 
 **Önerilen build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
 
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*
-
 *(Bu uygarlık için geç oyun ve deathball kompozisyonları henüz kapsanmamıştır.)*

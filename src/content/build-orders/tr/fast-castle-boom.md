@@ -19,9 +19,6 @@ steps:
   - { villagers: 28, assign: "28 nüfusta Castle Age'e tıkla; istersen 4. TC için Market'ten 100 taş al", icons: ["market"] }
   - { villagers: 28, assign: "Castle Age — her odun hattından 4 köylü çekip 2 ek Town Center kur", icons: ["town-center"] }
   - { villagers: 40, assign: "Mill'de Horse Collar araştır; ekonomi boomlandı, seçtiğin binalardan asker üretimine başla", icons: ["horse-collar", "barracks", "stable", "archery-range"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/fast-castle-boom"
 
 ---
 

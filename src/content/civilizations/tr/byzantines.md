@@ -29,5 +29,3 @@ Byzantines, Doğu Akdeniz'den savunmacı bir uygarlıktır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Cataphract duvarının arkasında ilerle, düşman mevzilerini dökmek için Bombard Cannon ekle ve iyileştirme ile dönüştürme için Monk'ları birlikte tut; ucuz ve ekstra dayanıklı binaların sayesinde Bombard Tower'lar savunma hattını sabitlemeye yarar.
 
 **Önerilen build:** [Spearman + Skirmisher](/en/builds/korean-spear-skirm)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

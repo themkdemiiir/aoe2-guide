@@ -28,5 +28,3 @@ Hindustanis, Güney Asya kökenli bir Barut ve Süvari uygarlığıdır.
 **Deathball kompozisyonu (kapalı haritalar / takım maçları):** Imperial Camel'ları dayanıklı ve sert vuran bir çekirdek olarak yığ; Shatagni'nin sağladığı 9 menzilli Hand Cannoneer'larla ekranla; binaları yıkmak ve düşman kuşatmasını geçmek için Bombard Cannon ekle.
 
 **Önerilen build:** [Scout Rush](/tr/builds/18pop-scouts)
-
-*Strateji, Hera'nın "her uygarlık için ideal strateji / kompozisyon" rehberlerinden sentezlenmiştir.*

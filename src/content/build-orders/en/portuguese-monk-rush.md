@@ -21,9 +21,6 @@ steps:
   - { assign: "Barracks + 2 spearmen; send 2 vils + scout toward center", icons: ["barracks", "spearman", "scout-cavalry"] }
   - { assign: "Build 2 Monasteries near map center; start producing Monks; grab relics", icons: ["monastery", "monk"] }
   - { assign: "Stragglers → farms; add Siege Workshop + Battering Ram for relic escort", icons: ["farm", "siege-workshop", "battering-ram"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Portuguese Monk Rush

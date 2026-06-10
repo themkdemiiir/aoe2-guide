@@ -29,5 +29,3 @@ Italians are an Archer and Naval civilization from Southern Europe.
 **Deathball composition (closed maps / team games):** Build around massed Genoese Crossbowmen with Condottieri to absorb and counter enemy gold units, add Monks for support, and round it out with Bombard Cannons for siege power.
 
 **Recommended build:** [19 Pop 1-Range Archers](/en/builds/19pop-archers)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

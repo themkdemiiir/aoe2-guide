@@ -19,9 +19,6 @@ steps:
   - { assign: "3 odun köylüsünü çek → Pazar (Market) (2) ve Demirci (Blacksmith) (1)", icons: ["market", "blacksmith"] }
   - { phase: castle, assign: "Kale Çağı'na tıkla; Double-Bit Axe ve Horse Collar'ı araştır", time: "10:40", icons: ["double-bit-axe", "horse-collar"] }
   - { assign: "Kale: meyve biterken o köylüleri ilk ek Şehir Merkezi noktasına gönder", icons: ["town-center", "farm"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Fortress'ta Hızlı Kale (Fast Castle)

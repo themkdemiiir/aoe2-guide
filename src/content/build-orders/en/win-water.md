@@ -18,9 +18,6 @@ steps:
   - { villagers: 21, assign: "Feudal: research Double-Bit Axe; queue 2 Fire Galleys from the Dock", icons: ["double-bit-axe", "fire-galley"] }
   - { villagers: 23, assign: "+2 → gold, build Mining Camp", icons: ["gold", "mining-camp"] }
   - { villagers: 25, assign: "+1 Mill on Berries, +1 → Berries; build 2nd Dock", icons: ["mill", "food", "dock"] }
-source:
-  author: "AoE Companion"
-  url: "https://aoecompanion.com/build-guides/win-water"
 ---
 
 # Win Water

@@ -20,9 +20,6 @@ steps:
   - { assign: "Castle Age'e tıkla; Double-Bit Axe ve Horse Collar araştır", phase: castle, time: "14:00", icons: ["double-bit-axe", "horse-collar"] }
   - { villagers: 25, assign: "Castle: 1. ek Town Center'ı odun çizgisine kur; Bow Saw araştır; yeni tarlalar ek", icons: ["town-center", "bow-saw", "farm"] }
   - { assign: "2. ek TC altın/taşa; ~18 tarlada Wheelbarrow, ardından Hand Cart; gerekirse Market'ten yiyecek/odun al", icons: ["town-center", "wheelbarrow"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 23 Köylü Hızlı Kale Boom — Arena

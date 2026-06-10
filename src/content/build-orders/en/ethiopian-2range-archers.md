@@ -22,9 +22,6 @@ steps:
   - { assign: "Click up to Castle; research Double-Bit Axe and start gold mining", icons: ["double-bit-axe", "gold"] }
   - { assign: "Castle: Crossbow + Bodkin Arrow; optional Horse Collar; Bow Saw" }
   - { assign: "Drop a 2nd lumber camp with 6 vils to fuel continuous production", icons: ["lumber-camp", "wood"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # Ethiopian 2-Range Archers for Team Games

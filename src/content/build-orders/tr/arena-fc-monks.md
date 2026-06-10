@@ -16,8 +16,6 @@ steps:
   - { villagers: 28, assign: "+5; Kale Çağı'na tıkla; boom yapmaya devam et", icons: ["castle-age"] }
   - { villagers: 30, assign: "Kale: Manastır + Castle kur; Keşiş üret; tüm kalıntıları kap", icons: ["monastery", "monk", "castle"] }
   - { villagers: 32, assign: "+2; 2. Town Center kur; Battering Ram için Siege Workshop aç", icons: ["town-center", "siege-workshop"] }
-source:
-  author: "T90Official"
 ---
 
 # Arena Hızlı Kale ve Keşiş Baskını

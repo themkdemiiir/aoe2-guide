@@ -28,5 +28,3 @@ Malay are a Naval civilization from Southeast Asia.
 **Deathball composition (closed maps / team games):** Mass discounted Battle Elephants as the frontline, support them with Arbalest, sustain with Monks, and clear key targets with Bombard Cannon.
 
 **Recommended build:** [Malay Flexible Opening](/en/builds/malay-flexible-opening)
-
-*Strategy synthesized from Hera's "ideal strategy / composition for every civ" guides.*

@@ -21,9 +21,6 @@ steps:
   - { assign: "Optional: 1–4 Spearmen from the barracks if you spot enemy Scouts", icons: ["spearman"] }
   - { villagers: 21, assign: "+4 → berries (5 on berries total); seed farms", icons: ["food", "farm"] }
   - { assign: "Wall with 2–3 vils using a mix of houses and palisades", icons: ["house"] }
-source:
-  author: "Hera"
-  url: "https://www.patreon.com/heraaoe2"
 ---
 
 # 19 Pop 1-Range Archers
