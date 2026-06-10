@@ -54,11 +54,15 @@ function isTransitionAssign(assign: string): boolean {
 interface PhaseSection {
   id: string;
   label: string;
-  steps: Array<Step & { index: number; isTransition: boolean }>;
+  steps: Array<Step & { index: number; isTransition: boolean; popChanged: boolean }>;
 }
 
 const sections: PhaseSection[] = [{ id: "opening", label: t(lang, "builds.opening"), steps: [] }];
 
+// Show the big pop chip only when the running Vil-Pop total actually CHANGES (a real
+// milestone). Reassignment / instruction steps that hold or omit the pop show their
+// step number instead — otherwise "18, 18, 18" reads like a bug.
+let lastPop: number | undefined;
 for (const [index, step] of steps.entries()) {
   const phaseKey =
     step.phase ?? (isTransitionAssign(step.assign) ? phaseFromAssign(step.assign) : null);
@@ -69,7 +73,9 @@ for (const [index, step] of steps.entries()) {
       sections.push({ id: phaseKey, label, steps: [] });
     }
   }
-  sections[sections.length - 1].steps.push({ ...step, index, isTransition });
+  const popChanged = step.villagers != null && step.villagers !== lastPop;
+  if (step.villagers != null) lastPop = step.villagers;
+  sections[sections.length - 1].steps.push({ ...step, index, isTransition, popChanged });
 }
 ---
 <div data-trainer data-slug={slug} data-lang={lang} tabindex="-1" class="trainer focus:outline-none">
@@ -94,7 +100,9 @@ for (const [index, step] of steps.entries()) {
   {sections.map((section) => {
     const first = section.steps[0];
     const pops = section.steps.map((s) => s.villagers).filter((v): v is number => v != null);
-    const popRange = pops.length ? ` · ${t(lang, "home.pop")} ${pops[0]}-${pops[pops.length - 1]}` : "";
+    const lo = pops.length ? Math.min(...pops) : 0;
+    const hi = pops.length ? Math.max(...pops) : 0;
+    const popRange = pops.length ? ` · ${t(lang, "home.pop")} ${lo === hi ? lo : `${lo}–${hi}`}` : "";
     return (
       <section class="overflow-hidden rounded border border-stone-700/40 bg-parchment shadow-sm">
         <header class="flex flex-wrap items-end justify-between gap-2 border-b border-stone-700/30 bg-stone-700/10 px-4 py-3">
@@ -121,7 +129,7 @@ for (const [index, step] of steps.entries()) {
               s.isTransition ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
             ]}>
               <div class="flex items-center gap-3 sm:block">
-                {s.villagers != null ? (
+                {s.popChanged ? (
                   <div class="inline-flex min-w-12 flex-col rounded border border-stone-700/30 bg-parchment/80 px-2 py-1 text-center">
                     <span class="text-[0.65rem] uppercase tracking-wide text-stone-700">{t(lang, "home.pop")}</span>
                     <span class="font-mono text-lg font-bold leading-none text-ink">{s.villagers}</span>
