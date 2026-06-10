@@ -27,5 +27,12 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkBuildOrderTruncate],
   },
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      // Prevent Vite from inlining small font subsets as data: URIs — they would
+      // be blocked by font-src 'self' in the CSP. Serve all fonts as /_astro/ URLs.
+      assetsInlineLimit: 0,
+    },
+  },
 });
