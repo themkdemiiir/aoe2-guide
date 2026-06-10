@@ -1,0 +1,44 @@
+# AOE2 Guide
+
+> Free, bilingual (English/Turkish) Age of Empires II Definitive Edition strategy reference covering all 53 civilizations, 46 build orders, maps, unit counters, and game mechanics.
+
+AOE2 Guide provides step-by-step build orders with villager timing, per-civilization strategy notes, map strategies, and unit counter charts. All content is available in English (/en/) and Turkish (/tr/).
+
+## Civilizations
+All 53 AoE2 DE civilizations with civ bonuses, team bonus, unique units, unique techs, tier rating, and strategy notes.
+- /en/civs/britons — Longbowman archer civilization; range bonus, cheap TCs, Warwolf trebuchet
+- /en/civs/franks — Cavalry civilization; free farm upgrades, faster paladin production
+- /en/civs/mongols — Cavalry archer civilization; faster Mangudai, siege engineers bonus
+- /en/civs/aztecs — Infantry/monk civilization; gold trickle, faster monk work, Jaguar Warrior
+- /en/civs/chinese — Fast start with extra food; discounted technologies, Chu Ko Nu
+- /en/civs/vikings — Strong infantry and navy; free Wheelbarrow/Hand Cart, Berserker
+- /en/civs/mayans — Archer civilization; free Obsidian Arrow, longer-lasting resources, Plumed Archer
+- /en/civs — Full civilization list
+
+## Build Orders
+Step-by-step villager assignment guides with population counts and timing.
+- /en/builds/18pop-scouts — Classic scout rush, Feudal Age pressure
+- /en/builds/19pop-archers — Fast archers feudal attack
+- /en/builds/maa-archers — Men-at-Arms opener into Feudal archers
+- /en/builds/25pop-knight-rush — Fast Castle Age knights pocket
+- /en/builds/fast-castle-boom — Economic boom for Arena and closed maps
+- /en/builds/drush-fc — Dark Age militia rush into Fast Castle
+- /en/builds/fc-crossbows — Fast Castle into Crossbow/Arbalest
+- /en/builds/galley-rush — Water map galley rush opening
+- /en/builds/fishing-ship-build — Water map fishing economy
+- /en/builds — Full build order list
+
+## Maps
+Strategy guides for popular competitive maps.
+- /en/maps/arabia — Open map; scouts and archers dominant, early pressure meta
+- /en/maps/arena — Fully walled start; Castle/Imperial Age tower and monk strategies
+- /en/maps/black-forest — Closed map; booming, trebuchet endgame, team coordination
+- /en/maps/islands — Water map; galley rush, fishing economy, naval control
+- /en/maps — Full map list
+
+## Counters
+- /en/counters — Unit counter chart by age (what beats what)
+
+## Units
+Stats, costs, and roles for all standard and unique units.
+- /en/units — Unit index with HP, attack, armor, cost, and training time

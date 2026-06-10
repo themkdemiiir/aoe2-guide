@@ -28,8 +28,9 @@ const { entry, fallback } = found;
 const { Content } = await render(entry);
 const civDataEntry = await getEntry("civ-data", civSlug);
 const meta = civDataEntry?.data;
+const description = `${entry.data.name} civilization guide for Age of Empires II — ${entry.data.tagline}`;
 ---
-<BaseLayout title={entry.data.name} canonicalPath={`/civs/${civSlug}`}>
+<BaseLayout title={entry.data.name} description={description} canonicalPath={`/civs/${civSlug}`}>
   <article class="mx-auto max-w-prose px-4 py-12">
     {fallback && (
       <Alert variant="warning" class="mb-6">

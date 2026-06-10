@@ -14,7 +14,7 @@ interface Props {
   canonicalPath?: string;
 }
 
-const { title, description = "Age of Empires II guide", canonicalPath = "/" } = Astro.props;
+const { title, description = "Age of Empires II — civilizations, build orders, maps and strategy guide.", canonicalPath = "/" } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
@@ -25,6 +25,9 @@ const canonical = `${site}/${locale}${canonicalPath}`;
 const ogMatch = canonicalPath.match(/^\/(civs|builds|units|maps)\/([^/]+)\/?$/);
 const ogImage = `${site}/og${ogMatch ? `/${ogMatch[1]}/${ogMatch[2]}` : "/default"}.png`;
 
+// Append brand suffix unless the title already identifies the site.
+const fullTitle = title.includes("AOE2") ? title : `${title} | AOE2 Guide`;
+
 // JSON-LD structured data — WebSite schema for rich results.
 const jsonLd = {
   "@context": "https://schema.org",
@@ -34,6 +37,27 @@ const jsonLd = {
   description,
   inLanguage: locale,
 };
+
+// BreadcrumbList — computed from canonicalPath; skipped on homepage.
+const sectionLabels: Record<string, string> = {
+  civs: "Civilizations", builds: "Build Orders", maps: "Maps",
+  units: "Units", counters: "Counters", glossary: "Glossary",
+  learn: "Learn", matchups: "Matchups",
+};
+const pathParts = canonicalPath.split("/").filter(Boolean);
+const breadcrumbLd = pathParts.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "AOE2 Guide", item: `${site}/${locale}/` },
+    ...(sectionLabels[pathParts[0]] ? [
+      { "@type": "ListItem", position: 2, name: sectionLabels[pathParts[0]], item: `${site}/${locale}/${pathParts[0]}` },
+    ] : []),
+    ...(pathParts[1] ? [
+      { "@type": "ListItem", position: 3, name: title, item: `${site}/${locale}${canonicalPath}` },
+    ] : []),
+  ],
+} : null;
 ---
 <!doctype html>
 <html lang={locale} dir={dir} data-theme="light">
@@ -47,7 +71,7 @@ const jsonLd = {
       }
     </script>
     <SEO
-      title={title}
+      title={fullTitle}
       description={description}
       canonical={canonical}
       openGraph={{
@@ -72,6 +96,7 @@ const jsonLd = {
     />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -79,6 +104,10 @@ const jsonLd = {
     <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href="/fonts/cinzel-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
+    {breadcrumbLd && (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd).replace(/</g, "\\u003c")} />
+    )}
+    <slot name="head" />
     {alternates.map(({ locale: l, path }) => (
       <link rel="alternate" hreflang={l} href={`${site}${path}`} />
     ))}
