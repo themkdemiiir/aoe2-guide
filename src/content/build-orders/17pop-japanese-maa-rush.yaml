@@ -2,9 +2,9 @@ slug: 17pop-japanese-maa-rush
 name:
   en: 17 Pop Japanese Man-at-Arms Rush
   tr: 17 Pop Japon Man-at-Arms Baskını
-difficulty: intermediate
+difficulty: advanced
 targetAge: feudal
-durationMin: 8
+durationMin: 9
 civsRecommended:
   - japanese
 steps:
@@ -22,25 +22,19 @@ steps:
     icons:
       - wood
       - lumber-camp
-  - villagers: 9
-    assign:
-      en: +1 → lure the first boar
-      tr: +1 → ilk yaban domuzunu çek
-    icons:
-      - food
   - villagers: 10
     assign:
-      en: +1 → lure the second boar under the Town Center
-      tr: +1 → ikinci yaban domuzunu Şehir Merkezi altına çek
+      en: +1 → first boar, +1 → second boar under the Town Center
+      tr: +1 → ilk yaban domuzunu çek, +1 → ikinci domuzu Şehir Merkezi altına çek
+    note:
+      en: Lure at least 2 deer — this is mandatory
+      tr: En az 2 geyik çek — bu zorunlu
     icons:
       - food
   - villagers: 11
     assign:
-      en: +1 → build a House, then move to the hunt
-      tr: +1 → Ev yap, sonra ava katıl
-    note:
-      en: Lure at least 2 deer — this is mandatory
-      tr: En az 2 geyik çek — bu zorunlu
+      en: +1 → build a House, then back to the hunt
+      tr: +1 → Ev yap, sonra ava dön
     icons:
       - house
       - food
@@ -50,16 +44,12 @@ steps:
       tr: +2 → av (ikinci yaban domuzunu yiyerek bitir)
     icons:
       - food
-  - assign:
-      en: +1 → build a Barracks at the front of your base
-      tr: +1 → üssünün ön tarafına Kışla kur
-    icons:
-      - barracks
   - villagers: 16
     assign:
-      en: +2 → food under the Town Center
-      tr: +2 → Şehir Merkezi altında yiyecek
+      en: +1 → Barracks at the front, +2 → food under the Town Center
+      tr: +1 → öne Kışla kur, +2 → Şehir Merkezi altında yiyecek
     icons:
+      - barracks
       - food
   - villagers: 17
     phase: feudal
@@ -75,51 +65,39 @@ steps:
       - loom
   - villagers: 17
     assign:
-      en: 2 from the hunt → gold, drop a Mining Camp
-      tr: Avdan 2 kişi → altına git, Maden Kampı kur
+      en: 2 from the hunt → gold with a Mining Camp; pump 3 Militia and send them across the map
+      tr: Avdan 2 kişi → Maden Kampı ile altına; 3 Milis bas ve haritanın karşısına yolla
     icons:
       - gold
       - mining-camp
-  - assign:
-      en: Pump 3 Militia and walk them across the map
-      tr: 3 Milis bas ve haritanın karşısına yürüt
-    icons:
       - militia
   - villagers: 17
     assign:
-      en: 4 off the Town Center → wood at the Lumber Camp
-      tr: Şehir Merkezi'nden 4 kişi → Kereste Kampı'nda oduna
-    icons:
-      - wood
-      - lumber-camp
-  - assign:
-      en: Build an Archery Range and start Archers; research Man-at-Arms
-      tr: Okçu Menzili kur ve Okçu basmaya başla; Man-at-Arms'ı araştır
+      en: 4 off the Town Center → wood; build an Archery Range, start Archers, research Man-at-Arms
+      tr: Şehir Merkezi'nden 4 kişi → oduna; Okçu Menzili kur, Okçu bas, Man-at-Arms'ı araştır
     icons:
       - archery-range
       - archer
       - man-at-arms
-  - assign:
-      en: Add a Blacksmith; research Double-Bit Axe
-      tr: Demirci ekle; Double-Bit Axe'ı araştır
+  - villagers: 19
+    assign:
+      en: +2 → gold; add a Blacksmith and research Double-Bit Axe
+      tr: +2 → altın; Demirci ekle ve Double-Bit Axe'ı araştır
     icons:
+      - gold
       - blacksmith
       - double-bit-axe
   - villagers: 20
     assign:
-      en: +2 → gold; 1 → berries and build a Mill
-      tr: +2 → altın; 1 → çilekler ve Değirmen kur
+      en: +1 → berries and build a Mill; research Fletching and push Archers + Man-at-Arms together
+      tr: +1 → çileklere ve Değirmen kur; Fletching'i araştır ve Okçu + Man-at-Arms'ı birlikte ileri sür
+    note:
+      en: Slowly move villagers to farms before the sheep run out
+      tr: Koyunlar bitmeden köylüleri yavaşça tarlalara geçir
     icons:
-      - gold
       - food
       - mill
-  - assign:
-      en: Research Fletching; send Archers and Man-at-Arms across the map together
-      tr: Fletching'i araştır; Okçuları ve Man-at-Arms'ı birlikte haritanın karşısına gönder
-    icons:
       - fletching
-      - archer
-      - man-at-arms
 intro:
   en: >-
     Reach Feudal Age around 8:25 and apply the fastest possible Man-at-Arms pressure, layering in Archers right behind
@@ -160,3 +138,5 @@ strategy:
     - >-
       Rakip hızlı duvar örerse veya Scout'larla karşılık verirse baskıyı gevşet, altın ve odununu güvene al ve
       birlikleri ziyan etmek yerine temiz bir şekilde Castle Çağı Crossbow'larına geçiş yap.
+source:
+  author: Hera

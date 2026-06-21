@@ -4,19 +4,19 @@ name:
   tr: Mayans
 tagline:
   en: Mayans — an Archer civilization from Mesoamerica.
-  tr: Mayans — Mezoamerika'dan bir Okçu uygarlığı.
+  tr: Mayans, Mezoamerika'dan bir Okçu uygarlığıdır.
 bonuses:
   en:
     - Start with +1 Villager, but -50 food
     - Resources last +15% longer
     - Foot Archers cost -10/20/30% in Feudal/Castle/Imperial Age
   tr:
-    - +1 köylü ile başla, ancak -50 Yiyecek
-    - Kaynaklar %15 daha uzun sürer
-    - Foot Archers, Feodal/Kale/İmparatorluk Çağı'nda %10/20/30 daha ucuz
+    - +1 Köylüyle fakat -50 yiyecekle başlanır
+    - Kaynaklar %15 daha uzun süre dayanır
+    - Yaya Okçular; Feodal Çağ'da %10, Kale Çağı'nda %20, İmparatorluk Çağı'nda %30 daha ucuzdur
 teamBonus:
   en: Walls cost -50%
-  tr: Duvarlar %50 daha ucuz
+  tr: Surların bedeli %50 azalır
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Hul'che Javelineers
     effect:
       en: Skirmishers fire an additional projectile
-      tr: Skirmishers fire an additional projectile
+      tr: Avcı Erleri ek bir cisim fırlatır
   imperial:
     name:
       en: Holcans
       tr: Holcans
     effect:
       en: Eagle Warriors +40 HP
-      tr: Eagle Warriors +40 HP
+      tr: Kartal Savaşçıların DP'si +40 artar
 strategy:
   en: >-
     Mayans are an Archer civilization from Mesoamerica.

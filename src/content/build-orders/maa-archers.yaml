@@ -24,61 +24,46 @@ steps:
       - house
   - villagers: 10
     assign:
-      en: +1 → lure the first boar
-      tr: +1 → ilk yaban domuzunu çek
-    icons:
-      - food
-  - assign:
-      en: Lure at least 2 deer
-      tr: En az 2 geyik çek
+      en: +1 → lure the first boar, then lure at least 2 deer once both boars are found
+      tr: +1 → ilk yaban domuzunu çek, ardından iki yaban domuzunu da bulunca en az 2 geyik çek
     note:
-      en: Mandatory — this build leans on the extra hunt food
-      tr: Zorunlu — bu açılış fazladan av etine dayanıyor
+      en: The deer lure is mandatory — this build leans on the extra hunt food
+      tr: Geyik çekmek zorunlu — bu açılış fazladan av etine dayanıyor
     icons:
       - food
   - villagers: 15
     assign:
-      en: +5 → hunt (eat through the second boar)
-      tr: +5 → av (ikinci yaban domuzunu bitir)
+      en: +5 → hunt under the Town Center (eat through the second boar when needed)
+      tr: +5 → Şehir Merkezi altında av (gerektiğinde ikinci yaban domuzunu bitir)
     icons:
       - food
-  - assign:
-      en: +1 → build a Barracks and a House at the front
-      tr: +1 → cephede bir Kışla ve bir Ev kur
-    icons:
-      - barracks
-      - house
   - villagers: 18
-    phase: feudal
     time: "8:50"
     assign:
-      en: +2 → hunt, research Loom, then click up to Feudal
-      tr: +2 → av, Loom araştır, sonra Feudal'a tıkla
+      en: +2 → hunt; build a Barracks then a front House, find your sheep, scout the enemy, research Loom, then click up to Feudal
+      tr: +2 → av; bir Kışla sonra cephede bir Ev kur, koyunlarını bul, rakibi keşfet, Loom araştır, sonra Feudal'a tıkla
     note:
-      en: Land with roughly 3 on wood and 14 on food
-      tr: Yaklaşık 3 köylü odunda, 14 köylü yiyecekte olarak çık
+      en: Click up around 8:50 with roughly 3 on wood and 14 on food
+      tr: Yaklaşık 8:50'de, 3 köylü odunda ve 14 köylü yiyecekte iken Feudal'a tıkla
     icons:
       - food
+      - barracks
       - loom
   - villagers: 18
+    phase: feudal
     assign:
-      en: "Feudal: move 5 from the hunt → wood at the Lumber Camp"
-      tr: "Feudal: avdan 5 köylüyü → Kereste Kampı'nda oduna kaydır"
+      en: "Feudal: move 5 from the hunt → wood (now 8 on wood, 9 on food)"
+      tr: "Feudal: avdan 5 köylüyü → oduna kaydır (artık 8 odunda, 9 yiyecekte)"
     icons:
       - wood
       - lumber-camp
   - villagers: 18
     assign:
-      en: 2 (hunt + Barracks builder) → gold, drop a Mining Camp
-      tr: 2 köylü (av + Kışla inşaatçısı) → altın, bir Maden Kampı kur
+      en: 2 (hunt + Barracks builder) → gold, drop a Mining Camp (now 8 wood, 7 food, 2 gold); pump 3 Militia out and research Man-at-Arms
+      tr: 2 köylü (av + Kışla inşaatçısı) → altın, bir Maden Kampı kur (artık 8 odun, 7 yiyecek, 2 altın); 3 Milis bas ve Man-at-Arms araştır
     icons:
       - gold
       - mining-camp
-  - assign:
-      en: Pump 3 Militia and walk them at the enemy; research Man-at-Arms
-      tr: 3 Milis bas ve düşmana yürüt; Man-at-Arms araştır
-    icons:
-      - militia
       - man-at-arms
   - villagers: 18
     assign:
@@ -89,32 +74,25 @@ steps:
       - double-bit-axe
   - villagers: 23
     assign:
-      en: +5 → berries, then seed Farms
-      tr: +5 → çilek, ardından Tarla ek
+      en: +5 → berries, then seed Farms as the hunt runs out
+      tr: +5 → çilek, av bitince Tarla ek
     icons:
       - food
       - farm
   - villagers: 25
     assign:
-      en: Build an Archery Range; +2 → gold
-      tr: Bir Okçu Menzili kur; +2 → altın
+      en: Build an Archery Range once you can afford it; +2 → gold
+      tr: Gücün yetince bir Okçu Menzili kur; +2 → altın
     icons:
       - archery-range
       - gold
   - assign:
-      en: Wall up and add Archers, Spearmen, or a tower as needed
-      tr: Duvar ör ve gerektiğinde Okçu, Mızrakçı veya kule ekle
+      en: Wall up while adding Archers, Spearmen, or a tower as needed; add a Blacksmith and research Fletching, then send Archers in to attack
+      tr: Gerektiğinde Okçu, Mızrakçı veya kule ekleyerek duvar ör; bir Demirci ekle ve Fletching araştır, sonra Okçuları saldırıya gönder
     icons:
       - archer
-      - spearman
-      - watch-tower
-  - assign:
-      en: Add a Blacksmith; research Fletching, then send Archers in to attack
-      tr: Bir Demirci ekle; Fletching araştır, sonra Okçuları saldırıya gönder
-    icons:
       - blacksmith
       - fletching
-      - archer
 intro:
   en: >-
     Hit Feudal Age around 8:50 on any civilization and open with 3 Militia upgraded into Man-at-Arms, then snowball the
@@ -161,3 +139,5 @@ strategy:
     - >-
       Temiz devam Castle Çağ Crossbow'larıdır: Feudal kavgası yatıştığında, Milis'e fazla yüklenmek yerine Okçularını
       Crossbowman ve Bodkin Arrow'a taşı.
+source:
+  author: Hera

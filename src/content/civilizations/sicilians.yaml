@@ -4,7 +4,7 @@ name:
   tr: Sicilians
 tagline:
   en: Sicilians — an Infantry and Cavalry civilization from Southern Europe.
-  tr: Sicilians — Güney Avrupa'dan bir Piyade ve Süvari uygarlığı.
+  tr: Sicilians, Güney Avrupa'dan bir Piyade ve Süvari uygarlığıdır.
 bonuses:
   en:
     - Start with +100 stone
@@ -13,14 +13,14 @@ bonuses:
     - Can build Donjon in Dark Age, replaces Watch Tower-line
     - Fortifications built +50% faster; Town Centers built +100% faster
   tr:
-    - +100 Taş ile başlar
-    - Çiftlik yükseltmeleri %125 daha fazla Yiyecek sağlar
+    - Fazladan +100 taşla başlanır
+    - Tarla yükseltmeleri %125 daha fazla yiyecek sağlar
     - Askerler %40 daha az bonus hasar alır
-    - Karanlık Çağ'da Donjon inşa edebilir; Watch Tower hattının yerini alır
-    - Tahkimatlar %50 daha hızlı, Town Center'lar %100 daha hızlı inşa edilir
+    - Karanlık Çağ'da Gözcü Kulesi yerine geçen Donjon inşa edilebilir
+    - Surlar %50 daha hızlı inşa edilir; Şehir Merkezleri %100 daha hızlı inşa edilir
 teamBonus:
   en: Transport Ships +5 line of sight and cost -50%
-  tr: Transport Ship'ler +5 görüş alanı kazanır ve %50 daha ucuza mal olur
+  tr: Taşıma Gemilerinin görüş hattı +5 artar ve bedeli %50 azalır
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: First Crusade
     effect:
       en: Up to 5 Town Centers spawn 5 Serjeants each; units more resistant to conversion
-      tr: Her Town Center 1 Serjeant üretir; Serjeant'lar +4 saldırı ve +3/+3 zırh kazanır
+      tr: İlk 5 Şehir Merkezinin her biri 5 Serjeant getirir; birimler dönüştürülmeye daha dayanıklıdır
   imperial:
     name:
       en: Hauberk
       tr: Hauberk
     effect:
       en: Knight-line +1 melee/+2 pierce armor
-      tr: Knight-line +1 melee/+2 pierce armor
+      tr: Şövalye türleri +1 yakın dövüş/+2 delici zırh kazanır
 strategy:
   en: >-
     Sicilians are an Infantry and Cavalry civilization from Southern Europe.

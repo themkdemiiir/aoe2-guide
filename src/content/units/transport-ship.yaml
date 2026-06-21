@@ -4,7 +4,7 @@ name:
   tr: Transport Ship
 role:
   en: utility naval
-  tr: yardımcı deniz
+  tr: yardımcı deniz birimi
 line: transport-ship-line
 lineRank: 1
 description:

@@ -1,7 +1,7 @@
 slug: anti-lame-dark-age
 name:
   en: Anti-Lame Fast Up Dark Age
-  tr: Anti-Lame Fast Up Dark Age
+  tr: Lame'e Karşı Hızlı Geçiş Dark Age
 difficulty: advanced
 targetAge: feudal
 durationMin: 8
@@ -29,17 +29,18 @@ steps:
       - lumber-camp
   - villagers: 10
     assign:
-      en: +1 → lure 2nd boar, eat it under the TC
-      tr: +1 → 2. yaban domuzunu çek, TC altında ye
+      en: +1 → eat the boar under the TC
+      tr: +1 → yaban domuzunu TC altında ye
     icons:
       - food
       - town-center
   - villagers: 11
     assign:
-      en: +1 → finish the second boar
-      tr: +1 → ikinci yaban domuzunu bitir
+      en: +1 → lure the second boar under the TC
+      tr: +1 → ikinci yaban domuzunu TC altına çek
     icons:
       - food
+      - town-center
   - villagers: 12
     assign:
       en: +1 → build a house, then mill on berries
@@ -142,3 +143,5 @@ strategy:
     - >-
       Saldırgan keşfe ve lame'lemeye karşı bir sigorta açılışı olarak en güçlüsüdür; oyun sessizleşirse zamanında çıkmış
       olursun ve standart bir Feudal ya da Castle planına sorunsuzca geçebilirsin.
+source:
+  author: Hera

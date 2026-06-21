@@ -4,7 +4,7 @@ name:
   tr: Cumans
 tagline:
   en: Cumans — a Cavalry civilization from Central Asia.
-  tr: Cumans — Orta Asya kökenli bir Süvari uygarlığı.
+  tr: Cumans, Orta Asya'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
     - One additional Town Center can be built in Feudal Age
@@ -12,13 +12,13 @@ bonuses:
     - Archery Ranges and Stables cost -75 wood
     - Siege Workshop and Battering Ram available in Feudal Age; Capped Ram available in Castle Age
   tr:
-    - Feodal Çağ'da ekstra bir Town Center inşa edilebilir
-    - Binek birimi hareketi Feodal/Kale/İmparatorluk Çağları'nda +%5/10/15 daha hızlı
-    - Archery Range ve Stable'lar -75 odun maliyetiyle inşa edilir
-    - Siege Workshop ve Battering Ram Feodal Çağ'da; Capped Ram Kale Çağı'nda kullanılabilir
+    - Feodal Çağ'da bir Şehir Merkezi daha inşa edilebilir
+    - Binekli Birimler Feodal Çağ'da %5,
+    - Okçuluk Binalarının ve Ahırların odun bedeli 75 azalır
+    - Kuşatma Atölyesi ve Koçbaşı, Feodal Çağ'da açılır; Metal Kafalı Koçbaşı Kale Çağı'nda açılır
 teamBonus:
   en: Palisade Walls +33% HP
-  tr: Palisade Wall'ların canı +%33
+  tr: Çit Surların DP'si %33 artar
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Steppe Husbandry
     effect:
       en: Scout Cavalry-line, Steppe Lancers and Cavalry Archers train +100% faster
-      tr: Scout Cavalry hattı ve Kipchaklar %100 daha hızlı eğitilir
+      tr: Atlı Gözcü Türleri, Bozkır Mızraklıları ve Atlı Okçular %100 daha hızlı eğitilir
   imperial:
     name:
       en: Cuman Mercenaries
       tr: Cuman Mercenaries
     effect:
       en: All team members can train 5 free Elite Kipchaks per Castle
-      tr: Takım üyeleri 10 ücretsiz Kipchak inşa edebilir (bir kez)
+      tr: Tüm takım üyeleri Kale başına 5 ücretsiz Elit Kıpçak eğitebilir
 strategy:
   en: >-
     Cumans are a Cavalry civilization from Central Asia.

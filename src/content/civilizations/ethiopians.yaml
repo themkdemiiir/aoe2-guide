@@ -4,19 +4,19 @@ name:
   tr: Ethiopians
 tagline:
   en: Ethiopians — an Archer civilization from East Africa.
-  tr: Ethiopians — Doğu Afrika'dan bir Archer uygarlığı.
+  tr: Ethiopians, Doğu Afrika'dan bir Okçu uygarlığıdır.
 bonuses:
   en:
     - Receive +100 gold and +100 food when advancing to the next Age
     - Foot Archers attack +18% faster
     - Pikeman upgrade free
   tr:
-    - Bir sonraki Çağ'a geçerken +100 Altın ve +100 Yiyecek alırsın
-    - Yaya Archer'ların saldırısı %18 daha hızlı
-    - Pikeman yükseltmesi ücretsiz
+    - Sonraki Çağa geçerken +100 altın ve +100 yiyecek alınır
+    - Yaya Okçular %18 daha hızlı saldırır
+    - Ağır Mızraklı Asker yükseltmeleri ücretsizdir
 teamBonus:
   en: Outposts +3 line of sight and cost no stone
-  tr: Karakollar +3 görüş alanı kazanır ve Taş'a mal olmaz
+  tr: Karakollar +3 görüş hattı kazanır ve taş gerektirmez
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Royal Heirs
     effect:
       en: Shotel Warriors and Camel Riders receive -3 damage from Mounted Units
-      tr: Shotel Warriors and Camel Riders receive -3 damage from Mounted Units
+      tr: Shotel Savaşçılarının ve Deve Binicilerinin Binekli Birimlerden aldığı hasar -3 azalır
   imperial:
     name:
       en: Torsion Engines
       tr: Torsion Engines
     effect:
       en: Siege Workshop Units' blast radius increased
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Kuşatma Atölyesi Birimlerinin patlama yarıçapı artar
 strategy:
   en: >-
     Ethiopians are an Archer civilization from East Africa.

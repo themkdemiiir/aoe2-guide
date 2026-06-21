@@ -24,8 +24,8 @@ steps:
       - lumber-camp
   - villagers: 10
     assign:
-      en: +1 → lure and eat the first boar
-      tr: +1 → ilk domuzu çek ve ye
+      en: +1 → lure the first boar
+      tr: +1 → ilk domuzu çek
     icons:
       - food
   - villagers: 11
@@ -58,24 +58,20 @@ steps:
       en: +2 → wood; research Loom and click up to Feudal
       tr: +2 → oduna; Loom araştır ve Feudal'a çağ atla
     note:
-      en: Feudal landing ~9:13 on 5 wood / 16 food — Malay's faster age-up buys you roughly a +2 villager lead
+      en: Perfect Feudal landing 9:13 on 5 wood / 16 food — Malay's faster age-up keeps you roughly 2 villagers ahead
       tr: >-
-        Feudal'a ~9:13'te iniş, 5 odun / 16 yiyecek ile — Malay'ın hızlı çağ atlaması sana kabaca +2 köylü avantajı
-        kazandırır
+        Mükemmel Feudal inişi 9:13, 5 odun / 16 yiyecek ile — Malay'ın hızlı çağ atlaması seni kabaca 2 köylü önde
+        tutar
     icons:
       - wood
       - loom
   - villagers: 21
     assign:
-      en: Send 5 from hunt → wood, dropping a second lumber camp
-      tr: Avdan 5 köylüyü → oduna gönder, ikinci bir lumber camp kur
+      en: Send 5 from hunt → wood for a second lumber camp, and pull 1 from hunt to build a Barracks so it is ready the moment you hit Feudal — earlier than other civs
+      tr: Avdan 5 köylüyü → oduna gönderip ikinci bir lumber camp kur ve avdan 1 köylü alıp bir Barracks dik, böylece Feudal'a ulaştığın an hazır olur — diğer uygarlıklardan önce
     icons:
       - wood
       - lumber-camp
-  - assign:
-      en: Pull 1 from hunt to build a Barracks early so a follow-up is ready the moment you decide
-      tr: Avdan 1 köylü al, erkenden bir Barracks kur ki karar verdiğin an devamı hazır olsun
-    icons:
       - barracks
   - assign:
       en: "Fork A — Archers: build one Archery Range and start Archers, moving 4 villagers → gold"
@@ -97,15 +93,11 @@ steps:
       - spearman
       - skirmisher
   - assign:
-      en: Add farms as the hunt runs out and research Double-Bit Axe to keep wood flowing
-      tr: Av tükenirken tarla ekle ve odunu akıtmak için Double-Bit Axe araştır
+      en: Add farms as the hunt runs out and research Double-Bit Axe (Horse Collar optional); once your chosen military is online, build a Blacksmith and research Fletching
+      tr: Av tükenirken tarla ekle ve Double-Bit Axe araştır (Horse Collar isteğe bağlı); seçtiğin ordu hazır olunca bir Blacksmith kur ve Fletching araştır
     icons:
       - farm
       - double-bit-axe
-  - assign:
-      en: Build a Blacksmith and research Fletching once your chosen military is online
-      tr: Seçtiğin ordu hazır olunca bir Blacksmith kur ve Fletching araştır
-    icons:
       - blacksmith
       - fletching
 intro:
@@ -156,3 +148,5 @@ strategy:
     - >-
       Hangi yolu seçersen seç, +2 köylü avantajı katlanarak büyür: hızlı bir Blacksmith ve Fletching arkasına ekilen
       tarlalar, rakibinin yetişemeyeceği kadar hızlı bir Castle veya Imperial çağ sıçraması yapmanı sağlar.
+source:
+  author: Hera

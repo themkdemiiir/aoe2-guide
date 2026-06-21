@@ -1,7 +1,7 @@
 slug: fc-knights-pocket
 name:
   en: Fast Castle 2-Stable Knights (Pocket)
-  tr: Fast Castle 2-Stable Knights (Pocket)
+  tr: Hızlı Kale 2-Stable Knights (Pocket)
 difficulty: intermediate
 targetAge: castle
 durationMin: 17
@@ -18,87 +18,89 @@ steps:
       tr: 6 → TC altında koyun
     icons:
       - food
-  - villagers: 9
+  - villagers: 10
     assign:
-      en: +3 → wood, build lumber camp
-      tr: +3 → odun, Lumber Camp kur
+      en: +4 → wood, build Lumber Camp
+      tr: +4 → odun, Lumber Camp kur
     icons:
       - wood
       - lumber-camp
-  - villagers: 12
+  - villagers: 16
     assign:
-      en: +3 → berries, build mill
-      tr: +3 → böğürtlen, Mill kur
+      en: 1 lures boar; +5 → berries, build Mill (research Loom)
+      tr: 1 köylü domuzu çeker; +5 → böğürtlen, Mill kur (Loom araştır)
     icons:
       - food
       - mill
-  - villagers: 15
+  - villagers: 24
     assign:
-      en: +3 → wood
-      tr: +3 → odun
-    icons:
-      - wood
-  - villagers: 23
-    assign:
-      en: +8 food/wood mix; click Feudal at 22–23 pop
-      tr: +8 yiyecek/odun karışımı; 22–23 nüfusta Feodal'a tıkla
-    icons:
-      - food
-      - wood
-  - villagers: 23
-    assign:
-      en: "Feudal: build Blacksmith + Market; 4 → gold (mining camp)"
-      tr: "Feodal: Blacksmith + Market kur; 4 → altın (Mining Camp)"
-    icons:
-      - blacksmith
-      - market
-      - gold
-  - villagers: 28
-    assign:
-      en: +5; click Castle Age; add farms during transition
-      tr: +5; Kale Çağı'na tıkla; geçiş sırasında çiftlik ekle
+      en: +2 → farms, +6 → wood (2nd Lumber Camp)
+      tr: +2 → çiftlik, +6 → odun (2. Lumber Camp)
     icons:
       - farm
-  - villagers: 30
+      - wood
+  - villagers: 27
     assign:
-      en: "Castle: build 2 Stables; produce Knights non-stop"
-      tr: "Kale: 2 Stable kur; Knight üretimini kesme"
+      en: +3 → gold (Mining Camp); click Feudal at 27 (~10:00)
+      tr: +3 → altın (Mining Camp); 27'de Feodal'a tıkla (~10:00)
+    icons:
+      - gold
+  - villagers: 27
+    phase: feudal
+    time: "10:00"
+    assign:
+      en: "Feudal: build Barracks, Stable + Blacksmith; research Double-Bit Axe + Horse Collar"
+      tr: "Feodal: Barracks, Stable + Blacksmith kur; Double-Bit Axe + Horse Collar araştır"
+    icons:
+      - stable
+      - blacksmith
+  - villagers: 29
+    assign:
+      en: +2 → gold; move 2 berry villagers to farms; click Castle Age
+      tr: +2 → altın; 2 böğürtlen köylüsünü çiftliğe al; Kale Çağı'na tıkla
+    icons:
+      - gold
+      - farm
+  - villagers: 29
+    phase: castle
+    time: "17:00"
+    assign:
+      en: "Castle: build 2nd Stable; train Knights non-stop from both; research Bloodlines"
+      tr: "Kale: 2. Stable kur; her iki Stable'dan durmadan Knight üret; Bloodlines araştır"
     icons:
       - stable
       - knight
-  - villagers: 32
-    assign:
-      en: +2 → gold; research Bloodlines + Forging
-      tr: +2 → altın; Bloodlines + Forging araştır
+  - assign:
+      en: Research Forging + Scale Barding Armor; add Knights and farms as gold allows
+      tr: Forging + Scale Barding Armor araştır; altın yettikçe Knight ve çiftlik ekle
     icons:
-      - gold
+      - knight
       - bloodlines
 intro:
   en: >-
-    **Goal:** Boom to ~28–30 villagers, arrive in Castle Age, then flood Knights from 2 Stables to support your team's
-    flanks. **Recommended civs:** Franks (Chivalry extra HP), Lithuanians (relics boost attack), Berbers (faster
-    cavalry), Huns (no houses), Magyars (free Husbandry)
+    **Goal:** Click Feudal at 27 villagers (~10:00), reach Castle Age around 17:00 with 29 villagers, then flood Knights
+    from 2 Stables to support your team's flanks. **Recommended civs:** Franks (Chivalry extra HP), Lithuanians (relics
+    boost attack), Berbers (faster cavalry), Huns (no houses), Magyars (free Husbandry)
   tr: >-
-    **Hedef:** ~28–30 köylüye kadar boom yap, Kale Çağı'na ulaş, ardından 2 Stable'dan Knight dök ve takım
-    arkadaşlarının flank'larını destekle. **Önerilen medeniyetler:** Franks (Chivalry ekstra can), Lithuanians
-    (emanetler saldırıyı artırır), Berbers (daha hızlı süvari), Huns (ev gerekmez), Magyars (ücretsiz Husbandry)
+    **Hedef:** 27 köylüde Feodal'a tıkla (~10:00), 17:00 civarında 29 köylüyle Kale Çağı'na ulaş, ardından 2 Stable'dan
+    Knight dök ve takım arkadaşlarının flank'larını destekle. **Önerilen medeniyetler:** Franks (Chivalry ekstra can),
+    Lithuanians (emanetler saldırıyı artırır), Berbers (daha hızlı süvari), Huns (ev gerekmez), Magyars (ücretsiz
+    Husbandry)
 strategy:
   en:
     - 6 villagers on sheep
-    - 3 villagers on wood; Lumber Camp
-    - 3 villagers to berries; Mill
-    - 3 more villagers to wood (15 total)
-    - 8 more villagers to food/wood split (23 total)
-    - Research Loom
-    - Build Blacksmith + Market
-    - 4 villagers to gold; Mining Camp
-    - Continue TC production to 28–30 villagers
-    - Build Farms; research Double-Bit Axe
-    - Build 2 Stables simultaneously
+    - 4 villagers to wood; build Lumber Camp
+    - Lure boar; 5 villagers to berries; build Mill; research Loom
+    - 2 villagers to farms; 6 to wood; build a 2nd Lumber Camp
+    - 3 villagers to gold; build Mining Camp; click Feudal at 27 (~10:00)
+    - "Feudal: build Barracks, Stable + Blacksmith"
+    - Research Double-Bit Axe + Horse Collar
+    - Move 2 berry villagers to farms; 2 new villagers to gold; click Castle Age
+    - Reach Castle Age around 17:00 with 29 villagers
+    - "Castle: build a 2nd Stable; train Knights non-stop from both"
     - Research Bloodlines (HP upgrade for Knights)
-    - Produce Knights non-stop from both Stables
     - Research Forging + Scale Barding Armor
-    - Add 2 more gold villagers as queue grows
+    - Add Knights and farms as gold allows
     - Send Knights to support flanks or raid opponent pockets
     - >-
       **Weak against:** Spearman + Archer combinations; Camel civs (Saracens, Hindustanis, Gurjaras) hard-counter
@@ -106,20 +108,18 @@ strategy:
     - "**Strong against:** Any army without Spearmen or Camels; Crossbow-heavy flanks that need cavalry support."
   tr:
     - 6 köylü koyuna
-    - 3 köylü oduna; Lumber Camp
-    - 3 köylü böğürtlene; Mill
-    - 3 köylü daha oduna (toplamda 15)
-    - 8 köylü daha yiyecek/odun bölüşümüne (toplamda 23)
-    - Loom araştır
-    - Blacksmith + Market kur
-    - 4 köylü altına; Mining Camp
-    - TC üretimini 28–30 köylüye kadar sürdür
-    - Çiftlik kur; Double-Bit Axe araştır
-    - Aynı anda 2 Stable kur
+    - 4 köylü oduna; Lumber Camp kur
+    - Domuzu çek; 5 köylü böğürtlene; Mill kur; Loom araştır
+    - 2 köylü çiftliğe; 6 köylü oduna; 2. Lumber Camp kur
+    - 3 köylü altına; Mining Camp kur; 27'de Feodal'a tıkla (~10:00)
+    - "Feodal: Barracks, Stable + Blacksmith kur"
+    - Double-Bit Axe + Horse Collar araştır
+    - 2 böğürtlen köylüsünü çiftliğe al; 2 yeni köylüyü altına; Kale Çağı'na tıkla
+    - 17:00 civarında 29 köylüyle Kale Çağı'na ulaş
+    - "Kale: 2. Stable kur; her iki Stable'dan durmadan Knight üret"
     - Bloodlines araştır (Knight'lar için can yükseltmesi)
-    - Her iki Stable'dan da durmadan Knight üret
     - Forging + Scale Barding Armor araştır
-    - Kuyruk büyüdükçe 2 köylü daha altına ekle
+    - Altın yettikçe Knight ve çiftlik ekle
     - Knight'ları flank'ları desteklemeye ya da rakip pocket'ları basmaya gönder
     - >-
       **Zayıf olduğu yerler:** Spearman + Archer kombinasyonları; Camel medeniyetleri (Saracens, Hindustanis, Gurjaras)
@@ -127,3 +127,6 @@ strategy:
     - >-
       **Güçlü olduğu yerler:** Spearman veya Camel içermeyen her ordu; süvari desteğine ihtiyaç duyan Crossbow ağırlıklı
       flank'lar.
+source:
+  author: AoE Companion
+  url: https://aoecompanion.com/build-guides/fast-castle-knights

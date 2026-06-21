@@ -3,8 +3,8 @@ name:
   en: Teutons
   tr: Teutons
 tagline:
-  en: Teutons — an Infantry civilization from Central Europe.
-  tr: Teutons — Orta Avrupa'dan bir Piyade uygarlığı.
+  en: Teutons — an Infantry and Defensive civilization from Central Europe.
+  tr: Teutons, Orta Avrupa'dan bir Piyade ve Savunma uygarlığıdır.
 bonuses:
   en:
     - Farms cost -40%
@@ -13,14 +13,14 @@ bonuses:
     - Monks +100% healing range
     - Murder Holes, Herbal Medicine free
   tr:
-    - Çiftlikler %40 daha ucuz
-    - Town Center'lar +10 garnizon kapasitesi; Tower'lar +5 garnizon kapasitesi
-    - Barracks ve Stable birimleri Kale/İmparatorluk Çağı'nda +1/+2 yakın dövüş zırhı kazanır
-    - Monk'lar %100 daha geniş iyileştirme menzili
-    - Murder Holes, Herbal Medicine ücretsiz
+    - Tarlalar %40 daha ucuz olur
+    - Şehir Merkezleri +10; Kuleler +5 garnizon kapasitesi kazanır
+    - Kışla ve Ahır Birimleri Kale Çağı'nda 1, İmparatorluk Çağı'nda 2 yakın dövüş zırhı kazanır
+    - Keşişlerin iyileştirme menzili %100 artar
+    - Senkendazlar ve Bitkisel İlaçlar ücretsizdir
 teamBonus:
   en: Units more resistant to conversion
-  tr: Birimler dönüştürmeye karşı daha dirençli
+  tr: Birimler dönüştürülmeye daha dayanıklı olur
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Ironclad
     effect:
       en: Siege Weapons +4 melee armor
-      tr: Siege Weapons +4 melee armor
+      tr: Kuşatma Silahları +4 yakın dövüş zırhı kazanır
   imperial:
     name:
       en: Crenellations
       tr: Crenellations
     effect:
       en: Castles +3 range, garrisoned Infantry fires arrows
-      tr: Castles +3 range, garrisoned Infantry fires arrows
+      tr: Kaleler +3 menzil kazanır, garnizondaki Piyadeler ok atar
 strategy:
   en: >-
     Teutons are an Infantry civilization from Central Europe.

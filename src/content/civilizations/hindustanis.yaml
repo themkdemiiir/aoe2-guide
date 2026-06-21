@@ -3,8 +3,8 @@ name:
   en: Hindustanis
   tr: Hindustanis
 tagline:
-  en: Hindustanis — a Gunpowder and Cavalry civilization from South Asia.
-  tr: Hindustanis — Güney Asya kökenli bir Barut ve Süvari uygarlığı.
+  en: Hindustanis — a Camel and Gunpowder civilization from South Asia.
+  tr: Hindustanis, Güney Asya'dan bir Deve ve Barut uygarlığıdır.
 bonuses:
   en:
     - Villagers cost -8/13/18/23% in Dark/Feudal/Castle/
@@ -12,13 +12,13 @@ bonuses:
     - Gunpowder Units +1 melee/+1 pierce armor
     - Can build Caravanserai in Imperial Age
   tr:
-    - Köylüler Karanlık/Feodal/Kale/İmparatorluk Çağı'nda -%8/13/18/23 maliyetle üretilir
-    - Camel Rider'lar %20 daha hızlı saldırır
-    - Barut Birimleri +1 yakın dövüş / +1 delici zırh kazanır
-    - İmparatorluk Çağı'nda Caravanserai inşa edilebilir
+    - Köylüler; Karanlık Çağ'da %8, Feodal Çağ'da %13, Kale Çağı'nda %18,
+    - Deve Binicileri %20 daha hızlı saldırır
+    - Barut Birimleri +1 yakın dövüş/+1 delici zırh kazanır
+    - İmparatorluk Çağı'nda Kervansaray inşa edilebilir
 teamBonus:
   en: Scout Cavalry-line and Camel Units +2 attack vs. buildings
-  tr: Scout Cavalry hattı ve Camel Birimleri binalara karşı +2 saldırı kazanır
+  tr: Atlı Gözcü türleri ve Deve Birimleri binalara karşı +2 saldırı kazanır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Grand Trunk Road
     effect:
       en: All gold income +10% faster; Market trading fee reduced to 10%
-      tr: All gold income +10% faster; Market trading fee reduced to 10%
+      tr: Tüm altın geliri %10 hızlanır; Market ticaret bedeli %10'a düşer
   imperial:
     name:
       en: Shatagni
       tr: Shatagni
     effect:
       en: Hand Cannoneers +2 range
-      tr: Oyun içi teknoloji ağacına bakınız
+      tr: Tüfekçilerin menzili +2 artar
 strategy:
   en: >-
     Hindustanis are a Gunpowder and Cavalry civilization from South Asia.

@@ -4,19 +4,19 @@ name:
   tr: Berbers
 tagline:
   en: Berbers — a Cavalry and Naval civilization from North Africa.
-  tr: Berbers — Kuzey Afrika'dan bir Süvari ve Denizcilik uygarlığı.
+  tr: Berbers, Kuzey Afrika'dan bir Süvari ve Donanma uygarlığıdır.
 bonuses:
   en:
     - Villagers move +5% faster in Dark Age, +10% faster starting in Feudal Age
     - Stable Units cost -15/20% in Castle/Imperial Age
     - Ships move +10% faster
   tr:
-    - Köylüler Karanlık Çağ'da %5, Feodal Çağ'dan itibaren %10 daha hızlı hareket eder
-    - Stable birimleri Kale/İmparatorluk Çağı'nda %-15/20 daha ucuzdur
+    - Köylüler; Karanlık Çağ'da %5, Feodal Çağ'dan itibaren %10 daha hızlı hareket eder
+    - Ahır Birimleri; Kale Çağı'nda %15, İmparatorluk Çağı'nda %20 daha ucuzdur
     - Gemiler %10 daha hızlı hareket eder
 teamBonus:
   en: Genitour available at the Archery Range starting in Castle Age
-  tr: Genitour, Kale Çağı'ndan itibaren Archery Range'de mevcut
+  tr: Genitour birimleri, Kale Çağı'ndan itibaren Okçuluk Binasında eğitilebilir
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Kasbah
     effect:
       en: Team Castles work +25% faster
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Takım Kaleleri %25 daha hızlı çalışır
   imperial:
     name:
       en: Maghrebi Camels
       tr: Maghrebi Camels
     effect:
       en: Camel Units regenerate 15 HP per minute
-      tr: Camel Units regenerate 15 HP per minute
+      tr: Deve Birimleri dakika başına 15 DP yeniler
 strategy:
   en: >-
     Berbers are a Cavalry and Naval civilization from North Africa.

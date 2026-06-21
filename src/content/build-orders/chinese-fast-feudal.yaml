@@ -1,7 +1,7 @@
 slug: chinese-fast-feudal
 name:
   en: Chinese Fast Feudal
-  tr: Chinese Fast Feudal
+  tr: Chinese Hızlı Feudal
 difficulty: advanced
 targetAge: feudal
 durationMin: 8
@@ -68,15 +68,15 @@ steps:
       - food
   - villagers: 20
     assign:
-      en: Pull 2 from the Town Center → reinforce the 1st lumber camp
-      tr: Town Center'dan 2 köylü çek → 1. lumber camp'i güçlendir
+      en: Move 2 from under the Town Center → 1st lumber camp (5 on wood)
+      tr: Town Center altından 2 köylü → 1. lumber camp'e (oduna 5 köylü)
     icons:
       - wood
       - lumber-camp
   - villagers: 20
     assign:
-      en: Pull 5 from the Town Center → drop a 2nd lumber camp on a fresh woodline
-      tr: Town Center'dan 5 köylü çek → yeni bir odun hattına 2. lumber camp kur
+      en: Move 5 from under the Town Center → 2nd lumber camp (10 on wood total)
+      tr: Town Center altından 5 köylü → 2. lumber camp'e (toplam oduna 10 köylü)
     icons:
       - wood
       - lumber-camp
@@ -108,11 +108,11 @@ steps:
       - man-at-arms
       - double-bit-axe
   - assign:
-      en: "Tower rush: send ~5 villagers forward to build Watch Towers in the enemy economy"
-      tr: "Tower rush: ~5 köylüyü rakibin ekonomisine Watch Tower kurmaya gönder"
+      en: "Tower rush: send 4-5 villagers forward and build a Barracks near the enemy, then reinforce with spears and a Range for Skirmishers"
+      tr: "Tower rush: 4-5 köylüyü ileri gönder ve rakibin yakınına Barracks kur, ardından spear ve Skirmisher için Range ile destekle"
     note:
-      en: Skip the MAA-trush — the build is too poor to support both
-      tr: MAA-trush'ı atla — build ikisini birden taşıyamayacak kadar fakir
+      en: Skip the MAA tower rush — Chinese lack the early resources to afford both
+      tr: MAA tower rush'ı atla — Chinese'in ikisini birden karşılayacak erken kaynağı yok
     icons:
       - watch-tower
 intro:
@@ -140,8 +140,8 @@ strategy:
       Man-at-Arms pressure leans on three quick Militia plus the upgrade and Double-Bit Axe; skip the full
       MAA-into-tower-rush, since the early eco cannot fund both at once.
     - >-
-      A pure Tower Rush sends five villagers forward into the enemy gold or wood — devastating when they are unwalled,
-      but only gamble on it once your scout confirms an opening.
+      A Tower Rush sends 4-5 villagers forward with a Barracks near the enemy so spears and a Range for Skirmishers can
+      reinforce — devastating when they are unwalled, but only gamble on it once your scout confirms an opening.
   tr:
     - >-
       Chinese üç fazladan köylüyle ve kurulacak ev olmadan başlar, bu yüzden bu açılış diğer tüm uygarlıklardan daha
@@ -159,5 +159,8 @@ strategy:
       Man-at-Arms baskısı üç hızlı Militia'ya, ardından yükseltme ve Double-Bit Axe'e dayanır; tam MAA'dan tower rush'a
       geçişi atla, çünkü erken ekonomi ikisini birden aynı anda finanse edemez.
     - >-
-      Saf bir Tower Rush beş köylüyü rakibin altın ya da odununa gönderir — duvarsızken yıkıcıdır, ama buna ancak
-      scout'un bir açık doğruladığında oyna.
+      Tower Rush 4-5 köylüyü ileri, rakibin yakınına bir Barracks ile gönderir; böylece spear ve Skirmisher için Range
+      destek verebilir — duvarsızken yıkıcıdır, ama buna ancak scout'un bir açık doğruladığında oyna.
+source:
+  author: Hera
+  url: https://www.youtube.com/@Hera

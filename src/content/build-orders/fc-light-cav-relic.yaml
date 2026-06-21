@@ -1,7 +1,7 @@
 slug: fc-light-cav-relic
 name:
   en: Fast Castle Light Cav Relic Control
-  tr: Fast Castle Light Cav Relic Control
+  tr: Fast Castle Light Cav ile Kalıntı Kontrolü
 difficulty: intermediate
 targetAge: castle
 durationMin: 15
@@ -23,8 +23,8 @@ steps:
       - lumber-camp
   - villagers: 10
     assign:
-      en: +1 → lure and shoot the first boar
-      tr: +1 → ilk yaban domuzunu çek ve vur
+      en: +1 → lure the first boar
+      tr: +1 → ilk yaban domuzunu çek
     icons:
       - food
   - villagers: 11
@@ -52,19 +52,14 @@ steps:
       - food
   - villagers: 18
     assign:
-      en: +4 → berries; add a House for headroom
-      tr: +4 → çileklere; pop alanı için bir Ev daha ekle
+      en: +4 → berries and add a House; once the boars run out, seed 3 farms with the freed-up sheep villagers
+      tr: +4 → çileklere ve bir Ev ekle; yaban domuzları bitince boşalan koyun köylüleriyle 3 tarla kur
+    note:
+      en: The farm villagers are a reassignment, not new pop
+      tr: Tarla köylüleri yeni pop değil, yeniden görevlendirme
     icons:
       - food
       - house
-  - villagers: 18
-    assign:
-      en: Seed 3 farms with the freed-up sheep villagers
-      tr: Boşalan koyun köylüleriyle 3 tarla kur
-    note:
-      en: Reassignment, not new pop
-      tr: Yeni pop değil, yeniden görevlendirme
-    icons:
       - farm
   - villagers: 23
     assign:
@@ -77,7 +72,7 @@ steps:
     phase: feudal
     assign:
       en: +2 → gold, then click Feudal Age (~11:20 / 8 wood, 15 food, 2 gold)
-      tr: +2 → altına, ardından Kale Çağı'na tıkla (~11:20 / 8 odun, 15 yiyecek, 2 altın)
+      tr: +2 → altına, ardından Feudal Çağı'na tıkla (~11:20 / 8 odun, 15 yiyecek, 2 altın)
     note:
       en: Keep your gold income flowing for the Monastery
       tr: Manastır için altın gelirini akışta tut
@@ -85,17 +80,16 @@ steps:
       - gold
   - villagers: 27
     assign:
-      en: "Feudal: food-out vils → straggler trees; build a Barracks, then a Stable; +2 → wood"
-      tr: "Feudal: yiyeceği biten köylüler → tek ağaçlara; bir Kışla, ardından bir Ahır kur; +2 → oduna"
+      en: "Feudal: food-out vils → straggler trees; build a Barracks, a Stable, and a Market (2 vils each); +2 → wood on the single Lumber Camp"
+      tr: "Feudal: yiyeceği biten köylüler → tek ağaçlara; bir Kışla, bir Ahır ve bir Pazar kur (her birine 2 köylü); tek Kereste Kampı'nda +2 → oduna"
+    note:
+      en: Balance wood and gold for the Castle click
+      tr: Kale tıklaması için odun ve altını dengele
     icons:
       - barracks
       - stable
-      - wood
-  - assign:
-      en: Add a Market and send 2 villagers to it; balance wood and gold for the Castle click
-      tr: Bir Pazar ekle ve 2 köylü gönder; Kale tıklaması için odun ve altını dengele
-    icons:
       - market
+      - wood
   - phase: castle
     time: "14:50"
     assign:
@@ -164,3 +158,6 @@ strategy:
     - >-
       Dört veya daha fazla kalıntıyı kontrol etmeyi hedefle, sonra devamını seç: harita kontrolünü ele geçirdiysen
       şövalye-kuşatma baskısı ya da oyun sakinleştiyse doğrudan Imperial'e boom.
+source:
+  author: Hera
+  url: https://www.youtube.com/@Hera

@@ -3,8 +3,8 @@ name:
   en: Wu
   tr: Wu
 tagline:
-  en: Wu — a Naval civilization from East Asia.
-  tr: Wu — Doğu Asya'dan bir Denizci uygarlığı.
+  en: Wu — an Infantry and Naval civilization from East Asia.
+  tr: Wu, Doğu Asya'dan bir Piyade ve Donanma uygarlığıdır.
 bonuses:
   en:
     - Military production buildings and Docks provide +55 food
@@ -12,10 +12,10 @@ bonuses:
     - Jian Swordsmen and Hei Guang Cavalry +2 attack in Imperial Age
     - Careening, Dry Dock free
   tr:
-    - Askeri üretim binaları ve Dock'lar +55 yiyecek sağlar
-    - Piyade Feodal/Kale/İmparatorluk Çağı'nda dakikada 10/15/30 can yeniler
-    - Jian Swordsmen ve Hei Guang Cavalry İmparatorluk Çağı'nda +2 saldırı kazanır
-    - Careening, Dry Dock ücretsizdir
+    - Askerî üretim binaları ve Rıhtımlar fazladan +55 yiyecek verir
+    - Piyadeler dakika başına Feodal Çağ'da 10, Kale Çağı'nda 15, İmparatorluk Çağı'nda 30 DP yeniler
+    - Jian Kılıç Ustaları ve Hei Guang Süvarileri, İmparatorluk Çağı'nda +2 saldırı kazanır
+    - Karinalama, Kuru Havuz ücretsiz
 teamBonus:
   en: Houses built +100% faster
   tr: Evler %100 daha hızlı inşa edilir
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Red Cliffs Tactics
     effect:
       en: Demolition Ships and Fire Archers deal fire damage to ships and buildings
-      tr: Demolition Ships and Fire Archers deal fire damage to ships and buildings
+      tr: İmha Gemileri ve Alev Okçuları, gemilere ve binalara ateş hasarı verir
   imperial:
     name:
       en: Sitting Tiger
       tr: Sitting Tiger
     effect:
       en: Traction Trebuchets and Lou Chuan trebuchet weapons fire additional projectiles
-      tr: Traction Trebuchets and Lou Chuan trebuchet weapons fire additional projectiles
+      tr: Mancınıklar ve Lou Chuan katapult silahları ek cisimler fırlatır
 strategy:
   en: >-
     Wu are a Naval civilization from East Asia.

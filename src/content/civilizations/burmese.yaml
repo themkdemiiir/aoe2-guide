@@ -3,8 +3,8 @@ name:
   en: Burmese
   tr: Burmese
 tagline:
-  en: Burmese — a Monk and Elephant civilization from Southeast Asia.
-  tr: Burmese — Güneydoğu Asya'dan bir Rahip ve Fil uygarlığı.
+  en: Burmese — an Infantry and Cavalry civilization from Southeast Asia.
+  tr: Burmese, Güneydoğu Asya'dan bir Piyade ve Süvari uygarlığıdır.
 bonuses:
   en:
     - Lumber Camp technologies free
@@ -12,13 +12,13 @@ bonuses:
     - Battle Elephants +1 melee/+1 pierce armor
     - Monastery technologies cost -50%
   tr:
-    - Kereste Kampı teknolojileri ücretsiz
-    - Piyade Feodal/Kale/İmparatorluk Çağı'nda +1/+2/+3 saldırı kazanır
-    - Battle Elephant'lar +1 yakın dövüş zırhı / +1 delici zırh kazanır
-    - Monastery teknolojileri %50 daha az maliyetli
+    - Kereste Kampı teknolojileri ücretsizdir
+    - Piyadeler; Feodal Çağ'da +1, Kale Çağı'nda +2, İmparatorluk Çağı'nda +3 saldırı kazanır
+    - Savaş Filleri +1 yakın dövüş/+1 delici zırh kazanır
+    - Manastır teknolojileri %50 daha ucuzdur
 teamBonus:
   en: Relics visible on the map at the start of the game
-  tr: Emanetler oyun başında haritada görünür
+  tr: Kadim Eserler oyunun başında haritada görülebilir
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Manipur Cavalry
     effect:
       en: Cavalry +4 attack vs. Ranged Soldiers
-      tr: Cavalry +4 attack vs. Ranged Soldiers
+      tr: Süvariler, Menzilli Askerlere karşı +4 saldırı kazanır
   imperial:
     name:
       en: Howdah
       tr: Howdah
     effect:
       en: Battle Elephants +1 melee/+1 pierce armor
-      tr: Battle Elephants +1 melee/+1 pierce armor
+      tr: Savaş Filleri +1 yakın dövüş/+1 delici zırh kazanır
 strategy:
   en: >-
     Burmese are a Monk and Elephant civilization from Southeast Asia.

@@ -4,7 +4,7 @@ name:
   tr: Heavy Scorpion
 role:
   en: siege
-  tr: siege
+  tr: kuşatma
 line: scorpion-line
 lineRank: 2
 description:

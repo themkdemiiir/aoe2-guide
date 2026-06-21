@@ -2,37 +2,12 @@
   "patch": "v100.1.84",
   "civs": [
     {
-      "slug": "achaemenids",
-      "region": "Ancient Middle Eastern",
-      "specialty": "Cavalry",
-      "uniqueUnits": [
-        "immortal"
-      ],
-      "civBonuses": [
-        "Stable units -15% cost",
-        "Cavalry +2 LOS",
-        "Town Centers support +5 population",
-        "Fishing Ships +2 HP per second"
-      ],
-      "teamBonus": "Cavalry +1 armor",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Persian Nobility",
-          "effect": "Knight line +2 attack"
-        },
-        "imperial": {
-          "name": "Royal Tithe",
-          "effect": "Relics generate +100% gold"
-        }
-      },
-      "regionNoun": "the Ancient Middle East"
-    },
-    {
       "slug": "armenians",
       "region": "Caucasian",
-      "specialty": "Infantry and Cavalry",
+      "specialty": "Infantry and Naval",
       "uniqueUnits": [
-        "composite-bowman"
+        "composite-bowman",
+        "warrior-priest"
       ],
       "civBonuses": [
         "Mule Carts cost -25%",
@@ -53,32 +28,6 @@
         }
       },
       "regionNoun": "the Caucasus"
-    },
-    {
-      "slug": "athenians",
-      "region": "Ancient Mediterranean",
-      "specialty": "Naval and Archer",
-      "uniqueUnits": [
-        "hoplite"
-      ],
-      "civBonuses": [
-        "Ships +2 armor",
-        "Docks work 20% faster",
-        "Archers +1 attack",
-        "Town Centers +5 LOS"
-      ],
-      "teamBonus": "Docks work 10% faster",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Athenian Democracy",
-          "effect": "Archers +1 range"
-        },
-        "imperial": {
-          "name": "Themistocles",
-          "effect": "War Galleys attack 15% faster"
-        }
-      },
-      "regionNoun": "the Ancient Mediterranean"
     },
     {
       "slug": "aztecs",
@@ -164,7 +113,8 @@
       "region": "Eastern European",
       "specialty": "Gunpowder and Monk",
       "uniqueUnits": [
-        "hussite-wagon"
+        "hussite-wagon",
+        "houfnice"
       ],
       "civBonuses": [
         "Mining Camp technologies free",
@@ -214,7 +164,7 @@
     {
       "slug": "bulgarians",
       "region": "Eastern European",
-      "specialty": "Cavalry and Siege",
+      "specialty": "Infantry and Cavalry",
       "uniqueUnits": [
         "konnik"
       ],
@@ -242,7 +192,8 @@
       "region": "Western European",
       "specialty": "Cavalry",
       "uniqueUnits": [
-        "coustillier"
+        "coustillier",
+        "flemish-militia"
       ],
       "civBonuses": [
         "Economic upgrades available one age earlier and cost -33% food",
@@ -266,7 +217,7 @@
     {
       "slug": "burmese",
       "region": "Southeast Asian",
-      "specialty": "Monk and Elephant",
+      "specialty": "Infantry and Cavalry",
       "uniqueUnits": [
         "arambai"
       ],
@@ -319,7 +270,7 @@
     {
       "slug": "celts",
       "region": "Western European",
-      "specialty": "Infantry",
+      "specialty": "Infantry and Siege",
       "uniqueUnits": [
         "woad-raider"
       ],
@@ -345,9 +296,10 @@
     {
       "slug": "chinese",
       "region": "East Asian",
-      "specialty": "Archer",
+      "specialty": "Archer and Gunpowder",
       "uniqueUnits": [
-        "chu-ko-nu"
+        "chu-ko-nu",
+        "dragon-ship"
       ],
       "civBonuses": [
         "Start with +3 Villagers, but -50 wood and -200 food",
@@ -399,7 +351,8 @@
       "region": "South Asian",
       "specialty": "Infantry and Naval",
       "uniqueUnits": [
-        "urumi-swordsman"
+        "urumi-swordsman",
+        "thirisadai"
       ],
       "civBonuses": [
         "Fishermen and Fishing Ships carry +15",
@@ -475,7 +428,7 @@
     {
       "slug": "georgians",
       "region": "Caucasian",
-      "specialty": "Infantry and Cavalry",
+      "specialty": "Defensive and Cavalry",
       "uniqueUnits": [
         "monaspa"
       ],
@@ -528,9 +481,11 @@
     {
       "slug": "gurjaras",
       "region": "South Asian",
-      "specialty": "Cavalry and Naval",
+      "specialty": "Cavalry and Camel",
       "uniqueUnits": [
-        "shrivamsha-rider"
+        "chakram-thrower",
+        "shrivamsha-rider",
+        "camel-scout"
       ],
       "civBonuses": [
         "Start with 2 Forage Bushes",
@@ -554,10 +509,11 @@
     {
       "slug": "hindustanis",
       "region": "South Asian",
-      "specialty": "Gunpowder and Cavalry",
+      "specialty": "Camel and Gunpowder",
       "uniqueUnits": [
         "elephant-archer",
-        "imperial-camel"
+        "imperial-camel-rider",
+        "ghulam"
       ],
       "civBonuses": [
         "Villagers cost -8/13/18/23% in Dark/Feudal/Castle/",
@@ -688,9 +644,10 @@
     {
       "slug": "jurchens",
       "region": "East Asian",
-      "specialty": "Cavalry",
+      "specialty": "Cavalry and Gunpowder",
       "uniqueUnits": [
-        "jurchen-knight"
+        "iron-pagoda",
+        "grenadier"
       ],
       "civBonuses": [
         "Meat of hunted and livestock animals doesn't decay",
@@ -768,7 +725,7 @@
     {
       "slug": "koreans",
       "region": "East Asian",
-      "specialty": "Tower and Naval",
+      "specialty": "Defensive and Naval",
       "uniqueUnits": [
         "war-wagon",
         "turtle-ship"
@@ -797,7 +754,8 @@
       "region": "Eastern European",
       "specialty": "Cavalry and Monk",
       "uniqueUnits": [
-        "leitis"
+        "leitis",
+        "winged-hussar"
       ],
       "civBonuses": [
         "Each Town Center provides +100 food",
@@ -818,35 +776,9 @@
       "regionNoun": "Eastern Europe"
     },
     {
-      "slug": "macedonians",
-      "region": "Ancient Mediterranean",
-      "specialty": "Infantry",
-      "uniqueUnits": [
-        "phalangite"
-      ],
-      "civBonuses": [
-        "Infantry +10 HP",
-        "Siege units -15% cost",
-        "Scout line +2 LOS",
-        "Monks require 4 units to convert"
-      ],
-      "teamBonus": "Infantry +1 pierce armor",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Sarissa",
-          "effect": "Spearman line +2 melee armor"
-        },
-        "imperial": {
-          "name": "Argyraspids",
-          "effect": "Infantry attack 10% faster"
-        }
-      },
-      "regionNoun": "the Ancient Mediterranean"
-    },
-    {
       "slug": "magyars",
       "region": "Eastern European",
-      "specialty": "Cavalry and Infantry",
+      "specialty": "Cavalry",
       "uniqueUnits": [
         "magyar-huszar"
       ],
@@ -922,9 +854,10 @@
     {
       "slug": "mapuche",
       "region": "South American",
-      "specialty": "Infantry",
+      "specialty": "Cavalry and Counter-units",
       "uniqueUnits": [
-        "mapuche-chief"
+        "kona",
+        "bolas-rider"
       ],
       "civBonuses": [
         "Foragers drop off +20% food",
@@ -999,9 +932,10 @@
     {
       "slug": "muisca",
       "region": "South American",
-      "specialty": "Gold and Infantry",
+      "specialty": "Archer and Monk",
       "uniqueUnits": [
-        "muisca-chief"
+        "guecha-warrior",
+        "temple-guard"
       ],
       "civBonuses": [
         "Advancing to the next Age costs -50% gold",
@@ -1028,7 +962,8 @@
       "region": "Middle Eastern",
       "specialty": "Cavalry",
       "uniqueUnits": [
-        "war-elephant"
+        "war-elephant",
+        "savar"
       ],
       "civBonuses": [
         "Start with +50 wood and +50 food",
@@ -1054,7 +989,8 @@
       "region": "Eastern European",
       "specialty": "Cavalry",
       "uniqueUnits": [
-        "obuch"
+        "obuch",
+        "winged-hussar"
       ],
       "civBonuses": [
         "Folwark replaces Mill",
@@ -1103,36 +1039,11 @@
       "regionNoun": "Southern Europe"
     },
     {
-      "slug": "puru",
-      "region": "South American",
-      "specialty": "War Elephant",
-      "uniqueUnits": [
-        "war-elephant"
-      ],
-      "civBonuses": [
-        "Elephants cost -20%",
-        "Battle Elephants +2 attack",
-        "Farms cost -10%",
-        "Stable units +1 pierce armor"
-      ],
-      "teamBonus": "Elephants +2 attack",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Amazon Warriors",
-          "effect": "Elephants +1 armor"
-        },
-        "imperial": {
-          "name": "Puru Rampage",
-          "effect": "Battle Elephants attack 15% faster"
-        }
-      },
-      "regionNoun": "South America"
-    },
-    {
       "slug": "romans",
       "region": "Ancient Mediterranean",
-      "specialty": "Infantry",
+      "specialty": "Infantry and Cavalry",
       "uniqueUnits": [
+        "centurion",
         "legionary"
       ],
       "civBonuses": [
@@ -1183,9 +1094,11 @@
     {
       "slug": "shu",
       "region": "East Asian",
-      "specialty": "Infantry",
+      "specialty": "Archer and Siege",
       "uniqueUnits": [
-        "tiger-cavalry"
+        "white-feather-guard",
+        "war-chariot",
+        "liu-bei"
       ],
       "civBonuses": [
         "Lumberjacks generate food in addition to wood",
@@ -1235,9 +1148,9 @@
     {
       "slug": "slavs",
       "region": "Eastern European",
-      "specialty": "Cavalry",
+      "specialty": "Infantry and Siege",
       "uniqueUnits": [
-        "boyars"
+        "boyar"
       ],
       "civBonuses": [
         "Farmers work +15% faster",
@@ -1287,37 +1200,12 @@
       "regionNoun": "Southern Europe"
     },
     {
-      "slug": "spartans",
-      "region": "Ancient Mediterranean",
-      "specialty": "Infantry",
-      "uniqueUnits": [
-        "spartan-warrior"
-      ],
-      "civBonuses": [
-        "Infantry +2 attack",
-        "Barracks work 20% faster",
-        "No houses required for population",
-        "Militia line upgrades free"
-      ],
-      "teamBonus": "Infantry +1 attack",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Spartan Discipline",
-          "effect": "Infantry +1 armor"
-        },
-        "imperial": {
-          "name": "Agoge",
-          "effect": "Infantry attack 15% faster"
-        }
-      },
-      "regionNoun": "the Ancient Mediterranean"
-    },
-    {
       "slug": "tatars",
       "region": "Central Asian",
       "specialty": "Cavalry Archer",
       "uniqueUnits": [
-        "keshik"
+        "keshik",
+        "flaming-camel"
       ],
       "civBonuses": [
         "Livestock animals last +50% longer",
@@ -1341,7 +1229,7 @@
     {
       "slug": "teutons",
       "region": "Central European",
-      "specialty": "Infantry",
+      "specialty": "Infantry and Defensive",
       "uniqueUnits": [
         "teutonic-knight"
       ],
@@ -1366,37 +1254,12 @@
       "regionNoun": "Central Europe"
     },
     {
-      "slug": "thracians",
-      "region": "Ancient Mediterranean",
-      "specialty": "Infantry and Cavalry",
-      "uniqueUnits": [
-        "thracian-warrior"
-      ],
-      "civBonuses": [
-        "Barracks units +1 melee armor",
-        "Stable work 15% faster",
-        "Farms cost -15%",
-        "Infantry +10% speed"
-      ],
-      "teamBonus": "Barracks units +1 pierce armor",
-      "uniqueTechs": {
-        "castle": {
-          "name": "Odrysian Tactics",
-          "effect": "Cavalry +1 attack"
-        },
-        "imperial": {
-          "name": "Thracian Shock",
-          "effect": "Infantry +10 HP"
-        }
-      },
-      "regionNoun": "the Ancient Mediterranean"
-    },
-    {
       "slug": "tupi",
       "region": "South American",
-      "specialty": "Archer and Raiding",
+      "specialty": "Archer and Infantry",
       "uniqueUnits": [
-        "tupi-warrior"
+        "blackwood-archer",
+        "ibirapema-warrior"
       ],
       "civBonuses": [
         "Start with +25 of each resource",
@@ -1448,7 +1311,8 @@
       "region": "Southeast Asian",
       "specialty": "Archer",
       "uniqueUnits": [
-        "rattan-archer"
+        "rattan-archer",
+        "imperial-skirmisher"
       ],
       "civBonuses": [
         "Enemy Town Centers are revealed at the start of the game",
@@ -1500,7 +1364,9 @@
       "region": "East Asian",
       "specialty": "Cavalry",
       "uniqueUnits": [
-        "heavy-cavalry"
+        "tiger-cavalry",
+        "xianbei-raider",
+        "cao-cao"
       ],
       "civBonuses": [
         "Receive one free Villager for each economic upgrade researched",
@@ -1523,9 +1389,11 @@
     {
       "slug": "wu",
       "region": "East Asian",
-      "specialty": "Naval",
+      "specialty": "Infantry and Naval",
       "uniqueUnits": [
-        "louchuan"
+        "fire-archer",
+        "jian-swordsman",
+        "sun-jian"
       ],
       "civBonuses": [
         "Military production buildings and Docks provide +55 food",

@@ -4,7 +4,7 @@ name:
   tr: Saracens
 tagline:
   en: Saracens — a Camel and Naval civilization from the Middle East.
-  tr: Saracens — Orta Doğu'dan bir Camel ve Denizcilik uygarlığı.
+  tr: Saracens, Orta Doğu'dan bir Deve ve Deniz uygarlığıdır.
 bonuses:
   en:
     - Market trading fee only 5%; Markets cost -100 wood
@@ -12,13 +12,13 @@ bonuses:
     - Galley-line attacks +25% faster
     - Transport Ships +100% HP, +20 carry capacity
   tr:
-    - Market işlem ücreti yalnızca %5; Market'lar -100 Odun
-    - Camel Birimleri +%25 can
-    - Galley hattı saldırıları +%25 daha hızlı
-    - Transport Ship'ler +%100 can, +20 taşıma kapasitesi
+    - Markette takas bedeli sadece %5 olur ve Market inşaat maliyeti +100 odun azalır
+    - Deve Birimlerinin DP'si %25 artar
+    - Kadırga türlerinin saldırıları %25 hızlanır
+    - Taşıma Gemilerinin DP'si %100, taşıma kapasitesi +20 artar
 teamBonus:
   en: Foot Archers and Skirmishers +2 attack vs. buildings
-  tr: Foot Archer'lar ve Skirmisher'lar binalara karşı +2 saldırı
+  tr: Yaya Okçular ve Avcı Erleri, binalara karşı +2 saldırı kazanır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Bimaristan
     effect:
       en: Monks passively heal multiple nearby units
-      tr: Monks passively heal multiple nearby units
+      tr: Keşişler yakındaki birden çok birimi pasif olarak iyileştirir
   imperial:
     name:
       en: Counterweights
       tr: Counterweights
     effect:
       en: Trebuchets and Mangonel-line +15% attack
-      tr: Trebuchets and Mangonel-line +15% attack
+      tr: Katapultlar ve Mancınık türleri %15 saldırı kazanır
 strategy:
   en: >-
     Saracens are a Camel and Naval civilization from the Middle East.

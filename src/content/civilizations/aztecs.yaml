@@ -4,7 +4,7 @@ name:
   tr: Aztecs
 tagline:
   en: Aztecs — an Infantry and Monk civilization from Mesoamerica.
-  tr: Aztecs — Mezoamerika'dan bir Piyade ve Keşiş uygarlığı.
+  tr: Aztecs, Mezoamerika'dan bir Piyade ve Keşiş uygarlığıdır.
 bonuses:
   en:
     - Start with +50 gold
@@ -12,13 +12,13 @@ bonuses:
     - Military Units train +15% faster
     - Monks gain +5 HP for each researched Monastery technology
   tr:
-    - +50 Altın ile başla
-    - Köylüler +3 taşır
-    - Askeri Birimler %15 daha hızlı eğitilir
-    - Monks, araştırılan her Monastery teknolojisi için +5 can kazanır
+    - +50 altınla başlanır
+    - Köylülerin taşıma kapasitesi +3 artar
+    - Askerî Birimler %15 daha hızlı eğitilir
+    - Keşişler, araştırılan her Manastır teknolojisi başına +5 DP kazanır
 teamBonus:
   en: Relics generate +33% gold
-  tr: Kutsal Emanetler %33 daha fazla Altın üretir
+  tr: Kadim Eserler %33 daha fazla altın getirir
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Atlatl
     effect:
       en: Skirmishers +1 attack, +1 range
-      tr: Skirmishers +1 attack, +1 range
+      tr: Akıncılar +1 saldırı ve +1 menzil kazanır
   imperial:
     name:
       en: Garland Wars
       tr: Garland Wars
     effect:
       en: Infantry +4 attack
-      tr: Infantry +4 attack
+      tr: Piyadelerin saldırısı +4 artar
 strategy:
   en: >-
     Aztecs are an Infantry and Monk civilization from Mesoamerica.

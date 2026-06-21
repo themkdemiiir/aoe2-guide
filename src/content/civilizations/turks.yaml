@@ -4,7 +4,7 @@ name:
   tr: Turks
 tagline:
   en: Turks — a Gunpowder civilization from the Middle East.
-  tr: Turks — Orta Doğu'dan bir Barut uygarlığı.
+  tr: Turks, Orta Doğu'dan bir Barut uygarlığıdır.
 bonuses:
   en:
     - Gold miners work +25% faster
@@ -13,12 +13,12 @@ bonuses:
     - Gunpowder Units +25% HP
   tr:
     - Altın madencileri %25 daha hızlı çalışır
-    - Scout Cavalry-line +1 delici zırh ve yükseltmeleri ücretsiz
-    - Chemistry ücretsiz; Barut teknolojilerinin maliyeti -%50
-    - Barut Birimleri +%25 can
+    - Atlı Gözcü türleri +1 delici zırh kazanır ve bedelsiz yükseltilir
+    - Kimya ücretsizdir; Barut teknolojileri -%50 daha az maliyete sahiptir
+    - Tüfekli Birimlerin DP'si %25 artar
 teamBonus:
   en: Gunpowder Units train +25% faster
-  tr: Barut Birimleri %25 daha hızlı eğitilir
+  tr: Tüfekli Birimler %25 daha hızlı eğitilir
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Sipahi
     effect:
       en: Mounted Archers +20 HP
-      tr: Mounted Archers +20 HP
+      tr: Atlı Okçular +20 DP kazanır
   imperial:
     name:
       en: Artillery
       tr: Artillery
     effect:
       en: Bombard Towers, Bombard Cannons, Cannon Galleons +2 range
-      tr: Bombard Towers, Bombard Cannons, Cannon Galleons +2 range
+      tr: Bombardıman Kulelerinin, Bombardıman Toplarının ve Toplu Kalyonların menzili +2 artar
 strategy:
   en: >-
     Turks are a Gunpowder civilization from the Middle East.

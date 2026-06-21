@@ -4,7 +4,7 @@ name:
   tr: Incas
 tagline:
   en: Incas — an Infantry civilization from South America.
-  tr: Incas — Güney Amerika'dan bir Piyade uygarlığı.
+  tr: Incas, Güney Amerika'dan bir Piyade uygarlığıdır.
 bonuses:
   en:
     - Houses and Settlements provide +5 population space
@@ -12,13 +12,15 @@ bonuses:
     - Military Units cost -5/10/15/20% food in Dark/Feudal/Castle/Imperial Age
     - Villagers affected by Infantry Blacksmith upgrades starting in Castle Age
   tr:
-    - Evler ve Yerleşimler +5 nüfus alanı sağlar
-    - Binalar %15 daha az Taş'a mal olur
-    - Askeri Birimler Karanlık/Feodal/Kale/İmparatorluk Çağı'nda %5/10/15/20 daha az Yiyecek harcar
-    - Kale Çağı'ndan itibaren köylüler Piyade Blacksmith yükseltmelerinden yararlanır
+    - Evler ve Yerleşimler +5 nüfus alanı daha verir
+    - Binalar %15 daha az taş gerektirir
+    - >-
+      Askerî Birimler; Karanlık Çağ'da %5, Feodal Çağ'da %10, Kale Çağı'nda %15, İmparatorluk Çağı'nda %20 daha az
+      yiyecek gerektirir
+    - Kale Çağı'ndan itibaren Köylüler, Demircideki Piyade yükseltmelerinden etkilenir
 teamBonus:
   en: Start with a free Llama
-  tr: Ücretsiz bir Llama ile başla
+  tr: Ücretsiz bir Lamayla başlanır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +28,14 @@ uniqueTechs:
       tr: Andean Sling
     effect:
       en: Skirmishers and Slingers no minimum range; Slingers +1 attack
-      tr: Skirmishers and Slingers no minimum range; Slingers +1 attack
+      tr: Avcı Erlerinin ve Sapancıların minimum menzili yoktur; Sapancılar +1 saldırı kazanır
   imperial:
     name:
       en: Fabric Shields
       tr: Fabric Shields
     effect:
       en: Kamayuks, Slingers and Champi Warriors +1 melee/+1 pierce armor
-      tr: Kamayuks, Slingers and Champi Warriors +1 melee/+1 pierce armor
+      tr: Kamayuklar, Sapancılar ve Champi Savaşçıları +1 yakın dövüş/+1 delici zırh kazanır
 strategy:
   en: >-
     Incas are an Infantry civilization from South America.

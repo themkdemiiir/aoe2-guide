@@ -1,7 +1,7 @@
 slug: georgians-healing-scouts
 name:
   en: Georgians Healing Scout Rush
-  tr: Georgians Healing Scout Rush
+  tr: Georgians İyileştiren Scout Rush
 difficulty: advanced
 targetAge: feudal
 durationMin: 8
@@ -26,8 +26,8 @@ steps:
       - food
   - villagers: 11
     assign:
-      en: +3 → second boar, luring it under the TC
-      tr: +3 → ikinci domuzu TC altına çekerek öldür
+      en: +3 → join the boar under the TC
+      tr: +3 → TC altındaki domuza katıl
     icons:
       - food
       - town-center
@@ -48,8 +48,8 @@ steps:
       - mill
   - villagers: 13
     assign:
-      en: +1 → the second pair of boar
-      tr: +1 → ikinci domuz çiftine
+      en: +1 → lure and eat the second boar
+      tr: +1 → ikinci domuzu çek ve ye
     icons:
       - food
   - villagers: 16
@@ -78,26 +78,17 @@ steps:
       - lumber-camp
       - food
   - assign:
-      en: Send 2 to a barracks at ~50–60% age-up, then build a stable
-      tr: Çağ atlamanın ~%50–60'ında 2 köylüyü kışlaya gönder, sonra ahır yap
+      en: Send 2 to a barracks at ~50–60% age-up, build a stable, research Double-Bit Axe, then wall both sides of your base
+      tr: Çağ atlamanın ~%50–60'ında 2 köylüyü kışlaya gönder, ahır yap, Double-Bit Axe araştır, sonra üssünün iki tarafını da duvarla
     icons:
       - barracks
       - stable
-  - assign:
-      en: Research Double-Bit Axe and wall both sides of your base
-      tr: Double-Bit Axe araştır ve üssünün iki tarafını da duvarla
-    icons:
       - double-bit-axe
   - assign:
-      en: Train Scout Cavalry non-stop and harass with 3 scouts
-      tr: Durmadan Scout Cavalry bas ve 3 scout ile taciz et
+      en: Harass with 3 scouts, research Horse Collar, and seed farms with all new villagers
+      tr: 3 scout ile taciz et, Horse Collar araştır ve tüm yeni köylülerle tarlalar ek
     icons:
-      - stable
       - scout-cavalry
-  - assign:
-      en: Research Horse Collar and seed farms behind the walls
-      tr: Horse Collar araştır ve duvarların arkasına tarlalar ek
-    icons:
       - horse-collar
       - farm
   - assign:
@@ -149,3 +140,5 @@ strategy:
       İşler oturunca Bow Saw ve altın madenciliğini ekle, bir Fortified Church kur ve relic toplamak için keşişler
       çıkar; bu sırada ikinci bir TC dik — iyileştiren süvari bu süre boyunca haritanın kontrolünü sürekli çekişmeli
       tutar.
+source:
+  author: Hera

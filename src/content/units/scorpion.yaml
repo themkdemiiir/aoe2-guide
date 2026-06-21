@@ -4,7 +4,7 @@ name:
   tr: Scorpion
 role:
   en: siege
-  tr: siege
+  tr: kuşatma
 line: scorpion-line
 lineRank: 1
 description:

@@ -1,7 +1,7 @@
 slug: fast-chickens-dark-age
 name:
   en: Fast Chickens Dark Age
-  tr: Fast Chickens Dark Age
+  tr: Hızlı Tavuklu Dark Age
 difficulty: intermediate
 targetAge: feudal
 durationMin: 9
@@ -32,8 +32,8 @@ steps:
       - food
   - villagers: 10
     assign:
-      en: +1 → lure and kill the first boar
-      tr: +1 → ilk yaban domuzunu çek ve öldür
+      en: +1 → send 1 villager to the first boar
+      tr: +1 → 1 köylüyü ilk yaban domuzuna gönder
     icons:
       - food
   - villagers: 11
@@ -51,8 +51,8 @@ steps:
       - wood
   - villagers: 15
     assign:
-      en: +1 → lure the second boar
-      tr: +1 → ikinci yaban domuzunu çek
+      en: +1 → send 1 villager to the second boar
+      tr: +1 → 1 köylüyü ikinci yaban domuzuna gönder
     icons:
       - food
   - assign:
@@ -136,3 +136,5 @@ strategy:
       Uygarlık notları: ekonomi bonusları (Mayans ek köylü, Aztecs daha hızlı toplama, Vikings ucuz ekonomi) tavuk
       yiyeceğini daha da uzatır; Malians ve Ethiopians ise ucuz veya hızlı menzilli birimleri sayesinde temiz bir
       şekilde okçu baskısına dönüşür.
+source:
+  author: Hera

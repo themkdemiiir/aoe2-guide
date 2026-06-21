@@ -3,8 +3,8 @@ name:
   en: Mapuche
   tr: Mapuche
 tagline:
-  en: Mapuche — an Infantry civilization from South America.
-  tr: Mapuche — Güney Amerika'dan bir Piyade uygarlığı.
+  en: Mapuche — a Cavalry and Counter-units civilization from South America.
+  tr: Mapuche, Güney Amerika'dan bir Süvari ve Karşıt Birlik uygarlığıdır.
 bonuses:
   en:
     - Foragers drop off +20% food
@@ -13,14 +13,14 @@ bonuses:
     - Mounted Units generate +3 gold when defeating military units
     - Enemy Castles are revealed on the map
   tr:
-    - Toplayıcılar %20 daha fazla Yiyecek bırakır
-    - Yerleşim Yerleri Spearman serisi ve Skirmisher eğitebilir
-    - Piyade, Slingers ve Skirmisher'lar Feodal/Kale/İmparatorluk Çağı'nda +5/10/15 can kazanır
-    - Atlı Birimler askeri birimleri yendiklerinde +3 Altın üretir
-    - Düşman Kale'leri haritada görünür hale gelir
+    - Toplayıcılar %20 daha fazla yiyecek bırakır
+    - Yerleşimler, Mızraklı Asker türlerini ve Avcı Eri eğitebilir
+    - Piyadeler, Sapancılar ve Avcı Erleri Feodal/Kale/İmparatorluk Çağlarında +5/10/15 DP'ye sahip olur
+    - Binekli birimler, askerî birimleri yendiğinde +3 daha fazla altın üretir
+    - Düşman Kaleleri haritada görülebilir
 teamBonus:
   en: Spearman-line and Skirmishers +2 line of sight
-  tr: Spearman serisi ve Skirmisher'lar +2 görüş alanı
+  tr: Mızraklı Asker türleri ve Avcı Erleri +2 görüş hattı kazanır
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Malon
     effect:
       en: Bolas Riders, Slingers and Skirmishers deal pass through damage
-      tr: Bolas Riders, Slingers and Skirmishers deal pass through damage
+      tr: Bolas Binicileri, Sapancılar ve Avcı Erleri delici hasar verir
   imperial:
     name:
       en: Butalmapu
       tr: Butalmapu
     effect:
       en: Team Castle Unique Units and Bolas Riders cost -15%
-      tr: Team Castle Unique Units and Bolas Riders cost -15%
+      tr: Takım Kalesi Özgün Birimlerinin ve Bolas Binicilerinin maliyeti %15 azalır
 strategy:
   en: |-
     Mapuche are an Infantry civilization from South America.

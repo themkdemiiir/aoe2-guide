@@ -40,23 +40,35 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 |---|---|
 | `docs/superpowers/specs/2026-05-23-aoe2-guide-design.md` | Architecture spec |
 | `docs/superpowers/plans/2026-05-23-aoe2-guide-implementation.md` | Implementation plan |
-| `src/content/config.ts` | All 7 Zod schemas (single source of truth for content shape) |
-| `src/content/<type>/{en,tr}/*.md` | Localized content |
+| `src/content/config.ts` | All collection schemas (single source of truth for content shape) |
+| `src/content/<type>/<slug>.yaml` | Bilingual content (civilizations, build-orders, units, maps, glossary) — each text field is `{ en: "...", tr: "..." }` |
+| `src/content/{beginner,articles}/{en,tr}/*.md` | Long-form MD content that remains in separate locale dirs |
 | `src/data/*.json` | Language-agnostic structured data (stats, slug refs, patch info) |
 | `src/components/{layout,content,ui,islands}/` | Astro components |
 | `src/i18n/{locales,ui,utils}.ts` | i18n config, UI strings, helpers |
 | `src/lib/content.ts` | Locale-aware content helpers (`getLocalizedEntries`, `getLocalizedEntry`) |
-| `md/` | Raw source guides (not built — input layer for the curation pipeline) |
+| `md/` | Raw source guides (not built — Hera build-order verification sources) |
 | `public/images/aoe2/` | Synced AOE2 icons (bundled in repo for offline builds) |
-| `scripts/` | sync-assets, build-icon-map, import-from-md, new-guide, check-translations |
+| `scripts/` | sync-assets, build-icon-map, build-civilizations, audit-yaml-translations, check-translations |
+
+**Civ content:** EN+TR text (bonuses, team bonus, unique-tech effects, unique units) is sourced from `aoe2techtree` locale strings via `pnpm build:civilizations` (`scripts/build-civilizations.mjs`). Do not hand-edit the generated YAML fields — re-run the script instead.
+
+**Build orders:** steps are verified against the Hera video sources in `md/build-orders/`.
 
 ## Workflow for new content
 
-1. Drop raw guide into `md/<type>/<source>-<topic>.md` with a frontmatter source block.
-2. `pnpm import:md md/<type>/<file>.md` scaffolds an EN entry with frontmatter placeholders.
-3. Edit the EN file: fill schema fields, write strategy notes.
-4. `pnpm new:guide <type> <slug>` creates an empty TR scaffold for translation.
-5. `pnpm build` validates schemas; broken frontmatter fails the build (and CI).
+### YAML types (civilizations, build-orders, units, maps, glossary)
+
+1. Create `src/content/<type>/<slug>.yaml` with all text fields as `{ en: "...", tr: "..." }`.
+2. Fill required schema fields — see `src/content/config.ts` for the authoritative schema.
+3. `pnpm build` runs `audit-yaml-translations` as a prebuild gate: any field where `en === tr` (excluding allow-listed proper nouns: `name`, `term`, unique-tech names) fails the build.
+
+### MD types (beginner, articles)
+
+1. Add `src/content/<type>/en/<slug>.md` (EN source of truth).
+2. `pnpm new:guide <type> <slug>` scaffolds a TR placeholder under `src/content/<type>/tr/`.
+3. Translate the TR file; missing TR falls back to EN automatically.
+4. `pnpm build` validates schemas; broken frontmatter fails the build (and CI).
 
 ## Attribution requirement
 

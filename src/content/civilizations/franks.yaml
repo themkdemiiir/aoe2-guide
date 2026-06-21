@@ -4,7 +4,7 @@ name:
   tr: Franks
 tagline:
   en: Franks — a Cavalry civilization from Western Europe.
-  tr: Franks — Batı Avrupa'dan bir Süvari uygarlığı.
+  tr: Franks, Batı Avrupa'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
     - Foragers work +15% faster
@@ -12,13 +12,13 @@ bonuses:
     - Mounted Units +20% HP starting in Feudal Age
     - Castles cost -15/25% in Castle/Imperial Age
   tr:
-    - Yiyecek toplayıcılar %15 daha hızlı çalışır
-    - Mill teknolojileri ücretsiz
-    - Binekli Birimler Feodal Çağ'dan itibaren %20 daha fazla can'a sahip
-    - Castle'lar Kale/İmparatorluk Çağı'nda %15/25 daha ucuz
+    - Toplayıcılar %15 daha hızlı çalışır
+    - Askerî teknolojiler ücretsizdir
+    - Feodal Çağ'dan itibaren Süvarilere %20 daha fazla DP
+    - Kaleler Kale Çağı'nda %15, İmparatorluk Çağı'nda %25 daha ucuzdur
 teamBonus:
   en: Knight-line +2 line of sight
-  tr: Knight-line +2 görüş alanı
+  tr: Şövalye sınıflarına +2 görüş hattı
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Bearded Axe
     effect:
       en: Throwing Axemen +2 range
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Balta Atarlara +2 menzil
   imperial:
     name:
       en: Chivalry
       tr: Chivalry
     effect:
       en: Stables work +40% faster
-      tr: Stables work +40% faster
+      tr: Ahırlar %40 daha hızlı çalışır
 strategy:
   en: >-
     Franks are a Cavalry civilization from Western Europe.

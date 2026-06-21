@@ -1,7 +1,7 @@
 slug: 25pop-fast-castle-unique-unit
 name:
   en: Fast Castle into Unique Unit
-  tr: Hızlı Kale ile Özel Birim
+  tr: Özel Birime Hızlı Castle
 difficulty: intermediate
 targetAge: castle
 durationMin: 15
@@ -78,23 +78,27 @@ steps:
       - lumber-camp
   - villagers: 25
     phase: feudal
+    time: "11:20"
     assign:
-      en: +2 → gold; build a Gold Mining Camp, then click Feudal at 25 pop
-      tr: +2 → altına; Gold Mining Camp kur, sonra 25 popta Feudal'a tıkla
+      en: +2 → gold (build a Gold Mining Camp), then click Feudal at 25 pop
+      tr: +2 → altına (Gold Mining Camp kur), sonra 25 popta Feudal'a tıkla
     note:
-      en: "Feudal lands ~11:20 — eco at age-up: 8 wood / 15 food / 2 gold"
-      tr: "Feudal ~11:20'de gelir — çağ atlarken ekonomi: 8 odun / 15 yiyecek / 2 altın"
+      en: "Eco at age-up: 8 wood / 15 food / 2 gold"
+      tr: "Çağ atlarken ekonomi: 8 odun / 15 yiyecek / 2 altın"
     icons:
       - gold
       - mining-camp
   - villagers: 27
     assign:
       en: >-
-        Feudal — sheep run out, send 4 to stone + a Mining Camp; re-task 3 onto stragglers, then 1 builds Blacksmith and
-        2 build Market; +2 (now 27) → stone; research Double-Bit Axe + Horse Collar
+        Feudal — when sheep run out, send 4 villagers to stone and build a Mining Camp. Move the other 3 to straggler
+        trees, then have 1 build a Blacksmith and 2 build a Market. Add +2 to stone (now 27).
       tr: >-
-        Feudal — koyunlar biter, 4 köylüyü taşa + Mining Camp'e gönder; 3 köylüyü straggler ağaçlarına yönlendir, sonra
-        1'i Blacksmith ve 2'si Market kurar; +2 (artık 27) → taşa; Double-Bit Axe + Horse Collar araştır
+        Feudal — koyunlar bitince 4 köylüyü taşa gönderip Mining Camp kur. Diğer 3'ünü straggler ağaçlarına al, sonra
+        1'i Blacksmith, 2'si Market kursun. +2 köylüyü taşa ekle (artık 27).
+    note:
+      en: Research Double-Bit Axe and Horse Collar
+      tr: Double-Bit Axe ve Horse Collar araştır
     icons:
       - stone
       - mining-camp
@@ -106,11 +110,11 @@ steps:
     time: "14:50"
     assign:
       en: >-
-        Keep mining stone, then click Castle Age — lands ~14:50. Drop a Castle with the stone villagers and mass Unique
-        Units; research Bow Saw
+        Castle Age lands ~14:50. Drop a Castle with the stone villagers and start massing Unique Units. Research Bow Saw,
+        and send idle berry villagers to whatever resource you need.
       tr: >-
-        Taş toplamayı sürdür, sonra Castle Age'e tıkla — ~14:50'de gelir. Taş köylüleriyle bir Castle kur ve Özel
-        Birimleri yığ; Bow Saw araştır
+        Castle Age ~14:50'de gelir. Taş köylüleriyle bir Castle kur ve Özel Birimleri yığmaya başla. Bow Saw araştır ve
+        boşa çıkan meyve köylülerini ihtiyacın olan kaynağa gönder.
     icons:
       - stone
       - castle
@@ -160,3 +164,5 @@ strategy:
     - >-
       Rakip de Hızlı Kale yapıyorsa avantajın Özel Birimin kendisidir — pasifçe boom yapmak yerine ondan daha fazla üret
       ve dövüşleri kendi şartlarında zorla.
+source:
+  author: Hera

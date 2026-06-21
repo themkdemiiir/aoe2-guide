@@ -4,7 +4,7 @@ name:
   tr: Camel
 role:
   en: anti-cavalry cavalry
-  tr: süvari karşıtı süvari
+  tr: süvari avcısı süvari
 line: camel-line
 lineRank: 1
 description:

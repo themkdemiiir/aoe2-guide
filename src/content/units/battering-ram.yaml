@@ -4,7 +4,7 @@ name:
   tr: Battering Ram
 role:
   en: siege
-  tr: siege
+  tr: kuşatma
 line: ram-line
 lineRank: 1
 description:

@@ -4,7 +4,7 @@ name:
   tr: Bengalis
 tagline:
   en: Bengalis — an Elephant and Naval civilization from South Asia.
-  tr: Bengalis — Güney Asya'dan bir Fil ve Denizcilik uygarlığı.
+  tr: Bengalis, Güney Asya'dan bir Fil ve Donanma uygarlığıdır.
 bonuses:
   en:
     - Town Centers spawn 2 Villagers when the next Age is reached
@@ -13,14 +13,14 @@ bonuses:
     - Monks +3 melee/+3 pierce armor
     - Ships regenerate 15 HP per minute
   tr:
-    - Town Center'lar bir sonraki çağa ulaşıldığında 2 köylü daha üretir
-    - Süvari, Skirmisher'lara karşı +2 saldırı kazanır
-    - Fil birimleri %25 daha az bonus hasar alır ve dönüştürmeye daha dirençlidir
-    - Monk'lar +3 yakın dövüş / +3 delici zırh kazanır
-    - Gemiler dakikada 15 can yeniler
+    - Şehir Merkezleri sonraki Çağa ulaşıldığında 2 Köylü verir
+    - Süvariler, Akıncılara karşı +2 saldırı kazanır
+    - Fil Birimleri %25 daha az hasar alır ve dönüştürülmeye daha dayanıklıdır
+    - Keşişler +3 yakın dövüş/+3 delici zırh kazanır
+    - Gemiler dakika başına 15 DP yeniler
 teamBonus:
   en: Trade Units generate +10% food in addition to gold
-  tr: Ticaret birimleri, Altın'a ek olarak %10 daha fazla Yiyecek üretir
+  tr: Ticaret Birimleri altına ek olarak %10 daha fazla yiyecek getirir
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Paiks
     effect:
       en: Rathas and Elephant Units attack +20% faster
-      tr: Ratha ve Elephant Archer %18 daha hızlı saldırır
+      tr: Rathalar ve Fil Birimleri %20 daha hızlı saldırır
   imperial:
     name:
       en: Mahayana
       tr: Mahayana
     effect:
       en: Villagers and Monks take -10% population space
-      tr: Köylüler 0,5 daha az nüfus yer
+      tr: Köylüler ve Keşişler %10 daha az nüfus alanı kaplar
 strategy:
   en: >-
     Bengalis are an Elephant and Naval civilization from South Asia.

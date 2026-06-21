@@ -41,8 +41,8 @@ steps:
       - food
   - villagers: 16
     assign:
-      en: +6 → food under the TC (about 9 on food, 4 on berries)
-      tr: +6 → ŞM altında yiyeceğe (yaklaşık 9'u yiyecekte, 4'ü meyvede)
+      en: +6 → food under the TC (9 on food, 4 on berries)
+      tr: +6 → ŞM altında yiyeceğe (9'u yiyecekte, 4'ü meyvede)
     icons:
       - food
   - assign:
@@ -69,9 +69,10 @@ steps:
       - farm
   - villagers: 22
     phase: feudal
+    time: "7:10"
     assign:
-      en: +2 → gold, then click Feudal Age (~7:10 / 7 wood, 13 food, 2 gold)
-      tr: +2 → altına, sonra Feudal Çağ'a tıkla (~7:10 / 7 odun, 13 yiyecek, 2 altın)
+      en: "+2 → gold, then click Feudal Age (7 wood, 13 food, 2 gold)"
+      tr: "+2 → altına, sonra Feudal Çağ'a tıkla (7 odun, 13 yiyecek, 2 altın)"
     note:
       en: Spend as little time in Feudal as possible
       tr: Feudal'da olabildiğince az vakit harca
@@ -150,3 +151,5 @@ strategy:
     - >-
       Buradan sonra uygarlığının Kale Çağı güç patlamasına yüklen — Franks veya Persians için şövalyeler (knight),
       surların ardında keşişler ve kalıntılar, ya da oyun uzarsa Imperial'a doğru ek Şehir Merkezleri.
+source:
+  author: Hera

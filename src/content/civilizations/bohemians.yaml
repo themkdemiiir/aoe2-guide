@@ -4,7 +4,7 @@ name:
   tr: Bohemians
 tagline:
   en: Bohemians — a Gunpowder and Monk civilization from Eastern Europe.
-  tr: Bohemians — Doğu Avrupa'dan bir Barut ve Keşiş uygarlığı.
+  tr: Bohemians, Doğu Avrupa'dan bir Barut ve Keşiş uygarlığıdır.
 bonuses:
   en:
     - Mining Camp technologies free
@@ -13,14 +13,14 @@ bonuses:
     - Fervor and Sanctity affect Villagers
     - Chemistry and Hand Cannoneer available in Castle Age
   tr:
-    - Madencilik Kampı teknolojileri ücretsiz
-    - Blacksmith ve Üniversiteler -100 odun maliyetiyle inşa edilir
-    - Spearman hattı +%25 bonus hasar verir
-    - Fervor ve Sanctity köylüleri etkiler
-    - Chemistry ve Hand Cannoneer Kale Çağı'nda kullanılabilir
+    - Maden Kampı teknolojileri ücretsizdir
+    - Demircilerin ve Üniversitelerin odun bedeli 100 azalır
+    - Mızraklı Asker türleri %25 daha fazla hasar verir
+    - Tutku ve Kutsallık, Köylüleri etkiler
+    - Kimya ve Tüfekçi, Kale Çağı'nda açılır
 teamBonus:
   en: Markets work +80% faster
-  tr: Market'lar %80 daha hızlı çalışır
+  tr: Marketler %80 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Wagenburg Tactics
     effect:
       en: Gunpowder Units move +15% faster
-      tr: Barut birimleri +1 hız kazanır
+      tr: Tüfekli Birimler %15 daha hızlı hareket eder
   imperial:
     name:
       en: Hussite Reforms
       tr: Hussite Reforms
     effect:
       en: Monks and Monastery technologies gold cost is replaced by food cost
-      tr: Monk ve Monastery'ler, Emanet gibi altın üretir
+      tr: Keşişlerin ve Manastır teknolojilerinin altın bedeli yerine yiyecek bedeli getirilir
 strategy:
   en: >-
     Bohemians are a Gunpowder and Monk civilization from Eastern Europe.

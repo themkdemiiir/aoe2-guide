@@ -4,7 +4,7 @@ name:
   tr: Poles
 tagline:
   en: Poles — a Cavalry civilization from Eastern Europe.
-  tr: Poles — Doğu Avrupa'dan bir Süvari uygarlığı.
+  tr: Poles, Doğu Avrupa'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
     - Folwark replaces Mill
@@ -12,13 +12,13 @@ bonuses:
     - Stone Miners generate gold in addition to stone
     - Bloodlines and Scout Cavalry-line upgrades cost -50% food
   tr:
-    - Folwark, Mill'in yerini alır
-    - Köylüler Feodal/Kale/İmparatorluk Çağı'nda 10/15/20 can yeniler
+    - Folwark, Değirmenin yerine geçer
+    - Köylüler; Feodal Çağ'da 10, Kale Çağı'nda 15, İmparatorluk Çağı'nda 20 DP yeniler
     - Taş Madencileri taşa ek olarak altın üretir
-    - Bloodlines ve Scout Cavalry hat yükseltmeleri %50 daha az Yiyecek maliyetiyle gelir
+    - Nesil ve Atlı Gözcü türlerinin yükseltmeleri %50 daha az yiyecek gerektirir
 teamBonus:
   en: Scout Cavalry-line +1 attack vs. Ranged Soldiers
-  tr: Scout Cavalry hattı Menzilli Askerlere karşı +1 saldırı kazanır
+  tr: Atlı Gözcü türleri Menzilli Askerlere karşı +1 saldırı kazanır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Szlachta Privileges
     effect:
       en: Knight-line costs -60% gold
-      tr: Knight hattı %60 daha az Altın maliyetiyle gelir
+      tr: Süvari türleri %60 daha az altına mal olur
   imperial:
     name:
       en: Lechitic Legacy
       tr: Lechitic Legacy
     effect:
       en: Scout Cavalry-line deals trample damage
-      tr: Light Cavalry ve Winged Hussar alan hasarı verir
+      tr: Atlı Gözcü türleri ezme hasarı verir
 strategy:
   en: >-
     Poles are a Cavalry civilization from Eastern Europe.

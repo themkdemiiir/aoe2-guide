@@ -17,34 +17,27 @@ steps:
       - town-center
   - villagers: 8
     assign:
-      en: +2 → wood, build a lumber camp and a house
-      tr: +2 → oduna, bir kütük kampı ve bir ev yap
+      en: +2 → wood; build a house with one of them
+      tr: +2 → oduna; biriyle bir ev yap
     icons:
       - wood
-      - lumber-camp
       - house
   - villagers: 9
     assign:
       en: +1 → lure the first boar
       tr: +1 → ilk yaban domuzunu çek
-    icons:
-      - food
-  - assign:
-      en: Lure 1–3 deer under the TC with idle eco vils
-      tr: Boştaki ekonomi köylüleriyle TC altına 1–3 geyik çek
     note:
-      en: Free food keeps the TC working while sheep run low
-      tr: Bedava et, koyunlar azalırken TC'yi çalışır tutar
+      en: With the scout, lure 1–3 deer once all sheep are found
+      tr: Scout ile, tüm koyunları bulduktan sonra 1–3 geyik çek
     icons:
       - food
-      - town-center
   - villagers: 15
     assign:
       en: +6 → hunt under the TC
       tr: +6 → TC altındaki ava
     note:
-      en: Lure the second boar before the first runs dry
-      tr: İlki tükenmeden ikinci yaban domuzunu çek
+      en: Lure the second boar during this time
+      tr: Bu sırada ikinci yaban domuzunu çek
     icons:
       - food
       - town-center
@@ -57,8 +50,8 @@ steps:
       - mining-camp
   - villagers: 18
     assign:
-      en: +2 → hunt; research Loom
-      tr: +2 → ava; Loom araştır
+      en: +2 → hunt under the TC; research Loom
+      tr: +2 → TC altındaki ava; Loom araştır
     icons:
       - food
       - loom
@@ -68,64 +61,65 @@ steps:
     assign:
       en: Click up to Feudal at 18 pop (2 wood / 15 food / 1 gold)
       tr: 18 nüfusta Feudal'a tıkla (2 odun / 15 yiyecek / 1 altın)
+    note:
+      en: Perfect landing time is 8:50
+      tr: İdeal varış zamanı 8:50
     icons:
       - loom
   - villagers: 18
     assign:
-      en: 7 from the TC → new lumber camp; 2 → barracks + house; 2 → straggler trees
-      tr: TC'den 7 → yeni kütük kampı; 2 → kışla + ev; 2 → ayrık ağaçlar
+      en: 7 from the TC → lumber camp; 2 → barracks + house; 2 → straggler trees
+      tr: TC'den 7 → kütük kampı; 2 → kışla + ev; 2 → ayrık ağaçlar
     icons:
       - lumber-camp
       - barracks
       - house
       - wood
-  - assign:
-      en: Build 2 Archery Ranges; start Archers from both the moment Feudal lands
-      tr: 2 Okçu Menzili kur; Feudal gelir gelmez ikisinden de Okçu üret
+  - villagers: 18
+    assign:
+      en: Build 2 Archery Ranges and start Archers; 1 range vil → Blacksmith, the other → food
+      tr: 2 Okçu Menzili kur ve Okçu üret; 1 menzil köylüsü → Demirci, diğeri → yiyecek
     icons:
       - archery-range
       - archer
+      - blacksmith
   - villagers: 25
     assign:
-      en: 1 range builder → Blacksmith; the other → food; put 7 on gold
-      tr: 1 menzil yapan köylü → Demirci; diğeri → yiyecek; 7 köylüyü altına koy
-    note:
-      en: Research Fletching, then send Archers to attack
-      tr: Fletching araştır, sonra Okçuları saldırıya gönder
+      en: +7 → gold; move 2 stragglers → food; research Fletching and attack
+      tr: +7 → altına; 2 ayrık ağaç köylüsü → yiyecek; Fletching araştır ve saldır
     icons:
-      - blacksmith
       - gold
       - fletching
   - villagers: 31
     assign:
-      en: +6 → berries; seed farms as hunt and berries run out
-      tr: +6 → meyveler; av ve meyveler bitince tarla ek
+      en: +6 → berries; add farms as the sheep run out
+      tr: +6 → meyvelere; koyunlar bitince tarla ekle
     icons:
       - food
       - farm
-  - villagers: 36
+  - villagers: 33
     assign:
-      en: +2 → wood, then +3 → gold; Market to sell stone for the age-up
-      tr: +2 → odun, sonra +3 → altın; çağ atlamak için Pazar'dan taş sat
+      en: +2 → wood
+      tr: +2 → oduna
     icons:
       - wood
+  - villagers: 36
+    assign:
+      en: +3 → gold; build a Market and sell stone to click up to Castle
+      tr: +3 → altına; Pazar yap ve Castle'a tıklamak için taş sat
+    icons:
       - gold
       - market
   - assign:
-      en: Click up to Castle; research Double-Bit Axe and start gold mining
-      tr: Castle'a tıkla; Double-Bit Axe araştır ve altın madenciliğine başla
+      en: "In Castle: research Double-Bit Axe, Gold Mining, Bow Saw; Crossbow + Bodkin Arrow"
+      tr: "Castle'da: Double-Bit Axe, Gold Mining, Bow Saw araştır; Crossbow + Bodkin Arrow"
+    note:
+      en: Drop a second lumber camp with 6 vils; keep attacking but don't lose your Archers
+      tr: 6 köylüyle ikinci bir kütük kampı kur; saldırmaya devam et ama Okçularını kaybetme
     icons:
-      - double-bit-axe
-      - gold
-  - assign:
-      en: "Castle: Crossbow + Bodkin Arrow; optional Horse Collar; Bow Saw"
-      tr: "Castle: Crossbow + Bodkin Arrow; isteğe bağlı Horse Collar; Bow Saw"
-  - assign:
-      en: Drop a 2nd lumber camp with 6 vils to fuel continuous production
-      tr: Üretimi kesintisiz sürdürmek için 6 köylüyle 2. kütük kampı bırak
-    icons:
+      - crossbow
+      - bow-saw
       - lumber-camp
-      - wood
 intro:
   en: >-
     Land in Feudal at 18 pop and open two Archery Ranges at once, leaning on Ethiopia's faster Archers and free age-up
@@ -136,40 +130,44 @@ intro:
 strategy:
   en:
     - >-
-      This is a flank build for team games: two ranges from the start means double the Archer output, and Ethiopia's
-      Archers move 15% faster, so they kite Skirmishers and disengage from Scouts better than a generic ranged opening.
+      This is a flank build for team games: the objective is to get as many Archers as possible right away. Two ranges
+      from the start means double the Archer output, and Ethiopia's faster Archers kite Skirmishers and disengage from
+      Scouts better than a generic ranged opening. Easiest with Ethiopians — slower civs usually go up at 20 pop instead.
     - >-
       The Dark Age is hunt-heavy — one boar, a deer lure, then a second boar — so you reach Feudal with almost no wood
       banked. Get the new lumber camp and straggler vils onto wood immediately or Archer production will stall.
     - >-
-      Push gold hard. Seven villagers go to gold in Feudal so Fletching lands fast and you never run dry feeding two
-      ranges; Ethiopia's free +100 food and +100 gold on each age-up cushions the heavy military spend and speeds the
-      click to Castle.
+      You deliberately sacrifice economy in favor of army. Seven villagers go to gold in Feudal so Fletching lands fast
+      and you never run dry feeding two ranges; Ethiopia's free +100 food and +100 gold on each age-up cushions the heavy
+      military spend and speeds the click to Castle.
     - >-
-      This opening deliberately sacrifices economy for tempo. Add berries and farms only as your hunt expires, sell
-      spare stone at the Market to push the Castle click, and keep raw Archer numbers climbing rather than
-      over-investing in eco upgrades.
+      Add berries and farms only as your hunt expires, and use the Market to reach Castle Age faster by selling stone.
+      The goal is to win in Feudal or early Castle — or build such a lead that you can fall back, add economy, and win
+      later. If you're short on food, keep adding villagers to whatever resource you need.
     - >-
-      In Castle Age go straight for Crossbow and Bodkin Arrow with Bow Saw to keep the wood flowing; a second lumber
-      camp on six vils sustains the mass. Let your pocket ally carry the eco boom while you apply constant pressure on
-      the flank.
+      In Castle Age go straight for Crossbow and Bodkin Arrow with Bow Saw to keep the wood flowing; a second lumber camp
+      on six vils sustains the mass. Keep attacking but don't lose your Archers, and let your pocket ally's Scouts cover
+      your weakness to Skirmishers.
   tr:
     - >-
-      Bu, takım oyunları için bir kanat build'idir: baştan iki menzil, iki kat Okçu üretimi demektir ve Etiyopya'nın
-      Okçuları %15 daha hızlı hareket eder; bu sayede Skirmisher'ları kitelemek ve Scout'lardan kaçmak normal bir
-      menzilli açılıştan daha kolaydır.
+      Bu, takım oyunları için bir kanat build'idir: amaç hemen mümkün olduğunca çok Okçu çıkarmaktır. Baştan iki menzil,
+      iki kat Okçu üretimi demektir ve Etiyopya'nın hızlı Okçuları Skirmisher'ları kitelemek ve Scout'lardan kaçmak için
+      normal bir menzilli açılıştan daha iyidir. En kolayı Etiyopya iledir — yavaş uygarlıklar genelde 20 nüfusta çıkar.
     - >-
       Karanlık Çağ av ağırlıklıdır — bir yaban domuzu, bir geyik çekme, sonra ikinci yaban domuzu — bu yüzden Feudal'a
       neredeyse hiç biriktirilmiş odun olmadan ulaşırsın. Yeni kütük kampını ve ayrık ağaç köylülerini hemen oduna
       geçir, yoksa Okçu üretimi tıkanır.
     - >-
-      Altına sert yüklen. Feudal'da yedi köylü altına gider; böylece Fletching hızlı tamamlanır ve iki menzili beslerken
-      hiç kurumazsın. Etiyopya'nın her çağ atlayışında verdiği bedava +100 yiyecek ve +100 altın, ağır askeri harcamayı
-      yumuşatır ve Castle tıklamasını hızlandırır.
+      Ordu uğruna ekonomiyi bilerek feda edersin. Feudal'da yedi köylü altına gider; böylece Fletching hızlı tamamlanır
+      ve iki menzili beslerken hiç kurumazsın. Etiyopya'nın her çağ atlayışında verdiği bedava +100 yiyecek ve +100 altın,
+      ağır askeri harcamayı yumuşatır ve Castle tıklamasını hızlandırır.
     - >-
-      Bu açılış, tempo uğruna ekonomiyi bilerek feda eder. Meyve ve tarlaları yalnızca avın tükendikçe ekle, fazla taşı
-      Pazar'dan satıp Castle tıklamasını öne çek ve ekonomi yükseltmelerine fazla yatırım yapmak yerine ham Okçu
-      sayısını artırmaya devam et.
+      Meyve ve tarlaları yalnızca avın tükendikçe ekle ve Pazar'ı kullanarak taş satıp Castle Çağı'na daha hızlı ulaş.
+      Amaç Feudal'da ya da erken Castle'da kazanmak — ya da geri çekilip ekonomi ekleyerek sonradan kazanabileceğin kadar
+      büyük bir üstünlük kurmaktır. Yiyecek sıkıntısı çekersen, ihtiyacın olan kaynağa köylü eklemeye devam et.
     - >-
       Castle Çağı'nda doğrudan Crossbow ve Bodkin Arrow'a git, odunu akıtmak için Bow Saw'ı da al; altı köylüyle ikinci
-      bir kütük kampı kitleyi besler. Ekonomi boom'unu cep müttefikine bırak, sen kanatta sürekli baskı uygula.
+      bir kütük kampı kitleyi besler. Saldırmaya devam et ama Okçularını kaybetme ve cep müttefikinin Scout'larının
+      Skirmisher zaafını kapatmasına izin ver.
+source:
+  author: Hera

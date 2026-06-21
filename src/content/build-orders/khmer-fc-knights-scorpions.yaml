@@ -1,10 +1,10 @@
 slug: khmer-fc-knights-scorpions
 name:
   en: Khmer Fast Castle Knights and Scorpions
-  tr: Khmer Fast Castle Knights ve Scorpions
+  tr: Khmer Hızlı Kale Knights ve Scorpions
 difficulty: advanced
-targetAge: feudal
-durationMin: 11
+targetAge: castle
+durationMin: 14
 civsRecommended:
   - khmer
 steps:
@@ -27,19 +27,13 @@ steps:
       tr: +2 → ilk domuza
     icons:
       - food
-  - villagers: 12
+  - villagers: 13
     assign:
-      en: +1 → build House + Mill, then berries
-      tr: +1 → House + Mill kur, ardından meyveye
+      en: +1 (12) → build House + Mill on berries; +1 (13) → berries
+      tr: +1 (12) → House + Mill kur, meyvede; +1 (13) → meyveye
     icons:
       - house
       - mill
-      - food
-  - villagers: 13
-    assign:
-      en: +1 → berries
-      tr: +1 → meyveye
-    icons:
       - food
   - villagers: 14
     assign:
@@ -54,17 +48,12 @@ steps:
     icons:
       - food
       - house
-  - villagers: 19
-    assign:
-      en: +1 → wood
-      tr: +1 → oduna
-    icons:
-      - wood
   - villagers: 20
     assign:
-      en: +1 → build a Farm
-      tr: +1 → bir Farm kur
+      en: +1 (19) → wood; +1 (20) → build a Farm
+      tr: +1 (19) → oduna; +1 (20) → bir Farm kur
     icons:
+      - wood
       - farm
   - villagers: 23
     phase: feudal
@@ -80,41 +69,37 @@ steps:
       - mining-camp
       - loom
   - assign:
-      en: "Feudal: seed 3 Farms, then click Castle instantly — Khmer build NO Feudal buildings"
-      tr: "Feudal: 3 Farm kur, sonra anında Castle'a tıkla — Khmer Feudal'da HİÇBİR bina kurmaz"
+      en: "Feudal: seed 3 Farms with hunt villagers, then click Castle instantly — Khmer build NO Feudal buildings"
+      tr: "Feudal: 3 Farm'ı avcı köylülerle kur, sonra anında Castle'a tıkla — Khmer Feudal'da HİÇBİR bina kurmaz"
     note:
-      en: Khmer need no building to age up; garrison villagers in houses and use your Scout for defense
-      tr: Khmer çağ atlamak için binaya ihtiyaç duymaz; köylüleri evlere yerleştir ve savunmada Scout kullan
+      en: Khmer need no building to age up; garrison villagers in houses and keep your Scout on defense
+      tr: Khmer çağ atlamak için binaya ihtiyaç duymaz; köylüleri evlere yerleştir ve Scout'u savunmada tut
     icons:
       - farm
       - scout-cavalry
   - villagers: 23
+    phase: castle
     assign:
-      en: 4 hunt/straggler villagers → woodline; +2 → gold
-      tr: 4 avcı/straggler köylü → ağaç hattına; +2 → altına
+      en: 4 hunt/straggler villagers → woodline; +2 → gold; research Double-Bit Axe
+      tr: 4 avcı/straggler köylü → ağaç hattına; +2 → altına; Double-Bit Axe araştır
+    note:
+      en: Tower the gold or wood only if pressured; when berries run out, send them to stragglers and make Farms
+      tr: Yalnızca baskı varsa altına ya da oduna kule dik; meyve bitince köylüleri straggler ağaçlara gönder ve Farm kur
     icons:
       - wood
       - gold
-  - assign:
-      en: Research Double-Bit Axe; tower only if pressured; berries-out → stragglers + Farms
-      tr: Double-Bit Axe araştır; baskı varsa kule dik; meyve biter → straggler + Farm
-    icons:
       - double-bit-axe
-      - farm
   - assign:
-      en: "Castle: build Stable + Blacksmith; research +1 cavalry armor"
-      tr: "Castle: Stable + Blacksmith kur; +1 süvari zırhı araştır"
+      en: "Castle: build Stable + Blacksmith, research +1 cavalry armor, and pump Knights immediately"
+      tr: "Castle: Stable + Blacksmith kur, +1 süvari zırhı araştır ve hemen Knight üret"
     icons:
       - stable
       - blacksmith
   - assign:
-      en: Pump Knights immediately; add a forward Siege Workshop
-      tr: Hemen Knight üret; ileri bir Siege Workshop ekle
+      en: With map control, send a vil forward for a Siege Workshop and mix Scorpions with Knights
+      tr: Harita kontrolüyle bir köylüyü ileri gönderip Siege Workshop kur ve Knight'larla birlikte Scorpion üret
     icons:
       - siege-workshop
-  - assign:
-      en: Mix Scorpions with Knights from the forward base
-      tr: İleri üsten Knight'larla birlikte Scorpion üret
 intro:
   en: >-
     **Goal:** Exploit Khmer's no-building-prerequisite bonus to skip Feudal structures entirely and slam into Castle Age
@@ -163,3 +148,6 @@ strategy:
     - >-
       **Devamı:** Baskı tıkanırsa arkaya ek Town Center kur, ardından geç oyunda Elite Battle Elephant veya relic
       destekli Monk oyununa geçiş yap.
+source:
+  author: Hera
+  url: https://www.youtube.com/@Hera

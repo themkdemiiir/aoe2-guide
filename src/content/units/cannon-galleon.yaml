@@ -4,7 +4,7 @@ name:
   tr: Cannon Galleon
 role:
   en: naval siege
-  tr: deniz kuşatma
+  tr: deniz kuşatma birimi
 line: cannon-galleon-line
 lineRank: 1
 description:

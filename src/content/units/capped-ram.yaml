@@ -4,7 +4,7 @@ name:
   tr: Capped Ram
 role:
   en: siege
-  tr: siege
+  tr: kuşatma
 line: ram-line
 lineRank: 2
 description:

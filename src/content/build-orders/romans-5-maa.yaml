@@ -64,9 +64,10 @@ steps:
       - wood
       - loom
   - villagers: 19
+    phase: feudal
     assign:
-      en: Move 2 off food → gold, then shift 7 off food → wood
-      tr: Yiyecekten 2 kişiyi → altına, ardından 7 kişiyi yiyecekten → oduna kaydır
+      en: Move 2 off food → gold, then 2 more off food → wood (ends ~7 wood, 9 food, 2 gold)
+      tr: Yiyecekten 2 kişiyi → altına, ardından 2 kişiyi daha yiyecekten → oduna kaydır (yaklaşık 7 odun, 9 yiyecek, 2 altın)
     icons:
       - gold
       - wood
@@ -74,16 +75,11 @@ steps:
       en: Pump Militia up to 5 and walk them at the opponent
       tr: Milisi 5'e kadar bas ve rakibe doğru yürüt
     note:
-      en: These 5 are the core of the push — keep them alive
-      tr: Bu 5 birim baskının çekirdeği — onları hayatta tut
+      en: These 5 are the core of the push — keep them alive; as the hunt runs out, send those Villagers to the straggler trees and seed 5 farms
+      tr: Bu 5 birim baskının çekirdeği — onları hayatta tut; av tükenince o Köylüleri sapan ağaçlara gönder ve 5 tarla ek
     icons:
       - militia
-  - assign:
-      en: As the hunt runs out, send those Villagers to the straggler trees and seed 5 farms
-      tr: Av tükenince o Köylüleri sapan ağaçlara gönder ve 5 tarla ek
-    icons:
       - farm
-      - wood
   - assign:
       en: Research Man-at-Arms, then Double-Bit Axe
       tr: Man-at-Arms'ı, ardından Double-Bit Axe'ı araştır
@@ -91,16 +87,14 @@ steps:
       - man-at-arms
       - double-bit-axe
   - assign:
-      en: Send new Villagers onto the straggler trees; build a Blacksmith once 5 farms are down
-      tr: Yeni Köylüleri sapan ağaçlara gönder; 5 tarla kurulunca bir Demirci kur
+      en: Send new Villagers to the straggler trees; build a Blacksmith once 5 farms are down and research Infantry armor (+2)
+      tr: Yeni Köylüleri sapan ağaçlara gönder; 5 tarla kurulunca bir Demirci kur ve Piyade zırhını (+2) araştır
+    note:
+      en: Roman infantry armor makes this push extremely resilient
+      tr: Roma piyade zırhı bu baskıyı çok dayanıklı yapar
     icons:
       - blacksmith
       - wood
-  - assign:
-      en: Research Infantry armor (+2) at the Blacksmith — Roman armor makes this huge
-      tr: Demirci'de Piyade zırhını (+2) araştır — Roma zırhı bunu çok güçlü kılar
-    icons:
-      - blacksmith
   - assign:
       en: Pressure with your Scout plus the Man-at-Arms together; pick fights you win
       tr: Scout ile Man-at-Arms'ı birlikte kullanarak baskı yap; sadece kazanacağın savaşlara gir
@@ -150,3 +144,5 @@ strategy:
       Bu açılış Castle Çağı'na esnek geçer — tarlaları bir Market ve duvarın arkasında hızlı bir Castle'a dönüştür,
       sonra Long Swordsman ve Scorpion ile devam et, Knight'a geç ya da baskı seni öne geçirdiyse sadece boom yapıp
       Relic topla.
+source:
+  author: Hera

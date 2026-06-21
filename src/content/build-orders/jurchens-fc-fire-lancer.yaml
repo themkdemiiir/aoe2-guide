@@ -1,7 +1,7 @@
 slug: jurchens-fc-fire-lancer
 name:
   en: Jurchens Fast Castle Fire Lancer Rush
-  tr: Jurchens Fast Castle Fire Lancer Rush
+  tr: Jurchens Fast Castle ile Fire Lancer Baskını
 difficulty: advanced
 targetAge: castle
 durationMin: 14
@@ -41,22 +41,17 @@ steps:
       - mill
   - villagers: 13
     assign:
-      en: +1 → lure the second boar
-      tr: +1 → ikinci yaban domuzunu çek
-    icons:
-      - food
-  - assign:
-      en: Lure at least 2 deer to the boar/sheep pile (re-task, no new villager)
-      tr: En az 2 geyiği domuz/koyun yığınına çek (yeniden görevlendirme, yeni köylü yok)
+      en: +1 → second boar; then re-task villagers to lure at least 2 deer to the pile
+      tr: +1 → ikinci yaban domuzu; sonra köylüleri en az 2 geyiği yığına çekmeye yeniden görevlendir
     note:
-      en: Pop stays at 13 — this is a re-task
-      tr: Nüfus 13'te kalır — bu bir yeniden görevlendirmedir
+      en: The deer lure is a re-task — pop stays at 13
+      tr: Geyik çekme bir yeniden görevlendirmedir — nüfus 13'te kalır
     icons:
       - food
   - villagers: 15
     assign:
-      en: +2 → hunt (deer and remaining boar meat)
-      tr: +2 → av (geyik ve kalan domuz eti)
+      en: +2 → hunt under the Town Center (deer and remaining boar meat)
+      tr: +2 → Şehir Merkezi'nin altında av (geyik ve kalan domuz eti)
     icons:
       - food
   - villagers: 19
@@ -83,30 +78,22 @@ steps:
       tr: Yaklaşık 4 odun / 15 yemek / 3 altın ile çık
     icons:
       - loom
-  - assign:
-      en: "Feudal: re-task 3 from wood → Market + Blacksmith; small-wall your wood and gold lines"
-      tr: "Feudal: odundan 3 köylüyü yeniden görevlendir → Pazar + Demirci; odun ve altın hatlarını kısmen duvarla"
+  - villagers: 24
+    assign:
+      en: "Feudal: re-task 3 from wood → Market + Blacksmith and small-wall your wood/gold lines; +2 → wood"
+      tr: "Feudal: odundan 3 köylüyü çek → Pazar + Demirci ve odun/altın hatlarını kısmen duvarla; +2 → odun"
     icons:
       - market
       - blacksmith
-  - villagers: 24
-    assign:
-      en: +2 → wood to fuel the age-up
-      tr: +2 → çağ atlamayı beslemek için odun
-    icons:
       - wood
-  - phase: castle
+  - villagers: 24
+    phase: castle
     time: "14:00"
     assign:
-      en: Click Castle Age — do NOT sell stone, you may need a defensive Tower
-      tr: Castle Age'e (Kale) tıkla — taşını SATMA, savunma için Gözcü Kulesi gerekebilir
+      en: "Click Castle Age (do NOT sell stone — you may need a defensive Tower); on landing send all 10 from the Town Center → wood + a 2nd Lumber Camp and add 2 Barracks"
+      tr: "Castle Age'e (Kale) tıkla (taşını SATMA — savunma için Gözcü Kulesi gerekebilir); çıkınca Şehir Merkezi'ndeki 10 köylünün tümünü çek → odun + 2. Kereste Kampı ve 2 Kışla ekle"
     icons:
       - watch-tower
-  - villagers: 24
-    assign:
-      en: "Castle: pull ~10 from the Town Center → wood + a 2nd Lumber Camp; add 2 Barracks"
-      tr: "Castle: Şehir Merkezi'nden ~10 köylüyü çek → odun + 2. Kereste Kampı; 2 Kışla ekle"
-    icons:
       - lumber-camp
       - barracks
   - assign:
@@ -166,3 +153,5 @@ strategy:
     - >-
       Bu agresif ama tam bir all-in değil — yaklaşık 5 köylüyü yemekte tut ki rush takılırsa toparlanıp geçiş
       yapabilesin.
+source:
+  author: Hera

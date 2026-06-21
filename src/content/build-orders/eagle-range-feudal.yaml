@@ -1,14 +1,15 @@
 slug: eagle-range-feudal
 name:
   en: Eagle and Range Feudal Rush
-  tr: Eagle and Range Feudal Rush
+  tr: Eagle ve Range Feodal Rush
 difficulty: intermediate
 targetAge: feudal
 durationMin: 9
 civsRecommended:
   - aztecs
-  - incas
   - mayans
+  - incas
+  - lithuanians
 steps:
   - villagers: 6
     assign:
@@ -37,8 +38,8 @@ steps:
     icons:
       - food
   - assign:
-      en: Lure 3 deer toward the TC with your scout
-      tr: İzciyle 3 geyiği Şehir Merkezi'ne doğru çek
+      en: Lure 3 deer to the TC with your Eagle Scout once all sheep are found
+      tr: Tüm koyunları bulunca Eagle Scout ile 3 geyiği Şehir Merkezi'ne çek
     note:
       en: Keeps food close so collectors never walk far
       tr: Yiyeceği yakın tutar, toplayıcılar uzağa yürümez
@@ -170,3 +171,5 @@ strategy:
     - >-
       Geçiş için ordunun arkasına Tarlalar ek, Kartallar için altını akıtmaya devam et ve baskıya devam mı edeceğine
       yoksa Kale Çağı'na boom mu yapacağına karar vermeden önce Fletching ile Demirci yükseltmelerini al.
+source:
+  author: Hera

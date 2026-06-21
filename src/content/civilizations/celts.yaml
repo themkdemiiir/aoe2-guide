@@ -3,8 +3,8 @@ name:
   en: Celts
   tr: Celts
 tagline:
-  en: Celts — an Infantry civilization from Western Europe.
-  tr: Celts — Batı Avrupa'dan bir Yaya uygarlığı.
+  en: Celts — an Infantry and Siege civilization from Western Europe.
+  tr: Celts, Batı Avrupa'dan bir Piyade ve Kuşatma uygarlığıdır.
 bonuses:
   en:
     - Lumberjacks work +15% faster
@@ -13,12 +13,12 @@ bonuses:
     - Siege Weapons attack +25% faster
   tr:
     - Oduncular %15 daha hızlı çalışır
-    - Celt birim görüş alanındaki hayvanlar çalınamaz
-    - Yaya birimleri Karanlık/Feodal/Kale/İmparatorluk Çağı'nda %5/10/15/20 daha hızlı hareket eder
-    - Siege Weapons %25 daha hızlı saldırır
+    - Kelt birimlerinin görüş hattındaki besi hayvanları çalınamaz
+    - Piyadeler; Karanlık Çağ'da %5, Feodal Çağ'da %10,
+    - Kuşatma Silahları %25 daha hızlı saldırır
 teamBonus:
   en: Siege Workshops work +20% faster
-  tr: Siege Workshop'lar %20 daha hızlı çalışır
+  tr: Kuşatma Atölyeleri %20 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,16 @@ uniqueTechs:
       tr: Stronghold
     effect:
       en: Castles and Watch Tower-line attack +33% faster; Castles heal allied Infantry in a 7 tile radius
-      tr: Castles and Watch Tower-line attack +33% faster; Castles heal allied Infantry in a 7 tile radius
+      tr: >-
+        Kaleler ve Gözcü Kulesi türleri %33 daha hızlı saldırır; Kaleler, etrafındaki 7 kare yarıçapında bir dairede
+        bulunan müttefik Piyadeleri iyileştirir
   imperial:
     name:
       en: Furor Celtica
       tr: Furor Celtica
     effect:
       en: Siege Weapons +40% HP
-      tr: Siege Weapons +40% HP
+      tr: Kuşatma Silahlarının DP'si %40 artar
 strategy:
   en: >-
     Celts are an Infantry civilization from Western Europe.

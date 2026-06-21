@@ -4,7 +4,7 @@ name:
   tr: Tatars
 tagline:
   en: Tatars — a Cavalry Archer civilization from Central Asia.
-  tr: Tatars — Orta Asya kökenli bir Cavalry Archer uygarlığı.
+  tr: Tatars, Orta Asya'dan bir Atlı Okçu uygarlığıdır.
 bonuses:
   en:
     - Livestock animals last +50% longer
@@ -12,13 +12,13 @@ bonuses:
     - New Town Centers spawn 2 Sheep starting in Castle Age
     - Thumb Ring, Parthian Tactics free
   tr:
-    - Çiftlik hayvanları %50 daha uzun süre dayanır
-    - Birimler yüksek rakımdan savaşırken %25 daha fazla hasar verir
-    - Kale Çağı'ndan itibaren yeni Town Center'lar 2 Sheep üretir
-    - Thumb Ring ve Parthian Tactics ücretsiz
+    - Besi hayvanları %50 daha uzun süre dayanır
+    - Birimler daha yüksek bir konumdan savaşırken %25 daha fazla hasar verir
+    - Kale Çağı'ndan itibaren yeni Şehir Merkezlerinde 2 Koyun belirir
+    - Zihgir ve Parthialı Taktikleri ücretsizdir
 teamBonus:
   en: Mounted Archers +2 line of sight
-  tr: Atlı Okçular +2 görüş alanı
+  tr: Binekli Okçuların görüş hattı +2 artar
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Silk Armor
     effect:
       en: Scout Cavalry-line, Steppe Lancers and Cavalry Archers +1 melee/+1 pierce armor
-      tr: Scout hattı, Cavalry Archer'lar ve Steppe Lancer'lar +1/+1 zırh kazanır
+      tr: Atlı Gözcü Türleri, Bozkır Mızraklıları ve Atlı Okçular +1 yakın dövüş/+1 delici zırh kazanır
   imperial:
     name:
       en: Timurid Siegecraft
       tr: Timurid Siegecraft
     effect:
       en: Trebuchets +2 range
-      tr: Trebuchet'ler +2 menzil kazanır; Flaming Camel'lar kullanılabilir hale gelir
+      tr: Katapultların menzili +2 artar
 strategy:
   en: >-
     Tatars are a Cavalry Archer civilization from Central Asia.

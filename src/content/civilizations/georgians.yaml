@@ -3,8 +3,8 @@ name:
   en: Georgians
   tr: Georgians
 tagline:
-  en: Georgians — an Infantry and Cavalry civilization from the Caucasus.
-  tr: Georgians — Kafkasya'dan bir Piyade ve Süvari uygarlığı.
+  en: Georgians — a Defensive and Cavalry civilization from the Caucasus.
+  tr: Georgians, Kafkasya'dan bir Savunma ve Süvari uygarlığıdır.
 bonuses:
   en:
     - Start with a Mule Cart
@@ -12,13 +12,15 @@ bonuses:
     - Mounted Units regenerate 2/8/14 HP per minute in Feudal/Castle/Imperial Age
     - Fortified Churches provide Villagers in a 9 tiles radius with +10% work rate
   tr:
-    - Bir Mule Cart ile başla
-    - Daha yüksek konumda bulunan birlik ve binalar -%15 hasar alır
-    - Binekli Birlikler Feodal/Kale/İmparatorluk Çağı'nda dakikada 2/8/14 can yeniler
-    - Fortified Church'ler, 9 karo yarıçapındaki köylülere +%10 çalışma hızı sağlar
+    - Katır Arabasıyla başlanır
+    - Birimler ve binalar daha yüksekte olduğunda %15 daha az hasar alır
+    - Binekli Birimler dakika başına Feodal Çağ'da 2, Kale Çağı'nda 8, İmparatorluk Çağı'nda 14 DP yeniler
+    - >-
+      Güçlendirilmiş Kiliseler, etrafında 9 kare yarıçapındaki bir daire içinde bulunan Köylülere %10 çalışma hızı
+      kazandırır
 teamBonus:
   en: Building repairs cost -25%
-  tr: Bina onarım maliyeti -%25
+  tr: Bina onarımları %25 daha ucuz olur
 uniqueTechs:
   castle:
     name:
@@ -26,14 +28,14 @@ uniqueTechs:
       tr: Svan Towers
     effect:
       en: Fortifications +2 attack; Watch Tower-line deals pass through damage
-      tr: Tower'lar her 2 garnizon birimi başına +1 saldırı kazanır
+      tr: Surlar +2 saldırı kazanır; Gözcü Kulesi türleri delici hasar verir
   imperial:
     name:
       en: Aznauri Cavalry
       tr: Aznauri Cavalry
     effect:
       en: Mounted Units take -20% population space
-      tr: Monaspa yakınındaki süvari birliklerini iyileştirir
+      tr: Binekli Birimler %20 daha az nüfus alanı kaplar
 strategy:
   en: >-
     Georgians are an Infantry and Cavalry civilization from the Caucasus.

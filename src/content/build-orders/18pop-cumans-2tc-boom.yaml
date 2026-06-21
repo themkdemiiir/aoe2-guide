@@ -3,8 +3,8 @@ name:
   en: 18 Pop Cumans 2 TC Boom
   tr: 18 Nüfus Cumans 2 Şehir Merkezi Boom
 difficulty: intermediate
-targetAge: feudal
-durationMin: 9
+targetAge: castle
+durationMin: 20
 civsRecommended:
   - cumans
 steps:
@@ -92,13 +92,14 @@ steps:
     icons:
       - wood
       - farm
-  - time: "19:00"
+  - time: "19:30"
+    phase: castle
     assign:
-      en: Click Castle Age once the two TCs are humming
-      tr: İki merkez de tıkır tıkır çalışınca Kale Çağı'na tıkla
+      en: Once both TCs are stable, add farms and gold, then click up to Castle Age
+      tr: İki merkez de oturunca tarla ve altın ekle, sonra Kale Çağı'na tıkla
     note:
-      en: Undisturbed, this lands around 19–20 minutes
-      tr: Rahatsız edilmezsen yaklaşık 19–20. dakikada gelir
+      en: Undisturbed, you land in Castle Age around 19–20 minutes
+      tr: Rahatsız edilmezsen yaklaşık 19–20. dakikada Kale Çağı'na ulaşırsın
     icons:
       - town-center
 intro:
@@ -144,3 +145,5 @@ strategy:
       Rahatsız edilmezsen yaklaşık 19–20. dakikada, tek merkezdeki hiç kimsenin yakalayamayacağı bir köylü sayısıyla
       Kale Çağı'na ulaşırsın. Oradan Şövalye yağdırabilir, eşleşmenin gerektirdiği yöne geçebilir ya da ekonomi farkına
       yaslanıp boom'a devam edebilirsin.
+source:
+  author: Hera

@@ -4,13 +4,13 @@ name:
   tr: Fast Castle ile Boom
 difficulty: beginner
 targetAge: castle
-durationMin: 17
+durationMin: 14
 civsRecommended:
-  - chinese
-  - britons
-  - franks
-  - teutons
-  - vikings
+  - burgundians
+  - poles
+  - bohemians
+  - portuguese
+  - bengalis
 steps:
   - villagers: 6
     assign:
@@ -18,156 +18,148 @@ steps:
       tr: 6 → TC altındaki koyunlara
     icons:
       - food
-  - villagers: 10
+  - villagers: 9
     assign:
-      en: +4 → wood; 1st builds lumber camp, then all to wood
-      tr: +4 → oduna; ilki Lumber Camp kurar, sonra hepsi oduna
+      en: +3 → wood (1st builds lumber camp, then all to wood)
+      tr: +3 → oduna (ilki Lumber Camp kurar, sonra hepsi oduna)
     icons:
       - wood
       - lumber-camp
-  - villagers: 11
+  - villagers: 10
     assign:
-      en: +1 → lure 1st boar
+      en: +1 → lure the 1st boar
       tr: +1 → 1. domuzu çek
     icons:
       - food
-  - villagers: 16
+  - villagers: 11
     assign:
-      en: +5 → 2 houses + mill near berries, then berries
-      tr: +5 → meyvelerin yanına 2 House + Mill, sonra meyveye
+      en: +1 → build a house, then a Mill on the berries
+      tr: +1 → House kur, sonra meyvelerin üstüne Mill
+    note:
+      en: Lure 3 deer into the TC with your scout
+      tr: Scout ile 3 geyiği TC'ye çek
     icons:
       - house
       - mill
       - food
-  - villagers: 16
+  - villagers: 13
     assign:
-      en: Re-task an existing boar villager to lure the 2nd boar
-      tr: Mevcut bir domuz köylüsünü 2. domuzu çekmesi için yeniden görevlendir
+      en: +2 → hunt under the TC; pull one to lure the 2nd boar
+      tr: +2 → TC altında ava; birini 2. domuzu çekmeye gönder
     icons:
       - food
-  - villagers: 18
+  - villagers: 17
     assign:
-      en: +2 → seed farms next to TC or Mill
-      tr: +2 → TC veya Mill yanına Farm ek
+      en: +4 → berries; seed 4 farms with sheep vils as the boars run out
+      tr: +4 → meyveye; domuzlar bitince koyun köylüleriyle 4 Farm ek
     icons:
+      - food
       - farm
+  - villagers: 21
+    assign:
+      en: +4 → wood (keep a single lumber camp)
+      tr: +4 → oduna (tek Lumber Camp'te kal)
+    icons:
+      - wood
   - villagers: 23
     assign:
-      en: +5 → wood; build 2nd lumber camp + a house, then all to wood
-      tr: +5 → oduna; 2. Lumber Camp + bir House kur, sonra hepsi oduna
-    icons:
-      - lumber-camp
-      - house
-      - wood
-  - villagers: 26
-    assign:
-      en: +3 → gold; build gold mining camp, then mine gold
-      tr: +3 → altına; altın Mining Camp kur, sonra altın çıkar
+      en: +2 → gold (build the gold mining camp), then click Feudal Age
+      tr: +2 → altına (altın Mining Camp kur), sonra Feudal Age'e tıkla
     note:
-      en: Click Feudal at 26 pop
-      tr: 26 nüfusta Feudal'a tıkla
+      en: Feudal lands ~10:30 at 23 pop
+      tr: Feudal ~10:30'da 23 nüfusta gelir
+    time: "10:30"
     icons:
       - gold
       - mining-camp
-  - villagers: 26
+  - villagers: 23
+    phase: feudal
     assign:
-      en: Feudal arrives — 1 vil → Blacksmith, 2 vils → Market (from wood)
-      tr: Feudal gelir — 1 köylü → Blacksmith, 2 köylü → Market (odundan)
+      en: Feudal — 1 vil builds a Blacksmith, 2 vils build a Market (no military)
+      tr: Feudal — 1 köylü Blacksmith, 2 köylü Market kurar (asker yok)
+    note:
+      en: Research Double-Bit Axe and Horse Collar
+      tr: Double-Bit Axe ve Horse Collar araştır
     icons:
       - blacksmith
       - market
-  - villagers: 26
-    assign:
-      en: Research Double-Bit Axe in the Lumber Camp
-      tr: Lumber Camp'te Double-Bit Axe araştır
-    icons:
       - double-bit-axe
-  - villagers: 28
+      - horse-collar
+  - villagers: 25
     assign:
-      en: Click Castle Age at 28 pop; buy 100 stone at Market for a 4th TC if desired
-      tr: 28 nüfusta Castle Age'e tıkla; istersen 4. TC için Market'ten 100 taş al
+      en: +2 → wood, then click Castle Age
+      tr: +2 → oduna, sonra Castle Age'e tıkla
+    note:
+      en: Castle lands ~14:00 at 25 pop
+      tr: Castle ~14:00'te 25 nüfusta gelir
+    time: "14:00"
     icons:
-      - market
-  - villagers: 28
+      - wood
+  - villagers: 25
+    phase: castle
     assign:
-      en: Castle Age — pull 4 vils from each woodline to build 2 additional Town Centers
-      tr: Castle Age — her odun hattından 4 köylü çekip 2 ek Town Center kur
+      en: Build a 2nd TC on a woodline, then a 3rd on gold/stone; research Bow Saw
+      tr: Bir odun hattına 2. TC, sonra altın/taşa 3. TC kur; Bow Saw araştır
+    note:
+      en: Buy food or wood at the Market whenever you can afford it
+      tr: Gücün yettikçe Market'ten food veya wood al
     icons:
       - town-center
-  - villagers: 40
-    assign:
-      en: Research Horse Collar in the Mill; economy boomed, begin military from your chosen buildings
-      tr: Mill'de Horse Collar araştır; ekonomi boomlandı, seçtiğin binalardan asker üretimine başla
-    icons:
-      - horse-collar
-      - barracks
-      - stable
-      - archery-range
+      - bow-saw
 intro:
   en: >-
-    **Goal:** Reach Castle Age as quickly as possible, then immediately deploy additional Town Centers to multiply
-    villager production. **Recommended civs:** Chinese, Britons, Franks, Teutons, Vikings
+    **Goal:** Reach Castle Age as fast as possible with enough resources to boom on extra Town Centers and
+    economy upgrades. Only run this when you are safe from early pressure (Arena, Hideout, walls).
+    **Recommended civs:** Burgundians, Poles, Bohemians, Portuguese, Bengalis
   tr: >-
-    **Amaç:** Mümkün olan en hızlı şekilde Castle Age'e ulaşmak, ardından hemen ek Town Center'lar kurarak köylü
-    üretimini katlamak. **Önerilen medeniyetler:** Chinese, Britons, Franks, Teutons, Vikings
+    **Amaç:** Mümkün olan en hızlı şekilde Castle Age'e ulaşıp ek Town Center'lar ve ekonomi
+    yükseltmeleriyle boom yapacak kadar kaynak biriktirmek. Bunu yalnızca erken baskıdan güvendeysen
+    oyna (Arena, Hideout, duvarlar). **Önerilen medeniyetler:** Burgundians, Poles, Bohemians, Portuguese, Bengalis
 strategy:
   en:
-    - 6 villagers on sheep (vils 4–6 join the starting three)
-    - 4 villagers on wood (vil 7 builds the lumber camp, then all gather wood)
-    - 1 villager lures the first boar (vil 11)
-    - 5 villagers on berries — build 2 houses and a Mill next to the berries first, then gather (vils 12–16)
-    - Re-task one of the boar villagers to lure the second boar
-    - 2 villagers seed farms next to the TC or Mill (vils 17–18)
-    - 5 villagers on wood — build a 2nd lumber camp and a house, then gather wood (vils 19–23)
-    - 3 villagers on gold — build the gold mining camp, then mine (vils 24–26)
-    - Take 1 villager from wood to build the Blacksmith
-    - Take 2 villagers from wood to build the Market
-    - Sell excess stone at the Market if short on food or gold
-    - No military buildings in Feudal Age
-    - Research Double-Bit Axe in the Lumber Camp during Feudal Age
-    - Click Castle Age as soon as the Blacksmith and Market are placed
-    - No military production in Feudal Age
-    - Pour every resource into the age-up
-    - Buy 100 stone at the Market if you intend to build a fourth Town Center
-    - Immediately build 2 additional Town Centers next to resources, pulling 4 villagers from each woodline
-    - An optional fourth Town Center requires purchasing 100 stone via the Market
-    - Research Horse Collar in the Mill to boost farming
-    - Transition sheep villagers onto Farms as the sheep deplete
-    - By 20 minutes you should have 40+ villagers producing continuously
-    - >-
-      Fast Castle Boom is the canonical defensive/economic strategy. The entire early game is dedicated to reaching
-      Castle Age as quickly as possible, then exploding the economy with extra Town Centers.
-    - >-
-      **Weak against:** Feudal all-in rushes that breach walls before Castle Age; Scout Rush that forces premature
-      military spending.
-    - "**Strong against:** Slow boom strategies; opponents also going for Castle Age without military pressure."
+    - 6 villagers on sheep under the TC
+    - 3 villagers on wood — the first builds the lumber camp, then all gather wood
+    - 1 villager lures the first boar
+    - 1 villager builds a house, then a Mill on the berries
+    - Lure 3 deer into the TC with your scout (highly recommended)
+    - 2 villagers hunt under the TC; re-task one to lure the second boar
+    - 4 villagers on berries
+    - Seed 4 farms with the sheep villagers as the boars run out
+    - 4 more villagers on wood — keep a single lumber camp
+    - 2 villagers on gold — build the gold mining camp
+    - Click Feudal Age at 23 pop (perfect landing ~10:30)
+    - When food under the TC runs out, send spare vils to straggler trees
+    - 1 villager builds the Blacksmith, 2 villagers build the Market (no military)
+    - 2 more villagers on wood, then click Castle Age at 25 pop (perfect landing ~14:00)
+    - Research Double-Bit Axe and Horse Collar
+    - Build a 2nd TC on a woodline away from the lumber camp
+    - Research Bow Saw
+    - Build a 3rd TC on the secondary gold or main stone if possible
+    - Use the Market to buy food or wood whenever you can afford it
+    - Keep booming a few minutes — get Wheelbarrow around 18 farms, then Handcart
+    - Mine stone and add a 4th TC whenever you want, then head to Imperial Age
   tr:
-    - 6 köylü koyunda (4–6. köylüler başlangıçtaki üçe katılır)
-    - 4 köylü odunda (7. köylü Lumber Camp'i kurar, sonra hepsi odun toplar)
-    - 1 köylü ilk domuzu çeker (11. köylü)
-    - 5 köylü meyvede — önce meyvelerin yanına 2 House ve bir Mill kur, sonra topla (12–16. köylüler)
-    - Mevcut bir domuz köylüsünü ikinci domuzu çekmesi için yeniden görevlendir
-    - 2 köylü TC veya Mill yanına Farm eker (17–18. köylüler)
-    - 5 köylü odunda — 2. Lumber Camp ve bir House kur, sonra odun topla (19–23. köylüler)
-    - 3 köylü altında — altın Mining Camp'i kur, sonra çıkar (24–26. köylüler)
-    - Blacksmith'i kurmak için odundan 1 köylü al
-    - Market'i kurmak için odundan 2 köylü al
-    - Yiyecek veya altın sıkıntısı varsa Market'te fazla taşı sat
-    - Feudal Age'de asker binası yok
-    - Feudal Age sırasında Lumber Camp'te Double-Bit Axe araştır
-    - Blacksmith ve Market yerleştirilir yerleştirilmez Castle Age'e tıkla
-    - Feudal Age'de asker üretimi yok
-    - Her kaynağı yaş geçişine yönlendir
-    - Dördüncü bir Town Center kurmayı planlıyorsan Market'ten 100 taş al
-    - Her odun hattından 4 köylü çekerek hemen kaynakların yanına 2 ek Town Center kur
-    - İsteğe bağlı dördüncü Town Center için Market'ten 100 taş satın almak gerekir
-    - Çiftçiliği güçlendirmek için Mill'de Horse Collar araştır
-    - Koyunlar tükendikçe koyun köylülerini Farm'lara geçir
-    - 20. dakikaya kadar 40+ köylünün sürekli üretim yapması gerekir
-    - >-
-      Fast Castle Boom, kanonik savunmacı/ekonomik stratejidir. Oyunun tüm erken evresi mümkün olan en hızlı şekilde
-      Castle Age'e ulaşmaya, ardından ek Town Center'larla ekonomiyi patlatmaya adanmıştır.
-    - >-
-      **Zayıf olduğu:** Castle Age'den önce duvarları aşan Feudal all-in baskınları; erken askeri harcamayı zorlayan
-      Scout Rush.
-    - "**Güçlü olduğu:** Yavaş boom stratejileri; askeri baskı yapmadan Castle Age'e geçmeye çalışan rakipler."
+    - 6 köylü TC altındaki koyunlara
+    - 3 köylü odunda — ilki Lumber Camp kurar, sonra hepsi odun toplar
+    - 1 köylü ilk domuzu çeker
+    - 1 köylü House kurar, sonra meyvelerin üstüne Mill
+    - Scout ile TC'ye 3 geyik çek (şiddetle önerilir)
+    - 2 köylü TC altında avlanır; birini ikinci domuzu çekmeye gönder
+    - 4 köylü meyvede
+    - Domuzlar bitince koyun köylüleriyle 4 Farm ek
+    - 4 köylü daha odunda — tek Lumber Camp'te kal
+    - 2 köylü altında — altın Mining Camp'i kur
+    - 23 nüfusta Feudal Age'e tıkla (ideal varış ~10:30)
+    - TC altındaki yiyecek bitince fazla köylüleri tek tük ağaçlara gönder
+    - 1 köylü Blacksmith, 2 köylü Market kurar (asker yok)
+    - 2 köylü daha odunda, sonra 25 nüfusta Castle Age'e tıkla (ideal varış ~14:00)
+    - Double-Bit Axe ve Horse Collar araştır
+    - Lumber Camp'ten uzakta bir odun hattına 2. TC kur
+    - Bow Saw araştır
+    - Mümkünse ikincil altına veya ana taşa 3. TC kur
+    - Gücün yettikçe Market'ten food veya wood almak için kullan
+    - Birkaç dakika daha boom yap — ~18 Farm'da Wheelbarrow, sonra Handcart al
+    - İstediğin zaman taş çıkarıp 4. TC ekle, ardından Imperial Age'e geç
+source:
+  author: Hera
+  url: https://www.youtube.com/@Hera

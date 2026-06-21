@@ -22,102 +22,80 @@ steps:
     icons:
       - wood
       - lumber-camp
-  - villagers: 11
+  - villagers: 18
     assign:
-      en: +1 → lure the first boar to the TC
-      tr: +1 → ilk domuzu TC'ye çek
-    icons:
-      - food
-  - villagers: 12
-    assign:
-      en: +1 → build House then Mill, gather berries
-      tr: +1 → House sonra Mill kur, meyve topla
-    icons:
-      - mill
-      - food
-  - villagers: 14
-    assign:
-      en: +2 → berries
-      tr: +2 → meyveye
-    icons:
-      - food
-  - villagers: 15
-    assign:
-      en: +1 → lure the second boar (also push 3 deer to the TC)
-      tr: +1 → ikinci domuzu çek (ayrıca 3 geyiği TC'ye it)
-    icons:
-      - food
-  - villagers: 16
-    assign:
-      en: +1 → build House then add to berries (4 total)
-      tr: +1 → House kur sonra meyveye ekle (toplam 4)
-    icons:
-      - house
-      - food
-  - villagers: 19
-    assign:
-      en: +3 → food under the TC (eat through hunt and sheep)
-      tr: +3 → TC altında yiyeceğe (av ve koyunu tüket)
-    icons:
-      - food
-  - villagers: 23
-    assign:
-      en: +4 → wood; seed Farms as the sheep run out
-      tr: +4 → oduna; koyun bitince Farm ekmeye başla
-    icons:
-      - wood
-      - farm
-  - villagers: 28
-    phase: feudal
-    time: "12:35"
-    assign:
-      en: +5 → gold, click Feudal Age
-      tr: +5 → altına, Feudal Age'e tıkla
+      en: +8 → food; lure both boars, push deer, eat through sheep
+      tr: +8 → yiyeceğe; iki domuzu da çek, geyiği it, koyunu tüket
     note:
-      en: Land Feudal ~12:35 with roughly 8 wood / 15 food / 5 gold
-      tr: ~12:35'te yaklaşık 8 odun / 15 yiyecek / 5 altın ile Feudal'a geç
+      en: Build a House then a Mill before the first boar
+      tr: İlk domuzdan önce House sonra Mill kur
+    icons:
+      - food
+      - mill
+  - villagers: 22
+    assign:
+      en: +4 → berries
+      tr: +4 → meyveye
+    icons:
+      - food
+  - villagers: 27
+    assign:
+      en: +5 → gold
+      tr: +5 → altına
     icons:
       - gold
+  - villagers: 28
+    phase: feudal
+    time: "12:30"
+    assign:
+      en: +1 → wood, click Feudal Age
+      tr: +1 → oduna, Feudal Age'e tıkla
+    note:
+      en: Reach Feudal ~12:30
+      tr: ~12:30'da Feudal'a geç
+    icons:
+      - wood
       - feudal-age
   - villagers: 30
     assign:
-      en: "Feudal: 1 → Blacksmith, 2 → Market; +2 → gold; research Double-Bit Axe"
-      tr: "Feudal: 1 → Blacksmith, 2 → Market; +2 → altına; Double-Bit Axe araştır"
+      en: "Feudal: 1 → Blacksmith, 2 → Market; +2 → gold"
+      tr: "Feudal: 1 → Blacksmith, 2 → Market; +2 → altına"
+    note:
+      en: "Totals: 7 gold / 8 wood / 11 food"
+      tr: "Toplam: 7 altın / 8 odun / 11 yiyecek"
     icons:
       - blacksmith
       - market
-      - double-bit-axe
+      - gold
   - phase: castle
-    time: "16:05"
+    time: "16:00"
     assign:
-      en: Sell 200 stone, click Castle Age
-      tr: 200 taş sat, Castle Age'e tıkla
+      en: Click Castle Age ~16:00
+      tr: ~16:00'da Castle Age'e tıkla
     icons:
       - castle-age
-      - gold
   - villagers: 32
     assign:
-      en: "Castle: builders → Farms, research Gold Mining; build Siege Workshop + Monastery"
-      tr: "Castle: inşaatçılar → Farm, Gold Mining araştır; Siege Workshop + Manastır kur"
+      en: "Castle: 2 → Siege Workshop, 1 → Monastery; +2 → gold; sell stone"
+      tr: "Castle: 2 → Siege Workshop, 1 → Manastır; +2 → altına; taşı sat"
     icons:
       - siege-workshop
       - monastery
-      - gold-mining
+      - gold
   - phase: imperial
-    time: "20:05"
+    time: "20:00"
     assign:
-      en: Add a second Mining Camp, click Imperial Age
-      tr: İkinci Mining Camp kur, Imperial Age'e tıkla
+      en: Click Imperial Age ~20:00
+      tr: ~20:00'da Imperial Age'e tıkla
     icons:
       - imperial-age
-      - mining-camp
   - assign:
-      en: "Imperial: buy wood, build Barracks + 2 Archery Ranges; mass Hand Cannoneers + 1-2 Bombard Cannons"
-      tr: "Imperial: odun al, Barracks + 2 Archery Range kur; El Topçusu + 1-2 Bombard Cannon yığ"
+      en: "Imperial: 11 → Farms, 8 → wood, 13 → gold; mass Hand Cannoneers + Bombard Cannons"
+      tr: "Imperial: 11 → Farm, 8 → odun, 13 → altın; El Topçusu + Bombard Cannon yığ"
     icons:
-      - archery-range
       - hand-cannoneer
       - bombard-cannon
+      - farm
 intro:
   en: Rush to Imperial Age around the 20-minute mark and flood the field with instant gunpowder.
   tr: Yaklaşık 20. dakikada İmparatorluk Çağı'na koş ve sahayı anında barutlu birliklerle doldur.
@@ -129,8 +107,7 @@ strategy:
       punish.
     - >-
       Turks get Chemistry for free, so Hand Cannoneers and Bombard Cannons arrive the instant you hit Imperial — there
-      is no awkward gunpowder research delay. Pump Hand Cannoneers from the two Archery Ranges and add one or two
-      Bombard Cannons for siege.
+      is no awkward gunpowder research delay. Pump Hand Cannoneers and add one or two Bombard Cannons for siege.
     - >-
       Keep buying wood and seeding Farms through the transition; your bottleneck is wood for production buildings, not
       food. The free, faster gold mining keeps a heavy gunpowder army affordable.
@@ -147,8 +124,7 @@ strategy:
       güvenli veya duvarlı bir üs ister.
     - >-
       Türkler Chemistry'yi ücretsiz aldığı için, İmparatorluk'a basar basmaz El Topçusu ve Bombard Cannon hazır gelir —
-      barut araştırması için sıkıntılı bir bekleme yoktur. İki Archery Range'den El Topçusu bas, kuşatma için bir veya
-      iki Bombard Cannon ekle.
+      barut araştırması için sıkıntılı bir bekleme yoktur. El Topçusu bas, kuşatma için bir veya iki Bombard Cannon ekle.
     - >-
       Geçiş boyunca odun almaya ve Farm ekmeye devam et; darboğazın yiyecek değil, üretim binaları için odundur.
       Ücretsiz ve daha hızlı altın madenciliği, ağır barut ordusunu karşılanabilir kılar.
@@ -158,3 +134,5 @@ strategy:
     - >-
       Duvarsız ekonomiyi kıran erken Feudal veya Castle saldırılarına ve kümelenmiş El Topçularını cezalandıran toplu
       Mangonel veya Siege Onager'a karşı zayıftır. Barutunu yay ve düşman kuşatmasını avlamak için Light Cavalry ekle.
+source:
+  author: Hera
