@@ -4,19 +4,31 @@ Astro Content Layer API — schemas in `config.ts`, validated by Zod at build ti
 
 ## File layout
 
+Most content types use a **single bilingual YAML file per entry**:
+
 ```
-src/content/<type>/<lang>/<slug>.md
+src/content/<type>/<slug>.yaml
 ```
 
-- `<type>`: civilizations · build-orders · units · maps · matchups · beginner · glossary
-- `<lang>`: en · tr
-- `<slug>`: English-canonical, kebab-case (e.g. `britons`, `21pop-archer`, `britons-vs-franks`)
+Every translatable text field is a `{ en: "...", tr: "..." }` object (a `localizedString`).
+
+- `<type>`: civilizations · build-orders · units · maps · glossary
+- `<slug>`: English-canonical, kebab-case (e.g. `britons`, `21pop-archer`, `arabia`)
+
+**Exceptions — separate locale dirs (MD):**
+
+```
+src/content/beginner/{en,tr}/<slug>.md
+src/content/articles/{en,tr}/<slug>.md
+```
+
+These long-form types remain in per-language MD directories; `pathId` generates IDs like `en/intro`.
 
 ## Critical patterns
 
 ### Use Content Layer API, not legacy `type: "content"`
 
-Each collection uses `loader: glob({ pattern, base, generateId: pathId })`. The `generateId: pathId` override is **required** — without it, frontmatter `slug` values collide across the 2 language directories (all `britons.md` files would claim ID `britons`).
+YAML collections use `loader: glob({ pattern: "*.{yaml,yml}", base, generateId })` with a custom `generateId` that strips the extension. MD collections (`beginner`, `articles`) use `pathId` to avoid slug collisions across locale dirs.
 
 ### Render bodies via `render(entry)`
 
@@ -27,12 +39,25 @@ const { Content, headings } = await render(entry);
 
 The legacy `entry.render()` method does **not exist** on Content Layer entries.
 
+### Bilingual gate: `audit-yaml-translations`
+
+`pnpm build` runs `scripts/audit-yaml-translations.mjs` as a prebuild step. It walks every YAML entry and fails the build if any `localizedString` field has `en === tr` (identical/untranslated). Allow-listed fields (proper nouns that don't need translation): paths matching `name` or `term`, and values ending with a parenthesised proper noun. Fix by providing a real TR translation before building.
+
 ## Adding a new entry
 
-1. `pnpm import:md md/<type>/<source>.md` (from a raw source), or `pnpm new:guide <type> <slug>` (scaffold blank).
-2. Fill the EN file's frontmatter — schema in `config.ts` is the source of truth for required fields.
-3. Translate to TR by editing the scaffolded file. Missing TR translations fall back to EN automatically.
-4. Schema-breaking changes will fail `pnpm build` and CI.
+### YAML types (civilizations, build-orders, units, maps, glossary)
+
+1. Create `src/content/<type>/<slug>.yaml` — each text field as `{ en: "...", tr: "..." }`.
+2. Consult `config.ts` for required fields (it is the authoritative schema).
+3. `pnpm build` validates schema **and** runs the translation audit; both must pass.
+
+> **Civilizations:** do not hand-edit the generated civ YAML. Run `pnpm build:civilizations` to regenerate EN+TR text from `aoe2techtree` locale strings (`.cache/aoe2-data/strings-{en,tr}.json`).
+
+### MD types (beginner, articles)
+
+1. Add `src/content/<type>/en/<slug>.md` as the EN source of truth.
+2. Add a matching `src/content/<type>/tr/<slug>.md` for the TR translation (or scaffold with `pnpm new:guide <type> <slug>`). Missing TR falls back to EN automatically.
+3. Schema-breaking frontmatter will fail `pnpm build` and CI.
 
 ## Data split
 
