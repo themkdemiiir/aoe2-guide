@@ -41,11 +41,22 @@ describe("parseHelp", () => {
   it("parses Turkish help text with localized section markers", () => {
     const r = parseHelp(TR, "tr");
     expect(r.civType).toBe("Yaya Okçu");
-    expect(r.civBonuses[0]).toBe("Çobanlar %25 daha hızlı çalışır");
+    expect(r.civBonuses).toEqual([
+      "Çobanlar %25 daha hızlı çalışır",
+      "Şehir Merkezleri, Kale Çağı'ndan itibaren %50 daha az odun gerektirir",
+    ]);
     expect(r.teamBonus).toBe("Okçuluk Binası %10 daha hızlı çalışır");
     expect(r.uniqueTechs.map((t) => t.effect)).toEqual([
       "Yaya Okçulara 1 menzil; Gözcü Kulesi türlerine 2 saldırı",
       "Katapultlar patlama hasarı verir ve daha isabetlidir",
     ]);
+  });
+
+  it("returns null when there are no bullet bonuses", () => {
+    expect(parseHelp("Archer civilization<br>Unique Unit:<br>Longbowman (Archer)", "en")).toBeNull();
+  });
+
+  it("throws on an unknown lang", () => {
+    expect(() => parseHelp("x", "de")).toThrow(/unknown lang/);
   });
 });
