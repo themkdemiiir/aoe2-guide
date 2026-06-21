@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Greek Fire
     effect:
       en: Fire Ships +1 range; Dromons and Bombard Towers increased blast radius
-      tr: Fire Ships +1 range; Dromons and Bombard Towers increased blast radius
+      tr: Ateş Gemileri +1 menzil kazanır, Dromonların ve Bombardıman Kulelerinin patlama alanı artar
   imperial:
     name:
       en: Logistica
       tr: Logistica
     effect:
       en: Cataphracts deal trample damage, +6 attack vs. Infantry
-      tr: Cataphracts deal trample damage, +6 attack vs. Infantry
+      tr: Zırhlı Atlılar ezme hasarı verir ve Piyadelere karşı +6 saldırıya sahiptir
 strategy:
   en: >-
     Byzantines are a Defensive civilization from the Eastern Mediterranean.

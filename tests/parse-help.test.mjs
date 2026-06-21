@@ -52,6 +52,20 @@ describe("parseHelp", () => {
     ]);
   });
 
+  it("recognizes the 'Özel Teknoloji' TR tech header synonym (Byzantines source)", () => {
+    const tr = [
+      "Savunma medeniyeti", "",
+      "• Binalar +DP", "",
+      "Özgün Birim", "Zırhlı Atlı (Süvari)", "",
+      "Özel Teknoloji",
+      "• Yunan Ateşi (Ateş Gemileri +1 menzil)",
+      "• Lojistika (Zırhlı Atlılar ezme hasarı verir)", "",
+      "Takım Bonusu:", "Keşişler %100 daha hızlı iyileştirir",
+    ].join("<br>");
+    const r = parseHelp(tr, "tr");
+    expect(r.uniqueTechs.map((t) => t.name)).toEqual(["Yunan Ateşi", "Lojistika"]);
+  });
+
   it("returns null when there are no bullet bonuses", () => {
     expect(parseHelp("Archer civilization<br>Unique Unit:<br>Longbowman (Archer)", "en")).toBeNull();
   });

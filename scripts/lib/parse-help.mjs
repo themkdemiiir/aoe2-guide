@@ -4,7 +4,9 @@
 
 const MARKERS = {
   en: { civ: /civilization$/i, unit: /^Unique Unit/i, tech: /^Unique Tech/i, team: /^Team Bonus/i },
-  tr: { civ: /medeniyeti$/i, unit: /^Özgün Birim/i, tech: /^Özgün Teknoloji/i, team: /^Takım Bonusu/i },
+  // TR tech header is normally "Özgün Teknoloji(ler)" but Byzantines' source uses the
+  // synonym "Özel Teknoloji" — accept both so the tech section is recognized either way.
+  tr: { civ: /medeniyeti$/i, unit: /^Özgün Birim/i, tech: /^Öz(gün|el) Teknoloji/i, team: /^Takım Bonusu/i },
 };
 
 export function parseHelp(raw, lang) {

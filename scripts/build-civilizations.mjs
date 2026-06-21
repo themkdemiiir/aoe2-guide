@@ -211,45 +211,6 @@ async function loadAoe2TT() {
 }
 
 // ---------------------------------------------------------------------------
-// Build civ entry from aalises row + icon-map slug check
-// ---------------------------------------------------------------------------
-function _buildCivEntry(slug, aalises, _techNames, iconSlugs) {
-  const specialty = aalises ? aalises.armyType : "Unknown";
-  const expansion = aalises ? aalises.expansion : "";
-  const region = REGION_OVERRIDE[slug] || REGION_MAP[expansion] || "Unknown";
-
-  let uniqueUnits = aalises ? aalises.uniqueUnits : [];
-  // Filter unique units to those present in icon-map
-  uniqueUnits = uniqueUnits.filter((u) => {
-    if (iconSlugs.units?.[u]) return true;
-    console.warn(`  [WARN] unique unit "${u}" for ${slug} not in icon-map — keeping slug anyway`);
-    return true; // keep even if not in icon-map, as per spec
-  });
-
-  const civBonuses = aalises ? aalises.bonuses : [];
-  const teamBonus = aalises ? aalises.teamBonus : "";
-
-  const castleTech = aalises ? aalises.castleTech : "";
-  const imperialTech = aalises ? aalises.imperialTech : "";
-
-  // Look up tech effect from tech_tree_strings if available
-  // (aoe2techtree doesn't provide effect text in the JSON, so we use the name as-is)
-
-  return {
-    slug,
-    region,
-    specialty,
-    uniqueUnits,
-    civBonuses,
-    teamBonus,
-    uniqueTechs: {
-      castle: { name: castleTech, effect: "" },
-      imperial: { name: imperialTech, effect: "" },
-    },
-  };
-}
-
-// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function run() {
@@ -350,26 +311,45 @@ async function run() {
     const helpId = helpIdBySlug[entry.slug];
     const en = helpId != null ? parseHelp(stringsEn[helpId] ?? stringsEn[String(helpId)], "en") : null;
     const tr = helpId != null ? parseHelp(stringsTr[helpId] ?? stringsTr[String(helpId)], "tr") : null;
+
+    // NO DEFAULT VALUES (owner directive): every civ fact must be source-derived. Fail loud
+    // instead of silently substituting an EN-in-TR fallback or an empty string. Each AoE2 civ
+    // has EN+TR help and exactly 2 unique techs (castle + imperial); if any of that is missing,
+    // the source/cache is wrong — stop the build rather than emit a default.
     if (!en) {
-      console.warn(`[WARN] no EN help for ${entry.slug} — skipping`);
-      continue;
+      console.error(`[FATAL] ${entry.slug}: no EN help string (help_string_id=${helpId})`);
+      process.exit(1);
     }
-    // EN civilizations.json fields stay EN (validate-data expects EN strings).
+    if (!tr) {
+      console.error(`[FATAL] ${entry.slug}: no TR help string (help_string_id=${helpId})`);
+      process.exit(1);
+    }
+    if (en.uniqueTechs.length < 2) {
+      console.error(`[FATAL] ${entry.slug}: EN help has ${en.uniqueTechs.length} unique tech(s), expected 2`);
+      process.exit(1);
+    }
+    if (tr.uniqueTechs.length < 2) {
+      console.error(`[FATAL] ${entry.slug}: TR help has ${tr.uniqueTechs.length} unique tech(s), expected 2`);
+      process.exit(1);
+    }
+
+    // EN civilizations.json fields stay EN (validate-data expects EN strings). Assign sourced
+    // values directly — no `?? ""`, no cross-language fallback.
     entry.civBonuses = en.civBonuses;
     entry.teamBonus = en.teamBonus;
-    entry.specialty = fixSpecialty(en.civType || entry.specialty);
+    entry.specialty = fixSpecialty(en.civType);
     entry.uniqueTechs = {
-      castle: { name: en.uniqueTechs[0]?.name ?? "", effect: en.uniqueTechs[0]?.effect ?? "" },
-      imperial: { name: en.uniqueTechs[1]?.name ?? "", effect: en.uniqueTechs[1]?.effect ?? "" },
+      castle: { name: en.uniqueTechs[0].name, effect: en.uniqueTechs[0].effect },
+      imperial: { name: en.uniqueTechs[1].name, effect: en.uniqueTechs[1].effect },
     };
-    // Localized payload for buildMarkdown (YAML output).
+    // Localized payload for buildMarkdown (YAML output) — sourced directly from TR help.
     entry.tr = {
-      civBonuses: tr?.civBonuses ?? en.civBonuses,
-      teamBonus: tr?.teamBonus ?? en.teamBonus,
-      civType: tr?.civType ?? en.civType,
+      civBonuses: tr.civBonuses,
+      teamBonus: tr.teamBonus,
+      civType: tr.civType,
       uniqueTechs: {
-        castle: tr?.uniqueTechs[0]?.effect ?? en.uniqueTechs[0]?.effect ?? "",
-        imperial: tr?.uniqueTechs[1]?.effect ?? en.uniqueTechs[1]?.effect ?? "",
+        castle: tr.uniqueTechs[0].effect,
+        imperial: tr.uniqueTechs[1].effect,
       },
     };
     entry.regionNoun = REGION_NOUN[entry.region] ?? entry.region;
