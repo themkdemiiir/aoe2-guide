@@ -34,8 +34,11 @@ steps:
       - food
   - villagers: 11
     assign:
-      en: +1 → build a house, then go to mill/berries
-      tr: +1 → house kur, ardından mill/meyveye git
+      en: +1 → build a house, then mill on berries
+      tr: +1 → house kur, sonra meyvede mill kur
+    note:
+      en: Lure deer with your scout once you find all your sheep
+      tr: Tüm koyunları bulunca scout ile geyik çek
     icons:
       - house
       - mill
@@ -45,15 +48,15 @@ steps:
       en: +6 → hunt under the TC
       tr: +6 → TC altında ava
     note:
-      en: Lure the second boar before the first runs dry
-      tr: İlki bitmeden ikinci domuzu çek
+      en: Lure the second boar during this time
+      tr: Bu sırada ikinci domuzu çek
     icons:
       - food
       - town-center
   - villagers: 19
     assign:
-      en: +2 → wood; research Loom
-      tr: +2 → oduna; Loom araştır
+      en: +2 → wood, then research Loom
+      tr: +2 → oduna, sonra Loom araştır
     icons:
       - wood
       - loom
@@ -61,64 +64,49 @@ steps:
     phase: feudal
     time: "9:15"
     assign:
-      en: Click up to Feudal at 19 pop (5 wood / 14 food)
-      tr: 19 köylüde Feudal'a tıkla (5 odun / 14 yiyecek)
+      en: Click up to Feudal at 19 pop (perfect landing 9:15)
+      tr: 19 köylüde Feudal'a tıkla (ideal varış 9:15)
     icons:
       - loom
   - villagers: 19
     assign:
-      en: 5 vils from the TC → 2nd lumber camp on a new woodline
-      tr: TC'den 5 köylü → yeni woodline'da 2. lumber camp
+      en: From the TC — 5 → 2nd lumber camp, 2 → straggler trees
+      tr: TC'den — 5 → 2. lumber camp, 2 → straggler ağaçlar
     icons:
       - lumber-camp
       - wood
   - villagers: 19
     assign:
-      en: 2 → straggler trees; 1 → house, then barracks, then back to food
-      tr: 2 → straggler ağaçlara; 1 → house, sonra barracks, sonra tekrar yiyeceğe
+      en: From the TC — 1 → house then barracks, 2 → mining camp on gold
+      tr: TC'den — 1 → house sonra barracks, 2 → altında mining camp
+    note:
+      en: Research Double-Bit Axe; skip Horse Collar for now
+      tr: Double-Bit Axe araştır; şimdilik Horse Collar'ı atla
     icons:
-      - wood
-      - barracks
       - house
-  - villagers: 19
-    assign:
-      en: 2 → gold, build a mining camp; research Double-Bit Axe (skip Horse Collar)
-      tr: 2 → altına, mining camp kur; Double-Bit Axe araştır (Horse Collar'ı atla)
-    icons:
+      - barracks
       - gold
       - mining-camp
-      - double-bit-axe
-  - assign:
-      en: Build an Archery Range and start Archers as soon as Feudal lands
-      tr: Feudal gelir gelmez Archery Range kur ve Archer üretmeye başla
+  - villagers: 21
+    assign:
+      en: Build an Archery Range and start Archers; +2 → gold (4 total)
+      tr: Archery Range kur ve Archer üret; +2 → altına (toplam 4)
     icons:
       - archery-range
       - archer
+      - gold
   - villagers: 21
     assign:
-      en: +2 → gold (4 total); build a Blacksmith → research Fletching
-      tr: +2 → altına (toplam 4); Blacksmith kur → Fletching araştır
+      en: Build a Blacksmith and research Fletching; move 4 → berries (5 total), start farms
+      tr: Blacksmith kur ve Fletching araştır; 4 → meyveye (toplam 5), tarla ekmeye başla
+    note:
+      en: Optional — 1-4 Spearmen from the barracks if you fear enemy Scouts
+      tr: İsteğe bağlı — rakip Scout'tan korkarsan barracks'tan 1-4 Spearman
     icons:
-      - gold
       - blacksmith
       - fletching
-  - assign:
-      en: "Optional: 1–4 Spearmen from the barracks if you spot enemy Scouts"
-      tr: "İsteğe bağlı: rakipte Scout görürsen barracks'tan 1–4 Spearman"
-    icons:
-      - spearman
-  - villagers: 21
-    assign:
-      en: +4 → berries (5 on berries total); seed farms
-      tr: +4 → meyveye (toplam 5 köylü meyvede); tarla ekmeye başla
-    icons:
       - food
       - farm
-  - assign:
-      en: Wall with 2–3 vils using a mix of houses and palisades
-      tr: Üretim oturunca 2–3 köylüyle duvar çek
-    icons:
-      - house
 intro:
   en: >-
     Land in Feudal at 19 pop, throw down a single Archery Range, and pump Fletching-backed Archers before your opponent
@@ -140,7 +128,7 @@ strategy:
       cheaply; if they go Skirmishers, do not over-invest in Archers — bank resources and lean on the Castle transition
       instead.
     - >-
-      Default follow-up is Castle Age with 10–15 Archers, then Crossbow plus Bodkin Arrow for a hard timing attack. Add
+      Default follow-up is Castle Age with 10-15 Archers, then Crossbow plus Bodkin Arrow for a hard timing attack. Add
       a second Archery Range or a Stable depending on the matchup.
     - >-
       Britons can lean hardest into this: extra range from the civ bonus means a third range and Thumb Ring in Castle
@@ -157,8 +145,11 @@ strategy:
       Gördüğüne göre tepki ver. Rakip Scout'a yüklenirse barracks'tan birkaç Spearman açığı ucuza kapatır; Skirmisher'a
       giderse Archer'a fazla yatırım yapma — kaynak biriktir ve Castle geçişine yaslan.
     - >-
-      Varsayılan devamı, 10–15 Archer'la Castle Age'e çıkmak, ardından sert bir timing saldırısı için Crossbow ve Bodkin
+      Varsayılan devamı, 10-15 Archer'la Castle Age'e çıkmak, ardından sert bir timing saldırısı için Crossbow ve Bodkin
       Arrow'dur. Eşleşmeye göre ikinci bir Archery Range veya Stable ekle.
     - >-
       Britons buna en çok yaslanabilir: medeniyet bonusundan gelen ekstra menzille Castle Age'de üçüncü range ve Thumb
       Ring, Archer kütlesini çığ gibi büyütür.
+source:
+  author: Hera
+  url: https://www.youtube.com/@Hera

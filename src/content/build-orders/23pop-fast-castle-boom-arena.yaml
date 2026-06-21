@@ -21,36 +21,25 @@ steps:
       - town-center
   - villagers: 9
     assign:
-      en: +3 → wood, drop a Lumber Camp
+      en: +3 → wood, build a Lumber Camp
       tr: +3 → oduna, bir Lumber Camp kur
     icons:
       - wood
       - lumber-camp
-  - villagers: 10
-    assign:
-      en: +1 → lure the first boar
-      tr: +1 → ilk domuzu çek
-    icons:
-      - food
   - villagers: 11
     assign:
-      en: +1 → build a House, then a Mill on the berries
-      tr: +1 → bir House, ardından meyvelerin yanına Mill kur
+      en: +1 → lure the first boar; +1 → House, then a Mill on the berries
+      tr: +1 → ilk domuzu çek; +1 → House, ardından meyvelerin yanına Mill kur
+    note:
+      en: Lure the 3 deer with the scout to stretch your food
+      tr: Yiyeceği uzatmak için scout ile 3 geyiği de çek
     icons:
+      - food
       - house
       - mill
-      - food
-  - assign:
-      en: Lure all 3 deer with the scout to stretch your food
-      tr: Yiyeceği uzatmak için scout ile 3 geyiği de çek
-    note:
-      en: No new villager — keep eco vils busy while the scout pulls deer
-      tr: Yeni köylü yok — scout geyikleri çekerken ekonomi köylüleri çalışmaya devam etsin
-    icons:
-      - food
   - villagers: 13
     assign:
-      en: +2 → hunt; lure the second boar when food is low
+      en: +2 → hunt; lure the second boar when food runs low
       tr: +2 → ava; yiyecek azalınca ikinci domuzu çek
     icons:
       - food
@@ -58,16 +47,11 @@ steps:
     assign:
       en: +4 → berries
       tr: +4 → meyvelere
+    note:
+      en: As sheep run out, re-task those villagers onto 4 new farms
+      tr: Koyunlar bitince o köylüleri 4 yeni tarlaya kaydır
     icons:
       - food
-  - villagers: 17
-    assign:
-      en: Seed 4 farms with the freed-up sheep villagers
-      tr: Boşalan koyun köylüleriyle 4 tarla kur
-    note:
-      en: Reassignment, not new pop
-      tr: Yeniden görevlendirme, yeni pop değil
-    icons:
       - farm
   - villagers: 21
     assign:
@@ -78,9 +62,10 @@ steps:
       - lumber-camp
   - villagers: 23
     phase: feudal
+    time: "10:30"
     assign:
-      en: +2 → gold, then click Feudal Age (~10:30 / 7 wood, 14 food, 2 gold)
-      tr: +2 → altına, ardından Feudal Age'e tıkla (~10:30 / 7 odun, 14 yiyecek, 2 altın)
+      en: +2 → gold, then click Feudal Age
+      tr: +2 → altına, ardından Feudal Age'e tıkla
     note:
       en: Spend as little time in Feudal as possible
       tr: Feudal'de mümkün olduğunca az zaman geçir
@@ -88,8 +73,8 @@ steps:
       - gold
   - villagers: 25
     assign:
-      en: "Feudal: 1 → Blacksmith, 2 → Market; food-out vils to straggler trees; +2 → wood"
-      tr: "Feudal: 1 → Blacksmith, 2 → Market; yiyeceği biten köylüler straggler ağaçlara; +2 → oduna"
+      en: "Feudal: 1 → Blacksmith, 2 → Market (use straggler-tree villagers); +2 → wood"
+      tr: "Feudal: 1 → Blacksmith, 2 → Market (straggler ağaç köylüleriyle); +2 → oduna"
     icons:
       - blacksmith
       - market
@@ -104,18 +89,19 @@ steps:
       - horse-collar
   - villagers: 25
     assign:
-      en: "Castle: drop your 1st extra Town Center on the wood line; research Bow Saw; seed more farms"
-      tr: "Castle: 1. ek Town Center'ı odun çizgisine kur; Bow Saw araştır; yeni tarlalar ek"
+      en: "Castle: drop a new Lumber Camp and your extra Town Centers; research Bow Saw; seed more farms"
+      tr: "Castle: yeni bir Lumber Camp ve ek Town Center'lar kur; Bow Saw araştır; yeni tarlalar ek"
     icons:
       - town-center
       - bow-saw
       - farm
   - assign:
-      en: 2nd extra TC on gold/stone; Wheelbarrow at ~18 farms, then Hand Cart; buy food/wood at Market as needed
-      tr: 2. ek TC altın/taşa; ~18 tarlada Wheelbarrow, ardından Hand Cart; gerekirse Market'ten yiyecek/odun al
+      en: Keep booming — Wheelbarrow near 18 farms, then Hand Cart; add a 4th TC off a stone mine; buy food/wood at Market as needed
+      tr: Boom'a devam et — ~18 tarlada Wheelbarrow, sonra Hand Cart; bir taş madeninden 4. TC ekle; gerekirse Market'ten yiyecek/odun al
     icons:
       - town-center
       - wheelbarrow
+      - market
 intro:
   en: >-
     Race to Castle Age off a clean 23-pop economy on a closed map, then snowball with extra Town Centers before the
@@ -162,3 +148,5 @@ strategy:
     - >-
       Boom'u bıraktığında bir gold unit, bir trash unit ve bir siege unit'e karar ver; sonra rakibin eşleşemeyeceği bir
       ekonomiyle Imperial'a geç.
+source:
+  author: Hera

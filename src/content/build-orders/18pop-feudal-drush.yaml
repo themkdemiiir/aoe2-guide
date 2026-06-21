@@ -33,18 +33,18 @@ steps:
       - food
   - villagers: 11
     assign:
-      en: +1 → build house, then hunt
-      tr: +1 → ev kur, sonra ava
+      en: +1 → build house, then back to hunt
+      tr: +1 → ev kur, sonra ava dön
     note:
-      en: Lure deer with the scout
-      tr: Scout ile geyikleri çek
+      en: Lure deer with the scout once all sheep are found
+      tr: Tüm koyunları bulunca scout ile geyikleri çek
     icons:
       - house
       - food
   - villagers: 15
     assign:
-      en: +4 → hunt; lure 2nd boar
-      tr: +4 → ava; 2. domuzu çek
+      en: +4 → hunt under TC; lure 2nd boar
+      tr: +4 → TC altında ava; 2. domuzu çek
     icons:
       - food
   - assign:
@@ -145,3 +145,5 @@ strategy:
     - >-
       Savunulan bir üsse karşı harass tıkanırsa Militia'yı içeri besleme — zamanında yükselmişsindir ve sorunsuzca
       normal bir Feudal veya Castle planına geçebilirsin.
+source:
+  author: Hera

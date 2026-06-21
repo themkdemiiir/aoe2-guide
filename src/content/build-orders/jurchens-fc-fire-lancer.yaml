@@ -1,7 +1,7 @@
 slug: jurchens-fc-fire-lancer
 name:
   en: Jurchens Fast Castle Fire Lancer Rush
-  tr: Jurchens Fast Castle Fire Lancer Rush
+  tr: Jurchens Fast Castle ile Fire Lancer Baskını
 difficulty: advanced
 targetAge: castle
 durationMin: 14
@@ -104,8 +104,8 @@ steps:
       - watch-tower
   - villagers: 24
     assign:
-      en: "Castle: pull ~10 from the Town Center → wood + a 2nd Lumber Camp; add 2 Barracks"
-      tr: "Castle: Şehir Merkezi'nden ~10 köylüyü çek → odun + 2. Kereste Kampı; 2 Kışla ekle"
+      en: "Castle: send all 10 from the Town Center → wood + a 2nd Lumber Camp; add 2 Barracks"
+      tr: "Castle: Şehir Merkezi'ndeki 10 köylünün tümünü çek → odun + 2. Kereste Kampı; 2 Kışla ekle"
     icons:
       - lumber-camp
       - barracks
@@ -166,3 +166,5 @@ strategy:
     - >-
       Bu agresif ama tam bir all-in değil — yaklaşık 5 köylüyü yemekte tut ki rush takılırsa toparlanıp geçiş
       yapabilesin.
+source:
+  author: Hera

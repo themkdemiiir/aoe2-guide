@@ -1,10 +1,10 @@
 slug: fc-crossbows
 name:
   en: Fast Castle into Crossbows
-  tr: Fast Castle into Crossbows
+  tr: Fast Castle'dan Crossbows'a
 difficulty: intermediate
 targetAge: castle
-durationMin: 18
+durationMin: 16
 civsRecommended:
   - britons
   - ethiopians
@@ -14,107 +14,112 @@ civsRecommended:
 steps:
   - villagers: 6
     assign:
-      en: 6 → sheep under TC
+      en: 6 → sheep under the TC
       tr: 6 → TC altındaki koyunlara
     icons:
       - food
-  - villagers: 9
+  - villagers: 10
     assign:
-      en: +3 → wood, build lumber camp
-      tr: +3 → oduna, Lumber Camp kur
+      en: +4 → wood; first builds a Lumber Camp
+      tr: +4 → oduna; ilki Lumber Camp kurar
     icons:
       - wood
       - lumber-camp
-  - villagers: 12
+  - villagers: 11
     assign:
-      en: +3 → berries, build mill
-      tr: +3 → meyveye, Mill kur
+      en: +1 → lure the first boar to the TC
+      tr: +1 → ilk yaban domuzunu TC'ye çek
+    icons:
+      - food
+  - villagers: 15
+    assign:
+      en: +4 → berries; first builds a Mill. Lure the second boar
+      tr: +4 → meyveye; ilki Mill kurar. İkinci yaban domuzunu çek
     icons:
       - food
       - mill
-  - villagers: 14
+  - villagers: 24
     assign:
-      en: +2 → wood
-      tr: +2 → oduna
+      en: +9 → wood; build a second Lumber Camp. Add Farms as sheep run out
+      tr: +9 → oduna; ikinci Lumber Camp kur. Koyun bitince Farm aç
     icons:
       - wood
-  - villagers: 18
+      - farm
+  - villagers: 27
+    phase: feudal
+    time: "11:00"
     assign:
-      en: +4 → wood/sheep; click Feudal at 18 pop
-      tr: +4 → odun/koyun; 18 nüfusta Feodal Çağ'a tıkla
+      en: +3 → gold (Mining Camp); click Feudal at 27 pop
+      tr: +3 → altına (Mining Camp); 27 nüfusta Feodal'a tıkla
     icons:
-      - wood
-  - villagers: 20
+      - gold
+      - mining-camp
+  - villagers: 29
+    time: "13:00"
     assign:
-      en: "Feudal: build Blacksmith + Market; 2 → gold (mining camp)"
-      tr: "Feodal: Blacksmith + Market kur; 2 → altına (mining camp)"
+      en: "In Feudal: build Blacksmith + Market; +2 villagers; click Castle Age"
+      tr: "Feodal'da: Blacksmith + Market kur; +2 köylü; Kale Çağı'na tıkla"
     icons:
       - blacksmith
       - market
-      - gold
-  - villagers: 26
+  - villagers: 29
+    phase: castle
+    time: "15:30"
     assign:
-      en: +6; click Castle Age at ~26 pop; add farms during
-      tr: +6; ~26 nüfusta Kale Çağı'na tıkla; arada tarla aç
-    icons:
-      - farm
-  - villagers: 28
-    assign:
-      en: "Castle: build 2 Archery Ranges; research Crossbow immediately"
-      tr: "Kale: 2 Archery Range kur; hemen Crossbow araştır"
+      en: "Castle Age: build 2 Archery Ranges; research Crossbow immediately"
+      tr: "Kale Çağı: 2 Archery Range kur; hemen Crossbow araştır"
     icons:
       - archery-range
       - crossbowman
-  - villagers: 30
+  - villagers: 32
     assign:
-      en: +2 → gold; add farms continuously
-      tr: +2 → altına; sürekli tarla açmaya devam et
+      en: +3 → gold; keep adding Farms; mass Crossbowmen from both Ranges
+      tr: +3 → altına; Farm açmaya devam; iki Range'den Crossbowmen yığ
     icons:
       - gold
       - farm
 intro:
   en: >-
-    **Goal:** Reach Castle Age with ~26 villagers, then mass Crossbowmen and Siege to dominate mid-game. **Recommended
-    civs:** Britons (+1 range), Ethiopians (+2 pierce attack), Vietnamese (see opponent on start), Mayans (+25% archer
-    HP), Chinese (extra starting resources)
+    **Goal:** Reach Castle Age at 27+2 villagers, then mass Crossbowmen to dominate the mid-game. A clean, generic Fast
+    Castle economy — no military in Feudal, pure boom into Crossbows. **Recommended civs:** Britons (+1 range),
+    Ethiopians (+2 pierce attack), Vietnamese (reveal opponent on start), Mayans (+25% archer HP), Chinese (extra
+    starting resources).
   tr: >-
-    **Hedef:** ~26 köylüyle Kale Çağı'na ulaş, ardından Crossbowmen ve Siege ile orta oyunu domine et. **Önerilen
-    medeniyetler:** Britons (+1 menzil), Ethiopians (+2 delici saldırı), Vietnamese (oyun başında rakibi görme), Mayans
-    (%25 ekstra okçu can), Chinese (ekstra başlangıç kaynakları)
+    **Hedef:** 27+2 köylüyle Kale Çağı'na ulaş, ardından Crossbowmen yığarak orta oyunu domine et. Tertemiz, jenerik bir
+    Fast Castle ekonomisi — Feodal'da asker yok, saf boom ile Crossbows'a geç. **Önerilen medeniyetler:** Britons (+1
+    menzil), Ethiopians (+2 delici saldırı), Vietnamese (oyun başında rakibi görme), Mayans (%25 ekstra okçu can),
+    Chinese (ekstra başlangıç kaynakları).
 strategy:
   en:
-    - 6 villagers on sheep
-    - 3 villagers on wood; Lumber Camp
-    - 3 villagers to berries; Mill
-    - 2 more villagers to wood (14 total)
-    - 4 more villagers to wood/sheep (18 total)
-    - No military — pure economy focus
-    - Build Blacksmith + Market (Castle Age prerequisites)
-    - 2 villagers to gold; Mining Camp
-    - Continue TC production to 26 villagers
-    - Add Farms; research Double-Bit Axe
-    - Build 2 Archery Ranges immediately
-    - Research Crossbow (high priority)
+    - 6 villagers on sheep under the TC
+    - 4 villagers to wood; build the first Lumber Camp
+    - Lure the first boar with villager 11
+    - 4 villagers to berries; build the Mill, then lure the second boar
+    - 9 more villagers to wood; build a second Lumber Camp and add Farms
+    - 3 villagers to gold (Mining Camp); click Feudal at 27 pop
+    - In Feudal, build Blacksmith + Market and click Castle Age (29 pop)
+    - In Castle Age, build 2 Archery Ranges and research Crossbow at once
+    - Research Fletching, then Bodkin Arrow, for the range and attack edge
     - Produce Crossbowmen non-stop from both Ranges
-    - Build Siege Workshop for Mangonel support
-    - Add more gold villagers as queue grows
-    - "**Weak against:** Knight rushes arriving before Mangonels are out; Skirmisher + cavalry mixes."
-    - "**Strong against:** Infantry armies, other archer civs (out-ranges them with upgrades)."
+    - Add a Siege Workshop for Mangonel support against Skirmishers
+    - Add gold villagers and keep Farms up as the queue grows
+    - "**Weak against:** Knights or Mangonels that arrive before your own Siege; heavy Skirmisher play."
+    - "**Strong against:** Infantry armies and other archer civs (out-ranges them with upgrades)."
   tr:
-    - 6 köylü koyunlara
-    - 3 köylü oduna; Lumber Camp
-    - 3 köylü meyveye; Mill
-    - 2 köylü daha oduna (toplam 14)
-    - 4 köylü daha odun/koyuna (toplam 18)
-    - Asker yok — yalnızca ekonomi odaklı
-    - Blacksmith + Market kur (Kale Çağı ön koşulları)
-    - 2 köylü altına; Mining Camp
-    - TC üretimini 26 köylüye kadar sürdür
-    - Tarla aç; Double-Bit Axe araştır
-    - Hemen 2 Archery Range kur
-    - Crossbow araştır (yüksek öncelik)
-    - Her iki Range'den de sürekli Crossbowmen üret
-    - Mangonel desteği için Siege Workshop kur
-    - Kuyruk büyüdükçe daha fazla altın köylüsü ekle
-    - "**Zayıf olduğu durum:** Mangonel çıkmadan önce gelen Knight rush'ları; Skirmisher + cavalry karışımları."
-    - "**Güçlü olduğu durum:** Piyade orduları, diğer okçu medeniyetleri (yükseltmelerle onları menzilde geçer)."
+    - 6 köylü TC altındaki koyunlara
+    - 4 köylü oduna; ilk Lumber Camp'i kur
+    - 11. köylüyle ilk yaban domuzunu çek
+    - 4 köylü meyveye; Mill kur, sonra ikinci yaban domuzunu çek
+    - 9 köylü daha oduna; ikinci Lumber Camp kur ve Farm aç
+    - 3 köylü altına (Mining Camp); 27 nüfusta Feodal'a tıkla
+    - Feodal'da Blacksmith + Market kur ve Kale Çağı'na tıkla (29 nüfus)
+    - Kale Çağı'nda 2 Archery Range kur ve hemen Crossbow araştır
+    - Menzil ve saldırı avantajı için Fletching, sonra Bodkin Arrow araştır
+    - İki Range'den sürekli Crossbowmen üret
+    - Skirmisher'lara karşı Mangonel desteği için Siege Workshop ekle
+    - Kuyruk büyüdükçe altın köylüsü ekle ve Farm'ları ayakta tut
+    - "**Zayıf olduğu durum:** Kendi Siege'inden önce gelen Knight ya da Mangonel'ler; yoğun Skirmisher oyunu."
+    - "**Güçlü olduğu durum:** Piyade orduları ve diğer okçu medeniyetleri (yükseltmelerle menzilde geçer)."
+source:
+  author: AoE Companion
+  url: https://aoecompanion.com/build-guides/fast-castle-boom

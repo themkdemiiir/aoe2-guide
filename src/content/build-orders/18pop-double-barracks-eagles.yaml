@@ -48,22 +48,16 @@ steps:
     assign:
       en: +1 → lure the second boar
       tr: +1 → ikinci domuzu çek
-    icons:
-      - food
-  - assign:
-      en: Push the deer toward your TC with the scout
-      tr: Scout ile geyikleri Şehir Merkezi'ne doğru sür
     note:
-      en: Keeps all hunt close so food never idles
-      tr: Tüm avı yakın tutar, böylece yiyecek toplaması hiç boşa düşmez
+      en: Optional - push deer to the TC with the Scout once all sheep are found
+      tr: İsteğe bağlı - tüm koyunları bulunca Scout ile geyiği TC'ye sür
     icons:
       - food
   - villagers: 18
-    phase: feudal
     time: "8:50"
     assign:
-      en: +6 → hunt (16 on food, 2 on wood), then click up to Feudal
-      tr: +6 → ava (16 yemekte, 2 odunda), sonra Feudal'a tıkla
+      en: +6 → hunt under the TC (16 on food), then click up to Feudal
+      tr: +6 → TC altında ava (16 yemekte), sonra Feudal'a tıkla
     note:
       en: "Aztecs / Incas: research Loom before aging up"
       tr: "Aztecs / Incas: çağ atlamadan önce Loom araştır"
@@ -71,50 +65,45 @@ steps:
       - food
       - loom
   - villagers: 18
+    phase: feudal
     assign:
-      en: Feudal lands — move 5 hunters to wood (7 on the Lumber Camp)
-      tr: Feudal gelir — 5 avcıyı oduna kaydır (Lumber Camp'te 7 köylü)
+      en: Move 5 hunters → wood (7 on the Lumber Camp), 2 hunters → gold (Mining Camp)
+      tr: 5 avcıyı → oduna (Lumber Camp'te 7), 2 avcıyı → altına (Mining Camp)
     icons:
       - wood
-      - lumber-camp
-  - villagers: 18
-    assign:
-      en: Pull 2 hunters → gold (Mining Camp); 2 hunters build Barracks + House
-      tr: 2 avcıyı → altına çek (Mining Camp); 2 avcı Barracks + House kurar
-    icons:
       - gold
       - mining-camp
-      - barracks
-      - house
   - villagers: 18
     assign:
-      en: Send 3 hunters → berries; research Double-Bit Axe (Horse Collar optional)
-      tr: 3 avcıyı → meyvelere gönder; Double-Bit Axe araştır (Horse Collar isteğe bağlı)
+      en: 2 hunters build a Barracks + House; send 3 hunters → berries
+      tr: 2 avcı Barracks + House kurar; 3 avcıyı → meyveye gönder
     icons:
+      - barracks
+      - house
       - food
+  - villagers: 18
+    assign:
+      en: Research Double-Bit Axe (Horse Collar optional)
+      tr: Double-Bit Axe araştır (Horse Collar isteğe bağlı)
+    icons:
       - double-bit-axe
   - assign:
-      en: +4 new villagers → gold; build a 2nd Barracks
-      tr: +4 yeni köylü → altına; 2. Barracks kur
+      en: Send the next 4 villagers → gold, then build a 2nd Barracks
+      tr: Sonraki 4 köylüyü → altına gönder, sonra 2. Barracks kur
     icons:
       - gold
       - barracks
   - assign:
-      en: Pump Eagle Scouts from both Barracks (2 Spearmen first vs Scouts)
-      tr: Her iki Barracks'tan Eagle Scout bas (Scout'a karşı önce 2 Spearman)
+      en: Train Eagle Scouts from both Barracks (2 Spearmen first vs a Scout opening)
+      tr: Her iki Barracks'tan Eagle Scout bas (Scout açılışına karşı önce 2 Spearman)
     note:
-      en: Add straggler-tree workers and Farms behind the army
-      tr: Ordu arkasına straggler ağaçları ve Farm ekle
+      en: Add Farms and straggler-tree workers behind the army; Blacksmith for Eagle armor/attack if needed
+      tr: Ordu arkasına Farm ve straggler ağacı köylüsü ekle; gerekirse Eagle zırh/saldırı için Blacksmith
     icons:
       - eagle-scout
       - spearman
-  - assign:
-      en: Drop a Blacksmith for Eagle armor and attack upgrades
-      tr: Eagle zırh ve saldırı geliştirmeleri için Blacksmith kur
-    icons:
-      - blacksmith
 intro:
-  en: Land Feudal fast off heavy hunt, then drown the enemy in Eagle Scouts trained from two Barracks at once.
+  en: Land Feudal fast off heavy hunt, then flood the enemy with Eagle Scouts trained from two Barracks at once.
   tr: Yoğun av ile hızlıca Feudal'a çık, ardından iki Barracks'tan aynı anda bastığın Eagle Scout'larla rakibi boğ.
 strategy:
   en:
@@ -151,3 +140,5 @@ strategy:
     - >-
       Geçiş için ordu arkasına Farm ekle, altın biriktir ve bir Market kullanarak (gerekirse taş satarak) teknoloji ve
       ekonomi avantajını Castle Age'e taşı.
+source:
+  author: Hera

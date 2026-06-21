@@ -1,7 +1,7 @@
 slug: maa-into-skirms
 name:
   en: Man-at-Arms Into Skirms
-  tr: Man-at-Arms Into Skirms
+  tr: Man-at-Arms Sonrası Skirmiş
 difficulty: intermediate
 targetAge: feudal
 durationMin: 9
@@ -175,3 +175,5 @@ strategy:
     - >-
       Kazanan bir Feudal konumdan Feudal'da öğütmeye devam edebilir ya da orduyu ve tarla ekonomisini eşleşmeye göre
       Crossbow, Pikeman veya bir Knight geçişine katarak akıcı bir şekilde Kale Çağı'na geçebilirsin.
+source:
+  author: Hera

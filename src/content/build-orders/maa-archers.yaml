@@ -29,8 +29,8 @@ steps:
     icons:
       - food
   - assign:
-      en: Lure at least 2 deer
-      tr: En az 2 geyik çek
+      en: Lure at least 2 deer once you have found both boars
+      tr: Her iki yaban domuzunu bulduktan sonra en az 2 geyik çek
     note:
       en: Mandatory — this build leans on the extra hunt food
       tr: Zorunlu — bu açılış fazladan av etine dayanıyor
@@ -49,21 +49,21 @@ steps:
       - barracks
       - house
   - villagers: 18
-    phase: feudal
     time: "8:50"
     assign:
-      en: +2 → hunt, research Loom, then click up to Feudal
-      tr: +2 → av, Loom araştır, sonra Feudal'a tıkla
+      en: +2 → hunt; find your sheep, scout the enemy, research Loom, then click up to Feudal
+      tr: +2 → av; koyunlarını bul, rakibi keşfet, Loom araştır, sonra Feudal'a tıkla
     note:
-      en: Land with roughly 3 on wood and 14 on food
-      tr: Yaklaşık 3 köylü odunda, 14 köylü yiyecekte olarak çık
+      en: Click up around 8:50 with roughly 3 on wood and 14 on food
+      tr: Yaklaşık 8:50'de, 3 köylü odunda ve 14 köylü yiyecekte iken Feudal'a tıkla
     icons:
       - food
       - loom
   - villagers: 18
+    phase: feudal
     assign:
-      en: "Feudal: move 5 from the hunt → wood at the Lumber Camp"
-      tr: "Feudal: avdan 5 köylüyü → Kereste Kampı'nda oduna kaydır"
+      en: "Feudal: move 5 from the hunt → wood (now 8 on wood, 9 on food)"
+      tr: "Feudal: avdan 5 köylüyü → oduna kaydır (artık 8 odunda, 9 yiyecekte)"
     icons:
       - wood
       - lumber-camp
@@ -161,3 +161,5 @@ strategy:
     - >-
       Temiz devam Castle Çağ Crossbow'larıdır: Feudal kavgası yatıştığında, Milis'e fazla yüklenmek yerine Okçularını
       Crossbowman ve Bodkin Arrow'a taşı.
+source:
+  author: Hera

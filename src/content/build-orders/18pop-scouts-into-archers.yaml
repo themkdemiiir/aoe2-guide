@@ -4,7 +4,7 @@ name:
   tr: 18 Köylü Scouts into Archers
 difficulty: intermediate
 targetAge: feudal
-durationMin: 9
+durationMin: 14
 civsRecommended:
   - chinese
   - huns
@@ -68,8 +68,8 @@ steps:
       - loom
   - villagers: 18
     assign:
-      en: Send 6 from hunt → wood (8 total on lumber, or split a second camp)
-      tr: Avdan 6 köylüyü → oduna gönder (toplam 8 oduncu, ya da ikinci kampa böl)
+      en: Send 6 from hunt → wood (8 on one lumber camp, or 9 on two)
+      tr: Avdan 6 köylüyü → oduna gönder (tek kampta 8, iki kampta 9 oduncu)
     icons:
       - wood
       - lumber-camp
@@ -163,3 +163,5 @@ strategy:
     - >-
       Buradan ya ikinci bir Stable ve Bloodlines ile Feudal All-In yaparsın ya da ekonomiyi dengeleyip Archer kütlesini
       güçlü bir Castle Age Crossbow timing'ine taşırsın.
+source:
+  author: Hera

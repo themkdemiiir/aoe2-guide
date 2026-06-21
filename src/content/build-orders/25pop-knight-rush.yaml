@@ -68,12 +68,13 @@ steps:
       - house
   - villagers: 25
     phase: feudal
+    time: "11:45"
     assign:
-      en: +3 → build Mining Camp and mine gold, then research Loom and click up
-      tr: +3 → Maden Kampı dik ve altın çıkar, ardından Loom araştır ve çağı tıkla
+      en: +3 → build Mining Camp and mine gold, then research Loom and click Feudal
+      tr: +3 → Maden Kampı dik ve altın çıkar, ardından Loom araştır ve Feudal'a tıkla
     note:
-      en: Feudal lands ~11:45 with about 8 on wood, 14 on food, 3 on gold
-      tr: Feudal ~11:45'te gelir; yaklaşık 8 odunda, 14 yiyecekte, 3 altında
+      en: "Perfect landing 11:45 — distribution: 8 wood, 14 food, 3 gold"
+      tr: "İdeal varış 11:45 — dağılım: 8 odun, 14 yiyecek, 3 altın"
     icons:
       - mining-camp
       - gold
@@ -95,20 +96,19 @@ steps:
     phase: castle
     time: "16:05"
     assign:
-      en: +4 → gold; research Double-Bit Axe; click Castle Age
-      tr: +4 → altın; Double-Bit Axe araştır; Castle çağını tıkla
+      en: +4 → gold; research Double-Bit Axe and Horse Collar; click Castle Age
+      tr: +4 → altın; Double-Bit Axe ve Horse Collar araştır; Castle çağını tıkla
     note:
-      en: Build a 2nd Stable as you advance
-      tr: Çağ atlarken 2. Ahırı dik
+      en: "Perfect Castle landing 16:05; add a 2nd Stable as you advance"
+      tr: "İdeal Castle varışı 16:05; çağ atlarken 2. Ahırı dik"
     icons:
       - gold
       - double-bit-axe
       - stable
   - assign:
-      en: "In Castle Age: research Horse Collar and Bow Saw; pump Knights from both Stables"
-      tr: "Castle çağında: Horse Collar ve Bow Saw araştır; iki Ahırdan da Şövalye bas"
+      en: "In Castle Age: research Bow Saw; pump Knights from both Stables"
+      tr: "Castle çağında: Bow Saw araştır; iki Ahırdan da Şövalye bas"
     icons:
-      - horse-collar
       - bow-saw
       - knight
 intro:
@@ -154,3 +154,5 @@ strategy:
     - >-
       Magyars, Slavs, Berbers ve Huns'un her biri planı tatlandırır (daha ucuz ya da daha hızlı Şövalye, bedava Ev, daha
       ucuz ekonomi), ama düzen beşinde de aynıdır.
+source:
+  author: Hera

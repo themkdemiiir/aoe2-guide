@@ -1,7 +1,7 @@
 slug: win-water
 name:
   en: Win Water
-  tr: Win Water
+  tr: Suda Kazan
 difficulty: intermediate
 targetAge: feudal
 durationMin: 11
@@ -156,3 +156,6 @@ strategy:
     - >-
       **Güçlü olduğu durumlar:** Dock'u atlayan veya geciktiren oyuncular; savaş gemisi olmayan açgözlü balık boom'ları;
       suda savaşmak zorunda kalan kara uygarlıkları.
+source:
+  author: AoE Companion
+  url: https://aoecompanion.com/build-guides/win-water

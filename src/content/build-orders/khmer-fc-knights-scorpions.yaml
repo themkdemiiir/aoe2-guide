@@ -1,10 +1,10 @@
 slug: khmer-fc-knights-scorpions
 name:
   en: Khmer Fast Castle Knights and Scorpions
-  tr: Khmer Fast Castle Knights ve Scorpions
+  tr: Khmer Hızlı Castle Knights ve Scorpions
 difficulty: advanced
-targetAge: feudal
-durationMin: 11
+targetAge: castle
+durationMin: 14
 civsRecommended:
   - khmer
 steps:
@@ -89,6 +89,7 @@ steps:
       - farm
       - scout-cavalry
   - villagers: 23
+    phase: castle
     assign:
       en: 4 hunt/straggler villagers → woodline; +2 → gold
       tr: 4 avcı/straggler köylü → ağaç hattına; +2 → altına
@@ -163,3 +164,6 @@ strategy:
     - >-
       **Devamı:** Baskı tıkanırsa arkaya ek Town Center kur, ardından geç oyunda Elite Battle Elephant veya relic
       destekli Monk oyununa geçiş yap.
+source:
+  author: Hera
+  url: https://www.youtube.com/@Hera

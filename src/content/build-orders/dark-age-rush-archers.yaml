@@ -1,7 +1,7 @@
 slug: dark-age-rush-archers
 name:
   en: Dark Age Rush into Archers
-  tr: Dark Age Rush into Archers
+  tr: Dark Age Rush'tan Archer'a Geçiş
 difficulty: intermediate
 targetAge: feudal
 durationMin: 12
@@ -46,23 +46,24 @@ steps:
       - food
   - villagers: 13
     assign:
-      en: +2 → build 2 Houses + Mill by berries, then → berries
-      tr: +2 → 2 House + Mill kur ve yemişlere geç
+      en: +2 → build 2 Houses + Mill by the berries, then → berries
+      tr: +2 → yemişlerin yanına 2 House + Mill kur, sonra yemişe geç
     icons:
       - house
       - mill
       - food
   - villagers: 15
     assign:
-      en: +2 → berries; lure the 2nd Boar
-      tr: +2 → yemiş; 2. Boar'ı çek
+      en: +2 → berries
+      tr: +2 → yemiş
     icons:
       - food
   - villagers: 16
     assign:
-      en: +1 → mine gold (~60 for 3 Militia)
-      tr: +1 → Altın kazan (~3 Militia için 60)
+      en: +1 → lure the 2nd Boar, then mine gold (60 for 3 Militia)
+      tr: +1 → 2. Boar'ı çek, sonra Altın kaz (3 Militia için 60)
     icons:
+      - food
       - gold
       - mining-camp
   - villagers: 17
@@ -127,7 +128,7 @@ strategy:
     - Villager 7 builds a Lumber Camp, then 4 villagers total on wood (through pop 10)
     - 1 villager lures the nearest Boar
     - 2 villagers build 2 Houses and a Mill by the berries, then gather berries
-    - Lure the 2nd Boar around pop 15
+    - Lure the 2nd Boar around pop 16
     - 1 villager mines gold (3 Militia cost 60 gold total)
     - 1 villager builds a Barracks; train 3 Militia, then send the builder to sheep
     - New villagers to sheep through pop 21, then build Farms next to the TC / Mill (pop 22–24)
@@ -158,8 +159,8 @@ strategy:
     - 7. köylü Lumber Camp kurar, ardından toplam 4 köylü oduna geçer (10. nüfusa kadar)
     - 1 köylü en yakın Boar'ı çeker
     - 2 köylü yemişlerin yanına 2 House ve Mill kurar, sonra yemiş toplar
-    - 15. nüfus civarında 2. Boar'ı çek
-    - 1 köylü Altın kazer (3 Militia toplam 60 Altın tutar)
+    - 16. nüfus civarında 2. Boar'ı çek
+    - 1 köylü Altın kazar (3 Militia toplam 60 Altın tutar)
     - 1 köylü Barracks kurar; 3 Militia eğit, sonra kurucu köylüyü koyuna gönder
     - 21. nüfusa kadar yeni köylüler koyuna, ardından TC / Mill yanına Farm kur (nüfus 22–24)
     - 25. köylü Farm kurar; Loom araştır
@@ -184,3 +185,6 @@ strategy:
     - >-
       **Güçlü olduğu durumlar:** Açgözlü fast-castle veya boom açılışları; erken asker yanıtı olmayan medeniyetler;
       Karanlık Çağ Militia'sına köylü kaybeden, duvarı geç kuran rakipler.
+source:
+  author: AoE Companion
+  url: https://aoecompanion.com/build-guides/dark-age-rush-archers

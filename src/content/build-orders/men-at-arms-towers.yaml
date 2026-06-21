@@ -14,8 +14,8 @@ civsRecommended:
 steps:
   - villagers: 6
     assign:
-      en: Queue villagers; build 2 Houses (2 vils build one, 1 builds the other), then to sheep until 6
-      tr: Köylü üret; 2 House inşa et (2 köylü birini, 1 köylü diğerini yapar), sonra 6'ya ulaşana kadar koyunlara git
+      en: Queue villagers nonstop; build 2 Houses, then send everyone to sheep until you reach 6
+      tr: Durmadan köylü üret; 2 House inşa et, sonra 6'ya ulaşana kadar herkesi koyunlara gönder
     icons:
       - food
       - house
@@ -66,8 +66,8 @@ steps:
       - food
   - villagers: 19
     assign:
-      en: +1 → build Barracks, train 3 Militia, then mine Stone
-      tr: +1 → Barracks inşa et, 3 Militia eğit, ardından Taş topla
+      en: +1 → build Barracks and train 3 Militia; this villager then mines Stone
+      tr: +1 → Barracks inşa et ve 3 Militia eğit; bu köylü ardından Taş toplar
     icons:
       - barracks
       - militia
@@ -177,3 +177,6 @@ strategy:
     - >-
       Büyük taahhüt, başarısız bir rush'ın ciddi bir ekonomik kayba yol açacağı anlamına gelir — yalnızca iyi bir hedef
       scout'ladıktan sonra taahhütte bulun.
+source:
+  author: AoE Companion
+  url: https://aoecompanion.com/build-guides/men-at-arms-towers

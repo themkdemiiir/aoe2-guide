@@ -29,8 +29,8 @@ steps:
       - food
   - villagers: 11
     assign:
-      en: +1 → hunt / deer
-      tr: +1 → av / geyik
+      en: +1 → hunt under TC
+      tr: +1 → TC altındaki av
     icons:
       - food
   - villagers: 12
@@ -44,15 +44,15 @@ steps:
     assign:
       en: +1 → second boar
       tr: +1 → ikinci yaban domuzu
-    note:
-      en: Lure deer or mill chickens to stretch food
-      tr: Yiyeceği uzatmak için geyikleri çek ya da tavukları değirmene topla
     icons:
       - food
   - villagers: 18
     assign:
       en: +5 → berries
       tr: +5 → çilekler
+    note:
+      en: When both boars run out, lure deer or send 3 hunt villagers to mill the chickens.
+      tr: İki yaban domuzu da bitince geyikleri çek ya da avdaki 3 köylüyü tavukları değirmene toplamaya gönder.
     icons:
       - food
   - villagers: 19
@@ -160,3 +160,5 @@ strategy:
     - >-
       Açgözlü boom açılışlarına ve şövalye ağırlıklı planlara karşı güçlüdür; çünkü Keşişler pahalı süvarileri kendi
       tarafına çevirir ve kalıntı üstünlüğü çığ gibi büyür.
+source:
+  author: Hera

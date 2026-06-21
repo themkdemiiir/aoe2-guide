@@ -24,8 +24,8 @@ steps:
       - lumber-camp
   - villagers: 10
     assign:
-      en: +1 → lure and eat the first boar
-      tr: +1 → ilk domuzu çek ve ye
+      en: +1 → lure the first boar
+      tr: +1 → ilk domuzu çek
     icons:
       - food
   - villagers: 11
@@ -58,10 +58,10 @@ steps:
       en: +2 → wood; research Loom and click up to Feudal
       tr: +2 → oduna; Loom araştır ve Feudal'a çağ atla
     note:
-      en: Feudal landing ~9:13 on 5 wood / 16 food — Malay's faster age-up buys you roughly a +2 villager lead
+      en: Perfect Feudal landing 9:13 on 5 wood / 16 food — Malay's faster age-up keeps you roughly 2 villagers ahead
       tr: >-
-        Feudal'a ~9:13'te iniş, 5 odun / 16 yiyecek ile — Malay'ın hızlı çağ atlaması sana kabaca +2 köylü avantajı
-        kazandırır
+        Mükemmel Feudal inişi 9:13, 5 odun / 16 yiyecek ile — Malay'ın hızlı çağ atlaması seni kabaca 2 köylü önde
+        tutar
     icons:
       - wood
       - loom
@@ -73,8 +73,8 @@ steps:
       - wood
       - lumber-camp
   - assign:
-      en: Pull 1 from hunt to build a Barracks early so a follow-up is ready the moment you decide
-      tr: Avdan 1 köylü al, erkenden bir Barracks kur ki karar verdiğin an devamı hazır olsun
+      en: Pull 1 from hunt to build a Barracks, so it is ready the moment you hit Feudal — earlier than other civs
+      tr: Avdan 1 köylü al ve bir Barracks kur, böylece Feudal'a ulaştığın an hazır olur — diğer uygarlıklardan önce
     icons:
       - barracks
   - assign:
@@ -156,3 +156,5 @@ strategy:
     - >-
       Hangi yolu seçersen seç, +2 köylü avantajı katlanarak büyür: hızlı bir Blacksmith ve Fletching arkasına ekilen
       tarlalar, rakibinin yetişemeyeceği kadar hızlı bir Castle veya Imperial çağ sıçraması yapmanı sağlar.
+source:
+  author: Hera

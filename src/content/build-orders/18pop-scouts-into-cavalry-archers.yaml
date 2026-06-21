@@ -3,8 +3,8 @@ name:
   en: 18 Pop Scouts into Cavalry Archers
   tr: 18 Köylü Scouts into Cavalry Archers
 difficulty: intermediate
-targetAge: feudal
-durationMin: 9
+targetAge: castle
+durationMin: 18
 civsRecommended:
   - huns
   - mongols
@@ -74,18 +74,14 @@ steps:
       - barracks
       - stable
   - assign:
-      en: Make Scout Cavalry; Double-Bit Axe; wall with the Stable builders
-      tr: Scout Cavalry üret; Double-Bit Axe; Stable kuranlarla duvar ör
+      en: Make Scout Cavalry; Double-Bit Axe; wall with the Stable builders; seed Farms toward ~15
+      tr: Scout Cavalry üret; Double-Bit Axe; Stable kuranlarla duvar ör; ~15'e doğru Farm ek
     note:
       en: Horse Collar always on closed maps; optional 1-4 Spearmen vs Scouts
       tr: Kapalı haritada Horse Collar şart; Scout'a karşı isteğe bağlı 1-4 Spearman
     icons:
       - scout-cavalry
       - double-bit-axe
-  - assign:
-      en: Seed Farms toward ~15; keep producing Scouts
-      tr: ~15'e doğru Farm ek; Scout üretmeye devam et
-    icons:
       - farm
   - assign:
       en: +5 → gold, build Mining Camp; build Blacksmith; finish walling
@@ -146,3 +142,5 @@ strategy:
     - >-
       Geç oyunda Cavalry Archers + Hussar ya da Cavalry Archers + Halberdier kompozisyonuna geç; Siege ile desteklersen
       esnek bir orta ve imparatorluk sonrası gücün olur.
+source:
+  author: Hera

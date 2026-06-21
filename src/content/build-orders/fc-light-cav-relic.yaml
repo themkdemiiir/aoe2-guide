@@ -1,7 +1,7 @@
 slug: fc-light-cav-relic
 name:
   en: Fast Castle Light Cav Relic Control
-  tr: Fast Castle Light Cav Relic Control
+  tr: Fast Castle Light Cav ile Kalıntı Kontrolü
 difficulty: intermediate
 targetAge: castle
 durationMin: 15
@@ -23,8 +23,8 @@ steps:
       - lumber-camp
   - villagers: 10
     assign:
-      en: +1 → lure and shoot the first boar
-      tr: +1 → ilk yaban domuzunu çek ve vur
+      en: +1 → lure the first boar
+      tr: +1 → ilk yaban domuzunu çek
     icons:
       - food
   - villagers: 11
@@ -164,3 +164,6 @@ strategy:
     - >-
       Dört veya daha fazla kalıntıyı kontrol etmeyi hedefle, sonra devamını seç: harita kontrolünü ele geçirdiysen
       şövalye-kuşatma baskısı ya da oyun sakinleştiyse doğrudan Imperial'e boom.
+source:
+  author: Hera
+  url: https://www.youtube.com/@Hera

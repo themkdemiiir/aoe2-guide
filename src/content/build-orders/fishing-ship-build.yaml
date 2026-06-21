@@ -45,14 +45,14 @@ steps:
       - food
   - villagers: 14
     assign:
-      en: +1 → lure the second boar
-      tr: +1 → ikinci yaban domuzunu çek
+      en: +1 → add to the boar under the Town Center
+      tr: +1 → şehir merkezinin altındaki domuza ekle
     icons:
       - food
   - villagers: 15
     assign:
-      en: +1 → take the second boar under the Town Center
-      tr: +1 → ikinci domuzu şehir merkezinin altında al
+      en: +1 → lure the second boar
+      tr: +1 → ikinci yaban domuzunu çek
     icons:
       - food
   - assign:
@@ -146,3 +146,5 @@ strategy:
     - >-
       Su bonusu olan uygarlıklar (Italians, Japanese, Vikings, Lithuanians, Malians) balıkçılıktan en çok değeri
       çıkarır, ama harita sana suyu verdiği sürece herhangi bir uygarlık bu düzeni oynayabilir.
+source:
+  author: Hera

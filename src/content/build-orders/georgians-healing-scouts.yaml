@@ -1,7 +1,7 @@
 slug: georgians-healing-scouts
 name:
   en: Georgians Healing Scout Rush
-  tr: Georgians Healing Scout Rush
+  tr: Georgians İyileştiren Scout Rush
 difficulty: advanced
 targetAge: feudal
 durationMin: 8
@@ -26,8 +26,8 @@ steps:
       - food
   - villagers: 11
     assign:
-      en: +3 → second boar, luring it under the TC
-      tr: +3 → ikinci domuzu TC altına çekerek öldür
+      en: +3 → join the boar under the TC
+      tr: +3 → TC altındaki domuza katıl
     icons:
       - food
       - town-center
@@ -48,8 +48,8 @@ steps:
       - mill
   - villagers: 13
     assign:
-      en: +1 → the second pair of boar
-      tr: +1 → ikinci domuz çiftine
+      en: +1 → lure and eat the second boar
+      tr: +1 → ikinci domuzu çek ve ye
     icons:
       - food
   - villagers: 16
@@ -149,3 +149,5 @@ strategy:
       İşler oturunca Bow Saw ve altın madenciliğini ekle, bir Fortified Church kur ve relic toplamak için keşişler
       çıkar; bu sırada ikinci bir TC dik — iyileştiren süvari bu süre boyunca haritanın kontrolünü sürekli çekişmeli
       tutar.
+source:
+  author: Hera

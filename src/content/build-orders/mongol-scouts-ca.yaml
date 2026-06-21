@@ -3,8 +3,8 @@ name:
   en: Scouts into Cavalry Archers
   tr: Süvarilerden Atlı Okçulara
 difficulty: intermediate
-targetAge: feudal
-durationMin: 9
+targetAge: castle
+durationMin: 18
 civsRecommended:
   - mongols
   - huns
@@ -180,3 +180,6 @@ strategy:
     - >-
       Zamanında duvarlayamazsan Atlı Okçu planından vazgeç, Bloodlines'lı Süvari üretmeye devam et ve bunun yerine
       ekonomi avantajına yaslan.
+source:
+  author: Hera
+  url: https://ageofnotes.com/build-orders/scouts-into-cavalry-archers-18-vils/

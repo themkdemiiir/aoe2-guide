@@ -1,7 +1,7 @@
 slug: armenian-spear-fc-relic
 name:
   en: Armenian Spear Rush into Fast Castle Relic Control
-  tr: Armenian Spear Rush into Fast Castle Relic Control
+  tr: Armenian Spear Rush ile Fast Castle Relic Control
 difficulty: advanced
 targetAge: castle
 durationMin: 16
@@ -24,8 +24,8 @@ steps:
       - lumber-camp
   - villagers: 11
     assign:
-      en: +1 → lure the first boar
-      tr: +1 → ilk domuzu çek
+      en: +1 → lure the 1st boar
+      tr: +1 → 1. domuzu çek
     icons:
       - food
   - assign:
@@ -39,8 +39,8 @@ steps:
       - barracks
   - villagers: 14
     assign:
-      en: +2 → 1st boar; lure the deer with your Scout
-      tr: +2 → 1. domuz; Scout ile geyiği çek
+      en: +2 → boar under the TC; optionally lure the deer with your Scout
+      tr: +2 → TC altındaki domuza; istersen Scout ile geyiği çek
     icons:
       - food
       - scout-cavalry
@@ -52,8 +52,8 @@ steps:
       - food
   - villagers: 17
     assign:
-      en: +2 → boar / hunt
-      tr: +2 → domuz / avlanma
+      en: +2 → boar under the TC
+      tr: +2 → TC altındaki domuza
     icons:
       - food
   - assign:
@@ -161,3 +161,5 @@ strategy:
     - >-
       Kalıntı geliri yavaş yanan bir ateş gibidir — Church'ü ve rahipleri duvarlar ve birkaç Spearman ile koru,
       istikrarlı altını matchup'ının gerektirdiği Castle Age ordusuna çevir.
+source:
+  author: Hera

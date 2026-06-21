@@ -1,7 +1,7 @@
 slug: scouts-into-skirms
 name:
   en: 18 Pop Scouts into Skirms
-  tr: 18 Köylü Scouts into Skirms
+  tr: 18 Köylü Scouts'tan Skirms'e
 difficulty: intermediate
 targetAge: feudal
 durationMin: 9
@@ -40,7 +40,7 @@ steps:
   - villagers: 11
     assign:
       en: +1 → build a house, then a mill on berries
-      tr: +1 → bir ev, sonra meyvenin yanına mill kur
+      tr: +1 → önce bir ev, sonra meyvenin yanına mill kur
     icons:
       - house
       - mill
@@ -50,8 +50,8 @@ steps:
       en: +1 → lure the second boar
       tr: +1 → ikinci domuzu çek
     note:
-      en: Lure deer with your scout to stretch the food
-      tr: Yiyeceği uzatmak için scout ile geyikleri sür
+      en: Once all sheep are found, lure deer with your scout to stretch the food
+      tr: Tüm koyunları bulunca, yiyeceği uzatmak için scout ile geyikleri çek
     icons:
       - food
   - villagers: 18
@@ -68,46 +68,43 @@ steps:
       - loom
   - villagers: 18
     assign:
-      en: Send 6 from hunt → wood (8 total on one lumber camp)
-      tr: Avdan 6 köylüyü → oduna gönder (tek lumber camp üzerinde toplam 8 oduncu)
+      en: "Split the 6 hunt villagers: 6 → wood (8 on one lumber camp), then 4 → berries"
+      tr: "6 av köylüsünü böl: 6 → oduna (tek lumber camp'te 8), sonra 4 → meyveye"
+    note:
+      en: Ends on 8 wood / 8 food after the splits below
+      tr: Aşağıdaki dağıtımlardan sonra 8 odun / 8 yiyecekte biter
     icons:
       - wood
       - lumber-camp
-  - villagers: 18
-    assign:
-      en: Send 4 from hunt → berries
-      tr: Avdan 4 köylüyü → meyveye gönder
-    icons:
       - food
   - villagers: 18
     assign:
-      en: "Pull 2 from hunt: one builds a Barracks, one builds a House"
-      tr: "Avdan 2 köylü al: biri Barracks, biri House kursun"
+      en: "Pull 4 from hunt: 1 Barracks, 1 House, and 2 build a Stable then wall or go wood"
+      tr: "Avdan 4 köylü al: 1 Barracks, 1 House ve 2'si Stable kurup duvar ya da oduna geçsin"
     icons:
       - barracks
       - house
-  - assign:
-      en: Build a Stable with 2 villagers, then send them to wall and wood; start Scout Cavalry
-      tr: 2 köylüyle Stable kur, sonra onları duvar ve oduna gönder; Scout Cavalry üretmeye başla
-    icons:
       - stable
-      - scout-cavalry
   - assign:
-      en: Research Double-Bit Axe (Horse Collar optional); seed farms as the hunt runs dry
-      tr: Double-Bit Axe araştır (Horse Collar isteğe bağlı); av tükenirken tarla ek
+      en: Start Scout Cavalry; research Double-Bit Axe (Horse Collar optional); seed farms as the hunt runs dry
+      tr: Scout Cavalry üretmeye başla; Double-Bit Axe araştır (Horse Collar isteğe bağlı); av tükenirken tarla ek
     icons:
+      - scout-cavalry
       - double-bit-axe
       - farm
   - assign:
-      en: When the opponent commits to Archers, drop a Range fast; move 2 to the woodline and start Skirmishers
-      tr: Rakip Archers'a tam yöneldiğinde hızlıca Range kur; 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla
+      en: When the opponent commits to Archers, drop a Range fast, move 2 to the woodline, and start Skirmishers
+      tr: Rakip Archers'a tam yöneldiğinde hızlıca Range kur, 2 köylüyü odun hattına taşı ve Skirmisher üretmeye başla
     icons:
       - archery-range
       - skirmisher
       - wood
   - assign:
-      en: Build a Blacksmith; research Fletching and infantry armor
-      tr: Blacksmith kur; Fletching ve piyade zırhını araştır
+      en: Build a Blacksmith; research Fletching and infantry armor ASAP to power your Skirmishers
+      tr: Blacksmith kur; Skirmisher'larını güçlendirmek için Fletching ve piyade zırhını mümkün olan en kısa sürede araştır
+    note:
+      en: Keep adding farms until about 13-15, then click up after Wheelbarrow
+      tr: Yaklaşık 13-15 tarlaya kadar tarla eklemeye devam et, sonra Wheelbarrow sonrası çağ atla
     icons:
       - blacksmith
       - fletching
@@ -167,3 +164,6 @@ strategy:
     - >-
       Castle Age'de bu, Knights destekli Elite Skirmisher'a temiz şekilde geçer — Skirmisher'lar Crossbow'lara karşı
       perde olurken, Knights altın-fakiri Feudal'ında eksik kalan vurucu gücü sağlar.
+source:
+  author: Hera
+  url: https://www.patreon.com/heraaoe2

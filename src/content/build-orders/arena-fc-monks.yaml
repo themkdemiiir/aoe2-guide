@@ -1,10 +1,10 @@
 slug: arena-fc-monks
 name:
-  en: Arena Fast Castle with Monk Rush
+  en: Arena Fast Castle into Monks
   tr: Arena Hızlı Kale ve Keşiş Baskını
 difficulty: intermediate
 targetAge: castle
-durationMin: 20
+durationMin: 13
 civsRecommended:
   - aztecs
   - byzantines
@@ -13,124 +13,141 @@ civsRecommended:
   - saracens
 steps:
   - villagers: 6
+    time: "0:25"
     assign:
-      en: 6 → sheep under TC
-      tr: 6 → TC altındaki koyunlar
+      en: 6 → sheep under TC; build 2 houses
+      tr: 6 → TC altındaki koyunlar; 2 house kur
     icons:
       - food
-  - villagers: 9
+  - villagers: 10
+    time: "2:10"
     assign:
-      en: +3 → wood, build lumber camp
-      tr: +3 → oduna, kereste kampı kur
+      en: +4 → wood; build Lumber Camp
+      tr: +4 → oduna; Lumber Camp kur
     icons:
       - wood
       - lumber-camp
-  - villagers: 12
+  - villagers: 13
+    time: "3:30"
     assign:
-      en: +3 → berries, build mill
-      tr: +3 → çileklere, Mill kur
+      en: +3 → berries; build Mill; lure boar
+      tr: +3 → çileklere; Mill kur; boar çek
     icons:
       - food
       - mill
-  - villagers: 15
+  - villagers: 18
+    time: "5:40"
     assign:
-      en: +3 → wood
-      tr: +3 → oduna
-    icons:
-      - wood
-  - villagers: 23
-    assign:
-      en: +8; click Feudal at 23 pop; no Feudal military
-      tr: +8; 23 nüfusta Feodal'a tıkla; Feodal askeri yok
+      en: +5 → food; add 2 farms as sheep run out
+      tr: +5 → yiyeceğe; koyunlar bitince 2 farm ekle
     icons:
       - food
-  - villagers: 23
+  - villagers: 21
+    time: "7:20"
     assign:
-      en: "CRITICAL: send scout out gate immediately for relics"
-      tr: "KRİTİK: atlıyı hemen kapıdan dışarı gönder — kalıntıları topla"
+      en: +1 → wood, +2 → gold; build Mining Camp
+      tr: +1 → oduna, +2 → altına; Mining Camp kur
     icons:
-      - scout-cavalry
-  - villagers: 23
-    assign:
-      en: "Feudal: build Blacksmith + Market; 4 → gold (mining camp)"
-      tr: "Feodal: Blacksmith + Market kur; 4 → altın (maden kampı)"
-    icons:
-      - blacksmith
-      - market
+      - wood
       - gold
-  - villagers: 28
+  - villagers: 23
+    time: "10:10"
+    phase: feudal
     assign:
-      en: +5; click Castle Age; keep booming
-      tr: +5; Kale Çağı'na tıkla; boom yapmaya devam et
+      en: +2; click Feudal at 23 pop — no Feudal military
+      tr: +2; 23 nüfusta Feodal'a tıkla — Feodal askeri yok
+    icons:
+      - food
+  - villagers: 25
+    time: "11:00"
+    assign:
+      en: "Feudal: build Market + Blacksmith; +2 → gold (4 total)"
+      tr: "Feodal: Market + Blacksmith kur; +2 → altına (toplam 4)"
+    icons:
+      - market
+      - blacksmith
+      - gold
+  - villagers: 25
+    time: "11:10"
+    assign:
+      en: Research Double-Bit Axe + Horse Collar; click Castle Age
+      tr: Double-Bit Axe + Horse Collar araştır; Kale Çağı'na tıkla
     icons:
       - castle-age
-  - villagers: 30
+  - villagers: 25
+    time: "12:30"
+    phase: castle
     assign:
-      en: "Castle: build Monastery + Castle; produce Monks; grab all relics"
-      tr: "Kale: Manastır + Castle kur; Keşiş üret; tüm kalıntıları kap"
+      en: "Castle: build Monastery; queue Monks; send them for relics"
+      tr: "Kale: Manastır kur; Keşiş sıraya al; kalıntılar için gönder"
     icons:
       - monastery
       - monk
-      - castle
-  - villagers: 32
+  - villagers: 27
+    time: "13:30"
     assign:
-      en: +2; build 2nd TC; Siege Workshop for Battering Rams
-      tr: +2; 2. Town Center kur; Battering Ram için Siege Workshop aç
+      en: Build Siege Workshop for Rams/Mangonels; add 2nd Monastery
+      tr: Ram/Mangonel için Siege Workshop kur; 2. Manastır ekle
+    icons:
+      - siege-workshop
+  - villagers: 30
+    time: "15:00"
+    assign:
+      en: Add 2nd Town Center; keep booming behind Monks + Siege
+      tr: 2. Town Center ekle; Keşiş + Siege arkasında boom yap
     icons:
       - town-center
-      - siege-workshop
 intro:
   en: >-
-    **Goal:** Fast Castle with no Feudal military, send the scout out the gate immediately to grab relics, then mass
-    Monks and Siege in Castle Age. **Recommended civs:** Aztecs (+5 Monk HP per Monastery tech, +33% relic gold),
-    Byzantines (Monks heal 50% faster, cheap trash + Cataphracts), Bohemians (powerful Monastery upgrades + gunpowder),
-    Spanish (Missionaries — mounted Monks), Saracens (Madrasah refunds gold when Monks die)
+    **Goal:** A clean Arena Fast Castle with no Feudal military — reach 23 villagers, click up around 10:10, build Market
+    and Blacksmith, then hit Castle Age near 12:30. In Castle Age you mass Monks to grab every relic and add Siege to
+    crack the walls. **Recommended civs:** Aztecs (+5 Monk HP per Monastery tech, +33% relic gold, strong Eagles +
+    Siege), Byzantines (Monks heal faster, cheap trash + Cataphracts), Bohemians (powerful Monastery techs + gunpowder),
+    Spanish (Missionaries — mounted Monks), Saracens (Madrasah refunds gold when Monks die).
   tr: >-
-    **Hedef:** Feodal askeri olmadan Kale Çağı'na hızlıca geç, atlıyı hemen kapıdan dışarı gönder ve kalıntıları kap;
-    ardından Kale Çağı'nda Keşiş ve Siege yığ. **Önerilen uygarlıklar:** Aztecs (Manastır teknolojisi başına +5 Keşiş
-    canı, +%33 kalıntı altını), Byzantines (Keşişler %50 daha hızlı iyileştirir, ucuz trash + Cataphract), Bohemians
-    (güçlü Manastır yükseltmeleri + barut), Spanish (Missionary — binekli Keşiş), Saracens (Madrasah, Keşiş ölünce
-    altını geri verir)
+    **Hedef:** Feodal askeri olmadan temiz bir Arena Hızlı Kale — 23 köylüye ulaş, ~10:10'da çağ at, Market ve Blacksmith
+    kur, ardından ~12:30'da Kale Çağı'na geç. Kale Çağı'nda tüm kalıntıları kapmak için Keşiş yığ ve duvarları kırmak
+    için Siege ekle. **Önerilen uygarlıklar:** Aztecs (Manastır teknolojisi başına +5 Keşiş canı, +%33 kalıntı altını,
+    güçlü Eagle + Siege), Byzantines (Keşişler daha hızlı iyileştirir, ucuz trash + Cataphract), Bohemians (güçlü
+    Manastır teknolojileri + barut), Spanish (Missionary — binekli Keşiş), Saracens (Madrasah, Keşiş ölünce altını geri
+    verir).
 strategy:
   en:
-    - 6 villagers on sheep
-    - 3 villagers on wood; Lumber Camp
-    - 3 villagers to berries; Mill
-    - 3 more villagers to wood
-    - 8 more villagers to food/wood
-    - Build Blacksmith + Market
-    - 4 villagers to gold; Mining Camp
-    - Boom to 28–30 villagers
-    - Research Double-Bit Axe, Horse Collar
-    - Build Monastery immediately; produce 2 Monks; grab remaining relics
-    - Build a Castle (defense + unique unit access)
-    - Build Siege Workshop; produce Battering Rams for wall breaching
-    - Research Sanctity, Fervor, Redemption
-    - Add 2nd Town Center; boom to 40+ villagers
+    - 6 villagers on sheep; build 2 houses
+    - 4 villagers to wood; build Lumber Camp
+    - 3 villagers to berries; build Mill; lure boar
+    - 5 more villagers to food; add 2 farms as sheep deplete
+    - 1 villager to wood, 2 to gold; build Mining Camp
+    - Reach 23 villagers and click Feudal (~10:10) — no Feudal military
+    - In Feudal, build Market + Blacksmith; put 4 villagers on gold
+    - Research Double-Bit Axe + Horse Collar; click Castle (~12:30)
+    - Build a Monastery immediately; queue Monks; send them to grab relics
+    - Build a Siege Workshop for Rams/Mangonels; add a 2nd Monastery
+    - Add a 2nd Town Center and keep booming behind Monks + Siege
     - >-
-      **Weak against:** Massed archers killing Monks; Trebuchet snipes on unsupported Monks; opponent grabbing 4+ relics
-      first.
+      **Weak against:** Massed archers killing Monks; Trebuchet snipes on unsupported Monks; an opponent grabbing the
+      relics first.
     - >-
-      **Strong against:** Knight-heavy armies (Monks convert Knights); slow infantry; opponents who ignore monastery
+      **Strong against:** Knight-heavy armies (Monks convert Knights); slow infantry; opponents who ignore Monastery
       protection.
   tr:
-    - 6 köylü koyunlara
-    - 3 köylü oduna; Lumber Camp
-    - 3 köylü çileklere; Mill
-    - 3 köylü daha oduna
-    - 8 köylü daha yiyecek/oduna
-    - Blacksmith + Market kur
-    - 4 köylü altına; Mining Camp
-    - 28–30 köylüye boom yap
-    - Double-Bit Axe ve Horse Collar araştır
-    - Hemen Manastır kur; 2 Keşiş üret; kalan kalıntıları topla
-    - Castle kur (savunma + özgün birim erişimi)
-    - Siege Workshop kur; duvar kırmak için Battering Ram üret
-    - Sanctity, Fervor ve Redemption araştır
-    - 2. Town Center ekle; 40+ köylüye boom yap
+    - 6 köylü koyunlara; 2 house kur
+    - 4 köylü oduna; Lumber Camp kur
+    - 3 köylü çileklere; Mill kur; boar çek
+    - 5 köylü daha yiyeceğe; koyunlar bitince 2 farm ekle
+    - 1 köylü oduna, 2 köylü altına; Mining Camp kur
+    - 23 köylüye ulaş ve Feodal'a tıkla (~10:10) — Feodal askeri yok
+    - Feodal'da Market + Blacksmith kur; 4 köylüyü altına koy
+    - Double-Bit Axe + Horse Collar araştır; Kale Çağı'na tıkla (~12:30)
+    - Hemen Manastır kur; Keşiş sıraya al; kalıntıları kapmaya gönder
+    - Ram/Mangonel için Siege Workshop kur; 2. Manastır ekle
+    - 2. Town Center ekle ve Keşiş + Siege arkasında boom yapmaya devam et
     - >-
       **Zayıf olduğu durumlar:** Keşişleri öldüren yoğun okçular; desteksiz Keşişlere yapılan Trebuchet sniping'i;
-      rakibin önce 4+ kalıntı kapması.
+      rakibin kalıntıları önce kapması.
     - >-
       **Güçlü olduğu durumlar:** Knight ağırlıklı ordular (Keşişler Knight'ları dönüştürür); yavaş piyade; Manastır
       korumasını ihmal eden rakipler.
+source:
+  author: AoE Companion
+  url: https://aoecompanion.com/build-guides/fast-castle-boom
