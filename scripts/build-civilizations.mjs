@@ -7,8 +7,9 @@
 //
 // Sources:
 //   SiegeEngineers/aoe2techtree (MIT) — data.json civ list + EN/TR help strings parsed by
-//     parseHelp() for bonuses, team bonus, unique-tech effects, and the civ archetype.
-//   aalises/age-of-empires-II-api (BSD-3-Clause) — region/expansion + uniqueUnits per civ.
+//     parseHelp() for bonuses, team bonus, unique-tech effects, the civ archetype, AND the
+//     unique unit name(s) (uniqueUnitNames → slugified into entry.uniqueUnits).
+//   aalises/age-of-empires-II-api (BSD-3-Clause) — region/expansion per civ.
 //   Only editorial copy remains hand-written: the EN/TR region labels and tagline templates.
 //   `strategy` prose is carried forward verbatim from the existing per-civ YAML.
 
@@ -247,27 +248,19 @@ async function run() {
 
   console.log(`Total unique civ slugs: ${allCivSlugs.size}`);
 
-  // Load existing civilizations.json to preserve the patch field and carry over each civ's
-  // already-validated uniqueUnits (those slugs are not in the help strings or the aalises CSV
-  // for the post-aalises DLC civs, so without this carryover their Unique Units block would
-  // vanish from the site).
+  // Load existing civilizations.json only to preserve the patch field. uniqueUnits are now
+  // sourced from each civ's EN help string (see below) — no carryover, no icon-map filtering.
   let existingData = { patch: "v100.1.84", civs: [] };
   try {
     const existing = await readFile(DATA_OUT, "utf8");
     existingData = JSON.parse(existing);
   } catch (_) {}
   const iconUnits = iconMap.units || {};
-  const prevUniqueUnits = Object.fromEntries(
-    (existingData.civs || []).map((c) => [
-      c.slug,
-      // Drop any carried-over slug that isn't a real icon (filters the few fabricated ones).
-      (c.uniqueUnits || []).filter((u) => iconUnits[u]),
-    ]),
-  );
 
   await mkdir(CONTENT_CIVS, { recursive: true });
 
   const civEntries = [];
+  const iconMissing = []; // { slug, unit } for unique units with no icon-map entry (warn only)
   let written = 0;
 
   // Process civs in sorted order
@@ -288,15 +281,15 @@ async function run() {
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
 
-    // Base entry: region + unique units are not in the help strings, so source them from
-    // aalises (CSV) where available, else region falls back to the expansion map. Bonuses,
-    // team bonus, unique-tech effects, and specialty are all (re-)sourced from parseHelp below.
+    // Base entry: region falls back to the expansion map. uniqueUnits are sourced from the EN
+    // help string below (see parseHelp().uniqueUnitNames). Bonuses, team bonus, unique-tech
+    // effects, and specialty are all (re-)sourced from parseHelp below.
     const region = REGION_OVERRIDE[slug] || REGION_MAP[aalises?.expansion] || "Unknown";
     const entry = {
       slug,
       region,
       specialty: aalises?.armyType ?? "Unknown",
-      uniqueUnits: aalises?.uniqueUnits?.length ? aalises.uniqueUnits : (prevUniqueUnits[slug] ?? []),
+      uniqueUnits: [],
       civBonuses: [],
       teamBonus: "",
       uniqueTechs: {
@@ -331,6 +324,21 @@ async function run() {
     if (tr.uniqueTechs.length < 2) {
       console.error(`[FATAL] ${entry.slug}: TR help has ${tr.uniqueTechs.length} unique tech(s), expected 2`);
       process.exit(1);
+    }
+
+    // Unique units: source from the EN help string's "Unique Unit(s)" section, slugified.
+    // No defaults — a civ legitimately has 1 or 2 unique units, so ≥1 is required. Fail loud
+    // rather than emit [] (which would silently hide a real unit from the site).
+    const uniqueUnits = (en.uniqueUnitNames ?? []).map(slugify).filter(Boolean);
+    if (uniqueUnits.length === 0) {
+      console.error(`[FATAL] ${entry.slug}: no unique unit in help string`);
+      process.exit(1);
+    }
+    entry.uniqueUnits = uniqueUnits;
+    // Icon cross-check (warn only): the unit name is the data we want; a missing icon is a
+    // separate asset-sync concern and must NOT drop the slug.
+    for (const u of uniqueUnits) {
+      if (!iconUnits[u]) iconMissing.push({ slug: entry.slug, unit: u });
     }
 
     // EN civilizations.json fields stay EN (validate-data expects EN strings). Assign sourced
@@ -376,9 +384,16 @@ async function run() {
 
   await writeFile(DATA_OUT, `${JSON.stringify(output, null, 2)}\n`, "utf8");
 
+  // Icon cross-check summary: one line per civ→slug whose unique unit has no icon yet, so the
+  // owner knows which unit assets to sync later. This never fails the build.
+  for (const { slug, unit } of iconMissing) {
+    console.log(`[ICON-MISSING] ${slug} → ${unit}`);
+  }
+
   console.log(`\nDone.`);
   console.log(`  Civs in JSON:          ${civEntries.length}`);
   console.log(`  Content files written: ${written}`);
+  console.log(`  Unique units missing icons: ${iconMissing.length}`);
 }
 
 // ---------------------------------------------------------------------------

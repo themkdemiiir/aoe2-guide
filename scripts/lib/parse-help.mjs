@@ -15,7 +15,7 @@ export function parseHelp(raw, lang) {
   if (!M) throw new Error(`parseHelp: unknown lang "${lang}"`);
 
   const lines = raw.split(/<br\s*\/?>/i).map((l) => l.replace(/<\/?[a-z]+>/gi, "").trim());
-  const out = { civType: "", civBonuses: [], teamBonus: "", uniqueTechs: [] };
+  const out = { civType: "", civBonuses: [], teamBonus: "", uniqueTechs: [], uniqueUnitNames: [] };
   let section = "bonuses";
 
   for (const l of lines) {
@@ -24,13 +24,21 @@ export function parseHelp(raw, lang) {
       out.civType = l.replace(M.civ, "").trim();
       continue;
     }
-    if (M.unit.test(l)) { section = "skip"; continue; }
+    if (M.unit.test(l)) { section = "unit"; continue; }
     if (M.tech.test(l)) { section = "techs"; continue; }
     if (M.team.test(l)) { section = "team"; continue; }
 
     const text = l.replace(/^•\s*/, "").trim();
     if (section === "bonuses" && l.startsWith("•")) {
       out.civBonuses.push(text);
+    } else if (section === "unit") {
+      // Unit names are comma-separated on the line(s) following the marker, each with a
+      // trailing parenthetical class — "Iron Pagoda (Cavalry), Grenadier (Gunpowder Unit)".
+      // Strip the class and collect each name.
+      for (const part of text.split(",")) {
+        const name = part.replace(/\s*\([^)]*\)\s*$/, "").trim();
+        if (name) out.uniqueUnitNames.push(name);
+      }
     } else if (section === "team") {
       out.teamBonus = out.teamBonus ? `${out.teamBonus} ${text}` : text;
     } else if (section === "techs" && l.startsWith("•")) {

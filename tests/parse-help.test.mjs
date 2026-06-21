@@ -36,6 +36,26 @@ describe("parseHelp", () => {
       { name: "Yeomen", effect: "Foot archers +1 range; Towers +2 attack" },
       { name: "Warwolf", effect: "Trebuchets deal blast damage and are more accurate" },
     ]);
+    expect(r.uniqueUnitNames).toEqual(["Longbowman"]);
+  });
+
+  it("captures two comma-separated unique unit names (Vikings-style EN help)", () => {
+    const en = [
+      "Infantry and Naval civilization", "",
+      "• Wheelbarrow, Hand Cart free", "",
+      "Unique Units:", "Berserk (Infantry), Longboat (Warship)", "",
+      "Unique Techs:",
+      "• Chieftains (Infantry +5 attack vs. Cavalry)",
+      "• Bogsveigar (Archer-line and Longboats +1 attack)", "",
+      "Team Bonus:", "Docks cost -15%",
+    ].join("<br>");
+    const r = parseHelp(en, "en");
+    expect(r.uniqueUnitNames).toEqual(["Berserk", "Longboat"]);
+  });
+
+  it("captures TR unique unit names, stripping the class parenthetical", () => {
+    const r = parseHelp(TR, "tr");
+    expect(r.uniqueUnitNames).toEqual(["Uzun Yay Okçusu"]);
   });
 
   it("parses Turkish help text with localized section markers", () => {

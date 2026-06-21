@@ -6,7 +6,8 @@
       "region": "Caucasian",
       "specialty": "Infantry and Naval",
       "uniqueUnits": [
-        "composite-bowman"
+        "composite-bowman",
+        "warrior-priest"
       ],
       "civBonuses": [
         "Mule Carts cost -25%",
@@ -112,7 +113,8 @@
       "region": "Eastern European",
       "specialty": "Gunpowder and Monk",
       "uniqueUnits": [
-        "hussite-wagon"
+        "hussite-wagon",
+        "houfnice"
       ],
       "civBonuses": [
         "Mining Camp technologies free",
@@ -190,7 +192,8 @@
       "region": "Western European",
       "specialty": "Cavalry",
       "uniqueUnits": [
-        "coustillier"
+        "coustillier",
+        "flemish-militia"
       ],
       "civBonuses": [
         "Economic upgrades available one age earlier and cost -33% food",
@@ -295,7 +298,8 @@
       "region": "East Asian",
       "specialty": "Archer and Gunpowder",
       "uniqueUnits": [
-        "chu-ko-nu"
+        "chu-ko-nu",
+        "dragon-ship"
       ],
       "civBonuses": [
         "Start with +3 Villagers, but -50 wood and -200 food",
@@ -347,7 +351,8 @@
       "region": "South Asian",
       "specialty": "Infantry and Naval",
       "uniqueUnits": [
-        "urumi-swordsman"
+        "urumi-swordsman",
+        "thirisadai"
       ],
       "civBonuses": [
         "Fishermen and Fishing Ships carry +15",
@@ -478,7 +483,9 @@
       "region": "South Asian",
       "specialty": "Cavalry and Camel",
       "uniqueUnits": [
-        "shrivamsha-rider"
+        "chakram-thrower",
+        "shrivamsha-rider",
+        "camel-scout"
       ],
       "civBonuses": [
         "Start with 2 Forage Bushes",
@@ -504,8 +511,8 @@
       "region": "South Asian",
       "specialty": "Camel and Gunpowder",
       "uniqueUnits": [
-        "elephant-archer",
-        "imperial-camel"
+        "ghulam",
+        "imperial-camel-rider"
       ],
       "civBonuses": [
         "Villagers cost -8/13/18/23% in Dark/Feudal/Castle/",
@@ -557,8 +564,7 @@
       "region": "South American",
       "specialty": "Infantry",
       "uniqueUnits": [
-        "kamayuk",
-        "slinger"
+        "kamayuk"
       ],
       "civBonuses": [
         "Houses and Settlements provide +5 population space",
@@ -637,7 +643,10 @@
       "slug": "jurchens",
       "region": "East Asian",
       "specialty": "Cavalry and Gunpowder",
-      "uniqueUnits": [],
+      "uniqueUnits": [
+        "iron-pagoda",
+        "grenadier"
+      ],
       "civBonuses": [
         "Meat of hunted and livestock animals doesn't decay",
         "Mounted Units and Fire Lancers attack +25% faster starting in Feudal Age",
@@ -743,7 +752,8 @@
       "region": "Eastern European",
       "specialty": "Cavalry and Monk",
       "uniqueUnits": [
-        "leitis"
+        "leitis",
+        "winged-hussar"
       ],
       "civBonuses": [
         "Each Town Center provides +100 food",
@@ -843,7 +853,10 @@
       "slug": "mapuche",
       "region": "South American",
       "specialty": "Cavalry and Counter-units",
-      "uniqueUnits": [],
+      "uniqueUnits": [
+        "kona",
+        "bolas-rider"
+      ],
       "civBonuses": [
         "Foragers drop off +20% food",
         "Settlements can train Spearman-line and Skirmishers",
@@ -918,7 +931,10 @@
       "slug": "muisca",
       "region": "South American",
       "specialty": "Archer and Monk",
-      "uniqueUnits": [],
+      "uniqueUnits": [
+        "guecha-warrior",
+        "temple-guard"
+      ],
       "civBonuses": [
         "Advancing to the next Age costs -50% gold",
         "Settlements cost -25% and heal nearby units",
@@ -944,7 +960,8 @@
       "region": "Middle Eastern",
       "specialty": "Cavalry",
       "uniqueUnits": [
-        "war-elephant"
+        "war-elephant",
+        "savar"
       ],
       "civBonuses": [
         "Start with +50 wood and +50 food",
@@ -970,7 +987,8 @@
       "region": "Eastern European",
       "specialty": "Cavalry",
       "uniqueUnits": [
-        "obuch"
+        "obuch",
+        "winged-hussar"
       ],
       "civBonuses": [
         "Folwark replaces Mill",
@@ -996,8 +1014,8 @@
       "region": "Southern European",
       "specialty": "Naval and Gunpowder",
       "uniqueUnits": [
-        "caravel",
-        "organ-gun"
+        "organ-gun",
+        "caravel"
       ],
       "civBonuses": [
         "Foragers generate wood in addition to food",
@@ -1023,6 +1041,7 @@
       "region": "Ancient Mediterranean",
       "specialty": "Infantry and Cavalry",
       "uniqueUnits": [
+        "centurion",
         "legionary"
       ],
       "civBonuses": [
@@ -1075,7 +1094,9 @@
       "region": "East Asian",
       "specialty": "Archer and Siege",
       "uniqueUnits": [
-        "tiger-cavalry"
+        "white-feather-guard",
+        "war-chariot",
+        "liu-bei"
       ],
       "civBonuses": [
         "Lumberjacks generate food in addition to wood",
@@ -1127,7 +1148,7 @@
       "region": "Eastern European",
       "specialty": "Infantry and Siege",
       "uniqueUnits": [
-        "boyars"
+        "boyar"
       ],
       "civBonuses": [
         "Farmers work +15% faster",
@@ -1181,7 +1202,8 @@
       "region": "Central Asian",
       "specialty": "Cavalry Archer",
       "uniqueUnits": [
-        "keshik"
+        "keshik",
+        "flaming-camel"
       ],
       "civBonuses": [
         "Livestock animals last +50% longer",
@@ -1233,7 +1255,10 @@
       "slug": "tupi",
       "region": "South American",
       "specialty": "Archer and Infantry",
-      "uniqueUnits": [],
+      "uniqueUnits": [
+        "blackwood-archer",
+        "ibirapema-warrior"
+      ],
       "civBonuses": [
         "Start with +25 of each resource",
         "Villagers can garrison in Settlements",
@@ -1284,7 +1309,8 @@
       "region": "Southeast Asian",
       "specialty": "Archer",
       "uniqueUnits": [
-        "rattan-archer"
+        "rattan-archer",
+        "imperial-skirmisher"
       ],
       "civBonuses": [
         "Enemy Town Centers are revealed at the start of the game",
@@ -1335,7 +1361,11 @@
       "slug": "wei",
       "region": "East Asian",
       "specialty": "Cavalry",
-      "uniqueUnits": [],
+      "uniqueUnits": [
+        "tiger-cavalry",
+        "xianbei-raider",
+        "cao-cao"
+      ],
       "civBonuses": [
         "Receive one free Villager for each economic upgrade researched",
         "Hei Guang Cavalry and Xianbei Raider +20/30% HP in Castle/Imperial Age",
@@ -1358,7 +1388,11 @@
       "slug": "wu",
       "region": "East Asian",
       "specialty": "Infantry and Naval",
-      "uniqueUnits": [],
+      "uniqueUnits": [
+        "fire-archer",
+        "jian-swordsman",
+        "sun-jian"
+      ],
       "civBonuses": [
         "Military production buildings and Docks provide +55 food",
         "Infantry regenerates 10/15/30 HP per minute in Feudal/Castle/Imperial Age",
