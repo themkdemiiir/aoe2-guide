@@ -4,7 +4,7 @@ name:
   tr: Heavy Demolition Ship
 role:
   en: naval suicide
-  tr: deniz intihar
+  tr: intihar deniz birimi
 line: demolition-line
 lineRank: 3
 description:

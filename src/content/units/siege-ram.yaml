@@ -4,7 +4,7 @@ name:
   tr: Siege Ram
 role:
   en: siege
-  tr: siege
+  tr: kuşatma
 line: ram-line
 lineRank: 3
 description:

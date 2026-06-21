@@ -4,7 +4,7 @@ name:
   tr: Bombard Cannon
 role:
   en: siege gunpowder
-  tr: barut kuşatma silahı
+  tr: barutlu kuşatma
 line: bombard-cannon-line
 lineRank: 1
 description:

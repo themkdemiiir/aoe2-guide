@@ -4,7 +4,7 @@ name:
   tr: Fast Fire Ship
 role:
   en: anti-ship naval
-  tr: gemi karşıtı deniz
+  tr: gemi avcısı deniz birimi
 line: fire-ship-line
 lineRank: 3
 description:

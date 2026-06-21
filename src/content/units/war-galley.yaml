@@ -4,7 +4,7 @@ name:
   tr: War Galley
 role:
   en: naval
-  tr: deniz
+  tr: deniz birimi
 line: galley-line
 lineRank: 2
 description:

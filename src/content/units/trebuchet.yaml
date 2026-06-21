@@ -4,7 +4,7 @@ name:
   tr: Trebuchet
 role:
   en: siege long-range
-  tr: kuşatma uzun menzilli
+  tr: uzun menzilli kuşatma
 line: trebuchet-line
 lineRank: 1
 description:

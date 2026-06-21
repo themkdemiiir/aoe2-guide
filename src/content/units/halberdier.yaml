@@ -4,7 +4,7 @@ name:
   tr: Halberdier
 role:
   en: anti-cavalry infantry
-  tr: süvari karşıtı piyade
+  tr: süvari avcısı piyade
 line: spearman-line
 lineRank: 3
 description:
