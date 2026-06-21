@@ -512,9 +512,8 @@
       "specialty": "Camel and Gunpowder",
       "uniqueUnits": [
         "elephant-archer",
-        "imperial-camel",
-        "ghulam",
-        "imperial-camel-rider"
+        "imperial-camel-rider",
+        "ghulam"
       ],
       "civBonuses": [
         "Villagers cost -8/13/18/23% in Dark/Feudal/Castle/",
@@ -1151,7 +1150,6 @@
       "region": "Eastern European",
       "specialty": "Infantry and Siege",
       "uniqueUnits": [
-        "boyars",
         "boyar"
       ],
       "civBonuses": [

@@ -1,10 +1,7 @@
-# Source: AoE Companion community guide "Win Water" — concrete villager counts but
-# NO in-game timestamps. Per-step clock times were removed (not in source); durationMin
-# is a conservative estimate, not a source-stated figure.
 slug: galley-rush
 name:
   en: Feudal Galley Rush
-  tr: Feudal Galley Rush
+  tr: Feudal Galley Baskını
 difficulty: intermediate
 targetAge: feudal
 durationMin: 10
@@ -76,16 +73,16 @@ steps:
       - food
   - villagers: 21
     assign:
-      en: "While advancing: 7 → 2nd Lumber Camp, 4 → gold (Mining Camp), 1 → 2nd Dock, 2 → stragglers, 1 → wood"
-      tr: "Çağ atlarken: 7 → 2. Lumber Camp, 4 → altın (Mining Camp), 1 → 2. Dock, 2 → ağaç artıkları, 1 → odun"
+      en: 'While advancing: 7 → 2nd Lumber Camp, 4 → gold (Mining Camp), 1 → 2nd Dock, 2 → stragglers, 1 → wood'
+      tr: 'Çağ atlarken: 7 → 2. Lumber Camp, 4 → altın (Mining Camp), 1 → 2. Dock, 2 → ağaç artıkları, 1 → odun'
     icons:
       - gold
       - dock
   - villagers: 25
     phase: feudal
     assign:
-      en: "Feudal: research Double-Bit Axe; queue Fire Galleys from both Docks; build a 3rd Dock"
-      tr: "Feodal: Double-Bit Axe araştır; iki Dock'tan Fire Galley üret; 3. Dock kur"
+      en: 'Feudal: research Double-Bit Axe; queue Fire Galleys from both Docks; build a 3rd Dock'
+      tr: 'Feodal: Double-Bit Axe araştır; iki Dock''tan Fire Galley üret; 3. Dock kur'
     icons:
       - fire-galley
       - dock
@@ -98,16 +95,15 @@ steps:
       - gold
 intro:
   en: >-
-    **Goal:** Reach Feudal Age at 21 villagers and pump Fire Galleys from multiple Docks to sink enemy Fishing
-    Ships and control the water. Four Dark-Age Fishing Ships fund the wood-and-gold economy that keeps ships
-    coming. **Recommended civs:** Vikings (+10% wood from Docks), Portuguese (ships die slower), Italians
-    (cheaper Docks + ships), Byzantines (Greek Fire in Castle Age), Malay (cheaper ships overall).
+    **Goal:** Reach Feudal Age at 21 villagers and pump Fire Galleys from multiple Docks to sink enemy Fishing Ships and
+    control the water. Four Dark-Age Fishing Ships fund the wood-and-gold economy that keeps ships coming. **Recommended
+    civs:** Vikings (+10% wood from Docks), Portuguese (ships die slower), Italians (cheaper Docks + ships), Byzantines
+    (Greek Fire in Castle Age), Malay (cheaper ships overall).
   tr: >-
-    **Hedef:** 21 köylüde Feodal Çağ'a ulaş ve birden çok Dock'tan Fire Galley üreterek düşmanın Fishing
-    Ship'lerini batır, suyu kontrol et. Karanlık Çağ'daki dört Fishing Ship, gemi üretimini sürdüren odun-altın
-    ekonomisini fonlar. **Önerilen uygarlıklar:** Vikings (Dock'lardan %10 fazla odun), Portuguese (gemiler daha
-    yavaş ölür), Italians (daha ucuz Dock + gemi), Byzantines (Kale Çağı'nda Greek Fire), Malay (gemiler genel
-    olarak daha ucuz).
+    **Hedef:** 21 köylüde Feodal Çağ'a ulaş ve birden çok Dock'tan Fire Galley üreterek düşmanın Fishing Ship'lerini
+    batır, suyu kontrol et. Karanlık Çağ'daki dört Fishing Ship, gemi üretimini sürdüren odun-altın ekonomisini fonlar.
+    **Önerilen uygarlıklar:** Vikings (Dock'lardan %10 fazla odun), Portuguese (gemiler daha yavaş ölür), Italians (daha
+    ucuz Dock + gemi), Byzantines (Kale Çağı'nda Greek Fire), Malay (gemiler genel olarak daha ucuz).
 strategy:
   en:
     - Build 2 Houses; 6 villagers on sheep under the TC
@@ -116,17 +112,15 @@ strategy:
     - 1 villager builds a Dock + 2 Houses; queue 4 Fishing Ships onto deep fish
     - 2 more to wood, then lure the 2nd boar; fill TC food to 20 pop
     - Research Loom and click Feudal Age at 21 villagers
-    - "While advancing: 7 to a 2nd Lumber Camp, 4 to gold, 1 builds a 2nd Dock, 2 to stragglers, 1 to wood"
+    - 'While advancing: 7 to a 2nd Lumber Camp, 4 to gold, 1 builds a 2nd Dock, 2 to stragglers, 1 to wood'
     - In Feudal, research Double-Bit Axe and pump Fire Galleys from both Docks
     - Build a 3rd Dock and keep ships coming
     - New TC villagers go to gold/berries/wood to sustain ship production
     - Use the ship group to kill enemy Fishing Ships and deny their Dock
     - >-
-      **Weak against:** Opponents who also double-Dock and match ship count; being out-fished while you over-commit
-      to military.
-    - >-
-      **Strong against:** Land civs forced onto water; opponents who skip a Dock; Fishing-Ship-dependent
-      economies.
+      **Weak against:** Opponents who also double-Dock and match ship count; being out-fished while you over-commit to
+      military.
+    - '**Strong against:** Land civs forced onto water; opponents who skip a Dock; Fishing-Ship-dependent economies.'
   tr:
     - 2 House kur; TC altında 6 köylü koyunlarda
     - 4 köylü Lumber Camp ile oduna
@@ -134,7 +128,7 @@ strategy:
     - 1 köylü Dock + 2 House kurar; derin balığa 4 Fishing Ship sıraya al
     - 2 köylü daha oduna, sonra 2. yaban domuzunu çek; TC yiyeceğini 20 pop'a doldur
     - Loom araştır ve 21 köylüde Feodal Çağ'a tıkla
-    - "Çağ atlarken: 7 köylü 2. Lumber Camp'e, 4 altına, 1 köylü 2. Dock kurar, 2 ağaç artıklarına, 1 oduna"
+    - 'Çağ atlarken: 7 köylü 2. Lumber Camp''e, 4 altına, 1 köylü 2. Dock kurar, 2 ağaç artıklarına, 1 oduna'
     - Feodal'de Double-Bit Axe araştır ve iki Dock'tan Fire Galley üret
     - 3. Dock kur ve gemileri durmadan üret
     - Yeni TC köylüleri gemi üretimini sürdürmek için altın/çilek/oduna gider
@@ -142,7 +136,7 @@ strategy:
     - >-
       **Zayıf yönü:** Rakip de çift Dock açar ve gemi sayısını tutturur; askeriyeye fazla yüklenince balıkta geride
       kalmak.
-    - "**Güçlü yönü:** Suya zorla sürülen kara uygarlıkları; Dock kurmayan rakipler; Fishing Ship'e bağımlı ekonomiler."
+    - '**Güçlü yönü:** Suya zorla sürülen kara uygarlıkları; Dock kurmayan rakipler; Fishing Ship''e bağımlı ekonomiler.'
 source:
   author: AoE Companion — Win Water (community build guide)
   url: https://aoecompanion.com/build-guides/win-water

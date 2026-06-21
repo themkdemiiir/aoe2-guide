@@ -336,8 +336,14 @@ async function run() {
     // names from either source collapse cleanly. No defaults: if the union is EMPTY, fail loud
     // rather than emit [] (which would silently hide a real unit) — and never fall back to the
     // removed hand-coded prior-file / icon-map-filtered carryover.
-    const helpUnits = (en.uniqueUnitNames ?? []).map(slugify).filter(Boolean);
-    const aalisesUnits = (aalises?.uniqueUnits ?? []).filter(Boolean);
+    // Source names whose slug differs from the canonical icon-map / content slug.
+    const UNIT_SLUG_ALIASES = {
+      boyars: "boyar", // aalises "Boyars" (Slavs)
+      "imperial-camel": "imperial-camel-rider", // aalises "Imperial Camel" (Hindustanis)
+    };
+    const canon = (u) => UNIT_SLUG_ALIASES[u] ?? u;
+    const helpUnits = (en.uniqueUnitNames ?? []).map(slugify).map(canon).filter(Boolean);
+    const aalisesUnits = (aalises?.uniqueUnits ?? []).map(canon).filter(Boolean);
     const uniqueUnits = [];
     const seen = new Set();
     for (const u of [...aalisesUnits, ...helpUnits]) {
