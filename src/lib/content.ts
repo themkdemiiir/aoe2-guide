@@ -38,14 +38,7 @@ export async function getLocalizedEntries<T extends ContentType>(
     result = fallbackEntries.map((entry) => localizedBySlug.get(canonicalSlug(entry.id)) ?? entry);
   }
 
-  // Alphabetize the name-keyed list collections (locale-aware so Turkish sorts
-  // correctly). Order-sensitive types (beginner chapters, articles) keep glob order.
-  if (type === "maps") {
-    const collator = new Intl.Collator(locale);
-    const nameOf = (e: CollectionEntry<T>) => String((e.data as { name?: string }).name ?? "");
-    result = [...result].sort((a, b) => collator.compare(nameOf(a), nameOf(b)));
-  }
-
+  // beginner chapters and articles keep their glob (numeric/order-field) sequence.
   return result;
 }
 

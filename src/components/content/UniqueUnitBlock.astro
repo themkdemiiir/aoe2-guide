@@ -1,9 +1,8 @@
 ---
 // UniqueUnitBlock — renders a civ's unique units inline, pulling stats from the
-// `unit-stats` content collection. If a unit MD file exists in `units/<lang>/`
-// for the slug, the unit name links to its dedicated page; otherwise it
-// renders as plain text. This eliminates broken links to the 39 unique-unit
-// pages that don't have MD files.
+// `unit-stats` content collection. If the slug exists in the `units` collection
+// its name links to its dedicated page; otherwise it renders as plain text
+// (humanized slug). This avoids broken links for units without a content entry.
 
 import { getCollection } from "astro:content";
 import Alert from "@/components/ui/Alert.astro";
@@ -13,7 +12,6 @@ import Icon from "@/components/ui/Icon.astro";
 import Stat from "@/components/ui/Stat.astro";
 import type { Locale } from "@/i18n/locales";
 import { localizedPath } from "@/i18n/utils";
-import { canonicalSlug, localeFromEntryId } from "@/lib/content";
 
 interface Props {
   slugs: string[];
@@ -22,22 +20,12 @@ interface Props {
 
 const { slugs, locale } = Astro.props;
 
-// Build a lookup of unit MD files (per locale, fallback to en) — lets us know
-// which unique units have a dedicated page to link to.
+// Units are single bilingual YAML entries (id === slug, name is { en, tr }).
+// A unit present in the collection has a dedicated page to link to.
 const allUnits = await getCollection("units");
 const allStats = await getCollection("unit-stats");
-const unitBySlug = new Map<string, { name: string; hasPageInLocale: boolean }>();
+const unitBySlug = new Map(allUnits.map((u) => [u.id, u.data]));
 const statsBySlug = new Map(allStats.map((entry) => [entry.id, entry.data]));
-for (const u of allUnits) {
-  const slug = canonicalSlug(u.id);
-  const entryLocale = localeFromEntryId(u.id);
-  const prev = unitBySlug.get(slug);
-  if (entryLocale === locale) {
-    unitBySlug.set(slug, { name: u.data.name, hasPageInLocale: true });
-  } else if (!prev) {
-    unitBySlug.set(slug, { name: u.data.name, hasPageInLocale: false });
-  }
-}
 
 function humanize(slug: string): string {
   return slug
@@ -46,20 +34,17 @@ function humanize(slug: string): string {
     .join(" ");
 }
 
-const blocks = await Promise.all(
-  slugs.map(async (slug) => {
-    const stats = statsBySlug.get(slug) ?? null;
-    const unitFile = unitBySlug.get(slug);
-    const name = unitFile?.name ?? humanize(slug);
-    const hasFile = !!allUnits.find((u) => canonicalSlug(u.id) === slug);
-    return {
-      slug,
-      name,
-      href: hasFile ? localizedPath(`/units/${slug}`, locale) : null,
-      stats,
-    };
-  }),
-);
+const blocks = slugs.map((slug) => {
+  const stats = statsBySlug.get(slug) ?? null;
+  const unit = unitBySlug.get(slug);
+  const name = unit ? (unit.name[locale] ?? unit.name.en) : humanize(slug);
+  return {
+    slug,
+    name,
+    href: unit ? localizedPath(`/units/${slug}`, locale) : null,
+    stats,
+  };
+});
 ---
 <div class="grid gap-3 sm:grid-cols-2">
   {blocks.map(({ slug, name, href, stats }) => (

@@ -17,6 +17,7 @@ export const ui = {
     "ui.theme.dark": "Dark",
     "ui.theme.auto": "Auto",
     "ui.translation.missing": "This page is not translated yet — showing English.",
+    "ui.current": "current",
     "footer.attribution":
       'Age of Empires II © Microsoft Corporation. This site was created under Microsoft\'s "Game Content Usage Rules" using assets from Age of Empires II, and it is not endorsed by or affiliated with Microsoft.',
     "matchups.title": "Civilization Comparator",
@@ -168,6 +169,7 @@ export const ui = {
     "ui.theme.dark": "Koyu",
     "ui.theme.auto": "Otomatik",
     "ui.translation.missing": "Bu sayfa henüz çevrilmedi — İngilizce gösteriliyor.",
+    "ui.current": "mevcut",
     "footer.attribution":
       'Age of Empires II © Microsoft Corporation. Bu site, Microsoft\'un "Game Content Usage Rules" kuralları çerçevesinde Age of Empires II varlıkları kullanılarak oluşturulmuştur; Microsoft tarafından onaylanmamıştır veya bağlantılı değildir.',
     "matchups.title": "Uygarlık Karşılaştırma",

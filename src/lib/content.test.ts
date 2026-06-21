@@ -8,8 +8,10 @@ import {
   localeFromEntryId,
 } from "./content";
 
-function entry(id: string, name: string): CollectionEntry<"maps"> {
-  return { id, data: { name } } as CollectionEntry<"maps">;
+function entry(id: string, name: string): CollectionEntry<"beginner"> {
+  // Minimal mock for the locale-overlay logic, which only reads `id`; cast through
+  // unknown since the real "beginner" data shape (slug/title/order) is irrelevant here.
+  return { id, data: { name } } as unknown as CollectionEntry<"beginner">;
 }
 
 afterEach(() => {
@@ -51,24 +53,24 @@ describe("canonicalSlug", () => {
 
 describe("getLocalizedEntries", () => {
   it("uses default locale entries for the default locale", async () => {
-    setMockCollection("maps", [
+    setMockCollection("beginner", [
       entry("en/britons", "Britons"),
       entry("tr/britons", "Britonlar"),
     ]);
 
-    await expect(getLocalizedEntries("maps", "en")).resolves.toMatchObject([
+    await expect(getLocalizedEntries("beginner", "en")).resolves.toMatchObject([
       { id: "en/britons" },
     ]);
   });
 
   it("overlays translated entries onto the default locale list", async () => {
-    setMockCollection("maps", [
+    setMockCollection("beginner", [
       entry("en/britons", "Britons"),
       entry("en/franks", "Franks"),
       entry("tr/britons", "Britonlar"),
     ]);
 
-    await expect(getLocalizedEntries("maps", "tr")).resolves.toMatchObject([
+    await expect(getLocalizedEntries("beginner", "tr")).resolves.toMatchObject([
       { id: "tr/britons", data: { name: "Britonlar" } },
       { id: "en/franks", data: { name: "Franks" } },
     ]);
@@ -77,17 +79,17 @@ describe("getLocalizedEntries", () => {
 
 describe("getLocalizedEntry", () => {
   it("returns exact localized entries before falling back to default locale", async () => {
-    setMockCollection("maps", [
+    setMockCollection("beginner", [
       entry("en/britons", "Britons"),
       entry("en/franks", "Franks"),
       entry("tr/britons", "Britonlar"),
     ]);
 
-    await expect(getLocalizedEntry("maps", "britons", "tr")).resolves.toMatchObject({
+    await expect(getLocalizedEntry("beginner", "britons", "tr")).resolves.toMatchObject({
       entry: { id: "tr/britons" },
       fallback: false,
     });
-    await expect(getLocalizedEntry("maps", "franks", "tr")).resolves.toMatchObject({
+    await expect(getLocalizedEntry("beginner", "franks", "tr")).resolves.toMatchObject({
       entry: { id: "en/franks" },
       fallback: true,
     });
