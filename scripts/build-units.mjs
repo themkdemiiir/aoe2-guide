@@ -17,18 +17,6 @@ import path from "node:path";
 
 const CACHE_DIR = path.resolve(".cache/aoe2-data");
 const DATA_OUT = path.resolve("src/data/unit-stats.json");
-const ICON_MAP = path.resolve("src/data/icon-map.json");
-
-// ---------------------------------------------------------------------------
-// Slugify
-// ---------------------------------------------------------------------------
-function _slugify(str) {
-  return str
-    .toLowerCase()
-    .replace(/['']/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
 
 // ---------------------------------------------------------------------------
 // CSV parser
@@ -237,12 +225,7 @@ const CANONICAL_UNITS = {
 // Main
 // ---------------------------------------------------------------------------
 async function run() {
-  const [iconMapText, unitsCsvText] = await Promise.all([
-    readFile(ICON_MAP, "utf8"),
-    readFile(path.join(CACHE_DIR, "units.csv"), "utf8"),
-  ]);
-
-  const _iconMap = JSON.parse(iconMapText);
+  const unitsCsvText = await readFile(path.join(CACHE_DIR, "units.csv"), "utf8");
   const csvRows = parseCsv(unitsCsvText);
 
   // Build a map: canonical slug -> csv row (use first occurrence for duplicates)
