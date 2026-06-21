@@ -1,20 +1,22 @@
 #!/usr/bin/env node
-// scripts/build-units.mjs
+// scripts/build-units.mjs  — DATA ONLY
 // Reads .cache/aoe2-data/units.csv and data.json.
 // Writes:
-//   src/data/unit-stats.json            (all units)
-//   src/content/units/en/<slug>.md      (one per unit, skips existing)
+//   src/data/unit-stats.json            (all units — numeric stats only)
+//
+// Unit content (descriptions, roles, names) lives in bilingual YAML files at
+// src/content/units/<slug>.yaml — those are the source of truth and are NOT
+// generated or modified by this script.
 //
 // Sources:
 //   aalises/age-of-empires-II-api  BSD-3-Clause  (units.csv, 104 units)
 //   SiegeEngineers/aoe2techtree    MIT            (data.json, unit stats)
 
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const CACHE_DIR = path.resolve(".cache/aoe2-data");
 const DATA_OUT = path.resolve("src/data/unit-stats.json");
-const CONTENT_EN = path.resolve("src/content/units/en");
 const ICON_MAP = path.resolve("src/data/icon-map.json");
 
 // ---------------------------------------------------------------------------
@@ -231,117 +233,6 @@ const CANONICAL_UNITS = {
   "Elite Turtle Ship": "elite-turtle-ship",
 };
 
-// Units that are civ-specific (unique units)
-// Maps unit slug -> civ slug
-const UNIQUE_UNIT_CIV = {
-  longbowman: "britons",
-  "elite-longbowman": "britons",
-  cataphract: "byzantines",
-  "elite-cataphract": "byzantines",
-  "woad-raider": "celts",
-  "elite-woad-raider": "celts",
-  "chu-ko-nu": "chinese",
-  "elite-chu-ko-nu": "chinese",
-  "throwing-axeman": "franks",
-  "elite-throwing-axeman": "franks",
-  huskarl: "goths",
-  "elite-huskarl": "goths",
-  tarkan: "huns",
-  "elite-tarkan": "huns",
-  samurai: "japanese",
-  "elite-samurai": "japanese",
-  "war-wagon": "koreans",
-  "elite-war-wagon": "koreans",
-  "turtle-ship": "koreans",
-  "elite-turtle-ship": "koreans",
-  "plumed-archer": "mayans",
-  "elite-plumed-archer": "mayans",
-  mangudai: "mongols",
-  "elite-mangudai": "mongols",
-  "war-elephant": "persians",
-  "elite-war-elephant": "persians",
-  mameluke: "saracens",
-  "elite-mameluke": "saracens",
-  conquistador: "spanish",
-  "elite-conquistador": "spanish",
-  "teutonic-knight": "teutons",
-  "elite-teutonic-knight": "teutons",
-  janissary: "turks",
-  "elite-janissary": "turks",
-  berserk: "vikings",
-  "elite-berserk": "vikings",
-  longboat: "vikings",
-  "elite-longboat": "vikings",
-  "jaguar-warrior": "aztecs",
-  "elite-jaguar-warrior": "aztecs",
-  "eagle-warrior": "aztecs", // shared by aztecs/mayans/incas
-  "elite-eagle-warrior": "aztecs",
-  "karambit-warrior": "malay",
-  "elite-karambit-warrior": "malay",
-};
-
-// Role classification
-const UNIT_ROLES = {
-  militia: "melee infantry",
-  "man-at-arms": "melee infantry",
-  "long-swordsman": "melee infantry",
-  "two-handed-swordsman": "melee infantry",
-  champion: "melee infantry",
-  spearman: "anti-cavalry infantry",
-  pikeman: "anti-cavalry infantry",
-  halberdier: "anti-cavalry infantry",
-  "eagle-warrior": "light infantry",
-  "elite-eagle-warrior": "light infantry",
-  archer: "ranged infantry",
-  crossbowman: "ranged infantry",
-  arbalester: "ranged infantry",
-  skirmisher: "anti-archer ranged",
-  "elite-skirmisher": "anti-archer ranged",
-  "cavalry-archer": "mounted archer",
-  "heavy-cavalry-archer": "mounted archer",
-  "hand-cannoneer": "gunpowder ranged",
-  "scout-cavalry": "light cavalry",
-  "light-cavalry": "light cavalry",
-  hussar: "light cavalry",
-  knight: "heavy cavalry",
-  cavalier: "heavy cavalry",
-  paladin: "heavy cavalry",
-  "camel-rider": "anti-cavalry cavalry",
-  "heavy-camel-rider": "anti-cavalry cavalry",
-  monk: "support / conversion",
-  "battering-ram": "siege",
-  "capped-ram": "siege",
-  "siege-ram": "siege",
-  mangonel: "siege",
-  onager: "siege",
-  "siege-onager": "siege",
-  scorpion: "siege",
-  "heavy-scorpion": "siege",
-  "bombard-cannon": "siege gunpowder",
-  trebuchet: "siege long-range",
-  galley: "naval",
-  "war-galley": "naval",
-  galleon: "naval",
-  "fire-ship": "anti-ship naval",
-  "fast-fire-ship": "anti-ship naval",
-  "demolition-ship": "naval suicide",
-  "heavy-demolition-ship": "naval suicide",
-  "cannon-galleon": "naval siege",
-  "elite-cannon-galleon": "naval siege",
-  "fishing-ship": "economic naval",
-  "transport-ship": "utility naval",
-};
-
-function getRole(slug) {
-  return UNIT_ROLES[slug] || "unique unit";
-}
-
-// Building where unit is trained
-function getBuilding(csvRow) {
-  const created = (csvRow.created_in || "").trim();
-  return created || "Castle";
-}
-
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -387,20 +278,14 @@ async function run() {
     existingUnitMap[u.slug] = u;
   }
 
-  await mkdir(CONTENT_EN, { recursive: true });
-
   const unitEntries = [];
-  let written = 0;
-  let skipped = 0;
   let warnings = 0;
 
   // Process canonical units in defined order
   for (const [displayName, slug] of Object.entries(CANONICAL_UNITS)) {
-    // Preserve existing hand-written longbowman
+    // Preserve existing stats for longbowman from previous run
     if (slug === "longbowman" && existingUnitMap.longbowman) {
       unitEntries.push(existingUnitMap.longbowman);
-      // Content file will be skipped
-      skipped++;
       continue;
     }
 
@@ -415,7 +300,11 @@ async function run() {
       const attack = parseInt(csvRow.attack, 10) || 0;
       const trainTime = parseInt(csvRow.build_time, 10) || 0;
 
+      // Spread any extra hand-authored fields (e.g. line, lineRank) from the
+      // existing JSON before overwriting with fresh CSV stats.
+      const existing = existingUnitMap[slug] || {};
       entry = {
+        ...existing,
         slug,
         hp,
         attack,
@@ -444,27 +333,6 @@ async function run() {
     }
 
     unitEntries.push(entry);
-
-    // Write content file (skip if exists)
-    const mdPath = path.join(CONTENT_EN, `${slug}.md`);
-    let exists = false;
-    try {
-      await access(mdPath);
-      exists = true;
-    } catch (_) {}
-
-    if (exists) {
-      console.log(`  [SKIP] ${mdPath}`);
-      skipped++;
-    } else {
-      const civSlug = UNIQUE_UNIT_CIV[slug] || null;
-      const role = getRole(slug);
-      const building = csvRow ? getBuilding(csvRow) : "Castle";
-      const md = buildMarkdown(slug, displayName, entry, role, civSlug, building);
-      await writeFile(mdPath, md, "utf8");
-      console.log(`  [WRITE] ${mdPath}`);
-      written++;
-    }
   }
 
   // Write unit-stats.json
@@ -475,53 +343,11 @@ async function run() {
   await writeFile(DATA_OUT, `${JSON.stringify(output, null, 2)}\n`, "utf8");
 
   console.log(`\nDone.`);
-  console.log(`  Units in JSON:          ${unitEntries.length}`);
-  console.log(`  Content files written:  ${written}`);
-  console.log(`  Content files skipped:  ${skipped}`);
+  console.log(`  Units in JSON: ${unitEntries.length}`);
+  console.log(`  Written:       ${DATA_OUT}`);
   if (warnings > 0) {
     console.log(`  Warnings (no CSV data): ${warnings}`);
   }
-}
-
-// ---------------------------------------------------------------------------
-// Markdown template
-// ---------------------------------------------------------------------------
-function buildMarkdown(slug, displayName, stats, role, civSlug, building) {
-  const costParts = [];
-  if (stats.cost.food) costParts.push(`${stats.cost.food} Food`);
-  if (stats.cost.wood) costParts.push(`${stats.cost.wood} Wood`);
-  if (stats.cost.gold) costParts.push(`${stats.cost.gold} Gold`);
-  if (stats.cost.stone) costParts.push(`${stats.cost.stone} Stone`);
-  const costStr = costParts.length ? costParts.join(", ") : "Free";
-
-  const rangeStr =
-    stats.range > 0
-      ? stats.minRange > 0
-        ? `${stats.minRange}–${stats.range}`
-        : `${stats.range}`
-      : "Melee";
-
-  const civLine = civSlug ? `civ: ${civSlug}` : "";
-
-  return `---
-slug: ${slug}
-name: "${displayName}"
-role: "${role}"
-${civLine}
----
-
-The ${displayName} is a ${role} trained at the ${building}.
-
-## Stats summary
-
-| HP | Attack | Range | Train time | Cost |
-|----|--------|-------|------------|------|
-| ${stats.hp} | ${stats.attack} | ${rangeStr} | ${stats.trainTime}s | ${costStr} |
-
-## Notes
-
-Standard unit. See the stats table above.
-`.trimStart();
 }
 
 run().catch((e) => {
