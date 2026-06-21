@@ -3,8 +3,8 @@ name:
   en: Bulgarians
   tr: Bulgarians
 tagline:
-  en: Bulgarians — a Cavalry and Siege civilization from Eastern Europe.
-  tr: Bulgarians — Doğu Avrupa'dan bir Süvari ve Kuşatma uygarlığı.
+  en: Bulgarians — an Infantry and Cavalry civilization from Eastern Europe.
+  tr: Bulgarians, Doğu Avrupa'dan bir Piyade ve Süvari uygarlığıdır.
 bonuses:
   en:
     - Militia-line upgrades free
@@ -12,13 +12,13 @@ bonuses:
     - Town Centers cost -50% stone
     - Can build Krepost in Castle Age
   tr:
-    - Militia hattı yükseltmeleri ücretsizdir
-    - Blacksmith ve Siege Workshop teknolojileri %50 daha az Yiyecek maliyetiyle araştırılır
-    - Town Center'lar %50 daha az Taş maliyetiyle inşa edilir
-    - Kale Çağı'nda Krepost inşa edebilir
+    - Milis türlerinin yükseltmeleri ücretsizdir
+    - Demirci ve Kuşatma Atölyesi teknolojileri %50 daha az yiyecek gerektirir
+    - Şehir Merkezleri %50 daha az taş gerektirir
+    - Kale Çağı'nda Krepost inşa edilebilir
 teamBonus:
   en: Blacksmiths work +80% faster
-  tr: Blacksmith'ler %80 daha hızlı çalışır
+  tr: Demirciler %80 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Stirrups
     effect:
       en: Cavalry attacks +33% faster
-      tr: Süvari birimleri %33 daha hızlı saldırır
+      tr: Süvariler %33 daha hızlı saldırır
   imperial:
     name:
       en: Bagains
       tr: Bagains
     effect:
       en: Militia-line +5 melee armor
-      tr: Militia hattı +5 yakın dövüş zırhı kazanır
+      tr: Milis türleri +5 yakın dövüş zırhı kazanır
 strategy:
   en: >-
     Bulgarians are a Cavalry and Siege civilization from Eastern Europe.

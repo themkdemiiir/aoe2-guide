@@ -4,19 +4,19 @@ name:
   tr: Vikings
 tagline:
   en: Vikings — an Infantry and Naval civilization from Northern Europe.
-  tr: Vikings — Kuzey Avrupa'dan bir Piyade ve Denizcilik uygarlığı.
+  tr: Vikings, Kuzey Avrupa'dan bir Piyade ve Deniz uygarlığıdır.
 bonuses:
   en:
     - Wheelbarrow, Hand Cart free
     - Infantry +20% HP starting in Feudal Age
     - Warships cost -10/15/20% in Feudal/Castle/Imperial Age
   tr:
-    - Wheelbarrow, Hand Cart ücretsiz
-    - Feodal Çağ'dan itibaren Piyade +%20 can
-    - Savaş gemileri Feodal/Kale/İmparatorluk Çağı'nda %-10/15/20 maliyet
+    - El Arabası ücretsizdir
+    - Feodal Çağ'dan itibaren Piyadelerin DP'si %20 artar
+    - Savaş Gemilerinin bedeli Feodal Çağ'da %10, Kale Çağı'nda %15, İmparatorluk Çağı'nda %20 azalır
 teamBonus:
   en: Docks cost -15%
-  tr: Dock'lar %-15 maliyet
+  tr: Rıhtımların bedeli %15 azalır
 uniqueTechs:
   castle:
     name:
@@ -27,15 +27,15 @@ uniqueTechs:
         Infantry +5 attack vs. Cavalry, +4 vs. Camel Units; generate +5 gold when defeating Villagers, Trade Units and
         Monks
       tr: >-
-        Infantry +5 attack vs. Cavalry, +4 vs. Camel Units; generate +5 gold when defeating Villagers, Trade Units and
-        Monks
+        Piyadeler Süvarilere karşı +5, Deve Birimlerine karşı +4 saldırı kazanır; Köylüleri, Ticaret Birimlerini ve
+        Keşişleri yendiğinde +5 altın elde eder
   imperial:
     name:
       en: Bogsveigar
       tr: Bogsveigar
     effect:
       en: Archer-line and Longboats +1 attack
-      tr: Archer-line and Longboats +1 attack
+      tr: Okçu türleri ve Uzun Gemiler +1 saldırı kazanır
 strategy:
   en: >-
     Vikings are an Infantry and Naval civilization from Northern Europe.

@@ -3,8 +3,8 @@ name:
   en: Koreans
   tr: Koreans
 tagline:
-  en: Koreans — a Tower and Naval civilization from East Asia.
-  tr: Koreans — Doğu Asya'dan bir Kule ve Denizcilik uygarlığı.
+  en: Koreans — a Defensive and Naval civilization from East Asia.
+  tr: Koreans, Doğu Asya'dan bir Savunma ve Donanma uygarlığıdır.
 bonuses:
   en:
     - Stone miners work +20% faster
@@ -13,12 +13,12 @@ bonuses:
     - Warships cost -20% wood
   tr:
     - Taş madencileri %20 daha hızlı çalışır
-    - Menzilli Askerler ve Piyade %50 daha az Odun'a mal olur
-    - Archer zırhı ve kule yükseltmeleri ücretsiz (Bombard Tower, Chemistry gerektirir)
-    - Savaş gemileri %20 daha az Odun'a mal olur
+    - Menzilli Askerler ve Piyadeler %50 daha az odun gerektirir
+    - Okçu zırhı ve kule yükseltmeleri ücretsizdir (Bombardıman Kulesi, Kimya gerektirir)
+    - Savaş Gemileri %20 daha az odun gerektirir
 teamBonus:
   en: Villagers +3 line of sight
-  tr: Köylüler +3 görüş alanı
+  tr: Köylüler +3 görüş hattı kazanır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Eupseong
     effect:
       en: Watch Tower-line +2 range
-      tr: Watch Tower-line +2 range
+      tr: Gözcü Kulesi türleri +2 menzil kazanır
   imperial:
     name:
       en: Shinkichon
       tr: Shinkichon
     effect:
       en: Rocket Carts and Turtle Ships +1 range, fire additional projectiles
-      tr: Rocket Carts and Turtle Ships +1 range, fire additional projectiles
+      tr: Roket Arabaları ve Kaplumbağa Gemileri +1 menzil kazanır ve ek mermi ateşler
 strategy:
   en: >-
     Koreans are a Tower and Naval civilization from East Asia.

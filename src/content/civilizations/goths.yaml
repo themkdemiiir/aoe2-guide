@@ -4,7 +4,7 @@ name:
   tr: Goths
 tagline:
   en: Goths — an Infantry civilization from Northern Europe.
-  tr: Goths — Kuzey Avrupa kökenli bir Piyade uygarlığı.
+  tr: Goths, Kuzey Avrupa'dan bir Piyade uygarlığıdır.
 bonuses:
   en:
     - Loom is researched instantly
@@ -13,14 +13,14 @@ bonuses:
     - Infantry +1/+2/+3 attack vs. buildings in Feudal/
     - +10 population space in Imperial Age
   tr:
-    - Loom anında araştırılır
-    - Avcılar +15 taşır; avlanan hayvanlar %20 daha uzun sürer
-    - Piyade maliyeti Karanlık/Feodal/Kale'de -%15/20/25/30
-    - Feodal Çağ'da piyade binalara karşı +1/+2/+3 saldırı kazanır
-    - İmparatorluk Çağı'nda +10 nüfus alanı
+    - Dokuma Tezgâhı anında araştırılır
+    - Avcılar +15 daha fazla et taşır; avlanan hayvanlar %20 daha uzun dayanır
+    - Piyadeler Karanlık Çağ'da %15, Feodal Çağ'da %20, Kale Çağı'nda %25,
+    - Piyadeler binalara karşı Feodal Çağ'da 1,
+    - Nüfus alanı İmparatorluk Çağı'nda +10 artar
 teamBonus:
   en: Barracks work +20% faster
-  tr: Barracks %20 daha hızlı çalışır
+  tr: Kışlalar %20 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Anarchy
     effect:
       en: Huskarls can be trained at Barracks
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Huskarllar Kışladan üretilebilir
   imperial:
     name:
       en: Perfusion
       tr: Perfusion
     effect:
       en: Barracks work +100% faster
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Kışlalar %100 daha hızlı çalışır
 strategy:
   en: >-
     Goths are an Infantry civilization from Northern Europe.

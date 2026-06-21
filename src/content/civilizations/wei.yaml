@@ -4,19 +4,19 @@ name:
   tr: Wei
 tagline:
   en: Wei — a Cavalry civilization from East Asia.
-  tr: Wei — Doğu Asya'dan gelen bir Süvari uygarlığı.
+  tr: Wei, Doğu Asya'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
     - Receive one free Villager for each economic upgrade researched
     - Hei Guang Cavalry and Xianbei Raider +20/30% HP in Castle/Imperial Age
     - Traction Trebuchets and Lou Chuans cost -25%
   tr:
-    - Araştırılan her ekonomik yükseltme için bir ücretsiz köylü kazanırsın
-    - Hei Guang Cavalry ve Xianbei Raider, Kale/İmparatorluk Çağı'nda +%20/30 can kazanır
-    - Traction Trebuchet'ler ve Lou Chuanlar -%25 maliyete gelir
+    - Araştırılan her ekonomi geliştirmesi için ücretsiz bir Köylü verir
+    - Hei Guang Süvarisi ve Siyenpi Akıncıları, Kale Çağı'nda %20 ve İmparatorluk Çağı'nda %30 DP kazanır
+    - Mancınıklar ve Lou Chuanlar %25 daha ucuzdur
 teamBonus:
   en: Cavalry +2 attack vs. Siege Weapons
-  tr: Süvari, Siege Weapon'lara karşı +2 saldırı kazanır
+  tr: Süvariler, Kuşatma Silahlarına karşı +2 saldırı kazanır
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Tuntian
     effect:
       en: Soldiers passively produce food
-      tr: Soldiers passively produce food
+      tr: Askerler pasif olarak yiyecek üretir
   imperial:
     name:
       en: Ming Guang Armor
       tr: Ming Guang Armor
     effect:
       en: Mounted Units +4 melee armor
-      tr: Mounted Units +4 melee armor
+      tr: Binekli Okçular +4 yakın dövüş zırhı kazanır
 strategy:
   en: >-
     Wei are a Cavalry civilization from East Asia.

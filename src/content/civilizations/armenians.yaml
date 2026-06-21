@@ -3,8 +3,8 @@ name:
   en: Armenians
   tr: Armenians
 tagline:
-  en: Armenians — an Infantry and Cavalry civilization from the Caucasus.
-  tr: Armenians — Kafkasya'dan gelen bir Piyade ve Süvari uygarlığı.
+  en: Armenians — an Infantry and Naval civilization from the Caucasus.
+  tr: Armenians, Kafkasya'dan bir Piyade ve Donanma uygarlığıdır.
 bonuses:
   en:
     - Mule Carts cost -25%
@@ -13,14 +13,14 @@ bonuses:
     - First Fortified Church receives a free Relic
     - Galley-line and Dromons fire an additional projectile
   tr:
-    - Mule Cart'lar %25 daha az maliyete gelir
-    - Mule Cart teknolojileri %40 daha etkilidir
-    - Spearman ve Militia hattı yükseltmeleri (Man-at-Arms hariç) bir çağ öncesinden erişilebilir
-    - İlk Fortified Church ücretsiz bir Relic alır
-    - Galley hattı ve Dromon'lar bir ek mermi atar
+    - Katır Arabalarının maliyeti %25 azalır
+    - Katır Arabası teknolojileri %40 daha etkilidir
+    - Mızraklı Asker ve Milis türü yükseltmeleri (Silahşor hariç) bir çağ önceden açılır
+    - İlk Güçlendirilmiş Kilise, ücretsiz bir Kadim Eser alır
+    - Kadırga türleri ve Dromonlar ek bir mermi daha fırlatır
 teamBonus:
   en: Infantry +2 line of sight
-  tr: Piyade +2 görüş alanı
+  tr: Piyadelerin görüş hattı +2 artar
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Cilician Fleet
     effect:
       en: Demolition Ships +20% blast radius; Galley-line and Dromons +1 range
-      tr: Galley'ler +2 menzil kazanır
+      tr: İmha Gemilerinin patlama yarıçapı %20 artar; Kadırga türlerinin ve Dromonların menzili 1 artar
   imperial:
     name:
       en: Fereters (Infantry (except Spearman-line) +30 HP; Warrior Priests heal +100% faster)
       tr: Fereters (Infantry (except Spearman-line) +30 HP; Warrior Priests heal +100% faster)
     effect:
       en: ''
-      tr: ''
+      tr: Mızraklı Asker türleri hariç Piyadeler +30 DP kazanır; Savaşçı Rahipler ise %100 daha hızlı iyileşir
 strategy:
   en: >-
     Armenians are an Infantry and Cavalry civilization from the Caucasus.

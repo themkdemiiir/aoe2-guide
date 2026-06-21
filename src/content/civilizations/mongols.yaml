@@ -4,7 +4,7 @@ name:
   tr: Mongols
 tagline:
   en: Mongols — a Cavalry Archer civilization from East Asia.
-  tr: Mongols — Doğu Asya'dan bir Cavalry Archer uygarlığı.
+  tr: Mongols, Doğu Asya'dan bir Atlı Okçu uygarlığıdır.
 bonuses:
   en:
     - Hunters work +40% faster
@@ -12,11 +12,11 @@ bonuses:
     - Scout Cavalry-line and Steppe Lancers +20/30% HP in Castle/Imperial Age
   tr:
     - Avcılar %40 daha hızlı çalışır
-    - Cavalry Archer'lar %25 daha hızlı saldırır
-    - Scout Cavalry-line ve Steppe Lancer'lar Kale/İmparatorluk Çağı'nda %20/30 daha fazla can'a sahip
+    - Atlı Okçular %25 daha hızlı saldırır
+    - Atlı Gözcü türleri ve Bozkır Mızraklılarının DP'si Kale Çağı'nda %20, İmparatorluk Çağı'nda %30 artar
 teamBonus:
   en: Scout Cavalry-line +2 line of sight
-  tr: Scout Cavalry-line +2 görüş alanı
+  tr: Atlı Gözcü türleri +2 görüş hattı kazanır
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Nomads
     effect:
       en: Lost Houses do not decrease population space
-      tr: Lost Houses do not decrease population space
+      tr: Evlerin eksilmesi nüfus alanını azaltmaz
   imperial:
     name:
       en: Drill
       tr: Drill
     effect:
       en: Siege Workshop Units move +50% faster
-      tr: Siege Workshop Units move +50% faster
+      tr: Kuşatma Atölyesi Birimleri %50 daha hızlı hareket eder
 strategy:
   en: >-
     Mongols are a Cavalry Archer civilization from East Asia.

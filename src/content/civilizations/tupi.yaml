@@ -3,8 +3,8 @@ name:
   en: Tupi
   tr: Tupi
 tagline:
-  en: Tupi — an Archer and Raiding civilization from South America.
-  tr: Tupi — Güney Amerika'dan bir Archer ve baskın uygarlığı.
+  en: Tupi — an Archer and Infantry civilization from South America.
+  tr: Tupi, Güney Amerika'dan bir Okçu ve Piyade uygarlığıdır.
 bonuses:
   en:
     - Start with +25 of each resource
@@ -12,13 +12,13 @@ bonuses:
     - Fallen units return 15% of their cost
     - Archery Range and Barracks upgrades cost -50% food
   tr:
-    - Her kaynaktan +25 ile başla
-    - Köylüler Settlement'lara garnizon yapabilir
-    - Düşen birimler, maliyetlerinin %15'ini geri kazandırır
-    - Archery Range ve Barracks yükseltmeleri -%50 Yiyecek maliyeti
+    - Her kaynak için +25 ile başlarsın
+    - Köylüler, Yerleşimlerde görevlendirilebilir
+    - Düşen birimler maliyetlerinin %15'ini iade eder
+    - Okçuluk Binası ve Kışla yükseltirken yiyecek maliyeti %50 daha az olur
 teamBonus:
   en: Towers and Castles provide +10 population space
-  tr: Tower ve Castle'lar +10 nüfus alanı sağlar
+  tr: Kuleler ve Kaleler +10 daha fazla nüfus alanı sunar
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Caciques
     effect:
       en: Champi Warriors and Slingers attack +25% faster
-      tr: Champi Warriors and Slingers attack +25% faster
+      tr: Champi Savaşçıları ve Sapancılar +%25 daha hızlı saldırır
   imperial:
     name:
       en: Curare
       tr: Curare
     effect:
       en: Foot Archers and Fortifications deal poison damage
-      tr: Foot Archers and Fortifications deal poison damage
+      tr: Yaya Okçular ve Surlar zehir hasarı verir
 strategy:
   en: >-
     Tupi are an Archer and Raiding civilization from South America.

@@ -4,7 +4,7 @@ name:
   tr: Khmer
 tagline:
   en: Khmer — a Siege and Elephant civilization from Southeast Asia.
-  tr: Khmer — Güneydoğu Asya'dan bir Kuşatma ve Fil uygarlığı.
+  tr: Khmer, Güneydoğu Asya'dan bir Kuşatma ve Fil uygarlığıdır.
 bonuses:
   en:
     - No buildings required to advance to the next Age or to unlock other buildings
@@ -12,13 +12,13 @@ bonuses:
     - Villagers can garrison in Houses
     - Battle Elephants move +10% faster
   tr:
-    - Bir sonraki Çağ'a ilerlemek veya diğer binaları açmak için ön bina gerekmez
-    - Çiftçiler yiyecek bırakmak için Mill veya Town Center'a ihtiyaç duymaz
-    - Köylüler House'lara garnizon kurabilir
-    - Battle Elephant'lar %10 daha hızlı hareket eder
+    - Sonraki Çağa ilerlemek ve diğer binaları açmak için bina gerekmez
+    - Çiftçilerin yiyecek bırakması için Değirmen veya Şehir Merkezi gerekmez
+    - Köylüler evlerde garnizon kurabilir
+    - Savaş Filleri %10 daha hızlı hareket eder
 teamBonus:
   en: Scorpions +1 range
-  tr: Scorpion'lar +1 menzil
+  tr: Akrepler +1 menzil kazanır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Tusk Swords
     effect:
       en: Battle Elephants +3 attack
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Savaş Filleri +3 saldırı kazanır
   imperial:
     name:
       en: Double Crossbow
       tr: Double Crossbow
     effect:
       en: Ballista Elephants and Scorpions fire an additional projectile
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Balistalı Filler ve Akrepler fazladan bir cisim fırlatır
 strategy:
   en: >-
     Khmer are a Siege and Elephant civilization from Southeast Asia.

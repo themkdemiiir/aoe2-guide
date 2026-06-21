@@ -4,19 +4,21 @@ name:
   tr: Lithuanians
 tagline:
   en: Lithuanians — a Cavalry and Monk civilization from Eastern Europe.
-  tr: Lithuanians — Doğu Avrupa'dan bir Süvari ve Keşiş uygarlığı.
+  tr: Lithuanians, Doğu Avrupa'dan bir Süvari ve Keşiş uygarlığıdır.
 bonuses:
   en:
     - Each Town Center provides +100 food
     - Spearman-line and Skirmisher-line move +10% faster
     - Each garrisoned Relic provides +1 attack to Knight-line and Leitis (maximum +4)
   tr:
-    - Her Town Center +100 Yiyecek sağlar
-    - Spearman hattı ve Skirmisher hattı %10 daha hızlı hareket eder
-    - Garnizona alınan her Relic, Knight hattına ve Leitis'e +1 saldırı kazandırır (maksimum +4)
+    - Her Şehir Merkezi fazladan +100 yemek verir
+    - Mızraklı Asker türleri ve Akıncı türleri %10 daha hızlı hareket eder
+    - >-
+      Binaya yerleştirilen her Kadim Eser, Şövalye türlerine ve Leitislere +1 saldırı kazandırır (bu en fazla +4
+      olabilir)
 teamBonus:
   en: Monasteries work +20% faster
-  tr: Monastery'ler %20 daha hızlı çalışır
+  tr: Manastırlar %20 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -24,14 +26,14 @@ uniqueTechs:
       tr: Hill Forts
     effect:
       en: Town Centers +3 range
-      tr: Town Center'lar +3 saldırı kazanır
+      tr: Şehir Merkezlerinin menzili +3 artar
   imperial:
     name:
       en: Tower Shields
       tr: Tower Shields
     effect:
       en: Spearman-line and Skirmishers +2 pierce armor
-      tr: Spearman hattı ve Skirmisher'lar +2 delici zırh kazanır
+      tr: Mızraklı Asker türleri ve Akıncılar +2 delici zırh kazanır
 strategy:
   en: >-
     Lithuanians are a Cavalry and Monk civilization from Eastern Europe.

@@ -4,7 +4,7 @@ name:
   tr: Japanese
 tagline:
   en: Japanese — an Infantry civilization from East Asia.
-  tr: Japanese — Doğu Asya'dan bir Piyade uygarlığı.
+  tr: Japanese, Doğu Asya'dan bir Piyade uygarlığıdır.
 bonuses:
   en:
     - Mills, Lumber- and Mining Camps cost -50%
@@ -12,13 +12,15 @@ bonuses:
     - Cavalry Archers +2 attack vs. Ranged Soldiers (except Skirmishers)
     - Fishing Ships work +5/10/15/20% faster in Dark/Feudal/Castle/Imperial Age; +100% HP
   tr:
-    - Mill, Lumber Camp ve Mining Camp'lar %50 daha ucuz
-    - Piyade saldırıları Feodal Çağ'dan itibaren %33 daha hızlı
-    - Cavalry Archer'lar Menzilli Askerlere (Skirmisher'lar hariç) +2 saldırı
-    - Balıkçı Gemileri Karanlık/Feodal/Kale/İmparatorluk Çağı'nda %5/10/15/20 daha hızlı çalışır; +%100 can
+    - Değirmenler, Kereste ve Maden Kampları %50 daha ucuzdur
+    - Piyade saldırıları Feodal Çağ'dan itibaren %33 daha hızlı olur
+    - Atlı Okçular, Menzilli Askerlere (Avcı Erleri hariç) karşı +2 saldırı kazanır
+    - >-
+      Balıkçı gemileri Karanlık Çağ'da %5, Feodal Çağ'da %10, Kale Çağı'nda %15, İmparatorluk Çağı'nda %20 daha hızlı
+      çalışır; ayrıca %100 DP kazanır
 teamBonus:
   en: Galley-line +4 line of sight
-  tr: Galley-line +4 görüş alanı
+  tr: Kadırga türleri +4 görüş hattı kazanır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +28,14 @@ uniqueTechs:
       tr: Yasama
     effect:
       en: Watch Tower-line fires additional arrows
-      tr: Watch Tower-line fires additional arrows
+      tr: Gözcü Kulesi türleri fazladan ok atar
   imperial:
     name:
       en: Kataparuto
       tr: Kataparuto
     effect:
       en: Trebuchets attack and pack/unpack faster
-      tr: Trebuchets attack and pack/unpack faster
+      tr: Katapultların saldırısı artar, toplanması ve kurulması hızlanır
 strategy:
   en: >-
     Japanese are an Infantry civilization from East Asia.

@@ -3,8 +3,8 @@ name:
   en: Romans
   tr: Romans
 tagline:
-  en: Romans — an Infantry civilization from the Ancient Mediterranean.
-  tr: Romans — Antik Akdeniz'den bir Piyade uygarlığı.
+  en: Romans — an Infantry and Cavalry civilization from the Ancient Mediterranean.
+  tr: Romans, Antik Akdeniz'den bir Piyade ve Süvari uygarlığıdır.
 bonuses:
   en:
     - Villagers gather, build, and repair +5% faster
@@ -12,13 +12,13 @@ bonuses:
     - Scorpions cost -50% gold
     - Galley-line and Dromons +1 melee/+1 pierce armor
   tr:
-    - Köylüler %5 daha hızlı toplar, inşa eder ve onarır
-    - Piyade zırh yükseltmelerinin etkileri iki katına çıkar
-    - Scorpion'lar %50 daha az Altın maliyetiyle üretilir
-    - Galley hattı ve Dromon'lar +1 yakın dövüş / +1 delici zırh kazanır
+    - Köylüler %5 daha hızlı toplama, inşaat ve tamir yapar
+    - Piyade zırh yükseltmelerinin etkisi iki katına çıkar
+    - Akrepler %50 daha az altın gerektirir
+    - Kadırga türleri ve Dromonlar +1 yakın dövüş zırhı ve +1 delici zırh kazanır
 teamBonus:
   en: Scorpions minimum range reduced
-  tr: Scorpion'ların minimum menzili azalır
+  tr: Akreplerin minimum menzili azalır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Ballistas
     effect:
       en: Scorpions attack +33% faster; Galley-line +2 attack
-      tr: Ballista Kuleleri ekstra hasar verir
+      tr: Akrepler %33 daha hızlı saldırır; Kadırga türleri +2 saldırı kazanır
   imperial:
     name:
       en: Comitatenses
       tr: Comitatenses
     effect:
       en: Militia-line, Knight-line, and Centurions train +50% faster and receive a charge attack
-      tr: Milis olmayan piyadeler +8 can kazanır
+      tr: Milis türleri, Şövalye türleri ve Bölük Komutanları %50 daha hızlı eğitilir ve hücum saldırısı kazanır
 strategy:
   en: >-
     Romans are an Infantry civilization from the Ancient Mediterranean.

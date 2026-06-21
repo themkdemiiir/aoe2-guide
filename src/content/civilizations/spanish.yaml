@@ -4,7 +4,7 @@ name:
   tr: Spanish
 tagline:
   en: Spanish — a Gunpowder and Monk civilization from Southern Europe.
-  tr: Spanish — Güney Avrupa'dan bir Barut ve Keşiş uygarlığı.
+  tr: Spanish, Güney Avrupa'dan bir Barut ve Keşiş uygarlığıdır.
 bonuses:
   en:
     - Builders work +30% faster
@@ -13,14 +13,14 @@ bonuses:
     - Gunpowder Units attack +18% faster
     - Cannon Galleons fire more accurately at moving targets
   tr:
-    - İnşaatçılar %30 daha hızlı çalışır
-    - Araştırılan her teknoloji için +20 Altın alınır
-    - Blacksmith yükseltmeleri Altın gerektirmez
+    - İnşaat Ustaları %30 daha hızlı çalışır
+    - Araştırılan her teknoloji +20 altın kazandırır
+    - Demirci yükseltmeleri altın gerektirmez
     - Barut Birimleri %18 daha hızlı saldırır
-    - Cannon Galleon'lar hareketli hedeflere daha isabetli ateş eder
+    - Toplu Kalyonlar, hareket eden hedefleri daha yüksek isabetle vurur
 teamBonus:
   en: Trade Units generate +25% gold
-  tr: Ticaret Birimleri %25 daha fazla Altın üretir
+  tr: Ticaret Birimleri %25 daha fazla altın getirir
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Inquisition
     effect:
       en: Monks and Missionaries convert faster; Missionaries +1 range
-      tr: Monks and Missionaries convert faster; Missionaries +1 range
+      tr: Keşişler ve Misyonerler, hedefleri daha hızlı dönüştürür; Misyonerlerin menzili +1 artar
   imperial:
     name:
       en: Supremacy
       tr: Supremacy
     effect:
       en: Villagers +40 HP, +6 attack, +2 melee/+2 pierce armor
-      tr: Villagers +40 HP, +6 attack, +2 melee/+2 pierce armor
+      tr: Köylüler +40 DP, +6 saldırı, +2 yakın dövüş/+2 delici zırh kazanır
 strategy:
   en: >-
     Spanish are a Gunpowder and Monk civilization from Southern Europe.

@@ -4,7 +4,7 @@ name:
   tr: Vietnamese
 tagline:
   en: Vietnamese — an Archer civilization from Southeast Asia.
-  tr: Vietnamese — Güneydoğu Asya kökenli bir Archer uygarlığı.
+  tr: Vietnamese, Güneydoğu Asya'dan bir Okçu uygarlığıdır.
 bonuses:
   en:
     - Enemy Town Centers are revealed at the start of the game
@@ -12,13 +12,13 @@ bonuses:
     - Archery Range units and Fire Lancers +20% HP
     - Conscription free
   tr:
-    - Düşman Şehir Merkezleri oyunun başında haritada gösterilir
-    - Ekonomik yükseltmeler odun maliyeti olmaksızın araştırılır ve %100 daha hızlı tamamlanır
-    - Archery Range birimleri ve Fire Lancers %20 daha fazla can'a sahiptir
-    - Conscription ücretsizdir
+    - Oyun başlangıcında düşman Şehir Merkezleri görünür olur
+    - Ekonomik yükseltmeler odun gerektirmez ve araştırmalar %100 daha hızlı olur
+    - Okçuluk Binası birimlerinin ve Alev Mızraklı Süvarilerin %20 daha fazla DP'si olur
+    - Zorunlu askerlik ücretsiz
 teamBonus:
   en: Imperial Skirmisher upgrade available in Imperial Age
-  tr: İmparatorluk Çağı'nda Imperial Skirmisher yükseltmesi kullanılabilir
+  tr: İmparatorluk Çağı'nda İmparatorluk Akıncısı yükseltmesi açılır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Chatras
     effect:
       en: Battle Elephants +100 HP
-      tr: Oyun içi teknoloji ağacına bakınız
+      tr: Savaş Fillerine +100 DP
   imperial:
     name:
       en: Paper Money
       tr: Paper Money
     effect:
       en: Lumberjacks slowly generate gold in addition to wood
-      tr: Oyun içi teknoloji ağacına bakınız
+      tr: Oduncular oduna ek olarak yavaşça altın üretir
 strategy:
   en: >-
     Vietnamese are an Archer civilization from Southeast Asia.

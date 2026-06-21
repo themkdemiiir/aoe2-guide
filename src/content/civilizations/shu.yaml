@@ -3,20 +3,20 @@ name:
   en: Shu
   tr: Shu
 tagline:
-  en: Shu — an Infantry civilization from East Asia.
-  tr: Shu — Doğu Asya'dan gelen bir Piyade uygarlığı.
+  en: Shu — an Archer and Siege civilization from East Asia.
+  tr: Shu, Doğu Asya'dan bir Okçu ve Kuşatma uygarlığıdır.
 bonuses:
   en:
     - Lumberjacks generate food in addition to wood
     - Archery Unit technologies at the Archery Range and Blacksmith cost -25%
     - Siege Weapons and Siege Warships move +10/15% faster in Castle/Imperial Age
   tr:
-    - Oduncular oduna ek olarak Yiyecek üretir
-    - Archery Range ve Blacksmith'teki menzilli birlik teknolojileri %25 daha az maliyete gelir
-    - Kuşatma silahları ve Kuşatma Savaş Gemileri Kale/İmparatorluk Çağı'nda %10/15 daha hızlı hareket eder
+    - Oduncular oduna ek olarak yiyecek üretir
+    - Okçuluk Binasındaki ve Demircideki Okçu Birim teknolojileri %25 daha ucuzdur
+    - Kuşatma Silahları ve Kuşatma Gemileri, Kale Çağı'nda/İmparatorluk Çağı'nda %10/%15 daha hızlıdır
 teamBonus:
   en: Foot Archers +2 line of sight
-  tr: Yaya Archer'lar +2 görüş alanı
+  tr: Yaya Okçuların görüş hattı +2 artar
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Coiled Serpent Array
     effect:
       en: Spearman-line and White Feather Guards gain additional HP when near each other
-      tr: Spearman-line and White Feather Guards gain additional HP when near each other
+      tr: Mızraklı Asker Türleri ve Beyaz Tüy Muhafızları birbirine yakınken ek DP kazanır
   imperial:
     name:
       en: Bolt Magazine
       tr: Bolt Magazine
     effect:
       en: Archer-line, War Chariots and Lou Chuans fire additional projectiles
-      tr: Archer-line, War Chariots and Lou Chuans fire additional projectiles
+      tr: Okçu türleri, Savaş Arabaları ve Lou Chuanlar fazladan mermi atar
 strategy:
   en: >-
     Shu are an Infantry civilization from East Asia.

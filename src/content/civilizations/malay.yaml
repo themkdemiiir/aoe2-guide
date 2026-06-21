@@ -4,7 +4,7 @@ name:
   tr: Malay
 tagline:
   en: Malay — a Naval civilization from Southeast Asia.
-  tr: Malay — Güneydoğu Asya'dan bir Deniz uygarlığı.
+  tr: Malay, Güneydoğu Asya'dan bir Donanma uygarlığıdır.
 bonuses:
   en:
     - Advancing to the next Age is +66% faster
@@ -12,13 +12,13 @@ bonuses:
     - Battle Elephants cost -25/35% in Castle/Imperial Age
     - Fish Traps cost -33% and provide +200% food
   tr:
-    - Bir sonraki Çağ'a geçiş %66 daha hızlı
-    - Piyade zırh yükseltmeleri ücretsiz
-    - Battle Elephant'lar Kale/İmparatorluk Çağı'nda -%25/35 daha ucuz
-    - Fish Trap'ler %33 daha ucuz ve %200 daha fazla yiyecek sağlar
+    - Sonraki Çağa %66 daha hızlı geçilir
+    - Piyade zırh yükseltmeleri ücretsizdir
+    - Savaş Filleri; Kale Çağı'nda %25, İmparatorluk Çağı'nda %35 daha ucuzdur
+    - Balık Kapanları %33 daha ucuzdur ve %200 daha fazla yiyecek sağlar
 teamBonus:
   en: Docks +6 line of sight
-  tr: Dock'lar +6 görüş alanı
+  tr: Rıhtımların görüş hattı +6 artar
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Thalassocracy
     effect:
       en: Docks are upgraded to Harbors
-      tr: Oyun içi teknoloji ağacına bakınız
+      tr: Rıhtımlar yükseltilerek Liman olur
   imperial:
     name:
       en: Forced Levy
       tr: Forced Levy
     effect:
       en: Militia-line gold cost is replaced by additional food cost
-      tr: Oyun içi teknoloji ağacına bakınız
+      tr: Milis türlerinin altın bedeli yerine ek yiyecek bedeli getirilir
 strategy:
   en: >-
     Malay are a Naval civilization from Southeast Asia.

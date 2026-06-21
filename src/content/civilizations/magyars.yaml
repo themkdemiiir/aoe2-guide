@@ -3,20 +3,20 @@ name:
   en: Magyars
   tr: Magyars
 tagline:
-  en: Magyars — a Cavalry and Infantry civilization from Eastern Europe.
-  tr: Magyars — Doğu Avrupa'dan bir Süvari ve Piyade uygarlığı.
+  en: Magyars — a Cavalry civilization from Eastern Europe.
+  tr: Magyars, Doğu Avrupa'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
     - Villagers defeat wolves with one strike
     - Scout Cavalry-line costs -15%
     - Melee attack upgrades free
   tr:
-    - Köylüler kurdu tek vuruşla öldürür
-    - Scout Cavalry-line %15 daha ucuz
-    - Yakın dövüş saldırı yükseltmeleri ücretsiz
+    - Köylüler, kurtları bir darbeyle yener
+    - Atlı Gözcü türleri %15 daha ucuzdur
+    - Yakın dövüş saldırısı yükseltmeleri ücretsizdir
 teamBonus:
   en: Mounted Archers train +25% faster
-  tr: Mounted Archer'lar %25 daha hızlı eğitilir
+  tr: Binekli Okçular %25 daha hızlı eğitilir
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Corvinian Army
     effect:
       en: Magyar Huszar gold cost is replaced by additional food cost
-      tr: Magyar Huszar gold cost is replaced by additional food cost
+      tr: Macar Huszarlar için altın bedeli yerine ek yiyecek bedeli getirilir
   imperial:
     name:
       en: Recurve Bow
       tr: Recurve Bow
     effect:
       en: Mounted Archers +1 attack, +1 range
-      tr: Mounted Archers +1 attack, +1 range
+      tr: Binekli Okçular +1 saldırı ve +1 menzil kazanır
 strategy:
   en: >-
     Magyars are a Cavalry and Infantry civilization from Eastern Europe.

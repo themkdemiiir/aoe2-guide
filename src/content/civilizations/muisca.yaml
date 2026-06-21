@@ -3,8 +3,8 @@ name:
   en: Muisca
   tr: Muisca
 tagline:
-  en: Muisca — a Gold and Infantry civilization from South America.
-  tr: Muisca — Güney Amerika'dan bir Altın ve Piyade uygarlığı.
+  en: Muisca — an Archer and Monk civilization from South America.
+  tr: Muisca, Güney Amerika'dan bir Okçu ve Keşiş uygarlığıdır.
 bonuses:
   en:
     - Advancing to the next Age costs -50% gold
@@ -13,14 +13,16 @@ bonuses:
     - Monks regain faith +50% faster
     - Caravan, Guilds free
   tr:
-    - Bir sonraki Çağ'a geçmek -%50 Altın gerektirir
-    - Settlement'lar -%25 maliyetli ve yakınındaki birimleri iyileştirir
-    - Champi Warriors ve Archery Range Birimleri Feodal/Kale/İmparatorluk Çağı'nda +1/2/3 yakın dövüş zırhı kazanır
-    - Monks inancını %50 daha hızlı yeniler
-    - Caravan, Guilds ücretsiz
+    - Bir sonraki Çağa atlama %50 daha az altına mal olur
+    - Yerleşim maliyeti %25 daha azdır ve yerleşimler yakındaki birimleri iyileştirir
+    - >-
+      Champi Savaşçıları ve Okçuluk Binası Birimleri Feodal/Kale/İmparatorluk Çağlarında +1/2/3 yakın dövüş zırhı
+      kazanır
+    - Keşişler +%50 daha hızlı inanç kazanır
+    - Kervanlar ve Loncalar ücretsizdir
 teamBonus:
   en: Natural gold sources last +15% longer
-  tr: Doğal Altın kaynakları %15 daha uzun süre dayanır
+  tr: Doğal altın kaynakları %15 daha uzun süre dayanır
 uniqueTechs:
   castle:
     name:
@@ -28,14 +30,14 @@ uniqueTechs:
       tr: Herbalism
     effect:
       en: Archer-line and Champi Warriors move +15% faster
-      tr: Archer-line and Champi Warriors move +15% faster
+      tr: Okçu türleri ve Champi Savaşçıları %15 daha hızlı hareket eder
   imperial:
     name:
       en: Huaracas
       tr: Huaracas
     effect:
       en: Slingers +1 range; train +25% faster
-      tr: Slingers +1 range; train +25% faster
+      tr: Sapancıların menzili +1 artar ve %25 daha hızlı eğitilirler
 strategy:
   en: >-
     Muisca are a Gold and Infantry civilization from South America.

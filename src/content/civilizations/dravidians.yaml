@@ -4,7 +4,7 @@ name:
   tr: Dravidians
 tagline:
   en: Dravidians — an Infantry and Naval civilization from South Asia.
-  tr: Dravidians — Güney Asya'dan Yaya ve Denizcilik uygarlığı.
+  tr: Dravidians, Güney Asya'dan bir Piyade ve Donanma uygarlığıdır.
 bonuses:
   en:
     - Fishermen and Fishing Ships carry +15
@@ -13,14 +13,14 @@ bonuses:
     - Barracks technologies cost -50%
     - Siege Weapons cost -33% wood
   tr:
-    - Balıkçılar ve Balıkçı Gemileri +15 taşır
-    - Bir sonraki Çağ'a geçerken +200 Odun alırsın
-    - Skirmisher'lar ve Elephant Archer'lar %25 daha hızlı saldırır
-    - Barracks teknolojileri %50 daha ucuz
-    - Kuşatma Silahları %33 daha az Odun maliyeti
+    - Balıkçıların ve Balıkçı Gemilerinin kapasitesi +15 artar
+    - Sonraki Çağa geçildiğinde 200 odun kazanılır
+    - Akıncılar ve Filli Okçular %25 daha hızlı saldırır
+    - Kışla teknolojileri %50 daha ucuzdur
+    - Kuşatma Silahları %33 daha az oduna mal olur
 teamBonus:
   en: Docks provide +5 population space
-  tr: Dock'lar +5 nüfus alanı sağlar
+  tr: Rıhtımlar +5 nüfus alanı sağlar
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Medical Corps
     effect:
       en: Elephant Units regenerate 30 HP per minute
-      tr: Battle Elephant'lar HP yeniler
+      tr: Fil Birimleri dakika başına 30 DP yeniler
   imperial:
     name:
       en: Wootz Steel
       tr: Wootz Steel
     effect:
       en: Infantry and Cavalry attacks ignore armor
-      tr: Yakın dövüş yaya ve süvari saldırıları zırhı yok sayar
+      tr: Piyade ve Süvari saldırıları zırhı yok sayar
 strategy:
   en: >-
     Dravidians are an Infantry and Naval civilization from South Asia.

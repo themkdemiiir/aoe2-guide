@@ -4,7 +4,7 @@ name:
   tr: Burgundians
 tagline:
   en: Burgundians — a Cavalry civilization from Western Europe.
-  tr: Burgundians — Batı Avrupa'dan bir Süvari uygarlığı.
+  tr: Burgundians, Batı Avrupa'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
     - Economic upgrades available one age earlier and cost -33% food
@@ -12,13 +12,13 @@ bonuses:
     - Cavalier upgrade available in Castle Age
     - Gunpowder Units +25% attack
   tr:
-    - Ekonomik yükseltmeler bir çağ önce kullanılabilir ve %33 daha az Yiyecek gerektirir
-    - Stable teknolojileri %50 daha ucuz
-    - Cavalier yükseltmesi Kale Çağı'nda kullanılabilir
-    - Barut Birimleri %25 daha fazla saldırı gücüne sahip
+    - Ekonomik yükseltmeler bir çağ öndecen açılır ve %33 daha az yiyeceğe mal olur
+    - Ahır teknolojileri %50 daha ucuzdur
+    - Süvari yükseltmesi Kale Çağı'nda açılır
+    - Tüfekli Birimler %25 saldırı kazanır
 teamBonus:
   en: Relics generate food in addition to gold
-  tr: Relics, Altın'a ek olarak Yiyecek de üretir
+  tr: Kadim Eserler altına ek olarak yiyecek sağlar
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Burgundian Vineyards
     effect:
       en: Farmers slowly generate gold in addition to food
-      tr: Çiftlikler, Yiyecek'e ek olarak yavaşça Altın da üretir
+      tr: Çiftçiler yiyeceğe ek olarak yavaş yavaş altın üretir
   imperial:
     name:
       en: Flemish Revolution
       tr: Flemish Revolution
     effect:
       en: All existing Villagers are transformed to Flemish Militia
-      tr: Tüm köylüleri anında Flemish Militia'ya dönüştürür; Flemish Militia, Barracks'ta kullanılabilir
+      tr: Tüm mevcut Köylüler Flaman Milislerine dönüştürülür
 strategy:
   en: >-
     Burgundians are a Cavalry civilization from Western Europe.

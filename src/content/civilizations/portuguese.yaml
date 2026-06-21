@@ -4,7 +4,7 @@ name:
   tr: Portuguese
 tagline:
   en: Portuguese — a Naval and Gunpowder civilization from Southern Europe.
-  tr: Portuguese — Güney Avrupa'dan bir Denizcilik ve Barut uygarlığı.
+  tr: Portuguese, Güney Avrupa'dan bir Donanma ve Barut uygarlığıdır.
 bonuses:
   en:
     - Foragers generate wood in addition to food
@@ -12,10 +12,10 @@ bonuses:
     - Can build Feitoria in Imperial Age
     - Ships +10/15/20% HP in Feudal/Castle/Imperial Age
   tr:
-    - Toplayıcılar yiyeceğe ek olarak odun da üretir
-    - Tüm birimler -%20 altın maliyetiyle üretilir
-    - İmparatorluk Çağı'nda Feitoria inşa edebilir
-    - Gemiler Feodal/Kale/İmparatorluk Çağı'nda +%10/%15/%20 can kazanır
+    - Toplayıcılar, yiyeceğe ek olarak odun da toplar
+    - Tüm birimler %20 daha az altın gerektirir
+    - İmparatorluk Çağı'nda Feitoria inşa edilebilir
+    - Gemilerin DP'si Feodal Çağ'da %10, Kale Çağı'nda %15 ve İmparatorluk Çağı'nda %20 daha fazladır
 teamBonus:
   en: Technologies research +25% faster
   tr: Teknolojiler %25 daha hızlı araştırılır
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Circumnavigation
     effect:
       en: Sets the entire map to explored; Ships train +33% faster
-      tr: Sets the entire map to explored; Ships train +33% faster
+      tr: Tüm harita keşfedilmiş olarak ayarlanır; gemiler %33 daha hızlı eğitilir
   imperial:
     name:
       en: Arquebus
       tr: Arquebus
     effect:
       en: Gunpowder Units fire more accurately at moving targets
-      tr: Oyun içi teknoloji ağacına bakın
+      tr: Barut Birimleri, hareket eden hedefleri daha yüksek isabetle vurur
 strategy:
   en: >-
     Portuguese are a Naval and Gunpowder civilization from Southern Europe.

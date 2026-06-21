@@ -4,19 +4,19 @@ name:
   tr: Britons
 tagline:
   en: Britons — a Foot Archer civilization from Western Europe.
-  tr: Britons — a Foot Archer civilization from Western Europe.
+  tr: Britons, Batı Avrupa'dan bir Yaya Okçu uygarlığıdır.
 bonuses:
   en:
     - Shepherds work +25% faster
     - Town Centers cost -50% wood starting in Castle Age
     - Foot Archers +1/+2 range in Castle/Imperial Age
   tr:
-    - Kale Çağı'ndan itibaren Şehir Merkezleri %50 daha az odun maliyetiyle inşa edilir.
-    - Yaya okçuları (Skirmisher hariç) Kale Çağı'nda +1, İmparatorluk Çağı'nda +2 menzil kazanır.
-    - Çobanlar %25 daha hızlı çalışır.
+    - Çobanlar %25 daha hızlı çalışır
+    - Şehir Merkezleri, Kale Çağı'ndan itibaren %50 daha az odun gerektirir
+    - Yaya Okçular Kale Çağı'nda +1, İmparatorluk Çağı'nda +2 menzil kazanır
 teamBonus:
   en: Archery Ranges work +10% faster
-  tr: Okçu Talimhaneleri %20 daha hızlı çalışır.
+  tr: Okçuluk Binası %10 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Yeomen
     effect:
       en: Foot Archers and Skirmisher-line +1 range; Watch Tower-line +2 attack
-      tr: Yaya okçuları +1 menzil; Kuleler +2 saldırı kazanır.
+      tr: Yaya Okçulara ve AAkıncılara1 menzil; Gözcü Kulesi türlerine 2 saldırı kazandırır
   imperial:
     name:
       en: Warwolf
       tr: Warwolf
     effect:
       en: Trebuchets deal blast damage and are more accurate
-      tr: Trebuchet'ler birimlere karşı alan hasarı verir ve ıskalamaz.
+      tr: Katapultlar patlama hasarı verir ve daha isabetlidir
 strategy:
   en: >-
     Britons are an Archer civilization from Western Europe.

@@ -4,7 +4,7 @@ name:
   tr: Huns
 tagline:
   en: Huns — a Cavalry civilization from Central Asia.
-  tr: Huns — Orta Asya'dan bir Süvari uygarlığı.
+  tr: Huns, Orta Asya'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
     - Do not need houses, but start with -100 wood
@@ -12,13 +12,13 @@ bonuses:
     - Trebuchets fire more accurately at units and small targets
     - On Nomadic maps, the first Town Center spawns a scouting Horse
   tr:
-    - Ev inşa etmeye gerek duymaz, ancak -100 Odun ile başlar
-    - Cavalry Archer'lar Kale/İmparatorluk Çağı'nda %10/20 daha ucuz
-    - Trebuchet'ler birimlere ve küçük hedeflere daha isabetli ateş eder
-    - Göçebe haritalarda ilk Town Center bir keşif Horse'u üretir
+    - Eve ihtiyaç olmaz fakat -100 odunla başlanır
+    - Atlı Okçular; Kale Çağı'nda %10, İmparatorluk Çağı'nda %20 daha ucuzdur
+    - Katapultlar, birimleri ve küçük hedefleri daha yüksek isabetle vurur
+    - Göçebe haritalarında, ilk Şehir Merkezinde bir gözcü atı belirir
 teamBonus:
   en: Stables work +20% faster
-  tr: Stable'lar %20 daha hızlı çalışır
+  tr: Ahırlar %20 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Marauders
     effect:
       en: Tarkans can be trained at Stables
-      tr: Tarkans can be trained at Stables
+      tr: Tarkanlar Ahırda eğitilebilir
   imperial:
     name:
       en: Atheism
       tr: Atheism
     effect:
       en: Enemy Relics generate -50% resources; Wonder and Relic victory takes +100 years
-      tr: Enemy Relics generate -50% resources; Wonder and Relic victory takes +100 years
+      tr: Düşman Kadim Eserleri %50 daha az kaynak üretir; Dünya Harikası ve Kadim Eserle zafer 100 yıl daha uzun sürer
 strategy:
   en: >-
     Huns are a Cavalry civilization from Central Asia.

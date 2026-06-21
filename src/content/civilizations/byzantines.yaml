@@ -4,7 +4,7 @@ name:
   tr: Byzantines
 tagline:
   en: Byzantines — a Defensive civilization from the Eastern Mediterranean.
-  tr: Byzantines — Doğu Akdeniz'den savunmacı bir uygarlık.
+  tr: Byzantines, Doğu Akdeniz'den bir Savunma uygarlığıdır.
 bonuses:
   en:
     - Buildings +10/20/30/40% HP in Dark/Feudal/Castle/Imperial Age
@@ -13,14 +13,14 @@ bonuses:
     - Advancing to Imperial Age costs -33%
     - Fire Ships and Dromons attack +25% faster
   tr:
-    - Binalar Karanlık/Feodal/Kale/İmparatorluk Çağı'nda +%10/20/30/40 can kazanır
-    - Camel Rider'lar, Skirmisher'lar ve Spearman hattı %25 daha ucuz
-    - Town Watch, Town Patrol ücretsiz
-    - İmparatorluk Çağı'na geçiş %33 daha az maliyetli
-    - Fire Ship'ler ve Dromon'lar %25 daha hızlı saldırır
+    - Binalar Karanlık Çağ'da %10, Feodal Çağ'da %20, Kale Çağı'nda %30, İmparatorluk Çağı'nda %40 DP kazanır
+    - Deve Binicileri, AAkıncılar e Mızraklı asker türleri %25 daha ucuzdur
+    - Şehir Gözcüsü ve Şehir Devriyesi ücretsizdir
+    - İmparatorluk Çağı'na geçmek %33 daha ucuzdur
+    - Ateş Gemileri ve Dromonlar %25 daha hızlı saldırır
 teamBonus:
   en: Monks heal +100% faster
-  tr: Monk'lar %100 daha hızlı iyileştirir
+  tr: Keşişler %100 daha hızlı iyileştirir
 uniqueTechs:
   castle:
     name:

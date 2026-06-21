@@ -3,8 +3,8 @@ name:
   en: Slavs
   tr: Slavs
 tagline:
-  en: Slavs — a Cavalry civilization from Eastern Europe.
-  tr: Slavlar — Doğu Avrupa'dan bir Süvari uygarlığı.
+  en: Slavs — an Infantry and Siege civilization from Eastern Europe.
+  tr: Slavs, Doğu Avrupa'dan bir Piyade ve Kuşatma uygarlığıdır.
 bonuses:
   en:
     - Farmers work +15% faster
@@ -13,12 +13,12 @@ bonuses:
     - Monks move +20% faster
   tr:
     - Çiftçiler %15 daha hızlı çalışır
-    - Arson, Gambesons ücretsiz
-    - Siege Workshop birimleri %15 daha az maliyetlidir
-    - Monk'lar %20 daha hızlı hareket eder
+    - Kundakçılık ve Gambesonlar ücretsizdir
+    - Kuşatma Atölyesi Birimleri %15 daha ucuzdur
+    - Keşişler %20 daha hızlı hareket eder
 teamBonus:
   en: Military buildings (except Castles) provide +5 population space
-  tr: Askeri binalar (Castle'lar hariç) +5 nüfus alanı sağlar
+  tr: Askerî binalar (Kaleler hariç) +5 nüfus alanı daha sağlar
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Detinets
     effect:
       en: Replaces 40% of Castle and Watch Tower-line stone cost with additional wood cost
-      tr: Replaces 40% of Castle and Watch Tower-line stone cost with additional wood cost
+      tr: Kale ve Gözcü Kulesi türlerinin taş bedelinin %40'ı yerine ek odun bedeli getirilir
   imperial:
     name:
       en: Druzhina
       tr: Druzhina
     effect:
       en: Infantry deals trample damage
-      tr: Oyun içi teknoloji ağacına bakın
+      tr: Piyadeler ezme hasarı verir
 strategy:
   en: >-
     Slavs are a Cavalry civilization from Eastern Europe.

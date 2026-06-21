@@ -3,8 +3,8 @@ name:
   en: Gurjaras
   tr: Gurjaras
 tagline:
-  en: Gurjaras — a Cavalry and Naval civilization from South Asia.
-  tr: Gurjaras — Güney Asya'dan gelen bir Süvari ve Denizcilik uygarlığı.
+  en: Gurjaras — a Cavalry and Camel civilization from South Asia.
+  tr: Gurjaras, Güney Asya'dan bir Süvari ve Deve uygarlığıdır.
 bonuses:
   en:
     - Start with 2 Forage Bushes
@@ -12,13 +12,13 @@ bonuses:
     - Mounted Units deal +20/30/40% bonus damage in Feudal/Castle/Imperial Age
     - Docks +5 garrison capacity
   tr:
-    - 2 Forage Bush ile başlar
-    - Çiftliklerde hayvancılığı garnizon edip pasif olarak Yiyecek üretebilir
-    - Binekli Birimler Feodal/Kale/İmparatorluk Çağı'nda +%20/30/40 bonus hasar verir
-    - Dock'lar +5 garnizon kapasitesi
+    - 2 Böğürtlen Çalısıyla başlanır
+    - Besi hayvanları pasif olarak yiyecek üretecek şekilde Değirmenlere yerleştirilebilir
+    - Binekli Birimler; Feodal Çağ'da %20, Kale Çağı'nda %30, İmparatorluk Çağı'nda %40 daha fazla hasar verir
+    - Rıhtımlar +5 garnizon kapasitesi kazanır
 teamBonus:
   en: Camel and Elephant Units train +25% faster
-  tr: Camel ve Fil Birimleri %25 daha hızlı eğitilir
+  tr: Deve ve Fil Birimleri %25 daha hızlı eğitilir
 uniqueTechs:
   castle:
     name:
@@ -26,14 +26,14 @@ uniqueTechs:
       tr: Kshatriyas
     effect:
       en: Military Units cost -25% food
-      tr: Askeri birimler -%25 Yiyecek maliyetiyle üretilir
+      tr: Askerî Birimler %25 daha az yiyecek gerektirir
   imperial:
     name:
       en: Frontier Guards
       tr: Frontier Guards
     effect:
       en: Camel Riders and Elephant Archers +4 melee armor
-      tr: Camel Rider'lar ve Elephant Archer'lar +4 yakın dövüş zırhı kazanır
+      tr: Deve Binicileri ve Filli Okçular +4 yakın dövüş zırhı kazanır
 strategy:
   en: >-
     Gurjaras are a Cavalry and Naval civilization from South Asia.

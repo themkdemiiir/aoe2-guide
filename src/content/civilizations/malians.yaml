@@ -4,19 +4,19 @@ name:
   tr: Malians
 tagline:
   en: Malians — an Infantry civilization from West Africa.
-  tr: Malians — Batı Afrika'dan bir Piyade uygarlığı.
+  tr: Malians, Batı Afrika'dan bir Piyade uygarlığıdır.
 bonuses:
   en:
     - Buildings cost -15% wood
     - Villagers drop off +10% more gold
     - Barracks Units +1/+2/+3 pierce armor in Feudal/
   tr:
-    - Binalar %15 daha az Odun harcar
-    - Köylüler %10 daha fazla Altın bırakır
-    - Barracks Birimleri Feodal/Kale/İmparatorluk Çağı'nda +1/+2/+3 delici zırh kazanır
+    - Binalar %15 daha az odun gerektirir
+    - Köylüler %10 daha fazla altın bırakır
+    - Kışla Birimleri; Feodal Çağ'da +1,
 teamBonus:
   en: Universities work +80% faster
-  tr: Universities %80 daha hızlı çalışır
+  tr: Üniversiteler %80 daha hızlı çalışır
 uniqueTechs:
   castle:
     name:
@@ -24,14 +24,14 @@ uniqueTechs:
       tr: Tigui
     effect:
       en: Town Centers fire arrows without garrison
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Şehir Merkezleri garnizona gerek duymadan ok fırlatır
   imperial:
     name:
       en: Farimba
       tr: Farimba
     effect:
       en: Cavalry +5 attack
-      tr: Oyun içi teknoloji ağacına bak
+      tr: Süvariler +5 saldırı kazanır
 strategy:
   en: >-
     Malians are an Infantry civilization from West Africa.

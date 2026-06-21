@@ -3,8 +3,8 @@ name:
   en: Jurchens
   tr: Jurchens
 tagline:
-  en: Jurchens — a Cavalry civilization from East Asia.
-  tr: Jurchens — Doğu Asya'dan bir Süvari uygarlığı.
+  en: Jurchens — a Cavalry and Gunpowder civilization from East Asia.
+  tr: Jurchens, Doğu Asya'dan bir Süvari ve Barut uygarlığıdır.
 bonuses:
   en:
     - Meat of hunted and livestock animals doesn't decay
@@ -13,14 +13,14 @@ bonuses:
     - Siege and Fortification upgrades cost -75% wood and research +100% faster
     - Units receive -50% friendly fire damage
   tr:
-    - Avlanan ve çiftlik hayvanlarının eti bozulmaz
-    - Binekli Birimler ve Fire Lancer'lar Feodal Çağ'dan itibaren %25 daha hızlı saldırır
-    - Siege Engineers Kale Çağı'nda kullanılabilir
-    - Kuşatma ve Tahkimat yükseltmeleri %75 daha az Odun gerektirir ve %100 daha hızlı araştırılır
-    - Birimler dost ateşinden %50 daha az hasar alır
+    - Avlanan hayvanların ve besi hayvanlarının eti çürümez
+    - Feodal Çağ'dan itibaren Binekli Birimler ve Alev Mızraklı Süvariler %25 daha hızlı saldırır
+    - Kuşatma Mühendisleri, Kale Çağı'nda açılır.
+    - Kuşatma ve Sur yükseltmeleri %75 daha az odun gerektirir ve %100 daha hızlı araştırılır
+    - Birimler -%50 daha az dost ateşi hasarı alır
 teamBonus:
   en: Gunpowder Units +2 line of sight
-  tr: Barut Birimleri +2 görüş alanı
+  tr: Tüfekli Birimler +2 görüş hattı kazanır
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Fortified Bastions
     effect:
       en: Fortifications regenerate 500 HP per minute
-      tr: Fortifications regenerate 500 HP per minute
+      tr: Surlar dakikada 500 DP yeniler
   imperial:
     name:
       en: Thunderclap Bombs
       tr: Thunderclap Bombs
     effect:
       en: Rocket Carts, Grenadiers and Lou Chuans detonate when defeated; projectiles produce additional explosions
-      tr: Rocket Carts, Grenadiers and Lou Chuans detonate when defeated; projectiles produce additional explosions
+      tr: Roket Arabaları, El Bombacıları ve Lou Chuanlar yenildiğinde patlar; mermiler ise ek patlamalar yaratır
 strategy:
   en: >-
     Jurchens are a Cavalry civilization from East Asia.

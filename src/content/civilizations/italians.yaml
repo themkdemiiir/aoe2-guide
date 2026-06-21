@@ -4,7 +4,7 @@ name:
   tr: Italians
 tagline:
   en: Italians — an Archer and Naval civilization from Southern Europe.
-  tr: Italians — Güney Avrupa'dan bir Okçu ve Denizcilik uygarlığı.
+  tr: Italians, Güney Avrupa'dan bir Okçu ve Donanma uygarlığıdır.
 bonuses:
   en:
     - Advancing to the next Age costs -15%
@@ -13,14 +13,14 @@ bonuses:
     - Gunpowder Units cost -20%
     - Fishing Ships cost -15%
   tr:
-    - Bir sonraki çağa geçmek -%15 daha ucuz
-    - Yaya Archer'lar ve Condottieri +1 yakın dövüş / +1 delici zırh kazanır
-    - Dock ve University teknolojileri -%25 daha ucuz
-    - Barut Birimleri -%20 daha ucuz
-    - Fishing Ship'ler -%15 daha ucuz
+    - Sonraki Çağa geçmek %15 daha ucuzdur
+    - Yaya Okçular ve Condottieri +1 yakın dövüş/+1 delici zırh kazanır
+    - Rıhtım ve Üniversite teknolojileri %25 daha ucuzdur
+    - Barut Birimleri %20 daha ucuzdur
+    - Balıkçı Gemileri %15 daha ucuzdur
 teamBonus:
   en: Condottiero available at the Barracks in Imperial Age
-  tr: İmparatorluk Çağı'nda Barracks'ta Condottiero erişilebilir
+  tr: Condottiero, İmparatorluk Çağı'nda Kışlada eğitilebilir
 uniqueTechs:
   castle:
     name:
@@ -28,14 +28,14 @@ uniqueTechs:
       tr: Silk Road
     effect:
       en: Trade Units cost -50%
-      tr: Trade Units cost -50%
+      tr: Ticaret Birimleri %50 daha ucuzdur
   imperial:
     name:
       en: Pirotechnia
       tr: Pirotechnia
     effect:
       en: Hand Cannoneers deal +15% pass through damage and are more accurate
-      tr: Hand Cannoneers deal +15% pass through damage and are more accurate
+      tr: Tüfekçiler %15 delici hasar verir ve daha isabetlidir
 strategy:
   en: >-
     Italians are an Archer and Naval civilization from Southern Europe.
