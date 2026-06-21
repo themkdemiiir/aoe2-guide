@@ -1,3 +1,6 @@
+# Source: AoE Companion community guide "Win Water" — concrete villager counts but
+# NO in-game timestamps. Per-step clock times were removed (not in source); durationMin
+# is a conservative estimate, not a source-stated figure.
 slug: galley-rush
 name:
   en: Feudal Galley Rush
@@ -12,132 +15,134 @@ civsRecommended:
   - byzantines
   - malay
 steps:
-  - villagers: 6
-    time: "2:30"
+  - villagers: 3
     assign:
-      en: 6 → sheep under TC
-      tr: 6 → TC altında koyunlar
+      en: Build 2 Houses; first 3 villagers → sheep under TC
+      tr: 2 House kur; ilk 3 köylü → TC altında koyunlar
+    icons:
+      - house
+      - food
+  - villagers: 6
+    assign:
+      en: +3 → sheep under TC (6 on food)
+      tr: +3 → TC altında koyunlar (6 yiyecekte)
     icons:
       - food
   - villagers: 10
-    time: "4:00"
     assign:
-      en: +4 → wood; Lumber Camp near the shore
-      tr: +4 → odun; sahile yakın Lumber Camp
+      en: +4 → wood; build Lumber Camp
+      tr: +4 → odun; Lumber Camp kur
     icons:
       - wood
       - lumber-camp
-  - villagers: 12
-    time: "4:40"
+  - villagers: 11
     assign:
-      en: +1 → build Dock on the shore; +1 → boar
-      tr: +1 → sahile Dock kur; +1 → yaban domuzu
+      en: +1 → lure the nearest boar
+      tr: +1 → en yakın yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 12
+    assign:
+      en: +1 → build Dock + 2 Houses near water; from the Dock queue 4 Fishing Ships
+      tr: +1 → suya yakın Dock + 2 House kur; Dock'tan 4 Fishing Ship sıraya al
     icons:
       - dock
-      - food
-  - villagers: 12
-    time: "5:10"
-    assign:
-      en: From the Dock, queue 4 Fishing Ships onto deep-sea fish
-      tr: Dock'tan derin deniz balığına 4 Fishing Ship sıraya al
-    icons:
       - fishing-ship
-      - food
-  - villagers: 16
-    time: "6:30"
+  - villagers: 14
     assign:
-      en: +4 → food under TC (boar, then berries/sheep)
-      tr: +4 → TC altında yiyecek (yaban domuzu, sonra çilek/koyun)
-    icons:
-      - food
-  - villagers: 21
-    time: "8:30"
-    assign:
-      en: +5 → wood; research Loom
-      tr: +5 → odun; Loom araştır
+      en: +2 → wood
+      tr: +2 → odun
     icons:
       - wood
-  - villagers: 21
-    time: "8:45"
-    phase: feudal
+  - villagers: 15
     assign:
-      en: Click Feudal Age at 21 vils
-      tr: 21 köylüde Feodal Çağ'a tıkla
+      en: +1 → lure the 2nd boar
+      tr: +1 → 2. yaban domuzunu çek
+    icons:
+      - food
+  - villagers: 20
+    assign:
+      en: +5 → sheep / boar under TC
+      tr: +5 → TC altında koyun / yaban domuzu
     icons:
       - food
   - villagers: 21
-    time: "9:00"
+    phase: feudal
     assign:
-      en: "While advancing: 3 → gold, rest → wood (2nd Lumber Camp); build 2nd Dock"
-      tr: "Çağ atlarken: 3 → altın, kalanı → odun (2. Lumber Camp); 2. Dock kur"
+      en: 21st → food; research Loom, then click Feudal Age
+      tr: 21. → yiyecek; Loom araştır, sonra Feodal Çağ'a tıkla
+    icons:
+      - loom
+      - food
+  - villagers: 21
+    assign:
+      en: "While advancing: 7 → 2nd Lumber Camp, 4 → gold (Mining Camp), 1 → 2nd Dock, 2 → stragglers, 1 → wood"
+      tr: "Çağ atlarken: 7 → 2. Lumber Camp, 4 → altın (Mining Camp), 1 → 2. Dock, 2 → ağaç artıkları, 1 → odun"
     icons:
       - gold
       - dock
-  - villagers: 21
-    time: "10:00"
+  - villagers: 25
     phase: feudal
     assign:
-      en: "Feudal: Galleys non-stop from both Docks; research Fletching"
-      tr: "Feodal: iki Dock'tan durmadan Galley; Fletching araştır"
+      en: "Feudal: research Double-Bit Axe; queue Fire Galleys from both Docks; build a 3rd Dock"
+      tr: "Feodal: Double-Bit Axe araştır; iki Dock'tan Fire Galley üret; 3. Dock kur"
     icons:
-      - galley
-  - villagers: 24
-    time: "11:30"
+      - fire-galley
+      - dock
+  - villagers: 25
     assign:
-      en: +3 → wood; Galleys hunt enemy Fishing Ships and Docks
-      tr: +3 → odun; Galley'ler düşman Fishing Ship ve Dock'larını avlar
+      en: New TC villagers → gold / berries / wood to sustain ships; expand the navy and fight for the water
+      tr: Yeni TC köylüleri → gemileri sürdürmek için altın / çilek / odun; donanmayı büyüt ve su için savaş
     icons:
-      - wood
-      - galley
+      - fire-galley
+      - gold
 intro:
   en: >-
-    **Goal:** Reach Feudal Age around 10:00 and flood Galleys from two Docks to sink enemy Fishing Ships and
-    deny the water. A few Dark-Age Fishing Ships fund the wood-and-gold economy that keeps Galleys coming.
-    **Recommended civs:** Vikings (+10% wood from Docks), Portuguese (ships die slower), Italians (cheaper
-    Docks + ships), Byzantines (Greek Fire in Castle Age), Malay (cheaper ships overall).
+    **Goal:** Reach Feudal Age at 21 villagers and pump Fire Galleys from multiple Docks to sink enemy Fishing
+    Ships and control the water. Four Dark-Age Fishing Ships fund the wood-and-gold economy that keeps ships
+    coming. **Recommended civs:** Vikings (+10% wood from Docks), Portuguese (ships die slower), Italians
+    (cheaper Docks + ships), Byzantines (Greek Fire in Castle Age), Malay (cheaper ships overall).
   tr: >-
-    **Hedef:** 10:00 civarında Feodal Çağ'a ulaş ve iki Dock'tan Galley göndererek düşmanın Fishing Ship'lerini
-    batır, suyu ele geçir. Karanlık Çağ'daki birkaç Fishing Ship, Galley üretimini sürdüren odun-altın
+    **Hedef:** 21 köylüde Feodal Çağ'a ulaş ve birden çok Dock'tan Fire Galley üreterek düşmanın Fishing
+    Ship'lerini batır, suyu kontrol et. Karanlık Çağ'daki dört Fishing Ship, gemi üretimini sürdüren odun-altın
     ekonomisini fonlar. **Önerilen uygarlıklar:** Vikings (Dock'lardan %10 fazla odun), Portuguese (gemiler daha
     yavaş ölür), Italians (daha ucuz Dock + gemi), Byzantines (Kale Çağı'nda Greek Fire), Malay (gemiler genel
     olarak daha ucuz).
 strategy:
   en:
-    - 6 villagers on sheep under the TC
-    - 4 villagers to wood; Lumber Camp near the shore
-    - 1 villager builds a Dock on the shore; 1 lures the boar
-    - Queue 4 Fishing Ships from the Dock onto deep-sea fish
-    - 4 more villagers to food under the TC
-    - 5 villagers to wood; research Loom
-    - Click Feudal Age at 21 villagers (~8:45)
-    - While advancing, send 3 villagers to gold and build a 2nd Dock
-    - In Feudal (~10:00), pump Galleys non-stop from both Docks
-    - Research Fletching for +1 Galley range
-    - New TC villagers go to wood to sustain ship production
-    - Use the Galley group to kill enemy Fishing Ships and deny their Dock
+    - Build 2 Houses; 6 villagers on sheep under the TC
+    - 4 villagers to wood with a Lumber Camp
+    - 1 villager lures the nearest boar
+    - 1 villager builds a Dock + 2 Houses; queue 4 Fishing Ships onto deep fish
+    - 2 more to wood, then lure the 2nd boar; fill TC food to 20 pop
+    - Research Loom and click Feudal Age at 21 villagers
+    - "While advancing: 7 to a 2nd Lumber Camp, 4 to gold, 1 builds a 2nd Dock, 2 to stragglers, 1 to wood"
+    - In Feudal, research Double-Bit Axe and pump Fire Galleys from both Docks
+    - Build a 3rd Dock and keep ships coming
+    - New TC villagers go to gold/berries/wood to sustain ship production
+    - Use the ship group to kill enemy Fishing Ships and deny their Dock
     - >-
-      **Weak against:** Opponents who also double-Dock and match Galley count; Fire Ships hard-counter Galleys
-      in Castle Age.
+      **Weak against:** Opponents who also double-Dock and match ship count; being out-fished while you over-commit
+      to military.
     - >-
       **Strong against:** Land civs forced onto water; opponents who skip a Dock; Fishing-Ship-dependent
       economies.
   tr:
-    - TC altında 6 köylü koyunlarda
-    - 4 köylü oduna; sahile yakın Lumber Camp
-    - 1 köylü sahile Dock kurar; 1 köylü yaban domuzunu çeker
-    - Dock'tan derin deniz balığına 4 Fishing Ship sıraya al
-    - 4 köylü daha TC altında yiyeceğe
-    - 5 köylü oduna; Loom araştır
-    - 21 köylüde Feodal Çağ'a tıkla (~8:45)
-    - Çağ atlarken 3 köylüyü altına gönder ve 2. Dock'u kur
-    - Feodal'de (~10:00) iki Dock'tan durmadan Galley üret
-    - +1 Galley menzili için Fletching araştır
-    - Yeni TC köylüleri gemi üretimini sürdürmek için oduna gider
-    - Galley grubuyla düşman Fishing Ship'lerini öldür ve Dock'larını engelle
+    - 2 House kur; TC altında 6 köylü koyunlarda
+    - 4 köylü Lumber Camp ile oduna
+    - 1 köylü en yakın yaban domuzunu çeker
+    - 1 köylü Dock + 2 House kurar; derin balığa 4 Fishing Ship sıraya al
+    - 2 köylü daha oduna, sonra 2. yaban domuzunu çek; TC yiyeceğini 20 pop'a doldur
+    - Loom araştır ve 21 köylüde Feodal Çağ'a tıkla
+    - "Çağ atlarken: 7 köylü 2. Lumber Camp'e, 4 altına, 1 köylü 2. Dock kurar, 2 ağaç artıklarına, 1 oduna"
+    - Feodal'de Double-Bit Axe araştır ve iki Dock'tan Fire Galley üret
+    - 3. Dock kur ve gemileri durmadan üret
+    - Yeni TC köylüleri gemi üretimini sürdürmek için altın/çilek/oduna gider
+    - Gemi grubuyla düşman Fishing Ship'lerini öldür ve Dock'larını engelle
     - >-
-      **Zayıf yönü:** Rakip de çift Dock açar ve Galley sayısını tutturur; Fire Ship'ler Kale Çağı'nda Galley'lere
-      karşı sert counter'dır.
+      **Zayıf yönü:** Rakip de çift Dock açar ve gemi sayısını tutturur; askeriyeye fazla yüklenince balıkta geride
+      kalmak.
     - "**Güçlü yönü:** Suya zorla sürülen kara uygarlıkları; Dock kurmayan rakipler; Fishing Ship'e bağımlı ekonomiler."
 source:
-  author: Sitaux AoE2 — Galley & Fire Rush
-  url: https://sitaux.com/galley-and-fire-rush/
+  author: AoE Companion — Win Water (community build guide)
+  url: https://aoecompanion.com/build-guides/win-water

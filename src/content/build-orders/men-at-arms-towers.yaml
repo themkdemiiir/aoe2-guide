@@ -1,7 +1,7 @@
 slug: men-at-arms-towers
 name:
   en: Men-at-Arms + Tower Rush
-  tr: Men-at-Arms + Tower Rush
+  tr: Men-at-Arms + Kule Baskını
 difficulty: advanced
 targetAge: feudal
 durationMin: 10
@@ -30,26 +30,21 @@ steps:
   - villagers: 10
     assign:
       en: +3 → collect wood
-      tr: +3 → Odun topla
+      tr: +3 → odun topla
     icons:
       - wood
   - villagers: 11
     assign:
       en: +1 → lure the nearest boar
-      tr: +1 → En yakın domuzu çek
+      tr: +1 → en yakın domuzu çek
     icons:
       - food
-  - villagers: 12
-    assign:
-      en: +1 → build 2 Houses near the berries
-      tr: +1 → Meyvelerin yanına 2 House inşa et
-    icons:
-      - house
   - villagers: 13
     assign:
-      en: +1 → build Mill next to berries
-      tr: +1 → Meyvelerin yanına Mill inşa et
+      en: "+1 (→12) build 2 Houses near the berries; +1 (→13) build Mill next to them"
+      tr: "+1 (→12) meyvelerin yanına 2 House inşa et; +1 (→13) yanlarına Mill kur"
     icons:
+      - house
       - mill
       - food
   - villagers: 15
@@ -61,39 +56,33 @@ steps:
   - villagers: 18
     assign:
       en: +3 → sheep or boar food
-      tr: +3 → koyun veya domuz Yiyeceği
+      tr: +3 → koyun veya domuz yiyeceği
     icons:
       - food
   - villagers: 19
     assign:
       en: +1 → build Barracks and train 3 Militia; this villager then mines Stone
-      tr: +1 → Barracks inşa et ve 3 Militia eğit; bu köylü ardından Taş toplar
+      tr: +1 → Barracks inşa et ve 3 Militia eğit; bu köylü ardından taş toplar
     icons:
       - barracks
       - militia
       - stone
-  - villagers: 20
-    assign:
-      en: +1 → build Mining Camp next to gold
-      tr: +1 → Altın yanına Mining Camp inşa et
-    icons:
-      - mining-camp
-      - gold
   - villagers: 21
     assign:
-      en: +1 → mine gold; research Loom; advance to Feudal Age
-      tr: +1 → Altın topla; Loom araştır; Feodal Çağ'a geç
+      en: "+1 (→20) build Mining Camp next to gold; +1 (→21) mine gold; research Loom and advance to Feudal Age"
+      tr: "+1 (→20) altın yanına Mining Camp kur; +1 (→21) altın topla; Loom araştır ve Feodal Çağ'a geç"
     note:
       en: Research Loom in your Town Center
       tr: Town Center'da Loom araştır
     icons:
+      - mining-camp
       - gold
       - loom
       - feudal-age
   - villagers: 21
     assign:
       en: "Feudal: upgrade Militia to Men-at-Arms; send the Militia plus your Stone/Gold villagers forward"
-      tr: "Feodal: Militia'yı Men-at-Arms'a yükselt; Militia ile Taş/Altın köylülerini öne gönder"
+      tr: "Feodal: Militia'yı Men-at-Arms'a yükselt; Militia ile taş/altın köylülerini öne gönder"
     icons:
       - man-at-arms
       - watch-tower
@@ -145,18 +134,18 @@ strategy:
   tr:
     - Sürekli köylü üret ve başlangıçta 2 House inşa et
     - 6 köylüye ulaşana kadar köylüleri koyunlara gönder
-    - 1 köylü Lumber Camp inşa eder; +3 köylü Odun toplar
+    - 1 köylü Lumber Camp inşa eder; +3 köylü odun toplar
     - 1 köylü en yakın domuzu çeker
     - 1 köylü meyvelerin yanına 2 House inşa eder; 1 köylü yanlarına Mill kurar
     - +2 köylü meyvelere; 2. domuzu çek
-    - +3 köylü koyun veya domuz Yiyeceğine
-    - 1 köylü Barracks inşa eder, 3 Militia eğitir, ardından Taş toplamaya geçer
-    - 1 köylü Altın yanına Mining Camp kurar; 1 köylü Altın toplar
-    - Öne gitmeden önce rakibinin üssünü iyi scout'la; ana Altın ve Odun hatlarını bul
+    - +3 köylü koyun veya domuz yiyeceğine
+    - 1 köylü Barracks inşa eder, 3 Militia eğitir, ardından taş toplamaya geçer
+    - 1 köylü altın yanına Mining Camp kurar; 1 köylü altın toplar
+    - Öne gitmeden önce rakibinin üssünü iyi scout'la; ana altın ve odun hatlarını bul
     - Feodal Çağ gelir gelmez Militia'yı Men-at-Arms'a yükselt
-    - Militia/Men-at-Arms ile Taş ve Altın köylülerini düşman üssüne doğru öne gönder
+    - Militia/Men-at-Arms ile taş ve altın köylülerini düşman üssüne doğru öne gönder
     - İlk tower'ı rakibinin erişemeyeceği bir yere kur — bu tower, ikinci tower'ının savunması olur
-    - Tower'ları düşmanın Altın ve Odun hatlarının üzerine koy; o kaynakları engelle
+    - Tower'ları düşmanın altın ve odun hatlarının üzerine koy; o kaynakları engelle
     - Men-at-Arms'ı yalnız köylüleri kovalamak ve tower inşaatçılarını korumak için kullan
     - Canı azalmış köylüleri bitmiş tower'a çekerek garnizona al ve ateş aç
     - Nüfus alanı azalırsa öne House inşa et
@@ -166,8 +155,8 @@ strategy:
       rakipler tüm planı bozar.
     - >-
       **Güçlü olduğu durumlar:** Öne atılan saldırıya zamanında yanıt veremeyen açgözlü ve pasif açılışlar ile açıkta
-      kalan Altın veya Odun hatlarına kümelenmiş ekonomiler.
-    - Öne gitmeden önce rakibinin üssünü iyi scout'la; ana Altın ve Odun hatlarını bul.
+      kalan altın veya odun hatlarına kümelenmiş ekonomiler.
+    - Öne gitmeden önce rakibinin üssünü iyi scout'la; ana altın ve odun hatlarını bul.
     - >-
       İnşa ettiğin ilk tower ikinci tower'ının savunması olacaktır; bu yüzden onu rakibinin erişemeyeceği bir noktaya
       kurmaya çalış.

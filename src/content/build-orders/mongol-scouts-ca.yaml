@@ -34,20 +34,15 @@ steps:
       - food
   - villagers: 10
     assign:
-      en: +1 → build a House, then a Mill on berries
-      tr: +1 → bir Ev, ardından meyvelerin yanına Değirmen kur
+      en: +1 → build a House, then a Mill on berries; use the Scout to push deer toward the Town Center
+      tr: +1 → bir Ev, ardından meyvelerin yanına Değirmen kur; Süvariyle geyikleri Şehir Merkezi'ne doğru sür
+    note:
+      en: Free deer food without losing villager time
+      tr: Köylü iş gücünden kaybetmeden bedava geyik yiyeceği
     icons:
       - house
       - mill
-  - assign:
-      en: Use the Scout to push deer toward the Town Center
-      tr: Süvariyle geyikleri Şehir Merkezi'ne doğru sür
-    note:
-      en: Free food without losing villager time
-      tr: Köylü iş gücünden kaybetmeden bedava yiyecek
-    icons:
       - scout-cavalry
-      - food
   - villagers: 16
     assign:
       en: +6 → hunt; lure the second boar into the mix
@@ -68,17 +63,8 @@ steps:
     phase: feudal
     time: "8:50"
     assign:
-      en: Click Feudal Age at 18 pop
-      tr: 18 nüfusta Feudal çağa tıkla
-    note:
-      en: Perfect Feudal landing around 8:50
-      tr: Mükemmel Feudal varışı ~8:50 civarı
-    icons:
-      - food
-  - villagers: 18
-    assign:
-      en: "Feudal: 5 → wood + 2nd Lumber Camp; 5 → berries; 1 builds a Barracks"
-      tr: "Feudal: 5 → odun + 2. Kereste Kampı; 5 → meyveler; 1 → Kışla kurar"
+      en: "Click Feudal Age at 18 pop (perfect landing ~8:50). In Feudal: move 5 hunt → wood + 2nd Lumber Camp, 5 → berries, 1 builds a Barracks"
+      tr: "18 nüfusta Feudal çağa tıkla (mükemmel varış ~8:50). Feudal'da: avdan 5 → odun + 2. Kereste Kampı, 5 → meyveler, 1 → Kışla kurar"
     icons:
       - wood
       - lumber-camp
@@ -86,24 +72,18 @@ steps:
       - barracks
   - villagers: 18
     assign:
-      en: 2 villagers build a Stable; pump Scout Cavalry and harass
-      tr: 2 köylü Ahır kurar; sürekli Süvari üret ve taciz et
+      en: 2 villagers build a Stable; pump Scout Cavalry and harass; research Double-Bit Axe (Horse Collar on closed maps); add 1–4 Spearmen vs. enemy scouts
+      tr: >-
+        2 köylü Ahır kurar; sürekli Süvari üret ve taciz et; Double-Bit Axe araştır (kapalı haritalarda Horse Collar);
+        düşman süvarisine karşı 1–4 Mızrakçı ekle
     note:
-      en: Wall the base with the two Stable builders once it is up
-      tr: Ahır bitince o iki köylüyle üssü duvarla
+      en: Wall the base with the two Stable builders once it is up; seed Farms as wood frees up
+      tr: Ahır bitince o iki köylüyle üssü duvarla; odun arttıkça Tarla kur
     icons:
       - stable
       - scout-cavalry
-  - assign:
-      en: Research Double-Bit Axe; add Horse Collar on closed maps; seed Farms; add 1–4 Spearmen vs. enemy scouts
-      tr: >-
-        Double-Bit Axe araştır; kapalı haritalarda Horse Collar ekle; Tarla kur; düşman süvarisine karşı 1–4 Mızrakçı
-        ekle
-    icons:
       - double-bit-axe
-      - horse-collar
       - farm
-      - spearman
   - assign:
       en: At ~15 Farms send 5 → gold + Mining Camp; build a Blacksmith; finish walling fully
       tr: ~15 Tarlada 5 → altın + Maden Kampı; Demirci kur; üssü tamamen duvarla
@@ -113,16 +93,11 @@ steps:
       - blacksmith
   - phase: castle
     assign:
-      en: Click Castle Age behind a sealed wall
-      tr: Kapalı duvarın arkasında Castle çağa tıkla
+      en: "Click Castle Age behind a sealed wall, then build 2 Archery Ranges; research Bloodlines + Fletching; start Cavalry Archers"
+      tr: "Kapalı duvarın arkasında Castle çağa tıkla, ardından 2 Okçu Menzili kur; Bloodlines + Fletching araştır; Atlı Okçu üretmeye başla"
     note:
       en: Bank gold and keep Scouts alive for the transition
       tr: Altın biriktir ve geçiş için Süvarileri hayatta tut
-    icons:
-      - food
-  - assign:
-      en: "Castle: build 2 Archery Ranges; research Bloodlines + Fletching; start Cavalry Archers"
-      tr: "Castle: 2 Okçu Menzili kur; Bloodlines + Fletching araştır; Atlı Okçu üretmeye başla"
     icons:
       - archery-range
       - bloodlines

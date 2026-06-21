@@ -68,19 +68,18 @@ steps:
       - food
   - villagers: 21
     assign:
-      en: +1 → sheep; research Loom; click Feudal Age
-      tr: +1 → koyunlar; Loom araştır; Feodal Çağ'a tıkla
+      en: >-
+        +1 → sheep; research Loom and click Feudal Age, then research Double-Bit Axe at the Lumber Camp and queue 2 Fire
+        Galleys from the Dock
+      tr: >-
+        +1 → koyunlar; Loom araştır ve Feodal Çağ'a tıkla, ardından Lumber Camp'te Double-Bit Axe araştır ve Dock'tan 2
+        Fire Galley sıraya al
     note:
       en: Wall up while uphill
       tr: Çağ atlarken surları tamamla
     icons:
       - loom
       - feudal-age
-  - villagers: 21
-    assign:
-      en: "Feudal: research Double-Bit Axe; queue 2 Fire Galleys from the Dock"
-      tr: "Feodal: Lumber Camp'te Double-Bit Axe araştır; Dock'tan 2 Fire Galley sıraya al"
-    icons:
       - double-bit-axe
       - fire-galley
   - villagers: 23
@@ -92,8 +91,8 @@ steps:
       - mining-camp
   - villagers: 25
     assign:
-      en: +1 Mill on Berries, +1 → Berries; build 2nd Dock
-      tr: +1 çileğe Mill kur, +1 → çilekler; 2. Dock'u inşa et
+      en: +1 Mill on Berries, +1 → Berries; build a 2nd and 3rd Dock (3 Docks total)
+      tr: +1 çileğe Mill kur, +1 → çilekler; 2. ve 3. Dock'u inşa et (toplam 3 Dock)
     icons:
       - mill
       - food
@@ -128,7 +127,7 @@ strategy:
     - Queue 2 Fire Galleys from the Dock to contest enemy fish and ships
     - 22–23 villagers to gold mining
     - 24th villager builds a Mill on Berries
-    - 25th villager to Berries
+    - 25th villager to Berries; build a 2nd and 3rd Dock for 3 Docks total
     - >-
       **Weak against:** Opponents who match your Dock count and out-micro your Galleys; Fire Ships hard-counter the
       Galley line once Castle Age begins; an undefended land wall against an early land push.
@@ -149,7 +148,7 @@ strategy:
     - Düşman balık ve gemilerini engellemeye Dock'tan 2 Fire Galley sıraya al
     - 22–23 köylüyü altın madenciliğine gönder
     - 24. köylü çileğe Mill kurar
-    - 25. köylüyü çileklere gönder
+    - 25. köylüyü çileklere gönder; toplam 3 Dock için 2. ve 3. Dock'u inşa et
     - >-
       **Zayıf olduğu durumlar:** Dock sayını eşitleyen ve Galley'lerini micro'da geçen rakipler; Kale Çağı başlayınca
       Fire Ship'ler Galley hattını sert counter'lar; erken kara baskısına karşı savunmasız kalan sur.

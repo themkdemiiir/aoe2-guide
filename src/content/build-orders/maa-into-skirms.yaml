@@ -1,7 +1,7 @@
 slug: maa-into-skirms
 name:
   en: Man-at-Arms Into Skirms
-  tr: Man-at-Arms Sonrası Skirmiş
+  tr: Man-at-Arms'tan Skirmiş'e
 difficulty: intermediate
 targetAge: feudal
 durationMin: 9
@@ -23,10 +23,14 @@ steps:
       - lumber-camp
   - villagers: 10
     assign:
-      en: +1 → lure and eat the first boar
-      tr: +1 → ilk yaban domuzunu çek ve ye
+      en: +1 → lure and eat the first boar; lure one or two deer in with your Scout if available
+      tr: +1 → ilk yaban domuzunu çek ve ye; varsa Scout'unla bir iki geyiği de çek
+    note:
+      en: Free deer food keeps your eco on hunt longer
+      tr: Bedava geyik yiyeceği ekonomiyi daha uzun süre avda tutar
     icons:
       - food
+      - scout-cavalry
   - villagers: 11
     assign:
       en: +1 → build a House, then a Mill on the chickens or berries
@@ -34,15 +38,6 @@ steps:
     icons:
       - house
       - mill
-      - food
-  - assign:
-      en: Lure one or two deer into the Mill range with your Scout
-      tr: Scout'unla bir iki geyiği Değirmen menziline çek
-    note:
-      en: Free food that keeps your eco on hunt longer
-      tr: Ekonomiyi daha uzun süre avda tutan bedava yiyecek
-    icons:
-      - scout-cavalry
       - food
   - villagers: 13
     assign:
@@ -62,14 +57,10 @@ steps:
       - food
   - villagers: 16
     assign:
-      en: +2 → hunt (boar and deer)
-      tr: +2 → av (domuz ve geyik)
+      en: +2 → hunt under the TC, and send one builder to make a Barracks and a House at the front of your base
+      tr: +2 → Şehir Merkezi'nin altında av, ve bir köylüyü üssünün ön tarafına Kışla ve Ev kurmaya gönder
     icons:
       - food
-  - assign:
-      en: +1 → build a Barracks and a House at the front of your base
-      tr: +1 → üssünün ön tarafına bir Kışla ve bir Ev kur
-    icons:
       - barracks
       - house
   - villagers: 19
@@ -94,41 +85,26 @@ steps:
       - militia
   - villagers: 19
     assign:
-      en: Send 5 off the hunt → wood and 3 off the hunt → berries
-      tr: Avdan 5 kişiyi → oduna, 3 kişiyi → çalılara gönder
+      en: Send 5 off the hunt → wood and 3 off the hunt → berries; research Man-at-Arms, then Double-Bit Axe (Horse Collar optional)
+      tr: Avdan 5 kişiyi → oduna, 3 kişiyi → çalılara gönder; Man-at-Arms, ardından Double-Bit Axe araştır (Horse Collar opsiyonel)
     icons:
       - wood
-      - food
-  - assign:
-      en: Research Man-at-Arms, then Double-Bit Axe (Horse Collar optional)
-      tr: Man-at-Arms, ardından Double-Bit Axe araştır (Horse Collar opsiyonel)
-    icons:
       - man-at-arms
       - double-bit-axe
-      - horse-collar
   - assign:
-      en: Build an Archery Range at the front; send the straggler-tree Villager onto farms; start Skirmishers
+      en: Build an Archery Range at the front and start Skirmishers; put new and straggler-tree Villagers onto farms; add a Blacksmith with Fletching, keep adding Man-at-Arms, take Arson at 7-8 Man-at-Arms, then Infantry and Skirmisher armor and Wheelbarrow at 14-16 farms
       tr: >-
-        Ön tarafa bir Okçuluk Menzili kur; üs çevresindeki tek tük ağaçtan kesen Köylü'yü tarlalara al; Skirmiş üretmeye
-        başla
+        Ön tarafa bir Okçuluk Menzili kur ve Skirmiş üretmeye başla; yeni köylüleri ve tek tük ağaçtan kesenleri
+        tarlalara al; Fletching ile bir Demirci ekle, Man-at-Arms eklemeye devam et, 7-8 Man-at-Arms olunca Arson al,
+        sonra Piyade ve Skirmiş zırhı ve 14-16 tarlada Wheelbarrow
     icons:
       - archery-range
       - skirmisher
       - farm
-  - assign:
-      en: Build a Blacksmith, research Fletching, and keep adding Man-at-Arms
-      tr: Bir Demirci kur, Fletching araştır ve Man-at-Arms eklemeye devam et
-    icons:
       - blacksmith
       - fletching
-      - man-at-arms
-  - assign:
-      en: Research Arson once you have 7-8 Man-at-Arms, then Infantry and Skirmisher armor; Wheelbarrow at 14-16 farms
-      tr: 7-8 Man-at-Arms olunca Arson araştır, sonra Piyade ve Skirmiş zırhı; 14-16 tarlada Wheelbarrow al
-    icons:
       - arson
       - wheelbarrow
-      - farm
 intro:
   en: >-
     Hit Feudal Age around 9:15 with Militia already walking out, upgrade to Man-at-Arms, and back them with Skirmishers

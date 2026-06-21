@@ -67,15 +67,11 @@ steps:
       - loom
   - villagers: 21
     assign:
-      en: Send 5 from hunt → wood, dropping a second lumber camp
-      tr: Avdan 5 köylüyü → oduna gönder, ikinci bir lumber camp kur
+      en: Send 5 from hunt → wood for a second lumber camp, and pull 1 from hunt to build a Barracks so it is ready the moment you hit Feudal — earlier than other civs
+      tr: Avdan 5 köylüyü → oduna gönderip ikinci bir lumber camp kur ve avdan 1 köylü alıp bir Barracks dik, böylece Feudal'a ulaştığın an hazır olur — diğer uygarlıklardan önce
     icons:
       - wood
       - lumber-camp
-  - assign:
-      en: Pull 1 from hunt to build a Barracks, so it is ready the moment you hit Feudal — earlier than other civs
-      tr: Avdan 1 köylü al ve bir Barracks kur, böylece Feudal'a ulaştığın an hazır olur — diğer uygarlıklardan önce
-    icons:
       - barracks
   - assign:
       en: "Fork A — Archers: build one Archery Range and start Archers, moving 4 villagers → gold"
@@ -97,15 +93,11 @@ steps:
       - spearman
       - skirmisher
   - assign:
-      en: Add farms as the hunt runs out and research Double-Bit Axe to keep wood flowing
-      tr: Av tükenirken tarla ekle ve odunu akıtmak için Double-Bit Axe araştır
+      en: Add farms as the hunt runs out and research Double-Bit Axe (Horse Collar optional); once your chosen military is online, build a Blacksmith and research Fletching
+      tr: Av tükenirken tarla ekle ve Double-Bit Axe araştır (Horse Collar isteğe bağlı); seçtiğin ordu hazır olunca bir Blacksmith kur ve Fletching araştır
     icons:
       - farm
       - double-bit-axe
-  - assign:
-      en: Build a Blacksmith and research Fletching once your chosen military is online
-      tr: Seçtiğin ordu hazır olunca bir Blacksmith kur ve Fletching araştır
-    icons:
       - blacksmith
       - fletching
 intro:

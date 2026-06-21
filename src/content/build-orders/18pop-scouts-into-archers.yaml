@@ -1,7 +1,7 @@
 slug: 18pop-scouts-into-archers
 name:
   en: 18 Pop Scouts into Archers
-  tr: 18 Köylü Scouts into Archers
+  tr: 18 Köylü Scouts'tan Archers'a
 difficulty: intermediate
 targetAge: feudal
 durationMin: 14
@@ -68,53 +68,34 @@ steps:
       - loom
   - villagers: 18
     assign:
-      en: Send 6 from hunt → wood (8 on one lumber camp, or 9 on two)
-      tr: Avdan 6 köylüyü → oduna gönder (tek kampta 8, iki kampta 9 oduncu)
+      en: "Reslot the hunt: 6 → wood (8 on one lumber camp, or 9 on two), 4 → berries, 2 → build a Barracks and a House"
+      tr: "Avı yeniden dağıt: 6 → oduna (tek kampta 8, iki kampta 9 oduncu), 4 → meyveye, 2 → Barracks ve House kur"
     icons:
       - wood
       - lumber-camp
-  - villagers: 18
-    assign:
-      en: Send 4 from hunt → berries
-      tr: Avdan 4 köylüyü → meyveye gönder
-    icons:
       - food
-  - villagers: 18
-    assign:
-      en: "Pull 2 from hunt: one builds a Barracks, one builds a House"
-      tr: "Avdan 2 köylü al: biri Barracks, biri House kursun"
-    icons:
       - barracks
-      - house
   - assign:
-      en: Build a Stable, start Scout Cavalry, add 1+ Spearman; research Double-Bit Axe (Horse Collar optional)
-      tr: Stable kur, Scout Cavalry üret, 1+ Spearman ekle; Double-Bit Axe araştır (Horse Collar isteğe bağlı)
+      en: Build a Stable and start Scout Cavalry; add 1+ Spearman, research Double-Bit Axe (Horse Collar optional)
+      tr: Stable kur ve Scout Cavalry üret; 1+ Spearman ekle, Double-Bit Axe araştır (Horse Collar isteğe bağlı)
     icons:
       - stable
       - scout-cavalry
       - spearman
       - double-bit-axe
   - assign:
-      en: Seed roughly 8 farms as the hunt food winds down
-      tr: Av yiyeceği azalırken yaklaşık 8 tarla ek
+      en: Seed roughly 8 farms as hunt food winds down, then move 8 Town Center villagers → gold and build a Mining Camp
+      tr: Av yiyeceği azalırken yaklaşık 8 tarla ek, sonra 8 Town Center köylüsünü → altına taşı ve Mining Camp kur
     icons:
       - farm
-  - assign:
-      en: Move 8 Town Center villagers → gold, build a Mining Camp
-      tr: 8 Town Center köylüsünü → altına taşı, Mining Camp kur
-    icons:
       - gold
       - mining-camp
   - assign:
-      en: Build 2 Archery Ranges and switch into Archers
-      tr: 2 Archery Range kur ve Archers'a geç
+      en: Build 2 Archery Ranges and switch into Archers, then add a Blacksmith and research Fletching
+      tr: 2 Archery Range kur ve Archers'a geç, ardından Blacksmith ekle ve Fletching araştır
     icons:
       - archery-range
       - archer
-  - assign:
-      en: Build a Blacksmith and research Fletching
-      tr: Blacksmith kur ve Fletching araştır
-    icons:
       - blacksmith
       - fletching
 intro:

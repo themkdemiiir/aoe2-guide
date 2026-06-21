@@ -67,15 +67,10 @@ steps:
       - loom
   - villagers: 17
     assign:
-      en: Feudal arrives — move 1 hunter to wood
-      tr: Feudal gelir — 1 avcıyı oduna kaydır
+      en: Feudal arrives — move 1 hunter to wood, then 2 hunters to stone and drop a mining camp
+      tr: Feudal gelir — 1 avcıyı oduna kaydır, sonra 2 avcıyı taşa al ve mining camp kur
     icons:
       - wood
-  - villagers: 17
-    assign:
-      en: Move 2 hunters to stone and drop a mining camp
-      tr: 2 avcıyı taşa al ve mining camp kur
-    icons:
       - stone
       - mining-camp
   - villagers: 17
@@ -88,26 +83,16 @@ steps:
     icons:
       - watch-tower
   - assign:
-      en: +2 new vils → hunt and food; add farms and houses as needed
-      tr: +2 yeni köylü → av ve yemek; gerektikçe tarla ve house ekle
+      en: Keep making vils for hunt and food; build the first tower ~8 tiles from their woodline or berries
+      tr: Av ve yemek için köylü üretmeyi sürdür; ilk kuleyi rakibin odun hattına veya meyvelerine ~8 kare mesafede kur
     icons:
       - food
-      - farm
-  - assign:
-      en: Build the first tower ~8 tiles from their woodline or berries
-      tr: İlk kuleyi rakibin odun hattına veya meyvelerine ~8 kare mesafede kur
-    icons:
       - watch-tower
   - assign:
-      en: +2 forward vils build houses for supply; garrison up to 10 vils per tower
-      tr: +2 ileri köylü tedarik için house kursun; kule başına 10 köylüye kadar içeri al
+      en: Forward vils build houses for supply; garrison up to 10 vils per tower and chain new towers 6–8 tiles apart
+      tr: İleri köylüler tedarik için house kursun; kule başına 10 köylüye kadar içeri al ve yeni kuleleri 6–8 kare aralıkla zincirle
     icons:
       - house
-      - watch-tower
-  - assign:
-      en: Chain new towers 6–8 tiles apart, walking deeper into their economy
-      tr: Yeni kuleleri 6–8 kare aralıkla zincirle, ekonomilerinin içine doğru ilerle
-    icons:
       - watch-tower
 intro:
   en: >-

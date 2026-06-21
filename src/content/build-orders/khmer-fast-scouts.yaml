@@ -47,42 +47,30 @@ steps:
     phase: feudal
     time: "7:35"
     assign:
-      en: +5 → hunt under the TC, then click up to Feudal
-      tr: +5 → TC altında avlanma, sonra Feudal'a tıkla
+      en: +5 → hunt under the TC, then click up to Feudal at 16 pop on pure food
+      tr: +5 → TC altında avlanma, sonra 16 nüfusta tamamen yiyecekle Feudal'a tıkla
     note:
-      en: Land at 16 pop on 0 wood / 16 food — pure food up
-      tr: 16 nüfusta 0 odun / 16 yiyecek ile geç — tamamen yiyecekle çık
+      en: Keep only 2 dead animals at once (unless luring deer)
+      tr: Aynı anda yalnızca 2 ölü hayvan tut (geyik çekmiyorsan)
     icons:
       - food
   - villagers: 16
     assign:
-      en: "Feudal: send 8 vils to a fresh woodline and build a lumber camp"
-      tr: "Feudal: 8 köylüyü yeni bir ormana gönder ve bir kereste kampı kur"
+      en: "Feudal: send 8 vils to a fresh woodline, build a lumber camp, and drop 1 house to protect it"
+      tr: "Feudal: 8 köylüyü yeni bir ormana gönder, bir kereste kampı kur ve onu korumak için 1 ev bırak"
     icons:
       - wood
       - lumber-camp
-  - assign:
-      en: Drop 1 house near the new woodline to stay above pop
-      tr: Nüfusun üstünde kalmak için yeni ormanın yanına 1 ev bırak
-    icons:
       - house
   - assign:
       en: Build a stable with 2 vils; start Scout Cavalry the moment it finishes
       tr: 2 köylüyle ahır kur; biter bitmez Atlı Keşifçi üretmeye başla
     note:
-      en: No barracks — Khmer go straight to the stable
-      tr: Kışla yok — Khmer doğrudan ahıra geçer
+      en: No barracks — Khmer go straight to the stable, and houses near resources garrison vils against raids
+      tr: Kışla yok — Khmer doğrudan ahıra geçer; kaynakların yanındaki evler baskınlara karşı köylüleri içine alır
     icons:
       - stable
       - scout-cavalry
-  - assign:
-      en: Place houses next to each resource cluster
-      tr: Her kaynak kümesinin yanına evler yerleştir
-    note:
-      en: Khmer villagers garrison in houses, so houses double as protection
-      tr: Khmer köylüleri evlere sığınır, yani evler aynı zamanda koruma sağlar
-    icons:
-      - house
   - assign:
       en: Research Double-Bit Axe at the lumber camp
       tr: Kereste kampında Double-Bit Axe'ı araştır
@@ -95,8 +83,11 @@ steps:
     icons:
       - food
   - assign:
-      en: Once you bank 60 wood, start seeding farms; keep scouts flowing
-      tr: 60 odun biriktirince tarla ekmeye başla; keşifçileri akıtmaya devam et
+      en: Once you bank 60 wood, seed farms with hunt vils; put leftovers on straggler trees
+      tr: 60 odun biriktirince av köylüleriyle tarla ek; kalanları seyrek ağaçlara koy
+    note:
+      en: Make farms as soon as you have 60 wood; keep scouts flowing
+      tr: 60 odunun olur olmaz tarla yap; keşifçileri akıtmaya devam et
     icons:
       - farm
       - scout-cavalry

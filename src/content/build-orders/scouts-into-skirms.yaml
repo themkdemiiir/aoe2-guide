@@ -1,7 +1,7 @@
 slug: scouts-into-skirms
 name:
   en: 18 Pop Scouts into Skirms
-  tr: 18 Köylü Scouts'tan Skirms'e
+  tr: 18 Köylü Scouts'tan Skirmisher'a
 difficulty: intermediate
 targetAge: feudal
 durationMin: 9
@@ -68,22 +68,19 @@ steps:
       - loom
   - villagers: 18
     assign:
-      en: "Split the 6 hunt villagers: 6 → wood (8 on one lumber camp), then 4 → berries"
-      tr: "6 av köylüsünü böl: 6 → oduna (tek lumber camp'te 8), sonra 4 → meyveye"
+      en: >-
+        Split the 6 hunters: 6 → wood (8 on one lumber camp) and 4 → berries; then pull 4 → 1 Barracks, 1 House, and 2
+        build a Stable before walling or going wood
+      tr: >-
+        6 avcıyı böl: 6 → oduna (tek lumber camp'te 8) ve 4 → meyveye; sonra 4 köylü al → 1 Barracks, 1 House ve 2'si
+        Stable kurup duvar örsün ya da oduna geçsin
     note:
-      en: Ends on 8 wood / 8 food after the splits below
-      tr: Aşağıdaki dağıtımlardan sonra 8 odun / 8 yiyecekte biter
+      en: Ends on 8 wood / 8 food
+      tr: 8 odun / 8 yiyecekte biter
     icons:
       - wood
       - lumber-camp
-      - food
-  - villagers: 18
-    assign:
-      en: "Pull 4 from hunt: 1 Barracks, 1 House, and 2 build a Stable then wall or go wood"
-      tr: "Avdan 4 köylü al: 1 Barracks, 1 House ve 2'si Stable kurup duvar ya da oduna geçsin"
-    icons:
       - barracks
-      - house
       - stable
   - assign:
       en: Start Scout Cavalry; research Double-Bit Axe (Horse Collar optional); seed farms as the hunt runs dry

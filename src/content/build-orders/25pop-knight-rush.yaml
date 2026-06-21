@@ -41,16 +41,10 @@ steps:
       - house
       - mill
       - food
-  - villagers: 12
-    assign:
-      en: +1 → hunt (deer/straggler food)
-      tr: +1 → ava git (geyik/artık yiyecek)
-    icons:
-      - food
   - villagers: 13
     assign:
-      en: +1 → lure the 2nd boar
-      tr: +1 → 2. yaban domuzunu çek
+      en: "+2 → 12th hunts deer/stragglers, 13th lures the 2nd boar"
+      tr: "+2 → 12. köylü geyik/artık avlar, 13. köylü 2. yaban domuzunu çeker"
     icons:
       - food
   - villagers: 17
@@ -80,16 +74,12 @@ steps:
       - gold
       - loom
   - assign:
-      en: "In Feudal: build Barracks + House, optionally wall; shift depleted food vils to Farms and wood"
-      tr: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır"
+      en: "In Feudal: build Barracks + House, optionally wall; shift depleted food vils to Farms and wood, then +2 → Stable and Market"
+      tr: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır, sonra +2 → Ahır ve Pazar dik"
     icons:
       - barracks
       - house
       - farm
-  - assign:
-      en: +2 → build Stable and Market
-      tr: +2 → Ahır ve Pazar dik
-    icons:
       - stable
       - market
   - villagers: 29
@@ -99,16 +89,12 @@ steps:
       en: +4 → gold; research Double-Bit Axe and Horse Collar; click Castle Age
       tr: +4 → altın; Double-Bit Axe ve Horse Collar araştır; Castle çağını tıkla
     note:
-      en: "Perfect Castle landing 16:05; add a 2nd Stable as you advance"
-      tr: "İdeal Castle varışı 16:05; çağ atlarken 2. Ahırı dik"
+      en: "Perfect Castle landing 16:05; add a 2nd Stable as you advance, then research Bow Saw and pump Knights from both Stables"
+      tr: "İdeal Castle varışı 16:05; çağ atlarken 2. Ahırı dik, ardından Bow Saw araştır ve iki Ahırdan da Şövalye bas"
     icons:
       - gold
       - double-bit-axe
       - stable
-  - assign:
-      en: "In Castle Age: research Bow Saw; pump Knights from both Stables"
-      tr: "Castle çağında: Bow Saw araştır; iki Ahırdan da Şövalye bas"
-    icons:
       - bow-saw
       - knight
 intro:
