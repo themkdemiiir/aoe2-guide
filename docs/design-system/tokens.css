@@ -1,0 +1,65 @@
+/*
+ * AOE2 Guide — Design tokens (portable)
+ * Extracted verbatim from src/styles/globals.css `@theme {}` (the Tailwind v4
+ * source of truth). This file is framework-agnostic: plain CSS custom properties
+ * usable without Tailwind. Colors are in oklch (same as source). Dark mode swaps
+ * a subset via [data-theme="dark"]; everything else inherits.
+ */
+
+:root {
+  /* Surfaces & text */
+  --color-parchment: oklch(0.93 0.04 80);   /* page background */
+  --color-ink: oklch(0.22 0.02 60);          /* primary text */
+  --color-stone-700: oklch(0.34 0.02 50);    /* secondary text, borders */
+  --color-stone-bg: oklch(0.17 0.02 50);     /* dark surface panel */
+
+  /* Accents */
+  --color-gold-500: oklch(0.73 0.13 80);     /* links, primary accent */
+  --color-gold-400: oklch(0.80 0.12 80);     /* lighter accent */
+  --color-gold-700: oklch(0.44 0.13 75);     /* AA-safe gold text on parchment (>=4.5:1) */
+  --color-royal: oklch(0.42 0.18 25);        /* warnings, important callouts */
+  --color-forest: oklch(0.50 0.10 145);
+  --color-steel: oklch(0.50 0.05 240);
+  --color-ember: oklch(0.86 0.12 75);        /* highlight / "due" state */
+
+  /* Resource indicators (AOE2 economy) */
+  --color-res-food: oklch(0.62 0.18 25);     /* red  */
+  --color-res-wood: oklch(0.50 0.05 50);     /* brown */
+  --color-res-gold: oklch(0.78 0.14 85);     /* yellow */
+  --color-res-stone: oklch(0.62 0 0);        /* grey */
+
+  /* Typography */
+  --font-display: "Cinzel", serif;                       /* headings (h1/h2) */
+  --font-body: "Inter", system-ui, sans-serif;           /* body */
+  --font-mono: "JetBrains Mono", ui-monospace, monospace; /* build-step timings */
+
+  /* Radii */
+  --radius: 4px;
+  --radius-sm: 2px;
+}
+
+/* Dark theme — only these four swap; the rest are inherited from :root. */
+[data-theme="dark"] {
+  --color-parchment: oklch(0.17 0.02 50);
+  --color-ink: oklch(0.92 0.012 85);   /* warm-light body text, NOT gold */
+  --color-stone-700: oklch(0.72 0.03 60);
+  --color-gold-500: oklch(0.80 0.12 80);
+}
+
+/* Self-hosted critical faces (latin + latin-ext; covers EN + Turkish ş ğ ı İ).
+   woff2 files live alongside this export under ./fonts/ (mirrored from
+   public/fonts/ in the repo). JetBrains Mono is loaded via @fontsource at runtime. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./fonts/inter-latin-400-normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(./fonts/cinzel-latin-600-normal.woff2) format("woff2");
+}
