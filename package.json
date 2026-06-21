@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/validate-icons.mjs && node scripts/verify-build-facts.mjs && node scripts/validate-data.mjs && node scripts/build-og.mjs && node scripts/optimize-images.mjs",
+    "prebuild": "node scripts/validate-icons.mjs && node scripts/verify-build-facts.mjs && node scripts/validate-data.mjs && node scripts/audit-yaml-translations.mjs && node scripts/build-og.mjs && node scripts/optimize-images.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "build:og": "node scripts/build-og.mjs",
     "build": "astro build",
@@ -52,6 +52,7 @@
     "astro-pagefind": "^2.0.0",
     "js-yaml": "^4.2.0",
     "knip": "^6.14.2",
+    "marked": "^18.0.5",
     "pagefind": "^1.5.2",
     "satori": "^0.26.0",
     "sharp": "^0.34.5",
