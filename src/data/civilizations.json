@@ -511,6 +511,8 @@
       "region": "South Asian",
       "specialty": "Camel and Gunpowder",
       "uniqueUnits": [
+        "elephant-archer",
+        "imperial-camel",
         "ghulam",
         "imperial-camel-rider"
       ],
@@ -564,7 +566,8 @@
       "region": "South American",
       "specialty": "Infantry",
       "uniqueUnits": [
-        "kamayuk"
+        "kamayuk",
+        "slinger"
       ],
       "civBonuses": [
         "Houses and Settlements provide +5 population space",
@@ -1014,8 +1017,8 @@
       "region": "Southern European",
       "specialty": "Naval and Gunpowder",
       "uniqueUnits": [
-        "organ-gun",
-        "caravel"
+        "caravel",
+        "organ-gun"
       ],
       "civBonuses": [
         "Foragers generate wood in addition to food",
@@ -1148,6 +1151,7 @@
       "region": "Eastern European",
       "specialty": "Infantry and Siege",
       "uniqueUnits": [
+        "boyars",
         "boyar"
       ],
       "civBonuses": [

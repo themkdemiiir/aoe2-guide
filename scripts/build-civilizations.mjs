@@ -326,12 +326,27 @@ async function run() {
       process.exit(1);
     }
 
-    // Unique units: source from the EN help string's "Unique Unit(s)" section, slugified.
-    // No defaults — a civ legitimately has 1 or 2 unique units, so ≥1 is required. Fail loud
-    // rather than emit [] (which would silently hide a real unit from the site).
-    const uniqueUnits = (en.uniqueUnitNames ?? []).map(slugify).filter(Boolean);
+    // Unique units: UNION of two trusted sources, because neither is complete on its own:
+    //   - aalises civilizations.csv `unique_unit` (aalises.uniqueUnits, already slugified): the
+    //     in-game help omits secondary unique units for some civs (e.g. Incas' Slinger).
+    //   - the EN help string's "Unique Unit(s)" section (en.uniqueUnitNames, slugified): the
+    //     aalises CSV is stale for some civs (e.g. Persians missing Savar).
+    // Dedupe by slug; preserve stable order — aalises entries first (in CSV order), then any
+    // help-only slugs not already present. slugify() is the single normalizer so identical
+    // names from either source collapse cleanly. No defaults: if the union is EMPTY, fail loud
+    // rather than emit [] (which would silently hide a real unit) — and never fall back to the
+    // removed hand-coded prior-file / icon-map-filtered carryover.
+    const helpUnits = (en.uniqueUnitNames ?? []).map(slugify).filter(Boolean);
+    const aalisesUnits = (aalises?.uniqueUnits ?? []).filter(Boolean);
+    const uniqueUnits = [];
+    const seen = new Set();
+    for (const u of [...aalisesUnits, ...helpUnits]) {
+      if (seen.has(u)) continue;
+      seen.add(u);
+      uniqueUnits.push(u);
+    }
     if (uniqueUnits.length === 0) {
-      console.error(`[FATAL] ${entry.slug}: no unique unit in help string`);
+      console.error(`[FATAL] ${entry.slug}: no unique unit from any source`);
       process.exit(1);
     }
     entry.uniqueUnits = uniqueUnits;
