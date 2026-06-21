@@ -72,14 +72,25 @@ until this read-side is repaired.
 - `CLAUDE.md` and `src/content/CLAUDE.md` still document the old `<type>/<lang>/<slug>.md`
   structure and the `import:md` / `new:guide` workflow.
 
-### 5. Build-order sourcing (MEDIUM)
+### 5. Build-order sourcing (MEDIUM → now in scope)
 
-46 builds: 11 derive from Hera transcripts in `md/build-orders/`, 35 are unsourced.
-**None** populate the optional `source` field (no attribution shown). Five Hera builds
-have duration mismatches vs their source; worst is `cumans-2tc-boom` — a 20-min Castle
-boom in the source but tagged `targetAge: feudal`, `durationMin: 9` (wrong). Build
-content is strategy (curated meta), not raw game data, so the 35 unsourced builds are
-**kept as-is**; only factual errors and attribution are fixed.
+46 builds: 11 derive from per-build Hera transcripts in `md/build-orders/`, the other 35
+had no per-build transcript. **None** populate the optional `source` field (no
+attribution shown). Several have factual errors vs their source — worst is
+`cumans-2tc-boom`: the source (`md/build-orders/hera-cumans-2tc-boom.md`) is a 20-min
+**Castle** boom (`target_age: castle`, `duration_min: 20`) but the YAML is tagged
+`targetAge: feudal`, `durationMin: 9` (wrong age and duration).
+
+**Owner directive:** treat the Hera materials we already hold as authoritative build
+sources — the per-build transcripts *and* `md/reference/hera-strategy-guide-2025-12.md`
++ `…-pdftext.txt` (a 2561-line transcribed Hera guide). That guide covers most of the
+"unsourced" builds by name (Drush Fast Castle, Fast Castle Boom, Fast Castle Light Cav
+Relic Control, Fast Castle into Unique Unit, Fast Castle on Fortress, Knight Rush,
+Scouts into Archers / Cavalry Archers / Skirms, …). So those 35 are not invented — they
+trace to this guide. Build orders are therefore **verified and corrected against the
+Hera sources** (villager counts, `m:ss` timings, `targetAge`, `durationMin`), attributed
+via the `source` field, and where a reputable source defines a useful build we lack, it
+may be **added — structured per schema and verified correct**. Correctness is the bar.
 
 ## Goals
 
@@ -90,11 +101,12 @@ content is strategy (curated meta), not raw game data, so the 35 unsourced build
 3. Regenerating civ data preserves TR translations and `strategy` prose.
 4. CI fails on any new fabricated civ or untranslated field — the guardrails are real
    again.
-5. Build-order factual errors fixed; Hera builds attributed.
+5. Every build order verified/corrected against a real source (Hera materials or a
+   reputable public guide) and attributed via the `source` field.
 
-Non-goals: rewriting the 35 unsourced build orders; re-sourcing map `recommendedCivs`
-(curated meta, acceptable); translating intentional-EN proper nouns; adding new content
-types or new civs.
+Non-goals: re-sourcing map `recommendedCivs` (curated meta, acceptable); translating
+intentional-EN proper nouns; adding new content types or new civs; OCR-correcting the
+Hera PDF beyond the `-pdftext.txt` we already have.
 
 ## Guiding principle — maximize source-derivation
 
@@ -178,12 +190,23 @@ natural Turkish (`"Throwing Axemen +2 range"` → `"Throwing Axemen +2 menzil"`)
 Independent native-Turkish verification pass over the editorial output only (the sourced
 fields are official and need no review beyond a parse sanity-check).
 
-### WS4 — Build-order accuracy + attribution
-- Fix the 5 duration mismatches; correct `cumans-2tc-boom` `targetAge` (feudal→castle)
-  and `durationMin` to match its Hera source.
-- Populate the `source` block (`author: "Hera"`, `url`) on the 11 Hera-derived builds.
-- 35 unsourced builds: content unchanged (verified structurally sound by
-  `verify-build-facts.mjs`); no provenance note added this round.
+### WS4 — Build-order verification, correction & attribution (source-grounded)
+- Build a source index from the Hera materials: the 11 per-build transcripts in
+  `md/build-orders/` and the named sections of `md/reference/hera-strategy-guide-2025-12*`
+  (Drush FC, Fast Castle Boom, FC Light Cav Relic, FC into Unique Unit, FC on Fortress,
+  Knight Rush, Scouts into Archers/Cavalry Archers/Skirms, …).
+- For each of the 46 builds: match it to its source section, then **verify and correct**
+  villager counts, `m:ss` timings, `targetAge`, and `durationMin` against that source.
+  Fix `cumans-2tc-boom` (feudal/9 → castle/20) and every other mismatch found.
+- Populate the `source` block (`author`, `url`) on every build that has a source
+  (Hera transcript/guide → credit Hera; any internet-sourced build → credit that source).
+- Builds with no source in our materials: verify against a reputable public source
+  (e.g. Hera's guides, aoecompanion) and attribute, or flag for the owner if none found.
+  New, useful builds defined by a reputable source may be **added** — structured per the
+  schema and verified correct. Correctness is the gate.
+- Translate the 18 untranslated build `name.tr` (editorial titles; source transcripts are
+  Turkish-native, so prefer the source's own Turkish name where present).
+- `verify-build-facts.mjs` (unit-age gate) must still pass for every build.
 
 ### WS5 — Re-instrument guardrails + docs
 - New `scripts/audit-yaml-translations.mjs`: walk every bilingual YAML, report fields
