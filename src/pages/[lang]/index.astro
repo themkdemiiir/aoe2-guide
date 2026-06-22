@@ -2,10 +2,10 @@
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Card from "@/components/ui/Card.astro";
 import Badge from "@/components/ui/Badge.astro";
-import CivCard from "@/components/content/CivCard.astro";
 import Icon from "@/components/ui/Icon.astro";
 import { Icon as UIIcon } from "astro-icon/components";
 import { getCollection } from "astro:content";
+import civMeta from "@data/civ-meta.json";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
 import { type CollectionEntry } from "astro:content";
@@ -30,19 +30,27 @@ const maps: CollectionEntry<"maps">[] = await getCollection("maps");
 // caption can show win/play rate (answers "why these six?"). ---
 const civBySlug = new Map(civs.map((c) => [c.id, c]));
 const civData = await getCollection("civ-data");
-// Rank by editorial tier (best first). The aoestats winRate is a stale Dec-2025
-// (patch 162286) snapshot, so it is neither used for ranking nor shown — only the
-// tier. Untiered civs (newest DLC) are excluded rather than guessed.
-const TIER_RANK: Record<string, number> = { S: 0, A: 1, B: 2, C: 3, D: 4 };
-const topCivs = [...civData]
-  .filter((cd) => civBySlug.has(cd.data.slug) && cd.data.meta?.tier)
-  .sort(
-    (a, b) =>
-      (TIER_RANK[a.data.meta?.tier ?? ""] ?? 9) - (TIER_RANK[b.data.meta?.tier ?? ""] ?? 9) ||
-      a.data.slug.localeCompare(b.data.slug),
-  )
-  .slice(0, 6)
-  .map((cd) => ({ entry: civBySlug.get(cd.data.slug)!, meta: cd.data.meta }));
+const specialtyBySlug = new Map(civData.map((c) => [c.data.slug, c.data.specialty]));
+
+// Top civilizations ranked by REAL ranked-1v1 win rate (aoestats archive, via
+// src/data/civ-meta.json). Rendered as the dark shield strip with live tier.
+// Brightened for legibility on the dark band (the strip sits on bg-stone-bg).
+const TIER_COLOR: Record<string, string> = { S: "#e0654f", A: "#e6bd5e", B: "#bda983", C: "#a3926e", D: "#8f7f60" };
+const oneBySlug = civMeta.civs as Record<string, { "1v1": { winRate: number; tier: string } | null }>;
+const topCivs = Object.keys(oneBySlug)
+  .map((slug) => ({ slug, one: oneBySlug[slug]?.["1v1"] }))
+  .filter((x) => x.one && civBySlug.has(x.slug))
+  .sort((a, b) => (b.one as { winRate: number }).winRate - (a.one as { winRate: number }).winRate)
+  .slice(0, 8)
+  .map((x) => ({
+    entry: civBySlug.get(x.slug)!,
+    tier: (x.one as { tier: string }).tier,
+    winRate: (x.one as { winRate: number }).winRate,
+    spec: specialtyBySlug.get(x.slug) ?? "",
+  }));
+const civCount = civs.length;
+const buildCount = builds.length;
+const mapCount = maps.length;
 
 // --- Featured build orders: easiest content leads (beginner-first), capped at 3. ---
 const featuredBuilds = [...builds]
@@ -147,6 +155,13 @@ const more = [
           {t(lang, "home.ctaSecondary")}
         </a>
       </div>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-mono text-xs tracking-wide text-ember/80">
+        <span><span class="font-medium text-gold-400">{civCount}</span> {t(lang, "home.count.civs")}</span>
+        <span class="text-gold-500/50" aria-hidden="true">·</span>
+        <span><span class="font-medium text-gold-400">{buildCount}</span> {t(lang, "home.count.builds")}</span>
+        <span class="text-gold-500/50" aria-hidden="true">·</span>
+        <span><span class="font-medium text-gold-400">{mapCount}</span> {t(lang, "home.count.maps")}</span>
+      </div>
     </div>
   </section>
 
@@ -191,43 +206,50 @@ const more = [
     </ul>
   </section>
 
-  {/* === Top civilizations: flagship data section. CivCard shows tier/specialty;
-       the caption adds win/play rate so the ranking is self-explaining. === */}
+  {/* === Top civilizations: dark shield strip, ranked by REAL ranked-1v1 win
+       rate (civ-meta.json). On bg-stone-bg use only gold/ember text tokens. === */}
   {topCivs.length > 0 && (
-    <section class="mx-auto max-w-6xl px-4 pt-14">
-      <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
-        <div>
-          <h2 class="font-display text-2xl text-ink">{t(lang, "home.topCivs.title")}</h2>
-          <p class="mt-1 text-sm text-stone-700">{t(lang, "home.topCivs.subtitle")}</p>
+    <section class="mt-14 border-y border-gold-500/40 bg-stone-bg">
+      <div class="mx-auto max-w-6xl px-4 py-14">
+        <div class="mb-8 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="h-px w-6 bg-gold-500/60" aria-hidden="true"></span>
+              <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">{t(lang, "home.topCivs.subtitle")}</span>
+            </div>
+            <h2 class="mt-3 font-display text-3xl text-gold-400">{civCount} {t(lang, "nav.civs")}</h2>
+          </div>
+          <a
+            href={localizedPath("/civs", lang)}
+            class="inline-flex items-center gap-1 font-display text-xs uppercase tracking-wide text-gold-500 transition-colors hover:text-gold-400"
+          >
+            {t(lang, "home.viewAll")}
+            <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
+          </a>
         </div>
-        <a
-          href={localizedPath("/civs", lang)}
-          class="inline-flex items-center gap-1 text-sm font-medium text-gold-700 hover:underline"
-        >
-          {t(lang, "home.viewAll")}
-          <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
-        </a>
-      </div>
-      <ul class="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {topCivs.map(({ entry, meta }) => (
-          <li class="flex h-full flex-col gap-2">
-            <CivCard
-              slug={entry.id}
-              name={entry.data.name[lang]}
-              tagline={entry.data.tagline[lang]}
-              bonuses={entry.data.bonuses[lang]}
-              locale={lang}
-            />
-            {meta?.tier && (
-              <p class="px-1 text-xs text-stone-700">
-                <span class="font-mono text-gold-700">
-                  {t(lang, "matchups.tier")} {meta.tier}
+        <ul class="grid sm:grid-cols-2 lg:grid-cols-4">
+          {topCivs.map((c) => (
+            <li>
+              <a
+                href={localizedPath(`/civs/${c.entry.id}`, lang)}
+                class="flex items-center gap-3.5 border-t border-gold-500/15 px-3 py-3.5 transition-colors hover:bg-gold-500/10"
+              >
+                <span
+                  class="flex h-10 w-8 flex-none items-center justify-center bg-royal"
+                  style="clip-path:polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)"
+                >
+                  <span class="-mt-1 font-display text-sm font-extrabold text-gold-400">{c.entry.data.name.en.charAt(0)}</span>
                 </span>
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
+                <span class="min-w-0 flex-1">
+                  <span class="block truncate font-display text-base font-bold text-gold-400">{c.entry.data.name[lang]}</span>
+                  <span class="mt-0.5 block truncate font-mono text-[9px] uppercase tracking-wide text-ember/70">{c.spec}</span>
+                </span>
+                <span class="font-display text-sm font-bold" style={`color:${TIER_COLOR[c.tier] ?? "#8f7f60"}`}>{c.tier}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )}
 

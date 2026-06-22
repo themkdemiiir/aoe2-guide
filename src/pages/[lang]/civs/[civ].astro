@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import UniqueUnitBlock from "@/components/content/UniqueUnitBlock.astro";
+import CivStats from "@/components/content/CivStats.astro";
 import Icon from "@/components/ui/Icon.astro";
 import { getCollection, getEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
+import { marked } from "marked";
 
 export async function getStaticPaths() {
   const civs = await getCollection("civilizations");
@@ -23,6 +25,7 @@ const meta = civDataEntry?.data;
 const name = entry.data.name[lang];
 const tagline = entry.data.tagline[lang];
 const description = `${name} civilization guide for Age of Empires II — ${tagline}`;
+const strategyHtml = entry.data.strategy?.[lang] ? (marked.parse(entry.data.strategy[lang]) as string) : "";
 ---
 <BaseLayout title={name} description={description} canonicalPath={`/civs/${civSlug}`}>
   <article class="mx-auto max-w-prose px-4 py-12">
@@ -35,12 +38,13 @@ const description = `${name} civilization guide for Age of Empires II — ${tagl
     </header>
 
     {meta && (
-      <dl class="mt-6 grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
+      <dl class="mt-6 grid grid-cols-2 gap-2 text-sm sm:grid-cols-3">
         <div><dt class="text-stone-700">Specialty</dt><dd class="text-ink">{meta.specialty}</dd></div>
         <div><dt class="text-stone-700">Region</dt><dd class="text-ink">{meta.region}</dd></div>
-        <div><dt class="text-stone-700">Tier</dt><dd class="text-gold-700">{meta.meta?.tier ?? "—"}</dd></div>
       </dl>
     )}
+
+    <CivStats slug={civSlug} lang={lang} />
 
     <section class="mt-8">
       <h2 class="font-display text-2xl text-ink">Bonuses</h2>
@@ -67,11 +71,8 @@ const description = `${name} civilization guide for Age of Empires II — ${tagl
       </ul>
     </section>
 
-    {entry.data.strategy?.[lang] && (
-      <section class="prose prose-stone mt-10 max-w-none rounded border border-stone-700/30 bg-parchment px-5 py-6">
-        <h2 class="font-display text-2xl text-ink">Strategy</h2>
-        <p class="mt-3 whitespace-pre-wrap text-ink">{entry.data.strategy[lang]}</p>
-      </section>
+    {strategyHtml && (
+      <section class="prose prose-stone mt-10 max-w-none rounded border border-stone-700/30 bg-parchment px-5 py-6" set:html={strategyHtml} />
     )}
   </article>
 </BaseLayout>

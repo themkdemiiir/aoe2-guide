@@ -1,10 +1,9 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import CivCard from "@/components/content/CivCard.astro";
-import FilterBar from "@/components/ui/FilterBar.astro";
 import { getCollection } from "astro:content";
+import civMeta from "@data/civ-meta.json";
 import { locales, type Locale } from "@/i18n/locales";
-import { t } from "@/i18n/utils";
+import { localizedPath, t } from "@/i18n/utils";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -12,77 +11,112 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Locale;
 const allCivs = await getCollection("civilizations");
-const civData = await getCollection("civ-data");
-const metaBySlug = new Map(civData.map((c) => [c.data.slug, c.data]));
 
-const regionSlug = (r: string) => r.toLowerCase().replace(/\s+/g, "-");
-const tierRank: Record<string, number> = { S: 0, A: 1, B: 2, C: 3, D: 4, F: 5 };
+type Ladder = { tier: string; winRate: number } | null;
+const meta = civMeta.civs as Record<string, { "1v1": Ladder }>;
 
-// Sort alphabetically by localized name
-const collator = new Intl.Collator(lang);
-const civs = [...allCivs].sort((a, b) =>
-  collator.compare(a.data.name[lang], b.data.name[lang])
-);
+// Real tier + win rate from the aoestats 1v1 RM archive (per civ).
+const civsWithStats = allCivs.map((c) => {
+  const m = meta[c.id]?.["1v1"] ?? null;
+  return {
+    slug: c.id,
+    name: c.data.name[lang],
+    initial: c.data.name.en.charAt(0),
+    tier: m?.tier ?? null,
+    winRate: m?.winRate ?? null,
+  };
+});
 
-const tierSet = new Set<string>();
-const regionMap = new Map<string, string>();
-for (const c of civs) {
-  const m = metaBySlug.get(c.id);
-  if (m?.meta?.tier) tierSet.add(m.meta.tier);
-  if (m?.region) regionMap.set(regionSlug(m.region), m.region);
-}
-
-const facets = [
-  {
-    name: "tier",
-    label: t(lang, "filter.tier"),
-    options: [...tierSet]
-      .sort((a, b) => (tierRank[a] ?? 9) - (tierRank[b] ?? 9))
-      .map((v) => ({ value: v, label: `${t(lang, "filter.tier")} ${v}` })),
-  },
-  {
-    name: "region",
-    label: t(lang, "filter.region"),
-    options: [...regionMap]
-      .map(([value, label]) => ({ value, label }))
-      .sort((a, b) => a.label.localeCompare(b.label)),
-  },
+const TIERS = [
+  { tier: "S", label: "TOP TIER", color: "#8a2d22" },
+  { tier: "A", label: "STRONG", color: "#9a6a1e" },
+  { tier: "B", label: "SOLID", color: "#6b5b41" },
+  { tier: "C", label: "SITUATIONAL", color: "#7a6a4a" },
+  { tier: "D", label: "WEAK", color: "#8a7a5a" },
 ];
+const groups = TIERS.map((tm) => ({
+  ...tm,
+  civs: civsWithStats.filter((c) => c.tier === tm.tier).sort((a, b) => (b.winRate ?? 0) - (a.winRate ?? 0)),
+})).filter((g) => g.civs.length);
+const unrated = civsWithStats.filter((c) => !c.tier).sort((a, b) => a.name.localeCompare(b.name, lang));
+
+const games1v1 = Math.round((civMeta.appearances?.["1v1"] ?? 0) / 2 / 1e6);
+const latestPatch = civMeta.patches?.[0]?.patch;
+const shield = "polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)";
 ---
 <BaseLayout title={t(lang, "nav.civs")} canonicalPath="/civs">
-  <section class="mx-auto max-w-7xl px-4 py-12" data-filter-root>
-    <h1 class="mb-6 font-display text-4xl text-ink">{t(lang, "nav.civs")}</h1>
-    <FilterBar
-      searchPlaceholder={`${t(lang, "filter.search")}…`}
-      facets={facets}
-      total={civs.length}
-      resultsLabel={t(lang, "filter.results")}
-      allLabel={t(lang, "filter.all")}
-      resetLabel={t(lang, "filter.reset")}
-    />
-    <ul class="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {civs.map((c) => {
-        const m = metaBySlug.get(c.id);
-        return (
-          <li
-            class="h-full"
-            data-filter-item
-            data-search={`${c.data.name[lang]} ${c.data.tagline[lang]}`.toLowerCase()}
-            data-tier={m?.meta?.tier ?? ""}
-            data-region={m?.region ? regionSlug(m.region) : ""}
+  <section class="mx-auto max-w-7xl px-4 py-12">
+    <div class="font-mono text-xs uppercase tracking-[0.14em] text-gold-700">
+      <a href={localizedPath("/", lang)} class="hover:text-gold-500">{lang === "tr" ? "Ana Sayfa" : "Home"}</a> / {t(lang, "nav.civs")}
+    </div>
+    <h1 class="mt-4 font-display text-4xl text-ink sm:text-5xl">{t(lang, "nav.civs")}</h1>
+    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-stone-700">
+      {lang === "tr"
+        ? `53 uygarlık — tier'lar ${games1v1}M+ ranked 1v1 maçtan (patch ${latestPatch}) türetilmiştir.`
+        : `All 53 civilizations — tiers derived from ${games1v1}M+ ranked 1v1 games (patch ${latestPatch}).`}
+    </p>
+
+    <div class="mt-8 space-y-3.5">
+      {groups.map((g) => (
+        <div class="flex overflow-hidden rounded border border-stone-700/25">
+          <div
+            class="flex w-28 flex-none flex-col items-center justify-center px-2.5 py-4 text-center text-parchment"
+            style={`background:${g.color}`}
           >
-            <CivCard
-              slug={c.id}
-              name={c.data.name[lang]}
-              tagline={c.data.tagline[lang]}
-              bonuses={c.data.bonuses[lang]}
-              locale={lang}
-            />
-          </li>
-        );
-      })}
-    </ul>
-    <p data-filter-empty hidden class="mt-8 text-center text-stone-700">{t(lang, "filter.noResults")}</p>
+            <span class="font-display text-5xl font-extrabold leading-none">{g.tier}</span>
+            <span class="mt-2 font-mono text-[9px] tracking-[0.12em] opacity-90">{g.label}</span>
+            <span class="mt-1 font-mono text-[9px] tracking-[0.06em] opacity-60">
+              {String(g.civs.length).padStart(2, "0")} {lang === "tr" ? "UYG." : "CIVS"}
+            </span>
+          </div>
+          <div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-3">
+            {g.civs.map((c) => (
+              <a
+                href={localizedPath(`/civs/${c.slug}`, lang)}
+                class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-2 pl-2.5 pr-3.5 transition-colors hover:border-gold-500"
+                style={`border-left:3px solid ${g.color}`}
+              >
+                <div class="flex h-9 w-7 flex-none items-center justify-center" style={`background:${g.color};clip-path:${shield}`}>
+                  <span class="-mt-1 font-display text-xs font-extrabold text-ember">{c.initial}</span>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="truncate font-display text-[15px] font-bold leading-tight text-ink">{c.name}</div>
+                  <div class="font-mono text-[10px] tracking-wide text-gold-700">{c.winRate}%</div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      {unrated.length > 0 && (
+        <div class="flex overflow-hidden rounded border border-dashed border-stone-700/25">
+          <div class="flex w-28 flex-none flex-col items-center justify-center px-2.5 py-4 text-center text-stone-700">
+            <span class="font-display text-2xl leading-none">NR</span>
+            <span class="mt-2 max-w-[6rem] font-mono text-[9px] tracking-[0.08em] opacity-70">
+              {lang === "tr" ? "YENİ — YETERSİZ VERİ" : "NEW — INSUFFICIENT DATA"}
+            </span>
+          </div>
+          <div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-3">
+            {unrated.map((c) => (
+              <a
+                href={localizedPath(`/civs/${c.slug}`, lang)}
+                class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-2 pl-2.5 pr-3.5 transition-colors hover:border-gold-500"
+              >
+                <div class="flex h-9 w-7 flex-none items-center justify-center bg-stone-700" style={`clip-path:${shield}`}>
+                  <span class="-mt-1 font-display text-xs font-extrabold text-parchment">{c.initial}</span>
+                </div>
+                <div class="truncate font-display text-[15px] font-bold leading-tight text-ink">{c.name}</div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <p class="mt-6 font-mono text-[11px] tracking-wide text-stone-700/80">
+      {lang === "tr" ? "Kaynak: aoestats.io ranked 1v1 RM arşivi · " : "Source: aoestats.io ranked 1v1 RM archive · "}
+      {games1v1}M+ {lang === "tr" ? "maç" : "games"}
+    </p>
   </section>
-  <script>import "@/scripts/list-filter.ts";</script>
 </BaseLayout>

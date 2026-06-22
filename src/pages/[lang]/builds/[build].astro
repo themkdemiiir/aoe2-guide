@@ -8,6 +8,7 @@ import civDataJson from "@data/civilizations.json";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
+import { marked } from "marked";
 
 export async function getStaticPaths() {
   const builds = await getCollection("build-orders");
@@ -126,11 +127,11 @@ const howToLd = {
     <section class="prose prose-stone mt-10 max-w-none rounded border border-stone-700/30 bg-parchment px-5 py-6">
       <h2 class="font-display text-3xl text-ink">{t(lang, "builds.strategyNotes")}</h2>
       {entry.data.intro?.[lang] && (
-        <p class="mt-2 text-stone-700">{entry.data.intro[lang]}</p>
+        <div class="mt-2 text-stone-700" set:html={marked.parse(entry.data.intro[lang]) as string} />
       )}
       {entry.data.strategy?.[lang] && (
         <ul class="mt-4 list-inside list-disc space-y-2 text-ink">
-          {entry.data.strategy[lang].map((point) => <li>{point}</li>)}
+          {entry.data.strategy[lang].map((point) => <li set:html={marked.parseInline(point) as string} />)}
         </ul>
       )}
     </section>

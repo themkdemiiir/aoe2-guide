@@ -4,35 +4,58 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 import iconMap from "@data/icon-map.json";
+import mapMeta from "@data/map-meta.json";
+import MapCivRankings from "@/components/content/MapCivRankings.astro";
+import { canon, dedupedMetaMaps, resolveMetaKey } from "@/lib/data-maps";
 import { marked } from "marked";
 
+const META_MAPS = (mapMeta as { maps: Record<string, { games: { "1v1": number; team: number } }> }).maps;
+
 export async function getStaticPaths() {
-  const maps: CollectionEntry<"maps">[] = await getCollection("maps");
-  return locales.flatMap((lang) => maps.map((m) => ({ params: { lang, map: m.id } })));
+  const curated = (await getCollection("maps")).map((m) => m.id);
+  const curatedCanon = new Set(curated.map(canon));
+  // archived maps with no curated page (compared canonically so golden_pit data
+  // doesn't spawn a /goldenpit page alongside the curated /golden-pit)
+  const dataOnly = dedupedMetaMaps().map((m) => m.slug).filter((s) => !curatedCanon.has(canon(s)));
+  return locales.flatMap((lang) => [...curated, ...dataOnly].map((map) => ({ params: { lang, map } })));
 }
 
 const lang = Astro.params.lang as Locale;
 const slug = Astro.params.map as string;
-const entry = (await getCollection("maps") as CollectionEntry<"maps">[]).find((m) => m.id === slug);
-if (!entry) return Astro.redirect("/404");
+const entry = ((await getCollection("maps")) as CollectionEntry<"maps">[]).find((m) => m.id === slug);
+const metaKey = resolveMetaKey(slug);
+const md = metaKey ? META_MAPS[metaKey] : undefined;
+if (!entry && !md) return Astro.redirect("/404");
 
-const bodyHtml = entry.data.body?.[lang] ? (marked.parse(entry.data.body[lang]) as string) : "";
+const prettify = (s: string) => s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+const name = entry ? entry.data.name[lang] : prettify(slug);
+const totalGames = md ? md.games["1v1"] + md.games.team : 0;
+const numFmt = new Intl.NumberFormat(lang === "tr" ? "tr-TR" : "en-US");
+
+const bodyHtml = entry?.data.body?.[lang] ? (marked.parse(entry.data.body[lang]) as string) : "";
 const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
 
 function displayName(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ");
 }
 ---
-<BaseLayout title={entry.data.name[lang]} canonicalPath={`/maps/${slug}`}>
+<BaseLayout title={name} canonicalPath={`/maps/${slug}`}>
   <article class="mx-auto max-w-3xl px-4 py-12">
     <header class="mb-8">
-      <h1 class="font-display text-4xl text-ink">{entry.data.name[lang]}</h1>
-      <p class="mt-1 text-sm capitalize text-stone-700">
-        {entry.data.type}{entry.data.size ? ` · ${entry.data.size}` : ""}
-      </p>
+      <h1 class="font-display text-4xl text-ink">{name}</h1>
+      {entry ? (
+        <p class="mt-1 text-sm capitalize text-stone-700">
+          {entry.data.type}{entry.data.size ? ` · ${entry.data.size}` : ""}
+        </p>
+      ) : (
+        <p class="mt-1 font-mono text-xs uppercase tracking-wide text-stone-700/80">
+          {lang === "tr" ? "Veri kaynaklı sayfa" : "Data-derived page"}
+          {totalGames ? ` · ${numFmt.format(totalGames)} ${lang === "tr" ? "ranked maç" : "ranked games"}` : ""}
+        </p>
+      )}
     </header>
 
-    {entry.data.recommendedCivs.length > 0 && (
+    {entry && entry.data.recommendedCivs.length > 0 && (
       <section class="mb-8">
         <h2 class="mb-3 font-display text-xl text-ink">{t(lang, "maps.recommendedCivs")}</h2>
         <ul class="flex flex-wrap gap-2">
@@ -51,7 +74,7 @@ function displayName(s: string) {
       </section>
     )}
 
-    {entry.data.teamComps && (
+    {entry && entry.data.teamComps && (
       <section class="mb-10">
         <h2 class="mb-4 font-display text-xl text-ink">{t(lang, "maps.teamComps")}</h2>
         {(["2v2", "4v4"] as const).map((format) => {
@@ -96,5 +119,7 @@ function displayName(s: string) {
     {bodyHtml && (
       <section class="prose prose-stone max-w-none" set:html={bodyHtml} />
     )}
+
+    <MapCivRankings mapSlug={slug} lang={lang} />
   </article>
 </BaseLayout>

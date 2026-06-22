@@ -1,0 +1,193 @@
+---
+// CivStats — real ranked stats for a civ from src/data/civ-meta.json, rendered as
+// Chart.js charts (byElo win-rate, byPatch trend, byMap performance). Bilingual.
+import civMeta from "@data/civ-meta.json";
+import { getCollection } from "astro:content";
+import { localizedPath } from "@/i18n/utils";
+import type { Locale } from "@/i18n/locales";
+
+interface Props {
+  slug: string;
+  lang: Locale;
+}
+const { slug, lang } = Astro.props;
+
+type Slice = { games: number; winRate: number };
+type Ladder = {
+  games: number; winRate: number; ci95: [number, number]; playRate: number; tier: string;
+  byElo: Record<string, Slice>; byPatch: Record<string, Slice>; byMap: Record<string, Slice>;
+};
+const civ = (civMeta.civs as unknown as Record<string, { "1v1": Ladder | null; team: Ladder | null }>)[slug];
+const one = civ?.["1v1"] ?? null;
+const team = civ?.team ?? null;
+const latestPatch = civMeta.patches?.[0]?.patch;
+
+const tr = lang === "tr";
+const eloOrder = (civMeta.eloBuckets as string[]) ?? [];
+
+// byElo (fixed bucket order; carry games so thin top buckets are honest)
+const eloKeys = one ? eloOrder.filter((b) => one.byElo[b]) : [];
+const elo = eloKeys.length
+  ? { labels: eloKeys, values: eloKeys.map((b) => one!.byElo[b].winRate), games: eloKeys.map((b) => one!.byElo[b].games) }
+  : null;
+// byPatch (chronological)
+const patchRows = one ? Object.entries(one.byPatch).map(([p, v]) => [Number(p), v.winRate] as [number, number]).sort((a, b) => a[0] - b[0]) : [];
+const patch = patchRows.length ? { labels: patchRows.map((r) => String(r[0])), values: patchRows.map((r) => r[1]) } : null;
+// byMap — sorted by WIN RATE (best maps first), each linking to its map page
+// when one exists. aoestats keys use underscores; map slugs use hyphens.
+const pretty = (m: string) => m.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+const mapSlugs = new Set((await getCollection("maps")).map((m) => m.id));
+const mapList = one
+  ? Object.entries(one.byMap)
+      .sort((a, b) => b[1].winRate - a[1].winRate)
+      .slice(0, 10)
+      .map(([m, v]) => {
+        const slug = m.replace(/_/g, "-");
+        return {
+          name: pretty(m),
+          winRate: v.winRate,
+          games: v.games,
+          href: mapSlugs.has(slug) ? localizedPath(`/maps/${slug}`, lang) : null,
+        };
+      })
+  : [];
+---
+{one && (
+  <section class="mt-10" data-civ-stats>
+    <div class="flex items-baseline justify-between gap-3">
+      <h2 class="font-display text-2xl text-ink">{tr ? "Ranked İstatistikler" : "Ranked Stats"}</h2>
+      <span class="font-mono text-[11px] uppercase tracking-wide text-stone-700/80">1v1 RM · patch {latestPatch}</span>
+    </div>
+
+    <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+        <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">Tier</div>
+        <div class="font-display text-2xl text-gold-700">{one.tier}</div>
+      </div>
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+        <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">{tr ? "Kazanma" : "Win rate"}</div>
+        <div class="font-display text-2xl text-ink">{one.winRate}%</div>
+        <div class="font-mono text-[10px] text-stone-700/70">±{((one.ci95[1] - one.ci95[0]) / 2).toFixed(1)}</div>
+      </div>
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+        <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">{tr ? "Oynanma" : "Play rate"}</div>
+        <div class="font-display text-2xl text-ink">{one.playRate}%</div>
+      </div>
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+        <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">{tr ? "Takım" : "Team"}</div>
+        <div class="font-display text-2xl text-ink">{team ? `${team.winRate}%` : "—"}</div>
+        {team && <div class="font-mono text-[10px] text-stone-700/70">{team.tier}</div>}
+      </div>
+    </div>
+
+    <div class="mt-5 grid gap-5 lg:grid-cols-2">
+      {elo && (
+        <div class="rounded border border-stone-700/20 bg-parchment/60 p-4">
+          <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Elo'ya göre kazanma" : "Win rate by Elo"}</h3>
+          <div class="mt-2 h-44"><canvas data-chart="bar" data-labels={JSON.stringify(elo.labels)} data-values={JSON.stringify(elo.values)} data-games={JSON.stringify(elo.games)}></canvas></div>
+        </div>
+      )}
+      {mapList.length > 0 && (
+        <div class="rounded border border-stone-700/20 bg-parchment/60 p-4">
+          <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Haritaya göre kazanma" : "Win rate by map"}</h3>
+          <ul class="mt-3 space-y-1">
+            {mapList.map((m) => {
+              const Tag = m.href ? "a" : "div";
+              const fill = Math.max(3, Math.min(100, ((m.winRate - 38) / 24) * 100));
+              return (
+                <li>
+                  <Tag
+                    {...(m.href ? { href: m.href } : {})}
+                    title={`${m.games.toLocaleString()} ${tr ? "maç" : "games"}`}
+                    class:list={["group flex items-center gap-2.5 rounded px-1.5 py-1", m.href && "transition-colors hover:bg-gold-500/10"]}
+                  >
+                    <span class="flex w-28 flex-none items-center gap-1 truncate text-sm text-ink group-hover:text-gold-700">
+                      {m.name}
+                      {m.href && <span class="text-[10px] text-gold-700/60">↗</span>}
+                    </span>
+                    <span class="relative h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10">
+                      <span class="absolute inset-y-0 left-0 rounded-full" style={`width:${fill}%;background:${m.winRate >= 50 ? "#c79a3c" : "#8a2d22"}`}></span>
+                    </span>
+                    <span class="w-11 flex-none text-right font-mono text-xs text-stone-700">{m.winRate}%</span>
+                  </Tag>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {patch && (
+        <div class="rounded border border-stone-700/20 bg-parchment/60 p-4 lg:col-span-2">
+          <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Patch'lere göre kazanma (tarihçe)" : "Win rate over patches"}</h3>
+          <div class="mt-2 h-44"><canvas data-chart="line" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)}></canvas></div>
+        </div>
+      )}
+    </div>
+    <p class="mt-3 font-mono text-[10px] tracking-wide text-stone-700/70">
+      {tr ? "Kaynak: aoestats.io ranked arşivi (1v1 RM). 50% = ortalama." : "Source: aoestats.io ranked archive (1v1 RM). 50% = average."}
+    </p>
+  </section>
+)}
+
+<script>
+  import Chart from "chart.js/auto";
+
+  const css = getComputedStyle(document.documentElement);
+  const stone = css.getPropertyValue("--color-stone-700").trim() || "#5a4a33";
+  const gold = "#c79a3c";
+  const maroon = "#8a2d22";
+  const grid = "rgba(120,96,52,0.18)";
+  const barColor = (v: number) => (v >= 50 ? gold : maroon);
+
+  Chart.defaults.color = stone;
+  Chart.defaults.font.family = "'JetBrains Mono', ui-monospace, monospace";
+  Chart.defaults.font.size = 10;
+
+  const num = (el: HTMLElement, k: string) => JSON.parse(el.dataset[k] || "[]");
+
+  for (const el of document.querySelectorAll<HTMLCanvasElement>("[data-civ-stats] canvas[data-chart]")) {
+    const kind = el.dataset.chart;
+    const labels = num(el, "labels") as string[];
+    const values = num(el, "values") as number[];
+    const games = num(el, "games") as number[];
+    const horizontal = kind === "hbar";
+    const isLine = kind === "line";
+
+    const valueAxis = {
+      suggestedMin: Math.min(40, ...values) - 1,
+      suggestedMax: Math.max(60, ...values) + 1,
+      grid: { color: grid },
+      ticks: { callback: (v: number | string) => `${v}%` },
+    };
+    const catAxis = { grid: { display: false }, ticks: { autoSkip: false } };
+
+    new Chart(el, {
+      type: isLine ? "line" : "bar",
+      data: {
+        labels,
+        datasets: [{
+          data: values,
+          backgroundColor: isLine ? "rgba(199,154,60,0.15)" : values.map(barColor),
+          borderColor: isLine ? maroon : values.map(barColor),
+          borderWidth: isLine ? 2 : 0,
+          borderRadius: isLine ? 0 : 3,
+          pointRadius: isLine ? 2 : 0,
+          pointBackgroundColor: maroon,
+          fill: isLine,
+          tension: 0.25,
+          barPercentage: 0.8,
+        }],
+      },
+      options: {
+        indexAxis: horizontal ? "y" : "x",
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (c) => `${c.parsed[horizontal ? "x" : "y"]}% win rate${games.length ? ` · ${games[c.dataIndex].toLocaleString()} games` : ""}` } },
+        },
+        scales: horizontal ? { x: valueAxis, y: catAxis } : { y: valueAxis, x: catAxis },
+      },
+    });
+  }
+</script>

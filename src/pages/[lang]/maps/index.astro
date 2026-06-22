@@ -4,12 +4,19 @@ import FilterBar from "@/components/ui/FilterBar.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
+import { canon, dedupedMetaMaps } from "@/lib/data-maps";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+const tr = lang === "tr";
 const maps: CollectionEntry<"maps">[] = await getCollection("maps");
+const curatedCanon = new Set(maps.map((m) => canon(m.id)));
+const prettify = (s: string) => s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+const numFmt = new Intl.NumberFormat(tr ? "tr-TR" : "en-US");
+// maps with archive rankings but no curated page → a compact data-page list
+const dataMaps = dedupedMetaMaps().filter((m) => !curatedCanon.has(canon(m.slug)));
 
 const mapTypes = ["open", "closed", "hybrid", "water", "nomad"] as const;
 const facets = [
@@ -57,5 +64,31 @@ const facets = [
       </>
     )}
   </section>
+
+  {dataMaps.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 pb-16">
+      <div class="border-t border-stone-700/20 pt-8">
+        <h2 class="font-display text-2xl text-ink">{tr ? "Tüm ranked haritalar" : "All ranked maps"}</h2>
+        <p class="mt-1 mb-5 text-sm text-stone-700">
+          {tr
+            ? "Arşiv verisinden civ sıralamalı (küratörlü rehber henüz yok)."
+            : "With archive civ rankings (no curated guide yet)."}
+        </p>
+        <ul class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {dataMaps.map((m) => (
+            <li>
+              <a
+                href={localizedPath(`/maps/${m.slug}`, lang)}
+                class="flex items-center justify-between gap-3 rounded border border-stone-700/25 bg-parchment px-3 py-2.5 transition-colors hover:border-gold-500"
+              >
+                <span class="truncate font-display text-ink">{prettify(m.slug)}</span>
+                <span class="flex-none font-mono text-[11px] text-stone-700/60">{numFmt.format(m.games)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
   <script>import "@/scripts/list-filter.ts";</script>
 </BaseLayout>
