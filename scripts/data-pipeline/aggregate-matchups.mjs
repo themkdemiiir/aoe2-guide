@@ -118,3 +118,49 @@ writeFileSync(OUT3, `${JSON.stringify({
   civs: teamCivs,
 }, null, 2)}\n`, "utf8");
 console.log(`civ-matchups-team: ${Object.keys(teamCivs).length} civs → ${OUT3}`);
+
+// ---- 1v1 head-to-head by elo bucket (for the compare page's elo filter) ----
+console.log("Aggregating 1v1 h2h by elo bucket…");
+const ELO = `CASE WHEN a.new_rating<1000 THEN '<1000' WHEN a.new_rating<1200 THEN '1000-1199' WHEN a.new_rating<1400 THEN '1200-1399' WHEN a.new_rating<1650 THEN '1400-1649' WHEN a.new_rating<1800 THEN '1650-1799' WHEN a.new_rating<2000 THEN '1800-1999' WHEN a.new_rating<2200 THEN '2000-2199' WHEN a.new_rating<2500 THEN '2200-2499' ELSE '2500+' END`;
+const MIN_BUCKET = 150;
+const eloRows = duck(`
+  SELECT a.civ civ, b.civ opp, ${ELO} bucket, count(*) g, sum(a.winner::int) w
+  FROM read_parquet('${P}') a
+  JOIN read_parquet('${P}') b USING (game_id)
+  JOIN read_parquet('${M}') m USING (game_id)
+  WHERE m.leaderboard='random_map' AND a.winner <> b.winner AND a.civ <> b.civ
+  GROUP BY 1, 2, 3
+  HAVING count(*) >= ${MIN_BUCKET}`);
+const acc = {}; // civ -> opp -> { bucket: {g,w} }
+for (const r of eloRows) {
+  if (!guideCivs.has(r.civ) || !guideCivs.has(r.opp)) continue;
+  ((acc[r.civ] ??= {})[r.opp] ??= {})[r.bucket] = { g: Number(r.g), w: Number(r.w) };
+}
+const eloCivs = {};
+for (const [civ, opps] of Object.entries(acc)) {
+  eloCivs[civ] = {};
+  for (const [opp, buckets] of Object.entries(opps)) {
+    const slice = {};
+    let ag = 0;
+    let aw = 0;
+    for (const [b, v] of Object.entries(buckets)) {
+      slice[b] = [pct(v.w / v.g), v.g];
+      ag += v.g;
+      aw += v.w;
+    }
+    if (ag >= 300) slice.all = [pct(aw / ag), ag];
+    eloCivs[civ][opp] = slice;
+  }
+}
+const OUT4 = path.resolve("src/data/civ-matchups-by-elo.json");
+writeFileSync(OUT4, `${JSON.stringify({
+  source: out.source,
+  generated: out.generated,
+  ladder: "1v1",
+  eloBuckets: ["all", "<1000", "1000-1199", "1200-1399", "1400-1649", "1650-1799", "1800-1999", "2000-2199", "2200-2499", "2500+"],
+  minGames: { bucket: MIN_BUCKET, all: 300 },
+  note: "[winRate, games] of <civ> vs <opp> per elo bucket (a's rating). Mirrors excluded.",
+  civs: eloCivs,
+}, null, 2)}\n`, "utf8");
+const eloCells = Object.values(eloCivs).reduce((s, o) => s + Object.values(o).reduce((t, sl) => t + Object.keys(sl).length, 0), 0);
+console.log(`civ-matchups-by-elo: ${Object.keys(eloCivs).length} civs · ${eloCells} cells → ${OUT4}`);
