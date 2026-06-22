@@ -1,0 +1,72 @@
+---
+// CivMatchups — civ-vs-civ 1v1 win rates from the aoestats archive
+// (src/data/civ-matchups.json): the civ's strongest and weakest matchups.
+import matchups from "@data/civ-matchups.json";
+import { getCollection } from "astro:content";
+import Icon from "@/components/ui/Icon.astro";
+import { localizedPath } from "@/i18n/utils";
+import type { Locale } from "@/i18n/locales";
+
+interface Props {
+  slug: string;
+  lang: Locale;
+}
+const { slug, lang } = Astro.props;
+const tr = lang === "tr";
+
+type M = { opp: string; games: number; winRate: number };
+const list = ((matchups.civs as Record<string, M[]>)[slug] ?? []).filter((m) => m.winRate !== 50);
+const civNames = new Map((await getCollection("civilizations")).map((c) => [c.id, c.data.name[lang]]));
+const numFmt = new Intl.NumberFormat(tr ? "tr-TR" : "en-US");
+
+const best = list.slice(0, 6); // most favorable (highest win rate vs)
+const worst = [...list].slice(-6).reverse(); // hardest
+
+type Col = { title: string; rows: M[] };
+const cols: Col[] = [
+  { title: tr ? "En güçlü olduğu" : "Strongest against", rows: best },
+  { title: tr ? "En çok zorlandığı" : "Weakest against", rows: worst },
+];
+---
+{list.length > 0 && (
+  <section class="mt-12">
+    <div class="flex items-baseline justify-between gap-3 border-b border-gold-500/30 pb-3">
+      <h2 class="font-display text-2xl text-ink">{tr ? "Eşleşmeler" : "Matchups"}</h2>
+      <span class="font-mono text-[11px] uppercase tracking-wide text-stone-700/80">1v1 RM</span>
+    </div>
+    <div class="mt-5 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+      {cols.map((col) => (
+        <div>
+          <h3 class="mb-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">{col.title}</h3>
+          <ul class="space-y-0.5">
+            {col.rows.map((m) => (
+              <li>
+                <a
+                  href={localizedPath(`/civs/${m.opp}`, lang)}
+                  class="group flex items-center gap-2.5 rounded px-2 py-1.5 transition-colors hover:bg-gold-500/10"
+                  title={`${numFmt.format(m.games)} ${tr ? "maç" : "games"}`}
+                >
+                  <Icon slug={m.opp} kind="civ" size={24} />
+                  <span class="flex-1 truncate font-display text-[15px] text-ink group-hover:text-gold-700">
+                    {civNames.get(m.opp) ?? m.opp}
+                  </span>
+                  <span
+                    class="font-mono text-sm font-medium"
+                    style={`color:${m.winRate >= 50 ? "#3f6b34" : "#8a2d22"}`}
+                  >
+                    {m.winRate >= 50 ? "+" : ""}{(m.winRate - 50).toFixed(1)}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="mt-3 font-mono text-[10px] tracking-wide text-stone-700/70">
+      {tr
+        ? "Rakibe karşı kazanma oranının 50%'den farkı (yön puanı). Kaynak: aoestats 1v1 RM arşivi."
+        : "Win-rate edge vs each opponent (points above/below 50%). Source: aoestats 1v1 RM archive."}
+    </p>
+  </section>
+)}

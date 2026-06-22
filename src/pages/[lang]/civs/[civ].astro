@@ -2,6 +2,7 @@
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import UniqueUnitBlock from "@/components/content/UniqueUnitBlock.astro";
 import CivStats from "@/components/content/CivStats.astro";
+import CivMatchups from "@/components/content/CivMatchups.astro";
 import Icon from "@/components/ui/Icon.astro";
 import { getCollection, getEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
@@ -45,6 +46,8 @@ const strategyHtml = entry.data.strategy?.[lang] ? (marked.parse(entry.data.stra
     )}
 
     <CivStats slug={civSlug} lang={lang} />
+
+    <CivMatchups slug={civSlug} lang={lang} />
 
     <section class="mt-8">
       <h2 class="font-display text-2xl text-ink">Bonuses</h2>
