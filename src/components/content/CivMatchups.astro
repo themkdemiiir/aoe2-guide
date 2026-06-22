@@ -58,8 +58,9 @@ const split = (rows: M[]) => [
         {mapViews.length > 0 && (
           <select
             data-mselect
+            data-team-hint={tr ? "Harita kırılımı sadece 1v1'de" : "Per-map breakdown is 1v1 only"}
             aria-label={tr ? "Harita seç" : "Select map"}
-            class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink"
+            class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink transition-opacity"
           >
             <option value="all">{tr ? "Tüm haritalar" : "All maps"}</option>
             {mapViews.map((v) => <option value={v.id}>{v.label}</option>)}
@@ -111,7 +112,12 @@ const split = (rows: M[]) => [
         const sync = () => {
           const want = state.ladder === "team" ? "team-all" : `1v1-${state.map}`;
           for (const v of root.querySelectorAll<HTMLElement>("[data-view]")) v.hidden = v.dataset.view !== want;
-          if (sel) sel.style.display = state.ladder === "team" ? "none" : "";
+          if (sel) {
+            // team has no per-map breakdown — disable (don't hide) the map picker
+            sel.disabled = state.ladder === "team";
+            sel.classList.toggle("opacity-40", state.ladder === "team");
+            sel.title = state.ladder === "team" ? (sel.dataset.teamHint || "") : "";
+          }
           if (ladderGroup) {
             for (const b of ladderGroup.querySelectorAll<HTMLButtonElement>("button")) {
               if (b.dataset.val === state.ladder) b.setAttribute("data-on", "");

@@ -79,7 +79,15 @@ const labels = {
         Patch
         <select data-patch class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
           <option value="all">{tr ? "Tüm zamanlar" : "All-time"}</option>
-          {patches.map((p, i) => <option value={p}>{i === 0 ? `${p} ${tr ? "(güncel)" : "(current)"}` : String(p)}</option>)}
+          {patches.map((p, i) => (
+            <option value={p}>
+              {i === 0
+                ? tr ? `Güncel yama (${p})` : `Current patch (${p})`
+                : i === 1
+                  ? tr ? `Önceki yama (${p})` : `Previous patch (${p})`
+                  : String(p)}
+            </option>
+          ))}
         </select>
       </label>
       <span data-slice-note class="font-mono text-[11px] text-stone-700/60"></span>
