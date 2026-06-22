@@ -6,12 +6,13 @@
 // they never drift and never ship two pages for one map.
 import mapMeta from "@data/map-meta.json";
 
+type Bucket = { civ: string; games: number; winRate: number }[];
 type MetaMap = {
   games: { "1v1": number; team: number };
-  "1v1": { all: unknown[] } | null;
-  team: { all: unknown[] } | null;
+  "1v1": Record<string, Bucket> | null;
+  team: Record<string, Bucket> | null;
 };
-const META_MAPS = (mapMeta as { maps: Record<string, MetaMap> }).maps;
+const META_MAPS = (mapMeta as unknown as { maps: Record<string, MetaMap> }).maps;
 
 // Fold a couple of misspelled aoestats keys onto the correct spelling.
 const ALIAS: Record<string, string> = { scandanavia: "scandinavia" };
@@ -35,7 +36,7 @@ export interface DataMap {
 export function dedupedMetaMaps(): DataMap[] {
   const byCanon = new Map<string, DataMap>();
   for (const [k, v] of Object.entries(META_MAPS)) {
-    const rankedCivs = Math.max(v["1v1"]?.all.length ?? 0, v.team?.all.length ?? 0);
+    const rankedCivs = Math.max(v["1v1"]?.all?.length ?? 0, v.team?.all?.length ?? 0);
     if (rankedCivs < MIN_RANKED_CIVS) continue;
     const c = canon(display(k));
     const games = v.games["1v1"] + v.games.team;

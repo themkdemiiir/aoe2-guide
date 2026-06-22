@@ -1,10 +1,12 @@
 ---
 // MapCivRankings — "best civs on this map", inverted from the aoestats archive
-// (src/data/map-meta.json). Per map: every civ ranked by win rate, with a
-// ladder toggle (Team / 1v1) and an elo toggle (All / 1650+). Bilingual.
+// (src/data/map-meta.json). Per map: civs ranked by win rate, with a ladder
+// toggle (1v1 / Team) and a full 9-bucket elo selector. The compact per-map
+// matrix is embedded and the rows are rendered client-side (10 buckets × 2
+// ladders is far too much to ship as static HTML). Bilingual.
 import mapMeta from "@data/map-meta.json";
+import iconMap from "@data/icon-map.json";
 import { getCollection } from "astro:content";
-import Icon from "@/components/ui/Icon.astro";
 import { localizedPath } from "@/i18n/utils";
 import { resolveMetaKey } from "@/lib/data-maps";
 import type { Locale } from "@/i18n/locales";
@@ -17,115 +19,102 @@ const { mapSlug, lang } = Astro.props;
 const tr = lang === "tr";
 
 type Row = { civ: string; games: number; winRate: number };
-type Tiers = { all: Row[]; high: Row[] } | null;
+type Ladder = Record<string, Row[]> | null;
 const key = resolveMetaKey(mapSlug);
-const md = key ? (mapMeta.maps as Record<string, { games: { "1v1": number; team: number }; "1v1": Tiers; team: Tiers }>)[key] : null;
+const md = key ? (mapMeta.maps as unknown as Record<string, { "1v1": Ladder; team: Ladder }>)[key] : null;
+const eloBuckets = (mapMeta.eloBuckets as string[]) ?? ["all"];
+const LADDERS = ["1v1", "team"] as const;
 
 const civNames = new Map((await getCollection("civilizations")).map((c) => [c.id, c.data.name[lang]]));
+const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
 
-// the four (ladder × tier) views; only those with data are emitted
-const COMBOS = [
-  { id: "team-all", ladder: "team" as const, tier: "all" as const },
-  { id: "team-high", ladder: "team" as const, tier: "high" as const },
-  { id: "1v1-all", ladder: "1v1" as const, tier: "all" as const },
-  { id: "1v1-high", ladder: "1v1" as const, tier: "high" as const },
-];
-const views = md
-  ? COMBOS.map((c) => ({ ...c, rows: md[c.ladder]?.[c.tier] ?? [] })).filter((v) => v.rows.length)
-  : [];
-const hasTeam = !!md?.team;
-const defaultId = hasTeam ? "team-all" : "1v1-all";
-const fill = (w: number) => Math.max(3, Math.min(100, ((w - 35) / 30) * 100));
-const fmt = new Intl.NumberFormat(lang === "tr" ? "tr-TR" : "en-US");
+// Compact per-map matrix for the client: data[ladder][bucket] = [[slug, games, winRate], …]
+const data: Record<string, Record<string, [string, number, number][]>> = {};
+const civInfo: Record<string, [string, string]> = {};
+for (const ladder of LADDERS) {
+  const lad = md?.[ladder];
+  if (!lad) continue;
+  data[ladder] = {};
+  for (const [b, rows] of Object.entries(lad)) {
+    data[ladder][b] = rows.map((r) => [r.civ, r.games, r.winRate]);
+    for (const r of rows) if (!civInfo[r.civ]) civInfo[r.civ] = [civNames.get(r.civ) ?? r.civ, civIcons[r.civ] ?? ""];
+  }
+}
+const has1v1 = !!data["1v1"];
+const hasTeam = !!data.team;
+const defaultLadder = has1v1 ? "1v1" : "team";
+const availBuckets = eloBuckets.filter((b) => LADDERS.some((l) => data[l]?.[b]?.length));
+const hasAny = availBuckets.length > 0;
+
+const labels = {
+  team: tr ? "Takım" : "Team",
+  allElo: tr ? "Tüm Elo" : "All Elo",
+  civBase: localizedPath("/civs/", lang),
+};
 ---
-{views.length > 0 && (
-  <section class="mt-12" data-map-civs data-default={defaultId}>
+{hasAny && (
+  <section class="mt-12" data-map-civs>
     <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
       <div>
         <h2 class="font-display text-2xl text-ink">{tr ? "Bu haritada en iyi uygarlıklar" : "Best civs on this map"}</h2>
-        <p class="mt-1 text-sm text-stone-700">
-          {tr ? "Ranked kazanma oranına göre — aoestats arşivi." : "Ranked by win rate — aoestats archive."}
-        </p>
+        <p class="mt-1 text-sm text-stone-700">{tr ? "Ranked kazanma oranına göre — aoestats arşivi." : "Ranked by win rate — aoestats archive."}</p>
       </div>
-      <div class="flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-wide">
-        <div class="flex overflow-hidden rounded border border-stone-700/30" role="group" data-toggle="ladder">
-          <button type="button" data-val="team" class="px-3 py-1.5 text-ink data-[on]:bg-royal data-[on]:text-parchment">{tr ? "Takım" : "Team"}</button>
-          <button type="button" data-val="1v1" class="border-l border-stone-700/30 px-3 py-1.5 text-ink data-[on]:bg-royal data-[on]:text-parchment">1v1</button>
-        </div>
-        <div class="flex overflow-hidden rounded border border-stone-700/30" role="group" data-toggle="tier">
-          <button type="button" data-val="all" class="px-3 py-1.5 text-ink data-[on]:bg-gold-700 data-[on]:text-parchment">{tr ? "Tüm Elo" : "All Elo"}</button>
-          <button type="button" data-val="high" class="border-l border-stone-700/30 px-3 py-1.5 text-ink data-[on]:bg-gold-700 data-[on]:text-parchment">1650+</button>
-        </div>
+      <div class="flex flex-wrap items-center gap-2">
+        {has1v1 && hasTeam && (
+          <div class="flex overflow-hidden rounded border border-stone-700/30 font-mono text-[11px] uppercase tracking-wide" data-toggle="ladder">
+            <button type="button" data-val="1v1" class="px-3 py-1.5 text-ink data-[on]:bg-royal data-[on]:text-parchment">1v1</button>
+            <button type="button" data-val="team" class="border-l border-stone-700/30 px-3 py-1.5 text-ink data-[on]:bg-royal data-[on]:text-parchment">{labels.team}</button>
+          </div>
+        )}
+        <select data-elo aria-label={tr ? "Elo" : "Elo"} class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
+          {availBuckets.map((b) => <option value={b}>{b === "all" ? labels.allElo : b}</option>)}
+        </select>
       </div>
     </div>
 
-    {views.map((v) => (
-      <ol data-view={v.id} hidden={v.id !== defaultId} class="mt-5 space-y-1">
-        {v.rows.map((r, i) => (
-          <li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">
-            <span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">{i + 1}</span>
-            <Icon slug={r.civ} kind="civ" size={26} />
-            <a
-              href={localizedPath(`/civs/${r.civ}`, lang)}
-              class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700"
-            >
-              {civNames.get(r.civ) ?? r.civ}
-            </a>
-            <span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block">
-              <span class="absolute inset-y-0 left-0 rounded-full" style={`width:${fill(r.winRate)}%;background:${r.winRate >= 50 ? "#c79a3c" : "#8a2d22"}`}></span>
-            </span>
-            <span class="w-14 flex-none text-right font-mono text-sm font-medium" style={`color:${r.winRate >= 50 ? "#8a6a1f" : "#8a2d22"}`}>{r.winRate}%</span>
-            <span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">{fmt.format(r.games)}</span>
-          </li>
-        ))}
-      </ol>
-    ))}
+    <ol data-rows class="mt-5 space-y-1"></ol>
+    <p data-nodata hidden class="mt-5 text-sm italic text-stone-700">{tr ? "Bu elo diliminde yeterli veri yok." : "Not enough data at this elo bucket."}</p>
     <p class="mt-3 font-mono text-[10px] tracking-wide text-stone-700/70">
       {tr
-        ? "Takım oyununda pozisyon (pocket/flank) winrate'i etkiler; 1650+ örneklemi daha incedir. 50% = ortalama."
-        : "In team games, position (pocket/flank) skews win rate; the 1650+ sample is thinner. 50% = average."}
+        ? "Takım oyununda pozisyon (pocket/flank) winrate'i etkiler; yüksek elo dilimleri daha incedir. 50% = ortalama."
+        : "In team games, position (pocket/flank) skews win rate; high elo buckets are thinner. 50% = average."}
     </p>
+
+    <script is:inline define:vars={{ data, civInfo, civBase: labels.civBase, defaultLadder }}>
+      (() => {
+        const root = document.currentScript.closest("[data-map-civs]");
+        const fmt = new Intl.NumberFormat();
+        const fill = (w) => Math.max(3, Math.min(100, ((w - 35) / 30) * 100));
+        const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+        const list = root.querySelector("[data-rows]");
+        const nodata = root.querySelector("[data-nodata]");
+        const ladderGroup = root.querySelector('[data-toggle="ladder"]');
+        const eloSel = root.querySelector("[data-elo]");
+        const state = { ladder: defaultLadder, bucket: "all" };
+
+        function render() {
+          const rows = (data[state.ladder] && data[state.ladder][state.bucket]) || [];
+          nodata.hidden = rows.length > 0;
+          list.innerHTML = rows.map((r, i) => {
+            const slug = r[0], games = r[1], wr = r[2];
+            const info = civInfo[slug] || [slug, ""];
+            const good = wr >= 50;
+            return '<li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">'
+              + '<span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">' + (i + 1) + '</span>'
+              + (info[1] ? '<img src="' + esc(info[1]) + '" alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none"/>' : '<span class="h-[26px] w-[26px] flex-none"></span>')
+              + '<a href="' + esc(civBase + slug) + '" class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">' + esc(info[0]) + '</a>'
+              + '<span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style="width:' + fill(wr) + '%;background:' + (good ? "#c79a3c" : "#8a2d22") + '"></span></span>'
+              + '<span class="w-14 flex-none text-right font-mono text-sm font-medium" style="color:' + (good ? "#8a6a1f" : "#8a2d22") + '">' + wr + '%</span>'
+              + '<span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">' + fmt.format(games) + '</span>'
+              + '</li>';
+          }).join("");
+          if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.toggleAttribute("data-on", b.dataset.val === state.ladder);
+        }
+
+        if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.addEventListener("click", () => { state.ladder = b.dataset.val; render(); });
+        if (eloSel) eloSel.addEventListener("change", () => { state.bucket = eloSel.value; render(); });
+        render();
+      })();
+    </script>
   </section>
 )}
-
-<script>
-  for (const root of document.querySelectorAll<HTMLElement>("[data-map-civs]")) {
-    const [defLadder, defTier] = (root.dataset.default ?? "team-all").split("-");
-    const state = { ladder: defLadder, tier: defTier };
-    const views = root.querySelectorAll<HTMLElement>("[data-view]");
-
-    const sync = () => {
-      const want = `${state.ladder}-${state.tier}`;
-      let shown = false;
-      for (const v of views) {
-        const on = v.dataset.view === want;
-        v.hidden = !on;
-        if (on) shown = true;
-      }
-      // fall back to an existing view if the chosen combo has no data
-      if (!shown && views.length) {
-        views[0].hidden = false;
-        const [l, t] = (views[0].dataset.view ?? "").split("-");
-        state.ladder = l; state.tier = t;
-      }
-      for (const group of root.querySelectorAll<HTMLElement>("[data-toggle]")) {
-        const kind = group.dataset.toggle as "ladder" | "tier";
-        for (const btn of group.querySelectorAll<HTMLButtonElement>("button")) {
-          if (btn.dataset.val === state[kind]) btn.setAttribute("data-on", "");
-          else btn.removeAttribute("data-on");
-        }
-      }
-    };
-
-    for (const group of root.querySelectorAll<HTMLElement>("[data-toggle]")) {
-      const kind = group.dataset.toggle as "ladder" | "tier";
-      for (const btn of group.querySelectorAll<HTMLButtonElement>("button")) {
-        btn.addEventListener("click", () => {
-          state[kind] = btn.dataset.val ?? state[kind];
-          sync();
-        });
-      }
-    }
-    sync();
-  }
-</script>
