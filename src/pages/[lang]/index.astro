@@ -1,8 +1,7 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Card from "@/components/ui/Card.astro";
-import Badge from "@/components/ui/Badge.astro";
-import Icon from "@/components/ui/Icon.astro";
+import BuildCard from "@/components/content/BuildCard.astro";
 import { Icon as UIIcon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import civMeta from "@data/civ-meta.json";
@@ -62,12 +61,6 @@ const featuredBuilds = [...builds]
 
 // --- Featured maps: a quick taste of the map library, capped at 4. ---
 const featuredMaps = maps.slice(0, 4);
-
-function difficultyVariant(difficulty: string) {
-  if (difficulty === "beginner") return "success";
-  if (difficulty === "advanced") return "destructive";
-  return "default";
-}
 
 // --- Primary actions: the four highest-intent journeys, verb-phrased so
 // comprehension is instant, each carrying a live count. This is the page's
@@ -273,34 +266,7 @@ const more = [
       <ul class="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {featuredBuilds.map((b) => (
           <li class="h-full">
-            <a
-              href={localizedPath(`/builds/${b.id}`, lang)}
-              class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4 transition hover:border-gold-500"
-            >
-              <div class="flex flex-wrap gap-2">
-                <Badge variant={difficultyVariant(b.data.difficulty)}>
-                  {t(lang, `difficulty.${b.data.difficulty}`)}
-                </Badge>
-                <Badge variant="outline">{t(lang, `age.${b.data.targetAge}`)}</Badge>
-                <Badge variant="secondary">
-                  ~{b.data.durationMin} {t(lang, "home.minutes")}
-                </Badge>
-              </div>
-              <h3 class="mt-3 font-display text-xl text-ink">{b.data.name[lang]}</h3>
-              {b.data.civsRecommended.length > 0 && (
-                <div class="mt-4 flex flex-wrap gap-1.5">
-                  {b.data.civsRecommended.slice(0, 5).map((civSlug) => (
-                    <span class="inline-flex items-center gap-1 rounded border border-stone-700/30 bg-stone-700/5 px-1.5 py-1 text-xs text-stone-700">
-                      <Icon slug={civSlug} kind="civ" size={20} />
-                      {civSlug.replace(/-/g, " ")}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <p class="mt-auto pt-4 font-mono text-xs text-stone-700">
-                {b.data.steps.length} {t(lang, "home.steps")} · ~{b.data.steps.at(-1)?.villagers ?? "?"} {t(lang, "home.pop")}
-              </p>
-            </a>
+            <BuildCard build={b} lang={lang} />
           </li>
         ))}
       </ul>

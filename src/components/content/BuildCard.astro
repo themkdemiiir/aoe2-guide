@@ -1,0 +1,70 @@
+---
+// BuildCard — a build order card with a TEMPO age-progress bar and a
+// timing/steps/max-pop stat footer. Shared by the builds index and the home
+// featured row so they stay consistent.
+import Icon from "@/components/ui/Icon.astro";
+import { t, localizedPath } from "@/i18n/utils";
+import type { Locale } from "@/i18n/locales";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  build: CollectionEntry<"build-orders">;
+  lang: Locale;
+}
+const { build, lang } = Astro.props;
+const b = build.data;
+const tr = lang === "tr";
+
+const DIFF_COLOR: Record<string, string> = { beginner: "#3f6b34", intermediate: "#9a6a1e", advanced: "#8a2d22" };
+const diffColor = DIFF_COLOR[b.difficulty] ?? "#6b5b41";
+const AGES = ["dark", "feudal", "castle", "imperial"] as const;
+const ageIndex = (AGES as readonly string[]).indexOf(b.targetAge);
+const maxPop = b.steps.at(-1)?.villagers ?? null;
+---
+<a
+  href={localizedPath(`/builds/${build.id}`, lang)}
+  class="flex h-full flex-col overflow-hidden rounded border border-stone-700/30 bg-parchment transition hover:border-gold-500 hover:shadow-md"
+>
+  <div class="flex items-center justify-between border-b border-stone-700/15 px-4 py-2.5">
+    <span class="flex items-center gap-2">
+      <span class="h-2 w-2 flex-none rounded-full" style={`background:${diffColor}`}></span>
+      <span class="font-mono text-[10px] uppercase tracking-wide text-stone-700">{t(lang, `difficulty.${b.difficulty}`)}</span>
+    </span>
+    <span class="font-mono text-[10px] uppercase tracking-wide text-stone-700/60">{t(lang, `age.${b.targetAge}`)}</span>
+  </div>
+
+  <div class="flex flex-1 flex-col p-4">
+    <h3 class="font-display text-xl leading-tight text-ink">{b.name[lang]}</h3>
+    {b.civsRecommended.length > 0 && (
+      <div class="mt-3 flex flex-wrap items-center gap-1">
+        {b.civsRecommended.slice(0, 7).map((c) => <Icon slug={c} kind="civ" size={22} />)}
+      </div>
+    )}
+    <div class="mt-auto pt-5">
+      <div class="mb-1.5 flex justify-between font-mono text-[9px] uppercase tracking-[0.12em] text-stone-700/60">
+        <span>Tempo</span>
+        <span style={`color:${diffColor}`}>{t(lang, `age.${b.targetAge}`)}</span>
+      </div>
+      <div class="flex gap-1" aria-hidden="true">
+        {AGES.map((_, i) => (
+          <span class="h-1.5 flex-1 rounded-sm" style={`background:${i <= ageIndex ? diffColor : "rgba(120,96,52,0.16)"}`}></span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="flex border-t border-stone-700/15 text-center">
+    <div class="flex-1 border-r border-stone-700/10 px-2 py-2.5">
+      <div class="font-display text-base font-bold leading-none" style={`color:${diffColor}`}>~{b.durationMin}′</div>
+      <div class="mt-1 font-mono text-[8px] uppercase tracking-wide text-stone-700/60">{tr ? "süre" : "timing"}</div>
+    </div>
+    <div class="flex-1 border-r border-stone-700/10 px-2 py-2.5">
+      <div class="font-display text-base font-bold leading-none" style={`color:${diffColor}`}>{b.steps.length}</div>
+      <div class="mt-1 font-mono text-[8px] uppercase tracking-wide text-stone-700/60">{tr ? "adım" : "steps"}</div>
+    </div>
+    <div class="flex-1 px-2 py-2.5">
+      <div class="font-display text-base font-bold leading-none" style={`color:${diffColor}`}>{maxPop ?? "?"}</div>
+      <div class="mt-1 font-mono text-[8px] uppercase tracking-wide text-stone-700/60">{tr ? "max pop" : "max pop"}</div>
+    </div>
+  </div>
+</a>
