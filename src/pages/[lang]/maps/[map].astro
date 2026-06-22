@@ -40,9 +40,9 @@ function displayName(s: string) {
 }
 ---
 <BaseLayout title={name} canonicalPath={`/maps/${slug}`}>
-  <article class="mx-auto max-w-3xl px-4 py-12">
-    <header class="mb-8">
-      <h1 class="font-display text-4xl text-ink">{name}</h1>
+  <article class="mx-auto max-w-3xl px-4 py-8">
+    <header class="mb-4">
+      <h1 class="font-display text-3xl text-ink">{name}</h1>
       {entry ? (
         <p class="mt-1 text-sm capitalize text-stone-700">
           {entry.data.type}{entry.data.size ? ` · ${entry.data.size}` : ""}
@@ -55,9 +55,11 @@ function displayName(s: string) {
       )}
     </header>
 
+    <MapCivRankings mapSlug={slug} lang={lang} />
+
     {entry && entry.data.recommendedCivs.length > 0 && (
-      <section class="mb-8">
-        <h2 class="mb-3 font-display text-xl text-ink">{t(lang, "maps.recommendedCivs")}</h2>
+      <section class="mb-6">
+        <h2 class="mb-3 font-display text-lg text-ink">{t(lang, "maps.recommendedCivs")}</h2>
         <ul class="flex flex-wrap gap-2">
           {entry.data.recommendedCivs.map((civ) => (
             <li>
@@ -75,8 +77,8 @@ function displayName(s: string) {
     )}
 
     {entry && entry.data.teamComps && (
-      <section class="mb-10">
-        <h2 class="mb-4 font-display text-xl text-ink">{t(lang, "maps.teamComps")}</h2>
+      <section class="mb-6">
+        <h2 class="mb-2 font-display text-lg text-ink">{t(lang, "maps.teamComps")}</h2>
         {(["2v2", "4v4"] as const).map((format) => {
           const comp = entry.data.teamComps?.[format];
           if (!comp) return null;
@@ -85,12 +87,12 @@ function displayName(s: string) {
             { label: t(lang, "maps.pocket"), data: comp.pocket },
           ];
           return (
-            <div class="mb-6">
-              <h3 class="mb-3 text-lg font-semibold text-ink">{format}</h3>
+            <div class="mb-4">
+              <h3 class="mb-2 text-lg font-semibold text-ink">{format}</h3>
               <div class="grid gap-4 sm:grid-cols-2">
                 {slots.map(({ label, data }) =>
                   data ? (
-                    <div class="rounded border border-stone-700/20 bg-parchment p-4">
+                    <div class="rounded border border-stone-700/20 bg-parchment p-3">
                       <p class="mb-2 text-xs font-bold uppercase tracking-widest text-stone-700">{label}</p>
                       <ul class="mb-3 flex flex-wrap gap-2">
                         {data.civs.map((civ) => (
@@ -119,7 +121,5 @@ function displayName(s: string) {
     {bodyHtml && (
       <section class="prose prose-stone max-w-none" set:html={bodyHtml} />
     )}
-
-    <MapCivRankings mapSlug={slug} lang={lang} />
   </article>
 </BaseLayout>

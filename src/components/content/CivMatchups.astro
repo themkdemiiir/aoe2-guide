@@ -45,7 +45,7 @@ const split = (rows: M[]) => [
 ];
 ---
 {oneOverall.length > 0 && (
-  <section class="mt-12" data-civ-matchups>
+  <section class="mt-8" data-civ-matchups>
     <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-gold-500/30 pb-3">
       <h2 class="font-display text-2xl text-ink">{tr ? "Eşleşmeler" : "Matchups"}</h2>
       <div class="flex flex-wrap items-center gap-2">
@@ -70,16 +70,16 @@ const split = (rows: M[]) => [
     </div>
 
     {views.map((v) => (
-      <div data-view={v.id} hidden={v.id !== "1v1-all"} class="mt-5 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+      <div data-view={v.id} hidden={v.id !== "1v1-all"} class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
         {split(v.rows).map((col) => (
           <div>
-            <h3 class="mb-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">{col.title}</h3>
+            <h3 class="mb-1.5 font-mono text-[11px] uppercase tracking-wide text-stone-700">{col.title}</h3>
             <ul class="space-y-0.5">
               {col.rows.map((m) => (
                 <li>
                   <a
                     href={localizedPath(`/civs/${m.opp}`, lang)}
-                    class="group flex items-center gap-2.5 rounded px-2 py-1.5 transition-colors hover:bg-gold-500/10"
+                    class="group flex items-center gap-2.5 rounded px-2 py-1 transition-colors hover:bg-gold-500/10"
                     title={`${numFmt.format(m.games)} ${tr ? "maç" : "games"}`}
                   >
                     <Icon slug={m.opp} kind="civ" size={24} />

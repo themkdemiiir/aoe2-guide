@@ -93,7 +93,6 @@ for (const [a, maps] of Object.entries(byMapData.civs as Record<string, Record<s
 }
 
 const h2hLabels = {
-  heading: lang === "tr" ? "Karşılıklı (1v1)" : "Head-to-head (1v1)",
   favored: lang === "tr" ? "favori" : "favored",
   even: lang === "tr" ? "başa baş" : "even",
   games: lang === "tr" ? "maç" : "games",
@@ -103,32 +102,31 @@ const h2hLabels = {
 };
 ---
 <BaseLayout title={t(lang, "matchups.title")} canonicalPath="/matchups">
-  <section class="mx-auto max-w-7xl px-4 py-12">
-    <h1 class="font-display text-4xl text-ink">{t(lang, "matchups.title")}</h1>
-    <p class="mt-3 max-w-prose text-stone-700">{t(lang, "matchups.intro")}</p>
+  <section class="mx-auto max-w-7xl px-4 py-6">
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <h1 class="font-display text-2xl text-ink sm:text-3xl">{t(lang, "matchups.title")}</h1>
+      <select id="h2h-elo" aria-label="elo" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
+        {ELO_BUCKETS.map((b, i) => <option value={i}>{b === "all" ? (lang === "tr" ? "Tüm Elo" : "All Elo") : b}</option>)}
+      </select>
+    </div>
+    <p class="mt-1 max-w-prose text-xs text-stone-700">{t(lang, "matchups.intro")}</p>
 
-    <form class="mt-8 grid gap-4 sm:grid-cols-2">
+    <form class="mt-4 grid gap-3 sm:grid-cols-2">
       <label class="block">
-        <span class="text-sm text-stone-700">{t(lang, "matchups.pickA")}</span>
+        <span class="text-xs text-stone-700">{t(lang, "matchups.pickA")}</span>
         <select id="civ-a" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
           {civs.map((c) => <option value={c.slug}>{displayName(c.slug)}</option>)}
         </select>
       </label>
       <label class="block">
-        <span class="text-sm text-stone-700">{t(lang, "matchups.pickB")}</span>
+        <span class="text-xs text-stone-700">{t(lang, "matchups.pickB")}</span>
         <select id="civ-b" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
           {civs.map((c) => <option value={c.slug}>{displayName(c.slug)}</option>)}
         </select>
       </label>
     </form>
 
-    <div class="mt-8 flex flex-wrap items-center gap-2 border-b border-gold-500/30 pb-2">
-      <h2 class="flex-1 font-display text-sm uppercase tracking-wide text-stone-700">{h2hLabels.heading}</h2>
-      <select id="h2h-elo" aria-label="elo" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
-        {ELO_BUCKETS.map((b, i) => <option value={i}>{b === "all" ? (lang === "tr" ? "Tüm Elo" : "All Elo") : b}</option>)}
-      </select>
-    </div>
-    <div id="h2h" class="mt-3"></div>
+    <div id="h2h" class="mt-4"></div>
 
     <div id="comparator" class="mt-6 grid gap-6 sm:grid-cols-2">
       <!-- JS will populate this with two civ panels -->
@@ -200,26 +198,26 @@ const h2hLabels = {
           + tierBadge(tier)
           + '<span class="font-mono text-ink">' + fmt(wr, '%') + '</span></div>';
         const metaHtml = (meta && meta.tier)
-          ? '<div class="mt-3 space-y-2">'
+          ? '<div class="mt-3 space-y-1">'
             + metaRow("1v1", meta.tier, meta.winRate)
             + metaRow(h2hLabels.team, meta.teamTier, meta.teamWinRate)
           + '</div>'
           : '<p class="mt-3 text-sm italic text-stone-700">' + labels.noMeta + '</p>';
 
         return ''
-          + '<article class="rounded border border-stone-700/40 bg-parchment p-4">'
+          + '<article class="rounded border border-stone-700/40 bg-parchment p-3">'
           + '  <header class="flex items-center gap-3">'
-          + (icon ? '    <img src="' + esc(icon) + '" alt="" width="56" height="56" loading="lazy" decoding="async" class="h-14 w-14 rounded border border-stone-700/40"/>' : '')
+          + (icon ? '    <img src="' + esc(icon) + '" alt="" width="56" height="56" loading="lazy" decoding="async" class="h-12 w-12 rounded border border-stone-700/40"/>' : '')
           + '    <div>'
-          + '      <h2 class="font-display text-2xl text-ink">' + esc(displayName(slug)) + '</h2>'
+          + '      <h2 class="font-display text-xl text-ink">' + esc(displayName(slug)) + '</h2>'
           + '      <p class="text-sm text-stone-700">' + esc(c.region || '') + ' · ' + esc(c.specialty || '') + '</p>'
           + '    </div>'
           + '  </header>'
-          + '  <section class="mt-4"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.meta + '</h3>' + metaHtml + '</section>'
-          + '  <section class="mt-4"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.civBonuses + '</h3><ul class="mt-1 list-inside list-disc space-y-1 text-sm text-ink">' + bonusesHtml + '</ul></section>'
-          + '  <section class="mt-4"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.teamBonus + '</h3><p class="mt-1 text-sm text-ink">' + esc(c.teamBonus || '—') + '</p></section>'
-          + '  <section class="mt-4"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.uniqueUnits + '</h3><ul class="mt-1 space-y-1 text-sm text-ink">' + uniqueUnitsHtml + '</ul></section>'
-          + '  <section class="mt-4"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.uniqueTechs + '</h3><ul class="mt-1 space-y-1 text-sm text-ink">' + techsHtml + '</ul></section>'
+          + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.meta + '</h3>' + metaHtml + '</section>'
+          + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.civBonuses + '</h3><ul class="mt-1 list-inside list-disc space-y-1 text-sm text-ink">' + bonusesHtml + '</ul></section>'
+          + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.teamBonus + '</h3><p class="mt-1 text-sm text-ink">' + esc(c.teamBonus || '—') + '</p></section>'
+          + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.uniqueUnits + '</h3><ul class="mt-1 space-y-1 text-sm text-ink">' + uniqueUnitsHtml + '</ul></section>'
+          + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.uniqueTechs + '</h3><ul class="mt-1 space-y-1 text-sm text-ink">' + techsHtml + '</ul></section>'
           + '</article>';
       }
 

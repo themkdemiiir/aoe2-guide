@@ -53,42 +53,42 @@ const mapList = one
   : [];
 ---
 {one && (
-  <section class="mt-10" data-civ-stats>
+  <section class="mt-6" data-civ-stats>
     <div class="flex items-baseline justify-between gap-3">
       <h2 class="font-display text-2xl text-ink">{tr ? "Ranked İstatistikler" : "Ranked Stats"}</h2>
       <span class="font-mono text-[11px] uppercase tracking-wide text-stone-700/80">1v1 RM · patch {latestPatch}</span>
     </div>
 
     <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-2.5">
         <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">Tier</div>
         <div class="font-display text-2xl text-gold-700">{one.tier}</div>
       </div>
-      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-2.5">
         <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">{tr ? "Kazanma" : "Win rate"}</div>
         <div class="font-display text-2xl text-ink">{one.winRate}%</div>
         <div class="font-mono text-[10px] text-stone-700/70">±{((one.ci95[1] - one.ci95[0]) / 2).toFixed(1)}</div>
       </div>
-      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-2.5">
         <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">{tr ? "Oynanma" : "Play rate"}</div>
         <div class="font-display text-2xl text-ink">{one.playRate}%</div>
       </div>
-      <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
+      <div class="rounded border border-stone-700/20 bg-parchment/60 p-2.5">
         <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">{tr ? "Takım" : "Team"}</div>
         <div class="font-display text-2xl text-ink">{team ? `${team.winRate}%` : "—"}</div>
         {team && <div class="font-mono text-[10px] text-stone-700/70">{team.tier}</div>}
       </div>
     </div>
 
-    <div class="mt-5 grid gap-5 lg:grid-cols-2">
+    <div class="mt-4 grid gap-5 lg:grid-cols-2">
       {elo && (
-        <div class="rounded border border-stone-700/20 bg-parchment/60 p-4">
+        <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
           <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Elo'ya göre kazanma" : "Win rate by Elo"}</h3>
-          <div class="mt-2 h-44"><canvas data-chart="bar" data-labels={JSON.stringify(elo.labels)} data-values={JSON.stringify(elo.values)} data-games={JSON.stringify(elo.games)}></canvas></div>
+          <div class="mt-2 h-36"><canvas data-chart="bar" data-labels={JSON.stringify(elo.labels)} data-values={JSON.stringify(elo.values)} data-games={JSON.stringify(elo.games)}></canvas></div>
         </div>
       )}
       {mapList.length > 0 && (
-        <div class="rounded border border-stone-700/20 bg-parchment/60 p-4">
+        <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
           <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Haritaya göre kazanma" : "Win rate by map"}</h3>
           <ul class="mt-3 space-y-1">
             {mapList.map((m) => {
@@ -117,9 +117,9 @@ const mapList = one
         </div>
       )}
       {patch && (
-        <div class="rounded border border-stone-700/20 bg-parchment/60 p-4 lg:col-span-2">
+        <div class="rounded border border-stone-700/20 bg-parchment/60 p-3 lg:col-span-2">
           <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Patch'lere göre kazanma (tarihçe)" : "Win rate over patches"}</h3>
-          <div class="mt-2 h-44"><canvas data-chart="line" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)}></canvas></div>
+          <div class="mt-2 h-36"><canvas data-chart="line" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)}></canvas></div>
         </div>
       )}
     </div>

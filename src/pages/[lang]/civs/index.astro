@@ -56,18 +56,18 @@ const labels = {
 };
 ---
 <BaseLayout title={t(lang, "nav.civs")} canonicalPath="/civs">
-  <section class="mx-auto max-w-7xl px-4 py-12">
+  <section class="mx-auto max-w-7xl px-4 py-6 sm:py-8">
     <div class="font-mono text-xs uppercase tracking-[0.14em] text-gold-700">
       <a href={localizedPath("/", lang)} class="hover:text-gold-500">{tr ? "Ana Sayfa" : "Home"}</a> / {t(lang, "nav.civs")}
     </div>
-    <h1 class="mt-4 font-display text-4xl text-ink sm:text-5xl">{t(lang, "nav.civs")}</h1>
-    <p class="mt-3 max-w-2xl text-lg leading-relaxed text-stone-700">
+    <h1 class="mt-2 font-display text-2xl text-ink sm:text-3xl">{t(lang, "nav.civs")}</h1>
+    <p class="mt-1 font-mono text-xs text-stone-700">
       {tr
-        ? `53 uygarlık — tier'lar ${games1v1}M+ ranked 1v1 maçtan. Elo ve patch'e göre filtrele.`
-        : `All 53 civilizations — tiers from ${games1v1}M+ ranked 1v1 games. Filter by elo and patch.`}
+        ? `53 uygarlık · ${games1v1}M+ ranked 1v1 maç · patch ${latestPatch}`
+        : `53 civs · ${games1v1}M+ ranked 1v1 games · patch ${latestPatch}`}
     </p>
 
-    <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+    <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
       <label class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
         Elo
         <select data-elo class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
@@ -93,9 +93,9 @@ const labels = {
       <span data-slice-note class="font-mono text-[11px] text-stone-700/60"></span>
     </div>
 
-    <div data-tierlist class="mt-6 space-y-3.5"></div>
+    <div data-tierlist class="mt-4 space-y-2.5"></div>
 
-    <p class="mt-6 font-mono text-[11px] tracking-wide text-stone-700/80">
+    <p class="mt-4 font-mono text-[11px] tracking-wide text-stone-700/80">
       {tr ? "Kaynak: aoestats.io ranked 1v1 RM arşivi · " : "Source: aoestats.io ranked 1v1 RM archive · "}
       {games1v1}M+ {tr ? "maç" : "games"} · patch {latestPatch}
     </p>
@@ -123,7 +123,7 @@ const labels = {
       }
 
       function chip(c, color) {
-        return '<a href="' + esc(labels.civBase + c.slug) + '" class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-2 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style="border-left:3px solid ' + color + '">'
+        return '<a href="' + esc(labels.civBase + c.slug) + '" class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-1.5 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style="border-left:3px solid ' + color + '">'
           + '<div class="flex h-9 w-7 flex-none items-center justify-center" style="background:' + color + ';clip-path:' + SHIELD + '"><span class="-mt-1 font-display text-xs font-extrabold text-ember">' + esc(c.initial) + '</span></div>'
           + '<div class="min-w-0 flex-1"><div class="truncate font-display text-[15px] font-bold leading-tight text-ink">' + esc(c.name) + '</div>'
           + '<div class="font-mono text-[10px] tracking-wide text-gold-700">' + (c._wr != null ? c._wr + "%" : "—") + '</div></div></a>';
@@ -133,9 +133,9 @@ const labels = {
         const block = '<div class="flex w-28 flex-none flex-col items-center justify-center px-2.5 py-4 text-center ' + (dashed ? "text-stone-700" : "text-parchment") + '"' + (dashed ? "" : ' style="background:' + color + '"') + '>'
           + (dashed
             ? '<span class="font-display text-2xl leading-none">' + letter + '</span><span class="mt-2 max-w-[6rem] font-mono text-[9px] tracking-[0.08em] opacity-70">' + label + '</span>'
-            : '<span class="font-display text-5xl font-extrabold leading-none">' + letter + '</span><span class="mt-2 font-mono text-[9px] tracking-[0.12em] opacity-90">' + label + '</span><span class="mt-1 font-mono text-[9px] tracking-[0.06em] opacity-60">' + String(civs.length).padStart(2, "0") + " " + labels.civs + '</span>')
+            : '<span class="font-display text-4xl font-extrabold leading-none">' + letter + '</span><span class="mt-2 font-mono text-[9px] tracking-[0.12em] opacity-90">' + label + '</span><span class="mt-1 font-mono text-[9px] tracking-[0.06em] opacity-60">' + String(civs.length).padStart(2, "0") + " " + labels.civs + '</span>')
           + '</div>';
-        const chips = '<div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-3">' + civs.map((c) => chip(c, dashed ? "#6b5b41" : color)).join("") + '</div>';
+        const chips = '<div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-2.5">' + civs.map((c) => chip(c, dashed ? "#6b5b41" : color)).join("") + '</div>';
         return '<div class="flex overflow-hidden rounded border ' + (dashed ? "border-dashed border-stone-700/25" : "border-stone-700/25") + '">' + block + chips + '</div>';
       }
 
