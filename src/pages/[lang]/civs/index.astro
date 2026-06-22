@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import iconMap from "@data/icon-map.json";
 import civMeta from "@data/civ-meta.json";
+import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { localizedPath, t } from "@/i18n/utils";
 
@@ -10,113 +11,148 @@ export function getStaticPaths() {
 }
 
 const lang = Astro.params.lang as Locale;
+const tr = lang === "tr";
 const allCivs = await getCollection("civilizations");
+const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
 
-type Ladder = { tier: string; winRate: number } | null;
-const meta = civMeta.civs as Record<string, { "1v1": Ladder }>;
+type Slice = { games: number; winRate: number };
+type Ladder = {
+  winRate: number; games: number; tier: string;
+  byElo: Record<string, Slice>; byPatch: Record<string, Slice>;
+} | null;
+const meta = civMeta.civs as unknown as Record<string, { "1v1": Ladder }>;
 
-// Real tier + win rate from the aoestats 1v1 RM archive (per civ).
-const civsWithStats = allCivs.map((c) => {
+// Compact per-civ data for the client: overall + byElo + byPatch as [winRate, games].
+const compact = (o?: Slice) => (o ? [o.winRate, o.games] : null);
+const civData = allCivs.map((c) => {
   const m = meta[c.id]?.["1v1"] ?? null;
   return {
     slug: c.id,
     name: c.data.name[lang],
     initial: c.data.name.en.charAt(0),
-    tier: m?.tier ?? null,
-    winRate: m?.winRate ?? null,
+    icon: civIcons[c.id] ?? "",
+    overall: m ? [m.winRate, m.games] : null,
+    byElo: m ? Object.fromEntries(Object.entries(m.byElo).map(([k, v]) => [k, compact(v)])) : {},
+    byPatch: m ? Object.fromEntries(Object.entries(m.byPatch).map(([k, v]) => [k, compact(v)])) : {},
   };
 });
 
-const TIERS = [
-  { tier: "S", label: "TOP TIER", color: "#8a2d22" },
-  { tier: "A", label: "STRONG", color: "#9a6a1e" },
-  { tier: "B", label: "SOLID", color: "#6b5b41" },
-  { tier: "C", label: "SITUATIONAL", color: "#7a6a4a" },
-  { tier: "D", label: "WEAK", color: "#8a7a5a" },
-];
-const groups = TIERS.map((tm) => ({
-  ...tm,
-  civs: civsWithStats.filter((c) => c.tier === tm.tier).sort((a, b) => (b.winRate ?? 0) - (a.winRate ?? 0)),
-})).filter((g) => g.civs.length);
-const unrated = civsWithStats.filter((c) => !c.tier).sort((a, b) => a.name.localeCompare(b.name, lang));
-
+const eloBuckets = (civMeta.eloBuckets as string[]) ?? [];
+const patches = (civMeta.patches as { patch: number }[]).map((p) => p.patch);
 const games1v1 = Math.round((civMeta.appearances?.["1v1"] ?? 0) / 2 / 1e6);
-const latestPatch = civMeta.patches?.[0]?.patch;
-const shield = "polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)";
+const latestPatch = patches[0];
+
+const labels = {
+  civBase: localizedPath("/civs/", lang),
+  civs: tr ? "UYG." : "CIVS",
+  nr: tr ? "YENİ / YETERSİZ VERİ" : "NEW / LOW SAMPLE",
+  tiers: [
+    ["S", tr ? "EN İYİ" : "TOP TIER", "#8a2d22"],
+    ["A", tr ? "GÜÇLÜ" : "STRONG", "#9a6a1e"],
+    ["B", tr ? "SAĞLAM" : "SOLID", "#6b5b41"],
+    ["C", tr ? "DURUMA GÖRE" : "SITUATIONAL", "#7a6a4a"],
+    ["D", tr ? "ZAYIF" : "WEAK", "#8a7a5a"],
+  ],
+};
 ---
 <BaseLayout title={t(lang, "nav.civs")} canonicalPath="/civs">
   <section class="mx-auto max-w-7xl px-4 py-12">
     <div class="font-mono text-xs uppercase tracking-[0.14em] text-gold-700">
-      <a href={localizedPath("/", lang)} class="hover:text-gold-500">{lang === "tr" ? "Ana Sayfa" : "Home"}</a> / {t(lang, "nav.civs")}
+      <a href={localizedPath("/", lang)} class="hover:text-gold-500">{tr ? "Ana Sayfa" : "Home"}</a> / {t(lang, "nav.civs")}
     </div>
     <h1 class="mt-4 font-display text-4xl text-ink sm:text-5xl">{t(lang, "nav.civs")}</h1>
     <p class="mt-3 max-w-2xl text-lg leading-relaxed text-stone-700">
-      {lang === "tr"
-        ? `53 uygarlık — tier'lar ${games1v1}M+ ranked 1v1 maçtan (patch ${latestPatch}) türetilmiştir.`
-        : `All 53 civilizations — tiers derived from ${games1v1}M+ ranked 1v1 games (patch ${latestPatch}).`}
+      {tr
+        ? `53 uygarlık — tier'lar ${games1v1}M+ ranked 1v1 maçtan. Elo ve patch'e göre filtrele.`
+        : `All 53 civilizations — tiers from ${games1v1}M+ ranked 1v1 games. Filter by elo and patch.`}
     </p>
 
-    <div class="mt-8 space-y-3.5">
-      {groups.map((g) => (
-        <div class="flex overflow-hidden rounded border border-stone-700/25">
-          <div
-            class="flex w-28 flex-none flex-col items-center justify-center px-2.5 py-4 text-center text-parchment"
-            style={`background:${g.color}`}
-          >
-            <span class="font-display text-5xl font-extrabold leading-none">{g.tier}</span>
-            <span class="mt-2 font-mono text-[9px] tracking-[0.12em] opacity-90">{g.label}</span>
-            <span class="mt-1 font-mono text-[9px] tracking-[0.06em] opacity-60">
-              {String(g.civs.length).padStart(2, "0")} {lang === "tr" ? "UYG." : "CIVS"}
-            </span>
-          </div>
-          <div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-3">
-            {g.civs.map((c) => (
-              <a
-                href={localizedPath(`/civs/${c.slug}`, lang)}
-                class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-2 pl-2.5 pr-3.5 transition-colors hover:border-gold-500"
-                style={`border-left:3px solid ${g.color}`}
-              >
-                <div class="flex h-9 w-7 flex-none items-center justify-center" style={`background:${g.color};clip-path:${shield}`}>
-                  <span class="-mt-1 font-display text-xs font-extrabold text-ember">{c.initial}</span>
-                </div>
-                <div class="min-w-0 flex-1">
-                  <div class="truncate font-display text-[15px] font-bold leading-tight text-ink">{c.name}</div>
-                  <div class="font-mono text-[10px] tracking-wide text-gold-700">{c.winRate}%</div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      ))}
-
-      {unrated.length > 0 && (
-        <div class="flex overflow-hidden rounded border border-dashed border-stone-700/25">
-          <div class="flex w-28 flex-none flex-col items-center justify-center px-2.5 py-4 text-center text-stone-700">
-            <span class="font-display text-2xl leading-none">NR</span>
-            <span class="mt-2 max-w-[6rem] font-mono text-[9px] tracking-[0.08em] opacity-70">
-              {lang === "tr" ? "YENİ — YETERSİZ VERİ" : "NEW — INSUFFICIENT DATA"}
-            </span>
-          </div>
-          <div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-3">
-            {unrated.map((c) => (
-              <a
-                href={localizedPath(`/civs/${c.slug}`, lang)}
-                class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-2 pl-2.5 pr-3.5 transition-colors hover:border-gold-500"
-              >
-                <div class="flex h-9 w-7 flex-none items-center justify-center bg-stone-700" style={`clip-path:${shield}`}>
-                  <span class="-mt-1 font-display text-xs font-extrabold text-parchment">{c.initial}</span>
-                </div>
-                <div class="truncate font-display text-[15px] font-bold leading-tight text-ink">{c.name}</div>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
+    <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+      <label class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
+        Elo
+        <select data-elo class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <option value="all">{tr ? "Tüm Elo" : "All Elo"}</option>
+          {eloBuckets.filter((b) => b !== "all").map((b) => <option value={b}>{b}</option>)}
+        </select>
+      </label>
+      <label class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
+        Patch
+        <select data-patch class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <option value="all">{tr ? "Tüm zamanlar" : "All-time"}</option>
+          {patches.map((p, i) => <option value={p}>{i === 0 ? `${p} ${tr ? "(güncel)" : "(current)"}` : String(p)}</option>)}
+        </select>
+      </label>
+      <span data-slice-note class="font-mono text-[11px] text-stone-700/60"></span>
     </div>
 
+    <div data-tierlist class="mt-6 space-y-3.5"></div>
+
     <p class="mt-6 font-mono text-[11px] tracking-wide text-stone-700/80">
-      {lang === "tr" ? "Kaynak: aoestats.io ranked 1v1 RM arşivi · " : "Source: aoestats.io ranked 1v1 RM archive · "}
-      {games1v1}M+ {lang === "tr" ? "maç" : "games"}
+      {tr ? "Kaynak: aoestats.io ranked 1v1 RM arşivi · " : "Source: aoestats.io ranked 1v1 RM archive · "}
+      {games1v1}M+ {tr ? "maç" : "games"} · patch {latestPatch}
     </p>
   </section>
+
+  <script is:inline define:vars={{ civData, labels }}>
+    (() => {
+      const root = document.currentScript.closest("section");
+      const SHIELD = "polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)";
+      const MIN = 150; // games below this in the chosen slice → low-sample
+      const fmt = new Intl.NumberFormat();
+      const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+      const tierOf = (wr) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
+
+      const list = root.querySelector("[data-tierlist]");
+      const eloSel = root.querySelector("[data-elo]");
+      const patchSel = root.querySelector("[data-patch]");
+      const note = root.querySelector("[data-slice-note]");
+      const state = { elo: "all", patch: "all" };
+
+      function statFor(c) {
+        if (state.patch !== "all") return c.byPatch[state.patch];
+        if (state.elo !== "all") return c.byElo[state.elo];
+        return c.overall;
+      }
+
+      function chip(c, color) {
+        return '<a href="' + esc(labels.civBase + c.slug) + '" class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-2 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style="border-left:3px solid ' + color + '">'
+          + '<div class="flex h-9 w-7 flex-none items-center justify-center" style="background:' + color + ';clip-path:' + SHIELD + '"><span class="-mt-1 font-display text-xs font-extrabold text-ember">' + esc(c.initial) + '</span></div>'
+          + '<div class="min-w-0 flex-1"><div class="truncate font-display text-[15px] font-bold leading-tight text-ink">' + esc(c.name) + '</div>'
+          + '<div class="font-mono text-[10px] tracking-wide text-gold-700">' + (c._wr != null ? c._wr + "%" : "—") + '</div></div></a>';
+      }
+
+      function row(letter, label, color, civs, dashed) {
+        const block = '<div class="flex w-28 flex-none flex-col items-center justify-center px-2.5 py-4 text-center ' + (dashed ? "text-stone-700" : "text-parchment") + '"' + (dashed ? "" : ' style="background:' + color + '"') + '>'
+          + (dashed
+            ? '<span class="font-display text-2xl leading-none">' + letter + '</span><span class="mt-2 max-w-[6rem] font-mono text-[9px] tracking-[0.08em] opacity-70">' + label + '</span>'
+            : '<span class="font-display text-5xl font-extrabold leading-none">' + letter + '</span><span class="mt-2 font-mono text-[9px] tracking-[0.12em] opacity-90">' + label + '</span><span class="mt-1 font-mono text-[9px] tracking-[0.06em] opacity-60">' + String(civs.length).padStart(2, "0") + " " + labels.civs + '</span>')
+          + '</div>';
+        const chips = '<div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-3">' + civs.map((c) => chip(c, dashed ? "#6b5b41" : color)).join("") + '</div>';
+        return '<div class="flex overflow-hidden rounded border ' + (dashed ? "border-dashed border-stone-700/25" : "border-stone-700/25") + '">' + block + chips + '</div>';
+      }
+
+      function render() {
+        const rated = [], low = [];
+        for (const c of civData) {
+          const s = statFor(c);
+          if (s && s[1] >= MIN) { c._wr = s[0]; c._g = s[1]; rated.push(c); }
+          else { c._wr = s ? s[0] : null; low.push(c); }
+        }
+        let html = "";
+        for (const [letter, label, color] of labels.tiers) {
+          const group = rated.filter((c) => tierOf(c._wr) === letter).sort((a, b) => b._wr - a._wr);
+          if (group.length) html += row(letter, label, color, group, false);
+        }
+        if (low.length) html += row("NR", labels.nr, "#8a7a5a", low.sort((a, b) => a.name.localeCompare(b.name)), true);
+        list.innerHTML = html;
+
+        const slice = state.patch !== "all" ? "patch " + state.patch : state.elo !== "all" ? "elo " + state.elo : "";
+        note.textContent = slice ? (rated.length + "/" + civData.length + " rated · " + slice) : "";
+      }
+
+      eloSel.addEventListener("change", () => { state.elo = eloSel.value; if (state.elo !== "all") { state.patch = "all"; patchSel.value = "all"; } render(); });
+      patchSel.addEventListener("change", () => { state.patch = patchSel.value; if (state.patch !== "all") { state.elo = "all"; eloSel.value = "all"; } render(); });
+      render();
+    })();
+  </script>
 </BaseLayout>
