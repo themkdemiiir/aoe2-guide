@@ -58,3 +58,35 @@ const out = {
 writeFileSync(OUT, `${JSON.stringify(out, null, 2)}\n`, "utf8");
 const pairs = Object.values(civs).reduce((s, a) => s + a.length, 0);
 console.log(`civ-matchups: ${Object.keys(civs).length} civs · ${pairs} pairs → ${OUT}`);
+
+// ---- per-map breakdown: civ vs opp, split by map ----
+console.log("Aggregating per-map matchups…");
+const MIN_MAP = 200;
+const mapRows = duck(`
+  SELECT a.civ civ, b.civ opp, m.map mapname, count(*) g, sum(a.winner::int) w
+  FROM read_parquet('${P}') a
+  JOIN read_parquet('${P}') b USING (game_id)
+  JOIN read_parquet('${M}') m USING (game_id)
+  WHERE m.leaderboard='random_map' AND a.winner <> b.winner AND a.civ <> b.civ
+  GROUP BY 1, 2, 3
+  HAVING count(*) >= ${MIN_MAP}`);
+
+const byMap = {};
+for (const r of mapRows) {
+  if (!guideCivs.has(r.civ) || !guideCivs.has(r.opp)) continue;
+  (((byMap[r.civ] ??= {})[r.mapname] ??= []).push({ opp: r.opp, games: Number(r.g), winRate: pct(r.w / r.g) }));
+}
+for (const c in byMap) for (const mp in byMap[c]) byMap[c][mp].sort((a, b) => b.winRate - a.winRate);
+
+const OUT2 = path.resolve("src/data/civ-matchups-by-map.json");
+const out2 = {
+  source: out.source,
+  generated: out.generated,
+  ladder: "1v1",
+  minGames: MIN_MAP,
+  note: "winRate = how often <civ> beats <opp> on <map> in 1v1 RM. Mirrors excluded.",
+  civs: byMap,
+};
+writeFileSync(OUT2, `${JSON.stringify(out2, null, 2)}\n`, "utf8");
+const cells = Object.values(byMap).reduce((s, maps) => s + Object.values(maps).reduce((t, a) => t + a.length, 0), 0);
+console.log(`civ-matchups-by-map: ${Object.keys(byMap).length} civs · ${cells} cells → ${OUT2}`);
