@@ -2,6 +2,8 @@
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import iconMap from "@data/icon-map.json";
+import matchupsData from "@data/civ-matchups.json";
+import civMeta from "@data/civ-meta.json";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 
@@ -36,6 +38,35 @@ const labels = {
 function displayName(slug: string): string {
   return slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, " ");
 }
+
+// Compact head-to-head matrix (a's 1v1 win rate vs b) + real per-civ meta, both
+// passed to the client so the comparator can show a verdict and true tiers.
+type MM = { opp: string; games: number; winRate: number };
+const h2h: Record<string, Record<string, [number, number]>> = {};
+for (const [civ, arr] of Object.entries(matchupsData.civs as Record<string, MM[]>)) {
+  h2h[civ] = {};
+  for (const m of arr) h2h[civ][m.opp] = [m.winRate, m.games];
+}
+type Ladder = { tier: string; winRate: number; playRate: number } | null;
+const civMetaLite: Record<string, { tier: string | null; winRate: number | null; playRate: number | null; teamTier: string | null; teamWinRate: number | null }> = {};
+for (const [slug, m] of Object.entries(civMeta.civs as Record<string, { "1v1": Ladder; team: Ladder }>)) {
+  civMetaLite[slug] = {
+    tier: m["1v1"]?.tier ?? null,
+    winRate: m["1v1"]?.winRate ?? null,
+    playRate: m["1v1"]?.playRate ?? null,
+    teamTier: m.team?.tier ?? null,
+    teamWinRate: m.team?.winRate ?? null,
+  };
+}
+const h2hLabels = {
+  heading: lang === "tr" ? "Karşılıklı (1v1)" : "Head-to-head (1v1)",
+  favored: lang === "tr" ? "favori" : "favored",
+  even: lang === "tr" ? "başa baş" : "even",
+  games: lang === "tr" ? "maç" : "games",
+  noData: lang === "tr" ? "Bu eşleşme için yeterli veri yok." : "Not enough data for this matchup.",
+  team: lang === "tr" ? "Takım" : "Team",
+  perMap: lang === "tr" ? "Harita bazlı eşleşmeler her civ'in sayfasında." : "Per-map matchups are on each civ's page.",
+};
 ---
 <BaseLayout title={t(lang, "matchups.title")} canonicalPath="/matchups">
   <section class="mx-auto max-w-7xl px-4 py-12">
@@ -57,11 +88,13 @@ function displayName(slug: string): string {
       </label>
     </form>
 
-    <div id="comparator" class="mt-8 grid gap-6 sm:grid-cols-2">
+    <div id="h2h" class="mt-8"></div>
+
+    <div id="comparator" class="mt-6 grid gap-6 sm:grid-cols-2">
       <!-- JS will populate this with two civ panels -->
     </div>
 
-    <script is:inline define:vars={{ civs, civIcons, unitIcons, labels }}>
+    <script is:inline define:vars={{ civs, civIcons, unitIcons, labels, h2h, civMetaLite, h2hLabels }}>
       // Build a slug -> civ lookup
       const byslug = Object.fromEntries(civs.map((c) => [c.slug, c]));
 
@@ -96,7 +129,7 @@ function displayName(slug: string): string {
         if (!c) return '<div class="rounded border border-royal/40 p-4 text-royal">Unknown civ: ' + esc(slug) + '</div>';
 
         const icon = civIcons[slug];
-        const meta = c.meta || {};
+        const meta = civMetaLite[slug] || {};
 
         const bonusesHtml = (c.civBonuses || []).map((b) => '<li>' + esc(b) + '</li>').join('');
 
@@ -114,11 +147,11 @@ function displayName(slug: string): string {
               + esc(c.uniqueTechs.imperial?.effect || '—') + '</li>'
           : '<li>—</li>';
 
-        const metaHtml = (meta && (meta.winRate != null || meta.tier))
+        const metaHtml = (meta && meta.tier)
           ? '<dl class="mt-3 grid grid-cols-3 gap-2 text-sm">'
+            + '<div><dt class="text-stone-700">' + labels.tier + '</dt><dd class="text-gold-700 font-bold">' + esc(meta.tier) + '</dd></div>'
             + '<div><dt class="text-stone-700">' + labels.winRate + '</dt><dd class="text-ink">' + fmt(meta.winRate, '%') + '</dd></div>'
-            + '<div><dt class="text-stone-700">' + labels.playRate + '</dt><dd class="text-ink">' + fmt(meta.playRate, '%') + '</dd></div>'
-            + '<div><dt class="text-stone-700">' + labels.tier + '</dt><dd class="text-gold-500 font-bold">' + esc(meta.tier || '—') + '</dd></div>'
+            + '<div><dt class="text-stone-700">' + h2hLabels.team + '</dt><dd class="text-ink">' + esc(meta.teamTier || '—') + ' ' + fmt(meta.teamWinRate, '%') + '</dd></div>'
           + '</dl>'
           : '<p class="mt-3 text-sm italic text-stone-700">' + labels.noMeta + '</p>';
 
@@ -139,9 +172,45 @@ function displayName(slug: string): string {
           + '</article>';
       }
 
+      function h2hBanner(a, b) {
+        const head = '<h2 class="font-display text-sm uppercase tracking-wide text-stone-700">' + h2hLabels.heading + '</h2>';
+        if (a === b) return '';
+        const rec = (h2h[a] && h2h[a][b]) || null;
+        if (!rec) {
+          return '<div class="rounded border border-stone-700/30 bg-parchment p-4">' + head
+            + '<p class="mt-2 text-sm italic text-stone-700">' + h2hLabels.noData + '</p></div>';
+        }
+        const wr = rec[0], games = rec[1];
+        const fav = wr >= 52 ? displayName(a) : wr <= 48 ? displayName(b) : null;
+        const favHtml = fav
+          ? '<span class="font-semibold" style="color:#3f6b34">' + esc(fav) + '</span> ' + h2hLabels.favored
+          : '<span class="font-semibold">' + h2hLabels.even + '</span>';
+        const iconA = civIcons[a], iconB = civIcons[b];
+        const fill = Math.max(4, Math.min(96, wr));
+        return ''
+          + '<div class="rounded border border-stone-700/30 bg-parchment p-4">'
+          + head
+          + '<div class="mt-3 flex items-center justify-center gap-4">'
+          + (iconA ? '<img src="' + esc(iconA) + '" alt="" width="40" height="40" class="h-10 w-10"/>' : '')
+          + '<div class="text-center">'
+          + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
+          + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
+          + '<div class="mt-1 text-sm text-stone-700">' + favHtml + ' · ' + games.toLocaleString() + ' ' + h2hLabels.games + '</div>'
+          + '</div>'
+          + (iconB ? '<img src="' + esc(iconB) + '" alt="" width="40" height="40" class="h-10 w-10"/>' : '')
+          + '</div>'
+          + '<div class="mt-3 flex h-2.5 overflow-hidden rounded-full border border-stone-700/20">'
+          + '<div style="width:' + fill + '%;background:#8a2d22"></div>'
+          + '<div style="width:' + (100 - fill) + '%;background:#c79a3c"></div>'
+          + '</div>'
+          + '<p class="mt-3 text-center font-mono text-[10px] text-stone-700/60">' + h2hLabels.perMap + '</p>'
+          + '</div>';
+      }
+
       function render() {
         const a = selA.value;
         const b = selB.value;
+        document.getElementById("h2h").innerHTML = h2hBanner(a, b);
         document.getElementById("comparator").innerHTML = panel(a) + panel(b);
         const url = new URL(location.href);
         url.searchParams.set("a", a);
