@@ -103,17 +103,16 @@ const labels = {
 
   <script is:inline define:vars={{ civData, labels }}>
     (() => {
-      const root = document.currentScript.closest("section");
       const SHIELD = "polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)";
       const MIN = 150; // games below this in the chosen slice → low-sample
       const fmt = new Intl.NumberFormat();
       const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
       const tierOf = (wr) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
 
-      const list = root.querySelector("[data-tierlist]");
-      const eloSel = root.querySelector("[data-elo]");
-      const patchSel = root.querySelector("[data-patch]");
-      const note = root.querySelector("[data-slice-note]");
+      const list = document.querySelector("[data-tierlist]");
+      const eloSel = document.querySelector("[data-elo]");
+      const patchSel = document.querySelector("[data-patch]");
+      const note = document.querySelector("[data-slice-note]");
       const state = { elo: "all", patch: "all" };
 
       function statFor(c) {

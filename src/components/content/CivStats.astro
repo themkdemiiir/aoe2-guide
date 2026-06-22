@@ -31,8 +31,10 @@ const elo = eloKeys.length
   ? { labels: eloKeys, values: eloKeys.map((b) => one!.byElo[b].winRate), games: eloKeys.map((b) => one!.byElo[b].games) }
   : null;
 // byPatch (chronological)
-const patchRows = one ? Object.entries(one.byPatch).map(([p, v]) => [Number(p), v.winRate] as [number, number]).sort((a, b) => a[0] - b[0]) : [];
-const patch = patchRows.length ? { labels: patchRows.map((r) => String(r[0])), values: patchRows.map((r) => r[1]) } : null;
+const patchRows = one ? Object.entries(one.byPatch).map(([p, v]) => [Number(p), v.winRate, v.games] as [number, number, number]).sort((a, b) => a[0] - b[0]) : [];
+const patch = patchRows.length
+  ? { labels: patchRows.map((r) => String(r[0])), values: patchRows.map((r) => r[1]), games: patchRows.map((r) => r[2]) }
+  : null;
 // byMap — sorted by WIN RATE (best maps first), each linking to its map page
 // when one exists. aoestats keys use underscores; map slugs use hyphens.
 const pretty = (m: string) => m.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -118,8 +120,8 @@ const mapList = one
       )}
       {patch && (
         <div class="rounded border border-stone-700/20 bg-parchment/60 p-3 lg:col-span-2">
-          <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Patch'lere göre kazanma (tarihçe)" : "Win rate over patches"}</h3>
-          <div class="mt-2 h-36"><canvas data-chart="line" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)}></canvas></div>
+          <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Patch'e göre kazanma" : "Win rate by patch"}</h3>
+          <div class="mt-2 h-36"><canvas data-chart="bar" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)} data-games={JSON.stringify(patch.games)}></canvas></div>
         </div>
       )}
     </div>
@@ -159,7 +161,7 @@ const mapList = one
       grid: { color: grid },
       ticks: { callback: (v: number | string) => `${v}%` },
     };
-    const catAxis = { grid: { display: false }, ticks: { autoSkip: false } };
+    const catAxis = { grid: { display: false }, ticks: { autoSkip: labels.length > 10, maxRotation: labels.length > 10 ? 60 : 0, font: { size: 9 } } };
 
     new Chart(el, {
       type: isLine ? "line" : "bar",

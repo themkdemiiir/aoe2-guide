@@ -86,8 +86,11 @@ const split = (rows: M[]) => [
                     <span class="flex-1 truncate font-display text-[15px] text-ink group-hover:text-gold-700">
                       {civNames.get(m.opp) ?? m.opp}
                     </span>
-                    <span class="font-mono text-sm font-medium" style={`color:${m.winRate >= 50 ? "#3f6b34" : "#8a2d22"}`}>
+                    <span class="w-10 flex-none text-right font-mono text-sm font-medium" style={`color:${m.winRate >= 50 ? "#3f6b34" : "#8a2d22"}`}>
                       {m.winRate >= 50 ? "+" : ""}{(m.winRate - 50).toFixed(1)}
+                    </span>
+                    <span class="w-12 flex-none text-right font-mono text-[10px] text-stone-700/50">
+                      {m.games >= 1000 ? `${Math.round(m.games / 1000)}k` : m.games}
                     </span>
                   </a>
                 </li>
