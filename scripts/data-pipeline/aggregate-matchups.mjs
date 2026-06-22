@@ -90,3 +90,31 @@ const out2 = {
 writeFileSync(OUT2, `${JSON.stringify(out2, null, 2)}\n`, "utf8");
 const cells = Object.values(byMap).reduce((s, maps) => s + Object.values(maps).reduce((t, a) => t + a.length, 0), 0);
 console.log(`civ-matchups-by-map: ${Object.keys(byMap).length} civs · ${cells} cells → ${OUT2}`);
+
+// ---- team-ladder overall matchups: a's team win rate when b is an enemy ----
+// Confounded (4 civs/side), so it's labeled as such and kept overall-only.
+console.log("Aggregating team matchups…");
+const teamRows = duck(`
+  SELECT a.civ civ, b.civ opp, count(*) g, sum(a.winner::int) w
+  FROM read_parquet('${P}') a
+  JOIN read_parquet('${P}') b USING (game_id)
+  JOIN read_parquet('${M}') m USING (game_id)
+  WHERE m.leaderboard='team_random_map' AND a.winner <> b.winner AND a.civ <> b.civ
+  GROUP BY 1, 2
+  HAVING count(*) >= 500`);
+const teamCivs = {};
+for (const r of teamRows) {
+  if (!guideCivs.has(r.civ) || !guideCivs.has(r.opp)) continue;
+  (teamCivs[r.civ] ??= []).push({ opp: r.opp, games: Number(r.g), winRate: pct(r.w / r.g) });
+}
+for (const k in teamCivs) teamCivs[k].sort((a, b) => b.winRate - a.winRate);
+const OUT3 = path.resolve("src/data/civ-matchups-team.json");
+writeFileSync(OUT3, `${JSON.stringify({
+  source: out.source,
+  generated: out.generated,
+  ladder: "team",
+  minGames: 500,
+  note: "winRate = how often <civ>'s team wins when <opp> is on the enemy team (team RM; confounded by the 3 other civs per side).",
+  civs: teamCivs,
+}, null, 2)}\n`, "utf8");
+console.log(`civ-matchups-team: ${Object.keys(teamCivs).length} civs → ${OUT3}`);

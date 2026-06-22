@@ -1,8 +1,9 @@
 ---
-// CivMatchups — civ-vs-civ 1v1 win rates from the aoestats archive. Overall
-// (civ-matchups.json) plus a per-map breakdown (civ-matchups-by-map.json) the
-// reader can switch to via the map dropdown. Shows strongest/weakest matchups.
+// CivMatchups — civ-vs-civ win rates from the aoestats archive. 1v1 (overall +
+// per-map breakdown) and team (overall only; confounded by the 3 other civs per
+// side). Ladder toggle + map selector. Shows strongest/weakest matchups.
 import matchups from "@data/civ-matchups.json";
+import teamMatchups from "@data/civ-matchups-team.json";
 import byMapData from "@data/civ-matchups-by-map.json";
 import { getCollection } from "astro:content";
 import Icon from "@/components/ui/Icon.astro";
@@ -17,50 +18,59 @@ const { slug, lang } = Astro.props;
 const tr = lang === "tr";
 
 type M = { opp: string; games: number; winRate: number };
-const overall = ((matchups.civs as Record<string, M[]>)[slug] ?? []).filter((m) => m.winRate !== 50);
+const oneOverall = ((matchups.civs as Record<string, M[]>)[slug] ?? []).filter((m) => m.winRate !== 50);
+const teamOverall = ((teamMatchups.civs as Record<string, M[]>)[slug] ?? []).filter((m) => m.winRate !== 50);
 const byMapRaw = (byMapData.civs as Record<string, Record<string, M[]>>)[slug] ?? {};
 const civNames = new Map((await getCollection("civilizations")).map((c) => [c.id, c.data.name[lang]]));
 const numFmt = new Intl.NumberFormat(tr ? "tr-TR" : "en-US");
 const prettify = (s: string) => s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
-// Most-played maps for this civ with enough opponents for a clean best/worst.
 const mapViews = Object.entries(byMapRaw)
   .filter(([, arr]) => arr.length >= 14)
   .map(([map, arr]) => ({ id: map, label: prettify(map), rows: arr, games: arr.reduce((s, x) => s + x.games, 0) }))
   .sort((a, b) => b.games - a.games)
   .slice(0, 10);
 
-type View = { id: string; label: string; rows: M[] };
+type View = { id: string; rows: M[] };
 const views: View[] = [
-  { id: "all", label: tr ? "Tüm haritalar" : "All maps", rows: overall },
-  ...mapViews.map((v) => ({ id: v.id, label: v.label, rows: v.rows })),
+  { id: "1v1-all", rows: oneOverall },
+  ...mapViews.map((v) => ({ id: `1v1-${v.id}`, rows: v.rows })),
 ];
-const splitView = (rows: M[]) => [
+const hasTeam = teamOverall.length > 0;
+if (hasTeam) views.push({ id: "team-all", rows: teamOverall });
+
+const split = (rows: M[]) => [
   { title: tr ? "En güçlü olduğu" : "Strongest against", rows: rows.slice(0, 6) },
   { title: tr ? "En çok zorlandığı" : "Weakest against", rows: [...rows].slice(-6).reverse() },
 ];
 ---
-{overall.length > 0 && (
+{oneOverall.length > 0 && (
   <section class="mt-12" data-civ-matchups>
     <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-gold-500/30 pb-3">
       <h2 class="font-display text-2xl text-ink">{tr ? "Eşleşmeler" : "Matchups"}</h2>
-      <div class="flex items-center gap-2">
-        <span class="font-mono text-[11px] uppercase tracking-wide text-stone-700/80">1v1 RM</span>
+      <div class="flex flex-wrap items-center gap-2">
+        {hasTeam && (
+          <div class="flex overflow-hidden rounded border border-stone-700/30 font-mono text-[11px] uppercase" data-ladder>
+            <button type="button" data-val="1v1" class="px-3 py-1 text-ink data-[on]:bg-royal data-[on]:text-parchment">1v1</button>
+            <button type="button" data-val="team" class="border-l border-stone-700/30 px-3 py-1 text-ink data-[on]:bg-royal data-[on]:text-parchment">{tr ? "Takım" : "Team"}</button>
+          </div>
+        )}
         {mapViews.length > 0 && (
           <select
             data-mselect
             aria-label={tr ? "Harita seç" : "Select map"}
             class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink"
           >
-            {views.map((v) => <option value={v.id}>{v.label}</option>)}
+            <option value="all">{tr ? "Tüm haritalar" : "All maps"}</option>
+            {mapViews.map((v) => <option value={v.id}>{v.label}</option>)}
           </select>
         )}
       </div>
     </div>
 
     {views.map((v) => (
-      <div data-mview={v.id} hidden={v.id !== "all"} class="mt-5 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-        {splitView(v.rows).map((col) => (
+      <div data-view={v.id} hidden={v.id !== "1v1-all"} class="mt-5 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+        {split(v.rows).map((col) => (
           <div>
             <h3 class="mb-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">{col.title}</h3>
             <ul class="space-y-0.5">
@@ -89,19 +99,36 @@ const splitView = (rows: M[]) => [
 
     <p class="mt-3 font-mono text-[10px] tracking-wide text-stone-700/70">
       {tr
-        ? "Rakibe karşı kazanma oranının 50%'den farkı (yön puanı). Harita seçince o haritadaki eşleşmeler. Kaynak: aoestats 1v1 RM."
-        : "Win-rate edge vs each opponent (points above/below 50%); pick a map for that map's matchups. Source: aoestats 1v1 RM."}
+        ? "Rakibe karşı kazanma yön puanı (50% = ortalama). Takım = rakip takımdayken; 3 diğer civ ile confound'lu. Kaynak: aoestats."
+        : "Win-rate edge vs each opponent (50% = average). Team = when the opponent is on the enemy side; confounded by the 3 other civs. Source: aoestats."}
     </p>
 
     <script>
       for (const root of document.querySelectorAll<HTMLElement>("[data-civ-matchups]")) {
+        const ladderGroup = root.querySelector<HTMLElement>("[data-ladder]");
         const sel = root.querySelector<HTMLSelectElement>("[data-mselect]");
-        if (!sel) continue;
-        sel.addEventListener("change", () => {
-          for (const v of root.querySelectorAll<HTMLElement>("[data-mview]")) {
-            v.hidden = v.dataset.mview !== sel.value;
+        const state = { ladder: "1v1", map: "all" };
+        const sync = () => {
+          const want = state.ladder === "team" ? "team-all" : `1v1-${state.map}`;
+          for (const v of root.querySelectorAll<HTMLElement>("[data-view]")) v.hidden = v.dataset.view !== want;
+          if (sel) sel.style.display = state.ladder === "team" ? "none" : "";
+          if (ladderGroup) {
+            for (const b of ladderGroup.querySelectorAll<HTMLButtonElement>("button")) {
+              if (b.dataset.val === state.ladder) b.setAttribute("data-on", "");
+              else b.removeAttribute("data-on");
+            }
           }
-        });
+        };
+        if (ladderGroup) {
+          for (const b of ladderGroup.querySelectorAll<HTMLButtonElement>("button")) {
+            b.addEventListener("click", () => {
+              state.ladder = b.dataset.val || "1v1";
+              sync();
+            });
+          }
+        }
+        if (sel) sel.addEventListener("change", () => { state.map = sel.value; sync(); });
+        sync();
       }
     </script>
   </section>
