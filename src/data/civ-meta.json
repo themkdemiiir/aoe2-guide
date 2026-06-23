@@ -14,32 +14,82 @@
     {
       "patch": "2026-06",
       "label": "Jun 2026",
-      "matches": 41762
+      "matches": 293143
     },
     {
       "patch": "2026-05",
       "label": "May 2026",
-      "matches": 9930
+      "matches": 99030
     },
     {
       "patch": "2026-04",
       "label": "Apr 2026",
-      "matches": 3583
+      "matches": 32604
+    },
+    {
+      "patch": "2026-03",
+      "label": "Mar 2026",
+      "matches": 19367
+    },
+    {
+      "patch": "2026-02",
+      "label": "Feb 2026",
+      "matches": 14981
     },
     {
       "patch": "2026-01",
       "label": "Jan 2026",
-      "matches": 11612
+      "matches": 40482
     },
     {
-      "patch": "2024-07",
-      "label": "Jul 2024",
-      "matches": 3013
+      "patch": "2025-12",
+      "label": "Dec 2025",
+      "matches": 12059
     },
     {
-      "patch": "2024-05",
-      "label": "May 2024",
-      "matches": 4807
+      "patch": "2025-11",
+      "label": "Nov 2025",
+      "matches": 8542
+    },
+    {
+      "patch": "2025-10",
+      "label": "Oct 2025",
+      "matches": 8000
+    },
+    {
+      "patch": "2025-09",
+      "label": "Sep 2025",
+      "matches": 6391
+    },
+    {
+      "patch": "2025-08",
+      "label": "Aug 2025",
+      "matches": 6415
+    },
+    {
+      "patch": "2025-07",
+      "label": "Jul 2025",
+      "matches": 5644
+    },
+    {
+      "patch": "2025-06",
+      "label": "Jun 2025",
+      "matches": 5149
+    },
+    {
+      "patch": "2025-05",
+      "label": "May 2025",
+      "matches": 5435
+    },
+    {
+      "patch": "2025-04",
+      "label": "Apr 2025",
+      "matches": 5118
+    },
+    {
+      "patch": "2025-03",
+      "label": "Mar 2025",
+      "matches": 4902
     }
   ],
   "eloBuckets": [
@@ -67,28 +117,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1174,
-            "winRate": 51.96
-          },
-          "2024-07": {
-            "games": 138,
-            "winRate": 54.35
+            "games": 7934,
+            "winRate": 51.71
           },
           "2026-01": {
-            "games": 377,
-            "winRate": 50.66
+            "games": 1426,
+            "winRate": 50.35
           },
-          "2024-05": {
-            "games": 210,
-            "winRate": 48.57
+          "2025-06": {
+            "games": 186,
+            "winRate": 53.76
           },
           "2026-04": {
-            "games": 113,
-            "winRate": 52.21
+            "games": 999,
+            "winRate": 51.55
           },
           "2026-05": {
-            "games": 312,
-            "winRate": 51.28
+            "games": 3100,
+            "winRate": 53
+          },
+          "2025-12": {
+            "games": 414,
+            "winRate": 52.42
+          },
+          "2026-03": {
+            "games": 623,
+            "winRate": 50.88
+          },
+          "2025-04": {
+            "games": 181,
+            "winRate": 56.91
+          },
+          "2025-03": {
+            "games": 193,
+            "winRate": 54.4
+          },
+          "2025-07": {
+            "games": 217,
+            "winRate": 54.84
+          },
+          "2025-11": {
+            "games": 319,
+            "winRate": 50.16
+          },
+          "2025-09": {
+            "games": 262,
+            "winRate": 54.58
+          },
+          "2025-05": {
+            "games": 220,
+            "winRate": 49.09
+          },
+          "2025-10": {
+            "games": 289,
+            "winRate": 52.6
+          },
+          "2026-02": {
+            "games": 511,
+            "winRate": 54.21
+          },
+          "2025-08": {
+            "games": 247,
+            "winRate": 51.42
           }
         },
         "byElo": {
@@ -391,28 +481,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1505,
-            "winRate": 50.56
+            "games": 30365,
+            "winRate": 49.29
           },
           "2026-01": {
-            "games": 494,
-            "winRate": 48.38
+            "games": 3097,
+            "winRate": 48.3
           },
-          "2024-05": {
-            "games": 402,
-            "winRate": 51
+          "2025-12": {
+            "games": 1271,
+            "winRate": 48.78
           },
-          "2024-07": {
-            "games": 179,
-            "winRate": 51.96
+          "2025-11": {
+            "games": 899,
+            "winRate": 48.05
           },
           "2026-05": {
-            "games": 381,
-            "winRate": 49.34
+            "games": 11930,
+            "winRate": 49.78
+          },
+          "2025-09": {
+            "games": 663,
+            "winRate": 46.76
           },
           "2026-04": {
-            "games": 166,
-            "winRate": 48.19
+            "games": 3578,
+            "winRate": 49.86
+          },
+          "2025-04": {
+            "games": 502,
+            "winRate": 50
+          },
+          "2025-05": {
+            "games": 505,
+            "winRate": 53.66
+          },
+          "2025-08": {
+            "games": 667,
+            "winRate": 52.17
+          },
+          "2025-10": {
+            "games": 836,
+            "winRate": 46.65
+          },
+          "2026-03": {
+            "games": 2094,
+            "winRate": 48.57
+          },
+          "2025-06": {
+            "games": 496,
+            "winRate": 46.57
+          },
+          "2025-07": {
+            "games": 540,
+            "winRate": 48.89
+          },
+          "2025-03": {
+            "games": 607,
+            "winRate": 50.91
+          },
+          "2026-02": {
+            "games": 1519,
+            "winRate": 49.51
           }
         },
         "byElo": {
@@ -743,28 +873,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1434,
-            "winRate": 49.02
-          },
-          "2024-07": {
-            "games": 139,
-            "winRate": 45.32
-          },
-          "2024-05": {
-            "games": 229,
-            "winRate": 49.78
+            "games": 14926,
+            "winRate": 48.76
           },
           "2026-01": {
-            "games": 355,
-            "winRate": 45.63
+            "games": 1927,
+            "winRate": 47.79
+          },
+          "2025-12": {
+            "games": 762,
+            "winRate": 45.41
+          },
+          "2025-03": {
+            "games": 289,
+            "winRate": 47.06
+          },
+          "2025-04": {
+            "games": 325,
+            "winRate": 48.62
           },
           "2026-05": {
-            "games": 355,
-            "winRate": 49.58
+            "games": 5348,
+            "winRate": 48.62
+          },
+          "2025-08": {
+            "games": 409,
+            "winRate": 48.66
+          },
+          "2025-10": {
+            "games": 506,
+            "winRate": 48.02
+          },
+          "2025-09": {
+            "games": 370,
+            "winRate": 50
+          },
+          "2026-03": {
+            "games": 1187,
+            "winRate": 49.2
           },
           "2026-04": {
-            "games": 140,
-            "winRate": 54.29
+            "games": 1839,
+            "winRate": 49.27
+          },
+          "2025-11": {
+            "games": 507,
+            "winRate": 45.17
+          },
+          "2025-07": {
+            "games": 368,
+            "winRate": 46.74
+          },
+          "2025-05": {
+            "games": 312,
+            "winRate": 47.12
+          },
+          "2025-06": {
+            "games": 332,
+            "winRate": 52.71
+          },
+          "2026-02": {
+            "games": 863,
+            "winRate": 46.47
           }
         },
         "byElo": {
@@ -1095,28 +1265,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 3104,
-            "winRate": 49.58
-          },
-          "2024-07": {
-            "games": 316,
-            "winRate": 54.75
-          },
-          "2024-05": {
-            "games": 636,
-            "winRate": 55.5
+            "games": 24822,
+            "winRate": 51.39
           },
           "2026-01": {
-            "games": 1187,
-            "winRate": 52.4
+            "games": 3595,
+            "winRate": 54.77
           },
           "2026-05": {
-            "games": 845,
-            "winRate": 48.4
+            "games": 7890,
+            "winRate": 51.74
+          },
+          "2025-12": {
+            "games": 782,
+            "winRate": 54.09
+          },
+          "2025-11": {
+            "games": 528,
+            "winRate": 53.79
+          },
+          "2025-10": {
+            "games": 492,
+            "winRate": 53.66
           },
           "2026-04": {
+            "games": 2249,
+            "winRate": 53.53
+          },
+          "2025-04": {
+            "games": 296,
+            "winRate": 50
+          },
+          "2025-05": {
             "games": 250,
-            "winRate": 58.8
+            "winRate": 56.4
+          },
+          "2026-03": {
+            "games": 1211,
+            "winRate": 52.19
+          },
+          "2025-03": {
+            "games": 298,
+            "winRate": 51.34
+          },
+          "2025-09": {
+            "games": 405,
+            "winRate": 55.06
+          },
+          "2025-07": {
+            "games": 351,
+            "winRate": 52.14
+          },
+          "2025-06": {
+            "games": 305,
+            "winRate": 51.8
+          },
+          "2026-02": {
+            "games": 908,
+            "winRate": 52.09
+          },
+          "2025-08": {
+            "games": 406,
+            "winRate": 54.43
           }
         },
         "byElo": {
@@ -1446,29 +1656,69 @@
         "playRate": 1.76,
         "tier": "A",
         "byPatch": {
-          "2024-05": {
-            "games": 194,
-            "winRate": 45.88
-          },
           "2026-06": {
-            "games": 2312,
-            "winRate": 48.83
+            "games": 20615,
+            "winRate": 50.53
           },
           "2026-01": {
-            "games": 493,
-            "winRate": 45.03
+            "games": 2327,
+            "winRate": 45.77
           },
-          "2024-07": {
-            "games": 124,
-            "winRate": 45.97
+          "2025-12": {
+            "games": 897,
+            "winRate": 48.27
           },
           "2026-05": {
-            "games": 578,
-            "winRate": 48.79
+            "games": 7093,
+            "winRate": 51.35
+          },
+          "2026-03": {
+            "games": 1446,
+            "winRate": 51.66
+          },
+          "2025-06": {
+            "games": 326,
+            "winRate": 51.23
+          },
+          "2025-05": {
+            "games": 336,
+            "winRate": 47.32
+          },
+          "2025-09": {
+            "games": 475,
+            "winRate": 50.53
+          },
+          "2025-03": {
+            "games": 422,
+            "winRate": 52.13
+          },
+          "2025-11": {
+            "games": 525,
+            "winRate": 49.52
+          },
+          "2025-04": {
+            "games": 388,
+            "winRate": 50.26
+          },
+          "2025-08": {
+            "games": 442,
+            "winRate": 50.9
+          },
+          "2025-07": {
+            "games": 407,
+            "winRate": 48.16
+          },
+          "2025-10": {
+            "games": 608,
+            "winRate": 50.33
           },
           "2026-04": {
-            "games": 228,
-            "winRate": 50
+            "games": 2489,
+            "winRate": 51.02
+          },
+          "2026-02": {
+            "games": 1027,
+            "winRate": 48.69
           }
         },
         "byElo": {
@@ -1798,25 +2048,69 @@
         "playRate": 3.46,
         "tier": "C",
         "byPatch": {
-          "2024-07": {
-            "games": 129,
-            "winRate": 41.86
-          },
           "2026-05": {
-            "games": 309,
-            "winRate": 49.19
+            "games": 2685,
+            "winRate": 49.2
           },
           "2026-06": {
-            "games": 1107,
-            "winRate": 46.43
-          },
-          "2024-05": {
-            "games": 200,
-            "winRate": 42.5
+            "games": 7903,
+            "winRate": 48.36
           },
           "2026-01": {
-            "games": 396,
-            "winRate": 52.02
+            "games": 1265,
+            "winRate": 50.91
+          },
+          "2025-03": {
+            "games": 147,
+            "winRate": 50.34
+          },
+          "2025-11": {
+            "games": 264,
+            "winRate": 47.73
+          },
+          "2025-09": {
+            "games": 239,
+            "winRate": 50.63
+          },
+          "2025-10": {
+            "games": 260,
+            "winRate": 45.77
+          },
+          "2025-06": {
+            "games": 175,
+            "winRate": 45.71
+          },
+          "2026-04": {
+            "games": 891,
+            "winRate": 50.28
+          },
+          "2025-05": {
+            "games": 187,
+            "winRate": 47.06
+          },
+          "2025-04": {
+            "games": 234,
+            "winRate": 50
+          },
+          "2025-12": {
+            "games": 333,
+            "winRate": 51.95
+          },
+          "2025-08": {
+            "games": 209,
+            "winRate": 45.93
+          },
+          "2026-03": {
+            "games": 548,
+            "winRate": 49.64
+          },
+          "2026-02": {
+            "games": 417,
+            "winRate": 47.96
+          },
+          "2025-07": {
+            "games": 160,
+            "winRate": 51.25
           }
         },
         "byElo": {
@@ -2147,28 +2441,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 2501,
-            "winRate": 49.78
+            "games": 21449,
+            "winRate": 50.78
           },
           "2026-01": {
-            "games": 536,
-            "winRate": 47.95
-          },
-          "2024-07": {
-            "games": 145,
-            "winRate": 47.59
+            "games": 2385,
+            "winRate": 48.76
           },
           "2026-05": {
-            "games": 610,
-            "winRate": 52.46
+            "games": 7137,
+            "winRate": 50.9
           },
-          "2024-05": {
-            "games": 228,
-            "winRate": 45.61
+          "2025-12": {
+            "games": 914,
+            "winRate": 50.55
+          },
+          "2025-10": {
+            "games": 566,
+            "winRate": 48.23
+          },
+          "2025-06": {
+            "games": 373,
+            "winRate": 50.13
           },
           "2026-04": {
-            "games": 198,
-            "winRate": 53.03
+            "games": 2551,
+            "winRate": 50.29
+          },
+          "2025-09": {
+            "games": 419,
+            "winRate": 51.31
+          },
+          "2025-11": {
+            "games": 531,
+            "winRate": 51.79
+          },
+          "2025-05": {
+            "games": 296,
+            "winRate": 54.73
+          },
+          "2025-08": {
+            "games": 452,
+            "winRate": 46.24
+          },
+          "2025-03": {
+            "games": 346,
+            "winRate": 49.71
+          },
+          "2026-02": {
+            "games": 989,
+            "winRate": 48.43
+          },
+          "2025-04": {
+            "games": 342,
+            "winRate": 48.83
+          },
+          "2026-03": {
+            "games": 1409,
+            "winRate": 51.17
+          },
+          "2025-07": {
+            "games": 412,
+            "winRate": 50.49
           }
         },
         "byElo": {
@@ -2498,29 +2832,69 @@
         "playRate": 1.76,
         "tier": "C",
         "byPatch": {
-          "2024-07": {
-            "games": 529,
-            "winRate": 59.17
-          },
           "2026-01": {
-            "games": 654,
-            "winRate": 49.24
+            "games": 1945,
+            "winRate": 54.19
           },
           "2026-05": {
-            "games": 311,
-            "winRate": 41.48
+            "games": 2658,
+            "winRate": 48.83
           },
           "2026-06": {
-            "games": 1330,
-            "winRate": 45.34
+            "games": 7728,
+            "winRate": 48.33
           },
-          "2024-05": {
-            "games": 428,
-            "winRate": 54.67
+          "2025-12": {
+            "games": 430,
+            "winRate": 49.07
+          },
+          "2025-11": {
+            "games": 297,
+            "winRate": 48.15
+          },
+          "2025-06": {
+            "games": 166,
+            "winRate": 50
+          },
+          "2025-04": {
+            "games": 170,
+            "winRate": 50
+          },
+          "2026-03": {
+            "games": 561,
+            "winRate": 51.52
           },
           "2026-04": {
-            "games": 157,
-            "winRate": 48.41
+            "games": 981,
+            "winRate": 48.93
+          },
+          "2025-09": {
+            "games": 192,
+            "winRate": 47.4
+          },
+          "2025-10": {
+            "games": 273,
+            "winRate": 47.99
+          },
+          "2025-05": {
+            "games": 145,
+            "winRate": 48.28
+          },
+          "2025-03": {
+            "games": 195,
+            "winRate": 52.82
+          },
+          "2025-08": {
+            "games": 234,
+            "winRate": 53.42
+          },
+          "2025-07": {
+            "games": 180,
+            "winRate": 48.33
+          },
+          "2026-02": {
+            "games": 466,
+            "winRate": 53.43
           }
         },
         "byElo": {
@@ -2851,28 +3225,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1661,
-            "winRate": 52.56
-          },
-          "2024-05": {
-            "games": 218,
-            "winRate": 51.83
+            "games": 9251,
+            "winRate": 48.78
           },
           "2026-01": {
-            "games": 374,
-            "winRate": 52.41
+            "games": 1278,
+            "winRate": 50.08
           },
           "2026-05": {
-            "games": 426,
-            "winRate": 53.99
+            "games": 3410,
+            "winRate": 49.21
+          },
+          "2025-12": {
+            "games": 389,
+            "winRate": 49.1
+          },
+          "2025-11": {
+            "games": 315,
+            "winRate": 45.71
           },
           "2026-04": {
-            "games": 147,
-            "winRate": 54.42
+            "games": 1069,
+            "winRate": 47.43
           },
-          "2024-07": {
-            "games": 124,
-            "winRate": 45.97
+          "2025-04": {
+            "games": 213,
+            "winRate": 53.99
+          },
+          "2025-03": {
+            "games": 180,
+            "winRate": 52.22
+          },
+          "2025-08": {
+            "games": 229,
+            "winRate": 51.53
+          },
+          "2026-03": {
+            "games": 606,
+            "winRate": 48.84
+          },
+          "2026-02": {
+            "games": 446,
+            "winRate": 47.31
+          },
+          "2025-10": {
+            "games": 252,
+            "winRate": 46.83
+          },
+          "2025-05": {
+            "games": 186,
+            "winRate": 49.46
+          },
+          "2025-07": {
+            "games": 219,
+            "winRate": 54.79
+          },
+          "2025-06": {
+            "games": 185,
+            "winRate": 45.41
+          },
+          "2025-09": {
+            "games": 223,
+            "winRate": 42.6
           }
         },
         "byElo": {
@@ -3203,24 +3617,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1836,
-            "winRate": 47.49
+            "games": 14624,
+            "winRate": 49.29
           },
           "2026-05": {
-            "games": 405,
-            "winRate": 51.6
+            "games": 4500,
+            "winRate": 50.36
           },
           "2026-01": {
-            "games": 840,
-            "winRate": 51.9
+            "games": 2551,
+            "winRate": 51.2
           },
-          "2024-05": {
-            "games": 143,
-            "winRate": 51.05
+          "2025-10": {
+            "games": 309,
+            "winRate": 50.49
+          },
+          "2025-12": {
+            "games": 534,
+            "winRate": 46.63
+          },
+          "2025-04": {
+            "games": 197,
+            "winRate": 49.75
+          },
+          "2025-05": {
+            "games": 220,
+            "winRate": 49.55
+          },
+          "2025-08": {
+            "games": 271,
+            "winRate": 49.82
           },
           "2026-04": {
-            "games": 162,
-            "winRate": 49.38
+            "games": 1469,
+            "winRate": 50.92
+          },
+          "2026-03": {
+            "games": 885,
+            "winRate": 48.7
+          },
+          "2025-06": {
+            "games": 218,
+            "winRate": 44.5
+          },
+          "2025-11": {
+            "games": 373,
+            "winRate": 50.4
+          },
+          "2026-02": {
+            "games": 723,
+            "winRate": 49.65
+          },
+          "2025-09": {
+            "games": 309,
+            "winRate": 49.19
+          },
+          "2025-03": {
+            "games": 271,
+            "winRate": 46.86
+          },
+          "2025-07": {
+            "games": 208,
+            "winRate": 50.48
           }
         },
         "byElo": {
@@ -3551,24 +4009,52 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1198,
-            "winRate": 51.5
+            "games": 4953,
+            "winRate": 51.26
           },
           "2026-05": {
-            "games": 324,
-            "winRate": 50.62
-          },
-          "2024-05": {
-            "games": 175,
-            "winRate": 54.29
+            "games": 1565,
+            "winRate": 50.03
           },
           "2026-01": {
-            "games": 411,
-            "winRate": 50.61
+            "games": 951,
+            "winRate": 48.79
+          },
+          "2025-10": {
+            "games": 149,
+            "winRate": 44.97
+          },
+          "2026-03": {
+            "games": 285,
+            "winRate": 52.98
+          },
+          "2025-08": {
+            "games": 113,
+            "winRate": 46.9
+          },
+          "2025-12": {
+            "games": 210,
+            "winRate": 50.95
+          },
+          "2025-11": {
+            "games": 185,
+            "winRate": 52.97
+          },
+          "2025-09": {
+            "games": 114,
+            "winRate": 52.63
           },
           "2026-04": {
-            "games": 100,
-            "winRate": 47
+            "games": 550,
+            "winRate": 49.82
+          },
+          "2025-03": {
+            "games": 105,
+            "winRate": 59.05
+          },
+          "2026-02": {
+            "games": 223,
+            "winRate": 52.47
           }
         },
         "byElo": {
@@ -3899,24 +4385,68 @@
         "tier": "C",
         "byPatch": {
           "2026-05": {
-            "games": 369,
-            "winRate": 47.15
-          },
-          "2024-07": {
-            "games": 134,
-            "winRate": 50
+            "games": 4186,
+            "winRate": 52.94
           },
           "2026-06": {
-            "games": 1399,
-            "winRate": 50.04
+            "games": 11005,
+            "winRate": 53.43
           },
           "2026-01": {
-            "games": 475,
-            "winRate": 49.68
+            "games": 1762,
+            "winRate": 52.61
           },
-          "2024-05": {
-            "games": 205,
-            "winRate": 52.2
+          "2025-12": {
+            "games": 511,
+            "winRate": 52.45
+          },
+          "2026-03": {
+            "games": 804,
+            "winRate": 53.73
+          },
+          "2025-09": {
+            "games": 243,
+            "winRate": 51.85
+          },
+          "2025-06": {
+            "games": 186,
+            "winRate": 53.76
+          },
+          "2025-10": {
+            "games": 353,
+            "winRate": 48.16
+          },
+          "2025-07": {
+            "games": 192,
+            "winRate": 53.13
+          },
+          "2025-08": {
+            "games": 224,
+            "winRate": 51.34
+          },
+          "2025-05": {
+            "games": 211,
+            "winRate": 47.87
+          },
+          "2025-03": {
+            "games": 154,
+            "winRate": 53.25
+          },
+          "2026-04": {
+            "games": 1141,
+            "winRate": 53.72
+          },
+          "2025-11": {
+            "games": 331,
+            "winRate": 54.08
+          },
+          "2025-04": {
+            "games": 210,
+            "winRate": 52.38
+          },
+          "2026-02": {
+            "games": 602,
+            "winRate": 51.83
           }
         },
         "byElo": {
@@ -4246,29 +4776,69 @@
         "playRate": 2.24,
         "tier": "B",
         "byPatch": {
-          "2024-05": {
-            "games": 284,
-            "winRate": 52.11
-          },
-          "2024-07": {
-            "games": 176,
-            "winRate": 55.11
-          },
           "2026-06": {
-            "games": 1710,
-            "winRate": 50.23
+            "games": 12331,
+            "winRate": 49.01
           },
           "2026-01": {
-            "games": 381,
-            "winRate": 50.92
+            "games": 1682,
+            "winRate": 47.86
           },
           "2026-05": {
-            "games": 316,
-            "winRate": 48.73
+            "games": 3973,
+            "winRate": 48.25
           },
           "2026-04": {
-            "games": 164,
-            "winRate": 52.44
+            "games": 1418,
+            "winRate": 49.86
+          },
+          "2025-04": {
+            "games": 247,
+            "winRate": 47.77
+          },
+          "2025-12": {
+            "games": 554,
+            "winRate": 48.56
+          },
+          "2025-09": {
+            "games": 360,
+            "winRate": 46.67
+          },
+          "2025-11": {
+            "games": 381,
+            "winRate": 51.18
+          },
+          "2026-03": {
+            "games": 850,
+            "winRate": 50.94
+          },
+          "2025-03": {
+            "games": 235,
+            "winRate": 55.32
+          },
+          "2025-05": {
+            "games": 226,
+            "winRate": 50.44
+          },
+          "2025-10": {
+            "games": 374,
+            "winRate": 48.66
+          },
+          "2025-08": {
+            "games": 315,
+            "winRate": 45.4
+          },
+          "2025-07": {
+            "games": 217,
+            "winRate": 47
+          },
+          "2025-06": {
+            "games": 233,
+            "winRate": 52.79
+          },
+          "2026-02": {
+            "games": 699,
+            "winRate": 44.21
           }
         },
         "byElo": {
@@ -4599,24 +5169,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1379,
-            "winRate": 49.75
+            "games": 7036,
+            "winRate": 49.2
           },
           "2026-01": {
-            "games": 394,
-            "winRate": 53.3
+            "games": 1111,
+            "winRate": 51.94
           },
-          "2024-05": {
-            "games": 163,
-            "winRate": 50.31
+          "2025-04": {
+            "games": 131,
+            "winRate": 45.8
           },
           "2026-05": {
-            "games": 354,
-            "winRate": 52.26
+            "games": 2457,
+            "winRate": 48.64
           },
           "2026-04": {
+            "games": 755,
+            "winRate": 49.01
+          },
+          "2025-09": {
+            "games": 120,
+            "winRate": 47.5
+          },
+          "2025-11": {
+            "games": 180,
+            "winRate": 45
+          },
+          "2025-08": {
+            "games": 141,
+            "winRate": 52.48
+          },
+          "2025-06": {
+            "games": 105,
+            "winRate": 55.24
+          },
+          "2025-12": {
+            "games": 265,
+            "winRate": 47.17
+          },
+          "2026-03": {
+            "games": 433,
+            "winRate": 51.27
+          },
+          "2025-10": {
+            "games": 173,
+            "winRate": 47.4
+          },
+          "2025-03": {
             "games": 117,
-            "winRate": 50.43
+            "winRate": 53.85
+          },
+          "2025-05": {
+            "games": 117,
+            "winRate": 45.3
+          },
+          "2026-02": {
+            "games": 309,
+            "winRate": 48.54
+          },
+          "2025-07": {
+            "games": 109,
+            "winRate": 46.79
           }
         },
         "byElo": {
@@ -4947,28 +5561,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1399,
-            "winRate": 52.39
+            "games": 8104,
+            "winRate": 48.38
           },
           "2026-01": {
-            "games": 1157,
-            "winRate": 53.85
+            "games": 3052,
+            "winRate": 53.54
           },
           "2026-05": {
-            "games": 356,
-            "winRate": 49.44
+            "games": 2998,
+            "winRate": 47.1
           },
-          "2024-05": {
-            "games": 196,
-            "winRate": 51.02
+          "2025-10": {
+            "games": 243,
+            "winRate": 49.79
           },
-          "2024-07": {
-            "games": 140,
-            "winRate": 48.57
+          "2025-04": {
+            "games": 174,
+            "winRate": 51.72
+          },
+          "2025-09": {
+            "games": 180,
+            "winRate": 52.78
+          },
+          "2026-03": {
+            "games": 693,
+            "winRate": 47.91
           },
           "2026-04": {
-            "games": 164,
-            "winRate": 47.56
+            "games": 1130,
+            "winRate": 51.06
+          },
+          "2025-12": {
+            "games": 353,
+            "winRate": 50.99
+          },
+          "2025-03": {
+            "games": 163,
+            "winRate": 52.15
+          },
+          "2025-11": {
+            "games": 229,
+            "winRate": 47.16
+          },
+          "2025-08": {
+            "games": 158,
+            "winRate": 49.37
+          },
+          "2025-05": {
+            "games": 125,
+            "winRate": 44.8
+          },
+          "2026-02": {
+            "games": 656,
+            "winRate": 46.04
+          },
+          "2025-06": {
+            "games": 146,
+            "winRate": 52.05
+          },
+          "2025-07": {
+            "games": 185,
+            "winRate": 40
           }
         },
         "byElo": {
@@ -5299,24 +5953,52 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 1258,
-            "winRate": 49.84
+            "games": 4923,
+            "winRate": 47.88
           },
           "2026-01": {
-            "games": 263,
-            "winRate": 49.81
+            "games": 727,
+            "winRate": 46.91
           },
           "2026-05": {
-            "games": 292,
-            "winRate": 53.08
-          },
-          "2024-05": {
-            "games": 112,
-            "winRate": 41.96
+            "games": 1584,
+            "winRate": 51.96
           },
           "2026-04": {
-            "games": 110,
-            "winRate": 50.91
+            "games": 552,
+            "winRate": 49.28
+          },
+          "2025-03": {
+            "games": 100,
+            "winRate": 56
+          },
+          "2025-10": {
+            "games": 125,
+            "winRate": 52
+          },
+          "2026-03": {
+            "games": 305,
+            "winRate": 49.84
+          },
+          "2025-12": {
+            "games": 205,
+            "winRate": 48.29
+          },
+          "2025-11": {
+            "games": 127,
+            "winRate": 51.97
+          },
+          "2025-09": {
+            "games": 112,
+            "winRate": 51.79
+          },
+          "2026-02": {
+            "games": 223,
+            "winRate": 46.64
+          },
+          "2025-07": {
+            "games": 112,
+            "winRate": 57.14
           }
         },
         "byElo": {
@@ -5991,24 +6673,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1452,
-            "winRate": 47.45
+            "games": 7563,
+            "winRate": 49.54
           },
           "2026-01": {
-            "games": 367,
-            "winRate": 46.87
-          },
-          "2024-07": {
-            "games": 115,
-            "winRate": 51.3
+            "games": 1146,
+            "winRate": 52.27
           },
           "2026-05": {
-            "games": 285,
-            "winRate": 54.04
+            "games": 2547,
+            "winRate": 49.43
           },
-          "2024-05": {
-            "games": 211,
-            "winRate": 52.61
+          "2026-04": {
+            "games": 727,
+            "winRate": 46.08
+          },
+          "2025-12": {
+            "games": 310,
+            "winRate": 48.06
+          },
+          "2025-10": {
+            "games": 191,
+            "winRate": 46.6
+          },
+          "2025-11": {
+            "games": 228,
+            "winRate": 52.19
+          },
+          "2026-03": {
+            "games": 434,
+            "winRate": 50
+          },
+          "2025-03": {
+            "games": 122,
+            "winRate": 51.64
+          },
+          "2025-04": {
+            "games": 138,
+            "winRate": 60.14
+          },
+          "2025-06": {
+            "games": 129,
+            "winRate": 53.49
+          },
+          "2025-09": {
+            "games": 160,
+            "winRate": 46.88
+          },
+          "2025-07": {
+            "games": 122,
+            "winRate": 46.72
+          },
+          "2025-08": {
+            "games": 153,
+            "winRate": 55.56
+          },
+          "2026-02": {
+            "games": 305,
+            "winRate": 52.13
+          },
+          "2025-05": {
+            "games": 100,
+            "winRate": 46
           }
         },
         "byElo": {
@@ -6338,29 +7064,69 @@
         "playRate": 1.06,
         "tier": "C",
         "byPatch": {
-          "2024-07": {
-            "games": 100,
-            "winRate": 46
-          },
           "2026-01": {
-            "games": 367,
-            "winRate": 48.5
+            "games": 1522,
+            "winRate": 48.09
           },
           "2026-06": {
-            "games": 1443,
-            "winRate": 50.66
+            "games": 13640,
+            "winRate": 51.36
           },
-          "2024-05": {
-            "games": 190,
-            "winRate": 50.53
+          "2025-05": {
+            "games": 258,
+            "winRate": 48.84
+          },
+          "2025-04": {
+            "games": 249,
+            "winRate": 46.18
           },
           "2026-05": {
-            "games": 338,
-            "winRate": 44.67
+            "games": 4806,
+            "winRate": 50.77
           },
           "2026-04": {
-            "games": 145,
-            "winRate": 53.1
+            "games": 1728,
+            "winRate": 49.94
+          },
+          "2026-03": {
+            "games": 977,
+            "winRate": 47.39
+          },
+          "2025-12": {
+            "games": 530,
+            "winRate": 47.36
+          },
+          "2025-03": {
+            "games": 258,
+            "winRate": 51.55
+          },
+          "2025-09": {
+            "games": 302,
+            "winRate": 47.68
+          },
+          "2025-10": {
+            "games": 328,
+            "winRate": 53.96
+          },
+          "2025-06": {
+            "games": 245,
+            "winRate": 44.9
+          },
+          "2025-11": {
+            "games": 421,
+            "winRate": 51.07
+          },
+          "2026-02": {
+            "games": 776,
+            "winRate": 51.55
+          },
+          "2025-08": {
+            "games": 297,
+            "winRate": 46.8
+          },
+          "2025-07": {
+            "games": 267,
+            "winRate": 50.19
           }
         },
         "byElo": {
@@ -6690,25 +7456,69 @@
         "playRate": 2.08,
         "tier": "A",
         "byPatch": {
-          "2024-05": {
-            "games": 218,
-            "winRate": 53.67
-          },
           "2026-06": {
-            "games": 1620,
-            "winRate": 42.22
+            "games": 9356,
+            "winRate": 47.67
           },
           "2026-01": {
-            "games": 468,
-            "winRate": 48.93
+            "games": 1439,
+            "winRate": 51.49
           },
-          "2024-07": {
-            "games": 219,
-            "winRate": 52.51
+          "2025-11": {
+            "games": 229,
+            "winRate": 54.15
+          },
+          "2025-10": {
+            "games": 212,
+            "winRate": 46.7
+          },
+          "2026-04": {
+            "games": 775,
+            "winRate": 44.13
           },
           "2026-05": {
-            "games": 229,
-            "winRate": 42.79
+            "games": 2061,
+            "winRate": 41.1
+          },
+          "2025-12": {
+            "games": 314,
+            "winRate": 49.04
+          },
+          "2025-03": {
+            "games": 143,
+            "winRate": 49.65
+          },
+          "2025-05": {
+            "games": 146,
+            "winRate": 50.68
+          },
+          "2026-03": {
+            "games": 794,
+            "winRate": 45.59
+          },
+          "2025-06": {
+            "games": 152,
+            "winRate": 49.34
+          },
+          "2025-08": {
+            "games": 178,
+            "winRate": 48.88
+          },
+          "2026-02": {
+            "games": 861,
+            "winRate": 55.75
+          },
+          "2025-04": {
+            "games": 117,
+            "winRate": 58.97
+          },
+          "2025-09": {
+            "games": 148,
+            "winRate": 49.32
+          },
+          "2025-07": {
+            "games": 155,
+            "winRate": 49.03
           }
         },
         "byElo": {
@@ -7038,25 +7848,69 @@
         "playRate": 2.84,
         "tier": "A",
         "byPatch": {
-          "2024-05": {
-            "games": 176,
-            "winRate": 39.77
-          },
           "2026-01": {
-            "games": 334,
-            "winRate": 45.51
+            "games": 1525,
+            "winRate": 46.36
           },
           "2026-06": {
-            "games": 1224,
-            "winRate": 51.23
+            "games": 11564,
+            "winRate": 49.82
           },
-          "2024-07": {
-            "games": 116,
-            "winRate": 35.34
+          "2025-06": {
+            "games": 259,
+            "winRate": 52.9
           },
           "2026-05": {
-            "games": 337,
-            "winRate": 43.92
+            "games": 4192,
+            "winRate": 49.33
+          },
+          "2026-04": {
+            "games": 1279,
+            "winRate": 49.49
+          },
+          "2025-04": {
+            "games": 285,
+            "winRate": 46.67
+          },
+          "2025-03": {
+            "games": 213,
+            "winRate": 46.48
+          },
+          "2025-12": {
+            "games": 438,
+            "winRate": 47.49
+          },
+          "2025-10": {
+            "games": 341,
+            "winRate": 43.4
+          },
+          "2026-03": {
+            "games": 742,
+            "winRate": 51.08
+          },
+          "2025-05": {
+            "games": 263,
+            "winRate": 51.71
+          },
+          "2025-08": {
+            "games": 274,
+            "winRate": 52.55
+          },
+          "2025-07": {
+            "games": 277,
+            "winRate": 47.65
+          },
+          "2025-09": {
+            "games": 272,
+            "winRate": 48.16
+          },
+          "2026-02": {
+            "games": 653,
+            "winRate": 49
+          },
+          "2025-11": {
+            "games": 359,
+            "winRate": 49.86
           }
         },
         "byElo": {
@@ -7387,28 +8241,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1810,
-            "winRate": 51.71
-          },
-          "2024-07": {
-            "games": 102,
-            "winRate": 56.86
+            "games": 10149,
+            "winRate": 51.1
           },
           "2026-01": {
-            "games": 386,
-            "winRate": 52.33
+            "games": 1219,
+            "winRate": 51.44
           },
-          "2024-05": {
-            "games": 175,
-            "winRate": 42.86
+          "2025-04": {
+            "games": 153,
+            "winRate": 53.59
           },
           "2026-05": {
-            "games": 438,
-            "winRate": 50.46
+            "games": 3146,
+            "winRate": 50.83
+          },
+          "2025-10": {
+            "games": 244,
+            "winRate": 54.1
+          },
+          "2025-08": {
+            "games": 235,
+            "winRate": 51.91
           },
           "2026-04": {
-            "games": 128,
-            "winRate": 57.03
+            "games": 968,
+            "winRate": 50.83
+          },
+          "2025-12": {
+            "games": 363,
+            "winRate": 50.41
+          },
+          "2025-03": {
+            "games": 196,
+            "winRate": 47.45
+          },
+          "2025-11": {
+            "games": 266,
+            "winRate": 52.26
+          },
+          "2026-02": {
+            "games": 419,
+            "winRate": 54.89
+          },
+          "2025-09": {
+            "games": 190,
+            "winRate": 61.05
+          },
+          "2025-06": {
+            "games": 155,
+            "winRate": 47.74
+          },
+          "2025-07": {
+            "games": 179,
+            "winRate": 54.75
+          },
+          "2025-05": {
+            "games": 168,
+            "winRate": 46.43
+          },
+          "2026-03": {
+            "games": 522,
+            "winRate": 54.21
           }
         },
         "byElo": {
@@ -7739,28 +8633,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 2126,
-            "winRate": 54.33
-          },
-          "2024-07": {
-            "games": 201,
-            "winRate": 54.23
+            "games": 15983,
+            "winRate": 51.85
           },
           "2026-01": {
-            "games": 552,
-            "winRate": 54.17
+            "games": 2032,
+            "winRate": 51.53
           },
           "2026-05": {
-            "games": 391,
-            "winRate": 55.24
+            "games": 4969,
+            "winRate": 49.99
           },
-          "2024-05": {
-            "games": 381,
-            "winRate": 55.91
+          "2025-12": {
+            "games": 740,
+            "winRate": 48.65
+          },
+          "2025-06": {
+            "games": 340,
+            "winRate": 51.18
+          },
+          "2025-10": {
+            "games": 528,
+            "winRate": 48.86
+          },
+          "2025-09": {
+            "games": 382,
+            "winRate": 46.86
+          },
+          "2026-03": {
+            "games": 956,
+            "winRate": 46.34
+          },
+          "2025-08": {
+            "games": 437,
+            "winRate": 46.45
+          },
+          "2025-07": {
+            "games": 396,
+            "winRate": 52.27
+          },
+          "2026-02": {
+            "games": 786,
+            "winRate": 46.56
+          },
+          "2025-04": {
+            "games": 334,
+            "winRate": 53.59
           },
           "2026-04": {
-            "games": 136,
-            "winRate": 50
+            "games": 1628,
+            "winRate": 51.47
+          },
+          "2025-11": {
+            "games": 492,
+            "winRate": 47.97
+          },
+          "2025-05": {
+            "games": 322,
+            "winRate": 45.65
+          },
+          "2025-03": {
+            "games": 328,
+            "winRate": 43.9
           }
         },
         "byElo": {
@@ -8091,28 +9025,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1533,
-            "winRate": 51.27
-          },
-          "2024-05": {
-            "games": 169,
-            "winRate": 43.79
+            "games": 18813,
+            "winRate": 47.61
           },
           "2026-01": {
-            "games": 438,
-            "winRate": 45.89
+            "games": 2220,
+            "winRate": 45.59
+          },
+          "2025-10": {
+            "games": 581,
+            "winRate": 48.54
           },
           "2026-05": {
-            "games": 367,
-            "winRate": 51.23
+            "games": 6564,
+            "winRate": 46.95
           },
           "2026-04": {
-            "games": 124,
-            "winRate": 52.42
+            "games": 2399,
+            "winRate": 46.48
           },
-          "2024-07": {
-            "games": 100,
-            "winRate": 45
+          "2025-05": {
+            "games": 385,
+            "winRate": 48.05
+          },
+          "2025-12": {
+            "games": 837,
+            "winRate": 47.19
+          },
+          "2025-04": {
+            "games": 374,
+            "winRate": 47.33
+          },
+          "2025-11": {
+            "games": 600,
+            "winRate": 42.67
+          },
+          "2025-07": {
+            "games": 425,
+            "winRate": 47.06
+          },
+          "2025-08": {
+            "games": 545,
+            "winRate": 49.36
+          },
+          "2026-03": {
+            "games": 1326,
+            "winRate": 45.02
+          },
+          "2025-03": {
+            "games": 371,
+            "winRate": 44.74
+          },
+          "2025-06": {
+            "games": 390,
+            "winRate": 42.05
+          },
+          "2026-02": {
+            "games": 957,
+            "winRate": 45.98
+          },
+          "2025-09": {
+            "games": 469,
+            "winRate": 47.97
           }
         },
         "byElo": {
@@ -8443,16 +9417,48 @@
         "tier": "C",
         "byPatch": {
           "2026-05": {
-            "games": 302,
-            "winRate": 50.33
+            "games": 1728,
+            "winRate": 52.08
           },
           "2026-06": {
-            "games": 1046,
-            "winRate": 50
+            "games": 4719,
+            "winRate": 52.09
           },
           "2026-01": {
-            "games": 855,
-            "winRate": 55.91
+            "games": 2065,
+            "winRate": 57.63
+          },
+          "2025-12": {
+            "games": 312,
+            "winRate": 59.29
+          },
+          "2025-11": {
+            "games": 265,
+            "winRate": 57.36
+          },
+          "2026-03": {
+            "games": 325,
+            "winRate": 47.69
+          },
+          "2026-04": {
+            "games": 540,
+            "winRate": 53.15
+          },
+          "2025-09": {
+            "games": 162,
+            "winRate": 53.7
+          },
+          "2025-10": {
+            "games": 260,
+            "winRate": 56.92
+          },
+          "2025-08": {
+            "games": 107,
+            "winRate": 56.07
+          },
+          "2026-02": {
+            "games": 291,
+            "winRate": 52.92
           }
         },
         "byElo": {
@@ -8672,17 +9678,9 @@
         "playRate": 0.33,
         "tier": "S",
         "byPatch": {
-          "143421": {
-            "games": 102654,
-            "winRate": 57.95
-          },
-          "147949": {
-            "games": 17550,
-            "winRate": 53.11
-          },
-          "162286": {
-            "games": 50,
-            "winRate": 46
+          "2025-05": {
+            "games": 197,
+            "winRate": 54.82
           }
         },
         "byElo": {
@@ -8911,24 +9909,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1351,
-            "winRate": 50.85
+            "games": 6650,
+            "winRate": 51.04
           },
           "2026-01": {
-            "games": 334,
-            "winRate": 47.6
+            "games": 1176,
+            "winRate": 49.83
           },
           "2026-05": {
-            "games": 360,
-            "winRate": 51.39
+            "games": 2380,
+            "winRate": 51.05
           },
-          "2024-05": {
-            "games": 172,
-            "winRate": 50
+          "2025-10": {
+            "games": 196,
+            "winRate": 52.04
+          },
+          "2025-12": {
+            "games": 334,
+            "winRate": 51.5
           },
           "2026-04": {
-            "games": 107,
-            "winRate": 46.73
+            "games": 733,
+            "winRate": 50.75
+          },
+          "2025-08": {
+            "games": 189,
+            "winRate": 52.38
+          },
+          "2025-05": {
+            "games": 105,
+            "winRate": 57.14
+          },
+          "2025-09": {
+            "games": 179,
+            "winRate": 49.72
+          },
+          "2025-03": {
+            "games": 127,
+            "winRate": 49.61
+          },
+          "2025-04": {
+            "games": 161,
+            "winRate": 54.66
+          },
+          "2025-07": {
+            "games": 149,
+            "winRate": 49.66
+          },
+          "2026-02": {
+            "games": 338,
+            "winRate": 51.78
+          },
+          "2026-03": {
+            "games": 486,
+            "winRate": 53.91
+          },
+          "2025-11": {
+            "games": 195,
+            "winRate": 50.26
+          },
+          "2025-06": {
+            "games": 139,
+            "winRate": 53.24
           }
         },
         "byElo": {
@@ -9259,20 +10301,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1055,
-            "winRate": 50.9
+            "games": 5413,
+            "winRate": 47.16
           },
           "2026-01": {
-            "games": 313,
-            "winRate": 47.28
+            "games": 751,
+            "winRate": 44.87
+          },
+          "2025-12": {
+            "games": 209,
+            "winRate": 45.93
+          },
+          "2026-04": {
+            "games": 610,
+            "winRate": 47.7
+          },
+          "2025-03": {
+            "games": 108,
+            "winRate": 43.52
+          },
+          "2025-04": {
+            "games": 128,
+            "winRate": 41.41
           },
           "2026-05": {
-            "games": 240,
-            "winRate": 50
+            "games": 1833,
+            "winRate": 45.06
           },
-          "2024-05": {
-            "games": 129,
-            "winRate": 44.96
+          "2025-10": {
+            "games": 146,
+            "winRate": 54.11
+          },
+          "2025-11": {
+            "games": 188,
+            "winRate": 45.74
+          },
+          "2025-06": {
+            "games": 104,
+            "winRate": 54.81
+          },
+          "2026-02": {
+            "games": 268,
+            "winRate": 41.42
+          },
+          "2025-07": {
+            "games": 114,
+            "winRate": 48.25
+          },
+          "2025-05": {
+            "games": 127,
+            "winRate": 37.8
+          },
+          "2026-03": {
+            "games": 307,
+            "winRate": 44.63
+          },
+          "2025-08": {
+            "games": 151,
+            "winRate": 42.38
+          },
+          "2025-09": {
+            "games": 125,
+            "winRate": 43.2
           }
         },
         "byElo": {
@@ -9603,24 +10693,68 @@
         "tier": "B",
         "byPatch": {
           "2026-01": {
-            "games": 655,
-            "winRate": 54.35
+            "games": 2092,
+            "winRate": 54.73
           },
           "2026-06": {
-            "games": 1258,
-            "winRate": 55.17
+            "games": 10728,
+            "winRate": 54.33
           },
-          "2024-05": {
-            "games": 136,
-            "winRate": 49.26
+          "2025-10": {
+            "games": 269,
+            "winRate": 51.67
+          },
+          "2025-04": {
+            "games": 213,
+            "winRate": 58.22
+          },
+          "2025-03": {
+            "games": 156,
+            "winRate": 53.85
           },
           "2026-05": {
-            "games": 340,
-            "winRate": 52.65
+            "games": 3497,
+            "winRate": 54.36
+          },
+          "2026-03": {
+            "games": 713,
+            "winRate": 55.12
           },
           "2026-04": {
-            "games": 133,
-            "winRate": 58.65
+            "games": 1174,
+            "winRate": 54.43
+          },
+          "2025-05": {
+            "games": 173,
+            "winRate": 52.02
+          },
+          "2025-09": {
+            "games": 206,
+            "winRate": 55.34
+          },
+          "2025-12": {
+            "games": 417,
+            "winRate": 53.48
+          },
+          "2025-07": {
+            "games": 216,
+            "winRate": 62.96
+          },
+          "2025-08": {
+            "games": 226,
+            "winRate": 51.33
+          },
+          "2025-11": {
+            "games": 293,
+            "winRate": 57
+          },
+          "2025-06": {
+            "games": 211,
+            "winRate": 58.77
+          },
+          "2026-02": {
+            "games": 508,
+            "winRate": 55.12
           }
         },
         "byElo": {
@@ -9951,24 +11085,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1443,
-            "winRate": 47.54
+            "games": 9400,
+            "winRate": 48.97
           },
           "2026-01": {
-            "games": 424,
-            "winRate": 52.83
+            "games": 1533,
+            "winRate": 52.12
           },
-          "2024-05": {
-            "games": 177,
-            "winRate": 46.33
+          "2025-10": {
+            "games": 296,
+            "winRate": 48.99
           },
           "2026-05": {
-            "games": 379,
-            "winRate": 52.51
+            "games": 3318,
+            "winRate": 50.03
           },
           "2026-04": {
-            "games": 149,
-            "winRate": 44.3
+            "games": 1200,
+            "winRate": 49.75
+          },
+          "2026-03": {
+            "games": 705,
+            "winRate": 50.35
+          },
+          "2025-12": {
+            "games": 443,
+            "winRate": 45.6
+          },
+          "2025-09": {
+            "games": 237,
+            "winRate": 56.12
+          },
+          "2025-11": {
+            "games": 270,
+            "winRate": 51.11
+          },
+          "2026-02": {
+            "games": 518,
+            "winRate": 50.58
+          },
+          "2025-07": {
+            "games": 172,
+            "winRate": 49.42
+          },
+          "2025-04": {
+            "games": 170,
+            "winRate": 57.06
+          },
+          "2025-06": {
+            "games": 163,
+            "winRate": 48.47
+          },
+          "2025-05": {
+            "games": 191,
+            "winRate": 51.83
+          },
+          "2025-03": {
+            "games": 163,
+            "winRate": 51.53
+          },
+          "2025-08": {
+            "games": 218,
+            "winRate": 49.08
           }
         },
         "byElo": {
@@ -10299,28 +11477,68 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 1420,
-            "winRate": 50.99
+            "games": 7264,
+            "winRate": 50.4
           },
           "2026-01": {
-            "games": 394,
-            "winRate": 48.98
-          },
-          "2024-07": {
-            "games": 116,
-            "winRate": 50
+            "games": 1075,
+            "winRate": 51.91
           },
           "2026-05": {
-            "games": 415,
-            "winRate": 54.7
+            "games": 2515,
+            "winRate": 52.8
           },
-          "2024-05": {
-            "games": 194,
-            "winRate": 54.12
+          "2025-05": {
+            "games": 154,
+            "winRate": 47.4
+          },
+          "2026-03": {
+            "games": 506,
+            "winRate": 53.75
+          },
+          "2025-04": {
+            "games": 131,
+            "winRate": 52.67
           },
           "2026-04": {
-            "games": 152,
-            "winRate": 49.34
+            "games": 843,
+            "winRate": 51.36
+          },
+          "2025-12": {
+            "games": 305,
+            "winRate": 50.16
+          },
+          "2025-09": {
+            "games": 176,
+            "winRate": 51.7
+          },
+          "2025-11": {
+            "games": 204,
+            "winRate": 55.88
+          },
+          "2025-10": {
+            "games": 201,
+            "winRate": 55.72
+          },
+          "2025-08": {
+            "games": 166,
+            "winRate": 56.02
+          },
+          "2025-03": {
+            "games": 109,
+            "winRate": 49.54
+          },
+          "2025-06": {
+            "games": 113,
+            "winRate": 46.9
+          },
+          "2026-02": {
+            "games": 343,
+            "winRate": 55.69
+          },
+          "2025-07": {
+            "games": 162,
+            "winRate": 53.7
           }
         },
         "byElo": {
@@ -10651,28 +11869,68 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 1630,
-            "winRate": 45.64
+            "games": 13863,
+            "winRate": 49.26
           },
           "2026-01": {
-            "games": 367,
-            "winRate": 46.59
+            "games": 1467,
+            "winRate": 49.28
           },
-          "2024-07": {
-            "games": 118,
-            "winRate": 44.07
-          },
-          "2024-05": {
-            "games": 176,
-            "winRate": 43.75
+          "2025-10": {
+            "games": 359,
+            "winRate": 55.43
           },
           "2026-05": {
-            "games": 392,
-            "winRate": 43.37
+            "games": 5094,
+            "winRate": 50.53
           },
           "2026-04": {
-            "games": 143,
-            "winRate": 46.15
+            "games": 1176,
+            "winRate": 50.51
+          },
+          "2025-12": {
+            "games": 480,
+            "winRate": 51.25
+          },
+          "2025-06": {
+            "games": 183,
+            "winRate": 52.46
+          },
+          "2025-08": {
+            "games": 266,
+            "winRate": 52.63
+          },
+          "2025-05": {
+            "games": 215,
+            "winRate": 48.84
+          },
+          "2026-02": {
+            "games": 561,
+            "winRate": 50.98
+          },
+          "2025-11": {
+            "games": 359,
+            "winRate": 51.25
+          },
+          "2025-07": {
+            "games": 222,
+            "winRate": 51.35
+          },
+          "2025-09": {
+            "games": 255,
+            "winRate": 50.2
+          },
+          "2025-04": {
+            "games": 228,
+            "winRate": 48.68
+          },
+          "2026-03": {
+            "games": 733,
+            "winRate": 51.84
+          },
+          "2025-03": {
+            "games": 200,
+            "winRate": 48.5
           }
         },
         "byElo": {
@@ -11003,12 +12261,24 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 914,
-            "winRate": 47.59
+            "games": 3297,
+            "winRate": 49.32
           },
           "2026-05": {
-            "games": 161,
-            "winRate": 40.99
+            "games": 690,
+            "winRate": 42.75
+          },
+          "2026-04": {
+            "games": 300,
+            "winRate": 42.67
+          },
+          "2026-03": {
+            "games": 308,
+            "winRate": 46.75
+          },
+          "2026-02": {
+            "games": 374,
+            "winRate": 55.88
           }
         },
         "byElo": {
@@ -11063,24 +12333,60 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 972,
-            "winRate": 47.74
+            "games": 4660,
+            "winRate": 47.58
           },
           "2026-01": {
-            "games": 362,
-            "winRate": 46.13
+            "games": 1012,
+            "winRate": 47.04
           },
           "2026-05": {
-            "games": 258,
-            "winRate": 48.06
+            "games": 1475,
+            "winRate": 49.83
           },
-          "2024-05": {
-            "games": 225,
-            "winRate": 56
+          "2025-12": {
+            "games": 247,
+            "winRate": 48.99
           },
-          "2024-07": {
-            "games": 137,
-            "winRate": 53.28
+          "2026-02": {
+            "games": 260,
+            "winRate": 51.92
+          },
+          "2025-10": {
+            "games": 162,
+            "winRate": 46.3
+          },
+          "2026-04": {
+            "games": 562,
+            "winRate": 48.93
+          },
+          "2025-05": {
+            "games": 117,
+            "winRate": 50.43
+          },
+          "2025-03": {
+            "games": 161,
+            "winRate": 54.66
+          },
+          "2025-11": {
+            "games": 144,
+            "winRate": 57.64
+          },
+          "2025-08": {
+            "games": 122,
+            "winRate": 48.36
+          },
+          "2026-03": {
+            "games": 303,
+            "winRate": 45.87
+          },
+          "2025-07": {
+            "games": 128,
+            "winRate": 53.91
+          },
+          "2025-09": {
+            "games": 116,
+            "winRate": 50
           }
         },
         "byElo": {
@@ -11411,28 +12717,68 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 1474,
-            "winRate": 46.4
+            "games": 10757,
+            "winRate": 48.73
           },
           "2026-01": {
-            "games": 410,
-            "winRate": 43.41
+            "games": 1724,
+            "winRate": 47.39
           },
-          "2024-05": {
-            "games": 229,
-            "winRate": 47.6
+          "2025-12": {
+            "games": 519,
+            "winRate": 53.56
           },
           "2026-05": {
-            "games": 378,
-            "winRate": 46.3
+            "games": 3841,
+            "winRate": 48.97
           },
-          "2024-07": {
-            "games": 159,
-            "winRate": 39.62
+          "2025-10": {
+            "games": 381,
+            "winRate": 52.76
+          },
+          "2025-07": {
+            "games": 237,
+            "winRate": 45.57
+          },
+          "2025-09": {
+            "games": 318,
+            "winRate": 44.65
+          },
+          "2026-02": {
+            "games": 669,
+            "winRate": 46.49
           },
           "2026-04": {
-            "games": 181,
-            "winRate": 52.49
+            "games": 1408,
+            "winRate": 48.65
+          },
+          "2025-04": {
+            "games": 266,
+            "winRate": 49.62
+          },
+          "2025-11": {
+            "games": 372,
+            "winRate": 46.51
+          },
+          "2026-03": {
+            "games": 790,
+            "winRate": 49.11
+          },
+          "2025-05": {
+            "games": 281,
+            "winRate": 42.35
+          },
+          "2025-06": {
+            "games": 266,
+            "winRate": 50.38
+          },
+          "2025-08": {
+            "games": 287,
+            "winRate": 49.13
+          },
+          "2025-03": {
+            "games": 234,
+            "winRate": 52.56
           }
         },
         "byElo": {
@@ -11763,12 +13109,24 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 957,
-            "winRate": 50.37
+            "games": 3299,
+            "winRate": 49.26
           },
           "2026-05": {
-            "games": 235,
-            "winRate": 52.34
+            "games": 1110,
+            "winRate": 56.58
+          },
+          "2026-04": {
+            "games": 434,
+            "winRate": 53.69
+          },
+          "2026-03": {
+            "games": 543,
+            "winRate": 56.35
+          },
+          "2026-02": {
+            "games": 490,
+            "winRate": 54.9
           }
         },
         "byElo": {
@@ -11823,20 +13181,48 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 1130,
-            "winRate": 46.9
+            "games": 4720,
+            "winRate": 48.18
           },
           "2026-01": {
-            "games": 298,
-            "winRate": 44.63
+            "games": 725,
+            "winRate": 46.62
           },
           "2026-05": {
-            "games": 300,
-            "winRate": 46
+            "games": 1662,
+            "winRate": 46.51
           },
-          "2024-05": {
-            "games": 148,
-            "winRate": 41.22
+          "2025-10": {
+            "games": 112,
+            "winRate": 41.07
+          },
+          "2025-12": {
+            "games": 212,
+            "winRate": 48.11
+          },
+          "2026-03": {
+            "games": 305,
+            "winRate": 48.2
+          },
+          "2025-11": {
+            "games": 124,
+            "winRate": 52.42
+          },
+          "2026-04": {
+            "games": 522,
+            "winRate": 44.44
+          },
+          "2025-08": {
+            "games": 114,
+            "winRate": 49.12
+          },
+          "2025-09": {
+            "games": 109,
+            "winRate": 47.71
+          },
+          "2026-02": {
+            "games": 202,
+            "winRate": 49.5
           }
         },
         "byElo": {
@@ -12167,24 +13553,68 @@
         "tier": "C",
         "byPatch": {
           "2026-06": {
-            "games": 1050,
-            "winRate": 49.05
+            "games": 6293,
+            "winRate": 48.39
           },
           "2026-01": {
-            "games": 305,
-            "winRate": 55.08
+            "games": 1026,
+            "winRate": 50.88
           },
-          "2024-05": {
-            "games": 143,
-            "winRate": 53.15
+          "2025-10": {
+            "games": 196,
+            "winRate": 45.41
           },
           "2026-05": {
-            "games": 282,
-            "winRate": 46.81
+            "games": 2308,
+            "winRate": 49.26
+          },
+          "2025-09": {
+            "games": 162,
+            "winRate": 45.68
+          },
+          "2025-11": {
+            "games": 210,
+            "winRate": 45.24
           },
           "2026-04": {
-            "games": 107,
-            "winRate": 55.14
+            "games": 818,
+            "winRate": 47.92
+          },
+          "2025-12": {
+            "games": 306,
+            "winRate": 51.31
+          },
+          "2026-02": {
+            "games": 345,
+            "winRate": 47.54
+          },
+          "2026-03": {
+            "games": 456,
+            "winRate": 53.07
+          },
+          "2025-04": {
+            "games": 176,
+            "winRate": 48.86
+          },
+          "2025-05": {
+            "games": 143,
+            "winRate": 50.35
+          },
+          "2025-08": {
+            "games": 164,
+            "winRate": 44.51
+          },
+          "2025-03": {
+            "games": 148,
+            "winRate": 58.78
+          },
+          "2025-06": {
+            "games": 134,
+            "winRate": 47.76
+          },
+          "2025-07": {
+            "games": 154,
+            "winRate": 54.55
           }
         },
         "byElo": {
@@ -12514,29 +13944,69 @@
         "playRate": 2.43,
         "tier": "B",
         "byPatch": {
-          "2024-07": {
-            "games": 105,
-            "winRate": 48.57
-          },
           "2026-01": {
-            "games": 413,
-            "winRate": 47.7
+            "games": 1925,
+            "winRate": 47.27
           },
           "2026-06": {
-            "games": 2235,
-            "winRate": 48.81
+            "games": 18061,
+            "winRate": 49.36
           },
-          "2024-05": {
-            "games": 222,
-            "winRate": 44.59
+          "2025-12": {
+            "games": 850,
+            "winRate": 48.24
           },
           "2026-04": {
-            "games": 223,
-            "winRate": 49.78
+            "games": 2155,
+            "winRate": 48.49
+          },
+          "2025-10": {
+            "games": 531,
+            "winRate": 46.33
+          },
+          "2025-04": {
+            "games": 349,
+            "winRate": 45.85
           },
           "2026-05": {
-            "games": 578,
-            "winRate": 52.94
+            "games": 6629,
+            "winRate": 49.55
+          },
+          "2025-09": {
+            "games": 392,
+            "winRate": 47.96
+          },
+          "2025-03": {
+            "games": 322,
+            "winRate": 48.76
+          },
+          "2025-06": {
+            "games": 301,
+            "winRate": 47.18
+          },
+          "2026-03": {
+            "games": 1206,
+            "winRate": 48.92
+          },
+          "2025-07": {
+            "games": 367,
+            "winRate": 47.41
+          },
+          "2025-11": {
+            "games": 643,
+            "winRate": 51.94
+          },
+          "2025-05": {
+            "games": 319,
+            "winRate": 51.41
+          },
+          "2025-08": {
+            "games": 355,
+            "winRate": 46.2
+          },
+          "2026-02": {
+            "games": 819,
+            "winRate": 51.65
           }
         },
         "byElo": {
@@ -12867,28 +14337,68 @@
         "tier": "S",
         "byPatch": {
           "2026-06": {
-            "games": 2623,
-            "winRate": 49.49
+            "games": 21163,
+            "winRate": 49.46
           },
           "2026-05": {
-            "games": 559,
-            "winRate": 52.59
-          },
-          "2024-07": {
-            "games": 115,
-            "winRate": 48.7
+            "games": 6686,
+            "winRate": 50.63
           },
           "2026-01": {
-            "games": 513,
-            "winRate": 51.07
+            "games": 2211,
+            "winRate": 50.07
           },
-          "2024-05": {
-            "games": 164,
-            "winRate": 46.95
+          "2026-03": {
+            "games": 1179,
+            "winRate": 49.79
+          },
+          "2025-10": {
+            "games": 369,
+            "winRate": 52.85
+          },
+          "2025-03": {
+            "games": 247,
+            "winRate": 55.87
+          },
+          "2025-04": {
+            "games": 258,
+            "winRate": 51.55
+          },
+          "2025-06": {
+            "games": 223,
+            "winRate": 50.22
+          },
+          "2025-08": {
+            "games": 284,
+            "winRate": 48.59
+          },
+          "2025-09": {
+            "games": 291,
+            "winRate": 48.11
+          },
+          "2025-12": {
+            "games": 658,
+            "winRate": 54.71
           },
           "2026-04": {
-            "games": 184,
-            "winRate": 47.28
+            "games": 2231,
+            "winRate": 49.98
+          },
+          "2025-11": {
+            "games": 390,
+            "winRate": 46.15
+          },
+          "2025-05": {
+            "games": 223,
+            "winRate": 45.29
+          },
+          "2026-02": {
+            "games": 838,
+            "winRate": 50.48
+          },
+          "2025-07": {
+            "games": 273,
+            "winRate": 51.65
           }
         },
         "byElo": {
@@ -13198,29 +14708,69 @@
         "playRate": 1.74,
         "tier": "C",
         "byPatch": {
-          "2024-05": {
-            "games": 303,
-            "winRate": 55.45
-          },
           "2026-06": {
-            "games": 1426,
-            "winRate": 47.05
-          },
-          "2024-07": {
-            "games": 256,
-            "winRate": 56.64
+            "games": 13502,
+            "winRate": 46.3
           },
           "2026-01": {
-            "games": 555,
-            "winRate": 49.91
+            "games": 2105,
+            "winRate": 48.93
+          },
+          "2025-04": {
+            "games": 323,
+            "winRate": 47.99
+          },
+          "2025-03": {
+            "games": 326,
+            "winRate": 48.16
           },
           "2026-04": {
-            "games": 139,
-            "winRate": 49.64
+            "games": 1624,
+            "winRate": 48.52
           },
           "2026-05": {
-            "games": 358,
-            "winRate": 46.37
+            "games": 4959,
+            "winRate": 47.19
+          },
+          "2026-02": {
+            "games": 775,
+            "winRate": 46.06
+          },
+          "2025-05": {
+            "games": 257,
+            "winRate": 49.42
+          },
+          "2025-12": {
+            "games": 743,
+            "winRate": 45.9
+          },
+          "2025-06": {
+            "games": 293,
+            "winRate": 47.44
+          },
+          "2025-10": {
+            "games": 429,
+            "winRate": 51.75
+          },
+          "2025-11": {
+            "games": 476,
+            "winRate": 48.74
+          },
+          "2026-03": {
+            "games": 1032,
+            "winRate": 45.06
+          },
+          "2025-08": {
+            "games": 313,
+            "winRate": 45.69
+          },
+          "2025-07": {
+            "games": 350,
+            "winRate": 50.86
+          },
+          "2025-09": {
+            "games": 367,
+            "winRate": 45.78
           }
         },
         "byElo": {
@@ -13551,16 +15101,52 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 744,
-            "winRate": 48.52
+            "games": 2964,
+            "winRate": 50.71
           },
           "2026-01": {
-            "games": 345,
-            "winRate": 54.49
+            "games": 788,
+            "winRate": 54.19
           },
           "2026-05": {
-            "games": 212,
-            "winRate": 50.94
+            "games": 1017,
+            "winRate": 52.11
+          },
+          "2026-03": {
+            "games": 192,
+            "winRate": 58.33
+          },
+          "2026-04": {
+            "games": 385,
+            "winRate": 51.95
+          },
+          "2025-12": {
+            "games": 190,
+            "winRate": 59.47
+          },
+          "2025-10": {
+            "games": 126,
+            "winRate": 56.35
+          },
+          "2025-05": {
+            "games": 190,
+            "winRate": 56.84
+          },
+          "2025-08": {
+            "games": 121,
+            "winRate": 54.55
+          },
+          "2025-06": {
+            "games": 127,
+            "winRate": 62.99
+          },
+          "2026-02": {
+            "games": 155,
+            "winRate": 45.16
+          },
+          "2025-11": {
+            "games": 139,
+            "winRate": 48.2
           }
         },
         "byElo": {
@@ -13797,28 +15383,68 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 1211,
-            "winRate": 51.28
+            "games": 9205,
+            "winRate": 51.45
           },
           "2026-01": {
-            "games": 378,
-            "winRate": 46.03
-          },
-          "2024-07": {
-            "games": 105,
-            "winRate": 40
+            "games": 1433,
+            "winRate": 47.59
           },
           "2026-05": {
-            "games": 305,
-            "winRate": 48.2
+            "games": 3489,
+            "winRate": 50.13
           },
-          "2024-05": {
-            "games": 169,
-            "winRate": 45.56
+          "2025-12": {
+            "games": 546,
+            "winRate": 50.55
           },
           "2026-04": {
-            "games": 105,
-            "winRate": 45.71
+            "games": 1138,
+            "winRate": 52.81
+          },
+          "2025-04": {
+            "games": 310,
+            "winRate": 51.29
+          },
+          "2025-10": {
+            "games": 299,
+            "winRate": 45.15
+          },
+          "2025-06": {
+            "games": 211,
+            "winRate": 48.82
+          },
+          "2025-03": {
+            "games": 267,
+            "winRate": 52.43
+          },
+          "2025-05": {
+            "games": 217,
+            "winRate": 52.07
+          },
+          "2026-03": {
+            "games": 776,
+            "winRate": 51.68
+          },
+          "2025-11": {
+            "games": 344,
+            "winRate": 54.36
+          },
+          "2025-09": {
+            "games": 256,
+            "winRate": 52.34
+          },
+          "2025-08": {
+            "games": 260,
+            "winRate": 51.54
+          },
+          "2025-07": {
+            "games": 251,
+            "winRate": 47.81
+          },
+          "2026-02": {
+            "games": 462,
+            "winRate": 45.02
           }
         },
         "byElo": {
@@ -14144,25 +15770,69 @@
         "playRate": 1.49,
         "tier": "B",
         "byPatch": {
-          "2024-05": {
-            "games": 171,
-            "winRate": 49.12
-          },
           "2026-01": {
-            "games": 407,
-            "winRate": 41.52
+            "games": 1614,
+            "winRate": 47.03
           },
           "2026-06": {
-            "games": 2254,
-            "winRate": 51.15
+            "games": 16145,
+            "winRate": 53.08
           },
           "2026-05": {
-            "games": 429,
-            "winRate": 48.95
+            "games": 4948,
+            "winRate": 51.64
+          },
+          "2025-09": {
+            "games": 290,
+            "winRate": 55.17
+          },
+          "2025-10": {
+            "games": 372,
+            "winRate": 53.76
           },
           "2026-04": {
-            "games": 166,
-            "winRate": 46.99
+            "games": 1599,
+            "winRate": 51.72
+          },
+          "2025-12": {
+            "games": 572,
+            "winRate": 51.92
+          },
+          "2026-03": {
+            "games": 910,
+            "winRate": 52.86
+          },
+          "2026-02": {
+            "games": 778,
+            "winRate": 52.57
+          },
+          "2025-08": {
+            "games": 288,
+            "winRate": 52.78
+          },
+          "2025-11": {
+            "games": 389,
+            "winRate": 50.64
+          },
+          "2025-05": {
+            "games": 244,
+            "winRate": 53.28
+          },
+          "2025-07": {
+            "games": 227,
+            "winRate": 44.93
+          },
+          "2025-06": {
+            "games": 228,
+            "winRate": 52.19
+          },
+          "2025-03": {
+            "games": 135,
+            "winRate": 39.26
+          },
+          "2025-04": {
+            "games": 250,
+            "winRate": 50.4
           }
         },
         "byElo": {
@@ -14492,29 +16162,69 @@
         "playRate": 3.31,
         "tier": "B",
         "byPatch": {
-          "2024-05": {
-            "games": 253,
-            "winRate": 51.38
-          },
           "2026-05": {
-            "games": 463,
-            "winRate": 51.84
-          },
-          "2024-07": {
-            "games": 197,
-            "winRate": 48.73
+            "games": 5470,
+            "winRate": 51.57
           },
           "2026-06": {
-            "games": 1788,
-            "winRate": 49.94
+            "games": 14948,
+            "winRate": 50.1
           },
           "2026-01": {
-            "games": 467,
-            "winRate": 52.46
+            "games": 1919,
+            "winRate": 52.11
+          },
+          "2025-03": {
+            "games": 283,
+            "winRate": 55.83
+          },
+          "2025-12": {
+            "games": 528,
+            "winRate": 57.2
+          },
+          "2025-10": {
+            "games": 399,
+            "winRate": 57.14
+          },
+          "2025-04": {
+            "games": 274,
+            "winRate": 51.09
+          },
+          "2025-09": {
+            "games": 309,
+            "winRate": 53.4
+          },
+          "2025-05": {
+            "games": 287,
+            "winRate": 55.4
           },
           "2026-04": {
-            "games": 191,
-            "winRate": 48.69
+            "games": 1940,
+            "winRate": 51.91
+          },
+          "2026-03": {
+            "games": 1052,
+            "winRate": 50.48
+          },
+          "2025-08": {
+            "games": 331,
+            "winRate": 53.17
+          },
+          "2025-06": {
+            "games": 283,
+            "winRate": 51.94
+          },
+          "2026-02": {
+            "games": 692,
+            "winRate": 51.73
+          },
+          "2025-07": {
+            "games": 274,
+            "winRate": 50
+          },
+          "2025-11": {
+            "games": 423,
+            "winRate": 51.3
           }
         },
         "byElo": {
@@ -14845,24 +16555,68 @@
         "tier": "C",
         "byPatch": {
           "2026-01": {
-            "games": 321,
-            "winRate": 43.61
+            "games": 1306,
+            "winRate": 45.71
           },
           "2026-06": {
-            "games": 1326,
-            "winRate": 48.87
+            "games": 9352,
+            "winRate": 49.44
+          },
+          "2025-12": {
+            "games": 407,
+            "winRate": 52.09
           },
           "2026-05": {
-            "games": 325,
-            "winRate": 45.23
+            "games": 3332,
+            "winRate": 50.24
           },
           "2026-04": {
-            "games": 119,
-            "winRate": 47.9
+            "games": 1018,
+            "winRate": 46.76
           },
-          "2024-05": {
-            "games": 107,
-            "winRate": 42.06
+          "2026-03": {
+            "games": 638,
+            "winRate": 51.25
+          },
+          "2025-03": {
+            "games": 150,
+            "winRate": 58.67
+          },
+          "2025-08": {
+            "games": 246,
+            "winRate": 49.59
+          },
+          "2025-10": {
+            "games": 342,
+            "winRate": 52.34
+          },
+          "2026-02": {
+            "games": 521,
+            "winRate": 50.86
+          },
+          "2025-06": {
+            "games": 160,
+            "winRate": 55.63
+          },
+          "2025-09": {
+            "games": 219,
+            "winRate": 50.23
+          },
+          "2025-04": {
+            "games": 155,
+            "winRate": 43.87
+          },
+          "2025-11": {
+            "games": 323,
+            "winRate": 44.89
+          },
+          "2025-05": {
+            "games": 184,
+            "winRate": 53.26
+          },
+          "2025-07": {
+            "games": 202,
+            "winRate": 45.05
           }
         },
         "byElo": {
@@ -15193,24 +16947,68 @@
         "tier": "B",
         "byPatch": {
           "2026-06": {
-            "games": 1554,
-            "winRate": 49.87
+            "games": 12624,
+            "winRate": 49.75
           },
           "2026-01": {
-            "games": 287,
-            "winRate": 46.34
+            "games": 1226,
+            "winRate": 45.84
           },
-          "2024-05": {
-            "games": 149,
-            "winRate": 53.69
+          "2025-12": {
+            "games": 463,
+            "winRate": 48.81
+          },
+          "2025-11": {
+            "games": 385,
+            "winRate": 48.57
+          },
+          "2025-09": {
+            "games": 249,
+            "winRate": 52.21
           },
           "2026-05": {
-            "games": 310,
-            "winRate": 46.77
+            "games": 3944,
+            "winRate": 49.65
+          },
+          "2025-04": {
+            "games": 162,
+            "winRate": 53.7
           },
           "2026-04": {
-            "games": 146,
-            "winRate": 52.05
+            "games": 1355,
+            "winRate": 49.45
+          },
+          "2025-10": {
+            "games": 321,
+            "winRate": 46.73
+          },
+          "2026-03": {
+            "games": 792,
+            "winRate": 50.38
+          },
+          "2025-03": {
+            "games": 200,
+            "winRate": 48
+          },
+          "2025-07": {
+            "games": 227,
+            "winRate": 48.02
+          },
+          "2025-06": {
+            "games": 202,
+            "winRate": 44.06
+          },
+          "2026-02": {
+            "games": 553,
+            "winRate": 49.37
+          },
+          "2025-05": {
+            "games": 211,
+            "winRate": 49.76
+          },
+          "2025-08": {
+            "games": 271,
+            "winRate": 50.18
           }
         },
         "byElo": {
@@ -15537,12 +17335,24 @@
         "tier": "S",
         "byPatch": {
           "2026-06": {
-            "games": 899,
-            "winRate": 53.95
+            "games": 3228,
+            "winRate": 51.83
           },
           "2026-05": {
-            "games": 195,
-            "winRate": 54.87
+            "games": 1046,
+            "winRate": 54.4
+          },
+          "2026-04": {
+            "games": 393,
+            "winRate": 54.2
+          },
+          "2026-02": {
+            "games": 375,
+            "winRate": 54.93
+          },
+          "2026-03": {
+            "games": 366,
+            "winRate": 51.64
           }
         },
         "byElo": {
@@ -15601,24 +17411,68 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 1230,
-            "winRate": 50.57
-          },
-          "2024-07": {
-            "games": 102,
-            "winRate": 47.06
+            "games": 9373,
+            "winRate": 50.98
           },
           "2026-01": {
-            "games": 344,
-            "winRate": 48.26
+            "games": 1272,
+            "winRate": 47.33
           },
-          "2024-05": {
-            "games": 181,
-            "winRate": 50.28
+          "2025-03": {
+            "games": 168,
+            "winRate": 51.79
+          },
+          "2026-04": {
+            "games": 1135,
+            "winRate": 51.89
+          },
+          "2025-04": {
+            "games": 179,
+            "winRate": 49.72
+          },
+          "2025-07": {
+            "games": 206,
+            "winRate": 48.06
           },
           "2026-05": {
-            "games": 307,
-            "winRate": 49.51
+            "games": 3369,
+            "winRate": 50.7
+          },
+          "2025-09": {
+            "games": 221,
+            "winRate": 46.61
+          },
+          "2025-08": {
+            "games": 244,
+            "winRate": 49.18
+          },
+          "2025-12": {
+            "games": 404,
+            "winRate": 49.75
+          },
+          "2026-03": {
+            "games": 670,
+            "winRate": 48.36
+          },
+          "2025-06": {
+            "games": 200,
+            "winRate": 50.5
+          },
+          "2026-02": {
+            "games": 516,
+            "winRate": 53.68
+          },
+          "2025-10": {
+            "games": 276,
+            "winRate": 53.26
+          },
+          "2025-05": {
+            "games": 218,
+            "winRate": 46.79
+          },
+          "2025-11": {
+            "games": 309,
+            "winRate": 53.07
           }
         },
         "byElo": {
@@ -15949,28 +17803,68 @@
         "tier": "C",
         "byPatch": {
           "2026-01": {
-            "games": 801,
-            "winRate": 47.32
+            "games": 3001,
+            "winRate": 48.15
           },
           "2026-06": {
-            "games": 5373,
-            "winRate": 52.15
-          },
-          "2024-07": {
-            "games": 203,
-            "winRate": 45.81
+            "games": 33414,
+            "winRate": 50.91
           },
           "2026-05": {
-            "games": 1095,
-            "winRate": 50.87
+            "games": 10015,
+            "winRate": 49.66
           },
-          "2024-05": {
-            "games": 341,
-            "winRate": 46.04
+          "2025-12": {
+            "games": 1050,
+            "winRate": 50.76
           },
           "2026-04": {
-            "games": 367,
-            "winRate": 47.68
+            "games": 3126,
+            "winRate": 52.11
+          },
+          "2025-05": {
+            "games": 528,
+            "winRate": 53.41
+          },
+          "2025-03": {
+            "games": 456,
+            "winRate": 50
+          },
+          "2025-06": {
+            "games": 438,
+            "winRate": 50.46
+          },
+          "2025-08": {
+            "games": 685,
+            "winRate": 50.66
+          },
+          "2025-04": {
+            "games": 474,
+            "winRate": 48.1
+          },
+          "2025-11": {
+            "games": 884,
+            "winRate": 52.04
+          },
+          "2025-09": {
+            "games": 646,
+            "winRate": 51.86
+          },
+          "2025-10": {
+            "games": 786,
+            "winRate": 52.04
+          },
+          "2025-07": {
+            "games": 609,
+            "winRate": 53.69
+          },
+          "2026-03": {
+            "games": 1745,
+            "winRate": 51.35
+          },
+          "2026-02": {
+            "games": 1349,
+            "winRate": 52.63
           }
         },
         "byElo": {
@@ -16301,24 +18195,68 @@
         "tier": "A",
         "byPatch": {
           "2026-06": {
-            "games": 2739,
-            "winRate": 53.96
+            "games": 12615,
+            "winRate": 49.08
           },
           "2026-01": {
-            "games": 308,
-            "winRate": 42.86
+            "games": 1283,
+            "winRate": 45.36
           },
           "2026-05": {
-            "games": 484,
-            "winRate": 54.75
+            "games": 3819,
+            "winRate": 48.26
+          },
+          "2025-03": {
+            "games": 203,
+            "winRate": 42.86
           },
           "2026-04": {
-            "games": 171,
-            "winRate": 59.06
+            "games": 1345,
+            "winRate": 48.55
           },
-          "2024-05": {
-            "games": 138,
-            "winRate": 54.35
+          "2026-03": {
+            "games": 703,
+            "winRate": 49.64
+          },
+          "2025-12": {
+            "games": 487,
+            "winRate": 47.64
+          },
+          "2025-06": {
+            "games": 183,
+            "winRate": 48.09
+          },
+          "2025-08": {
+            "games": 220,
+            "winRate": 50.45
+          },
+          "2025-05": {
+            "games": 262,
+            "winRate": 44.27
+          },
+          "2025-09": {
+            "games": 276,
+            "winRate": 48.55
+          },
+          "2026-02": {
+            "games": 570,
+            "winRate": 42.46
+          },
+          "2025-11": {
+            "games": 422,
+            "winRate": 48.1
+          },
+          "2025-10": {
+            "games": 335,
+            "winRate": 45.97
+          },
+          "2025-04": {
+            "games": 304,
+            "winRate": 54.61
+          },
+          "2025-07": {
+            "games": 208,
+            "winRate": 43.75
           }
         },
         "byElo": {
@@ -16649,20 +18587,40 @@
         "tier": "C",
         "byPatch": {
           "2026-01": {
-            "games": 448,
-            "winRate": 55.58
+            "games": 982,
+            "winRate": 55.91
           },
           "2026-06": {
-            "games": 1147,
-            "winRate": 52.22
+            "games": 4449,
+            "winRate": 50.19
+          },
+          "2025-10": {
+            "games": 137,
+            "winRate": 56.2
           },
           "2026-05": {
-            "games": 312,
-            "winRate": 49.04
+            "games": 1446,
+            "winRate": 51.31
+          },
+          "2025-12": {
+            "games": 243,
+            "winRate": 61.73
+          },
+          "2026-02": {
+            "games": 222,
+            "winRate": 54.5
           },
           "2026-04": {
-            "games": 103,
-            "winRate": 45.63
+            "games": 483,
+            "winRate": 51.35
+          },
+          "2025-11": {
+            "games": 129,
+            "winRate": 45.74
+          },
+          "2026-03": {
+            "games": 264,
+            "winRate": 54.92
           }
         },
         "byElo": {
@@ -16895,20 +18853,52 @@
         "tier": "S",
         "byPatch": {
           "2026-06": {
-            "games": 1794,
-            "winRate": 49.55
+            "games": 8485,
+            "winRate": 50.01
           },
           "2026-01": {
-            "games": 475,
-            "winRate": 53.89
+            "games": 1155,
+            "winRate": 53.33
+          },
+          "2025-12": {
+            "games": 316,
+            "winRate": 50.32
           },
           "2026-04": {
-            "games": 142,
-            "winRate": 55.63
+            "games": 768,
+            "winRate": 54.17
           },
           "2026-05": {
-            "games": 463,
-            "winRate": 52.27
+            "games": 2733,
+            "winRate": 51.23
+          },
+          "2025-11": {
+            "games": 166,
+            "winRate": 53.61
+          },
+          "2026-02": {
+            "games": 329,
+            "winRate": 50.76
+          },
+          "2025-10": {
+            "games": 143,
+            "winRate": 55.24
+          },
+          "2025-09": {
+            "games": 125,
+            "winRate": 56
+          },
+          "2025-05": {
+            "games": 137,
+            "winRate": 48.91
+          },
+          "2025-08": {
+            "games": 107,
+            "winRate": 52.34
+          },
+          "2026-03": {
+            "games": 436,
+            "winRate": 50.69
           }
         },
         "byElo": {
