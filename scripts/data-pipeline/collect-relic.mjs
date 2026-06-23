@@ -34,7 +34,8 @@ const args = Object.fromEntries(
 );
 const MAX_PLAYERS = Number(args.players ?? 2000); // top-N ranked profiles to seed from
 const OUT_DIR = path.resolve(args.out ?? "data-cache/relic");
-const THROTTLE_MS = Number(args.throttle ?? 300); // ~3 req/s — polite, no SLA
+const THROTTLE_MS = Number(args.throttle ?? 120); // per-worker delay between requests
+const CONCURRENCY = Number(args.concurrency ?? 12); // parallel in-flight requests
 const PAGE = 200; // leaderboard page size
 
 // --- helpers ------------------------------------------------------------------
@@ -111,29 +112,42 @@ async function run() {
   console.log(`Got ${profileIds.length} profiles. Crawling match history (resume: ${doneProfiles.size} already done)…`);
 
   let newRows = 0;
-  let processed = 0;
-  for (const pid of profileIds) {
-    if (doneProfiles.has(pid)) { processed++; continue; }
+  const todo = profileIds.filter((pid) => !doneProfiles.has(pid));
+  let processed = profileIds.length - todo.length;
+  let qi = 0;
+  let ckBusy = false;
+  const saveCk = async () => {
+    if (ckBusy) return; // a write is already in flight; the next checkpoint will catch up
+    ckBusy = true;
+    try { await writeFile(ckPath, JSON.stringify({ doneProfiles: [...doneProfiles], seenMatches: [...seenMatches] }), "utf8"); }
+    finally { ckBusy = false; }
+  };
+
+  // CONCURRENCY workers pull from a shared queue. Match-ids are claimed in
+  // seenMatches BEFORE append so two workers never write the same match.
+  async function handle(pid) {
     const url = `${API}/getRecentMatchHistory?title=${TITLE}&profile_ids=%5B${pid}%5D`;
     let rows = [];
     try { rows = normalizeMatches(await getJson(url)); } catch (e) {
-      process.stderr.write(`\n  [warn] profile ${pid}: ${e.message} — skipping\n`);
+      process.stderr.write(`\n  [warn] profile ${pid}: ${e.message}\n`);
     }
     const fresh = rows.filter((r) => !seenMatches.has(r.match_id));
+    for (const r of fresh) seenMatches.add(r.match_id);
     if (fresh.length) {
-      await appendFile(outPath, fresh.map((r) => JSON.stringify(r)).join("\n") + "\n", "utf8");
-      for (const r of fresh) seenMatches.add(r.match_id);
+      await appendFile(outPath, `${fresh.map((r) => JSON.stringify(r)).join("\n")}\n`, "utf8");
       newRows += fresh.length;
     }
     doneProfiles.add(pid);
     processed++;
-    if (processed % 25 === 0) {
-      await writeFile(ckPath, JSON.stringify({ doneProfiles: [...doneProfiles], seenMatches: [...seenMatches] }), "utf8");
-      process.stderr.write(`\r  crawled ${processed}/${profileIds.length} players · ${seenMatches.size} unique matches`);
+    if (processed % 150 === 0) {
+      await saveCk();
+      process.stderr.write(`\r  crawled ${processed}/${profileIds.length} · ${seenMatches.size} matches · ${CONCURRENCY}x parallel`);
     }
-    await sleep(THROTTLE_MS);
+    if (THROTTLE_MS) await sleep(THROTTLE_MS);
   }
-  await writeFile(ckPath, JSON.stringify({ doneProfiles: [...doneProfiles], seenMatches: [...seenMatches] }), "utf8");
+  async function worker() { while (qi < todo.length) await handle(todo[qi++]); }
+  await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
+  await saveCk();
   process.stderr.write("\n");
   console.log(`Done. +${newRows} new matches this run · ${seenMatches.size} unique ranked 1v1 RM matches total → ${outPath}`);
   console.log(`Next: build a VERIFIED civ-id map, then aggregate (node scripts/data-pipeline/aggregate-civmeta.mjs).`);
