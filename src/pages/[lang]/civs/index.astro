@@ -38,9 +38,9 @@ const civData = allCivs.map((c) => {
 });
 
 const eloBuckets = (civMeta.eloBuckets as string[]) ?? [];
-const patches = (civMeta.patches as { patch: number }[]).map((p) => p.patch);
+const patches = (civMeta.patches as { patch: string; label: string; matches: number }[]) ?? [];
 const games1v1 = Math.round((civMeta.appearances?.["1v1"] ?? 0) / 2 / 1e6);
-const latestPatch = patches[0];
+const latestPatch = patches[0]?.label ?? "";
 
 const labels = {
   civBase: localizedPath("/civs/", lang),
@@ -74,13 +74,7 @@ const labels = {
           <option value="overall">{tr ? "Genel (tüm zaman · tüm elo)" : "Overall (all-time · all elo)"}</option>
           <optgroup label={tr ? "Yamaya göre" : "By patch"}>
             {patches.map((p, i) => (
-              <option value={`patch:${p}`}>
-                {i === 0
-                  ? tr ? `Güncel yama (${p})` : `Current patch (${p})`
-                  : i === 1
-                    ? tr ? `Önceki yama (${p})` : `Previous patch (${p})`
-                    : String(p)}
-              </option>
+              <option value={`patch:${p.patch}`}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>
             ))}
           </optgroup>
           <optgroup label={tr ? "Elo'ya göre" : "By elo"}>

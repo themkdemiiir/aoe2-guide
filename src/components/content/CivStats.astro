@@ -20,7 +20,7 @@ type Ladder = {
 const civ = (civMeta.civs as unknown as Record<string, { "1v1": Ladder | null; team: Ladder | null }>)[slug];
 const one = civ?.["1v1"] ?? null;
 const team = civ?.team ?? null;
-const latestPatch = civMeta.patches?.[0]?.patch;
+const latestPatch = (civMeta.patches?.[0] as { label?: string } | undefined)?.label ?? "";
 
 const tr = lang === "tr";
 const eloOrder = (civMeta.eloBuckets as string[]) ?? [];
@@ -31,9 +31,10 @@ const elo = eloKeys.length
   ? { labels: eloKeys, values: eloKeys.map((b) => one!.byElo[b].winRate), games: eloKeys.map((b) => one!.byElo[b].games) }
   : null;
 // byPatch (chronological)
-const patchRows = one ? Object.entries(one.byPatch).map(([p, v]) => [Number(p), v.winRate, v.games] as [number, number, number]).sort((a, b) => a[0] - b[0]) : [];
+const patchLabel = Object.fromEntries(((civMeta.patches as { patch: string; label: string }[]) ?? []).map((p) => [p.patch, p.label]));
+const patchRows = one ? Object.entries(one.byPatch).map(([p, v]) => [p, v.winRate, v.games] as [string, number, number]).sort((a, b) => a[0].localeCompare(b[0])) : [];
 const patch = patchRows.length
-  ? { labels: patchRows.map((r) => String(r[0])), values: patchRows.map((r) => r[1]), games: patchRows.map((r) => r[2]) }
+  ? { labels: patchRows.map((r) => patchLabel[r[0]] ?? r[0]), values: patchRows.map((r) => r[1]), games: patchRows.map((r) => r[2]) }
   : null;
 // byMap — sorted by WIN RATE (best maps first), each linking to its map page
 // when one exists. aoestats keys use underscores; map slugs use hyphens.
