@@ -80,6 +80,7 @@ function normalizeMatches(history) {
     out.push({
       match_id: m.id,
       completed: m.completiontime,
+      gamemod_id: m.gamemod_id ?? null, // patch proxy: monotonic, date-aligned (each gamemod_id = one patch period)
       map_raw: m.mapname ?? null,
       ladder: m.matchtype_id ?? null,
       players: members.map((p) => ({
