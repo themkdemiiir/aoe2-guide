@@ -1,57 +1,80 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import Card from "@/components/ui/Card.astro";
+import Icon from "@/components/ui/Icon.astro";
 import BuildCard from "@/components/content/BuildCard.astro";
 import { Icon as UIIcon } from "astro-icon/components";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import civMeta from "@data/civ-meta.json";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
-import { type CollectionEntry } from "astro:content";
-import { type CollectionEntry as _CE } from "astro:content";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
 
-// --- Live content (drives the action-tile counts, the top-civ strip, and the
-// featured build/map rows). ---
+// --- Collections drive the live counts, the spotlight join, and the featured
+// rows. Counts come from collection lengths (the source of truth), never
+// hardcoded. ---
 const civs = await getCollection("civilizations");
 const builds: CollectionEntry<"build-orders">[] = await getCollection("build-orders");
 const maps: CollectionEntry<"maps">[] = await getCollection("maps");
-
-// --- Top civilizations: rank by live meta win rate, then join back to the
-// localized civ entry for name/tagline/bonuses. civ-data carries the meta but
-// NOT the localized text; the `civilizations` collection carries the text but
-// no meta. Join the two, filter to slugs present in BOTH collections so CivCard
-// never receives an undefined name, and carry the FULL meta through so the
-// caption can show win/play rate (answers "why these six?"). ---
-const civBySlug = new Map(civs.map((c) => [c.id, c]));
-const civData = await getCollection("civ-data");
-const specialtyBySlug = new Map(civData.map((c) => [c.data.slug, c.data.specialty]));
-
-// Top civilizations ranked by REAL ranked-1v1 win rate (aoestats archive, via
-// src/data/civ-meta.json). Rendered as the dark shield strip with live tier.
-// Brightened for legibility on the dark band (the strip sits on bg-stone-bg).
-const TIER_COLOR: Record<string, string> = { S: "#e0654f", A: "#e6bd5e", B: "#bda983", C: "#a3926e", D: "#8f7f60" };
-const oneBySlug = civMeta.civs as Record<string, { "1v1": { winRate: number; tier: string } | null }>;
-const topCivs = Object.keys(oneBySlug)
-  .map((slug) => ({ slug, one: oneBySlug[slug]?.["1v1"] }))
-  .filter((x) => x.one && civBySlug.has(x.slug))
-  .sort((a, b) => (b.one as { winRate: number }).winRate - (a.one as { winRate: number }).winRate)
-  .slice(0, 8)
-  .map((x) => ({
-    entry: civBySlug.get(x.slug)!,
-    tier: (x.one as { tier: string }).tier,
-    winRate: (x.one as { winRate: number }).winRate,
-    spec: specialtyBySlug.get(x.slug) ?? "",
-  }));
 const civCount = civs.length;
 const buildCount = builds.length;
 const mapCount = maps.length;
 
-// --- Featured build orders: easiest content leads (beginner-first), capped at 3. ---
+// --- Spotlight join: civ-meta carries the live win rate + tier but no localized
+// text; the `civilizations` collection carries the text but no meta; `civ-data`
+// carries the one-word specialty. Join all three, keep only slugs present in the
+// civ collection (so a crest never renders without a name), rank by live 1v1 win
+// rate, take the top 3. This is the page's signature — the current top of the
+// meta, sourced from src/data/civ-meta.json. ---
+const civBySlug = new Map(civs.map((c) => [c.id, c]));
+const civData = await getCollection("civ-data");
+const specialtyBySlug = new Map(civData.map((c) => [c.data.slug, c.data.specialty]));
+
+// Tier accent colors, brightened for legibility on the dark cover. Data-driven,
+// so applied via inline style (the sanctioned exception to "classes only").
+const TIER_COLOR: Record<string, string> = { S: "#e0654f", A: "#e6bd5e", B: "#bda983", C: "#a3926e", D: "#8f7f60" };
+const oneBySlug = civMeta.civs as Record<string, { "1v1": { winRate: number; tier: string } | null }>;
+
+const spotlight = Object.keys(oneBySlug)
+  .map((slug) => ({ slug, one: oneBySlug[slug]?.["1v1"] }))
+  .filter((x) => x.one && civBySlug.has(x.slug))
+  .sort((a, b) => (b.one as { winRate: number }).winRate - (a.one as { winRate: number }).winRate)
+  .slice(0, 3)
+  .map((x) => ({
+    entry: civBySlug.get(x.slug)!,
+    slug: x.slug,
+    tier: (x.one as { tier: string }).tier,
+    winRate: (x.one as { winRate: number }).winRate,
+    spec: specialtyBySlug.get(x.slug) ?? "",
+  }));
+
+// --- Tier distribution across every civ with a 1v1 tier: the "shape" of the
+// meta, which makes the bare count of civs mean something. ---
+const TIER_ORDER = ["S", "A", "B", "C", "D"] as const;
+const tierCounts = TIER_ORDER.map((tier) => ({
+  tier,
+  count: Object.values(oneBySlug).filter((c) => c["1v1"]?.tier === tier).length,
+})).filter((t) => t.count > 0);
+const tieredTotal = tierCounts.reduce((n, t) => n + t.count, 0);
+
+// --- Provenance: matches analyzed = 1v1 civ-appearances ÷ 2, floored to the
+// nearest 10K. Read from the data file so a crawl refresh updates the home with
+// no code change (source-derived, no hardcoded number). ---
+const matchesK = Math.floor((civMeta.appearances?.["1v1"] ?? 0) / 2 / 10000) * 10;
+
+// --- Localized month-year from civMeta.generated ("YYYY-MM-DD"). ---
+const MONTHS: Record<Locale, string[]> = {
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  tr: ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"],
+};
+const [genY, genM] = (civMeta.generated ?? "").split("-");
+const updatedMonth = genY && genM ? `${MONTHS[lang][Number(genM) - 1]} ${genY}` : "";
+
+// --- Featured build orders: beginner-first so the easiest leads, capped at 3. ---
 const featuredBuilds = [...builds]
   .sort((a, b) => {
     const rank = (d: string) => (d === "beginner" ? 0 : d === "intermediate" ? 1 : 2);
@@ -59,51 +82,20 @@ const featuredBuilds = [...builds]
   })
   .slice(0, 3);
 
-// --- Featured maps: a quick taste of the map library, capped at 4. ---
+// --- Featured maps: a quick taste of the library, capped at 4. ---
 const featuredMaps = maps.slice(0, 4);
 
-// --- Primary actions: the four highest-intent journeys, verb-phrased so
-// comprehension is instant, each carrying a live count. This is the page's
-// "easy to understand" core and sits directly under the hero so the page
-// answers "what do you want to do?" before any meta jargon. Matchups has no
-// collection, so its count is null (shows a sub-label instead). ---
-const actions = [
-  {
-    href: "/civs",
-    icon: "lucide:castle",
-    title: "home.action.civs.title",
-    desc: "home.civs.desc",
-    count: civs.length,
-    countLabel: "home.count.civs",
-  },
-  {
-    href: "/builds",
-    icon: "lucide:list-ordered",
-    title: "home.action.builds.title",
-    desc: "home.builds.desc",
-    count: builds.length,
-    countLabel: "home.count.builds",
-  },
-  {
-    href: "/maps",
-    icon: "lucide:map",
-    title: "home.action.maps.title",
-    desc: "home.maps.desc",
-    count: maps.length,
-    countLabel: "home.count.maps",
-  },
-  {
-    href: "/matchups",
-    icon: "lucide:scale",
-    title: "home.action.matchups.title",
-    desc: "home.matchups.desc",
-    count: null,
-    countLabel: "home.action.matchups.sub",
-  },
+// --- Chapters: the four primary journeys. Parallel destinations (NOT a numbered
+// sequence), so they read as cards, not steps. Matchups has no collection, so it
+// shows a sub-label instead of a count. ---
+const chapters = [
+  { href: "/civs", icon: "lucide:castle", title: "home.action.civs.title", desc: "home.civs.desc", count: civCount, countLabel: "home.count.civs" },
+  { href: "/builds", icon: "lucide:list-ordered", title: "home.action.builds.title", desc: "home.builds.desc", count: buildCount, countLabel: "home.count.builds" },
+  { href: "/maps", icon: "lucide:map", title: "home.action.maps.title", desc: "home.maps.desc", count: mapCount, countLabel: "home.count.maps" },
+  { href: "/matchups", icon: "lucide:scale", title: "home.action.matchups.title", desc: "home.matchups.desc", count: null, countLabel: "home.action.matchups.sub" },
 ] as const;
 
-// --- Remaining destinations: compact link row keeps every section one click
-// away (complete internal linking) without a redundant full nav grid. ---
+// --- Appendix: every remaining section, one click away. ---
 const more = [
   { href: "/units", key: "nav.units", icon: "lucide:swords" },
   { href: "/counters", key: "nav.counters", icon: "lucide:shield" },
@@ -113,106 +105,201 @@ const more = [
 ] as const;
 ---
 <BaseLayout title="AOE2 Guide" canonicalPath="/">
-  {/* === Cinematic hero: full-bleed dark band ===
-       On bg-stone-bg use ONLY gold/ember text tokens — they stay light in both
-       themes; text-ink / text-stone-700 swap with the theme and would vanish on
-       a permanently-dark band. The border-y is load-bearing: --color-stone-bg is
-       byte-identical to dark-mode --color-parchment, so in dark mode the band
-       blends into the page background — the gold rules keep its extent visible. */}
-  <section class="border-y border-gold-500/40 bg-stone-bg">
-    <div class="mx-auto max-w-5xl px-4 py-12 text-center sm:py-16">
-      <img src="/favicon.svg" alt="" width="88" height="88" class="mx-auto drop-shadow-lg" />
-      <div class="mx-auto my-4 flex max-w-xs items-center gap-3" aria-hidden="true">
-        <span class="h-px flex-1 bg-gradient-to-r from-transparent to-gold-500/60"></span>
+  {/* ========================================================================
+       ACT I — THE GILDED COVER
+       One continuous dark band (masthead + State of the Meta). On bg-stone-bg
+       use ONLY gold/ember text tokens — text-ink / text-stone-700 swap with the
+       theme and would vanish here. The border-y gold rule is load-bearing: in
+       dark mode --color-stone-bg ≈ --color-parchment, so the rules keep the
+       band's extent visible. A faint parchment-paper layer adds vellum grain.
+     ======================================================================== */}
+  <section class="relative isolate overflow-hidden border-y border-gold-500/40 bg-stone-bg">
+    <div
+      class="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
+      style="background-image:url(/images/aoe2/Backgrounds/bg_aoe2_hd_paper.jpg);background-size:520px;"
+      aria-hidden="true"
+    ></div>
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:py-20">
+      {/* --- Masthead: type-led, left-aligned like a manuscript opening. The
+           illuminated initial leads the wordmark; the lead + provenance set the
+           page's thesis (the live meta) before any navigation. --- */}
+      <div class="max-w-3xl">
+        <p class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-gold-400">
+          <span class="h-px w-6 bg-gold-500/60" aria-hidden="true"></span>
+          {t(lang, "home.eyebrow")}
+        </p>
+        {/* Illuminated initial: the "A" is the same cap-height as the wordmark
+            (so it reads as the first glyph of one word, not a small floating
+            letter), framed in a maroon gilt box and sharing the baseline. */}
+        <h1 class="mt-4 font-display text-4xl leading-none text-gold-500 sm:text-6xl">
+          <span class="sr-only">AOE2 Guide</span>
+          <span
+            class="mr-1 inline-block rounded border border-gold-500/50 bg-royal px-2.5 py-0.5 align-baseline text-gold-400 shadow-md"
+            aria-hidden="true"
+          >A</span><span aria-hidden="true">OE2&nbsp;Guide</span>
+        </h1>
+        <p class="mt-5 max-w-xl text-lg text-ember/90 sm:text-xl">{t(lang, "home.codex.lead")}</p>
+        <p class="mt-3 font-mono text-xs tracking-wide text-ember/70 sm:text-[13px]">
+          <span class="font-bold text-gold-400">{matchesK}K+</span>
+          {" "}{t(lang, "home.codex.matches")}
+          <span class="mx-1.5 text-gold-500/40" aria-hidden="true">·</span>
+          {t(lang, "home.codex.currentPatch")}
+          {updatedMonth && (
+            <>
+              <span class="mx-1.5 text-gold-500/40" aria-hidden="true">·</span>
+              {`${t(lang, "home.codex.updated")} ${updatedMonth}`}
+            </>
+          )}
+        </p>
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <a
+            href={localizedPath("/civs", lang)}
+            class="inline-flex items-center gap-2 rounded border border-gold-500 bg-gold-500/20 px-6 py-3 font-medium text-gold-400 transition-colors hover:bg-gold-500/35"
+          >
+            <UIIcon name="lucide:castle" class="h-5 w-5" />
+            {t(lang, "home.ctaPrimary")}
+          </a>
+          <a
+            href={localizedPath("/builds", lang)}
+            class="inline-flex items-center gap-2 rounded border border-gold-500/40 px-6 py-3 font-medium text-ember transition-colors hover:border-gold-500 hover:text-gold-400"
+          >
+            <UIIcon name="lucide:list-ordered" class="h-5 w-5" />
+            {t(lang, "home.ctaSecondary")}
+          </a>
+        </div>
+      </div>
+
+      {/* --- Act divider: gold hairline + diamond flourish. --- */}
+      <div class="my-10 flex items-center gap-4 sm:my-12" aria-hidden="true">
+        <span class="h-px flex-1 bg-gradient-to-r from-transparent to-gold-500/40"></span>
         <UIIcon name="lucide:diamond" class="h-3 w-3 text-gold-500" />
-        <span class="h-px flex-1 bg-gradient-to-l from-transparent to-gold-500/60"></span>
+        <span class="h-px flex-1 bg-gradient-to-l from-transparent to-gold-500/40"></span>
       </div>
-      <p class="font-display text-sm uppercase tracking-[0.35em] text-gold-400">
-        {t(lang, "home.eyebrow")}
-      </p>
-      <h1 class="mt-3 font-display text-4xl text-gold-500 sm:text-5xl">AOE2 Guide</h1>
-      <p class="mx-auto mt-3 max-w-2xl text-lg text-ember/90">{t(lang, "home.tagline")}</p>
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <a
-          href={localizedPath("/civs", lang)}
-          class="inline-flex items-center gap-2 rounded border border-gold-500 bg-gold-500/20 px-6 py-3 font-medium text-gold-400 transition-colors hover:bg-gold-500/35"
-        >
-          <UIIcon name="lucide:castle" class="h-5 w-5" />
-          {t(lang, "home.ctaPrimary")}
-        </a>
-        <a
-          href={localizedPath("/builds", lang)}
-          class="inline-flex items-center gap-2 rounded border border-gold-500/40 px-6 py-3 font-medium text-ember transition-colors hover:border-gold-500 hover:text-gold-400"
-        >
-          <UIIcon name="lucide:list-ordered" class="h-5 w-5" />
-          {t(lang, "home.ctaSecondary")}
-        </a>
-      </div>
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-mono text-xs tracking-wide text-ember/80">
-        <span><span class="font-medium text-gold-400">{civCount}</span> {t(lang, "home.count.civs")}</span>
-        <span class="text-gold-500/50" aria-hidden="true">·</span>
-        <span><span class="font-medium text-gold-400">{buildCount}</span> {t(lang, "home.count.builds")}</span>
-        <span class="text-gold-500/50" aria-hidden="true">·</span>
-        <span><span class="font-medium text-gold-400">{mapCount}</span> {t(lang, "home.count.maps")}</span>
-      </div>
+
+      {/* --- State of the Meta: the signature. Three gilded crest cards = the
+           live top of the meta, ranked by 1v1 win rate. --- */}
+      {spotlight.length > 0 && (
+        <div>
+          <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">
+                <span class="h-px w-6 bg-gold-500/60" aria-hidden="true"></span>
+                {t(lang, "home.stateOfMeta.title")}
+              </h2>
+              <p class="mt-2 text-sm text-ember/75">{t(lang, "home.stateOfMeta.subtitle")}</p>
+            </div>
+            <a
+              href={localizedPath("/civs", lang)}
+              class="inline-flex items-center gap-1 font-display text-xs uppercase tracking-wide text-gold-500 transition-colors hover:text-gold-400"
+            >
+              {t(lang, "home.tierList")}
+              <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
+            </a>
+          </div>
+
+          <ul class="grid gap-4 sm:grid-cols-3">
+            {spotlight.map((c) => (
+              <li>
+                <a
+                  href={localizedPath(`/civs/${c.slug}`, lang)}
+                  class="group flex h-full items-center gap-4 rounded border border-gold-500/25 bg-gold-500/[0.06] p-4 transition-colors hover:border-gold-500/60 hover:bg-gold-500/10 sm:flex-col sm:items-start sm:gap-3 sm:p-5"
+                >
+                  <span class="flex h-16 w-16 flex-none items-center justify-center rounded-full border border-gold-500/40 bg-royal/40 sm:h-20 sm:w-20">
+                    <Icon slug={c.slug} kind="civ" size={56} framed={false} alt={c.entry.data.name[lang]} />
+                  </span>
+                  <span class="min-w-0 flex-1">
+                    <span class="block truncate font-display text-lg font-bold text-gold-400 sm:text-xl">{c.entry.data.name[lang]}</span>
+                    {c.spec && (
+                      <span class="mt-0.5 block truncate font-mono text-[10px] uppercase tracking-wide text-ember/70">{c.spec}</span>
+                    )}
+                    <span class="mt-2.5 flex items-baseline gap-2">
+                      <span class="font-display text-2xl font-extrabold leading-none" style={`color:${TIER_COLOR[c.tier] ?? "#8f7f60"}`}>{c.tier}</span>
+                      <span class="font-mono text-sm text-ember/85">{c.winRate.toFixed(1)}%</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* --- Tier distribution bar: the shape of the meta across all civs. --- */}
+          {tieredTotal > 0 && (
+            <div class="mt-7">
+              <div class="mb-2 flex items-baseline justify-between font-mono text-[11px] uppercase tracking-wide text-ember/70">
+                <span><span class="font-bold text-gold-400">{civCount}</span> {t(lang, "nav.civs")}</span>
+                <span>{t(lang, "home.tierBar.label")}</span>
+              </div>
+              <div
+                class="flex h-2.5 gap-px overflow-hidden rounded-sm ring-1 ring-gold-500/20"
+                role="img"
+                aria-label={`${civCount} ${t(lang, "nav.civs")} — ${tierCounts.map((tt) => `${tt.tier} ${tt.count}`).join(", ")}`}
+              >
+                {tierCounts.map((tt) => (
+                  <span style={`width:${(tt.count / tieredTotal) * 100}%;background:${TIER_COLOR[tt.tier]}`}></span>
+                ))}
+              </div>
+              <ul class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-ember/70">
+                {tierCounts.map((tt) => (
+                  <li class="flex items-center gap-1.5">
+                    <span class="font-bold" style={`color:${TIER_COLOR[tt.tier]}`}>{tt.tier}</span>
+                    <span>{tt.count}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   </section>
 
-  {/* === Top civilizations: dark shield strip, ranked by REAL ranked-1v1 win
-       rate (civ-meta.json). On bg-stone-bg use only gold/ember text tokens. ===
-       Leads the page — the most data-rich content (live win rates + tiers). */}
-  {topCivs.length > 0 && (
-    <section class="mt-8 border-y border-gold-500/40 bg-stone-bg">
-      <div class="mx-auto max-w-6xl px-4 py-14">
-        <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <div class="flex items-center gap-3">
-              <span class="h-px w-6 bg-gold-500/60" aria-hidden="true"></span>
-              <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">{t(lang, "home.topCivs.subtitle")}</span>
-            </div>
-            <h2 class="mt-3 font-display text-2xl text-gold-400">{civCount} {t(lang, "nav.civs")}</h2>
-          </div>
-          <a
-            href={localizedPath("/civs", lang)}
-            class="inline-flex items-center gap-1 font-display text-xs uppercase tracking-wide text-gold-500 transition-colors hover:text-gold-400"
-          >
-            {t(lang, "home.viewAll")}
-            <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
-          </a>
-        </div>
-        <ul class="grid sm:grid-cols-2 lg:grid-cols-4">
-          {topCivs.map((c) => (
-            <li>
-              <a
-                href={localizedPath(`/civs/${c.entry.id}`, lang)}
-                class="flex items-center gap-3.5 border-t border-gold-500/15 px-3 py-3.5 transition-colors hover:bg-gold-500/10"
-              >
-                <span
-                  class="flex h-10 w-8 flex-none items-center justify-center bg-royal"
-                  style="clip-path:polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)"
-                >
-                  <span class="-mt-1 font-display text-sm font-extrabold text-gold-400">{c.entry.data.name.en.charAt(0)}</span>
-                </span>
-                <span class="min-w-0 flex-1">
-                  <span class="block truncate font-display text-base font-bold text-gold-400">{c.entry.data.name[lang]}</span>
-                  <span class="mt-0.5 block truncate font-mono text-[9px] uppercase tracking-wide text-ember/70">{c.spec}</span>
-                </span>
-                <span class="flex flex-none items-center gap-1.5">
-                  <span class="font-mono text-xs text-ember/80">{c.winRate.toFixed(1)}%</span>
-                  <span class="font-display text-sm font-bold" style={`color:${TIER_COLOR[c.tier] ?? "#8f7f60"}`}>{c.tier}</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
+  {/* ========================================================================
+       ACT II — THE PARCHMENT INTERIOR
+       Quiet and disciplined; the boldness was spent on the cover. Parchment
+       tokens (text-ink / text-stone-700 / text-gold-700) so it follows the theme.
+     ======================================================================== */}
 
-  {/* === Featured build orders: easiest content leads. All badge labels go
-       through t() (no raw English enums leaking onto /tr). === */}
+  {/* --- Chapters: the four primary journeys. --- */}
+  <section class="mx-auto max-w-6xl px-4 pt-12 sm:pt-14">
+    <h2 class="font-display text-2xl text-ink">{t(lang, "home.heading")}</h2>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+      {chapters.map((a) => (
+        <li class="h-full">
+          <a
+            href={localizedPath(a.href, lang)}
+            class="group flex h-full items-start gap-4 rounded border border-stone-700/40 bg-parchment p-5 transition-colors hover:border-gold-500"
+          >
+            <span class="shrink-0 rounded bg-gold-500/15 p-3 text-gold-500">
+              <UIIcon name={a.icon} class="h-7 w-7" />
+            </span>
+            <span class="flex-1">
+              <span class="flex items-center justify-between gap-2">
+                <span class="font-display text-xl text-ink group-hover:text-gold-500">{t(lang, a.title)}</span>
+                <UIIcon
+                  name="lucide:arrow-right"
+                  class="h-5 w-5 shrink-0 text-stone-700 transition-transform group-hover:translate-x-0.5 group-hover:text-gold-500"
+                />
+              </span>
+              <span class="mt-1 block text-sm text-stone-700">{t(lang, a.desc)}</span>
+              <span class="mt-3 block text-sm font-medium text-stone-700">
+                {a.count !== null ? (
+                  <>
+                    <span class="font-mono text-gold-700">{a.count}</span> {t(lang, a.countLabel)}
+                  </>
+                ) : (
+                  t(lang, a.countLabel)
+                )}
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* --- Featured build orders: easiest content leads. --- */}
   {featuredBuilds.length > 0 && (
-    <section class="mx-auto max-w-6xl px-4 pt-10">
+    <section class="mx-auto max-w-6xl px-4 pt-12 sm:pt-14">
       <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
         <div>
           <h2 class="font-display text-2xl text-ink">{t(lang, "home.featuredBuilds.title")}</h2>
@@ -236,50 +323,9 @@ const more = [
     </section>
   )}
 
-  {/* === Primary actions: verb-phrased entry points with live counts ===
-       Navigation — sits below the real data-rich content (Top Civs, Builds). */}
-  <section class="mx-auto max-w-5xl px-4 pt-10">
-    <h2 class="mb-5 font-display text-2xl text-ink">{t(lang, "home.heading")}</h2>
-    <ul class="grid gap-4 sm:grid-cols-2">
-      {actions.map((a) => (
-        <li class="h-full">
-          <a
-            href={localizedPath(a.href, lang)}
-            class="group flex h-full items-start gap-4 rounded border border-stone-700/40 bg-parchment p-5 transition-colors hover:border-gold-500"
-          >
-            <span class="shrink-0 rounded bg-gold-500/15 p-3 text-gold-500">
-              <UIIcon name={a.icon} class="h-7 w-7" />
-            </span>
-            <span class="flex-1">
-              <span class="flex items-center justify-between gap-2">
-                <span class="font-display text-xl text-ink group-hover:text-gold-500">
-                  {t(lang, a.title)}
-                </span>
-                <UIIcon
-                  name="lucide:arrow-right"
-                  class="h-5 w-5 shrink-0 text-stone-700 transition-transform group-hover:translate-x-0.5 group-hover:text-gold-500"
-                />
-              </span>
-              <span class="mt-1 block text-sm text-stone-700">{t(lang, a.desc)}</span>
-              <span class="mt-3 block text-sm font-medium text-stone-700">
-                {a.count !== null ? (
-                  <>
-                    <span class="font-mono text-gold-700">{a.count}</span> {t(lang, a.countLabel)}
-                  </>
-                ) : (
-                  t(lang, a.countLabel)
-                )}
-              </span>
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  {/* === Featured maps: type label routed through t() (all 5 enum members). === */}
+  {/* --- Maps to master. --- */}
   {featuredMaps.length > 0 && (
-    <section class="mx-auto max-w-6xl px-4 pt-10">
+    <section class="mx-auto max-w-6xl px-4 pt-12 sm:pt-14">
       <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
         <div>
           <h2 class="font-display text-2xl text-ink">{t(lang, "home.maps.title")}</h2>
@@ -313,8 +359,8 @@ const more = [
     </section>
   )}
 
-  {/* === More to explore: keeps every remaining section one click away. === */}
-  <section class="mx-auto max-w-5xl px-4 pt-10 pb-12">
+  {/* --- Appendix: every remaining section, one click away. --- */}
+  <section class="mx-auto max-w-5xl px-4 pb-14 pt-12 sm:pt-14">
     <h2 class="mb-4 flex items-center gap-3 font-display text-sm uppercase tracking-wide text-stone-700">
       <span class="h-px flex-1 bg-stone-700/30" aria-hidden="true"></span>
       {t(lang, "home.more")}
