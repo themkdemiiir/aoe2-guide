@@ -27,9 +27,10 @@ const eloBucket = (r) =>
   r < 1000 ? "<1000" : r < 1200 ? "1000-1199" : r < 1400 ? "1200-1399" : r < 1650 ? "1400-1649"
   : r < 1800 ? "1650-1799" : r < 2000 ? "1800-1999" : r < 2200 ? "2000-2199" : r < 2500 ? "2200-2499" : "2500+";
 
-const MIN_MAP = 3000; // map needs this many current 1v1 matches to be refreshed
+const MIN_MAP = 3000; // map needs this many current 1v1 matches to be included
 const MIN_ALL = 200; // per-civ gate, "all" bucket
 const MIN_BUCKET = 60; // per-civ gate, single bucket
+const MIN_RANKED_CIVS = 10; // a NEW (crawl-only) map needs this many civs in "all" to render a page (matches src/lib/data-maps.ts)
 
 // canon(map name) -> map-meta key (prefer the higher-volume variant)
 const canonToKey = {};
@@ -39,10 +40,19 @@ for (const [k, v] of Object.entries(meta.maps)) {
   if (!canonToKey[c] || g > canonToKey[c].g) canonToKey[c] = { key: k, g };
 }
 
-// crawl map filename → map-meta key
+// Crawl-only maps (not in the frozen archive) get a fresh underscore key derived
+// from the .rms filename, so "Border Dispute.rms" → border_dispute → the route
+// renders /maps/border-dispute with a clean prettified name. Existing maps still
+// resolve to their archive key (the higher-volume spelling).
+const mkKey = (raw) =>
+  String(raw)
+    .replace(/\.[a-z0-9]+$/i, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
 const mapKeyFor = (raw) => {
   const c = canon(String(raw).replace(/\.[a-z0-9]+$/i, "")); // strip extension, canonicalize
-  return canonToKey[c]?.key ?? null;
+  return canonToKey[c]?.key ?? mkKey(raw); // existing archive key, or a fresh crawl-only key
 };
 
 // --- aggregate crawl: key -> bucket -> civ -> {g,w} (+ "all") ---
@@ -69,11 +79,14 @@ for await (const line of rl) {
   }
 }
 
-// --- splice current 1v1 rankings into map-meta ---
+// --- splice current 1v1 rankings into map-meta: overlay existing archive maps,
+//     and ADD crawl-only maps that clear the volume + ranked-civ gates ---
 let refreshed = 0;
+let added = 0;
+const addedKeys = [];
 for (const [key, buckets] of Object.entries(acc)) {
   const total = Object.values(buckets.all ?? {}).reduce((s, v) => s + v.g, 0);
-  if (total < MIN_MAP || !meta.maps[key]) continue;
+  if (total < MIN_MAP) continue;
   const byElo = {};
   for (const [bk, civs] of Object.entries(buckets)) {
     const min = bk === "all" ? MIN_ALL : MIN_BUCKET;
@@ -83,14 +96,22 @@ for (const [key, buckets] of Object.entries(acc)) {
       .sort((a, b) => b.winRate - a.winRate);
     if (list.length) byElo[bk] = list;
   }
-  if (Object.keys(byElo).length) {
+  if (!Object.keys(byElo).length) continue;
+  if (meta.maps[key]) {
+    // existing archive map: overlay current 1v1 rankings, keep team as-is
     meta.maps[key]["1v1"] = byElo;
     meta.maps[key].games["1v1"] = total;
     refreshed++;
+  } else if ((byElo.all?.length ?? 0) >= MIN_RANKED_CIVS) {
+    // crawl-only map: add a new data-only entry (no team — the crawl is 1v1 only)
+    meta.maps[key] = { games: { "1v1": total, team: 0 }, "1v1": byElo, team: null };
+    added++;
+    addedKeys.push(`${key} (${total})`);
   }
 }
 
 meta.source = "aoestats.io ranked archive (team) + self-collected World's Edge live ladder (1v1, current)";
 meta.generated = new Date().toISOString().slice(0, 10);
 writeFileSync(META, `${JSON.stringify(meta, null, 2)}\n`, "utf8");
-console.log(`refresh-map-current: ${used} crawl rows matched a map · ${refreshed} maps got current 1v1 rankings → ${META}`);
+console.log(`refresh-map-current: ${used} crawl rows · ${refreshed} maps refreshed · ${added} crawl-only maps added → ${META}`);
+if (added) console.log(`  added: ${addedKeys.sort().join(", ")}`);

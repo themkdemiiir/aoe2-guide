@@ -135934,6 +135934,8234 @@
           }
         ]
       }
+    },
+    "karsts": {
+      "games": {
+        "1v1": 18971,
+        "team": 0
+      },
+      "1v1": {
+        "1000-1199": [
+          {
+            "civ": "incas",
+            "games": 142,
+            "winRate": 68.31
+          },
+          {
+            "civ": "gurjaras",
+            "games": 136,
+            "winRate": 67.65
+          },
+          {
+            "civ": "spanish",
+            "games": 248,
+            "winRate": 64.52
+          },
+          {
+            "civ": "lithuanians",
+            "games": 163,
+            "winRate": 63.8
+          },
+          {
+            "civ": "romans",
+            "games": 160,
+            "winRate": 63.75
+          },
+          {
+            "civ": "celts",
+            "games": 78,
+            "winRate": 62.82
+          },
+          {
+            "civ": "italians",
+            "games": 225,
+            "winRate": 62.22
+          },
+          {
+            "civ": "aztecs",
+            "games": 296,
+            "winRate": 61.82
+          },
+          {
+            "civ": "berbers",
+            "games": 494,
+            "winRate": 61.34
+          },
+          {
+            "civ": "bulgarians",
+            "games": 206,
+            "winRate": 61.17
+          },
+          {
+            "civ": "portuguese",
+            "games": 146,
+            "winRate": 60.27
+          },
+          {
+            "civ": "burgundians",
+            "games": 343,
+            "winRate": 59.77
+          },
+          {
+            "civ": "magyars",
+            "games": 139,
+            "winRate": 58.99
+          },
+          {
+            "civ": "japanese",
+            "games": 156,
+            "winRate": 58.33
+          },
+          {
+            "civ": "huns",
+            "games": 122,
+            "winRate": 58.2
+          },
+          {
+            "civ": "ethiopians",
+            "games": 236,
+            "winRate": 58.05
+          },
+          {
+            "civ": "poles",
+            "games": 100,
+            "winRate": 58
+          },
+          {
+            "civ": "jurchens",
+            "games": 103,
+            "winRate": 57.28
+          },
+          {
+            "civ": "burmese",
+            "games": 131,
+            "winRate": 57.25
+          },
+          {
+            "civ": "goths",
+            "games": 130,
+            "winRate": 56.92
+          },
+          {
+            "civ": "khmer",
+            "games": 97,
+            "winRate": 56.7
+          },
+          {
+            "civ": "byzantines",
+            "games": 187,
+            "winRate": 56.68
+          },
+          {
+            "civ": "persians",
+            "games": 85,
+            "winRate": 56.47
+          },
+          {
+            "civ": "vikings",
+            "games": 104,
+            "winRate": 55.77
+          },
+          {
+            "civ": "saracens",
+            "games": 212,
+            "winRate": 55.66
+          },
+          {
+            "civ": "turks",
+            "games": 119,
+            "winRate": 55.46
+          },
+          {
+            "civ": "koreans",
+            "games": 101,
+            "winRate": 55.45
+          },
+          {
+            "civ": "malay",
+            "games": 120,
+            "winRate": 55
+          },
+          {
+            "civ": "bengalis",
+            "games": 159,
+            "winRate": 54.09
+          },
+          {
+            "civ": "mongols",
+            "games": 196,
+            "winRate": 54.08
+          },
+          {
+            "civ": "bohemians",
+            "games": 209,
+            "winRate": 54.07
+          },
+          {
+            "civ": "armenians",
+            "games": 148,
+            "winRate": 54.05
+          },
+          {
+            "civ": "mayans",
+            "games": 127,
+            "winRate": 53.54
+          },
+          {
+            "civ": "cumans",
+            "games": 167,
+            "winRate": 53.29
+          },
+          {
+            "civ": "tatars",
+            "games": 111,
+            "winRate": 53.15
+          },
+          {
+            "civ": "vietnamese",
+            "games": 307,
+            "winRate": 53.09
+          },
+          {
+            "civ": "hindustanis",
+            "games": 194,
+            "winRate": 52.58
+          },
+          {
+            "civ": "malians",
+            "games": 153,
+            "winRate": 52.29
+          },
+          {
+            "civ": "dravidians",
+            "games": 113,
+            "winRate": 52.21
+          },
+          {
+            "civ": "chinese",
+            "games": 191,
+            "winRate": 51.83
+          },
+          {
+            "civ": "teutons",
+            "games": 107,
+            "winRate": 50.47
+          },
+          {
+            "civ": "britons",
+            "games": 164,
+            "winRate": 50
+          },
+          {
+            "civ": "slavs",
+            "games": 125,
+            "winRate": 49.6
+          },
+          {
+            "civ": "sicilians",
+            "games": 168,
+            "winRate": 49.4
+          },
+          {
+            "civ": "wu",
+            "games": 77,
+            "winRate": 49.35
+          },
+          {
+            "civ": "franks",
+            "games": 61,
+            "winRate": 47.54
+          }
+        ],
+        "all": [
+          {
+            "civ": "berbers",
+            "games": 972,
+            "winRate": 57.1
+          },
+          {
+            "civ": "burgundians",
+            "games": 689,
+            "winRate": 57.04
+          },
+          {
+            "civ": "spanish",
+            "games": 539,
+            "winRate": 55.84
+          },
+          {
+            "civ": "poles",
+            "games": 247,
+            "winRate": 55.47
+          },
+          {
+            "civ": "jurchens",
+            "games": 210,
+            "winRate": 55.24
+          },
+          {
+            "civ": "lithuanians",
+            "games": 379,
+            "winRate": 54.62
+          },
+          {
+            "civ": "malay",
+            "games": 296,
+            "winRate": 53.38
+          },
+          {
+            "civ": "incas",
+            "games": 341,
+            "winRate": 53.37
+          },
+          {
+            "civ": "ethiopians",
+            "games": 568,
+            "winRate": 53.35
+          },
+          {
+            "civ": "gurjaras",
+            "games": 379,
+            "winRate": 53.03
+          },
+          {
+            "civ": "italians",
+            "games": 580,
+            "winRate": 51.9
+          },
+          {
+            "civ": "romans",
+            "games": 407,
+            "winRate": 51.35
+          },
+          {
+            "civ": "armenians",
+            "games": 349,
+            "winRate": 51.29
+          },
+          {
+            "civ": "huns",
+            "games": 331,
+            "winRate": 51.06
+          },
+          {
+            "civ": "saracens",
+            "games": 531,
+            "winRate": 50.85
+          },
+          {
+            "civ": "mayans",
+            "games": 303,
+            "winRate": 50.5
+          },
+          {
+            "civ": "magyars",
+            "games": 334,
+            "winRate": 50.3
+          },
+          {
+            "civ": "khmer",
+            "games": 245,
+            "winRate": 50.2
+          },
+          {
+            "civ": "burmese",
+            "games": 359,
+            "winRate": 50.14
+          },
+          {
+            "civ": "byzantines",
+            "games": 501,
+            "winRate": 50.1
+          },
+          {
+            "civ": "tatars",
+            "games": 293,
+            "winRate": 49.83
+          },
+          {
+            "civ": "vikings",
+            "games": 307,
+            "winRate": 49.19
+          },
+          {
+            "civ": "chinese",
+            "games": 460,
+            "winRate": 48.7
+          },
+          {
+            "civ": "portuguese",
+            "games": 440,
+            "winRate": 48.18
+          },
+          {
+            "civ": "sicilians",
+            "games": 408,
+            "winRate": 47.79
+          },
+          {
+            "civ": "cumans",
+            "games": 465,
+            "winRate": 47.74
+          },
+          {
+            "civ": "aztecs",
+            "games": 855,
+            "winRate": 47.49
+          },
+          {
+            "civ": "vietnamese",
+            "games": 697,
+            "winRate": 47.2
+          },
+          {
+            "civ": "britons",
+            "games": 362,
+            "winRate": 46.96
+          },
+          {
+            "civ": "bulgarians",
+            "games": 536,
+            "winRate": 46.83
+          },
+          {
+            "civ": "goths",
+            "games": 284,
+            "winRate": 46.83
+          },
+          {
+            "civ": "hindustanis",
+            "games": 427,
+            "winRate": 46.6
+          },
+          {
+            "civ": "turks",
+            "games": 324,
+            "winRate": 46.6
+          },
+          {
+            "civ": "bohemians",
+            "games": 627,
+            "winRate": 46.57
+          },
+          {
+            "civ": "japanese",
+            "games": 471,
+            "winRate": 46.5
+          },
+          {
+            "civ": "dravidians",
+            "games": 279,
+            "winRate": 46.24
+          },
+          {
+            "civ": "teutons",
+            "games": 295,
+            "winRate": 46.1
+          },
+          {
+            "civ": "mongols",
+            "games": 471,
+            "winRate": 46.07
+          },
+          {
+            "civ": "malians",
+            "games": 369,
+            "winRate": 45.26
+          },
+          {
+            "civ": "bengalis",
+            "games": 517,
+            "winRate": 45.07
+          },
+          {
+            "civ": "slavs",
+            "games": 344,
+            "winRate": 43.02
+          }
+        ],
+        "1200-1399": [
+          {
+            "civ": "italians",
+            "games": 63,
+            "winRate": 69.84
+          },
+          {
+            "civ": "berbers",
+            "games": 143,
+            "winRate": 65.73
+          },
+          {
+            "civ": "ethiopians",
+            "games": 100,
+            "winRate": 65
+          },
+          {
+            "civ": "saracens",
+            "games": 67,
+            "winRate": 62.69
+          },
+          {
+            "civ": "spanish",
+            "games": 64,
+            "winRate": 62.5
+          },
+          {
+            "civ": "aztecs",
+            "games": 66,
+            "winRate": 56.06
+          },
+          {
+            "civ": "burgundians",
+            "games": 130,
+            "winRate": 53.08
+          },
+          {
+            "civ": "vietnamese",
+            "games": 72,
+            "winRate": 52.78
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "burgundians",
+            "games": 151,
+            "winRate": 48.34
+          },
+          {
+            "civ": "huns",
+            "games": 158,
+            "winRate": 46.2
+          },
+          {
+            "civ": "malay",
+            "games": 113,
+            "winRate": 46.02
+          },
+          {
+            "civ": "berbers",
+            "games": 307,
+            "winRate": 45.6
+          },
+          {
+            "civ": "vikings",
+            "games": 171,
+            "winRate": 44.44
+          },
+          {
+            "civ": "poles",
+            "games": 95,
+            "winRate": 44.21
+          },
+          {
+            "civ": "saracens",
+            "games": 234,
+            "winRate": 44.02
+          },
+          {
+            "civ": "lithuanians",
+            "games": 144,
+            "winRate": 43.75
+          },
+          {
+            "civ": "tatars",
+            "games": 122,
+            "winRate": 43.44
+          },
+          {
+            "civ": "sicilians",
+            "games": 189,
+            "winRate": 43.39
+          },
+          {
+            "civ": "armenians",
+            "games": 134,
+            "winRate": 43.28
+          },
+          {
+            "civ": "gurjaras",
+            "games": 178,
+            "winRate": 42.7
+          },
+          {
+            "civ": "byzantines",
+            "games": 234,
+            "winRate": 41.03
+          },
+          {
+            "civ": "spanish",
+            "games": 186,
+            "winRate": 40.86
+          },
+          {
+            "civ": "cumans",
+            "games": 241,
+            "winRate": 40.66
+          },
+          {
+            "civ": "chinese",
+            "games": 191,
+            "winRate": 39.79
+          },
+          {
+            "civ": "burmese",
+            "games": 151,
+            "winRate": 39.74
+          },
+          {
+            "civ": "mayans",
+            "games": 106,
+            "winRate": 39.62
+          },
+          {
+            "civ": "magyars",
+            "games": 135,
+            "winRate": 39.26
+          },
+          {
+            "civ": "khmer",
+            "games": 107,
+            "winRate": 39.25
+          },
+          {
+            "civ": "portuguese",
+            "games": 235,
+            "winRate": 38.3
+          },
+          {
+            "civ": "bohemians",
+            "games": 340,
+            "winRate": 37.35
+          },
+          {
+            "civ": "japanese",
+            "games": 263,
+            "winRate": 36.88
+          },
+          {
+            "civ": "aztecs",
+            "games": 483,
+            "winRate": 36.85
+          },
+          {
+            "civ": "britons",
+            "games": 144,
+            "winRate": 36.81
+          },
+          {
+            "civ": "vietnamese",
+            "games": 280,
+            "winRate": 36.79
+          },
+          {
+            "civ": "incas",
+            "games": 136,
+            "winRate": 36.76
+          },
+          {
+            "civ": "mongols",
+            "games": 207,
+            "winRate": 36.23
+          },
+          {
+            "civ": "italians",
+            "games": 261,
+            "winRate": 36.02
+          },
+          {
+            "civ": "ethiopians",
+            "games": 165,
+            "winRate": 35.76
+          },
+          {
+            "civ": "malians",
+            "games": 166,
+            "winRate": 35.54
+          },
+          {
+            "civ": "romans",
+            "games": 182,
+            "winRate": 35.16
+          },
+          {
+            "civ": "bengalis",
+            "games": 277,
+            "winRate": 34.66
+          },
+          {
+            "civ": "bulgarians",
+            "games": 265,
+            "winRate": 33.96
+          },
+          {
+            "civ": "slavs",
+            "games": 162,
+            "winRate": 33.95
+          },
+          {
+            "civ": "dravidians",
+            "games": 101,
+            "winRate": 33.66
+          },
+          {
+            "civ": "turks",
+            "games": 143,
+            "winRate": 32.17
+          },
+          {
+            "civ": "teutons",
+            "games": 124,
+            "winRate": 29.84
+          },
+          {
+            "civ": "hindustanis",
+            "games": 141,
+            "winRate": 29.79
+          },
+          {
+            "civ": "goths",
+            "games": 98,
+            "winRate": 29.59
+          }
+        ]
+      },
+      "team": null
+    },
+    "em_runestones": {
+      "games": {
+        "1v1": 30789,
+        "team": 0
+      },
+      "1v1": {
+        "all": [
+          {
+            "civ": "khmer",
+            "games": 331,
+            "winRate": 58.01
+          },
+          {
+            "civ": "lithuanians",
+            "games": 486,
+            "winRate": 55.97
+          },
+          {
+            "civ": "incas",
+            "games": 575,
+            "winRate": 55.65
+          },
+          {
+            "civ": "armenians",
+            "games": 474,
+            "winRate": 53.8
+          },
+          {
+            "civ": "chinese",
+            "games": 622,
+            "winRate": 53.38
+          },
+          {
+            "civ": "spanish",
+            "games": 814,
+            "winRate": 52.95
+          },
+          {
+            "civ": "muisca",
+            "games": 212,
+            "winRate": 52.83
+          },
+          {
+            "civ": "berbers",
+            "games": 1332,
+            "winRate": 52.78
+          },
+          {
+            "civ": "turks",
+            "games": 526,
+            "winRate": 52.66
+          },
+          {
+            "civ": "bohemians",
+            "games": 1046,
+            "winRate": 52.2
+          },
+          {
+            "civ": "burgundians",
+            "games": 382,
+            "winRate": 52.09
+          },
+          {
+            "civ": "celts",
+            "games": 238,
+            "winRate": 51.68
+          },
+          {
+            "civ": "portuguese",
+            "games": 1099,
+            "winRate": 51.59
+          },
+          {
+            "civ": "dravidians",
+            "games": 379,
+            "winRate": 51.45
+          },
+          {
+            "civ": "slavs",
+            "games": 691,
+            "winRate": 51.37
+          },
+          {
+            "civ": "malians",
+            "games": 817,
+            "winRate": 51.29
+          },
+          {
+            "civ": "huns",
+            "games": 593,
+            "winRate": 51.1
+          },
+          {
+            "civ": "tatars",
+            "games": 505,
+            "winRate": 51.09
+          },
+          {
+            "civ": "byzantines",
+            "games": 804,
+            "winRate": 50.75
+          },
+          {
+            "civ": "wu",
+            "games": 464,
+            "winRate": 50.65
+          },
+          {
+            "civ": "romans",
+            "games": 1110,
+            "winRate": 50.45
+          },
+          {
+            "civ": "gurjaras",
+            "games": 685,
+            "winRate": 50.36
+          },
+          {
+            "civ": "bulgarians",
+            "games": 1098,
+            "winRate": 50.36
+          },
+          {
+            "civ": "jurchens",
+            "games": 300,
+            "winRate": 50.33
+          },
+          {
+            "civ": "franks",
+            "games": 245,
+            "winRate": 50.2
+          },
+          {
+            "civ": "sicilians",
+            "games": 522,
+            "winRate": 50.19
+          },
+          {
+            "civ": "wei",
+            "games": 261,
+            "winRate": 49.81
+          },
+          {
+            "civ": "bengalis",
+            "games": 784,
+            "winRate": 49.74
+          },
+          {
+            "civ": "vietnamese",
+            "games": 1834,
+            "winRate": 49.73
+          },
+          {
+            "civ": "persians",
+            "games": 263,
+            "winRate": 49.43
+          },
+          {
+            "civ": "poles",
+            "games": 352,
+            "winRate": 49.15
+          },
+          {
+            "civ": "magyars",
+            "games": 463,
+            "winRate": 48.81
+          },
+          {
+            "civ": "ethiopians",
+            "games": 419,
+            "winRate": 48.45
+          },
+          {
+            "civ": "cumans",
+            "games": 661,
+            "winRate": 48.26
+          },
+          {
+            "civ": "aztecs",
+            "games": 1756,
+            "winRate": 48.18
+          },
+          {
+            "civ": "britons",
+            "games": 487,
+            "winRate": 48.05
+          },
+          {
+            "civ": "goths",
+            "games": 383,
+            "winRate": 48.04
+          },
+          {
+            "civ": "malay",
+            "games": 387,
+            "winRate": 47.8
+          },
+          {
+            "civ": "burmese",
+            "games": 539,
+            "winRate": 47.31
+          },
+          {
+            "civ": "teutons",
+            "games": 590,
+            "winRate": 47.29
+          },
+          {
+            "civ": "mongols",
+            "games": 604,
+            "winRate": 46.52
+          },
+          {
+            "civ": "hindustanis",
+            "games": 489,
+            "winRate": 46.42
+          },
+          {
+            "civ": "koreans",
+            "games": 287,
+            "winRate": 46.34
+          },
+          {
+            "civ": "japanese",
+            "games": 1007,
+            "winRate": 46.18
+          },
+          {
+            "civ": "saracens",
+            "games": 702,
+            "winRate": 46.15
+          },
+          {
+            "civ": "italians",
+            "games": 817,
+            "winRate": 45.9
+          },
+          {
+            "civ": "vikings",
+            "games": 636,
+            "winRate": 45.75
+          },
+          {
+            "civ": "mayans",
+            "games": 236,
+            "winRate": 39.83
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "lithuanians",
+            "games": 116,
+            "winRate": 63.79
+          },
+          {
+            "civ": "incas",
+            "games": 127,
+            "winRate": 63.78
+          },
+          {
+            "civ": "chinese",
+            "games": 125,
+            "winRate": 62.4
+          },
+          {
+            "civ": "tatars",
+            "games": 121,
+            "winRate": 60.33
+          },
+          {
+            "civ": "britons",
+            "games": 102,
+            "winRate": 59.8
+          },
+          {
+            "civ": "armenians",
+            "games": 109,
+            "winRate": 58.72
+          },
+          {
+            "civ": "khmer",
+            "games": 77,
+            "winRate": 57.14
+          },
+          {
+            "civ": "bengalis",
+            "games": 165,
+            "winRate": 55.76
+          },
+          {
+            "civ": "huns",
+            "games": 115,
+            "winRate": 55.65
+          },
+          {
+            "civ": "sicilians",
+            "games": 117,
+            "winRate": 55.56
+          },
+          {
+            "civ": "bohemians",
+            "games": 241,
+            "winRate": 54.36
+          },
+          {
+            "civ": "romans",
+            "games": 270,
+            "winRate": 54.07
+          },
+          {
+            "civ": "burgundians",
+            "games": 102,
+            "winRate": 53.92
+          },
+          {
+            "civ": "jurchens",
+            "games": 78,
+            "winRate": 53.85
+          },
+          {
+            "civ": "malians",
+            "games": 229,
+            "winRate": 53.71
+          },
+          {
+            "civ": "burmese",
+            "games": 125,
+            "winRate": 53.6
+          },
+          {
+            "civ": "mongols",
+            "games": 142,
+            "winRate": 53.52
+          },
+          {
+            "civ": "aztecs",
+            "games": 359,
+            "winRate": 53.48
+          },
+          {
+            "civ": "poles",
+            "games": 60,
+            "winRate": 53.33
+          },
+          {
+            "civ": "byzantines",
+            "games": 190,
+            "winRate": 52.63
+          },
+          {
+            "civ": "berbers",
+            "games": 403,
+            "winRate": 52.61
+          },
+          {
+            "civ": "turks",
+            "games": 105,
+            "winRate": 52.38
+          },
+          {
+            "civ": "teutons",
+            "games": 117,
+            "winRate": 52.14
+          },
+          {
+            "civ": "slavs",
+            "games": 183,
+            "winRate": 51.91
+          },
+          {
+            "civ": "portuguese",
+            "games": 241,
+            "winRate": 51.45
+          },
+          {
+            "civ": "bulgarians",
+            "games": 249,
+            "winRate": 51.41
+          },
+          {
+            "civ": "cumans",
+            "games": 162,
+            "winRate": 51.23
+          },
+          {
+            "civ": "italians",
+            "games": 161,
+            "winRate": 50.93
+          },
+          {
+            "civ": "vietnamese",
+            "games": 526,
+            "winRate": 50.57
+          },
+          {
+            "civ": "gurjaras",
+            "games": 149,
+            "winRate": 50.34
+          },
+          {
+            "civ": "wu",
+            "games": 127,
+            "winRate": 48.82
+          },
+          {
+            "civ": "magyars",
+            "games": 113,
+            "winRate": 48.67
+          },
+          {
+            "civ": "dravidians",
+            "games": 101,
+            "winRate": 48.51
+          },
+          {
+            "civ": "ethiopians",
+            "games": 95,
+            "winRate": 48.42
+          },
+          {
+            "civ": "malay",
+            "games": 87,
+            "winRate": 48.28
+          },
+          {
+            "civ": "goths",
+            "games": 94,
+            "winRate": 47.87
+          },
+          {
+            "civ": "japanese",
+            "games": 182,
+            "winRate": 47.8
+          },
+          {
+            "civ": "spanish",
+            "games": 197,
+            "winRate": 46.7
+          },
+          {
+            "civ": "saracens",
+            "games": 152,
+            "winRate": 46.05
+          },
+          {
+            "civ": "koreans",
+            "games": 74,
+            "winRate": 45.95
+          },
+          {
+            "civ": "vikings",
+            "games": 130,
+            "winRate": 45.38
+          },
+          {
+            "civ": "hindustanis",
+            "games": 119,
+            "winRate": 36.13
+          }
+        ],
+        "1400-1649": [
+          {
+            "civ": "japanese",
+            "games": 61,
+            "winRate": 62.3
+          },
+          {
+            "civ": "vietnamese",
+            "games": 175,
+            "winRate": 60.57
+          },
+          {
+            "civ": "incas",
+            "games": 66,
+            "winRate": 59.09
+          },
+          {
+            "civ": "bohemians",
+            "games": 78,
+            "winRate": 57.69
+          },
+          {
+            "civ": "bulgarians",
+            "games": 72,
+            "winRate": 56.94
+          },
+          {
+            "civ": "spanish",
+            "games": 89,
+            "winRate": 55.06
+          },
+          {
+            "civ": "portuguese",
+            "games": 88,
+            "winRate": 54.55
+          },
+          {
+            "civ": "malians",
+            "games": 60,
+            "winRate": 53.33
+          },
+          {
+            "civ": "aztecs",
+            "games": 61,
+            "winRate": 52.46
+          },
+          {
+            "civ": "wu",
+            "games": 62,
+            "winRate": 51.61
+          },
+          {
+            "civ": "romans",
+            "games": 98,
+            "winRate": 50
+          },
+          {
+            "civ": "slavs",
+            "games": 67,
+            "winRate": 49.25
+          },
+          {
+            "civ": "berbers",
+            "games": 128,
+            "winRate": 49.22
+          },
+          {
+            "civ": "burmese",
+            "games": 61,
+            "winRate": 49.18
+          },
+          {
+            "civ": "vikings",
+            "games": 72,
+            "winRate": 45.83
+          },
+          {
+            "civ": "byzantines",
+            "games": 81,
+            "winRate": 44.44
+          },
+          {
+            "civ": "italians",
+            "games": 71,
+            "winRate": 43.66
+          },
+          {
+            "civ": "chinese",
+            "games": 69,
+            "winRate": 40.58
+          }
+        ],
+        "1200-1399": [
+          {
+            "civ": "bengalis",
+            "games": 71,
+            "winRate": 61.97
+          },
+          {
+            "civ": "byzantines",
+            "games": 106,
+            "winRate": 60.38
+          },
+          {
+            "civ": "wu",
+            "games": 73,
+            "winRate": 58.9
+          },
+          {
+            "civ": "ethiopians",
+            "games": 74,
+            "winRate": 58.11
+          },
+          {
+            "civ": "berbers",
+            "games": 243,
+            "winRate": 58.02
+          },
+          {
+            "civ": "bohemians",
+            "games": 116,
+            "winRate": 56.9
+          },
+          {
+            "civ": "slavs",
+            "games": 102,
+            "winRate": 56.86
+          },
+          {
+            "civ": "italians",
+            "games": 90,
+            "winRate": 56.67
+          },
+          {
+            "civ": "burgundians",
+            "games": 71,
+            "winRate": 56.34
+          },
+          {
+            "civ": "huns",
+            "games": 89,
+            "winRate": 56.18
+          },
+          {
+            "civ": "incas",
+            "games": 106,
+            "winRate": 55.66
+          },
+          {
+            "civ": "hindustanis",
+            "games": 84,
+            "winRate": 54.76
+          },
+          {
+            "civ": "spanish",
+            "games": 127,
+            "winRate": 54.33
+          },
+          {
+            "civ": "bulgarians",
+            "games": 194,
+            "winRate": 54.12
+          },
+          {
+            "civ": "armenians",
+            "games": 63,
+            "winRate": 53.97
+          },
+          {
+            "civ": "japanese",
+            "games": 86,
+            "winRate": 53.49
+          },
+          {
+            "civ": "jurchens",
+            "games": 62,
+            "winRate": 53.23
+          },
+          {
+            "civ": "malians",
+            "games": 109,
+            "winRate": 53.21
+          },
+          {
+            "civ": "gurjaras",
+            "games": 79,
+            "winRate": 53.16
+          },
+          {
+            "civ": "chinese",
+            "games": 64,
+            "winRate": 53.13
+          },
+          {
+            "civ": "burmese",
+            "games": 71,
+            "winRate": 52.11
+          },
+          {
+            "civ": "cumans",
+            "games": 91,
+            "winRate": 51.65
+          },
+          {
+            "civ": "portuguese",
+            "games": 168,
+            "winRate": 51.19
+          },
+          {
+            "civ": "vikings",
+            "games": 92,
+            "winRate": 51.09
+          },
+          {
+            "civ": "aztecs",
+            "games": 171,
+            "winRate": 50.88
+          },
+          {
+            "civ": "romans",
+            "games": 177,
+            "winRate": 50.85
+          },
+          {
+            "civ": "saracens",
+            "games": 79,
+            "winRate": 50.63
+          },
+          {
+            "civ": "vietnamese",
+            "games": 306,
+            "winRate": 50
+          },
+          {
+            "civ": "goths",
+            "games": 80,
+            "winRate": 47.5
+          },
+          {
+            "civ": "malay",
+            "games": 64,
+            "winRate": 46.88
+          },
+          {
+            "civ": "britons",
+            "games": 75,
+            "winRate": 46.67
+          },
+          {
+            "civ": "mongols",
+            "games": 65,
+            "winRate": 44.62
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "khmer",
+            "games": 130,
+            "winRate": 59.23
+          },
+          {
+            "civ": "spanish",
+            "games": 358,
+            "winRate": 56.15
+          },
+          {
+            "civ": "shu",
+            "games": 66,
+            "winRate": 54.55
+          },
+          {
+            "civ": "chinese",
+            "games": 335,
+            "winRate": 53.43
+          },
+          {
+            "civ": "franks",
+            "games": 84,
+            "winRate": 52.38
+          },
+          {
+            "civ": "turks",
+            "games": 296,
+            "winRate": 52.03
+          },
+          {
+            "civ": "berbers",
+            "games": 496,
+            "winRate": 51.41
+          },
+          {
+            "civ": "tatars",
+            "games": 240,
+            "winRate": 50.83
+          },
+          {
+            "civ": "lithuanians",
+            "games": 248,
+            "winRate": 50.81
+          },
+          {
+            "civ": "hindustanis",
+            "games": 187,
+            "winRate": 50.8
+          },
+          {
+            "civ": "muisca",
+            "games": 66,
+            "winRate": 50
+          },
+          {
+            "civ": "bohemians",
+            "games": 556,
+            "winRate": 49.82
+          },
+          {
+            "civ": "portuguese",
+            "games": 555,
+            "winRate": 49.73
+          },
+          {
+            "civ": "malians",
+            "games": 381,
+            "winRate": 49.61
+          },
+          {
+            "civ": "incas",
+            "games": 233,
+            "winRate": 49.36
+          },
+          {
+            "civ": "slavs",
+            "games": 303,
+            "winRate": 49.17
+          },
+          {
+            "civ": "gurjaras",
+            "games": 381,
+            "winRate": 49.08
+          },
+          {
+            "civ": "armenians",
+            "games": 216,
+            "winRate": 49.07
+          },
+          {
+            "civ": "byzantines",
+            "games": 380,
+            "winRate": 48.16
+          },
+          {
+            "civ": "wu",
+            "games": 146,
+            "winRate": 47.95
+          },
+          {
+            "civ": "bulgarians",
+            "games": 524,
+            "winRate": 47.9
+          },
+          {
+            "civ": "burgundians",
+            "games": 130,
+            "winRate": 47.69
+          },
+          {
+            "civ": "jurchens",
+            "games": 82,
+            "winRate": 47.56
+          },
+          {
+            "civ": "goths",
+            "games": 137,
+            "winRate": 47.45
+          },
+          {
+            "civ": "romans",
+            "games": 511,
+            "winRate": 47.36
+          },
+          {
+            "civ": "huns",
+            "games": 319,
+            "winRate": 47.34
+          },
+          {
+            "civ": "persians",
+            "games": 111,
+            "winRate": 46.85
+          },
+          {
+            "civ": "dravidians",
+            "games": 127,
+            "winRate": 46.46
+          },
+          {
+            "civ": "bengalis",
+            "games": 464,
+            "winRate": 46.12
+          },
+          {
+            "civ": "aztecs",
+            "games": 1135,
+            "winRate": 45.64
+          },
+          {
+            "civ": "sicilians",
+            "games": 290,
+            "winRate": 45.52
+          },
+          {
+            "civ": "poles",
+            "games": 172,
+            "winRate": 45.35
+          },
+          {
+            "civ": "vietnamese",
+            "games": 722,
+            "winRate": 45.29
+          },
+          {
+            "civ": "teutons",
+            "games": 339,
+            "winRate": 45.13
+          },
+          {
+            "civ": "saracens",
+            "games": 391,
+            "winRate": 44.76
+          },
+          {
+            "civ": "malay",
+            "games": 154,
+            "winRate": 44.16
+          },
+          {
+            "civ": "vikings",
+            "games": 290,
+            "winRate": 43.45
+          },
+          {
+            "civ": "wei",
+            "games": 102,
+            "winRate": 43.14
+          },
+          {
+            "civ": "ethiopians",
+            "games": 164,
+            "winRate": 42.68
+          },
+          {
+            "civ": "magyars",
+            "games": 225,
+            "winRate": 42.67
+          },
+          {
+            "civ": "italians",
+            "games": 458,
+            "winRate": 42.58
+          },
+          {
+            "civ": "japanese",
+            "games": 638,
+            "winRate": 42.48
+          },
+          {
+            "civ": "cumans",
+            "games": 328,
+            "winRate": 42.38
+          },
+          {
+            "civ": "britons",
+            "games": 236,
+            "winRate": 42.37
+          },
+          {
+            "civ": "celts",
+            "games": 85,
+            "winRate": 42.35
+          },
+          {
+            "civ": "koreans",
+            "games": 97,
+            "winRate": 42.27
+          },
+          {
+            "civ": "mongols",
+            "games": 309,
+            "winRate": 40.78
+          },
+          {
+            "civ": "burmese",
+            "games": 233,
+            "winRate": 40.34
+          },
+          {
+            "civ": "mayans",
+            "games": 94,
+            "winRate": 30.85
+          }
+        ]
+      },
+      "team": null
+    },
+    "dunesprings": {
+      "games": {
+        "1v1": 15050,
+        "team": 0
+      },
+      "1v1": {
+        "all": [
+          {
+            "civ": "berbers",
+            "games": 723,
+            "winRate": 59.61
+          },
+          {
+            "civ": "burgundians",
+            "games": 447,
+            "winRate": 57.94
+          },
+          {
+            "civ": "chinese",
+            "games": 423,
+            "winRate": 54.14
+          },
+          {
+            "civ": "celts",
+            "games": 231,
+            "winRate": 54.11
+          },
+          {
+            "civ": "lithuanians",
+            "games": 411,
+            "winRate": 53.53
+          },
+          {
+            "civ": "malians",
+            "games": 260,
+            "winRate": 51.54
+          },
+          {
+            "civ": "armenians",
+            "games": 357,
+            "winRate": 51.54
+          },
+          {
+            "civ": "italians",
+            "games": 433,
+            "winRate": 51.5
+          },
+          {
+            "civ": "bengalis",
+            "games": 390,
+            "winRate": 51.28
+          },
+          {
+            "civ": "gurjaras",
+            "games": 287,
+            "winRate": 50.87
+          },
+          {
+            "civ": "aztecs",
+            "games": 688,
+            "winRate": 50.87
+          },
+          {
+            "civ": "ethiopians",
+            "games": 464,
+            "winRate": 50.86
+          },
+          {
+            "civ": "byzantines",
+            "games": 374,
+            "winRate": 50.53
+          },
+          {
+            "civ": "vietnamese",
+            "games": 439,
+            "winRate": 50.34
+          },
+          {
+            "civ": "saracens",
+            "games": 542,
+            "winRate": 50
+          },
+          {
+            "civ": "britons",
+            "games": 284,
+            "winRate": 49.65
+          },
+          {
+            "civ": "tatars",
+            "games": 200,
+            "winRate": 49.5
+          },
+          {
+            "civ": "mongols",
+            "games": 439,
+            "winRate": 49.43
+          },
+          {
+            "civ": "bulgarians",
+            "games": 443,
+            "winRate": 49.21
+          },
+          {
+            "civ": "slavs",
+            "games": 358,
+            "winRate": 49.16
+          },
+          {
+            "civ": "sicilians",
+            "games": 328,
+            "winRate": 48.78
+          },
+          {
+            "civ": "burmese",
+            "games": 277,
+            "winRate": 48.38
+          },
+          {
+            "civ": "khmer",
+            "games": 256,
+            "winRate": 48.05
+          },
+          {
+            "civ": "spanish",
+            "games": 343,
+            "winRate": 47.81
+          },
+          {
+            "civ": "bohemians",
+            "games": 448,
+            "winRate": 47.77
+          },
+          {
+            "civ": "hindustanis",
+            "games": 289,
+            "winRate": 47.75
+          },
+          {
+            "civ": "teutons",
+            "games": 227,
+            "winRate": 47.58
+          },
+          {
+            "civ": "romans",
+            "games": 321,
+            "winRate": 47.35
+          },
+          {
+            "civ": "cumans",
+            "games": 396,
+            "winRate": 47.22
+          },
+          {
+            "civ": "magyars",
+            "games": 282,
+            "winRate": 47.16
+          },
+          {
+            "civ": "vikings",
+            "games": 242,
+            "winRate": 47.11
+          },
+          {
+            "civ": "malay",
+            "games": 226,
+            "winRate": 46.9
+          },
+          {
+            "civ": "incas",
+            "games": 249,
+            "winRate": 45.78
+          },
+          {
+            "civ": "huns",
+            "games": 292,
+            "winRate": 45.21
+          },
+          {
+            "civ": "portuguese",
+            "games": 397,
+            "winRate": 44.84
+          },
+          {
+            "civ": "japanese",
+            "games": 366,
+            "winRate": 42.9
+          },
+          {
+            "civ": "turks",
+            "games": 283,
+            "winRate": 42.4
+          }
+        ],
+        "1200-1399": [
+          {
+            "civ": "berbers",
+            "games": 115,
+            "winRate": 68.7
+          },
+          {
+            "civ": "burgundians",
+            "games": 78,
+            "winRate": 67.95
+          },
+          {
+            "civ": "saracens",
+            "games": 68,
+            "winRate": 63.24
+          },
+          {
+            "civ": "ethiopians",
+            "games": 74,
+            "winRate": 60.81
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "celts",
+            "games": 105,
+            "winRate": 66.67
+          },
+          {
+            "civ": "magyars",
+            "games": 91,
+            "winRate": 65.93
+          },
+          {
+            "civ": "burgundians",
+            "games": 211,
+            "winRate": 65.4
+          },
+          {
+            "civ": "mayans",
+            "games": 72,
+            "winRate": 65.28
+          },
+          {
+            "civ": "bohemians",
+            "games": 124,
+            "winRate": 64.52
+          },
+          {
+            "civ": "berbers",
+            "games": 349,
+            "winRate": 64.18
+          },
+          {
+            "civ": "aztecs",
+            "games": 219,
+            "winRate": 63.47
+          },
+          {
+            "civ": "lithuanians",
+            "games": 156,
+            "winRate": 63.46
+          },
+          {
+            "civ": "italians",
+            "games": 160,
+            "winRate": 63.13
+          },
+          {
+            "civ": "poles",
+            "games": 67,
+            "winRate": 62.69
+          },
+          {
+            "civ": "teutons",
+            "games": 99,
+            "winRate": 62.63
+          },
+          {
+            "civ": "spanish",
+            "games": 127,
+            "winRate": 62.2
+          },
+          {
+            "civ": "cumans",
+            "games": 110,
+            "winRate": 61.82
+          },
+          {
+            "civ": "gurjaras",
+            "games": 91,
+            "winRate": 61.54
+          },
+          {
+            "civ": "goths",
+            "games": 73,
+            "winRate": 60.27
+          },
+          {
+            "civ": "incas",
+            "games": 88,
+            "winRate": 60.23
+          },
+          {
+            "civ": "vietnamese",
+            "games": 205,
+            "winRate": 59.51
+          },
+          {
+            "civ": "malians",
+            "games": 106,
+            "winRate": 59.43
+          },
+          {
+            "civ": "japanese",
+            "games": 117,
+            "winRate": 58.97
+          },
+          {
+            "civ": "huns",
+            "games": 97,
+            "winRate": 58.76
+          },
+          {
+            "civ": "burmese",
+            "games": 106,
+            "winRate": 58.49
+          },
+          {
+            "civ": "jurchens",
+            "games": 62,
+            "winRate": 58.06
+          },
+          {
+            "civ": "bengalis",
+            "games": 97,
+            "winRate": 57.73
+          },
+          {
+            "civ": "bulgarians",
+            "games": 170,
+            "winRate": 57.65
+          },
+          {
+            "civ": "mongols",
+            "games": 181,
+            "winRate": 57.46
+          },
+          {
+            "civ": "portuguese",
+            "games": 129,
+            "winRate": 57.36
+          },
+          {
+            "civ": "romans",
+            "games": 116,
+            "winRate": 56.9
+          },
+          {
+            "civ": "armenians",
+            "games": 139,
+            "winRate": 56.83
+          },
+          {
+            "civ": "slavs",
+            "games": 155,
+            "winRate": 56.77
+          },
+          {
+            "civ": "tatars",
+            "games": 69,
+            "winRate": 56.52
+          },
+          {
+            "civ": "saracens",
+            "games": 200,
+            "winRate": 56.5
+          },
+          {
+            "civ": "khmer",
+            "games": 95,
+            "winRate": 55.79
+          },
+          {
+            "civ": "ethiopians",
+            "games": 190,
+            "winRate": 55.79
+          },
+          {
+            "civ": "byzantines",
+            "games": 137,
+            "winRate": 55.47
+          },
+          {
+            "civ": "chinese",
+            "games": 163,
+            "winRate": 55.21
+          },
+          {
+            "civ": "dravidians",
+            "games": 83,
+            "winRate": 54.22
+          },
+          {
+            "civ": "hindustanis",
+            "games": 122,
+            "winRate": 54.1
+          },
+          {
+            "civ": "malay",
+            "games": 89,
+            "winRate": 53.93
+          },
+          {
+            "civ": "sicilians",
+            "games": 129,
+            "winRate": 53.49
+          },
+          {
+            "civ": "vikings",
+            "games": 66,
+            "winRate": 51.52
+          },
+          {
+            "civ": "britons",
+            "games": 111,
+            "winRate": 51.35
+          },
+          {
+            "civ": "turks",
+            "games": 109,
+            "winRate": 49.54
+          },
+          {
+            "civ": "persians",
+            "games": 72,
+            "winRate": 43.06
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "bengalis",
+            "games": 246,
+            "winRate": 48.78
+          },
+          {
+            "civ": "chinese",
+            "games": 191,
+            "winRate": 47.64
+          },
+          {
+            "civ": "koreans",
+            "games": 63,
+            "winRate": 46.03
+          },
+          {
+            "civ": "aztecs",
+            "games": 416,
+            "winRate": 44.95
+          },
+          {
+            "civ": "vikings",
+            "games": 156,
+            "winRate": 44.23
+          },
+          {
+            "civ": "byzantines",
+            "games": 172,
+            "winRate": 43.6
+          },
+          {
+            "civ": "khmer",
+            "games": 128,
+            "winRate": 42.97
+          },
+          {
+            "civ": "tatars",
+            "games": 105,
+            "winRate": 42.86
+          },
+          {
+            "civ": "berbers",
+            "games": 205,
+            "winRate": 42.44
+          },
+          {
+            "civ": "britons",
+            "games": 118,
+            "winRate": 42.37
+          },
+          {
+            "civ": "malians",
+            "games": 119,
+            "winRate": 41.18
+          },
+          {
+            "civ": "armenians",
+            "games": 160,
+            "winRate": 40.63
+          },
+          {
+            "civ": "cumans",
+            "games": 245,
+            "winRate": 40.41
+          },
+          {
+            "civ": "gurjaras",
+            "games": 156,
+            "winRate": 40.38
+          },
+          {
+            "civ": "sicilians",
+            "games": 149,
+            "winRate": 40.27
+          },
+          {
+            "civ": "bulgarians",
+            "games": 220,
+            "winRate": 40
+          },
+          {
+            "civ": "burgundians",
+            "games": 133,
+            "winRate": 39.85
+          },
+          {
+            "civ": "saracens",
+            "games": 256,
+            "winRate": 39.84
+          },
+          {
+            "civ": "lithuanians",
+            "games": 169,
+            "winRate": 39.05
+          },
+          {
+            "civ": "ethiopians",
+            "games": 164,
+            "winRate": 39.02
+          },
+          {
+            "civ": "bohemians",
+            "games": 261,
+            "winRate": 38.7
+          },
+          {
+            "civ": "vietnamese",
+            "games": 197,
+            "winRate": 38.58
+          },
+          {
+            "civ": "mongols",
+            "games": 191,
+            "winRate": 37.17
+          },
+          {
+            "civ": "malay",
+            "games": 98,
+            "winRate": 36.73
+          },
+          {
+            "civ": "portuguese",
+            "games": 227,
+            "winRate": 36.56
+          },
+          {
+            "civ": "poles",
+            "games": 88,
+            "winRate": 36.36
+          },
+          {
+            "civ": "hindustanis",
+            "games": 113,
+            "winRate": 36.28
+          },
+          {
+            "civ": "dravidians",
+            "games": 72,
+            "winRate": 36.11
+          },
+          {
+            "civ": "italians",
+            "games": 208,
+            "winRate": 35.58
+          },
+          {
+            "civ": "slavs",
+            "games": 152,
+            "winRate": 35.53
+          },
+          {
+            "civ": "romans",
+            "games": 170,
+            "winRate": 35.29
+          },
+          {
+            "civ": "turks",
+            "games": 136,
+            "winRate": 34.56
+          },
+          {
+            "civ": "mayans",
+            "games": 79,
+            "winRate": 34.18
+          },
+          {
+            "civ": "incas",
+            "games": 120,
+            "winRate": 34.17
+          },
+          {
+            "civ": "huns",
+            "games": 159,
+            "winRate": 33.96
+          },
+          {
+            "civ": "spanish",
+            "games": 164,
+            "winRate": 33.54
+          },
+          {
+            "civ": "burmese",
+            "games": 124,
+            "winRate": 33.06
+          },
+          {
+            "civ": "japanese",
+            "games": 217,
+            "winRate": 32.72
+          },
+          {
+            "civ": "magyars",
+            "games": 150,
+            "winRate": 32.67
+          },
+          {
+            "civ": "goths",
+            "games": 77,
+            "winRate": 32.47
+          },
+          {
+            "civ": "teutons",
+            "games": 99,
+            "winRate": 29.29
+          }
+        ]
+      },
+      "team": null
+    },
+    "isthmus": {
+      "games": {
+        "1v1": 15041,
+        "team": 0
+      },
+      "1v1": {
+        "1200-1399": [
+          {
+            "civ": "bulgarians",
+            "games": 66,
+            "winRate": 65.15
+          },
+          {
+            "civ": "berbers",
+            "games": 63,
+            "winRate": 50.79
+          }
+        ],
+        "all": [
+          {
+            "civ": "burgundians",
+            "games": 358,
+            "winRate": 54.75
+          },
+          {
+            "civ": "italians",
+            "games": 488,
+            "winRate": 54.1
+          },
+          {
+            "civ": "byzantines",
+            "games": 273,
+            "winRate": 53.85
+          },
+          {
+            "civ": "sicilians",
+            "games": 318,
+            "winRate": 53.46
+          },
+          {
+            "civ": "malay",
+            "games": 202,
+            "winRate": 52.97
+          },
+          {
+            "civ": "bulgarians",
+            "games": 610,
+            "winRate": 52.46
+          },
+          {
+            "civ": "gurjaras",
+            "games": 329,
+            "winRate": 52.28
+          },
+          {
+            "civ": "chinese",
+            "games": 278,
+            "winRate": 52.16
+          },
+          {
+            "civ": "magyars",
+            "games": 392,
+            "winRate": 51.79
+          },
+          {
+            "civ": "romans",
+            "games": 370,
+            "winRate": 51.62
+          },
+          {
+            "civ": "hindustanis",
+            "games": 243,
+            "winRate": 51.44
+          },
+          {
+            "civ": "teutons",
+            "games": 298,
+            "winRate": 51.34
+          },
+          {
+            "civ": "saracens",
+            "games": 508,
+            "winRate": 51.18
+          },
+          {
+            "civ": "malians",
+            "games": 373,
+            "winRate": 50.94
+          },
+          {
+            "civ": "japanese",
+            "games": 474,
+            "winRate": 50.63
+          },
+          {
+            "civ": "berbers",
+            "games": 477,
+            "winRate": 50.31
+          },
+          {
+            "civ": "armenians",
+            "games": 339,
+            "winRate": 50.15
+          },
+          {
+            "civ": "spanish",
+            "games": 351,
+            "winRate": 50.14
+          },
+          {
+            "civ": "turks",
+            "games": 271,
+            "winRate": 49.82
+          },
+          {
+            "civ": "bohemians",
+            "games": 535,
+            "winRate": 49.53
+          },
+          {
+            "civ": "mongols",
+            "games": 327,
+            "winRate": 49.24
+          },
+          {
+            "civ": "goths",
+            "games": 252,
+            "winRate": 49.21
+          },
+          {
+            "civ": "khmer",
+            "games": 269,
+            "winRate": 49.07
+          },
+          {
+            "civ": "cumans",
+            "games": 405,
+            "winRate": 48.64
+          },
+          {
+            "civ": "lithuanians",
+            "games": 237,
+            "winRate": 48.52
+          },
+          {
+            "civ": "huns",
+            "games": 302,
+            "winRate": 48.34
+          },
+          {
+            "civ": "tatars",
+            "games": 234,
+            "winRate": 48.29
+          },
+          {
+            "civ": "aztecs",
+            "games": 816,
+            "winRate": 48.28
+          },
+          {
+            "civ": "slavs",
+            "games": 510,
+            "winRate": 48.04
+          },
+          {
+            "civ": "portuguese",
+            "games": 449,
+            "winRate": 47.44
+          },
+          {
+            "civ": "ethiopians",
+            "games": 290,
+            "winRate": 47.24
+          },
+          {
+            "civ": "vietnamese",
+            "games": 555,
+            "winRate": 47.21
+          },
+          {
+            "civ": "incas",
+            "games": 247,
+            "winRate": 46.96
+          },
+          {
+            "civ": "burmese",
+            "games": 262,
+            "winRate": 46.95
+          },
+          {
+            "civ": "bengalis",
+            "games": 399,
+            "winRate": 46.87
+          },
+          {
+            "civ": "vikings",
+            "games": 289,
+            "winRate": 46.71
+          },
+          {
+            "civ": "britons",
+            "games": 248,
+            "winRate": 45.97
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "hindustanis",
+            "games": 76,
+            "winRate": 67.11
+          },
+          {
+            "civ": "japanese",
+            "games": 109,
+            "winRate": 66.97
+          },
+          {
+            "civ": "burgundians",
+            "games": 154,
+            "winRate": 66.23
+          },
+          {
+            "civ": "sicilians",
+            "games": 101,
+            "winRate": 65.35
+          },
+          {
+            "civ": "gurjaras",
+            "games": 90,
+            "winRate": 63.33
+          },
+          {
+            "civ": "spanish",
+            "games": 137,
+            "winRate": 62.04
+          },
+          {
+            "civ": "magyars",
+            "games": 117,
+            "winRate": 61.54
+          },
+          {
+            "civ": "incas",
+            "games": 70,
+            "winRate": 61.43
+          },
+          {
+            "civ": "mongols",
+            "games": 113,
+            "winRate": 61.06
+          },
+          {
+            "civ": "byzantines",
+            "games": 77,
+            "winRate": 61.04
+          },
+          {
+            "civ": "berbers",
+            "games": 161,
+            "winRate": 60.87
+          },
+          {
+            "civ": "bulgarians",
+            "games": 176,
+            "winRate": 60.8
+          },
+          {
+            "civ": "italians",
+            "games": 160,
+            "winRate": 60.62
+          },
+          {
+            "civ": "malay",
+            "games": 63,
+            "winRate": 60.32
+          },
+          {
+            "civ": "huns",
+            "games": 79,
+            "winRate": 59.49
+          },
+          {
+            "civ": "goths",
+            "games": 91,
+            "winRate": 59.34
+          },
+          {
+            "civ": "malians",
+            "games": 135,
+            "winRate": 59.26
+          },
+          {
+            "civ": "saracens",
+            "games": 173,
+            "winRate": 58.96
+          },
+          {
+            "civ": "chinese",
+            "games": 81,
+            "winRate": 58.02
+          },
+          {
+            "civ": "teutons",
+            "games": 85,
+            "winRate": 57.65
+          },
+          {
+            "civ": "armenians",
+            "games": 119,
+            "winRate": 57.14
+          },
+          {
+            "civ": "romans",
+            "games": 101,
+            "winRate": 56.44
+          },
+          {
+            "civ": "ethiopians",
+            "games": 103,
+            "winRate": 56.31
+          },
+          {
+            "civ": "bohemians",
+            "games": 148,
+            "winRate": 56.08
+          },
+          {
+            "civ": "aztecs",
+            "games": 194,
+            "winRate": 55.67
+          },
+          {
+            "civ": "khmer",
+            "games": 87,
+            "winRate": 55.17
+          },
+          {
+            "civ": "turks",
+            "games": 84,
+            "winRate": 54.76
+          },
+          {
+            "civ": "cumans",
+            "games": 110,
+            "winRate": 54.55
+          },
+          {
+            "civ": "portuguese",
+            "games": 131,
+            "winRate": 53.44
+          },
+          {
+            "civ": "vietnamese",
+            "games": 213,
+            "winRate": 52.11
+          },
+          {
+            "civ": "burmese",
+            "games": 83,
+            "winRate": 50.6
+          },
+          {
+            "civ": "slavs",
+            "games": 179,
+            "winRate": 49.72
+          },
+          {
+            "civ": "britons",
+            "games": 82,
+            "winRate": 48.78
+          },
+          {
+            "civ": "celts",
+            "games": 72,
+            "winRate": 48.61
+          },
+          {
+            "civ": "bengalis",
+            "games": 86,
+            "winRate": 46.51
+          },
+          {
+            "civ": "vikings",
+            "games": 66,
+            "winRate": 45.45
+          },
+          {
+            "civ": "tatars",
+            "games": 75,
+            "winRate": 45.33
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "byzantines",
+            "games": 160,
+            "winRate": 50
+          },
+          {
+            "civ": "chinese",
+            "games": 157,
+            "winRate": 49.04
+          },
+          {
+            "civ": "dravidians",
+            "games": 79,
+            "winRate": 48.1
+          },
+          {
+            "civ": "bohemians",
+            "games": 311,
+            "winRate": 47.91
+          },
+          {
+            "civ": "tatars",
+            "games": 119,
+            "winRate": 47.9
+          },
+          {
+            "civ": "italians",
+            "games": 276,
+            "winRate": 47.46
+          },
+          {
+            "civ": "teutons",
+            "games": 164,
+            "winRate": 46.95
+          },
+          {
+            "civ": "gurjaras",
+            "games": 208,
+            "winRate": 45.67
+          },
+          {
+            "civ": "mayans",
+            "games": 75,
+            "winRate": 45.33
+          },
+          {
+            "civ": "slavs",
+            "games": 246,
+            "winRate": 45.12
+          },
+          {
+            "civ": "bengalis",
+            "games": 250,
+            "winRate": 44.4
+          },
+          {
+            "civ": "aztecs",
+            "games": 568,
+            "winRate": 44.37
+          },
+          {
+            "civ": "vikings",
+            "games": 185,
+            "winRate": 44.32
+          },
+          {
+            "civ": "sicilians",
+            "games": 156,
+            "winRate": 44.23
+          },
+          {
+            "civ": "turks",
+            "games": 136,
+            "winRate": 44.12
+          },
+          {
+            "civ": "romans",
+            "games": 202,
+            "winRate": 44.06
+          },
+          {
+            "civ": "saracens",
+            "games": 256,
+            "winRate": 43.75
+          },
+          {
+            "civ": "magyars",
+            "games": 199,
+            "winRate": 43.72
+          },
+          {
+            "civ": "bulgarians",
+            "games": 330,
+            "winRate": 43.64
+          },
+          {
+            "civ": "huns",
+            "games": 191,
+            "winRate": 43.46
+          },
+          {
+            "civ": "malay",
+            "games": 83,
+            "winRate": 43.37
+          },
+          {
+            "civ": "cumans",
+            "games": 246,
+            "winRate": 43.09
+          },
+          {
+            "civ": "armenians",
+            "games": 179,
+            "winRate": 43.02
+          },
+          {
+            "civ": "japanese",
+            "games": 310,
+            "winRate": 42.9
+          },
+          {
+            "civ": "berbers",
+            "games": 225,
+            "winRate": 42.67
+          },
+          {
+            "civ": "malians",
+            "games": 186,
+            "winRate": 42.47
+          },
+          {
+            "civ": "portuguese",
+            "games": 252,
+            "winRate": 42.46
+          },
+          {
+            "civ": "mongols",
+            "games": 172,
+            "winRate": 42.44
+          },
+          {
+            "civ": "khmer",
+            "games": 128,
+            "winRate": 41.41
+          },
+          {
+            "civ": "lithuanians",
+            "games": 128,
+            "winRate": 41.41
+          },
+          {
+            "civ": "burmese",
+            "games": 129,
+            "winRate": 41.09
+          },
+          {
+            "civ": "vietnamese",
+            "games": 244,
+            "winRate": 40.98
+          },
+          {
+            "civ": "burgundians",
+            "games": 117,
+            "winRate": 40.17
+          },
+          {
+            "civ": "hindustanis",
+            "games": 125,
+            "winRate": 40
+          },
+          {
+            "civ": "britons",
+            "games": 120,
+            "winRate": 39.17
+          },
+          {
+            "civ": "incas",
+            "games": 127,
+            "winRate": 38.58
+          },
+          {
+            "civ": "celts",
+            "games": 70,
+            "winRate": 38.57
+          },
+          {
+            "civ": "ethiopians",
+            "games": 136,
+            "winRate": 37.5
+          },
+          {
+            "civ": "spanish",
+            "games": 143,
+            "winRate": 36.36
+          },
+          {
+            "civ": "goths",
+            "games": 113,
+            "winRate": 36.28
+          },
+          {
+            "civ": "poles",
+            "games": 93,
+            "winRate": 27.96
+          }
+        ]
+      },
+      "team": null
+    },
+    "glacis": {
+      "games": {
+        "1v1": 9967,
+        "team": 0
+      },
+      "1v1": {
+        "all": [
+          {
+            "civ": "chinese",
+            "games": 213,
+            "winRate": 58.69
+          },
+          {
+            "civ": "burgundians",
+            "games": 238,
+            "winRate": 57.56
+          },
+          {
+            "civ": "lithuanians",
+            "games": 265,
+            "winRate": 55.85
+          },
+          {
+            "civ": "byzantines",
+            "games": 358,
+            "winRate": 55.03
+          },
+          {
+            "civ": "berbers",
+            "games": 374,
+            "winRate": 54.81
+          },
+          {
+            "civ": "ethiopians",
+            "games": 353,
+            "winRate": 54.39
+          },
+          {
+            "civ": "spanish",
+            "games": 241,
+            "winRate": 53.94
+          },
+          {
+            "civ": "magyars",
+            "games": 224,
+            "winRate": 52.68
+          },
+          {
+            "civ": "romans",
+            "games": 241,
+            "winRate": 49.79
+          },
+          {
+            "civ": "cumans",
+            "games": 268,
+            "winRate": 49.63
+          },
+          {
+            "civ": "slavs",
+            "games": 223,
+            "winRate": 48.88
+          },
+          {
+            "civ": "saracens",
+            "games": 310,
+            "winRate": 48.71
+          },
+          {
+            "civ": "bohemians",
+            "games": 353,
+            "winRate": 47.31
+          },
+          {
+            "civ": "vietnamese",
+            "games": 292,
+            "winRate": 47.26
+          },
+          {
+            "civ": "aztecs",
+            "games": 364,
+            "winRate": 46.15
+          },
+          {
+            "civ": "bengalis",
+            "games": 310,
+            "winRate": 46.13
+          },
+          {
+            "civ": "bulgarians",
+            "games": 276,
+            "winRate": 45.29
+          },
+          {
+            "civ": "mongols",
+            "games": 269,
+            "winRate": 44.24
+          },
+          {
+            "civ": "italians",
+            "games": 237,
+            "winRate": 43.88
+          },
+          {
+            "civ": "japanese",
+            "games": 270,
+            "winRate": 43.7
+          },
+          {
+            "civ": "portuguese",
+            "games": 215,
+            "winRate": 42.33
+          },
+          {
+            "civ": "vikings",
+            "games": 204,
+            "winRate": 42.16
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "magyars",
+            "games": 78,
+            "winRate": 69.23
+          },
+          {
+            "civ": "burgundians",
+            "games": 113,
+            "winRate": 68.14
+          },
+          {
+            "civ": "romans",
+            "games": 91,
+            "winRate": 68.13
+          },
+          {
+            "civ": "aztecs",
+            "games": 121,
+            "winRate": 67.77
+          },
+          {
+            "civ": "italians",
+            "games": 74,
+            "winRate": 67.57
+          },
+          {
+            "civ": "spanish",
+            "games": 97,
+            "winRate": 67.01
+          },
+          {
+            "civ": "byzantines",
+            "games": 138,
+            "winRate": 66.67
+          },
+          {
+            "civ": "ethiopians",
+            "games": 156,
+            "winRate": 66.67
+          },
+          {
+            "civ": "malians",
+            "games": 86,
+            "winRate": 66.28
+          },
+          {
+            "civ": "berbers",
+            "games": 154,
+            "winRate": 65.58
+          },
+          {
+            "civ": "jurchens",
+            "games": 87,
+            "winRate": 64.37
+          },
+          {
+            "civ": "lithuanians",
+            "games": 111,
+            "winRate": 63.06
+          },
+          {
+            "civ": "turks",
+            "games": 69,
+            "winRate": 62.32
+          },
+          {
+            "civ": "bengalis",
+            "games": 81,
+            "winRate": 61.73
+          },
+          {
+            "civ": "vietnamese",
+            "games": 120,
+            "winRate": 61.67
+          },
+          {
+            "civ": "wu",
+            "games": 70,
+            "winRate": 61.43
+          },
+          {
+            "civ": "hindustanis",
+            "games": 77,
+            "winRate": 61.04
+          },
+          {
+            "civ": "japanese",
+            "games": 88,
+            "winRate": 60.23
+          },
+          {
+            "civ": "bohemians",
+            "games": 123,
+            "winRate": 59.35
+          },
+          {
+            "civ": "bulgarians",
+            "games": 88,
+            "winRate": 59.09
+          },
+          {
+            "civ": "sicilians",
+            "games": 75,
+            "winRate": 58.67
+          },
+          {
+            "civ": "saracens",
+            "games": 106,
+            "winRate": 58.49
+          },
+          {
+            "civ": "chinese",
+            "games": 95,
+            "winRate": 57.89
+          },
+          {
+            "civ": "mongols",
+            "games": 101,
+            "winRate": 56.44
+          },
+          {
+            "civ": "slavs",
+            "games": 79,
+            "winRate": 55.7
+          },
+          {
+            "civ": "burmese",
+            "games": 61,
+            "winRate": 54.1
+          },
+          {
+            "civ": "khmer",
+            "games": 69,
+            "winRate": 53.62
+          },
+          {
+            "civ": "portuguese",
+            "games": 69,
+            "winRate": 53.62
+          },
+          {
+            "civ": "malay",
+            "games": 66,
+            "winRate": 50
+          },
+          {
+            "civ": "teutons",
+            "games": 61,
+            "winRate": 49.18
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "chinese",
+            "games": 96,
+            "winRate": 60.42
+          },
+          {
+            "civ": "britons",
+            "games": 67,
+            "winRate": 50.75
+          },
+          {
+            "civ": "armenians",
+            "games": 81,
+            "winRate": 46.91
+          },
+          {
+            "civ": "burgundians",
+            "games": 82,
+            "winRate": 46.34
+          },
+          {
+            "civ": "cumans",
+            "games": 194,
+            "winRate": 44.33
+          },
+          {
+            "civ": "spanish",
+            "games": 121,
+            "winRate": 43.8
+          },
+          {
+            "civ": "burmese",
+            "games": 60,
+            "winRate": 43.33
+          },
+          {
+            "civ": "khmer",
+            "games": 93,
+            "winRate": 43.01
+          },
+          {
+            "civ": "berbers",
+            "games": 173,
+            "winRate": 42.77
+          },
+          {
+            "civ": "wu",
+            "games": 61,
+            "winRate": 42.62
+          },
+          {
+            "civ": "gurjaras",
+            "games": 101,
+            "winRate": 42.57
+          },
+          {
+            "civ": "huns",
+            "games": 93,
+            "winRate": 40.86
+          },
+          {
+            "civ": "lithuanians",
+            "games": 98,
+            "winRate": 40.82
+          },
+          {
+            "civ": "byzantines",
+            "games": 165,
+            "winRate": 40.61
+          },
+          {
+            "civ": "slavs",
+            "games": 114,
+            "winRate": 40.35
+          },
+          {
+            "civ": "bengalis",
+            "games": 208,
+            "winRate": 39.42
+          },
+          {
+            "civ": "tatars",
+            "games": 77,
+            "winRate": 38.96
+          },
+          {
+            "civ": "sicilians",
+            "games": 98,
+            "winRate": 38.78
+          },
+          {
+            "civ": "bulgarians",
+            "games": 173,
+            "winRate": 38.73
+          },
+          {
+            "civ": "magyars",
+            "games": 114,
+            "winRate": 38.6
+          },
+          {
+            "civ": "malians",
+            "games": 79,
+            "winRate": 37.97
+          },
+          {
+            "civ": "romans",
+            "games": 130,
+            "winRate": 37.69
+          },
+          {
+            "civ": "saracens",
+            "games": 157,
+            "winRate": 37.58
+          },
+          {
+            "civ": "turks",
+            "games": 90,
+            "winRate": 36.67
+          },
+          {
+            "civ": "bohemians",
+            "games": 178,
+            "winRate": 36.52
+          },
+          {
+            "civ": "hindustanis",
+            "games": 84,
+            "winRate": 35.71
+          },
+          {
+            "civ": "mayans",
+            "games": 62,
+            "winRate": 35.48
+          },
+          {
+            "civ": "vietnamese",
+            "games": 143,
+            "winRate": 34.97
+          },
+          {
+            "civ": "incas",
+            "games": 78,
+            "winRate": 34.62
+          },
+          {
+            "civ": "vikings",
+            "games": 133,
+            "winRate": 34.59
+          },
+          {
+            "civ": "mongols",
+            "games": 146,
+            "winRate": 34.25
+          },
+          {
+            "civ": "portuguese",
+            "games": 127,
+            "winRate": 33.86
+          },
+          {
+            "civ": "aztecs",
+            "games": 220,
+            "winRate": 33.64
+          },
+          {
+            "civ": "japanese",
+            "games": 158,
+            "winRate": 32.91
+          },
+          {
+            "civ": "ethiopians",
+            "games": 119,
+            "winRate": 31.93
+          },
+          {
+            "civ": "italians",
+            "games": 138,
+            "winRate": 29.71
+          },
+          {
+            "civ": "teutons",
+            "games": 86,
+            "winRate": 23.26
+          }
+        ]
+      },
+      "team": null
+    },
+    "thames": {
+      "games": {
+        "1v1": 12059,
+        "team": 0
+      },
+      "1v1": {
+        "1000-1199": [
+          {
+            "civ": "mayans",
+            "games": 64,
+            "winRate": 67.19
+          },
+          {
+            "civ": "jurchens",
+            "games": 149,
+            "winRate": 67.11
+          },
+          {
+            "civ": "poles",
+            "games": 70,
+            "winRate": 65.71
+          },
+          {
+            "civ": "portuguese",
+            "games": 75,
+            "winRate": 65.33
+          },
+          {
+            "civ": "tatars",
+            "games": 72,
+            "winRate": 65.28
+          },
+          {
+            "civ": "huns",
+            "games": 66,
+            "winRate": 65.15
+          },
+          {
+            "civ": "malians",
+            "games": 79,
+            "winRate": 64.56
+          },
+          {
+            "civ": "bohemians",
+            "games": 121,
+            "winRate": 63.64
+          },
+          {
+            "civ": "byzantines",
+            "games": 175,
+            "winRate": 63.43
+          },
+          {
+            "civ": "bulgarians",
+            "games": 147,
+            "winRate": 62.59
+          },
+          {
+            "civ": "burmese",
+            "games": 66,
+            "winRate": 62.12
+          },
+          {
+            "civ": "mongols",
+            "games": 84,
+            "winRate": 61.9
+          },
+          {
+            "civ": "gurjaras",
+            "games": 77,
+            "winRate": 61.04
+          },
+          {
+            "civ": "spanish",
+            "games": 130,
+            "winRate": 60.77
+          },
+          {
+            "civ": "wu",
+            "games": 75,
+            "winRate": 60
+          },
+          {
+            "civ": "goths",
+            "games": 74,
+            "winRate": 59.46
+          },
+          {
+            "civ": "hindustanis",
+            "games": 96,
+            "winRate": 59.38
+          },
+          {
+            "civ": "berbers",
+            "games": 256,
+            "winRate": 59.38
+          },
+          {
+            "civ": "aztecs",
+            "games": 172,
+            "winRate": 59.3
+          },
+          {
+            "civ": "ethiopians",
+            "games": 188,
+            "winRate": 59.04
+          },
+          {
+            "civ": "teutons",
+            "games": 73,
+            "winRate": 58.9
+          },
+          {
+            "civ": "bengalis",
+            "games": 80,
+            "winRate": 58.75
+          },
+          {
+            "civ": "incas",
+            "games": 87,
+            "winRate": 58.62
+          },
+          {
+            "civ": "slavs",
+            "games": 91,
+            "winRate": 58.24
+          },
+          {
+            "civ": "armenians",
+            "games": 91,
+            "winRate": 58.24
+          },
+          {
+            "civ": "japanese",
+            "games": 110,
+            "winRate": 58.18
+          },
+          {
+            "civ": "saracens",
+            "games": 105,
+            "winRate": 58.1
+          },
+          {
+            "civ": "romans",
+            "games": 131,
+            "winRate": 58.02
+          },
+          {
+            "civ": "burgundians",
+            "games": 138,
+            "winRate": 57.97
+          },
+          {
+            "civ": "magyars",
+            "games": 71,
+            "winRate": 57.75
+          },
+          {
+            "civ": "italians",
+            "games": 115,
+            "winRate": 57.39
+          },
+          {
+            "civ": "dravidians",
+            "games": 78,
+            "winRate": 56.41
+          },
+          {
+            "civ": "chinese",
+            "games": 98,
+            "winRate": 56.12
+          },
+          {
+            "civ": "lithuanians",
+            "games": 123,
+            "winRate": 55.28
+          },
+          {
+            "civ": "vietnamese",
+            "games": 154,
+            "winRate": 55.19
+          },
+          {
+            "civ": "malay",
+            "games": 67,
+            "winRate": 53.73
+          },
+          {
+            "civ": "britons",
+            "games": 91,
+            "winRate": 52.75
+          },
+          {
+            "civ": "sicilians",
+            "games": 92,
+            "winRate": 52.17
+          },
+          {
+            "civ": "cumans",
+            "games": 80,
+            "winRate": 51.25
+          },
+          {
+            "civ": "turks",
+            "games": 63,
+            "winRate": 47.62
+          },
+          {
+            "civ": "koreans",
+            "games": 61,
+            "winRate": 44.26
+          }
+        ],
+        "all": [
+          {
+            "civ": "jurchens",
+            "games": 313,
+            "winRate": 61.02
+          },
+          {
+            "civ": "lithuanians",
+            "games": 309,
+            "winRate": 55.02
+          },
+          {
+            "civ": "berbers",
+            "games": 540,
+            "winRate": 54.26
+          },
+          {
+            "civ": "chinese",
+            "games": 261,
+            "winRate": 54.02
+          },
+          {
+            "civ": "incas",
+            "games": 211,
+            "winRate": 53.08
+          },
+          {
+            "civ": "ethiopians",
+            "games": 446,
+            "winRate": 52.69
+          },
+          {
+            "civ": "hindustanis",
+            "games": 268,
+            "winRate": 52.61
+          },
+          {
+            "civ": "byzantines",
+            "games": 409,
+            "winRate": 52.32
+          },
+          {
+            "civ": "saracens",
+            "games": 313,
+            "winRate": 52.08
+          },
+          {
+            "civ": "burgundians",
+            "games": 272,
+            "winRate": 51.84
+          },
+          {
+            "civ": "magyars",
+            "games": 218,
+            "winRate": 50.46
+          },
+          {
+            "civ": "romans",
+            "games": 329,
+            "winRate": 49.85
+          },
+          {
+            "civ": "spanish",
+            "games": 315,
+            "winRate": 49.84
+          },
+          {
+            "civ": "malians",
+            "games": 205,
+            "winRate": 49.76
+          },
+          {
+            "civ": "bohemians",
+            "games": 395,
+            "winRate": 49.37
+          },
+          {
+            "civ": "mongols",
+            "games": 268,
+            "winRate": 49.25
+          },
+          {
+            "civ": "britons",
+            "games": 220,
+            "winRate": 49.09
+          },
+          {
+            "civ": "slavs",
+            "games": 234,
+            "winRate": 47.86
+          },
+          {
+            "civ": "huns",
+            "games": 209,
+            "winRate": 47.85
+          },
+          {
+            "civ": "sicilians",
+            "games": 213,
+            "winRate": 47.42
+          },
+          {
+            "civ": "armenians",
+            "games": 228,
+            "winRate": 47.37
+          },
+          {
+            "civ": "aztecs",
+            "games": 505,
+            "winRate": 47.33
+          },
+          {
+            "civ": "bengalis",
+            "games": 310,
+            "winRate": 47.1
+          },
+          {
+            "civ": "gurjaras",
+            "games": 236,
+            "winRate": 47.03
+          },
+          {
+            "civ": "portuguese",
+            "games": 285,
+            "winRate": 46.67
+          },
+          {
+            "civ": "vietnamese",
+            "games": 399,
+            "winRate": 45.86
+          },
+          {
+            "civ": "japanese",
+            "games": 319,
+            "winRate": 45.77
+          },
+          {
+            "civ": "italians",
+            "games": 299,
+            "winRate": 45.15
+          },
+          {
+            "civ": "vikings",
+            "games": 210,
+            "winRate": 44.76
+          },
+          {
+            "civ": "cumans",
+            "games": 296,
+            "winRate": 43.92
+          },
+          {
+            "civ": "bulgarians",
+            "games": 358,
+            "winRate": 42.46
+          }
+        ],
+        "1200-1399": [
+          {
+            "civ": "jurchens",
+            "games": 62,
+            "winRate": 69.35
+          },
+          {
+            "civ": "berbers",
+            "games": 72,
+            "winRate": 62.5
+          },
+          {
+            "civ": "ethiopians",
+            "games": 71,
+            "winRate": 61.97
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "lithuanians",
+            "games": 116,
+            "winRate": 49.14
+          },
+          {
+            "civ": "tatars",
+            "games": 76,
+            "winRate": 48.68
+          },
+          {
+            "civ": "magyars",
+            "games": 109,
+            "winRate": 44.95
+          },
+          {
+            "civ": "chinese",
+            "games": 115,
+            "winRate": 44.35
+          },
+          {
+            "civ": "jurchens",
+            "games": 70,
+            "winRate": 42.86
+          },
+          {
+            "civ": "berbers",
+            "games": 181,
+            "winRate": 42.54
+          },
+          {
+            "civ": "turks",
+            "games": 92,
+            "winRate": 42.39
+          },
+          {
+            "civ": "hindustanis",
+            "games": 95,
+            "winRate": 42.11
+          },
+          {
+            "civ": "sicilians",
+            "games": 98,
+            "winRate": 41.84
+          },
+          {
+            "civ": "ethiopians",
+            "games": 150,
+            "winRate": 41.33
+          },
+          {
+            "civ": "saracens",
+            "games": 164,
+            "winRate": 40.85
+          },
+          {
+            "civ": "byzantines",
+            "games": 170,
+            "winRate": 40.59
+          },
+          {
+            "civ": "britons",
+            "games": 94,
+            "winRate": 40.43
+          },
+          {
+            "civ": "bengalis",
+            "games": 188,
+            "winRate": 40.43
+          },
+          {
+            "civ": "poles",
+            "games": 62,
+            "winRate": 40.32
+          },
+          {
+            "civ": "khmer",
+            "games": 85,
+            "winRate": 40
+          },
+          {
+            "civ": "malians",
+            "games": 94,
+            "winRate": 39.36
+          },
+          {
+            "civ": "cumans",
+            "games": 196,
+            "winRate": 39.29
+          },
+          {
+            "civ": "aztecs",
+            "games": 293,
+            "winRate": 39.25
+          },
+          {
+            "civ": "romans",
+            "games": 156,
+            "winRate": 39.1
+          },
+          {
+            "civ": "huns",
+            "games": 110,
+            "winRate": 39.09
+          },
+          {
+            "civ": "vikings",
+            "games": 128,
+            "winRate": 39.06
+          },
+          {
+            "civ": "burgundians",
+            "games": 90,
+            "winRate": 38.89
+          },
+          {
+            "civ": "bohemians",
+            "games": 215,
+            "winRate": 38.6
+          },
+          {
+            "civ": "incas",
+            "games": 71,
+            "winRate": 38.03
+          },
+          {
+            "civ": "slavs",
+            "games": 116,
+            "winRate": 37.93
+          },
+          {
+            "civ": "gurjaras",
+            "games": 135,
+            "winRate": 37.78
+          },
+          {
+            "civ": "portuguese",
+            "games": 170,
+            "winRate": 37.65
+          },
+          {
+            "civ": "spanish",
+            "games": 126,
+            "winRate": 37.3
+          },
+          {
+            "civ": "armenians",
+            "games": 100,
+            "winRate": 37
+          },
+          {
+            "civ": "japanese",
+            "games": 181,
+            "winRate": 36.46
+          },
+          {
+            "civ": "vietnamese",
+            "games": 175,
+            "winRate": 34.86
+          },
+          {
+            "civ": "mongols",
+            "games": 125,
+            "winRate": 34.4
+          },
+          {
+            "civ": "teutons",
+            "games": 77,
+            "winRate": 33.77
+          },
+          {
+            "civ": "burmese",
+            "games": 72,
+            "winRate": 33.33
+          },
+          {
+            "civ": "italians",
+            "games": 145,
+            "winRate": 31.72
+          },
+          {
+            "civ": "bulgarians",
+            "games": 187,
+            "winRate": 25.13
+          }
+        ]
+      },
+      "team": null
+    },
+    "river_divide": {
+      "games": {
+        "1v1": 7136,
+        "team": 0
+      },
+      "1v1": {
+        "all": [
+          {
+            "civ": "aztecs",
+            "games": 306,
+            "winRate": 56.86
+          },
+          {
+            "civ": "burgundians",
+            "games": 326,
+            "winRate": 56.13
+          },
+          {
+            "civ": "berbers",
+            "games": 342,
+            "winRate": 55.26
+          },
+          {
+            "civ": "saracens",
+            "games": 250,
+            "winRate": 52
+          },
+          {
+            "civ": "italians",
+            "games": 257,
+            "winRate": 51.36
+          },
+          {
+            "civ": "bohemians",
+            "games": 228,
+            "winRate": 50.88
+          },
+          {
+            "civ": "cumans",
+            "games": 223,
+            "winRate": 50.67
+          },
+          {
+            "civ": "mongols",
+            "games": 224,
+            "winRate": 48.66
+          },
+          {
+            "civ": "vietnamese",
+            "games": 275,
+            "winRate": 46.18
+          },
+          {
+            "civ": "bulgarians",
+            "games": 227,
+            "winRate": 40.97
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "aztecs",
+            "games": 98,
+            "winRate": 72.45
+          },
+          {
+            "civ": "mayans",
+            "games": 72,
+            "winRate": 69.44
+          },
+          {
+            "civ": "cumans",
+            "games": 76,
+            "winRate": 65.79
+          },
+          {
+            "civ": "bulgarians",
+            "games": 83,
+            "winRate": 63.86
+          },
+          {
+            "civ": "burmese",
+            "games": 69,
+            "winRate": 63.77
+          },
+          {
+            "civ": "berbers",
+            "games": 177,
+            "winRate": 62.71
+          },
+          {
+            "civ": "bohemians",
+            "games": 73,
+            "winRate": 61.64
+          },
+          {
+            "civ": "italians",
+            "games": 112,
+            "winRate": 61.61
+          },
+          {
+            "civ": "britons",
+            "games": 61,
+            "winRate": 60.66
+          },
+          {
+            "civ": "armenians",
+            "games": 74,
+            "winRate": 59.46
+          },
+          {
+            "civ": "burgundians",
+            "games": 170,
+            "winRate": 59.41
+          },
+          {
+            "civ": "saracens",
+            "games": 83,
+            "winRate": 59.04
+          },
+          {
+            "civ": "bengalis",
+            "games": 60,
+            "winRate": 58.33
+          },
+          {
+            "civ": "hindustanis",
+            "games": 63,
+            "winRate": 55.56
+          },
+          {
+            "civ": "sicilians",
+            "games": 69,
+            "winRate": 55.07
+          },
+          {
+            "civ": "japanese",
+            "games": 75,
+            "winRate": 54.67
+          },
+          {
+            "civ": "mongols",
+            "games": 92,
+            "winRate": 53.26
+          },
+          {
+            "civ": "ethiopians",
+            "games": 79,
+            "winRate": 51.9
+          },
+          {
+            "civ": "vietnamese",
+            "games": 130,
+            "winRate": 50
+          },
+          {
+            "civ": "spanish",
+            "games": 92,
+            "winRate": 48.91
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "aztecs",
+            "games": 176,
+            "winRate": 48.86
+          },
+          {
+            "civ": "saracens",
+            "games": 120,
+            "winRate": 43.33
+          },
+          {
+            "civ": "bohemians",
+            "games": 128,
+            "winRate": 42.19
+          },
+          {
+            "civ": "ethiopians",
+            "games": 64,
+            "winRate": 42.19
+          },
+          {
+            "civ": "burmese",
+            "games": 67,
+            "winRate": 40.3
+          },
+          {
+            "civ": "bengalis",
+            "games": 82,
+            "winRate": 40.24
+          },
+          {
+            "civ": "burgundians",
+            "games": 87,
+            "winRate": 40.23
+          },
+          {
+            "civ": "chinese",
+            "games": 85,
+            "winRate": 40
+          },
+          {
+            "civ": "khmer",
+            "games": 65,
+            "winRate": 40
+          },
+          {
+            "civ": "berbers",
+            "games": 113,
+            "winRate": 39.82
+          },
+          {
+            "civ": "italians",
+            "games": 117,
+            "winRate": 39.32
+          },
+          {
+            "civ": "vikings",
+            "games": 70,
+            "winRate": 38.57
+          },
+          {
+            "civ": "malians",
+            "games": 85,
+            "winRate": 37.65
+          },
+          {
+            "civ": "mongols",
+            "games": 96,
+            "winRate": 37.5
+          },
+          {
+            "civ": "incas",
+            "games": 63,
+            "winRate": 36.51
+          },
+          {
+            "civ": "huns",
+            "games": 99,
+            "winRate": 36.36
+          },
+          {
+            "civ": "gurjaras",
+            "games": 66,
+            "winRate": 36.36
+          },
+          {
+            "civ": "sicilians",
+            "games": 70,
+            "winRate": 35.71
+          },
+          {
+            "civ": "japanese",
+            "games": 98,
+            "winRate": 35.71
+          },
+          {
+            "civ": "cumans",
+            "games": 118,
+            "winRate": 35.59
+          },
+          {
+            "civ": "vietnamese",
+            "games": 104,
+            "winRate": 35.58
+          },
+          {
+            "civ": "lithuanians",
+            "games": 63,
+            "winRate": 34.92
+          },
+          {
+            "civ": "turks",
+            "games": 69,
+            "winRate": 33.33
+          },
+          {
+            "civ": "spanish",
+            "games": 75,
+            "winRate": 33.33
+          },
+          {
+            "civ": "portuguese",
+            "games": 109,
+            "winRate": 32.11
+          },
+          {
+            "civ": "armenians",
+            "games": 67,
+            "winRate": 29.85
+          },
+          {
+            "civ": "magyars",
+            "games": 70,
+            "winRate": 28.57
+          },
+          {
+            "civ": "bulgarians",
+            "games": 121,
+            "winRate": 24.79
+          }
+        ]
+      },
+      "team": null
+    },
+    "cliffbound": {
+      "games": {
+        "1v1": 8560,
+        "team": 0
+      },
+      "1v1": {
+        "1200-1399": [
+          {
+            "civ": "burgundians",
+            "games": 84,
+            "winRate": 76.19
+          }
+        ],
+        "all": [
+          {
+            "civ": "burgundians",
+            "games": 408,
+            "winRate": 62.01
+          },
+          {
+            "civ": "berbers",
+            "games": 480,
+            "winRate": 57.08
+          },
+          {
+            "civ": "hindustanis",
+            "games": 226,
+            "winRate": 56.19
+          },
+          {
+            "civ": "italians",
+            "games": 316,
+            "winRate": 55.06
+          },
+          {
+            "civ": "saracens",
+            "games": 325,
+            "winRate": 53.85
+          },
+          {
+            "civ": "cumans",
+            "games": 224,
+            "winRate": 53.13
+          },
+          {
+            "civ": "spanish",
+            "games": 302,
+            "winRate": 52.98
+          },
+          {
+            "civ": "aztecs",
+            "games": 418,
+            "winRate": 52.63
+          },
+          {
+            "civ": "bohemians",
+            "games": 235,
+            "winRate": 49.79
+          },
+          {
+            "civ": "portuguese",
+            "games": 212,
+            "winRate": 49.06
+          },
+          {
+            "civ": "mongols",
+            "games": 216,
+            "winRate": 47.69
+          },
+          {
+            "civ": "chinese",
+            "games": 239,
+            "winRate": 46.86
+          },
+          {
+            "civ": "bengalis",
+            "games": 260,
+            "winRate": 45.77
+          },
+          {
+            "civ": "vietnamese",
+            "games": 343,
+            "winRate": 44.61
+          },
+          {
+            "civ": "japanese",
+            "games": 230,
+            "winRate": 43.04
+          },
+          {
+            "civ": "bulgarians",
+            "games": 217,
+            "winRate": 42.86
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "burgundians",
+            "games": 190,
+            "winRate": 67.89
+          },
+          {
+            "civ": "cumans",
+            "games": 88,
+            "winRate": 65.91
+          },
+          {
+            "civ": "turks",
+            "games": 69,
+            "winRate": 65.22
+          },
+          {
+            "civ": "berbers",
+            "games": 272,
+            "winRate": 63.97
+          },
+          {
+            "civ": "vikings",
+            "games": 60,
+            "winRate": 63.33
+          },
+          {
+            "civ": "burmese",
+            "games": 79,
+            "winRate": 63.29
+          },
+          {
+            "civ": "aztecs",
+            "games": 158,
+            "winRate": 63.29
+          },
+          {
+            "civ": "italians",
+            "games": 136,
+            "winRate": 63.24
+          },
+          {
+            "civ": "ethiopians",
+            "games": 75,
+            "winRate": 62.67
+          },
+          {
+            "civ": "hindustanis",
+            "games": 112,
+            "winRate": 62.5
+          },
+          {
+            "civ": "saracens",
+            "games": 130,
+            "winRate": 62.31
+          },
+          {
+            "civ": "bohemians",
+            "games": 79,
+            "winRate": 62.03
+          },
+          {
+            "civ": "malay",
+            "games": 79,
+            "winRate": 59.49
+          },
+          {
+            "civ": "bengalis",
+            "games": 76,
+            "winRate": 59.21
+          },
+          {
+            "civ": "spanish",
+            "games": 135,
+            "winRate": 58.52
+          },
+          {
+            "civ": "portuguese",
+            "games": 74,
+            "winRate": 58.11
+          },
+          {
+            "civ": "armenians",
+            "games": 69,
+            "winRate": 57.97
+          },
+          {
+            "civ": "malians",
+            "games": 71,
+            "winRate": 57.75
+          },
+          {
+            "civ": "mayans",
+            "games": 61,
+            "winRate": 57.38
+          },
+          {
+            "civ": "japanese",
+            "games": 69,
+            "winRate": 56.52
+          },
+          {
+            "civ": "mongols",
+            "games": 86,
+            "winRate": 55.81
+          },
+          {
+            "civ": "bulgarians",
+            "games": 65,
+            "winRate": 55.38
+          },
+          {
+            "civ": "chinese",
+            "games": 104,
+            "winRate": 53.85
+          },
+          {
+            "civ": "britons",
+            "games": 72,
+            "winRate": 52.78
+          },
+          {
+            "civ": "vietnamese",
+            "games": 155,
+            "winRate": 52.26
+          },
+          {
+            "civ": "goths",
+            "games": 84,
+            "winRate": 51.19
+          },
+          {
+            "civ": "sicilians",
+            "games": 94,
+            "winRate": 51.06
+          },
+          {
+            "civ": "romans",
+            "games": 78,
+            "winRate": 50
+          },
+          {
+            "civ": "gurjaras",
+            "games": 71,
+            "winRate": 49.3
+          },
+          {
+            "civ": "huns",
+            "games": 87,
+            "winRate": 45.98
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "sicilians",
+            "games": 74,
+            "winRate": 52.7
+          },
+          {
+            "civ": "italians",
+            "games": 141,
+            "winRate": 43.97
+          },
+          {
+            "civ": "hindustanis",
+            "games": 74,
+            "winRate": 43.24
+          },
+          {
+            "civ": "turks",
+            "games": 93,
+            "winRate": 43.01
+          },
+          {
+            "civ": "aztecs",
+            "games": 216,
+            "winRate": 42.13
+          },
+          {
+            "civ": "bohemians",
+            "games": 132,
+            "winRate": 40.91
+          },
+          {
+            "civ": "saracens",
+            "games": 139,
+            "winRate": 40.29
+          },
+          {
+            "civ": "berbers",
+            "games": 142,
+            "winRate": 40.14
+          },
+          {
+            "civ": "huns",
+            "games": 87,
+            "winRate": 39.08
+          },
+          {
+            "civ": "cumans",
+            "games": 105,
+            "winRate": 37.14
+          },
+          {
+            "civ": "mongols",
+            "games": 98,
+            "winRate": 36.73
+          },
+          {
+            "civ": "spanish",
+            "games": 101,
+            "winRate": 36.63
+          },
+          {
+            "civ": "armenians",
+            "games": 71,
+            "winRate": 36.62
+          },
+          {
+            "civ": "bulgarians",
+            "games": 129,
+            "winRate": 36.43
+          },
+          {
+            "civ": "burgundians",
+            "games": 97,
+            "winRate": 36.08
+          },
+          {
+            "civ": "bengalis",
+            "games": 134,
+            "winRate": 35.82
+          },
+          {
+            "civ": "vikings",
+            "games": 85,
+            "winRate": 35.29
+          },
+          {
+            "civ": "chinese",
+            "games": 102,
+            "winRate": 35.29
+          },
+          {
+            "civ": "portuguese",
+            "games": 108,
+            "winRate": 35.19
+          },
+          {
+            "civ": "vietnamese",
+            "games": 140,
+            "winRate": 35
+          },
+          {
+            "civ": "japanese",
+            "games": 126,
+            "winRate": 34.13
+          },
+          {
+            "civ": "gurjaras",
+            "games": 92,
+            "winRate": 33.7
+          },
+          {
+            "civ": "lithuanians",
+            "games": 68,
+            "winRate": 32.35
+          },
+          {
+            "civ": "incas",
+            "games": 71,
+            "winRate": 28.17
+          },
+          {
+            "civ": "malians",
+            "games": 81,
+            "winRate": 27.16
+          },
+          {
+            "civ": "slavs",
+            "games": 60,
+            "winRate": 20
+          }
+        ]
+      },
+      "team": null
+    },
+    "vulpine": {
+      "games": {
+        "1v1": 25582,
+        "team": 0
+      },
+      "1v1": {
+        "1000-1199": [
+          {
+            "civ": "chinese",
+            "games": 180,
+            "winRate": 63.89
+          },
+          {
+            "civ": "magyars",
+            "games": 169,
+            "winRate": 63.31
+          },
+          {
+            "civ": "incas",
+            "games": 152,
+            "winRate": 63.16
+          },
+          {
+            "civ": "poles",
+            "games": 93,
+            "winRate": 62.37
+          },
+          {
+            "civ": "celts",
+            "games": 93,
+            "winRate": 61.29
+          },
+          {
+            "civ": "khmer",
+            "games": 116,
+            "winRate": 61.21
+          },
+          {
+            "civ": "ethiopians",
+            "games": 226,
+            "winRate": 60.62
+          },
+          {
+            "civ": "dravidians",
+            "games": 126,
+            "winRate": 60.32
+          },
+          {
+            "civ": "jurchens",
+            "games": 200,
+            "winRate": 60
+          },
+          {
+            "civ": "armenians",
+            "games": 142,
+            "winRate": 59.86
+          },
+          {
+            "civ": "cumans",
+            "games": 124,
+            "winRate": 59.68
+          },
+          {
+            "civ": "burmese",
+            "games": 149,
+            "winRate": 59.06
+          },
+          {
+            "civ": "bengalis",
+            "games": 189,
+            "winRate": 58.73
+          },
+          {
+            "civ": "spanish",
+            "games": 235,
+            "winRate": 58.72
+          },
+          {
+            "civ": "hindustanis",
+            "games": 116,
+            "winRate": 58.62
+          },
+          {
+            "civ": "berbers",
+            "games": 446,
+            "winRate": 58.52
+          },
+          {
+            "civ": "gurjaras",
+            "games": 148,
+            "winRate": 58.11
+          },
+          {
+            "civ": "wei",
+            "games": 88,
+            "winRate": 57.95
+          },
+          {
+            "civ": "lithuanians",
+            "games": 177,
+            "winRate": 57.63
+          },
+          {
+            "civ": "saracens",
+            "games": 192,
+            "winRate": 57.29
+          },
+          {
+            "civ": "byzantines",
+            "games": 229,
+            "winRate": 57.21
+          },
+          {
+            "civ": "burgundians",
+            "games": 208,
+            "winRate": 57.21
+          },
+          {
+            "civ": "bohemians",
+            "games": 264,
+            "winRate": 57.2
+          },
+          {
+            "civ": "turks",
+            "games": 149,
+            "winRate": 57.05
+          },
+          {
+            "civ": "aztecs",
+            "games": 399,
+            "winRate": 56.89
+          },
+          {
+            "civ": "malay",
+            "games": 109,
+            "winRate": 56.88
+          },
+          {
+            "civ": "tatars",
+            "games": 120,
+            "winRate": 56.67
+          },
+          {
+            "civ": "teutons",
+            "games": 138,
+            "winRate": 56.52
+          },
+          {
+            "civ": "italians",
+            "games": 222,
+            "winRate": 56.31
+          },
+          {
+            "civ": "portuguese",
+            "games": 246,
+            "winRate": 56.1
+          },
+          {
+            "civ": "shu",
+            "games": 66,
+            "winRate": 56.06
+          },
+          {
+            "civ": "romans",
+            "games": 249,
+            "winRate": 55.82
+          },
+          {
+            "civ": "vietnamese",
+            "games": 405,
+            "winRate": 55.8
+          },
+          {
+            "civ": "mayans",
+            "games": 131,
+            "winRate": 55.73
+          },
+          {
+            "civ": "persians",
+            "games": 70,
+            "winRate": 55.71
+          },
+          {
+            "civ": "bulgarians",
+            "games": 260,
+            "winRate": 55
+          },
+          {
+            "civ": "vikings",
+            "games": 129,
+            "winRate": 54.26
+          },
+          {
+            "civ": "sicilians",
+            "games": 145,
+            "winRate": 53.79
+          },
+          {
+            "civ": "franks",
+            "games": 68,
+            "winRate": 52.94
+          },
+          {
+            "civ": "japanese",
+            "games": 207,
+            "winRate": 52.66
+          },
+          {
+            "civ": "britons",
+            "games": 134,
+            "winRate": 52.24
+          },
+          {
+            "civ": "wu",
+            "games": 136,
+            "winRate": 52.21
+          },
+          {
+            "civ": "slavs",
+            "games": 209,
+            "winRate": 50.72
+          },
+          {
+            "civ": "goths",
+            "games": 118,
+            "winRate": 50
+          },
+          {
+            "civ": "koreans",
+            "games": 78,
+            "winRate": 48.72
+          },
+          {
+            "civ": "mongols",
+            "games": 191,
+            "winRate": 48.69
+          },
+          {
+            "civ": "huns",
+            "games": 141,
+            "winRate": 48.23
+          },
+          {
+            "civ": "malians",
+            "games": 194,
+            "winRate": 47.94
+          }
+        ],
+        "all": [
+          {
+            "civ": "wu",
+            "games": 340,
+            "winRate": 56.47
+          },
+          {
+            "civ": "berbers",
+            "games": 1177,
+            "winRate": 55.23
+          },
+          {
+            "civ": "incas",
+            "games": 405,
+            "winRate": 54.32
+          },
+          {
+            "civ": "wei",
+            "games": 218,
+            "winRate": 54.13
+          },
+          {
+            "civ": "poles",
+            "games": 308,
+            "winRate": 53.9
+          },
+          {
+            "civ": "chinese",
+            "games": 600,
+            "winRate": 53.17
+          },
+          {
+            "civ": "jurchens",
+            "games": 369,
+            "winRate": 53.12
+          },
+          {
+            "civ": "burgundians",
+            "games": 467,
+            "winRate": 52.89
+          },
+          {
+            "civ": "lithuanians",
+            "games": 515,
+            "winRate": 52.82
+          },
+          {
+            "civ": "malay",
+            "games": 289,
+            "winRate": 52.6
+          },
+          {
+            "civ": "celts",
+            "games": 238,
+            "winRate": 52.1
+          },
+          {
+            "civ": "spanish",
+            "games": 668,
+            "winRate": 52.1
+          },
+          {
+            "civ": "persians",
+            "games": 221,
+            "winRate": 52.04
+          },
+          {
+            "civ": "ethiopians",
+            "games": 631,
+            "winRate": 51.66
+          },
+          {
+            "civ": "aztecs",
+            "games": 1405,
+            "winRate": 51.32
+          },
+          {
+            "civ": "hindustanis",
+            "games": 338,
+            "winRate": 51.18
+          },
+          {
+            "civ": "armenians",
+            "games": 430,
+            "winRate": 51.16
+          },
+          {
+            "civ": "khmer",
+            "games": 337,
+            "winRate": 50.74
+          },
+          {
+            "civ": "saracens",
+            "games": 665,
+            "winRate": 50.68
+          },
+          {
+            "civ": "magyars",
+            "games": 462,
+            "winRate": 50.65
+          },
+          {
+            "civ": "cumans",
+            "games": 537,
+            "winRate": 50.65
+          },
+          {
+            "civ": "romans",
+            "games": 806,
+            "winRate": 50.5
+          },
+          {
+            "civ": "malians",
+            "games": 618,
+            "winRate": 50.32
+          },
+          {
+            "civ": "goths",
+            "games": 335,
+            "winRate": 50.15
+          },
+          {
+            "civ": "portuguese",
+            "games": 782,
+            "winRate": 50
+          },
+          {
+            "civ": "italians",
+            "games": 684,
+            "winRate": 49.71
+          },
+          {
+            "civ": "bulgarians",
+            "games": 842,
+            "winRate": 49.64
+          },
+          {
+            "civ": "bengalis",
+            "games": 686,
+            "winRate": 49.42
+          },
+          {
+            "civ": "dravidians",
+            "games": 336,
+            "winRate": 49.4
+          },
+          {
+            "civ": "byzantines",
+            "games": 659,
+            "winRate": 49.32
+          },
+          {
+            "civ": "vietnamese",
+            "games": 1099,
+            "winRate": 49.04
+          },
+          {
+            "civ": "turks",
+            "games": 399,
+            "winRate": 48.87
+          },
+          {
+            "civ": "mayans",
+            "games": 283,
+            "winRate": 48.76
+          },
+          {
+            "civ": "burmese",
+            "games": 421,
+            "winRate": 48.69
+          },
+          {
+            "civ": "tatars",
+            "games": 391,
+            "winRate": 48.59
+          },
+          {
+            "civ": "teutons",
+            "games": 443,
+            "winRate": 48.31
+          },
+          {
+            "civ": "slavs",
+            "games": 579,
+            "winRate": 47.84
+          },
+          {
+            "civ": "britons",
+            "games": 404,
+            "winRate": 47.77
+          },
+          {
+            "civ": "franks",
+            "games": 214,
+            "winRate": 47.66
+          },
+          {
+            "civ": "bohemians",
+            "games": 925,
+            "winRate": 46.81
+          },
+          {
+            "civ": "gurjaras",
+            "games": 559,
+            "winRate": 46.33
+          },
+          {
+            "civ": "vikings",
+            "games": 480,
+            "winRate": 46.04
+          },
+          {
+            "civ": "sicilians",
+            "games": 478,
+            "winRate": 46.03
+          },
+          {
+            "civ": "japanese",
+            "games": 732,
+            "winRate": 45.49
+          },
+          {
+            "civ": "mongols",
+            "games": 584,
+            "winRate": 44.18
+          },
+          {
+            "civ": "koreans",
+            "games": 222,
+            "winRate": 42.79
+          },
+          {
+            "civ": "huns",
+            "games": 511,
+            "winRate": 42.07
+          }
+        ],
+        "1200-1399": [
+          {
+            "civ": "spanish",
+            "games": 71,
+            "winRate": 64.79
+          },
+          {
+            "civ": "malians",
+            "games": 79,
+            "winRate": 63.29
+          },
+          {
+            "civ": "saracens",
+            "games": 62,
+            "winRate": 62.9
+          },
+          {
+            "civ": "berbers",
+            "games": 182,
+            "winRate": 62.09
+          },
+          {
+            "civ": "ethiopians",
+            "games": 103,
+            "winRate": 61.17
+          },
+          {
+            "civ": "aztecs",
+            "games": 84,
+            "winRate": 60.71
+          },
+          {
+            "civ": "lithuanians",
+            "games": 73,
+            "winRate": 60.27
+          },
+          {
+            "civ": "burgundians",
+            "games": 74,
+            "winRate": 59.46
+          },
+          {
+            "civ": "slavs",
+            "games": 61,
+            "winRate": 59.02
+          },
+          {
+            "civ": "chinese",
+            "games": 63,
+            "winRate": 58.73
+          },
+          {
+            "civ": "bulgarians",
+            "games": 85,
+            "winRate": 57.65
+          },
+          {
+            "civ": "romans",
+            "games": 112,
+            "winRate": 56.25
+          },
+          {
+            "civ": "bohemians",
+            "games": 90,
+            "winRate": 55.56
+          },
+          {
+            "civ": "portuguese",
+            "games": 88,
+            "winRate": 54.55
+          },
+          {
+            "civ": "vietnamese",
+            "games": 137,
+            "winRate": 54.01
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "wu",
+            "games": 107,
+            "winRate": 54.21
+          },
+          {
+            "civ": "berbers",
+            "games": 457,
+            "winRate": 49.23
+          },
+          {
+            "civ": "poles",
+            "games": 158,
+            "winRate": 48.1
+          },
+          {
+            "civ": "wei",
+            "games": 71,
+            "winRate": 47.89
+          },
+          {
+            "civ": "goths",
+            "games": 145,
+            "winRate": 47.59
+          },
+          {
+            "civ": "aztecs",
+            "games": 893,
+            "winRate": 47.48
+          },
+          {
+            "civ": "malians",
+            "games": 316,
+            "winRate": 47.15
+          },
+          {
+            "civ": "burgundians",
+            "games": 157,
+            "winRate": 46.5
+          },
+          {
+            "civ": "cumans",
+            "games": 330,
+            "winRate": 45.76
+          },
+          {
+            "civ": "chinese",
+            "games": 314,
+            "winRate": 44.9
+          },
+          {
+            "civ": "persians",
+            "games": 98,
+            "winRate": 44.9
+          },
+          {
+            "civ": "bengalis",
+            "games": 423,
+            "winRate": 44.68
+          },
+          {
+            "civ": "saracens",
+            "games": 374,
+            "winRate": 44.65
+          },
+          {
+            "civ": "lithuanians",
+            "games": 213,
+            "winRate": 44.6
+          },
+          {
+            "civ": "bulgarians",
+            "games": 447,
+            "winRate": 44.3
+          },
+          {
+            "civ": "romans",
+            "games": 389,
+            "winRate": 44.22
+          },
+          {
+            "civ": "hindustanis",
+            "games": 147,
+            "winRate": 44.22
+          },
+          {
+            "civ": "byzantines",
+            "games": 337,
+            "winRate": 43.92
+          },
+          {
+            "civ": "spanish",
+            "games": 317,
+            "winRate": 43.85
+          },
+          {
+            "civ": "turks",
+            "games": 192,
+            "winRate": 43.23
+          },
+          {
+            "civ": "shu",
+            "games": 65,
+            "winRate": 43.08
+          },
+          {
+            "civ": "malay",
+            "games": 121,
+            "winRate": 42.98
+          },
+          {
+            "civ": "incas",
+            "games": 173,
+            "winRate": 42.77
+          },
+          {
+            "civ": "italians",
+            "games": 363,
+            "winRate": 42.7
+          },
+          {
+            "civ": "teutons",
+            "games": 254,
+            "winRate": 42.52
+          },
+          {
+            "civ": "portuguese",
+            "games": 396,
+            "winRate": 42.42
+          },
+          {
+            "civ": "franks",
+            "games": 92,
+            "winRate": 42.39
+          },
+          {
+            "civ": "vietnamese",
+            "games": 465,
+            "winRate": 41.29
+          },
+          {
+            "civ": "armenians",
+            "games": 201,
+            "winRate": 41.29
+          },
+          {
+            "civ": "slavs",
+            "games": 279,
+            "winRate": 41.22
+          },
+          {
+            "civ": "khmer",
+            "games": 134,
+            "winRate": 41.04
+          },
+          {
+            "civ": "japanese",
+            "games": 448,
+            "winRate": 40.63
+          },
+          {
+            "civ": "celts",
+            "games": 74,
+            "winRate": 40.54
+          },
+          {
+            "civ": "huns",
+            "games": 301,
+            "winRate": 40.53
+          },
+          {
+            "civ": "gurjaras",
+            "games": 336,
+            "winRate": 40.48
+          },
+          {
+            "civ": "tatars",
+            "games": 184,
+            "winRate": 39.67
+          },
+          {
+            "civ": "jurchens",
+            "games": 94,
+            "winRate": 39.36
+          },
+          {
+            "civ": "sicilians",
+            "games": 244,
+            "winRate": 39.34
+          },
+          {
+            "civ": "bohemians",
+            "games": 516,
+            "winRate": 39.34
+          },
+          {
+            "civ": "vikings",
+            "games": 239,
+            "winRate": 39.33
+          },
+          {
+            "civ": "mongols",
+            "games": 304,
+            "winRate": 38.16
+          },
+          {
+            "civ": "britons",
+            "games": 187,
+            "winRate": 37.97
+          },
+          {
+            "civ": "magyars",
+            "games": 191,
+            "winRate": 37.7
+          },
+          {
+            "civ": "dravidians",
+            "games": 139,
+            "winRate": 37.41
+          },
+          {
+            "civ": "ethiopians",
+            "games": 213,
+            "winRate": 35.68
+          },
+          {
+            "civ": "burmese",
+            "games": 175,
+            "winRate": 35.43
+          },
+          {
+            "civ": "koreans",
+            "games": 90,
+            "winRate": 34.44
+          },
+          {
+            "civ": "mayans",
+            "games": 82,
+            "winRate": 32.93
+          }
+        ],
+        "1400-1649": [
+          {
+            "civ": "berbers",
+            "games": 72,
+            "winRate": 54.17
+          },
+          {
+            "civ": "vietnamese",
+            "games": 66,
+            "winRate": 46.97
+          }
+        ]
+      },
+      "team": null
+    },
+    "loch_ness": {
+      "games": {
+        "1v1": 8402,
+        "team": 0
+      },
+      "1v1": {
+        "1000-1199": [
+          {
+            "civ": "armenians",
+            "games": 85,
+            "winRate": 74.12
+          },
+          {
+            "civ": "bulgarians",
+            "games": 70,
+            "winRate": 71.43
+          },
+          {
+            "civ": "japanese",
+            "games": 77,
+            "winRate": 70.13
+          },
+          {
+            "civ": "magyars",
+            "games": 97,
+            "winRate": 67.01
+          },
+          {
+            "civ": "lithuanians",
+            "games": 74,
+            "winRate": 66.22
+          },
+          {
+            "civ": "aztecs",
+            "games": 96,
+            "winRate": 64.58
+          },
+          {
+            "civ": "burgundians",
+            "games": 80,
+            "winRate": 63.75
+          },
+          {
+            "civ": "sicilians",
+            "games": 68,
+            "winRate": 63.24
+          },
+          {
+            "civ": "bohemians",
+            "games": 80,
+            "winRate": 62.5
+          },
+          {
+            "civ": "byzantines",
+            "games": 101,
+            "winRate": 62.38
+          },
+          {
+            "civ": "romans",
+            "games": 61,
+            "winRate": 62.3
+          },
+          {
+            "civ": "saracens",
+            "games": 109,
+            "winRate": 61.47
+          },
+          {
+            "civ": "ethiopians",
+            "games": 123,
+            "winRate": 60.98
+          },
+          {
+            "civ": "jurchens",
+            "games": 79,
+            "winRate": 60.76
+          },
+          {
+            "civ": "spanish",
+            "games": 78,
+            "winRate": 60.26
+          },
+          {
+            "civ": "berbers",
+            "games": 131,
+            "winRate": 59.54
+          },
+          {
+            "civ": "celts",
+            "games": 66,
+            "winRate": 59.09
+          },
+          {
+            "civ": "mongols",
+            "games": 90,
+            "winRate": 58.89
+          },
+          {
+            "civ": "vietnamese",
+            "games": 66,
+            "winRate": 57.58
+          },
+          {
+            "civ": "slavs",
+            "games": 70,
+            "winRate": 52.86
+          }
+        ],
+        "all": [
+          {
+            "civ": "armenians",
+            "games": 208,
+            "winRate": 57.69
+          },
+          {
+            "civ": "ethiopians",
+            "games": 317,
+            "winRate": 53.63
+          },
+          {
+            "civ": "magyars",
+            "games": 226,
+            "winRate": 52.65
+          },
+          {
+            "civ": "bohemians",
+            "games": 335,
+            "winRate": 51.04
+          },
+          {
+            "civ": "saracens",
+            "games": 286,
+            "winRate": 50.35
+          },
+          {
+            "civ": "aztecs",
+            "games": 335,
+            "winRate": 48.36
+          },
+          {
+            "civ": "japanese",
+            "games": 202,
+            "winRate": 48.02
+          },
+          {
+            "civ": "bengalis",
+            "games": 298,
+            "winRate": 47.99
+          },
+          {
+            "civ": "mongols",
+            "games": 201,
+            "winRate": 46.77
+          },
+          {
+            "civ": "cumans",
+            "games": 270,
+            "winRate": 45.56
+          },
+          {
+            "civ": "byzantines",
+            "games": 281,
+            "winRate": 45.55
+          },
+          {
+            "civ": "berbers",
+            "games": 332,
+            "winRate": 44.58
+          },
+          {
+            "civ": "vietnamese",
+            "games": 217,
+            "winRate": 43.32
+          },
+          {
+            "civ": "bulgarians",
+            "games": 253,
+            "winRate": 41.5
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "slavs",
+            "games": 109,
+            "winRate": 51.38
+          },
+          {
+            "civ": "sicilians",
+            "games": 106,
+            "winRate": 50
+          },
+          {
+            "civ": "spanish",
+            "games": 92,
+            "winRate": 50
+          },
+          {
+            "civ": "malay",
+            "games": 60,
+            "winRate": 48.33
+          },
+          {
+            "civ": "vikings",
+            "games": 123,
+            "winRate": 47.97
+          },
+          {
+            "civ": "bohemians",
+            "games": 222,
+            "winRate": 46.4
+          },
+          {
+            "civ": "burmese",
+            "games": 67,
+            "winRate": 46.27
+          },
+          {
+            "civ": "gurjaras",
+            "games": 114,
+            "winRate": 43.86
+          },
+          {
+            "civ": "bengalis",
+            "games": 223,
+            "winRate": 43.5
+          },
+          {
+            "civ": "romans",
+            "games": 100,
+            "winRate": 43
+          },
+          {
+            "civ": "ethiopians",
+            "games": 136,
+            "winRate": 42.65
+          },
+          {
+            "civ": "turks",
+            "games": 64,
+            "winRate": 42.19
+          },
+          {
+            "civ": "saracens",
+            "games": 134,
+            "winRate": 41.04
+          },
+          {
+            "civ": "armenians",
+            "games": 96,
+            "winRate": 40.63
+          },
+          {
+            "civ": "aztecs",
+            "games": 225,
+            "winRate": 40.44
+          },
+          {
+            "civ": "magyars",
+            "games": 109,
+            "winRate": 40.37
+          },
+          {
+            "civ": "malians",
+            "games": 83,
+            "winRate": 39.76
+          },
+          {
+            "civ": "cumans",
+            "games": 199,
+            "winRate": 39.2
+          },
+          {
+            "civ": "huns",
+            "games": 74,
+            "winRate": 39.19
+          },
+          {
+            "civ": "lithuanians",
+            "games": 99,
+            "winRate": 38.38
+          },
+          {
+            "civ": "poles",
+            "games": 63,
+            "winRate": 38.1
+          },
+          {
+            "civ": "teutons",
+            "games": 66,
+            "winRate": 37.88
+          },
+          {
+            "civ": "chinese",
+            "games": 98,
+            "winRate": 37.76
+          },
+          {
+            "civ": "khmer",
+            "games": 83,
+            "winRate": 36.14
+          },
+          {
+            "civ": "portuguese",
+            "games": 131,
+            "winRate": 35.88
+          },
+          {
+            "civ": "mongols",
+            "games": 92,
+            "winRate": 34.78
+          },
+          {
+            "civ": "burgundians",
+            "games": 70,
+            "winRate": 34.29
+          },
+          {
+            "civ": "britons",
+            "games": 65,
+            "winRate": 33.85
+          },
+          {
+            "civ": "vietnamese",
+            "games": 130,
+            "winRate": 33.08
+          },
+          {
+            "civ": "japanese",
+            "games": 119,
+            "winRate": 32.77
+          },
+          {
+            "civ": "byzantines",
+            "games": 140,
+            "winRate": 30
+          },
+          {
+            "civ": "bulgarians",
+            "games": 168,
+            "winRate": 28.57
+          },
+          {
+            "civ": "italians",
+            "games": 119,
+            "winRate": 27.73
+          },
+          {
+            "civ": "berbers",
+            "games": 148,
+            "winRate": 27.7
+          }
+        ]
+      },
+      "team": null
+    },
+    "crownwood": {
+      "games": {
+        "1v1": 18082,
+        "team": 0
+      },
+      "1v1": {
+        "1200-1399": [
+          {
+            "civ": "aztecs",
+            "games": 62,
+            "winRate": 67.74
+          },
+          {
+            "civ": "spanish",
+            "games": 67,
+            "winRate": 65.67
+          },
+          {
+            "civ": "jurchens",
+            "games": 64,
+            "winRate": 64.06
+          },
+          {
+            "civ": "byzantines",
+            "games": 77,
+            "winRate": 62.34
+          },
+          {
+            "civ": "burgundians",
+            "games": 66,
+            "winRate": 60.61
+          },
+          {
+            "civ": "vietnamese",
+            "games": 84,
+            "winRate": 58.33
+          },
+          {
+            "civ": "lithuanians",
+            "games": 74,
+            "winRate": 56.76
+          },
+          {
+            "civ": "ethiopians",
+            "games": 71,
+            "winRate": 56.34
+          },
+          {
+            "civ": "saracens",
+            "games": 68,
+            "winRate": 55.88
+          },
+          {
+            "civ": "berbers",
+            "games": 133,
+            "winRate": 55.64
+          },
+          {
+            "civ": "chinese",
+            "games": 62,
+            "winRate": 45.16
+          }
+        ],
+        "all": [
+          {
+            "civ": "lithuanians",
+            "games": 439,
+            "winRate": 57.86
+          },
+          {
+            "civ": "jurchens",
+            "games": 370,
+            "winRate": 57.84
+          },
+          {
+            "civ": "spanish",
+            "games": 468,
+            "winRate": 56.62
+          },
+          {
+            "civ": "berbers",
+            "games": 942,
+            "winRate": 55.2
+          },
+          {
+            "civ": "wei",
+            "games": 215,
+            "winRate": 54.42
+          },
+          {
+            "civ": "italians",
+            "games": 475,
+            "winRate": 54.32
+          },
+          {
+            "civ": "byzantines",
+            "games": 569,
+            "winRate": 53.95
+          },
+          {
+            "civ": "dravidians",
+            "games": 319,
+            "winRate": 53.92
+          },
+          {
+            "civ": "goths",
+            "games": 250,
+            "winRate": 53.2
+          },
+          {
+            "civ": "ethiopians",
+            "games": 532,
+            "winRate": 53.01
+          },
+          {
+            "civ": "magyars",
+            "games": 329,
+            "winRate": 52.28
+          },
+          {
+            "civ": "malay",
+            "games": 247,
+            "winRate": 52.23
+          },
+          {
+            "civ": "burgundians",
+            "games": 395,
+            "winRate": 51.9
+          },
+          {
+            "civ": "mayans",
+            "games": 211,
+            "winRate": 51.18
+          },
+          {
+            "civ": "turks",
+            "games": 276,
+            "winRate": 50.72
+          },
+          {
+            "civ": "aztecs",
+            "games": 875,
+            "winRate": 50.4
+          },
+          {
+            "civ": "tatars",
+            "games": 289,
+            "winRate": 50.17
+          },
+          {
+            "civ": "poles",
+            "games": 230,
+            "winRate": 50
+          },
+          {
+            "civ": "slavs",
+            "games": 372,
+            "winRate": 49.46
+          },
+          {
+            "civ": "incas",
+            "games": 281,
+            "winRate": 49.11
+          },
+          {
+            "civ": "malians",
+            "games": 325,
+            "winRate": 48.92
+          },
+          {
+            "civ": "japanese",
+            "games": 505,
+            "winRate": 48.91
+          },
+          {
+            "civ": "mongols",
+            "games": 403,
+            "winRate": 48.88
+          },
+          {
+            "civ": "huns",
+            "games": 321,
+            "winRate": 48.6
+          },
+          {
+            "civ": "wu",
+            "games": 245,
+            "winRate": 48.57
+          },
+          {
+            "civ": "britons",
+            "games": 281,
+            "winRate": 48.4
+          },
+          {
+            "civ": "romans",
+            "games": 496,
+            "winRate": 48.39
+          },
+          {
+            "civ": "burmese",
+            "games": 304,
+            "winRate": 48.36
+          },
+          {
+            "civ": "cumans",
+            "games": 348,
+            "winRate": 48.28
+          },
+          {
+            "civ": "chinese",
+            "games": 386,
+            "winRate": 48.19
+          },
+          {
+            "civ": "hindustanis",
+            "games": 339,
+            "winRate": 48.08
+          },
+          {
+            "civ": "bulgarians",
+            "games": 557,
+            "winRate": 47.94
+          },
+          {
+            "civ": "sicilians",
+            "games": 332,
+            "winRate": 47.89
+          },
+          {
+            "civ": "vietnamese",
+            "games": 662,
+            "winRate": 47.58
+          },
+          {
+            "civ": "bohemians",
+            "games": 589,
+            "winRate": 47.2
+          },
+          {
+            "civ": "vikings",
+            "games": 325,
+            "winRate": 47.08
+          },
+          {
+            "civ": "armenians",
+            "games": 302,
+            "winRate": 47.02
+          },
+          {
+            "civ": "teutons",
+            "games": 270,
+            "winRate": 46.67
+          },
+          {
+            "civ": "saracens",
+            "games": 446,
+            "winRate": 45.74
+          },
+          {
+            "civ": "gurjaras",
+            "games": 383,
+            "winRate": 45.69
+          },
+          {
+            "civ": "portuguese",
+            "games": 440,
+            "winRate": 45
+          },
+          {
+            "civ": "bengalis",
+            "games": 483,
+            "winRate": 42.86
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "gurjaras",
+            "games": 102,
+            "winRate": 69.61
+          },
+          {
+            "civ": "lithuanians",
+            "games": 166,
+            "winRate": 69.28
+          },
+          {
+            "civ": "wei",
+            "games": 95,
+            "winRate": 66.32
+          },
+          {
+            "civ": "italians",
+            "games": 184,
+            "winRate": 65.76
+          },
+          {
+            "civ": "malay",
+            "games": 84,
+            "winRate": 65.48
+          },
+          {
+            "civ": "ethiopians",
+            "games": 213,
+            "winRate": 63.85
+          },
+          {
+            "civ": "berbers",
+            "games": 438,
+            "winRate": 62.79
+          },
+          {
+            "civ": "burgundians",
+            "games": 195,
+            "winRate": 61.54
+          },
+          {
+            "civ": "byzantines",
+            "games": 206,
+            "winRate": 61.17
+          },
+          {
+            "civ": "magyars",
+            "games": 126,
+            "winRate": 61.11
+          },
+          {
+            "civ": "jurchens",
+            "games": 185,
+            "winRate": 61.08
+          },
+          {
+            "civ": "aztecs",
+            "games": 305,
+            "winRate": 60.98
+          },
+          {
+            "civ": "saracens",
+            "games": 132,
+            "winRate": 60.61
+          },
+          {
+            "civ": "spanish",
+            "games": 180,
+            "winRate": 60
+          },
+          {
+            "civ": "japanese",
+            "games": 147,
+            "winRate": 59.86
+          },
+          {
+            "civ": "dravidians",
+            "games": 133,
+            "winRate": 59.4
+          },
+          {
+            "civ": "koreans",
+            "games": 64,
+            "winRate": 59.38
+          },
+          {
+            "civ": "poles",
+            "games": 84,
+            "winRate": 58.33
+          },
+          {
+            "civ": "vikings",
+            "games": 93,
+            "winRate": 58.06
+          },
+          {
+            "civ": "turks",
+            "games": 100,
+            "winRate": 58
+          },
+          {
+            "civ": "hindustanis",
+            "games": 149,
+            "winRate": 57.72
+          },
+          {
+            "civ": "bohemians",
+            "games": 182,
+            "winRate": 57.69
+          },
+          {
+            "civ": "goths",
+            "games": 112,
+            "winRate": 57.14
+          },
+          {
+            "civ": "tatars",
+            "games": 93,
+            "winRate": 56.99
+          },
+          {
+            "civ": "chinese",
+            "games": 137,
+            "winRate": 56.93
+          },
+          {
+            "civ": "mayans",
+            "games": 88,
+            "winRate": 56.82
+          },
+          {
+            "civ": "romans",
+            "games": 173,
+            "winRate": 56.65
+          },
+          {
+            "civ": "malians",
+            "games": 133,
+            "winRate": 56.39
+          },
+          {
+            "civ": "burmese",
+            "games": 111,
+            "winRate": 55.86
+          },
+          {
+            "civ": "incas",
+            "games": 140,
+            "winRate": 55.71
+          },
+          {
+            "civ": "slavs",
+            "games": 127,
+            "winRate": 55.12
+          },
+          {
+            "civ": "wu",
+            "games": 93,
+            "winRate": 53.76
+          },
+          {
+            "civ": "teutons",
+            "games": 93,
+            "winRate": 53.76
+          },
+          {
+            "civ": "celts",
+            "games": 67,
+            "winRate": 53.73
+          },
+          {
+            "civ": "cumans",
+            "games": 96,
+            "winRate": 53.13
+          },
+          {
+            "civ": "mongols",
+            "games": 147,
+            "winRate": 53.06
+          },
+          {
+            "civ": "armenians",
+            "games": 104,
+            "winRate": 52.88
+          },
+          {
+            "civ": "bengalis",
+            "games": 130,
+            "winRate": 52.31
+          },
+          {
+            "civ": "bulgarians",
+            "games": 190,
+            "winRate": 51.58
+          },
+          {
+            "civ": "huns",
+            "games": 105,
+            "winRate": 51.43
+          },
+          {
+            "civ": "britons",
+            "games": 111,
+            "winRate": 51.35
+          },
+          {
+            "civ": "vietnamese",
+            "games": 245,
+            "winRate": 51.02
+          },
+          {
+            "civ": "portuguese",
+            "games": 133,
+            "winRate": 50.38
+          },
+          {
+            "civ": "sicilians",
+            "games": 128,
+            "winRate": 49.22
+          },
+          {
+            "civ": "khmer",
+            "games": 76,
+            "winRate": 47.37
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "lithuanians",
+            "games": 167,
+            "winRate": 46.11
+          },
+          {
+            "civ": "spanish",
+            "games": 185,
+            "winRate": 45.95
+          },
+          {
+            "civ": "jurchens",
+            "games": 77,
+            "winRate": 45.45
+          },
+          {
+            "civ": "byzantines",
+            "games": 249,
+            "winRate": 44.98
+          },
+          {
+            "civ": "goths",
+            "games": 87,
+            "winRate": 44.83
+          },
+          {
+            "civ": "mongols",
+            "games": 185,
+            "winRate": 43.24
+          },
+          {
+            "civ": "berbers",
+            "games": 296,
+            "winRate": 43.24
+          },
+          {
+            "civ": "cumans",
+            "games": 204,
+            "winRate": 43.14
+          },
+          {
+            "civ": "magyars",
+            "games": 144,
+            "winRate": 43.06
+          },
+          {
+            "civ": "bulgarians",
+            "games": 284,
+            "winRate": 42.96
+          },
+          {
+            "civ": "chinese",
+            "games": 166,
+            "winRate": 42.17
+          },
+          {
+            "civ": "italians",
+            "games": 223,
+            "winRate": 42.15
+          },
+          {
+            "civ": "aztecs",
+            "games": 486,
+            "winRate": 41.98
+          },
+          {
+            "civ": "sicilians",
+            "games": 160,
+            "winRate": 41.88
+          },
+          {
+            "civ": "tatars",
+            "games": 134,
+            "winRate": 41.79
+          },
+          {
+            "civ": "koreans",
+            "games": 65,
+            "winRate": 41.54
+          },
+          {
+            "civ": "romans",
+            "games": 244,
+            "winRate": 41.39
+          },
+          {
+            "civ": "dravidians",
+            "games": 102,
+            "winRate": 41.18
+          },
+          {
+            "civ": "huns",
+            "games": 158,
+            "winRate": 40.51
+          },
+          {
+            "civ": "britons",
+            "games": 114,
+            "winRate": 40.35
+          },
+          {
+            "civ": "franks",
+            "games": 65,
+            "winRate": 40
+          },
+          {
+            "civ": "mayans",
+            "games": 70,
+            "winRate": 40
+          },
+          {
+            "civ": "malay",
+            "games": 98,
+            "winRate": 39.8
+          },
+          {
+            "civ": "ethiopians",
+            "games": 199,
+            "winRate": 39.7
+          },
+          {
+            "civ": "wu",
+            "games": 71,
+            "winRate": 39.44
+          },
+          {
+            "civ": "vietnamese",
+            "games": 279,
+            "winRate": 39.43
+          },
+          {
+            "civ": "slavs",
+            "games": 178,
+            "winRate": 39.33
+          },
+          {
+            "civ": "vikings",
+            "games": 177,
+            "winRate": 38.98
+          },
+          {
+            "civ": "malians",
+            "games": 136,
+            "winRate": 38.97
+          },
+          {
+            "civ": "armenians",
+            "games": 137,
+            "winRate": 38.69
+          },
+          {
+            "civ": "portuguese",
+            "games": 233,
+            "winRate": 38.63
+          },
+          {
+            "civ": "japanese",
+            "games": 293,
+            "winRate": 38.57
+          },
+          {
+            "civ": "turks",
+            "games": 134,
+            "winRate": 38.06
+          },
+          {
+            "civ": "bohemians",
+            "games": 321,
+            "winRate": 37.69
+          },
+          {
+            "civ": "bengalis",
+            "games": 291,
+            "winRate": 37.46
+          },
+          {
+            "civ": "teutons",
+            "games": 134,
+            "winRate": 36.57
+          },
+          {
+            "civ": "poles",
+            "games": 98,
+            "winRate": 34.69
+          },
+          {
+            "civ": "gurjaras",
+            "games": 231,
+            "winRate": 34.63
+          },
+          {
+            "civ": "persians",
+            "games": 64,
+            "winRate": 34.38
+          },
+          {
+            "civ": "incas",
+            "games": 89,
+            "winRate": 33.71
+          },
+          {
+            "civ": "saracens",
+            "games": 224,
+            "winRate": 33.48
+          },
+          {
+            "civ": "burmese",
+            "games": 120,
+            "winRate": 33.33
+          },
+          {
+            "civ": "hindustanis",
+            "games": 133,
+            "winRate": 33.08
+          },
+          {
+            "civ": "khmer",
+            "games": 80,
+            "winRate": 32.5
+          },
+          {
+            "civ": "burgundians",
+            "games": 112,
+            "winRate": 31.25
+          },
+          {
+            "civ": "celts",
+            "games": 60,
+            "winRate": 23.33
+          }
+        ]
+      },
+      "team": null
+    },
+    "rampart": {
+      "games": {
+        "1v1": 11404,
+        "team": 0
+      },
+      "1v1": {
+        "1200-1399": [
+          {
+            "civ": "berbers",
+            "games": 66,
+            "winRate": 54.55
+          }
+        ],
+        "all": [
+          {
+            "civ": "spanish",
+            "games": 341,
+            "winRate": 56.6
+          },
+          {
+            "civ": "berbers",
+            "games": 536,
+            "winRate": 55.97
+          },
+          {
+            "civ": "jurchens",
+            "games": 240,
+            "winRate": 55
+          },
+          {
+            "civ": "byzantines",
+            "games": 388,
+            "winRate": 54.9
+          },
+          {
+            "civ": "ethiopians",
+            "games": 335,
+            "winRate": 54.63
+          },
+          {
+            "civ": "burgundians",
+            "games": 288,
+            "winRate": 54.51
+          },
+          {
+            "civ": "chinese",
+            "games": 284,
+            "winRate": 53.87
+          },
+          {
+            "civ": "lithuanians",
+            "games": 282,
+            "winRate": 53.55
+          },
+          {
+            "civ": "romans",
+            "games": 263,
+            "winRate": 51.71
+          },
+          {
+            "civ": "italians",
+            "games": 295,
+            "winRate": 51.19
+          },
+          {
+            "civ": "saracens",
+            "games": 285,
+            "winRate": 50.18
+          },
+          {
+            "civ": "aztecs",
+            "games": 485,
+            "winRate": 50.1
+          },
+          {
+            "civ": "slavs",
+            "games": 213,
+            "winRate": 49.3
+          },
+          {
+            "civ": "dravidians",
+            "games": 206,
+            "winRate": 49.03
+          },
+          {
+            "civ": "bohemians",
+            "games": 416,
+            "winRate": 48.56
+          },
+          {
+            "civ": "malians",
+            "games": 202,
+            "winRate": 48.02
+          },
+          {
+            "civ": "vietnamese",
+            "games": 475,
+            "winRate": 48
+          },
+          {
+            "civ": "sicilians",
+            "games": 219,
+            "winRate": 47.49
+          },
+          {
+            "civ": "huns",
+            "games": 207,
+            "winRate": 47.34
+          },
+          {
+            "civ": "cumans",
+            "games": 270,
+            "winRate": 47.04
+          },
+          {
+            "civ": "bengalis",
+            "games": 282,
+            "winRate": 46.81
+          },
+          {
+            "civ": "mongols",
+            "games": 302,
+            "winRate": 46.69
+          },
+          {
+            "civ": "bulgarians",
+            "games": 325,
+            "winRate": 46.46
+          },
+          {
+            "civ": "japanese",
+            "games": 294,
+            "winRate": 46.26
+          },
+          {
+            "civ": "gurjaras",
+            "games": 226,
+            "winRate": 46.02
+          },
+          {
+            "civ": "portuguese",
+            "games": 258,
+            "winRate": 43.8
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "ethiopians",
+            "games": 136,
+            "winRate": 69.85
+          },
+          {
+            "civ": "italians",
+            "games": 104,
+            "winRate": 67.31
+          },
+          {
+            "civ": "byzantines",
+            "games": 143,
+            "winRate": 67.13
+          },
+          {
+            "civ": "romans",
+            "games": 109,
+            "winRate": 66.97
+          },
+          {
+            "civ": "goths",
+            "games": 63,
+            "winRate": 66.67
+          },
+          {
+            "civ": "aztecs",
+            "games": 142,
+            "winRate": 66.2
+          },
+          {
+            "civ": "jurchens",
+            "games": 137,
+            "winRate": 65.69
+          },
+          {
+            "civ": "spanish",
+            "games": 133,
+            "winRate": 65.41
+          },
+          {
+            "civ": "armenians",
+            "games": 94,
+            "winRate": 64.89
+          },
+          {
+            "civ": "huns",
+            "games": 65,
+            "winRate": 64.62
+          },
+          {
+            "civ": "lithuanians",
+            "games": 107,
+            "winRate": 64.49
+          },
+          {
+            "civ": "incas",
+            "games": 70,
+            "winRate": 64.29
+          },
+          {
+            "civ": "burgundians",
+            "games": 151,
+            "winRate": 64.24
+          },
+          {
+            "civ": "berbers",
+            "games": 273,
+            "winRate": 64.1
+          },
+          {
+            "civ": "tatars",
+            "games": 64,
+            "winRate": 64.06
+          },
+          {
+            "civ": "burmese",
+            "games": 74,
+            "winRate": 63.51
+          },
+          {
+            "civ": "magyars",
+            "games": 69,
+            "winRate": 62.32
+          },
+          {
+            "civ": "cumans",
+            "games": 79,
+            "winRate": 62.03
+          },
+          {
+            "civ": "wu",
+            "games": 76,
+            "winRate": 61.84
+          },
+          {
+            "civ": "malians",
+            "games": 88,
+            "winRate": 61.36
+          },
+          {
+            "civ": "malay",
+            "games": 64,
+            "winRate": 60.94
+          },
+          {
+            "civ": "saracens",
+            "games": 112,
+            "winRate": 60.71
+          },
+          {
+            "civ": "vietnamese",
+            "games": 188,
+            "winRate": 60.64
+          },
+          {
+            "civ": "japanese",
+            "games": 106,
+            "winRate": 60.38
+          },
+          {
+            "civ": "bulgarians",
+            "games": 109,
+            "winRate": 58.72
+          },
+          {
+            "civ": "gurjaras",
+            "games": 82,
+            "winRate": 58.54
+          },
+          {
+            "civ": "bohemians",
+            "games": 146,
+            "winRate": 57.53
+          },
+          {
+            "civ": "khmer",
+            "games": 61,
+            "winRate": 57.38
+          },
+          {
+            "civ": "mongols",
+            "games": 112,
+            "winRate": 57.14
+          },
+          {
+            "civ": "mayans",
+            "games": 70,
+            "winRate": 57.14
+          },
+          {
+            "civ": "britons",
+            "games": 71,
+            "winRate": 56.34
+          },
+          {
+            "civ": "dravidians",
+            "games": 94,
+            "winRate": 55.32
+          },
+          {
+            "civ": "chinese",
+            "games": 116,
+            "winRate": 54.31
+          },
+          {
+            "civ": "hindustanis",
+            "games": 93,
+            "winRate": 53.76
+          },
+          {
+            "civ": "bengalis",
+            "games": 80,
+            "winRate": 53.75
+          },
+          {
+            "civ": "portuguese",
+            "games": 88,
+            "winRate": 53.41
+          },
+          {
+            "civ": "turks",
+            "games": 62,
+            "winRate": 53.23
+          },
+          {
+            "civ": "sicilians",
+            "games": 82,
+            "winRate": 50
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "chinese",
+            "games": 124,
+            "winRate": 48.39
+          },
+          {
+            "civ": "malay",
+            "games": 66,
+            "winRate": 46.97
+          },
+          {
+            "civ": "armenians",
+            "games": 80,
+            "winRate": 46.25
+          },
+          {
+            "civ": "spanish",
+            "games": 166,
+            "winRate": 45.78
+          },
+          {
+            "civ": "bengalis",
+            "games": 181,
+            "winRate": 44.2
+          },
+          {
+            "civ": "berbers",
+            "games": 174,
+            "winRate": 42.53
+          },
+          {
+            "civ": "sicilians",
+            "games": 120,
+            "winRate": 42.5
+          },
+          {
+            "civ": "hindustanis",
+            "games": 77,
+            "winRate": 41.56
+          },
+          {
+            "civ": "aztecs",
+            "games": 316,
+            "winRate": 41.46
+          },
+          {
+            "civ": "vikings",
+            "games": 132,
+            "winRate": 40.91
+          },
+          {
+            "civ": "khmer",
+            "games": 76,
+            "winRate": 40.79
+          },
+          {
+            "civ": "byzantines",
+            "games": 167,
+            "winRate": 40.72
+          },
+          {
+            "civ": "lithuanians",
+            "games": 116,
+            "winRate": 40.52
+          },
+          {
+            "civ": "britons",
+            "games": 79,
+            "winRate": 40.51
+          },
+          {
+            "civ": "slavs",
+            "games": 128,
+            "winRate": 39.84
+          },
+          {
+            "civ": "italians",
+            "games": 159,
+            "winRate": 39.62
+          },
+          {
+            "civ": "huns",
+            "games": 127,
+            "winRate": 39.37
+          },
+          {
+            "civ": "cumans",
+            "games": 168,
+            "winRate": 38.69
+          },
+          {
+            "civ": "teutons",
+            "games": 92,
+            "winRate": 38.04
+          },
+          {
+            "civ": "gurjaras",
+            "games": 119,
+            "winRate": 37.82
+          },
+          {
+            "civ": "mongols",
+            "games": 143,
+            "winRate": 37.76
+          },
+          {
+            "civ": "bulgarians",
+            "games": 196,
+            "winRate": 37.76
+          },
+          {
+            "civ": "bohemians",
+            "games": 232,
+            "winRate": 37.5
+          },
+          {
+            "civ": "saracens",
+            "games": 139,
+            "winRate": 37.41
+          },
+          {
+            "civ": "romans",
+            "games": 128,
+            "winRate": 36.72
+          },
+          {
+            "civ": "portuguese",
+            "games": 144,
+            "winRate": 36.11
+          },
+          {
+            "civ": "jurchens",
+            "games": 61,
+            "winRate": 36.07
+          },
+          {
+            "civ": "vietnamese",
+            "games": 220,
+            "winRate": 35
+          },
+          {
+            "civ": "burmese",
+            "games": 72,
+            "winRate": 34.72
+          },
+          {
+            "civ": "ethiopians",
+            "games": 122,
+            "winRate": 34.43
+          },
+          {
+            "civ": "burgundians",
+            "games": 99,
+            "winRate": 34.34
+          },
+          {
+            "civ": "dravidians",
+            "games": 76,
+            "winRate": 34.21
+          },
+          {
+            "civ": "turks",
+            "games": 79,
+            "winRate": 34.18
+          },
+          {
+            "civ": "magyars",
+            "games": 105,
+            "winRate": 33.33
+          },
+          {
+            "civ": "malians",
+            "games": 92,
+            "winRate": 31.52
+          },
+          {
+            "civ": "japanese",
+            "games": 156,
+            "winRate": 31.41
+          },
+          {
+            "civ": "poles",
+            "games": 77,
+            "winRate": 31.17
+          },
+          {
+            "civ": "incas",
+            "games": 62,
+            "winRate": 29.03
+          },
+          {
+            "civ": "tatars",
+            "games": 90,
+            "winRate": 24.44
+          },
+          {
+            "civ": "goths",
+            "games": 64,
+            "winRate": 20.31
+          }
+        ]
+      },
+      "team": null
+    },
+    "sandrift": {
+      "games": {
+        "1v1": 6947,
+        "team": 0
+      },
+      "1v1": {
+        "all": [
+          {
+            "civ": "italians",
+            "games": 283,
+            "winRate": 57.95
+          },
+          {
+            "civ": "berbers",
+            "games": 428,
+            "winRate": 57.01
+          },
+          {
+            "civ": "saracens",
+            "games": 233,
+            "winRate": 56.22
+          },
+          {
+            "civ": "burgundians",
+            "games": 356,
+            "winRate": 56.18
+          },
+          {
+            "civ": "cumans",
+            "games": 206,
+            "winRate": 48.54
+          },
+          {
+            "civ": "aztecs",
+            "games": 339,
+            "winRate": 46.9
+          },
+          {
+            "civ": "mongols",
+            "games": 213,
+            "winRate": 46.01
+          },
+          {
+            "civ": "vietnamese",
+            "games": 261,
+            "winRate": 45.98
+          },
+          {
+            "civ": "bohemians",
+            "games": 206,
+            "winRate": 45.63
+          },
+          {
+            "civ": "portuguese",
+            "games": 202,
+            "winRate": 43.56
+          }
+        ],
+        "1200-1399": [
+          {
+            "civ": "burgundians",
+            "games": 67,
+            "winRate": 68.66
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "italians",
+            "games": 128,
+            "winRate": 69.53
+          },
+          {
+            "civ": "saracens",
+            "games": 87,
+            "winRate": 66.67
+          },
+          {
+            "civ": "cumans",
+            "games": 84,
+            "winRate": 65.48
+          },
+          {
+            "civ": "britons",
+            "games": 72,
+            "winRate": 65.28
+          },
+          {
+            "civ": "dravidians",
+            "games": 66,
+            "winRate": 63.64
+          },
+          {
+            "civ": "berbers",
+            "games": 249,
+            "winRate": 63.45
+          },
+          {
+            "civ": "bohemians",
+            "games": 75,
+            "winRate": 62.67
+          },
+          {
+            "civ": "burgundians",
+            "games": 161,
+            "winRate": 62.11
+          },
+          {
+            "civ": "hindustanis",
+            "games": 86,
+            "winRate": 61.63
+          },
+          {
+            "civ": "aztecs",
+            "games": 127,
+            "winRate": 61.42
+          },
+          {
+            "civ": "chinese",
+            "games": 75,
+            "winRate": 60
+          },
+          {
+            "civ": "bengalis",
+            "games": 60,
+            "winRate": 58.33
+          },
+          {
+            "civ": "goths",
+            "games": 68,
+            "winRate": 57.35
+          },
+          {
+            "civ": "portuguese",
+            "games": 85,
+            "winRate": 56.47
+          },
+          {
+            "civ": "japanese",
+            "games": 68,
+            "winRate": 55.88
+          },
+          {
+            "civ": "spanish",
+            "games": 76,
+            "winRate": 55.26
+          },
+          {
+            "civ": "vietnamese",
+            "games": 132,
+            "winRate": 54.55
+          },
+          {
+            "civ": "burmese",
+            "games": 79,
+            "winRate": 54.43
+          },
+          {
+            "civ": "gurjaras",
+            "games": 70,
+            "winRate": 54.29
+          },
+          {
+            "civ": "mongols",
+            "games": 83,
+            "winRate": 53.01
+          },
+          {
+            "civ": "mayans",
+            "games": 66,
+            "winRate": 51.52
+          },
+          {
+            "civ": "sicilians",
+            "games": 68,
+            "winRate": 50
+          },
+          {
+            "civ": "malians",
+            "games": 60,
+            "winRate": 46.67
+          },
+          {
+            "civ": "bulgarians",
+            "games": 65,
+            "winRate": 44.62
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "spanish",
+            "games": 93,
+            "winRate": 46.24
+          },
+          {
+            "civ": "lithuanians",
+            "games": 63,
+            "winRate": 44.44
+          },
+          {
+            "civ": "chinese",
+            "games": 77,
+            "winRate": 42.86
+          },
+          {
+            "civ": "saracens",
+            "games": 104,
+            "winRate": 41.35
+          },
+          {
+            "civ": "huns",
+            "games": 93,
+            "winRate": 39.78
+          },
+          {
+            "civ": "italians",
+            "games": 116,
+            "winRate": 39.66
+          },
+          {
+            "civ": "bulgarians",
+            "games": 101,
+            "winRate": 39.6
+          },
+          {
+            "civ": "berbers",
+            "games": 123,
+            "winRate": 39.02
+          },
+          {
+            "civ": "mongols",
+            "games": 99,
+            "winRate": 37.37
+          },
+          {
+            "civ": "aztecs",
+            "games": 184,
+            "winRate": 34.24
+          },
+          {
+            "civ": "bohemians",
+            "games": 116,
+            "winRate": 33.62
+          },
+          {
+            "civ": "burgundians",
+            "games": 100,
+            "winRate": 33
+          },
+          {
+            "civ": "vietnamese",
+            "games": 101,
+            "winRate": 30.69
+          },
+          {
+            "civ": "portuguese",
+            "games": 98,
+            "winRate": 30.61
+          },
+          {
+            "civ": "malians",
+            "games": 63,
+            "winRate": 30.16
+          },
+          {
+            "civ": "bengalis",
+            "games": 97,
+            "winRate": 29.9
+          },
+          {
+            "civ": "burmese",
+            "games": 64,
+            "winRate": 29.69
+          },
+          {
+            "civ": "cumans",
+            "games": 91,
+            "winRate": 27.47
+          },
+          {
+            "civ": "japanese",
+            "games": 68,
+            "winRate": 26.47
+          }
+        ]
+      },
+      "team": null
+    },
+    "border_dispute": {
+      "games": {
+        "1v1": 29262,
+        "team": 0
+      },
+      "1v1": {
+        "all": [
+          {
+            "civ": "wei",
+            "games": 247,
+            "winRate": 56.28
+          },
+          {
+            "civ": "sicilians",
+            "games": 605,
+            "winRate": 55.21
+          },
+          {
+            "civ": "slavs",
+            "games": 720,
+            "winRate": 53.61
+          },
+          {
+            "civ": "chinese",
+            "games": 639,
+            "winRate": 53.05
+          },
+          {
+            "civ": "khmer",
+            "games": 284,
+            "winRate": 52.82
+          },
+          {
+            "civ": "vietnamese",
+            "games": 2037,
+            "winRate": 52.77
+          },
+          {
+            "civ": "italians",
+            "games": 715,
+            "winRate": 52.59
+          },
+          {
+            "civ": "vikings",
+            "games": 643,
+            "winRate": 52.41
+          },
+          {
+            "civ": "bohemians",
+            "games": 950,
+            "winRate": 52.21
+          },
+          {
+            "civ": "franks",
+            "games": 228,
+            "winRate": 52.19
+          },
+          {
+            "civ": "armenians",
+            "games": 397,
+            "winRate": 52.14
+          },
+          {
+            "civ": "malians",
+            "games": 689,
+            "winRate": 52.1
+          },
+          {
+            "civ": "berbers",
+            "games": 1190,
+            "winRate": 52.02
+          },
+          {
+            "civ": "burgundians",
+            "games": 354,
+            "winRate": 51.98
+          },
+          {
+            "civ": "britons",
+            "games": 436,
+            "winRate": 51.83
+          },
+          {
+            "civ": "tatars",
+            "games": 455,
+            "winRate": 51.65
+          },
+          {
+            "civ": "romans",
+            "games": 1013,
+            "winRate": 51.63
+          },
+          {
+            "civ": "poles",
+            "games": 291,
+            "winRate": 51.2
+          },
+          {
+            "civ": "wu",
+            "games": 341,
+            "winRate": 51.03
+          },
+          {
+            "civ": "spanish",
+            "games": 838,
+            "winRate": 50.84
+          },
+          {
+            "civ": "ethiopians",
+            "games": 419,
+            "winRate": 50.36
+          },
+          {
+            "civ": "lithuanians",
+            "games": 497,
+            "winRate": 50.3
+          },
+          {
+            "civ": "gurjaras",
+            "games": 641,
+            "winRate": 50.23
+          },
+          {
+            "civ": "teutons",
+            "games": 603,
+            "winRate": 50.08
+          },
+          {
+            "civ": "turks",
+            "games": 522,
+            "winRate": 50
+          },
+          {
+            "civ": "huns",
+            "games": 909,
+            "winRate": 49.72
+          },
+          {
+            "civ": "burmese",
+            "games": 505,
+            "winRate": 49.5
+          },
+          {
+            "civ": "dravidians",
+            "games": 346,
+            "winRate": 49.42
+          },
+          {
+            "civ": "goths",
+            "games": 359,
+            "winRate": 49.3
+          },
+          {
+            "civ": "portuguese",
+            "games": 968,
+            "winRate": 49.28
+          },
+          {
+            "civ": "byzantines",
+            "games": 625,
+            "winRate": 48.96
+          },
+          {
+            "civ": "jurchens",
+            "games": 215,
+            "winRate": 48.37
+          },
+          {
+            "civ": "persians",
+            "games": 236,
+            "winRate": 48.31
+          },
+          {
+            "civ": "bulgarians",
+            "games": 1026,
+            "winRate": 48.05
+          },
+          {
+            "civ": "malay",
+            "games": 338,
+            "winRate": 47.93
+          },
+          {
+            "civ": "aztecs",
+            "games": 1719,
+            "winRate": 47.7
+          },
+          {
+            "civ": "mayans",
+            "games": 215,
+            "winRate": 46.98
+          },
+          {
+            "civ": "cumans",
+            "games": 534,
+            "winRate": 46.82
+          },
+          {
+            "civ": "incas",
+            "games": 428,
+            "winRate": 46.5
+          },
+          {
+            "civ": "hindustanis",
+            "games": 466,
+            "winRate": 46.14
+          },
+          {
+            "civ": "saracens",
+            "games": 775,
+            "winRate": 45.81
+          },
+          {
+            "civ": "bengalis",
+            "games": 761,
+            "winRate": 45.73
+          },
+          {
+            "civ": "koreans",
+            "games": 303,
+            "winRate": 45.54
+          },
+          {
+            "civ": "japanese",
+            "games": 961,
+            "winRate": 45.47
+          },
+          {
+            "civ": "mongols",
+            "games": 617,
+            "winRate": 45.06
+          },
+          {
+            "civ": "magyars",
+            "games": 428,
+            "winRate": 44.16
+          },
+          {
+            "civ": "celts",
+            "games": 235,
+            "winRate": 41.7
+          }
+        ],
+        "1000-1199": [
+          {
+            "civ": "poles",
+            "games": 63,
+            "winRate": 61.9
+          },
+          {
+            "civ": "chinese",
+            "games": 160,
+            "winRate": 61.25
+          },
+          {
+            "civ": "goths",
+            "games": 95,
+            "winRate": 61.05
+          },
+          {
+            "civ": "persians",
+            "games": 75,
+            "winRate": 60
+          },
+          {
+            "civ": "malians",
+            "games": 207,
+            "winRate": 59.42
+          },
+          {
+            "civ": "burgundians",
+            "games": 100,
+            "winRate": 59
+          },
+          {
+            "civ": "armenians",
+            "games": 116,
+            "winRate": 58.62
+          },
+          {
+            "civ": "slavs",
+            "games": 198,
+            "winRate": 58.59
+          },
+          {
+            "civ": "italians",
+            "games": 182,
+            "winRate": 58.24
+          },
+          {
+            "civ": "khmer",
+            "games": 78,
+            "winRate": 57.69
+          },
+          {
+            "civ": "tatars",
+            "games": 120,
+            "winRate": 57.5
+          },
+          {
+            "civ": "turks",
+            "games": 129,
+            "winRate": 57.36
+          },
+          {
+            "civ": "gurjaras",
+            "games": 154,
+            "winRate": 57.14
+          },
+          {
+            "civ": "franks",
+            "games": 62,
+            "winRate": 56.45
+          },
+          {
+            "civ": "lithuanians",
+            "games": 140,
+            "winRate": 56.43
+          },
+          {
+            "civ": "britons",
+            "games": 104,
+            "winRate": 55.77
+          },
+          {
+            "civ": "berbers",
+            "games": 382,
+            "winRate": 55.24
+          },
+          {
+            "civ": "spanish",
+            "games": 239,
+            "winRate": 55.23
+          },
+          {
+            "civ": "vietnamese",
+            "games": 671,
+            "winRate": 54.69
+          },
+          {
+            "civ": "vikings",
+            "games": 171,
+            "winRate": 54.39
+          },
+          {
+            "civ": "romans",
+            "games": 276,
+            "winRate": 54.35
+          },
+          {
+            "civ": "sicilians",
+            "games": 142,
+            "winRate": 54.23
+          },
+          {
+            "civ": "burmese",
+            "games": 125,
+            "winRate": 53.6
+          },
+          {
+            "civ": "mongols",
+            "games": 148,
+            "winRate": 53.38
+          },
+          {
+            "civ": "teutons",
+            "games": 154,
+            "winRate": 53.25
+          },
+          {
+            "civ": "huns",
+            "games": 243,
+            "winRate": 53.09
+          },
+          {
+            "civ": "aztecs",
+            "games": 389,
+            "winRate": 52.96
+          },
+          {
+            "civ": "portuguese",
+            "games": 227,
+            "winRate": 52.86
+          },
+          {
+            "civ": "japanese",
+            "games": 174,
+            "winRate": 52.3
+          },
+          {
+            "civ": "bulgarians",
+            "games": 287,
+            "winRate": 52.26
+          },
+          {
+            "civ": "wu",
+            "games": 104,
+            "winRate": 51.92
+          },
+          {
+            "civ": "bohemians",
+            "games": 223,
+            "winRate": 51.57
+          },
+          {
+            "civ": "incas",
+            "games": 110,
+            "winRate": 50.91
+          },
+          {
+            "civ": "saracens",
+            "games": 198,
+            "winRate": 50
+          },
+          {
+            "civ": "byzantines",
+            "games": 148,
+            "winRate": 50
+          },
+          {
+            "civ": "ethiopians",
+            "games": 123,
+            "winRate": 48.78
+          },
+          {
+            "civ": "jurchens",
+            "games": 68,
+            "winRate": 48.53
+          },
+          {
+            "civ": "dravidians",
+            "games": 88,
+            "winRate": 47.73
+          },
+          {
+            "civ": "malay",
+            "games": 88,
+            "winRate": 47.73
+          },
+          {
+            "civ": "bengalis",
+            "games": 181,
+            "winRate": 45.3
+          },
+          {
+            "civ": "magyars",
+            "games": 127,
+            "winRate": 44.88
+          },
+          {
+            "civ": "cumans",
+            "games": 111,
+            "winRate": 44.14
+          },
+          {
+            "civ": "hindustanis",
+            "games": 130,
+            "winRate": 41.54
+          },
+          {
+            "civ": "koreans",
+            "games": 77,
+            "winRate": 40.26
+          }
+        ],
+        "1400-1649": [
+          {
+            "civ": "romans",
+            "games": 62,
+            "winRate": 58.06
+          },
+          {
+            "civ": "vietnamese",
+            "games": 152,
+            "winRate": 54.61
+          },
+          {
+            "civ": "berbers",
+            "games": 72,
+            "winRate": 51.39
+          },
+          {
+            "civ": "spanish",
+            "games": 67,
+            "winRate": 46.27
+          }
+        ],
+        "<1000": [
+          {
+            "civ": "jurchens",
+            "games": 73,
+            "winRate": 54.79
+          },
+          {
+            "civ": "sicilians",
+            "games": 365,
+            "winRate": 53.15
+          },
+          {
+            "civ": "bohemians",
+            "games": 578,
+            "winRate": 51.9
+          },
+          {
+            "civ": "berbers",
+            "games": 521,
+            "winRate": 50.48
+          },
+          {
+            "civ": "lithuanians",
+            "games": 255,
+            "winRate": 50.2
+          },
+          {
+            "civ": "dravidians",
+            "games": 167,
+            "winRate": 49.7
+          },
+          {
+            "civ": "britons",
+            "games": 230,
+            "winRate": 49.57
+          },
+          {
+            "civ": "italians",
+            "games": 419,
+            "winRate": 49.4
+          },
+          {
+            "civ": "huns",
+            "games": 450,
+            "winRate": 49.11
+          },
+          {
+            "civ": "mayans",
+            "games": 98,
+            "winRate": 48.98
+          },
+          {
+            "civ": "vietnamese",
+            "games": 838,
+            "winRate": 48.93
+          },
+          {
+            "civ": "burgundians",
+            "games": 170,
+            "winRate": 48.82
+          },
+          {
+            "civ": "teutons",
+            "games": 336,
+            "winRate": 48.81
+          },
+          {
+            "civ": "wu",
+            "games": 134,
+            "winRate": 48.51
+          },
+          {
+            "civ": "wei",
+            "games": 97,
+            "winRate": 48.45
+          },
+          {
+            "civ": "khmer",
+            "games": 128,
+            "winRate": 48.44
+          },
+          {
+            "civ": "tatars",
+            "games": 252,
+            "winRate": 48.41
+          },
+          {
+            "civ": "ethiopians",
+            "games": 177,
+            "winRate": 48.02
+          },
+          {
+            "civ": "byzantines",
+            "games": 363,
+            "winRate": 47.93
+          },
+          {
+            "civ": "spanish",
+            "games": 395,
+            "winRate": 47.59
+          },
+          {
+            "civ": "malians",
+            "games": 380,
+            "winRate": 47.37
+          },
+          {
+            "civ": "hindustanis",
+            "games": 224,
+            "winRate": 47.32
+          },
+          {
+            "civ": "romans",
+            "games": 523,
+            "winRate": 47.23
+          },
+          {
+            "civ": "vikings",
+            "games": 272,
+            "winRate": 47.06
+          },
+          {
+            "civ": "malay",
+            "games": 156,
+            "winRate": 46.79
+          },
+          {
+            "civ": "muisca",
+            "games": 73,
+            "winRate": 46.58
+          },
+          {
+            "civ": "slavs",
+            "games": 338,
+            "winRate": 46.45
+          },
+          {
+            "civ": "persians",
+            "games": 97,
+            "winRate": 46.39
+          },
+          {
+            "civ": "poles",
+            "games": 149,
+            "winRate": 46.31
+          },
+          {
+            "civ": "chinese",
+            "games": 365,
+            "winRate": 46.03
+          },
+          {
+            "civ": "portuguese",
+            "games": 551,
+            "winRate": 45.92
+          },
+          {
+            "civ": "turks",
+            "games": 306,
+            "winRate": 45.75
+          },
+          {
+            "civ": "aztecs",
+            "games": 1164,
+            "winRate": 45.45
+          },
+          {
+            "civ": "tupi",
+            "games": 66,
+            "winRate": 45.45
+          },
+          {
+            "civ": "burmese",
+            "games": 245,
+            "winRate": 45.31
+          },
+          {
+            "civ": "gurjaras",
+            "games": 392,
+            "winRate": 45.15
+          },
+          {
+            "civ": "koreans",
+            "games": 152,
+            "winRate": 44.74
+          },
+          {
+            "civ": "cumans",
+            "games": 312,
+            "winRate": 44.55
+          },
+          {
+            "civ": "armenians",
+            "games": 205,
+            "winRate": 44.39
+          },
+          {
+            "civ": "incas",
+            "games": 216,
+            "winRate": 43.98
+          },
+          {
+            "civ": "bengalis",
+            "games": 474,
+            "winRate": 43.88
+          },
+          {
+            "civ": "franks",
+            "games": 110,
+            "winRate": 43.64
+          },
+          {
+            "civ": "bulgarians",
+            "games": 536,
+            "winRate": 42.54
+          },
+          {
+            "civ": "japanese",
+            "games": 685,
+            "winRate": 41.75
+          },
+          {
+            "civ": "magyars",
+            "games": 226,
+            "winRate": 41.59
+          },
+          {
+            "civ": "goths",
+            "games": 158,
+            "winRate": 41.14
+          },
+          {
+            "civ": "saracens",
+            "games": 462,
+            "winRate": 41.13
+          },
+          {
+            "civ": "mongols",
+            "games": 351,
+            "winRate": 39.6
+          },
+          {
+            "civ": "celts",
+            "games": 121,
+            "winRate": 33.88
+          }
+        ],
+        "1200-1399": [
+          {
+            "civ": "cumans",
+            "games": 63,
+            "winRate": 63.49
+          },
+          {
+            "civ": "chinese",
+            "games": 72,
+            "winRate": 62.5
+          },
+          {
+            "civ": "slavs",
+            "games": 124,
+            "winRate": 62.1
+          },
+          {
+            "civ": "saracens",
+            "games": 67,
+            "winRate": 59.7
+          },
+          {
+            "civ": "teutons",
+            "games": 61,
+            "winRate": 59.02
+          },
+          {
+            "civ": "romans",
+            "games": 130,
+            "winRate": 58.46
+          },
+          {
+            "civ": "wu",
+            "games": 62,
+            "winRate": 58.06
+          },
+          {
+            "civ": "mongols",
+            "games": 69,
+            "winRate": 57.97
+          },
+          {
+            "civ": "japanese",
+            "games": 72,
+            "winRate": 56.94
+          },
+          {
+            "civ": "portuguese",
+            "games": 111,
+            "winRate": 56.76
+          },
+          {
+            "civ": "bulgarians",
+            "games": 141,
+            "winRate": 56.74
+          },
+          {
+            "civ": "spanish",
+            "games": 129,
+            "winRate": 56.59
+          },
+          {
+            "civ": "vietnamese",
+            "games": 324,
+            "winRate": 56.17
+          },
+          {
+            "civ": "malians",
+            "games": 60,
+            "winRate": 55
+          },
+          {
+            "civ": "italians",
+            "games": 62,
+            "winRate": 53.23
+          },
+          {
+            "civ": "aztecs",
+            "games": 125,
+            "winRate": 52
+          },
+          {
+            "civ": "burmese",
+            "games": 81,
+            "winRate": 51.85
+          },
+          {
+            "civ": "bohemians",
+            "games": 76,
+            "winRate": 50
+          },
+          {
+            "civ": "ethiopians",
+            "games": 67,
+            "winRate": 49.25
+          },
+          {
+            "civ": "berbers",
+            "games": 189,
+            "winRate": 48.68
+          },
+          {
+            "civ": "huns",
+            "games": 145,
+            "winRate": 48.28
+          },
+          {
+            "civ": "hindustanis",
+            "games": 75,
+            "winRate": 48
+          },
+          {
+            "civ": "vikings",
+            "games": 109,
+            "winRate": 47.71
+          },
+          {
+            "civ": "goths",
+            "games": 67,
+            "winRate": 43.28
+          },
+          {
+            "civ": "lithuanians",
+            "games": 70,
+            "winRate": 42.86
+          }
+        ]
+      },
+      "team": null
     }
   }
 }
