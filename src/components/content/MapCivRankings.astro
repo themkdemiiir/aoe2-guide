@@ -5,6 +5,7 @@
 // matrix is embedded and the rows are rendered client-side (10 buckets × 2
 // ladders is far too much to ship as static HTML). Bilingual.
 import mapMeta from "@data/map-meta.json";
+import civMeta from "@data/civ-meta.json";
 import iconMap from "@data/icon-map.json";
 import { getCollection } from "astro:content";
 import { localizedPath, t } from "@/i18n/utils";
@@ -46,10 +47,20 @@ const defaultLadder = has1v1 ? "1v1" : "team";
 const availBuckets = eloBuckets.filter((b) => LADDERS.some((l) => data[l]?.[b]?.length));
 const hasAny = availBuckets.length > 0;
 
+// Every civ needs name+icon: a cube-derived patch slice may surface civs absent
+// from the embedded all-time matrix.
+for (const [id, nm] of civNames) if (!civInfo[id]) civInfo[id] = [nm, civIcons[id] ?? ""];
+// Patch dimension (1v1 only — the cube is 1v1). The cube's map key == the
+// map-meta key, so patch slices line up with the rest of the page.
+const patches = (civMeta.patches as { patch: string; label: string }[]) ?? [];
+const hasPatch = has1v1 && patches.length > 0;
+
 const labels = {
   team: tr ? "Takım" : "Team",
   allElo: tr ? "Tüm Elo" : "All Elo",
+  allTime: tr ? "Tüm zamanlar" : "All-time",
   civBase: localizedPath("/civs/", lang),
+  cubeKey: key ?? "",
 };
 
 // Server-rendered default view (default ladder, "all" bucket) so the rankings
@@ -84,6 +95,12 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
         <select data-elo aria-label={tr ? "Elo" : "Elo"} class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
           {availBuckets.map((b) => <option value={b}>{b === "all" ? labels.allElo : b}</option>)}
         </select>
+        {hasPatch && (
+          <select data-patch aria-label={tr ? "Yama" : "Patch"} class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
+            <option value="">{labels.allTime}</option>
+            {patches.map((p, i) => <option value={p.patch}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>)}
+          </select>
+        )}
       </div>
     </div>
 
@@ -108,7 +125,7 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
       {tr ? "Kazanma oranına göre. " : "Ranked by win rate. "}{t(lang, "data.source")}
     </p>
 
-    <script is:inline define:vars={{ data, civInfo, civBase: labels.civBase, defaultLadder }}>
+    <script is:inline define:vars={{ data, civInfo, civBase: labels.civBase, defaultLadder, cubeKey: labels.cubeKey }}>
       (() => {
         const root = document.currentScript.closest("[data-map-civs]");
         const fmt = new Intl.NumberFormat();
@@ -118,29 +135,72 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
         const nodata = root.querySelector("[data-nodata]");
         const ladderGroup = root.querySelector('[data-toggle="ladder"]');
         const eloSel = root.querySelector("[data-elo]");
-        const state = { ladder: defaultLadder, bucket: "all" };
+        const patchSel = root.querySelector("[data-patch]");
+        const state = { ladder: defaultLadder, bucket: "all", patch: "" };
 
-        function render() {
-          const rows = (data[state.ladder] && data[state.ladder][state.bucket]) || [];
+        // Patch slices come from the shared 1v1 cube (same one /civs uses).
+        let cube = null, cubeReq = null;
+        function loadCube() {
+          if (cube) return Promise.resolve(cube);
+          if (!cubeReq) cubeReq = fetch("/civ-cube.json").then((r) => r.json()).then((c) => {
+            c._mi = c.maps.indexOf(cubeKey);
+            c._ei = Object.fromEntries(c.elos.map((e, i) => [e, i]));
+            c._pi = Object.fromEntries(c.months.map((p, i) => [p.patch, i]));
+            cube = c; return c;
+          });
+          return cubeReq;
+        }
+        function cubeRows(bucket, patch) {
+          if (cube._mi < 0) return [];
+          const eIdx = bucket === "all" ? -1 : (cube._ei[bucket] ?? -2);
+          const pIdx = cube._pi[patch];
+          if (eIdx === -2 || pIdx == null) return [];
+          const agg = {};
+          for (const r of cube.rows) {
+            if (r[2] !== cube._mi) continue;
+            if (eIdx >= 0 && r[1] !== eIdx) continue;
+            if (r[3] !== pIdx) continue;
+            const a = (agg[r[0]] ??= [0, 0]); a[0] += r[4]; a[1] += r[5];
+          }
+          return Object.entries(agg)
+            .map(([ci, gw]) => [cube.civs[ci], gw[0], +((gw[1] / gw[0]) * 100).toFixed(2)])
+            .filter((r) => r[1] >= 20)
+            .sort((a, b) => b[2] - a[2]);
+        }
+
+        function rowHtml(r, i) {
+          const slug = r[0], games = r[1], wr = r[2];
+          const info = civInfo[slug] || [slug, ""];
+          const good = wr >= 50;
+          return '<li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">'
+            + '<span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">' + (i + 1) + '</span>'
+            + (info[1] ? '<img src="' + esc(info[1]) + '" alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none"/>' : '<span class="h-[26px] w-[26px] flex-none"></span>')
+            + '<a href="' + esc(civBase + slug) + '" class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">' + esc(info[0]) + '</a>'
+            + '<span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style="width:' + fill(wr) + '%;background:' + (good ? "#c79a3c" : "#8a2d22") + '"></span></span>'
+            + '<span class="w-14 flex-none text-right font-mono text-sm font-medium" style="color:' + (good ? "#8a6a1f" : "#8a2d22") + '">' + wr + '%</span>'
+            + '<span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">' + fmt.format(games) + '</span>'
+            + '</li>';
+        }
+        function paint(rows) {
           nodata.hidden = rows.length > 0;
-          list.innerHTML = rows.map((r, i) => {
-            const slug = r[0], games = r[1], wr = r[2];
-            const info = civInfo[slug] || [slug, ""];
-            const good = wr >= 50;
-            return '<li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">'
-              + '<span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">' + (i + 1) + '</span>'
-              + (info[1] ? '<img src="' + esc(info[1]) + '" alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none"/>' : '<span class="h-[26px] w-[26px] flex-none"></span>')
-              + '<a href="' + esc(civBase + slug) + '" class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">' + esc(info[0]) + '</a>'
-              + '<span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style="width:' + fill(wr) + '%;background:' + (good ? "#c79a3c" : "#8a2d22") + '"></span></span>'
-              + '<span class="w-14 flex-none text-right font-mono text-sm font-medium" style="color:' + (good ? "#8a6a1f" : "#8a2d22") + '">' + wr + '%</span>'
-              + '<span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">' + fmt.format(games) + '</span>'
-              + '</li>';
-          }).join("");
+          list.innerHTML = rows.map(rowHtml).join("");
           if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.toggleAttribute("data-on", b.dataset.val === state.ladder);
         }
 
-        if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.addEventListener("click", () => { state.ladder = b.dataset.val; render(); });
+        async function render() {
+          // Patch is 1v1-only (the cube is 1v1); hide its selector on the team ladder.
+          if (patchSel) patchSel.hidden = state.ladder !== "1v1";
+          if (state.ladder === "1v1" && state.patch) {
+            await loadCube();
+            paint(cubeRows(state.bucket, state.patch));
+          } else {
+            paint((data[state.ladder] && data[state.ladder][state.bucket]) || []);
+          }
+        }
+
+        if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.addEventListener("click", () => { state.ladder = b.dataset.val; if (state.ladder !== "1v1") state.patch = ""; render(); });
         if (eloSel) eloSel.addEventListener("change", () => { state.bucket = eloSel.value; render(); });
+        if (patchSel) patchSel.addEventListener("change", () => { state.patch = patchSel.value; render(); });
         render();
       })();
     </script>
