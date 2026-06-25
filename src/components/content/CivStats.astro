@@ -2,8 +2,9 @@
 // CivStats — real ranked stats for a civ from src/data/civ-meta.json, rendered as
 // Chart.js charts (byElo win-rate, byPatch trend, byMap performance). Bilingual.
 import civMeta from "@data/civ-meta.json";
+import cubeDims from "@data/civ-cube-dims.json";
 import { getCollection } from "astro:content";
-import { localizedPath } from "@/i18n/utils";
+import { localizedPath, t } from "@/i18n/utils";
 import type { Locale } from "@/i18n/locales";
 
 interface Props {
@@ -11,6 +12,13 @@ interface Props {
   lang: Locale;
 }
 const { slug, lang } = Astro.props;
+
+// Dropdown options for the combinable slice filter (Map × Elo × Patch). The
+// intersection is computed in the browser from the fetched cube (civ-meta only
+// has the separate marginals, which can't be combined).
+const cdims = cubeDims as { elos: string[]; maps: string[]; mapNames: string[] };
+const sliceMaps = cdims.maps.map((key, i) => ({ key, name: cdims.mapNames[i] }));
+const slicePatches = (civMeta.patches as { patch: string; label: string }[]) ?? [];
 
 type Slice = { games: number; winRate: number };
 type Ladder = {
@@ -83,6 +91,41 @@ const mapList = one
       </div>
     </div>
 
+    {/* Combinable slice filter: this civ's win rate for any Map × Elo × Patch
+        intersection, computed in-browser from the fetched cube. Hidden until JS;
+        the tiles + charts above/below stay the overall view (no-JS friendly). */}
+    <div data-civ-filter data-slug={slug} hidden class="mt-4 rounded border border-stone-700/20 bg-parchment/60 p-3">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
+        <span class="text-stone-700/80">{tr ? "Dilim" : "Slice"}</span>
+        <label class="flex items-center gap-1.5">{tr ? "Harita" : "Map"}
+          <select data-cf="map" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+            <option value="">{tr ? "Tüm haritalar" : "Any map"}</option>
+            {sliceMaps.map((m) => <option value={m.key}>{m.name}</option>)}
+          </select>
+        </label>
+        <label class="flex items-center gap-1.5">Elo
+          <select data-cf="elo" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+            <option value="">{tr ? "Tüm elo" : "Any elo"}</option>
+            {cdims.elos.map((b) => <option value={b}>{b}</option>)}
+          </select>
+        </label>
+        <label class="flex items-center gap-1.5">{tr ? "Yama" : "Patch"}
+          <select data-cf="patch" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+            <option value="">{tr ? "Tüm zamanlar" : "All-time"}</option>
+            {slicePatches.map((p, i) => <option value={p.patch}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>)}
+          </select>
+        </label>
+        <button type="button" data-cf-reset hidden class="rounded border border-stone-700/30 px-2 py-1 text-[10px] hover:border-gold-500 hover:text-gold-500">{tr ? "Sıfırla" : "Reset"}</button>
+      </div>
+      <div data-cf-load hidden class="mt-2 font-mono text-[11px] text-stone-700/60">{tr ? "veri yükleniyor…" : "loading data…"}</div>
+      <div data-cf-out hidden class="mt-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span data-cf-label class="font-mono text-[11px] text-stone-700/80"></span>
+        <span data-cf-wr class="font-display text-2xl leading-none">—</span>
+        <span data-cf-tier class="font-display text-lg font-bold leading-none"></span>
+        <span data-cf-games class="font-mono text-[11px] text-stone-700/60"></span>
+      </div>
+    </div>
+
     <div class="mt-4 grid gap-5 lg:grid-cols-2">
       {elo && (
         <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
@@ -127,7 +170,7 @@ const mapList = one
       )}
     </div>
     <p class="mt-3 font-mono text-[10px] tracking-wide text-stone-700/70">
-      {tr ? "Kaynak: aoestats.io ranked arşivi (1v1 RM). 50% = ortalama." : "Source: aoestats.io ranked archive (1v1 RM). 50% = average."}
+      {t(lang, "data.source")} · {tr ? "50% = ortalama" : "50% = average"}
     </p>
   </section>
 )}
@@ -192,5 +235,91 @@ const mapList = one
         scales: horizontal ? { x: valueAxis, y: catAxis } : { y: valueAxis, x: catAxis },
       },
     });
+  }
+
+  // --- Per-civ slice filter: this civ's win rate for any Map × Elo × Patch
+  // intersection, summed in-browser from the fetched cube. ---
+  const cf = document.querySelector<HTMLElement>("[data-civ-filter]");
+  if (cf) {
+    const isTr = document.documentElement.lang === "tr";
+    const gamesWord = isTr ? "maç" : "games";
+    const lowWord = isTr ? "yetersiz veri" : "low sample";
+    const slug = cf.dataset.slug!;
+    const q = <T extends Element>(s: string) => cf.querySelector<T>(s)!;
+    const sel = {
+      map: q<HTMLSelectElement>('[data-cf="map"]'),
+      elo: q<HTMLSelectElement>('[data-cf="elo"]'),
+      patch: q<HTMLSelectElement>('[data-cf="patch"]'),
+    };
+    const out = q<HTMLElement>("[data-cf-out]");
+    const loadEl = q<HTMLElement>("[data-cf-load]");
+    const reset = q<HTMLButtonElement>("[data-cf-reset]");
+    const elWr = q<HTMLElement>("[data-cf-wr]");
+    const elTier = q<HTMLElement>("[data-cf-tier]");
+    const elGames = q<HTMLElement>("[data-cf-games]");
+    const elLabel = q<HTMLElement>("[data-cf-label]");
+    const tierOf = (wr: number) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
+    const tierColor: Record<string, string> = { S: "#8a2d22", A: "#9a6a1e", B: "#6b5b41", C: "#7a6a4a", D: "#8a7a5a" };
+
+    type Cube = { civs: string[]; elos: string[]; maps: string[]; months: { patch: string }[]; rows: number[][]; _ci: number; _ei: Record<string, number>; _mi: Record<string, number>; _pi: Record<string, number> };
+    let cube: Cube | null = null;
+    let req: Promise<Cube> | null = null;
+    const loadCube = () => {
+      if (cube) return Promise.resolve(cube);
+      if (!req) req = fetch("/civ-cube.json").then((r) => r.json()).then((c: Cube) => {
+        c._ci = c.civs.indexOf(slug);
+        c._ei = Object.fromEntries(c.elos.map((e, i) => [e, i]));
+        c._mi = Object.fromEntries(c.maps.map((m, i) => [m, i]));
+        c._pi = Object.fromEntries(c.months.map((p, i) => [p.patch, i]));
+        cube = c; return c;
+      });
+      return req;
+    };
+    const isDefault = () => !sel.map.value && !sel.elo.value && !sel.patch.value;
+
+    async function update() {
+      reset.hidden = isDefault();
+      if (isDefault()) { out.hidden = true; return; }
+      loadEl.hidden = false;
+      const c = await loadCube();
+      loadEl.hidden = true;
+      out.hidden = false;
+      const parts: string[] = [];
+      if (sel.map.value) parts.push(sel.map.options[sel.map.selectedIndex].text);
+      if (sel.elo.value) parts.push(sel.elo.value);
+      if (sel.patch.value) parts.push(sel.patch.options[sel.patch.selectedIndex].text.replace(/^Current · |^Güncel · /, ""));
+      elLabel.textContent = parts.join(" · ");
+      const eIdx = sel.elo.value ? c._ei[sel.elo.value] : -1;
+      const mIdx = sel.map.value ? (c._mi[sel.map.value] ?? -2) : -1;
+      const pIdx = sel.patch.value ? c._pi[sel.patch.value] : -1;
+      let g = 0, w = 0;
+      if (c._ci >= 0 && mIdx !== -2) {
+        for (const r of c.rows) {
+          if (r[0] !== c._ci) continue;
+          if (eIdx >= 0 && r[1] !== eIdx) continue;
+          if (mIdx >= 0 && r[2] !== mIdx) continue;
+          if (pIdx >= 0 && r[3] !== pIdx) continue;
+          g += r[4]; w += r[5];
+        }
+      }
+      if (g > 0) {
+        const wr = +((w / g) * 100).toFixed(2);
+        const t = tierOf(wr);
+        elWr.textContent = `${wr}%`;
+        elWr.style.color = wr >= 50 ? "#8a6a1f" : "#8a2d22";
+        elTier.textContent = t;
+        elTier.style.color = tierColor[t];
+        elGames.textContent = `${g.toLocaleString()} ${gamesWord}`;
+      } else {
+        elWr.textContent = "—";
+        elWr.style.color = "";
+        elTier.textContent = "";
+        elGames.textContent = `(${lowWord})`;
+      }
+    }
+
+    for (const s of Object.values(sel)) s.addEventListener("change", update);
+    reset.addEventListener("click", () => { sel.map.value = ""; sel.elo.value = ""; sel.patch.value = ""; update(); });
+    cf.hidden = false;
   }
 </script>

@@ -7,7 +7,7 @@ import teamMatchups from "@data/civ-matchups-team.json";
 import byMapData from "@data/civ-matchups-by-map.json";
 import { getCollection } from "astro:content";
 import Icon from "@/components/ui/Icon.astro";
-import { localizedPath } from "@/i18n/utils";
+import { localizedPath, t } from "@/i18n/utils";
 import type { Locale } from "@/i18n/locales";
 
 interface Props {
@@ -103,8 +103,9 @@ const split = (rows: M[]) => [
 
     <p class="mt-3 font-mono text-[10px] tracking-wide text-stone-700/70">
       {tr
-        ? "Rakibe karşı kazanma yön puanı (50% = ortalama). Takım = rakip takımdayken; 3 diğer civ ile confound'lu. Kaynak: aoestats."
-        : "Win-rate edge vs each opponent (50% = average). Team = when the opponent is on the enemy side; confounded by the 3 other civs. Source: aoestats."}
+        ? "Rakibe karşı kazanma yön puanı (50% = ortalama). Takım = rakip takımdayken; 3 diğer civ ile confound'lu. "
+        : "Win-rate edge vs each opponent (50% = average). Team = when the opponent is on the enemy side; confounded by the 3 other civs. "}
+      {t(lang, "data.source")}
     </p>
 
     <script>

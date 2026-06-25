@@ -137,8 +137,7 @@ const serverTiers = labels.tiers
     </div>
 
     <p class="mt-4 font-mono text-[11px] tracking-wide text-stone-700/80">
-      {tr ? "Kaynak: kendi topladığımız World's Edge ranked 1v1 RM verisi · " : "Source: self-collected World's Edge ranked 1v1 RM data · "}
-      {games1v1}M+ {tr ? "maç" : "games"} · patch {latestPatch}
+      {t(lang, "data.source")} · {games1v1}M+ {tr ? "maç" : "games"} · patch {latestPatch}
     </p>
   </section>
 
