@@ -23,7 +23,8 @@ import path from "node:path";
 
 const API = "https://aoe-api.worldsedgelink.com/community/leaderboard";
 const TITLE = "age2";
-const LEADERBOARD_1V1_RM = 3; // verified: id 3 = 1v1 Random Map ranked ladder
+const LEADERBOARD_1V1_RM = 3; // verified: id 3 = SOLO_RM_RANKED (1v1 Random Map)
+const LEADERBOARD_TEAM_RM = 4; // verified via getAvailableLeaderboards: id 4 = TEAM_RM_RANKED
 
 // --- CLI args (tiny parser) ---------------------------------------------------
 const args = Object.fromEntries(
@@ -37,6 +38,11 @@ const OUT_DIR = path.resolve(args.out ?? "data-cache/relic");
 const THROTTLE_MS = Number(args.throttle ?? 120); // per-worker delay between requests
 const CONCURRENCY = Number(args.concurrency ?? 12); // parallel in-flight requests
 const PAGE = 200; // leaderboard page size
+const TEAM = !!args.team; // --team: seed the Team RM ladder + keep team-sized AUTOMATCH matches
+const LEADERBOARD = Number(args.leaderboard ?? (TEAM ? LEADERBOARD_TEAM_RM : LEADERBOARD_1V1_RM));
+// Keep predicate per mode: 1v1 = exactly 2 members; team = 4/6/8 (2v2/3v3/4v4)
+const keepBySize = (n) => (TEAM ? n >= 4 && n % 2 === 0 : n === 2);
+const MODE = TEAM ? "team RM" : "1v1 RM";
 
 // --- helpers ------------------------------------------------------------------
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -59,7 +65,7 @@ async function getJson(url, tries = 4) {
 async function fetchProfileIds(limit) {
   const ids = new Set();
   for (let start = 1; ids.size < limit; start += PAGE) {
-    const url = `${API}/getLeaderBoard2?title=${TITLE}&leaderboard_id=${LEADERBOARD_1V1_RM}&start=${start}&count=${PAGE}&sortBy=1`;
+    const url = `${API}/getLeaderBoard2?title=${TITLE}&leaderboard_id=${LEADERBOARD}&start=${start}&count=${PAGE}&sortBy=1`;
     const data = await getJson(url);
     const groups = data?.statGroups ?? [];
     if (!groups.length) break;
@@ -77,13 +83,14 @@ function normalizeMatches(history) {
   for (const m of history?.matchHistoryStats ?? []) {
     if (m.description !== "AUTOMATCH") continue; // ranked matchmaking only (drops customs/lobbies)
     const members = m.matchhistorymember ?? [];
-    if (members.length !== 2) continue; // 1v1 only
+    if (!keepBySize(members.length)) continue; // 1v1 = 2 members; team = 4/6/8 (2v2/3v3/4v4)
     out.push({
       match_id: m.id,
       completed: m.completiontime,
       gamemod_id: m.gamemod_id ?? null, // patch proxy: monotonic, date-aligned (each gamemod_id = one patch period)
       map_raw: m.mapname ?? null,
       ladder: m.matchtype_id ?? null,
+      team_size: members.length, // 2 = 1v1, 4 = 2v2, 6 = 3v3, 8 = 4v4
       players: members.map((p) => ({
         profile_id: p.profile_id,
         civ_id: p.civilization_id, // NUMERIC — mapped to slug later via a verified map
@@ -107,7 +114,7 @@ async function run() {
   const doneProfiles = new Set(ck.doneProfiles);
   const seenMatches = new Set(ck.seenMatches);
 
-  console.log(`Seeding up to ${MAX_PLAYERS} ranked profiles from the 1v1 RM ladder…`);
+  console.log(`Seeding up to ${MAX_PLAYERS} ranked profiles from the ${MODE} ladder (leaderboard_id=${LEADERBOARD})…`);
   const profileIds = await fetchProfileIds(MAX_PLAYERS);
   console.log(`Got ${profileIds.length} profiles. Crawling match history (resume: ${doneProfiles.size} already done)…`);
 
@@ -149,7 +156,7 @@ async function run() {
   await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
   await saveCk();
   process.stderr.write("\n");
-  console.log(`Done. +${newRows} new matches this run · ${seenMatches.size} unique ranked 1v1 RM matches total → ${outPath}`);
+  console.log(`Done. +${newRows} new matches this run · ${seenMatches.size} unique ranked ${MODE} matches total → ${outPath}`);
   console.log(`Next: build a VERIFIED civ-id map, then aggregate (node scripts/data-pipeline/aggregate-civmeta.mjs).`);
 }
 
