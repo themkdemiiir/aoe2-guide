@@ -2,6 +2,7 @@
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import iconMap from "@data/icon-map.json";
 import civMeta from "@data/civ-meta.json";
+import cubeDims from "@data/civ-cube-dims.json";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { localizedPath, t } from "@/i18n/utils";
@@ -15,15 +16,12 @@ const tr = lang === "tr";
 const allCivs = await getCollection("civilizations");
 const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
 
-type Slice = { games: number; winRate: number };
-type Ladder = {
-  winRate: number; games: number; tier: string;
-  byElo: Record<string, Slice>; byPatch: Record<string, Slice>;
-} | null;
+type Ladder = { winRate: number; games: number } | null;
 const meta = civMeta.civs as unknown as Record<string, { "1v1": Ladder }>;
 
-// Compact per-civ data for the client: overall + byElo + byPatch as [winRate, games].
-const compact = (o?: Slice) => (o ? [o.winRate, o.games] : null);
+// Slim per-civ payload embedded in the page: name/icon/initial + the OVERALL
+// win rate (for the default view + the no-JS fallback). All the sliced stats
+// (elo × map × patch) live in the fetched cube, not here.
 const civData = allCivs.map((c) => {
   const m = meta[c.id]?.["1v1"] ?? null;
   return {
@@ -32,28 +30,49 @@ const civData = allCivs.map((c) => {
     initial: c.data.name.en.charAt(0),
     icon: civIcons[c.id] ?? "",
     overall: m ? [m.winRate, m.games] : null,
-    byElo: m ? Object.fromEntries(Object.entries(m.byElo).map(([k, v]) => [k, compact(v)])) : {},
-    byPatch: m ? Object.fromEntries(Object.entries(m.byPatch).map(([k, v]) => [k, compact(v)])) : {},
   };
 });
 
-const eloBuckets = (civMeta.eloBuckets as string[]) ?? [];
-const patches = (civMeta.patches as { patch: string; label: string; matches: number }[]) ?? [];
 const games1v1 = Math.round((civMeta.appearances?.["1v1"] ?? 0) / 2 / 1e6);
+const patches = (civMeta.patches as { patch: string; label: string }[]) ?? [];
 const latestPatch = patches[0]?.label ?? "";
+
+// Filter dropdown options come from the cube's own dimensions, so they line up
+// exactly with what the fetched cube can answer.
+const dims = cubeDims as { elos: string[]; maps: string[]; mapNames: string[]; months: { patch: string; label: string }[] };
+const mapOptions = dims.maps.map((key, i) => ({ key, name: dims.mapNames[i] }));
+
+const SHIELD = "polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)";
+const MIN = 30; // games below this in the chosen slice → low-sample
+const tierOf = (wr: number) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
 
 const labels = {
   civBase: localizedPath("/civs/", lang),
   civs: tr ? "UYG." : "CIVS",
   nr: tr ? "YENİ / YETERSİZ VERİ" : "NEW / LOW SAMPLE",
+  loading: tr ? "veri yükleniyor…" : "loading data…",
+  rated: tr ? "değerlendirildi" : "rated",
+  reset: tr ? "Sıfırla" : "Reset",
   tiers: [
     ["S", tr ? "EN İYİ" : "TOP TIER", "#8a2d22"],
     ["A", tr ? "GÜÇLÜ" : "STRONG", "#9a6a1e"],
     ["B", tr ? "SAĞLAM" : "SOLID", "#6b5b41"],
     ["C", tr ? "DURUMA GÖRE" : "SITUATIONAL", "#7a6a4a"],
     ["D", tr ? "ZAYIF" : "WEAK", "#8a7a5a"],
-  ],
+  ] as const,
 };
+
+// --- Server-rendered DEFAULT view (Overall) so the tier list is in the static
+// HTML and works with JS off. The client re-renders only when a filter changes. ---
+const ratedCivs = civData
+  .filter((c) => c.overall && (c.overall[1] as number) >= MIN)
+  .map((c) => ({ ...c, wr: c.overall![0] as number }));
+const serverTiers = labels.tiers
+  .map(([letter, label, color]) => ({
+    letter, label, color,
+    civs: ratedCivs.filter((c) => tierOf(c.wr) === letter).sort((a, b) => b.wr - a.wr),
+  }))
+  .filter((g) => g.civs.length);
 ---
 <BaseLayout title={t(lang, "nav.civs")} canonicalPath="/civs">
   <section class="mx-auto max-w-7xl px-4 py-6 sm:py-8">
@@ -67,49 +86,111 @@ const labels = {
         : `53 civs · ${games1v1}M+ ranked 1v1 games · patch ${latestPatch}`}
     </p>
 
-    <div class="mt-3 flex flex-wrap items-center gap-3">
-      <label class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
-        {tr ? "Görünüm" : "View"}
-        <select data-lens class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
-          <option value="overall">{tr ? "Genel (tüm zaman · tüm elo)" : "Overall (all-time · all elo)"}</option>
-          <optgroup label={tr ? "Yamaya göre" : "By patch"}>
-            {patches.map((p, i) => (
-              <option value={`patch:${p.patch}`}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>
-            ))}
-          </optgroup>
-          <optgroup label={tr ? "Elo'ya göre" : "By elo"}>
-            {eloBuckets.filter((b) => b !== "all").map((b) => <option value={`elo:${b}`}>{b}</option>)}
-          </optgroup>
+    {/* --- Combinable filters: Map × Elo × Patch. All three intersect (e.g.
+         current patch + 1200 elo + Arabia). Hidden until JS reveals it — the
+         filtering fetches a static cube and runs in the browser (no server); the
+         Overall tier list below is server-rendered so the page works without JS. --- */}
+    <div data-filter hidden class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
+      <label class="flex items-center gap-1.5">{tr ? "Harita" : "Map"}
+        <select data-f="map" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <option value="">{tr ? "Tüm haritalar" : "Any map"}</option>
+          {mapOptions.map((m) => <option value={m.key}>{m.name}</option>)}
         </select>
       </label>
-      <span data-slice-note class="font-mono text-[11px] text-stone-700/60"></span>
+      <label class="flex items-center gap-1.5">Elo
+        <select data-f="elo" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <option value="">{tr ? "Tüm elo" : "Any elo"}</option>
+          {dims.elos.map((b) => <option value={b}>{b}</option>)}
+        </select>
+      </label>
+      <label class="flex items-center gap-1.5">{tr ? "Yama" : "Patch"}
+        <select data-f="patch" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <option value="">{tr ? "Tüm zamanlar" : "All-time"}</option>
+          {patches.map((p, i) => <option value={p.patch}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>)}
+        </select>
+      </label>
+      <button type="button" data-reset hidden class="rounded border border-stone-700/30 px-2 py-1 text-[10px] text-stone-700 hover:border-gold-500 hover:text-gold-500">{labels.reset}</button>
+      <span data-slice-note class="normal-case text-stone-700/60"></span>
     </div>
 
-    <div data-tierlist class="mt-4 space-y-2.5"></div>
+    <div data-tierlist class="mt-4 space-y-2.5">
+      {serverTiers.map((g) => (
+        <div class="flex overflow-hidden rounded border border-stone-700/25">
+          <div class="flex w-28 flex-none flex-col items-center justify-center px-2.5 py-4 text-center text-parchment" style={`background:${g.color}`}>
+            <span class="font-display text-4xl font-extrabold leading-none">{g.letter}</span>
+            <span class="mt-2 font-mono text-[9px] tracking-[0.12em] opacity-90">{g.label}</span>
+            <span class="mt-1 font-mono text-[9px] tracking-[0.06em] opacity-60">{String(g.civs.length).padStart(2, "0")} {labels.civs}</span>
+          </div>
+          <div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-2.5">
+            {g.civs.map((c) => (
+              <a href={`${labels.civBase}${c.slug}`} class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-1.5 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style={`border-left:3px solid ${g.color}`}>
+                <div class="flex h-9 w-7 flex-none items-center justify-center" style={`background:${g.color};clip-path:${SHIELD}`}><span class="-mt-1 font-display text-xs font-extrabold text-ember">{c.initial}</span></div>
+                <div class="min-w-0 flex-1">
+                  <div class="truncate font-display text-[15px] font-bold leading-tight text-ink">{c.name}</div>
+                  <div class="font-mono text-[10px] tracking-wide text-gold-700">{c.wr != null ? `${c.wr}%` : "—"}</div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
 
     <p class="mt-4 font-mono text-[11px] tracking-wide text-stone-700/80">
-      {tr ? "Kaynak: aoestats.io ranked 1v1 RM arşivi · " : "Source: aoestats.io ranked 1v1 RM archive · "}
+      {tr ? "Kaynak: kendi topladığımız World's Edge ranked 1v1 RM verisi · " : "Source: self-collected World's Edge ranked 1v1 RM data · "}
       {games1v1}M+ {tr ? "maç" : "games"} · patch {latestPatch}
     </p>
   </section>
 
-  <script is:inline define:vars={{ civData, labels }}>
+  <script is:inline define:vars={{ civData, labels, SHIELD, MIN }}>
     (() => {
-      const SHIELD = "polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)";
-      const MIN = 150; // games below this in the chosen slice → low-sample
-      const fmt = new Intl.NumberFormat();
       const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
       const tierOf = (wr) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
 
+      const root = document.querySelector("[data-filter]");
       const list = document.querySelector("[data-tierlist]");
-      const lensSel = document.querySelector("[data-lens]");
       const note = document.querySelector("[data-slice-note]");
-      const state = { lens: "overall" };
+      const resetBtn = root.querySelector("[data-reset]");
+      const sel = { map: root.querySelector('[data-f="map"]'), elo: root.querySelector('[data-f="elo"]'), patch: root.querySelector('[data-f="patch"]') };
 
-      function statFor(c) {
-        if (state.lens.startsWith("patch:")) return c.byPatch[state.lens.slice(6)];
-        if (state.lens.startsWith("elo:")) return c.byElo[state.lens.slice(4)];
-        return c.overall;
+      let cube = null, cubeReq = null;
+      function loadCube() {
+        if (cube) return Promise.resolve(cube);
+        if (!cubeReq) cubeReq = fetch("/civ-cube.json").then((r) => r.json()).then((c) => {
+          c._ei = Object.fromEntries(c.elos.map((e, i) => [e, i]));
+          c._mi = Object.fromEntries(c.maps.map((m, i) => [m, i]));
+          c._pi = Object.fromEntries(c.months.map((p, i) => [p.patch, i]));
+          cube = c; return c;
+        });
+        return cubeReq;
+      }
+
+      const isDefault = () => !sel.map.value && !sel.elo.value && !sel.patch.value;
+
+      // slug -> [winRate, games] for the current filter intersection
+      function sliceStats() {
+        if (isDefault()) {
+          const o = {};
+          for (const c of civData) o[c.slug] = c.overall; // [wr, games]
+          return o;
+        }
+        const eIdx = sel.elo.value ? cube._ei[sel.elo.value] : -1;
+        const mIdx = sel.map.value ? (cube._mi[sel.map.value] ?? -2) : -1; // -2 = selected map absent from cube
+        const pIdx = sel.patch.value ? cube._pi[sel.patch.value] : -1;
+        const agg = {}; // civIndex -> [g, w]
+        for (const r of cube.rows) {
+          if (eIdx >= 0 && r[1] !== eIdx) continue;
+          if (mIdx >= 0 && r[2] !== mIdx) continue;
+          if (mIdx === -2) { agg.length = 0; break; }
+          if (pIdx >= 0 && r[3] !== pIdx) continue;
+          const a = (agg[r[0]] ??= [0, 0]); a[0] += r[4]; a[1] += r[5];
+        }
+        const o = {};
+        for (const ci in agg) {
+          const slug = cube.civs[ci], g = agg[ci][0], w = agg[ci][1];
+          o[slug] = g > 0 ? [+((w / g) * 100).toFixed(2), g] : null;
+        }
+        return o;
       }
 
       function chip(c, color) {
@@ -129,10 +210,10 @@ const labels = {
         return '<div class="flex overflow-hidden rounded border ' + (dashed ? "border-dashed border-stone-700/25" : "border-stone-700/25") + '">' + block + chips + '</div>';
       }
 
-      function render() {
+      function paint(stats) {
         const rated = [], low = [];
         for (const c of civData) {
-          const s = statFor(c);
+          const s = stats[c.slug];
           if (s && s[1] >= MIN) { c._wr = s[0]; c._g = s[1]; rated.push(c); }
           else { c._wr = s ? s[0] : null; low.push(c); }
         }
@@ -144,12 +225,26 @@ const labels = {
         if (low.length) html += row("NR", labels.nr, "#8a7a5a", low.sort((a, b) => a.name.localeCompare(b.name)), true);
         list.innerHTML = html;
 
-        const slice = state.lens === "overall" ? "" : state.lens.replace("patch:", "patch ").replace("elo:", "elo ");
-        note.textContent = slice ? (rated.length + "/" + civData.length + " rated · " + slice) : "";
+        const parts = [];
+        if (sel.map.value) parts.push(sel.map.options[sel.map.selectedIndex].text);
+        if (sel.elo.value) parts.push(sel.elo.value);
+        if (sel.patch.value) parts.push(sel.patch.options[sel.patch.selectedIndex].text.replace(/^Current · |^Güncel · /, ""));
+        resetBtn.hidden = parts.length === 0;
+        note.textContent = parts.length ? (rated.length + "/" + civData.length + " " + labels.rated + " · " + parts.join(" · ")) : "";
       }
 
-      lensSel.addEventListener("change", () => { state.lens = lensSel.value; render(); });
-      render();
+      async function render() {
+        if (isDefault()) { paint(sliceStats()); return; }
+        note.textContent = labels.loading;
+        await loadCube();
+        paint(sliceStats());
+      }
+
+      for (const s of Object.values(sel)) s.addEventListener("change", render);
+      resetBtn.addEventListener("click", () => { sel.map.value = ""; sel.elo.value = ""; sel.patch.value = ""; render(); });
+
+      // Reveal the filter (needs JS); the server already rendered Overall.
+      root.hidden = false;
     })();
   </script>
 </BaseLayout>
