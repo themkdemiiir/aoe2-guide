@@ -1,90 +1,81 @@
-# AOE2 Guide — next-session handoff
+# AOE2 Guide — next-session handoff (2026-06-25)
 
-Paste the prompt below into a fresh session. The project memory
-(`MEMORY.md` + memory files) auto-loads and carries the deep context; this doc
-is the task list + the gotchas that matter for the remaining work.
+Project memory (`MEMORY.md` + files) auto-loads the deep context. This is the
+task list + what's live + the active thread (replay parsing). Paste the prompt
+below into a fresh session.
 
----
+## What's LIVE on aoe2guide.com (shipped this session, all on `main`)
 
-## State as of this handoff (all pushed to `origin/main`, latest `b96d362`)
+- **Homepage** redesigned as the *Illuminated Meta Codex* (`src/pages/[lang]/index.astro`).
+- **+14 crawl-only ranked maps** (EM Runestones, Vulpine, Border Dispute, Karsts, …).
+- **Combinable Map×Elo×Patch filters**, fully static (Cloudflare Pages, no server/DB):
+  a precomputed cube `public/civ-cube.json` (~305KB gz) is fetched + filtered in
+  the browser. Used by `/civs` (tier list), CivStats (per-civ slice), and map
+  pages (patch). All have a server-rendered **no-JS fallback**.
+- **Team ladder is current** (1.32M-match team RM crawl) and **matchups regenerated
+  from the crawls** → **ONE source everywhere** ("self-collected World's Edge
+  ranked ladder"); zero aoestats refs left in `src/data`. See memory:
+  [[project_team_crawl]], [[project_homepage_codex]], [[project_deploy_pipeline]].
+- Cloudflare auto-deploys on push to main (~2 min). GitHub CI is red only from
+  pre-existing biome lint in `scripts/`/`tests/` — not a deploy blocker.
 
-The stats are now **current** (June 2026), sourced from a self-collected World's
-Edge crawl (756k 1v1 matches, on the VM `mkd@192.168.111.7` + backed up at
-`data-cache/relic-patched/matches.ndjson`, ~142M, gitignored):
+Site work is essentially DONE. Deferred (low priority): curated map prose (needs
+sources), deeper matchups filtering (data non-combinable), 2500+ bucket is thin,
+CI-lint cleanup. The 6-agent analysis of these is in the session transcript.
 
-- **civ-meta.json** — 1v1 overall/tier/winRate/byElo/byMap/byPatch all **current**
-  (refresh-civ-current.mjs). `byPatch` is a 16-month dated axis (aggregate-patches.mjs,
-  `gamemod_id`→month). **team ladder is still frozen aoestats** (crawl is 1v1 only).
-- **map-meta.json** — 1v1 "best civs on this map" rankings **current** for 45 maps
-  (refresh-map-current.mjs). **team rankings still frozen aoestats.**
-- Pipeline scripts in `scripts/data-pipeline/`. The crawl→key mapping is canonical
-  (`canon()`), done once at ingestion — keep it there, don't scatter it (see
-  [[feedback_consistent_names]]).
-- Verify client-rendered pages with headless chromium: `playwright` is a LOCAL
-  devDep (uncommitted). Write a `*.mjs` in the project root and
-  `import { chromium } from "playwright"`.
+## The ACTIVE thread → replay parsing for full in-game events
+
+The user wants to "time every important event" per game. Status (see
+[[project_data_workbench]] for full detail):
+
+- **Analysis workbench**: DuckDB `~/aoe2-guide/data-cache/aoe2.duckdb` on VM
+  `mkd@192.168.111.7` — **aoestats archive (30.7M matches) + Relic crawls, deduped
+  → 116M player-rows / 32.46M unique matches**, clean schema (`games` fact +
+  `civs` dim + `civ_winrate`/`map_civ`/`civ_opening`/`civ_timing` summaries) +
+  openings + age-up times. Web UI: tmux `duckui` → `start_ui_server()` on
+  `127.0.0.1:4213`; reach via `ssh -L 4213:localhost:4213 -N -f mkd@192.168.111.7`.
+- **Parser SOLVED**: **`aoe2rec`** (github aoe2ct/aoe2rec, Rust, MIT, `binrw`)
+  parses the user's **current-patch** replays (v67) in ~ms with the **full action
+  stream** (`world_time` + `game_command`) + civ per player. **Python mgz FAILS**
+  on this patch. Built locally: `/tmp/aoe2rec` (`cargo build --release -p aoe2js`).
+  Rust installed on the desktop via rustup.
+- **PLAN**: DuckDB stores all (add an `events` table); aoe2rec parses; a **semantic
+  extractor** maps `game_command`+`world_time` → age-ups / first-TC / military /
+  build-order signature, keyed to `match_id`. Rewrite hot parts in Rust as needed.
+- **Open question**: collecting *other* players' games needs the Relic
+  **replay-download endpoint** (UNVERIFIED — replays expire in weeks, history is
+  gone). The user's OWN + local replays parse now with no download
+  (`~/.local/share/Steam/steamapps/compatdata/813780/pfx/.../Age of Empires 2 DE/<steamid>/savegame/*.aoe2record`).
+
+## Next steps (the new session should do)
+
+1. **Create a dedicated parse-worker VM** on the Proxmox host (steps given to the
+   user; specs ~8 vCPU / 12 GB / 80 GB Ubuntu 24.04). Or reuse the existing VM.
+2. Install Rust + DuckDB + clone aoe2rec on it.
+3. **Build the PoC extractor**: aoe2rec (lib or `aoe2rec-py`) → extract events from
+   local replays → write a DuckDB `events(match_id, profile_id, event, t_seconds)`
+   table keyed to `games`. Prove the value chain on real local replays (no download).
+4. Then decide collection-at-scale (verify the Relic replay-download endpoint).
+
+## Hardware / gotchas
+
+- Proxmox host: Ryzen 5 2600 (12T). Nodes seen: nvme **16C/62GB**, ssd **12C/15.5GB**.
+  Compute is never the bottleneck (parse is ms/replay). A 2nd VM = isolation, not need.
+- VM SSH: key must be loaded (`ssh-add -l`); push to GitHub needs it too.
+- DuckDB is single-writer: query *through* the UI, or read source files in-memory.
+- `pnpm build` runs the translation-audit + schema gate. Civ YAML is generated.
 
 ---
 
 ## PROMPT FOR THE NEW SESSION
 
-> I'm continuing work on the AOE2 guide (Astro static site, the memory has full
-> context). The stats are now current from a live crawl. Three buckets of work
-> remain, in priority order. Read `docs/superpowers/NEXT-SESSION.md` first.
->
-> **1 — Homepage redesign (highest priority).** The homepage
-> (`src/pages/[lang]/index.astro`) doesn't look good — I want a fresh, striking,
-> genuinely well-designed home. Use the `frontend-design` skill. Keep the real
-> data wired in (live tiers/win rates from civ-meta, the 53·43·13 counts), keep
-> the medieval parchment/maroon/gold theme + Cinzel/JetBrains-Mono, keep it
-> static + bilingual (EN/TR via `t()`), but rethink the layout/hierarchy/visual
-> impact from scratch — it should feel designed, not assembled. Current sections:
-> hero, "53 Civilizations" tier strip, featured TEMPO build cards, nav tiles,
-> featured maps, more-to-explore. Show me a design direction before building.
->
-> **2 — Content gaps.**
-> - Add the **current ranked maps** the crawl has but map-meta/site lacks
->   (em_runestones, vulpine, border_dispute, karsts, fourlakes-variants, …). They
->   need map-meta entries (extend aggregate-maps or refresh-map-current to emit
->   crawl-only maps) and either data-only pages (already supported via
->   `[map].astro` route extension) or curated content.
-> - More **curated map content** — only 13 of ~90 maps have recommendedCivs /
->   teamComps / body; the rest are data-only. Don't fabricate (source-derived
->   only, [[feedback_source_derived_only]]).
-> - **Matchups team** is overall-only + confounded; consider per-map/per-elo if
->   worth it.
->
-> **3 — Polish / infra.**
-> - **Verify the Cloudflare Pages deploy** — is aoe2guide.com auto-deploying on
->   push to main? Confirm the live site reflects the recent commits.
-> - **Team data is still frozen aoestats** (civ team + map team). To make it
->   current, run a TEAM crawl: collect-relic with the team RM leaderboard id
->   (current is `leaderboard_id=3` = 1v1 RM; find the team RM id), capturing
->   gamemod_id, then a refresh for team like the 1v1 ones.
-> - **High-elo buckets (2500+)** are thin in the crawl — some civs lose the top
->   byElo bucket. Decide: accept, or backfill the 2500+ bucket from aoestats.
-> - **No-JS fallback** — the civs tier list + map rankings are client-rendered
->   (empty without JS). Add SSR fallback or accept (it's a data tool).
-> - **Name consistency** — minimize the canon/mapping; ideally one canonical map
->   key everywhere ([[feedback_consistent_names]]).
-> - **Automate the crawl/refresh** (currently manual on the VM).
-> - Decide whether to commit `playwright` as a devDep (postinstall downloads
->   browsers — may break CI).
->
-> Plan it, then execute with reviews. Keep it light where you can — it's a hobby
-> project ([[feedback_hobby_keep_it_light]]).
-
----
-
-## Gotchas the new session will hit
-
-- **VM SSH** uses the agent at `/run/user/1000/ssh-agent.socket`; if `ssh-add -l`
-  is empty, ask the user to `ssh-add ~/.ssh/id_ed25519` (passphrase-locked) — the
-  GitHub push needs it too.
-- **`pnpm build`** runs the translation audit (any `en===tr` fails) + schema
-  validation as a prebuild gate.
-- Civ YAML is generated (`pnpm build:civilizations`) — don't hand-edit.
-- `data-cache/` + `*.zip` are gitignored.
-- Heavy data files are build-time imports (not shipped wholesale); interactive
-  pages (matchups ~400KB, map rankings) inline/embed their data and render rows
-  client-side to stay light.
+> Continuing the AOE2 guide (memory has full context; read
+> `docs/superpowers/NEXT-SESSION.md` first). The site is shipped + live. The active
+> thread is **replay parsing**: `aoe2rec` (Rust) is validated — it parses my
+> current-patch `.aoe2record` replays with the full event stream. Plan: store
+> everything in the DuckDB workbench on the VM (add an `events` table), parse with
+> aoe2rec, and write a semantic extractor (game_command+world_time → age-ups /
+> build-order events). First: I'll create a parse-worker VM on Proxmox — help me
+> set it up, then build the PoC extractor on my local replays (no download needed),
+> writing events into DuckDB keyed to `games`. Then we'll look at collecting other
+> players' replays. Keep it light — hobby project.
