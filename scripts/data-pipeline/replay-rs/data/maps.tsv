@@ -1,0 +1,199 @@
+# AoE2 map_id -> name -> family -> notes. SINGLE SOURCE OF TRUTH; the analyzer reads col1(id)+col3(family).
+# Source: families classified from the Age of Empires Fandom wiki by real flank/pocket TEAM STRUCTURE
+#   (not just terrain); gameplay map ids only (9..215). Arabia=9 verified vs a real replay.
+# family enum (EDIT col 3): open | closed | hybrid | water | nomad | special | other
+#   open/closed = flank/pocket coaching applies (open-land vs walled). hybrid/water/nomad/special/other = NO role tag.
+# Columns: id<TAB>name<TAB>family<TAB>notes
+9	Arabia	open	Classic open land map; teams spawn together with outer flanks facing enemies and protected inner pockets.
+10	Archipelago	water	Naval-dominant; players spread across small islands separated by ocean, no land flank/pocket arrangement.
+11	Baltic	hybrid	Large central sea ringed by land with thin walkable land routes; water-control hybrid, no clean flank/pocket.
+12	Black Forest	closed	Forest-walled lanes/chokepoints; teams spawn together, outer players hold front gaps (flanks), inner are pockets.
+13	Coastal	hybrid	Roughly half land, half surrounding sea; mixed land/water play with no clear flank/pocket structure.
+14	Continental	hybrid	Mostly-land continent surrounded by water with ponds; naval matters, no clean flank/pocket layout.
+15	Crater Lake	hybrid	Large central lake (~1/3 water) with players on peninsulas split by narrow land strips; turtle/water hybrid, no flank/pocket.
+16	Fortress	closed	Every player starts pre-walled with castle/towers; teams sling so inner pockets feed outer flanks fighting at the front.
+17	Gold Rush	open	Open forestland; players/teams spawn around a contested central gold desert, classic flank/pocket arrangement applies.
+18	Highland	open	Cliffed forested land with rivers; played as open land-combat map, teams spawn together with flank/pocket layout.
+19	Islands	water	Every player on own isolated island regardless of team; naval-dominant, no land flank/pocket.
+20	Mediterranean	hybrid	Ring of land around a central sea; players spread along coast, naval control key, no clean flank/pocket.
+21	Migration	hybrid	Players start on small private islands with a resource-rich central continent; naval migration map, no land flank/pocket.
+22	Rivers	hybrid	Mostly land split by crossable rivers/shallows acting as barriers; water-influenced, no clear flank/pocket.
+23	Team Islands	water	Teammates share one island separated by water from enemies; naval-dominant, no land flank/pocket roles.
+25	Scandinavia	hybrid	Frozen closed-hybrid map with beaches/water on both sides and abundant fish; land+water mix, no clear flank/pocket.
+26	Mongolia	open	Open land map (dirt/snow/pine) with cliffs and chokepoints, Arabia-like; teams spawn together giving flank/pocket roles.
+27	Yucatan	closed	Heavily forested closed land map favoring early walling/boom (between Cenotes and Black Forest); teams spawn together with flank/pocket.
+28	Salt Marsh	hybrid	Amphibious marsh of shallows and navigable water; unpredictable/asymmetrical layout, no clean flank/pocket arrangement.
+29	Arena	closed	Each player starts inside a stone-walled arena; classic closed boom map, teams together with flank/pocket roles.
+31	Oasis	closed	Desert with central oasis water ringed by thick palm forest; teams spawn together around the circle, forest barrier creates flank/pocket turtle/boom play.
+32	Ghost Lake	open	Majority-land, very open Arabia-like map with a frozen central no-man's-land lake; teams spawn together with flank/pocket.
+33	Nomad	nomad	No starting Town Center; villagers scattered around a shoreline water body, players must find a TC spot — no flank/pocket structure.
+34	Canals	hybrid	Snaking water canals connect all bases with fish and dock room; mixed land/water with cross-shore transport, no clear flank/pocket.
+35	Capricious	open	Arabia-like green open land with small fish lakes on the outskirts; resource seed doubles one resource and halves others. Standard open-land flank/pocket applies in team games.
+36	Dingos	hybrid	Archipelago of peninsulas around deep water with one central hill crossing; abundant sheep + wolves. Water-split layout, not a clean land flank/pocket.
+37	Graveyards	open	Modestly forested open land map with dead trees, small fish lakes, and bonus relic/gold/stone graveyard patches; used competitively. Standard land flank/pocket.
+38	Metropolis	hybrid	Each player starts with three Town Centers ringed around a large central inland sea full of fish; Baltic-style boom/turtle map, not flank/pocket.
+39	Moats	other	Each player's TC sits inside its own ring of deep-water moat with a single land entrance; individual turtle fortresses, no team flank/pocket (Team Moats is a separate map).
+40	Paradise Island	water	One large forested tropical island shared by all players, surrounded by a fish-rich ocean ring; naval/fish contest dominant, no land flank/pocket.
+41	Pilgrims	nomad	Players begin on resource-poor islets with villagers + a transport ship (no permanent TC base) and must migrate to a wolf-filled mainland; nomad/migration map.
+42	Prairie	open	Arid wide-open sparsely forested plain where walling is hard and play is aggressive; classic open-land flank/pocket in team games.
+43	Seasons	hybrid	Each player separated by a river that varies by season (Ghost Lake/Highland style); a divided map, not a classic flank/pocket layout.
+44	Sherwood Forest	other	Forest-flavored standard 1v1-style map with scattered trees and ponds; no clear team flank/pocket arrangement.
+46	Shipwreck	hybrid	Players start on separate small islands linked by shallows; survival/expansion map with no flank/pocket structure.
+47	Team Glaciers	other	Teams spawn together but the only link between teams is a single ice-bridge choke (single-lane), so no outer-flank/inner-pocket roles.
+49	Iberia	hybrid	Real World fixed-geography map; open land plus significant surrounding water, no classic flank/pocket layout.
+50	Britain	water	Real World map where almost everything is reachable from the sea; naval play dominant, no land flank/pocket.
+51	Mideast	hybrid	Real World fixed-geography map; land-focused but coastal navy matters at chokes; no classic flank/pocket arrangement.
+52	Texas	other	Real World fixed-geography island that plays as a land map; no functional naval play and no flank/pocket team structure.
+53	Italy	hybrid	Real-World map of the Apennine peninsula; central forested peninsula contested, Sardinia/Africa players separated by sea forcing navy. Fixed geographic positions, no flank/pocket.
+54	Central America	hybrid	Real-World map; ~half water with naval focus, all players start on mainland, islands hold gold/stone/relics. Fixed positions, no flank/pocket.
+55	France	hybrid	Real-World map; mostly open mainland with mid forests, plus Gulf of Gascony/Atlantic water rich in fish. Fixed geographic positions, no team flank/pocket.
+56	Norse Lands	water	Real-World Scandinavia map; water connected across almost the entire map, naval dominance and rushes recommended. Naval-dominant, no land flank/pocket.
+57	Sea of Japan (East Sea)	water	Real-World map; strong naval focus, archipelago attackable from sea, navy indispensable. Fixed positions, naval-dominant, no flank/pocket.
+58	Byzantium	water	Real-World map; two mainlands split by the Aegean dotted with resource islands, plays like Archipelago. Naval-dominant, no land flank/pocket.
+67	Acropolis	open	Extremely open land map; each player starts on a defensive plateau around a central pond. Open competitive map used in team play with classic flank/pocket positioning.
+68	Budapest	special	Non-standard startup: each player begins with TWO Town Centers; 4 large lakes push settlements close together. Unusual start, no flank/pocket structure.
+69	Cenotes	open	Open Arabia-like land with scattered watering holes (shore fish); standard TC start, teams spawn together so outer=flank/inner=pocket applies.
+70	City of Lakes	water	Semi-closed water map dominated by fish-rich lakes/ponds; teammates share a peninsula side, naval-focused with no land flank/pocket.
+71	Golden Pit	open	Open like Arabia, players in forest edges with contested central gold depression; standard start, classic flank/pocket team layout.
+72	Hideout	closed	Players spawn in palisade-walled alcoves around a central forest; in team games teams sit together with outer flanks/inner pockets.
+73	Hill Fort	closed	Each player starts walled on a hill (fortified palisade) with flat open ground outside; teams spawn together giving flank/pocket roles.
+74	Lombardia	open	Open snowy land with tree clumps and varied elevation; wiki notes teammates start clumped on one side, so flank/pocket clearly applies.
+75	Steppe	nomad	Nomadic start (no TC, yurts/villagers in alcoves) on extremely open grassland; scattered start, no flank/pocket structure.
+76	Valley	open	Open hilly grasslands with a crossable dry river partially bisecting center; teammates share grasslands together, giving flank/pocket roles.
+77	MegaRandom	special	Fully randomized generator that mixes terrain/resources from many map types; no fixed layout, so no reliable flank/pocket structure.
+78	Hamburger	closed	Players start on a central flat island ringed by a fish-filled moat; teams spawn together separated by trees, giving outer flank / inner pocket roles (slinging viable in team games).
+79	CtR Random	special	Capture the Relic event game-mode map (randomized variant); non-standard objective mode, not a classic flank/pocket RM layout.
+80	CtR Monsoon	special	Capture the Relic event game-mode map; custom relic-objective mode, not a standard flank/pocket map.
+81	CtR Pyramid Descent	special	Capture the Relic event game-mode map; custom relic-objective mode, not a standard flank/pocket map.
+82	CtR Spiral	special	Capture the Relic event game-mode map; custom relic-objective mode with spiral layout, not a standard flank/pocket map.
+83	Kilimanjaro	open	Very open African land map; players spawn around a central mountain, teams together giving outer flanks / protected inner pockets; early aggression common.
+84	Mountain Pass	other	Alpine 1v1-oriented map full of mountain chokepoints, forests and random lakes; lane/choke structure rather than a classic team flank/pocket arrangement.
+85	Nile Delta	nomad	Nomad-type start: players begin on river islets with no TC plus a transport ship to settle the resource-rich mainlands; no flank/pocket arrangement.
+86	Serengeti	open	Open random map, the African 'Arabia' - thin resources, no chokepoints, hard to turtle; classic land flank/pocket applies in team games.
+87	Socotra	open	Tiny island ringed by water (no fish, water is just a second attack front); players spawn very close in a flank/pocket arc - outer flanks face the front, pocket protected inland.
+88	Amazon	other	Real World map (fixed geography) divided by the Amazon river with Andes cliffs west and fish-rich surrounding seas; geographic placement, not symmetric flank/pocket.
+89	China	other	Real World map (fixed geography) - open land with crossable rivers and little naval value; players placed to match geography, not a flank/pocket layout.
+90	Horn of Africa	other	Real World map (fixed geography) - mostly dry land with little water except the east; geographic placement means no classic flank/pocket.
+91	India	other	Real World map (fixed geography) - open land with large water bodies on the sides and many coastal starts; geographic placement, no symmetric flank/pocket.
+92	Madagascar	water	Real World map classified as a water map; two landmasses split by fish-rich sea (Team-Islands-like), naval-dominant with no land flank/pocket.
+93	West Africa	other	Real World map; very open land (water in W/S barely matters), players placed by geography not flank/pocket.
+94	Bohemia	nomad	Real World land map with Nomad-type start, enclosed by unbuildable border terrain; scattered no-TC start, no flank/pocket.
+95	Earth	special	Special map: nomad start, players spawn at poles with transport ship and must migrate across a whole-Earth land+water map.
+96	Canyons	other	Desert land map divided by a central canyon cross (cliffs + shallows); chokepoint layout, not classic flank/pocket.
+97	Enemy Archipelago	water	Naval map; each player shares an island with an ENEMY, fights near-1v1, no land flank/pocket.
+98	Enemy Islands	water	Naval TDM map; team shares one island vs enemy team's island across deep ocean, navy-dominant, no land flank/pocket.
+99	Far Out	other	Very open long rectangular land map; teams on opposite ends but players start very far apart, so no tight flank/pocket cluster.
+100	Front Line	open	Open dry/savanna land; in team games teams cluster on one side with TCs very close, giving outer-flank / inner-pocket layout.
+101	Inner Circle	other	Players ring a central mountain on grassy/forested land with small lakes; circular arrangement, not a flank/pocket layout.
+102	Motherland	hybrid	One player per team on a central mainland, others on wood-less islands; high water %, forces naval/land convergence on mainland, no flank/pocket.
+103	Open Plains	open	Savannah, no water; two enemies meet in center with allies safe behind them (arrow shape) — classic flank/pocket, sling-friendly.
+104	Ring of Water	water	Water ring with central island and outer mainland; allies split island/mainland, naval dominance is the goal — no land flank/pocket.
+105	Snakepit	other	Snake-shaped forest path with water in north/shallows in south; strict 2-team lane where each player faces the opponent directly ahead, not flank/pocket.
+106	The Eye	water	Central island plus outer landmasses, naval dominance absolutely crucial, unfit for FFA; water-dominant with no land flank/pocket.
+107	Australia	hybrid	Real-world continent map; water covers more than half, dry hilly interior, geographic player placement, no flank/pocket structure.
+108	Indochina	hybrid	Rainforest peninsula with central river/coastal waters; main fight on land but sea control matters, players start opposite near shore — no flank/pocket.
+109	Indonesia	hybrid	Mostly shallows where land units and warships interact; open amphibious battlefield, no flank/pocket.
+110	Strait of Malacca	hybrid	Forested north landmass plus southern islands/shallows; navy important, mixed land+water, no flank/pocket.
+111	Philippines	hybrid	Islands amid open shallows accessible to ships and land units; amphibious, no land flank/pocket.
+112	Bog Islands	hybrid	Amphibious 'Arabia' of dry islands on vast traversable shallows; open mixed map, no flank/pocket.
+113	Mangrove Jungle	hybrid	Mangrove forest around a central shallows path between players; lane-like mixed terrain, no flank/pocket.
+114	Pacific Islands	water	Players on own/shared islands separated by shallows and deep lagoons; naval-dominant island map, no land flank/pocket.
+115	Sandbank	hybrid	Edge shallows crossable by land, deeper ship channels, central mangrove grove; amphibious, no flank/pocket.
+116	Water Nomad	nomad	No starting TC; scattered 7 villagers + 6 fishing ships must settle; naval nomad, no flank/pocket.
+117	Jungle Islands	water	Amphibious islands; each player on own small island, naval-dominant; no land flank/pocket.
+118	Holy Line	other	Open flatlands split by central relic-line wall and side lakes; monk/relic gimmick, no classic flank/pocket.
+119	Border Stones	other	No water; players (and even teammates) isolated by walls of stone mines; gimmick layout, no flank/pocket.
+120	Yin Yang	other	Yin-yang-shaped land with central river; players spawn in random/scattered positions, no structured flank/pocket.
+121	Jungle Lanes	other	Lane map: central cliff splits map, teams cross via jungle lanes; lane structure not flank/pocket.
+122	Alpine Lakes	open	Open snowy land with tiny fish ponds (ships pointless); standard symmetric land map with team flank/pocket.
+123	Bogland	nomad	Wetland with no water bodies; nomad-style scattered villagers and resources, no starting TC.
+124	Mountain Ridge	open	Open land, two sides separated by contested central ridge; teams spawn opposite with flank/pocket arrangement.
+125	Ravines	other	Lightly forested land where each player sits isolated in their own ravine (TC on a central hill ringed by a pit/outposts); individual ravine spawns, no classic flank/pocket grouping.
+126	Wolf Hill	other	Forest-ringed valley with players arranged in a circle around a central relic-laden wolf hill (Gold Rush style); circular/central-feature layout, not flank/pocket.
+127	Swirling River	hybrid	A long curving river bisects the map, with bends forming peninsulas that separate players; land+water mix with no clear flank/pocket arrangement.
+128	Twin Forests	closed	Two forest-walled clearings, three teammates per side facing across a forest/water-shallows divide; teams grouped together giving outer-flank / inner-pocket roles within each clearing.
+129	Journey South	other	Gimmick climate-strip map; all players' TCs bunched along the top-right edge close together, resources force a march south across an icy river; shared starting strip, no flank/pocket.
+130	Snake Forest	other	Forest with a snake-shaped path; each player sits at a bend with a lane leading to a north/south pocket connecting teammates; lane map (Michi-like), not classic flank/pocket.
+131	Sprawling Streams	hybrid	Map split by four rivers with shallows bridging them; far and center landmasses hold two players each, the others one each; river-divided land+water, no flank/pocket.
+132	Antarctica	hybrid	Real-world map: one giant very-open frozen island surrounded by fish-rich icy water; trees don't wall; geographic player placement, no flank/pocket structure.
+133	Aral Sea	water	Real World giant map dominated by one huge central sea; ships/transports essential, no land flank-pocket arrangement.
+134	Black Sea	water	Steppe shores around a large central sea that is the main food source; naval-dominant, undefendable shoreline, no flank/pocket.
+135	Caucasus	hybrid	Real World valley ringed by mountains/cliffs and sea; mixed land+water placed by geography, no classic flank/pocket.
+136	Siberia	hybrid	Map split into land (NW) and water+islands (SE); teams start directly opposed with defensive Towers, a half-water hybrid not open flank/pocket.
+139	Golden Swamp	hybrid	Semi-open swamp with a central gold/stone island ringed by shallow water; significant water mix, players on perimeter, no clear flank/pocket.
+140	Four Lakes	open	Open Arabia-like land with four small lakes in the corners; teams spawn together giving the classic flank/pocket layout.
+141	Land Nomad	nomad	Nomad start: no TC, 3 scattered villagers, build-TC treaty; waterless open land, scattered start breaks any flank/pocket.
+142	BR Battle On Ice	special	Battle Royale event map (free-for-all on an ice hill); non-standard mode, no team flank/pocket.
+143	BR El Dorado	special	Battle Royale event mode map; non-standard rules, no classic flank/pocket coaching.
+144	BR Fall of Axum	special	Battle Royale event mode map; non-standard rules, no flank/pocket structure.
+145	BR Fall of Rome	special	Battle Royale event mode map; non-standard rules, no flank/pocket structure.
+146	BR Majapahit Empire	special	Battle Royale event mode map; non-standard rules, no flank/pocket structure.
+147	Amazon Tunnel	other	Closed forest map split by a single central tunnel/corridor; lane map like Michi, all players face the shared choke rather than a flank/pocket split.
+148	Coastal Forest	hybrid	Land starts on two southern edges with fish-rich northern coast and central forest; land+water mix, players line edges with no clear flank/pocket.
+149	African Clearing	nomad	Nomad-type savanna map (no starting TC), abundant huntables/shore fish; scattered start, no flank/pocket.
+150	Atacama	open	Open desert land map with contested central forest; standard team open-map spawn gives outer flanks and inner pockets.
+151	Seize The Mountain	hybrid	Players start on small islands in shallows around a resource-rich central mountain; contested-center/demo-ship play, not a flank/pocket layout.
+152	Crater	open	Gold Rush-style: open center with gold/stone/relics, bases ring the outer forest; teams spawn together so outer=flank, inner=pocket.
+153	Crossroads	other	Hills force armies along fixed paths around/through the middle; lane/chokepoint map with no clear flank/pocket arrangement.
+154	Michi	other	Thick forest splits the map in two with each team on one side; classic lane map, no flank/pocket until forest is cut.
+155	Team Moats	other	Each player walled by a fishless water moat; teammates start together but it is a turtle map, no open flank/pocket aggression model.
+156	Volcanic Island	closed	Hideout-like shared central forest with outer fishing ponds; players ring the forest so flank/pocket applies (light naval eco).
+157	Acclivity	other	Flat starts separated by unbuildable narrow hills dividing each player; exposed, fight for the heights, no clean team flank/pocket.
+158	Eruption	open	Gold Rush-like volcano: central gold cluster with defensible rim, players ring the outside; teams together give outer=flank, inner=pocket.
+159	Frigid Lake	hybrid	Land map ringed around a central fish-lake; each TC sits in shallows with tuna, towns exposed - water-for-fish mix breaks clean flank/pocket.
+160	Greenland	hybrid	Each player on a separate large island connected by ice traversable by land+water units; separated starts, no flank/pocket.
+161	Lowland	open	Open elevation land map; players on high ground fight over a resource-rich central valley - standard team flank/pocket applies.
+162	Marketplace	special	Custom Empire Wars map (Chrazini, Red Bull Wololo IV): scout replaced by trade carts, Gaia markets in corners, central forest - non-standard mechanics.
+163	Meadow	open	Open grassland with little cover; small forests generate between adjacent players, plentiful food/gold - classic open flank/pocket team layout.
+164	Mountain Range	other	A mountain ridge splits the map in two; teammates are NOT guaranteed the same side, so no reliable flank/pocket arrangement.
+165	Northern Isles	water	Islands-style water map; each player on own island, central resource island, starts with transport ship - naval-dominant, no land flank/pocket.
+166	Ring Fortress	closed	Each player starts inside an incomplete palisade ring around their TC (Hideout-like defense); closed land map where teams spawn together with flanks/pockets.
+167	Runestones	open	Arabia-like open land map (Chrazini, RBW IV) with central Relic in rocks; classic team flank/pocket spawns apply.
+168	Aftermath	closed	Each player ringed by collapsed Stone Walls (Arena/Fortress-like) with capturable Trade Workshops between players; standard closed team flank/pocket.
+169	Enclosed	closed	Players start inside a ring of unbuildable terrain and can wall early (Fortress-like); standard team flank/pocket layout around the enclave.
+170	Haboob	open	Very open desert; in team games large forests placed between each adjacent player pair, reinforcing flank/pocket spawns.
+171	Kawasan	open	Open land with small fish ponds between each adjacent player pair and central berries/Relics; minor water (fishing only), standard team flank/pocket.
+172	Land Madness	open	Resource-dense but walling nearly impossible (forests ringed by unbuildable terrain); played very open, standard team flank/pocket.
+173	Sacred Springs	open	Open land; no boars/bushes at TC, contest Pagodas (fish/boar/Relic) with one spawning between each player in team games; standard flank/pocket.
+174	Wade	hybrid	Marshy swamp of non-navigable shallow water that blocks ships and building; land+water mix fragments the map, no clear flank/pocket structure.
+175	Morass	hybrid	Central rainforest ringed by scattered shallows/ponds with shore fish; standard TC start (2 boar, 4 sheep). Land-with-water aggression map, no clear flank/pocket arrangement.
+176	Shoals	water	Central cross-shaped lake; each player starts with a Sea Tower and naval control is decisive. Naval-dominant, no land flank/pocket.
+177	Cliffbound	other	Open land with inaccessible cliffs encircling a resource-rich center; cracked ground (+20% bldg dmg). Empire Wars 1v1 tournament map, no team flank/pocket.
+178	Isthmus	hybrid	Narrow strip of desert land joining player areas, flanked by lakes; sea control paramount, central pyramid. Hybrid land+water, no flank/pocket.
+179	Dunesprings	hybrid	Large central round lake with fish plus outer shore-fish ring; standard TC start, early dock encouraged. Hybrid land+water, no flank/pocket.
+180	Golden Stream	hybrid	Central island holding many gold mines and a relic, surrounded by water; players on outer land. Hybrid contest map, no land flank/pocket.
+181	Mountain Dunes	other	Bases on elevated clear ground; rest covered in hills/forests that block building, flat stone deposits on cracked terrain. Land-only 1v1 tournament map, no team flank/pocket.
+182	River Divide	hybrid	Players on opposite sides of a green mainland, starting areas split by narrow rivers; resources lie across the water. Hybrid land+river, no flank/pocket.
+183	Sandrift	other	Open desert defined by a central rift dividing the two sides; building-restricted zones around TC and rift. Red Bull Wololo 1v1 tournament map (Chrazini); mirror/lane layout, no flank/pocket.
+184	Shrubland	other	Open low-wood map; all wood in a central oasis walled off by cliffs, fruit bushes and relics in corners. 1v1 tournament map, cavalry-favoring open terrain, no flank/pocket structure.
+185	The Passage	water	Naval map: each player on an island separated by narrow sea with dock and tower; relics spawn in the water. Water-dominant, no land flank/pocket.
+186	Hollow Woodlands	hybrid	Players start close in a central inner circle (baobab forest, only gold/stone) ringed by water with crossings and shore fish. Significant land+water mix, no clear flank/pocket.
+187	Karsts	other	Fairly open map with extra gold/stone around limestone rock formations that form chokepoints; caves and elevation. 1v1 tournament map, no genuine flank/pocket arrangement.
+188	Glade	closed	Arena-type: each player's TC enclosed by a thick wall of trees with a single opening to a resource-rich center. Classic closed map; teams spawn together with outer flanks / inner pockets.
+189	Fortified Clearing	other	Blurs open/closed: each player walled toward the center but the map-edge backside is open/vulnerable; 1v1 attack-route map. Pockets aren't rear-protected, so no clean flank/pocket.
+190	QS Arabia	open	Quick-search pool version of Arabia; classified same as base Arabia. Canonical open land map with teams spawning together: outer players flank, inner players pocket.
+191	QS Fortified Clearing	closed	Clearing where each base is walled toward the center but open along the map edge; standard team map with outer flank / inner pocket spawns.
+192	QS Glade	closed	Arena-type map: each TC enclosed by thick forest with one opening to the contested middle; teammates spawn together with flank/pocket roles.
+193	QS Nomad	nomad	No starting Town Center; 3 scattered villagers + extra wood/stone, strong water/fishing component, so no fixed flank/pocket layout.
+194	QS Runestones	open	Old-Arabia-style open land with a central relic; standard open team map with outer flanks and protected inner pockets.
+195	QS Arena	closed	Each player starts inside a stone-walled enclosure opening to the center; classic closed team map with flank/pocket spawns.
+196	QS Black Forest	closed	Dense forest with carved lanes linking bases; teammates spawn together, outer players are flanks facing enemy lanes, inner players are pockets.
+197	Great Wall	other	Two gaia fortified walls split opposing teams entirely; everyone is wall-protected and play funnels through the central gap, so no classic flank/pocket roles.
+198	Border Dispute	other	All players spawn in a tight circle around a central boar pond for a hyper-aggressive dark age; circular arrangement, not a flank/pocket layout.
+199	Graupel	nomad	Migration/nomad: villagers start on a central ice cap in a lake with a transport ship, no TC; ferry to mainland. Scattered start, no flank/pocket.
+200	Stranded	nomad	Migration/nomad: start on a tiny island, board transport ship and build first TC on the mainland; plays like Nomad. No flank/pocket.
+201	Sardis	open	Open land map; players spawn around a neutral walled burning city (relics, captureable central Trade Workshop). Standard TC, teams spawn together giving flank/pocket.
+202	Aquarena	water	Arena-like but naval: each player walled (sea walls) around a central lake battleground; naval-dominant (Chronicles civs). No land flank/pocket.
+203	Forest Breach	other	Forested map with semi-random TC spawns (near center or trapped inside tree-enclosed corners). Chaotic placement, no flank/pocket.
+204	Chaos Pit	other	All players start crammed inside a single central forest-ringed pit (no gold inside) and cut outward for resources. Chaotic central start, no flank/pocket.
+205	Mired	nomad	Nomad variant: villagers start clustered (with a horse) on an unbuildable central pond; migrate to shore woodlines to place TC. No flank/pocket.
+206	Murkwood	nomad	Nomad-type: three villagers scattered across a large island, walkable water with huntable animals and fishing-heavy Dark Age. Scattered start, no flank/pocket.
+207	Crownwood	special	Open hilly land map with small woodlines near TC and forests atop hills; custom 1v1 Red Bull Wololo: Londinium map by Chrazini, no team flank/pocket layout.
+208	Dorothea Quarry	special	Sunken pit with central water basin of oysters ringed by elevated forests/resources; custom Londinium tournament map, not a team flank/pocket map.
+209	Glacis	special	Partially walled/protected starts with a contested resource-rich no-man's-land center; custom 1v1 Londinium map by Chrazini, no team flank/pocket structure.
+210	Hengehold	special	Stonehenge center with relics/wildlife, outer perimeter neutral resources and forests; custom Londinium event map, no team flank/pocket layout.
+211	Loch Ness	special	Land split by a slender river with central crossing, water control matters; features Nessie unit gimmick. Custom Londinium map, no team flank/pocket.
+212	Rampart	special	Custom Red Bull Wololo: Londinium map by Chrazini (update 162286); name implies fortified/walled play. 1v1 tournament map, no team flank/pocket structure.
+213	Stonefront	special	Resource-scarce starts with wealth in quarries amid rock formations hindering movement; map control focused custom 1v1 Londinium map, no team flank/pocket.
+214	Thames	special	Battle along River Thames; bespoke objectives (Royal Albert Hall +25 pop, southern gold/stone). Custom Londinium event map, no team flank/pocket layout.
+215	Vulpine	other	1v1 tournament land map (Red Bull Wololo: Londinium) with unbuildable terrain barriers and a central forest; standard TC start but compartmentalized design gives no classic flank/pocket.
