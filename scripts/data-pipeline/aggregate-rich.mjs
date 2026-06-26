@@ -17,6 +17,8 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS, eloBucket, eloCaseSql } from "./lib/buckets.mjs";
 
+const SOURCE_DATE = "2026-02"; // aoestats archive corpus month (frozen) — confirm before changing
+
 const HOME = process.env.HOME;
 const DUCK = `${HOME}/bin/duckdb`;
 const M = `${HOME}/aoestats/m_*.parquet`;
@@ -128,6 +130,7 @@ const out = {
   source: "aoestats.io ranked Parquet archive (jerkeeler)" + (liveApp ? " + self-collected World's Edge (live 1v1)" : ""),
   ladders: ["1v1", "team"],
   generated: new Date().toISOString().slice(0, 10),
+  sourceDate: SOURCE_DATE,
   appearances: { "1v1": L["1v1"].totalApp, team: L.team.totalApp, live: liveApp },
   patches: L["1v1"].patches.map((r) => ({ patch: r.patch, matches: Number(r.n) })),
   eloBuckets: ELO_BUCKETS,

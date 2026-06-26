@@ -14,6 +14,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS, eloCaseSql } from "./lib/buckets.mjs";
 
+const SOURCE_DATE = "2026-02"; // aoestats archive corpus month (frozen) — confirm before changing
+
 const HOME = process.env.HOME;
 const DUCK = `${HOME}/bin/duckdb`;
 const M = `${HOME}/aoestats/m_*.parquet`;
@@ -96,6 +98,7 @@ for (const mp of [...allMaps].sort()) {
 const out = {
   source: "aoestats.io ranked Parquet archive",
   generated: new Date().toISOString().slice(0, 10),
+  sourceDate: SOURCE_DATE,
   eloBuckets: TIERS,
   minGames: { all: MIN_ALL, bucket: MIN_BUCKET, map: MIN_MAP },
   maps,

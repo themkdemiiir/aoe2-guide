@@ -14,6 +14,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS_WITH_ALL, eloCaseSql } from "./lib/buckets.mjs";
 
+const SOURCE_DATE = "2026-02"; // aoestats archive corpus month (frozen) — confirm before changing
+
 const HOME = process.env.HOME;
 const DUCK = `${HOME}/bin/duckdb`;
 const M = `${HOME}/aoestats/m_*.parquet`;
@@ -51,6 +53,7 @@ for (const k in civs) civs[k].sort((a, b) => b.winRate - a.winRate);
 const out = {
   source: "aoestats.io ranked Parquet archive (1v1 RM)",
   generated: new Date().toISOString().slice(0, 10),
+  sourceDate: SOURCE_DATE,
   ladder: "1v1",
   minGames: MIN,
   note: "winRate = how often <civ> beats <opp> in 1v1 RM. Mirrors excluded.",
@@ -83,6 +86,7 @@ const OUT2 = path.resolve("src/data/civ-matchups-by-map.json");
 const out2 = {
   source: out.source,
   generated: out.generated,
+  sourceDate: out.sourceDate,
   ladder: "1v1",
   minGames: MIN_MAP,
   note: "winRate = how often <civ> beats <opp> on <map> in 1v1 RM. Mirrors excluded.",
@@ -113,6 +117,7 @@ const OUT3 = path.resolve("src/data/civ-matchups-team.json");
 writeFileSync(OUT3, `${JSON.stringify({
   source: out.source,
   generated: out.generated,
+  sourceDate: out.sourceDate,
   ladder: "team",
   minGames: 500,
   note: "winRate = how often <civ>'s team wins when <opp> is on the enemy team (team RM; confounded by the 3 other civs per side).",
@@ -157,6 +162,7 @@ const OUT4 = path.resolve("src/data/civ-matchups-by-elo.json");
 writeFileSync(OUT4, `${JSON.stringify({
   source: out.source,
   generated: out.generated,
+  sourceDate: out.sourceDate,
   ladder: "1v1",
   eloBuckets: ELO_BUCKETS_WITH_ALL,
   minGames: { bucket: MIN_BUCKET, all: 300 },
