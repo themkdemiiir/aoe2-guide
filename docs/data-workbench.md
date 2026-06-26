@@ -49,41 +49,57 @@ merged build (aoestats + crawl + summaries) is the SQL run from this session;
 re-run after refreshing the crawl. Builds in ~30s; the file grows on
 `CREATE OR REPLACE` — run `CHECKPOINT;` / rebuild fresh to compact.
 
-## What in-game events we have — and don't
+## Replay-derived depth — what we have
 
-The 116M rows are **match results** + what aoestats extracted from replays:
-**opening** + **age-up times** (~13.9M 1v1 games) + duration. That's it for
-in-game events.
+Two layers of in-game detail, both keyed to `match_id`:
 
-Full event timelines (build order, every unit, fights, resource milestones)
-live **only inside the replay file** (`.aoe2record`) and are **not recoverable
-for history** — Relic expires replay download links after ~weeks, so 2022-2025
-replays are gone. More VMs/RAM don't help; the bottleneck is replay availability,
-not compute (one VM crunches 116M rows in seconds). Earliest data is 2022-08
-(aoestats' start), not DE launch (2019-11).
+1. **`match_ages`** (historical, from aoestats `replay_summary_raw`): per player
+   per age — age-up time, villagers/military/buildings **produced in that age**,
+   units/techs. **60M rows across 4.33M matches** (the replay-enhanced subset of
+   2022-08→2026-02). Built once via `extract-replay-summaries.py` +
+   `build-match-ages.sh` → `match_ages.parquet` → `build-match-ages.sql`. This is
+   the max replay-derived data that survives for history (the raw replay files are
+   gone — see below).
+2. **`replay_events` / `replay_ages`** (forward, from live replay parsing): the
+   FULL event timeline (every train/research/build/move, timestamped) for games we
+   download + parse while fresh. Same per-age shape as `match_ages`, so history +
+   future unify.
 
-## Replay-parsing pipeline — scope (going-forward full events)
+## The replay-download path (UNBLOCKED 2026-06-25)
 
-The feasible version of "time every important event": parse replays of **new**
-games while their links are still fresh, accumulating full-event data forward.
+Earlier thought blocked — it wasn't, we used the wrong endpoint. The bare
+`matchurls` from `getRecentMatchHistory` are **unsigned** → Azure 403
+`PublicAccessNotPermitted`. The working endpoint signs them:
 
-**Phase 0 — feasibility PoC (make-or-break):** can we *programmatically download*
-a recent ranked replay given a `match_id`/`profile_id`, and parse it? aoestats
-clearly parsed replays, so a path exists, but the Relic replay-download endpoint
-is undocumented — **verify this first**; if replays aren't fetchable, the project
-stops here. Parse with the **`mgz`** Python library (standard AoE2 record parser).
+```text
+GET .../community/leaderboard/getReplayFiles?matchIDs=%5B<id>%5D&title=age2
+→ { replayFiles: [{ profile_id, size, url(SIGNED ?sig=...) }], expiryUnix }
+```
 
-**Phase 1 — pipeline:** crawl new ranked match_ids (extend `collect-relic`) →
-download each replay within the freshness window → `mgz` parse → extract events
-(age-ups, first TC, first military, key buildings, resign/win time, APM, …) →
-store as `events(match_id, profile_id, event_type, t_seconds, …)` in DuckDB/parquet,
-keyed to `games`. Run on a **dedicated 2nd VM** (download + parse is CPU/I/O
-heavy; this is where extra RAM/cores earn their keep).
+- One replay per player; `size == -1` = never uploaded (skip; pick max size>0).
+- Rate limit ~120/min, batch ≤10 matchIDs.
+- **Retention ~weeks** (probed: ≥18 days downloadable; a 2024 match → `NOT_FOUND`).
+  So only RECENT games are fetchable — **history's replays are unrecoverable**
+  (aoe2.net, aoestats' old upstream, is sunset; that's why aoestats froze 2026-02).
+- **Parser routing:** `aoe2rec` (Rust) parses CURRENT-patch replays; Python `mgz`
+  parses only OLD (≤2021) ones — they're complementary, route by era.
 
-**Phase 2 — analysis:** aggregate the event timeline (e.g. real age-up curves,
-build-order frequencies, timing-vs-winrate) and optionally surface a slice on the
-site as precomputed JSON.
+## Replay pipeline (`scripts/data-pipeline/`)
 
-**Risks:** replay endpoint availability/rate limits (Phase 0); replay expiry
-window (fetch within days); not all games are recorded; sustained volume
-(tens of thousands of ranked games/day) must fit the 2nd VM's throughput.
+- **`replays/`** — Python reference: `getReplayFiles` → download (signed) →
+  `aoe2rec` → semantic extract (meta/players/events/ages) → parquet shards, with a
+  resumable **SQLite manifest** (every match ends in exactly one status:
+  `parsed`/`no_replay`/`expired`/`parse_failed`/`error`). Nothing dropped.
+- **`replay-rs/`** — the FAST Rust port (used for the big runs): aoe2rec as a
+  **library** (in-process parse, no subprocess) + rayon. ~80 replays/s parse;
+  end-to-end ~250 matches/min (download/rate-limit bound). Per-replay panics are
+  caught (`catch_unwind`) → `parse_failed`, never crash the run. NDJSON shards are
+  gzipped (~27 KB/match; the full ~410k-match recent window ≈ ~10 GiB).
+  - `replay-rs seed candidates.csv --db manifest.sqlite` (seed match_ids)
+  - `replay-rs run --db manifest.sqlite --out shards --threads 16` (resumable)
+  - `vendor/aoe2rec` (the parser clone) is gitignored, not committed.
+
+**Honest ceiling:** millions of raw replay FILES don't exist anywhere anymore
+(private blobs + dead aoe2.net). We capture all match RESULTS forward (the crawl)
+and full events for the **recent, still-downloadable** window — plus the 4.33M
+historical `match_ages` we already own. That is the maximum obtainable.
