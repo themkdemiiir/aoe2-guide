@@ -131,11 +131,14 @@ pub fn findings(
         if let (Some(civ), Some(elo)) = (civs.get(&m.info.civ_id).map(String::as_str), elo) {
             let bucket = data::elo_bucket(elo);
             let (feudal_res, castle_res, imp_res) = age_research_s(civ);
-            if let Some((s, exact)) = bench.slice(civ, map_slug, bucket, mode) {
-                let ref_desc = if exact {
-                    format!("{bucket} {mode} median on {map_slug}")
-                } else {
-                    format!("{map_slug} median (all elo/mode)")
+            if let Some((s, kind)) = bench.slice(civ, map_slug, bucket, mode) {
+                let ref_desc = match kind {
+                    data::MatchKind::Exact => format!("{bucket} {mode} median on {map_slug}"),
+                    data::MatchKind::MapMode => format!("{map_slug} {mode} median (all elo)"),
+                    data::MatchKind::MapAll if mode == "1v1" => {
+                        format!("{map_slug} median (no 1v1 baseline — team-heavy rollup)")
+                    }
+                    data::MatchKind::MapAll => format!("{map_slug} median (all elo/mode)"),
                 };
                 if let (Some(fms), Some(ref_s)) = (m.feudal_ms, s.feudal_s) {
                     let comp = fms as f64 / 1000.0 + feudal_res;
@@ -163,7 +166,7 @@ pub fn findings(
                 }
             }
             // --- vs PRO (the exact 2500+ median on this map) — aspirational, only when far behind ---
-            if let Some((p, true)) = bench.slice(civ, map_slug, "2500+", mode) {
+            if let Some((p, data::MatchKind::Exact)) = bench.slice(civ, map_slug, "2500+", mode) {
                 if let (Some(cms), Some(pro_s)) = (m.castle_ms, p.castle_s) {
                     let comp = cms as f64 / 1000.0 + castle_res;
                     if comp > pro_s + 240.0 {

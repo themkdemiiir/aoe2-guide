@@ -43,23 +43,36 @@ struct BenchmarkFile {
     civs: Civs,
 }
 
+/// How precisely a benchmark slice matched the request — lets the coaching note be worded honestly.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum MatchKind {
+    /// exact `(civ, map, bucket, mode)` cell
+    Exact,
+    /// same-mode map rollup `(civ, map, "all", mode)` — right mode, all elo
+    MapMode,
+    /// map all-mode rollup `(civ, map, "all", "all")` — mode-agnostic (team-heavy for a 1v1 request)
+    MapAll,
+}
+
 #[derive(Debug)]
 pub struct Benchmark(Civs);
 
 impl Benchmark {
-    /// Resolve `(civ, map, bucket, mode)` → `(slice, exact?)`. Falls back WITHIN the map to
-    /// the `(civ, map, "all", "all")` rollup, and returns `None` if the map has no data at
-    /// all — so we never compare a player against an unrelated map's median. `exact` is
-    /// false when a rollup was used, so the coaching note can be worded honestly.
-    pub fn slice(&self, civ: &str, map: &str, bucket: &str, mode: &str) -> Option<(&Slice, bool)> {
-        let c = self.0.get(civ)?;
-        if let Some(s) = c.get(map).and_then(|m| m.get(bucket)).and_then(|b| b.get(mode)) {
-            return Some((s, true));
+    /// Resolve `(civ, map, bucket, mode)` → `(slice, kind)`. Falls back WITHIN the map:
+    /// exact → same-mode rollup `(civ, map, "all", mode)` → all-mode rollup
+    /// `(civ, map, "all", "all")` → `None` if the map has no data. So we never compare a player
+    /// against an unrelated map, and a 1v1 request prefers 1v1 data before degrading to the
+    /// team-heavy all-mode median. `kind` lets the coaching note say which baseline was used.
+    pub fn slice(&self, civ: &str, map: &str, bucket: &str, mode: &str) -> Option<(&Slice, MatchKind)> {
+        let m = self.0.get(civ)?.get(map)?;
+        if let Some(s) = m.get(bucket).and_then(|b| b.get(mode)) {
+            return Some((s, MatchKind::Exact));
         }
-        c.get(map)
-            .and_then(|m| m.get("all"))
-            .and_then(|b| b.get("all"))
-            .map(|s| (s, false))
+        let all = m.get("all")?;
+        if let Some(s) = all.get(mode) {
+            return Some((s, MatchKind::MapMode));
+        }
+        all.get("all").map(|s| (s, MatchKind::MapAll))
     }
 }
 
@@ -120,17 +133,38 @@ mod tests {
     fn benchmark_slice_is_map_specific_with_fallback() {
         let b = load_benchmark();
         // exact team cell on arabia
-        let (s, exact) = b.slice("franks", "arabia", "1400-1649", "team").expect("franks arabia");
-        assert!(exact);
+        let (s, kind) = b.slice("franks", "arabia", "1400-1649", "team").expect("franks arabia");
+        assert_eq!(kind, MatchKind::Exact);
         assert!(s.castle_s.unwrap() > 1000.0); // arabia Castle ~21 min
         // arena is much faster to Castle (Fast Castle) — proves map-specificity
         let (a, _) = b.slice("franks", "arena", "1400-1649", "team").expect("franks arena");
         assert!(a.castle_s.unwrap() < s.castle_s.unwrap());
-        // a sparse 1v1 cell falls back to the map rollup (exact = false)
-        let (_, ex) = b.slice("franks", "arabia", "1400-1649", "1v1").expect("fallback");
-        assert!(!ex);
+        // a sparse 1v1 cell falls back to a map rollup (not an exact cell)
+        let (_, kind2) = b.slice("franks", "arabia", "1400-1649", "1v1").expect("fallback");
+        assert_ne!(kind2, MatchKind::Exact);
         // unknown map -> None (never compare against an unrelated map)
         assert!(b.slice("franks", "no_such_map", "1400-1649", "team").is_none());
+    }
+
+    #[test]
+    fn slice_prefers_same_mode_rollup_over_all_mode() {
+        use std::collections::HashMap;
+        let mk = |feudal: f64| Slice { feudal_s: Some(feudal), castle_s: None, imperial_s: None };
+        let mut modes = HashMap::new();
+        modes.insert("1v1".to_string(), mk(100.0));
+        modes.insert("all".to_string(), mk(200.0)); // all-mode (team-heavy) is slower
+        let mut buckets = HashMap::new();
+        buckets.insert("all".to_string(), modes);
+        let mut maps = HashMap::new();
+        maps.insert("arabia".to_string(), buckets);
+        let mut civs = HashMap::new();
+        civs.insert("franks".to_string(), maps);
+        let b = Benchmark(civs);
+        // a 1v1 request with no exact cell must prefer the (map,'all','1v1') rollup
+        // over the team-heavy (map,'all','all') rollup.
+        let (s, kind) = b.slice("franks", "arabia", "1400-1649", "1v1").expect("rollup");
+        assert_eq!(kind, MatchKind::MapMode);
+        assert_eq!(s.feudal_s, Some(100.0));
     }
 
     #[test]
