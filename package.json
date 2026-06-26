@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/validate-icons.mjs && node scripts/verify-build-facts.mjs && node scripts/validate-data.mjs && node scripts/audit-yaml-translations.mjs && node scripts/build-og.mjs && node scripts/optimize-images.mjs",
+    "prebuild": "node scripts/validate-icons.mjs && node scripts/verify-build-facts.mjs && node scripts/validate-data.mjs && node scripts/validate-stats.mjs && node scripts/audit-yaml-translations.mjs && node scripts/build-og.mjs && node scripts/optimize-images.mjs",
     "validate:data": "node scripts/validate-data.mjs",
+    "validate:stats": "node scripts/validate-stats.mjs",
     "build:og": "node scripts/build-og.mjs",
     "build": "astro build",
     "preview": "astro preview",
