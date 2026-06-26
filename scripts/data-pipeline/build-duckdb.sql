@@ -14,9 +14,11 @@ SELECT
   f.ladder, f.match_id, f.completed,
   strftime(to_timestamp(f.completed), '%Y-%m') AS month,
   f.gamemod_id, f.map_raw,
+  -- paired SQL face of scripts/data-pipeline/lib/buckets.mjs (eloCaseSql/canonMap) — keep thresholds in sync
   regexp_replace(lower(regexp_replace(f.map_raw, '\.[a-z0-9]+$', '')), '[^a-z0-9]', '', 'g') AS map_canon,
   COALESCE(f.team_size, 2) AS team_size,
   f.p.profile_id AS profile_id, f.p.civ_id AS civ_id, cm.civ_slug, f.p.rating AS rating,
+  -- paired SQL face of scripts/data-pipeline/lib/buckets.mjs (eloCaseSql/canonMap) — keep thresholds in sync
   CASE WHEN f.p.rating IS NULL THEN 'unknown' WHEN f.p.rating<1000 THEN '<1000' WHEN f.p.rating<1200 THEN '1000-1199' WHEN f.p.rating<1400 THEN '1200-1399' WHEN f.p.rating<1650 THEN '1400-1649' WHEN f.p.rating<1800 THEN '1650-1799' WHEN f.p.rating<2000 THEN '1800-1999' WHEN f.p.rating<2200 THEN '2000-2199' WHEN f.p.rating<2500 THEN '2200-2499' ELSE '2500+' END AS elo_bucket,
   f.p.won AS won
 FROM flat f LEFT JOIN civmap cm ON cm.civ_id = f.p.civ_id;

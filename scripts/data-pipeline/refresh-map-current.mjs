@@ -13,6 +13,7 @@
 import { createReadStream, readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline";
 import path from "node:path";
+import { canonMap, eloBucket } from "./lib/buckets.mjs";
 
 const IN = path.resolve("data-cache/relic-patched/matches.ndjson");
 const META = path.resolve("src/data/map-meta.json");
@@ -22,10 +23,6 @@ const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civiliz
 const meta = JSON.parse(readFileSync(META, "utf8"));
 
 const pct = (x) => +(x * 100).toFixed(2);
-const canon = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
-const eloBucket = (r) =>
-  r < 1000 ? "<1000" : r < 1200 ? "1000-1199" : r < 1400 ? "1200-1399" : r < 1650 ? "1400-1649"
-  : r < 1800 ? "1650-1799" : r < 2000 ? "1800-1999" : r < 2200 ? "2000-2199" : r < 2500 ? "2200-2499" : "2500+";
 
 const MIN_MAP = 3000; // map needs this many current 1v1 matches to be included
 const MIN_ALL = 200; // per-civ gate, "all" bucket
@@ -35,7 +32,7 @@ const MIN_RANKED_CIVS = 10; // a NEW (crawl-only) map needs this many civs in "a
 // canon(map name) -> map-meta key (prefer the higher-volume variant)
 const canonToKey = {};
 for (const [k, v] of Object.entries(meta.maps)) {
-  const c = canon(k);
+  const c = canonMap(k);
   const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
   if (!canonToKey[c] || g > canonToKey[c].g) canonToKey[c] = { key: k, g };
 }
@@ -51,7 +48,7 @@ const mkKey = (raw) =>
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_+|_+$/g, "");
 const mapKeyFor = (raw) => {
-  const c = canon(String(raw).replace(/\.[a-z0-9]+$/i, "")); // strip extension, canonicalize
+  const c = canonMap(raw); // canonMap strips the extension + non-alphanumerics itself
   return canonToKey[c]?.key ?? mkKey(raw); // existing archive key, or a fresh crawl-only key
 };
 
@@ -59,6 +56,7 @@ const mapKeyFor = (raw) => {
 const acc = {};
 const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
 let used = 0;
+let skippedNullElo = 0;
 for await (const line of rl) {
   if (!line.trim()) continue;
   let m;
@@ -70,8 +68,8 @@ for await (const line of rl) {
   for (const pl of m.players ?? []) {
     const slug = civIdMap[String(pl.civ_id)];
     if (!slug || !guideCivs.has(slug)) continue;
-    const b = eloBucket(pl.rating ?? 0);
-    for (const bk of [b, "all"]) {
+    const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
+    for (const bk of [eb, "all"]) {
       const cw = (((mp[bk] ??= {})[slug] ??= { g: 0, w: 0 }));
       cw.g++;
       if (pl.won) cw.w++;
@@ -113,5 +111,5 @@ for (const [key, buckets] of Object.entries(acc)) {
 meta.source = "aoestats.io ranked archive (team) + self-collected World's Edge live ladder (1v1, current)";
 meta.generated = new Date().toISOString().slice(0, 10);
 writeFileSync(META, `${JSON.stringify(meta, null, 2)}\n`, "utf8");
-console.log(`refresh-map-current: ${used} crawl rows · ${refreshed} maps refreshed · ${added} crawl-only maps added → ${META}`);
+console.log(`refresh-map-current: ${used} crawl rows · ${refreshed} maps refreshed · ${added} crawl-only maps added · ${skippedNullElo} null-elo dropped → ${META}`);
 if (added) console.log(`  added: ${addedKeys.sort().join(", ")}`);

@@ -12,6 +12,7 @@
 import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { ELO_BUCKETS_WITH_ALL, eloCaseSql } from "./lib/buckets.mjs";
 
 const HOME = process.env.HOME;
 const DUCK = `${HOME}/bin/duckdb`;
@@ -121,7 +122,7 @@ console.log(`civ-matchups-team: ${Object.keys(teamCivs).length} civs → ${OUT3}
 
 // ---- 1v1 head-to-head by elo bucket (for the compare page's elo filter) ----
 console.log("Aggregating 1v1 h2h by elo bucket…");
-const ELO = `CASE WHEN a.new_rating<1000 THEN '<1000' WHEN a.new_rating<1200 THEN '1000-1199' WHEN a.new_rating<1400 THEN '1200-1399' WHEN a.new_rating<1650 THEN '1400-1649' WHEN a.new_rating<1800 THEN '1650-1799' WHEN a.new_rating<2000 THEN '1800-1999' WHEN a.new_rating<2200 THEN '2000-2199' WHEN a.new_rating<2500 THEN '2200-2499' ELSE '2500+' END`;
+const ELO = eloCaseSql("a.new_rating");
 const MIN_BUCKET = 150;
 const eloRows = duck(`
   SELECT a.civ civ, b.civ opp, ${ELO} bucket, count(*) g, sum(a.winner::int) w
@@ -157,7 +158,7 @@ writeFileSync(OUT4, `${JSON.stringify({
   source: out.source,
   generated: out.generated,
   ladder: "1v1",
-  eloBuckets: ["all", "<1000", "1000-1199", "1200-1399", "1400-1649", "1650-1799", "1800-1999", "2000-2199", "2200-2499", "2500+"],
+  eloBuckets: ELO_BUCKETS_WITH_ALL,
   minGames: { bucket: MIN_BUCKET, all: 300 },
   note: "[winRate, games] of <civ> vs <opp> per elo bucket (a's rating). Mirrors excluded.",
   civs: eloCivs,

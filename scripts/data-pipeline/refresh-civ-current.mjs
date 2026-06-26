@@ -14,6 +14,7 @@
 import { createReadStream, readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline";
 import path from "node:path";
+import { canonMap, eloBucket } from "./lib/buckets.mjs";
 
 const IN = path.resolve("data-cache/relic-patched/matches.ndjson");
 const META = path.resolve("src/data/civ-meta.json");
@@ -24,10 +25,6 @@ const meta = JSON.parse(readFileSync(META, "utf8"));
 const mapMeta = JSON.parse(readFileSync(path.resolve("src/data/map-meta.json"), "utf8"));
 
 const pct = (x) => +(x * 100).toFixed(2);
-const canon = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
-const eloBucket = (r) =>
-  r < 1000 ? "<1000" : r < 1200 ? "1000-1199" : r < 1400 ? "1200-1399" : r < 1650 ? "1400-1649"
-  : r < 1800 ? "1650-1799" : r < 2000 ? "1800-1999" : r < 2200 ? "2000-2199" : r < 2500 ? "2200-2499" : "2500+";
 const tierOf = (w) => (w >= 53 ? "S" : w >= 51 ? "A" : w >= 49 ? "B" : w >= 47 ? "C" : "D");
 function wilson(wins, n, z = 1.96) {
   if (!n) return [0, 0];
@@ -43,15 +40,16 @@ const MIN_MAP = 200; // per-map gate
 // crawl map filename → map-meta key (so byMap keys stay consistent with map pages)
 const canonToKey = {};
 for (const [k, v] of Object.entries(mapMeta.maps)) {
-  const cc = canon(k);
+  const cc = canonMap(k);
   const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
   if (!canonToKey[cc] || g > canonToKey[cc].g) canonToKey[cc] = { key: k, g };
 }
-const mapKeyFor = (raw) => canonToKey[canon(String(raw).replace(/\.[a-z0-9]+$/i, ""))]?.key ?? null;
+const mapKeyFor = (raw) => canonToKey[canonMap(raw)]?.key ?? null; // canonMap strips the extension itself
 
 // --- aggregate the crawl per civ ---
 const civ = {};
 let totalApp = 0;
+let skippedNullElo = 0;
 const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
 for await (const line of rl) {
   if (!line.trim()) continue;
@@ -65,8 +63,8 @@ for await (const line of rl) {
     const c = (civ[slug] ??= { g: 0, w: 0, byElo: {}, byMap: {} });
     const won = pl.won ? 1 : 0;
     c.g++; c.w += won;
-    const b = eloBucket(pl.rating ?? 0);
-    const be = (c.byElo[b] ??= { g: 0, w: 0 }); be.g++; be.w += won;
+    const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
+    const be = (c.byElo[eb] ??= { g: 0, w: 0 }); be.g++; be.w += won;
     if (mapKey) { const bm = (c.byMap[mapKey] ??= { g: 0, w: 0 }); bm.g++; bm.w += won; }
   }
 }
@@ -95,4 +93,4 @@ meta.appearances = { ...(meta.appearances ?? {}), "1v1": totalApp };
 meta.source = "self-collected World's Edge live ladder (1v1, current) + aoestats archive (team)";
 meta.generated = new Date().toISOString().slice(0, 10);
 writeFileSync(META, `${JSON.stringify(meta, null, 2)}\n`, "utf8");
-console.log(`refresh-civ-current: ${totalApp} crawl appearances · ${updated} civs got current 1v1 overall/byElo/byMap → ${META}`);
+console.log(`refresh-civ-current: ${totalApp} crawl appearances · ${updated} civs got current 1v1 overall/byElo/byMap · ${skippedNullElo} null-elo dropped → ${META}`);

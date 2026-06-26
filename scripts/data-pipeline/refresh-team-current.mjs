@@ -15,6 +15,7 @@
 import { createReadStream, readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline";
 import path from "node:path";
+import { canonMap, eloBucket } from "./lib/buckets.mjs";
 
 const IN = path.resolve("data-cache/relic-team/matches.ndjson");
 const CIV_META = path.resolve("src/data/civ-meta.json");
@@ -26,10 +27,6 @@ const civMeta = JSON.parse(readFileSync(CIV_META, "utf8"));
 const mapMeta = JSON.parse(readFileSync(MAP_META, "utf8"));
 
 const pct = (x) => +(x * 100).toFixed(2);
-const canon = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
-const eloBucket = (r) =>
-  r < 1000 ? "<1000" : r < 1200 ? "1000-1199" : r < 1400 ? "1200-1399" : r < 1650 ? "1400-1649"
-  : r < 1800 ? "1650-1799" : r < 2000 ? "1800-1999" : r < 2200 ? "2000-2199" : r < 2500 ? "2200-2499" : "2500+";
 const tierOf = (w) => (w >= 53 ? "S" : w >= 51 ? "A" : w >= 49 ? "B" : w >= 47 ? "C" : "D");
 function wilson(wins, n, z = 1.96) {
   if (!n) return [0, 0];
@@ -50,16 +47,17 @@ const MIN_RANKED_CIVS = 10; // a map's team "all" bucket needs this many civs to
 // crawl map filename → map-meta key (keep byMap keys consistent with the map pages)
 const canonToKey = {};
 for (const [k, v] of Object.entries(mapMeta.maps)) {
-  const cc = canon(k);
+  const cc = canonMap(k);
   const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
   if (!canonToKey[cc] || g > canonToKey[cc].g) canonToKey[cc] = { key: k, g };
 }
-const mapKeyFor = (raw) => canonToKey[canon(String(raw).replace(/\.[a-z0-9]+$/i, ""))]?.key ?? null;
+const mapKeyFor = (raw) => canonToKey[canonMap(raw)]?.key ?? null; // canonMap strips the extension itself
 
 // --- one streaming pass: aggregate per-civ AND per-map×bucket×civ ---
 const civ = {}; // slug -> { g, w, byElo, byMap }
 const mapAgg = {}; // mapKey -> bucket -> slug -> { g, w }
 let totalApp = 0;
+let skippedNullElo = 0;
 const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
 for await (const line of rl) {
   if (!line.trim()) continue;
@@ -72,15 +70,15 @@ for await (const line of rl) {
     if (!slug || !guideCivs.has(slug)) continue;
     totalApp++;
     const won = pl.won ? 1 : 0;
-    const b = eloBucket(pl.rating ?? 0);
+    const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
     // civ aggregate
     const c = (civ[slug] ??= { g: 0, w: 0, byElo: {}, byMap: {} });
     c.g++; c.w += won;
-    const be = (c.byElo[b] ??= { g: 0, w: 0 }); be.g++; be.w += won;
+    const be = (c.byElo[eb] ??= { g: 0, w: 0 }); be.g++; be.w += won;
     if (mapKey) { const bm = (c.byMap[mapKey] ??= { g: 0, w: 0 }); bm.g++; bm.w += won; }
     // map aggregate (per bucket + "all")
     if (mp) {
-      for (const bk of [b, "all"]) {
+      for (const bk of [eb, "all"]) {
         const cw = ((mp[bk] ??= {})[slug] ??= { g: 0, w: 0 });
         cw.g++; cw.w += won;
       }
@@ -136,6 +134,6 @@ mapMeta.source = "self-collected World's Edge live ladder (1v1 + team, current)"
 mapMeta.generated = today;
 writeFileSync(CIV_META, `${JSON.stringify(civMeta, null, 2)}\n`, "utf8");
 writeFileSync(MAP_META, `${JSON.stringify(mapMeta, null, 2)}\n`, "utf8");
-console.log(`refresh-team-current: ${totalApp} team appearances · ${civUpdated} civs + ${mapUpdated} maps got current team data`);
+console.log(`refresh-team-current: ${totalApp} team appearances · ${civUpdated} civs + ${mapUpdated} maps got current team data · ${skippedNullElo} null-elo dropped`);
 console.log(`  → ${CIV_META}`);
 console.log(`  → ${MAP_META}`);

@@ -71,7 +71,7 @@ async function run() {
     matches++;
     if (m.completed) { minDate = Math.min(minDate, m.completed); maxDate = Math.max(maxDate, m.completed); }
     for (const p of m.players ?? []) {
-      if (MIN_ELO && (p.rating ?? 0) < MIN_ELO) continue;
+      if (MIN_ELO && (p.rating == null || p.rating < MIN_ELO)) continue;
       const slug = civIdMap[String(p.civ_id)];
       if (slug === undefined) { unknownIds.add(p.civ_id); continue; }
       if (!guideCivs.has(slug)) { skippedExcluded++; continue; } // Chronicles/removed civ — not in this guide

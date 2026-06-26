@@ -18,6 +18,7 @@
 import { createReadStream, readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline";
 import path from "node:path";
+import { canonMap, eloBucket } from "./lib/buckets.mjs";
 
 const IN = path.resolve("data-cache/relic-patched/matches.ndjson");
 const OUT = path.resolve("public/civ-cube.json");
@@ -28,10 +29,6 @@ const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civiliz
 const civMeta = JSON.parse(readFileSync(path.resolve("src/data/civ-meta.json"), "utf8"));
 const mapMeta = JSON.parse(readFileSync(path.resolve("src/data/map-meta.json"), "utf8"));
 
-const canon = (s) => String(s).toLowerCase().replace(/\.[a-z0-9]+$/i, "").replace(/[^a-z0-9]/g, "");
-const eloBucket = (r) =>
-  r < 1000 ? "<1000" : r < 1200 ? "1000-1199" : r < 1400 ? "1200-1399" : r < 1650 ? "1400-1649"
-  : r < 1800 ? "1650-1799" : r < 2000 ? "1800-1999" : r < 2200 ? "2000-2199" : r < 2500 ? "2200-2499" : "2500+";
 const monthKey = (t) => { const d = new Date(t * 1000); return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; };
 const prettify = (s) => s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
@@ -43,16 +40,17 @@ const monthLabel = Object.fromEntries(patchMeta.map((p) => [p.patch, p.label]));
 // crawl map name → map-meta key (so the map filter lines up with the map pages)
 const canonToKey = {};
 for (const [k, v] of Object.entries(mapMeta.maps)) {
-  const c = canon(k);
+  const c = canonMap(k);
   const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
   if (!canonToKey[c] || g > canonToKey[c].g) canonToKey[c] = { key: k, g };
 }
-const mapKeyFor = (raw) => canonToKey[canon(raw)]?.key ?? null;
+const mapKeyFor = (raw) => canonToKey[canonMap(raw)]?.key ?? null;
 
 // --- aggregate: "civ|elo|map|month" -> [games, wins] ---
 const cube = {};
 const mapGames = {};
 let rows = 0;
+let skippedNullElo = 0;
 const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
 for await (const line of rl) {
   if (!line.trim()) continue;
@@ -66,7 +64,8 @@ for await (const line of rl) {
   for (const pl of m.players ?? []) {
     const slug = civIdMap[String(pl.civ_id)];
     if (!slug || !guideCivs.has(slug)) continue;
-    const k = `${slug}|${eloBucket(pl.rating ?? 0)}|${mk}|${mo}`;
+    const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
+    const k = `${slug}|${eb}|${mk}|${mo}`;
     const cw = (cube[k] ??= [0, 0]);
     cw[0]++; if (pl.won) cw[1]++;
     mapGames[mk] = (mapGames[mk] ?? 0) + 1;
@@ -103,6 +102,6 @@ writeFileSync(OUT, JSON.stringify(out));
 // Tiny dims file (no rows) for the page to import at build time → dropdowns that
 // exactly match the cube. The big `rows` stay in public/ and are fetched on demand.
 writeFileSync(DIMS, `${JSON.stringify({ generated: out.generated, elos, maps, mapNames: out.mapNames, months: out.months }, null, 2)}\n`);
-console.log(`build-civ-cube: ${rows} appearances · ${packed.length} cells · ${civs.length} civs × ${elos.length} elos × ${maps.length} maps × ${months.length} months`);
+console.log(`build-civ-cube: ${rows} appearances · ${packed.length} cells · ${civs.length} civs × ${elos.length} elos × ${maps.length} maps × ${months.length} months · ${skippedNullElo} null-elo dropped`);
 console.log(`  → ${OUT}`);
 console.log(`  → ${DIMS}`);

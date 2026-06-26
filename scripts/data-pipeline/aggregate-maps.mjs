@@ -12,6 +12,7 @@
 import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { ELO_BUCKETS, eloCaseSql } from "./lib/buckets.mjs";
 
 const HOME = process.env.HOME;
 const DUCK = `${HOME}/bin/duckdb`;
@@ -30,9 +31,8 @@ function duck(sql) {
 }
 const pct = (x) => +(x * 100).toFixed(2);
 
-const ELO = `CASE WHEN p.new_rating<1000 THEN '<1000' WHEN p.new_rating<1200 THEN '1000-1199' WHEN p.new_rating<1400 THEN '1200-1399' WHEN p.new_rating<1650 THEN '1400-1649' WHEN p.new_rating<1800 THEN '1650-1799' WHEN p.new_rating<2000 THEN '1800-1999' WHEN p.new_rating<2200 THEN '2000-2199' WHEN p.new_rating<2500 THEN '2200-2499' ELSE '2500+' END`;
-const BUCKETS = ["<1000", "1000-1199", "1200-1399", "1400-1649", "1650-1799", "1800-1999", "2000-2199", "2200-2499", "2500+"];
-const TIERS = ["all", ...BUCKETS]; // "all" first
+const ELO = eloCaseSql("p.new_rating");
+const TIERS = ["all", ...ELO_BUCKETS]; // "all" first
 
 const MIN_ALL = 200; // min games for an "all elo" civ entry on a map
 const MIN_BUCKET = 60; // min games for a single-bucket civ entry on a map

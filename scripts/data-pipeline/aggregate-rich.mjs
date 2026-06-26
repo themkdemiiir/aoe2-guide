@@ -15,6 +15,7 @@
 import { execSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { ELO_BUCKETS, eloBucket, eloCaseSql } from "./lib/buckets.mjs";
 
 const HOME = process.env.HOME;
 const DUCK = `${HOME}/bin/duckdb`;
@@ -46,8 +47,7 @@ function wilson(wins, n, z = 1.96) {
 }
 const tier = (w) => (w >= 53 ? "S" : w >= 51 ? "A" : w >= 49 ? "B" : w >= 47 ? "C" : "D");
 const pct = (x) => +(x * 100).toFixed(2);
-const ELO = `CASE WHEN p.new_rating<1000 THEN '<1000' WHEN p.new_rating<1200 THEN '1000-1199' WHEN p.new_rating<1400 THEN '1200-1399' WHEN p.new_rating<1650 THEN '1400-1649' WHEN p.new_rating<1800 THEN '1650-1799' WHEN p.new_rating<2000 THEN '1800-1999' WHEN p.new_rating<2200 THEN '2000-2199' WHEN p.new_rating<2500 THEN '2200-2499' ELSE '2500+' END`;
-const ELO_BUCKETS = ["<1000", "1000-1199", "1200-1399", "1400-1649", "1650-1799", "1800-1999", "2000-2199", "2200-2499", "2500+"];
+const ELO = eloCaseSql("p.new_rating");
 const idx = (rows) => { const m = {}; for (const r of rows) (m[r.civ] ??= []).push(r); return m; };
 
 // ---- aggregate one ladder (a leaderboard value) into per-civ breakdowns ----
@@ -69,9 +69,9 @@ const L = { "1v1": aggregateLadder("random_map"), team: aggregateLadder("team_ra
 
 // ---- self-collected live 1v1 data, merged into the 1v1 ladder ----
 let liveApp = 0;
+let skippedNullElo = 0;
 const liveTally = {}; // civ -> {games, wins, byElo:{bucket:{games,wins}}}
 if (existsSync(path.resolve(RELIC))) {
-  const eloBucket = (e) => (e < 1000 ? "<1000" : e < 1200 ? "1000-1199" : e < 1400 ? "1200-1399" : e < 1650 ? "1400-1649" : e < 1800 ? "1650-1799" : e < 2000 ? "1800-1999" : e < 2200 ? "2000-2199" : e < 2500 ? "2200-2499" : "2500+");
   for (const line of readFileSync(path.resolve(RELIC), "utf8").split("\n")) {
     if (!line.trim()) continue;
     let m; try { m = JSON.parse(line); } catch { continue; }
@@ -80,8 +80,9 @@ if (existsSync(path.resolve(RELIC))) {
       if (!slug || !guideCivs.has(slug)) continue;
       const t = (liveTally[slug] ??= { games: 0, wins: 0, byElo: {} });
       t.games++; if (pl.won) t.wins++;
-      const b = eloBucket(pl.rating ?? 0); (t.byElo[b] ??= { games: 0, wins: 0 });
-      t.byElo[b].games++; if (pl.won) t.byElo[b].wins++;
+      const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
+      (t.byElo[eb] ??= { games: 0, wins: 0 });
+      t.byElo[eb].games++; if (pl.won) t.byElo[eb].wins++;
       liveApp++;
     }
   }
@@ -136,4 +137,4 @@ const out = {
 writeFileSync(OUT, `${JSON.stringify(out, null, 2)}\n`, "utf8");
 const r1 = Object.values(civs).filter((c) => c["1v1"]).length;
 const rt = Object.values(civs).filter((c) => c.team).length;
-console.log(`civ-meta: 1v1 ${(L["1v1"].totalApp / 1e6).toFixed(1)}M (+${liveApp} live) · team ${(L.team.totalApp / 1e6).toFixed(1)}M · ${r1} civs 1v1 / ${rt} team · ${out.patches.length} patches → ${OUT}`);
+console.log(`civ-meta: 1v1 ${(L["1v1"].totalApp / 1e6).toFixed(1)}M (+${liveApp} live) · team ${(L.team.totalApp / 1e6).toFixed(1)}M · ${r1} civs 1v1 / ${rt} team · ${out.patches.length} patches · ${skippedNullElo} null-elo dropped → ${OUT}`);

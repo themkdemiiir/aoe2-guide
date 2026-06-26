@@ -21,6 +21,7 @@ import { readdirSync, mkdirSync, renameSync, writeFileSync, existsSync } from "n
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import os from "node:os";
+import { eloCaseSql } from "./lib/buckets.mjs";
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((acc, a, i, arr) => {
@@ -32,8 +33,7 @@ const DB = path.resolve(args.db ?? `${os.homedir()}/aoe2-guide/data-cache/aoe2.d
 const STREAM_DIR = path.resolve(args["stream-dir"] ?? `${os.homedir()}/aoe2-guide/data-cache/relic-stream`);
 const DUCKDB = args.duckdb ?? `${os.homedir()}/bin/duckdb`;
 
-const ELO_CASE =
-  "CASE WHEN f.p.rating IS NULL THEN 'unknown' WHEN f.p.rating<1000 THEN '<1000' WHEN f.p.rating<1200 THEN '1000-1199' WHEN f.p.rating<1400 THEN '1200-1399' WHEN f.p.rating<1650 THEN '1400-1649' WHEN f.p.rating<1800 THEN '1650-1799' WHEN f.p.rating<2000 THEN '1800-1999' WHEN f.p.rating<2200 THEN '2000-2199' WHEN f.p.rating<2500 THEN '2200-2499' ELSE '2500+' END";
+const ELO_CASE = eloCaseSql("f.p.rating");
 
 // shards directly under <stream>/<ladder>/ (NOT under ingested/)
 function shardsFor(ladder) {
@@ -57,6 +57,7 @@ const rawBranches = ladders
 
 // QUALIFY drops intra-batch dups (same match across two sweep shards); the NOT IN
 // drops matches already in games (from aoestats or an earlier crawl).
+// The inline map-raw -> map regex below mirrors canonMap()/build-duckdb.sql.
 const sql = `
 .mode box
 SELECT count(*) AS games_before FROM games;
