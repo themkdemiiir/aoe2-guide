@@ -9,9 +9,24 @@ use crate::analyze::position::CoordMetric;
 use crate::analyze::walk::Walked;
 use crate::analyze::{float, metrics};
 
-const FEUDAL_RES_S: f64 = 130.0; // source: spec age research durations
+const FEUDAL_RES_S: f64 = 130.0; // baseline age-up research (data.json Tech 101/102/103 ResearchTime)
 const CASTLE_RES_S: f64 = 160.0;
 const IMP_RES_S: f64 = 190.0;
+
+// Malay: "Advancing to the next Age is 66% faster" (src/data/civilizations.json malay bonus;
+// AoE2 wiki / Liquipedia Feudal Age). "66% faster" = research-rate ×1.66 ⇒ time = base / 1.66,
+// confirmed by the wiki's Malay Feudal 78s (=130/1.66) and Castle 96s (=160/1.66).
+const MALAY_AGE_FACTOR: f64 = 1.0 / 1.66;
+
+/// Click→completion research durations, civ-aware. Baseline 130/160/190s is the standard
+/// no-bonus age-up research time; only civs with a sourced age-up speed bonus deviate.
+fn age_research_s(civ: &str) -> (f64, f64, f64) {
+    let m = match civ {
+        "malay" => MALAY_AGE_FACTOR,
+        _ => 1.0,
+    };
+    (FEUDAL_RES_S * m, CASTLE_RES_S * m, IMP_RES_S * m)
+}
 
 /// Compute every player's metrics. Roles + coordinate metrics are computed upstream
 /// (they need cross-player context) and threaded in.
@@ -115,6 +130,7 @@ pub fn findings(
         let elo = if team { m.elo_team.or(m.elo_1v1) } else { m.elo_1v1.or(m.elo_team) };
         if let (Some(civ), Some(elo)) = (civs.get(&m.info.civ_id).map(String::as_str), elo) {
             let bucket = data::elo_bucket(elo);
+            let (feudal_res, castle_res, imp_res) = age_research_s(civ);
             if let Some((s, exact)) = bench.slice(civ, map_slug, bucket, mode) {
                 let ref_desc = if exact {
                     format!("{bucket} {mode} median on {map_slug}")
@@ -122,7 +138,7 @@ pub fn findings(
                     format!("{map_slug} median (all elo/mode)")
                 };
                 if let (Some(fms), Some(ref_s)) = (m.feudal_ms, s.feudal_s) {
-                    let comp = fms as f64 / 1000.0 + FEUDAL_RES_S;
+                    let comp = fms as f64 / 1000.0 + feudal_res;
                     if comp > ref_s + 60.0 {
                         let sev = if comp > ref_s + 120.0 { Severity::High } else { Severity::Med };
                         out.push(mk(pn, "Feudal up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
@@ -131,7 +147,7 @@ pub fn findings(
                 }
                 if let (Some(cms), Some(ref_s)) = (m.castle_ms, s.castle_s) {
                     let slack = if matches!(m.role, Some(Role::Pocket)) { 180.0 } else { 90.0 };
-                    let comp = cms as f64 / 1000.0 + CASTLE_RES_S;
+                    let comp = cms as f64 / 1000.0 + castle_res;
                     if comp > ref_s + slack {
                         let sev = if comp > ref_s + slack + 90.0 { Severity::High } else { Severity::Med };
                         out.push(mk(pn, "Castle up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
@@ -139,7 +155,7 @@ pub fn findings(
                     }
                 }
                 if let (Some(ims), Some(ref_s)) = (m.imperial_ms, s.imperial_s) {
-                    let comp = ims as f64 / 1000.0 + IMP_RES_S;
+                    let comp = ims as f64 / 1000.0 + imp_res;
                     if comp > ref_s + 180.0 {
                         out.push(mk(pn, "Imperial up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, Severity::Low,
                             &format!("Slower to Imperial than the {ref_desc}.")));
@@ -149,7 +165,7 @@ pub fn findings(
             // --- vs PRO (the exact 2500+ median on this map) — aspirational, only when far behind ---
             if let Some((p, true)) = bench.slice(civ, map_slug, "2500+", mode) {
                 if let (Some(cms), Some(pro_s)) = (m.castle_ms, p.castle_s) {
-                    let comp = cms as f64 / 1000.0 + CASTLE_RES_S;
+                    let comp = cms as f64 / 1000.0 + castle_res;
                     if comp > pro_s + 240.0 {
                         out.push(mk(pn, "Castle vs pro", &fmt_mmss(comp), &fmt_mmss(pro_s), Basis::Pro, Severity::Low,
                             &format!("Castle is {} behind the 2500+ {map_slug} median — the pace to aim for.",
@@ -288,5 +304,18 @@ mod tests {
         let f = findings(&[m, pm(2, 0, Some(600_000))], &load_benchmark(), &civs, Family::Open, "arabia");
         // 2 players => 1v1 mode; franks arabia 1v1 falls back to the arabia rollup.
         assert!(f.iter().any(|x| x.metric == "Feudal up-time" && x.basis == Basis::YourElo));
+    }
+
+    #[test]
+    fn age_research_no_bonus_civ_uses_baseline() {
+        assert_eq!(age_research_s("franks"), (130.0, 160.0, 190.0));
+    }
+
+    #[test]
+    fn age_research_malay_faster_than_baseline() {
+        let (f, c, i) = age_research_s("malay");
+        assert!(f < 130.0 && c < 160.0 && i < 190.0);
+        // 130 / 1.66 ≈ 78.31
+        assert!((f - 130.0 / 1.66).abs() < 0.01);
     }
 }
