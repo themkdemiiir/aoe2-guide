@@ -99,11 +99,14 @@ exact resources (stated in the report footer).
 - `civs.tsv` — civ id → slug (benchmark key). From `src/data/civ-id-map.json`.
 - `costs.json` — unit/building/tech costs for the float estimator. Regenerate:
   `node scripts/data-pipeline/build-costs.mjs` (reads `.cache/aoe2-data/data.json`).
-- `benchmark.json` — age-up median timings per civ. **v1 is an all-ELO placeholder**
-  (`_partial: true`) from `match_ages.parquet`; regenerate the full
-  civ×elo_bucket×(1v1|team) version with `build-benchmark.sql` + `build-benchmark.mjs`
-  on the VM when the DuckDB is unlocked. Villager medians are deferred (the historical
-  per-age basis differs from the analyzer's cumulative count).
+- `benchmark.json` — age-up median timings, the full **civ × map(slug) × elo_bucket × mode**
+  shape: medians of `games.{feudal,castle,imperial}_t` (age COMPLETION seconds), with
+  `mode` (`1v1`|`team`) keyed by `games.ladder`, plus per-map and per-civ `"all"` rollups.
+  Baked into the binary via `include_str!`; `data.rs`'s `Benchmark::slice` resolves
+  `(civ, map, bucket, mode)` with same-mode → all-mode fallback WITHIN the map.
+  Regenerate with `build-benchmark.sql` + `build-benchmark.mjs` on the VM when the DuckDB
+  is unlocked. Villager medians are deferred (the historical per-age basis differs from the
+  analyzer's cumulative count).
 
 ## Layout
 
@@ -116,4 +119,4 @@ exact resources (stated in the report footer).
 | `store.rs`    | gzipped NDJSON shard writers (`store.py`'s parquet writer)   |
 | `pipeline.rs` | orchestrator: batch → rayon download+parse → store (`pipeline.py`) |
 | `seed.rs`     | seed-file (csv/newline) parsing                              |
-| `main.rs`     | CLI: `seed` / `run` / `bench`                                |
+| `main.rs`     | CLI: `seed` / `run` / `bench` / `analyze`                    |

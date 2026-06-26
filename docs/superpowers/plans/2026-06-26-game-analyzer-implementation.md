@@ -1,5 +1,10 @@
 # Game Analyzer Implementation Plan
 
+> **STATUS (2026-06-26):** v1 is BUILT — the `analyze` subcommand (Tasks 1–13) is
+> implemented and committed on branch `feat/analyzer-foundation`. The unchecked
+> `- [ ]` boxes below are HISTORICAL (the plan as originally written); they were
+> not re-ticked. Treat this document as the design record, not a live checklist.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add an `analyze` subcommand to the `replay-rs` crate that turns one ranked replay into a per-player macro-coaching scorecard + "top fixes".

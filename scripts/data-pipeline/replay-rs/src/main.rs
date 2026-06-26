@@ -5,8 +5,10 @@
 //! + parses in parallel with rayon.
 //!
 //! Usage:
-//!   replay-rs seed <ids.csv|ids.txt> [--db <manifest.sqlite>] [--ladder L] [--played-at TS]
-//!   replay-rs run  [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]
+//!   replay-rs seed    <ids.csv|ids.txt> [--db <manifest.sqlite>] [--ladder L] [--played-at TS]
+//!   replay-rs run     [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]
+//!   replay-rs bench   <dir of .aoe2record> [--threads N] [--repeat N]
+//!   replay-rs analyze <file.aoe2record>|--match-id N [--you NAME]
 //!
 //! Defaults: --db ./manifest.sqlite  --out ./shards  --threads 12
 
@@ -216,7 +218,9 @@ fn print_usage() {
          \n\
          USAGE:\n  \
            replay-rs seed <ids.csv|ids.txt> [--db <manifest.sqlite>]\n  \
-           replay-rs run [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]\n\
+           replay-rs run [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]\n  \
+           replay-rs bench <dir of .aoe2record> [--threads N] [--repeat N]\n  \
+           replay-rs analyze <file.aoe2record>|--match-id N [--you NAME]\n\
          \n\
          DEFAULTS: --db {DEFAULT_DB}  --out {DEFAULT_OUT}  --threads {DEFAULT_THREADS}"
     );

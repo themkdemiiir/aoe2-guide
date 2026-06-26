@@ -2,10 +2,11 @@
 // replay-rs/data/benchmark.json: { civs: { civ: { map: { bucket: { mode: {feudal_s,castle_s,imperial_s} } } } } }.
 // Run from repo root: node scripts/data-pipeline/build-benchmark.mjs bench.csv
 //
-// NOTE: this emits the RICH 4-dimension shape (civ × map × bucket × mode). The current
-// committed benchmark.json is a 3-dimension all-map placeholder and data.rs's loader reads
-// civ→bucket→mode; when you adopt this richer file, add the `map` level to data.rs
-// (BenchmarkFile + Benchmark::slice fallback: civ→map→bucket→mode, falling back map→"all").
+// NOTE: this emits the RICH 4-dimension shape (civ × map × bucket × mode), which is exactly
+// what the committed benchmark.json now is and what data.rs reads: BenchmarkFile decodes
+// civ→map(slug)→bucket→mode and Benchmark::slice falls back WITHIN the map
+// (exact → same-mode map rollup civ→map→"all"→mode → all-mode rollup civ→map→"all"→"all").
+// `mode` is '1v1'|'team' derived from games.ladder (NOT team_size); the CSV carries it per row.
 import { readFileSync, writeFileSync } from "node:fs";
 const csv = readFileSync(process.argv[2] || "bench.csv", "utf8").trim().split("\n");
 const head = csv.shift().split(",");
