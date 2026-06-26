@@ -3,7 +3,7 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import BuildOrderSteps from "@/components/content/BuildOrderSteps.astro";
 import Badge from "@/components/ui/Badge.astro";
 import Icon from "@/components/ui/Icon.astro";
-import civDataJson from "@data/civilizations.json";
+import civMeta from "@data/civ-meta.json";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
@@ -19,11 +19,11 @@ const slug = Astro.params.build as string;
 const entry = (await getCollection("build-orders")).find((b) => b.id === slug);
 if (!entry) return Astro.redirect("/404");
 
-const civs = (civDataJson as { civs: Array<{ slug: string; specialty?: string; meta?: { tier?: string | null } }> }).civs;
-const civBySlug = new Map(civs.map((civ) => [civ.slug, civ]));
+const civTier = (s: string): string | null =>
+  (civMeta.civs as Record<string, { "1v1"?: { tier?: string } | null }>)[s]?.["1v1"]?.tier ?? null;
 const recommendedCivs = entry.data.civsRecommended.map((civSlug) => ({
   slug: civSlug,
-  meta: civBySlug.get(civSlug),
+  tier: civTier(civSlug),
 }));
 
 const difficultyVariant = entry.data.difficulty === "beginner" ? "success" : entry.data.difficulty === "advanced" ? "destructive" : "default";
@@ -82,14 +82,14 @@ const howToLd = {
         <div class="mt-5 border-t border-stone-700/20 pt-4">
           <h2 class="text-xs font-semibold uppercase tracking-wide text-stone-700">{t(lang, "maps.recommendedCivs")}</h2>
           <div class="mt-3 flex flex-wrap gap-2">
-            {recommendedCivs.map(({ slug: civSlug, meta }) => (
+            {recommendedCivs.map(({ slug: civSlug, tier }) => (
               <a
                 href={localizedPath(`/civs/${civSlug}`, lang)}
                 class="inline-flex items-center gap-2 rounded border border-stone-700/30 bg-parchment/70 px-2 py-1 text-sm text-ink hover:border-gold-500 hover:text-gold-500"
               >
                 <Icon slug={civSlug} kind="civ" size={28} />
                 <span>{civName(civSlug)}</span>
-                {meta?.meta?.tier && <span class="text-xs text-stone-700">{t(lang, "matchups.tier")} {meta.meta.tier}</span>}
+                {tier && <span class="text-xs text-stone-700">{t(lang, "matchups.tier")} {tier}</span>}
               </a>
             ))}
           </div>

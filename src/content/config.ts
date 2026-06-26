@@ -172,16 +172,6 @@ const civData = defineCollection({
         imperial: z.object({ name: z.string(), effect: z.string() }),
       })
       .optional(),
-    meta: z
-      .object({
-        tier: z.string().nullable().optional(),
-        winRate: z.number().nullable().optional(),
-        playRate: z.number().nullable().optional(),
-        sampleSize: z.number().nullable().optional(),
-        snapshotDate: z.string().nullable().optional(),
-      })
-      .nullable()
-      .optional(),
   }),
 });
 

@@ -32,7 +32,6 @@
     "sync:game-data": "node scripts/sync-game-data.mjs",
     "build:civilizations": "node scripts/build-civilizations.mjs",
     "build:units": "node scripts/build-units.mjs",
-    "sync:meta": "node scripts/sync-meta-stats.mjs",
     "build:facts": "node scripts/build-game-facts.mjs",
     "verify:facts": "node scripts/verify-build-facts.mjs"
   },

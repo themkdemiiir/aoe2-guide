@@ -3,6 +3,7 @@ import { getEntry } from "astro:content";
 import Badge from "@/components/ui/Badge.astro";
 import Card from "@/components/ui/Card.astro";
 import Icon from "@/components/ui/Icon.astro";
+import civMeta from "@data/civ-meta.json";
 import type { Locale } from "@/i18n/locales";
 import { localizedPath } from "@/i18n/utils";
 
@@ -16,6 +17,8 @@ interface Props {
 
 const { slug, name, tagline, bonuses, locale } = Astro.props;
 const meta = (await getEntry("civ-data", slug))?.data;
+const tier =
+  (civMeta.civs as Record<string, { "1v1"?: { tier?: string } | null }>)[slug]?.["1v1"]?.tier ?? null;
 ---
 <Card href={localizedPath(`/civs/${slug}`, locale)} interactive>
   <div class="flex items-center gap-3">
@@ -25,10 +28,10 @@ const meta = (await getEntry("civ-data", slug))?.data;
       <p class="text-sm text-stone-700">{tagline}</p>
     </div>
   </div>
-  {meta && (
+  {(meta?.specialty || tier) && (
     <div class="mt-3 flex flex-wrap gap-1">
-      {meta.specialty && <Badge variant="outline">{meta.specialty}</Badge>}
-      {meta.meta?.tier && <Badge variant="success">Tier {meta.meta.tier}</Badge>}
+      {meta?.specialty && <Badge variant="outline">{meta.specialty}</Badge>}
+      {tier && <Badge variant="success">Tier {tier}</Badge>}
     </div>
   )}
   {bonuses && bonuses.length > 0 && (
