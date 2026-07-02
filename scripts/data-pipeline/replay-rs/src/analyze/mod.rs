@@ -12,29 +12,12 @@ pub mod data;
 pub mod position;
 pub mod float;
 pub mod compare;
-pub mod report;
 
-pub use model::{AnalyzeArgs, Input};
 pub use model::{Report, YouSel};
 
 use std::collections::HashMap;
 
-use anyhow::{anyhow, Result};
 use aoe2rec::Savegame;
-
-use crate::api;
-
-pub fn run(args: AnalyzeArgs) -> Result<()> {
-    let game = load_game(&args.input)?;
-    let sel = match &args.you { Some(n) => YouSel::Name(n.clone()), None => YouSel::Auto };
-    let report = analyze(&game, &sel)?;
-    if args.json {
-        println!("{}", serde_json::to_string_pretty(&report)?);
-    } else {
-        print!("{}", report::render(&report));
-    }
-    Ok(())
-}
 
 /// Pure analysis: parsed replay in -> Report out. No file/network IO (committed
 /// data/* are include_str!-baked). This is the future WASM boundary. Errs ONLY
@@ -88,27 +71,6 @@ fn resolve_you(sel: &YouSel, players: &[model::PlayerInfo], rec: i32) -> anyhow:
             .find(|p| p.profile_id == *id).map(|p| p.player_number)
             .ok_or_else(|| anyhow::anyhow!("profile {id} is not a player in this replay")),
         YouSel::Auto => Ok(rec),
-    }
-}
-
-fn load_game(input: &Input) -> Result<Savegame> {
-    match input {
-        Input::File(p) => {
-            Savegame::from_file(p).map_err(|e| anyhow!("parse {}: {e}", p.display()))
-        }
-        Input::MatchId(id) => {
-            let client = api::build_client()?;
-            let per = api::get_replay_files(&client, &[*id])?;
-            let files = per.get(id).ok_or_else(|| {
-                anyhow!("match {id}: expired or not found (replays age out after ~weeks)")
-            })?;
-            let best = api::best_file(files).ok_or_else(|| {
-                anyhow!("match {id}: no uploaded replay (all players' files missing)")
-            })?;
-            let url = best.url.clone().ok_or_else(|| anyhow!("match {id}: replay has no url"))?;
-            let bytes = api::download_replay(&client, &url)?;
-            Savegame::from_bytes(bytes).map_err(|e| anyhow!("parse match {id}: {e}"))
-        }
     }
 }
 

@@ -12,7 +12,7 @@ use std::io::Read;
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
 
-use crate::config;
+use replay_rs::config;
 
 /// Monotonic-spacing rate limiter shared across threads (matches RateLimiter in
 /// api.py). Each `wait()` blocks until at least `interval` has elapsed since the

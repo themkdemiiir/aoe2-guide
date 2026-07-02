@@ -21,7 +21,7 @@ use std::collections::HashMap;
 use aoe2rec::actions::{ActionData, Game};
 use aoe2rec::{Operation, Savegame};
 
-use crate::config;
+use replay_rs::config;
 
 // --- output row shapes (serialised to NDJSON; column types match store.py) ---
 

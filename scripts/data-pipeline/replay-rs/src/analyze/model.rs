@@ -5,8 +5,6 @@
 //! outputs (`PlayerMetrics`, `Finding`). Pure metric functions live in `metrics.rs`;
 //! nothing here touches `aoe2rec`.
 
-use std::path::PathBuf;
-
 use serde::Serialize;
 
 // --- map families (from data/maps.tsv) ---------------------------------------
@@ -20,20 +18,6 @@ pub enum Family {
     Nomad,
     Special,
     Other,
-}
-
-// --- CLI ---------------------------------------------------------------------
-#[derive(Debug, Clone)]
-pub enum Input {
-    File(PathBuf),
-    MatchId(i64),
-}
-
-#[derive(Debug, Clone)]
-pub struct AnalyzeArgs {
-    pub input: Input,
-    pub you: Option<String>,
-    pub json: bool,
 }
 
 // --- normalized event stream -------------------------------------------------

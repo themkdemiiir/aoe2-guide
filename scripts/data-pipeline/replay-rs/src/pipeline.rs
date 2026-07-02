@@ -20,10 +20,10 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::Instant;
 
 use crate::api::{self, RateLimiter};
-use crate::config;
 use crate::extract;
 use crate::manifest::{fmt_counts, Manifest, Update};
 use crate::store::Store;
+use replay_rs::config;
 
 /// A match that resolved to a downloadable signed URL.
 struct Downloadable {

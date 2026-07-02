@@ -5,6 +5,10 @@ edition = "2021"
 description = "Fast in-process AoE2 replay-processing pipeline (Rust port of scripts/data-pipeline/replays/*.py)"
 license = "MIT"
 
+[lib]
+name = "replay_rs"
+path = "src/lib.rs"
+
 [[bin]]
 name = "replay-rs"
 path = "src/main.rs"

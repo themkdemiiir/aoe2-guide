@@ -12,12 +12,11 @@
 //!
 //! Defaults: --db ./manifest.sqlite  --out ./shards  --threads 12
 
-mod analyze;
 mod api;
-mod config;
 mod extract;
 mod manifest;
 mod pipeline;
+mod report;
 mod seed;
 mod store;
 
@@ -182,28 +181,58 @@ fn cmd_run(args: &[String]) -> Result<()> {
     })
 }
 
+/// Where the replay bytes come from (CLI-side concern; the lib only sees &Savegame).
+enum Input { File(std::path::PathBuf), MatchId(i64) }
+
 /// `analyze <file.aoe2record | --match-id N> [--you NAME] [--json]` — post-game coaching report.
 fn cmd_analyze(args: &[String]) -> Result<()> {
-    use analyze::{AnalyzeArgs, Input};
+    use replay_rs::analyze::{self, YouSel};
     let mut input: Option<Input> = None;
-    let mut you: Option<String> = None;
+    let mut you = YouSel::Auto;
     let mut json = false;
     let mut i = 0;
     while i < args.len() {
         match args[i].as_str() {
-            "--match-id" => {
-                input = Some(Input::MatchId(take_value(args, &mut i, "--match-id")?.parse()?))
-            }
-            "--you" => you = Some(take_value(args, &mut i, "--you")?),
+            "--match-id" => input = Some(Input::MatchId(take_value(args, &mut i, "--match-id")?.parse()?)),
+            "--you" => you = YouSel::Name(take_value(args, &mut i, "--you")?),
             "--json" => json = true,
             v if !v.starts_with("--") => input = Some(Input::File(std::path::PathBuf::from(v))),
             other => bail!("analyze: unknown flag {other}"),
         }
         i += 1;
     }
-    let input =
-        input.ok_or_else(|| anyhow::anyhow!("analyze: need <file.aoe2record> or --match-id N"))?;
-    analyze::run(AnalyzeArgs { input, you, json })
+    let input = input.ok_or_else(|| anyhow::anyhow!("analyze: need <file.aoe2record> or --match-id N"))?;
+    let game = load_game(&input)?;
+    let report = analyze::analyze(&game, &you)?;
+    if json {
+        println!("{}", serde_json::to_string_pretty(&report)?);
+    } else {
+        print!("{}", report::render(&report));
+    }
+    Ok(())
+}
+
+/// File read or getReplayFiles->download — the IO the lib deliberately doesn't do.
+fn load_game(input: &Input) -> Result<aoe2rec::Savegame> {
+    use anyhow::anyhow;
+    match input {
+        Input::File(p) => {
+            aoe2rec::Savegame::from_file(p).map_err(|e| anyhow!("parse {}: {e}", p.display()))
+        }
+        Input::MatchId(id) => {
+            let client = api::build_client()?;
+            let per = api::get_replay_files(&client, &[*id])?;
+            let files = per.get(id).ok_or_else(|| {
+                anyhow!("match {id}: expired or not found (replays age out after ~weeks)")
+            })?;
+            let best = api::best_file(files).ok_or_else(|| {
+                anyhow!("match {id}: no uploaded replay (all players' files missing)")
+            })?;
+            let url = best.url.clone().ok_or_else(|| anyhow!("match {id}: replay has no url"))?;
+            let bytes = api::download_replay(&client, &url)?;
+            aoe2rec::Savegame::from_bytes(bytes).map_err(|e| anyhow!("parse match {id}: {e}"))
+        }
+    }
 }
 
 /// Consume the value following a `--flag`, advancing the index.
