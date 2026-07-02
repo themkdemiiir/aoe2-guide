@@ -150,3 +150,163 @@ pub fn download_replay(client: &reqwest::blocking::Client, url: &str) -> Result<
     GzDecoder::new(raw.as_slice()).read_to_end(&mut out)?;
     Ok(bytes::Bytes::from(out))
 }
+
+// --- getRecentMatchHistory (recent ranked games for one profile) --------------
+// source: same endpoint + normalization rules as scripts/data-pipeline/stream-relic.mjs
+// (in production via the 3h cron): AUTOMATCH description = ranked matchmaking;
+// outcome 1 = win; newrating falls back to oldrating.
+
+#[derive(Debug, Deserialize)]
+struct RecentHistoryResponse {
+    #[serde(default, rename = "matchHistoryStats")]
+    match_history_stats: Vec<MatchStat>,
+    #[serde(default)]
+    profiles: Vec<ProfileEntry>,
+}
+
+#[derive(Debug, Deserialize)]
+struct MatchStat {
+    id: i64,
+    #[serde(default)]
+    completiontime: i64,
+    #[serde(default)]
+    description: String,
+    #[serde(default)]
+    mapname: Option<String>,
+    #[serde(default)]
+    matchtype_id: Option<u32>,
+    #[serde(default)]
+    matchhistorymember: Vec<MatchMember>,
+}
+
+#[derive(Debug, Deserialize)]
+struct MatchMember {
+    profile_id: i64,
+    #[serde(default)]
+    civilization_id: Option<u32>,
+    #[serde(default)]
+    oldrating: Option<i32>,
+    #[serde(default)]
+    newrating: Option<i32>,
+    #[serde(default)]
+    outcome: Option<i32>,
+}
+
+#[derive(Debug, Deserialize)]
+struct ProfileEntry {
+    profile_id: i64,
+    #[serde(default)]
+    alias: Option<String>,
+}
+
+/// One recent ranked game from the profile's point of view.
+#[derive(Debug, Clone)]
+pub struct RecentMatch {
+    pub match_id: i64,
+    pub completed_unix: i64,
+    pub map_raw: Option<String>,
+    pub ladder: Option<u32>,
+    pub team_size: usize,
+    pub my_civ_id: Option<u32>,
+    pub my_rating: Option<i32>,
+    pub my_won: Option<bool>,
+    pub my_alias: Option<String>,
+}
+
+/// AUTOMATCH + completed only, newest first, "me" fields joined by profile_id.
+fn normalize_recent(doc: RecentHistoryResponse, profile_id: i64) -> Vec<RecentMatch> {
+    let alias = doc
+        .profiles
+        .iter()
+        .find(|p| p.profile_id == profile_id)
+        .and_then(|p| p.alias.clone());
+    let mut out: Vec<RecentMatch> = doc
+        .match_history_stats
+        .into_iter()
+        // source: description == "AUTOMATCH" marks ranked matchmaking games (real
+        // custom/lobby games observed as "." — see FIXTURE comment below); completed
+        // only (completiontime > 0) excludes in-progress/un-reported matches.
+        .filter(|m| m.description == "AUTOMATCH" && m.completiontime > 0)
+        .map(|m| {
+            let me = m
+                .matchhistorymember
+                .iter()
+                .find(|x| x.profile_id == profile_id);
+            RecentMatch {
+                match_id: m.id,
+                completed_unix: m.completiontime,
+                map_raw: m.mapname,
+                ladder: m.matchtype_id,
+                team_size: m.matchhistorymember.len(),
+                my_civ_id: me.and_then(|x| x.civilization_id),
+                // source: newrating is the post-game rating; oldrating is the
+                // pre-game fallback when newrating is absent (e.g. unrated game).
+                my_rating: me.and_then(|x| x.newrating.or(x.oldrating)),
+                // source: outcome 1 = win (stream-relic.mjs normalization rule).
+                my_won: me.and_then(|x| x.outcome.map(|o| o == 1)),
+                my_alias: alias.clone(),
+            }
+        })
+        .collect();
+    out.sort_by_key(|m| std::cmp::Reverse(m.completed_unix));
+    out
+}
+
+/// Recent ranked games for one profile (the API returns roughly the last ~10).
+pub fn get_recent_matches(
+    client: &reqwest::blocking::Client,
+    profile_id: i64,
+) -> Result<Vec<RecentMatch>> {
+    let url = format!(
+        "{}/getRecentMatchHistory?title={}&profile_ids=%5B{}%5D",
+        config::API_BASE,
+        config::TITLE,
+        profile_id
+    );
+    let raw = get_bytes(client, &url, 4)?;
+    let doc: RecentHistoryResponse = serde_json::from_slice(&raw)?;
+    Ok(normalize_recent(doc, profile_id))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Trimmed REAL getRecentMatchHistory response (probed 2026-07-02, profile_id
+    // 199325 = "VIT | Hera", pulled live off the 1v1 RM ladder via getLeaderBoard2):
+    // 2 AUTOMATCH matches (out of chronological order) + 1 non-AUTOMATCH entry
+    // (real observed description value is "." here, not "CUSTOM" — the live API
+    // does not use "CUSTOM" as a description string) that must be filtered out.
+    // Note the "." entry has the LATEST completiontime of the three, proving the
+    // filter runs before the newest-first sort.
+    const FIXTURE: &str = r#"{
+      "matchHistoryStats": [
+        {"id": 54100641, "completiontime": 1607456129, "description": "AUTOMATCH", "mapname": "Arabia.rms", "matchtype_id": 2,
+         "matchhistorymember": [
+           {"profile_id": 199325, "civilization_id": 6, "oldrating": 2062, "newrating": 2026, "outcome": 0},
+           {"profile_id": 2653793, "civilization_id": 6, "oldrating": 2125, "newrating": 2134, "outcome": 1}]},
+        {"id": 489464526, "completiontime": 1782951012, "description": ".", "mapname": "my map", "matchtype_id": 0,
+         "matchhistorymember": [
+           {"profile_id": 199325, "civilization_id": 43, "oldrating": 1714, "newrating": 1729, "outcome": 1},
+           {"profile_id": 271202, "civilization_id": 25, "oldrating": 1686, "newrating": 1671, "outcome": 0}]},
+        {"id": 83138685, "completiontime": 1618070120, "description": "AUTOMATCH", "mapname": "goldenpit.rms2", "matchtype_id": 2,
+         "matchhistorymember": [
+           {"profile_id": 214031, "civilization_id": 2, "oldrating": 1854, "newrating": 1846, "outcome": 0},
+           {"profile_id": 199325, "civilization_id": 2, "oldrating": 2026, "newrating": 2052, "outcome": 1}]}
+      ],
+      "profiles": [{"profile_id": 199325, "alias": "VIT | Hera"}, {"profile_id": 214031, "alias": "HAMZA"}]
+    }"#;
+
+    #[test]
+    fn recent_matches_filters_sorts_and_joins_me() {
+        let doc: RecentHistoryResponse = serde_json::from_str(FIXTURE).unwrap();
+        let ms = normalize_recent(doc, 199325);
+        assert_eq!(ms.len(), 2); // the "." (non-AUTOMATCH) entry is dropped
+        assert_eq!(ms[0].match_id, 83138685); // newest first among AUTOMATCH only
+        assert_eq!(ms[0].my_won, Some(true));
+        assert_eq!(ms[0].my_rating, Some(2052)); // newrating preferred
+        assert_eq!(ms[1].my_civ_id, Some(6));
+        assert_eq!(ms[0].my_alias.as_deref(), Some("VIT | Hera"));
+        assert_eq!(ms[0].team_size, 2);
+    }
+}
