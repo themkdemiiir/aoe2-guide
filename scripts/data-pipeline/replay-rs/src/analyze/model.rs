@@ -30,6 +30,8 @@ pub enum EvKind {
     Build { id: i64, x: f32, y: f32 }, // building_id + map position
     Move { x: f32, y: f32 },
     Interact { x: f32, y: f32 },
+    MarketBuy,                        // resource/amount undecoded — count only
+    MarketSell,
     Other,
 }
 
@@ -103,6 +105,14 @@ pub struct PlayerMetrics {
     pub mil_series: Vec<u32>,
     /// effective actions per minute (raw command count, same basis as `apm`).
     pub apm_series: Vec<u32>,
+    /// eco/military splits of apm counting ONLY unambiguously attributable actions
+    /// (eco/mil unit trains, cost-verified building sets, watched eco techs + age-ups) —
+    /// lower bounds; moves/attacks stay unclassified.
+    pub eco_apm: f64,
+    pub mil_apm: f64,
+    /// market transactions (command counts; resource/amount not decoded).
+    pub market_buys: u32,
+    pub market_sells: u32,
 }
 
 /// The four comparison bases: your elo-bucket median, the 2500+ "pro" median, the opponent

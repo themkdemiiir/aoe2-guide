@@ -58,6 +58,9 @@ pub fn build_metrics(
                 .max_by(|a, b| a.rate_gap_per_min.partial_cmp(&b.rate_gap_per_min).unwrap());
             let cm = coords.get(&pn).cloned().unwrap_or_default();
             let (vils_series, mil_series) = metrics::production_series(&w.evs, pn, dur);
+            let mins = (dur as f64 / 60_000.0).max(1.0 / 60.0);
+            let (eco_cmds, mil_cmds) = w.cmd_split.get(&pn).copied().unwrap_or((0, 0));
+            let (market_buys, market_sells) = metrics::market_counts(&w.evs, pn);
             PlayerMetrics {
                 info: info.clone(),
                 feudal_ms,
@@ -82,6 +85,10 @@ pub fn build_metrics(
                 vils_series,
                 mil_series,
                 apm_series: w.action_series.get(&pn).cloned().unwrap_or_default(),
+                eco_apm: eco_cmds as f64 / mins,
+                mil_apm: mil_cmds as f64 / mins,
+                market_buys,
+                market_sells,
             }
         })
         .collect()
@@ -96,8 +103,7 @@ fn fmt_secs(ms: u32) -> String {
     format!("{}s", ms / 1000)
 }
 fn fmt_mmss(secs: f64) -> String {
-    let s = secs.max(0.0) as u32;
-    format!("{}:{:02}", s / 60, s % 60)
+    crate::config::mmss(secs.max(0.0) as u32)
 }
 
 /// mode is decided once by the caller (analyze()) and recorded in ReportMeta so the
@@ -309,6 +315,10 @@ mod tests {
             vils_series: vec![],
             mil_series: vec![],
             apm_series: vec![],
+            eco_apm: 0.0,
+            mil_apm: 0.0,
+            market_buys: 0,
+            market_sells: 0,
         }
     }
 

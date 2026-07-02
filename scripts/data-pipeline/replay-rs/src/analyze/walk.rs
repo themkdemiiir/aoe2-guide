@@ -6,6 +6,7 @@ use std::collections::HashMap;
 use aoe2rec::actions::ActionData;
 use aoe2rec::{Operation, PostGameBlock, Savegame};
 
+use crate::analyze::metrics::classify_cmd;
 use crate::analyze::model::{Ev, EvKind, GameMeta, PlayerInfo};
 
 /// Build action body: `x:f32@[4..8]`, `y:f32@[8..12]`, `building_id:i32@[12..16]`.
@@ -47,6 +48,9 @@ pub struct Walked {
     /// the same count bucketed per minute (index = minute since game start) —
     /// feeds the APM-over-time chart.
     pub action_series: HashMap<i32, Vec<u32>>,
+    /// per player (eco, mil) counts of UNAMBIGUOUSLY attributable commands
+    /// (metrics::classify_cmd) — same per-command basis as `actions`.
+    pub cmd_split: HashMap<i32, (u32, u32)>,
 }
 
 /// player_id position differs per ActionData variant; we only need it for the variants we map.
@@ -56,7 +60,9 @@ fn pid(ad: &ActionData) -> i32 {
         | ActionData::Research { player_id, .. }
         | ActionData::Build { player_id, .. }
         | ActionData::Move { player_id, .. }
-        | ActionData::Interact { player_id, .. } => *player_id as i32,
+        | ActionData::Interact { player_id, .. }
+        | ActionData::Buy { player_id, .. }
+        | ActionData::Sell { player_id, .. } => *player_id as i32,
         _ => 0,
     }
 }
@@ -100,6 +106,7 @@ pub fn walk(game: &Savegame) -> Walked {
     let mut elo = EloTable::default();
     let mut actions: HashMap<i32, u32> = HashMap::new();
     let mut action_series: HashMap<i32, Vec<u32>> = HashMap::new();
+    let mut cmd_split: HashMap<i32, (u32, u32)> = HashMap::new();
 
     for op in &game.operations {
         match op {
@@ -130,8 +137,15 @@ pub fn walk(game: &Savegame) -> Walked {
                     },
                     ActionData::Move { x, y, .. } => EvKind::Move { x: *x, y: *y },
                     ActionData::Interact { x, y, .. } => EvKind::Interact { x: *x, y: *y },
+                    // resource type/amount live in an undecoded blob — counts only (honest)
+                    ActionData::Buy { .. } => EvKind::MarketBuy,
+                    ActionData::Sell { .. } => EvKind::MarketSell,
                     _ => EvKind::Other,
                 };
+                if let Some(is_eco) = classify_cmd(&kind) {
+                    let e = cmd_split.entry(p).or_insert((0, 0));
+                    if is_eco { e.0 += 1 } else { e.1 += 1 }
+                }
                 evs.push(Ev { player: p, t_ms: *world_time, kind });
             }
             Operation::PostGame { blocks, .. } => {
@@ -155,7 +169,7 @@ pub fn walk(game: &Savegame) -> Walked {
         rec_player: game.zheader.replay.rec_player as i32,
     };
 
-    Walked { meta, players, evs, elo, actions, action_series }
+    Walked { meta, players, evs, elo, actions, action_series, cmd_split }
 }
 
 #[cfg(test)]

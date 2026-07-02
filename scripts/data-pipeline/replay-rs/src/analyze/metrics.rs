@@ -115,6 +115,52 @@ pub fn production_series(evs: &[Ev], player: i32, duration_ms: u32) -> (Vec<u32>
     (eco, mil)
 }
 
+// Building sets for the eco/military action split. source: .cache/aoe2-data data.json
+// Building table, ids verified by COST (70 House 25W, 68 Mill 100W, 50 Farm 60W,
+// 562 Lumber Camp 100W, 584 Mining Camp 100W, 45 Dock 150W, 84 Market 175W,
+// 199 Fish Trap 100W, 109/621 Town Center | 12 Barracks 175W, 87 Archery Range 175W,
+// 101 Stable 175W, 49 Siege Workshop 200W, 82 Castle 650S, 79 Watch Tower 35W/125S).
+pub const ECO_BUILDINGS: [i64; 10] = [70, 68, 50, 562, 584, 45, 84, 199, 109, 621];
+pub const MIL_BUILDINGS: [i64; 6] = [12, 87, 101, 49, 82, 79];
+pub const AGE_TECHS: [u16; 3] = [101, 102, 103]; // feudal/castle/imperial (config::age_name)
+
+/// Classify ONE command's event kind as eco/military; None = unattributable
+/// (moves, attacks, unknown buildings, non-watched techs). Called by walk on the
+/// per-COMMAND kind (before DeQueue amount-expansion), so the counts share the
+/// `apm` command basis. These are lower bounds, not a partition of apm.
+pub fn classify_cmd(kind: &EvKind) -> Option<bool /* is_eco */> {
+    match *kind {
+        EvKind::Train(u) => Some(ECO_UNIT_IDS.contains(&u)),
+        EvKind::Build { id, .. } => {
+            if ECO_BUILDINGS.contains(&id) {
+                Some(true)
+            } else if MIL_BUILDINGS.contains(&id) {
+                Some(false)
+            } else {
+                None
+            }
+        }
+        EvKind::Research(t) => (AGE_TECHS.contains(&t)
+            || WATCHED_TECHS.iter().any(|&(id, _)| id == t))
+        .then_some(true),
+        _ => None,
+    }
+}
+
+/// Market Buy/Sell command counts (resource/amount live in an undecoded blob).
+pub fn market_counts(evs: &[Ev], player: i32) -> (u32, u32) {
+    let mut buys = 0;
+    let mut sells = 0;
+    for e in evs.iter().filter(|e| e.player == player) {
+        match e.kind {
+            EvKind::MarketBuy => buys += 1,
+            EvKind::MarketSell => sells += 1,
+            _ => {}
+        }
+    }
+    (buys, sells)
+}
+
 /// Rule-based opening tag (light port of dj0wns/AoE_Rec_Opening_Analysis):
 /// dark-age militia ≥3 = Drush; then the first two DISTINCT unit lines opened in
 /// the Feudal window, in train order ("Scouts into Archers"); no feudal military

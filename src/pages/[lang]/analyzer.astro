@@ -3,6 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 import { t } from "@/i18n/utils";
+import { displayName } from "@/lib/display";
 import civIdMap from "@data/civ-id-map.json";
 
 export function getStaticPaths() {
@@ -11,15 +12,12 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Locale;
 
-const prettify = (s: string) =>
-  s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-
 // game/replay civ_id -> { name, icon } for the client renderer (replay civ ids
 // are the GAME id space — civ-id-map.json is correct here, unlike the Relic API).
 const civs = Object.fromEntries(
   Object.entries(civIdMap as Record<string, string>).map(([id, slug]) => [
     id,
-    { slug, name: prettify(slug) },
+    { slug, name: displayName(slug) },
   ]),
 );
 
@@ -81,6 +79,7 @@ const ecoTechs: Record<string, string> = {
 
   <script>
     import Chart from "chart.js/auto";
+    import { esc } from "@/scripts/html";
 
     const { L, civs, ecoTechs } = JSON.parse(document.getElementById("az-data")!.textContent!);
 
@@ -102,8 +101,6 @@ const ecoTechs: Record<string, string> = {
     const errMsg = document.getElementById("az-error-msg")!;
     const reportEl = document.getElementById("az-report")!;
 
-    const esc = (s: unknown) =>
-      String(s ?? "").replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
     const mmss = (ms: number | null | undefined) =>
       ms == null ? "—" : `${Math.floor(ms / 60000)}:${String(Math.floor(ms / 1000) % 60).padStart(2, "0")}`;
     const secs = (ms: number) => `${Math.round(ms / 1000)}s`;
@@ -211,6 +208,11 @@ const ecoTechs: Record<string, string> = {
       tiles.push(tile(L["analyzer.tile.idleFeudal"], esc(secs(m.idle_feudal_ms)), L["analyzer.estimate"]));
       tiles.push(tile(L["analyzer.tile.military"], esc(mmss(m.first_military_ms))));
       tiles.push(tile(L["analyzer.tile.apm"], esc(String(Math.round(m.apm)))));
+      tiles.push(tile(L["analyzer.tile.ecoApm"], esc(String(Math.round(m.eco_apm)))));
+      tiles.push(tile(L["analyzer.tile.milApm"], esc(String(Math.round(m.mil_apm)))));
+      if (m.market_buys + m.market_sells > 0) {
+        tiles.push(tile(L["analyzer.tile.market"], `${m.market_buys} / ${m.market_sells}`, L["analyzer.market.detail"]));
+      }
       const elo = m.elo_team ?? m.elo_1v1;
       tiles.push(tile(L["analyzer.tile.elo"], elo != null ? esc(String(elo)) : "—"));
       if (m.role) tiles.push(tile(L["analyzer.tile.role"], esc(L[`analyzer.role.${m.role}`] ?? m.role)));
@@ -224,6 +226,72 @@ const ecoTechs: Record<string, string> = {
         tiles.push(tile(L["analyzer.tile.scouting"], `${esc(v)}${esc(d)}`));
       }
       return `<div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">${tiles.join("")}</div>`;
+    }
+
+    // "What winners build" — lazily fetched static benchmark (public/winner-comps.json,
+    // derived from 60M match_ages rows: ranked 1v1 winners per civ × elo bucket).
+    let compsDoc: any | undefined;
+    async function loadComps() {
+      if (compsDoc !== undefined) return compsDoc;
+      try {
+        compsDoc = await (await fetch("/winner-comps.json")).json();
+      } catch {
+        compsDoc = null; // file absent/offline — section simply doesn't render
+      }
+      return compsDoc;
+    }
+    // mirror of scripts/data-pipeline/lib/buckets.mjs eloBucket (client copy)
+    const eloBucketOf = (r: number) =>
+      r < 1000 ? "<1000" : r < 1200 ? "1000-1199" : r < 1400 ? "1200-1399" : r < 1650 ? "1400-1649"
+      : r < 1800 ? "1650-1799" : r < 2000 ? "1800-1999" : r < 2200 ? "2000-2199" : r < 2500 ? "2200-2499" : "2500+";
+
+    async function winnersBlock(sel: any, mode: string) {
+      const elo = mode === "team" ? (sel.elo_team ?? sel.elo_1v1) : (sel.elo_1v1 ?? sel.elo_team);
+      const slug = civOf(sel.info.civ_id).slug;
+      if (elo == null || !slug) return "";
+      const doc = await loadComps();
+      const cell = doc?.civs?.[slug]?.[eloBucketOf(elo)];
+      if (!cell?.units?.length) return "";
+      const chips = cell.units
+        .map(
+          (u: any) => `<span class="inline-flex items-center gap-1.5 rounded border border-stone-700/25 bg-parchment px-2 py-1 text-xs text-ink">${esc(displayUnit(u.unit))} <span class="font-mono text-gold-700">${esc(String(u.pct))}%</span><span class="font-mono text-[10px] text-stone-700/80">~${esc(String(Math.round(u.med)))}</span></span>`,
+        )
+        .join("");
+      return `<h3 class="mt-6 font-display text-sm font-bold uppercase tracking-wide text-stone-700">${esc(L["analyzer.winners"])}</h3>
+        <p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.winners.note"])}</p>
+        <div class="mt-2 flex flex-wrap gap-2">${chips}</div>`;
+    }
+    const displayUnit = (u: string) => u.replace(/\b\w/g, (c) => c.toUpperCase());
+
+    // Within-match superlatives — factual comparisons between THIS game's players
+    // only (no invented thresholds). Strict winners; ties get no badge.
+    function badges(players: any[]) {
+      if (players.length < 2) return "";
+      const award = (key: string, value: (m: any) => number | null, best: "min" | "max") => {
+        const vals = players.map((m) => value(m)).map((v) => (v == null ? null : v));
+        const cmp = best === "min" ? Math.min : Math.max;
+        const present = vals.filter((v): v is number => v != null);
+        if (!present.length) return null;
+        const target = cmp(...present);
+        const winners = vals.map((v, i) => (v === target ? i : -1)).filter((i) => i >= 0);
+        if (winners.length !== 1) return null;
+        return { key, who: players[winners[0]] };
+      };
+      const found = [
+        award("analyzer.badge.fastestCastle", (m) => m.castle_ms, "min"),
+        award("analyzer.badge.mostVils", (m) => (m.castle_ms != null ? m.vils_castle : null), "max"),
+        award("analyzer.badge.highestApm", (m) => m.apm, "max"),
+        award("analyzer.badge.cleanestTc", (m) => m.idle_dark_ms + m.idle_feudal_ms, "min"),
+        award("analyzer.badge.firstMilitary", (m) => m.first_military_ms, "min"),
+        award("analyzer.badge.marketRegular", (m) => (m.market_buys + m.market_sells > 0 ? m.market_buys + m.market_sells : null), "max"),
+      ].filter(Boolean) as Array<{ key: string; who: any }>;
+      if (!found.length) return "";
+      return `<h3 class="mt-6 font-display text-sm font-bold uppercase tracking-wide text-stone-700">${esc(L["analyzer.badges"])}</h3>
+        <div class="mt-2 flex flex-wrap gap-2">${found
+          .map(
+            (b) => `<span class="inline-flex items-center gap-1.5 rounded border border-gold-500/40 bg-gold-500/10 px-2 py-1 text-xs text-ink">🏅 <strong class="font-display">${esc(L[b.key])}</strong><span class="text-stone-700">·</span><span class="flex items-center gap-1"><span class="inline-block h-2 w-2 rounded-sm" style="background:${colorOf(b.who.info.color_id)}"></span>${esc(b.who.info.name)}</span></span>`,
+          )
+          .join("")}</div>`;
     }
 
     // Watched eco upgrades: researched ones with their time, the rest greyed out.
@@ -307,6 +375,8 @@ const ecoTechs: Record<string, string> = {
 
         <div class="mt-4">${scorecard(sel)}</div>
         ${ecoRow(sel)}
+        <div id="az-winners"></div>
+        ${badges(players)}
 
         <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.charts.production"])}</h3>
         <p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.charts.productionNote"])}</p>
@@ -353,6 +423,11 @@ const ecoTechs: Record<string, string> = {
         });
       }
       drawCharts(players, selPn);
+      // async fill: winners benchmark for the selected player's civ × elo
+      winnersBlock(sel, meta.mode).then((html) => {
+        const holder = reportEl.querySelector("#az-winners");
+        if (holder && html) holder.innerHTML = html;
+      });
       if (scrollToReport) reportEl.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
