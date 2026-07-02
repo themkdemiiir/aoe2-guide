@@ -9,6 +9,7 @@
 //!   replay-rs run     [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]
 //!   replay-rs bench   <dir of .aoe2record> [--threads N] [--repeat N]
 //!   replay-rs analyze <file.aoe2record>|--match-id N [--you NAME] [--json]
+//!   replay-rs recent   --profile-id P [--limit N]
 //!
 //! Defaults: --db ./manifest.sqlite  --out ./shards  --threads 12
 
@@ -50,6 +51,7 @@ fn real_main() -> Result<()> {
         "run" => cmd_run(rest),
         "bench" => cmd_bench(rest),
         "analyze" => cmd_analyze(rest),
+        "recent" => cmd_recent(rest),
         "-h" | "--help" | "help" => {
             print_usage();
             Ok(())
@@ -243,6 +245,63 @@ fn take_value(args: &[String], i: &mut usize, flag: &str) -> Result<String> {
         .ok_or_else(|| anyhow::anyhow!("{flag} requires a value"))
 }
 
+/// --profile-id N, or the explicit AOE2_PROFILE_ID env; absence is a loud error
+/// (no-defaults rule: we never guess whose games to fetch).
+fn resolve_profile(flag: Option<i64>) -> Result<i64> {
+    flag.or_else(|| std::env::var("AOE2_PROFILE_ID").ok().and_then(|v| v.parse().ok()))
+        .ok_or_else(|| anyhow::anyhow!(
+            "need --profile-id N (or AOE2_PROFILE_ID env). Find yours on aoe2insights.com / aoe2companion.com"))
+}
+
+/// Human "how long ago" from a seconds delta (no chrono dep — keep it light).
+fn ago(secs: i64) -> String {
+    let s = secs.max(0);
+    if s < 3600 { format!("{}m ago", s / 60) }
+    else if s < 86_400 { format!("{}h ago", s / 3600) }
+    else { format!("{}d ago", s / 86_400) }
+}
+
+/// `recent --profile-id P [--limit N]` — list recent ranked games, newest first.
+fn cmd_recent(args: &[String]) -> Result<()> {
+    let mut profile: Option<i64> = None;
+    let mut limit: Option<usize> = None;
+    let mut i = 0;
+    while i < args.len() {
+        match args[i].as_str() {
+            "--profile-id" => profile = Some(take_value(args, &mut i, "--profile-id")?.parse()?),
+            "--limit" => limit = Some(take_value(args, &mut i, "--limit")?.parse()?),
+            other => bail!("recent: unknown flag {other}"),
+        }
+        i += 1;
+    }
+    let profile = resolve_profile(profile)?;
+    let client = api::build_client()?;
+    let matches = api::get_recent_matches(&client, profile)?;
+    if matches.is_empty() {
+        bail!("recent: the API returned no recent ranked matches for profile {profile}");
+    }
+    let civs = replay_rs::analyze::data::load_civs();
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)?.as_secs() as i64;
+    println!(
+        "recent ranked games — {} (profile {profile})",
+        matches[0].my_alias.as_deref().unwrap_or("?")
+    );
+    println!("  {:<12} {:>8}  {:<20} {:<5} {:<14} {:>5}  {}",
+        "match_id", "when", "map", "mode", "civ", "elo", "result");
+    for m in matches.iter().take(limit.unwrap_or(usize::MAX)) {
+        // 2 members = 1v1; 4/6/8 = 2v2/3v3/4v4. source: stream-relic.mjs keepBySize.
+        let mode = if m.team_size == 2 { "1v1".to_string() } else { format!("{0}v{0}", m.team_size / 2) };
+        let civ = m.my_civ_id.and_then(|id| civs.get(&id).cloned()).unwrap_or_else(|| "?".into());
+        let result = match m.my_won { Some(true) => "win", Some(false) => "loss", None => "?" };
+        println!("  {:<12} {:>8}  {:<20} {:<5} {:<14} {:>5}  {}",
+            m.match_id, ago(now - m.completed_unix), m.map_raw.as_deref().unwrap_or("?"),
+            mode, civ, m.my_rating.map(|r| r.to_string()).unwrap_or_else(|| "-".into()), result);
+    }
+    println!("\nanalyze one:  replay-rs analyze --match-id <id> --profile-id {profile}");
+    Ok(())
+}
+
 fn print_usage() {
     eprintln!(
         "replay-rs — fast in-process AoE2 replay pipeline\n\
@@ -251,8 +310,22 @@ fn print_usage() {
            replay-rs seed <ids.csv|ids.txt> [--db <manifest.sqlite>]\n  \
            replay-rs run [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]\n  \
            replay-rs bench <dir of .aoe2record> [--threads N] [--repeat N]\n  \
-           replay-rs analyze <file.aoe2record>|--match-id N [--you NAME] [--json]\n\
+           replay-rs analyze <file.aoe2record>|--match-id N [--you NAME] [--json]\n  \
+           replay-rs recent --profile-id P [--limit N]\n\
          \n\
          DEFAULTS: --db {DEFAULT_DB}  --out {DEFAULT_OUT}  --threads {DEFAULT_THREADS}"
     );
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ago_formats_minutes_hours_days() {
+        assert_eq!(ago(90), "1m ago");
+        assert_eq!(ago(2 * 3600 + 100), "2h ago");
+        assert_eq!(ago(3 * 86_400 + 5), "3d ago");
+        assert_eq!(ago(-5), "0m ago"); // clock skew never goes negative
+    }
 }
