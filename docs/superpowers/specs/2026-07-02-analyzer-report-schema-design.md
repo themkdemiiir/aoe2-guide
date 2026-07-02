@@ -137,6 +137,34 @@ pub struct ReportMeta {
 - Smoke (`#[ignore]`, existing pattern): `analyze` a real local save with `--json`,
   pipe through `jq .schema_version`.
 
+## Addendum (2026-07-02, user-requested): latest played games
+
+Fetch and analyze a player's recent ranked games without hand-copying match ids.
+Grounded on the already-validated `getRecentMatchHistory` endpoint (same API +
+normalization rules as `scripts/data-pipeline/stream-relic.mjs`, in production via
+the 3h cron): `AUTOMATCH` only, completed matches, newest first.
+
+- **`replay-rs recent --profile-id P [--limit N]`** — list recent ranked games:
+  match_id, date, map, mode (1v1/team), civ, rating, win/loss. Pure listing; the
+  user picks a match_id to analyze, or uses `--latest`.
+- **`analyze --latest [N|all] --profile-id P`** — resolve the N most recent
+  completed matches (default 1; `all` = everything the history returns, ~last 10)
+  and run the existing download→parse→analyze path on each. Terminal mode prints
+  reports sequentially; `--json` mode emits **NDJSON** (one `Report` per line —
+  consistent with the pipeline's shard format; a single `--match-id`/file stays a
+  single JSON document).
+- `--profile-id` is required (numeric, from aoe2companion/aoe2insights); an
+  `AOE2_PROFILE_ID` env var may serve as explicit default. Per the no-defaults
+  rule, absence of both is a loud error, never a guess.
+- All network code stays **bin-side** (`api.rs` grows a `get_recent_matches`),
+  preserving the pure-lib boundary.
+- Implementation must start by probing the endpoint once and locking the serde
+  structs against the real response (field names like `matchhistorystats`,
+  `profiles` alias join) — source-derived, no guessed schemas.
+- Honest caveat surfaced in output: replays only exist for uploaded matches and
+  age out after ~2 weeks; unavailable replays are reported per-match and skipped,
+  not fatal.
+
 ## Non-goals
 
 - No v2 metrics (eAPM, opening classifier, timeline) — additive later.
