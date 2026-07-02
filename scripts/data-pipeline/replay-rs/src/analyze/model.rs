@@ -33,6 +33,7 @@ pub enum Input {
 pub struct AnalyzeArgs {
     pub input: Input,
     pub you: Option<String>,
+    pub json: bool,
 }
 
 // --- normalized event stream -------------------------------------------------

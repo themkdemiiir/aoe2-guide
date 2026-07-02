@@ -28,7 +28,11 @@ pub fn run(args: AnalyzeArgs) -> Result<()> {
     let game = load_game(&args.input)?;
     let sel = match &args.you { Some(n) => YouSel::Name(n.clone()), None => YouSel::Auto };
     let report = analyze(&game, &sel)?;
-    print!("{}", report::render(&report));
+    if args.json {
+        println!("{}", serde_json::to_string_pretty(&report)?);
+    } else {
+        print!("{}", report::render(&report));
+    }
     Ok(())
 }
 

@@ -8,7 +8,7 @@
 //!   replay-rs seed    <ids.csv|ids.txt> [--db <manifest.sqlite>] [--ladder L] [--played-at TS]
 //!   replay-rs run     [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]
 //!   replay-rs bench   <dir of .aoe2record> [--threads N] [--repeat N]
-//!   replay-rs analyze <file.aoe2record>|--match-id N [--you NAME]
+//!   replay-rs analyze <file.aoe2record>|--match-id N [--you NAME] [--json]
 //!
 //! Defaults: --db ./manifest.sqlite  --out ./shards  --threads 12
 
@@ -182,11 +182,12 @@ fn cmd_run(args: &[String]) -> Result<()> {
     })
 }
 
-/// `analyze <file.aoe2record | --match-id N> [--you NAME]` — post-game coaching report.
+/// `analyze <file.aoe2record | --match-id N> [--you NAME] [--json]` — post-game coaching report.
 fn cmd_analyze(args: &[String]) -> Result<()> {
     use analyze::{AnalyzeArgs, Input};
     let mut input: Option<Input> = None;
     let mut you: Option<String> = None;
+    let mut json = false;
     let mut i = 0;
     while i < args.len() {
         match args[i].as_str() {
@@ -194,6 +195,7 @@ fn cmd_analyze(args: &[String]) -> Result<()> {
                 input = Some(Input::MatchId(take_value(args, &mut i, "--match-id")?.parse()?))
             }
             "--you" => you = Some(take_value(args, &mut i, "--you")?),
+            "--json" => json = true,
             v if !v.starts_with("--") => input = Some(Input::File(std::path::PathBuf::from(v))),
             other => bail!("analyze: unknown flag {other}"),
         }
@@ -201,7 +203,7 @@ fn cmd_analyze(args: &[String]) -> Result<()> {
     }
     let input =
         input.ok_or_else(|| anyhow::anyhow!("analyze: need <file.aoe2record> or --match-id N"))?;
-    analyze::run(AnalyzeArgs { input, you })
+    analyze::run(AnalyzeArgs { input, you, json })
 }
 
 /// Consume the value following a `--flag`, advancing the index.
@@ -220,7 +222,7 @@ fn print_usage() {
            replay-rs seed <ids.csv|ids.txt> [--db <manifest.sqlite>]\n  \
            replay-rs run [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]\n  \
            replay-rs bench <dir of .aoe2record> [--threads N] [--repeat N]\n  \
-           replay-rs analyze <file.aoe2record>|--match-id N [--you NAME]\n\
+           replay-rs analyze <file.aoe2record>|--match-id N [--you NAME] [--json]\n\
          \n\
          DEFAULTS: --db {DEFAULT_DB}  --out {DEFAULT_OUT}  --threads {DEFAULT_THREADS}"
     );
