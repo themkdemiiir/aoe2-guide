@@ -155,7 +155,8 @@ the 3h cron): `AUTOMATCH` only, completed matches, newest first.
   match_id, date, map, mode (1v1/team), civ, rating, win/loss. Pure listing; the
   user picks a match_id to analyze, or uses `--latest`.
 - **`analyze --latest [N|all] --profile-id P`** — resolve the N most recent
-  completed matches (default 1; `all` = everything the history returns, ~last 10)
+  completed matches (default 1; `all` = everything the history returns — the
+  probe returned 129 history entries; the AUTOMATCH subset varies by profile)
   and run the existing download→parse→analyze path on each. Terminal mode prints
   reports sequentially; `--json` mode emits **NDJSON** (one `Report` per line —
   consistent with the pipeline's shard format; a single `--match-id`/file stays a

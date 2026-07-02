@@ -231,6 +231,12 @@ fn cmd_analyze(args: &[String]) -> Result<()> {
         if input.is_some() {
             bail!("analyze: --latest conflicts with a file / --match-id input");
         }
+        if !matches!(you, YouSel::Auto) {
+            bail!("analyze: --you conflicts with --latest (identity comes from --profile-id)");
+        }
+        if let Latest::N(0) = latest {
+            bail!("analyze: --latest 0 requests zero games — pass a positive count or 'all'");
+        }
         let profile = resolve_profile(profile)?;
         let client = api::build_client()?;
         let recent = api::get_recent_matches(&client, profile)?;
@@ -279,7 +285,7 @@ fn cmd_analyze(args: &[String]) -> Result<()> {
         }
         if analyzed == 0 {
             bail!("analyze: none of the {take} recent matches had a downloadable replay \
-                   (replays only exist when uploaded and age out after ~2 weeks)");
+                   — replays only exist when uploaded and age out (~2-4 weeks in practice)");
         }
         return Ok(());
     }
@@ -309,7 +315,7 @@ fn load_game(input: &Input) -> Result<aoe2rec::Savegame> {
             let client = api::build_client()?;
             let per = api::get_replay_files(&client, &[*id])?;
             let files = per.get(id).ok_or_else(|| {
-                anyhow!("match {id}: expired or not found (replays age out after ~weeks)")
+                anyhow!("match {id}: expired or not found — replays age out (~2-4 weeks in practice)")
             })?;
             let best = api::best_file(files).ok_or_else(|| {
                 anyhow!("match {id}: no uploaded replay (all players' files missing)")
@@ -329,12 +335,21 @@ fn take_value(args: &[String], i: &mut usize, flag: &str) -> Result<String> {
         .ok_or_else(|| anyhow::anyhow!("{flag} requires a value"))
 }
 
-/// --profile-id N, or the explicit AOE2_PROFILE_ID env; absence is a loud error
-/// (no-defaults rule: we never guess whose games to fetch).
+/// --profile-id N, or the explicit AOE2_PROFILE_ID env; absence of both is a
+/// loud error (no-defaults rule: we never guess whose games to fetch). A SET
+/// but unparseable env var is also a loud error — never silently treated as unset.
 fn resolve_profile(flag: Option<i64>) -> Result<i64> {
-    flag.or_else(|| std::env::var("AOE2_PROFILE_ID").ok().and_then(|v| v.parse().ok()))
-        .ok_or_else(|| anyhow::anyhow!(
-            "need --profile-id N (or AOE2_PROFILE_ID env). Find yours on aoe2insights.com / aoe2companion.com"))
+    if let Some(id) = flag {
+        return Ok(id);
+    }
+    match std::env::var("AOE2_PROFILE_ID") {
+        Ok(v) => v.parse().map_err(|_| {
+            anyhow::anyhow!("AOE2_PROFILE_ID is set to {v:?}, which isn't a valid profile id number")
+        }),
+        Err(_) => Err(anyhow::anyhow!(
+            "need --profile-id N (or AOE2_PROFILE_ID env). Find yours on aoe2insights.com / aoe2companion.com"
+        )),
+    }
 }
 
 /// Human "how long ago" from a seconds delta (no chrono dep — keep it light).

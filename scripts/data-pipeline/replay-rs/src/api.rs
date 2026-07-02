@@ -250,7 +250,8 @@ fn normalize_recent(doc: RecentHistoryResponse, profile_id: i64) -> Vec<RecentMa
     out
 }
 
-/// Recent ranked games for one profile (the API returns roughly the last ~10).
+/// Recent ranked games for one profile. The probe returned 129 history entries
+/// of all types for one profile; the AUTOMATCH subset varies by profile.
 pub fn get_recent_matches(
     client: &reqwest::blocking::Client,
     profile_id: i64,

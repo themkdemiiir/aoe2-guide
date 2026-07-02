@@ -94,6 +94,9 @@ terminal.
 # uploaded and age out (~2-4 weeks in practice) — unavailable ones are skipped with a warning.
 ```
 
+With `--latest`, your identity comes from `--profile-id`; `--you` applies only to
+single file/`--match-id` analysis — the two flags conflict otherwise.
+
 The crate is now split into **lib** (`replay_rs`: pure `analyze()` + `config`) and **bin** (all IO
 and orchestration). The JSON `Report` (schema version 1, snake_case enums, `caveats` included) is
 the stable contract that a future WASM build or site consumer can depend on.
