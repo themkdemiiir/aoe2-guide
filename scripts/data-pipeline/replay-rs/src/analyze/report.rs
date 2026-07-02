@@ -8,8 +8,7 @@ use std::io::IsTerminal;
 use comfy_table::Table;
 use owo_colors::OwoColorize;
 
-use crate::analyze::float;
-use crate::analyze::model::{Basis, Family, Finding, GameMeta, PlayerMetrics, Role, Severity};
+use crate::analyze::model::{Basis, Family, Finding, PlayerMetrics, Report, Role, Severity};
 
 /// AoE2 DE `color_id` is the 1-indexed slot color (1=Blue … 8=Orange), and the 8th color
 /// is stored as `0` — verified by an 8-player replay whose color_ids were a clean sequential
@@ -41,14 +40,13 @@ fn sev_symbol(s: Severity) -> &'static str {
     }
 }
 
-pub fn render(
-    meta: &GameMeta,
-    map_name: &str,
-    family: Family,
-    metrics: &[PlayerMetrics],
-    findings: &[Finding],
-    you: i32,
-) -> String {
+pub fn render(report: &Report) -> String {
+    let meta = &report.meta;
+    let metrics = &report.players;
+    let findings = &report.findings;
+    let you = meta.you;
+    let family = meta.family;
+
     let color = std::io::stdout().is_terminal();
     let names: HashMap<i32, String> = metrics
         .iter()
@@ -59,7 +57,7 @@ pub fn render(
     s.push_str(&format!(
         "\nAoE2 Game Analysis — {} players · {} · {}:{:02}\n\n",
         metrics.len(),
-        map_name,
+        meta.map_name,
         meta.duration_ms / 60000,
         (meta.duration_ms / 1000) % 60
     ));
@@ -152,17 +150,18 @@ pub fn render(
         ));
     }
 
-    // --- honest footer ---
-    s.push_str("\n");
-    s.push_str(&format!("note: {}\n", float::CAVEAT));
-    s.push_str("note: macro coach only — no fights, micro, map control, or exact resources.\n");
+    // --- honest footer (verbatim from the Report so JSON and terminal agree) ---
+    s.push('\n');
+    for c in &report.caveats {
+        s.push_str(&format!("note: {c}\n"));
+    }
     s
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::analyze::model::{Basis, PlayerInfo};
+    use crate::analyze::model::{Basis, PlayerInfo, Report, ReportMeta, SCHEMA_VERSION, MACRO_CAVEAT};
 
     fn pm(name: &str, pn: i32) -> PlayerMetrics {
         PlayerMetrics {
@@ -197,25 +196,23 @@ mod tests {
 
     #[test]
     fn report_contains_player_and_top_fix() {
-        let meta = GameMeta {
-            map_id: 9,
-            duration_ms: 2_400_000,
-            rec_player: 1,
+        let report = Report {
+            schema_version: SCHEMA_VERSION,
+            meta: ReportMeta { map_id: 9, map_name: "Arabia".into(), family: Family::Open,
+                               mode: "1v1".into(), duration_ms: 2_400_000, you: 1 },
+            players: vec![pm("MKD", 1)],
+            findings: vec![Finding {
+                player_number: 1, metric: "idle TC (dark)".into(), your: "30s".into(),
+                reference: "~0-15s".into(), basis: Basis::Absolute, severity: Severity::High,
+                note: "tighten production".into(),
+            }],
+            caveats: vec![MACRO_CAVEAT.to_string()],
         };
-        let metrics = vec![pm("MKD", 1)];
-        let findings = vec![Finding {
-            player_number: 1,
-            metric: "idle TC (dark)".into(),
-            your: "30s".into(),
-            reference: "~0-15s".into(),
-            basis: Basis::Absolute,
-            severity: Severity::High,
-            note: "tighten production".into(),
-        }];
-        let s = render(&meta, "Arabia", Family::Open, &metrics, &findings, 1);
+        let s = render(&report);
         assert!(s.contains("Arabia"));
         assert!(s.contains("Top Fixes"));
         assert!(s.contains("MKD"));
         assert!(s.contains("idle TC (dark)"));
+        assert!(s.contains("macro coach only")); // caveats now come from the Report
     }
 }

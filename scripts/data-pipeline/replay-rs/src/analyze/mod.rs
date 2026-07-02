@@ -28,12 +28,7 @@ pub fn run(args: AnalyzeArgs) -> Result<()> {
     let game = load_game(&args.input)?;
     let sel = match &args.you { Some(n) => YouSel::Name(n.clone()), None => YouSel::Auto };
     let report = analyze(&game, &sel)?;
-    // temporary bridge to the pre-Task-3 render signature; render only reads duration_ms
-    let meta = model::GameMeta {
-        map_id: report.meta.map_id, duration_ms: report.meta.duration_ms, rec_player: report.meta.you,
-    };
-    print!("{}", report::render(&meta, &report.meta.map_name, report.meta.family,
-                                &report.players, &report.findings, report.meta.you));
+    print!("{}", report::render(&report));
     Ok(())
 }
 
