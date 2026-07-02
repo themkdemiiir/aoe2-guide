@@ -174,8 +174,6 @@ struct MatchStat {
     #[serde(default)]
     mapname: Option<String>,
     #[serde(default)]
-    matchtype_id: Option<u32>,
-    #[serde(default)]
     matchhistorymember: Vec<MatchMember>,
 }
 
@@ -205,7 +203,6 @@ pub struct RecentMatch {
     pub match_id: i64,
     pub completed_unix: i64,
     pub map_raw: Option<String>,
-    pub ladder: Option<u32>,
     pub team_size: usize,
     pub my_civ_id: Option<u32>,
     pub my_rating: Option<i32>,
@@ -238,7 +235,6 @@ fn normalize_recent(doc: RecentHistoryResponse, profile_id: i64) -> Vec<RecentMa
                 match_id: m.id,
                 completed_unix: m.completiontime,
                 map_raw: m.mapname,
-                ladder: m.matchtype_id,
                 team_size: m.matchhistorymember.len(),
                 my_civ_id: me.and_then(|x| x.civilization_id),
                 // source: newrating is the post-game rating; oldrating is the
