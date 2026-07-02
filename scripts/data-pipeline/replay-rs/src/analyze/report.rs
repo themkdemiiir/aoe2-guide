@@ -8,7 +8,7 @@ use std::io::IsTerminal;
 use comfy_table::Table;
 use owo_colors::OwoColorize;
 
-use crate::analyze::model::{Basis, Family, Finding, PlayerMetrics, Report, Role, Severity};
+use crate::analyze::model::{Basis, Family, Report, Role, Severity};
 
 /// AoE2 DE `color_id` is the 1-indexed slot color (1=Blue … 8=Orange), and the 8th color
 /// is stored as `0` — verified by an 8-player replay whose color_ids were a clean sequential
@@ -161,7 +161,8 @@ pub fn render(report: &Report) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::analyze::model::{Basis, PlayerInfo, Report, ReportMeta, SCHEMA_VERSION, MACRO_CAVEAT};
+    use crate::analyze::model::{Basis, Finding, PlayerInfo, PlayerMetrics, Report, ReportMeta,
+                                SCHEMA_VERSION, MACRO_CAVEAT};
 
     fn pm(name: &str, pn: i32) -> PlayerMetrics {
         PlayerMetrics {
