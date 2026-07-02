@@ -16,12 +16,12 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { crawlRecords } from "./lib/crawl-stream.mjs";
 import { isRanked1v1, relicCivSlug } from "./lib/relic-map.mjs";
+import { pct } from "./lib/stats.mjs";
 
 const META = path.resolve("src/data/civ-meta.json");
 
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 
-const pct = (x) => +(x * 100).toFixed(2);
 const MIN_PATCH_MATCHES = 3000; // a gamemod needs this many matches to count as a "patch"
 const MIN_CIV_GAMES = 100; // per civ × patch gate (self-collected sample is smaller than aoestats)
 const MAX_PATCHES = 16; // keep the most recent N patches
@@ -29,7 +29,7 @@ const MAX_PATCHES = 16; // keep the most recent N patches
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 // gamemod_id flips several times a month (hotfixes), so bucket by CALENDAR MONTH
 // for a clean, unambiguous dated patch axis.
-const monthKey = (t) => { const d = new Date(t * 1000); return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; };
+const monthKey = (t) => new Date(t * 1000).toISOString().slice(0, 7);
 const monthLabel = (key) => { const [y, mo] = key.split("-"); return `${MONTHS[+mo - 1]} ${y}`; };
 
 // --- pass 1: accumulate per month + per civ × month --------------------------

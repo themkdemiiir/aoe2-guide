@@ -5,6 +5,7 @@ import Icon from "@/components/ui/Icon.astro";
 import counters from "@data/counters.json";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { displayName } from "@/lib/display";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -20,9 +21,6 @@ const units = counters.units as Record<string, UnitInfo>;
 // counters.json prose is migrating from EN-only strings to { en, tr }; accept both.
 const loc = (v: Localized): string => (typeof v === "string" ? v : (v[lang] ?? v.en));
 
-function displayName(slug: string) {
-  return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-}
 const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).localeCompare(displayName(b[0])));
 ---
 <BaseLayout title={t(lang, "counters.title")} canonicalPath="/counters">

@@ -20,87 +20,36 @@
 
 import { mkdir, readFile, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
+import { parseArgs } from "node:util";
+import {
+  API, TITLE, LEADERBOARD_1V1_RM, LEADERBOARD_TEAM_RM,
+  keepBySize as keepBySizeFor, makeClient, normalizeMatches, sleep,
+} from "./lib/relic-api.mjs";
 
-const API = "https://aoe-api.worldsedgelink.com/community/leaderboard";
-const TITLE = "age2";
-const LEADERBOARD_1V1_RM = 3; // verified: id 3 = SOLO_RM_RANKED (1v1 Random Map)
-const LEADERBOARD_TEAM_RM = 4; // verified via getAvailableLeaderboards: id 4 = TEAM_RM_RANKED
-
-// --- CLI args (tiny parser) ---------------------------------------------------
-const args = Object.fromEntries(
-  process.argv.slice(2).reduce((acc, a, i, arr) => {
-    if (a.startsWith("--")) acc.push([a.slice(2), arr[i + 1]?.startsWith("--") ? true : arr[i + 1] ?? true]);
-    return acc;
-  }, []),
-);
+// --- CLI args (strict: a typo'd flag fails loud) --------------------------------
+const { values: args } = parseArgs({
+  options: {
+    team: { type: "boolean" },
+    leaderboard: { type: "string" },
+    players: { type: "string" },
+    out: { type: "string" },
+    throttle: { type: "string" },
+    concurrency: { type: "string" },
+  },
+  strict: true,
+});
 const MAX_PLAYERS = Number(args.players ?? 2000); // top-N ranked profiles to seed from
 const OUT_DIR = path.resolve(args.out ?? "data-cache/relic");
 const THROTTLE_MS = Number(args.throttle ?? 120); // per-worker delay between requests
 const CONCURRENCY = Number(args.concurrency ?? 12); // parallel in-flight requests
-const PAGE = 200; // leaderboard page size
 const TEAM = !!args.team; // --team: seed the Team RM ladder + keep team-sized AUTOMATCH matches
 const LEADERBOARD = Number(args.leaderboard ?? (TEAM ? LEADERBOARD_TEAM_RM : LEADERBOARD_1V1_RM));
 // Keep predicate per mode: 1v1 = exactly 2 members; team = 4/6/8 (2v2/3v3/4v4)
-const keepBySize = (n) => (TEAM ? n >= 4 && n % 2 === 0 : n === 2);
+const keepBySize = keepBySizeFor(TEAM);
 const MODE = TEAM ? "team RM" : "1v1 RM";
 
-// --- helpers ------------------------------------------------------------------
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-async function getJson(url, tries = 4) {
-  for (let attempt = 1; attempt <= tries; attempt++) {
-    try {
-      const res = await fetch(url, { headers: { "user-agent": "aoe2guide-stats/1.0 (self-collect)" } });
-      if (res.status === 429 || res.status >= 500) throw new Error(`HTTP ${res.status}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
-    } catch (e) {
-      if (attempt === tries) throw e;
-      await sleep(THROTTLE_MS * attempt * 3); // back off
-    }
-  }
-}
-
-// --- 1) seed: top-N ranked profile_ids from the 1v1 RM leaderboard ------------
-async function fetchProfileIds(limit) {
-  const ids = new Set();
-  for (let start = 1; ids.size < limit; start += PAGE) {
-    const url = `${API}/getLeaderBoard2?title=${TITLE}&leaderboard_id=${LEADERBOARD}&start=${start}&count=${PAGE}&sortBy=1`;
-    const data = await getJson(url);
-    const groups = data?.statGroups ?? [];
-    if (!groups.length) break;
-    for (const g of groups) for (const m of g.members ?? []) if (m.profile_id != null) ids.add(m.profile_id);
-    process.stderr.write(`\r  leaderboard: ${ids.size} profiles seeded`);
-    await sleep(THROTTLE_MS);
-  }
-  process.stderr.write("\n");
-  return [...ids].slice(0, limit);
-}
-
-// --- 2) per-player recent match history -> normalized 1v1 RM rows -------------
-function normalizeMatches(history) {
-  const out = [];
-  for (const m of history?.matchHistoryStats ?? []) {
-    if (m.description !== "AUTOMATCH") continue; // ranked matchmaking only (drops customs/lobbies)
-    const members = m.matchhistorymember ?? [];
-    if (!keepBySize(members.length)) continue; // 1v1 = 2 members; team = 4/6/8 (2v2/3v3/4v4)
-    out.push({
-      match_id: m.id,
-      completed: m.completiontime,
-      gamemod_id: m.gamemod_id ?? null, // patch proxy: monotonic, date-aligned (each gamemod_id = one patch period)
-      map_raw: m.mapname ?? null,
-      ladder: m.matchtype_id ?? null,
-      team_size: members.length, // 2 = 1v1, 4 = 2v2, 6 = 3v3, 8 = 4v4
-      players: members.map((p) => ({
-        profile_id: p.profile_id,
-        civ_id: p.civilization_id, // NUMERIC — mapped to slug later via a verified map
-        rating: p.newrating ?? p.oldrating ?? null,
-        won: p.outcome === 1,
-      })),
-    });
-  }
-  return out;
-}
+// shared client (lib/relic-api.mjs) — the crawler pair uses ONE implementation
+const { getJson, fetchProfileIds } = makeClient({ throttleMs: THROTTLE_MS });
 
 // --- main ---------------------------------------------------------------------
 async function run() {
@@ -115,7 +64,7 @@ async function run() {
   const seenMatches = new Set(ck.seenMatches);
 
   console.log(`Seeding up to ${MAX_PLAYERS} ranked profiles from the ${MODE} ladder (leaderboard_id=${LEADERBOARD})…`);
-  const profileIds = await fetchProfileIds(MAX_PLAYERS);
+  const profileIds = await fetchProfileIds({ leaderboard: LEADERBOARD, limit: MAX_PLAYERS });
   console.log(`Got ${profileIds.length} profiles. Crawling match history (resume: ${doneProfiles.size} already done)…`);
 
   let newRows = 0;
@@ -135,7 +84,7 @@ async function run() {
   async function handle(pid) {
     const url = `${API}/getRecentMatchHistory?title=${TITLE}&profile_ids=%5B${pid}%5D`;
     let rows = [];
-    try { rows = normalizeMatches(await getJson(url)); } catch (e) {
+    try { rows = normalizeMatches(await getJson(url), keepBySize); } catch (e) {
       process.stderr.write(`\n  [warn] profile ${pid}: ${e.message}\n`);
     }
     const fresh = rows.filter((r) => !seenMatches.has(r.match_id));

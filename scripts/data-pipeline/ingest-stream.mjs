@@ -26,18 +26,22 @@
 //   node scripts/data-pipeline/ingest-stream.mjs --db <path> --stream-dir <dir> --duckdb <bin>
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, renameSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { parseArgs } from "node:util";
+import { gzipSync } from "node:zlib";
 import { eloCaseSql } from "./lib/buckets.mjs";
 import { ERA_START, relicCivmapSql } from "./lib/relic-map.mjs";
 
-const args = Object.fromEntries(
-  process.argv.slice(2).reduce((acc, a, i, arr) => {
-    if (a.startsWith("--")) acc.push([a.slice(2), arr[i + 1]?.startsWith("--") ? true : arr[i + 1] ?? true]);
-    return acc;
-  }, []),
-);
+const { values: args } = parseArgs({
+  options: {
+    db: { type: "string" },
+    "stream-dir": { type: "string" },
+    duckdb: { type: "string" },
+  },
+  strict: true,
+});
 const DB = path.resolve(args.db ?? `${os.homedir()}/aoe2-guide/data-cache/aoe2.duckdb`);
 const STREAM_DIR = path.resolve(args["stream-dir"] ?? `${os.homedir()}/aoe2-guide/data-cache/relic-stream`);
 const DUCKDB = args.duckdb ?? `${os.homedir()}/bin/duckdb`;
@@ -126,8 +130,8 @@ for (const [dir, fs] of Object.entries(byDir)) {
   const dest = path.join(STREAM_DIR, "ingested", dir);
   mkdirSync(dest, { recursive: true });
   for (const f of fs) {
-    execFileSync("gzip", ["-f", f]);                                  // f -> f.gz in place
-    renameSync(`${f}.gz`, path.join(dest, `${path.basename(f)}.gz`));
+    writeFileSync(path.join(dest, `${path.basename(f)}.gz`), gzipSync(readFileSync(f)));
+    unlinkSync(f);
   }
 }
 console.log(`ingest-stream: archived ${files.length} shard(s) gzipped → relic-stream/ingested/`);

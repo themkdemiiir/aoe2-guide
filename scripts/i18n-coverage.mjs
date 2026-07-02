@@ -10,7 +10,7 @@
 // Usage:  node scripts/i18n-coverage.mjs
 // CI:     exits 1 if any gaps are found, 2 on config error.
 
-import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, sep } from "node:path";
 
 const CONTENT_ROOT = "src/content";
@@ -19,14 +19,9 @@ const EN_SEG = `${sep}en${sep}`;
 const TR_SEG = `${sep}tr${sep}`;
 
 function walk(dir) {
-  const out = [];
-  for (const name of readdirSync(dir)) {
-    const p = join(dir, name);
-    const st = statSync(p);
-    if (st.isDirectory()) out.push(...walk(p));
-    else if (p.endsWith(".md") || p.endsWith(".mdx")) out.push(p);
-  }
-  return out;
+  return readdirSync(dir, { recursive: true })
+    .map((name) => join(dir, name))
+    .filter((p) => p.endsWith(".md") || p.endsWith(".mdx"));
 }
 
 // Strip frontmatter + collapse whitespace so "identical" means identical *body*.

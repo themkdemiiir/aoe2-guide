@@ -34,6 +34,11 @@ pub const VILLAGER_ID: u16 = 83;
 /// trade cart(128), trade cog(354), and 17. Matches `config.ECO_UNIT_IDS`.
 pub const ECO_UNIT_IDS: [u16; 5] = [83, 13, 128, 354, 17];
 
+/// Canonical m:ss formatter (single copy — report/compare/main all render times).
+pub fn mmss(total_secs: u32) -> String {
+    format!("{}:{:02}", total_secs / 60, total_secs % 60)
+}
+
 pub fn is_eco_unit(unit_id: u16) -> bool {
     ECO_UNIT_IDS.contains(&unit_id)
 }

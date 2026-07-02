@@ -20,6 +20,7 @@ import path from "node:path";
 import { eloBucket } from "./lib/buckets.mjs";
 import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
 import { canonToKeyIndex, isRankedTeam, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
+import { pct, tierOf, wilson } from "./lib/stats.mjs";
 
 const CIV_META = path.resolve("src/data/civ-meta.json");
 const MAP_META = path.resolve("src/data/map-meta.json");
@@ -27,16 +28,6 @@ const MAP_META = path.resolve("src/data/map-meta.json");
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 const civMeta = JSON.parse(readFileSync(CIV_META, "utf8"));
 const mapMeta = JSON.parse(readFileSync(MAP_META, "utf8"));
-
-const pct = (x) => +(x * 100).toFixed(2);
-const tierOf = (w) => (w >= 53 ? "S" : w >= 51 ? "A" : w >= 49 ? "B" : w >= 47 ? "C" : "D");
-function wilson(wins, n, z = 1.96) {
-  if (!n) return [0, 0];
-  const p = wins / n, d = 1 + (z * z) / n;
-  const c = (p + (z * z) / (2 * n)) / d;
-  const m = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / d;
-  return [c - m, c + m];
-}
 
 const MIN_CIV = 500; // per-civ team-overall gate
 const MIN_ELO = 100; // per-civ byElo bucket gate

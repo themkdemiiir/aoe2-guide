@@ -36,6 +36,7 @@ const specialtyBySlug = new Map(civData.map((c) => [c.data.slug, c.data.specialt
 
 // Tier accent colors, brightened for legibility on the dark cover. Data-driven,
 // so applied via inline style (the sanctioned exception to "classes only").
+// Intentionally brighter variant of the canonical dark codex palette in src/lib/tiers.ts.
 const TIER_COLOR: Record<string, string> = { S: "#e0654f", A: "#e6bd5e", B: "#bda983", C: "#a3926e", D: "#8f7f60" };
 const oneBySlug = civMeta.civs as Record<string, { "1v1": { winRate: number; tier: string } | null }>;
 

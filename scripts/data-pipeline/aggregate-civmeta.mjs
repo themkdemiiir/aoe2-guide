@@ -18,15 +18,20 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { parseArgs } from "node:util";
 import { crawlRecords } from "./lib/crawl-stream.mjs";
 import { RELIC_CIV_MAP, isRanked1v1 } from "./lib/relic-map.mjs";
+import { tierOf, wilson } from "./lib/stats.mjs";
 
-const args = Object.fromEntries(
-  process.argv.slice(2).reduce((acc, a, i, arr) => {
-    if (a.startsWith("--")) acc.push([a.slice(2), arr[i + 1]?.startsWith("--") ? true : arr[i + 1] ?? true]);
-    return acc;
-  }, []),
-);
+const { values: args } = parseArgs({
+  options: {
+    in: { type: "string" },
+    out: { type: "string" },
+    "min-games": { type: "string" },
+    "min-elo": { type: "string" },
+  },
+  strict: true,
+});
 // Default input = ALL crawl sources via lib/crawl-stream.mjs (deduped, gated);
 // --in <file> narrows to one NDJSON file (still gated + deduped).
 const IN = args.in ? [path.resolve(args.in)] : undefined;
@@ -39,24 +44,6 @@ const civIdMap = RELIC_CIV_MAP;
 const guideCivs = new Set(
   JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug),
 );
-
-// Wilson score 95% CI for a binomial proportion (robust for small/extreme n).
-function wilson(wins, n, z = 1.96) {
-  if (n === 0) return [0, 0];
-  const p = wins / n;
-  const d = 1 + (z * z) / n;
-  const centre = (p + (z * z) / (2 * n)) / d;
-  const margin = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / d;
-  return [centre - margin, centre + margin];
-}
-
-function tier(winRatePct) {
-  if (winRatePct >= 53) return "S";
-  if (winRatePct >= 51) return "A";
-  if (winRatePct >= 49) return "B";
-  if (winRatePct >= 47) return "C";
-  return "D";
-}
 
 async function run() {
   const tally = {}; // slug -> { games, wins }
@@ -111,7 +98,7 @@ async function run() {
       winRate: +(wr * 100).toFixed(2),
       ci95: [+(lo * 100).toFixed(2), +(hi * 100).toFixed(2)],
       playRate: +((games / appearances) * 100).toFixed(2),
-      tier: tier(wr * 100),
+      tier: tierOf(wr * 100),
     };
   }
 

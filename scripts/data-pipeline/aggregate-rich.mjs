@@ -15,15 +15,15 @@
 // Runs ON THE BOX (needs ~/bin/duckdb + ~/aoestats/*.parquet).
 //   node scripts/data-pipeline/aggregate-rich.mjs
 
-import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS, eloCaseSql } from "./lib/buckets.mjs";
+import { duck } from "./lib/duck.mjs";
+import { TIER_METHOD, pct, tierOf, wilson } from "./lib/stats.mjs";
 
 const SOURCE_DATE = "2026-02"; // aoestats archive corpus month (frozen) — confirm before changing
 
 const HOME = process.env.HOME;
-const DUCK = `${HOME}/bin/duckdb`;
 const M = `${HOME}/aoestats/m_*.parquet`;
 const P = `${HOME}/aoestats/p_*.parquet`;
 const OUT = path.resolve("src/data/civ-meta.json");
@@ -39,19 +39,6 @@ const guideCivs = new Set(
   JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug),
 );
 
-function duck(sql) {
-  const out = execSync(`${DUCK} -json -c ${JSON.stringify(sql)}`, { maxBuffer: 1 << 29 }).toString().trim();
-  return out ? JSON.parse(out) : [];
-}
-function wilson(wins, n, z = 1.96) {
-  if (!n) return [0, 0];
-  const p = wins / n, d = 1 + z * z / n;
-  const c = (p + z * z / (2 * n)) / d;
-  const m = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d;
-  return [c - m, c + m];
-}
-const tier = (w) => (w >= 53 ? "S" : w >= 51 ? "A" : w >= 49 ? "B" : w >= 47 ? "C" : "D");
-const pct = (x) => +(x * 100).toFixed(2);
 const ELO = eloCaseSql("p.new_rating");
 const idx = (rows) => { const m = {}; for (const r of rows) (m[r.civ] ??= []).push(r); return m; };
 
@@ -88,7 +75,7 @@ function buildLadder(slug, agg) {
   const ag = agg.ageup[slug];
   return {
     games, winRate: pct(wins / games), ci95: [pct(lo), pct(hi)],
-    playRate: pct(games / agg.totalApp), tier: tier((wins / games) * 100),
+    playRate: pct(games / agg.totalApp), tier: tierOf((wins / games) * 100),
     byPatch: bp, byElo,
     byMap: Object.fromEntries((agg.byMap[slug] ?? []).sort((a, b) => Number(b.games) - Number(a.games)).slice(0, 14).map((r) => [r.mapname, { games: Number(r.games), winRate: pct(r.wr) }])),
     openings: (agg.openings[slug] ?? []).map((r) => ({ opening: r.opening, share: o ? pct(Number(r.games) / Number(o.games)) : null })),
@@ -111,7 +98,7 @@ const out = {
   appearances: { "1v1": L["1v1"].totalApp, team: L.team.totalApp },
   patches: L["1v1"].patches.map((r) => ({ patch: r.patch, matches: Number(r.n) })),
   eloBuckets: ELO_BUCKETS,
-  tierMethod: "Win rate: ≥53 S | 51–53 A | 49–51 B | 47–49 C | <47 D. No data → null.",
+  tierMethod: TIER_METHOD,
   civs,
 };
 writeFileSync(OUT, `${JSON.stringify(out, null, 2)}\n`, "utf8");

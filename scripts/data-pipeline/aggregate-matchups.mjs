@@ -9,15 +9,15 @@
 // Runs ON THE BOX (needs ~/bin/duckdb + ~/aoestats/*.parquet).
 //   node scripts/data-pipeline/aggregate-matchups.mjs
 
-import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS_WITH_ALL, eloCaseSql } from "./lib/buckets.mjs";
+import { duck } from "./lib/duck.mjs";
+import { pct } from "./lib/stats.mjs";
 
 const SOURCE_DATE = "2026-02"; // aoestats archive corpus month (frozen) — confirm before changing
 
 const HOME = process.env.HOME;
-const DUCK = `${HOME}/bin/duckdb`;
 const M = `${HOME}/aoestats/m_*.parquet`;
 const P = `${HOME}/aoestats/p_*.parquet`;
 const OUT = path.resolve("src/data/civ-matchups.json");
@@ -26,11 +26,6 @@ const guideCivs = new Set(
   JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug),
 );
 
-function duck(sql) {
-  const oneLine = sql.replace(/\s+/g, " ").trim();
-  return JSON.parse(execSync(`${DUCK} -json -c ${JSON.stringify(oneLine)}`, { maxBuffer: 1 << 30 }).toString().trim() || "[]");
-}
-const pct = (x) => +(x * 100).toFixed(2);
 const MIN = 300; // min games per matchup to be reported
 
 console.log("Aggregating civ-vs-civ 1v1 matchups via DuckDB (self-join)…");

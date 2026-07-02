@@ -7,6 +7,7 @@ import iconMap from "@data/icon-map.json";
 import mapMeta from "@data/map-meta.json";
 import MapCivRankings from "@/components/content/MapCivRankings.astro";
 import { canon, dedupedMetaMaps, resolveMetaKey } from "@/lib/data-maps";
+import { displayName } from "@/lib/display";
 import { marked } from "marked";
 
 const META_MAPS = (mapMeta as { maps: Record<string, { games: { "1v1": number; team: number } }> }).maps;
@@ -27,17 +28,12 @@ const metaKey = resolveMetaKey(slug);
 const md = metaKey ? META_MAPS[metaKey] : undefined;
 if (!entry && !md) return Astro.redirect("/404");
 
-const prettify = (s: string) => s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-const name = entry ? entry.data.name[lang] : prettify(slug);
+const name = entry ? entry.data.name[lang] : displayName(slug);
 const totalGames = md ? md.games["1v1"] + md.games.team : 0;
 const numFmt = new Intl.NumberFormat(lang === "tr" ? "tr-TR" : "en-US");
 
 const bodyHtml = entry?.data.body?.[lang] ? (marked.parse(entry.data.body[lang]) as string) : "";
 const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
-
-function displayName(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ");
-}
 ---
 <BaseLayout title={name} canonicalPath={`/maps/${slug}`}>
   <article class="mx-auto max-w-3xl px-4 py-8">

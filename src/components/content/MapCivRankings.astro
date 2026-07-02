@@ -130,6 +130,7 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
         const root = document.currentScript.closest("[data-map-civs]");
         const fmt = new Intl.NumberFormat();
         const fill = (w) => Math.max(3, Math.min(100, ((w - 35) / 30) * 100));
+        // mirror of src/scripts/html.ts (is:inline can't import — keep in sync)
         const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
         const list = root.querySelector("[data-rows]");
         const nodata = root.querySelector("[data-nodata]");

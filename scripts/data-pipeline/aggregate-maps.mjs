@@ -9,15 +9,15 @@
 // Runs ON THE BOX (needs ~/bin/duckdb + ~/aoestats/*.parquet).
 //   node scripts/data-pipeline/aggregate-maps.mjs
 
-import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS, eloCaseSql } from "./lib/buckets.mjs";
+import { duck } from "./lib/duck.mjs";
+import { pct } from "./lib/stats.mjs";
 
 const SOURCE_DATE = "2026-02"; // aoestats archive corpus month (frozen) — confirm before changing
 
 const HOME = process.env.HOME;
-const DUCK = `${HOME}/bin/duckdb`;
 const M = `${HOME}/aoestats/m_*.parquet`;
 const P = `${HOME}/aoestats/p_*.parquet`;
 const OUT = path.resolve("src/data/map-meta.json");
@@ -25,13 +25,6 @@ const OUT = path.resolve("src/data/map-meta.json");
 const guideCivs = new Set(
   JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug),
 );
-
-function duck(sql) {
-  const oneLine = sql.replace(/\s+/g, " ").trim();
-  const out = execSync(`${DUCK} -json -c ${JSON.stringify(oneLine)}`, { maxBuffer: 1 << 30 }).toString().trim();
-  return out ? JSON.parse(out) : [];
-}
-const pct = (x) => +(x * 100).toFixed(2);
 
 const ELO = eloCaseSql("p.new_rating");
 const TIERS = ["all", ...ELO_BUCKETS]; // "all" first

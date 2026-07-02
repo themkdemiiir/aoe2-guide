@@ -6,6 +6,7 @@ import cubeDims from "@data/civ-cube-dims.json";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { localizedPath, t } from "@/i18n/utils";
+import { tierOf, TIER_COLORS } from "@/lib/tiers";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -48,7 +49,6 @@ const mapOptions = dims.maps.map((key, i) => ({ key, name: dims.mapNames[i] }));
 
 const SHIELD = "polygon(0 0,100% 0,100% 68%,50% 100%,0 68%)";
 const MIN = 30; // games below this in the chosen slice → low-sample
-const tierOf = (wr: number) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
 
 const labels = {
   civBase: localizedPath("/civs/", lang),
@@ -58,11 +58,11 @@ const labels = {
   rated: tr ? "değerlendirildi" : "rated",
   reset: tr ? "Sıfırla" : "Reset",
   tiers: [
-    ["S", tr ? "EN İYİ" : "TOP TIER", "#8a2d22"],
-    ["A", tr ? "GÜÇLÜ" : "STRONG", "#9a6a1e"],
-    ["B", tr ? "SAĞLAM" : "SOLID", "#6b5b41"],
-    ["C", tr ? "DURUMA GÖRE" : "SITUATIONAL", "#7a6a4a"],
-    ["D", tr ? "ZAYIF" : "WEAK", "#8a7a5a"],
+    ["S", tr ? "EN İYİ" : "TOP TIER", TIER_COLORS.S],
+    ["A", tr ? "GÜÇLÜ" : "STRONG", TIER_COLORS.A],
+    ["B", tr ? "SAĞLAM" : "SOLID", TIER_COLORS.B],
+    ["C", tr ? "DURUMA GÖRE" : "SITUATIONAL", TIER_COLORS.C],
+    ["D", tr ? "ZAYIF" : "WEAK", TIER_COLORS.D],
   ] as const,
 };
 
@@ -147,7 +147,10 @@ const serverTiers = labels.tiers
 
   <script is:inline define:vars={{ civData, labels, SHIELD, MIN }}>
     (() => {
+      // mirror of src/scripts/html.ts (is:inline can't import — keep in sync)
       const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+      // mirror of src/lib/tiers.ts (is:inline can't import — keep in sync;
+      // tier COLORS arrive via define:vars in labels.tiers, sourced from TIER_COLORS)
       const tierOf = (wr) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
 
       const root = document.querySelector("[data-filter]");

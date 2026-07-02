@@ -28,8 +28,7 @@ fn color_name(id: i32) -> &'static str {
 }
 
 fn opt_mmss(ms: Option<u32>) -> String {
-    ms.map(|m| format!("{}:{:02}", m / 60000, (m / 1000) % 60))
-        .unwrap_or_else(|| "—".into())
+    ms.map(|m| replay_rs::config::mmss(m / 1000)).unwrap_or_else(|| "—".into())
 }
 
 fn sev_symbol(s: Severity) -> &'static str {
@@ -55,11 +54,10 @@ pub fn render(report: &Report) -> String {
     let mut s = String::new();
 
     s.push_str(&format!(
-        "\nAoE2 Game Analysis — {} players · {} · {}:{:02}\n\n",
+        "\nAoE2 Game Analysis — {} players · {} · {}\n\n",
         metrics.len(),
         meta.map_name,
-        meta.duration_ms / 60000,
-        (meta.duration_ms / 1000) % 60
+        replay_rs::config::mmss(meta.duration_ms / 1000)
     ));
 
     // --- scorecard ---
@@ -107,7 +105,7 @@ pub fn render(report: &Report) -> String {
             let d = m.nearest_enemy_dist?;
             let scout = m
                 .find_enemy_ms
-                .map(|t| format!("found enemy {}:{:02}", t / 60000, (t / 1000) % 60))
+                .map(|t| format!("found enemy {}", replay_rs::config::mmss(t / 1000)))
                 .unwrap_or_else(|| "never reached enemy".into());
             Some(format!("  {}: nearest enemy ~{:.0} tiles · {}", m.info.name, d, scout))
         })
@@ -196,6 +194,10 @@ mod tests {
             vils_series: vec![],
             mil_series: vec![],
             apm_series: vec![],
+            eco_apm: 0.0,
+            mil_apm: 0.0,
+            market_buys: 0,
+            market_sells: 0,
         }
     }
 

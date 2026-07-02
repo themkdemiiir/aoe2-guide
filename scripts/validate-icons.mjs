@@ -51,17 +51,8 @@ const KNOWN_MISSING = new Set([
 ]);
 
 async function walkContent(dir) {
-  const out = [];
-  const entries = await readdir(dir, { withFileTypes: true });
-  for (const e of entries) {
-    const full = path.join(dir, e.name);
-    if (e.isDirectory()) {
-      out.push(...(await walkContent(full)));
-    } else if (e.isFile() && /\.(md|mdx)$/i.test(e.name)) {
-      out.push(full);
-    }
-  }
-  return out;
+  const entries = await readdir(dir, { recursive: true });
+  return entries.filter((name) => /\.(md|mdx)$/i.test(name)).map((name) => path.join(dir, name));
 }
 
 function extractIconRefs(source) {

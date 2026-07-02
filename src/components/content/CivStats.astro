@@ -177,6 +177,7 @@ const mapList = one
 
 <script>
   import Chart from "chart.js/auto";
+  import { tierOf, TIER_COLORS } from "@/lib/tiers";
 
   const css = getComputedStyle(document.documentElement);
   const stone = css.getPropertyValue("--color-stone-700").trim() || "#5a4a33";
@@ -258,9 +259,6 @@ const mapList = one
     const elTier = q<HTMLElement>("[data-cf-tier]");
     const elGames = q<HTMLElement>("[data-cf-games]");
     const elLabel = q<HTMLElement>("[data-cf-label]");
-    const tierOf = (wr: number) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
-    const tierColor: Record<string, string> = { S: "#8a2d22", A: "#9a6a1e", B: "#6b5b41", C: "#7a6a4a", D: "#8a7a5a" };
-
     type Cube = { civs: string[]; elos: string[]; maps: string[]; months: { patch: string }[]; rows: number[][]; _ci: number; _ei: Record<string, number>; _mi: Record<string, number>; _pi: Record<string, number> };
     let cube: Cube | null = null;
     let req: Promise<Cube> | null = null;
@@ -310,7 +308,7 @@ const mapList = one
         elWr.textContent = `${wr}%`;
         elWr.style.color = wr >= 50 ? "#8a6a1f" : "#8a2d22";
         elTier.textContent = t;
-        elTier.style.color = tierColor[t];
+        elTier.style.color = TIER_COLORS[t];
         elGames.textContent = `${g.toLocaleString()} ${gamesWord}`;
       } else {
         elWr.textContent = "—";

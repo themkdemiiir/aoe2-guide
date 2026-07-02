@@ -8,6 +8,8 @@ import mapMetaData from "@data/map-meta.json";
 import civMeta from "@data/civ-meta.json";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { displayName } from "@/lib/display";
+import { TIER_COLORS } from "@/lib/tiers";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -37,9 +39,12 @@ const labels = {
   imperialAge: t(lang, "matchups.imperialAge"),
 };
 
-function displayName(slug: string): string {
-  return slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, " ");
-}
+// Display names precomputed server-side (canonical prettifier in
+// src/lib/display.ts) so the is:inline script below needs no local copy.
+// Covers every slug the client renders: civs + their unique units.
+const displayNames = Object.fromEntries(
+  [...civs.map((c) => c.slug), ...civs.flatMap((c) => c.uniqueUnits ?? [])].map((s) => [s, displayName(s)]),
+);
 
 // Head-to-head by elo bucket: h2hElo[a][b] = { bucketIdx: [winRate, games] } where
 // bucketIdx indexes ELO_BUCKETS (["all", "<1000", …]). Lets the comparator filter
@@ -82,7 +87,7 @@ const COMMON_MAPS = Object.entries(mapMetaData.maps as Record<string, { games: {
   .slice(0, 15)
   .map(([k]) => k);
 const mapIdx = Object.fromEntries(COMMON_MAPS.map((m, i) => [m, i]));
-const mapNames = COMMON_MAPS.map((m) => displayName(m).replace(/_/g, " "));
+const mapNames = COMMON_MAPS.map((m) => displayName(m));
 const pm: Record<string, Record<string, Record<number, number>>> = {};
 for (const [a, maps] of Object.entries(byMapData.civs as Record<string, Record<string, MM[]>>)) {
   for (const [map, arr] of Object.entries(maps)) {
@@ -115,13 +120,13 @@ const h2hLabels = {
       <label class="block">
         <span class="text-xs text-stone-700">{t(lang, "matchups.pickA")}</span>
         <select id="civ-a" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
-          {civs.map((c) => <option value={c.slug}>{displayName(c.slug)}</option>)}
+          {civs.map((c) => <option value={c.slug}>{displayNames[c.slug]}</option>)}
         </select>
       </label>
       <label class="block">
         <span class="text-xs text-stone-700">{t(lang, "matchups.pickB")}</span>
         <select id="civ-b" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
-          {civs.map((c) => <option value={c.slug}>{displayName(c.slug)}</option>)}
+          {civs.map((c) => <option value={c.slug}>{displayNames[c.slug]}</option>)}
         </select>
       </label>
     </form>
@@ -132,13 +137,14 @@ const h2hLabels = {
       <!-- JS will populate this with two civ panels -->
     </div>
 
-    <script is:inline define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames }}>
+    <script is:inline define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS }}>
       // Build a slug -> civ lookup
       const byslug = Object.fromEntries(civs.map((c) => [c.slug, c]));
 
       // Escape data-derived strings before inserting into innerHTML — defense-in-depth.
       // Civ data is authored today, but community contributions are planned; this prevents
       // any HTML/script in a data field from executing.
+      // mirror of src/scripts/html.ts (is:inline can't import — keep in sync)
       function esc(s) {
         return String(s).replace(/[&<>"']/g, (ch) =>
           ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch],
@@ -154,9 +160,9 @@ const h2hLabels = {
       selA.value = initialA;
       selB.value = initialB;
 
-      function displayName(slug) {
-        return slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, " ");
-      }
+      // Names are precomputed server-side with the canonical prettifier
+      // (src/lib/display.ts) and passed in via define:vars.
+      const displayName = (slug) => displayNames[slug] ?? slug;
 
       function fmt(n, suffix) {
         return (typeof n === "number" ? n.toFixed(1) + suffix : "—");
@@ -164,9 +170,9 @@ const h2hLabels = {
 
       function tierBadge(tier) {
         if (!tier) return '<span class="text-stone-700">—</span>';
-        const C = { S: "#8a2d22", A: "#9a6a1e", B: "#6b5b41", C: "#7a6a4a", D: "#8a7a5a" };
+        // TIER_COLORS comes from src/lib/tiers.ts via define:vars.
         return '<span class="inline-flex h-6 w-6 items-center justify-center rounded font-display text-sm font-bold text-parchment" style="background:'
-          + (C[tier] || "#8a7a5a") + '">' + esc(tier) + '</span>';
+          + (TIER_COLORS[tier] || TIER_COLORS.D) + '">' + esc(tier) + '</span>';
       }
 
       function panel(slug) {

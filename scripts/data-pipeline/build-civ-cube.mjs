@@ -34,7 +34,7 @@ const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civiliz
 const civMeta = JSON.parse(readFileSync(path.resolve("src/data/civ-meta.json"), "utf8"));
 const mapMeta = JSON.parse(readFileSync(path.resolve("src/data/map-meta.json"), "utf8"));
 
-const monthKey = (t) => { const d = new Date(t * 1000); return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; };
+const monthKey = (t) => new Date(t * 1000).toISOString().slice(0, 7);
 const prettify = (s) => s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
 // The patch axis = the same dated months civ-meta exposes (so the filter matches).

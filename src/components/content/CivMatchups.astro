@@ -8,6 +8,7 @@ import byMapData from "@data/civ-matchups-by-map.json";
 import { getCollection } from "astro:content";
 import Icon from "@/components/ui/Icon.astro";
 import { localizedPath, t } from "@/i18n/utils";
+import { displayName } from "@/lib/display";
 import type { Locale } from "@/i18n/locales";
 
 interface Props {
@@ -23,11 +24,10 @@ const teamOverall = ((teamMatchups.civs as Record<string, M[]>)[slug] ?? []).fil
 const byMapRaw = (byMapData.civs as Record<string, Record<string, M[]>>)[slug] ?? {};
 const civNames = new Map((await getCollection("civilizations")).map((c) => [c.id, c.data.name[lang]]));
 const numFmt = new Intl.NumberFormat(tr ? "tr-TR" : "en-US");
-const prettify = (s: string) => s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
 const mapViews = Object.entries(byMapRaw)
   .filter(([, arr]) => arr.length >= 14)
-  .map(([map, arr]) => ({ id: map, label: prettify(map), rows: arr, games: arr.reduce((s, x) => s + x.games, 0) }))
+  .map(([map, arr]) => ({ id: map, label: displayName(map), rows: arr, games: arr.reduce((s, x) => s + x.games, 0) }))
   .sort((a, b) => b.games - a.games)
   .slice(0, 10);
 

@@ -20,13 +20,12 @@ import path from "node:path";
 import { eloBucket } from "./lib/buckets.mjs";
 import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
 import { canonToKeyIndex, isRanked1v1, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
+import { pct } from "./lib/stats.mjs";
 
 const META = path.resolve("src/data/map-meta.json");
 
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 const meta = JSON.parse(readFileSync(META, "utf8"));
-
-const pct = (x) => +(x * 100).toFixed(2);
 
 const MIN_MAP = 3000; // map needs this many current 1v1 matches to be included
 const MIN_ALL = 200; // per-civ gate, "all" bucket
