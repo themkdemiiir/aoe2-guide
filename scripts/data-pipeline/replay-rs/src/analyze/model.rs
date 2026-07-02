@@ -95,6 +95,14 @@ pub struct PlayerMetrics {
     pub nearest_enemy_dist: Option<f32>,
     /// time the player's units first reached an enemy base region (scouting), if any.
     pub find_enemy_ms: Option<u32>,
+    /// rule-based opening tag ("Scouts into Archers", "Fast Castle", …); None = nothing to say.
+    pub opening: Option<String>,
+    /// cumulative eco units QUEUED per minute (index = minute; same DeQueue basis as vils@Castle).
+    pub vils_series: Vec<u32>,
+    /// cumulative military units QUEUED per minute.
+    pub mil_series: Vec<u32>,
+    /// effective actions per minute (raw command count, same basis as `apm`).
+    pub apm_series: Vec<u32>,
 }
 
 /// The four comparison bases: your elo-bucket median, the 2500+ "pro" median, the opponent

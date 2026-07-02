@@ -57,6 +57,7 @@ pub fn build_metrics(
                 .into_iter()
                 .max_by(|a, b| a.rate_gap_per_min.partial_cmp(&b.rate_gap_per_min).unwrap());
             let cm = coords.get(&pn).cloned().unwrap_or_default();
+            let (vils_series, mil_series) = metrics::production_series(&w.evs, pn, dur);
             PlayerMetrics {
                 info: info.clone(),
                 feudal_ms,
@@ -77,6 +78,10 @@ pub fn build_metrics(
                 float_window: peak.as_ref().map(|p| (p.start_ms, p.end_ms)),
                 nearest_enemy_dist: cm.nearest_enemy_dist,
                 find_enemy_ms: cm.find_enemy_ms,
+                opening: metrics::classify_opening(&w.evs, pn, feudal_ms, castle_ms),
+                vils_series,
+                mil_series,
+                apm_series: w.action_series.get(&pn).cloned().unwrap_or_default(),
             }
         })
         .collect()
@@ -300,6 +305,10 @@ mod tests {
             float_window: None,
             nearest_enemy_dist: None,
             find_enemy_ms: None,
+            opening: None,
+            vils_series: vec![],
+            mil_series: vec![],
+            apm_series: vec![],
         }
     }
 

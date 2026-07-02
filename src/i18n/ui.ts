@@ -212,6 +212,10 @@ export const ui = {
     "analyzer.table.win": "win",
     "analyzer.table.loss": "loss",
     "analyzer.notes": "Notes",
+    "analyzer.opening": "Opening",
+    "analyzer.charts.production": "Production over time",
+    "analyzer.charts.productionNote": "Cumulative units queued — villagers solid, military dashed.",
+    "analyzer.charts.apm": "Actions per minute",
     "analyzer.eco": "Eco upgrades",
     "analyzer.eco.missing": "not researched",
     "analyzer.result.note":
@@ -430,6 +434,10 @@ export const ui = {
     "analyzer.table.win": "galibiyet",
     "analyzer.table.loss": "mağlubiyet",
     "analyzer.notes": "Notlar",
+    "analyzer.opening": "Açılış",
+    "analyzer.charts.production": "Zaman içinde üretim",
+    "analyzer.charts.productionNote": "Kümülatif kuyruğa alınan birimler — köylüler düz, askerler kesikli çizgi.",
+    "analyzer.charts.apm": "Dakika başına eylem",
     "analyzer.eco": "Ekonomi geliştirmeleri",
     "analyzer.eco.missing": "araştırılmadı",
     "analyzer.result.note":

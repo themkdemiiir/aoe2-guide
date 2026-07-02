@@ -192,6 +192,10 @@ mod tests {
             float_window: None,
             nearest_enemy_dist: None,
             find_enemy_ms: None,
+            opening: None,
+            vils_series: vec![],
+            mil_series: vec![],
+            apm_series: vec![],
         }
     }
 

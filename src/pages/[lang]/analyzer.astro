@@ -80,7 +80,21 @@ const ecoTechs: Record<string, string> = {
   <script is:inline type="application/json" id="az-data" set:html={JSON.stringify({ L, civs, ecoTechs })} />
 
   <script>
+    import Chart from "chart.js/auto";
+
     const { L, civs, ecoTechs } = JSON.parse(document.getElementById("az-data")!.textContent!);
+
+    // Chart defaults matching the site's stat components (CivStats.astro).
+    Chart.defaults.font.family = "'JetBrains Mono', monospace";
+    Chart.defaults.font.size = 10;
+    Chart.defaults.color = "#6b5b41";
+
+    // AoE2 DE slot colors by replay color_id (1=Blue … 7=Gray, 0|8=Orange).
+    const PLAYER_COLORS: Record<number, string> = {
+      1: "#2f6bd8", 2: "#c2352b", 3: "#3f8f3f", 4: "#c7a23c",
+      5: "#2fa8a8", 6: "#8e4f9f", 7: "#7a7a72", 0: "#d07a2d", 8: "#d07a2d",
+    };
+    const colorOf = (id: number) => PLAYER_COLORS[id] ?? "#6b5b41";
     const drop = document.getElementById("az-drop")!;
     const fileInput = document.getElementById("az-file") as HTMLInputElement;
     const statusEl = document.getElementById("az-status")!;
@@ -107,6 +121,66 @@ const ecoTechs: Record<string, string> = {
 
     let report: any = null;
     let selectedPn: number | null = null;
+    let charts: Chart[] = [];
+
+    // Production + APM line charts (Chart.js — same library as the civ stats pages).
+    function drawCharts(players: any[], selPn: number) {
+      for (const c of charts) c.destroy();
+      charts = [];
+      const mins = Math.max(...players.map((m: any) => Math.max(m.vils_series.length, m.apm_series.length)), 1);
+      const labels = Array.from({ length: mins }, (_, i) => i);
+      const line = (data: number[], color: string, you: boolean, dashed = false) => ({
+        data,
+        borderColor: color,
+        backgroundColor: "transparent",
+        borderWidth: you ? 2.5 : 1.2,
+        borderDash: dashed ? [5, 4] : undefined,
+        pointRadius: 0,
+        tension: 0.25,
+      });
+      const base = {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false as const,
+        plugins: { legend: { display: false }, tooltip: { mode: "index" as const, intersect: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } },
+          y: { grid: { color: "rgba(107,91,65,0.15)" }, beginAtZero: true },
+        },
+      };
+      const prodEl = document.getElementById("az-chart-prod") as HTMLCanvasElement | null;
+      if (prodEl) {
+        charts.push(new Chart(prodEl, {
+          type: "line",
+          data: {
+            labels,
+            datasets: players.flatMap((m: any) => {
+              const you = m.info.player_number === selPn;
+              const c = colorOf(m.info.color_id);
+              return [
+                { label: `${m.info.name} · vils`, ...line(m.vils_series, c, you) },
+                { label: `${m.info.name} · mil`, ...line(m.mil_series, c, you, true) },
+              ];
+            }),
+          },
+          options: base,
+        }));
+      }
+      const apmEl = document.getElementById("az-chart-apm") as HTMLCanvasElement | null;
+      if (apmEl) {
+        charts.push(new Chart(apmEl, {
+          type: "line",
+          data: {
+            labels,
+            datasets: players.map((m: any) => ({
+              label: m.info.name,
+              ...line(m.apm_series, colorOf(m.info.color_id), m.info.player_number === selPn),
+            })),
+          },
+          options: base,
+        }));
+      }
+    }
 
     const civOf = (id: number) => civs[String(id)] ?? { slug: null, name: `?${id}` };
     const civCell = (id: number, size: number) => {
@@ -199,8 +273,9 @@ const ecoTechs: Record<string, string> = {
           const you = m.info.player_number === selPn;
           const elo = m.elo_team ?? m.elo_1v1;
           return `<tr data-pn="${m.info.player_number}" class="cursor-pointer border-b border-stone-700/15 last:border-b-0 ${you ? "bg-gold-500/15" : "hover:bg-gold-500/10"}">
-            <td class="px-2 py-1.5 font-display font-bold text-ink">${you ? "➤ " : ""}${esc(m.info.name)}</td>
+            <td class="px-2 py-1.5 font-display font-bold text-ink"><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm align-baseline" style="background:${colorOf(m.info.color_id)}"></span>${you ? "➤ " : ""}${esc(m.info.name)}</td>
             <td class="px-2 py-1.5">${civCell(m.info.civ_id, 24)}</td>
+            <td class="px-2 py-1.5 text-xs">${m.opening ? esc(m.opening) : "—"}</td>
             <td class="px-2 py-1.5 font-mono">${esc(mmss(m.feudal_ms))}</td>
             <td class="px-2 py-1.5 font-mono">${esc(mmss(m.castle_ms))}</td>
             <td class="px-2 py-1.5 font-mono">${esc(mmss(m.imperial_ms))}</td>
@@ -226,20 +301,31 @@ const ecoTechs: Record<string, string> = {
           </label>
           <span class="font-display text-lg font-bold ${sel.info.won === true ? "text-forest" : sel.info.won === false ? "text-royal" : "text-stone-700"}" ${sel.info.won == null ? `title="${esc(L["analyzer.result.note"])}"` : ""}>${esc(resultOf(sel.info.won))}</span>
           <span class="text-sm text-stone-700">${civCell(sel.info.civ_id, 24)}</span>
+          ${sel.opening ? `<span class="rounded border border-gold-500/50 bg-gold-500/10 px-2 py-0.5 font-mono text-[11px] uppercase tracking-wide text-gold-700">${esc(L["analyzer.opening"])}: ${esc(sel.opening)}</span>` : ""}
         </div>
         ${sel.info.won == null ? `<p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.result.note"])}</p>` : ""}
 
         <div class="mt-4">${scorecard(sel)}</div>
         ${ecoRow(sel)}
 
+        <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.charts.production"])}</h3>
+        <p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.charts.productionNote"])}</p>
+        <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+          ${players.map((m: any) => `<span class="flex items-center gap-1.5 font-mono text-[11px] text-stone-700"><span class="inline-block h-2.5 w-2.5 rounded-sm" style="background:${colorOf(m.info.color_id)}"></span>${esc(m.info.name)}</span>`).join("")}
+        </div>
+        <div class="mt-2 h-64 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-prod"></canvas></div>
+        <h3 class="mt-6 font-display text-xl text-ink">${esc(L["analyzer.charts.apm"])}</h3>
+        <div class="mt-2 h-48 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-apm"></canvas></div>
+
         <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.fixes"])}</h3>
         <div class="mt-2 rounded border border-stone-700/25 bg-parchment/60 px-4 py-2">${findingsList(selPn)}</div>
 
         <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.table.title"])}</h3>
         <div class="mt-2 overflow-x-auto rounded border border-stone-700/25">
-          <table class="w-full min-w-[720px] text-left text-sm">
+          <table class="w-full min-w-[860px] text-left text-sm">
             <thead><tr class="border-b border-stone-700/30 bg-parchment/80 font-mono text-[10px] uppercase tracking-wide text-stone-700">
               <th class="px-2 py-2">${esc(L["analyzer.table.player"])}</th><th class="px-2 py-2">${esc(L["analyzer.table.civ"])}</th>
+              <th class="px-2 py-2">${esc(L["analyzer.opening"])}</th>
               <th class="px-2 py-2">${esc(L["analyzer.tile.feudal"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.castle"])}</th>
               <th class="px-2 py-2">${esc(L["analyzer.tile.imperial"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.vils"])}</th>
               <th class="px-2 py-2">${esc(L["analyzer.tile.idleDark"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.apm"])}</th>
@@ -266,6 +352,7 @@ const ecoTechs: Record<string, string> = {
           render();
         });
       }
+      drawCharts(players, selPn);
       if (scrollToReport) reportEl.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 

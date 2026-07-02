@@ -76,6 +76,90 @@ pub fn eco_tech_times(evs: &[Ev], player: i32) -> Vec<(u16, u32)> {
         .collect()
 }
 
+// Feudal-opening unit lines. source: .cache/aoe2-data data.json, ids verified by COST
+// (internal names are legacy-shifted): 74 Militia 50F/20G, 75 Man-at-Arms, 93 Spearman
+// 35F/25W, 4 Archer, 7 Skirmisher 25F/35W, 448 Scout Cavalry, 751 Eagle Scout.
+const MILITIA_LINE: [u16; 2] = [74, 75];
+const OPENER_LINES: &[(&[u16], &str)] = &[
+    (&[448], "Scouts"),
+    (&[4], "Archers"),
+    (&[7], "Skirms"),
+    (&[751], "Eagles"),
+    (&[74, 75], "M@A"),
+    (&[93], "Spears"),
+];
+
+/// Cumulative eco/military units QUEUED per minute (index = minute since start).
+/// Same DeQueue basis as vils@Castle / first-military — commands, not completions.
+pub fn production_series(evs: &[Ev], player: i32, duration_ms: u32) -> (Vec<u32>, Vec<u32>) {
+    let mins = (duration_ms / 60_000) as usize + 1;
+    let mut eco = vec![0u32; mins];
+    let mut mil = vec![0u32; mins];
+    for e in evs.iter().filter(|e| e.player == player) {
+        if let EvKind::Train(u) = e.kind {
+            let m = (e.t_ms / 60_000) as usize;
+            if m >= mins {
+                continue; // action logged past the canonical duration — ignore
+            }
+            if ECO_UNIT_IDS.contains(&u) {
+                eco[m] += 1;
+            } else {
+                mil[m] += 1;
+            }
+        }
+    }
+    for i in 1..mins {
+        eco[i] += eco[i - 1];
+        mil[i] += mil[i - 1];
+    }
+    (eco, mil)
+}
+
+/// Rule-based opening tag (light port of dj0wns/AoE_Rec_Opening_Analysis):
+/// dark-age militia ≥3 = Drush; then the first two DISTINCT unit lines opened in
+/// the Feudal window, in train order ("Scouts into Archers"); no feudal military
+/// but Castle reached = "Fast Castle". None when there's nothing to say (no
+/// Feudal, or a passive Feudal with no Castle) — never guess.
+pub fn classify_opening(
+    evs: &[Ev],
+    player: i32,
+    feudal_ms: Option<u32>,
+    castle_ms: Option<u32>,
+) -> Option<String> {
+    let feudal = feudal_ms?;
+    let castle_or = castle_ms.unwrap_or(feudal + 12 * 60_000);
+    let dark_militia = evs
+        .iter()
+        .filter(|e| e.player == player && e.t_ms < feudal)
+        .filter(|e| matches!(e.kind, EvKind::Train(u) if MILITIA_LINE.contains(&u)))
+        .count();
+
+    let mut opened: Vec<(u32, &str)> = OPENER_LINES
+        .iter()
+        .filter_map(|(ids, tag)| {
+            evs.iter()
+                .filter(|e| e.player == player && e.t_ms >= feudal && e.t_ms < castle_or)
+                .filter_map(|e| match e.kind {
+                    EvKind::Train(u) if ids.contains(&u) => Some(e.t_ms),
+                    _ => None,
+                })
+                .min()
+                .map(|t| (t, *tag))
+        })
+        .collect();
+    opened.sort_by_key(|&(t, _)| t);
+
+    let feudal_tags: Vec<&str> = opened.iter().take(2).map(|&(_, tag)| tag).collect();
+    let body = match feudal_tags.as_slice() {
+        [] if castle_ms.is_some() => Some("Fast Castle".to_string()),
+        [] => None,
+        [one] => Some((*one).to_string()),
+        [a, b] => Some(format!("{a} into {b}")),
+        _ => unreachable!(),
+    }?;
+    Some(if dark_militia >= 3 { format!("Drush + {body}") } else { body })
+}
+
 fn median(v: Vec<f32>) -> Option<f32> {
     // filter non-finite (a junk Build/Move blob can decode to NaN) so the sort is total + safe
     let mut v: Vec<f32> = v.into_iter().filter(|x| x.is_finite()).collect();

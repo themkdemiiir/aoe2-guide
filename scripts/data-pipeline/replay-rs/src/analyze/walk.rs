@@ -44,6 +44,9 @@ pub struct Walked {
     /// one count per raw Operation::Action per player (BEFORE DeQueue amount-expansion) —
     /// the basis for eAPM. The rec logs no selects/camera, so this is already "effective".
     pub actions: HashMap<i32, u32>,
+    /// the same count bucketed per minute (index = minute since game start) —
+    /// feeds the APM-over-time chart.
+    pub action_series: HashMap<i32, Vec<u32>>,
 }
 
 /// player_id position differs per ActionData variant; we only need it for the variants we map.
@@ -96,12 +99,20 @@ pub fn walk(game: &Savegame) -> Walked {
     let mut evs = Vec::new();
     let mut elo = EloTable::default();
     let mut actions: HashMap<i32, u32> = HashMap::new();
+    let mut action_series: HashMap<i32, Vec<u32>> = HashMap::new();
 
     for op in &game.operations {
         match op {
             Operation::Action { action_data, world_time, .. } => {
                 let p = pid(action_data);
                 *actions.entry(p).or_insert(0) += 1; // one per raw command (eAPM basis)
+                // same basis, bucketed per minute (APM-over-time chart)
+                let min = (*world_time / 60_000) as usize;
+                let series = action_series.entry(p).or_default();
+                if series.len() <= min {
+                    series.resize(min + 1, 0);
+                }
+                series[min] += 1;
                 let kind = match action_data {
                     ActionData::DeQueue { unit_id, amount, .. } => {
                         // expand `amount` to repeated Train events for cumulative counting.
@@ -144,7 +155,7 @@ pub fn walk(game: &Savegame) -> Walked {
         rec_player: game.zheader.replay.rec_player as i32,
     };
 
-    Walked { meta, players, evs, elo, actions }
+    Walked { meta, players, evs, elo, actions, action_series }
 }
 
 #[cfg(test)]
