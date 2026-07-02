@@ -69,8 +69,15 @@ Phase C deliberately does not pre-build that machinery.
 
 ```rust
 // lib: analyze/mod.rs
-pub fn analyze(game: &Savegame, you: Option<&str>) -> Report
+pub fn analyze(game: &Savegame, you: &YouSel) -> Report
+pub enum YouSel { Auto, Name(String), ProfileId(i64) }
 ```
+
+> Amended 2026-07-02 (was `Option<&str>`): the `--latest` addendum needs "you"
+> resolved by profile id — a downloaded replay's recording player is whoever
+> uploaded it, not necessarily you. `PlayerInfo` correspondingly gains
+> `profile_id: i64` (already extracted by the bulk pipeline; additive to the
+> JSON contract and useful to any site consumer).
 
 - Runs walk → maps lookup → roles/bases/coords → metrics → findings → assembles
   `Report`. No file IO, no network, no printing (the committed `data/*` files are
