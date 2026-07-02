@@ -95,15 +95,17 @@ fn fmt_mmss(secs: f64) -> String {
     format!("{}:{:02}", s / 60, s % 60)
 }
 
+/// mode is decided once by the caller (analyze()) and recorded in ReportMeta so the
+/// findings and the report can never disagree. "team" | "1v1".
 pub fn findings(
     metrics: &[PlayerMetrics],
     bench: &Benchmark,
     civs: &HashMap<u32, String>,
     family: Family,
     map_slug: &str,
+    mode: &str,
 ) -> Vec<Finding> {
-    let team = is_team_game(metrics);
-    let mode = if team { "team" } else { "1v1" };
+    let team = mode == "team";
     let mut out = Vec::new();
 
     for m in metrics {
@@ -292,7 +294,7 @@ mod tests {
 
     #[test]
     fn flags_high_dark_idle_tc() {
-        let f = findings(&[pm(1, 80_000, Some(720_000))], &load_benchmark(), &HashMap::new(), Family::Open, "arabia");
+        let f = findings(&[pm(1, 80_000, Some(720_000))], &load_benchmark(), &HashMap::new(), Family::Open, "arabia", "1v1");
         assert!(f
             .iter()
             .any(|x| x.metric.contains("idle TC") && matches!(x.severity, Severity::High)));
@@ -305,7 +307,7 @@ mod tests {
         civs.insert(2u32, "franks".to_string());
         let mut m = pm(1, 0, Some(900_000)); // 15:00 click
         m.elo_1v1 = Some(1300);
-        let f = findings(&[m, pm(2, 0, Some(600_000))], &load_benchmark(), &civs, Family::Open, "arabia");
+        let f = findings(&[m, pm(2, 0, Some(600_000))], &load_benchmark(), &civs, Family::Open, "arabia", "1v1");
         // 2 players => 1v1 mode; franks arabia 1v1 falls back to the arabia rollup.
         assert!(f.iter().any(|x| x.metric == "Feudal up-time" && x.basis == Basis::YourElo));
     }

@@ -152,7 +152,6 @@ pub const MACRO_CAVEAT: &str =
     "macro coach only — no fights, micro, map control, or exact resources.";
 
 /// How to pick the "you" player. Name = --you (case-insensitive); ProfileId = --latest.
-#[allow(dead_code)] // wired up by a later Phase C task (CLI selection); model-only for now
 #[derive(Debug, Clone)]
 pub enum YouSel { Auto, Name(String), ProfileId(i64) }
 
