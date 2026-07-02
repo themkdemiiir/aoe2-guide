@@ -223,9 +223,11 @@ fn normalize_recent(doc: RecentHistoryResponse, profile_id: i64) -> Vec<RecentMa
     let mut out: Vec<RecentMatch> = doc
         .match_history_stats
         .into_iter()
-        // source: description == "AUTOMATCH" marks ranked matchmaking games (real
-        // custom/lobby games observed as "." — see FIXTURE comment below); completed
-        // only (completiontime > 0) excludes in-progress/un-reported matches.
+        // AUTOMATCH marks ranked matchmaking (source: stream-relic.mjs; custom
+        // lobbies observed as "." — see FIXTURE comment below).
+        // completiontime > 0 is DEFENSIVE, not from stream-relic.mjs: excludes
+        // in-progress/unreported matches (none observed in the 129-entry probe);
+        // analyzing an unfinished match is meaningless.
         .filter(|m| m.description == "AUTOMATCH" && m.completiontime > 0)
         .map(|m| {
             let me = m
@@ -279,6 +281,10 @@ mod tests {
     // does not use "CUSTOM" as a description string) that must be filtered out.
     // Note the "." entry has the LATEST completiontime of the three, proving the
     // filter runs before the newest-first sort.
+    // Entry id 74166094 is a real probed AUTOMATCH match, but its completiontime
+    // is SYNTHETIC (real value 1614653045, set to 0 here): no completiontime <= 0
+    // appeared anywhere in the 129-entry probe, so this one field is fabricated
+    // solely to exercise the defensive completed-only branch of the filter.
     const FIXTURE: &str = r#"{
       "matchHistoryStats": [
         {"id": 54100641, "completiontime": 1607456129, "description": "AUTOMATCH", "mapname": "Arabia.rms", "matchtype_id": 2,
@@ -289,6 +295,10 @@ mod tests {
          "matchhistorymember": [
            {"profile_id": 199325, "civilization_id": 43, "oldrating": 1714, "newrating": 1729, "outcome": 1},
            {"profile_id": 271202, "civilization_id": 25, "oldrating": 1686, "newrating": 1671, "outcome": 0}]},
+        {"id": 74166094, "completiontime": 0, "description": "AUTOMATCH", "mapname": "Fortress.rms", "matchtype_id": 18,
+         "matchhistorymember": [
+           {"profile_id": 3309375, "civilization_id": 14, "oldrating": 1002, "newrating": 970, "outcome": 0},
+           {"profile_id": 199325, "civilization_id": 11, "oldrating": 1000, "newrating": 1048, "outcome": 1}]},
         {"id": 83138685, "completiontime": 1618070120, "description": "AUTOMATCH", "mapname": "goldenpit.rms2", "matchtype_id": 2,
          "matchhistorymember": [
            {"profile_id": 214031, "civilization_id": 2, "oldrating": 1854, "newrating": 1846, "outcome": 0},
@@ -301,7 +311,9 @@ mod tests {
     fn recent_matches_filters_sorts_and_joins_me() {
         let doc: RecentHistoryResponse = serde_json::from_str(FIXTURE).unwrap();
         let ms = normalize_recent(doc, 199325);
-        assert_eq!(ms.len(), 2); // the "." (non-AUTOMATCH) entry is dropped
+        assert_eq!(ms.len(), 2); // "." (non-AUTOMATCH) and completiontime=0 dropped
+        // the AUTOMATCH-but-uncompleted entry is filtered by the defensive branch
+        assert!(ms.iter().all(|m| m.match_id != 74166094));
         assert_eq!(ms[0].match_id, 83138685); // newest first among AUTOMATCH only
         assert_eq!(ms[0].my_won, Some(true));
         assert_eq!(ms[0].my_rating, Some(2052)); // newrating preferred
