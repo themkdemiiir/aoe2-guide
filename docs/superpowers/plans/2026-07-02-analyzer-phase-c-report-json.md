@@ -14,6 +14,8 @@
 - NO new dependencies. No clap — keep the hand-rolled `while` arg loop in `main.rs`.
 - Every AoE2/API constant carries a `// source:` comment. No fabricated values.
 - No default values that hide missing data: absent `--profile-id` (and env) is a loud error.
+- NO silent fallbacks anywhere: a `--you NAME` / `--profile-id` that matches no player in the
+  replay is an ERROR, never a quiet fallback to the recorder. NO regex anywhere.
 - Enums serialize `snake_case` (`Basis::YourElo` → `"your_elo"`). `schema_version` = 1.
 - `--json` output replaces the pretty report entirely (stdout = pure JSON). Multi-game `--latest` output is NDJSON (one compact JSON per line); single file/`--match-id` stays one pretty document.
 - Keep it light: this is a hobby project. No feature flags, no workspace split (that's the WASM phase).
@@ -178,7 +180,7 @@ git add -A && git commit -m "feat(analyze): serializable Report model (schema v1
 
 **Interfaces:**
 - Consumes: Task 1's `Report`, `ReportMeta`, `YouSel`.
-- Produces: `analyze::analyze(game: &Savegame, you: &YouSel) -> Report` (pure — no IO); `compare::findings(metrics, bench, civs, family, map_slug, mode: &str) -> Vec<Finding>`; private `resolve_you(sel: &YouSel, players: &[PlayerInfo], rec: i32) -> i32`.
+- Produces: `analyze::analyze(game: &Savegame, you: &YouSel) -> anyhow::Result<Report>` (pure — no IO; `Err` only when an explicit `--you`/`--profile-id` selector matches no player); `compare::findings(metrics, bench, civs, family, map_slug, mode: &str) -> Vec<Finding>`; private `resolve_you(sel: &YouSel, players: &[PlayerInfo], rec: i32) -> anyhow::Result<i32>`.
 
 - [ ] **Step 1: Write the failing tests.** In `src/analyze/mod.rs` add:
 
@@ -194,12 +196,14 @@ mod tests {
     }
 
     #[test]
-    fn resolve_you_by_profile_name_and_fallback() {
+    fn resolve_you_by_profile_name_auto_and_loud_error() {
         let players = vec![p(1, 111, "Alice"), p(2, 222, "Bob")];
-        assert_eq!(resolve_you(&YouSel::ProfileId(222), &players, 1), 2);
-        assert_eq!(resolve_you(&YouSel::Name("bob".into()), &players, 1), 2); // case-insensitive
-        assert_eq!(resolve_you(&YouSel::Auto, &players, 1), 1);
-        assert_eq!(resolve_you(&YouSel::ProfileId(999), &players, 1), 1); // unknown -> rec player
+        assert_eq!(resolve_you(&YouSel::ProfileId(222), &players, 1).unwrap(), 2);
+        assert_eq!(resolve_you(&YouSel::Name("bob".into()), &players, 1).unwrap(), 2); // case-insensitive
+        assert_eq!(resolve_you(&YouSel::Auto, &players, 1).unwrap(), 1);
+        // no-fallback rule: an unmatched explicit selector is an ERROR, never the recorder
+        assert!(resolve_you(&YouSel::ProfileId(999), &players, 1).is_err());
+        assert!(resolve_you(&YouSel::Name("nobody".into()), &players, 1).is_err());
     }
 }
 ```
@@ -235,8 +239,9 @@ In `src/analyze/mod.rs`, replace the body of `run()`'s analysis section with a p
 pub use model::{Report, YouSel};
 
 /// Pure analysis: parsed replay in -> Report out. No file/network IO (committed
-/// data/* are include_str!-baked). This is the future WASM boundary.
-pub fn analyze(game: &Savegame, you: &YouSel) -> Report {
+/// data/* are include_str!-baked). This is the future WASM boundary. Errs ONLY
+/// when an explicit you-selector matches no player (no-fallback rule).
+pub fn analyze(game: &Savegame, you: &YouSel) -> anyhow::Result<Report> {
     let w = walk::walk(game);
     let map_table = maps::load();
     let (map_name, family) = map_table.lookup(w.meta.map_id);
@@ -257,9 +262,9 @@ pub fn analyze(game: &Savegame, you: &YouSel) -> Report {
     let players = compare::build_metrics(&w, &costs, &roles, &coords);
     let mode = if compare::is_team_game(&players) { "team" } else { "1v1" };
     let findings = compare::findings(&players, &bench, &civs, family, &map_slug, mode);
-    let you = resolve_you(you, &w.players, w.meta.rec_player);
+    let you = resolve_you(you, &w.players, w.meta.rec_player)?;
 
-    Report {
+    Ok(Report {
         schema_version: model::SCHEMA_VERSION,
         meta: model::ReportMeta {
             map_id: w.meta.map_id, map_name, family, mode: mode.to_string(),
@@ -268,17 +273,23 @@ pub fn analyze(game: &Savegame, you: &YouSel) -> Report {
         players,
         findings,
         caveats: vec![float::CAVEAT.to_string(), model::MACRO_CAVEAT.to_string()],
-    }
+    })
 }
 
-/// "you" = explicit name (case-insensitive) or profile id when known; else the recorder.
-fn resolve_you(sel: &YouSel, players: &[model::PlayerInfo], rec: i32) -> i32 {
+/// "you" = Auto (the recorder) or an explicit name/profile selector. An explicit
+/// selector that matches no player is an ERROR (no-fallback rule) — silently
+/// coaching the wrong player would be worse than failing.
+fn resolve_you(sel: &YouSel, players: &[model::PlayerInfo], rec: i32) -> anyhow::Result<i32> {
     match sel {
         YouSel::Name(n) => players.iter()
-            .find(|p| p.name.eq_ignore_ascii_case(n)).map(|p| p.player_number).unwrap_or(rec),
+            .find(|p| p.name.eq_ignore_ascii_case(n)).map(|p| p.player_number)
+            .ok_or_else(|| anyhow::anyhow!(
+                "--you '{n}' matches no player (players: {})",
+                players.iter().map(|p| p.name.as_str()).collect::<Vec<_>>().join(", "))),
         YouSel::ProfileId(id) => players.iter()
-            .find(|p| p.profile_id == *id).map(|p| p.player_number).unwrap_or(rec),
-        YouSel::Auto => rec,
+            .find(|p| p.profile_id == *id).map(|p| p.player_number)
+            .ok_or_else(|| anyhow::anyhow!("profile {id} is not a player in this replay")),
+        YouSel::Auto => Ok(rec),
     }
 }
 ```
@@ -291,7 +302,7 @@ signature (Task 3 collapses it; this keeps Task 2 independently green). Delete t
 pub fn run(args: AnalyzeArgs) -> Result<()> {
     let game = load_game(&args.input)?;
     let sel = match &args.you { Some(n) => YouSel::Name(n.clone()), None => YouSel::Auto };
-    let report = analyze(&game, &sel);
+    let report = analyze(&game, &sel)?;
     // temporary bridge to the pre-Task-3 render signature; render only reads duration_ms
     let meta = model::GameMeta {
         map_id: report.meta.map_id, duration_ms: report.meta.duration_ms, rec_player: report.meta.you,
@@ -497,7 +508,7 @@ fn cmd_analyze(args: &[String]) -> Result<()> {
     }
     let input = input.ok_or_else(|| anyhow::anyhow!("analyze: need <file.aoe2record> or --match-id N"))?;
     let game = load_game(&input)?;
-    let report = analyze::analyze(&game, &you);
+    let report = analyze::analyze(&game, &you)?;
     if json {
         println!("{}", serde_json::to_string_pretty(&report)?);
     } else {
@@ -899,7 +910,12 @@ After the loop, branch BEFORE the single-input path:
                     Ok(g) => g,
                     Err(e) => { eprintln!("match {id}: {e:#} — skipped"); continue; }
                 };
-                let report = replay_rs::analyze::analyze(&game, &replay_rs::analyze::YouSel::ProfileId(profile));
+                // Err here = profile not a player in this replay (e.g. an oddball
+                // history entry) — warn + skip like the other per-match failures.
+                let report = match replay_rs::analyze::analyze(&game, &replay_rs::analyze::YouSel::ProfileId(profile)) {
+                    Ok(r) => r,
+                    Err(e) => { eprintln!("match {id}: {e:#} — skipped"); continue; }
+                };
                 if json {
                     println!("{}", serde_json::to_string(&report)?); // NDJSON: one line per game
                 } else {
