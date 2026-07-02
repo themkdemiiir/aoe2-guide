@@ -8,7 +8,7 @@
 //!   replay-rs seed    <ids.csv|ids.txt> [--db <manifest.sqlite>] [--ladder L] [--played-at TS]
 //!   replay-rs run     [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]
 //!   replay-rs bench   <dir of .aoe2record> [--threads N] [--repeat N]
-//!   replay-rs analyze <file.aoe2record>|--match-id N [--you NAME] [--json]
+//!   replay-rs analyze <file>|--match-id N|--latest [N|all] [--you NAME] [--profile-id P] [--json]
 //!   replay-rs recent   --profile-id P [--limit N]
 //!
 //! Defaults: --db ./manifest.sqlite  --out ./shards  --threads 12
@@ -186,22 +186,106 @@ fn cmd_run(args: &[String]) -> Result<()> {
 /// Where the replay bytes come from (CLI-side concern; the lib only sees &Savegame).
 enum Input { File(std::path::PathBuf), MatchId(i64) }
 
-/// `analyze <file.aoe2record | --match-id N> [--you NAME] [--json]` — post-game coaching report.
+/// --latest's optional value: bare flag = 1, a number = N, "all" = whatever
+/// getRecentMatchHistory returns (~last 10).
+enum Latest { N(usize), All }
+
+fn parse_latest(v: Option<&str>) -> Result<Latest> {
+    match v {
+        None => Ok(Latest::N(1)),
+        Some("all") => Ok(Latest::All),
+        Some(n) => n.parse().map(Latest::N)
+            .map_err(|_| anyhow::anyhow!("analyze: --latest takes a number or 'all', got {n}")),
+    }
+}
+
+/// `analyze <file.aoe2record>|--match-id N|--latest [N|all] [--you NAME] [--profile-id P] [--json]`
+/// — post-game coaching report.
 fn cmd_analyze(args: &[String]) -> Result<()> {
     use replay_rs::analyze::{self, YouSel};
     let mut input: Option<Input> = None;
     let mut you = YouSel::Auto;
     let mut json = false;
+    let mut latest: Option<Latest> = None;
+    let mut profile: Option<i64> = None;
     let mut i = 0;
     while i < args.len() {
         match args[i].as_str() {
             "--match-id" => input = Some(Input::MatchId(take_value(args, &mut i, "--match-id")?.parse()?)),
             "--you" => you = YouSel::Name(take_value(args, &mut i, "--you")?),
             "--json" => json = true,
+            "--latest" => {
+                // optional value: consume the next arg only if it isn't another flag
+                let peek = args.get(i + 1).map(String::as_str).filter(|v| !v.starts_with("--"));
+                if peek.is_some() { i += 1; }
+                latest = Some(parse_latest(peek)?);
+            }
+            "--profile-id" => profile = Some(take_value(args, &mut i, "--profile-id")?.parse()?),
             v if !v.starts_with("--") => input = Some(Input::File(std::path::PathBuf::from(v))),
             other => bail!("analyze: unknown flag {other}"),
         }
         i += 1;
+    }
+
+    if let Some(latest) = latest {
+        if input.is_some() {
+            bail!("analyze: --latest conflicts with a file / --match-id input");
+        }
+        let profile = resolve_profile(profile)?;
+        let client = api::build_client()?;
+        let recent = api::get_recent_matches(&client, profile)?;
+        let take = match latest { Latest::All => recent.len(), Latest::N(n) => n.min(recent.len()) };
+        if take == 0 {
+            bail!("analyze: no recent ranked matches for profile {profile}");
+        }
+        let ids: Vec<i64> = recent.iter().take(take).map(|m| m.match_id).collect();
+        let mut analyzed = 0usize;
+        for chunk in ids.chunks(replay_rs::config::REPLAYFILES_BATCH) {
+            let per = api::get_replay_files(&client, chunk)?;
+            for id in chunk {
+                let Some(files) = per.get(id) else {
+                    eprintln!("match {id}: replay expired/aged out — skipped");
+                    continue;
+                };
+                let Some(best) = api::best_file(files) else {
+                    eprintln!("match {id}: no uploaded replay — skipped");
+                    continue;
+                };
+                let Some(url) = best.url.clone() else {
+                    eprintln!("match {id}: replay has no url — skipped");
+                    continue;
+                };
+                let game = match api::download_replay(&client, &url)
+                    .and_then(|b| aoe2rec::Savegame::from_bytes(b)
+                        .map_err(|e| anyhow::anyhow!("parse: {e}")))
+                {
+                    Ok(g) => g,
+                    Err(e) => { eprintln!("match {id}: {e:#} — skipped"); continue; }
+                };
+                // Err here = profile not a player in this replay (e.g. an oddball
+                // history entry) — warn + skip like the other per-match failures.
+                let report = match replay_rs::analyze::analyze(&game, &replay_rs::analyze::YouSel::ProfileId(profile)) {
+                    Ok(r) => r,
+                    Err(e) => { eprintln!("match {id}: {e:#} — skipped"); continue; }
+                };
+                if json {
+                    println!("{}", serde_json::to_string(&report)?); // NDJSON: one line per game
+                } else {
+                    println!("\n═══ match {id} ═══");
+                    print!("{}", report::render(&report));
+                }
+                analyzed += 1;
+            }
+        }
+        if analyzed == 0 {
+            bail!("analyze: none of the {take} recent matches had a downloadable replay \
+                   (replays only exist when uploaded and age out after ~2 weeks)");
+        }
+        return Ok(());
+    }
+
+    if matches!(you, YouSel::Auto) {
+        if let Some(p) = profile { you = YouSel::ProfileId(p); }
     }
     let input = input.ok_or_else(|| anyhow::anyhow!("analyze: need <file.aoe2record> or --match-id N"))?;
     let game = load_game(&input)?;
@@ -310,7 +394,7 @@ fn print_usage() {
            replay-rs seed <ids.csv|ids.txt> [--db <manifest.sqlite>]\n  \
            replay-rs run [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]\n  \
            replay-rs bench <dir of .aoe2record> [--threads N] [--repeat N]\n  \
-           replay-rs analyze <file.aoe2record>|--match-id N [--you NAME] [--json]\n  \
+           replay-rs analyze <file>|--match-id N|--latest [N|all] [--you NAME] [--profile-id P] [--json]\n  \
            replay-rs recent --profile-id P [--limit N]\n\
          \n\
          DEFAULTS: --db {DEFAULT_DB}  --out {DEFAULT_OUT}  --threads {DEFAULT_THREADS}"
@@ -327,5 +411,13 @@ mod tests {
         assert_eq!(ago(2 * 3600 + 100), "2h ago");
         assert_eq!(ago(3 * 86_400 + 5), "3d ago");
         assert_eq!(ago(-5), "0m ago"); // clock skew never goes negative
+    }
+
+    #[test]
+    fn latest_value_parses_default_number_and_all() {
+        assert!(matches!(parse_latest(None), Ok(Latest::N(1))));
+        assert!(matches!(parse_latest(Some("3")), Ok(Latest::N(3))));
+        assert!(matches!(parse_latest(Some("all")), Ok(Latest::All)));
+        assert!(parse_latest(Some("banana")).is_err());
     }
 }
