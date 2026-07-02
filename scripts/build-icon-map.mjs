@@ -34,7 +34,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const AOE2TT_SHA = process.env.AOE2TT_SHA || "b34082d13c31932d89788ad35af984896cbe050c";
+const AOE2TT_SHA = process.env.AOE2TT_SHA || "b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0";
 const TREE_ICON_ITEMS_CACHE = ".cache/aoe2-data/tree-icon-items.json";
 const TREE_PATHS = ["data/trees", "chronicles/data/trees"];
 const ASSETS_DIR = "public/images/aoe2";

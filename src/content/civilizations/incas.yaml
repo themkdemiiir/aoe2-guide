@@ -9,13 +9,13 @@ bonuses:
   en:
     - Houses and Settlements provide +5 population space
     - Buildings cost -15% stone
-    - Military Units cost -5/10/15/20% food in Dark/Feudal/Castle/Imperial Age
+    - Military Units cost -15/20/25/30% food in Dark/Feudal/Castle/Imperial Age
     - Villagers affected by Infantry Blacksmith upgrades starting in Castle Age
   tr:
     - Evler ve Yerleşimler +5 nüfus alanı daha verir
     - Binalar %15 daha az taş gerektirir
     - >-
-      Askerî Birimler; Karanlık Çağ'da %5, Feodal Çağ'da %10, Kale Çağı'nda %15, İmparatorluk Çağı'nda %20 daha az
+      Askerî Birimler; Karanlık Çağ'da %15, Feodal Çağ'da %20, Kale Çağı'nda %25, İmparatorluk Çağı'nda %30 daha az
       yiyecek gerektirir
     - Kale Çağı'ndan itibaren Köylüler, Demircideki Piyade yükseltmelerinden etkilenir
 teamBonus:

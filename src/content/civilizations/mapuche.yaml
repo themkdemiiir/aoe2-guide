@@ -7,13 +7,13 @@ tagline:
   tr: Mapuche, Güney Amerika'dan bir Süvari ve Karşıt Birlik uygarlığıdır.
 bonuses:
   en:
-    - Foragers drop off +20% food
+    - Foragers drop off +25% food
     - Settlements can train Spearman-line and Skirmishers
     - Infantry, Slingers and Skirmishers +5/10/15 HP in Feudal/Castle/Imperial Age
     - Mounted Units generate +3 gold when defeating military units
     - Enemy Castles are revealed on the map
   tr:
-    - Toplayıcılar %20 daha fazla yiyecek bırakır
+    - Toplayıcılar %25 daha fazla yiyecek bırakır
     - Yerleşimler, Mızraklı Asker türlerini ve Avcı Eri eğitebilir
     - Piyadeler, Sapancılar ve Avcı Erleri Feodal/Kale/İmparatorluk Çağlarında +5/10/15 DP'ye sahip olur
     - Binekli birimler, askerî birimleri yendiğinde +3 daha fazla altın üretir

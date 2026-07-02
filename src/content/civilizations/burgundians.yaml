@@ -7,12 +7,12 @@ tagline:
   tr: Burgundians, Batı Avrupa'dan bir Süvari uygarlığıdır.
 bonuses:
   en:
-    - Economic upgrades available one age earlier and cost -33% food
+    - Economic upgrades available one age earlier and cost -40% food
     - Stable technologies cost -50%
     - Cavalier upgrade available in Castle Age
     - Gunpowder Units +25% attack
   tr:
-    - Ekonomik yükseltmeler bir çağ öndecen açılır ve %33 daha az yiyeceğe mal olur
+    - Ekonomik yükseltmeler bir çağ öndecen açılır ve %40 daha az yiyeceğe mal olur
     - Ahır teknolojileri %50 daha ucuzdur
     - Süvari yükseltmesi Kale Çağı'nda açılır
     - Tüfekli Birimler %25 saldırı kazanır

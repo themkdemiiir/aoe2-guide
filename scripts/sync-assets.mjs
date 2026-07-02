@@ -13,7 +13,7 @@ import path from "node:path";
 import { pipeline } from "node:stream/promises";
 
 const REPO = "SiegeEngineers/aoe2techtree";
-const SHA = process.env.AOE2TT_SHA || "b34082d13c31932d89788ad35af984896cbe050c";
+const SHA = process.env.AOE2TT_SHA || "b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0";
 const TARGET = path.resolve("public/images/aoe2");
 const TMP = path.resolve(".cache/aoe2tt");
 

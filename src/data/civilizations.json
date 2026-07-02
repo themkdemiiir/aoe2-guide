@@ -11,7 +11,7 @@
       ],
       "civBonuses": [
         "Mule Carts cost -25%",
-        "Mule Cart technologies are +40% more effective",
+        "Mule Cart technology effects +40%",
         "Spearman- and Militia-line upgrades (except Man-at-Arms) available one age earlier",
         "First Fortified Church receives a free Relic",
         "Galley-line and Dromons fire an additional projectile"
@@ -196,7 +196,7 @@
         "flemish-militia"
       ],
       "civBonuses": [
-        "Economic upgrades available one age earlier and cost -33% food",
+        "Economic upgrades available one age earlier and cost -40% food",
         "Stable technologies cost -50%",
         "Cavalier upgrade available in Castle Age",
         "Gunpowder Units +25% attack"
@@ -571,7 +571,7 @@
       "civBonuses": [
         "Houses and Settlements provide +5 population space",
         "Buildings cost -15% stone",
-        "Military Units cost -5/10/15/20% food in Dark/Feudal/Castle/Imperial Age",
+        "Military Units cost -15/20/25/30% food in Dark/Feudal/Castle/Imperial Age",
         "Villagers affected by Infantry Blacksmith upgrades starting in Castle Age"
       ],
       "teamBonus": "Start with a free Llama",
@@ -860,7 +860,7 @@
         "bolas-rider"
       ],
       "civBonuses": [
-        "Foragers drop off +20% food",
+        "Foragers drop off +25% food",
         "Settlements can train Spearman-line and Skirmishers",
         "Infantry, Slingers and Skirmishers +5/10/15 HP in Feudal/Castle/Imperial Age",
         "Mounted Units generate +3 gold when defeating military units",
@@ -939,7 +939,7 @@
       ],
       "civBonuses": [
         "Advancing to the next Age costs -50% gold",
-        "Settlements cost -25% and heal nearby units",
+        "Settlements cost -33% and heal nearby units",
         "Champi Warriors and Archery Range Units +1/2/3 melee armor in Feudal/Castle/Imperial Age",
         "Monks regain faith +50% faster",
         "Caravan, Guilds free"
@@ -952,7 +952,7 @@
         },
         "imperial": {
           "name": "Huaracas",
-          "effect": "Slingers +1 range; train +25% faster"
+          "effect": "Slingers +1 range; train +50% faster"
         }
       },
       "regionNoun": "South America"

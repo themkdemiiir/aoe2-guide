@@ -8,13 +8,13 @@ tagline:
 bonuses:
   en:
     - Advancing to the next Age costs -50% gold
-    - Settlements cost -25% and heal nearby units
+    - Settlements cost -33% and heal nearby units
     - Champi Warriors and Archery Range Units +1/2/3 melee armor in Feudal/Castle/Imperial Age
     - Monks regain faith +50% faster
     - Caravan, Guilds free
   tr:
     - Bir sonraki Çağa atlama %50 daha az altına mal olur
-    - Yerleşim maliyeti %25 daha azdır ve yerleşimler yakındaki birimleri iyileştirir
+    - Yerleşim maliyeti %33 daha azdır ve yerleşimler yakındaki birimleri iyileştirir
     - >-
       Champi Savaşçıları ve Okçuluk Binası Birimleri Feodal/Kale/İmparatorluk Çağlarında +1/2/3 yakın dövüş zırhı
       kazanır
@@ -36,7 +36,7 @@ uniqueTechs:
       en: Huaracas
       tr: Huaracas
     effect:
-      en: Slingers +1 range; train +25% faster
+      en: Slingers +1 range; train +50% faster
       tr: Sapancıların menzili +1 artar ve %25 daha hızlı eğitilirler
 strategy:
   en: >-

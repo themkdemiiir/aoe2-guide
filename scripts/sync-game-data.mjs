@@ -15,9 +15,9 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-// Pinned SHAs — fetched 2026-05-23
+// Pinned SHAs — fetched 2026-05-23; AOE2TT_SHA bumped 2026-07-01 (picks up DE Update 177723)
 const AALISES_SHA = process.env.AALISES_SHA || "3ec582fa0ebd5ea11b2d1ff405e61836c6f3a99d";
-const AOE2TT_SHA = process.env.AOE2TT_SHA || "b34082d13c31932d89788ad35af984896cbe050c";
+const AOE2TT_SHA = process.env.AOE2TT_SHA || "b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0";
 
 const CACHE_DIR = path.resolve(".cache/aoe2-data");
 
