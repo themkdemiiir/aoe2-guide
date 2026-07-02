@@ -5,6 +5,10 @@
 // (build-duckdb.sql, build-benchmark.sql) keep an inline CASE/regex as the
 // documented paired SQL face — keep thresholds in sync with eloCaseSql()/canonMap().
 
+// Last month covered by the frozen aoestats archive. Months <= this come from
+// the archive (full corpus, real maps); later months come from the crawl.
+export const AOESTATS_END_MONTH = "2026-02";
+
 export const ELO_BUCKETS = [
   "<1000",
   "1000-1199",

@@ -282,6 +282,7 @@ const ecoTechs: Record<string, string> = {
       dOpp?: number | null; dRef?: number | null;
       // colored deltas only for direction-unambiguous exact comparisons
       colored: boolean; est?: boolean; fmtDelta?: (d: number) => string;
+      kind?: "time" | "count" | "score"; help?: string;
     };
 
     function matrixRows(sel: any, opp: any, refs: any): { group: string; rows: Row[] }[] {
@@ -293,7 +294,7 @@ const ecoTechs: Record<string, string> = {
       const dN = (d: number) => `${Math.abs(Math.round(d))}`;
       const S = (ms: number | null | undefined, res: number) => (ms == null ? null : ms / 1000 + res);
 
-      const age = (label: string, youMs: number | null, oppMs: number | null, refS: number | null | undefined, res: number): Row => {
+      const age = (label: string, youMs: number | null, oppMs: number | null, refS: number | null | undefined, res: number, help?: string): Row => {
         const y = S(youMs, res);
         const o = S(oppMs, res);
         return {
@@ -304,14 +305,14 @@ const ecoTechs: Record<string, string> = {
           refBasis: refS != null ? basis : undefined,
           dOpp: y != null && o != null ? o - y : null, // positive = you faster = ahead
           dRef: exact && y != null && refS != null ? refS - y : null,
-          colored: true, fmtDelta: dSecs,
+          colored: true, fmtDelta: dSecs, kind: "time", help,
         };
       };
 
       const eco: Row[] = [
-        age(L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms, r?.feudal_s, r?.age_res_s?.[0] ?? 130),
-        age(L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms, r?.castle_s, r?.age_res_s?.[1] ?? 160),
-        age(L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms, r?.imperial_s, r?.age_res_s?.[2] ?? 190),
+        age(L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms, r?.feudal_s, r?.age_res_s?.[0] ?? 130, L["analyzer.help.feudal"]),
+        age(L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms, r?.castle_s, r?.age_res_s?.[1] ?? 160, L["analyzer.help.castle"]),
+        age(L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms, r?.imperial_s, r?.age_res_s?.[2] ?? 190, L["analyzer.help.imperial"]),
         {
           label: L["analyzer.tile.vils"],
           you: sel.castle_ms != null ? String(sel.vils_castle) : "—",
@@ -320,28 +321,31 @@ const ecoTechs: Record<string, string> = {
           refBasis: r?.vils_castle != null ? basis : undefined,
           dOpp: sel.castle_ms != null && opp?.castle_ms != null ? sel.vils_castle - opp.vils_castle : null,
           dRef: exact && sel.castle_ms != null && r?.vils_castle != null ? sel.vils_castle - r.vils_castle : null,
-          colored: true, fmtDelta: dN,
+          colored: true, fmtDelta: dN, kind: "count", help: L["analyzer.help.vils"],
         },
         {
           label: L["analyzer.tile.idleDark"], est: true,
           you: secs(sel.idle_dark_ms), opp: opp ? secs(Math.round(opp.idle_dark_ms)) : "—", ref: noRef,
           dOpp: opp ? (opp.idle_dark_ms - sel.idle_dark_ms) / 1000 : null, colored: true, fmtDelta: dSecs,
+          kind: "time", help: L["analyzer.help.idleDark"],
         },
         {
           label: L["analyzer.tile.idleFeudal"], est: true,
           you: secs(sel.idle_feudal_ms), opp: opp ? secs(Math.round(opp.idle_feudal_ms)) : "—", ref: noRef,
           dOpp: opp ? (opp.idle_feudal_ms - sel.idle_feudal_ms) / 1000 : null, colored: true, fmtDelta: dSecs,
+          kind: "time", help: L["analyzer.help.idleFeudal"],
         },
         {
           label: L["analyzer.tile.float"], est: true,
           you: `~${Math.round(sel.float_banked)}`, opp: opp ? `~${Math.round(opp.float_banked)}` : "—", ref: noRef,
           dOpp: opp ? opp.float_banked - sel.float_banked : null, colored: true, fmtDelta: dN,
+          kind: "score", help: L["analyzer.help.float"],
         },
         {
           label: L["analyzer.tile.market"],
           you: `${sel.market_buys}/${sel.market_sells}`,
           opp: opp ? `${Math.round(opp.market_buys)}/${Math.round(opp.market_sells)}` : "—",
-          ref: noRef, colored: false,
+          ref: noRef, colored: false, help: L["analyzer.help.market"],
         },
       ];
 
@@ -359,14 +363,14 @@ const ecoTechs: Record<string, string> = {
           label: L["analyzer.row.ecoUpgrades"],
           you: byCastle(sel) != null ? `${byCastle(sel)}/10` : "—",
           opp: opp && byCastle(opp) != null ? `${byCastle(opp)}/10` : "—",
-          ref: shareTxt, colored: false,
+          ref: shareTxt, colored: false, help: L["analyzer.help.ecoUpgrades"],
         },
         {
           label: L["analyzer.row.wheelbarrow"],
           you: wbTime(sel) != null ? mmss(wbTime(sel)) : "—",
           opp: opp && wbTime(opp) != null ? mmss(wbTime(opp)) : "—",
           ref: shares ? `${shares.wheelbarrow}% ${L["analyzer.row.winnersResearch"]}` : noRef,
-          colored: false,
+          colored: false, help: L["analyzer.help.wheelbarrow"],
         },
       ];
 
@@ -379,12 +383,12 @@ const ecoTechs: Record<string, string> = {
           label: L["analyzer.opening"],
           you: sel.opening ?? "—", opp: opp?.opening ?? "—",
           ref: openTxt, refBasis: openRef ? L["analyzer.matrix.basis.exact"] : undefined,
-          colored: false,
+          colored: false, help: L["analyzer.help.opening"],
         },
         {
           label: L["analyzer.tile.military"],
           you: mmss(sel.first_military_ms), opp: opp ? mmss(opp.first_military_ms) : "—",
-          ref: noRef, colored: false,
+          ref: noRef, colored: false, help: L["analyzer.help.military"],
         },
       ];
 
@@ -393,14 +397,14 @@ const ecoTechs: Record<string, string> = {
         scout.push({
           label: L["analyzer.tile.scouting"],
           you: mmss(sel.find_enemy_ms), opp: opp ? mmss(opp.find_enemy_ms) : "—",
-          ref: noRef, colored: false,
+          ref: noRef, colored: false, help: L["analyzer.help.scouting"],
         });
       }
 
       const att: Row[] = [
-        { label: L["analyzer.tile.apm"], you: String(Math.round(sel.apm)), opp: opp ? String(Math.round(opp.apm)) : "—", ref: noRef, colored: false },
-        { label: L["analyzer.tile.ecoApm"], you: String(Math.round(sel.eco_apm)), opp: opp ? String(Math.round(opp.eco_apm)) : "—", ref: noRef, colored: false },
-        { label: L["analyzer.tile.milApm"], you: String(Math.round(sel.mil_apm)), opp: opp ? String(Math.round(opp.mil_apm)) : "—", ref: noRef, colored: false },
+        { label: L["analyzer.tile.apm"], you: String(Math.round(sel.apm)), opp: opp ? String(Math.round(opp.apm)) : "—", ref: noRef, colored: false, help: L["analyzer.help.apm"] },
+        { label: L["analyzer.tile.ecoApm"], you: String(Math.round(sel.eco_apm)), opp: opp ? String(Math.round(opp.eco_apm)) : "—", ref: noRef, colored: false, help: L["analyzer.help.ecoApm"] },
+        { label: L["analyzer.tile.milApm"], you: String(Math.round(sel.mil_apm)), opp: opp ? String(Math.round(opp.mil_apm)) : "—", ref: noRef, colored: false, help: L["analyzer.help.milApm"] },
       ];
 
       return [
@@ -412,17 +416,104 @@ const ecoTechs: Record<string, string> = {
       ];
     }
 
-    // A delta chip: ▲ ahead (forest) / ▼ behind (royal) / ≈ even. Neutral rows get plain text.
-    function chipHtml(kind: string, d: number | null | undefined, colored: boolean, fmt?: (d: number) => string, evenBand = 0) {
+    // A plain-language delta pill: "3:56 behind Alper" / "6 fewer than winners at your level".
+    function phrasePill(d: number | null | undefined, colored: boolean, who: string, kind?: string) {
       if (d == null) return "";
-      const even = Math.abs(d) <= evenBand;
-      const txt = even ? L["analyzer.matrix.even"] : `${d > 0 ? "▲" : "▼"} ${fmt ? fmt(d) : Math.abs(Math.round(d))}`;
-      const cls = !colored || even ? "text-stone-700" : d > 0 ? "text-forest" : "text-royal";
-      return `<span class="font-mono text-[10px] ${cls}">${esc(kind)} ${esc(txt)}</span>`;
+      const even = Math.abs(d) < 0.5;
+      const mag = kind === "time" ? fmtGapS(d) : String(Math.abs(Math.round(d)));
+      const tpl = even
+        ? L["analyzer.phrase.even"]
+        : d > 0
+          ? (kind === "count" ? L["analyzer.phrase.more"] : L["analyzer.phrase.ahead"])
+          : (kind === "count" ? L["analyzer.phrase.fewer"] : L["analyzer.phrase.behind"]);
+      const txt = fill(tpl, { d: mag, who });
+      const cls = !colored || even
+        ? "border-stone-700/30 text-stone-700"
+        : d > 0
+          ? "border-forest/40 bg-forest/10 text-forest"
+          : "border-royal/40 bg-royal/10 text-royal";
+      return `<span class="rounded border px-1.5 py-0.5 font-mono text-[10px] ${cls}">${esc(txt)}</span>`;
+    }
+
+    // Plain-language coach paragraph — every sentence assembled from real data,
+    // sentences with no data behind them are simply omitted.
+    function summaryHtml(sel: any, players: any[], refs: any, meta: any) {
+      const oppInfo = opponentOf(sel, players);
+      const oppShort = oppInfo ? String(oppInfo.label).split(" ")[0].slice(0, 14) : L["analyzer.matrix.opp"];
+      const opp = oppInfo?.m ?? null;
+      const r = sel.reference;
+      const exact = r?.kind === "exact";
+      const refName = L["analyzer.phrase.refName"];
+      const sentences: string[] = [];
+
+      // 1) the game
+      const civName = civOf(sel.info.civ_id).name;
+      const dur = mmss(meta.duration_ms);
+      sentences.push(
+        sel.info.won == null
+          ? fill(L["analyzer.sum.gameUndecided"], { civ: civName, map: meta.map_name, dur })
+          : fill(L["analyzer.sum.game"], { civ: civName, map: meta.map_name, dur, result: resultOf(sel.info.won).toLowerCase() }),
+      );
+
+      // 2) biggest age-up gap (comp-adjusted, same math as the matrix)
+      const ages: Array<[string, number | null, number | null, number | null | undefined, number]> = [
+        [L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms ?? null, r?.feudal_s, r?.age_res_s?.[0] ?? 130],
+        [L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms ?? null, r?.castle_s, r?.age_res_s?.[1] ?? 160],
+        [L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms ?? null, r?.imperial_s, r?.age_res_s?.[2] ?? 190],
+      ];
+      let worst: { label: string; you: string; dOpp: number | null; dRef: number | null; score: number } | null = null;
+      let best: { label: string; d: number; who: string } | null = null;
+      for (const [label, youMs, oppMs, refS, res] of ages) {
+        if (youMs == null) continue;
+        const y = youMs / 1000 + res;
+        const dOpp = oppMs != null ? oppMs / 1000 + res - y : null;
+        const dRef = exact && refS != null ? refS - y : null;
+        const score = Math.min(dOpp ?? 0, dRef ?? 0);
+        if (score < -30 && (!worst || score < worst.score)) {
+          worst = { label, you: mmss(y * 1000), dOpp, dRef, score };
+        }
+        const up = Math.max(dOpp ?? 0, dRef ?? 0);
+        if (up > 30 && (!best || up > best.d)) {
+          best = { label, d: up, who: (dOpp ?? 0) >= (dRef ?? 0) ? oppShort : refName };
+        }
+      }
+      if (worst) {
+        const parts: string[] = [];
+        if (worst.dOpp != null && worst.dOpp < -30) parts.push(fill(L["analyzer.phrase.behind"], { d: fmtGapS(worst.dOpp), who: oppShort }));
+        if (worst.dRef != null && worst.dRef < -30) parts.push(fill(L["analyzer.phrase.behind"], { d: fmtGapS(worst.dRef), who: refName }));
+        if (parts.length) {
+          sentences.push(fill(L["analyzer.sum.biggestGap"], { age: worst.label, you: worst.you, vsOpp: parts[0], vsRef: parts[1] ? `, ${parts[1]}` : "" }));
+        }
+      }
+
+      // 3) TC idle cost (only when meaningful)
+      const idle = sel.idle_dark_ms + sel.idle_feudal_ms;
+      if (idle > 60_000) {
+        sentences.push(fill(L["analyzer.sum.idle"], { total: fmtGapS(idle / 1000), n: String(Math.round(idle / 25_000)) }));
+      }
+
+      // 4) one genuine positive
+      const openRef = r && refs?.openings?.[civOf(sel.info.civ_id).slug]?.[r.bucket];
+      const topOpen = openRef?.list?.filter((o: any) => o.opening !== "unknown").slice(0, 2) ?? [];
+      const openMatch = sel.opening && topOpen.some((o: any) =>
+        sel.opening.toLowerCase().includes(o.opening.replace(/_/g, " ").split(" ")[0]));
+      if (openMatch) {
+        sentences.push(fill(L["analyzer.sum.positive"], { what: fill(L["analyzer.sum.openingGood"], { opening: sel.opening }) }));
+      } else if (best) {
+        sentences.push(fill(L["analyzer.sum.positive"], {
+          what: fill(L["analyzer.sum.aheadBit"], { phrase: `${best.label}: ${fill(L["analyzer.phrase.ahead"], { d: fmtGapS(best.d), who: best.who })}` }),
+        }));
+      }
+
+      return `<div class="mt-5 rounded border-l-4 border-gold-500 bg-gold-500/10 px-4 py-3">
+          <h3 class="font-display text-sm font-bold uppercase tracking-wide text-gold-700">${esc(L["analyzer.summary"])}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-ink">${sentences.map(esc).join(" ")}</p>
+        </div>`;
     }
 
     function matrixHtml(sel: any, players: any[], refs: any) {
       const oppInfo = opponentOf(sel, players);
+      const oppShort = oppInfo ? String(oppInfo.label).split(" ")[0].slice(0, 14) : L["analyzer.matrix.opp"];
       const groups = matrixRows(sel, oppInfo?.m ?? null, refs);
       const sections = groups
         .map(({ group, rows }) => {
@@ -437,15 +528,15 @@ const ecoTechs: Record<string, string> = {
             : "";
           const body = rows
             .map((x) => `<div class="border-b border-stone-700/10 py-1.5 last:border-b-0">
-                <div class="flex flex-wrap items-baseline gap-x-2.5">
-                  <span class="font-display text-[13px] font-bold text-ink">${esc(x.label)}${x.est ? ' <span class="font-mono text-[9px] text-stone-700/70">~</span>' : ""}</span>
-                  ${chipHtml(L["analyzer.matrix.opp"], x.dOpp, x.colored, x.fmtDelta)}
-                  ${chipHtml(L["analyzer.matrix.ref"], x.dRef, x.colored, x.fmtDelta)}
+                <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                  <span class="font-display text-[13px] font-bold text-ink${x.help ? " cursor-help border-b border-dotted border-stone-700/40" : ""}"${x.help ? ` title="${esc(x.help)}"` : ""}>${esc(x.label)}${x.est ? ' <span class="font-mono text-[9px] text-stone-700/70">~</span>' : ""}</span>
+                  ${phrasePill(x.dOpp, x.colored, oppShort, x.kind)}
+                  ${phrasePill(x.dRef, x.colored, L["analyzer.phrase.refName"], x.kind)}
                 </div>
                 <div class="mt-0.5 font-mono text-[11px] text-stone-700">
                   ${esc(L["analyzer.matrix.you"])} <span class="text-ink">${esc(x.you)}</span>
-                  · ${esc(L["analyzer.matrix.opp"])} <span class="text-ink">${esc(x.opp)}</span>
-                  · ${esc(L["analyzer.matrix.ref"])} <span class="text-ink">${esc(x.ref)}</span>${x.refBasis ? ` <span class="text-[9px] text-stone-700/70">[${esc(x.refBasis)}]</span>` : ""}
+                  · ${esc(oppShort)} <span class="text-ink">${esc(x.opp)}</span>
+                  · ${esc(L["analyzer.matrix.winnersShort"])} <span class="text-ink">${x.ref === L["analyzer.matrix.noRef"] ? "—" : esc(x.ref)}</span>${x.refBasis ? ` <span class="text-[9px] text-stone-700/70">[${esc(x.refBasis)}]</span>` : ""}
                 </div>
               </div>`)
             .join("");
@@ -498,6 +589,9 @@ const ecoTechs: Record<string, string> = {
         <div class="mt-2 flex flex-wrap gap-2">${chips}</div>`;
     }
     const displayUnit = (u: string) => u.replace(/\b\w/g, (c) => c.toUpperCase());
+    const fill = (tpl: string, vars: Record<string, string>) =>
+      String(tpl ?? "").replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+    const fmtGapS = (d: number) => (Math.abs(d) >= 90 ? mmss(Math.abs(d) * 1000) : `${Math.abs(Math.round(d))}s`);
 
     // Within-match superlatives — factual comparisons between THIS game's players
     // only (no invented thresholds). Strict winners; ties get no badge.
@@ -561,7 +655,7 @@ const ecoTechs: Record<string, string> = {
         .map((f: any) => {
           const basis = f.basis && f.basis !== "absolute" ? ` <span class="font-mono text-[10px] text-stone-700/80">[${esc(L[`analyzer.basis.${f.basis}`] ?? f.basis)}]</span>` : "";
           return `<li class="flex items-start gap-2.5 border-b border-stone-700/15 py-2 last:border-b-0">
-            <span class="mt-0.5 inline-block rounded px-1.5 font-mono text-[10px] uppercase ${sevStyle[f.severity] ?? sevStyle.low}">${esc(f.severity)}</span>
+            <span class="mt-0.5 inline-block rounded px-1.5 font-mono text-[10px] uppercase ${sevStyle[f.severity] ?? sevStyle.low}">${esc(L[`analyzer.sev.${f.severity}`] ?? f.severity)}</span>
             <span class="text-sm text-ink"><strong class="font-display">${esc(f.metric)}</strong> — ${esc(L["analyzer.you"])} <span class="font-mono">${esc(f.your)}</span> (${esc(L["analyzer.ref"])} <span class="font-mono">${esc(f.reference)}</span>)${basis}<br /><span class="text-stone-700">${esc(f.note)}</span></span>
           </li>`;
         });
@@ -615,6 +709,7 @@ const ecoTechs: Record<string, string> = {
           ${sel.opening ? `<span class="rounded border border-gold-500/50 bg-gold-500/10 px-2 py-0.5 font-mono text-[11px] uppercase tracking-wide text-gold-700">${esc(L["analyzer.opening"])}: ${esc(sel.opening)}</span>` : ""}
         </div>
         ${sel.info.won == null ? `<p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.result.note"])}</p>` : ""}
+        <div id="az-summary"></div>
 
         <div class="mt-4">${scorecard(sel)}</div>
         <div id="az-matrix"></div>
@@ -669,6 +764,8 @@ const ecoTechs: Record<string, string> = {
       drawCharts(players, selPn);
       // async fills: head-to-head matrix (needs winner-refs) + winners benchmark
       loadRefs().then((refs) => {
+        const sHolder = reportEl.querySelector("#az-summary");
+        if (sHolder) sHolder.innerHTML = summaryHtml(sel, players, refs, meta);
         const holder = reportEl.querySelector("#az-matrix");
         if (holder) holder.innerHTML = matrixHtml(sel, players, refs);
       });

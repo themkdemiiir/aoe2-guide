@@ -20,9 +20,9 @@
 // Runs on the box that holds data-cache (the VM).
 //   node scripts/data-pipeline/build-civ-cube.mjs
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { eloBucket } from "./lib/buckets.mjs";
+import { AOESTATS_END_MONTH, canonMap, eloBucket } from "./lib/buckets.mjs";
 import { crawlRecords } from "./lib/crawl-stream.mjs";
 import { canonToKeyIndex, isRanked1v1, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
 
@@ -51,9 +51,36 @@ const cube = {};
 const mapGames = {};
 let rows = 0;
 let skippedNullElo = 0;
+// Back months (<= archive end) come from /tmp/cube-history.csv (aoestats: full
+// corpus + REAL maps — see build-cube-history.sql); the crawl only covers later
+// months, so the two sources never overlap.
+const HIST = "/tmp/cube-history.csv";
+if (existsSync(HIST)) {
+  const lines = readFileSync(HIST, "utf8").trim().split("\n");
+  const head = lines.shift().split(",");
+  let histRows = 0;
+  for (const line of lines) {
+    const r = Object.fromEntries(line.split(",").map((v, i) => [head[i], v]));
+    if (r.month > AOESTATS_END_MONTH || !keepMonths.has(r.month)) continue;
+    if (!guideCivs.has(r.civ)) continue;
+    if (r.bucket === "unknown") continue;
+    const mk = canonToKey[canonMap(r.map)]?.key ?? r.map;
+    const k = `${r.civ}|${r.bucket}|${mk}|${r.month}`;
+    const cw = (cube[k] ??= [0, 0]);
+    cw[0] += +r.games; cw[1] += +r.wins;
+    mapGames[mk] = (mapGames[mk] ?? 0) + +r.games;
+    rows += +r.games;
+    histRows++;
+  }
+  console.log(`  history: ${histRows} archive cells merged (months <= ${AOESTATS_END_MONTH})`);
+} else {
+  console.warn(`  WARN: ${HIST} missing — back months will have no map slices (run build-cube-history.sql)`);
+}
+
 for await (const m of crawlRecords()) {
   if (!isRanked1v1(m)) continue;
   const mo = monthKey(m.completed);
+  if (mo <= AOESTATS_END_MONTH) continue; // archive owns the back months
   if (!keepMonths.has(mo)) continue;
   const truth = mapTruth.get(m.match_id);
   const mk = truth ? (canonToKey[truth.canon]?.key ?? UNKNOWN_MAP) : UNKNOWN_MAP;

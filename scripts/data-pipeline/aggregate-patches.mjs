@@ -14,7 +14,9 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { AOESTATS_END_MONTH } from "./lib/buckets.mjs";
 import { crawlRecords } from "./lib/crawl-stream.mjs";
+import { duck } from "./lib/duck.mjs";
 import { isRanked1v1, relicCivSlug } from "./lib/relic-map.mjs";
 import { pct } from "./lib/stats.mjs";
 
@@ -36,10 +38,31 @@ const monthLabel = (key) => { const [y, mo] = key.split("-"); return `${MONTHS[+
 const gm = {}; // monthKey -> { matches }
 const civPatch = {}; // slug -> monthKey -> { g, w }
 
+// Back months (<= archive end) come from the aoestats archive: full corpus,
+// name-derived civs, real per-match dates — the crawl only samples history.
+const HOME = process.env.HOME;
+const HIST_M = `SELECT game_id, strftime(started_timestamp, '%Y-%m') AS month
+  FROM read_parquet('${HOME}/aoestats/m_*.parquet')
+  WHERE leaderboard = 'random_map' AND started_timestamp >= TIMESTAMP '2024-07-01'`;
+for (const r of duck(`WITH m AS (${HIST_M}) SELECT month, count(*) AS matches FROM m GROUP BY 1`)) {
+  if (r.month > AOESTATS_END_MONTH) continue;
+  (gm[r.month] ??= { matches: 0 }).matches += Number(r.matches);
+}
+for (const r of duck(`WITH m AS (${HIST_M})
+  SELECT m.month, p.civ, count(*) AS g, sum(p.winner::int) AS w
+  FROM read_parquet('${HOME}/aoestats/p_*.parquet') p JOIN m USING (game_id)
+  GROUP BY 1, 2`)) {
+  if (r.month > AOESTATS_END_MONTH || !guideCivs.has(r.civ)) continue;
+  const cp = ((civPatch[r.civ] ??= {})[r.month] ??= { g: 0, w: 0 });
+  cp.g += Number(r.g);
+  cp.w += Number(r.w);
+}
+
 let lines = 0;
 for await (const m of crawlRecords()) {
   if (!isRanked1v1(m)) continue;
   const g = monthKey(m.completed);
+  if (g <= AOESTATS_END_MONTH) continue; // archive owns the back months
   lines++;
   (gm[g] ??= { matches: 0 }).matches++;
   for (const pl of m.players ?? []) {
