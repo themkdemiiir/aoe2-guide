@@ -291,9 +291,11 @@ const mapList = one
       elLabel.textContent = parts.join(" · ");
       const eIdx = sel.elo.value ? c._ei[sel.elo.value] : -1;
       const mIdx = sel.map.value ? (c._mi[sel.map.value] ?? -2) : -1;
-      const pIdx = sel.patch.value ? c._pi[sel.patch.value] : -1;
+      // -2 = selected month absent from the cube (metas can be regenerated
+      // separately) → show "no data", never silently drop the filter.
+      const pIdx = sel.patch.value ? (c._pi[sel.patch.value] ?? -2) : -1;
       let g = 0, w = 0;
-      if (c._ci >= 0 && mIdx !== -2) {
+      if (c._ci >= 0 && mIdx !== -2 && pIdx !== -2) {
         for (const r of c.rows) {
           if (r[0] !== c._ci) continue;
           if (eIdx >= 0 && r[1] !== eIdx) continue;

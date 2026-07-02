@@ -8,55 +8,57 @@
 //   civ-matchups-by-map.json  1v1 per map      civs[civ][mapKey] = [{opp,…}]
 //   civ-matchups-by-elo.json  1v1 per elo      civs[civ][opp] = {bucket:[wr,g], all:[wr,g]}
 //   civ-matchups-team.json    team overall     civs[civ] = [{opp,games,winRate}] (confounded)
-// 1v1 from data-cache/relic-patched, team from data-cache/relic-team.
+// One pass over ALL crawl sources (lib/crawl-stream.mjs, last CURRENT_WINDOW_DAYS,
+// ranked RM only). Civ ids are the Relic API space (relic-civ-id-map.json);
+// per-map matchups use replay-parsed map truth only (the API mapname is junk).
 //
 //   node scripts/data-pipeline/refresh-matchups-current.mjs
 
-import { createReadStream, readFileSync, writeFileSync } from "node:fs";
-import { createInterface } from "node:readline";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { ELO_BUCKETS_WITH_ALL, canonMap, eloBucket } from "./lib/buckets.mjs";
+import { ELO_BUCKETS_WITH_ALL, eloBucket } from "./lib/buckets.mjs";
+import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
+import { canonToKeyIndex, isRanked1v1, isRankedTeam, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
 
-const IN_1V1 = path.resolve("data-cache/relic-patched/matches.ndjson");
-const IN_TEAM = path.resolve("data-cache/relic-team/matches.ndjson");
-
-const civIdMap = JSON.parse(readFileSync(path.resolve("src/data/civ-id-map.json"), "utf8"));
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 const mapMeta = JSON.parse(readFileSync(path.resolve("src/data/map-meta.json"), "utf8"));
 
 const pct = (x) => +(x * 100).toFixed(2);
-const canonToKey = {};
-for (const [k, v] of Object.entries(mapMeta.maps)) {
-  const c = canonMap(k);
-  const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
-  if (!canonToKey[c] || g > canonToKey[c].g) canonToKey[c] = { key: k, g };
-}
-const mapKeyFor = (raw) => canonToKey[canonMap(raw)]?.key ?? null;
+const canonToKey = canonToKeyIndex(mapMeta);
+const mapTruth = await loadReplayMapTruth();
 
-const SOURCE = "self-collected World's Edge live ladder (1v1 + team, current)";
+const SOURCE = `self-collected World's Edge live ladder (ranked RM, last ${CURRENT_WINDOW_DAYS} days; maps replay-verified)`;
 const TODAY = new Date().toISOString().slice(0, 10);
 const MIN = 300, MIN_MAP = 200, MIN_BUCKET = 150, MIN_ALL = 300, MIN_TEAM = 500;
 const bump = (o, k, won) => { const a = (o[k] ??= [0, 0]); a[0]++; if (won) a[1]++; };
 
-// --- 1v1: overall + by-map + by-elo (both perspectives per match) ---
-const ov = {}, bm = {}, be = {};
+// --- single pass over all crawl sources: 1v1 (overall/by-map/by-elo) + team ---
+const ov = {}, bm = {}, be = {}, tv = {};
 let skippedNullElo = 0;
-const r1 = createInterface({ input: createReadStream(IN_1V1), crlfDelay: Infinity });
-for await (const line of r1) {
-  if (!line.trim()) continue;
-  let m;
-  try { m = JSON.parse(line); } catch { continue; }
-  const ps = (m.players ?? []).map((p) => ({ civ: civIdMap[String(p.civ_id)], won: !!p.won, rating: p.rating })).filter((p) => p.civ && guideCivs.has(p.civ));
-  if (ps.length !== 2) continue;
-  const [a, b] = ps;
-  if (a.civ === b.civ) continue;
-  const mapKey = m.map_raw ? mapKeyFor(m.map_raw) : null;
-  for (const [x, y] of [[a, b], [b, a]]) {
-    bump(ov, `${x.civ}|${y.civ}`, x.won);
-    if (mapKey) bump(bm, `${x.civ}|${y.civ}|${mapKey}`, x.won);
-    const eb = eloBucket(x.rating);
-    if (eb == null) { skippedNullElo++; continue; }
-    bump(be, `${x.civ}|${y.civ}|${eb}`, x.won);
+for await (const m of crawlRecords({ recentDays: CURRENT_WINDOW_DAYS })) {
+  if (isRanked1v1(m)) {
+    const ps = (m.players ?? []).map((p) => ({ civ: relicCivSlug(p.civ_id), won: !!p.won, rating: p.rating })).filter((p) => guideCivs.has(p.civ));
+    if (ps.length !== 2) continue;
+    const [a, b] = ps;
+    if (a.civ === b.civ) continue;
+    const truth = mapTruth.get(m.match_id);
+    const mapKey = truth ? (canonToKey[truth.canon]?.key ?? null) : null;
+    for (const [x, y] of [[a, b], [b, a]]) {
+      bump(ov, `${x.civ}|${y.civ}`, x.won);
+      if (mapKey) bump(bm, `${x.civ}|${y.civ}|${mapKey}`, x.won);
+      const eb = eloBucket(x.rating);
+      if (eb == null) { skippedNullElo++; continue; }
+      bump(be, `${x.civ}|${y.civ}|${eb}`, x.won);
+    }
+  } else if (isRankedTeam(m)) {
+    const ps = (m.players ?? []).map((p) => ({ civ: relicCivSlug(p.civ_id), won: !!p.won })).filter((p) => guideCivs.has(p.civ));
+    if (ps.length < 4) continue;
+    for (let i = 0; i < ps.length; i++) for (let j = 0; j < ps.length; j++) {
+      if (i === j) continue;
+      const x = ps[i], y = ps[j];
+      if (x.won === y.won || x.civ === y.civ) continue; // cross-team only
+      bump(tv, `${x.civ}|${y.civ}`, x.won);
+    }
   }
 }
 
@@ -100,22 +102,7 @@ for (const [civ, opps] of Object.entries(beAcc)) {
   if (Object.keys(oOut).length) byElo[civ] = oOut;
 }
 
-// --- team: confounded cross-team matchups from the team crawl ---
-const tv = {};
-const rt = createInterface({ input: createReadStream(IN_TEAM), crlfDelay: Infinity });
-for await (const line of rt) {
-  if (!line.trim()) continue;
-  let m;
-  try { m = JSON.parse(line); } catch { continue; }
-  const ps = (m.players ?? []).map((p) => ({ civ: civIdMap[String(p.civ_id)], won: !!p.won })).filter((p) => p.civ && guideCivs.has(p.civ));
-  if (ps.length < 4) continue;
-  for (let i = 0; i < ps.length; i++) for (let j = 0; j < ps.length; j++) {
-    if (i === j) continue;
-    const x = ps[i], y = ps[j];
-    if (x.won === y.won || x.civ === y.civ) continue; // cross-team only
-    bump(tv, `${x.civ}|${y.civ}`, x.won);
-  }
-}
+// --- team: confounded cross-team matchups (accumulated in the single pass) ---
 const teamCivs = {};
 for (const [k, [g, w]] of Object.entries(tv)) {
   if (g < MIN_TEAM) continue;

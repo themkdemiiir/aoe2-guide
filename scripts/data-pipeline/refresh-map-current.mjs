@@ -2,23 +2,27 @@
 // scripts/data-pipeline/refresh-map-current.mjs
 //
 // Refresh the 1v1 map rankings in map-meta.json with the CURRENT self-collected
-// World's Edge crawl (data-cache/relic-patched/matches.ndjson). aggregate-maps
-// builds map-meta from the frozen aoestats archive only; this splices the live
-// crawl's current map × civ × elo 1v1 rankings over the top (per map, where the
-// crawl has enough volume). Team rankings stay aoestats (the crawl is 1v1).
+// World's Edge crawl (all crawl sources via lib/crawl-stream.mjs, last
+// CURRENT_WINDOW_DAYS, ranked-RM 1v1 only). aggregate-maps builds map-meta from
+// the frozen aoestats archive only; this splices the live crawl's current
+// map × civ × elo 1v1 rankings over the top (per map, where the crawl has
+// enough volume). Team rankings are refreshed by refresh-team-current.
+// The per-match map is REPLAY-PARSED truth only (lib/relic-map.mjs
+// loadReplayMapTruth) — the API mapname is wrong for most matches, so matches
+// without a parsed replay contribute NO map slice. Civ ids are the Relic API
+// space (relic-civ-id-map.json).
 //
-// Runs LOCALLY (reads the desktop crawl backup + map-meta.json).
+// Runs on the box that holds data-cache (the VM).
 //   node scripts/data-pipeline/refresh-map-current.mjs
 
-import { createReadStream, readFileSync, writeFileSync } from "node:fs";
-import { createInterface } from "node:readline";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { canonMap, eloBucket } from "./lib/buckets.mjs";
+import { eloBucket } from "./lib/buckets.mjs";
+import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
+import { canonToKeyIndex, isRanked1v1, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
 
-const IN = path.resolve("data-cache/relic-patched/matches.ndjson");
 const META = path.resolve("src/data/map-meta.json");
 
-const civIdMap = JSON.parse(readFileSync(path.resolve("src/data/civ-id-map.json"), "utf8"));
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 const meta = JSON.parse(readFileSync(META, "utf8"));
 
@@ -30,44 +34,33 @@ const MIN_BUCKET = 60; // per-civ gate, single bucket
 const MIN_RANKED_CIVS = 10; // a NEW (crawl-only) map needs this many civs in "all" to render a page (matches src/lib/data-maps.ts)
 
 // canon(map name) -> map-meta key (prefer the higher-volume variant)
-const canonToKey = {};
-for (const [k, v] of Object.entries(meta.maps)) {
-  const c = canonMap(k);
-  const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
-  if (!canonToKey[c] || g > canonToKey[c].g) canonToKey[c] = { key: k, g };
-}
+const canonToKey = canonToKeyIndex(meta);
 
 // Crawl-only maps (not in the frozen archive) get a fresh underscore key derived
-// from the .rms filename, so "Border Dispute.rms" → border_dispute → the route
-// renders /maps/border-dispute with a clean prettified name. Existing maps still
-// resolve to their archive key (the higher-volume spelling).
-const mkKey = (raw) =>
-  String(raw)
-    .replace(/\.[a-z0-9]+$/i, "")
+// from the replay-truth map NAME, so "Border Dispute" → border_dispute → the
+// route renders /maps/border-dispute with a clean prettified name. Existing maps
+// still resolve to their archive key (the higher-volume spelling).
+const mkKey = (name) =>
+  String(name)
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_+|_+$/g, "");
-const mapKeyFor = (raw) => {
-  const c = canonMap(raw); // canonMap strips the extension + non-alphanumerics itself
-  return canonToKey[c]?.key ?? mkKey(raw); // existing archive key, or a fresh crawl-only key
-};
+const mapTruth = await loadReplayMapTruth();
 
 // --- aggregate crawl: key -> bucket -> civ -> {g,w} (+ "all") ---
 const acc = {};
-const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
 let used = 0;
 let skippedNullElo = 0;
-for await (const line of rl) {
-  if (!line.trim()) continue;
-  let m;
-  try { m = JSON.parse(line); } catch { continue; }
-  const key = m.map_raw ? mapKeyFor(m.map_raw) : null;
-  if (!key) continue;
+for await (const m of crawlRecords({ recentDays: CURRENT_WINDOW_DAYS })) {
+  if (!isRanked1v1(m)) continue;
+  const truth = mapTruth.get(m.match_id);
+  if (!truth) continue; // no replay-verified map — the API mapname is untrustworthy
+  const key = canonToKey[truth.canon]?.key ?? mkKey(truth.name);
   used++;
   const mp = (acc[key] ??= {});
   for (const pl of m.players ?? []) {
-    const slug = civIdMap[String(pl.civ_id)];
-    if (!slug || !guideCivs.has(slug)) continue;
+    const slug = relicCivSlug(pl.civ_id);
+    if (!guideCivs.has(slug)) continue;
     const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
     for (const bk of [eb, "all"]) {
       const cw = (((mp[bk] ??= {})[slug] ??= { g: 0, w: 0 }));

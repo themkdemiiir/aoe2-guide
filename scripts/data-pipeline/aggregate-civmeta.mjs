@@ -16,9 +16,10 @@
 // Usage (on the box, after collect-relic):
 //   node scripts/data-pipeline/aggregate-civmeta.mjs --min-games 400 [--min-elo 1000]
 
-import { createReadStream, readFileSync, writeFileSync } from "node:fs";
-import { createInterface } from "node:readline";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { crawlRecords } from "./lib/crawl-stream.mjs";
+import { RELIC_CIV_MAP, isRanked1v1 } from "./lib/relic-map.mjs";
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((acc, a, i, arr) => {
@@ -26,12 +27,15 @@ const args = Object.fromEntries(
     return acc;
   }, []),
 );
-const IN = path.resolve(args.in ?? "data-cache/relic/matches.ndjson");
+// Default input = ALL crawl sources via lib/crawl-stream.mjs (deduped, gated);
+// --in <file> narrows to one NDJSON file (still gated + deduped).
+const IN = args.in ? [path.resolve(args.in)] : undefined;
 const OUT = path.resolve(args.out ?? "src/data/civ-meta.json");
 const MIN_GAMES = Number(args["min-games"] ?? 400);
 const MIN_ELO = Number(args["min-elo"] ?? 0);
 
-const civIdMap = JSON.parse(readFileSync(path.resolve("src/data/civ-id-map.json"), "utf8"));
+// Crawl civ ids are the Relic API space — NOT civ-id-map.json (game/replay space).
+const civIdMap = RELIC_CIV_MAP;
 const guideCivs = new Set(
   JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug),
 );
@@ -63,11 +67,8 @@ async function run() {
   let maxDate = 0;
   const unknownIds = new Set();
 
-  const rl = createInterface({ input: createReadStream(IN, "utf8"), crlfDelay: Infinity });
-  for await (const line of rl) {
-    if (!line.trim()) continue;
-    let m;
-    try { m = JSON.parse(line); } catch { continue; }
+  for await (const m of crawlRecords({ sources: IN })) {
+    if (!isRanked1v1(m)) continue; // RM + era gates already applied by crawlRecords
     matches++;
     if (m.completed) { minDate = Math.min(minDate, m.completed); maxDate = Math.max(maxDate, m.completed); }
     for (const p of m.players ?? []) {
@@ -84,8 +85,8 @@ async function run() {
 
   // Fail loud: an unmapped civ_id means our civ-id map is incomplete — surface it, don't ship blind.
   if (unknownIds.size) {
-    console.error(`[FATAL] ${unknownIds.size} civ_id(s) have no civ-id-map entry: ${[...unknownIds].sort((a, b) => a - b).join(", ")}`);
-    console.error("Add them to src/data/civ-id-map.json (verify against aoc-reference) and re-run. No data emitted.");
+    console.error(`[FATAL] ${unknownIds.size} Relic civilization_id(s) have no relic-civ-id-map entry: ${[...unknownIds].sort((a, b) => a - b).join(", ")}`);
+    console.error("A new DLC likely shifted the API id space — re-derive src/data/relic-civ-id-map.json (races table + replay join) and re-run. No data emitted.");
     process.exit(1);
   }
   if (matches === 0) {

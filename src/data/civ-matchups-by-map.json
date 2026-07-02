@@ -1,1159 +1,131 @@
 {
-  "source": "self-collected World's Edge live ladder (1v1 + team, current)",
-  "generated": "2026-06-25",
+  "source": "self-collected World's Edge live ladder (ranked RM, last 75 days; maps replay-verified)",
+  "generated": "2026-07-02",
   "ladder": "1v1",
   "minGames": 200,
   "note": "winRate = how often <civ> beats <opp> on <map> in 1v1 RM. Mirrors excluded.",
   "civs": {
-    "berbers": {
+    "magyars": {
       "arabia": [
         {
-          "opp": "bengalis",
-          "games": 206,
-          "winRate": 60.19
-        },
-        {
-          "opp": "bohemians",
-          "games": 236,
-          "winRate": 59.75
-        },
-        {
-          "opp": "romans",
-          "games": 435,
-          "winRate": 55.86
-        },
-        {
-          "opp": "portuguese",
-          "games": 294,
-          "winRate": 55.78
-        },
-        {
-          "opp": "japanese",
-          "games": 271,
-          "winRate": 55.72
-        },
-        {
-          "opp": "vikings",
-          "games": 204,
-          "winRate": 54.9
-        },
-        {
-          "opp": "aztecs",
-          "games": 559,
-          "winRate": 53.31
-        },
-        {
-          "opp": "saracens",
-          "games": 251,
-          "winRate": 52.99
-        },
-        {
-          "opp": "byzantines",
-          "games": 208,
-          "winRate": 52.4
-        },
-        {
-          "opp": "bulgarians",
-          "games": 404,
-          "winRate": 51.98
-        },
-        {
-          "opp": "malians",
-          "games": 279,
-          "winRate": 51.25
-        },
-        {
-          "opp": "italians",
-          "games": 237,
-          "winRate": 50.63
+          "opp": "franks",
+          "games": 300,
+          "winRate": 52.67
         },
         {
           "opp": "vietnamese",
-          "games": 630,
-          "winRate": 50.32
+          "games": 258,
+          "winRate": 51.16
         },
         {
-          "opp": "slavs",
-          "games": 286,
-          "winRate": 47.2
-        },
-        {
-          "opp": "spanish",
-          "games": 355,
-          "winRate": 46.76
-        },
-        {
-          "opp": "burmese",
-          "games": 211,
-          "winRate": 44.55
-        }
-      ],
-      "african_clearing": [
-        {
-          "opp": "vietnamese",
-          "games": 222,
-          "winRate": 51.35
-        }
-      ],
-      "marketplace": [
-        {
-          "opp": "vietnamese",
-          "games": 202,
-          "winRate": 46.04
-        }
-      ],
-      "mega_random": [
-        {
-          "opp": "vietnamese",
-          "games": 202,
-          "winRate": 51.49
-        }
-      ]
-    },
-    "byzantines": {
-      "arabia": [
-        {
-          "opp": "aztecs",
-          "games": 268,
-          "winRate": 49.25
-        },
-        {
-          "opp": "berbers",
-          "games": 208,
-          "winRate": 47.6
-        },
-        {
-          "opp": "vietnamese",
-          "games": 234,
-          "winRate": 46.58
-        }
-      ]
-    },
-    "teutons": {
-      "arabia": [
-        {
-          "opp": "vietnamese",
-          "games": 204,
-          "winRate": 50
-        }
-      ],
-      "arena": [
-        {
-          "opp": "aztecs",
-          "games": 212,
-          "winRate": 54.72
-        },
-        {
-          "opp": "bohemians",
-          "games": 204,
-          "winRate": 53.43
-        }
-      ]
-    },
-    "vietnamese": {
-      "arabia": [
-        {
-          "opp": "bengalis",
-          "games": 275,
-          "winRate": 63.27
-        },
-        {
-          "opp": "chinese",
-          "games": 225,
-          "winRate": 58.22
-        },
-        {
-          "opp": "byzantines",
-          "games": 234,
-          "winRate": 53.85
-        },
-        {
-          "opp": "italians",
-          "games": 315,
-          "winRate": 53.02
-        },
-        {
-          "opp": "saracens",
-          "games": 273,
-          "winRate": 52.01
-        },
-        {
-          "opp": "romans",
-          "games": 483,
-          "winRate": 51.76
-        },
-        {
-          "opp": "slavs",
-          "games": 281,
-          "winRate": 51.6
-        },
-        {
-          "opp": "teutons",
-          "games": 204,
-          "winRate": 50.49
-        },
-        {
-          "opp": "bohemians",
-          "games": 326,
-          "winRate": 50.31
-        },
-        {
-          "opp": "mongols",
-          "games": 213,
-          "winRate": 50.23
-        },
-        {
-          "opp": "huns",
-          "games": 231,
-          "winRate": 50.22
-        },
-        {
-          "opp": "japanese",
-          "games": 375,
-          "winRate": 50.13
-        },
-        {
-          "opp": "berbers",
-          "games": 630,
-          "winRate": 49.84
-        },
-        {
-          "opp": "burmese",
-          "games": 224,
-          "winRate": 49.55
-        },
-        {
-          "opp": "spanish",
-          "games": 410,
-          "winRate": 49.27
-        },
-        {
-          "opp": "bulgarians",
-          "games": 461,
-          "winRate": 49.02
-        },
-        {
-          "opp": "aztecs",
-          "games": 685,
-          "winRate": 48.91
-        },
-        {
-          "opp": "incas",
-          "games": 240,
-          "winRate": 48.75
-        },
-        {
-          "opp": "vikings",
-          "games": 307,
-          "winRate": 48.21
-        },
-        {
-          "opp": "cumans",
-          "games": 231,
-          "winRate": 46.75
-        },
-        {
-          "opp": "portuguese",
-          "games": 379,
-          "winRate": 46.7
-        },
-        {
-          "opp": "malians",
-          "games": 306,
-          "winRate": 45.42
-        },
-        {
-          "opp": "lithuanians",
-          "games": 236,
-          "winRate": 45.34
-        }
-      ],
-      "marketplace": [
-        {
-          "opp": "berbers",
-          "games": 202,
-          "winRate": 53.96
-        },
-        {
-          "opp": "aztecs",
-          "games": 224,
-          "winRate": 49.55
-        }
-      ],
-      "mega_random": [
-        {
-          "opp": "romans",
-          "games": 206,
-          "winRate": 54.37
-        },
-        {
-          "opp": "berbers",
-          "games": 202,
-          "winRate": 48.02
-        },
-        {
-          "opp": "bulgarians",
-          "games": 246,
-          "winRate": 47.97
-        },
-        {
-          "opp": "aztecs",
-          "games": 231,
-          "winRate": 47.62
-        }
-      ],
-      "arena": [
-        {
-          "opp": "aztecs",
-          "games": 228,
-          "winRate": 51.32
-        },
-        {
-          "opp": "bohemians",
-          "games": 201,
-          "winRate": 46.77
-        }
-      ],
-      "african_clearing": [
-        {
-          "opp": "berbers",
-          "games": 222,
-          "winRate": 48.65
-        },
-        {
-          "opp": "italians",
-          "games": 237,
-          "winRate": 43.88
-        }
-      ],
-      "four_lakes": [
-        {
-          "opp": "aztecs",
-          "games": 201,
-          "winRate": 53.23
-        }
-      ]
-    },
-    "bulgarians": {
-      "arena": [
-        {
-          "opp": "aztecs",
-          "games": 232,
-          "winRate": 53.45
-        }
-      ],
-      "arabia": [
-        {
-          "opp": "japanese",
-          "games": 263,
-          "winRate": 55.89
-        },
-        {
-          "opp": "portuguese",
-          "games": 227,
-          "winRate": 54.63
-        },
-        {
-          "opp": "bohemians",
-          "games": 230,
-          "winRate": 54.35
-        },
-        {
-          "opp": "saracens",
-          "games": 203,
-          "winRate": 53.2
-        },
-        {
-          "opp": "malians",
-          "games": 213,
-          "winRate": 53.05
-        },
-        {
-          "opp": "spanish",
-          "games": 283,
-          "winRate": 53
-        },
-        {
-          "opp": "aztecs",
-          "games": 464,
-          "winRate": 52.16
-        },
-        {
-          "opp": "vietnamese",
-          "games": 461,
-          "winRate": 51.19
-        },
-        {
-          "opp": "vikings",
-          "games": 200,
-          "winRate": 51
-        },
-        {
-          "opp": "romans",
-          "games": 301,
-          "winRate": 49.5
-        },
-        {
-          "opp": "berbers",
-          "games": 404,
-          "winRate": 48.02
-        }
-      ],
-      "mega_random": [
-        {
-          "opp": "vietnamese",
-          "games": 246,
-          "winRate": 52.03
-        }
-      ]
-    },
-    "aztecs": {
-      "arena": [
-        {
-          "opp": "japanese",
-          "games": 284,
-          "winRate": 56.34
-        },
-        {
-          "opp": "vietnamese",
-          "games": 228,
-          "winRate": 51.32
-        },
-        {
-          "opp": "portuguese",
-          "games": 248,
-          "winRate": 47.58
-        },
-        {
-          "opp": "bohemians",
-          "games": 245,
-          "winRate": 46.53
-        },
-        {
-          "opp": "bulgarians",
-          "games": 232,
-          "winRate": 45.26
-        },
-        {
-          "opp": "teutons",
-          "games": 212,
-          "winRate": 44.81
-        },
-        {
-          "opp": "bengalis",
-          "games": 210,
-          "winRate": 44.29
-        },
-        {
-          "opp": "gurjaras",
-          "games": 218,
-          "winRate": 41.74
-        }
-      ],
-      "arabia": [
-        {
-          "opp": "italians",
-          "games": 303,
-          "winRate": 58.75
-        },
-        {
-          "opp": "vikings",
-          "games": 237,
-          "winRate": 58.23
-        },
-        {
-          "opp": "gurjaras",
-          "games": 226,
-          "winRate": 54.87
-        },
-        {
-          "opp": "burmese",
-          "games": 253,
-          "winRate": 54.55
-        },
-        {
-          "opp": "huns",
-          "games": 239,
-          "winRate": 53.14
-        },
-        {
-          "opp": "portuguese",
-          "games": 336,
-          "winRate": 52.98
-        },
-        {
-          "opp": "byzantines",
-          "games": 268,
-          "winRate": 51.49
-        },
-        {
-          "opp": "mongols",
-          "games": 210,
-          "winRate": 51.43
-        },
-        {
-          "opp": "vietnamese",
-          "games": 685,
-          "winRate": 51.39
-        },
-        {
-          "opp": "cumans",
-          "games": 205,
-          "winRate": 51.22
-        },
-        {
-          "opp": "japanese",
-          "games": 413,
-          "winRate": 51.09
-        },
-        {
-          "opp": "spanish",
-          "games": 367,
-          "winRate": 49.05
-        },
-        {
-          "opp": "saracens",
-          "games": 299,
-          "winRate": 48.83
-        },
-        {
-          "opp": "bohemians",
-          "games": 360,
-          "winRate": 48.61
-        },
-        {
-          "opp": "malians",
-          "games": 326,
-          "winRate": 48.47
-        },
-        {
-          "opp": "sicilians",
-          "games": 220,
-          "winRate": 48.18
-        },
-        {
-          "opp": "lithuanians",
-          "games": 217,
-          "winRate": 47.93
-        },
-        {
-          "opp": "romans",
-          "games": 479,
-          "winRate": 47.81
-        },
-        {
-          "opp": "bulgarians",
-          "games": 464,
-          "winRate": 47.41
-        },
-        {
-          "opp": "berbers",
-          "games": 559,
-          "winRate": 46.69
-        },
-        {
-          "opp": "slavs",
-          "games": 280,
-          "winRate": 45.71
-        },
-        {
-          "opp": "bengalis",
-          "games": 303,
-          "winRate": 45.21
-        },
-        {
-          "opp": "chinese",
-          "games": 251,
-          "winRate": 45.02
-        }
-      ],
-      "marketplace": [
-        {
-          "opp": "vietnamese",
+          "opp": "persians",
           "games": 224,
           "winRate": 50.45
-        }
-      ],
-      "mega_random": [
-        {
-          "opp": "vietnamese",
-          "games": 231,
-          "winRate": 52.38
         },
         {
-          "opp": "japanese",
-          "games": 219,
-          "winRate": 52.05
+          "opp": "mongols",
+          "games": 380,
+          "winRate": 48.95
         },
         {
-          "opp": "bohemians",
-          "games": 200,
-          "winRate": 47.5
-        }
-      ],
-      "four_lakes": [
-        {
-          "opp": "vietnamese",
-          "games": 201,
-          "winRate": 46.77
-        }
-      ]
-    },
-    "portuguese": {
-      "arabia": [
-        {
-          "opp": "japanese",
-          "games": 238,
-          "winRate": 56.3
-        },
-        {
-          "opp": "romans",
-          "games": 253,
-          "winRate": 55.73
-        },
-        {
-          "opp": "spanish",
-          "games": 202,
-          "winRate": 54.46
-        },
-        {
-          "opp": "vietnamese",
-          "games": 379,
-          "winRate": 53.03
-        },
-        {
-          "opp": "aztecs",
-          "games": 336,
-          "winRate": 47.32
-        },
-        {
-          "opp": "bulgarians",
-          "games": 227,
-          "winRate": 45.81
-        },
-        {
-          "opp": "berbers",
-          "games": 294,
-          "winRate": 44.56
-        }
-      ],
-      "arena": [
-        {
-          "opp": "aztecs",
-          "games": 248,
-          "winRate": 53.23
-        }
-      ]
-    },
-    "slavs": {
-      "arabia": [
-        {
-          "opp": "aztecs",
-          "games": 280,
-          "winRate": 55.36
-        },
-        {
-          "opp": "berbers",
-          "games": 286,
-          "winRate": 52.8
-        },
-        {
-          "opp": "vietnamese",
-          "games": 281,
-          "winRate": 48.4
-        }
-      ]
-    },
-    "romans": {
-      "arabia": [
-        {
-          "opp": "japanese",
-          "games": 233,
-          "winRate": 56.65
-        },
-        {
-          "opp": "spanish",
-          "games": 255,
-          "winRate": 54.9
-        },
-        {
-          "opp": "aztecs",
-          "games": 479,
-          "winRate": 51.77
-        },
-        {
-          "opp": "bulgarians",
-          "games": 301,
-          "winRate": 50.5
-        },
-        {
-          "opp": "bohemians",
-          "games": 212,
-          "winRate": 49.53
-        },
-        {
-          "opp": "vietnamese",
-          "games": 483,
-          "winRate": 48.24
-        },
-        {
-          "opp": "malians",
-          "games": 203,
-          "winRate": 46.31
-        },
-        {
-          "opp": "portuguese",
-          "games": 253,
-          "winRate": 44.66
-        },
-        {
-          "opp": "berbers",
-          "games": 435,
-          "winRate": 44.6
-        }
-      ],
-      "mega_random": [
-        {
-          "opp": "vietnamese",
-          "games": 206,
-          "winRate": 45.15
-        }
-      ]
-    },
-    "cumans": {
-      "arabia": [
-        {
-          "opp": "vietnamese",
-          "games": 231,
-          "winRate": 52.81
-        },
-        {
-          "opp": "aztecs",
-          "games": 205,
-          "winRate": 47.8
-        }
-      ]
-    },
-    "spanish": {
-      "arabia": [
-        {
-          "opp": "berbers",
-          "games": 355,
-          "winRate": 53.24
-        },
-        {
-          "opp": "vietnamese",
-          "games": 410,
-          "winRate": 51.22
-        },
-        {
-          "opp": "japanese",
-          "games": 206,
-          "winRate": 50.97
-        },
-        {
-          "opp": "aztecs",
-          "games": 367,
-          "winRate": 50.95
-        },
-        {
-          "opp": "bulgarians",
-          "games": 283,
-          "winRate": 47.7
-        },
-        {
-          "opp": "portuguese",
-          "games": 202,
-          "winRate": 45.54
-        },
-        {
-          "opp": "romans",
-          "games": 255,
-          "winRate": 45.49
-        }
-      ]
-    },
-    "italians": {
-      "arabia": [
-        {
-          "opp": "berbers",
-          "games": 237,
-          "winRate": 49.79
-        },
-        {
-          "opp": "japanese",
-          "games": 200,
-          "winRate": 48.5
-        },
-        {
-          "opp": "vietnamese",
-          "games": 315,
-          "winRate": 47.94
-        },
-        {
-          "opp": "aztecs",
-          "games": 303,
-          "winRate": 42.57
-        }
-      ],
-      "african_clearing": [
-        {
-          "opp": "vietnamese",
-          "games": 237,
-          "winRate": 56.54
-        }
-      ]
-    },
-    "saracens": {
-      "arabia": [
-        {
-          "opp": "aztecs",
-          "games": 299,
-          "winRate": 51.17
-        },
-        {
-          "opp": "vietnamese",
-          "games": 273,
-          "winRate": 47.99
-        },
-        {
-          "opp": "berbers",
-          "games": 251,
-          "winRate": 47.01
-        },
-        {
-          "opp": "bulgarians",
-          "games": 203,
-          "winRate": 46.31
-        }
-      ]
-    },
-    "vikings": {
-      "arabia": [
-        {
-          "opp": "vietnamese",
-          "games": 307,
-          "winRate": 51.79
-        },
-        {
-          "opp": "bulgarians",
-          "games": 200,
-          "winRate": 48.5
-        },
-        {
-          "opp": "berbers",
+          "opp": "ethiopians",
           "games": 204,
-          "winRate": 45.59
-        },
-        {
-          "opp": "aztecs",
-          "games": 237,
-          "winRate": 43.04
+          "winRate": 43.63
         }
       ]
     },
-    "japanese": {
-      "arena": [
-        {
-          "opp": "aztecs",
-          "games": 284,
-          "winRate": 45.77
-        },
-        {
-          "opp": "bohemians",
-          "games": 204,
-          "winRate": 42.16
-        }
-      ],
+    "ethiopians": {
       "arabia": [
         {
-          "opp": "bohemians",
-          "games": 225,
-          "winRate": 52.89
-        },
-        {
-          "opp": "italians",
-          "games": 200,
-          "winRate": 52.5
-        },
-        {
-          "opp": "vietnamese",
-          "games": 375,
-          "winRate": 50.4
-        },
-        {
-          "opp": "spanish",
-          "games": 206,
-          "winRate": 49.51
-        },
-        {
-          "opp": "aztecs",
-          "games": 413,
-          "winRate": 47.94
-        },
-        {
-          "opp": "berbers",
-          "games": 271,
-          "winRate": 43.91
-        },
-        {
-          "opp": "bulgarians",
-          "games": 263,
-          "winRate": 43.73
-        },
-        {
-          "opp": "portuguese",
-          "games": 238,
-          "winRate": 43.7
-        },
-        {
-          "opp": "romans",
-          "games": 233,
-          "winRate": 43.35
-        }
-      ],
-      "mega_random": [
-        {
-          "opp": "aztecs",
-          "games": 219,
-          "winRate": 50.68
+          "opp": "magyars",
+          "games": 204,
+          "winRate": 56.37
         }
       ]
     },
-    "bohemians": {
-      "arena": [
-        {
-          "opp": "japanese",
-          "games": 204,
-          "winRate": 57.84
-        },
-        {
-          "opp": "aztecs",
-          "games": 245,
-          "winRate": 54.69
-        },
-        {
-          "opp": "vietnamese",
-          "games": 201,
-          "winRate": 52.74
-        },
-        {
-          "opp": "gurjaras",
-          "games": 233,
-          "winRate": 50.21
-        },
-        {
-          "opp": "teutons",
-          "games": 204,
-          "winRate": 47.55
-        }
-      ],
-      "arabia": [
-        {
-          "opp": "romans",
-          "games": 212,
-          "winRate": 51.42
-        },
-        {
-          "opp": "aztecs",
-          "games": 360,
-          "winRate": 51.11
-        },
-        {
-          "opp": "vietnamese",
-          "games": 326,
-          "winRate": 49.39
-        },
-        {
-          "opp": "japanese",
-          "games": 225,
-          "winRate": 48.89
-        },
-        {
-          "opp": "bulgarians",
-          "games": 230,
-          "winRate": 46.52
-        },
-        {
-          "opp": "berbers",
-          "games": 236,
-          "winRate": 40.25
-        }
-      ],
-      "mega_random": [
-        {
-          "opp": "aztecs",
-          "games": 200,
-          "winRate": 53
-        }
-      ]
-    },
-    "malians": {
+    "franks": {
       "arabia": [
         {
           "opp": "vietnamese",
-          "games": 306,
-          "winRate": 54.25
-        },
-        {
-          "opp": "romans",
-          "games": 203,
-          "winRate": 53.69
-        },
-        {
-          "opp": "aztecs",
-          "games": 326,
-          "winRate": 52.15
-        },
-        {
-          "opp": "berbers",
           "games": 279,
-          "winRate": 48.75
+          "winRate": 54.48
         },
         {
-          "opp": "bulgarians",
-          "games": 213,
-          "winRate": 47.42
+          "opp": "mongols",
+          "games": 355,
+          "winRate": 50.99
+        },
+        {
+          "opp": "magyars",
+          "games": 300,
+          "winRate": 47.33
+        },
+        {
+          "opp": "persians",
+          "games": 200,
+          "winRate": 43
         }
       ]
     },
-    "burmese": {
+    "persians": {
       "arabia": [
         {
-          "opp": "berbers",
-          "games": 211,
-          "winRate": 56.4
+          "opp": "franks",
+          "games": 200,
+          "winRate": 57
         },
         {
-          "opp": "vietnamese",
+          "opp": "mongols",
+          "games": 227,
+          "winRate": 56.83
+        },
+        {
+          "opp": "magyars",
           "games": 224,
-          "winRate": 50.89
-        },
-        {
-          "opp": "aztecs",
-          "games": 253,
-          "winRate": 46.25
-        }
-      ]
-    },
-    "lithuanians": {
-      "arabia": [
-        {
-          "opp": "vietnamese",
-          "games": 236,
-          "winRate": 55.08
-        },
-        {
-          "opp": "aztecs",
-          "games": 217,
-          "winRate": 52.07
+          "winRate": 49.55
         }
       ]
     },
     "mongols": {
       "arabia": [
         {
-          "opp": "vietnamese",
-          "games": 213,
-          "winRate": 50.23
-        },
-        {
-          "opp": "aztecs",
-          "games": 210,
-          "winRate": 48.1
-        }
-      ]
-    },
-    "bengalis": {
-      "arabia": [
-        {
-          "opp": "aztecs",
-          "games": 303,
-          "winRate": 54.79
-        },
-        {
-          "opp": "berbers",
-          "games": 206,
-          "winRate": 40.78
+          "opp": "magyars",
+          "games": 380,
+          "winRate": 51.05
         },
         {
           "opp": "vietnamese",
-          "games": 275,
-          "winRate": 37.45
-        }
-      ],
-      "arena": [
-        {
-          "opp": "aztecs",
-          "games": 210,
-          "winRate": 56.19
-        }
-      ]
-    },
-    "gurjaras": {
-      "arena": [
-        {
-          "opp": "aztecs",
-          "games": 218,
-          "winRate": 58.26
+          "games": 277,
+          "winRate": 50.9
         },
         {
-          "opp": "bohemians",
-          "games": 233,
-          "winRate": 49.79
-        }
-      ],
-      "arabia": [
-        {
-          "opp": "aztecs",
-          "games": 226,
-          "winRate": 46.46
-        }
-      ]
-    },
-    "chinese": {
-      "arabia": [
-        {
-          "opp": "aztecs",
-          "games": 251,
-          "winRate": 54.98
+          "opp": "franks",
+          "games": 355,
+          "winRate": 49.01
         },
         {
-          "opp": "vietnamese",
-          "games": 225,
-          "winRate": 41.78
+          "opp": "persians",
+          "games": 227,
+          "winRate": 43.17
         }
       ]
     },
-    "sicilians": {
+    "vietnamese": {
       "arabia": [
         {
-          "opp": "aztecs",
-          "games": 220,
-          "winRate": 51.82
-        }
-      ]
-    },
-    "incas": {
-      "arabia": [
-        {
-          "opp": "vietnamese",
-          "games": 240,
-          "winRate": 51.67
-        }
-      ]
-    },
-    "huns": {
-      "arabia": [
-        {
-          "opp": "vietnamese",
-          "games": 231,
-          "winRate": 49.35
+          "opp": "mongols",
+          "games": 277,
+          "winRate": 49.1
         },
         {
-          "opp": "aztecs",
-          "games": 239,
-          "winRate": 47.28
+          "opp": "magyars",
+          "games": 258,
+          "winRate": 48.84
+        },
+        {
+          "opp": "franks",
+          "games": 279,
+          "winRate": 45.52
         }
       ]
     }

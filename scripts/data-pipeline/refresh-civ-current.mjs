@@ -2,24 +2,26 @@
 // scripts/data-pipeline/refresh-civ-current.mjs
 //
 // Refresh the 1v1 civ stats in civ-meta.json with the CURRENT self-collected
-// World's Edge crawl (data-cache/relic-patched/matches.ndjson). aggregate-rich
-// built these from the frozen aoestats archive; this recomputes the 1v1
-// overall (winRate, ci95, tier, playRate), byElo, and byMap from the live
-// ladder so the default civ view is current. byPatch (already crawl-derived)
-// and the team ladder (aoestats; the crawl is 1v1) are preserved.
+// World's Edge crawl (all crawl sources via lib/crawl-stream.mjs, last
+// CURRENT_WINDOW_DAYS, ranked-RM 1v1 only). aggregate-rich built these from
+// the frozen aoestats archive; this recomputes the 1v1 overall (winRate,
+// ci95, tier, playRate), byElo, and byMap from the live ladder so the default
+// civ view is current. byPatch (already crawl-derived) and the team ladder
+// (refresh-team-current) are preserved. Civ ids are the Relic API space
+// (relic-civ-id-map.json); per-map slices use replay-parsed map truth only
+// (the API mapname is wrong for most matches).
 //
-// Runs LOCALLY (reads the desktop crawl backup + civ-meta.json + map-meta.json).
+// Runs on the box that holds data-cache (the VM).
 //   node scripts/data-pipeline/refresh-civ-current.mjs
 
-import { createReadStream, readFileSync, writeFileSync } from "node:fs";
-import { createInterface } from "node:readline";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { canonMap, eloBucket } from "./lib/buckets.mjs";
+import { eloBucket } from "./lib/buckets.mjs";
+import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
+import { canonToKeyIndex, isRanked1v1, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
 
-const IN = path.resolve("data-cache/relic-patched/matches.ndjson");
 const META = path.resolve("src/data/civ-meta.json");
 
-const civIdMap = JSON.parse(readFileSync(path.resolve("src/data/civ-id-map.json"), "utf8"));
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 const meta = JSON.parse(readFileSync(META, "utf8"));
 const mapMeta = JSON.parse(readFileSync(path.resolve("src/data/map-meta.json"), "utf8"));
@@ -37,28 +39,21 @@ function wilson(wins, n, z = 1.96) {
 const MIN_ELO = 100; // per-bucket gate (crawl is thinner at the top than aoestats)
 const MIN_MAP = 200; // per-map gate
 
-// crawl map filename → map-meta key (so byMap keys stay consistent with map pages)
-const canonToKey = {};
-for (const [k, v] of Object.entries(mapMeta.maps)) {
-  const cc = canonMap(k);
-  const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
-  if (!canonToKey[cc] || g > canonToKey[cc].g) canonToKey[cc] = { key: k, g };
-}
-const mapKeyFor = (raw) => canonToKey[canonMap(raw)]?.key ?? null; // canonMap strips the extension itself
+// replay-truth map canon → map-meta key (so byMap keys stay consistent with map pages)
+const canonToKey = canonToKeyIndex(mapMeta);
+const mapTruth = await loadReplayMapTruth();
 
 // --- aggregate the crawl per civ ---
 const civ = {};
 let totalApp = 0;
 let skippedNullElo = 0;
-const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
-for await (const line of rl) {
-  if (!line.trim()) continue;
-  let m;
-  try { m = JSON.parse(line); } catch { continue; }
-  const mapKey = m.map_raw ? mapKeyFor(m.map_raw) : null;
+for await (const m of crawlRecords({ recentDays: CURRENT_WINDOW_DAYS })) {
+  if (!isRanked1v1(m)) continue;
+  const truth = mapTruth.get(m.match_id);
+  const mapKey = truth ? (canonToKey[truth.canon]?.key ?? null) : null;
   for (const pl of m.players ?? []) {
-    const slug = civIdMap[String(pl.civ_id)];
-    if (!slug || !guideCivs.has(slug)) continue;
+    const slug = relicCivSlug(pl.civ_id);
+    if (!guideCivs.has(slug)) continue;
     totalApp++;
     const c = (civ[slug] ??= { g: 0, w: 0, byElo: {}, byMap: {} });
     const won = pl.won ? 1 : 0;
@@ -72,8 +67,11 @@ for await (const line of rl) {
 // --- splice current 1v1 stats into civ-meta ---
 let updated = 0;
 for (const [slug, c] of Object.entries(civ)) {
-  const o = meta.civs[slug]?.["1v1"];
-  if (!o || c.g < 500) continue; // need a usable civ sample
+  const entry = meta.civs[slug];
+  if (!entry || c.g < 500) continue; // need a usable civ sample
+  // Civs missing from the frozen aoestats archive (post-freeze DLC: muisca,
+  // mapuche, tupi, …) have a null 1v1 block — the crawl IS their only source.
+  const o = (entry["1v1"] ??= { byPatch: {}, openings: [], ageUp: null });
   const [lo, hi] = wilson(c.w, c.g);
   o.games = c.g;
   o.winRate = pct(c.w / c.g);
@@ -83,14 +81,17 @@ for (const [slug, c] of Object.entries(civ)) {
   o.byElo = Object.fromEntries(
     Object.entries(c.byElo).filter(([, v]) => v.g >= MIN_ELO).map(([b, v]) => [b, { games: v.g, winRate: pct(v.w / v.g) }]),
   );
-  o.byMap = Object.fromEntries(
+  // byMap is limited to replay-VERIFIED matches; when coverage is too thin to
+  // say anything, PRESERVE the previous slices rather than wiping the chart.
+  const byMap = Object.fromEntries(
     Object.entries(c.byMap).filter(([, v]) => v.g >= MIN_MAP).map(([k, v]) => [k, { games: v.g, winRate: pct(v.w / v.g) }]),
   );
+  if (Object.keys(byMap).length) o.byMap = byMap;
   updated++;
 }
 
 meta.appearances = { ...(meta.appearances ?? {}), "1v1": totalApp };
-meta.source = "self-collected World's Edge live ladder (1v1, current) + aoestats archive (team)";
+meta.source = `self-collected World's Edge live ladder (ranked RM, last ${CURRENT_WINDOW_DAYS} days; maps replay-verified)`;
 meta.generated = new Date().toISOString().slice(0, 10);
 writeFileSync(META, `${JSON.stringify(meta, null, 2)}\n`, "utf8");
 console.log(`refresh-civ-current: ${totalApp} crawl appearances · ${updated} civs got current 1v1 overall/byElo/byMap · ${skippedNullElo} null-elo dropped → ${META}`);

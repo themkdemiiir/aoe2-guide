@@ -352,6 +352,21 @@ fn resolve_profile(flag: Option<i64>) -> Result<i64> {
     }
 }
 
+/// Relic API civilization_id -> slug. The API uses its OWN civ id space (NOT the
+/// replay/game space that data/civs.tsv + analyze use) — see data/relic-civs.tsv.
+fn load_relic_civs() -> std::collections::HashMap<u32, String> {
+    include_str!("../data/relic-civs.tsv")
+        .lines()
+        .filter(|l| !l.trim().is_empty() && !l.starts_with('#'))
+        .filter_map(|l| {
+            let mut it = l.splitn(2, '\t');
+            let id = it.next()?.trim().parse().ok()?;
+            let slug = it.next()?.trim().to_string();
+            Some((id, slug))
+        })
+        .collect()
+}
+
 /// Human "how long ago" from a seconds delta (no chrono dep — keep it light).
 fn ago(secs: i64) -> String {
     let s = secs.max(0);
@@ -379,22 +394,28 @@ fn cmd_recent(args: &[String]) -> Result<()> {
     if matches.is_empty() {
         bail!("recent: the API returned no recent ranked matches for profile {profile}");
     }
-    let civs = replay_rs::analyze::data::load_civs();
+    // Civ ids from the API are Relic's OWN space — never data::load_civs() (game space).
+    let civs = load_relic_civs();
     let now = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)?.as_secs() as i64;
     println!(
         "recent ranked games — {} (profile {profile})",
         matches[0].my_alias.as_deref().unwrap_or("?")
     );
-    println!("  {:<12} {:>8}  {:<20} {:<5} {:<14} {:>5}  {}",
-        "match_id", "when", "map", "mode", "civ", "elo", "result");
+    // No map column: the API's per-match mapname is wrong for most matches
+    // (measured 43% agreement vs replays) — `analyze` reports the real map.
+    println!("  {:<12} {:>8}  {:<5} {:<14} {:>5}  {}",
+        "match_id", "when", "mode", "civ", "elo", "result");
     for m in matches.iter().take(limit.unwrap_or(usize::MAX)) {
         // 2 members = 1v1; 4/6/8 = 2v2/3v3/4v4. source: stream-relic.mjs keepBySize.
         let mode = if m.team_size == 2 { "1v1".to_string() } else { format!("{0}v{0}", m.team_size / 2) };
-        let civ = m.my_civ_id.and_then(|id| civs.get(&id).cloned()).unwrap_or_else(|| "?".into());
+        let civ = match m.my_civ_id {
+            Some(id) => civs.get(&id).cloned().unwrap_or_else(|| format!("?id{id}")),
+            None => "?".into(),
+        };
         let result = match m.my_won { Some(true) => "win", Some(false) => "loss", None => "?" };
-        println!("  {:<12} {:>8}  {:<20} {:<5} {:<14} {:>5}  {}",
-            m.match_id, ago(now - m.completed_unix), m.map_raw.as_deref().unwrap_or("?"),
+        println!("  {:<12} {:>8}  {:<5} {:<14} {:>5}  {}",
+            m.match_id, ago(now - m.completed_unix),
             mode, civ, m.my_rating.map(|r| r.to_string()).unwrap_or_else(|| "-".into()), result);
     }
     println!("\nanalyze one:  replay-rs analyze --match-id <id> --profile-id {profile}");
@@ -434,5 +455,20 @@ mod tests {
         assert!(matches!(parse_latest(Some("3")), Ok(Latest::N(3))));
         assert!(matches!(parse_latest(Some("all")), Ok(Latest::All)));
         assert!(parse_latest(Some("banana")).is_err());
+    }
+
+    #[test]
+    fn relic_civs_use_the_api_id_space() {
+        let c = load_relic_civs();
+        // Ground truth from match 486659810 (the user played Persians; API said 32):
+        assert_eq!(c.get(&32).map(String::as_str), Some("persians"));
+        assert_eq!(c.get(&0).map(String::as_str), Some("armenians"));
+        assert_eq!(c.get(&21).map(String::as_str), Some("hindustanis")); // API name "Indians"
+        // 53/54 were jurchens/khitans only during 2025-05..08 — absent today:
+        assert!(c.get(&53).is_none());
+        assert!(c.get(&54).is_none());
+        // The two spaces genuinely differ (kills any "same table" regression):
+        let game = replay_rs::analyze::data::load_civs();
+        assert_ne!(c.get(&32), game.get(&32)); // relic 32=persians, game 32=bulgarians
     }
 }

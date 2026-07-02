@@ -12,16 +12,25 @@
 // Crawl rows have no replay-derived fields, so opening/age timings land NULL and
 // source='crawl', patch=gamemod_id — matching how the merged build wrote crawl rows.
 //
+// Correctness gates (2026-07): only ranked-RM matchtypes (6=1v1, 7/8/9=team —
+// the record's own `ladder` field; the shard DIRECTORY only reflects player
+// count and also contains EW/DM/quickplay); only the current Relic civ-id-space
+// era; civ mapped via relic_civmap (regenerated from the committed
+// src/data/relic-civ-id-map.json every run) with a FAIL-LOUD error() on any
+// unmapped id; map is NULL — the API mapname is wrong for most matches, replay
+// parsing is the only map truth (backfilled separately).
+//
 // Runs ON THE VM (needs the duckdb binary + the .duckdb file unlocked — sweep.sh
 // stops the UI first). Usage:
 //   node scripts/data-pipeline/ingest-stream.mjs
 //   node scripts/data-pipeline/ingest-stream.mjs --db <path> --stream-dir <dir> --duckdb <bin>
 
-import { readdirSync, mkdirSync, renameSync, writeFileSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
-import path from "node:path";
+import { existsSync, mkdirSync, readdirSync, renameSync, writeFileSync } from "node:fs";
 import os from "node:os";
+import path from "node:path";
 import { eloCaseSql } from "./lib/buckets.mjs";
+import { ERA_START, relicCivmapSql } from "./lib/relic-map.mjs";
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((acc, a, i, arr) => {
@@ -43,44 +52,49 @@ function shardsFor(ladder) {
 }
 const sqlList = (files) => `[${files.map((f) => `'${f}'`).join(", ")}]`;
 
-const ladders = [
-  { name: "1v1", files: shardsFor("1v1"), teamExpr: "CAST(NULL AS BIGINT)" },
-  { name: "team", files: shardsFor("team"), teamExpr: "team_size" },
-].filter((l) => l.files.length);
-
-if (!ladders.length) { console.log("ingest-stream: no new shards — nothing to ingest."); process.exit(0); }
-
-const rawBranches = ladders
-  .map((l) => `SELECT '${l.name}' AS ladder, match_id, completed, gamemod_id, map_raw, ${l.teamExpr} AS team_size, players
-       FROM read_json(${sqlList(l.files)}, format='newline_delimited')`)
-  .join("\n  UNION ALL BY NAME\n  ");
+const byDir = { "1v1": shardsFor("1v1"), team: shardsFor("team") };
+const files = [...byDir["1v1"], ...byDir.team];
+if (!files.length) { console.log("ingest-stream: no new shards — nothing to ingest."); process.exit(0); }
 
 // QUALIFY drops intra-batch dups (same match across two sweep shards); the NOT IN
-// drops matches already in games (from aoestats or an earlier crawl).
-// The inline map-raw -> map regex below mirrors canonMap()/build-duckdb.sql.
+// drops matches already in games (from aoestats or an earlier crawl). The ladder
+// comes from the record's matchtype, NOT the shard directory. The exclusion
+// counts are printed so gate drops are never silent in the cron log.
 const sql = `
 .mode box
+${relicCivmapSql()}
 SELECT count(*) AS games_before FROM games;
+CREATE TEMP TABLE raw_batch AS
+  SELECT match_id, completed, gamemod_id, ladder AS matchtype, team_size, players
+  FROM read_json(${sqlList(files)}, format='newline_delimited', union_by_name=true);
+SELECT count(DISTINCT match_id) FILTER (matchtype IS NULL) AS dropped_null_matchtype,
+       count(DISTINCT match_id) FILTER (matchtype IS NOT NULL AND matchtype NOT IN (6,7,8,9)) AS dropped_non_rm,
+       count(DISTINCT match_id) FILTER (matchtype IN (6,7,8,9) AND completed < ${ERA_START}) AS dropped_pre_era
+FROM raw_batch;
 INSERT INTO games
 WITH raw AS (
-  ${rawBranches}
+  SELECT * FROM raw_batch
 ),
 fresh AS (
   SELECT * FROM raw
-  WHERE match_id NOT IN (SELECT match_id FROM games)
+  WHERE matchtype IN (6, 7, 8, 9)          -- ranked RM only (6=1v1, 7/8/9=team)
+    AND completed >= ${ERA_START}           -- current Relic civ-id-space era only
+    AND match_id NOT IN (SELECT match_id FROM games)
   QUALIFY row_number() OVER (PARTITION BY match_id ORDER BY completed) = 1
 ),
-flat AS (SELECT ladder, match_id, completed, gamemod_id, map_raw, team_size, UNNEST(players) AS p FROM fresh)
+flat AS (SELECT matchtype, match_id, completed, gamemod_id, team_size, UNNEST(players) AS p FROM fresh)
 SELECT
   'crawl' AS source,
-  f.ladder,
+  CASE WHEN f.matchtype = 6 THEN '1v1' ELSE 'team' END AS ladder,
   f.match_id,
   CAST(to_timestamp(f.completed) AS TIMESTAMP) AS played_at,
   strftime(to_timestamp(f.completed), '%Y-%m') AS month,
-  regexp_replace(lower(regexp_replace(f.map_raw, '\\.[a-z0-9]+$', '')), '[^a-z0-9]', '', 'g') AS map,
+  CAST(NULL AS VARCHAR) AS map,            -- API mapname is untrustworthy; replay backfill only
   COALESCE(f.team_size, 2) AS team_size,
   f.p.profile_id AS profile_id,
-  cm.civ_slug AS civ,
+  CASE WHEN cm.civ_slug IS NULL
+       THEN error('ingest-stream: unmapped Relic civ id ' || COALESCE(CAST(f.p.civ_id AS VARCHAR), 'NULL') || ' — a DLC likely shifted the API id space; re-derive src/data/relic-civ-id-map.json')
+       ELSE cm.civ_slug END AS civ,
   f.p.rating AS rating,
   ${ELO_CASE} AS elo_bucket,
   f.p.won AS won,
@@ -89,26 +103,31 @@ SELECT
   CAST(NULL AS DOUBLE) AS castle_t,
   CAST(NULL AS DOUBLE) AS imperial_t,
   CAST(f.gamemod_id AS VARCHAR) AS patch
-FROM flat f LEFT JOIN civmap cm ON cm.civ_id = f.p.civ_id;
+FROM flat f LEFT JOIN relic_civmap cm ON cm.civ_id = f.p.civ_id
+-- a player row with NO civilization_id is a malformed API record: drop the ROW
+-- (matches lib/relic-map.mjs relicCivSlug(null) returning null). The error()
+-- above then fires only for unknown NUMERIC ids — a real id-space shift —
+-- instead of one poison record wedging the cron ingest forever.
+WHERE f.p.civ_id IS NOT NULL;
 SELECT count(*) AS games_after FROM games;
 `;
 
 const sqlPath = path.join(os.tmpdir(), `ingest-stream-${process.pid}.sql`);
 writeFileSync(sqlPath, sql, "utf8");
 
-console.log(`ingest-stream: ingesting ${ladders.map((l) => `${l.name}:${l.files.length}`).join(", ")} shard(s) into ${DB}`);
+console.log(`ingest-stream: ingesting ${Object.entries(byDir).map(([d, fs]) => `${d}:${fs.length}`).join(", ")} shard(s) into ${DB}`);
 const out = execFileSync(DUCKDB, [DB, "-f", sqlPath], { encoding: "utf8" });
 process.stdout.write(out);
 
-// archive ingested shards GZIPPED — they're redundant with DuckDB, so keep them
-// only as a compact backup (~10x smaller). Safe to purge relic-stream/ingested/
-// anytime the disk gets tight; the data already lives in the games table.
-for (const l of ladders) {
-  const dest = path.join(STREAM_DIR, "ingested", l.name);
+// archive ingested shards GZIPPED — the raw records (incl. non-RM matchtypes we
+// don't ingest) stay recoverable here; safe to purge if the disk gets tight.
+for (const [dir, fs] of Object.entries(byDir)) {
+  if (!fs.length) continue;
+  const dest = path.join(STREAM_DIR, "ingested", dir);
   mkdirSync(dest, { recursive: true });
-  for (const f of l.files) {
+  for (const f of fs) {
     execFileSync("gzip", ["-f", f]);                                  // f -> f.gz in place
     renameSync(`${f}.gz`, path.join(dest, `${path.basename(f)}.gz`));
   }
 }
-console.log(`ingest-stream: archived ${ladders.reduce((n, l) => n + l.files.length, 0)} shard(s) gzipped → relic-stream/ingested/`);
+console.log(`ingest-stream: archived ${files.length} shard(s) gzipped → relic-stream/ingested/`);

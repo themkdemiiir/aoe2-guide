@@ -2,27 +2,23 @@
 // scripts/data-pipeline/aggregate-patches.mjs
 //
 // Build a REAL, date-aligned patch axis from the self-collected World's Edge
-// crawl (data-cache/relic-patched/matches.ndjson). The API exposes no build
-// number, but `gamemod_id` is a clean patch proxy — each maps to a tight date
-// range (378→Aug 2020 … 1797→Jun 2026). We aggregate per civ × gamemod (→ a
-// dated "patch"), then splice that byPatch into civ-meta.json, replacing the
-// frozen aoestats build-number patches. Overall / byElo / byMap stay aoestats.
+// crawl (all sources via lib/crawl-stream.mjs, ranked-RM 1v1, whole current
+// id-space era). The API exposes no build number, but months are a clean dated
+// axis (gamemod_id flips too often). We aggregate per civ × month, then splice
+// that byPatch into civ-meta.json, replacing the frozen aoestats build-number
+// patches. Overall / byElo / byMap stay whatever the refresh scripts wrote.
+// Civ ids are the Relic API space (relic-civ-id-map.json).
 //
-// Runs ON THE BOX (reads the crawl ndjson + civ-meta.json there).
-//   node scripts/data-pipeline/aggregate-patches.mjs [--in data-cache/relic-patched/matches.ndjson]
+// Runs on the box that holds data-cache (the VM).
+//   node scripts/data-pipeline/aggregate-patches.mjs
 
-import { readFileSync, writeFileSync, createReadStream } from "node:fs";
-import { createInterface } from "node:readline";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { crawlRecords } from "./lib/crawl-stream.mjs";
+import { isRanked1v1, relicCivSlug } from "./lib/relic-map.mjs";
 
-const args = Object.fromEntries(process.argv.slice(2).reduce((a, x, i, r) => {
-  if (x.startsWith("--")) a.push([x.slice(2), r[i + 1]?.startsWith("--") ? true : r[i + 1] ?? true]);
-  return a;
-}, []));
-const IN = path.resolve(args.in ?? "data-cache/relic-patched/matches.ndjson");
 const META = path.resolve("src/data/civ-meta.json");
 
-const civIdMap = JSON.parse(readFileSync(path.resolve("src/data/civ-id-map.json"), "utf8"));
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 
 const pct = (x) => +(x * 100).toFixed(2);
@@ -40,19 +36,15 @@ const monthLabel = (key) => { const [y, mo] = key.split("-"); return `${MONTHS[+
 const gm = {}; // monthKey -> { matches }
 const civPatch = {}; // slug -> monthKey -> { g, w }
 
-const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
 let lines = 0;
-for await (const line of rl) {
-  if (!line.trim()) continue;
-  let m;
-  try { m = JSON.parse(line); } catch { continue; }
-  if (!m.completed) continue;
+for await (const m of crawlRecords()) {
+  if (!isRanked1v1(m)) continue;
   const g = monthKey(m.completed);
   lines++;
   (gm[g] ??= { matches: 0 }).matches++;
   for (const pl of m.players ?? []) {
-    const slug = civIdMap[String(pl.civ_id)];
-    if (!slug || !guideCivs.has(slug)) continue;
+    const slug = relicCivSlug(pl.civ_id);
+    if (!guideCivs.has(slug)) continue;
     const cp = ((civPatch[slug] ??= {})[g] ??= { g: 0, w: 0 });
     cp.g++;
     if (pl.won) cp.w++;
@@ -81,7 +73,7 @@ for (const [slug, m] of Object.entries(meta.civs)) {
 }
 
 meta.patches = patches; // now [{patch:gamemod, label:"Jun 2026", matches}]
-meta.patchSource = "self-collected World's Edge crawl (gamemod_id as a dated patch axis)";
+meta.patchSource = "self-collected World's Edge crawl (ranked RM 1v1, monthly dated patch axis)";
 meta.generated = new Date().toISOString().slice(0, 10);
 writeFileSync(META, `${JSON.stringify(meta, null, 2)}\n`, "utf8");
 

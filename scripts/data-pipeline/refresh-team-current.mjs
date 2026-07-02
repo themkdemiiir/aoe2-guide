@@ -2,26 +2,28 @@
 // scripts/data-pipeline/refresh-team-current.mjs
 //
 // Refresh the TEAM ladder in civ-meta.json + map-meta.json with the CURRENT
-// self-collected World's Edge TEAM RM crawl (data-cache/relic-team/matches.ndjson,
-// collected via `collect-relic --team`). The team ladder was frozen aoestats; this
-// recomputes the current team civ overall (winRate, ci95, tier, playRate), byElo,
-// byMap, and the per-map team civ rankings. Where the crawl is too thin for a map
-// (or a bucket), the frozen aoestats value is PRESERVED — never replaced with nothing.
-// byPatch / openings / ageUp on the civ team block are left as-is (not in the crawl).
+// self-collected World's Edge TEAM RM crawl (all crawl sources via
+// lib/crawl-stream.mjs, last CURRENT_WINDOW_DAYS, ranked-RM team only). The
+// team ladder was frozen aoestats; this recomputes the current team civ
+// overall (winRate, ci95, tier, playRate), byElo, byMap, and the per-map team
+// civ rankings. Where the crawl is too thin for a map (or a bucket), the
+// frozen aoestats value is PRESERVED — never replaced with nothing.
+// byPatch / openings / ageUp on the civ team block are left as-is (not in the
+// crawl). Civ ids are the Relic API space (relic-civ-id-map.json); per-map
+// slices use replay-parsed map truth only (the API mapname is junk).
 //
-// Runs LOCALLY (reads the desktop team-crawl + both meta files).
+// Runs on the box that holds data-cache (the VM).
 //   node scripts/data-pipeline/refresh-team-current.mjs
 
-import { createReadStream, readFileSync, writeFileSync } from "node:fs";
-import { createInterface } from "node:readline";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { canonMap, eloBucket } from "./lib/buckets.mjs";
+import { eloBucket } from "./lib/buckets.mjs";
+import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
+import { canonToKeyIndex, isRankedTeam, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
 
-const IN = path.resolve("data-cache/relic-team/matches.ndjson");
 const CIV_META = path.resolve("src/data/civ-meta.json");
 const MAP_META = path.resolve("src/data/map-meta.json");
 
-const civIdMap = JSON.parse(readFileSync(path.resolve("src/data/civ-id-map.json"), "utf8"));
 const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
 const civMeta = JSON.parse(readFileSync(CIV_META, "utf8"));
 const mapMeta = JSON.parse(readFileSync(MAP_META, "utf8"));
@@ -44,30 +46,23 @@ const MIN_ALL = 200; // per-civ gate inside a map's "all" bucket
 const MIN_BUCKET = 60; // per-civ gate inside a map's single elo bucket
 const MIN_RANKED_CIVS = 10; // a map's team "all" bucket needs this many civs to overlay
 
-// crawl map filename → map-meta key (keep byMap keys consistent with the map pages)
-const canonToKey = {};
-for (const [k, v] of Object.entries(mapMeta.maps)) {
-  const cc = canonMap(k);
-  const g = (v.games?.["1v1"] ?? 0) + (v.games?.team ?? 0);
-  if (!canonToKey[cc] || g > canonToKey[cc].g) canonToKey[cc] = { key: k, g };
-}
-const mapKeyFor = (raw) => canonToKey[canonMap(raw)]?.key ?? null; // canonMap strips the extension itself
+// replay-truth map canon → map-meta key (keep byMap keys consistent with the map pages)
+const canonToKey = canonToKeyIndex(mapMeta);
+const mapTruth = await loadReplayMapTruth();
 
 // --- one streaming pass: aggregate per-civ AND per-map×bucket×civ ---
 const civ = {}; // slug -> { g, w, byElo, byMap }
 const mapAgg = {}; // mapKey -> bucket -> slug -> { g, w }
 let totalApp = 0;
 let skippedNullElo = 0;
-const rl = createInterface({ input: createReadStream(IN), crlfDelay: Infinity });
-for await (const line of rl) {
-  if (!line.trim()) continue;
-  let m;
-  try { m = JSON.parse(line); } catch { continue; }
-  const mapKey = m.map_raw ? mapKeyFor(m.map_raw) : null;
+for await (const m of crawlRecords({ recentDays: CURRENT_WINDOW_DAYS })) {
+  if (!isRankedTeam(m)) continue;
+  const truth = mapTruth.get(m.match_id);
+  const mapKey = truth ? (canonToKey[truth.canon]?.key ?? null) : null;
   const mp = mapKey ? (mapAgg[mapKey] ??= {}) : null;
   for (const pl of m.players ?? []) {
-    const slug = civIdMap[String(pl.civ_id)];
-    if (!slug || !guideCivs.has(slug)) continue;
+    const slug = relicCivSlug(pl.civ_id);
+    if (!guideCivs.has(slug)) continue;
     totalApp++;
     const won = pl.won ? 1 : 0;
     const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
@@ -89,8 +84,10 @@ for await (const line of rl) {
 // --- overlay civ-meta team blocks ---
 let civUpdated = 0;
 for (const [slug, c] of Object.entries(civ)) {
-  const o = civMeta.civs[slug]?.team;
-  if (!o || c.g < MIN_CIV) continue; // need a usable team sample; preserve frozen otherwise
+  const entry = civMeta.civs[slug];
+  if (!entry || c.g < MIN_CIV) continue; // need a usable team sample; preserve frozen otherwise
+  // Post-archive-freeze civs have a null team block — create it from the crawl.
+  const o = (entry.team ??= { byPatch: {}, openings: [], ageUp: null });
   const [lo, hi] = wilson(c.w, c.g);
   o.games = c.g;
   o.winRate = pct(c.w / c.g);
@@ -100,9 +97,11 @@ for (const [slug, c] of Object.entries(civ)) {
   o.byElo = Object.fromEntries(
     Object.entries(c.byElo).filter(([, v]) => v.g >= MIN_ELO).map(([bk, v]) => [bk, { games: v.g, winRate: pct(v.w / v.g) }]),
   );
-  o.byMap = Object.fromEntries(
+  // byMap is replay-VERIFIED matches only — preserve previous slices when thin.
+  const byMap = Object.fromEntries(
     Object.entries(c.byMap).filter(([, v]) => v.g >= MIN_CIV_MAP).map(([k, v]) => [k, { games: v.g, winRate: pct(v.w / v.g) }]),
   );
+  if (Object.keys(byMap).length) o.byMap = byMap;
   civUpdated++;
 }
 
@@ -128,9 +127,9 @@ for (const [key, buckets] of Object.entries(mapAgg)) {
 
 civMeta.appearances = { ...(civMeta.appearances ?? {}), team: totalApp };
 const today = new Date().toISOString().slice(0, 10);
-civMeta.source = "self-collected World's Edge live ladder (1v1 + team, current)";
+civMeta.source = `self-collected World's Edge live ladder (ranked RM, last ${CURRENT_WINDOW_DAYS} days; maps replay-verified)`;
 civMeta.generated = today;
-mapMeta.source = "self-collected World's Edge live ladder (1v1 + team, current)";
+mapMeta.source = `self-collected World's Edge live ladder (ranked RM, last ${CURRENT_WINDOW_DAYS} days; maps replay-verified)`;
 mapMeta.generated = today;
 writeFileSync(CIV_META, `${JSON.stringify(civMeta, null, 2)}\n`, "utf8");
 writeFileSync(MAP_META, `${JSON.stringify(mapMeta, null, 2)}\n`, "utf8");

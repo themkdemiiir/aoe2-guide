@@ -172,8 +172,6 @@ struct MatchStat {
     #[serde(default)]
     description: String,
     #[serde(default)]
-    mapname: Option<String>,
-    #[serde(default)]
     matchhistorymember: Vec<MatchMember>,
 }
 
@@ -202,7 +200,9 @@ struct ProfileEntry {
 pub struct RecentMatch {
     pub match_id: i64,
     pub completed_unix: i64,
-    pub map_raw: Option<String>,
+    // NOTE: the API's per-match `mapname` is deliberately NOT surfaced — it is
+    // wrong for most matches (43% agreement vs replays); `analyze` reads the
+    // real map from the replay itself.
     pub team_size: usize,
     pub my_civ_id: Option<u32>,
     pub my_rating: Option<i32>,
@@ -234,7 +234,6 @@ fn normalize_recent(doc: RecentHistoryResponse, profile_id: i64) -> Vec<RecentMa
             RecentMatch {
                 match_id: m.id,
                 completed_unix: m.completiontime,
-                map_raw: m.mapname,
                 team_size: m.matchhistorymember.len(),
                 my_civ_id: me.and_then(|x| x.civilization_id),
                 // source: newrating is the post-game rating; oldrating is the
