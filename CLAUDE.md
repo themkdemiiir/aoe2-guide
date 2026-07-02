@@ -33,6 +33,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 | `pnpm assets:sync` | Refresh AOE2 icons from `SiegeEngineers/aoe2techtree` at the pinned SHA |
 | `pnpm icons:map` | Regenerate `src/data/icon-map.json` from aoc-reference-data |
 | `pnpm import:md <path>` | Promote a raw `md/<type>/<file>.md` source into a scaffolded EN content entry |
+| `pnpm build:wasm` | Rebuild the `/analyzer` WASM engine (needs `wasm-pack` + `rustup target add wasm32-unknown-unknown`; glue → `src/wasm/pkg/`, binary → `public/analyzer/pkg/` — both committed) |
 
 ## Layout map
 
@@ -52,6 +53,8 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 | `scripts/` | sync-assets, build-icon-map, build-civilizations, audit-yaml-translations, check-translations |
 
 **Civ content:** EN+TR text (bonuses, team bonus, unique-tech effects, unique units) is sourced from `aoe2techtree` locale strings via `pnpm build:civilizations` (`scripts/build-civilizations.mjs`). Do not hand-edit the generated YAML fields — re-run the script instead.
+
+**Two civ-id spaces — never conflate them:** `src/data/civ-id-map.json` maps GAME/replay `civ_id`s (used by the analyzer + replay data); `src/data/relic-civ-id-map.json` maps the Relic API's own `civilization_id`s (used by every crawl consumer via `scripts/data-pipeline/lib/relic-map.mjs`). Applying the wrong table silently shuffles every civ label — that was a real June-2026 production bug. Guard tests: `tests/relic-civ-map.test.mjs`.
 
 **Build orders:** steps are verified against the Hera video sources in `md/build-orders/`.
 

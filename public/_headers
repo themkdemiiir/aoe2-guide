@@ -18,6 +18,10 @@
 # Static assets — not content-hashed but stable; 30-day cache with background revalidation.
 /images/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+# Analyzer wasm: 1.4MB, NOT content-hashed (its JS glue IS hashed under /_astro/),
+# so no immutable — a bounded cache keeps deploy-time glue/wasm ABI skew short.
+/analyzer/pkg/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
 /og/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 /og.png

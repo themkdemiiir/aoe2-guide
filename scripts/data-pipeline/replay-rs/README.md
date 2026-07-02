@@ -94,12 +94,23 @@ terminal.
 # uploaded and age out (~2-4 weeks in practice) — unavailable ones are skipped with a warning.
 ```
 
+`recent` maps the API's civ ids through `data/relic-civs.tsv` — the Relic API uses its
+**own civ id space** (see `src/data/relic-civ-id-map.json` provenance), NOT the
+replay/game space of `civs.tsv`. `recent` deliberately has **no map column**: the API's
+per-match `mapname` is wrong for most matches (43% agreement vs replays) — `analyze`
+reports the real map from the replay itself.
+
 With `--latest`, your identity comes from `--profile-id`; `--you` applies only to
 single file/`--match-id` analysis — the two flags conflict otherwise.
 
 The crate is now split into **lib** (`replay_rs`: pure `analyze()` + `config`) and **bin** (all IO
 and orchestration). The JSON `Report` (schema version 1, snake_case enums, `caveats` included) is
-the stable contract that a future WASM build or site consumer can depend on.
+the stable contract the WASM build and site consumers depend on.
+
+**WASM:** all IO-shaped deps are behind the default `cli` feature
+(`cargo build --lib --no-default-features` is the wasm32-clean lib). The site's
+in-browser analyzer is `../replay-wasm` (wasm-bindgen wrapper over
+`replay_rs::analyze`) built with `pnpm build:wasm` and served at `/analyzer`.
 
 It reports age-up times, villagers@Castle, idle-TC, APM, ELO (read straight from the
 replay's PostGame leaderboard — 1v1 ladder 3 / team ladder 4), win/loss (team-aware),
@@ -113,7 +124,9 @@ exact resources (stated in the report footer).
 - `maps.tsv` — map id → name → **family** → notes. Edit the `family` column
   (`open`/`closed` get the role tag; `hybrid`/`water`/`nomad`/`special`/`other` don't).
   Families were classified from the AoE2 Fandom wiki by real flank/pocket structure.
-- `civs.tsv` — civ id → slug (benchmark key). From `src/data/civ-id-map.json`.
+- `civs.tsv` — GAME/replay civ id → slug (benchmark key). From `src/data/civ-id-map.json`.
+- `relic-civs.tsv` — Relic API `civilization_id` → slug (used ONLY by `recent`).
+  From `src/data/relic-civ-id-map.json`; the two id spaces genuinely differ.
 - `costs.json` — unit/building/tech costs for the float estimator. Regenerate:
   `node scripts/data-pipeline/build-costs.mjs` (reads `.cache/aoe2-data/data.json`).
 - `benchmark.json` — age-up median timings, the full **civ × map(slug) × elo_bucket × mode**

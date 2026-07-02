@@ -12,6 +12,23 @@ path = "src/lib.rs"
 [[bin]]
 name = "replay-rs"
 path = "src/main.rs"
+required-features = ["cli"]
+
+# The lib tree (analyze/* + config) is pure — aoe2rec/serde/anyhow only — and is
+# what ../replay-wasm compiles to wasm32. Everything IO-shaped hides behind `cli`:
+#   cargo build                               → CLI as before (default)
+#   cargo build --lib --no-default-features   → the WASM-clean lib alone
+[features]
+default = ["cli"]
+cli = [
+  "dep:reqwest",
+  "dep:rusqlite",
+  "dep:rayon",
+  "dep:bytes",
+  "dep:flate2",
+  "dep:owo-colors",
+  "dep:comfy-table",
+]
 
 [dependencies]
 # In-process replay parser (vendored; never committed — see .gitignore). We depend
@@ -21,14 +38,14 @@ aoe2rec = { path = "vendor/aoe2rec/crates/aoe2rec" }
 # HTTP: rustls (NOT openssl), blocking client, transparent gzip for the API JSON.
 # The replay blobs are gzip-framed too but we decompress those ourselves so we can
 # feed the raw .aoe2record bytes to aoe2rec.
-reqwest = { version = "0.12", default-features = false, features = ["blocking", "gzip", "rustls-tls"] }
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "gzip", "rustls-tls"], optional = true }
 
 # Resumable manifest (same schema/statuses as manifest.py). `bundled` compiles
 # SQLite in-tree so there's no system dependency.
-rusqlite = { version = "0.32", features = ["bundled"] }
+rusqlite = { version = "0.32", features = ["bundled"], optional = true }
 
 # Data-parallel download+parse across cores.
-rayon = "1.10"
+rayon = { version = "1.10", optional = true }
 
 # Row (de)serialisation -> NDJSON shards, and generic action-variant tagging.
 serde = { version = "1", features = ["derive"] }
@@ -37,16 +54,16 @@ serde_json = "1"
 # Ergonomic error handling at the orchestration layer.
 anyhow = "1"
 
-# aoe2rec::Savegame::from_bytes takes bytes::Bytes.
-bytes = "1"
+# aoe2rec::Savegame::from_bytes takes bytes::Bytes (bin-side call sites only).
+bytes = { version = "1", optional = true }
 
 # Gunzip the downloaded replay blobs to raw .aoe2record bytes.
-flate2 = "1"
+flate2 = { version = "1", optional = true }
 
 # analyze subcommand: colored terminal scorecard + a fixed table. comfy-table without
 # default features drops crossterm (we don't need TTY control), leaving only unicode-width.
-owo-colors = "4.3"
-comfy-table = { version = "7.2", default-features = false }
+owo-colors = { version = "4.3", optional = true }
+comfy-table = { version = "7.2", default-features = false, optional = true }
 
 [profile.release]
 opt-level = 3

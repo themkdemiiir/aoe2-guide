@@ -14,6 +14,8 @@ const routes: Array<{ path: string; titleContains: string }> = [
   { path: "/en/builds/", titleContains: "Build Orders" },
   { path: "/en/maps/", titleContains: "Maps" },
   { path: "/en/matchups/", titleContains: "Comparator" },
+  { path: "/en/analyzer/", titleContains: "Analyzer" },
+  { path: "/tr/analyzer/", titleContains: "Analiz" },
   { path: "/en/learn/", titleContains: "Learn" },
   { path: "/en/glossary/", titleContains: "Glossary" },
   { path: "/en/search/", titleContains: "Search" },

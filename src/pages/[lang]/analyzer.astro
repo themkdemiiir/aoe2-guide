@@ -1,0 +1,318 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { locales, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+import { t } from "@/i18n/utils";
+import civIdMap from "@data/civ-id-map.json";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+
+const prettify = (s: string) =>
+  s.split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+
+// game/replay civ_id -> { name, icon } for the client renderer (replay civ ids
+// are the GAME id space — civ-id-map.json is correct here, unlike the Relic API).
+const civs = Object.fromEntries(
+  Object.entries(civIdMap as Record<string, string>).map(([id, slug]) => [
+    id,
+    { slug, name: prettify(slug) },
+  ]),
+);
+
+// Every analyzer.* string, pre-localized — derived by prefix so adding a key to
+// ui.ts can never silently miss the client payload.
+const L = Object.fromEntries(
+  (Object.keys(ui.en) as Array<keyof typeof ui.en>)
+    .filter((k) => k.startsWith("analyzer."))
+    .map((k) => [k, t(lang, k)]),
+);
+
+// Mirror of replay-rs metrics.rs WATCHED_TECHS (tech_id -> display name) — the
+// set of eco upgrades the engine reports in eco_techs.
+const ecoTechs: Record<string, string> = {
+  "22": "Loom", "213": "Wheelbarrow", "249": "Hand Cart",
+  "202": "Double-Bit Axe", "203": "Bow Saw", "14": "Horse Collar",
+  "13": "Heavy Plow", "55": "Gold Mining", "182": "Gold Shaft Mining",
+  "278": "Stone Mining",
+};
+---
+
+<BaseLayout title={t(lang, "analyzer.title")} description={t(lang, "analyzer.tagline")} canonicalPath="/analyzer">
+  <section class="mx-auto max-w-5xl px-4 py-10">
+    <h1 class="font-display text-4xl text-ink">{t(lang, "analyzer.title")}</h1>
+    <p class="mt-3 max-w-3xl text-stone-700">{t(lang, "analyzer.tagline")}</p>
+
+    <div id="az-drop" class="mt-8 cursor-pointer rounded border-2 border-dashed border-stone-700/40 bg-parchment/60 px-6 py-14 text-center transition-colors hover:border-gold-500 data-[over=true]:border-gold-500 data-[over=true]:bg-gold-500/10">
+      <p class="font-display text-xl text-ink">{t(lang, "analyzer.drop")}</p>
+      <p class="mt-2 text-sm text-stone-700">
+        <label class="cursor-pointer text-gold-700 underline underline-offset-2 hover:text-gold-500">
+          {t(lang, "analyzer.browse")}
+          <input id="az-file" type="file" accept=".aoe2record" class="sr-only" />
+        </label>
+      </p>
+      <p class="mt-4 font-mono text-[11px] uppercase tracking-wide text-stone-700/80">{t(lang, "analyzer.privacy")}</p>
+    </div>
+
+    <div class="mt-4 grid gap-2 text-sm text-stone-700 sm:grid-cols-2">
+      <p>{t(lang, "analyzer.where")}</p>
+      <p>{t(lang, "analyzer.version")}</p>
+    </div>
+
+    <p id="az-status" class="mt-6 hidden font-mono text-sm text-stone-700" aria-live="polite"></p>
+
+    <div id="az-error" class="mt-6 hidden rounded border border-royal/40 bg-royal/10 p-4">
+      <p class="font-display font-bold text-royal">{t(lang, "analyzer.error")}</p>
+      <p id="az-error-msg" class="mt-1 font-mono text-sm text-stone-700"></p>
+    </div>
+
+    <div id="az-report" class="mt-10 hidden"></div>
+
+    <p class="mt-12 border-t border-stone-700/20 pt-4 text-sm text-stone-700">
+      {t(lang, "analyzer.cli")}
+      <a href="https://github.com/themkdemiiir/aoe2-guide" class="text-gold-700 underline underline-offset-2 hover:text-gold-500">GitHub</a>
+    </p>
+  </section>
+
+  <script is:inline type="application/json" id="az-data" set:html={JSON.stringify({ L, civs, ecoTechs })} />
+
+  <script>
+    const { L, civs, ecoTechs } = JSON.parse(document.getElementById("az-data")!.textContent!);
+    const drop = document.getElementById("az-drop")!;
+    const fileInput = document.getElementById("az-file") as HTMLInputElement;
+    const statusEl = document.getElementById("az-status")!;
+    const errBox = document.getElementById("az-error")!;
+    const errMsg = document.getElementById("az-error-msg")!;
+    const reportEl = document.getElementById("az-report")!;
+
+    const esc = (s: unknown) =>
+      String(s ?? "").replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+    const mmss = (ms: number | null | undefined) =>
+      ms == null ? "—" : `${Math.floor(ms / 60000)}:${String(Math.floor(ms / 1000) % 60).padStart(2, "0")}`;
+    const secs = (ms: number) => `${Math.round(ms / 1000)}s`;
+
+    let wasmMod: any = null;
+    async function loadWasm() {
+      if (wasmMod) return wasmMod;
+      // Glue is bundled from src/wasm/pkg (lazy chunk); the 1.4MB wasm binary
+      // stays in public/ and is fetched only when a file is actually dropped.
+      const mod = await import("../../wasm/pkg/replay_wasm.js");
+      await mod.default({ module_or_path: "/analyzer/pkg/replay_wasm_bg.wasm" });
+      wasmMod = mod;
+      return mod;
+    }
+
+    let report: any = null;
+    let selectedPn: number | null = null;
+
+    const civOf = (id: number) => civs[String(id)] ?? { slug: null, name: `?${id}` };
+    const civCell = (id: number, size: number) => {
+      const c = civOf(id);
+      const icon = c.slug
+        ? `<img src="/images/aoe2/Civs/${c.slug}-${size}.webp" alt="" width="${size / 2}" height="${size / 2}" class="inline-block h-[1.1em] w-auto align-[-0.15em]" loading="lazy" onerror="this.remove()" /> `
+        : "";
+      return `${icon}${esc(c.name)}`;
+    };
+    const resultOf = (won: boolean | null) =>
+      won === true ? L["analyzer.result.win"] : won === false ? L["analyzer.result.loss"] : L["analyzer.result.unknown"];
+
+    function tile(label: string, value: string, note?: string) {
+      return `<div class="rounded border border-stone-700/25 bg-parchment/60 p-2.5">
+        <div class="font-mono text-[10px] uppercase tracking-wide text-stone-700">${esc(label)}</div>
+        <div class="mt-1 font-display text-lg font-bold text-ink">${value}</div>
+        ${note ? `<div class="font-mono text-[10px] text-stone-700/80">${esc(note)}</div>` : ""}
+      </div>`;
+    }
+
+    function scorecard(m: any) {
+      const tiles: string[] = [];
+      tiles.push(tile(L["analyzer.tile.feudal"], esc(mmss(m.feudal_ms))));
+      tiles.push(tile(L["analyzer.tile.castle"], esc(mmss(m.castle_ms))));
+      tiles.push(tile(L["analyzer.tile.imperial"], esc(mmss(m.imperial_ms))));
+      tiles.push(tile(L["analyzer.tile.vils"], m.castle_ms != null ? esc(String(m.vils_castle)) : "—"));
+      tiles.push(tile(L["analyzer.tile.idleDark"], esc(secs(m.idle_dark_ms)), L["analyzer.estimate"]));
+      tiles.push(tile(L["analyzer.tile.idleFeudal"], esc(secs(m.idle_feudal_ms)), L["analyzer.estimate"]));
+      tiles.push(tile(L["analyzer.tile.military"], esc(mmss(m.first_military_ms))));
+      tiles.push(tile(L["analyzer.tile.apm"], esc(String(Math.round(m.apm)))));
+      const elo = m.elo_team ?? m.elo_1v1;
+      tiles.push(tile(L["analyzer.tile.elo"], elo != null ? esc(String(elo)) : "—"));
+      if (m.role) tiles.push(tile(L["analyzer.tile.role"], esc(L[`analyzer.role.${m.role}`] ?? m.role)));
+      if (m.float_banked > 0) {
+        const w = m.float_window ? ` @ ${mmss(m.float_window[0])}–${mmss(m.float_window[1])}` : "";
+        tiles.push(tile(L["analyzer.tile.float"], `~${esc(String(Math.round(m.float_banked)))}${esc(w)}`, L["analyzer.estimate"]));
+      }
+      if (m.find_enemy_ms != null || m.nearest_enemy_dist != null) {
+        const v = m.find_enemy_ms != null ? mmss(m.find_enemy_ms) : "—";
+        const d = m.nearest_enemy_dist != null ? ` · ~${Math.round(m.nearest_enemy_dist)} tiles` : "";
+        tiles.push(tile(L["analyzer.tile.scouting"], `${esc(v)}${esc(d)}`));
+      }
+      return `<div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">${tiles.join("")}</div>`;
+    }
+
+    // Watched eco upgrades: researched ones with their time, the rest greyed out.
+    function ecoRow(m: any) {
+      const done = new Map<number, number>(m.eco_techs.map((e: [number, number]) => [e[0], e[1]]));
+      const chips = Object.entries(ecoTechs).map(([id, name]) => {
+        const at = done.get(Number(id));
+        return at != null
+          ? `<span class="inline-flex items-center gap-1.5 rounded border border-stone-700/25 bg-parchment px-2 py-1 text-xs text-ink">${esc(name)} <span class="font-mono text-gold-700">${esc(mmss(at))}</span></span>`
+          : `<span class="inline-flex items-center gap-1.5 rounded border border-dashed border-stone-700/25 px-2 py-1 text-xs text-stone-700/70">${esc(name)} <span class="font-mono text-[10px]">${esc(L["analyzer.eco.missing"])}</span></span>`;
+      });
+      return `<h3 class="mt-6 font-display text-sm font-bold uppercase tracking-wide text-stone-700">${esc(L["analyzer.eco"])}</h3>
+        <div class="mt-2 flex flex-wrap gap-2">${chips.join("")}</div>`;
+    }
+
+    function findingsList(pn: number) {
+      const sevStyle: Record<string, string> = {
+        high: "bg-royal text-parchment",
+        med: "bg-gold-500 text-ink",
+        low: "bg-stone-700/30 text-ink",
+      };
+      const rows = report.findings
+        .filter((f: any) => f.player_number === pn)
+        .map((f: any) => {
+          const basis = f.basis && f.basis !== "absolute" ? ` <span class="font-mono text-[10px] text-stone-700/80">[${esc(L[`analyzer.basis.${f.basis}`] ?? f.basis)}]</span>` : "";
+          return `<li class="flex items-start gap-2.5 border-b border-stone-700/15 py-2 last:border-b-0">
+            <span class="mt-0.5 inline-block rounded px-1.5 font-mono text-[10px] uppercase ${sevStyle[f.severity] ?? sevStyle.low}">${esc(f.severity)}</span>
+            <span class="text-sm text-ink"><strong class="font-display">${esc(f.metric)}</strong> — ${esc(L["analyzer.you"])} <span class="font-mono">${esc(f.your)}</span> (${esc(L["analyzer.ref"])} <span class="font-mono">${esc(f.reference)}</span>)${basis}<br /><span class="text-stone-700">${esc(f.note)}</span></span>
+          </li>`;
+        });
+      if (!rows.length) return `<p class="text-sm text-forest">${esc(L["analyzer.noFindings"])}</p>`;
+      return `<ul>${rows.join("")}</ul>`;
+    }
+
+    function render(scrollToReport = false) {
+      const meta = report.meta;
+      const players = report.players;
+      const sel = players.find((p: any) => p.info.player_number === selectedPn) ?? players[0];
+      const selPn = sel.info.player_number;
+
+      const options = players
+        .map((p: any) => `<option value="${p.info.player_number}" ${p.info.player_number === selPn ? "selected" : ""}>${esc(p.info.name)}</option>`)
+        .join("");
+
+      const tableRows = players
+        .map((m: any) => {
+          const you = m.info.player_number === selPn;
+          const elo = m.elo_team ?? m.elo_1v1;
+          return `<tr data-pn="${m.info.player_number}" class="cursor-pointer border-b border-stone-700/15 last:border-b-0 ${you ? "bg-gold-500/15" : "hover:bg-gold-500/10"}">
+            <td class="px-2 py-1.5 font-display font-bold text-ink">${you ? "➤ " : ""}${esc(m.info.name)}</td>
+            <td class="px-2 py-1.5">${civCell(m.info.civ_id, 24)}</td>
+            <td class="px-2 py-1.5 font-mono">${esc(mmss(m.feudal_ms))}</td>
+            <td class="px-2 py-1.5 font-mono">${esc(mmss(m.castle_ms))}</td>
+            <td class="px-2 py-1.5 font-mono">${esc(mmss(m.imperial_ms))}</td>
+            <td class="px-2 py-1.5 font-mono">${m.castle_ms != null ? esc(String(m.vils_castle)) : "—"}</td>
+            <td class="px-2 py-1.5 font-mono">${esc(secs(m.idle_dark_ms))}</td>
+            <td class="px-2 py-1.5 font-mono">${esc(String(Math.round(m.apm)))}</td>
+            <td class="px-2 py-1.5 font-mono">${elo != null ? esc(String(elo)) : "—"}</td>
+            <td class="px-2 py-1.5">${m.info.won === true ? `<span class="text-forest">${esc(L["analyzer.table.win"])}</span>` : m.info.won === false ? `<span class="text-royal">${esc(L["analyzer.table.loss"])}</span>` : "—"}</td>
+          </tr>`;
+        })
+        .join("");
+
+      reportEl.innerHTML = `
+        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b-2 border-gold-500/60 pb-3">
+          <h2 class="font-display text-2xl text-ink">${esc(meta.map_name)}</h2>
+          <span class="rounded border border-stone-700/30 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-stone-700">${esc(meta.family)}</span>
+          <span class="font-mono text-sm text-stone-700">${esc(meta.mode)} · ${players.length} ${esc(L["analyzer.players"])} · ${esc(L["analyzer.duration"])} ${esc(mmss(meta.duration_ms))}</span>
+        </div>
+
+        <div class="mt-5 flex flex-wrap items-center gap-3">
+          <label class="font-mono text-[11px] uppercase tracking-wide text-stone-700">${esc(L["analyzer.viewAs"])}
+            <select id="az-viewas" class="ml-2 rounded border border-stone-700/40 bg-parchment px-2 py-1 font-body text-sm text-ink">${options}</select>
+          </label>
+          <span class="font-display text-lg font-bold ${sel.info.won === true ? "text-forest" : sel.info.won === false ? "text-royal" : "text-stone-700"}" ${sel.info.won == null ? `title="${esc(L["analyzer.result.note"])}"` : ""}>${esc(resultOf(sel.info.won))}</span>
+          <span class="text-sm text-stone-700">${civCell(sel.info.civ_id, 24)}</span>
+        </div>
+        ${sel.info.won == null ? `<p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.result.note"])}</p>` : ""}
+
+        <div class="mt-4">${scorecard(sel)}</div>
+        ${ecoRow(sel)}
+
+        <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.fixes"])}</h3>
+        <div class="mt-2 rounded border border-stone-700/25 bg-parchment/60 px-4 py-2">${findingsList(selPn)}</div>
+
+        <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.table.title"])}</h3>
+        <div class="mt-2 overflow-x-auto rounded border border-stone-700/25">
+          <table class="w-full min-w-[720px] text-left text-sm">
+            <thead><tr class="border-b border-stone-700/30 bg-parchment/80 font-mono text-[10px] uppercase tracking-wide text-stone-700">
+              <th class="px-2 py-2">${esc(L["analyzer.table.player"])}</th><th class="px-2 py-2">${esc(L["analyzer.table.civ"])}</th>
+              <th class="px-2 py-2">${esc(L["analyzer.tile.feudal"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.castle"])}</th>
+              <th class="px-2 py-2">${esc(L["analyzer.tile.imperial"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.vils"])}</th>
+              <th class="px-2 py-2">${esc(L["analyzer.tile.idleDark"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.apm"])}</th>
+              <th class="px-2 py-2">${esc(L["analyzer.tile.elo"])}</th><th class="px-2 py-2">${esc(L["analyzer.table.result"])}</th>
+            </tr></thead>
+            <tbody>${tableRows}</tbody>
+          </table>
+        </div>
+
+        <h4 class="mt-6 font-display text-sm font-bold uppercase tracking-wide text-stone-700">${esc(L["analyzer.notes"])}</h4>
+        <ul class="mt-1 list-disc pl-5 text-xs text-stone-700">
+          ${report.caveats.map((c: string) => `<li>${esc(c)}</li>`).join("")}
+        </ul>
+      `;
+      reportEl.classList.remove("hidden");
+
+      reportEl.querySelector("#az-viewas")!.addEventListener("change", (e) => {
+        selectedPn = Number((e.target as HTMLSelectElement).value);
+        render();
+      });
+      for (const tr of reportEl.querySelectorAll("tbody tr[data-pn]")) {
+        tr.addEventListener("click", () => {
+          selectedPn = Number((tr as HTMLElement).dataset.pn);
+          render();
+        });
+      }
+      if (scrollToReport) reportEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function analyze(file: File) {
+      errBox.classList.add("hidden");
+      reportEl.classList.add("hidden");
+      statusEl.classList.remove("hidden");
+      statusEl.textContent = L["analyzer.parsing"];
+      try {
+        const mod = await loadWasm();
+        const bytes = new Uint8Array(await file.arrayBuffer());
+        const json = mod.analyze_replay(bytes, "");
+        report = JSON.parse(json);
+        selectedPn = report.meta.you;
+        statusEl.classList.add("hidden");
+        render(true);
+      } catch (e: any) {
+        statusEl.classList.add("hidden");
+        errMsg.textContent = e?.message ?? String(e);
+        errBox.classList.remove("hidden");
+      }
+    }
+
+    drop.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("label")) return; // native input click
+      fileInput.click();
+    });
+    fileInput.addEventListener("change", () => {
+      const f = fileInput.files?.[0];
+      fileInput.value = ""; // allow re-selecting the same file
+      if (f) analyze(f);
+    });
+    for (const ev of ["dragover", "dragenter"]) {
+      drop.addEventListener(ev, (e) => {
+        e.preventDefault();
+        drop.dataset.over = "true";
+      });
+    }
+    for (const ev of ["dragleave", "drop"]) {
+      drop.addEventListener(ev, (e) => {
+        e.preventDefault();
+        delete drop.dataset.over;
+      });
+    }
+    drop.addEventListener("drop", (e) => {
+      const f = (e as DragEvent).dataTransfer?.files?.[0];
+      if (f) analyze(f);
+    });
+  </script>
+</BaseLayout>

@@ -33,3 +33,7 @@ md/reference/hera-*
 # saved to the project root) so it can never be committed by accident.
 hera-*
 *hera-strategy-guide*
+
+# WASM analyzer wrapper build artifacts (built via pnpm build:wasm; pkg output IS committed under public/analyzer/pkg).
+scripts/data-pipeline/replay-wasm/target/
+scripts/data-pipeline/replay-wasm/Cargo.lock
