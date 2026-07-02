@@ -80,9 +80,23 @@ terminal.
 # a local save (the recording player is auto-detected as "you")
 ./target/release/replay-rs analyze "/path/to/MP Replay ….aoe2record"
 
-# or download by match id (getReplayFiles -> download -> parse); --you overrides "you"
-./target/release/replay-rs analyze --match-id 475242532 --you MKD
+# or by match id; --you NAME / --profile-id P pins "you" (name wins if both)
+./target/release/replay-rs analyze --match-id 475242532 --profile-id 199325
+
+# machine-readable: stdout becomes ONE pretty-JSON Report (schema_version 1)
+./target/release/replay-rs analyze --match-id 475242532 --json
+
+# your latest ranked games (getRecentMatchHistory): list, then analyze
+./target/release/replay-rs recent --profile-id 199325 --limit 5
+./target/release/replay-rs analyze --latest --profile-id 199325       # newest game
+./target/release/replay-rs analyze --latest all --profile-id 199325 --json   # NDJSON, one Report/line
+# AOE2_PROFILE_ID env can stand in for --profile-id. Replays only exist when
+# uploaded and age out (~2-4 weeks in practice) — unavailable ones are skipped with a warning.
 ```
+
+The crate is now split into **lib** (`replay_rs`: pure `analyze()` + `config`) and **bin** (all IO
+and orchestration). The JSON `Report` (schema version 1, snake_case enums, `caveats` included) is
+the stable contract that a future WASM build or site consumer can depend on.
 
 It reports age-up times, villagers@Castle, idle-TC, APM, ELO (read straight from the
 replay's PostGame leaderboard — 1v1 ladder 3 / team ladder 4), win/loss (team-aware),
