@@ -21,13 +21,13 @@ const nav = [
 <header class="sticky top-0 z-40 border-b border-stone-700/30 bg-parchment/95 backdrop-blur">
   <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
     <a href={localizedPath("/", locale)} class="font-display text-xl text-ink">AOE2 Guide</a>
-    <nav class="ml-4 hidden gap-4 md:flex">
+    <nav class="ml-4 hidden gap-4 lg:flex">
       {nav.map(({ key, href }) => (
         <a href={href} class="text-sm text-stone-700 hover:text-gold-500">{t(locale, key)}</a>
       ))}
     </nav>
     <div class="ml-auto flex items-center gap-2">
-      <details data-mobile-menu class="relative md:hidden">
+      <details data-mobile-menu class="relative lg:hidden">
         <summary
           class="flex cursor-pointer list-none items-center rounded border border-stone-700/40 p-2 text-stone-700 transition-colors hover:border-gold-500 hover:text-gold-500 [&::-webkit-details-marker]:hidden"
           aria-label={t(locale, "nav.menu")}

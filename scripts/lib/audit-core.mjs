@@ -24,7 +24,9 @@ export function auditEntry(_typeDir, _fileName, data) {
 function walk(node, prefix, issues) {
   if (Array.isArray(node)) {
     // localizedString arrays are { en: [...], tr: [...] } handled below, not here
-    node.forEach((v, i) => walk(v, `${prefix}[${i}]`, issues));
+    node.forEach((v, i) => {
+      walk(v, `${prefix}[${i}]`, issues);
+    });
     return;
   }
   if (node && typeof node === "object") {

@@ -19,7 +19,10 @@ const locale = getLocaleFromUrl(Astro.url);
 const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const alternates = allLocalePaths(canonicalPath);
-const canonical = `${site}/${locale}${canonicalPath}`;
+// Trailing slash matches the served URLs + sitemap (the slashless form 308s on
+// CF Pages — canonicals must not point at redirects).
+const withSlash = (p: string) => (p.endsWith("/") ? p : `${p}/`);
+const canonical = withSlash(`${site}/${locale}${canonicalPath}`);
 // Per-page Open Graph card from scripts/build-og.mjs (/og/<seg>/<slug>.png);
 // non-detail pages fall back to the default card. Language-agnostic (English title).
 const ogMatch = canonicalPath.match(/^\/(civs|builds|units|maps)\/([^/]+)\/?$/);
@@ -109,9 +112,9 @@ const breadcrumbLd = pathParts.length > 0 ? {
     )}
     <slot name="head" />
     {alternates.map(({ locale: l, path }) => (
-      <link rel="alternate" hreflang={l} href={`${site}${path}`} />
+      <link rel="alternate" hreflang={l} href={withSlash(`${site}${path}`)} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={`${site}/en${canonicalPath}`} />
+    <link rel="alternate" hreflang="x-default" href={withSlash(`${site}/en${canonicalPath}`)} />
     <ClientRouter />
     <script is:inline>
       // Set theme before paint to avoid FOUC

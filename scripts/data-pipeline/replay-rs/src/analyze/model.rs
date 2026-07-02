@@ -113,6 +113,27 @@ pub struct PlayerMetrics {
     /// market transactions (command counts; resource/amount not decoded).
     pub market_buys: u32,
     pub market_sells: u32,
+    /// the RESOLVED benchmark slice this player was compared against (winners'
+    /// vils; age medians), with its honesty labels — None when the map/civ has
+    /// no data. The UI renders this as the "reference" column verbatim.
+    pub reference: Option<RefSlice>,
+}
+
+/// The benchmark slice actually used for this player (already fallback-resolved).
+#[derive(Debug, Clone, Serialize)]
+pub struct RefSlice {
+    pub feudal_s: Option<f64>,
+    pub castle_s: Option<f64>,
+    pub imperial_s: Option<f64>,
+    /// median villagers trained by Castle among WINNERS of the slice
+    pub vils_castle: Option<f64>,
+    /// this civ's age research durations (feudal/castle/imp seconds) — add to the
+    /// player's CLICK times to compare against the COMPLETION-based medians above
+    pub age_res_s: (f64, f64, f64),
+    /// elo bucket the player resolved to (e.g. "1400-1649")
+    pub bucket: String,
+    /// how precise the match was: "exact" | "map_mode" | "map_all"
+    pub kind: String,
 }
 
 /// The four comparison bases: your elo-bucket median, the 2500+ "pro" median, the opponent

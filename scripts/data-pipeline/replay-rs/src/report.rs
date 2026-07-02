@@ -198,6 +198,7 @@ mod tests {
             mil_apm: 0.0,
             market_buys: 0,
             market_sells: 0,
+            reference: None,
         }
     }
 

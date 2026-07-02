@@ -45,7 +45,8 @@ const ecoTechs: Record<string, string> = {
     <p class="mt-3 max-w-3xl text-stone-700">{t(lang, "analyzer.tagline")}</p>
 
     <div id="az-drop" class="mt-8 cursor-pointer rounded border-2 border-dashed border-stone-700/40 bg-parchment/60 px-6 py-14 text-center transition-colors hover:border-gold-500 data-[over=true]:border-gold-500 data-[over=true]:bg-gold-500/10">
-      <p class="font-display text-xl text-ink">{t(lang, "analyzer.drop")}</p>
+      <p class="hidden font-display text-xl text-ink sm:block">{t(lang, "analyzer.drop")}</p>
+      <p class="font-display text-xl text-ink sm:hidden">{t(lang, "analyzer.dropTap")}</p>
       <p class="mt-2 text-sm text-stone-700">
         <label class="cursor-pointer text-gold-700 underline underline-offset-2 hover:text-gold-500">
           {t(lang, "analyzer.browse")}
@@ -228,6 +229,241 @@ const ecoTechs: Record<string, string> = {
       return `<div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">${tiles.join("")}</div>`;
     }
 
+    // ---- Head-to-head comparison matrix: You | Opponent | Reference ----------
+    // Reference = the RESOLVED benchmark slice the engine attached per player
+    // (m.reference: winners' medians + honesty labels) + winner-refs.json
+    // (openings / eco-tech shares). Rows without a fair reference SAY so.
+    let refsDoc: any | undefined;
+    async function loadRefs() {
+      if (refsDoc !== undefined) return refsDoc;
+      try {
+        refsDoc = await (await fetch("/winner-refs.json")).json();
+      } catch {
+        refsDoc = null;
+      }
+      return refsDoc;
+    }
+
+    // Opponent for the matrix: 1v1 = the other player (team ids can be equal in
+    // unteamed 1v1s); team = mean of enemy team.
+    function opponentOf(sel: any, players: any[]) {
+      if (players.length === 2) {
+        const other = players.find((p) => p.info.player_number !== sel.info.player_number);
+        return other ? { m: other, label: other.info.name } : null;
+      }
+      const enemies = players.filter((p) => p.info.team_id !== sel.info.team_id);
+      if (!enemies.length) return null;
+      if (enemies.length === 1) return { m: enemies[0], label: enemies[0].info.name };
+      const avg = (f: (m: any) => number | null) => {
+        const vs = enemies.map(f).filter((v): v is number => v != null);
+        return vs.length ? vs.reduce((a, b) => a + b, 0) / vs.length : null;
+      };
+      return {
+        label: `${L["analyzer.matrix.enemyAvg"]} (${enemies.length})`,
+        m: {
+          info: { name: L["analyzer.matrix.enemyAvg"] },
+          feudal_ms: avg((m) => m.feudal_ms), castle_ms: avg((m) => m.castle_ms),
+          imperial_ms: avg((m) => m.imperial_ms),
+          vils_castle: avg((m) => (m.castle_ms != null ? m.vils_castle : null)),
+          idle_dark_ms: avg((m) => m.idle_dark_ms), idle_feudal_ms: avg((m) => m.idle_feudal_ms),
+          first_military_ms: avg((m) => m.first_military_ms),
+          apm: avg((m) => m.apm), eco_apm: avg((m) => m.eco_apm), mil_apm: avg((m) => m.mil_apm),
+          float_banked: avg((m) => m.float_banked),
+          market_buys: avg((m) => m.market_buys), market_sells: avg((m) => m.market_sells),
+          eco_techs: [], opening: null, find_enemy_ms: avg((m) => m.find_enemy_ms),
+          nearest_enemy_dist: avg((m) => m.nearest_enemy_dist), reference: null,
+        },
+      };
+    }
+
+    type Row = {
+      label: string; you: string; opp: string; ref: string; refBasis?: string;
+      // signed gaps in the metric's unit; sign convention: positive = YOU ahead
+      dOpp?: number | null; dRef?: number | null;
+      // colored deltas only for direction-unambiguous exact comparisons
+      colored: boolean; est?: boolean; fmtDelta?: (d: number) => string;
+    };
+
+    function matrixRows(sel: any, opp: any, refs: any): { group: string; rows: Row[] }[] {
+      const r = sel.reference;
+      const exact = r?.kind === "exact";
+      const basis = r ? (L[`analyzer.matrix.basis.${r.kind}`] ?? r.kind) : "";
+      const noRef = L["analyzer.matrix.noRef"];
+      const dSecs = (d: number) => `${Math.abs(Math.round(d))}s`;
+      const dN = (d: number) => `${Math.abs(Math.round(d))}`;
+      const S = (ms: number | null | undefined, res: number) => (ms == null ? null : ms / 1000 + res);
+
+      const age = (label: string, youMs: number | null, oppMs: number | null, refS: number | null | undefined, res: number): Row => {
+        const y = S(youMs, res);
+        const o = S(oppMs, res);
+        return {
+          label,
+          you: y != null ? mmss((y - res) * 1000 + res * 1000) : "—",
+          opp: o != null ? mmss((o - res) * 1000 + res * 1000) : "—",
+          ref: refS != null ? mmss(refS * 1000) : noRef,
+          refBasis: refS != null ? basis : undefined,
+          dOpp: y != null && o != null ? o - y : null, // positive = you faster = ahead
+          dRef: exact && y != null && refS != null ? refS - y : null,
+          colored: true, fmtDelta: dSecs,
+        };
+      };
+
+      const eco: Row[] = [
+        age(L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms, r?.feudal_s, r?.age_res_s?.[0] ?? 130),
+        age(L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms, r?.castle_s, r?.age_res_s?.[1] ?? 160),
+        age(L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms, r?.imperial_s, r?.age_res_s?.[2] ?? 190),
+        {
+          label: L["analyzer.tile.vils"],
+          you: sel.castle_ms != null ? String(sel.vils_castle) : "—",
+          opp: opp?.castle_ms != null ? String(Math.round(opp.vils_castle)) : "—",
+          ref: r?.vils_castle != null ? `${r.vils_castle}` : noRef,
+          refBasis: r?.vils_castle != null ? basis : undefined,
+          dOpp: sel.castle_ms != null && opp?.castle_ms != null ? sel.vils_castle - opp.vils_castle : null,
+          dRef: exact && sel.castle_ms != null && r?.vils_castle != null ? sel.vils_castle - r.vils_castle : null,
+          colored: true, fmtDelta: dN,
+        },
+        {
+          label: L["analyzer.tile.idleDark"], est: true,
+          you: secs(sel.idle_dark_ms), opp: opp ? secs(Math.round(opp.idle_dark_ms)) : "—", ref: noRef,
+          dOpp: opp ? (opp.idle_dark_ms - sel.idle_dark_ms) / 1000 : null, colored: true, fmtDelta: dSecs,
+        },
+        {
+          label: L["analyzer.tile.idleFeudal"], est: true,
+          you: secs(sel.idle_feudal_ms), opp: opp ? secs(Math.round(opp.idle_feudal_ms)) : "—", ref: noRef,
+          dOpp: opp ? (opp.idle_feudal_ms - sel.idle_feudal_ms) / 1000 : null, colored: true, fmtDelta: dSecs,
+        },
+        {
+          label: L["analyzer.tile.float"], est: true,
+          you: `~${Math.round(sel.float_banked)}`, opp: opp ? `~${Math.round(opp.float_banked)}` : "—", ref: noRef,
+          dOpp: opp ? opp.float_banked - sel.float_banked : null, colored: true, fmtDelta: dN,
+        },
+        {
+          label: L["analyzer.tile.market"],
+          you: `${sel.market_buys}/${sel.market_sells}`,
+          opp: opp ? `${Math.round(opp.market_buys)}/${Math.round(opp.market_sells)}` : "—",
+          ref: noRef, colored: false,
+        },
+      ];
+
+      const wbTime = (m: any) => m?.eco_techs?.find?.((e: [number, number]) => e[0] === 213)?.[1] ?? null;
+      const byCastle = (m: any) =>
+        m?.eco_techs && m?.castle_ms != null
+          ? m.eco_techs.filter((e: [number, number]) => e[1] <= m.castle_ms).length
+          : null;
+      const shares = r && refs?.ecoTechByCastle?.[r.bucket];
+      const shareTxt = shares
+        ? `${L["analyzer.row.winnersResearch"]}: Loom ${shares.loom}% · DBA ${shares.dba}% · WB ${shares.wheelbarrow}%`
+        : noRef;
+      const tech: Row[] = [
+        {
+          label: L["analyzer.row.ecoUpgrades"],
+          you: byCastle(sel) != null ? `${byCastle(sel)}/10` : "—",
+          opp: opp && byCastle(opp) != null ? `${byCastle(opp)}/10` : "—",
+          ref: shareTxt, colored: false,
+        },
+        {
+          label: L["analyzer.row.wheelbarrow"],
+          you: wbTime(sel) != null ? mmss(wbTime(sel)) : "—",
+          opp: opp && wbTime(opp) != null ? mmss(wbTime(opp)) : "—",
+          ref: shares ? `${shares.wheelbarrow}% ${L["analyzer.row.winnersResearch"]}` : noRef,
+          colored: false,
+        },
+      ];
+
+      const openRef = r && refs?.openings?.[civOf(sel.info.civ_id).slug]?.[r.bucket];
+      const openTxt = openRef
+        ? openRef.list.filter((o: any) => o.opening !== 'unknown').slice(0, 3).map((o: any) => `${displayUnit(o.opening.replace(/_/g, " "))} ${o.pct}%`).join(" · ")
+        : noRef;
+      const mil: Row[] = [
+        {
+          label: L["analyzer.opening"],
+          you: sel.opening ?? "—", opp: opp?.opening ?? "—",
+          ref: openTxt, refBasis: openRef ? L["analyzer.matrix.basis.exact"] : undefined,
+          colored: false,
+        },
+        {
+          label: L["analyzer.tile.military"],
+          you: mmss(sel.first_military_ms), opp: opp ? mmss(opp.first_military_ms) : "—",
+          ref: noRef, colored: false,
+        },
+      ];
+
+      const scout: Row[] = [];
+      if (sel.find_enemy_ms != null || opp?.find_enemy_ms != null) {
+        scout.push({
+          label: L["analyzer.tile.scouting"],
+          you: mmss(sel.find_enemy_ms), opp: opp ? mmss(opp.find_enemy_ms) : "—",
+          ref: noRef, colored: false,
+        });
+      }
+
+      const att: Row[] = [
+        { label: L["analyzer.tile.apm"], you: String(Math.round(sel.apm)), opp: opp ? String(Math.round(opp.apm)) : "—", ref: noRef, colored: false },
+        { label: L["analyzer.tile.ecoApm"], you: String(Math.round(sel.eco_apm)), opp: opp ? String(Math.round(opp.eco_apm)) : "—", ref: noRef, colored: false },
+        { label: L["analyzer.tile.milApm"], you: String(Math.round(sel.mil_apm)), opp: opp ? String(Math.round(opp.mil_apm)) : "—", ref: noRef, colored: false },
+      ];
+
+      return [
+        { group: L["analyzer.group.economy"], rows: eco },
+        { group: L["analyzer.group.technology"], rows: tech },
+        { group: L["analyzer.group.military"], rows: mil },
+        ...(scout.length ? [{ group: L["analyzer.group.scouting"], rows: scout }] : []),
+        { group: L["analyzer.group.attention"], rows: att },
+      ];
+    }
+
+    // A delta chip: ▲ ahead (forest) / ▼ behind (royal) / ≈ even. Neutral rows get plain text.
+    function chipHtml(kind: string, d: number | null | undefined, colored: boolean, fmt?: (d: number) => string, evenBand = 0) {
+      if (d == null) return "";
+      const even = Math.abs(d) <= evenBand;
+      const txt = even ? L["analyzer.matrix.even"] : `${d > 0 ? "▲" : "▼"} ${fmt ? fmt(d) : Math.abs(Math.round(d))}`;
+      const cls = !colored || even ? "text-stone-700" : d > 0 ? "text-forest" : "text-royal";
+      return `<span class="font-mono text-[10px] ${cls}">${esc(kind)} ${esc(txt)}</span>`;
+    }
+
+    function matrixHtml(sel: any, players: any[], refs: any) {
+      const oppInfo = opponentOf(sel, players);
+      const groups = matrixRows(sel, oppInfo?.m ?? null, refs);
+      const sections = groups
+        .map(({ group, rows }) => {
+          const colored = rows.filter((x) => x.colored);
+          const aheadO = colored.filter((x) => (x.dOpp ?? 0) > 0 && x.dOpp != null).length;
+          const behindO = colored.filter((x) => x.dOpp != null && x.dOpp < 0).length;
+          const aheadR = colored.filter((x) => x.dRef != null && x.dRef > 0).length;
+          const behindR = colored.filter((x) => x.dRef != null && x.dRef < 0).length;
+          const verdict = aheadO + behindO + aheadR + behindR
+            ? `${L["analyzer.matrix.vsOpp"]}: ${aheadO} ${L["analyzer.matrix.ahead"]} / ${behindO} ${L["analyzer.matrix.behind"]}` +
+              (aheadR + behindR ? ` · ${L["analyzer.matrix.vsRef"]}: ${aheadR} ${L["analyzer.matrix.ahead"]} / ${behindR} ${L["analyzer.matrix.behind"]}` : "")
+            : "";
+          const body = rows
+            .map((x) => `<div class="border-b border-stone-700/10 py-1.5 last:border-b-0">
+                <div class="flex flex-wrap items-baseline gap-x-2.5">
+                  <span class="font-display text-[13px] font-bold text-ink">${esc(x.label)}${x.est ? ' <span class="font-mono text-[9px] text-stone-700/70">~</span>' : ""}</span>
+                  ${chipHtml(L["analyzer.matrix.opp"], x.dOpp, x.colored, x.fmtDelta)}
+                  ${chipHtml(L["analyzer.matrix.ref"], x.dRef, x.colored, x.fmtDelta)}
+                </div>
+                <div class="mt-0.5 font-mono text-[11px] text-stone-700">
+                  ${esc(L["analyzer.matrix.you"])} <span class="text-ink">${esc(x.you)}</span>
+                  · ${esc(L["analyzer.matrix.opp"])} <span class="text-ink">${esc(x.opp)}</span>
+                  · ${esc(L["analyzer.matrix.ref"])} <span class="text-ink">${esc(x.ref)}</span>${x.refBasis ? ` <span class="text-[9px] text-stone-700/70">[${esc(x.refBasis)}]</span>` : ""}
+                </div>
+              </div>`)
+            .join("");
+          return `<div class="rounded border border-stone-700/25 bg-parchment/60 px-3 py-2">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+                <h4 class="font-display text-sm font-bold uppercase tracking-wide text-gold-700">${esc(group)}</h4>
+                <span class="font-mono text-[10px] text-stone-700/80">${esc(verdict)}</span>
+              </div>
+              <div class="mt-1">${body}</div>
+            </div>`;
+        })
+        .join("");
+      const oppNote = oppInfo && players.length > 2 ? ` · ${esc(L["analyzer.matrix.opp"])}: ${esc(oppInfo.label)}` : "";
+      return `<h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.matrix"])}</h3>
+        <p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.matrix.note"])}${oppNote}</p>
+        <div class="mt-2 grid gap-2.5 lg:grid-cols-2">${sections}</div>`;
+    }
+
     // "What winners build" — lazily fetched static benchmark (public/winner-comps.json,
     // derived from 60M match_ages rows: ranked 1v1 winners per civ × elo bucket).
     let compsDoc: any | undefined;
@@ -297,7 +533,14 @@ const ecoTechs: Record<string, string> = {
     // Watched eco upgrades: researched ones with their time, the rest greyed out.
     function ecoRow(m: any) {
       const done = new Map<number, number>(m.eco_techs.map((e: [number, number]) => [e[0], e[1]]));
-      const chips = Object.entries(ecoTechs).map(([id, name]) => {
+      const ordered = Object.entries(ecoTechs).sort(([a], [b]) => {
+        const ta = done.get(Number(a)), tb = done.get(Number(b));
+        if (ta != null && tb != null) return ta - tb; // researched: by time
+        if (ta != null) return -1;
+        if (tb != null) return 1;
+        return 0; // unresearched: keep stable order, after researched
+      });
+      const chips = ordered.map(([id, name]) => {
         const at = done.get(Number(id));
         return at != null
           ? `<span class="inline-flex items-center gap-1.5 rounded border border-stone-700/25 bg-parchment px-2 py-1 text-xs text-ink">${esc(name)} <span class="font-mono text-gold-700">${esc(mmss(at))}</span></span>`
@@ -341,7 +584,7 @@ const ecoTechs: Record<string, string> = {
           const you = m.info.player_number === selPn;
           const elo = m.elo_team ?? m.elo_1v1;
           return `<tr data-pn="${m.info.player_number}" class="cursor-pointer border-b border-stone-700/15 last:border-b-0 ${you ? "bg-gold-500/15" : "hover:bg-gold-500/10"}">
-            <td class="px-2 py-1.5 font-display font-bold text-ink"><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm align-baseline" style="background:${colorOf(m.info.color_id)}"></span>${you ? "➤ " : ""}${esc(m.info.name)}</td>
+            <td class="sticky left-0 bg-parchment px-2 py-1.5 font-display font-bold text-ink"><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm align-baseline" style="background:${colorOf(m.info.color_id)}"></span>${you ? "➤ " : ""}${esc(m.info.name)}</td>
             <td class="px-2 py-1.5">${civCell(m.info.civ_id, 24)}</td>
             <td class="px-2 py-1.5 text-xs">${m.opening ? esc(m.opening) : "—"}</td>
             <td class="px-2 py-1.5 font-mono">${esc(mmss(m.feudal_ms))}</td>
@@ -374,6 +617,7 @@ const ecoTechs: Record<string, string> = {
         ${sel.info.won == null ? `<p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.result.note"])}</p>` : ""}
 
         <div class="mt-4">${scorecard(sel)}</div>
+        <div id="az-matrix"></div>
         ${ecoRow(sel)}
         <div id="az-winners"></div>
         ${badges(players)}
@@ -394,7 +638,7 @@ const ecoTechs: Record<string, string> = {
         <div class="mt-2 overflow-x-auto rounded border border-stone-700/25">
           <table class="w-full min-w-[860px] text-left text-sm">
             <thead><tr class="border-b border-stone-700/30 bg-parchment/80 font-mono text-[10px] uppercase tracking-wide text-stone-700">
-              <th class="px-2 py-2">${esc(L["analyzer.table.player"])}</th><th class="px-2 py-2">${esc(L["analyzer.table.civ"])}</th>
+              <th class="sticky left-0 bg-parchment/95 px-2 py-2">${esc(L["analyzer.table.player"])}</th><th class="px-2 py-2">${esc(L["analyzer.table.civ"])}</th>
               <th class="px-2 py-2">${esc(L["analyzer.opening"])}</th>
               <th class="px-2 py-2">${esc(L["analyzer.tile.feudal"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.castle"])}</th>
               <th class="px-2 py-2">${esc(L["analyzer.tile.imperial"])}</th><th class="px-2 py-2">${esc(L["analyzer.tile.vils"])}</th>
@@ -423,7 +667,11 @@ const ecoTechs: Record<string, string> = {
         });
       }
       drawCharts(players, selPn);
-      // async fill: winners benchmark for the selected player's civ × elo
+      // async fills: head-to-head matrix (needs winner-refs) + winners benchmark
+      loadRefs().then((refs) => {
+        const holder = reportEl.querySelector("#az-matrix");
+        if (holder) holder.innerHTML = matrixHtml(sel, players, refs);
+      });
       winnersBlock(sel, meta.mode).then((html) => {
         const holder = reportEl.querySelector("#az-winners");
         if (holder && html) holder.innerHTML = html;
@@ -446,7 +694,9 @@ const ecoTechs: Record<string, string> = {
         render(true);
       } catch (e: any) {
         statusEl.classList.add("hidden");
-        errMsg.textContent = e?.message ?? String(e);
+        // raw parser errors carry backtraces/ANSI — log them, show a friendly line
+        console.error("analyze failed:", e);
+        errMsg.textContent = L["analyzer.error.parse"];
         errBox.classList.remove("hidden");
       }
     }

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { readdirSync, readFileSync } from "node:fs";
 import yaml from "js-yaml";
-import civData from "../src/data/civilizations.json" assert { type: "json" };
+import civData from "../src/data/civilizations.json" with { type: "json" };
 
 const CIV_DIR = "src/content/civilizations";
 const FABRICATED_SLUGS = ["achaemenids", "athenians", "macedonians", "spartans", "thracians", "puru"];

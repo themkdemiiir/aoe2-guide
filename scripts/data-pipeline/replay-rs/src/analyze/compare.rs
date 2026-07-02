@@ -89,6 +89,7 @@ pub fn build_metrics(
                 mil_apm: mil_cmds as f64 / mins,
                 market_buys,
                 market_sells,
+                reference: None, // attached after findings (attach_references)
             }
         })
         .collect()
@@ -97,6 +98,43 @@ pub fn build_metrics(
 /// More than 2 real players => treat as a team game (picks the team ELO + team benchmark slice).
 pub fn is_team_game(metrics: &[PlayerMetrics]) -> bool {
     metrics.len() > 2
+}
+
+/// Attach each player's RESOLVED benchmark slice (same resolution the findings
+/// use) so the UI can render a You|Opponent|Reference matrix without shipping
+/// the whole benchmark to the client.
+pub fn attach_references(
+    metrics: &mut [PlayerMetrics],
+    bench: &Benchmark,
+    civs: &HashMap<u32, String>,
+    map_slug: &str,
+    mode: &str,
+) {
+    use crate::analyze::model::RefSlice;
+    let team = mode == "team";
+    for m in metrics.iter_mut() {
+        let elo = if team { m.elo_team.or(m.elo_1v1) } else { m.elo_1v1.or(m.elo_team) };
+        let (Some(civ), Some(elo)) = (civs.get(&m.info.civ_id).map(String::as_str), elo) else {
+            continue;
+        };
+        let bucket = data::elo_bucket(elo);
+        if let Some((s, kind)) = bench.slice(civ, map_slug, bucket, mode) {
+            m.reference = Some(RefSlice {
+                feudal_s: s.feudal_s,
+                castle_s: s.castle_s,
+                imperial_s: s.imperial_s,
+                vils_castle: s.vils_castle,
+                age_res_s: age_research_s(civ),
+                bucket: bucket.to_string(),
+                kind: match kind {
+                    data::MatchKind::Exact => "exact",
+                    data::MatchKind::MapMode => "map_mode",
+                    data::MatchKind::MapAll => "map_all",
+                }
+                .to_string(),
+            });
+        }
+    }
 }
 
 fn fmt_secs(ms: u32) -> String {
@@ -319,6 +357,7 @@ mod tests {
             mil_apm: 0.0,
             market_buys: 0,
             market_sells: 0,
+            reference: None,
         }
     }
 

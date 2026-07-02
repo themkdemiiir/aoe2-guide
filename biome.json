@@ -18,7 +18,11 @@
       "!**/public/images",
       "!**/pnpm-lock.yaml",
       "!**/*.css",
-      "!**/*.astro"
+      "!**/*.astro",
+      "!**/src/wasm/pkg",
+      "!**/src/data/*.json",
+      "!**/scripts/data-pipeline/replay-rs/data",
+      "!**/public/*.json"
     ]
   },
   "formatter": {
@@ -63,5 +67,20 @@
         "organizeImports": "on"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "scripts/data-pipeline/**",
+        "tests/civ-generation.test.mjs"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noAssignInExpressions": "off"
+          }
+        }
+      }
+    }
+  ]
 }
