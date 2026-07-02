@@ -84,6 +84,7 @@ pub fn walk(game: &Savegame) -> Walked {
         .filter(|p| p.civ_id != 0)
         .map(|p| PlayerInfo {
             player_number: p.player_number,
+            profile_id: p.profile_id as i64,
             civ_id: p.civ_id,
             name: String::from(&p.name),
             color_id: p.color_id,

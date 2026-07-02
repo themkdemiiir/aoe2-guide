@@ -108,6 +108,7 @@ mod tests {
     fn p(pn: i32, team: u8) -> PlayerInfo {
         PlayerInfo {
             player_number: pn,
+            profile_id: 0,
             civ_id: 1,
             name: String::new(),
             color_id: pn,

@@ -7,8 +7,11 @@
 
 use std::path::PathBuf;
 
+use serde::Serialize;
+
 // --- map families (from data/maps.tsv) ---------------------------------------
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum Family {
     Open,
     Closed,
@@ -60,9 +63,12 @@ pub struct GameMeta {
     pub rec_player: i32,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct PlayerInfo {
     pub player_number: i32,
+    /// Relic profile id — stable player identity across matches. source: replay GameSettings
+    /// players (same field the bulk pipeline's `players` table extracts).
+    pub profile_id: i64,
     pub civ_id: u32,
     pub name: String,
     pub color_id: i32,
@@ -72,7 +78,8 @@ pub struct PlayerInfo {
 }
 
 // --- position / role ---------------------------------------------------------
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum Role {
     Flank,
     Pocket,
@@ -80,7 +87,7 @@ pub enum Role {
 
 // --- analysis outputs --------------------------------------------------------
 /// Everything computed for one player, ready to compare + render.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct PlayerMetrics {
     pub info: PlayerInfo,
     pub feudal_ms: Option<u32>,
@@ -107,7 +114,8 @@ pub struct PlayerMetrics {
 
 /// The four comparison bases: your elo-bucket median, the 2500+ "pro" median, the opponent
 /// in this replay, and absolute-waste thresholds.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum Basis {
     YourElo,
     Pro,
@@ -116,14 +124,15 @@ pub enum Basis {
 }
 
 /// Ordered so `High` sorts last by default; "top fixes" sorts by `Reverse(severity)`.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum Severity {
     Low,
     Med,
     High,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct Finding {
     pub player_number: i32,
     pub metric: String,
@@ -132,4 +141,65 @@ pub struct Finding {
     pub basis: Basis,
     pub severity: Severity,
     pub note: String,
+}
+
+// --- serialized report (the one-way-door JSON contract; see the Phase C spec) --
+/// Bump on any breaking shape change so a consumer can detect instead of misparse.
+pub const SCHEMA_VERSION: u32 = 1;
+
+/// Honesty footer, shared verbatim by terminal + JSON. source: analyzer design spec.
+pub const MACRO_CAVEAT: &str =
+    "macro coach only — no fights, micro, map control, or exact resources.";
+
+/// How to pick the "you" player. Name = --you (case-insensitive); ProfileId = --latest.
+#[allow(dead_code)] // wired up by a later Phase C task (CLI selection); model-only for now
+#[derive(Debug, Clone)]
+pub enum YouSel { Auto, Name(String), ProfileId(i64) }
+
+#[derive(Debug, Clone, Serialize)]
+pub struct ReportMeta {
+    pub map_id: u32,
+    pub map_name: String,
+    pub family: Family,
+    pub mode: String, // "1v1" | "team"
+    pub duration_ms: u32,
+    pub you: i32, // player_number
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct Report {
+    pub schema_version: u32,
+    pub meta: ReportMeta,
+    pub players: Vec<PlayerMetrics>,
+    pub findings: Vec<Finding>, // FULL list, severity-sorted; terminal's take(8) is a render choice
+    pub caveats: Vec<String>,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn report_serializes_versioned_snake_case() {
+        let r = Report {
+            schema_version: SCHEMA_VERSION,
+            meta: ReportMeta {
+                map_id: 9, map_name: "Arabia".into(), family: Family::Open,
+                mode: "1v1".into(), duration_ms: 2_400_000, you: 1,
+            },
+            players: vec![],
+            findings: vec![Finding {
+                player_number: 1, metric: "Feudal up-time".into(), your: "12:10".into(),
+                reference: "11:20".into(), basis: Basis::YourElo, severity: Severity::High,
+                note: "n".into(),
+            }],
+            caveats: vec![MACRO_CAVEAT.to_string()],
+        };
+        let v: serde_json::Value = serde_json::from_str(&serde_json::to_string(&r).unwrap()).unwrap();
+        assert_eq!(v["schema_version"], 1);
+        assert_eq!(v["meta"]["family"], "open");
+        assert_eq!(v["meta"]["mode"], "1v1");
+        assert_eq!(v["findings"][0]["basis"], "your_elo");
+        assert_eq!(v["findings"][0]["severity"], "high");
+    }
 }

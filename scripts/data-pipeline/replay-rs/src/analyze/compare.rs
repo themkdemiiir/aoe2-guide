@@ -263,6 +263,7 @@ mod tests {
         PlayerMetrics {
             info: PlayerInfo {
                 player_number: pn,
+                profile_id: 0,
                 civ_id: 2,
                 name: "MKD".into(),
                 color_id: pn,
