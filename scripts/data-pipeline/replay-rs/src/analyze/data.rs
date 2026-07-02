@@ -31,8 +31,14 @@ pub struct Slice {
     pub feudal_s: Option<f64>,
     pub castle_s: Option<f64>,
     pub imperial_s: Option<f64>,
-    // villager medians intentionally omitted: historical match_ages villagers are per-age,
-    // not cumulative like the analyzer's count — bases differ, so we don't compare them in v1.
+    /// Median villagers trained by Castle Age among WINNERS of this slice.
+    /// Basis verified comparable to the analyzer's vils@Castle: match_ages
+    /// `villagers` are per-AGE-WINDOW counts (dark med 23 / feudal 11 /
+    /// castle 42 — windows, not snapshots), so dark+feudal summed = trained by
+    /// castle-up, same as our cumulative DeQueue count (both exclude starting
+    /// villagers). Built by build-benchmark-vils.{sql,mjs}; absent cells stay None.
+    #[serde(default)]
+    pub vils_castle: Option<f64>,
 }
 
 // civ -> map(slug) -> elo_bucket -> mode -> Slice. Map/civ rollups live under the "all" key.
@@ -139,9 +145,11 @@ mod tests {
         // arena is much faster to Castle (Fast Castle) — proves map-specificity
         let (a, _) = b.slice("franks", "arena", "1400-1649", "team").expect("franks arena");
         assert!(a.castle_s.unwrap() < s.castle_s.unwrap());
-        // a sparse 1v1 cell falls back to a map rollup (not an exact cell)
-        let (_, kind2) = b.slice("franks", "arabia", "1400-1649", "1v1").expect("fallback");
-        assert_ne!(kind2, MatchKind::Exact);
+        // the 2026-07 regen keys mode by games.ladder, so REAL 1v1 cells exist now
+        let (v, kind2) = b.slice("franks", "arabia", "1400-1649", "1v1").expect("1v1 exact");
+        assert_eq!(kind2, MatchKind::Exact);
+        // and they carry the winner vils@Castle medians (build-benchmark-vils)
+        assert!(v.vils_castle.expect("vils merged") > 20.0);
         // unknown map -> None (never compare against an unrelated map)
         assert!(b.slice("franks", "no_such_map", "1400-1649", "team").is_none());
     }
@@ -149,7 +157,7 @@ mod tests {
     #[test]
     fn slice_prefers_same_mode_rollup_over_all_mode() {
         use std::collections::HashMap;
-        let mk = |feudal: f64| Slice { feudal_s: Some(feudal), castle_s: None, imperial_s: None };
+        let mk = |feudal: f64| Slice { feudal_s: Some(feudal), castle_s: None, imperial_s: None, vils_castle: None };
         let mut modes = HashMap::new();
         modes.insert("1v1".to_string(), mk(100.0));
         modes.insert("all".to_string(), mk(200.0)); // all-mode (team-heavy) is slower

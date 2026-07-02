@@ -166,6 +166,17 @@ pub fn findings(
                             &format!("Slower to Imperial than the {ref_desc}.")));
                     }
                 }
+                // --- vs WINNERS at this slice: villagers trained by Castle Age.
+                // Gap thresholds ≈ 2.5min / 5min of lost TC production (25s/vil).
+                if let (Some(_), Some(ref_v)) = (m.castle_ms, s.vils_castle) {
+                    let yours = m.vils_castle as f64;
+                    if yours + 6.0 < ref_v {
+                        let sev = if yours + 12.0 < ref_v { Severity::High } else { Severity::Med };
+                        out.push(mk(pn, "villagers by Castle", &m.vils_castle.to_string(), &format!("~{ref_v:.0}"),
+                            Basis::YourElo, sev,
+                            &format!("Winners in this bracket train ~{ref_v:.0} villagers by Castle Age — TC idle time usually explains the gap.")));
+                    }
+                }
             }
             // --- vs PRO (the exact 2500+ median on this map) — aspirational, only when far behind ---
             if let Some((p, data::MatchKind::Exact)) = bench.slice(civ, map_slug, "2500+", mode) {
