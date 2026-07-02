@@ -15,168 +15,174 @@
     "arabia",
     "arena",
     "mega_random",
-    "glade",
     "nomad",
-    "hideout",
-    "haboob",
-    "four_lakes",
+    "glade",
     "african_clearing",
-    "gold_rush",
-    "lowland",
-    "socotra",
-    "land_nomad",
-    "graveyards",
-    "fortress",
-    "kawasan",
-    "yucatan",
-    "black_forest",
-    "valley",
-    "fortified_clearing",
-    "scandanavia",
     "enclosed",
-    "golden_swamp",
-    "acropolis",
+    "land_nomad",
+    "four_lakes",
+    "haboob",
+    "lowland",
+    "hideout",
+    "gold_rush",
+    "valley",
     "steppe",
-    "marketplace",
-    "land_madness",
+    "black_forest",
+    "socotra",
+    "fortress",
+    "yucatan",
+    "scandanavia",
+    "graveyards",
+    "acropolis",
     "runestones",
-    "mediterranean",
-    "canals",
+    "kawasan",
+    "fortified_clearing",
+    "golden_swamp",
     "michi",
+    "mountain_pass",
+    "marketplace",
+    "mediterranean",
+    "ghost_lake",
+    "land_madness",
     "cenotes",
-    "passage",
+    "canals",
+    "migration",
+    "hill_fort",
     "shrubland",
-    "frigid_lake",
+    "continental",
+    "passage",
     "atacama",
+    "baltic",
+    "frigid_lake",
     "sherwood_forest",
     "capricious",
     "wade",
     "mongolia",
     "paradise_island",
-    "hill_fort",
+    "salt_marsh",
+    "islands",
     "pacific_islands",
     "serengeti",
     "hamburger",
-    "shoals",
     "prairie",
+    "shoals",
     "kilimanjaro",
-    "migration"
+    "oasis"
   ],
   "mapNames": [
     "Arabia",
     "Arena",
     "Mega Random",
-    "Glade",
     "Nomad",
-    "Hideout",
-    "Haboob",
-    "Four Lakes",
+    "Glade",
     "African Clearing",
-    "Gold Rush",
-    "Lowland",
-    "Socotra",
-    "Land Nomad",
-    "Graveyards",
-    "Fortress",
-    "Kawasan",
-    "Yucatan",
-    "Black Forest",
-    "Valley",
-    "Fortified Clearing",
-    "Scandanavia",
     "Enclosed",
-    "Golden Swamp",
-    "Acropolis",
+    "Land Nomad",
+    "Four Lakes",
+    "Haboob",
+    "Lowland",
+    "Hideout",
+    "Gold Rush",
+    "Valley",
     "Steppe",
-    "Marketplace",
-    "Land Madness",
+    "Black Forest",
+    "Socotra",
+    "Fortress",
+    "Yucatan",
+    "Scandanavia",
+    "Graveyards",
+    "Acropolis",
     "Runestones",
-    "Mediterranean",
-    "Canals",
+    "Kawasan",
+    "Fortified Clearing",
+    "Golden Swamp",
     "Michi",
+    "Mountain Pass",
+    "Marketplace",
+    "Mediterranean",
+    "Ghost Lake",
+    "Land Madness",
     "Cenotes",
-    "Passage",
+    "Canals",
+    "Migration",
+    "Hill Fort",
     "Shrubland",
-    "Frigid Lake",
+    "Continental",
+    "Passage",
     "Atacama",
+    "Baltic",
+    "Frigid Lake",
     "Sherwood Forest",
     "Capricious",
     "Wade",
     "Mongolia",
     "Paradise Island",
-    "Hill Fort",
+    "Salt Marsh",
+    "Islands",
     "Pacific Islands",
     "Serengeti",
     "Hamburger",
-    "Shoals",
     "Prairie",
+    "Shoals",
     "Kilimanjaro",
-    "Migration"
+    "Oasis"
   ],
   "months": [
     {
-      "patch": "2026-07",
-      "label": "Jul 2026"
+      "patch": "179158",
+      "label": "Update 179158"
     },
     {
-      "patch": "2026-06",
-      "label": "Jun 2026"
+      "patch": "178524",
+      "label": "Update 178524"
     },
     {
-      "patch": "2026-05",
-      "label": "May 2026"
+      "patch": "177723",
+      "label": "Update 177723"
     },
     {
-      "patch": "2026-04",
-      "label": "Apr 2026"
+      "patch": "175278",
+      "label": "Update 175278"
     },
     {
-      "patch": "2026-03",
-      "label": "Mar 2026"
+      "patch": "174992",
+      "label": "Update 174992"
     },
     {
-      "patch": "2026-02",
-      "label": "Feb 2026"
+      "patch": "170934",
+      "label": "Update 170934"
     },
     {
-      "patch": "2026-01",
-      "label": "Jan 2026"
+      "patch": "169652",
+      "label": "Update 169652"
     },
     {
-      "patch": "2025-12",
-      "label": "Dec 2025"
+      "patch": "162286",
+      "label": "Update 162286"
     },
     {
-      "patch": "2025-11",
-      "label": "Nov 2025"
+      "patch": "153015",
+      "label": "Update 153015"
     },
     {
-      "patch": "2025-10",
-      "label": "Oct 2025"
+      "patch": "147949",
+      "label": "Update 147949"
     },
     {
-      "patch": "2025-09",
-      "label": "Sep 2025"
+      "patch": "143421",
+      "label": "Update 143421"
     },
     {
-      "patch": "2025-08",
-      "label": "Aug 2025"
+      "patch": "141935",
+      "label": "Update 141935"
     },
     {
-      "patch": "2025-07",
-      "label": "Jul 2025"
+      "patch": "125283",
+      "label": "Update 125283"
     },
     {
-      "patch": "2025-06",
-      "label": "Jun 2025"
-    },
-    {
-      "patch": "2025-05",
-      "label": "May 2025"
-    },
-    {
-      "patch": "2025-04",
-      "label": "Apr 2025"
+      "patch": "111772",
+      "label": "Update 111772"
     }
   ]
 }

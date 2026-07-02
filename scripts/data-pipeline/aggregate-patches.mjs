@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 // scripts/data-pipeline/aggregate-patches.mjs
 //
-// Build a REAL, date-aligned patch axis from the self-collected World's Edge
-// crawl (all sources via lib/crawl-stream.mjs, ranked-RM 1v1, whole current
-// id-space era). The API exposes no build number, but months are a clean dated
-// axis (gamemod_id flips too often). We aggregate per civ × month, then splice
-// that byPatch into civ-meta.json, replacing the frozen aoestats build-number
-// patches. Overall / byElo / byMap stay whatever the refresh scripts wrote.
+// Build the patch axis from REAL game builds ("Update 179158"…). Back months
+// (≤ archive end) come from the aoestats archive's per-match `patch` column;
+// the crawl era maps gamemod_id → build via src/data/patch-index.json
+// (replay-verified for recent builds, release-date-aligned for the rest).
+// Aggregates per civ × build, then splices byPatch into civ-meta.json.
+// Overall / byElo / byMap stay whatever the refresh scripts wrote.
 // Civ ids are the Relic API space (relic-civ-id-map.json).
 //
 // Runs on the box that holds data-cache (the VM).
@@ -17,43 +17,46 @@ import path from "node:path";
 import { AOESTATS_END_MONTH } from "./lib/buckets.mjs";
 import { crawlRecords } from "./lib/crawl-stream.mjs";
 import { duck } from "./lib/duck.mjs";
+import { buildOf, patchLabel } from "./lib/patch-axis.mjs";
 import { isRanked1v1, relicCivSlug } from "./lib/relic-map.mjs";
 import { pct } from "./lib/stats.mjs";
 
 const META = path.resolve("src/data/civ-meta.json");
 
-const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
+const guideCivs = new Set(
+  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
+    (c) => c.slug,
+  ),
+);
 
-const MIN_PATCH_MATCHES = 3000; // a gamemod needs this many matches to count as a "patch"
+const MIN_PATCH_MATCHES = 3000; // a build needs this many matches to count as a "patch"
 const MIN_CIV_GAMES = 100; // per civ × patch gate (self-collected sample is smaller than aoestats)
 const MAX_PATCHES = 16; // keep the most recent N patches
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-// gamemod_id flips several times a month (hotfixes), so bucket by CALENDAR MONTH
-// for a clean, unambiguous dated patch axis.
 const monthKey = (t) => new Date(t * 1000).toISOString().slice(0, 7);
-const monthLabel = (key) => { const [y, mo] = key.split("-"); return `${MONTHS[+mo - 1]} ${y}`; };
 
-// --- pass 1: accumulate per month + per civ × month --------------------------
-const gm = {}; // monthKey -> { matches }
-const civPatch = {}; // slug -> monthKey -> { g, w }
+// --- accumulate per BUILD + per civ × build ----------------------------------
+const gm = {}; // build -> { matches }
+const civPatch = {}; // slug -> build -> { g, w }
 
 // Back months (<= archive end) come from the aoestats archive: full corpus,
 // name-derived civs, real per-match dates — the crawl only samples history.
 const HOME = process.env.HOME;
-const HIST_M = `SELECT game_id, strftime(started_timestamp, '%Y-%m') AS month
+const HIST_M = `SELECT game_id, CAST(patch AS VARCHAR) AS build, strftime(started_timestamp, '%Y-%m') AS month
   FROM read_parquet('${HOME}/aoestats/m_*.parquet')
   WHERE leaderboard = 'random_map' AND started_timestamp >= TIMESTAMP '2024-07-01'`;
-for (const r of duck(`WITH m AS (${HIST_M}) SELECT month, count(*) AS matches FROM m GROUP BY 1`)) {
-  if (r.month > AOESTATS_END_MONTH) continue;
-  (gm[r.month] ??= { matches: 0 }).matches += Number(r.matches);
+for (const r of duck(
+  `WITH m AS (${HIST_M}) SELECT build, count(*) AS matches FROM m WHERE month <= '${AOESTATS_END_MONTH}' GROUP BY 1`,
+)) {
+  (gm[r.build] ??= { matches: 0 }).matches += Number(r.matches);
 }
 for (const r of duck(`WITH m AS (${HIST_M})
-  SELECT m.month, p.civ, count(*) AS g, sum(p.winner::int) AS w
+  SELECT m.build, p.civ, count(*) AS g, sum(p.winner::int) AS w
   FROM read_parquet('${HOME}/aoestats/p_*.parquet') p JOIN m USING (game_id)
+  WHERE m.month <= '${AOESTATS_END_MONTH}'
   GROUP BY 1, 2`)) {
-  if (r.month > AOESTATS_END_MONTH || !guideCivs.has(r.civ)) continue;
-  const cp = ((civPatch[r.civ] ??= {})[r.month] ??= { g: 0, w: 0 });
+  if (!guideCivs.has(r.civ)) continue;
+  const cp = ((civPatch[r.civ] ??= {})[r.build] ??= { g: 0, w: 0 });
   cp.g += Number(r.g);
   cp.w += Number(r.w);
 }
@@ -61,8 +64,9 @@ for (const r of duck(`WITH m AS (${HIST_M})
 let lines = 0;
 for await (const m of crawlRecords()) {
   if (!isRanked1v1(m)) continue;
-  const g = monthKey(m.completed);
-  if (g <= AOESTATS_END_MONTH) continue; // archive owns the back months
+  if (monthKey(m.completed) <= AOESTATS_END_MONTH) continue; // archive owns the back months
+  const g = buildOf(m); // throws on unmapped gamemods — never defaults
+  if (!g) continue; // documented anomaly gamemods (see patch-index.json)
   lines++;
   (gm[g] ??= { matches: 0 }).matches++;
   for (const pl of m.players ?? []) {
@@ -74,12 +78,12 @@ for await (const m of crawlRecords()) {
   }
 }
 
-// --- pick the patches: recent months with enough matches ---------------------
+// --- pick the patches: recent BUILDS with enough matches (builds are monotonic) ---
 const patches = Object.entries(gm)
   .filter(([, v]) => v.matches >= MIN_PATCH_MATCHES)
-  .sort((a, b) => b[0].localeCompare(a[0]))
+  .sort((a, b) => Number(b[0]) - Number(a[0]))
   .slice(0, MAX_PATCHES)
-  .map(([g, v]) => ({ patch: g, label: monthLabel(g), matches: v.matches }));
+  .map(([g, v]) => ({ patch: g, label: patchLabel(g), matches: v.matches }));
 const keep = new Set(patches.map((p) => String(p.patch)));
 
 // --- splice byPatch into civ-meta -------------------------------------------
@@ -92,14 +96,20 @@ for (const [slug, m] of Object.entries(meta.civs)) {
     if (!keep.has(g) || v.g < MIN_CIV_GAMES) continue;
     byPatch[g] = { games: v.g, winRate: pct(v.w / v.g) };
   }
-  if (Object.keys(byPatch).length) { m["1v1"].byPatch = byPatch; civsUpdated++; }
+  if (Object.keys(byPatch).length) {
+    m["1v1"].byPatch = byPatch;
+    civsUpdated++;
+  }
 }
 
-meta.patches = patches; // now [{patch:gamemod, label:"Jun 2026", matches}]
-meta.patchSource = "self-collected World's Edge crawl (ranked RM 1v1, monthly dated patch axis)";
+meta.patches = patches; // [{patch:"179158", label:"Update 179158", matches}]
+meta.patchSource =
+  "official game builds — aoestats archive patch column + gamemod→build index for the crawl era (ranked RM 1v1)";
 meta.generated = new Date().toISOString().slice(0, 10);
 writeFileSync(META, `${JSON.stringify(meta, null, 2)}\n`, "utf8");
 
-console.log(`patches: ${lines} crawl rows · ${patches.length} dated patches · ${civsUpdated} civs got byPatch`);
-console.log(`newest patch: gamemod ${patches[0]?.patch} = ${patches[0]?.label} (${patches[0]?.matches} matches)`);
+console.log(
+  `patches: ${lines} crawl rows · ${patches.length} builds on the axis · ${civsUpdated} civs got byPatch`,
+);
+console.log(`newest patch: ${patches[0]?.label} (${patches[0]?.matches} matches)`);
 console.log(`→ ${META}`);

@@ -1,0 +1,40 @@
+{
+  "_source": "Official AoE2:DE update posts (ageofempires.com) cross-checked against the Steam news API (app 813780) and the Fandom patch-chain; verified 2026-07-02. Hotfix builds without a standalone official post are dated from the Fandom wiki.",
+  "_gamemodNote": "The Relic API exposes no build number, only gamemod_id (the data-mod version, bumped once per game update). June 2026 pairs are PROVEN by joining crawl match_ids to replay-file headers (1794→177723, 1796→178524, 1797→179158); earlier pairs follow the same 1:1 order-preserving sequence, with each gamemod's first-seen date matching its build's release day (1749: 2026-02-23 = Update 169652's release; 1791: 2026-04-23 = 174992; 1792: 2026-04-28 = 175278). Gamemods 1703/1742/1744 only cover archive-owned months and are never consulted by the pipeline.",
+  "_ignoreNote": "ignoreGamemods are sub-0.01% anomalies on the ranked ladder (1782: 1 match on 2026-03-31; 1800: 8 matches on 2026-06-25) — likely preview/event lobbies misreported as ranked. Excluded consciously rather than guessed at.",
+  "builds": [
+    { "build": 179158, "label": "Update 179158", "released": "2026-06-16", "note": "hotfix — current live build", "source": "https://ageofempires.fandom.com/wiki/Update_179158" },
+    { "build": 178524, "label": "Update 178524", "released": "2026-06-09", "note": "hotfix", "source": "https://ageofempires.fandom.com/wiki/Update_178524" },
+    { "build": 177723, "label": "Update 177723", "released": "2026-06-02", "source": "https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-177723/" },
+    { "build": 175278, "label": "Update 175278", "released": "2026-04-28", "note": "hotfix", "source": "https://ageofempires.fandom.com/wiki/Update_175278" },
+    { "build": 174992, "label": "Update 174992", "released": "2026-04-23", "source": "https://ageofempires.fandom.com/wiki/Update_174992" },
+    { "build": 170934, "label": "Update 170934", "released": "2026-03-12", "source": "https://ageofempires.fandom.com/wiki/Update_170934" },
+    { "build": 169652, "label": "Update 169652", "released": "2026-02-23", "note": "hotfix", "source": "https://ageofempires.fandom.com/wiki/Update_169652" },
+    { "build": 169409, "label": "Update 169409", "released": "2026-02-19", "note": "hotfix", "source": "https://ageofempires.fandom.com/wiki/Update_169409" },
+    { "build": 169123, "label": "Update 169123", "released": "2026-02-17", "note": "The Last Chieftains DLC + naval rework", "source": "https://ageofempires.fandom.com/wiki/Update_169123" },
+    { "build": 162286, "label": "Update 162286", "released": "2025-12-02", "source": "https://ageofempires.fandom.com/wiki/Update_162286" },
+    { "build": 160062, "label": "Update 160062", "released": "2025-11-06", "source": "https://ageofempires.fandom.com/wiki/Update_160062" },
+    { "build": 158041, "label": "Update 158041", "released": "2025-10-14", "note": "Chronicles: Alexander the Great DLC", "source": "https://ageofempires.fandom.com/wiki/Update_158041" },
+    { "build": 155976, "label": "Update 155976", "released": "2025-09-16", "source": "https://ageofempires.fandom.com/wiki/Update_155976" },
+    { "build": 153638, "label": "Update 153638", "released": "2025-08-20", "source": "https://ageofempires.fandom.com/wiki/Update_153638" },
+    { "build": 153015, "label": "Update 153015", "released": "2025-08-12", "source": "https://ageofempires.fandom.com/wiki/Update_153015" },
+    { "build": 147949, "label": "Update 147949", "released": "2025-06-25", "source": "https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-147949/" },
+    { "build": 145651, "label": "Update 145651", "released": "2025-05-28", "source": "https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-145651/" },
+    { "build": 144358, "label": "Update 144358", "released": "2025-05-12", "source": "https://ageofempires.fandom.com/wiki/Update_144358" },
+    { "build": 143421, "label": "Update 143421", "released": "2025-05-06", "note": "The Three Kingdoms DLC", "source": "https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-143421/" },
+    { "build": 143191, "label": "Update 143191", "released": "2025-04-28", "source": "https://ageofempires.fandom.com/wiki/Update_143191" },
+    { "build": 141935, "label": "Update 141935", "released": "2025-04-10", "source": "https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-update-141935/" },
+    { "build": 133431, "label": "Update 133431", "released": "2025-01-30", "source": "https://www.ageofempires.com/news/age-of-empires-ii-definitive-edition-minor-update-133431/" }
+  ],
+  "gamemodToBuild": {
+    "1703": 162286,
+    "1749": 169652,
+    "1768": 170934,
+    "1791": 174992,
+    "1792": 175278,
+    "1794": 177723,
+    "1796": 178524,
+    "1797": 179158
+  },
+  "ignoreGamemods": [1782, 1800]
+}

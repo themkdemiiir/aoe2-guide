@@ -86,8 +86,8 @@ const serverTiers = labels.tiers
     <h1 class="mt-2 font-display text-2xl text-ink sm:text-3xl">{t(lang, "nav.civs")}</h1>
     <p class="mt-1 font-mono text-xs text-stone-700">
       {tr
-        ? `53 uygarlık · ${games1v1Label} ranked 1v1 maç · patch ${latestPatch}`
-        : `53 civs · ${games1v1Label} ranked 1v1 games · patch ${latestPatch}`}
+        ? `53 uygarlık · ${games1v1Label} ranked 1v1 maç · ${latestPatch}`
+        : `53 civs · ${games1v1Label} ranked 1v1 games · ${latestPatch}`}
     </p>
 
     {/* --- Combinable filters: Map × Elo × Patch. All three intersect (e.g.
@@ -141,7 +141,7 @@ const serverTiers = labels.tiers
     </div>
 
     <p class="mt-4 font-mono text-[11px] tracking-wide text-stone-700/80">
-      {t(lang, "data.source")} · {games1v1Label} {tr ? "maç" : "games"} · patch {latestPatch}
+      {t(lang, "data.source")} · {games1v1Label} {tr ? "maç" : "games"} · {latestPatch}
     </p>
   </section>
 

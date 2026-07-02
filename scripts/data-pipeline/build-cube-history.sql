@@ -10,10 +10,11 @@
 SET temp_directory='/tmp/duckspill-cubeh';
 COPY (
 WITH m AS (
-  SELECT game_id, map, strftime(started_timestamp, '%Y-%m') AS month
+  SELECT game_id, map, patch,
+         strftime(started_timestamp, '%Y-%m') AS month
   FROM read_parquet('/home/mkd/aoestats/m_*.parquet')
   WHERE leaderboard = 'random_map'
-    AND started_timestamp >= TIMESTAMP '2024-07-01'  -- more than the 16-month axis will ever need
+    AND started_timestamp >= TIMESTAMP '2024-07-01'  -- more than the axis will ever need
 ),
 p AS (
   SELECT game_id, civ, winner,
@@ -26,10 +27,10 @@ p AS (
               ELSE '2500+' END AS bucket
   FROM read_parquet('/home/mkd/aoestats/p_*.parquet')
 )
-SELECT p.civ, p.bucket, m.map, m.month,
+SELECT p.civ, p.bucket, m.map, m.patch, m.month,
        count(*) AS games, sum(p.winner::int) AS wins
 FROM p JOIN m USING (game_id)
 WHERE p.bucket <> 'unknown'
-GROUP BY 1, 2, 3, 4
+GROUP BY 1, 2, 3, 4, 5
 HAVING count(*) >= 20
 ) TO '/tmp/cube-history.csv' (FORMAT CSV, HEADER);
