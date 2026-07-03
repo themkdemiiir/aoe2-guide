@@ -50,6 +50,9 @@ if [ -x "$REPLAY_BIN" ]; then
     || log "WARN: replay seed exited $?"
   "$REPLAY_BIN" run --db "$REPLAY_DIR/manifest.sqlite" --out "$REPLAY_DIR/shards" \
     --limit "${REPLAY_LIMIT:-1500}" || log "WARN: replay run exited $?"
+  # audit the gamemod→build map against fresh replay headers (patch-index.json)
+  node scripts/data-pipeline/check-patch-axis.mjs \
+    || log "ALERT: patch-axis check FAILED — update src/data/patch-index.json before any stats refresh"
 else
   log "WARN: replay-rs binary missing — skipping replay-truth refresh"
 fi
