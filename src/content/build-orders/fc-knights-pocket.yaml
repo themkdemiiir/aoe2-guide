@@ -18,6 +18,7 @@ steps:
       tr: 6 → TC altında koyun
     icons:
       - food
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +4 → wood, build Lumber Camp
@@ -25,6 +26,7 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 16
     assign:
       en: 1 lures boar; +5 → berries, build Mill (research Loom)
@@ -32,6 +34,7 @@ steps:
     icons:
       - food
       - mill
+    resources: { food: 12, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 24
     assign:
       en: +2 → farms, +6 → wood (2nd Lumber Camp)
@@ -39,12 +42,14 @@ steps:
     icons:
       - farm
       - wood
+    resources: { food: 14, wood: 10, gold: 0, stone: 0, builder: 0 }
   - villagers: 27
     assign:
       en: +3 → gold (Mining Camp); click Feudal at 27 (~10:00)
       tr: +3 → altın (Mining Camp); 27'de Feodal'a tıkla (~10:00)
     icons:
       - gold
+    resources: { food: 14, wood: 10, gold: 3, stone: 0, builder: 0 }
   - villagers: 27
     phase: feudal
     time: "10:00"
@@ -54,6 +59,7 @@ steps:
     icons:
       - stable
       - blacksmith
+    resources: { food: 14, wood: 10, gold: 3, stone: 0, builder: 0 }
   - villagers: 29
     assign:
       en: +2 → gold; move 2 berry villagers to farms; click Castle Age
@@ -61,6 +67,7 @@ steps:
     icons:
       - gold
       - farm
+    resources: { food: 14, wood: 10, gold: 5, stone: 0, builder: 0 }
   - villagers: 29
     phase: castle
     time: "17:00"
@@ -70,12 +77,14 @@ steps:
     icons:
       - stable
       - knight
+    resources: { food: 14, wood: 10, gold: 5, stone: 0, builder: 0 }
   - assign:
       en: Research Forging + Scale Barding Armor; add Knights and farms as gold allows
       tr: Forging + Scale Barding Armor araştır; altın yettikçe Knight ve çiftlik ekle
     icons:
       - knight
       - bloodlines
+    resources: { food: 14, wood: 10, gold: 5, stone: 0, builder: 0 }
 intro:
   en: >-
     **Goal:** Click Feudal at 27 villagers (~10:00), reach Castle Age around 17:00 with 29 villagers, then flood Knights

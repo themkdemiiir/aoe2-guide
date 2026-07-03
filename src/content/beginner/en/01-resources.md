@@ -1,6 +1,7 @@
 ---
 slug: 01-resources
 title: Resources & Villagers
+description: "AoE2 resources and villagers: what Food, Wood, Gold, and Stone are used for, continuous villager production, early allocation, and idle time costs."
 order: 1
 ---
 

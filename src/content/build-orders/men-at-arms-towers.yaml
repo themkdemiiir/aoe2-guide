@@ -20,6 +20,7 @@ steps:
       - food
       - house
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 7
     assign:
       en: +1 → build Lumber Camp
@@ -27,18 +28,21 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 1, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +3 → collect wood
       tr: +3 → odun topla
     icons:
       - wood
+    resources: { food: 6, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → lure the nearest boar
       tr: +1 → en yakın domuzu çek
     icons:
       - food
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 13
     assign:
       en: "+1 (→12) build 2 Houses near the berries; +1 (→13) build Mill next to them"
@@ -47,18 +51,21 @@ steps:
       - house
       - mill
       - food
+    resources: { food: 9, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 15
     assign:
       en: +2 → berries; lure 2nd boar
       tr: +2 → meyveler; 2. domuzu çek
     icons:
       - food
+    resources: { food: 11, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     assign:
       en: +3 → sheep or boar food
       tr: +3 → koyun veya domuz yiyeceği
     icons:
       - food
+    resources: { food: 14, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     assign:
       en: +1 → build Barracks and train 3 Militia; this villager then mines Stone
@@ -67,6 +74,7 @@ steps:
       - barracks
       - militia
       - stone
+    resources: { food: 14, wood: 4, gold: 0, stone: 1, builder: 0 }
   - villagers: 21
     assign:
       en: "+1 (→20) build Mining Camp next to gold; +1 (→21) mine gold; research Loom and advance to Feudal Age"
@@ -79,6 +87,7 @@ steps:
       - gold
       - loom
       - feudal-age
+    resources: { food: 14, wood: 4, gold: 2, stone: 1, builder: 0 }
   - villagers: 21
     assign:
       en: "Feudal: upgrade Militia to Men-at-Arms; send the Militia plus your Stone/Gold villagers forward"
@@ -86,6 +95,7 @@ steps:
     icons:
       - man-at-arms
       - watch-tower
+    resources: { food: 14, wood: 4, gold: 0, stone: 0, builder: 3 }
 intro:
   en: >-
     **Goal:** Control your opponent's access to resources by placing towers in strategic locations in their base and

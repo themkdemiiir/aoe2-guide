@@ -1,6 +1,7 @@
 ---
 slug: 05-walling-and-placement
 title: "Walling & Building Placement"
+description: "Walling and building placement in AoE2: when to wall, using military buildings as wall segments, smart economy placement, and the three wall types."
 order: 5
 ---
 

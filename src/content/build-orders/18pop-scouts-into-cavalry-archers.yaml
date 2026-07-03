@@ -19,6 +19,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 8
     assign:
       en: +2 → wood, build Lumber Camp
@@ -26,12 +27,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 9
     assign:
       en: +1 → lure the first boar
       tr: +1 → ilk domuzu çek
     icons:
       - food
+    resources: { food: 7, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +1 → build House, then Mill on berries
@@ -40,12 +43,14 @@ steps:
       - house
       - mill
       - food
+    resources: { food: 8, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 16
     assign:
       en: +6 → hunt (lure 2nd boar), shoot deer with the Scout
       tr: +6 → avda (2. domuzu çek), Scout ile geyikleri vur
     icons:
       - food
+    resources: { food: 14, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     phase: feudal
     time: "8:50"
@@ -58,6 +63,7 @@ steps:
     icons:
       - wood
       - loom
+    resources: { food: 14, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     assign:
       en: "Feudal: 5 hunt vils → wood, build 2nd Lumber Camp (9 on wood)"
@@ -65,6 +71,7 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 9, wood: 9, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     assign:
       en: 5 hunt vils → berries; 1 builds Barracks; 2 build Stable
@@ -73,6 +80,7 @@ steps:
       - food
       - barracks
       - stable
+    resources: { food: 6, wood: 9, gold: 0, stone: 0, builder: 3 }
   - assign:
       en: Make Scout Cavalry; Double-Bit Axe; wall with the Stable builders; seed Farms toward ~15
       tr: Scout Cavalry üret; Double-Bit Axe; Stable kuranlarla duvar ör; ~15'e doğru Farm ek
@@ -83,6 +91,7 @@ steps:
       - scout-cavalry
       - double-bit-axe
       - farm
+    resources: { food: 7, wood: 9, gold: 0, stone: 0, builder: 2 }
   - assign:
       en: +5 → gold, build Mining Camp; build Blacksmith; finish walling
       tr: +5 → altına, Mining Camp kur; Blacksmith kur; duvarı tamamla
@@ -90,6 +99,7 @@ steps:
       - gold
       - mining-camp
       - blacksmith
+    resources: { food: 9, wood: 9, gold: 5, stone: 0, builder: 0 }
   - phase: castle
     assign:
       en: Click Castle Age; redistribute eco, add gold; build 2 Archery Ranges
@@ -99,9 +109,11 @@ steps:
       tr: Önce Fletching + Bloodlines araştır
     icons:
       - archery-range
+    resources: { food: 15, wood: 12, gold: 8, stone: 0, builder: 0 }
   - assign:
       en: Pump Cavalry Archers from both Ranges; research Bow Saw, Bodkin Arrow, Husbandry
       tr: Her iki Range'den Cavalry Archers bas; Bow Saw, Bodkin Arrow, Husbandry araştır
+    resources: { food: 15, wood: 12, gold: 8, stone: 0, builder: 0 }
 intro:
   en: >-
     Open with Scouts for map control, wall up safely behind them, then hide a Cavalry Archer mass behind your walls in

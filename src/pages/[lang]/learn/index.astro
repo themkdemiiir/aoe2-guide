@@ -12,7 +12,7 @@ const chapters = (await getLocalizedEntries("beginner", lang)).sort(
   (a, b) => a.data.order - b.data.order
 );
 ---
-<BaseLayout title={t(lang, "nav.learn")} canonicalPath="/learn">
+<BaseLayout title={t(lang, "nav.learn")} description={t(lang, "meta.learn")} canonicalPath="/learn">
   <section class="mx-auto max-w-prose px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "nav.learn")}</h1>
     {chapters.length === 0 ? (

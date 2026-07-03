@@ -1,6 +1,7 @@
 ---
 slug: 02-build-orders
 title: Build Orders
+description: "Build orders in AoE2: what they are, how steps are written, and the three foundational openings — 18-pop Scouts, 19-pop Archers, and Fast Castle."
 order: 2
 prereq: [01-resources]
 ---

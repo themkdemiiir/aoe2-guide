@@ -1,6 +1,7 @@
 ---
 slug: 03-scouting
 title: "Scouting"
+description: "Scouting in AoE2: control your scout manually, map your own base first, read the enemy economy and upgrades, and orbit safely around their Town Center."
 order: 3
 prereq: [01-resources]
 ---

@@ -20,6 +20,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 3, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 6
     assign:
       en: +3 → sheep; first 2 Villagers build Houses on the way
@@ -27,6 +28,7 @@ steps:
     icons:
       - food
       - house
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +4 → wood, Lumber Camp on nearest trees
@@ -34,12 +36,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → lure nearest Boar to the TC
       tr: +1 → en yakın Boar'ı TC'ye çek
     icons:
       - food
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 12
     assign:
       en: +1 → build Dock by deep fish, then a House; queue 4x Fishing Ships
@@ -47,6 +51,7 @@ steps:
     icons:
       - dock
       - fishing-ship
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 1 }
   - villagers: 14
     assign:
       en: +2 → wood at the Lumber Camp
@@ -54,18 +59,21 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 7, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 15
     assign:
       en: +1 → lure 2nd Boar to the TC
       tr: +1 → 2. Boar'ı TC'ye çek
     icons:
       - food
+    resources: { food: 8, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 20
     assign:
       en: +5 → sheep / Boar meat under TC
       tr: +5 → TC altında koyun / Boar eti
     icons:
       - food
+    resources: { food: 13, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 21
     assign:
       en: >-
@@ -82,6 +90,7 @@ steps:
       - feudal-age
       - double-bit-axe
       - fire-galley
+    resources: { food: 14, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 23
     assign:
       en: +2 → gold, build Mining Camp
@@ -89,6 +98,7 @@ steps:
     icons:
       - gold
       - mining-camp
+    resources: { food: 14, wood: 6, gold: 2, stone: 0, builder: 1 }
   - villagers: 25
     assign:
       en: +1 Mill on Berries, +1 → Berries; build a 2nd and 3rd Dock (3 Docks total)
@@ -97,6 +107,7 @@ steps:
       - mill
       - food
       - dock
+    resources: { food: 16, wood: 6, gold: 2, stone: 0, builder: 1 }
 intro:
   en: >-
     **Goal:** Open a strong fishing economy behind defensive walls, take Feudal Age at 21 villagers, and contest the

@@ -19,6 +19,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +4 → wood; first builds the Lumber Camp, then all gather wood
@@ -26,12 +27,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → lure and gather the first boar
       tr: +1 → ilk yaban domuzunu çekip topla
     icons:
       - food
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 12
     assign:
       en: +1 → build a House, then a Mill near the berries
@@ -39,6 +42,7 @@ steps:
     icons:
       - house
       - mill
+    resources: { food: 8, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 13
     assign:
       en: +1 → second boar; then re-task villagers to lure at least 2 deer to the pile
@@ -48,18 +52,21 @@ steps:
       tr: Geyik çekme bir yeniden görevlendirmedir — nüfus 13'te kalır
     icons:
       - food
+    resources: { food: 9, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 15
     assign:
       en: +2 → hunt under the Town Center (deer and remaining boar meat)
       tr: +2 → Şehir Merkezi'nin altında av (geyik ve kalan domuz eti)
     icons:
       - food
+    resources: { food: 11, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     assign:
       en: +4 → berries
       tr: +4 → meyveler
     icons:
       - food
+    resources: { food: 15, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 22
     assign:
       en: +3 → gold; build the Mining Camp, then mine
@@ -67,6 +74,7 @@ steps:
     icons:
       - gold
       - mining-camp
+    resources: { food: 15, wood: 4, gold: 3, stone: 0, builder: 0 }
   - villagers: 22
     phase: feudal
     time: "10:30"
@@ -78,6 +86,7 @@ steps:
       tr: Yaklaşık 4 odun / 15 yemek / 3 altın ile çık
     icons:
       - loom
+    resources: { food: 15, wood: 4, gold: 3, stone: 0, builder: 0 }
   - villagers: 24
     assign:
       en: "Feudal: re-task 3 from wood → Market + Blacksmith and small-wall your wood/gold lines; +2 → wood"
@@ -86,6 +95,7 @@ steps:
       - market
       - blacksmith
       - wood
+    resources: { food: 15, wood: 3, gold: 3, stone: 0, builder: 3 }
   - villagers: 24
     phase: castle
     time: "14:00"
@@ -96,6 +106,7 @@ steps:
       - watch-tower
       - lumber-camp
       - barracks
+    resources: { food: 5, wood: 13, gold: 3, stone: 0, builder: 3 }
   - assign:
       en: >-
         Research infantry armor (skip eco techs); pump Fire Lancers from both Barracks; add a forward Siege Workshop;
@@ -107,6 +118,7 @@ steps:
       - barracks
       - siege-workshop
       - farm
+    resources: { food: 5, wood: 13, gold: 3, stone: 0, builder: 3 }
 intro:
   en: >-
     A greedy Fast Castle that skips Feudal military and lands on the Jurchens' food-free Fire Lancers and siege for a

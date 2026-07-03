@@ -41,16 +41,41 @@ const buildOrders = defineCollection({
     targetAge: z.enum(["feudal", "castle", "imperial"]),
     durationMin: z.number(),
     civsRecommended: z.array(z.string()),
-    steps: z.array(
-      z.object({
-        villagers: z.number().optional(),
-        phase: z.enum(["feudal", "castle", "imperial"]).optional(),
-        time: z.string().optional(),
-        assign: localizedString,
-        note: localizedString.optional(),
-        icons: z.array(z.string()).optional(),
+    steps: z
+      .array(
+        z.object({
+          villagers: z.number().optional(),
+          phase: z.enum(["feudal", "castle", "imperial"]).optional(),
+          time: z.string().optional(),
+          assign: localizedString,
+          note: localizedString.optional(),
+          icons: z.array(z.string()).optional(),
+          // Cumulative villager split AFTER the step (derived from the verified
+          // step texts + Hera transcripts, adversarially re-checked). Optional:
+          // builds whose text is genuinely ambiguous ship without columns
+          // rather than with guessed numbers.
+          resources: z
+            .object({
+              food: z.number().int().min(0),
+              wood: z.number().int().min(0),
+              gold: z.number().int().min(0),
+              stone: z.number().int().min(0),
+              builder: z.number().int().min(0),
+            })
+            .optional(),
+        }),
+      )
+      .superRefine((steps, ctx) => {
+        // The split must reconcile with the audited Vil-Pop rail — fail the build, never render wrong numbers.
+        steps.forEach((s, i) => {
+          if (s.resources && s.villagers != null) {
+            const sum = s.resources.food + s.resources.wood + s.resources.gold + s.resources.stone + s.resources.builder;
+            if (sum !== s.villagers) {
+              ctx.addIssue({ code: z.ZodIssueCode.custom, path: [i, "resources"], message: `resources sum ${sum} != villagers ${s.villagers}` });
+            }
+          }
+        });
       }),
-    ),
     intro: localizedString.optional(),
     strategy: z.object({ en: z.array(z.string()), tr: z.array(z.string()) }).optional(),
     source: z
@@ -113,6 +138,7 @@ const beginner = defineCollection({
   schema: z.object({
     slug: z.string(),
     title: z.string(),
+    description: z.string(), // meta description — required so no chapter ships Google a duplicate snippet
     order: z.number(),
     prereq: z.array(z.string()).optional(),
   }),
@@ -140,6 +166,7 @@ const articles = defineCollection({
     description: z.string(),
     category: z.enum(["fundamentals", "strategy", "counters", "meta", "resources"]),
     order: z.number().default(0),
+    published: z.string().optional(), // first-publication date (Article JSON-LD datePublished)
     updated: z.string().optional(),
     heroIcon: z.string().optional(),
     sources: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),

@@ -4,6 +4,7 @@ title: "Birim Karşıtları: Feudal ve Kale Çağı"
 description: "AoE2'de counter'lar gerçekte nasıl çalışır — delici zırh, bonus hasar ve hız — ve her oyuncunun bilmesi gereken Feudal counter döngüsü."
 category: counters
 order: 1
+published: "2026-06-08"
 updated: "2026-06-08"
 heroIcon: "lucide:swords"
 sources:

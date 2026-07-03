@@ -4,6 +4,7 @@ title: "The Best AoE2 Learning Resources"
 description: "A curated list of the build-order sites, counter guides, stats trackers, creators, and tools we recommend for improving at Age of Empires II."
 category: resources
 order: 2
+published: "2026-06-08"
 updated: "2026-06-08"
 heroIcon: "lucide:book-open"
 sources:

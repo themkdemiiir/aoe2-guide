@@ -9,14 +9,15 @@ import { getLocaleFromUrl, allLocalePaths } from "@/i18n/utils";
 
 interface Props {
   title: string;
-  description?: string;
+  /** REQUIRED and page-specific: a shared fallback made 395 pages duplicate one description (Google ignores those). */
+  description: string;
   /** Path WITHOUT locale prefix, used for hreflang and lang switcher. e.g. "/civs/britons" */
   canonicalPath?: string;
   /** Error pages (404): robots noindex, no canonical/hreflang/breadcrumb — those tags mint crawlable dead URLs. */
   noindex?: boolean;
 }
 
-const { title, description = "Age of Empires II — civilizations, build orders, maps and strategy guide.", canonicalPath = "/", noindex = false } = Astro.props;
+const { title, description, canonicalPath = "/", noindex = false } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";

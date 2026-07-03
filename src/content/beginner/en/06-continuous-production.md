@@ -1,6 +1,7 @@
 ---
 slug: 06-continuous-production
 title: "Continuous Production & Lanchester's Law"
+description: "Continuous production in AoE2: never idle a military building, villager counts to feed a Range, and the Lanchester square law behind snowballing leads."
 order: 6
 prereq: [01-resources]
 ---

@@ -18,6 +18,7 @@ steps:
       - food
       - mill
       - town-center
+    resources: { food: 4, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 7
     assign:
       en: 3 → wood, drop a Lumber Camp
@@ -25,12 +26,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 4, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: 3 → farms; use the 5 pre-built farms by the Town Center
       tr: 3 → tarlalara; ŞM yanındaki 5 hazır tarlayı kullan
     icons:
       - farm
+    resources: { food: 7, wood: 3, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: Lure the first boar with the scout; eat it under the TC
       tr: İlk yaban domuzunu scout ile çek; ŞM altında ye
@@ -39,12 +42,14 @@ steps:
       tr: Domuz biterken üretilen ilk 1-2 köylüyü tarlalara gönder
     icons:
       - food
+    resources: { food: 7, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 16
     assign:
       en: +6 → food under the TC (9 on food, 4 on berries)
       tr: +6 → ŞM altında yiyeceğe (9'u yiyecekte, 4'ü meyvede)
     icons:
       - food
+    resources: { food: 13, wood: 3, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: Lure the second boar to keep food flowing
       tr: Yiyeceği akışta tutmak için ikinci domuzu çek
@@ -53,12 +58,14 @@ steps:
       tr: Yeni nüfus yok — eko köylülerini meşgul tut
     icons:
       - food
+    resources: { food: 13, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 20
     assign:
       en: +4 → wood as the wood economy tightens
       tr: +4 → oduna, çünkü odun ekonomisi sıkışmaya başlar
     icons:
       - wood
+    resources: { food: 13, wood: 7, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: When the boar is gone, push food villagers onto farms (seed 4)
       tr: Domuz bitince yiyecek köylülerini tarlalara aktar (4 tarla aç)
@@ -67,6 +74,7 @@ steps:
       tr: Yeni nüfus değil, görev değişimi
     icons:
       - farm
+    resources: { food: 13, wood: 7, gold: 0, stone: 0, builder: 0 }
   - villagers: 22
     phase: feudal
     time: "7:10"
@@ -78,6 +86,7 @@ steps:
       tr: Feudal'da olabildiğince az vakit harca
     icons:
       - gold
+    resources: { food: 13, wood: 7, gold: 2, stone: 0, builder: 0 }
   - villagers: 24
     assign:
       en: "Feudal: heal the scout, then scout relics and the opponent; move +2 → wood"
@@ -85,12 +94,14 @@ steps:
     icons:
       - scout-cavalry
       - wood
+    resources: { food: 13, wood: 9, gold: 2, stone: 0, builder: 0 }
   - assign:
       en: Pull 3 wood villagers → Market (2) and Blacksmith (1)
       tr: 3 odun köylüsünü çek → Pazar (Market) (2) ve Demirci (Blacksmith) (1)
     icons:
       - market
       - blacksmith
+    resources: { food: 13, wood: 6, gold: 2, stone: 0, builder: 3 }
   - phase: castle
     time: "10:40"
     assign:
@@ -99,12 +110,14 @@ steps:
     icons:
       - double-bit-axe
       - horse-collar
+    resources: { food: 13, wood: 6, gold: 2, stone: 0, builder: 3 }
   - assign:
       en: "Castle: as the berries run out, send those villagers to your first extra Town Center spot"
       tr: "Kale: meyve biterken o köylüleri ilk ek Şehir Merkezi noktasına gönder"
     icons:
       - town-center
       - farm
+    resources: { food: 9, wood: 6, gold: 2, stone: 0, builder: 7 }
 intro:
   en: >-
     Reach Castle Age around 10:40 from the Fortress map's pre-built start, using its free walls and towers as cover

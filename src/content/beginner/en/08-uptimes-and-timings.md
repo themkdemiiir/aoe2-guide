@@ -1,6 +1,7 @@
 ---
 slug: 08-uptimes-and-timings
 title: "Uptimes & Timings"
+description: "Uptimes and timings in AoE2: the 25-second pop math behind Feudal age-up times, timing attacks that punish, and Castle and Imperial benchmarks."
 order: 8
 ---
 

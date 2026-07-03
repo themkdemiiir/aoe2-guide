@@ -1,6 +1,7 @@
 ---
 slug: 03-scouting
 title: "Keşif (Scouting)"
+description: "AoE2 keşif rehberi: keşifçiyi manuel yönet, önce kendi üssünü çıkar, rakip ekonomisini oku ve Şehir Merkezi menzilinden uzak yörüngede dolaş."
 order: 3
 prereq: [01-resources]
 ---

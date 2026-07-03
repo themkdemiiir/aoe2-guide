@@ -33,28 +33,13 @@ const popValues = entry.data.steps.map((s) => s.villagers).filter((v): v is numb
 const firstPop = popValues[0] ?? "-";
 const finalPop = popValues.at(-1) ?? "-";
 
-const ageLabel: Record<string, string> = { feudal: "Feudal Age", castle: "Castle Age", imperial: "Imperial Age" };
-const difficultyLabel: Record<string, string> = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
-const description = `${entry.data.name[lang]} — ${difficultyLabel[entry.data.difficulty]} AoE2 build order targeting ${ageLabel[entry.data.targetAge]} in ~${entry.data.durationMin} minutes. Step-by-step villager assignments.`;
-
-const howToLd = {
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  name: entry.data.name[lang],
-  description,
-  totalTime: `PT${entry.data.durationMin}M`,
-  step: entry.data.steps.map((step, i) => ({
-    "@type": "HowToStep",
-    position: i + 1,
-    name: step.assign[lang],
-    text: step.note?.[lang] ? `${step.assign[lang]} — ${step.note[lang]}` : step.assign[lang],
-  })),
-};
+const diff = t(lang, `difficulty.${entry.data.difficulty}`);
+const age = t(lang, `age.${entry.data.targetAge}`);
+const description = lang === "tr"
+  ? `${entry.data.name.tr} — ${diff} seviye AoE2 build order'ı; ~${entry.data.durationMin} dakikada ${age} hedefler. Adım adım köylü görevlendirmeleri.`
+  : `${entry.data.name.en} — ${diff} AoE2 build order targeting ${age} in ~${entry.data.durationMin} minutes. Step-by-step villager assignments.`;
 ---
-<BaseLayout title={entry.data.name[lang]} description={description} canonicalPath={`/builds/${slug}`}>
-  <Fragment slot="head">
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(howToLd).replace(/</g, "\\u003c")} />
-  </Fragment>
+<BaseLayout title={`${entry.data.name[lang]} — AoE2 Build Order`} description={description} canonicalPath={`/builds/${slug}`}>
   <article class="mx-auto max-w-6xl px-4 py-6">
     <header class="rounded border border-stone-700/40 bg-parchment p-4 shadow-sm">
       <div class="flex flex-wrap gap-2">

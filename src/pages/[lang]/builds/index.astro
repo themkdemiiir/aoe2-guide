@@ -31,7 +31,7 @@ const facets = [
   },
 ];
 ---
-<BaseLayout title={t(lang, "nav.builds")} canonicalPath="/builds">
+<BaseLayout title={t(lang, "nav.builds")} description={t(lang, "meta.builds")} canonicalPath="/builds">
   <section class="mx-auto max-w-7xl px-4 py-12" data-filter-root>
     <h1 class="mb-6 font-display text-4xl text-ink">{t(lang, "nav.builds")}</h1>
     {builds.length === 0 ? (

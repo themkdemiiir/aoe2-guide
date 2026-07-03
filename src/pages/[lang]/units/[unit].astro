@@ -45,7 +45,11 @@ if (lineRoot) {
   }
 }
 ---
-<BaseLayout title={entry.data.name[lang]} canonicalPath={`/units/${slug}`}>
+<BaseLayout
+  title={entry.data.name[lang]}
+  description={(entry.data.description?.[lang] ?? `${entry.data.name[lang]} — ${entry.data.role[lang]}`).slice(0, 155)}
+  canonicalPath={`/units/${slug}`}
+>
   <article class="mx-auto max-w-prose px-4 py-12">
     <header class="flex items-center gap-4">
       <Icon slug={slug} kind="unit" size={96} />

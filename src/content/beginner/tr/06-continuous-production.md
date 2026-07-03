@@ -1,6 +1,7 @@
 ---
 slug: 06-continuous-production
 title: "Sürekli Üretim ve Lanchester Yasası"
+description: "Sürekli üretim ve Lanchester Kare Yasası: askeri binaları asla boş bırakma, Range başına gereken köylü sayısı ve küçük öndeliğin kartopu etkisi."
 order: 6
 prereq: [01-resources]
 ---

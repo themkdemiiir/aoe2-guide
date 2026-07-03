@@ -19,6 +19,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 9
     assign:
       en: +3 → wood; first villager drops a Lumber Camp, then all gather
@@ -26,12 +27,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +1 → lure the first boar
       tr: +1 → ilk domuzu çek
     icons:
       - food
+    resources: { food: 7, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → build a house and a Mill on the berries
@@ -40,6 +43,7 @@ steps:
       - house
       - mill
       - food
+    resources: { food: 8, wood: 3, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: Re-task an idle villager to lure the deer
       tr: Boştaki bir köylüyü geyiği çekmeye yönlendir
@@ -48,18 +52,21 @@ steps:
       tr: Yeni pop yok — mevcut bir köylü kullanılır
     icons:
       - food
+    resources: { food: 8, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 14
     assign:
       en: +3 → hunt (lure the second boar)
       tr: +3 → ava (ikinci domuzu çek)
     icons:
       - food
+    resources: { food: 11, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     assign:
       en: +4 → berries
       tr: +4 → meyvelere
     icons:
       - food
+    resources: { food: 15, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     assign:
       en: Seed 3 farms with villagers freed from depleted food
@@ -69,6 +76,7 @@ steps:
       tr: Yeni pop yok — mevcut yiyecek köylüleri yönlendirilir
     icons:
       - farm
+    resources: { food: 15, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 23
     assign:
       en: +5 → wood (single Lumber Camp covers both woodlines)
@@ -76,6 +84,7 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 15, wood: 8, gold: 0, stone: 0, builder: 0 }
   - villagers: 25
     phase: feudal
     time: "11:20"
@@ -88,6 +97,7 @@ steps:
     icons:
       - gold
       - mining-camp
+    resources: { food: 15, wood: 8, gold: 2, stone: 0, builder: 0 }
   - villagers: 27
     assign:
       en: >-
@@ -106,6 +116,7 @@ steps:
       - market
       - double-bit-axe
       - horse-collar
+    resources: { food: 8, wood: 11, gold: 2, stone: 6, builder: 0 }
   - phase: castle
     time: "14:50"
     assign:
@@ -119,6 +130,7 @@ steps:
       - stone
       - castle
       - bow-saw
+    resources: { food: 8, wood: 11, gold: 2, stone: 0, builder: 6 }
 intro:
   en: >-
     Rush to Castle Age at 25 pop, immediately drop a Castle, and flood Unique Units while the opponent is still

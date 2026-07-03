@@ -19,6 +19,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 9
     assign:
       en: +3 → wood, build a Lumber Camp
@@ -26,6 +27,7 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → lure the first boar; +1 → House, then a Mill on the berries
@@ -37,12 +39,14 @@ steps:
       - food
       - house
       - mill
+    resources: { food: 8, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 13
     assign:
       en: +2 → hunt; lure the second boar when food runs low
       tr: +2 → ava; yiyecek azalınca ikinci domuzu çek
     icons:
       - food
+    resources: { food: 10, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 17
     assign:
       en: +4 → berries
@@ -53,6 +57,7 @@ steps:
     icons:
       - food
       - farm
+    resources: { food: 14, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 21
     assign:
       en: +4 → wood on a single Lumber Camp
@@ -60,6 +65,7 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 14, wood: 7, gold: 0, stone: 0, builder: 0 }
   - villagers: 23
     phase: feudal
     time: "10:30"
@@ -71,6 +77,7 @@ steps:
       tr: Feudal'de mümkün olduğunca az zaman geçir
     icons:
       - gold
+    resources: { food: 14, wood: 7, gold: 2, stone: 0, builder: 0 }
   - villagers: 25
     assign:
       en: "Feudal: 1 → Blacksmith, 2 → Market (use straggler-tree villagers); +2 → wood"
@@ -79,6 +86,7 @@ steps:
       - blacksmith
       - market
       - wood
+    resources: { food: 14, wood: 6, gold: 2, stone: 0, builder: 3 }
   - phase: castle
     time: "14:00"
     assign:
@@ -87,6 +95,7 @@ steps:
     icons:
       - double-bit-axe
       - horse-collar
+    resources: { food: 14, wood: 6, gold: 2, stone: 0, builder: 3 }
   - villagers: 25
     assign:
       en: "Castle: drop a new Lumber Camp and your extra Town Centers; research Bow Saw; seed more farms"
@@ -95,6 +104,7 @@ steps:
       - town-center
       - bow-saw
       - farm
+    resources: { food: 14, wood: 6, gold: 2, stone: 0, builder: 3 }
   - assign:
       en: Keep booming — Wheelbarrow near 18 farms, then Hand Cart; add a 4th TC off a stone mine; buy food/wood at Market as needed
       tr: Boom'a devam et — ~18 tarlada Wheelbarrow, sonra Hand Cart; bir taş madeninden 4. TC ekle; gerekirse Market'ten yiyecek/odun al
@@ -102,6 +112,7 @@ steps:
       - town-center
       - wheelbarrow
       - market
+    resources: { food: 14, wood: 6, gold: 2, stone: 0, builder: 3 }
 intro:
   en: >-
     Race to Castle Age off a clean 23-pop economy on a closed map, then snowball with extra Town Centers before the

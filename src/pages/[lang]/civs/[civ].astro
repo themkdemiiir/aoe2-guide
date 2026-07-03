@@ -25,7 +25,9 @@ const civDataEntry = await getEntry("civ-data", civSlug);
 const meta = civDataEntry?.data;
 const name = entry.data.name[lang];
 const tagline = entry.data.tagline[lang];
-const description = `${name} civilization guide for Age of Empires II — ${tagline}`;
+const description = lang === "tr"
+  ? `${name} uygarlık rehberi (Age of Empires II) — ${tagline}`
+  : `${name} civilization guide for Age of Empires II — ${tagline}`;
 const strategyHtml = entry.data.strategy?.[lang] ? (marked.parse(entry.data.strategy[lang]) as string) : "";
 ---
 <BaseLayout title={name} description={description} canonicalPath={`/civs/${civSlug}`}>

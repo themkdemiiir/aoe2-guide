@@ -3,6 +3,7 @@ import iconMapJson from "@data/icon-map.json";
 import type { Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 
+interface Resources { food: number; wood: number; gold: number; stone: number; builder: number; }
 interface Step {
   villagers?: number;
   phase?: "feudal" | "castle" | "imperial";
@@ -10,6 +11,7 @@ interface Step {
   assign: { en: string; tr: string };
   note?: { en: string; tr: string };
   icons?: string[];
+  resources?: Resources;
 }
 interface Props { steps: Step[]; lang: Locale; slug: string; }
 const { steps, lang, slug } = Astro.props;
@@ -51,18 +53,39 @@ function isTransitionAssign(assign: string): boolean {
   return /\b(Feudal|Castle|Imperial|Kale|Feodal|Emperyal|İmparatorluk)\s+(arrives?|click|hit|reach|tıkla|geç|geçiş|ulaş)/i.test(assign);
 }
 
-interface PhaseSection {
-  id: string;
-  label: string;
-  steps: Array<Step & { index: number; isTransition: boolean; popChanged: boolean }>;
+// The two-axis scan every serious build tool converges on (buildorderguide,
+// RTS Overlay, Hera's sheets): a villager-count rail to find your place, and
+// per-resource split columns to glance the assignment — prose stays minimal.
+const RES_KEYS = ["food", "wood", "gold", "stone", "builder"] as const;
+type ResKey = (typeof RES_KEYS)[number];
+const hasRes = steps.some((s) => s.resources);
+// food/wood always earn a column; gold/stone/builder only when the build uses them
+const resKeys: ResKey[] = hasRes
+  ? RES_KEYS.filter((k) => k === "food" || k === "wood" || steps.some((s) => (s.resources?.[k] ?? 0) > 0))
+  : [];
+const RES_LABEL: Record<ResKey, string> = {
+  food: t(lang, "res.food"), wood: t(lang, "res.wood"), gold: t(lang, "res.gold"),
+  stone: t(lang, "res.stone"), builder: t(lang, "res.builder"),
+};
+const RES_TEXT: Record<ResKey, string> = {
+  food: "text-res-food", wood: "text-res-wood", gold: "text-res-gold",
+  stone: "text-res-stone", builder: "text-stone-700",
+};
+const gridCols = `grid-template-columns: 3rem minmax(0,1fr)${resKeys.length ? ` repeat(${resKeys.length}, clamp(1.7rem, 4.5vw, 2.4rem))` : ""};`;
+
+interface RowStep extends Step {
+  index: number;
+  isTransition: boolean;
+  popChanged: boolean;
+  popShown?: number; // running Vil-Pop, carried forward so any row answers "how many vils now?"
+  resChanged: Partial<Record<ResKey, boolean>>;
 }
+interface PhaseSection { id: string; label: string; steps: RowStep[]; }
 
 const sections: PhaseSection[] = [{ id: "opening", label: t(lang, "builds.opening"), steps: [] }];
 
-// Show the big pop chip only when the running Vil-Pop total actually CHANGES (a real
-// milestone). Reassignment / instruction steps that hold or omit the pop show their
-// step number instead — otherwise "18, 18, 18" reads like a bug.
 let lastPop: number | undefined;
+let lastRes: Resources | undefined;
 for (const [index, step] of steps.entries()) {
   const phaseKey =
     step.phase ?? (isTransitionAssign(step.assign[lang]) ? phaseFromAssign(step.assign[lang]) : null);
@@ -75,8 +98,25 @@ for (const [index, step] of steps.entries()) {
   }
   const popChanged = step.villagers != null && step.villagers !== lastPop;
   if (step.villagers != null) lastPop = step.villagers;
-  sections[sections.length - 1].steps.push({ ...step, index, isTransition, popChanged });
+  const resChanged: Partial<Record<ResKey, boolean>> = {};
+  if (step.resources) {
+    for (const k of RES_KEYS) resChanged[k] = lastRes == null || step.resources[k] !== lastRes[k];
+    lastRes = step.resources;
+  }
+  sections[sections.length - 1].steps.push({ ...step, index, isTransition, popChanged, popShown: lastPop, resChanged });
 }
+
+// Checkpoints: the one line per age a player actually glances at mid-game —
+// target pop, target time and (when verified) the landing split.
+const checkpoints = sections
+  .filter((sec) => sec.id !== "opening")
+  .map((sec) => {
+    const first = sec.steps[0];
+    return first
+      ? { label: sec.label, pop: first.popShown, time: first.time, res: first.resources }
+      : null;
+  })
+  .filter((c): c is NonNullable<typeof c> => c != null);
 ---
 <div data-trainer data-slug={slug} data-lang={lang} tabindex="-1" class="trainer focus:outline-none">
   <div class="mb-4 flex flex-wrap items-center gap-2 rounded border border-stone-700/30 bg-stone-700/5 px-3 py-2 text-sm print:hidden">
@@ -96,6 +136,26 @@ for (const [index, step] of steps.entries()) {
       <button type="button" data-action="reset-progress" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 hover:border-gold-500">{t(lang, "builds.resetProgress")}</button>
     </span>
   </div>
+
+  {checkpoints.length > 0 && (
+    <div class="mb-4 flex flex-wrap items-center gap-2 rounded border border-stone-700/30 bg-parchment px-3 py-2">
+      <span class="text-[0.65rem] font-semibold uppercase tracking-widest text-stone-700">{t(lang, "builds.checkpoints")}</span>
+      {checkpoints.map((c) => (
+        <span class="inline-flex items-center gap-1.5 rounded border border-gold-500/50 bg-gold-500/10 px-2 py-1 font-mono text-xs text-ink">
+          <span class="font-semibold">{c.label}</span>
+          {c.pop != null && <span>{c.pop} {t(lang, "builds.vils")}</span>}
+          {c.time && <span class="text-stone-700">{c.time}</span>}
+          {c.res && RES_KEYS.filter((k) => k !== "builder" && (c.res?.[k] ?? 0) > 0).map((k) => (
+            <span class="inline-flex items-center gap-0.5">
+              <img src={RESOURCE_ICONS[k]} alt={RES_LABEL[k]} width="14" height="14" class="h-3.5 w-3.5" />
+              <span class={RES_TEXT[k]}>{c.res?.[k]}</span>
+            </span>
+          ))}
+        </span>
+      ))}
+    </div>
+  )}
+
   <div class="space-y-4">
   {sections.map((section) => {
     const first = section.steps[0];
@@ -105,17 +165,23 @@ for (const [index, step] of steps.entries()) {
     const popRange = pops.length ? ` · ${t(lang, "home.pop")} ${lo === hi ? lo : `${lo}–${hi}`}` : "";
     return (
       <section class="overflow-hidden rounded border border-stone-700/40 bg-parchment shadow-sm">
-        <header class="flex flex-wrap items-end justify-between gap-2 border-b border-stone-700/30 bg-stone-700/10 px-4 py-3">
-          <div>
+        <header class="grid items-end gap-x-2 border-b border-stone-700/30 bg-stone-700/10 px-3 py-2" style={gridCols}>
+          <span class="pb-0.5 text-center text-[0.6rem] font-semibold uppercase tracking-wide text-stone-700">{t(lang, "builds.vils")}</span>
+          <div class="flex flex-wrap items-baseline gap-x-2">
             <h3 class="font-display text-lg text-ink">{section.label}</h3>
-            <p class="text-xs text-stone-700">
-              {section.steps.length} {t(lang, "home.steps")}{popRange}
-            </p>
+            <span class="text-xs text-stone-700">{section.steps.length} {t(lang, "home.steps")}{popRange}</span>
+            {first?.time && <span class="ml-auto font-mono text-xs text-stone-700">{first.time}</span>}
           </div>
-          {first?.time && <span class="font-mono text-xs text-stone-700">{first.time}</span>}
+          {resKeys.map((k) => (
+            k === "builder" ? (
+              <span class="pb-0.5 text-center text-[0.6rem] font-semibold uppercase tracking-wide text-stone-700" title={RES_LABEL[k]}>{RES_LABEL[k].slice(0, 4)}</span>
+            ) : (
+              <span class="flex justify-center pb-0.5"><img src={RESOURCE_ICONS[k]} alt={RES_LABEL[k]} title={RES_LABEL[k]} width="18" height="18" class="h-4.5 w-4.5" /></span>
+            )
+          ))}
         </header>
 
-        <ol class="divide-y divide-stone-700/20">
+        <ol class="divide-y divide-stone-700/15">
           {section.steps.map((s) => (
             <li
               id={`step-${s.index}`}
@@ -125,52 +191,42 @@ for (const [index, step] of steps.entries()) {
               data-assign={s.assign[lang]}
               tabindex="0"
               class:list={[
-              "group grid cursor-pointer gap-3 px-4 py-3 scroll-mt-24 sm:grid-cols-[5rem_1fr]",
-              s.isTransition ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
-            ]}>
-              <div class="flex items-center gap-3 sm:block">
-                {s.popChanged ? (
-                  <div class="inline-flex min-w-12 flex-col rounded border border-stone-700/30 bg-parchment/80 px-2 py-1 text-center">
-                    <span class="text-[0.65rem] uppercase tracking-wide text-stone-700">{t(lang, "home.pop")}</span>
-                    <span class="font-mono text-lg font-bold leading-none text-ink">{s.villagers}</span>
-                  </div>
-                ) : (
-                  <div class="inline-flex min-w-12 items-center justify-center rounded border border-dashed border-stone-700/20 bg-parchment/50 px-2 py-2 text-center font-mono text-sm text-stone-700">
-                    #{s.index + 1}
-                  </div>
-                )}
-                <div class="font-mono text-xs text-stone-700 sm:mt-2 sm:text-center">
-                  {s.time ?? `#${s.index + 1}`}
-                </div>
-              </div>
+                "group grid cursor-pointer items-center gap-x-2 px-3 py-1.5 scroll-mt-24",
+                s.isTransition ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
+              ]}
+              style={gridCols}
+            >
+              <span
+                class:list={[
+                  "justify-self-center font-mono leading-none",
+                  s.popChanged
+                    ? "rounded border border-stone-700/40 bg-parchment px-1.5 py-1 text-base font-bold text-ink"
+                    : "text-sm text-stone-700/60",
+                ]}
+              >{s.popShown ?? "·"}</span>
 
-              <div class="min-w-0 space-y-2">
-                {s.icons && s.icons.length > 0 && (
-                  <div class="flex flex-wrap gap-1.5">
-                    {s.icons.map((slug) => {
-                      const src = resolveIcon(slug);
-                      return src ? (
-                        <span class="inline-flex items-center gap-1 rounded border border-stone-700/30 bg-parchment/80 px-1.5 py-1 text-xs text-stone-700" title={titleCase(slug)}>
-                          <img src={src} alt={slug} width="28" height="28" class="h-7 w-7 shrink-0 rounded-sm object-contain" />
-                          <span class="sr-only">{titleCase(slug)}</span>
-                        </span>
-                      ) : (
-                        <span class="inline-flex items-center rounded border border-dashed border-stone-700/30 bg-stone-700/5 px-2 py-1 text-xs text-stone-700">
-                          {titleCase(slug)}
-                        </span>
-                      );
-                    })}
-                  </div>
-                )}
-                <p class:list={["text-sm leading-relaxed", s.isTransition ? "font-semibold text-ink" : "text-ink"]}>
-                  {s.assign[lang]}
+              <div class="min-w-0 py-0.5">
+                <p class:list={["flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[15px] leading-snug", s.isTransition ? "font-semibold text-ink" : "text-ink"]}>
+                  {s.icons && s.icons.slice(0, 3).map((iconSlug) => {
+                    const src = resolveIcon(iconSlug);
+                    return src ? <img src={src} alt={titleCase(iconSlug)} title={titleCase(iconSlug)} width="20" height="20" class="h-5 w-5 shrink-0 rounded-sm object-contain" /> : null;
+                  })}
+                  <span>{s.assign[lang]}</span>
+                  {s.time && <span class="ml-auto shrink-0 rounded bg-stone-700/10 px-1.5 py-0.5 font-mono text-xs font-normal text-stone-700">{s.time}</span>}
                 </p>
                 {s.note?.[lang] && (
-                  <p class="rounded border-l-2 border-gold-500 bg-gold-500/10 px-3 py-2 text-xs text-stone-700">
-                    {s.note[lang]}
-                  </p>
+                  <p class="mt-0.5 text-xs leading-snug text-stone-700">↳ {s.note[lang]}</p>
                 )}
               </div>
+
+              {resKeys.map((k) => (
+                <span
+                  class:list={[
+                    "text-center font-mono text-sm tabular-nums",
+                    s.resources == null ? "text-stone-700/30" : s.resChanged[k] ? `font-bold ${RES_TEXT[k]}` : "text-stone-700/45",
+                  ]}
+                >{s.resources ? s.resources[k] : ""}</span>
+              ))}
             </li>
           ))}
         </ol>

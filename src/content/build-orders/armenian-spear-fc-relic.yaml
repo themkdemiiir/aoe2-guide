@@ -15,6 +15,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +4 → wood (build a Lumber Camp)
@@ -22,12 +23,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → lure the 1st boar
       tr: +1 → 1. domuzu çek
     icons:
       - food
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: +1 → House, then a front Barracks, then a House; start a slow wall
       tr: +1 → House, ardından öne bir Barracks, sonra bir House; yavaş duvar örmeye başla
@@ -37,6 +40,7 @@ steps:
     icons:
       - house
       - barracks
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 1 }
   - villagers: 14
     assign:
       en: +2 → boar under the TC; optionally lure the deer with your Scout
@@ -44,18 +48,21 @@ steps:
     icons:
       - food
       - scout-cavalry
+    resources: { food: 9, wood: 4, gold: 0, stone: 0, builder: 1 }
   - villagers: 15
     assign:
       en: +1 → 2nd boar
       tr: +1 → 2. domuz
     icons:
       - food
+    resources: { food: 10, wood: 4, gold: 0, stone: 0, builder: 1 }
   - villagers: 17
     assign:
       en: +2 → boar under the TC
       tr: +2 → TC altındaki domuza
     icons:
       - food
+    resources: { food: 12, wood: 4, gold: 0, stone: 0, builder: 1 }
   - assign:
       en: Queue 2-3 Spearmen and harass alongside the Scout
       tr: 2-3 Spearman üret ve Scout ile birlikte baskı yap
@@ -65,6 +72,7 @@ steps:
     icons:
       - spearman
       - scout-cavalry
+    resources: { food: 12, wood: 4, gold: 0, stone: 0, builder: 1 }
   - villagers: 23
     assign:
       en: +6 → berries (build a Mill); pull 2 hunters onto the wall (3 walling vils total)
@@ -72,6 +80,7 @@ steps:
     icons:
       - food
       - mill
+    resources: { food: 16, wood: 4, gold: 0, stone: 0, builder: 3 }
   - villagers: 26
     assign:
       en: +3 → gold; move 5 food villagers to wood (9 on wood); seed Farms
@@ -80,11 +89,13 @@ steps:
       - gold
       - wood
       - farm
+    resources: { food: 11, wood: 9, gold: 3, stone: 0, builder: 3 }
   - assign:
       en: Research Loom
       tr: Loom araştır
     icons:
       - loom
+    resources: { food: 11, wood: 9, gold: 3, stone: 0, builder: 3 }
   - villagers: 26
     phase: feudal
     time: "12:10"
@@ -96,6 +107,7 @@ steps:
       tr: Ekonomi dağılımı ~9 odun / 11 yemek / 3 altın
     icons:
       - food
+    resources: { food: 11, wood: 9, gold: 3, stone: 0, builder: 3 }
   - villagers: 26
     assign:
       en: "Feudal: send walling villagers to stragglers; build a Market + Blacksmith with 3 of them"
@@ -103,6 +115,7 @@ steps:
     icons:
       - market
       - blacksmith
+    resources: { food: 11, wood: 9, gold: 3, stone: 0, builder: 3 }
   - villagers: 28
     phase: castle
     time: "15:40"
@@ -113,6 +126,7 @@ steps:
       - gold
       - double-bit-axe
       - horse-collar
+    resources: { food: 11, wood: 9, gold: 5, stone: 0, builder: 3 }
 intro:
   en: >-
     Poke with early Spearmen to deny the enemy opening, then Fast Castle into a Fortified Church that floods the map

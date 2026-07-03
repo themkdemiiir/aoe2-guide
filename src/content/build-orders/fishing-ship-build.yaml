@@ -19,6 +19,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +5 → wood, drop a Lumber Camp
@@ -26,12 +27,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 12
     assign:
       en: +1 → lure the first boar
       tr: +1 → ilk yaban domuzunu çek
     icons:
       - food
+    resources: { food: 7, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 13
     assign:
       en: +1 → build a House, then a Dock and put it on shore fish
@@ -43,18 +46,21 @@ steps:
       - house
       - dock
       - food
+    resources: { food: 8, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 14
     assign:
       en: +1 → add to the boar under the Town Center
       tr: +1 → şehir merkezinin altındaki domuza ekle
     icons:
       - food
+    resources: { food: 9, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 15
     assign:
       en: +1 → lure the second boar
       tr: +1 → ikinci yaban domuzunu çek
     icons:
       - food
+    resources: { food: 10, wood: 5, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: From the Dock, queue Fishing Ships up to 3; build a House after the first one
       tr: Limandan 3'e kadar Balıkçı Gemisi çıkar; ilkinden sonra bir Ev yap
@@ -64,6 +70,7 @@ steps:
     icons:
       - dock
       - fishing-ship
+    resources: { food: 10, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     assign:
       en: +4 → food under the Town Center
@@ -71,11 +78,13 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 14, wood: 5, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: Research Loom
       tr: Loom'u araştır
     icons:
       - loom
+    resources: { food: 14, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     phase: feudal
     time: "9:15"
@@ -87,6 +96,7 @@ steps:
       tr: Yaklaşık 5 köylü odunda, 14 köylü yiyecekte olacak şekilde geç
     icons:
       - town-center
+    resources: { food: 14, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     assign:
       en: Move 7 from the sheep over to a second Lumber Camp
@@ -94,12 +104,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 7, wood: 12, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: Keep all 3 Fishing Ships working the water for a steady food trickle
       tr: 3 Balıkçı Gemisini de suda tutarak istikrarlı bir yiyecek akışı sağla
     icons:
       - fishing-ship
       - food
+    resources: { food: 7, wood: 12, gold: 0, stone: 0, builder: 0 }
 intro:
   en: >-
     Use the extra food from three Fishing Ships to reach Feudal Age around 9:15 with a faster, water-fed economy on

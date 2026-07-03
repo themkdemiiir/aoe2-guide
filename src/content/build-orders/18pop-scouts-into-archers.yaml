@@ -68,8 +68,8 @@ steps:
       - loom
   - villagers: 18
     assign:
-      en: "Reslot the hunt: 6 → wood (8 on one lumber camp, or 9 on two), 4 → berries, 2 → build a Barracks and a House"
-      tr: "Avı yeniden dağıt: 6 → oduna (tek kampta 8, iki kampta 9 oduncu), 4 → meyveye, 2 → Barracks ve House kur"
+      en: "Reslot the hunt: 6 → wood (8 total, on one or two lumber camps), 4 → berries, 2 → build a Barracks and a House"
+      tr: "Avı yeniden dağıt: 6 → oduna (toplam 8 oduncu; tek veya iki kamp), 4 → meyveye, 2 → Barracks ve House kur"
     icons:
       - wood
       - lumber-camp

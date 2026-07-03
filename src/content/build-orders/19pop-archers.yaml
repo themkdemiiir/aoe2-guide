@@ -19,6 +19,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 9
     assign:
       en: +3 → wood, build a lumber camp
@@ -26,12 +27,14 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +1 → lure the first boar
       tr: +1 → ilk domuzu çek
     icons:
       - food
+    resources: { food: 7, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → build a house, then mill on berries
@@ -43,6 +46,7 @@ steps:
       - house
       - mill
       - food
+    resources: { food: 8, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 17
     assign:
       en: +6 → hunt under the TC
@@ -53,6 +57,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 14, wood: 3, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     assign:
       en: +2 → wood, then research Loom
@@ -60,6 +65,7 @@ steps:
     icons:
       - wood
       - loom
+    resources: { food: 14, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     phase: feudal
     time: "9:15"
@@ -68,6 +74,7 @@ steps:
       tr: 19 köylüde Feudal'a tıkla (ideal varış 9:15)
     icons:
       - loom
+    resources: { food: 14, wood: 5, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     assign:
       en: From the TC — 5 → 2nd lumber camp, 2 → straggler trees
@@ -75,6 +82,7 @@ steps:
     icons:
       - lumber-camp
       - wood
+    resources: { food: 7, wood: 12, gold: 0, stone: 0, builder: 0 }
   - villagers: 19
     assign:
       en: From the TC — 1 → house then barracks, 2 → mining camp on gold
@@ -87,6 +95,7 @@ steps:
       - barracks
       - gold
       - mining-camp
+    resources: { food: 4, wood: 12, gold: 2, stone: 0, builder: 1 }
   - villagers: 21
     assign:
       en: Build an Archery Range and start Archers; +2 → gold (4 total)
@@ -95,6 +104,7 @@ steps:
       - archery-range
       - archer
       - gold
+    resources: { food: 4, wood: 12, gold: 4, stone: 0, builder: 1 }
   - villagers: 21
     assign:
       en: Build a Blacksmith and research Fletching; move 4 → berries (5 total), start farms
@@ -107,6 +117,7 @@ steps:
       - fletching
       - food
       - farm
+    resources: { food: 5, wood: 12, gold: 4, stone: 0, builder: 0 }
 intro:
   en: >-
     Land in Feudal at 19 pop, throw down a single Archery Range, and pump Fletching-backed Archers before your opponent

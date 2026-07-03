@@ -1,6 +1,7 @@
 ---
 slug: 07-using-your-army
 title: "Ordunu Kullanmak"
+description: "Ordunu kullanmak: sayı üstünlüğü neden counterlardan önemli, kaybedilen savaştan çekilme, yüksek arazi avantajı ve güç sıçramalarını kullanma."
 order: 7
 ---
 

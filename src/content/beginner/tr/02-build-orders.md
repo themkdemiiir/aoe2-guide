@@ -1,6 +1,7 @@
 ---
 slug: 02-build-orders
 title: "Yapım Sıraları"
+description: "AoE2 yapım sıraları: build order nedir, adımlar nasıl okunur ve üç temel açılış — 18-Pop Scouts, 19-Pop Archers ve Fast Castle."
 order: 2
 prereq: [01-resources]
 ---

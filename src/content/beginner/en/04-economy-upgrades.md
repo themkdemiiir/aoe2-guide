@@ -1,6 +1,7 @@
 ---
 slug: 04-economy-upgrades
 title: "Economy Upgrades"
+description: "AoE2 economy upgrades: why Lumber Camp research comes first, how farm upgrades save wood, and when to time Wheelbarrow, Hand Cart, and mining techs."
 order: 4
 ---
 

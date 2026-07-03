@@ -1,6 +1,7 @@
 ---
 slug: 08-uptimes-and-timings
 title: "Çağ Atlama Süreleri ve Zamanlamalar"
+description: "Çağ atlama süreleri ve zamanlamalar: Feudal süresinin 25 saniyelik pop hesabı, oyun kazandıran zamanlama saldırıları ve Castle-Imperial referansları."
 order: 8
 ---
 

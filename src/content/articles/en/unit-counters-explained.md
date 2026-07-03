@@ -4,6 +4,7 @@ title: "Unit Counters Explained: Feudal & Castle Age"
 description: "How AoE2 counters actually work — pierce armour, bonus damage, and speed — plus the Feudal counter-square every player must know."
 category: counters
 order: 1
+published: "2026-06-08"
 updated: "2026-06-08"
 heroIcon: "lucide:swords"
 sources:

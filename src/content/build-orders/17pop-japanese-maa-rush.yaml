@@ -15,6 +15,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 8
     assign:
       en: +2 → wood, drop a Lumber Camp
@@ -22,6 +23,7 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +1 → first boar, +1 → second boar under the Town Center
@@ -31,6 +33,7 @@ steps:
       tr: En az 2 geyik çek — bu zorunlu
     icons:
       - food
+    resources: { food: 8, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → build a House, then back to the hunt
@@ -38,12 +41,14 @@ steps:
     icons:
       - house
       - food
+    resources: { food: 9, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 13
     assign:
       en: +2 → hunt (eat through the second boar)
       tr: +2 → av (ikinci yaban domuzunu yiyerek bitir)
     icons:
       - food
+    resources: { food: 11, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 16
     assign:
       en: +1 → Barracks at the front, +2 → food under the Town Center
@@ -51,6 +56,7 @@ steps:
     icons:
       - barracks
       - food
+    resources: { food: 13, wood: 2, gold: 0, stone: 0, builder: 1 }
   - villagers: 17
     phase: feudal
     time: "8:25"
@@ -63,6 +69,7 @@ steps:
     icons:
       - wood
       - loom
+    resources: { food: 13, wood: 3, gold: 0, stone: 0, builder: 1 }
   - villagers: 17
     assign:
       en: 2 from the hunt → gold with a Mining Camp; pump 3 Militia and send them across the map
@@ -71,6 +78,7 @@ steps:
       - gold
       - mining-camp
       - militia
+    resources: { food: 11, wood: 3, gold: 2, stone: 0, builder: 1 }
   - villagers: 17
     assign:
       en: 4 off the Town Center → wood; build an Archery Range, start Archers, research Man-at-Arms
@@ -79,6 +87,7 @@ steps:
       - archery-range
       - archer
       - man-at-arms
+    resources: { food: 7, wood: 7, gold: 2, stone: 0, builder: 1 }
   - villagers: 19
     assign:
       en: +2 → gold; add a Blacksmith and research Double-Bit Axe
@@ -87,6 +96,7 @@ steps:
       - gold
       - blacksmith
       - double-bit-axe
+    resources: { food: 7, wood: 7, gold: 4, stone: 0, builder: 1 }
   - villagers: 20
     assign:
       en: +1 → berries and build a Mill; research Fletching and push Archers + Man-at-Arms together
@@ -98,6 +108,7 @@ steps:
       - food
       - mill
       - fletching
+    resources: { food: 8, wood: 7, gold: 4, stone: 0, builder: 1 }
 intro:
   en: >-
     Reach Feudal Age around 8:25 and apply the fastest possible Man-at-Arms pressure, layering in Archers right behind

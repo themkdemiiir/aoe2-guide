@@ -74,8 +74,8 @@ steps:
       - gold
       - loom
   - assign:
-      en: "In Feudal: build Barracks + House, optionally wall; shift depleted food vils to Farms and wood, then +2 → Stable and Market"
-      tr: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır, sonra +2 → Ahır ve Pazar dik"
+      en: "In Feudal: build Barracks + House, optionally wall; shift depleted food vils to Farms and wood, then 2 vils → Stable and Market"
+      tr: "Feudal'da: Kışla + Ev dik, istersen duvar ör; tükenen yiyecek köylülerini Tarlalara ve oduna kaydır, sonra 2 köylüyle Ahır ve Pazar dik"
     icons:
       - barracks
       - house

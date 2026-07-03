@@ -14,6 +14,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 5, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 8
     assign:
       en: +3 → build a mill on the chickens and gather them
@@ -24,18 +25,21 @@ steps:
     icons:
       - mill
       - food
+    resources: { food: 8, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 9
     assign:
       en: +1 → back onto the sheep
       tr: +1 → tekrar koyunlara
     icons:
       - food
+    resources: { food: 9, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +1 → send 1 villager to the first boar
       tr: +1 → 1 köylüyü ilk yaban domuzuna gönder
     icons:
       - food
+    resources: { food: 10, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → build a house, then chop a straggler tree
@@ -43,18 +47,21 @@ steps:
     icons:
       - house
       - wood
+    resources: { food: 10, wood: 1, gold: 0, stone: 0, builder: 0 }
   - villagers: 14
     assign:
       en: +3 → straggler trees near the TC
       tr: +3 → TC yakınındaki tek ağaçlara
     icons:
       - wood
+    resources: { food: 10, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 15
     assign:
       en: +1 → send 1 villager to the second boar
       tr: +1 → 1 köylüyü ikinci yaban domuzuna gönder
     icons:
       - food
+    resources: { food: 11, wood: 4, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: Drop a lumber camp on the 4 straggler-tree villagers
       tr: Tek ağaçlardaki 4 köylüye odun kampı kur
@@ -64,6 +71,7 @@ steps:
     icons:
       - lumber-camp
       - wood
+    resources: { food: 11, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     phase: feudal
     time: "8:50"
@@ -76,18 +84,21 @@ steps:
     icons:
       - food
       - loom
+    resources: { food: 14, wood: 4, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: "Feudal: walk 6 villagers onto the berries with a mill so food keeps flowing"
       tr: "Feudal: 6 köylüyü değirmenle çilek çalılarına götür ki yiyecek akmaya devam etsin"
     icons:
       - food
       - mill
+    resources: { food: 14, wood: 4, gold: 0, stone: 0, builder: 0 }
   - assign:
       en: Pick your feudal opening based on what your scout sees — scouts, archers, or man-at-arms all work from here
       tr: Feudal açılışını scout'unun gördüğüne göre seç — scout, okçu veya man-at-arms hepsi buradan çalışır
     icons:
       - scout-cavalry
       - archer
+    resources: { food: 14, wood: 4, gold: 0, stone: 0, builder: 0 }
 intro:
   en: >-
     A flexible 18-pop Arabia opener that uses the chickens by your Town Center for fast early food, landing in Feudal

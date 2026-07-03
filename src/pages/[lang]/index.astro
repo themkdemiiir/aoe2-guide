@@ -105,7 +105,7 @@ const more = [
   { href: "/glossary", key: "nav.glossary", icon: "lucide:book-open" },
 ] as const;
 ---
-<BaseLayout title="AOE2 Guide" canonicalPath="/">
+<BaseLayout title={lang === "tr" ? "AOE2 Guide — Age of Empires II Build Order, Uygarlık ve Strateji Rehberi" : "AOE2 Guide — Age of Empires II Build Orders, Civilizations & Strategy"} description={t(lang, "meta.home")} canonicalPath="/">
   {/* ========================================================================
        ACT I — THE GILDED COVER
        One continuous dark band (masthead + State of the Meta). On bg-stone-bg

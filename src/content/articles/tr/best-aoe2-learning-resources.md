@@ -4,6 +4,7 @@ title: "En İyi AoE2 Öğrenme Kaynakları"
 description: "Age of Empires II'de gelişmek için önerdiğimiz yapım sırası siteleri, counter rehberleri, istatistik takipçileri, içerik üreticileri ve araçlardan oluşan derli toplu bir liste."
 category: resources
 order: 2
+published: "2026-06-08"
 updated: "2026-06-08"
 heroIcon: "lucide:book-open"
 sources:

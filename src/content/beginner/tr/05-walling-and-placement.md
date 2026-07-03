@@ -1,6 +1,7 @@
 ---
 slug: 05-walling-and-placement
 title: "Duvar Örme ve Bina Yerleşimi"
+description: "AoE2 duvar örme ve bina yerleşimi: ne zaman duvar örmeli, askeri binaları duvar olarak kullanma, ekonomi binası yerleşimi ve üç duvar türü."
 order: 5
 ---
 

@@ -1,6 +1,7 @@
 ---
 slug: 07-using-your-army
 title: "Using Your Army"
+description: "Using your army in AoE2: why numbers beat counters, when to retreat, using high ground, and abusing power spikes before your opponent ages up."
 order: 7
 ---
 

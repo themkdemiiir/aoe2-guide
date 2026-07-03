@@ -1,6 +1,7 @@
 ---
 slug: 01-resources
 title: "Kaynaklar ve Köylüler"
+description: "AoE2 kaynakları ve köylüler: dört kaynağın kullanımı, kesintisiz köylü üretimi, erken oyun köylü dağılımı ve boşta kalma süresinin maliyeti."
 order: 1
 ---
 

@@ -21,6 +21,7 @@ steps:
     icons:
       - food
       - house
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: 7 builds Lumber Camp; 7–10 → wood
@@ -28,6 +29,7 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 4, gold: 0, stone: 0, builder: 0 }
   - villagers: 12
     assign:
       en: 11 lures 1st boar; 12 builds house by water + Dock + 2nd house
@@ -35,6 +37,7 @@ steps:
     icons:
       - food
       - dock
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 1 }
   - villagers: 12
     assign:
       en: make 4 Fishing Ships from the Dock and send them to deep fish
@@ -42,6 +45,7 @@ steps:
     icons:
       - fishing-ship
       - food
+    resources: { food: 7, wood: 4, gold: 0, stone: 0, builder: 1 }
   - villagers: 15
     assign:
       en: 13–14 → wood; 15 lures 2nd boar
@@ -49,6 +53,7 @@ steps:
     icons:
       - wood
       - food
+    resources: { food: 8, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 21
     assign:
       en: 16–21 → sheep/boar; research Loom; queue Feudal Age
@@ -56,6 +61,7 @@ steps:
     icons:
       - food
       - loom
+    resources: { food: 14, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 21
     phase: feudal
     assign:
@@ -64,6 +70,7 @@ steps:
     icons:
       - double-bit-axe
       - fire-galley
+    resources: { food: 14, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 21
     assign:
       en: build a house + 2 Archery Ranges next to your Barracks; train Archers
@@ -71,12 +78,14 @@ steps:
     icons:
       - archery-range
       - archer
+    resources: { food: 14, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 24
     assign:
       en: 22–24 → gold
       tr: 22–24 → altın
     icons:
       - gold
+    resources: { food: 14, wood: 6, gold: 3, stone: 0, builder: 1 }
   - villagers: 28
     assign:
       en: 25 builds Mill next to berries; 26–28 → berries
@@ -84,6 +93,7 @@ steps:
     icons:
       - mill
       - food
+    resources: { food: 18, wood: 6, gold: 3, stone: 0, builder: 1 }
   - villagers: 34
     assign:
       en: 29–34 build Farms; research Fletching and Wheelbarrow
@@ -92,6 +102,7 @@ steps:
       - farm
       - fletching
       - wheelbarrow
+    resources: { food: 24, wood: 6, gold: 3, stone: 0, builder: 1 }
   - villagers: 35
     phase: castle
     assign:
@@ -100,6 +111,7 @@ steps:
     icons:
       - gold
       - fire-galley
+    resources: { food: 24, wood: 6, gold: 4, stone: 0, builder: 1 }
 intro:
   en: >-
     **Goal:** Control the water with Fire Galleys while applying land pressure with Archers, using a Fishing Ship

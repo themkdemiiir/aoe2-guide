@@ -31,7 +31,7 @@ for (const term of rendered) {
 }
 const letters = [...grouped.keys()].sort();
 ---
-<BaseLayout title={tt(lang, "nav.glossary")} canonicalPath="/glossary">
+<BaseLayout title={tt(lang, "nav.glossary")} description={tt(lang, "meta.glossary")} canonicalPath="/glossary">
   <section class="mx-auto max-w-prose px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{tt(lang, "nav.glossary")}</h1>
 

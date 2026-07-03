@@ -17,6 +17,7 @@ steps:
     icons:
       - food
       - town-center
+    resources: { food: 6, wood: 0, gold: 0, stone: 0, builder: 0 }
   - villagers: 8
     assign:
       en: +2 → wood, drop a Lumber Camp
@@ -24,18 +25,21 @@ steps:
     icons:
       - wood
       - lumber-camp
+    resources: { food: 6, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 9
     assign:
       en: +1 → lure the first boar to the TC
       tr: +1 → ilk domuzu Şehir Merkezi'ne çek
     icons:
       - food
+    resources: { food: 7, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 10
     assign:
       en: +1 → hunt the boar under the TC
       tr: +1 → domuzu Şehir Merkezi altında avla
     icons:
       - food
+    resources: { food: 8, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 11
     assign:
       en: +1 → build a House, then a Mill on berries
@@ -44,6 +48,7 @@ steps:
       - house
       - mill
       - food
+    resources: { food: 9, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 12
     assign:
       en: +1 → lure the second boar
@@ -53,6 +58,7 @@ steps:
       tr: İsteğe bağlı - tüm koyunları bulunca Scout ile geyiği TC'ye sür
     icons:
       - food
+    resources: { food: 10, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     time: "8:50"
     assign:
@@ -64,6 +70,7 @@ steps:
     icons:
       - food
       - loom
+    resources: { food: 16, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 18
     phase: feudal
     assign:
@@ -73,6 +80,7 @@ steps:
       - wood
       - gold
       - mining-camp
+    resources: { food: 9, wood: 7, gold: 2, stone: 0, builder: 0 }
   - villagers: 18
     assign:
       en: 2 hunters build a Barracks + House; send 3 hunters → berries
@@ -81,18 +89,21 @@ steps:
       - barracks
       - house
       - food
+    resources: { food: 7, wood: 7, gold: 2, stone: 0, builder: 2 }
   - villagers: 18
     assign:
       en: Research Double-Bit Axe (Horse Collar optional)
       tr: Double-Bit Axe araştır (Horse Collar isteğe bağlı)
     icons:
       - double-bit-axe
+    resources: { food: 7, wood: 7, gold: 2, stone: 0, builder: 2 }
   - assign:
       en: Send the next 4 villagers → gold, then build a 2nd Barracks
       tr: Sonraki 4 köylüyü → altına gönder, sonra 2. Barracks kur
     icons:
       - gold
       - barracks
+    resources: { food: 7, wood: 7, gold: 6, stone: 0, builder: 2 }
   - assign:
       en: Train Eagle Scouts from both Barracks (2 Spearmen first vs a Scout opening)
       tr: Her iki Barracks'tan Eagle Scout bas (Scout açılışına karşı önce 2 Spearman)
@@ -102,6 +113,7 @@ steps:
     icons:
       - eagle-scout
       - spearman
+    resources: { food: 7, wood: 7, gold: 6, stone: 0, builder: 2 }
 intro:
   en: Land Feudal fast off heavy hunt, then flood the enemy with Eagle Scouts trained from two Barracks at once.
   tr: Yoğun av ile hızlıca Feudal'a çık, ardından iki Barracks'tan aynı anda bastığın Eagle Scout'larla rakibi boğ.

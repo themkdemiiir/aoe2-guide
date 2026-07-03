@@ -1,6 +1,7 @@
 ---
 slug: 04-economy-upgrades
 title: "Ekonomi Yükseltmeleri"
+description: "AoE2 ekonomi yükseltmeleri: Kereste Kampı hattı neden önce gelir, tarla yükseltmeleri nasıl odun kazandırır, Wheelbarrow ve Hand Cart ne zaman alınır."
 order: 4
 ---
 

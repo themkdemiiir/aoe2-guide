@@ -23,7 +23,7 @@ const loc = (v: Localized): string => (typeof v === "string" ? v : (v[lang] ?? v
 
 const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).localeCompare(displayName(b[0])));
 ---
-<BaseLayout title={t(lang, "counters.title")} canonicalPath="/counters">
+<BaseLayout title={t(lang, "counters.title")} description={t(lang, "meta.counters")} canonicalPath="/counters">
   <section class="mx-auto max-w-5xl px-4 py-12">
     <h1 class="font-display text-4xl text-ink">{t(lang, "counters.title")}</h1>
     <p class="mt-3 max-w-prose text-stone-700">{t(lang, "counters.intro")}</p>
