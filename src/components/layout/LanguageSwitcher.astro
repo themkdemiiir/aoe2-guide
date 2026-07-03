@@ -3,7 +3,8 @@ import { locales, localeMeta } from "@/i18n/locales";
 import { getLocaleFromUrl, localizedPath } from "@/i18n/utils";
 
 const currentLocale = getLocaleFromUrl(Astro.url);
-const pathname = Astro.url.pathname;
+// On the 404 page, /en/404/ and /tr/404/ don't exist — switch to the locale homes.
+const pathname = /^\/404\/?$/.test(Astro.url.pathname) ? "/" : Astro.url.pathname;
 ---
 <details class="relative">
   <summary class="cursor-pointer list-none text-sm text-stone-700 hover:text-gold-500">

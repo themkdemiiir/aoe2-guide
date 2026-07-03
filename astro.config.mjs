@@ -11,6 +11,10 @@ import { remarkBuildOrderTruncate } from "./src/lib/remark/build-order-truncate.
 export default defineConfig({
   site: "https://aoe2guide.com",
   output: "static",
+  // Served URLs are the trailing-slash form (slashless 308s on CF Pages);
+  // "always" makes a slashless internal link fail loud in dev instead of
+  // silently bouncing through a redirect in production.
+  trailingSlash: "always",
   // Prefetch internal links on hover → near-instant navigation (pairs with the
   // ClientRouter view transitions). Hover keeps it conservative on link-dense
   // pages (civs/builds indexes) rather than prefetching everything upfront.
@@ -20,7 +24,9 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
-    sitemap(),
+    // The root "/" is a language-gate redirect page — a sitemap must not list
+    // URLs that redirect.
+    sitemap({ filter: (page) => new URL(page).pathname !== "/" }),
     pagefind(),
     icon({ include: { lucide: ["*"], heroicons: ["*"] } }),
   ],

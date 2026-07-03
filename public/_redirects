@@ -1,0 +1,35 @@
+# Cloudflare Pages redirects — first match wins.
+# URLs that were live on aoe2guide.com and later removed; without these they
+# hard-404 and pile up in Google Search Console.
+
+# --- Civilizations removed 2026-06-21 (d45109b: 6 unsourced civs cut, 59 -> 53) ---
+/en/civs/achaemenids/  /en/civs/  301
+/tr/civs/achaemenids/  /tr/civs/  301
+/en/civs/athenians/    /en/civs/  301
+/tr/civs/athenians/    /tr/civs/  301
+/en/civs/macedonians/  /en/civs/  301
+/tr/civs/macedonians/  /tr/civs/  301
+/en/civs/puru/         /en/civs/  301
+/tr/civs/puru/         /tr/civs/  301
+/en/civs/spartans/     /en/civs/  301
+/tr/civs/spartans/     /tr/civs/  301
+/en/civs/thracians/    /en/civs/  301
+/tr/civs/thracians/    /tr/civs/  301
+
+# --- Build orders removed 2026-06-21 (96a3c47: 3 unverifiable builds cut) ---
+/en/builds/arena-fc-monks/        /en/builds/23pop-fast-castle-boom-arena/  301
+/tr/builds/arena-fc-monks/        /tr/builds/23pop-fast-castle-boom-arena/  301
+/en/builds/dark-age-rush-archers/ /en/builds/maa-archers/                   301
+/tr/builds/dark-age-rush-archers/ /tr/builds/maa-archers/                   301
+/en/builds/fc-crossbows/          /en/builds/                               301
+/tr/builds/fc-crossbows/          /tr/builds/                               301
+
+# --- Matchup detail route deleted pre-launch (7f674d9); index page remains ---
+/en/matchups/britons-vs-franks/  /en/matchups/  301
+/tr/matchups/britons-vs-franks/  /tr/matchups/  301
+
+# --- ES/DE locales dropped 2026-06-07 (never live on this domain; pages.dev-era safety net) ---
+/es   /en/        301
+/de   /en/        301
+/es/* /en/:splat  301
+/de/* /en/:splat  301

@@ -34,4 +34,4 @@ Age of Empires II'de gelişmek için tekerleği yeniden icat etmenize gerek yok 
 
 Bir seferde **tek** bir zayıflık seçin — boşta kalan Town Center süresi, sallantılı bir yapım sırası, kötü keşif — birkaç oyun boyunca düzeltin, sonra bir sonrakine geçin. Kendi kayıtlı oyunlarınızı bu kaynaklara karşı incelemek, *yaptığınızı sandığınız* ile *gerçekte olan* arasındaki farkı bulmanın en hızlı yoludur.
 
-Yapılandırılmış bir yol için [Öğren](/tr/learn) bölümümüzle ve [Counter](/tr/counters) sayfasıyla başlayın.
+Yapılandırılmış bir yol için [Öğren](/tr/learn/) bölümümüzle ve [Counter](/tr/counters/) sayfasıyla başlayın.

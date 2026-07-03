@@ -1,12 +1,15 @@
 ---
 import { defaultLocale } from "@/i18n/locales";
 const home = `/${defaultLocale}/`;
+// Absolute: a relative canonical inherits whichever host serves it, so the
+// www/pages.dev mirrors would canonicalize their root to the WRONG host.
+const homeAbs = new URL(home, Astro.site).href;
 ---
 <!doctype html>
 <html lang={defaultLocale}>
   <head>
     <meta charset="utf-8" />
-    <link rel="canonical" href={home} />
+    <link rel="canonical" href={homeAbs} />
     <title>AOE2 Guide</title>
     <script is:inline>
       // Default entry is English; honor a returning visitor's saved choice.

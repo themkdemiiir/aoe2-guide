@@ -14,13 +14,15 @@ export function t(locale: Locale, key: UIKey): string {
 
 export function localizedPath(path: string, locale: Locale): string {
   const trimmed = path.startsWith("/") ? path.slice(1) : path;
-  const segments = trimmed.split("/");
+  const segments = trimmed.split("/").filter(Boolean);
   if (segments[0] && isLocale(segments[0])) {
     segments[0] = locale;
   } else {
     segments.unshift(locale);
   }
-  return `/${segments.join("/")}`;
+  // Trailing slash = the served URL form; the slashless form 308s on CF Pages,
+  // so every internal link would bounce through a redirect without it.
+  return `/${segments.join("/")}/`;
 }
 
 export function allLocalePaths(path: string): Array<{ locale: Locale; path: string }> {

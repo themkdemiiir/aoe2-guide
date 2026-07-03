@@ -34,4 +34,4 @@ You don't have to reinvent the wheel to improve at Age of Empires II — the com
 
 Pick **one** weakness at a time — idle Town Center time, a shaky build order, poor scouting — fix it across a few games, then move to the next. Reviewing your own recorded games against these references is the fastest way to find the gap between what you *think* you did and what actually happened.
 
-For a structured path, start with our [Learn](/en/learn) chapters and the [Counters](/en/counters) page.
+For a structured path, start with our [Learn](/en/learn/) chapters and the [Counters](/en/counters/) page.

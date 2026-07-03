@@ -12,7 +12,7 @@ sources:
   - { label: "aoe2techtree.net — hidden unit stats", url: "https://aoe2techtree.net" }
 ---
 
-There is no unit in Age of Empires II without a weakness. "Countering" an enemy is not about memorising a chart — it is about understanding *why* one unit beats another. For the full interactive matrix, see the [Counters page](/en/counters); this article explains the reasoning behind it.
+There is no unit in Age of Empires II without a weakness. "Countering" an enemy is not about memorising a chart — it is about understanding *why* one unit beats another. For the full interactive matrix, see the [Counters page](/en/counters/); this article explains the reasoning behind it.
 
 ## What makes a counter a counter
 

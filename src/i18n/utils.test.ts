@@ -20,13 +20,18 @@ describe("t", () => {
 });
 
 describe("localizedPath", () => {
+  // Always trailing slash: the served URL form — the slashless form 308s on CF Pages.
   it("swaps the leading locale segment", () => {
-    expect(localizedPath("/en/civs/britons", "tr")).toBe("/tr/civs/britons");
-    expect(localizedPath("/tr/builds", "en")).toBe("/en/builds");
+    expect(localizedPath("/en/civs/britons", "tr")).toBe("/tr/civs/britons/");
+    expect(localizedPath("/tr/builds", "en")).toBe("/en/builds/");
   });
   it("inserts locale when missing", () => {
-    expect(localizedPath("/civs/britons", "tr")).toBe("/tr/civs/britons");
-    expect(localizedPath("civs", "en")).toBe("/en/civs");
+    expect(localizedPath("/civs/britons", "tr")).toBe("/tr/civs/britons/");
+    expect(localizedPath("civs", "en")).toBe("/en/civs/");
+  });
+  it("normalizes existing trailing slash and root", () => {
+    expect(localizedPath("/civs/britons/", "en")).toBe("/en/civs/britons/");
+    expect(localizedPath("/", "tr")).toBe("/tr/");
   });
 });
 
@@ -34,7 +39,7 @@ describe("allLocalePaths", () => {
   it("returns paths for all 2 locales", () => {
     const paths = allLocalePaths("/civs/britons");
     expect(paths).toHaveLength(2);
-    expect(paths.find((p) => p.locale === "en")?.path).toBe("/en/civs/britons");
-    expect(paths.find((p) => p.locale === "tr")?.path).toBe("/tr/civs/britons");
+    expect(paths.find((p) => p.locale === "en")?.path).toBe("/en/civs/britons/");
+    expect(paths.find((p) => p.locale === "tr")?.path).toBe("/tr/civs/britons/");
   });
 });

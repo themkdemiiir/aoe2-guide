@@ -127,7 +127,7 @@ const serverTiers = labels.tiers
           </div>
           <div class="flex flex-1 flex-wrap content-start gap-2.5 bg-parchment/60 p-2.5">
             {g.civs.map((c) => (
-              <a href={`${labels.civBase}${c.slug}`} class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-1.5 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style={`border-left:3px solid ${g.color}`}>
+              <a href={`${labels.civBase}${c.slug}/`} class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-1.5 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style={`border-left:3px solid ${g.color}`}>
                 <div class="flex h-9 w-7 flex-none items-center justify-center" style={`background:${g.color};clip-path:${SHIELD}`}><span class="-mt-1 font-display text-xs font-extrabold text-ember">{c.initial}</span></div>
                 <div class="min-w-0 flex-1">
                   <div class="truncate font-display text-[15px] font-bold leading-tight text-ink">{c.name}</div>
@@ -200,7 +200,7 @@ const serverTiers = labels.tiers
       }
 
       function chip(c, color) {
-        return '<a href="' + esc(labels.civBase + c.slug) + '" class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-1.5 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style="border-left:3px solid ' + color + '">'
+        return '<a href="' + esc(labels.civBase + c.slug + "/") + '" class="flex w-52 items-center gap-2.5 rounded border border-stone-700/20 bg-parchment py-1.5 pl-2.5 pr-3.5 transition-colors hover:border-gold-500" style="border-left:3px solid ' + color + '">'
           + '<div class="flex h-9 w-7 flex-none items-center justify-center" style="background:' + color + ';clip-path:' + SHIELD + '"><span class="-mt-1 font-display text-xs font-extrabold text-ember">' + esc(c.initial) + '</span></div>'
           + '<div class="min-w-0 flex-1"><div class="truncate font-display text-[15px] font-bold leading-tight text-ink">' + esc(c.name) + '</div>'
           + '<div class="font-mono text-[10px] tracking-wide text-gold-700">' + (c._wr != null ? c._wr + "%" : "—") + '</div></div></a>';

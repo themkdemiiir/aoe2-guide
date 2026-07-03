@@ -12,9 +12,11 @@ interface Props {
   description?: string;
   /** Path WITHOUT locale prefix, used for hreflang and lang switcher. e.g. "/civs/britons" */
   canonicalPath?: string;
+  /** Error pages (404): robots noindex, no canonical/hreflang/breadcrumb — those tags mint crawlable dead URLs. */
+  noindex?: boolean;
 }
 
-const { title, description = "Age of Empires II — civilizations, build orders, maps and strategy guide.", canonicalPath = "/" } = Astro.props;
+const { title, description = "Age of Empires II — civilizations, build orders, maps and strategy guide.", canonicalPath = "/", noindex = false } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
@@ -48,16 +50,16 @@ const sectionLabels: Record<string, string> = {
   learn: "Learn", matchups: "Matchups", analyzer: "Analyzer",
 };
 const pathParts = canonicalPath.split("/").filter(Boolean);
-const breadcrumbLd = pathParts.length > 0 ? {
+const breadcrumbLd = pathParts.length > 0 && !noindex ? {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "AOE2 Guide", item: `${site}/${locale}/` },
     ...(sectionLabels[pathParts[0]] ? [
-      { "@type": "ListItem", position: 2, name: sectionLabels[pathParts[0]], item: `${site}/${locale}/${pathParts[0]}` },
+      { "@type": "ListItem", position: 2, name: sectionLabels[pathParts[0]], item: withSlash(`${site}/${locale}/${pathParts[0]}`) },
     ] : []),
     ...(pathParts[1] ? [
-      { "@type": "ListItem", position: 3, name: title, item: `${site}/${locale}${canonicalPath}` },
+      { "@type": "ListItem", position: 3, name: title, item: withSlash(`${site}/${locale}${canonicalPath}`) },
     ] : []),
   ],
 } : null;
@@ -73,7 +75,14 @@ const breadcrumbLd = pathParts.length > 0 ? {
         location.replace("https://aoe2guide.com" + location.pathname + location.search + location.hash);
       }
     </script>
-    <SEO
+    {noindex && (
+      <>
+        <title>{fullTitle}</title>
+        <meta name="description" content={description} />
+        <meta name="robots" content="noindex, nofollow" />
+      </>
+    )}
+    {!noindex && <SEO
       title={fullTitle}
       description={description}
       canonical={canonical}
@@ -96,7 +105,7 @@ const breadcrumbLd = pathParts.length > 0 ? {
         },
       }}
       twitter={{ card: "summary_large_image" }}
-    />
+    />}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -111,10 +120,10 @@ const breadcrumbLd = pathParts.length > 0 ? {
       <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbLd).replace(/</g, "\\u003c")} />
     )}
     <slot name="head" />
-    {alternates.map(({ locale: l, path }) => (
+    {!noindex && alternates.map(({ locale: l, path }) => (
       <link rel="alternate" hreflang={l} href={withSlash(`${site}${path}`)} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={withSlash(`${site}/en${canonicalPath}`)} />
+    {!noindex && <link rel="alternate" hreflang="x-default" href={withSlash(`${site}/en${canonicalPath}`)} />}
     <ClientRouter />
     <script is:inline>
       // Set theme before paint to avoid FOUC

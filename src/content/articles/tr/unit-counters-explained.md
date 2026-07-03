@@ -12,7 +12,7 @@ sources:
   - { label: "aoe2techtree.net — gizli birim statları", url: "https://aoe2techtree.net" }
 ---
 
-Age of Empires II'de zayıflığı olmayan birim yoktur. Rakibi "counter'lamak" bir tabloyu ezberlemek değil, bir birimin diğerini *neden* yendiğini anlamaktır. Tam etkileşimli matris için [Counter sayfasına](/tr/counters) bakın; bu yazı onun ardındaki mantığı açıklar.
+Age of Empires II'de zayıflığı olmayan birim yoktur. Rakibi "counter'lamak" bir tabloyu ezberlemek değil, bir birimin diğerini *neden* yendiğini anlamaktır. Tam etkileşimli matris için [Counter sayfasına](/tr/counters/) bakın; bu yazı onun ardındaki mantığı açıklar.
 
 ## Bir counter'ı counter yapan nedir
 
