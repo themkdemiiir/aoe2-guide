@@ -210,9 +210,9 @@ mod tests {
                                mode: "1v1".into(), duration_ms: 2_400_000, you: 1 },
             players: vec![pm("MKD", 1)],
             findings: vec![Finding {
-                player_number: 1, metric: "idle TC (dark)".into(), your: "30s".into(),
+                player_number: 1, code: "idle_tc_dark_high", metric: "idle TC (dark)".into(), your: "30s".into(),
                 reference: "~0-15s".into(), basis: Basis::Absolute, severity: Severity::High,
-                note: "tighten production".into(),
+                note: "tighten production".into(), vars: std::collections::BTreeMap::new(),
             }],
             caveats: vec![MACRO_CAVEAT.to_string()],
         };

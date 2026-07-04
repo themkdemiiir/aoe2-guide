@@ -159,12 +159,19 @@ pub enum Severity {
 #[derive(Debug, Clone, Serialize)]
 pub struct Finding {
     pub player_number: i32,
+    /// Stable snake_case code, one per emit site, so the browser can localize the
+    /// metric + note (the English strings stay for the CLI renderer). Additive to
+    /// the JSON contract — no SCHEMA_VERSION bump.
+    pub code: &'static str,
     pub metric: String,
     pub your: String,
     pub reference: String,
     pub basis: Basis,
     pub severity: Severity,
     pub note: String,
+    /// Template values for the localized note (empty for static findings).
+    #[serde(skip_serializing_if = "std::collections::BTreeMap::is_empty")]
+    pub vars: std::collections::BTreeMap<&'static str, String>,
 }
 
 // --- serialized report (the one-way-door JSON contract; see the Phase C spec) --
@@ -212,9 +219,9 @@ mod tests {
             },
             players: vec![],
             findings: vec![Finding {
-                player_number: 1, metric: "Feudal up-time".into(), your: "12:10".into(),
+                player_number: 1, code: "feudal_slow", metric: "Feudal up-time".into(), your: "12:10".into(),
                 reference: "11:20".into(), basis: Basis::YourElo, severity: Severity::High,
-                note: "n".into(),
+                note: "n".into(), vars: std::collections::BTreeMap::new(),
             }],
             caveats: vec![MACRO_CAVEAT.to_string()],
         };

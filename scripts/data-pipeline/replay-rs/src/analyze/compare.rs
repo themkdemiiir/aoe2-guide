@@ -163,14 +163,14 @@ pub fn findings(
         // --- absolute waste: idle TC (ESTIMATE = window − vils×25s; thresholds are lenient
         //     so a normal mid-elo player banking for an age-up isn't flagged) ---
         if m.idle_dark_ms > 70_000 {
-            out.push(mk(pn, "idle TC (dark)", &fmt_secs(m.idle_dark_ms), "~0-30s", Basis::Absolute, Severity::High,
+            out.push(mk(pn, "idle_tc_dark_high", "idle TC (dark)", &fmt_secs(m.idle_dark_ms), "~0-30s", Basis::Absolute, Severity::High,
                 "Lots of Dark-Age TC idle (estimate) — keep a villager queued non-stop."));
         } else if m.idle_dark_ms > 35_000 {
-            out.push(mk(pn, "idle TC (dark)", &fmt_secs(m.idle_dark_ms), "~0-30s", Basis::Absolute, Severity::Med,
+            out.push(mk(pn, "idle_tc_dark_med", "idle TC (dark)", &fmt_secs(m.idle_dark_ms), "~0-30s", Basis::Absolute, Severity::Med,
                 "Some Dark-Age TC idle (estimate) — tighten villager production."));
         }
         if m.idle_feudal_ms > 50_000 {
-            out.push(mk(pn, "idle TC (feudal)", &fmt_secs(m.idle_feudal_ms), "<25s", Basis::Absolute, Severity::Med,
+            out.push(mk(pn, "idle_tc_feudal", "idle TC (feudal)", &fmt_secs(m.idle_feudal_ms), "<25s", Basis::Absolute, Severity::Med,
                 "TC idle in Feudal (estimate) — each 25s idle ≈ one lost villager."));
         }
 
@@ -195,7 +195,7 @@ pub fn findings(
                     let comp = fms as f64 / 1000.0 + feudal_res;
                     if comp > ref_s + 60.0 {
                         let sev = if comp > ref_s + 120.0 { Severity::High } else { Severity::Med };
-                        out.push(mk(pn, "Feudal up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
+                        out.push(mk(pn, "feudal_slow", "Feudal up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
                             &format!("Slower to Feudal than the {ref_desc} for {civ}.")));
                     }
                 }
@@ -204,14 +204,14 @@ pub fn findings(
                     let comp = cms as f64 / 1000.0 + castle_res;
                     if comp > ref_s + slack {
                         let sev = if comp > ref_s + slack + 90.0 { Severity::High } else { Severity::Med };
-                        out.push(mk(pn, "Castle up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
+                        out.push(mk(pn, "castle_slow", "Castle up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
                             &format!("Slower to Castle than the {ref_desc}.")));
                     }
                 }
                 if let (Some(ims), Some(ref_s)) = (m.imperial_ms, s.imperial_s) {
                     let comp = ims as f64 / 1000.0 + imp_res;
                     if comp > ref_s + 180.0 {
-                        out.push(mk(pn, "Imperial up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, Severity::Low,
+                        out.push(mk(pn, "imperial_slow", "Imperial up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, Severity::Low,
                             &format!("Slower to Imperial than the {ref_desc}.")));
                     }
                 }
@@ -221,7 +221,7 @@ pub fn findings(
                     let yours = m.vils_castle as f64;
                     if yours + 6.0 < ref_v {
                         let sev = if yours + 12.0 < ref_v { Severity::High } else { Severity::Med };
-                        out.push(mk(pn, "villagers by Castle", &m.vils_castle.to_string(), &format!("~{ref_v:.0}"),
+                        out.push(mk(pn, "villagers_castle", "villagers by Castle", &m.vils_castle.to_string(), &format!("~{ref_v:.0}"),
                             Basis::YourElo, sev,
                             &format!("Winners in this bracket train ~{ref_v:.0} villagers by Castle Age — TC idle time usually explains the gap.")));
                     }
@@ -232,7 +232,7 @@ pub fn findings(
                 if let (Some(cms), Some(pro_s)) = (m.castle_ms, p.castle_s) {
                     let comp = cms as f64 / 1000.0 + castle_res;
                     if comp > pro_s + 240.0 {
-                        out.push(mk(pn, "Castle vs pro", &fmt_mmss(comp), &fmt_mmss(pro_s), Basis::Pro, Severity::Low,
+                        out.push(mk(pn, "castle_vs_pro", "Castle vs pro", &fmt_mmss(comp), &fmt_mmss(pro_s), Basis::Pro, Severity::Low,
                             &format!("Castle is {} behind the 2500+ {map_slug} median — the pace to aim for.",
                                 fmt_mmss(comp - pro_s))));
                     }
@@ -245,11 +245,11 @@ pub fn findings(
             matches!((m.eco_techs.iter().find(|&&(t, _)| t == id), by), (Some(&(_, tt)), Some(b)) if tt <= b)
         };
         if m.castle_ms.is_some() && !researched_by(213, m.castle_ms) {
-            out.push(mk(pn, "Wheelbarrow", "not by Castle", "by Castle Age", Basis::Absolute, Severity::Med,
+            out.push(mk(pn, "no_wheelbarrow", "Wheelbarrow", "not by Castle", "by Castle Age", Basis::Absolute, Severity::Med,
                 "No Wheelbarrow by Castle Age — a big eco multiplier left on the table."));
         }
         if m.feudal_ms.is_some() && !researched_by(22, m.feudal_ms) {
-            out.push(mk(pn, "Loom", "not by Feudal", "by Feudal", Basis::Absolute, Severity::Low,
+            out.push(mk(pn, "no_loom", "Loom", "not by Feudal", "by Feudal", Basis::Absolute, Severity::Low,
                 "No Loom by Feudal — cheap villager survivability vs early aggression."));
         }
 
@@ -259,7 +259,7 @@ pub fn findings(
                 .float_window
                 .map(|(s, e)| format!(" ({}–{})", fmt_mmss(s as f64 / 1000.0), fmt_mmss(e as f64 / 1000.0)))
                 .unwrap_or_default();
-            out.push(mk(pn, "floating resources",
+            out.push(mk(pn, "floating_res", "floating resources",
                 &format!("~{:.0} res/min ≈ {:.0} banked{when}", m.float_peak_rate, m.float_banked),
                 "reinvest", Basis::Absolute, Severity::Med,
                 "Economy out-produced spending — add production buildings/villagers (estimate)."));
@@ -267,7 +267,7 @@ pub fn findings(
 
         // --- absolute: late / no military (gentle; even a boom needs defense) ---
         if m.first_military_ms.map_or(true, |t| t > 20 * 60_000) {
-            out.push(mk(pn, "military timing",
+            out.push(mk(pn, "late_military", "military timing",
                 &m.first_military_ms.map(|t| fmt_mmss(t as f64 / 1000.0)).unwrap_or_else(|| "none".into()),
                 "<20 min", Basis::Absolute, Severity::Low,
                 "No/very-late military — even a fast-castle boom needs units before the enemy arrives."));
@@ -277,9 +277,9 @@ pub fn findings(
         //     closed/water, so "never reached enemy" is normal there, not a mistake) ---
         if family == Family::Open && m.nearest_enemy_dist.is_some() {
             match m.find_enemy_ms {
-                None => out.push(mk(pn, "scouting", "never reached enemy", "by ~6–8 min", Basis::Absolute, Severity::Med,
+                None => out.push(mk(pn, "never_scouted", "scouting", "never reached enemy", "by ~6–8 min", Basis::Absolute, Severity::Med,
                     "Your units never reached the enemy base — scout to read their build and react.")),
-                Some(t) if t > 8 * 60_000 => out.push(mk(pn, "scouting", &fmt_mmss(t as f64 / 1000.0), "by ~6–8 min",
+                Some(t) if t > 8 * 60_000 => out.push(mk(pn, "scouted_late", "scouting", &fmt_mmss(t as f64 / 1000.0), "by ~6–8 min",
                     Basis::Absolute, Severity::Low, "Found the enemy late — scout earlier to read their strategy.")),
                 _ => {}
             }
@@ -292,7 +292,7 @@ pub fn findings(
             let (slow, fast, gap) = if a > b { (0usize, 1usize, a - b) } else { (1, 0, b - a) };
             if gap > 45_000 {
                 let pn = metrics[slow].info.player_number;
-                out.push(mk(pn, "Feudal vs opponent", &fmt_mmss(a.max(b) as f64 / 1000.0),
+                out.push(mk(pn, "feudal_vs_opp", "Feudal vs opponent", &fmt_mmss(a.max(b) as f64 / 1000.0),
                     &fmt_mmss(a.min(b) as f64 / 1000.0), Basis::Opponent, Severity::Med,
                     &format!("Reached Feudal {}s after {} — you started the game behind.", gap / 1000, metrics[fast].info.name)));
             }
@@ -303,15 +303,17 @@ pub fn findings(
     out
 }
 
-fn mk(pn: i32, metric: &str, your: &str, reference: &str, basis: Basis, severity: Severity, note: &str) -> Finding {
+fn mk(pn: i32, code: &'static str, metric: &str, your: &str, reference: &str, basis: Basis, severity: Severity, note: &str) -> Finding {
     Finding {
         player_number: pn,
+        code,
         metric: metric.to_string(),
         your: your.to_string(),
         reference: reference.to_string(),
         basis,
         severity,
         note: note.to_string(),
+        vars: std::collections::BTreeMap::new(),
     }
 }
 
@@ -367,6 +369,23 @@ mod tests {
         assert!(f
             .iter()
             .any(|x| x.metric.contains("idle TC") && matches!(x.severity, Severity::High)));
+    }
+
+    #[test]
+    fn every_finding_carries_a_code() {
+        // Metrics that trip several categories (idle TC, slow Feudal, missing Loom):
+        // every emitted finding must carry a non-empty stable code so the browser can
+        // localize its metric + note.
+        let mut civs = HashMap::new();
+        civs.insert(2u32, "franks".to_string());
+        let mut m = pm(1, 80_000, Some(900_000)); // high dark idle + 15:00 Feudal
+        m.elo_1v1 = Some(1000);
+        m.castle_ms = Some(1_500_000);
+        let f = findings(&[m], &load_benchmark(), &civs, Family::Open, "arabia", "1v1");
+        assert!(!f.is_empty(), "expected findings to test");
+        for x in &f {
+            assert!(!x.code.is_empty(), "finding for metric {:?} has no code", x.metric);
+        }
     }
 
     #[test]
