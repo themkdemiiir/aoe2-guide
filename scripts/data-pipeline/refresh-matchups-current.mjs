@@ -18,6 +18,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS_WITH_ALL, eloBucket } from "./lib/buckets.mjs";
 import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
+import { loadGuideCivs } from "./lib/guide-civs.mjs";
 import {
   canonToKeyIndex,
   isRanked1v1,
@@ -27,11 +28,7 @@ import {
 } from "./lib/relic-map.mjs";
 import { pct } from "./lib/stats.mjs";
 
-const guideCivs = new Set(
-  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
-    (c) => c.slug,
-  ),
-);
+const guideCivs = loadGuideCivs();
 const mapMeta = JSON.parse(readFileSync(path.resolve("src/data/map-meta.json"), "utf8"));
 
 const canonToKey = canonToKeyIndex(mapMeta);

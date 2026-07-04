@@ -7,6 +7,7 @@ import civMeta from "@data/civ-meta.json";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
+import { displayName } from "@/lib/display";
 import { marked } from "marked";
 
 export async function getStaticPaths() {
@@ -27,7 +28,6 @@ const recommendedCivs = entry.data.civsRecommended.map((civSlug) => ({
 }));
 
 const difficultyVariant = entry.data.difficulty === "beginner" ? "success" : entry.data.difficulty === "advanced" ? "destructive" : "default";
-const civName = (s: string) => s.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 const minutes = t(lang, "home.minutes");
 const popValues = entry.data.steps.map((s) => s.villagers).filter((v): v is number => v != null);
 const firstPop = popValues[0] ?? "-";
@@ -73,7 +73,7 @@ const description = lang === "tr"
                 class="inline-flex items-center gap-2 rounded border border-stone-700/30 bg-parchment/70 px-2 py-1 text-sm text-ink hover:border-gold-500 hover:text-gold-500"
               >
                 <Icon slug={civSlug} kind="civ" size={28} />
-                <span>{civName(civSlug)}</span>
+                <span>{displayName(civSlug)}</span>
                 {tier && <span class="text-xs text-stone-700">{t(lang, "matchups.tier")} {tier}</span>}
               </a>
             ))}

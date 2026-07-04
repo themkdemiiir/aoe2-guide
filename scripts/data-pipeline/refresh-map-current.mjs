@@ -19,6 +19,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { eloBucket } from "./lib/buckets.mjs";
 import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
+import { loadGuideCivs } from "./lib/guide-civs.mjs";
 import {
   canonToKeyIndex,
   isRanked1v1,
@@ -29,11 +30,7 @@ import { pct } from "./lib/stats.mjs";
 
 const META = path.resolve("src/data/map-meta.json");
 
-const guideCivs = new Set(
-  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
-    (c) => c.slug,
-  ),
-);
+const guideCivs = loadGuideCivs();
 const meta = JSON.parse(readFileSync(META, "utf8"));
 
 const MIN_MAP = 3000; // map needs this many current 1v1 matches to be included

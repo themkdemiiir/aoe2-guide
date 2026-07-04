@@ -15,10 +15,11 @@
 // Runs ON THE BOX (needs ~/bin/duckdb + ~/aoestats/*.parquet).
 //   node scripts/data-pipeline/aggregate-rich.mjs
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import path from "node:path";
 import { ELO_BUCKETS, eloCaseSql } from "./lib/buckets.mjs";
 import { duck } from "./lib/duck.mjs";
+import { loadGuideCivs } from "./lib/guide-civs.mjs";
 import { pct, TIER_METHOD, tierOf, wilson } from "./lib/stats.mjs";
 
 const SOURCE_DATE = "2026-02"; // aoestats archive corpus month (frozen) — confirm before changing
@@ -37,11 +38,7 @@ if (process.argv.length > 2) {
   process.exit(1);
 }
 
-const guideCivs = new Set(
-  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
-    (c) => c.slug,
-  ),
-);
+const guideCivs = loadGuideCivs();
 
 const ELO = eloCaseSql("p.new_rating");
 const idx = (rows) => {

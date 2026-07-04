@@ -17,17 +17,14 @@ import path from "node:path";
 import { AOESTATS_END_MONTH } from "./lib/buckets.mjs";
 import { crawlRecords } from "./lib/crawl-stream.mjs";
 import { duck } from "./lib/duck.mjs";
+import { loadGuideCivs } from "./lib/guide-civs.mjs";
 import { buildOf, patchLabel } from "./lib/patch-axis.mjs";
 import { isRanked1v1, relicCivSlug } from "./lib/relic-map.mjs";
 import { pct } from "./lib/stats.mjs";
 
 const META = path.resolve("src/data/civ-meta.json");
 
-const guideCivs = new Set(
-  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
-    (c) => c.slug,
-  ),
-);
+const guideCivs = loadGuideCivs();
 
 const MIN_PATCH_MATCHES = 3000; // a build needs this many matches to count as a "patch"
 const MIN_CIV_GAMES = 100; // per civ × patch gate (self-collected sample is smaller than aoestats)

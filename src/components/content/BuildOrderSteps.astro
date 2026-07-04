@@ -2,6 +2,7 @@
 import iconMapJson from "@data/icon-map.json";
 import type { Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { displayName } from "@/lib/display";
 
 interface Resources { food: number; wood: number; gold: number; stone: number; builder: number; }
 interface Step {
@@ -32,13 +33,6 @@ function resolveIcon(slug: string): string | null {
     if (path) return path;
   }
   return null;
-}
-
-function titleCase(slug: string): string {
-  return slug
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
 }
 
 // Prefer the structured `phase` field; fall back to a STRICT "<Age> click/arrives"
@@ -209,7 +203,7 @@ const checkpoints = sections
                 <p class:list={["flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[15px] leading-snug", s.isTransition ? "font-semibold text-ink" : "text-ink"]}>
                   {s.icons && s.icons.slice(0, 3).map((iconSlug) => {
                     const src = resolveIcon(iconSlug);
-                    return src ? <img src={src} alt={titleCase(iconSlug)} title={titleCase(iconSlug)} width="20" height="20" class="h-5 w-5 shrink-0 rounded-sm object-contain" /> : null;
+                    return src ? <img src={src} alt={displayName(iconSlug)} title={displayName(iconSlug)} width="20" height="20" class="h-5 w-5 shrink-0 rounded-sm object-contain" /> : null;
                   })}
                   <span>{s.assign[lang]}</span>
                   {s.time && <span class="ml-auto shrink-0 rounded bg-stone-700/10 px-1.5 py-0.5 font-mono text-xs font-normal text-stone-700">{s.time}</span>}

@@ -29,6 +29,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { AOESTATS_END_MONTH, canonMap, eloBucket } from "./lib/buckets.mjs";
 import { crawlRecords } from "./lib/crawl-stream.mjs";
+import { loadGuideCivs } from "./lib/guide-civs.mjs";
 import { buildOf } from "./lib/patch-axis.mjs";
 import {
   canonToKeyIndex,
@@ -41,11 +42,7 @@ const OUT = path.resolve("public/civ-cube.json");
 const DIMS = path.resolve("src/data/civ-cube-dims.json"); // tiny: dropdown lists, imported at build
 const UNKNOWN_MAP = "__unknown__";
 
-const guideCivs = new Set(
-  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
-    (c) => c.slug,
-  ),
-);
+const guideCivs = loadGuideCivs();
 const civMeta = JSON.parse(readFileSync(path.resolve("src/data/civ-meta.json"), "utf8"));
 const mapMeta = JSON.parse(readFileSync(path.resolve("src/data/map-meta.json"), "utf8"));
 
