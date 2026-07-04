@@ -265,7 +265,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
   <section class="mx-auto max-w-7xl px-4 py-6">
     <div class="flex flex-wrap items-end justify-between gap-3">
       <h1 class="font-display text-2xl text-ink sm:text-3xl">{t(lang, "matchups.title")}</h1>
-      <select id="h2h-elo" aria-label="elo" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
+      <select id="h2h-elo" aria-label="elo" class="select-field">
         {ELO_BUCKETS.map((b, i) => <option value={i}>{b === "all" ? (lang === "tr" ? "Tüm Elo" : "All Elo") : b}</option>)}
       </select>
     </div>
@@ -274,13 +274,13 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
     <form class="mt-4 grid gap-3 sm:grid-cols-2">
       <label class="block">
         <span class="text-xs text-stone-700">{t(lang, "matchups.pickA")}</span>
-        <select id="civ-a" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
+        <select id="civ-a" class="mt-1 w-full select-field">
           {civs.map((c) => <option value={c.slug} selected={c.slug === initialA}>{displayNames[c.slug]}</option>)}
         </select>
       </label>
       <label class="block">
         <span class="text-xs text-stone-700">{t(lang, "matchups.pickB")}</span>
-        <select id="civ-b" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
+        <select id="civ-b" class="mt-1 w-full select-field">
           {civs.map((c) => <option value={c.slug} selected={c.slug === initialB}>{displayNames[c.slug]}</option>)}
         </select>
       </label>

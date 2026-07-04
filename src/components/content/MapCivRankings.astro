@@ -11,6 +11,7 @@ import iconMap from "@data/icon-map.json";
 import { getCollection } from "astro:content";
 import { localizedPath, t } from "@/i18n/utils";
 import { resolveMetaKey } from "@/lib/data-maps";
+import SectionEyebrow from "@/components/ui/SectionEyebrow.astro";
 import type { Locale } from "@/i18n/locales";
 
 interface Props {
@@ -94,6 +95,7 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
   <section class="mt-8" data-map-civs>
     <div class="flex flex-wrap items-end justify-between gap-3 border-b border-gold-500/30 pb-3">
       <div>
+        <SectionEyebrow label={tr ? "Sıralı · Kazanma oranı" : "Ranked · Win rate"} class="mb-1.5" />
         <h2 class="font-display text-xl text-ink">{tr ? "Bu haritada en iyi uygarlıklar" : "Best civs on this map"}</h2>
       </div>
       <div class="flex flex-wrap items-center gap-2">
@@ -103,11 +105,11 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
             <button type="button" data-val="team" class="border-l border-stone-700/30 px-3 py-1.5 text-ink data-[on]:bg-royal data-[on]:text-parchment">{labels.team}</button>
           </div>
         )}
-        <select data-elo aria-label={tr ? "Elo" : "Elo"} class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
+        <select data-elo aria-label={tr ? "Elo" : "Elo"} class="select-field">
           {availBuckets.map((b) => <option value={b}>{b === "all" ? labels.allElo : b}</option>)}
         </select>
         {hasPatch && (
-          <select data-patch aria-label={tr ? "Yama" : "Patch"} class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink">
+          <select data-patch aria-label={tr ? "Yama" : "Patch"} class="select-field">
             <option value="">{labels.allTime}</option>
             {patches.map((p, i) => <option value={p.patch}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>)}
           </select>

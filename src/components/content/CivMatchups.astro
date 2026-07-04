@@ -67,7 +67,7 @@ const split = (rows: M[]) => {
             data-mselect
             data-team-hint={tr ? "Harita kırılımı sadece 1v1'de" : "Per-map breakdown is 1v1 only"}
             aria-label={tr ? "Harita seç" : "Select map"}
-            class="rounded border border-stone-700/30 bg-parchment px-2 py-1 font-mono text-xs text-ink transition-opacity"
+            class="select-field transition-opacity"
           >
             <option value="all">{tr ? "Tüm haritalar" : "All maps"}</option>
             {mapViews.map((v) => <option value={v.id}>{v.label}</option>)}

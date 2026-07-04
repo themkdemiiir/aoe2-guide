@@ -32,7 +32,7 @@ const { searchPlaceholder, facets = [], total, resultsLabel, allLabel, resetLabe
     <select
       data-filter-facet={f.name}
       aria-label={f.label}
-      class="rounded border border-stone-700/40 bg-parchment px-3 py-2 text-sm text-ink focus:border-gold-500 focus:outline-none"
+      class="select-field"
     >
       <option value="">{f.label}: {allLabel}</option>
       {f.options.map((o) => <option value={o.value}>{o.label}</option>)}

@@ -98,19 +98,19 @@ const mapList = one
       <div class="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
         <span class="text-stone-700/80">{tr ? "Dilim" : "Slice"}</span>
         <label class="flex items-center gap-1.5">{tr ? "Harita" : "Map"}
-          <select data-cf="map" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <select data-cf="map" class="select-field normal-case">
             <option value="">{tr ? "Tüm haritalar" : "Any map"}</option>
             {sliceMaps.map((m) => <option value={m.key}>{m.name}</option>)}
           </select>
         </label>
         <label class="flex items-center gap-1.5">Elo
-          <select data-cf="elo" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <select data-cf="elo" class="select-field normal-case">
             <option value="">{tr ? "Tüm elo" : "Any elo"}</option>
             {cdims.elos.map((b) => <option value={b}>{b}</option>)}
           </select>
         </label>
         <label class="flex items-center gap-1.5">{tr ? "Yama" : "Patch"}
-          <select data-cf="patch" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+          <select data-cf="patch" class="select-field normal-case">
             <option value="">{tr ? "Tüm zamanlar" : "All-time"}</option>
             {slicePatches.map((p, i) => <option value={p.patch}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>)}
           </select>

@@ -66,6 +66,9 @@
   --color-steel: oklch(0.50 0.05 240);
   --color-ember: oklch(0.86 0.12 75);
   --color-stone-bg: oklch(0.17 0.02 50);
+  /* Illuminated-initial tile fill — a deep gilt-framed maroon that must stay
+     deep in dark mode (royal auto-lightens to salmon and breaks the gilt look). */
+  --color-logo-tile: oklch(0.42 0.18 25);
 
   --color-res-food: oklch(0.62 0.18 25);
   --color-res-wood: oklch(0.50 0.05 50);
@@ -92,7 +95,9 @@
   /* Body text is a neutral warm-light, NOT gold — gold stays on links/accents only. */
   --color-ink: oklch(0.92 0.012 85);
   --color-stone-700: oklch(0.72 0.03 60);
-  --color-gold-500: oklch(0.8 0.12 80);
+  /* Burnished dark gold: slightly lower L / higher C than a naive auto-lighten so
+     it reads as gilt metal on the dark ground rather than a flat pale yellow. */
+  --color-gold-500: oklch(0.77 0.135 82);
   /* These were dark-on-dark before: royal/forest/steel and the AA-on-parchment
      gold-700 all sat near-invisible on the dark bg. Lighten for dark legibility. */
   --color-gold-700: oklch(0.80 0.12 78);
@@ -100,8 +105,12 @@
   --color-forest: oklch(0.74 0.10 145);
   --color-steel: oklch(0.72 0.05 240);
   --color-wr-good: oklch(0.80 0.12 82);
-  --color-wr-bad: oklch(0.68 0.17 25);
+  /* Muted oxblood, not the loud salmon it auto-lightened to — keeps "below
+     average" bars legible without shouting on the dark charts. */
+  --color-wr-bad: oklch(0.60 0.135 25);
   --color-fav: oklch(0.74 0.12 145);
+  /* Tile stays a deep maroon in dark (do not inherit royal's dark lighten). */
+  --color-logo-tile: oklch(0.40 0.17 25);
 }
 
 html {
@@ -132,6 +141,33 @@ summary:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--color-gold-500);
   outline-offset: 2px;
+}
+
+/* Themed <select> — parchment fill, hairline border, custom gilded chevron, 44px
+   tap target, mono text. Replaces the native OS control that broke the codex
+   identity everywhere. Focus ring comes from the global select:focus-visible rule.
+   The chevron is a fixed gilt tone that reads on both the light and dark fill. */
+.select-field {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--color-parchment);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%23c79a3c' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 0.72rem;
+  border: 1px solid color-mix(in oklch, var(--color-stone-700) 32%, transparent);
+  border-radius: var(--radius);
+  padding: 0 2rem 0 0.7rem;
+  min-height: 2.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color 150ms;
+}
+.select-field:hover {
+  border-color: color-mix(in oklch, var(--color-gold-500) 60%, transparent);
 }
 
 /* Themed prose — maps @tailwindcss/typography to our medieval tokens.

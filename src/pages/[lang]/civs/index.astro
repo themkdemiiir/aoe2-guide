@@ -96,19 +96,19 @@ const serverTiers = labels.tiers
          Overall tier list below is server-rendered so the page works without JS. --- */}
     <div data-filter hidden class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-wide text-stone-700">
       <label class="flex items-center gap-1.5">{tr ? "Harita" : "Map"}
-        <select data-f="map" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+        <select data-f="map" class="select-field normal-case">
           <option value="">{tr ? "Tüm haritalar" : "Any map"}</option>
           {mapOptions.map((m) => <option value={m.key}>{m.name}</option>)}
         </select>
       </label>
       <label class="flex items-center gap-1.5">Elo
-        <select data-f="elo" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+        <select data-f="elo" class="select-field normal-case">
           <option value="">{tr ? "Tüm elo" : "Any elo"}</option>
           {dims.elos.map((b) => <option value={b}>{b}</option>)}
         </select>
       </label>
       <label class="flex items-center gap-1.5">{tr ? "Yama" : "Patch"}
-        <select data-f="patch" class="rounded border border-stone-700/30 bg-parchment px-2 py-1 text-xs normal-case text-ink">
+        <select data-f="patch" class="select-field normal-case">
           <option value="">{tr ? "Tüm zamanlar" : "All-time"}</option>
           {patches.map((p, i) => <option value={p.patch}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>)}
         </select>

@@ -11,8 +11,8 @@ import { CanvasRenderer } from "echarts/renderers";
 
 echarts.use([CanvasRenderer]);
 
-export { echarts };
 export type { ECharts } from "echarts/core";
+export { echarts };
 
 export type ThemeColors = {
   good: string;
@@ -49,7 +49,10 @@ export function mountChart(el: HTMLElement, opts: { onThemeChange?: () => void }
   let themeObs: MutationObserver | null = null;
   if (opts.onThemeChange) {
     themeObs = new MutationObserver(() => opts.onThemeChange?.());
-    themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    themeObs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
   }
   const dispose = () => {
     resizeObs.disconnect();

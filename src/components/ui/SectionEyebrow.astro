@@ -1,0 +1,16 @@
+---
+// SectionEyebrow — the illuminated-codex kicker: a gold hairline tick + a mono
+// uppercase label. Promotes the home cover's motif to interior section heads so
+// the identity carries through the whole site. Pass a short, TRUE label
+// (e.g. "RANKED · 1V1 RM", "TECH TREE", "CHAPTER 3"). Uses gold-700 (AA on
+// parchment; token lightens for dark) — the cover keeps gold-400 on its dark ground.
+interface Props {
+  label: string;
+  class?: string;
+}
+const { label, class: className } = Astro.props;
+---
+<p class:list={["flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-gold-700", className]}>
+  <span class="h-px w-6 flex-none bg-gold-500/60" aria-hidden="true"></span>
+  {label}
+</p>
