@@ -89,8 +89,8 @@ steps:
       en: Castle Age
       tr: Castle Çağı
     note:
-      en: Research Double-Bit Axe; move hunt/berries onto wood + gold
-      tr: Double-Bit Axe araştır; avı/çilekleri oduna ve altına kaydır
+      en: Research Double-Bit Axe + Gold Mining; move hunt/berries onto wood + gold
+      tr: Double-Bit Axe ve Gold Mining araştır; avı/çilekleri oduna ve altına kaydır
     icons:
       - wood
       - gold
@@ -108,8 +108,8 @@ steps:
       - monastery
       - monk
   - assign:
-      en: Stragglers → farms; add Siege Workshop + Battering Ram for relic escort
-      tr: Artan köylüler → tarlalar; kalıntı koruması için Kuşatma Atölyesi + Koçbaşı ekle
+      en: Stragglers → farms; add Siege Workshop + Battering Ram to break the opponent's walls
+      tr: Artan köylüler → tarlalar; rakibin surlarını kırmak için Kuşatma Atölyesi + Koçbaşı ekle
     icons:
       - farm
       - siege-workshop
@@ -160,3 +160,5 @@ strategy:
     - >-
       Açgözlü boom açılışlarına ve şövalye ağırlıklı planlara karşı güçlüdür; çünkü Keşişler pahalı süvarileri kendi
       tarafına çevirir ve kalıntı üstünlüğü çığ gibi büyür.
+source:
+  author: "Hera — Strategy Guide (December 2025)"

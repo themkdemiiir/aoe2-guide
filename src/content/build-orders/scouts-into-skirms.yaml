@@ -69,11 +69,11 @@ steps:
   - villagers: 18
     assign:
       en: >-
-        Split the 6 hunters: 6 → wood (8 on one lumber camp) and 4 → berries; then pull 4 → 1 Barracks, 1 House, and 2
-        build a Stable before walling or going wood
+        Move 6 hunters → wood (8 on one lumber camp) and 4 more → berries; then 2 hunters build a Barracks + a House,
+        then a Stable with the same 2 before walling or going to wood
       tr: >-
-        6 avcıyı böl: 6 → oduna (tek lumber camp'te 8) ve 4 → meyveye; sonra 4 köylü al → 1 Barracks, 1 House ve 2'si
-        Stable kurup duvar örsün ya da oduna geçsin
+        6 avcıyı → oduna taşı (tek lumber camp'te 8), 4 avcıyı → meyveye; sonra 2 avcı bir Barracks + House, ardından
+        aynı 2'si Stable kursun; sonra duvar örsünler ya da oduna geçsinler
     note:
       en: Ends on 8 wood / 8 food
       tr: 8 odun / 8 yiyecekte biter

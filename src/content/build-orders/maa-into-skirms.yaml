@@ -57,10 +57,16 @@ steps:
       - food
   - villagers: 16
     assign:
-      en: +2 → hunt under the TC, and send one builder to make a Barracks and a House at the front of your base
-      tr: +2 → Şehir Merkezi'nin altında av, ve bir köylüyü üssünün ön tarafına Kışla ve Ev kurmaya gönder
+      en: +2 → hunt under the TC
+      tr: +2 → Şehir Merkezi'nin altında av
     icons:
       - food
+      - town-center
+  - villagers: 17
+    assign:
+      en: +1 → build a Barracks and then a House at the front of your base
+      tr: +1 → üssünün ön tarafına bir Kışla, ardından bir Ev kur
+    icons:
       - barracks
       - house
   - villagers: 19

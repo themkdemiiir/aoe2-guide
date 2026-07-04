@@ -88,13 +88,13 @@ steps:
 intro:
   en: >-
     **Goal:** Click Feudal at 27 villagers (~10:00), reach Castle Age around 17:00 with 29 villagers, then flood Knights
-    from 2 Stables to support your team's flanks. **Recommended civs:** Franks (Chivalry extra HP), Lithuanians (relics
-    boost attack), Berbers (faster cavalry), Huns (no houses), Magyars (free Husbandry)
+    from 2 Stables to support your team's flanks. **Recommended civs:** Franks (cavalry +20% HP), Lithuanians (relics
+    boost attack), Berbers (cheaper Stable units), Huns (no houses), Magyars (free melee attack upgrades)
   tr: >-
     **Hedef:** 27 köylüde Feodal'a tıkla (~10:00), 17:00 civarında 29 köylüyle Kale Çağı'na ulaş, ardından 2 Stable'dan
-    Knight dök ve takım arkadaşlarının flank'larını destekle. **Önerilen medeniyetler:** Franks (Chivalry ekstra can),
-    Lithuanians (emanetler saldırıyı artırır), Berbers (daha hızlı süvari), Huns (ev gerekmez), Magyars (ücretsiz
-    Husbandry)
+    Knight dök ve takım arkadaşlarının flank'larını destekle. **Önerilen medeniyetler:** Franks (süvari +%20 can),
+    Lithuanians (emanetler saldırıyı artırır), Berbers (daha ucuz Stable birimleri), Huns (ev gerekmez), Magyars
+    (ücretsiz yakın dövüş saldırı yükseltmeleri)
 strategy:
   en:
     - 6 villagers on sheep

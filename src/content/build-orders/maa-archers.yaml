@@ -40,11 +40,11 @@ steps:
   - villagers: 18
     time: "8:50"
     assign:
-      en: +2 → hunt; build a Barracks then a front House, find your sheep, scout the enemy, research Loom, then click up to Feudal
-      tr: +2 → av; bir Kışla sonra cephede bir Ev kur, koyunlarını bul, rakibi keşfet, Loom araştır, sonra Feudal'a tıkla
+      en: +1 → build a Barracks then a front House; +2 → hunt; find your sheep, scout the enemy, research Loom, then click up to Feudal
+      tr: +1 → bir Kışla, sonra cephede bir Ev kur; +2 → av; koyunlarını bul, rakibi keşfet, Loom araştır, sonra Feudal'a tıkla
     note:
-      en: Click up around 8:50 with roughly 3 on wood and 14 on food
-      tr: Yaklaşık 8:50'de, 3 köylü odunda ve 14 köylü yiyecekte iken Feudal'a tıkla
+      en: Land around 8:50 with roughly 3 on wood and 14 on food
+      tr: Yaklaşık 8:50'de, 3 köylü odunda ve 14 köylü yiyecekte iken Feudal'a in
     icons:
       - food
       - barracks
@@ -59,8 +59,8 @@ steps:
       - lumber-camp
   - villagers: 18
     assign:
-      en: 2 (hunt + Barracks builder) → gold, drop a Mining Camp (now 8 wood, 7 food, 2 gold); pump 3 Militia out and research Man-at-Arms
-      tr: 2 köylü (av + Kışla inşaatçısı) → altın, bir Maden Kampı kur (artık 8 odun, 7 yiyecek, 2 altın); 3 Milis bas ve Man-at-Arms araştır
+      en: 2 from the hunt → gold, drop a Mining Camp (now 8 wood, 7 food, 2 gold); pump 3 Militia out and research Man-at-Arms
+      tr: Avdan 2 köylü → altın, bir Maden Kampı kur (artık 8 odun, 7 yiyecek, 2 altın); 3 Milis bas ve Man-at-Arms araştır
     icons:
       - gold
       - mining-camp

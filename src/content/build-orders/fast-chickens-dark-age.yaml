@@ -124,9 +124,9 @@ strategy:
       Wall as your economy transitions, then react to what you see: add a stable against scouts, an archery range plus
       skirmishers against archers, or push militia across the map if you opened man-at-arms.
     - >-
-      Civ notes: eco bonuses (Mayans extra villager, Aztecs faster gathering, Vikings cheaper economy) stretch the
-      chicken food further, while Malians and Ethiopians convert cleanly into archer pressure thanks to their cheaper or
-      faster ranged units.
+      Civ notes: eco bonuses (Mayans' extra starting villager, Aztecs' villagers carrying +3, Vikings' free Wheelbarrow
+      and Hand Cart) stretch the chicken food further, while Ethiopians' faster-firing foot archers and Malians' cheaper
+      (-15% wood) buildings convert cleanly into archer pressure.
   tr:
     - >-
       Tüm mesele tempo: tavukların üzerine erken kurulan değirmen, TC'den birkaç kare ötede yoğun yiyecek verir, böylece
@@ -144,6 +144,6 @@ strategy:
       Ekonomin geçiş yaparken duvar ör, sonra gördüğüne göre tepki ver: scout'a karşı bir ahır, okçuya karşı bir okçu
       menzili artı skirmisher, man-at-arms açtıysan haritanın karşısına militia bas.
     - >-
-      Uygarlık notları: ekonomi bonusları (Mayans ek köylü, Aztecs daha hızlı toplama, Vikings ucuz ekonomi) tavuk
-      yiyeceğini daha da uzatır; Malians ve Ethiopians ise ucuz veya hızlı menzilli birimleri sayesinde temiz bir
-      şekilde okçu baskısına dönüşür.
+      Uygarlık notları: ekonomi bonusları (Mayans'ın fazladan başlangıç köylüsü, Aztecs'in köylülerinin +3 taşıması,
+      Vikings'in ücretsiz Wheelbarrow ve Hand Cart'ı) tavuk yiyeceğini daha da uzatır; Ethiopians'ın daha hızlı ateş eden
+      yaya okçuları ve Malians'ın daha ucuz (-15% odun) binaları ise temiz bir şekilde okçu baskısına dönüşür.

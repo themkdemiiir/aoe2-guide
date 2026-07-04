@@ -32,7 +32,8 @@ steps:
       tr: +1 → ilk domuzu çek
     icons:
       - food
-  - assign:
+  - villagers: 12
+    assign:
       en: +1 → 2 houses, then a Barracks; keep walling with palisades
       tr: +1 → 2 ev, ardından bir Barracks; palisade ile duvar örmeye devam et
     note:

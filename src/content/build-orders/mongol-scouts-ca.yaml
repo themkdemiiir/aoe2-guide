@@ -93,8 +93,8 @@ steps:
       - blacksmith
   - phase: castle
     assign:
-      en: "Click Castle Age behind a sealed wall, then build 2 Archery Ranges; research Bloodlines + Fletching; start Cavalry Archers"
-      tr: "Kapalı duvarın arkasında Castle çağa tıkla, ardından 2 Okçu Menzili kur; Bloodlines + Fletching araştır; Atlı Okçu üretmeye başla"
+      en: "Click Castle Age behind a sealed wall, then build 2 Archery Ranges; research Gold Mining, Bloodlines + Fletching; start Cavalry Archers"
+      tr: "Kapalı duvarın arkasında Castle çağa tıkla, ardından 2 Okçu Menzili kur; Gold Mining, Bloodlines + Fletching araştır; Atlı Okçu üretmeye başla"
     note:
       en: Bank gold and keep Scouts alive for the transition
       tr: Altın biriktir ve geçiş için Süvarileri hayatta tut
@@ -138,7 +138,7 @@ strategy:
   tr:
     - >-
       Feudal Süvariler asıl kazanma planın değil, bir perdedir: görevleri düşmanın harita kontrolünü engellemek ve sen
-      üssü tamamen duvarlarken zaman kazandırmaktır. Onları Mızrakçı veya Okçulara karşı fazla harcama.
+      üssü tamamen duvarlarken zaman kazandırmaktır. Onları Mızrakçı veya Okçu Avcılarına (Skirmisher) karşı fazla harcama.
     - >-
       Duvarlamak işin can damarıdır. Atlı Okçular yığılırken kırılgandır; kapalı bir üs, dışarı çıkmadan önce
       teknolojiye yatırım yapıp sayı toplamana imkân verir.
@@ -155,3 +155,5 @@ strategy:
     - >-
       Zamanında duvarlayamazsan Atlı Okçu planından vazgeç, Bloodlines'lı Süvari üretmeye devam et ve bunun yerine
       ekonomi avantajına yaslan.
+source:
+  author: "Hera — Strategy Guide (December 2025)"

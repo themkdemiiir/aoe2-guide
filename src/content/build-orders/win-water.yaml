@@ -75,6 +75,7 @@ steps:
       - food
     resources: { food: 13, wood: 6, gold: 0, stone: 0, builder: 1 }
   - villagers: 21
+    phase: feudal
     assign:
       en: >-
         +1 → sheep; research Loom and click Feudal Age, then research Double-Bit Axe at the Lumber Camp and queue 2 Fire
@@ -111,16 +112,16 @@ steps:
 intro:
   en: >-
     **Goal:** Open a strong fishing economy behind defensive walls, take Feudal Age at 21 villagers, and contest the
-    water with Fire Galleys from two Docks while booming on fish. **Recommended civs:** Vikings (cheaper Fishing Ships,
-    +10% wood from Docks, free Bloodlines), Italians (cheaper Docks and ships, cheaper Dock techs), Portuguese (ships
-    die slower, gold discount), Malay (cheaper Fishing Ships and a faster Fish Trap line), Japanese (cheaper Docks, +HP
-    warships), Byzantines (cheaper Town Watch / Fire Ships line)
+    water with Fire Galleys from two Docks while booming on fish. **Recommended civs:** Vikings (cheaper warships, free
+    Wheelbarrow), Italians (cheaper Dock techs and Fishing Ships), Portuguese (ships die slower, gold discount), Malay
+    (cheaper, higher-food Fish Traps; faster Age-ups), Japanese (faster-working, double-HP Fishing Ships), Byzantines
+    (free Town Watch, faster-firing Fire Ships)
   tr: >-
     **Hedef:** Savunma surları arkasında güçlü bir balıkçı ekonomisi kur, 21 köylüde Feodal Çağ'a geç ve iki Dock'tan
-    Fire Galley'lerle suya hâkim ol; balıkla boomla. **Önerilen uygarlıklar:** Vikings (daha ucuz Fishing Ship'ler,
-    Dock'lardan +%10 odun, ücretsiz Bloodlines), Italians (daha ucuz Dock'lar ve gemiler, daha ucuz Dock teknolojileri),
-    Portuguese (gemiler daha yavaş ölür, altın indirimi), Malay (daha ucuz Fishing Ship'ler ve daha hızlı Fish Trap
-    hattı), Japanese (daha ucuz Dock'lar, +can savaş gemileri), Byzantines (daha ucuz Town Watch / Fire Ship hattı)
+    Fire Galley'lerle suya hâkim ol; balıkla boomla. **Önerilen uygarlıklar:** Vikings (daha ucuz savaş gemileri,
+    ücretsiz Wheelbarrow), Italians (daha ucuz Dock teknolojileri ve Fishing Ship'ler), Portuguese (gemiler daha yavaş
+    ölür, altın indirimi), Malay (daha ucuz, daha yüksek yiyecekli Fish Trap'ler; daha hızlı çağ atlama), Japanese (daha
+    hızlı çalışan, çift canlı Fishing Ship'ler), Byzantines (ücretsiz Town Watch, daha hızlı ateş eden Fire Ship'ler)
 strategy:
   en:
     - >-

@@ -46,8 +46,8 @@ steps:
     resources: { food: 8, wood: 2, gold: 0, stone: 0, builder: 0 }
   - villagers: 16
     assign:
-      en: +6 → hunt (lure 2nd boar), shoot deer with the Scout
-      tr: +6 → avda (2. domuzu çek), Scout ile geyikleri vur
+      en: +6 → hunt (lure 2nd boar); push deer to the TC with the Scout
+      tr: +6 → avda (2. domuzu çek); Scout ile geyikleri TC'ye sür
     icons:
       - food
     resources: { food: 14, wood: 2, gold: 0, stone: 0, builder: 0 }
@@ -154,3 +154,5 @@ strategy:
     - >-
       Geç oyunda Cavalry Archers + Hussar ya da Cavalry Archers + Halberdier kompozisyonuna geç; Siege ile desteklersen
       esnek bir orta ve imparatorluk sonrası gücün olur.
+source:
+  author: Hera

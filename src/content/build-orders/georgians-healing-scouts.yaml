@@ -75,7 +75,7 @@ steps:
       tr: "Feudal: avdan 8 köylüyü Mule Cart ile bir odun hattına gönder; 3 köylüyü meyvelere taşı (toplam 4)"
     icons:
       - wood
-      - lumber-camp
+      - mule-cart
       - food
   - assign:
       en: Send 2 to a barracks at ~50–60% age-up, build a stable, research Double-Bit Axe, then wall both sides of your base
@@ -92,8 +92,8 @@ steps:
       - horse-collar
       - farm
   - assign:
-      en: At 13–14 farms move 7 villagers to gold with the Mule Cart; add a blacksmith
-      tr: 13–14 tarlada 7 köylüyü Mule Cart ile altına geçir; bir demirci ekle
+      en: At 13–14 farms send the next 7 villagers to gold and build a Mule Cart; add a blacksmith
+      tr: 13–14 tarlada sonraki 7 köylüyü altına gönder ve bir Mule Cart kur; bir demirci ekle
     icons:
       - gold
       - blacksmith

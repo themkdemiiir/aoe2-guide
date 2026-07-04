@@ -9,7 +9,6 @@ civsRecommended:
   - aztecs
   - mayans
   - incas
-  - lithuanians
 steps:
   - villagers: 6
     assign:
@@ -110,11 +109,11 @@ steps:
       - archery-range
   - assign:
       en: >-
-        DECISION — vs archers send +4 TC villagers to gold for Archers; vs skirmishers send +4 to straggler wood for
-        Skirmishers
+        DECISION — vs man-at-arms or scouts send +4 TC villagers to gold for Archers; vs archers send +4 to straggler
+        wood for Skirmishers
       tr: >-
-        KARAR — okçulara karşı +4 ŞM köylüsünü altına gönderip Okçu bas; nişancılara karşı +4'ü artık ağaç odununa
-        gönderip Nişancı bas
+        KARAR — man-at-arms veya scout'lara karşı +4 ŞM köylüsünü altına gönderip Okçu bas; okçulara karşı +4'ü artık
+        ağaç odununa gönderip Nişancı bas
     icons:
       - archer
       - skirmisher
@@ -141,8 +140,8 @@ strategy:
       The whole idea is two threats at once — Eagles run down stragglers and raid villagers while your Range adds ranged
       damage the enemy must also answer, splitting their defense.
     - >-
-      Read your opponent before committing the second unit: against an archer or scout opening, mass your own Archers;
-      against a skirmisher wall, switch the same villagers to Skirmishers so you out-trade them.
+      Read your opponent before committing the second unit: against a man-at-arms or scout opening, mass your own
+      Archers; against an archer opening, switch the same villagers to Skirmishers so you out-trade them.
     - >-
       Wall early with the Range and Barracks builders — Houses and palisades close the gaps so your raiders stay safe
       and the enemy cannot counter-raid your exposed gold.
@@ -160,8 +159,8 @@ strategy:
       Tüm fikir aynı anda iki tehdit oluşturmaktır — Kartallar kaçan köylüleri kovalayıp baskın yaparken, Menzil rakibin
       yine cevap vermek zorunda kalacağı menzilli hasar ekler ve savunmasını böler.
     - >-
-      İkinci birime karar vermeden önce rakibini oku: okçu veya izci açılışına karşı kendi Okçularını yığ; nişancı
-      duvarına karşı aynı köylüleri Nişancıya çevirip takasta öne geç.
+      İkinci birime karar vermeden önce rakibini oku: man-at-arms veya izci açılışına karşı kendi Okçularını yığ; okçu
+      açılışına karşı aynı köylüleri Nişancıya çevirip takasta öne geç.
     - >-
       Menzil ve Kışla işçileriyle erkenden duvar ör — Evler ve palisadlar boşlukları kapatır, böylece baskıncıların
       güvende kalır ve rakip açıktaki altınına karşı baskın yapamaz.

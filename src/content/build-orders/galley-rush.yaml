@@ -97,13 +97,13 @@ intro:
   en: >-
     **Goal:** Reach Feudal Age at 21 villagers and pump Fire Galleys from multiple Docks to sink enemy Fishing Ships and
     control the water. Four Dark-Age Fishing Ships fund the wood-and-gold economy that keeps ships coming. **Recommended
-    civs:** Vikings (+10% wood from Docks), Portuguese (ships die slower), Italians (cheaper Docks + ships), Byzantines
-    (Greek Fire in Castle Age), Malay (cheaper ships overall).
+    civs:** Vikings (cheaper warships), Portuguese (ships die slower), Italians (cheaper Dock techs + Fishing Ships),
+    Byzantines (Greek Fire in Castle Age), Malay (+66% faster Age advance).
   tr: >-
     **Hedef:** 21 köylüde Feodal Çağ'a ulaş ve birden çok Dock'tan Fire Galley üreterek düşmanın Fishing Ship'lerini
     batır, suyu kontrol et. Karanlık Çağ'daki dört Fishing Ship, gemi üretimini sürdüren odun-altın ekonomisini fonlar.
-    **Önerilen uygarlıklar:** Vikings (Dock'lardan %10 fazla odun), Portuguese (gemiler daha yavaş ölür), Italians (daha
-    ucuz Dock + gemi), Byzantines (Kale Çağı'nda Greek Fire), Malay (gemiler genel olarak daha ucuz).
+    **Önerilen uygarlıklar:** Vikings (daha ucuz savaş gemileri), Portuguese (gemiler daha yavaş ölür), Italians (daha
+    ucuz Dock teknolojileri + Balıkçı Gemileri), Byzantines (Kale Çağı'nda Greek Fire), Malay (%66 daha hızlı çağ atlama).
 strategy:
   en:
     - Build 2 Houses; 6 villagers on sheep under the TC

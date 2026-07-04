@@ -80,8 +80,8 @@ steps:
   - villagers: 23
     phase: castle
     assign:
-      en: 4 hunt/straggler villagers → woodline; +2 → gold; research Double-Bit Axe
-      tr: 4 avcı/straggler köylü → ağaç hattına; +2 → altına; Double-Bit Axe araştır
+      en: 4 hunt/straggler villagers → woodline; 2 more hunt/straggler villagers → gold; research Double-Bit Axe
+      tr: 4 avcı/straggler köylü → ağaç hattına; 2 avcı/straggler köylü daha → altına; Double-Bit Axe araştır
     note:
       en: Tower the gold or wood only if pressured; when berries run out, send them to stragglers and make Farms
       tr: Yalnızca baskı varsa altına ya da oduna kule dik; meyve bitince köylüleri straggler ağaçlara gönder ve Farm kur

@@ -47,7 +47,8 @@ steps:
       tr: +4 → TC altında ava; 2. domuzu çek
     icons:
       - food
-  - assign:
+  - villagers: 16
+    assign:
       en: +1 → build Barracks at front of base, then house
       tr: +1 → üssün ön tarafına barracks kur, sonra ev
     icons:

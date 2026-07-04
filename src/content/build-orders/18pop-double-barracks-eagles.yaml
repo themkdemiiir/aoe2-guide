@@ -97,7 +97,8 @@ steps:
     icons:
       - double-bit-axe
     resources: { food: 7, wood: 7, gold: 2, stone: 0, builder: 2 }
-  - assign:
+  - villagers: 22
+    assign:
       en: Send the next 4 villagers → gold, then build a 2nd Barracks
       tr: Sonraki 4 köylüyü → altına gönder, sonra 2. Barracks kur
     icons:
@@ -152,3 +153,5 @@ strategy:
     - >-
       Geçiş için ordu arkasına Farm ekle, altın biriktir ve bir Market kullanarak (gerekirse taş satarak) teknoloji ve
       ekonomi avantajını Castle Age'e taşı.
+source:
+  author: Hera

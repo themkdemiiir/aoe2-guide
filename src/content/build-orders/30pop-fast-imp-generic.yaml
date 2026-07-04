@@ -45,7 +45,7 @@ steps:
     icons:
       - gold
       - mining-camp
-  - villagers: 32
+  - villagers: 30
     phase: feudal
     assign:
       en: Feudal arrives — 1 villager builds the Blacksmith, 2 build the Market then return to wood
@@ -154,3 +154,5 @@ strategy:
     - >-
       **Güçlü olduğu:** Aynı anda Imperial Age'e ulaşan ama daha zayıf orduya sahip boom stratejileri; Castle Age
       birimlerine ağır yatırım yapan rakipler.
+source:
+  author: Hera

@@ -115,15 +115,15 @@ steps:
 intro:
   en: >-
     **Goal:** Control the water with Fire Galleys while applying land pressure with Archers, using a Fishing Ship
-    economy to fund a smooth two-front push into Castle Age. **Recommended civs:** Italians (cheaper Docks + ships,
-    cheaper Fire Galleys), Japanese (faster-training warships, strong archers), Vikings (cheaper, tankier navy),
+    economy to fund a smooth two-front push into Castle Age. **Recommended civs:** Italians (cheaper Dock techs and
+    Fishing Ships, cheaper Age-ups), Japanese (faster-working, double-HP Fishing Ships), Vikings (cheaper warships),
     Byzantines (cheap counter-units, strong Fire Ship line), Portuguese (+HP ships, gold discount)
   tr: >-
     **Hedef:** Fire Galley'lerle suyu kontrol ederken Archer'larla karada baskı kur; iki cepheli bu hamleyi Kale Çağı'na
-    kadar finanse etmek için Fishing Ship ekonomisini kullan. **Önerilen uygarlıklar:** Italians (daha ucuz Dock + gemi,
-    daha ucuz Fire Galley), Japanese (daha hızlı üretilen savaş gemileri, güçlü okçular), Vikings (daha ucuz ve
-    dayanıklı deniz kuvvetleri), Byzantines (ucuz counter birimleri, güçlü Fire Ship hattı), Portuguese (+can gemiler,
-    altın indirimi)
+    kadar finanse etmek için Fishing Ship ekonomisini kullan. **Önerilen uygarlıklar:** Italians (daha ucuz Dock
+    teknolojileri ve Fishing Ship'ler, daha ucuz Çağ atlama), Japanese (daha hızlı çalışan, çift canlı Fishing Ship'ler),
+    Vikings (daha ucuz savaş
+    gemileri), Byzantines (ucuz counter birimleri, güçlü Fire Ship hattı), Portuguese (+can gemiler, altın indirimi)
 strategy:
   en:
     - 3 villagers build 2 houses (two on one, one on the other), then to sheep; queue villagers non-stop at the Town Center

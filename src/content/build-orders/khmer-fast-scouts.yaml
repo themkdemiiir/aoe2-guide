@@ -93,11 +93,11 @@ steps:
       - scout-cavalry
 intro:
   en: >-
-    Abuse the Khmer free-housing bonus to reach Feudal at 16 pop around 7:35 and flood the map with Scout Cavalry before
-    your opponent can react.
+    Abuse the Khmer no-buildings-required age-up bonus to reach Feudal at 16 pop around 7:35 and flood the map with
+    Scout Cavalry before your opponent can react.
   tr: >-
-    Khmer'in bedava ev bonusunu sömürerek 7:35 civarında 16 nüfusla Feudal'a geç ve rakip tepki veremeden haritayı Atlı
-    Keşifçilerle doldur.
+    Khmer'in yapı gerektirmeden çağ atlama bonusunu sömürerek 7:35 civarında 16 nüfusla Feudal'a geç ve rakip tepki
+    veremeden haritayı Atlı Keşifçilerle doldur.
 strategy:
   en:
     - >-
@@ -113,8 +113,8 @@ strategy:
       React to your scouting. Add spearmen only if the opponent commits to their own scouts; against archers, peel
       toward an archery range and skirmishers instead of forcing more cavalry into a bad trade.
     - >-
-      Carry the tempo into Castle Age. Because Khmer pay no wood for houses, the saved resources can snowball into
-      Knights or a fast follow-up tech spike if your early harassment lands.
+      Carry the tempo into Castle Age. Because Khmer skip the Barracks and other age-up buildings, the saved resources
+      can snowball into Knights or a fast follow-up tech spike if your early harassment lands.
   tr:
     - >-
       Mesele tamamen hızdır: 16 nüfuslu, tamamen yiyecekle yapılan geçiş, standart 18 nüfuslu açılışın çok önünde
@@ -129,5 +129,7 @@ strategy:
       Keşfine göre tepki ver. Rakip kendi keşifçilerine yüklenirse ancak o zaman mızraklı ekle; okçulara karşı süvarini
       kötü bir takasa zorlamak yerine bir okçu menzili ve sıyırıcılara (skirmisher) yönel.
     - >-
-      Tempoyu Castle çağına taşı. Khmer evlere odun ödemediği için biriken kaynaklar, erken tacizin tutarsa Şövalyelere
-      ya da hızlı bir teknoloji sıçramasına dönüşebilir.
+      Tempoyu Castle çağına taşı. Khmer Kışla'yı ve diğer çağ atlama yapılarını atladığı için biriken kaynaklar, erken
+      tacizin tutarsa Şövalyelere ya da hızlı bir teknoloji sıçramasına dönüşebilir.
+source:
+  author: "Hera — Strategy Guide (December 2025)"

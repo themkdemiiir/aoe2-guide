@@ -52,8 +52,8 @@ steps:
       en: +4 → berries
       tr: +4 → meyvelere
     note:
-      en: As sheep run out, re-task those villagers onto 4 new farms
-      tr: Koyunlar bitince o köylüleri 4 yeni tarlaya kaydır
+      en: As the boars run out, re-task those villagers onto 4 new farms
+      tr: Domuzlar bitince o köylüleri 4 yeni tarlaya kaydır
     icons:
       - food
       - farm
@@ -159,3 +159,5 @@ strategy:
     - >-
       Boom'u bıraktığında bir gold unit, bir trash unit ve bir siege unit'e karar ver; sonra rakibin eşleşemeyeceği bir
       ekonomiyle Imperial'a geç.
+source:
+  author: Hera

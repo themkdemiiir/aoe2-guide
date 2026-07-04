@@ -80,8 +80,8 @@ steps:
       - gold
   - villagers: 27
     assign:
-      en: "Feudal: food-out vils → straggler trees; build a Barracks, a Stable, and a Market (2 vils each); +2 → wood on the single Lumber Camp"
-      tr: "Feudal: yiyeceği biten köylüler → tek ağaçlara; bir Kışla, bir Ahır ve bir Pazar kur (her birine 2 köylü); tek Kereste Kampı'nda +2 → oduna"
+      en: "Feudal: food-out vils → straggler trees; build a Barracks; make a Stable and a Market (2 vils each); +2 → wood on the single Lumber Camp"
+      tr: "Feudal: yiyeceği biten köylüler → tek ağaçlara; bir Kışla kur; bir Ahır ve bir Pazar yap (her birine 2 köylü); tek Kereste Kampı'nda +2 → oduna"
     note:
       en: Balance wood and gold for the Castle click
       tr: Kale tıklaması için odun ve altını dengele
@@ -158,3 +158,5 @@ strategy:
     - >-
       Dört veya daha fazla kalıntıyı kontrol etmeyi hedefle, sonra devamını seç: harita kontrolünü ele geçirdiysen
       şövalye-kuşatma baskısı ya da oyun sakinleştiyse doğrudan Imperial'e boom.
+source:
+  author: "Hera — Strategy Guide (December 2025)"

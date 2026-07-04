@@ -89,6 +89,7 @@ steps:
       - feudal-age
     resources: { food: 14, wood: 4, gold: 2, stone: 1, builder: 0 }
   - villagers: 21
+    phase: feudal
     assign:
       en: "Feudal: upgrade Militia to Men-at-Arms; send the Militia plus your Stone/Gold villagers forward"
       tr: "Feodal: Militia'yı Men-at-Arms'a yükselt; Militia ile taş/altın köylülerini öne gönder"
@@ -133,8 +134,6 @@ strategy:
     - >-
       **Strong against:** Greedy and passive openings that cannot respond to forward aggression in time, and economies
       clustered on exposed gold or wood lines.
-    - Scout your opponent's base well to find their main gold and woodlines before going forward.
-    - The first tower you build will be your second tower's defense, so try to build it out of your opponent's reach.
     - >-
       This is a fairly complex build that needs practice to execute properly; it gets especially tricky micro-managing
       forward villagers and military while expanding your economy at home.
@@ -166,10 +165,6 @@ strategy:
     - >-
       **Güçlü olduğu durumlar:** Öne atılan saldırıya zamanında yanıt veremeyen açgözlü ve pasif açılışlar ile açıkta
       kalan altın veya odun hatlarına kümelenmiş ekonomiler.
-    - Öne gitmeden önce rakibinin üssünü iyi scout'la; ana altın ve odun hatlarını bul.
-    - >-
-      İnşa ettiğin ilk tower ikinci tower'ının savunması olacaktır; bu yüzden onu rakibinin erişemeyeceği bir noktaya
-      kurmaya çalış.
     - >-
       Bu oldukça karmaşık bir build; düzgün uygulamak için pratik gerektirir. Özellikle öne giden köylüleri ve askeri
       micro yaparken evdeki ekonomini büyütmek zorunda kalmak işleri güçleştirir.
