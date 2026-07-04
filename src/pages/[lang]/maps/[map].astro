@@ -6,6 +6,7 @@ import { t } from "@/i18n/utils";
 import iconMap from "@data/icon-map.json";
 import mapMeta from "@data/map-meta.json";
 import MapCivRankings from "@/components/content/MapCivRankings.astro";
+import SectionEyebrow from "@/components/ui/SectionEyebrow.astro";
 import { canon, dedupedMetaMaps, resolveMetaKey } from "@/lib/data-maps";
 import { displayName } from "@/lib/display";
 import { marked } from "marked";
@@ -53,18 +54,16 @@ const hasRankings = !!rankSrc && (["1v1", "team"] as const).some((l) => {
   canonicalPath={`/maps/${slug}`}
 >
   <article class="mx-auto max-w-3xl px-4 py-8">
-    <header class="mb-4">
-      <h1 class="font-display text-3xl text-ink">{name}</h1>
-      {entry ? (
-        <p class="mt-1 text-sm capitalize text-stone-700">
-          {entry.data.type}{entry.data.size ? ` · ${entry.data.size}` : ""}
-        </p>
-      ) : (
-        <p class="mt-1 font-mono text-xs uppercase tracking-wide text-stone-700/80">
-          {lang === "tr" ? "Veri kaynaklı sayfa" : "Data-derived page"}
-          {totalGames ? ` · ${numFmt.format(totalGames)} ${lang === "tr" ? "ranked maç" : "ranked games"}` : ""}
-        </p>
-      )}
+    <header class="mb-6">
+      <SectionEyebrow label={entry ? (lang === "tr" ? "Harita rehberi" : "Map guide") : (lang === "tr" ? "Veri kaynaklı" : "Data-derived")} class="mb-2" />
+      <h1 class="font-display text-4xl text-ink">{name}</h1>
+      <p class="mt-1.5 font-mono text-xs uppercase tracking-wide text-stone-700/80">
+        {[
+          entry?.data.type,
+          entry?.data.size,
+          totalGames ? `${numFmt.format(totalGames)} ${lang === "tr" ? "ranked maç" : "ranked games"}` : null,
+        ].filter(Boolean).join(" · ")}
+      </p>
     </header>
 
     <MapCivRankings mapSlug={slug} lang={lang} />
