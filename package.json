@@ -69,6 +69,7 @@
     "@fontsource/jetbrains-mono": "^5.2.8",
     "astro-icon": "^1.1.5",
     "astro-seo": "^1.1.0",
-    "chart.js": "^4.5.1"
+    "chart.js": "^4.5.1",
+    "echarts": "^6.1.0"
   }
 }

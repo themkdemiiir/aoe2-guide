@@ -34,12 +34,14 @@ fn parse_lines(text: &str) -> Vec<SeedRow> {
             match_id,
             ladder: None,
             played_at: None,
+            profile_ids: None,
         })
         .collect()
 }
 
 /// Minimal CSV: header row maps column names; first numeric column is match_id.
-/// Recognised optional headers: `match_id`/`matchid`, `ladder`, `played_at`.
+/// Recognised optional headers: `match_id`/`matchid`, `ladder`, `played_at`,
+/// `profile_ids` (semicolon-separated participant ids for the archive fallback).
 fn parse_csv(text: &str) -> Result<Vec<SeedRow>> {
     let mut lines = text.lines();
     let header = lines.next().unwrap_or("");
@@ -48,6 +50,7 @@ fn parse_csv(text: &str) -> Result<Vec<SeedRow>> {
     let id_idx = find(&["match_id", "matchid", "id"]).unwrap_or(0);
     let ladder_idx = find(&["ladder"]);
     let played_idx = find(&["played_at", "playedat", "ts"]);
+    let pids_idx = find(&["profile_ids", "profileids", "pids"]);
 
     let mut rows = Vec::new();
     for line in lines {
@@ -68,6 +71,14 @@ fn parse_csv(text: &str) -> Result<Vec<SeedRow>> {
             played_at: played_idx
                 .and_then(|i| fields.get(i))
                 .and_then(|s| s.parse::<i64>().ok()),
+            // Keep only well-formed id lists — a malformed cell must not seed a
+            // garbage archive URL later.
+            profile_ids: pids_idx
+                .and_then(|i| fields.get(i))
+                .filter(|s| {
+                    !s.is_empty() && s.split(';').all(|p| p.parse::<i64>().is_ok())
+                })
+                .map(|s| s.to_string()),
         });
     }
     Ok(rows)

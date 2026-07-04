@@ -163,6 +163,7 @@ fn cmd_run(args: &[String]) -> Result<()> {
     let mut out = DEFAULT_OUT.to_string();
     let mut threads = DEFAULT_THREADS;
     let mut limit: Option<usize> = None;
+    let mut archive_limit = replay_rs::config::ARCHIVE_LIMIT_PER_RUN;
     let mut i = 0;
     while i < args.len() {
         match args[i].as_str() {
@@ -170,6 +171,9 @@ fn cmd_run(args: &[String]) -> Result<()> {
             "--out" => out = take_value(args, &mut i, "--out")?,
             "--threads" => threads = take_value(args, &mut i, "--threads")?.parse()?,
             "--limit" => limit = Some(take_value(args, &mut i, "--limit")?.parse()?),
+            "--archive-limit" => {
+                archive_limit = take_value(args, &mut i, "--archive-limit")?.parse()?
+            }
             other => bail!("run: unknown flag {other}"),
         }
         i += 1;
@@ -180,6 +184,7 @@ fn cmd_run(args: &[String]) -> Result<()> {
         threads,
         limit,
         batch_lookahead: DEFAULT_LOOKAHEAD,
+        archive_limit,
     })
 }
 
@@ -427,8 +432,8 @@ fn print_usage() {
         "replay-rs — fast in-process AoE2 replay pipeline\n\
          \n\
          USAGE:\n  \
-           replay-rs seed <ids.csv|ids.txt> [--db <manifest.sqlite>]\n  \
-           replay-rs run [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M]\n  \
+           replay-rs seed <ids.csv|ids.txt> [--db <manifest.sqlite>]   (CSV may carry profile_ids \"1;2\")\n  \
+           replay-rs run [--db <manifest.sqlite>] [--out <dir>] [--threads N] [--limit M] [--archive-limit R]\n  \
            replay-rs bench <dir of .aoe2record> [--threads N] [--repeat N]\n  \
            replay-rs analyze <file>|--match-id N|--latest [N|all] [--you NAME] [--profile-id P] [--json]\n  \
            replay-rs recent --profile-id P [--limit N]\n\

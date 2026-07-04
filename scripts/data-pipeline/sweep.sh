@@ -43,13 +43,23 @@ node scripts/data-pipeline/ingest-stream.mjs                      || log "WARN: 
 REPLAY_BIN="$ROOT/scripts/data-pipeline/replay-rs/target/release/replay-rs"
 REPLAY_DIR="$ROOT/data-cache/replays"
 if [ -x "$REPLAY_BIN" ]; then
-  "$HOME/bin/duckdb" "$DB" -noheader -list \
-    -c "SELECT DISTINCT match_id FROM games WHERE source='crawl' AND played_at >= now() - INTERVAL 2 DAY" \
-    > /tmp/replay-seed.txt \
-    && "$REPLAY_BIN" seed /tmp/replay-seed.txt --db "$REPLAY_DIR/manifest.sqlite" \
+  # profile_ids ride along so a match that ages out of getReplayFiles can still
+  # be fetched from the age archive (api.ageofempires.com) on a later run.
+  "$HOME/bin/duckdb" "$DB" -csv \
+    -c "SELECT match_id,
+               CAST(epoch(any_value(played_at)) AS BIGINT) AS played_at,
+               string_agg(DISTINCT CAST(profile_id AS VARCHAR), ';') AS profile_ids
+        FROM games WHERE source='crawl' AND played_at >= now() - INTERVAL 2 DAY
+        GROUP BY match_id" \
+    > /tmp/replay-seed.csv \
+    && "$REPLAY_BIN" seed /tmp/replay-seed.csv --db "$REPLAY_DIR/manifest.sqlite" \
     || log "WARN: replay seed exited $?"
+  # rolling archive backfill: seed one older aoestats week when the backlog is
+  # drained (disk- and backlog-guarded inside the script)
+  bash "$ROOT/scripts/data-pipeline/backfill-seed.sh" || log "WARN: backfill seed exited $?"
   "$REPLAY_BIN" run --db "$REPLAY_DIR/manifest.sqlite" --out "$REPLAY_DIR/shards" \
-    --limit "${REPLAY_LIMIT:-1500}" || log "WARN: replay run exited $?"
+    --limit "${REPLAY_LIMIT:-1500}" --archive-limit "${ARCHIVE_LIMIT:-60}" \
+    || log "WARN: replay run exited $?"
   # audit the gamemod→build map against fresh replay headers (patch-index.json)
   node scripts/data-pipeline/check-patch-axis.mjs \
     || log "ALERT: patch-axis check FAILED — update src/data/patch-index.json before any stats refresh"

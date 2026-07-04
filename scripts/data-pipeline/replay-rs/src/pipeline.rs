@@ -34,6 +34,13 @@ struct Downloadable {
     best_pid: Option<i64>,
 }
 
+/// A match that aged out of getReplayFiles but has participant profile ids, so
+/// the age-archive fallback (api.ageofempires.com) can still try it.
+struct FallbackCandidate {
+    match_id: i64,
+    profile_ids: Vec<i64>,
+}
+
 /// Outcome of one download+parse, ready to fold into a manifest Update.
 struct Outcome {
     match_id: i64,
@@ -77,6 +84,9 @@ pub struct RunConfig {
     pub limit: Option<usize>,
     /// How many pending ids to pull per outer loop iteration.
     pub batch_lookahead: usize,
+    /// Cap on archive-fallback HTTP requests per run (each is ~30s of pacing;
+    /// the cap keeps a cron-driven run inside its window).
+    pub archive_limit: usize,
 }
 
 pub fn run(cfg: RunConfig) -> Result<()> {
@@ -94,6 +104,10 @@ pub fn run(cfg: RunConfig) -> Result<()> {
     let store = Store::open(Path::new(&cfg.out))?;
     let client = api::build_client()?;
     let limiter = RateLimiter::new(config::REPLAYFILES_PER_MIN);
+    // Archive fallback: one request per ~30s, shared budget across the run.
+    let archive_limiter = RateLimiter::new((60.0 / config::ARCHIVE_SPACING_SECS) as u32);
+    let mut archive_requests = 0usize;
+    let mut archive_blocked = false; // set on a persistent 429 wall
 
     // Recover non-terminal rows from any prior partial run (downloadable/error
     // -> pending) so a crashed run resumes cleanly without stranding matches.
@@ -123,8 +137,23 @@ pub fn run(cfg: RunConfig) -> Result<()> {
         }
 
         // --- look up signed URLs in chunks of REPLAYFILES_BATCH (rate-limited) ---
-        let ids: Vec<i64> = pending.iter().map(|(m, _, _)| *m).collect();
+        let ids: Vec<i64> = pending.iter().map(|r| r.match_id).collect();
+        // Participant ids per match (archive-fallback key), parsed defensively:
+        // the seeder validates the format, but the manifest is hand-editable.
+        let pids_by_match: std::collections::HashMap<i64, Vec<i64>> = pending
+            .iter()
+            .filter_map(|r| {
+                let pids: Vec<i64> = r
+                    .profile_ids
+                    .as_deref()?
+                    .split(';')
+                    .filter_map(|p| p.trim().parse().ok())
+                    .collect();
+                (!pids.is_empty()).then_some((r.match_id, pids))
+            })
+            .collect();
         let mut downloadables: Vec<Downloadable> = Vec::new();
+        let mut fallbacks: Vec<FallbackCandidate> = Vec::new();
         let mut pre_updates: Vec<Update> = Vec::new();
 
         for chunk in ids.chunks(config::REPLAYFILES_BATCH) {
@@ -144,8 +173,16 @@ pub fn run(cfg: RunConfig) -> Result<()> {
             for &m in chunk {
                 match per_match.get(&m) {
                     None => {
-                        // absent from the response = aged out
-                        pre_updates.push(Update::new(m, config::EXPIRED));
+                        // Absent from the response = aged out of the fast path.
+                        // With participant ids we can still try the age archive;
+                        // without them the match is done.
+                        match pids_by_match.get(&m) {
+                            Some(pids) => fallbacks.push(FallbackCandidate {
+                                match_id: m,
+                                profile_ids: pids.clone(),
+                            }),
+                            None => pre_updates.push(Update::new(m, config::EXPIRED)),
+                        }
                     }
                     Some(files) => match api::best_file(files) {
                         None => {
@@ -181,9 +218,95 @@ pub fn run(cfg: RunConfig) -> Result<()> {
                 .collect()
         });
 
+        // --- archive fallback: strictly serial, heavily paced ------------------
+        // Every candidate leaves this block with a status: parsed, parse_failed,
+        // expired (archive has no copy), or error (retryable) — otherwise the
+        // outer loop would re-take the same pending rows forever.
+        let mut fallback_outcomes: Vec<Outcome> = Vec::new();
+        let n_fallbacks = fallbacks.len();
+        for cand in fallbacks {
+            let budget_left = cfg.archive_limit.saturating_sub(archive_requests) > 0;
+            if archive_blocked || !budget_left {
+                fallback_outcomes.push(Outcome {
+                    match_id: cand.match_id,
+                    status: config::ERROR,
+                    error: Some(if archive_blocked {
+                        "archive: rate limited (deferred to next run)".into()
+                    } else {
+                        "archive: request budget exhausted (deferred to next run)".into()
+                    }),
+                    events: None,
+                    n_files: 0,
+                    best_size: -1,
+                    best_pid: None,
+                });
+                continue;
+            }
+            match api::download_archive_replay(
+                &client,
+                &archive_limiter,
+                cand.match_id,
+                &cand.profile_ids,
+                &mut archive_requests,
+            ) {
+                Ok(api::ArchiveFetch::Ok(raw, pid)) => {
+                    let d = Downloadable {
+                        match_id: cand.match_id,
+                        url: String::new(),
+                        n_files: 1,
+                        best_size: raw.len() as i64,
+                        best_pid: Some(pid),
+                    };
+                    fallback_outcomes.push(parse_and_store(&d, raw, &store, &parsed_events));
+                }
+                Ok(api::ArchiveFetch::NotFound) => fallback_outcomes.push(Outcome {
+                    match_id: cand.match_id,
+                    status: config::EXPIRED,
+                    error: Some("archive: 404 for all participants".into()),
+                    events: None,
+                    n_files: 0,
+                    best_size: -1,
+                    best_pid: None,
+                }),
+                // Terminal: a bad ZIP is deterministic, so parse_failed (not the
+                // retryable error) — otherwise it re-burns budget every run.
+                Ok(api::ArchiveFetch::BadPayload(msg)) => fallback_outcomes.push(Outcome {
+                    match_id: cand.match_id,
+                    status: config::PARSE_FAILED,
+                    error: Some(truncate(&msg, 200)),
+                    events: None,
+                    n_files: 0,
+                    best_size: -1,
+                    best_pid: None,
+                }),
+                Ok(api::ArchiveFetch::RateLimited) => {
+                    archive_blocked = true;
+                    fallback_outcomes.push(Outcome {
+                        match_id: cand.match_id,
+                        status: config::ERROR,
+                        error: Some("archive: rate limited (deferred to next run)".into()),
+                        events: None,
+                        n_files: 0,
+                        best_size: -1,
+                        best_pid: None,
+                    });
+                }
+                Err(e) => fallback_outcomes.push(Outcome {
+                    match_id: cand.match_id,
+                    status: config::ERROR,
+                    error: Some(truncate(&format!("archive: {e}"), 200)),
+                    events: None,
+                    n_files: 0,
+                    best_size: -1,
+                    best_pid: None,
+                }),
+            }
+        }
+
         // --- fold outcomes into manifest updates (single writer) --------------
         let updates: Vec<Update> = outcomes
             .into_iter()
+            .chain(fallback_outcomes)
             .map(|o| {
                 let mut u = Update::new(o.match_id, o.status);
                 u.n_files = Some(o.n_files);
@@ -197,7 +320,7 @@ pub fn run(cfg: RunConfig) -> Result<()> {
         manifest.update_many(&updates)?;
         store.flush()?;
 
-        processed += processed_in_batch;
+        processed += processed_in_batch + n_fallbacks;
         let rate = processed as f64 / t0.elapsed().as_secs_f64().max(1e-9);
         println!(
             "  processed {processed} ({rate:.1}/s) — {}",
@@ -241,10 +364,20 @@ fn process_one(
         }
     };
 
-    // 2. parse + extract + store, isolated from panics. The closure only borrows
-    // shared data (the reqwest client, the mutex-guarded Store, the atomic
-    // counter) and owns `raw`; a panic mid-parse cannot leave our own state
-    // inconsistent, so AssertUnwindSafe is sound here.
+    parse_and_store(d, raw, store, parsed_events)
+}
+
+/// Parse + extract + store raw replay bytes, isolated from panics. Shared by
+/// the signed-URL path and the archive fallback. The closure only borrows
+/// shared data (the mutex-guarded Store, the atomic counter) and owns `raw`;
+/// a panic mid-parse cannot leave our own state inconsistent, so
+/// AssertUnwindSafe is sound here.
+fn parse_and_store(
+    d: &Downloadable,
+    raw: bytes::Bytes,
+    store: &Store,
+    parsed_events: &AtomicU64,
+) -> Outcome {
     let result = std::panic::catch_unwind(AssertUnwindSafe(|| {
         let data = extract::extract(d.match_id, raw)?;
         let n_ev = data.events.len() as i64;

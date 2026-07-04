@@ -151,6 +151,120 @@ pub fn download_replay(client: &reqwest::blocking::Client, url: &str) -> Result<
     Ok(bytes::Bytes::from(out))
 }
 
+// --- age archive fallback (api.ageofempires.com) ------------------------------
+// For matches that aged out of getReplayFiles. Serves a ZIP with one
+// AgeIIDE_Replay_<id>.aoe2record member; needs a participant profileId; rate
+// limit is harsh (see config). aoe.ms/replay is a bare 301 onto this endpoint.
+
+/// Outcome of one archive lookup across a match's participants.
+pub enum ArchiveFetch {
+    /// Raw .aoe2record bytes + the profile id that worked.
+    Ok(bytes::Bytes, i64),
+    /// Every tried participant returned 404 — the archive has no copy.
+    NotFound,
+    /// 429 wall persisted through retries — retry the match on a later run.
+    RateLimited,
+    /// 200 arrived but the ZIP was unusable — a deterministic failure, so this
+    /// is terminal (retrying only re-burns the archive budget). Carries why.
+    BadPayload(String),
+}
+
+/// Try each participant until one yields the replay. Paced by `limiter`
+/// (ARCHIVE_SPACING_SECS between requests, shared across the run); honors
+/// Retry-After on 429. Network/protocol failures bubble up as Err (retryable).
+pub fn download_archive_replay(
+    client: &reqwest::blocking::Client,
+    limiter: &RateLimiter,
+    match_id: i64,
+    profile_ids: &[i64],
+    requests_made: &mut usize,
+) -> Result<ArchiveFetch> {
+    for &pid in profile_ids.iter().take(config::ARCHIVE_MAX_PIDS_PER_MATCH) {
+        let url = format!(
+            "{}?gameId={match_id}&profileId={pid}&matchId={match_id}",
+            config::ARCHIVE_BASE
+        );
+        let mut tries_429 = 0u32;
+        loop {
+            limiter.wait();
+            *requests_made += 1;
+            let resp = client.get(&url).send()?;
+            match resp.status().as_u16() {
+                200 => {
+                    let body = resp.bytes()?; // network failure here stays retryable
+                    return match unzip_single_member(&body) {
+                        Ok(record) => Ok(ArchiveFetch::Ok(record, pid)),
+                        // A structurally bad ZIP won't get better on retry.
+                        Err(e) => Ok(ArchiveFetch::BadPayload(format!(
+                            "archive zip for match {match_id} profile {pid}: {e}"
+                        ))),
+                    };
+                }
+                404 => break, // this participant has no copy — try the next one
+                429 => {
+                    if tries_429 >= config::ARCHIVE_MAX_429_RETRIES {
+                        return Ok(ArchiveFetch::RateLimited);
+                    }
+                    tries_429 += 1;
+                    let wait = resp
+                        .headers()
+                        .get(reqwest::header::RETRY_AFTER)
+                        .and_then(|v| v.to_str().ok())
+                        .and_then(|v| v.parse::<u64>().ok())
+                        .unwrap_or(config::ARCHIVE_RETRY_DEFAULT_SECS)
+                        .min(config::ARCHIVE_RETRY_MAX_SECS);
+                    std::thread::sleep(Duration::from_secs(wait));
+                }
+                other => {
+                    return Err(anyhow!(
+                        "archive: match {match_id} profile {pid}: HTTP {other}"
+                    ))
+                }
+            }
+        }
+    }
+    Ok(ArchiveFetch::NotFound)
+}
+
+/// Minimal single-member ZIP extraction (the archive always ships exactly one
+/// .aoe2record, produced by .NET). Handles stored + deflate members; anything
+/// else fails loud rather than guessing. Hand-rolled to keep the offline build
+/// dependency-free — flate2 (already a dep) does the inflation.
+fn unzip_single_member(zip: &[u8]) -> Result<bytes::Bytes> {
+    use flate2::read::DeflateDecoder;
+    if zip.len() < 30 || &zip[0..4] != b"PK\x03\x04" {
+        return Err(anyhow!("not a zip local-file header ({} bytes)", zip.len()));
+    }
+    let u16le = |o: usize| u16::from_le_bytes([zip[o], zip[o + 1]]) as usize;
+    let u32le = |o: usize| u32::from_le_bytes([zip[o], zip[o + 1], zip[o + 2], zip[o + 3]]) as usize;
+    let method = u16le(8);
+    let compressed_size = u32le(18);
+    let data_off = 30 + u16le(26) + u16le(28);
+    if data_off > zip.len() {
+        return Err(anyhow!("zip header runs past the buffer"));
+    }
+    match method {
+        // Deflate: inflate from the data offset; the decoder stops at the
+        // stream's own end marker, so a streaming zip's zeroed size field
+        // (general-purpose bit 3) is harmless.
+        8 => {
+            let mut out = Vec::new();
+            DeflateDecoder::new(&zip[data_off..]).read_to_end(&mut out)?;
+            Ok(bytes::Bytes::from(out))
+        }
+        // Stored: the size field must be real (streaming+stored is ambiguous).
+        0 => {
+            if compressed_size == 0 || data_off + compressed_size > zip.len() {
+                return Err(anyhow!("stored zip member with unusable size field"));
+            }
+            Ok(bytes::Bytes::copy_from_slice(
+                &zip[data_off..data_off + compressed_size],
+            ))
+        }
+        m => Err(anyhow!("unsupported zip compression method {m}")),
+    }
+}
+
 // --- getRecentMatchHistory (recent ranked games for one profile) --------------
 // source: same endpoint + normalization rules as scripts/data-pipeline/stream-relic.mjs
 // (in production via the 3h cron): AUTOMATCH description = ranked matchmaking;
@@ -269,6 +383,51 @@ pub fn get_recent_matches(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Build a one-member zip in memory: local header + (deflated|stored) data.
+    /// Mirrors what the archive endpoint ships (single .aoe2record member).
+    fn make_zip(payload: &[u8], deflate: bool, zero_size_fields: bool) -> Vec<u8> {
+        use flate2::{write::DeflateEncoder, Compression};
+        use std::io::Write as _;
+        let name = b"AgeIIDE_Replay_1.aoe2record";
+        let data: Vec<u8> = if deflate {
+            let mut enc = DeflateEncoder::new(Vec::new(), Compression::default());
+            enc.write_all(payload).unwrap();
+            enc.finish().unwrap()
+        } else {
+            payload.to_vec()
+        };
+        let mut z = Vec::new();
+        z.extend_from_slice(b"PK\x03\x04");
+        z.extend_from_slice(&20u16.to_le_bytes()); // version needed
+        // general-purpose flags: bit 3 = sizes live in a trailing descriptor
+        z.extend_from_slice(&if zero_size_fields { 8u16 } else { 0u16 }.to_le_bytes());
+        z.extend_from_slice(&if deflate { 8u16 } else { 0u16 }.to_le_bytes());
+        z.extend_from_slice(&[0u8; 8]); // dos time/date + crc (unchecked here)
+        let sz = if zero_size_fields { 0 } else { data.len() as u32 };
+        z.extend_from_slice(&sz.to_le_bytes()); // compressed size
+        z.extend_from_slice(&sz.to_le_bytes()); // uncompressed size
+        z.extend_from_slice(&(name.len() as u16).to_le_bytes());
+        z.extend_from_slice(&0u16.to_le_bytes()); // extra len
+        z.extend_from_slice(name);
+        z.extend_from_slice(&data);
+        z
+    }
+
+    #[test]
+    fn unzip_handles_deflate_stored_and_streaming_headers() {
+        let payload = b"fake aoe2record bytes: not a real replay, just round-trip data";
+        for (deflate, zero) in [(true, false), (true, true), (false, false)] {
+            let z = make_zip(payload, deflate, zero);
+            let out = unzip_single_member(&z).unwrap();
+            assert_eq!(out.as_ref(), payload, "deflate={deflate} zero={zero}");
+        }
+        // Streaming + stored is ambiguous — must fail loud, never guess.
+        assert!(unzip_single_member(&make_zip(payload, false, true)).is_err());
+        // Garbage in — loud error out.
+        assert!(unzip_single_member(b"not a zip at all").is_err());
+        assert!(unzip_single_member(b"").is_err());
+    }
 
     // Trimmed REAL getRecentMatchHistory response (probed 2026-07-02, profile_id
     // 199325 = "VIT | Hera", pulled live off the 1v1 RM ladder via getLeaderBoard2):

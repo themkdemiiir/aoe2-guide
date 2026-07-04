@@ -14,6 +14,30 @@ pub const REPLAYFILES_PER_MIN: u32 = 100;
 /// Max matchIDs per getReplayFiles call.
 pub const REPLAYFILES_BATCH: usize = 10;
 
+// --- age archive (api.ageofempires.com — what aoe.ms redirects to) -----------
+// Serves replays for matches YEARS old (probed 2026-07-04: a Feb-2023 match
+// downloaded fine) as a ZIP holding one AgeIIDE_Replay_<id>.aoe2record. Needs a
+// PARTICIPANT profileId. Rate limit is harsh: a 5s-spaced probe hit a 429 wall
+// after ~19 requests and stayed blocked for minutes, so pace in tens of seconds
+// and honor Retry-After.
+pub const ARCHIVE_BASE: &str = "https://api.ageofempires.com/api/GameStats/AgeII/GetMatchReplay/";
+/// Fixed spacing between archive requests (probe-derived; do not lower casually).
+pub const ARCHIVE_SPACING_SECS: f64 = 30.0;
+/// Sleep when a 429 carries no Retry-After header.
+pub const ARCHIVE_RETRY_DEFAULT_SECS: u64 = 120;
+/// Cap on a server-supplied Retry-After so a bad/huge value can't park the run
+/// past its cron window (a >window sleep would overlap the next run's manifest).
+pub const ARCHIVE_RETRY_MAX_SECS: u64 = 300;
+/// 429 retries per request before giving up (match stays retryable via `error`).
+pub const ARCHIVE_MAX_429_RETRIES: u32 = 2;
+/// Default cap on archive requests per `run` (~30 min at 30s spacing) so the
+/// 3h sweep cron can never overrun its window. Override with `--archive-limit`.
+pub const ARCHIVE_LIMIT_PER_RUN: usize = 60;
+/// Try at most this many of a match's participants before giving up on it.
+/// Probed 2026-07-04: 404s are per-MATCH (both 1v1 participants always agreed),
+/// so extra tries mostly burn budget on dead matches — 2 is cheap insurance.
+pub const ARCHIVE_MAX_PIDS_PER_MATCH: usize = 2;
+
 // --- semantic decoding (AoE2 DE ids) -----------------------------------------
 /// Research tech ids that mark an age-up. Maps to the canonical age name.
 pub fn age_name(technology_type: u16) -> Option<&'static str> {

@@ -1,9 +1,10 @@
 ---
 // MapCivRankings — "best civs on this map", inverted from the aoestats archive
 // (src/data/map-meta.json). Per map: civs ranked by win rate, with a ladder
-// toggle (1v1 / Team) and a full 9-bucket elo selector. The compact per-map
-// matrix is embedded and the rows are rendered client-side (10 buckets × 2
-// ladders is far too much to ship as static HTML). Bilingual.
+// toggle (1v1 / Team) and a full 9-bucket elo selector. Rendered as a diverging
+// ECharts bar leaderboard anchored on the 50% line (gold = above, red = below),
+// with a dataZoom slider to scroll all civs. The server-rendered list survives
+// as the no-JS fallback and the always-available "table view" twin. Bilingual.
 import mapMeta from "@data/map-meta.json";
 import civMeta from "@data/civ-meta.json";
 import iconMap from "@data/icon-map.json";
@@ -41,8 +42,14 @@ for (const ladder of LADDERS) {
     for (const r of rows) if (!civInfo[r.civ]) civInfo[r.civ] = [civNames.get(r.civ) ?? r.civ, civIcons[r.civ] ?? ""];
   }
 }
-const has1v1 = !!data["1v1"];
-const hasTeam = !!data.team;
+// A ladder counts as "available" only if some bucket actually has rows — a
+// present-but-empty object (e.g. lombardia's `"1v1": {}`, or the empty `team`
+// on acclivity/crossroads/frigid_lake/morass) must NOT light up its toggle or
+// become the default, or the reader lands on an empty view with full data one
+// click away.
+const ladderHasRows = (l: string) => Object.values(data[l] ?? {}).some((r) => r.length > 0);
+const has1v1 = ladderHasRows("1v1");
+const hasTeam = ladderHasRows("team");
 const defaultLadder = has1v1 ? "1v1" : "team";
 const availBuckets = eloBuckets.filter((b) => LADDERS.some((l) => data[l]?.[b]?.length));
 const hasAny = availBuckets.length > 0;
@@ -59,14 +66,18 @@ const labels = {
   team: tr ? "Takım" : "Team",
   allElo: tr ? "Tüm Elo" : "All Elo",
   allTime: tr ? "Tüm zamanlar" : "All-time",
+  tableView: tr ? "Tablo görünümü" : "Table view",
+  chartAria: tr ? "Bu haritadaki uygarlık kazanma oranları grafiği" : "Chart of civilization win rates on this map",
   civBase: localizedPath("/civs/", lang),
   cubeKey: key ?? "",
 };
 
+// Payload for the bundled chart script (bundled scripts can't use define:vars).
+const payload = { data, civInfo, civBase: labels.civBase, defaultLadder, cubeKey: labels.cubeKey };
+
 // Server-rendered default view (default ladder, "all" bucket) so the rankings
-// are in the static HTML and work with JS off. The client script re-renders the
-// identical rows on load and layers the ladder/elo interactivity on top
-// (progressive enhancement) — without JS you still see the default ranking.
+// are in the static HTML and work with JS off. With JS, the same list collapses
+// into the "table view" twin under the chart and both re-render on filter change.
 const fillPct = (w: number) => Math.max(3, Math.min(100, ((w - 35) / 30) * 100));
 const numFmt = new Intl.NumberFormat(tr ? "tr-TR" : "en-US");
 const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]) => ({
@@ -104,115 +115,384 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
       </div>
     </div>
 
-    <ol data-rows class="mt-5 space-y-1">
-      {defaultRows.map((r, i) => (
-        <li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">
-          <span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">{i + 1}</span>
-          {r.icon ? (
-            <img src={r.icon} alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none" />
-          ) : (
-            <span class="h-[26px] w-[26px] flex-none"></span>
-          )}
-          <a href={`${labels.civBase}${r.slug}/`} class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">{r.name}</a>
-          <span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style={`width:${r.fill}%;background:${r.good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}`}></span></span>
-          <span class="w-14 flex-none text-right font-mono text-sm font-medium" style={`color:${r.good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}`}>{r.winRate}%</span>
-          <span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">{numFmt.format(r.games)}</span>
-        </li>
-      ))}
-    </ol>
+    <div data-chart hidden role="img" aria-label={labels.chartAria} class="mt-4 h-[460px] w-full"></div>
+
+    <details data-table open class="mt-4 group">
+      <summary class="cursor-pointer select-none font-mono text-[11px] uppercase tracking-wide text-stone-700/80 hover:text-gold-700">{labels.tableView}</summary>
+      <ol data-rows class="mt-3 space-y-1">
+        {defaultRows.map((r, i) => (
+          <li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">
+            <span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">{i + 1}</span>
+            {r.icon ? (
+              <img src={r.icon} alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none" />
+            ) : (
+              <span class="h-[26px] w-[26px] flex-none"></span>
+            )}
+            <a href={`${labels.civBase}${r.slug}/`} class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">{r.name}</a>
+            <span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style={`width:${r.fill}%;background:${r.good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}`}></span></span>
+            <span class="w-14 flex-none text-right font-mono text-sm font-medium" style={`color:${r.good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}`}>{r.winRate}%</span>
+            <span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">{numFmt.format(r.games)}</span>
+          </li>
+        ))}
+      </ol>
+    </details>
     <p data-nodata hidden class="mt-5 text-sm italic text-stone-700">{tr ? "Bu elo diliminde yeterli veri yok." : "Not enough data at this elo bucket."}</p>
     <p class="mt-3 font-mono text-[10px] tracking-wide text-stone-700/70">
-      {tr ? "Kazanma oranına göre. " : "Ranked by win rate. "}{t(lang, "data.source")}
+      <span data-count>{tr ? `${defaultRows.length} uygarlık` : `${defaultRows.length} civs`}</span>{" · "}{tr ? "Kazanma oranına göre · 50% = ortalama. " : "Ranked by win rate · 50% = average. "}{t(lang, "data.source")}
     </p>
 
-    <script is:inline data-astro-rerun define:vars={{ data, civInfo, civBase: labels.civBase, defaultLadder, cubeKey: labels.cubeKey }}>
-      (() => {
-        const root = document.currentScript.closest("[data-map-civs]");
-        const fmt = new Intl.NumberFormat(document.documentElement.lang || "en");
-        const fill = (w) => Math.max(3, Math.min(100, ((w - 35) / 30) * 100));
-        // mirror of src/scripts/html.ts (is:inline can't import — keep in sync)
-        const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-        const list = root.querySelector("[data-rows]");
-        const nodata = root.querySelector("[data-nodata]");
-        const ladderGroup = root.querySelector('[data-toggle="ladder"]');
-        const eloSel = root.querySelector("[data-elo]");
-        const patchSel = root.querySelector("[data-patch]");
-        const state = { ladder: defaultLadder, bucket: "all", patch: "" };
+    <script is:inline type="application/json" data-payload set:html={JSON.stringify(payload).replace(/</g, "\\u003c")} />
+  </section>
+)}
 
-        // Patch slices come from the shared 1v1 cube (same one /civs uses).
-        let cube = null, cubeReq = null;
-        function loadCube() {
-          if (cube) return Promise.resolve(cube);
-          if (!cubeReq) cubeReq = fetch("/civ-cube.json").then((r) => r.json()).then((c) => {
+<script>
+  // Diverging leaderboard: bars grow from the 50% "battle line". Tree-shaken
+  // ECharts (core + bar + grid/tooltip/dataZoom + canvas ≈ 181 KB gz) loads on
+  // map pages only. Wrapped in astro:page-load and disposed on astro:before-swap
+  // so ClientRouter navigations neither leak instances nor leave blank charts.
+  import * as echarts from "echarts/core";
+  import { BarChart } from "echarts/charts";
+  import { DataZoomComponent, GridComponent, MarkLineComponent, TooltipComponent } from "echarts/components";
+  import { CanvasRenderer } from "echarts/renderers";
+  import { esc } from "@/scripts/html";
+
+  echarts.use([BarChart, GridComponent, TooltipComponent, DataZoomComponent, MarkLineComponent, CanvasRenderer]);
+
+  type SliceRow = [string, number, number]; // [slug, games, winRate]
+  type Payload = {
+    data: Record<string, Record<string, SliceRow[]>>;
+    civInfo: Record<string, [string, string]>;
+    civBase: string;
+    defaultLadder: string;
+    cubeKey: string;
+  };
+  type Cube = {
+    civs: string[]; elos: string[]; maps: string[];
+    months: { patch: string }[]; rows: number[][];
+    _mi: number; _ei: Record<string, number>; _pi: Record<string, number>;
+  };
+
+  let chart: echarts.ECharts | null = null;
+  let cleanup: (() => void) | null = null;
+
+  function themeColors() {
+    const css = getComputedStyle(document.documentElement);
+    const v = (name: string, fb: string) => css.getPropertyValue(name).trim() || fb;
+    return {
+      good: v("--color-wr-good", "#8a5f18"),
+      bad: v("--color-wr-bad", "#942124"),
+      ink: v("--color-ink", "#221811"),
+      muted: v("--color-stone-700", "#41352f"),
+      surface: v("--color-parchment", "#f6e6cb"),
+      gold: v("--color-gold-500", "#c79a3c"),
+    };
+  }
+
+  function init() {
+    const root = document.querySelector<HTMLElement>("[data-map-civs]");
+    if (!root) return;
+    const payload: Payload = JSON.parse(root.querySelector("[data-payload]")!.textContent!);
+    const { data, civInfo, civBase, defaultLadder, cubeKey } = payload;
+
+    const isTr = document.documentElement.lang === "tr";
+    const fmt = new Intl.NumberFormat(isTr ? "tr-TR" : "en-US");
+    const gamesWord = isTr ? "maç" : "games";
+    const rankTxt = (n: number) => (isTr ? `sıra ${n}` : `rank #${n}`);
+    const mono = "'JetBrains Mono', ui-monospace, monospace";
+    const body = "'Inter', system-ui, sans-serif";
+
+    const mount = root.querySelector<HTMLElement>("[data-chart]")!;
+    const table = root.querySelector<HTMLDetailsElement>("[data-table]")!;
+    const list = root.querySelector<HTMLElement>("[data-rows]")!;
+    const nodata = root.querySelector<HTMLElement>("[data-nodata]")!;
+    const ladderGroup = root.querySelector<HTMLElement>('[data-toggle="ladder"]');
+    const eloSel = root.querySelector<HTMLSelectElement>("[data-elo]")!;
+    const patchSel = root.querySelector<HTMLSelectElement>("[data-patch]");
+    const state = { ladder: defaultLadder, bucket: "all", patch: "" };
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    mount.hidden = false;
+    table.open = false;
+
+    chart = echarts.init(mount, null, { renderer: "canvas" });
+    chart.on("click", (p) => {
+      const slug = p.componentType === "yAxis" ? String(p.value) : rowsNow[p.dataIndex]?.[0];
+      if (slug) window.location.href = `${civBase}${slug}/`;
+    });
+
+    let rowsNow: SliceRow[] = [];
+
+    // Patch slices come from the shared 1v1 cube (same one /civs uses).
+    let cube: Cube | null = null;
+    let cubeReq: Promise<Cube> | null = null;
+    function loadCube(): Promise<Cube> {
+      if (cube) return Promise.resolve(cube);
+      if (!cubeReq)
+        cubeReq = fetch("/civ-cube.json")
+          .then((r) => {
+            if (!r.ok) throw new Error(`civ-cube.json ${r.status}`);
+            return r.json();
+          })
+          .then((c: Cube) => {
             c._mi = c.maps.indexOf(cubeKey);
             c._ei = Object.fromEntries(c.elos.map((e, i) => [e, i]));
             c._pi = Object.fromEntries(c.months.map((p, i) => [p.patch, i]));
             // hide patch options with NO rows for this map — a dead "Current ·"
             // option that always empties is worse than a shorter list
-            const monthsWithRows = new Set();
-            if (c._mi >= 0) for (const r of c.rows) if (r[2] === c._mi) monthsWithRows.add(r[3]);
-            for (const opt of patchSel.querySelectorAll("option")) {
-              if (!opt.value) continue;
-              const pi = c._pi[opt.value];
-              if (pi == null || !monthsWithRows.has(pi)) opt.remove();
+            if (patchSel) {
+              const monthsWithRows = new Set<number>();
+              if (c._mi >= 0) for (const r of c.rows) if (r[2] === c._mi) monthsWithRows.add(r[3]);
+              for (const opt of patchSel.querySelectorAll("option")) {
+                if (!opt.value) continue;
+                const pi = c._pi[opt.value];
+                if (pi == null || !monthsWithRows.has(pi)) opt.remove();
+              }
             }
-            cube = c; return c;
+            cube = c;
+            return c;
+          })
+          .catch((e) => {
+            // Don't cache a rejected promise — a transient failure must not
+            // wedge every later patch selection for the session.
+            cubeReq = null;
+            throw e;
           });
-          return cubeReq;
-        }
-        function cubeRows(bucket, patch) {
-          if (cube._mi < 0) return [];
-          const eIdx = bucket === "all" ? -1 : (cube._ei[bucket] ?? -2);
-          const pIdx = cube._pi[patch];
-          if (eIdx === -2 || pIdx == null) return [];
-          const agg = {};
-          for (const r of cube.rows) {
-            if (r[2] !== cube._mi) continue;
-            if (eIdx >= 0 && r[1] !== eIdx) continue;
-            if (r[3] !== pIdx) continue;
-            const a = (agg[r[0]] ??= [0, 0]); a[0] += r[4]; a[1] += r[5];
-          }
-          return Object.entries(agg)
-            .map(([ci, gw]) => [cube.civs[ci], gw[0], +((gw[1] / gw[0]) * 100).toFixed(2)])
-            .filter((r) => r[1] >= 20)
-            .sort((a, b) => b[2] - a[2]);
-        }
+      return cubeReq;
+    }
+    function cubeRows(bucket: string, patch: string): SliceRow[] {
+      const c = cube!;
+      if (c._mi < 0) return [];
+      const eIdx = bucket === "all" ? -1 : (c._ei[bucket] ?? -2);
+      const pIdx = c._pi[patch];
+      if (eIdx === -2 || pIdx == null) return [];
+      const agg: Record<string, [number, number]> = {};
+      for (const r of c.rows) {
+        if (r[2] !== c._mi) continue;
+        if (eIdx >= 0 && r[1] !== eIdx) continue;
+        if (r[3] !== pIdx) continue;
+        const a = (agg[r[0]] ??= [0, 0]);
+        a[0] += r[4];
+        a[1] += r[5];
+      }
+      return Object.entries(agg)
+        .map(([ci, gw]) => [c.civs[+ci], gw[0], +((gw[1] / gw[0]) * 100).toFixed(2)] as SliceRow)
+        .filter((r) => r[1] >= 20)
+        .sort((a, b) => b[2] - a[2]);
+    }
 
-        function rowHtml(r, i) {
-          const slug = r[0], games = r[1], wr = r[2];
-          const info = civInfo[slug] || [slug, ""];
-          const good = wr >= 50;
-          return '<li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">'
-            + '<span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">' + (i + 1) + '</span>'
-            + (info[1] ? '<img src="' + esc(info[1]) + '" alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none"/>' : '<span class="h-[26px] w-[26px] flex-none"></span>')
-            + '<a href="' + esc(civBase + slug + "/") + '" class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">' + esc(info[0]) + '</a>'
-            + '<span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style="width:' + fill(wr) + '%;background:' + (good ? "var(--color-wr-good)" : "var(--color-wr-bad)") + '"></span></span>'
-            + '<span class="w-14 flex-none text-right font-mono text-sm font-medium" style="color:' + (good ? "var(--color-wr-good)" : "var(--color-wr-bad)") + '">' + wr + '%</span>'
-            + '<span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">' + fmt.format(games) + '</span>'
-            + '</li>';
-        }
-        function paint(rows) {
-          nodata.hidden = rows.length > 0;
-          list.innerHTML = rows.map(rowHtml).join("");
-          if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.toggleAttribute("data-on", b.dataset.val === state.ladder);
-        }
+    const richKey = (slug: string) => `i_${slug.replace(/[^a-zA-Z0-9]/g, "_")}`;
 
-        async function render() {
-          // Patch is 1v1-only (the cube is 1v1); hide its selector on the team ladder.
-          if (patchSel) patchSel.hidden = state.ladder !== "1v1";
-          if (state.ladder === "1v1" && state.patch) {
-            await loadCube();
-            paint(cubeRows(state.bucket, state.patch));
-          } else {
-            paint((data[state.ladder] && data[state.ladder][state.bucket]) || []);
-          }
-        }
+    function paintChart(rows: SliceRow[], keepWindow = false) {
+      const c = themeColors();
+      // Theme repaints keep the reader's scroll position; data changes reset it.
+      const prevZoom = keepWindow ? (chart!.getOption() as { dataZoom?: { startValue?: number; endValue?: number }[] })?.dataZoom?.[0] : null;
+      // Symmetric x-window around the 50% line keeps the battle line centered
+      // and the deviation encoding honest. Rounded up to a multiple of 4 so the
+      // four splits land on whole percentages.
+      const rawExt = Math.max(6, ...rows.map((r) => Math.abs(r[2] - 50) + 1));
+      const ext = Math.ceil(rawExt / 4) * 4;
+      const narrow = mount.clientWidth < 480;
+      const labelW = narrow ? 128 : 168;
+      // Absolute rank by slug — the axisLabel formatter's index is relative to
+      // the dataZoom window, so it must not be used as the rank.
+      const rankOf = new Map(rows.map((r, i) => [r[0], i + 1]));
+      const rich: Record<string, object> = {
+        rank: { color: c.muted, fontFamily: mono, fontSize: 10, width: 18, align: "right" },
+        name: { color: c.ink, fontFamily: body, fontSize: narrow ? 11 : 12, padding: [0, 0, 0, 6] },
+      };
+      for (const [slug] of rows) {
+        const icon = civInfo[slug]?.[1];
+        if (icon) rich[richKey(slug)] = { height: 18, width: 18, backgroundColor: { image: icon } };
+      }
+      chart!.setOption(
+        {
+          animation: !reducedMotion,
+          animationDuration: 500,
+          animationDurationUpdate: 400,
+          grid: { left: labelW + 10, right: 64, top: 6, bottom: 24 },
+          xAxis: {
+            type: "value",
+            min: -ext,
+            max: ext,
+            interval: narrow ? ext / 2 : ext / 4,
+            axisLabel: { formatter: (v: number) => `${v + 50}%`, color: c.muted, fontFamily: mono, fontSize: 10 },
+            splitLine: { lineStyle: { color: c.muted, opacity: 0.14, width: 1 } },
+            axisLine: { show: false },
+            axisTick: { show: false },
+          },
+          yAxis: {
+            type: "category",
+            inverse: true,
+            data: rows.map((r) => r[0]),
+            triggerEvent: true,
+            axisLabel: {
+              // Left-aligned at a fixed offset so rank / icon / name form
+              // steady columns instead of zigzagging with name length.
+              align: "left",
+              margin: labelW,
+              formatter: (slug: string) => {
+                const name = civInfo[slug]?.[0] ?? slug;
+                const iconSeg = civInfo[slug]?.[1] ? `{${richKey(slug)}|} ` : "";
+                return `{rank|${rankOf.get(slug)}}  ${iconSeg}{name|${name}}`;
+              },
+              rich,
+            },
+            axisLine: { show: false },
+            axisTick: { show: false },
+          },
+          dataZoom: [
+            {
+              type: "slider",
+              yAxisIndex: 0,
+              show: rows.length > 12,
+              startValue: prevZoom?.startValue ?? 0,
+              endValue: prevZoom?.endValue ?? Math.min(11, rows.length - 1),
+              width: 10,
+              right: 8,
+              brushSelect: false,
+              zoomLock: true,
+              showDetail: false,
+              moveHandleSize: 0,
+              handleSize: "110%",
+              borderColor: "transparent",
+              backgroundColor: `color-mix(in srgb, ${c.muted} 8%, transparent)`,
+              fillerColor: `color-mix(in srgb, ${c.gold} 35%, transparent)`,
+              handleStyle: { color: c.gold, borderColor: c.gold },
+              emphasis: { handleStyle: { color: c.gold } },
+              dataBackground: { lineStyle: { opacity: 0 }, areaStyle: { opacity: 0 } },
+            },
+            { type: "inside", yAxisIndex: 0, zoomOnMouseWheel: false, moveOnMouseWheel: true, moveOnMouseMove: false },
+          ],
+          tooltip: {
+            trigger: "axis",
+            axisPointer: { type: "shadow", shadowStyle: { color: `color-mix(in srgb, ${c.gold} 10%, transparent)` } },
+            backgroundColor: c.surface,
+            borderColor: c.gold,
+            borderWidth: 1,
+            padding: [8, 12],
+            textStyle: { color: c.ink, fontFamily: body, fontSize: 12 },
+            extraCssText: "border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,0.22);",
+            formatter: (params: { dataIndex: number }[]) => {
+              const i = params[0]?.dataIndex ?? 0;
+              const [slug, games, wr] = rowsNow[i];
+              const [name, icon] = civInfo[slug] ?? [slug, ""];
+              const img = icon ? `<img src="${esc(icon)}" width="22" height="22" style="vertical-align:-5px;margin-right:6px" alt=""/>` : "";
+              return `${img}<b style="font-family:${body}">${esc(name)}</b><br/>` +
+                `<span style="font-family:${mono};font-size:15px">${wr}%</span>` +
+                `<span style="opacity:.65;font-size:11px"> · ${fmt.format(games)} ${gamesWord} · ${rankTxt(i + 1)}</span>`;
+            },
+          },
+          series: [
+            {
+              type: "bar",
+              barWidth: 14,
+              cursor: "pointer",
+              data: rows.map((r) => {
+                const d = +(r[2] - 50).toFixed(2);
+                return {
+                  value: d,
+                  itemStyle: {
+                    color: d >= 0 ? c.good : c.bad,
+                    borderRadius: d >= 0 ? [0, 4, 4, 0] : [4, 0, 0, 4],
+                  },
+                  label: { position: d >= 0 ? "right" : "left" },
+                };
+              }),
+              label: {
+                show: true,
+                color: c.ink,
+                fontFamily: mono,
+                fontSize: 11,
+                formatter: (p: { dataIndex: number }) => `${rowsNow[p.dataIndex][2].toFixed(1)}%`,
+              },
+              markLine: {
+                silent: true,
+                symbol: "none",
+                label: { show: false },
+                lineStyle: { color: c.ink, opacity: 0.35, width: 1.5, type: "solid" },
+                data: [{ xAxis: 0 }],
+              },
+            },
+          ],
+        },
+        { notMerge: true },
+      );
+    }
 
-        if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.addEventListener("click", () => { state.ladder = b.dataset.val; if (state.ladder !== "1v1") state.patch = ""; render(); });
-        if (eloSel) eloSel.addEventListener("change", () => { state.bucket = eloSel.value; render(); });
-        if (patchSel) patchSel.addEventListener("change", () => { state.patch = patchSel.value; render(); });
-        render();
-      })();
-    </script>
-  </section>
-)}
+    function rowHtml(r: SliceRow, i: number) {
+      const [slug, games, wr] = r;
+      const info = civInfo[slug] || [slug, ""];
+      const good = wr >= 50;
+      const fill = Math.max(3, Math.min(100, ((wr - 35) / 30) * 100));
+      return '<li class="flex items-center gap-3 rounded px-2 py-1.5 odd:bg-stone-700/[0.04]">'
+        + `<span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">${i + 1}</span>`
+        + (info[1] ? `<img src="${esc(info[1])}" alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none"/>` : '<span class="h-[26px] w-[26px] flex-none"></span>')
+        + `<a href="${esc(civBase + slug + "/")}" class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">${esc(info[0])}</a>`
+        + `<span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style="width:${fill}%;background:${good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}"></span></span>`
+        + `<span class="w-14 flex-none text-right font-mono text-sm font-medium" style="color:${good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}">${wr}%</span>`
+        + `<span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">${fmt.format(games)}</span>`
+        + "</li>";
+    }
+
+    const countEl = root.querySelector<HTMLElement>("[data-count]");
+    const civWord = isTr ? "uygarlık" : "civs";
+    function paint(rows: SliceRow[]) {
+      rowsNow = rows;
+      const empty = rows.length === 0;
+      nodata.hidden = !empty;
+      mount.hidden = empty;
+      table.hidden = empty;
+      if (!empty) paintChart(rows);
+      list.innerHTML = rows.map(rowHtml).join("");
+      if (countEl) countEl.textContent = `${rows.length} ${civWord}`;
+      if (ladderGroup) for (const b of ladderGroup.querySelectorAll("button")) b.toggleAttribute("data-on", b.dataset.val === state.ladder);
+    }
+
+    async function render() {
+      // Patch is 1v1-only (the cube is 1v1); hide its selector on the team ladder.
+      if (patchSel) patchSel.hidden = state.ladder !== "1v1";
+      if (state.ladder === "1v1" && state.patch) {
+        try {
+          await loadCube();
+        } catch {
+          // Cube fetch failed: fall back to the all-time slice and clear the
+          // patch selector so the label can never disagree with the shown data.
+          state.patch = "";
+          if (patchSel) patchSel.value = "";
+          paint(data[state.ladder]?.[state.bucket] ?? []);
+          return;
+        }
+        paint(cubeRows(state.bucket, state.patch));
+      } else {
+        paint(data[state.ladder]?.[state.bucket] ?? []);
+      }
+    }
+
+    if (ladderGroup)
+      for (const b of ladderGroup.querySelectorAll("button"))
+        b.addEventListener("click", () => {
+          state.ladder = b.dataset.val!;
+          if (state.ladder !== "1v1") state.patch = "";
+          render();
+        });
+    eloSel.addEventListener("change", () => { state.bucket = eloSel.value; render(); });
+    patchSel?.addEventListener("change", () => { state.patch = patchSel.value; render(); });
+
+    // Theme swap: tokens flip on <html data-theme>; canvas colors must follow.
+    const themeObs = new MutationObserver(() => { if (rowsNow.length) paintChart(rowsNow, true); });
+    themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    const resizeObs = new ResizeObserver(() => chart?.resize());
+    resizeObs.observe(mount);
+    cleanup = () => { themeObs.disconnect(); resizeObs.disconnect(); };
+
+    render();
+  }
+
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:before-swap", () => {
+    cleanup?.();
+    cleanup = null;
+    chart?.dispose();
+    chart = null;
+  });
+</script>
