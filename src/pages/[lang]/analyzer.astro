@@ -377,9 +377,13 @@ const ecoTechs: Record<string, string> = {
           ? m.eco_techs.filter((e: [number, number]) => e[1] <= m.castle_ms).length
           : null;
       const shares = r && refs?.ecoTechByCastle?.[r.bucket];
-      const shareTxt = shares
-        ? `${L["analyzer.row.winnersResearch"]}: Loom ${shares.loom}% · DBA ${shares.dba}% · WB ${shares.wheelbarrow}%`
-        : noRef;
+      const meds = r && refs?.medsByBucket?.[r.bucket];
+      // Winner MEDIAN research times (Plan C) beat the %-share text when present.
+      const shareTxt = meds
+        ? `${L["analyzer.row.winnersResearch"]}: Loom ${mmss(meds.loomMs)} · DBA ${mmss(meds.dbaMs)} · WB ${mmss(meds.wheelbarrowMs)}`
+        : shares
+          ? `${L["analyzer.row.winnersResearch"]}: Loom ${shares.loom}% · DBA ${shares.dba}% · WB ${shares.wheelbarrow}%`
+          : noRef;
       const tech: Row[] = [
         {
           label: L["analyzer.row.ecoUpgrades"],
@@ -391,8 +395,10 @@ const ecoTechs: Record<string, string> = {
           label: L["analyzer.row.wheelbarrow"],
           you: wbTime(sel) != null ? mmss(wbTime(sel)) : "—",
           opp: opp && wbTime(opp) != null ? mmss(wbTime(opp)) : "—",
-          ref: shares ? `${shares.wheelbarrow}% ${L["analyzer.row.winnersResearch"]}` : noRef,
-          colored: false, help: L["analyzer.help.wheelbarrow"],
+          ref: meds?.wheelbarrowMs != null ? mmss(meds.wheelbarrowMs) : (shares ? `${shares.wheelbarrow}% ${L["analyzer.row.winnersResearch"]}` : noRef),
+          refBasis: meds?.wheelbarrowMs != null ? L["analyzer.phrase.refName"] : undefined,
+          dRef: meds?.wheelbarrowMs != null && wbTime(sel) != null ? (meds.wheelbarrowMs - wbTime(sel)) / 1000 : null,
+          colored: meds?.wheelbarrowMs != null, fmtDelta: dSecs, kind: "time", help: L["analyzer.help.wheelbarrow"],
         },
       ];
 
@@ -410,7 +416,10 @@ const ecoTechs: Record<string, string> = {
         {
           label: L["analyzer.tile.military"],
           you: mmss(sel.first_military_ms), opp: opp ? mmss(opp.first_military_ms) : "—",
-          ref: noRef, colored: false, help: L["analyzer.help.military"],
+          ref: meds?.firstMilitaryMs != null ? mmss(meds.firstMilitaryMs) : noRef,
+          refBasis: meds?.firstMilitaryMs != null ? L["analyzer.phrase.refName"] : undefined,
+          dRef: meds?.firstMilitaryMs != null && sel.first_military_ms != null ? (meds.firstMilitaryMs - sel.first_military_ms) / 1000 : null,
+          colored: meds?.firstMilitaryMs != null, fmtDelta: dSecs, kind: "time", help: L["analyzer.help.military"],
         },
       ];
 
