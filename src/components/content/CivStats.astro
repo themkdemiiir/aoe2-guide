@@ -130,7 +130,7 @@ const mapList = one
       {elo && (
         <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
           <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Elo'ya göre kazanma" : "Win rate by Elo"}</h3>
-          <div class="mt-2 h-36"><canvas role="img" aria-label={t(lang, "ui.chartWinByElo")} data-chart="bar" data-labels={JSON.stringify(elo.labels)} data-values={JSON.stringify(elo.values)} data-games={JSON.stringify(elo.games)}></canvas></div>
+          <div class="mt-2 h-40"><div role="img" aria-label={t(lang, "ui.chartWinByElo")} data-chart="elo" data-labels={JSON.stringify(elo.labels)} data-values={JSON.stringify(elo.values)} data-games={JSON.stringify(elo.games)} class="h-full w-full"></div></div>
         </div>
       )}
       {mapList.length > 0 && (
@@ -165,7 +165,7 @@ const mapList = one
       {patch && (
         <div class="rounded border border-stone-700/20 bg-parchment/60 p-3 lg:col-span-2">
           <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Patch'e göre kazanma" : "Win rate by patch"}</h3>
-          <div class="mt-2 h-36"><canvas role="img" aria-label={t(lang, "ui.chartWinByPatch")} data-chart="bar" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)} data-games={JSON.stringify(patch.games)}></canvas></div>
+          <div class="mt-2 h-40"><div role="img" aria-label={t(lang, "ui.chartWinByPatch")} data-chart="patch" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)} data-games={JSON.stringify(patch.games)} class="h-full w-full"></div></div>
         </div>
       )}
     </div>
@@ -176,74 +176,149 @@ const mapList = one
 )}
 
 <script>
-  import Chart from "chart.js/auto";
+  import { BarChart, LineChart } from "echarts/charts";
+  import { GridComponent, MarkLineComponent, TooltipComponent } from "echarts/components";
+  import { type ECharts, echarts, mountChart, themeColors } from "@/lib/echarts";
   import { tierOf, TIER_COLORS } from "@/lib/tiers";
 
+  echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, MarkLineComponent]);
+
+  const mono = "'JetBrains Mono', ui-monospace, monospace";
+  const charts = new Map<HTMLElement, { chart: ECharts; dispose: () => void }>();
+
+  // "<1000" -> "<1k", "1000-1199" -> "1k", "1650-1799" -> "1.65k", "2500+" -> "2.5k+"
+  const abbrevElo = (s: string) => {
+    const lead = s.match(/\d+/);
+    if (!lead) return s;
+    const n = +lead[0];
+    const k = n % 1000 === 0 ? `${n / 1000}k` : `${(n / 1000).toFixed(2).replace(/0$/, "")}k`;
+    return s.startsWith("<") ? `<${k}` : s.endsWith("+") ? `${k}+` : k;
+  };
+
   // Wrapped in astro:page-load so charts + the slice filter re-initialise after
-  // ClientRouter navigations (a bundled module script otherwise runs once per
-  // session, leaving the next civ's charts blank). Colors read from theme tokens
-  // each run so they track light/dark.
+  // ClientRouter navigations. Colors read from theme tokens each run (light/dark).
   function initCivStats() {
     const numLocale = document.documentElement.lang === "tr" ? "tr-TR" : "en-US";
-    const css = getComputedStyle(document.documentElement);
-    const stone = css.getPropertyValue("--color-stone-700").trim() || "#5a4a33";
-    const gold = css.getPropertyValue("--color-wr-good").trim() || "#c79a3c";
-    const maroon = css.getPropertyValue("--color-wr-bad").trim() || "#8a2d22";
-    const grid = "rgba(120,96,52,0.18)";
-    const barColor = (v: number) => (v >= 50 ? gold : maroon);
+    const isTr = document.documentElement.lang === "tr";
+    const gamesWord = isTr ? "maç" : "games";
+    const wrWord = isTr ? "kazanma" : "win rate";
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const num = (el: HTMLElement, k: string): unknown[] => JSON.parse(el.dataset[k] || "[]");
 
-    Chart.defaults.color = stone;
-    Chart.defaults.font.family = "'JetBrains Mono', ui-monospace, monospace";
-    Chart.defaults.font.size = 10;
+    for (const el of document.querySelectorAll<HTMLElement>("[data-civ-stats] [data-chart]")) {
+      const kind = el.dataset.chart;
+      const labels = num(el, "labels") as string[];
+      const values = num(el, "values") as number[];
+      const games = num(el, "games") as number[];
+      if (!values.length) continue;
 
-    const num = (el: HTMLElement, k: string) => JSON.parse(el.dataset[k] || "[]");
+      // Win rates cluster near 50%, so a zero-based axis crushes the real spread.
+      // byElo: diverging bars grown from the 50% line (matches the map leaderboard).
+      // byPatch: a trend line on an honest, padded window. Both draw a 50% baseline.
+      const paint = (chart: ECharts) => {
+        const c = themeColors();
+        const tooltip = {
+          trigger: "axis" as const,
+          backgroundColor: c.surface,
+          borderColor: c.gold,
+          borderWidth: 1,
+          padding: [6, 10],
+          textStyle: { color: c.ink, fontFamily: mono, fontSize: 11 },
+          extraCssText: "border-radius:4px;box-shadow:0 3px 14px rgba(0,0,0,0.2);",
+          formatter: (ps: { dataIndex: number }[]) => {
+            const i = ps[0].dataIndex;
+            const g = games[i] != null ? ` · ${games[i].toLocaleString(numLocale)} ${gamesWord}` : "";
+            return `${labels[i]}<br/><b style="font-size:14px">${values[i].toFixed(1)}%</b> ${wrWord}${g}`;
+          },
+        };
+        if (kind === "patch") {
+          const lo = Math.floor(Math.min(48, ...values) - 1);
+          const hi = Math.ceil(Math.max(52, ...values) + 1);
+          chart.setOption(
+            {
+              animation: !reducedMotion,
+              grid: { left: 4, right: 12, top: 12, bottom: 18, containLabel: true },
+              tooltip,
+              xAxis: {
+                type: "category",
+                data: labels,
+                boundaryGap: false,
+                axisLabel: { color: c.muted, fontFamily: mono, fontSize: 9, hideOverlap: true, rotate: labels.length > 6 ? 30 : 0 },
+                axisLine: { lineStyle: { color: c.muted, opacity: 0.3 } },
+                axisTick: { show: false },
+              },
+              yAxis: {
+                type: "value",
+                min: lo,
+                max: hi,
+                axisLabel: { formatter: (v: number) => `${v}%`, color: c.muted, fontFamily: mono, fontSize: 10 },
+                splitLine: { lineStyle: { color: c.muted, opacity: 0.14 } },
+              },
+              series: [
+                {
+                  type: "line",
+                  data: values,
+                  smooth: 0.25,
+                  symbol: "circle",
+                  symbolSize: 5,
+                  lineStyle: { color: c.gold, width: 2 },
+                  itemStyle: { color: c.gold },
+                  areaStyle: { color: `color-mix(in srgb, ${c.gold} 12%, transparent)` },
+                  markLine: { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: c.ink, opacity: 0.35, width: 1.5 }, data: [{ yAxis: 50 }] },
+                },
+              ],
+            },
+            { notMerge: true },
+          );
+        } else {
+          const ext = Math.max(4, Math.ceil(Math.max(...values.map((v) => Math.abs(v - 50) + 1)) / 2) * 2);
+          chart.setOption(
+            {
+              animation: !reducedMotion,
+              grid: { left: 4, right: 8, top: 20, bottom: 22, containLabel: true },
+              tooltip,
+              xAxis: {
+                type: "category",
+                data: labels.map(abbrevElo),
+                axisLabel: { color: c.muted, fontFamily: mono, fontSize: 10, interval: 0, rotate: labels.length > 6 ? 32 : 0 },
+                axisLine: { lineStyle: { color: c.muted, opacity: 0.3 } },
+                axisTick: { show: false },
+              },
+              yAxis: {
+                type: "value",
+                min: -ext,
+                max: ext,
+                interval: ext / 2,
+                axisLabel: { formatter: (v: number) => `${v + 50}%`, color: c.muted, fontFamily: mono, fontSize: 10 },
+                splitLine: { lineStyle: { color: c.muted, opacity: 0.14 } },
+              },
+              series: [
+                {
+                  type: "bar",
+                  barWidth: "52%",
+                  data: values.map((v) => {
+                    const d = +(v - 50).toFixed(2);
+                    return {
+                      value: d,
+                      itemStyle: { color: d >= 0 ? c.good : c.bad, borderRadius: d >= 0 ? [3, 3, 0, 0] : [0, 0, 3, 3] },
+                      label: { position: (d >= 0 ? "top" : "bottom") as "top" | "bottom" },
+                    };
+                  }),
+                  label: { show: true, color: c.ink, fontFamily: mono, fontSize: 10, formatter: (p: { dataIndex: number }) => `${values[p.dataIndex].toFixed(1)}%` },
+                  markLine: { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: c.ink, opacity: 0.4, width: 1.5 }, data: [{ yAxis: 0 }] },
+                },
+              ],
+            },
+            { notMerge: true },
+          );
+        }
+      };
 
-    for (const el of document.querySelectorAll<HTMLCanvasElement>("[data-civ-stats] canvas[data-chart]")) {
-      Chart.getChart(el)?.destroy(); // idempotent if this runs twice on one DOM
-    const kind = el.dataset.chart;
-    const labels = num(el, "labels") as string[];
-    const values = num(el, "values") as number[];
-    const games = num(el, "games") as number[];
-    const horizontal = kind === "hbar";
-    const isLine = kind === "line";
-
-    const valueAxis = {
-      suggestedMin: Math.min(40, ...values) - 1,
-      suggestedMax: Math.max(60, ...values) + 1,
-      grid: { color: grid },
-      ticks: { callback: (v: number | string) => `${v}%` },
-    };
-    const catAxis = { grid: { display: false }, ticks: { autoSkip: labels.length > 10, maxRotation: labels.length > 10 ? 60 : 0, font: { size: 9 } } };
-
-    new Chart(el, {
-      type: isLine ? "line" : "bar",
-      data: {
-        labels,
-        datasets: [{
-          data: values,
-          backgroundColor: isLine ? "rgba(199,154,60,0.15)" : values.map(barColor),
-          borderColor: isLine ? maroon : values.map(barColor),
-          borderWidth: isLine ? 2 : 0,
-          borderRadius: isLine ? 0 : 3,
-          pointRadius: isLine ? 2 : 0,
-          pointBackgroundColor: maroon,
-          fill: isLine,
-          tension: 0.25,
-          barPercentage: 0.8,
-        }],
-      },
-      options: {
-        indexAxis: horizontal ? "y" : "x",
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: (c) => `${c.parsed[horizontal ? "x" : "y"]}% win rate${games.length ? ` · ${games[c.dataIndex].toLocaleString(numLocale)} games` : ""}` } },
-        },
-        scales: horizontal ? { x: valueAxis, y: catAxis } : { y: valueAxis, x: catAxis },
-      },
-    });
-  }
+      charts.get(el)?.dispose();
+      const mounted = mountChart(el, { onThemeChange: () => paint(mounted.chart) });
+      charts.set(el, mounted);
+      paint(mounted.chart);
+    }
 
   // --- Per-civ slice filter: this civ's win rate for any Map × Elo × Patch
   // intersection, summed in-browser from the fetched cube. ---
@@ -332,4 +407,9 @@ const mapList = one
   }
 
   document.addEventListener("astro:page-load", initCivStats);
+  // Dispose ECharts instances on ClientRouter navigation so they don't leak.
+  document.addEventListener("astro:before-swap", () => {
+    for (const { dispose } of charts.values()) dispose();
+    charts.clear();
+  });
 </script>
