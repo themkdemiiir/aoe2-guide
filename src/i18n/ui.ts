@@ -209,6 +209,8 @@ export const ui = {
     "analyzer.version":
       "Current-patch ranked replays are supported; replays from much older patches may fail to parse.",
     "analyzer.parsing": "Parsing replay…",
+    "analyzer.loadingEngine": "Loading engine…",
+    "analyzer.dropAria": "Upload a replay file to analyze",
     "analyzer.error": "Could not analyze this replay",
     "analyzer.viewAs": "View as",
     "analyzer.players": "players",
@@ -573,6 +575,8 @@ export const ui = {
     "analyzer.version":
       "Güncel yamanın dereceli tekrarları desteklenir; çok eski yamalardan kalan kayıtlar açılamayabilir.",
     "analyzer.parsing": "Tekrar kaydı çözümleniyor…",
+    "analyzer.loadingEngine": "Motor yükleniyor…",
+    "analyzer.dropAria": "Analiz için tekrar kaydı yükle",
     "analyzer.error": "Bu tekrar kaydı analiz edilemedi",
     "analyzer.viewAs": "Şu oyuncu olarak gör",
     "analyzer.players": "oyuncu",
