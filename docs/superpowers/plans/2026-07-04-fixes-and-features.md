@@ -72,6 +72,7 @@ Each line links to its detailed section. Effort: S/M/L. Commit + run gates after
 - [ ] Unit stat-table depth (train time, armor classes, ROF, LOS; kill duplicate readout) · M
 - [ ] Analyzer **sample-replay** path (bundle a small `.aoe2record`) · M
 - [ ] Counters page grouped table (winner/loser/reason) · M
+- [ ] **Cumulative "X+" elo toggle** on civ/map/matchup stat views · S · **client-side, no pipeline change**: the cube already stores games+wins per band, so "1650+" = sum of bands ≥1650 (exact `Σwins/Σgames`). Add a band-vs-cumulative toggle; cutoffs on existing band edges (1650+, 1800+, 2000+) so sums are clean. Pools far more games per view for stable win rates. NOTE: does NOT apply to the analyzer winner-**medians** (can't sum medians; peer-band + rollup fallback is correct there, and the backfill is already thickening every band). See §UI-Phase-4 note.
 
 ### Stage 8 — Data Explorer (Plan E) — NEEDS A BRAINSTORM FIRST
 - [ ] Run `superpowers:brainstorming` on the 6 open design decisions → spec → then implement. Not code-ready. · L
