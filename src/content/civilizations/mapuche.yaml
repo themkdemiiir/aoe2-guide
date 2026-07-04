@@ -38,7 +38,7 @@ uniqueTechs:
       tr: Takım Kalesi Özgün Birimlerinin ve Bolas Binicilerinin maliyeti %15 azalır
 strategy:
   en: |-
-    Mapuche are an Infantry civilization from South America.
+    Mapuche are a Cavalry and Counter-units civilization from South America.
 
     ## How to Play Mapuche
 
@@ -46,7 +46,7 @@ strategy:
 
     *(A detailed opening / late-game / deathball guide for this civ is coming soon.)*
   tr: |-
-    Mapuche, Güney Amerika'dan bir Piyade uygarlığıdır.
+    Mapuche, Güney Amerika'dan bir Süvari ve Karşıt Birlik uygarlığıdır.
 
     ## Mapuche Nasıl Oynanır
 
