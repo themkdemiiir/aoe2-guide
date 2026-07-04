@@ -128,6 +128,7 @@ const h2hLabels = {
   favored: lang === "tr" ? "favori" : "favored",
   even: lang === "tr" ? "başa baş" : "even",
   games: lang === "tr" ? "maç" : "games",
+  lowSample: lang === "tr" ? "az veri" : "low sample",
   noData: lang === "tr" ? "Bu eşleşme için yeterli veri yok." : "Not enough data for this matchup.",
   team: lang === "tr" ? "Takım" : "Team",
   byMap: lang === "tr" ? "Haritaya göre (en iyi → en kötü)" : "By map (best → worst)",
@@ -219,7 +220,7 @@ const perMapHtmlSSR = (a: string, b: string) => {
     + entries.map((e) =>
         '<div class="flex items-center justify-between gap-2 text-sm">'
         + '<span class="truncate text-ink">' + escSSR(e[0]) + '</span>'
-        + '<span class="font-mono font-medium" style="color:' + (e[1] >= 50 ? 'var(--color-fav)' : 'var(--color-wr-bad)') + '">' + e[1] + '%</span>'
+        + '<span class="font-mono font-medium" style="color:' + (e[1] >= 52 ? 'var(--color-fav)' : e[1] <= 48 ? 'var(--color-wr-bad)' : 'var(--color-stone-700)') + '">' + e[1] + '%</span>'
         + '</div>',
       ).join('')
     + '</div></div>';
@@ -240,6 +241,7 @@ const h2hBannerSSR = (a: string, b: string, eIdx: number): string => {
     : '<span class="font-semibold">' + h2hLabels.even + '</span>';
   const iconA = civIcons[a], iconB = civIcons[b];
   const fill = Math.max(4, Math.min(96, wr));
+  const favColor = wr >= 52 ? "var(--color-fav)" : wr <= 48 ? "var(--color-wr-bad)" : "var(--color-stone-700)";
   const aCrown = wr >= 52 ? "gold" : "silver";
   const bCrown = wr <= 48 ? "gold" : "silver";
   return ''
@@ -249,13 +251,13 @@ const h2hBannerSSR = (a: string, b: string, eIdx: number): string => {
     + '<div class="text-center">'
     + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
     + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
-    + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games : '') + '</div>'
+    + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games + (games < 50 ? ' <span style="color:var(--color-royal)">(' + h2hLabels.lowSample + ')</span>' : '') : '') + '</div>'
     + '</div>'
     + civHeadSSR(iconB, bCrown, 48)
     + '</div>'
-    + '<div class="mt-3 flex h-2.5 overflow-hidden rounded-full border border-stone-700/20">'
-    + '<div style="width:' + fill + '%;background:var(--color-wr-bad)"></div>'
-    + '<div style="width:' + (100 - fill) + '%;background:var(--color-wr-good)"></div>'
+    + '<div class="relative mt-3 h-2.5 overflow-hidden rounded-full border border-stone-700/20 bg-stone-700/10">'
+    + '<div class="h-full" style="width:' + fill + '%;background:' + favColor + '"></div>'
+    + '<div class="absolute inset-y-0 w-px bg-ink/40" style="left:50%"></div>'
     + '</div>'
     + (eIdx === 0 ? perMapHtmlSSR(a, b) : '')
     + '</div>';
@@ -431,6 +433,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           : '<span class="font-semibold">' + h2hLabels.even + '</span>';
         const iconA = civIcons[a], iconB = civIcons[b];
         const fill = Math.max(4, Math.min(96, wr));
+        const favColor = wr >= 52 ? "var(--color-fav)" : wr <= 48 ? "var(--color-wr-bad)" : "var(--color-stone-700)";
         const aCrown = wr >= 52 ? "gold" : "silver";
         const bCrown = wr <= 48 ? "gold" : "silver";
         return ''
@@ -440,13 +443,13 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + '<div class="text-center">'
           + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
           + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
-          + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games : '') + '</div>'
+          + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games + (games < 50 ? ' <span style="color:var(--color-royal)">(' + h2hLabels.lowSample + ')</span>' : '') : '') + '</div>'
           + '</div>'
           + civHead(iconB, bCrown, 48)
           + '</div>'
-          + '<div class="mt-3 flex h-2.5 overflow-hidden rounded-full border border-stone-700/20">'
-          + '<div style="width:' + fill + '%;background:var(--color-wr-bad)"></div>'
-          + '<div style="width:' + (100 - fill) + '%;background:var(--color-wr-good)"></div>'
+          + '<div class="relative mt-3 h-2.5 overflow-hidden rounded-full border border-stone-700/20 bg-stone-700/10">'
+          + '<div class="h-full" style="width:' + fill + '%;background:' + favColor + '"></div>'
+          + '<div class="absolute inset-y-0 w-px bg-ink/40" style="left:50%"></div>'
           + '</div>'
           + (cut == null && +eloVal === 0 ? perMapHtml(a, b) : '')
           + '</div>';
@@ -465,7 +468,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + entries.map((e) =>
               '<div class="flex items-center justify-between gap-2 text-sm">'
               + '<span class="truncate text-ink">' + esc(e[0]) + '</span>'
-              + '<span class="font-mono font-medium" style="color:' + (e[1] >= 50 ? 'var(--color-fav)' : 'var(--color-wr-bad)') + '">' + e[1] + '%</span>'
+              + '<span class="font-mono font-medium" style="color:' + (e[1] >= 52 ? 'var(--color-fav)' : e[1] <= 48 ? 'var(--color-wr-bad)' : 'var(--color-stone-700)') + '">' + e[1] + '%</span>'
               + '</div>',
             ).join('')
           + '</div></div>';
