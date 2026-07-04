@@ -79,22 +79,15 @@ const ecoTechs: Record<string, string> = {
   <script is:inline type="application/json" id="az-data" set:html={JSON.stringify({ L, civs, ecoTechs })} />
 
   <script>
-    import Chart from "chart.js/auto";
+    import { LineChart } from "echarts/charts";
+    import { GridComponent, TooltipComponent } from "echarts/components";
+    import { type ECharts, echarts, mountChart, themeColors } from "@/lib/echarts";
     import { esc } from "@/scripts/html";
 
+    echarts.use([LineChart, GridComponent, TooltipComponent]);
+    const mono = "'JetBrains Mono', ui-monospace, monospace";
+
     const { L, civs, ecoTechs } = JSON.parse(document.getElementById("az-data")!.textContent!);
-
-    // Theme tokens resolve differently in light vs dark (they swap on
-    // html[data-theme]); read them at render time so charts follow the theme.
-    const cssVar = (name: string, fallback: string) => {
-      const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-      return v || fallback;
-    };
-
-    // Chart defaults matching the site's stat components (CivStats.astro).
-    Chart.defaults.font.family = "'JetBrains Mono', monospace";
-    Chart.defaults.font.size = 10;
-    Chart.defaults.color = cssVar("--color-stone-700", "#6b5b41");
 
     // AoE2 DE slot colors by replay color_id (1=Blue … 7=Gray, 0|8=Orange).
     const PLAYER_COLORS: Record<number, string> = {
@@ -126,73 +119,85 @@ const ecoTechs: Record<string, string> = {
 
     let report: any = null;
     let selectedPn: number | null = null;
-    let charts: Chart[] = [];
+    let mounted: { chart: ECharts; dispose: () => void }[] = [];
     // Last-rendered chart inputs, so a theme switch can rebuild with new colors.
     let lastPlayers: any[] | null = null;
     let lastSelPn = 0;
 
-    // Production + APM line charts (Chart.js — same library as the civ stats pages).
+    // Production + APM multi-series line charts (ECharts via the shared lib). The
+    // report DOM is rebuilt per replay, so dispose + re-init each draw; the theme
+    // MutationObserver below re-draws with fresh tokens on light/dark swap.
     function drawCharts(players: any[], selPn: number) {
-      for (const c of charts) c.destroy();
-      charts = [];
+      for (const m of mounted) m.dispose();
+      mounted = [];
       lastPlayers = players;
       lastSelPn = selPn;
-      // Re-read theme tokens each draw so light/dark swaps recolor axes + grid.
-      const axisText = cssVar("--color-stone-700", "#6b5b41");
-      Chart.defaults.color = axisText;
-      const gridColor = `color-mix(in oklch, ${axisText} 15%, transparent)`;
+      const c = themeColors();
       const mins = Math.max(...players.map((m: any) => Math.max(m.vils_series.length, m.apm_series.length)), 1);
-      const labels = Array.from({ length: mins }, (_, i) => i);
-      const line = (data: number[], color: string, you: boolean, dashed = false) => ({
+      const labels = Array.from({ length: mins }, (_, i) => `${i}`);
+      const lineSeries = (name: string, data: number[], color: string, you: boolean, dashed = false) => ({
+        name,
+        type: "line" as const,
         data,
-        borderColor: color,
-        backgroundColor: "transparent",
-        borderWidth: you ? 2.5 : 1.2,
-        borderDash: dashed ? [5, 4] : undefined,
-        pointRadius: 0,
-        tension: 0.25,
+        showSymbol: false,
+        smooth: 0.25,
+        lineStyle: { color, width: you ? 2.5 : 1.2, type: (dashed ? "dashed" : "solid") as "dashed" | "solid" },
+        itemStyle: { color },
       });
-      const base = {
-        responsive: true,
-        maintainAspectRatio: false,
+      const baseOption = (series: unknown[]) => ({
         animation: false as const,
-        plugins: { legend: { display: false }, tooltip: { mode: "index" as const, intersect: false } },
-        scales: {
-          x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } },
-          y: { grid: { color: gridColor }, beginAtZero: true },
+        grid: { left: 6, right: 12, top: 10, bottom: 20, containLabel: true },
+        tooltip: {
+          trigger: "axis" as const,
+          backgroundColor: c.surface,
+          borderColor: c.gold,
+          borderWidth: 1,
+          padding: [6, 10],
+          textStyle: { color: c.ink, fontFamily: mono, fontSize: 11 },
+          extraCssText: "border-radius:4px;box-shadow:0 3px 14px rgba(0,0,0,0.2);",
         },
-      };
-      const prodEl = document.getElementById("az-chart-prod") as HTMLCanvasElement | null;
+        xAxis: {
+          type: "category" as const,
+          data: labels,
+          boundaryGap: false,
+          axisLabel: { color: c.muted, fontFamily: mono, fontSize: 10 },
+          axisLine: { lineStyle: { color: c.muted, opacity: 0.3 } },
+          axisTick: { show: false },
+        },
+        yAxis: {
+          type: "value" as const,
+          min: 0,
+          axisLabel: { color: c.muted, fontFamily: mono, fontSize: 10 },
+          splitLine: { lineStyle: { color: c.muted, opacity: 0.14 } },
+        },
+        series,
+      });
+      const prodEl = document.getElementById("az-chart-prod");
       if (prodEl) {
-        charts.push(new Chart(prodEl, {
-          type: "line",
-          data: {
-            labels,
-            datasets: players.flatMap((m: any) => {
-              const you = m.info.player_number === selPn;
-              const c = colorOf(m.info.color_id);
+        const m = mountChart(prodEl);
+        m.chart.setOption(
+          baseOption(
+            players.flatMap((p: any) => {
+              const you = p.info.player_number === selPn;
+              const col = colorOf(p.info.color_id);
               return [
-                { label: `${m.info.name} · vils`, ...line(m.vils_series, c, you) },
-                { label: `${m.info.name} · mil`, ...line(m.mil_series, c, you, true) },
+                lineSeries(`${p.info.name} · vils`, p.vils_series, col, you),
+                lineSeries(`${p.info.name} · mil`, p.mil_series, col, you, true),
               ];
             }),
-          },
-          options: base,
-        }));
+          ),
+          { notMerge: true },
+        );
+        mounted.push(m);
       }
-      const apmEl = document.getElementById("az-chart-apm") as HTMLCanvasElement | null;
+      const apmEl = document.getElementById("az-chart-apm");
       if (apmEl) {
-        charts.push(new Chart(apmEl, {
-          type: "line",
-          data: {
-            labels,
-            datasets: players.map((m: any) => ({
-              label: m.info.name,
-              ...line(m.apm_series, colorOf(m.info.color_id), m.info.player_number === selPn),
-            })),
-          },
-          options: base,
-        }));
+        const m = mountChart(apmEl);
+        m.chart.setOption(
+          baseOption(players.map((p: any) => lineSeries(p.info.name, p.apm_series, colorOf(p.info.color_id), p.info.player_number === selPn))),
+          { notMerge: true },
+        );
+        mounted.push(m);
       }
     }
 
@@ -739,9 +744,9 @@ const ecoTechs: Record<string, string> = {
         <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
           ${players.map((m: any) => `<span class="flex items-center gap-1.5 font-mono text-[11px] text-stone-700"><span class="inline-block h-2.5 w-2.5 rounded-sm" style="background:${colorOf(m.info.color_id)}"></span>${esc(m.info.name)}</span>`).join("")}
         </div>
-        <div class="mt-2 h-64 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-prod" role="img" aria-label="${esc(L["analyzer.chartProdLabel"])}"></canvas></div>
+        <div class="mt-2 h-64 rounded border border-stone-700/25 bg-parchment/60 p-3"><div id="az-chart-prod" role="img" aria-label="${esc(L["analyzer.chartProdLabel"])}" class="h-full w-full"></div></div>
         <h3 class="mt-6 font-display text-xl text-ink">${esc(L["analyzer.charts.apm"])}</h3>
-        <div class="mt-2 h-48 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-apm" role="img" aria-label="${esc(L["analyzer.chartApmLabel"])}"></canvas></div>
+        <div class="mt-2 h-48 rounded border border-stone-700/25 bg-parchment/60 p-3"><div id="az-chart-apm" role="img" aria-label="${esc(L["analyzer.chartApmLabel"])}" class="h-full w-full"></div></div>
 
         <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.fixes"])}</h3>
         <div class="mt-2 rounded border border-stone-700/25 bg-parchment/60 px-4 py-2">${findingsList(selPn)}</div>
@@ -846,5 +851,11 @@ const ecoTechs: Record<string, string> = {
     new MutationObserver(() => {
       if (lastPlayers) drawCharts(lastPlayers, lastSelPn);
     }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+    // Dispose ECharts instances on ClientRouter navigation so they don't leak.
+    document.addEventListener("astro:before-swap", () => {
+      for (const m of mounted) m.dispose();
+      mounted = [];
+    });
   </script>
 </BaseLayout>
