@@ -1,0 +1,242 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import SectionEyebrow from "@/components/ui/SectionEyebrow.astro";
+import cubeDims from "@data/civ-cube-dims.json";
+import civMeta from "@data/civ-meta.json";
+import { getCollection } from "astro:content";
+import { locales, type Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Locale;
+const tr = lang === "tr";
+
+const cdims = cubeDims as { elos: string[]; maps: string[]; mapNames: string[] };
+const civs = (await getCollection("civilizations"))
+  .map((c) => ({ slug: c.id, name: c.data.name[lang] }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+const sliceMaps = cdims.maps.map((key, i) => ({ key, name: cdims.mapNames[i] }));
+const patches = (civMeta.patches as { patch: string; label: string }[]) ?? [];
+const labelCls = "flex flex-col gap-1 font-mono text-[11px] uppercase tracking-wide text-stone-700";
+---
+<BaseLayout title={t(lang, "explorer.title")} description={t(lang, "meta.explorer")} canonicalPath="/explorer">
+  <section class="mx-auto max-w-4xl px-4 py-10" data-explorer>
+    <SectionEyebrow label={tr ? "Serbest sorgu" : "Free query"} class="mb-2" />
+    <h1 class="font-display text-4xl text-ink">{t(lang, "explorer.title")}</h1>
+    <p class="mt-2 max-w-prose text-sm text-stone-700">{t(lang, "explorer.intro")}</p>
+
+    <div class="mt-6 grid gap-3 rounded border border-stone-700/25 bg-parchment/60 p-4 sm:grid-cols-2 lg:grid-cols-3">
+      <label class={labelCls}>{t(lang, "nav.civs")}
+        <select data-x="civ" class="select-field">
+          {civs.map((c) => <option value={c.slug}>{c.name}</option>)}
+        </select>
+      </label>
+      <label class={labelCls}>{tr ? "Harita" : "Map"}
+        <select data-x="map" class="select-field">
+          <option value="">{tr ? "Tüm haritalar" : "Any map"}</option>
+          {sliceMaps.map((m) => <option value={m.key}>{m.name}</option>)}
+        </select>
+      </label>
+      <label class={labelCls}>Elo
+        <select data-x="elo" class="select-field">
+          <option value="">{tr ? "Tüm elo" : "Any elo"}</option>
+          {cdims.elos.map((b) => <option value={b}>{b}</option>)}
+          <option disabled>──</option>
+          <option value="cum:1650">1650+</option>
+          <option value="cum:1800">1800+</option>
+          <option value="cum:2000">2000+</option>
+        </select>
+      </label>
+      <label class={labelCls}>{tr ? "Yama" : "Patch"}
+        <select data-x="patch" class="select-field">
+          <option value="">{tr ? "Tüm zamanlar" : "All-time"}</option>
+          {patches.map((p, i) => <option value={p.patch}>{i === 0 ? (tr ? `Güncel · ${p.label}` : `Current · ${p.label}`) : p.label}</option>)}
+        </select>
+      </label>
+      <label class={labelCls}>{t(lang, "explorer.breakBy")}
+        <select data-x="dim" class="select-field">
+          <option value="">{tr ? "(yok)" : "(none)"}</option>
+          <option value="elo">Elo</option>
+          <option value="map">{tr ? "Harita" : "Map"}</option>
+          <option value="patch">{tr ? "Yama" : "Patch"}</option>
+        </select>
+      </label>
+    </div>
+
+    <div data-x-load hidden class="mt-4 font-mono text-[11px] text-stone-700/60">{tr ? "veri yükleniyor…" : "loading data…"}</div>
+
+    <div data-x-result hidden class="mt-6">
+      <span data-x-label class="font-mono text-[11px] uppercase tracking-wide text-stone-700/80"></span>
+      <div class="mt-1.5 flex items-baseline gap-3">
+        <span data-x-wr class="font-display text-4xl leading-none">—</span>
+        <span data-x-games class="font-mono text-sm text-stone-700/70"></span>
+      </div>
+      <div data-x-chart-wrap hidden class="mt-7">
+        <h2 data-x-chart-title class="font-mono text-[11px] uppercase tracking-wide text-stone-700"></h2>
+        <div class="mt-2 h-64"><div data-x-chart class="h-full w-full"></div></div>
+      </div>
+    </div>
+
+    <p data-x-nodata hidden class="mt-6 text-sm italic text-stone-700">{t(lang, "explorer.noData")}</p>
+    <p class="mt-8 font-mono text-[10px] tracking-wide text-stone-700/60">
+      {t(lang, "data.source")} · {tr ? "50% = ortalama · her şey tarayıcında, ücretsiz" : "50% = average · runs in your browser, free"}
+    </p>
+  </section>
+
+  <script>
+    import { BarChart, LineChart } from "echarts/charts";
+    import { GridComponent, MarkLineComponent, TooltipComponent } from "echarts/components";
+    import { type ECharts, echarts, mountChart, themeColors } from "@/lib/echarts";
+    import { breakdown, type Cube, sliceWinRate } from "@/lib/cube-query";
+
+    echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, MarkLineComponent]);
+    const mono = "'JetBrains Mono', ui-monospace, monospace";
+
+    // "1650-1799" -> "1.65k", "<1000" -> "<1k", "2500+" -> "2.5k+"
+    const abbrevElo = (s: string) => {
+      const lead = s.match(/\d+/);
+      if (!lead) return s;
+      const n = +lead[0];
+      const k = n % 1000 === 0 ? `${n / 1000}k` : `${(n / 1000).toFixed(2).replace(/0$/, "")}k`;
+      return s.startsWith("<") ? `<${k}` : s.endsWith("+") ? `${k}+` : k;
+    };
+
+    let mounted: { chart: ECharts; dispose: () => void } | null = null;
+
+    function initExplorer() {
+      const root = document.querySelector<HTMLElement>("[data-explorer]");
+      if (!root) return;
+      const q = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+      const sel = {
+        civ: q<HTMLSelectElement>('[data-x="civ"]'),
+        map: q<HTMLSelectElement>('[data-x="map"]'),
+        elo: q<HTMLSelectElement>('[data-x="elo"]'),
+        patch: q<HTMLSelectElement>('[data-x="patch"]'),
+        dim: q<HTMLSelectElement>('[data-x="dim"]'),
+      };
+      const loadEl = q<HTMLElement>("[data-x-load]");
+      const resultEl = q<HTMLElement>("[data-x-result]");
+      const nodataEl = q<HTMLElement>("[data-x-nodata]");
+      const wrEl = q<HTMLElement>("[data-x-wr]");
+      const gamesEl = q<HTMLElement>("[data-x-games]");
+      const labelEl = q<HTMLElement>("[data-x-label]");
+      const chartWrap = q<HTMLElement>("[data-x-chart-wrap]");
+      const chartTitle = q<HTMLElement>("[data-x-chart-title]");
+      const chartEl = q<HTMLElement>("[data-x-chart]");
+
+      const isTr = document.documentElement.lang === "tr";
+      const numLocale = isTr ? "tr-TR" : "en-US";
+      const gamesWord = isTr ? "maç" : "games";
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      let cube: Cube | null = null;
+      let req: Promise<Cube> | null = null;
+      const loadCube = () => cube ? Promise.resolve(cube) : (req ??= fetch("/civ-cube.json").then((r) => r.json()).then((c: Cube) => (cube = c)));
+
+      const optText = (s: HTMLSelectElement) => s.options[s.selectedIndex]?.text ?? "";
+
+      let lastRows: ReturnType<typeof breakdown> = [];
+      let lastDim = "";
+
+      function paint() {
+        if (!mounted || !lastRows.length) return;
+        const c = themeColors();
+        const rows = lastRows;
+        const tooltip = {
+          trigger: "axis" as const,
+          backgroundColor: c.surface, borderColor: c.gold, borderWidth: 1, padding: [6, 10],
+          textStyle: { color: c.ink, fontFamily: mono, fontSize: 11 },
+          extraCssText: "border-radius:4px;box-shadow:0 3px 14px rgba(0,0,0,0.2);",
+          formatter: (ps: { dataIndex: number }[]) => {
+            const r = rows[ps[0].dataIndex];
+            return `${r.label}<br/><b style="font-size:14px">${r.wr.toFixed(1)}%</b> · ${r.games.toLocaleString(numLocale)} ${gamesWord}`;
+          },
+        };
+        const axisLabel = { color: c.muted, fontFamily: mono, fontSize: 10 };
+        const split = { lineStyle: { color: c.muted, opacity: 0.14 } };
+        if (lastDim === "patch") {
+          const vals = rows.map((r) => r.wr);
+          mounted.chart.setOption({
+            animation: !reducedMotion,
+            grid: { left: 4, right: 12, top: 12, bottom: 40, containLabel: true },
+            tooltip,
+            xAxis: { type: "category", data: rows.map((r) => r.label), boundaryGap: false, axisLabel: { ...axisLabel, fontSize: 9, hideOverlap: true, rotate: rows.length > 6 ? 30 : 0 }, axisTick: { show: false }, axisLine: { lineStyle: { color: c.muted, opacity: 0.3 } } },
+            yAxis: { type: "value", min: Math.floor(Math.min(48, ...vals) - 1), max: Math.ceil(Math.max(52, ...vals) + 1), axisLabel: { ...axisLabel, formatter: (v: number) => `${v}%` }, splitLine: split },
+            series: [{ type: "line", data: vals, smooth: 0.25, symbol: "circle", symbolSize: 5, lineStyle: { color: c.gold, width: 2 }, itemStyle: { color: c.gold }, areaStyle: { color: `color-mix(in srgb, ${c.gold} 12%, transparent)` }, markLine: { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: c.ink, opacity: 0.35, width: 1.5 }, data: [{ yAxis: 50 }] } }],
+          }, { notMerge: true });
+        } else {
+          const ext = Math.max(4, Math.ceil(Math.max(...rows.map((r) => Math.abs(r.wr - 50) + 1)) / 2) * 2);
+          mounted.chart.setOption({
+            animation: !reducedMotion,
+            grid: { left: 4, right: 8, top: 20, bottom: 40, containLabel: true },
+            tooltip,
+            xAxis: { type: "category", data: rows.map((r) => (lastDim === "elo" ? abbrevElo(r.label) : r.label)), axisLabel: { ...axisLabel, interval: 0, rotate: rows.length > 6 ? 32 : 0 }, axisTick: { show: false }, axisLine: { lineStyle: { color: c.muted, opacity: 0.3 } } },
+            yAxis: { type: "value", min: -ext, max: ext, interval: ext / 2, axisLabel: { ...axisLabel, formatter: (v: number) => `${v + 50}%` }, splitLine: split },
+            series: [{
+              type: "bar", barWidth: "52%",
+              data: rows.map((r) => { const d = +(r.wr - 50).toFixed(2); return { value: d, itemStyle: { color: d >= 2 ? c.good : d <= -2 ? c.bad : c.muted, borderRadius: d >= 0 ? [3, 3, 0, 0] : [0, 0, 3, 3] }, label: { position: (d >= 0 ? "top" : "bottom") as "top" | "bottom" } }; }),
+              label: { show: true, color: c.ink, fontFamily: mono, fontSize: 10, formatter: (p: { dataIndex: number }) => `${rows[p.dataIndex].wr.toFixed(1)}` },
+              markLine: { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: c.ink, opacity: 0.4, width: 1.5 }, data: [{ yAxis: 0 }] },
+            }],
+          }, { notMerge: true });
+        }
+      }
+
+      async function update() {
+        loadEl.hidden = cube != null;
+        const c = await loadCube();
+        loadEl.hidden = true;
+        const s = { civ: sel.civ.value, map: sel.map.value, elo: sel.elo.value, patch: sel.patch.value };
+        const res = sliceWinRate(c, s);
+        const parts = [optText(sel.civ)];
+        if (s.map) parts.push(optText(sel.map));
+        if (s.elo) parts.push(optText(sel.elo));
+        if (s.patch) parts.push(optText(sel.patch).replace(/^Current · |^Güncel · /, ""));
+        labelEl.textContent = parts.join(" · ");
+
+        if (res.wr == null) {
+          resultEl.hidden = true;
+          nodataEl.hidden = false;
+          mounted?.dispose();
+          mounted = null;
+          return;
+        }
+        nodataEl.hidden = true;
+        resultEl.hidden = false;
+        wrEl.textContent = `${res.wr}%`;
+        wrEl.style.color = res.wr >= 52 ? "var(--color-wr-good)" : res.wr <= 48 ? "var(--color-wr-bad)" : "";
+        gamesEl.textContent = `${res.games.toLocaleString(numLocale)} ${gamesWord}${res.games < 200 ? ` · ${isTr ? "az veri" : "low sample"}` : ""}`;
+
+        const dim = sel.dim.value as "elo" | "map" | "patch" | "";
+        if (!dim) {
+          chartWrap.hidden = true;
+          mounted?.dispose();
+          mounted = null;
+          return;
+        }
+        lastRows = breakdown(c, s, dim);
+        lastDim = dim;
+        chartWrap.hidden = lastRows.length === 0;
+        if (!lastRows.length) {
+          mounted?.dispose();
+          mounted = null;
+          return;
+        }
+        chartTitle.textContent = `${labelEl.textContent} · ${optText(sel.dim)}`;
+        if (!mounted) mounted = mountChart(chartEl, { onThemeChange: paint });
+        paint();
+      }
+
+      for (const s of Object.values(sel)) s.addEventListener("change", update);
+      update();
+    }
+
+    document.addEventListener("astro:page-load", initExplorer);
+    document.addEventListener("astro:before-swap", () => {
+      mounted?.dispose();
+      mounted = null;
+    });
+  </script>
+</BaseLayout>
