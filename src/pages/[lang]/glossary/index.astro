@@ -39,18 +39,32 @@ const letters = [...grouped.keys()].sort();
       <p class="mt-6 text-stone-700">{tt(lang, "ui.emptyComingSoon")}</p>
     ) : (
       <>
-        <nav class="mt-4 flex flex-wrap gap-2 text-sm">
-          {letters.map((l) => (
-            <a href={`#${l}`} class="rounded border border-stone-700/30 px-2 py-1 hover:border-gold-500 hover:text-gold-500">{l}</a>
-          ))}
-        </nav>
+        <div class="sticky top-14 z-30 -mx-4 mt-4 border-b border-stone-700/20 bg-parchment/95 px-4 py-3 backdrop-blur">
+          <input
+            data-glossary-search
+            type="search"
+            aria-label={tt(lang, "glossary.filter")}
+            placeholder={tt(lang, "glossary.filter")}
+            class="w-full rounded border border-stone-700/40 bg-parchment px-3 py-2 text-sm text-ink placeholder:text-stone-700/60 focus:border-gold-500 focus:outline-none"
+          />
+          <nav class="mt-2 flex flex-wrap gap-1.5 text-sm">
+            {letters.map((l) => (
+              <a href={`#${l}`} data-letter-link={l} class="rounded border border-stone-700/30 px-2 py-1 font-mono transition-colors hover:border-gold-500 hover:text-gold-700">{l}</a>
+            ))}
+          </nav>
+        </div>
+
+        <p data-glossary-empty hidden class="mt-8 text-sm italic text-stone-700">{tt(lang, "glossary.noMatch")}</p>
 
         {letters.map((l) => (
-          <section id={l} class="mt-10 scroll-mt-24">
-            <h2 class="font-display text-2xl text-gold-500">{l}</h2>
-            <dl class="mt-2 space-y-3">
+          <section id={l} data-letter-section={l} class="mt-10 scroll-mt-44">
+            <h2 class="flex items-baseline gap-3 border-b border-gold-500/25 pb-1 font-display text-4xl text-gold-700">
+              {l}
+              <span class="font-mono text-[11px] uppercase tracking-widest text-stone-700/60">{grouped.get(l)!.length}</span>
+            </h2>
+            <dl class="mt-3 space-y-3">
               {grouped.get(l)!.map((term) => (
-                <div>
+                <div data-term={term.data.term[lang].toLowerCase()}>
                   <dt class="font-display text-lg text-ink">{term.data.term[lang]}</dt>
                   <dd class="prose prose-stone max-w-none" set:html={term.html} />
                 </div>
@@ -61,4 +75,36 @@ const letters = [...grouped.keys()].sort();
       </>
     )}
   </section>
+  <script>
+    // Type-to-filter: hide non-matching terms, collapse empty letter sections, and
+    // dim A–Z chips with no matches. Wrapped for ClientRouter re-init.
+    function initGlossaryFilter() {
+      const search = document.querySelector<HTMLInputElement>("[data-glossary-search]");
+      if (!search) return;
+      const terms = [...document.querySelectorAll<HTMLElement>("[data-term]")];
+      const sections = [...document.querySelectorAll<HTMLElement>("[data-letter-section]")];
+      const links = [...document.querySelectorAll<HTMLElement>("[data-letter-link]")];
+      const empty = document.querySelector<HTMLElement>("[data-glossary-empty]");
+      search.addEventListener("input", () => {
+        const q = search.value.trim().toLowerCase();
+        const active = new Set<string>();
+        for (const el of terms) {
+          const match = !q || (el.dataset.term ?? "").includes(q);
+          el.hidden = !match;
+          if (match) {
+            const sec = el.closest<HTMLElement>("[data-letter-section]")?.dataset.letterSection;
+            if (sec) active.add(sec);
+          }
+        }
+        for (const s of sections) s.hidden = !!q && !active.has(s.dataset.letterSection ?? "");
+        for (const a of links) {
+          const has = !q || active.has(a.dataset.letterLink ?? "");
+          a.classList.toggle("opacity-30", !has);
+          a.classList.toggle("pointer-events-none", !has);
+        }
+        if (empty) empty.hidden = !q || active.size > 0;
+      });
+    }
+    document.addEventListener("astro:page-load", initGlossaryFilter);
+  </script>
 </BaseLayout>
