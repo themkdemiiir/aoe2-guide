@@ -199,6 +199,9 @@ export const ui = {
       "Questions, ideas, or just want to talk strategy? Start a thread in GitHub Discussions.",
     "about.connect.discussions": "GitHub Discussions",
     "toc.title": "On this page",
+    "learn.chapter": "Chapter",
+    "learn.prev": "Previous",
+    "learn.next": "Next",
     "nav.analyzer": "Analyzer",
     "analyzer.title": "Replay Analyzer",
     "analyzer.tagline":
@@ -567,6 +570,9 @@ export const ui = {
       "Soruların ya da fikirlerin mi var, yoksa strateji mi konuşmak istiyorsun? GitHub Discussions'ta bir başlık aç.",
     "about.connect.discussions": "GitHub Discussions",
     "toc.title": "Bu sayfada",
+    "learn.chapter": "Bölüm",
+    "learn.prev": "Önceki",
+    "learn.next": "Sonraki",
     "nav.analyzer": "Analiz",
     "analyzer.title": "Tekrar Analizi",
     "analyzer.tagline":

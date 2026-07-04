@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import TableOfContents from "@/components/content/TableOfContents.astro";
+import SectionEyebrow from "@/components/ui/SectionEyebrow.astro";
 import { render } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t, localizedPath } from "@/i18n/utils";
@@ -36,6 +37,7 @@ const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
           {t(lang, "ui.translation.missing")}
         </div>
       )}
+      {idx >= 0 && <SectionEyebrow label={`${t(lang, "learn.chapter")} ${idx + 1} / ${all.length}`} class="mb-3" />}
       <h1 class="font-display text-4xl text-ink">{entry.data.title}</h1>
 
       {tocItems.length >= 3 && (
@@ -49,12 +51,18 @@ const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
       <section class="prose prose-stone mt-8 max-w-none"><Content /></section>
 
-      <nav class="mt-12 flex justify-between gap-4 border-t border-stone-700/30 pt-6 text-sm text-stone-700">
+      <nav class="mt-12 grid gap-3 border-t border-stone-700/30 pt-6 sm:grid-cols-2">
         {prev ? (
-          <a href={localizedPath(`/learn/${canonicalSlug(prev.id)}`, lang)} class="hover:text-gold-500">← {prev.data.title}</a>
-        ) : <span />}
+          <a href={localizedPath(`/learn/${canonicalSlug(prev.id)}`, lang)} class="group rounded border border-stone-700/30 bg-parchment p-3 transition-colors hover:border-gold-500">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-stone-700/70">← {t(lang, "learn.prev")}</span>
+            <span class="mt-1 block font-display text-ink group-hover:text-gold-700">{prev.data.title}</span>
+          </a>
+        ) : <span class="hidden sm:block" />}
         {next ? (
-          <a href={localizedPath(`/learn/${canonicalSlug(next.id)}`, lang)} class="text-right hover:text-gold-500">{next.data.title} →</a>
+          <a href={localizedPath(`/learn/${canonicalSlug(next.id)}`, lang)} class="group rounded border border-stone-700/30 bg-parchment p-3 text-right transition-colors hover:border-gold-500 sm:col-start-2">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-stone-700/70">{t(lang, "learn.next")} →</span>
+            <span class="mt-1 block font-display text-ink group-hover:text-gold-700">{next.data.title}</span>
+          </a>
         ) : <span />}
       </nav>
     </article>
@@ -65,4 +73,32 @@ const tocItems = headings.filter((h) => h.depth === 2 || h.depth === 3);
       </div>
     </aside>
   </div>
+  <script>
+    // Scroll-spy: highlight the current section in the desktop TOC while reading.
+    function initTocSpy() {
+      const links = new Map(
+        [...document.querySelectorAll<HTMLElement>("aside [data-toc-link]")].map((a) => [a.dataset.tocLink ?? "", a]),
+      );
+      if (!links.size) return;
+      const heads = [...document.querySelectorAll<HTMLElement>("article :is(h2, h3)")].filter((h) => links.has(h.id));
+      let current = "";
+      const setActive = (id: string) => {
+        if (id === current) return;
+        links.get(current)?.removeAttribute("aria-current");
+        current = id;
+        links.get(id)?.setAttribute("aria-current", "true");
+      };
+      const obs = new IntersectionObserver(
+        (entries) => {
+          const vis = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top);
+          if (vis.length) setActive(vis[0].target.id);
+        },
+        { rootMargin: "-80px 0px -70% 0px", threshold: 0 },
+      );
+      for (const h of heads) obs.observe(h);
+    }
+    document.addEventListener("astro:page-load", initTocSpy);
+  </script>
 </BaseLayout>
