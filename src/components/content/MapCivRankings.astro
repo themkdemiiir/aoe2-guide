@@ -150,13 +150,12 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
   // ECharts (core + bar + grid/tooltip/dataZoom + canvas ≈ 181 KB gz) loads on
   // map pages only. Wrapped in astro:page-load and disposed on astro:before-swap
   // so ClientRouter navigations neither leak instances nor leave blank charts.
-  import * as echarts from "echarts/core";
   import { BarChart } from "echarts/charts";
   import { DataZoomComponent, GridComponent, MarkLineComponent, TooltipComponent } from "echarts/components";
-  import { CanvasRenderer } from "echarts/renderers";
   import { esc } from "@/scripts/html";
+  import { type ECharts, echarts, mountChart, themeColors } from "@/lib/echarts";
 
-  echarts.use([BarChart, GridComponent, TooltipComponent, DataZoomComponent, MarkLineComponent, CanvasRenderer]);
+  echarts.use([BarChart, GridComponent, TooltipComponent, DataZoomComponent, MarkLineComponent]);
 
   type SliceRow = [string, number, number]; // [slug, games, winRate]
   type Payload = {
@@ -172,21 +171,8 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
     _mi: number; _ei: Record<string, number>; _pi: Record<string, number>;
   };
 
-  let chart: echarts.ECharts | null = null;
+  let chart: ECharts | null = null;
   let cleanup: (() => void) | null = null;
-
-  function themeColors() {
-    const css = getComputedStyle(document.documentElement);
-    const v = (name: string, fb: string) => css.getPropertyValue(name).trim() || fb;
-    return {
-      good: v("--color-wr-good", "#8a5f18"),
-      bad: v("--color-wr-bad", "#942124"),
-      ink: v("--color-ink", "#221811"),
-      muted: v("--color-stone-700", "#41352f"),
-      surface: v("--color-parchment", "#f6e6cb"),
-      gold: v("--color-gold-500", "#c79a3c"),
-    };
-  }
 
   function init() {
     const root = document.querySelector<HTMLElement>("[data-map-civs]");
@@ -214,7 +200,11 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
     mount.hidden = false;
     table.open = false;
 
-    chart = echarts.init(mount, null, { renderer: "canvas" });
+    const mounted = mountChart(mount, {
+      onThemeChange: () => { if (rowsNow.length) paintChart(rowsNow, true); },
+    });
+    chart = mounted.chart;
+    cleanup = mounted.dispose;
     chart.on("click", (p) => {
       const slug = p.componentType === "yAxis" ? String(p.value) : rowsNow[p.dataIndex]?.[0];
       if (slug) window.location.href = `${civBase}${slug}/`;
@@ -478,13 +468,6 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
     eloSel.addEventListener("change", () => { state.bucket = eloSel.value; render(); });
     patchSel?.addEventListener("change", () => { state.patch = patchSel.value; render(); });
 
-    // Theme swap: tokens flip on <html data-theme>; canvas colors must follow.
-    const themeObs = new MutationObserver(() => { if (rowsNow.length) paintChart(rowsNow, true); });
-    themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    const resizeObs = new ResizeObserver(() => chart?.resize());
-    resizeObs.observe(mount);
-    cleanup = () => { themeObs.disconnect(); resizeObs.disconnect(); };
-
     render();
   }
 
@@ -492,7 +475,6 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
   document.addEventListener("astro:before-swap", () => {
     cleanup?.();
     cleanup = null;
-    chart?.dispose();
     chart = null;
   });
 </script>
