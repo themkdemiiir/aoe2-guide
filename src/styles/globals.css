@@ -126,7 +126,10 @@ body {
    UA default ring reads weakly on the dark gilded cover (bg-stone-bg); a gold
    outline keeps focus obvious site-wide. Gold-500 swaps with the theme. */
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--color-gold-500);
   outline-offset: 2px;
 }
@@ -138,7 +141,7 @@ button:focus-visible {
   --tw-prose-body: var(--color-ink);
   --tw-prose-headings: var(--color-ink);
   --tw-prose-lead: var(--color-stone-700);
-  --tw-prose-links: var(--color-gold-500);
+  --tw-prose-links: var(--color-gold-700);
   --tw-prose-bold: var(--color-ink);
   --tw-prose-counters: var(--color-stone-700);
   --tw-prose-bullets: var(--color-gold-500);

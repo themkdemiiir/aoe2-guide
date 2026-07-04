@@ -174,9 +174,9 @@ const checkpoints = sections
           </div>
           {resKeys.map((k) => (
             k === "builder" ? (
-              <span class="pb-0.5 text-center text-[0.6rem] font-semibold uppercase tracking-wide text-stone-700" title={RES_LABEL[k]}>{RES_LABEL[k].slice(0, 4)}</span>
+              <span class="pb-0.5 text-right text-[0.6rem] font-semibold uppercase tracking-wide text-stone-700" title={RES_LABEL[k]}>{t(lang, "res.builderShort")}</span>
             ) : (
-              <span class="flex justify-center pb-0.5"><img src={RESOURCE_ICONS[k]} alt={RES_LABEL[k]} title={RES_LABEL[k]} width="18" height="18" class="h-4.5 w-4.5" /></span>
+              <span class="flex justify-end pb-0.5"><img src={RESOURCE_ICONS[k]} alt={RES_LABEL[k]} title={RES_LABEL[k]} width="18" height="18" class="h-4.5 w-4.5" /></span>
             )
           ))}
         </header>
@@ -191,7 +191,7 @@ const checkpoints = sections
               data-assign={s.assign[lang]}
               tabindex="0"
               class:list={[
-                "group grid cursor-pointer items-center gap-x-2 px-3 py-1.5 scroll-mt-24",
+                "group grid cursor-pointer items-center gap-x-2 px-3 py-1.5 scroll-mt-24 transition-colors hover:bg-gold-500/5",
                 s.isTransition ? "bg-gold-500/10" : s.index % 2 ? "bg-parchment/70" : "bg-parchment",
               ]}
               style={gridCols}
@@ -222,10 +222,10 @@ const checkpoints = sections
               {resKeys.map((k) => (
                 <span
                   class:list={[
-                    "text-center font-mono text-sm tabular-nums",
-                    s.resources == null ? "text-stone-700/30" : s.resChanged[k] ? `font-bold ${RES_TEXT[k]}` : "text-stone-700/45",
+                    "text-right font-mono text-sm tabular-nums",
+                    s.resources == null ? "text-stone-700/40" : s.resChanged[k] ? `font-bold ${RES_TEXT[k]}` : "text-stone-700/70",
                   ]}
-                >{s.resources ? s.resources[k] : ""}</span>
+                >{s.resources ? s.resources[k] : "–"}</span>
               ))}
             </li>
           ))}

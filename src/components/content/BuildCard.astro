@@ -42,12 +42,12 @@ const maxPop = b.steps.at(-1)?.villagers ?? null;
     )}
     <div class="mt-auto pt-5">
       <div class="mb-1.5 flex justify-between font-mono text-[9px] uppercase tracking-[0.12em] text-stone-700/60">
-        <span>Tempo</span>
-        <span style={`color:${diffColor}`}>{t(lang, `age.${b.targetAge}`)}</span>
+        <span>{t(lang, "builds.ageLabel")}</span>
+        <span class="text-gold-700">{t(lang, `age.${b.targetAge}`)}</span>
       </div>
       <div class="flex gap-1" aria-hidden="true">
         {AGES.map((_, i) => (
-          <span class="h-1.5 flex-1 rounded-sm" style={`background:${i <= ageIndex ? diffColor : "rgba(120,96,52,0.16)"}`}></span>
+          <span class="h-1.5 flex-1 rounded-sm" style={`background:${i <= ageIndex ? "var(--color-gold-500)" : "rgba(120,96,52,0.16)"}`}></span>
         ))}
       </div>
     </div>

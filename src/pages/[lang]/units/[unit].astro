@@ -78,9 +78,9 @@ if (lineRoot) {
               </span>
               <Icon slug={tier.slug} kind="unit" size={32} />
               <div class="min-w-0 flex-1">
-                <div class={`font-display text-base leading-tight ${tier.isCurrent ? "text-gold-500" : "text-ink"}`}>
+                <div class={`font-display text-base leading-tight ${tier.isCurrent ? "text-gold-700" : "text-ink"}`}>
                   {tier.name}
-                  {tier.isCurrent && <span class="ml-2 text-xs font-normal text-gold-500">({t(lang, "ui.current")})</span>}
+                  {tier.isCurrent && <span class="ml-2 text-xs font-normal text-gold-700">({t(lang, "ui.current")})</span>}
                 </div>
               </div>
               {tier.stats && (
@@ -102,17 +102,19 @@ if (lineRoot) {
     {stats && (
       <table class="mt-6 w-full text-sm">
         <tbody>
-          <tr><th class="text-left text-stone-700">HP</th><td class="text-ink">{stats.hp}</td></tr>
-          <tr><th class="text-left text-stone-700">Attack</th><td class="text-ink">{stats.attack}</td></tr>
-          <tr><th class="text-left text-stone-700">Range</th><td class="text-ink">{stats.range}</td></tr>
-          <tr><th class="text-left text-stone-700">Train time</th><td class="text-ink">{stats.trainTime}s</td></tr>
+          <tr><th class="text-left text-stone-700">{t(lang, "units.hp")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.hp}</td></tr>
+          <tr><th class="text-left text-stone-700">{t(lang, "units.attack")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.attack}</td></tr>
+          <tr><th class="text-left text-stone-700">{t(lang, "units.range")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.range}</td></tr>
+          <tr><th class="text-left text-stone-700">{t(lang, "units.trainTime")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.trainTime}s</td></tr>
           <tr>
-            <th class="text-left text-stone-700">Cost</th>
-            <td class="text-ink">
-              <span class="text-res-food">{stats.cost.food}f</span>
-              <span class="ml-2 text-res-wood">{stats.cost.wood}w</span>
-              <span class="ml-2 text-res-gold">{stats.cost.gold}g</span>
-              <span class="ml-2 text-res-stone">{stats.cost.stone}s</span>
+            <th class="text-left text-stone-700">{t(lang, "units.cost")}</th>
+            <td class="text-right font-mono tabular-nums text-ink">
+              <span class="inline-flex justify-end gap-2">
+                {stats.cost.food > 0 && <span class="text-res-food">{stats.cost.food}f</span>}
+                {stats.cost.wood > 0 && <span class="text-res-wood">{stats.cost.wood}w</span>}
+                {stats.cost.gold > 0 && <span class="text-res-gold">{stats.cost.gold}g</span>}
+                {stats.cost.stone > 0 && <span class="text-res-stone">{stats.cost.stone}s</span>}
+              </span>
             </td>
           </tr>
         </tbody>

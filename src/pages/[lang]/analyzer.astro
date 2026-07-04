@@ -698,13 +698,13 @@ const ecoTechs: Record<string, string> = {
             <td class="sticky left-0 bg-parchment px-2 py-1.5 font-display font-bold text-ink"><span class="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm align-baseline" style="background:${colorOf(m.info.color_id)}"></span>${you ? "➤ " : ""}${esc(m.info.name)}</td>
             <td class="px-2 py-1.5">${civCell(m.info.civ_id, 24)}</td>
             <td class="px-2 py-1.5 text-xs">${m.opening ? esc(m.opening) : "—"}</td>
-            <td class="px-2 py-1.5 font-mono">${esc(mmss(m.feudal_ms))}</td>
-            <td class="px-2 py-1.5 font-mono">${esc(mmss(m.castle_ms))}</td>
-            <td class="px-2 py-1.5 font-mono">${esc(mmss(m.imperial_ms))}</td>
-            <td class="px-2 py-1.5 font-mono">${m.castle_ms != null ? esc(String(m.vils_castle)) : "—"}</td>
-            <td class="px-2 py-1.5 font-mono">${esc(secs(m.idle_dark_ms))}</td>
-            <td class="px-2 py-1.5 font-mono">${esc(String(Math.round(m.apm)))}</td>
-            <td class="px-2 py-1.5 font-mono">${elo != null ? esc(String(elo)) : "—"}</td>
+            <td class="px-2 py-1.5 text-right font-mono tabular-nums">${esc(mmss(m.feudal_ms))}</td>
+            <td class="px-2 py-1.5 text-right font-mono tabular-nums">${esc(mmss(m.castle_ms))}</td>
+            <td class="px-2 py-1.5 text-right font-mono tabular-nums">${esc(mmss(m.imperial_ms))}</td>
+            <td class="px-2 py-1.5 text-right font-mono tabular-nums">${m.castle_ms != null ? esc(String(m.vils_castle)) : "—"}</td>
+            <td class="px-2 py-1.5 text-right font-mono tabular-nums">${esc(secs(m.idle_dark_ms))}</td>
+            <td class="px-2 py-1.5 text-right font-mono tabular-nums">${esc(String(Math.round(m.apm)))}</td>
+            <td class="px-2 py-1.5 text-right font-mono tabular-nums">${elo != null ? esc(String(elo)) : "—"}</td>
             <td class="px-2 py-1.5">${m.info.won === true ? `<span class="text-forest">${esc(L["analyzer.table.win"])}</span>` : m.info.won === false ? `<span class="text-royal">${esc(L["analyzer.table.loss"])}</span>` : "—"}</td>
           </tr>`;
         })

@@ -74,6 +74,8 @@ const MONTHS: Record<Locale, string[]> = {
 };
 const [genY, genM] = (civMeta.generated ?? "").split("-");
 const updatedMonth = genY && genM ? `${MONTHS[lang][Number(genM) - 1]} ${genY}` : "";
+// Real patch id (source-derived) for the provenance line — not a generic phrase.
+const latestPatchId = (civMeta.patches?.[0] as { patch?: string } | undefined)?.patch ?? "";
 
 // --- Featured build orders: beginner-first so the easiest leads, capped at 3. ---
 const featuredBuilds = [...builds]
@@ -141,10 +143,15 @@ const more = [
         </h1>
         <p class="mt-5 max-w-xl text-lg text-ember/90 sm:text-xl">{t(lang, "home.codex.lead")}</p>
         <p class="mt-3 font-mono text-xs tracking-wide text-ember/70 sm:text-[13px]">
-          <span class="font-bold text-gold-400">{matchesK}K+</span>
+          <span class="font-bold text-gold-400 tabular-nums">{matchesK}K+</span>
           {" "}{t(lang, "home.codex.matches")}
-          <span class="mx-1.5 text-gold-500/40" aria-hidden="true">·</span>
-          {t(lang, "home.codex.currentPatch")}
+          {latestPatchId && (
+            <>
+              <span class="mx-1.5 text-gold-500/40" aria-hidden="true">·</span>
+              {t(lang, "home.codex.currentPatch")}{" "}
+              <span class="font-bold text-gold-400 tabular-nums">{latestPatchId}</span>
+            </>
+          )}
           {updatedMonth && (
             <>
               <span class="mx-1.5 text-gold-500/40" aria-hidden="true">·</span>
