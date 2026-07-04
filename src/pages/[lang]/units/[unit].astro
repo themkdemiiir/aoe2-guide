@@ -4,6 +4,8 @@ import Icon from "@/components/ui/Icon.astro";
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
+import { displayName } from "@/lib/display";
+import countersData from "@data/counters.json";
 
 export async function getStaticPaths() {
   const units: CollectionEntry<"units">[] = await getCollection("units");
@@ -42,6 +44,43 @@ if (lineRoot) {
       stats: tierStats,
       isCurrent: tierSlug === slug,
     });
+  }
+}
+
+// --- Counters block: 16 units carry Strong/Weak-vs relations in counters.json. ---
+type Loc = string | { en: string; tr: string };
+type CounterInfo = { strongVs: string[]; weakVs: string[]; note?: Loc };
+const loc = (v: Loc | undefined): string | null =>
+  v == null ? null : typeof v === "string" ? v : (v[lang] ?? v.en);
+const unitCounters = (countersData.units as Record<string, CounterInfo>)[slug] ?? null;
+
+// --- Stat-vs-class chart: compare against the average of the unit's ROLE peers,
+// but only when the role is a real class — ≥3 units and not the "unique unit"
+// catch-all (averaging 41 wildly-different unique units would be meaningless). ---
+type StatShape = {
+  hp: number;
+  attack: number;
+  cost: { food: number; wood: number; gold: number; stone: number };
+};
+const roleEn = entry.data.role.en;
+let classChart: { role: string; n: number; hp: [number, number]; attack: [number, number]; gold: [number, number] } | null = null;
+if (stats && roleEn !== "unique unit") {
+  const peers = (await getCollection("units")).filter((u) => u.data.role.en === roleEn);
+  if (peers.length >= 3) {
+    const peerStats: StatShape[] = [];
+    for (const u of peers) {
+      const s = (await getEntry("unit-stats", u.id))?.data as StatShape | undefined;
+      if (s) peerStats.push(s);
+    }
+    const avg = (f: (s: StatShape) => number) => Math.round(peerStats.reduce((n, s) => n + f(s), 0) / peerStats.length);
+    const s = stats as unknown as StatShape;
+    classChart = {
+      role: entry.data.role[lang],
+      n: peerStats.length,
+      hp: [s.hp, avg((x) => x.hp)],
+      attack: [s.attack, avg((x) => x.attack)],
+      gold: [s.cost.gold, avg((x) => x.cost.gold)],
+    };
   }
 }
 ---
@@ -122,6 +161,71 @@ if (lineRoot) {
           </tr>
         </tbody>
       </table>
+    )}
+
+    {classChart && (
+      <section class="mt-8">
+        <h2 class="mb-1 font-display text-xl text-ink">{t(lang, "units.statVsClass")}</h2>
+        <p class="mb-3 font-mono text-[11px] uppercase tracking-wide text-stone-700/70">{classChart.role} · {classChart.n}</p>
+        <div class="space-y-3">
+          {([["units.hp", classChart.hp], ["units.attack", classChart.attack], ["res.gold", classChart.gold]] as const).map(([label, pair]) => {
+            const [mine, avg] = pair;
+            const max = Math.max(mine, avg, 1);
+            return (
+              <div class="flex items-center gap-3 text-sm">
+                <span class="w-16 flex-none text-stone-700">{t(lang, label)}</span>
+                <div class="min-w-0 flex-1 space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="relative h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10"><span class="absolute inset-y-0 left-0 rounded-full bg-gold-500" style={`width:${(mine / max) * 100}%`}></span></span>
+                    <span class="w-9 flex-none text-right font-mono tabular-nums text-ink">{mine}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="relative h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10"><span class="absolute inset-y-0 left-0 rounded-full bg-stone-700/40" style={`width:${(avg / max) * 100}%`}></span></span>
+                    <span class="w-9 flex-none text-right font-mono tabular-nums text-stone-700/70">{avg}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <p class="mt-2.5 flex gap-4 font-mono text-[10px] uppercase tracking-wide text-stone-700/70">
+          <span class="flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-gold-500"></span>{t(lang, "units.thisUnit")}</span>
+          <span class="flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-stone-700/40"></span>{t(lang, "units.classAvg")}</span>
+        </p>
+      </section>
+    )}
+
+    {unitCounters && (
+      <section class="mt-8">
+        <h2 class="mb-3 font-display text-xl text-ink">{t(lang, "units.counters")}</h2>
+        <div class="space-y-3">
+          {unitCounters.strongVs.length > 0 && (
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wide text-forest">{t(lang, "counters.strongVs")}</span>
+              <div class="mt-1.5 flex flex-wrap gap-2">
+                {unitCounters.strongVs.map((u) => (
+                  <span class="inline-flex items-center gap-1.5 rounded border border-forest/30 bg-forest/10 px-2 py-1 text-sm text-ink">
+                    <Icon slug={u} kind="unit" size={20} framed={false} /> {displayName(u)}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          {unitCounters.weakVs.length > 0 && (
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wide text-royal">{t(lang, "counters.weakVs")}</span>
+              <div class="mt-1.5 flex flex-wrap gap-2">
+                {unitCounters.weakVs.map((u) => (
+                  <span class="inline-flex items-center gap-1.5 rounded border border-royal/30 bg-royal/10 px-2 py-1 text-sm text-ink">
+                    <Icon slug={u} kind="unit" size={20} framed={false} /> {displayName(u)}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          {loc(unitCounters.note) && <p class="text-sm text-stone-700">{loc(unitCounters.note)}</p>}
+        </div>
+      </section>
     )}
 
     {!stats && (
