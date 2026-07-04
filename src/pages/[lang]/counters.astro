@@ -35,20 +35,30 @@ const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).local
         <section class="mt-10">
           <h2 class="font-display text-2xl text-ink">{t(lang, `counters.${ageKey}`)}</h2>
           <p class="mt-1 max-w-prose text-sm text-stone-700">{loc(age.intro)}</p>
-          <ul class="mt-4 space-y-2">
-            {age.relations.map((r) => (
-              <li class="flex flex-wrap items-center gap-x-2 gap-y-1 rounded border border-stone-700/20 bg-parchment p-3">
-                <span class="inline-flex items-center gap-1.5 font-medium text-ink">
-                  <Icon slug={r.winner} kind="unit" size={24} /> {displayName(r.winner)}
-                </span>
-                <span class="text-xs font-bold uppercase tracking-wide text-gold-700">{t(lang, "counters.beats")}</span>
-                <span class="inline-flex items-center gap-1.5 text-stone-700">
-                  <Icon slug={r.loser} kind="unit" size={24} /> {displayName(r.loser)}
-                </span>
-                <span class="w-full text-sm text-stone-700 sm:flex-1 sm:border-l sm:border-stone-700/20 sm:pl-3">{loc(r.why)}</span>
-              </li>
-            ))}
-          </ul>
+          <div class="mt-4 overflow-x-auto rounded border border-stone-700/20">
+            <table class="w-full min-w-136 text-sm">
+              <thead>
+                <tr class="border-b border-stone-700/25 bg-stone-700/5 text-left font-mono text-[10px] uppercase tracking-wide text-stone-700">
+                  <th class="px-3 py-2">{t(lang, "counters.counter")}</th>
+                  <th class="px-3 py-2">{t(lang, "counters.beats")}</th>
+                  <th class="px-3 py-2">{t(lang, "counters.why")}</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-stone-700/15">
+                {age.relations.map((r) => (
+                  <tr class="align-top odd:bg-parchment even:bg-parchment/60">
+                    <td class="whitespace-nowrap px-3 py-2">
+                      <span class="inline-flex items-center gap-1.5 font-medium text-ink"><Icon slug={r.winner} kind="unit" size={22} /> {displayName(r.winner)}</span>
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-2">
+                      <span class="inline-flex items-center gap-1.5 text-stone-700"><Icon slug={r.loser} kind="unit" size={22} /> {displayName(r.loser)}</span>
+                    </td>
+                    <td class="px-3 py-2 text-stone-700">{loc(r.why)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       );
     })}
