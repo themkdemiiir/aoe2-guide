@@ -537,3 +537,36 @@ git add -A && git commit -m "feat(analyzer): localize templated Top-Fix strings 
 **Prerequisite:** the archive backfill should accumulate more replay depth first (it feeds the interesting queries), and the R2 backup-sync task (separate, small) establishes the R2 credentials this reuses.
 
 **Next action for E:** run `superpowers:brainstorming` on the Data Explorer with the six decisions above as the agenda, producing a spec → then a real implementation plan.
+
+---
+
+## Plan F — Unify all charts on ECharts (drop Chart.js)
+
+**Why (user, 2026-07-04):** the site runs **two** chart libraries and one page type has none — civ pages + analyzer use **Chart.js**, the new map leaderboard uses **ECharts**, unit pages have only stat tables. Standardize on ECharts for one consistent, polished system everywhere.
+
+**Architecture — foundation first.** `MapCivRankings.astro` already contains the reusable ECharts patterns (theme-token reading, dark-mode `MutationObserver`, ClientRouter `astro:page-load`/`before-swap` lifecycle, tooltip styling). Extract those into a shared module so every chart is consistent and the lifecycle logic isn't copy-pasted (the "one canonical form" rule). Then migrate each page onto it; remove Chart.js last.
+
+**Bundle note:** ECharts (~181 KB gz) is heavier than Chart.js (~51 KB), but it becomes **one shared chunk cached across all chart pages**, and Chart.js is removed — so it's one system, not two. Civ + analyzer pages already pay for a chart lib today.
+
+**Phases (each self-contained + shippable):**
+
+### F1 — Extract the shared ECharts foundation (safe refactor, no visual change)
+- Create `src/lib/echarts.ts`: `themeColors()` (reads `--color-wr-good/-bad/-ink/-stone-700/-parchment/-gold-500` from `getComputedStyle`, with the same hardcoded fallbacks as MapCivRankings), and a `mountChart(el, buildOption, { onThemeChange })` helper that does `echarts.init`, wires a `ResizeObserver` + a `data-theme` `MutationObserver`, and returns a `dispose()` for `astro:before-swap`.
+- Rewire `MapCivRankings.astro`'s script to import from `src/lib/echarts.ts` instead of its inline copies. **Regression gate:** screenshot `/en/maps/arabia/` light + dark before/after — pixel-identical. No new user-visible strings.
+
+### F2 — Civ pages → ECharts (first visible win; highest traffic)
+- Recon `CivStats.astro` first (3 charts: win-rate-by-elo bar, by-patch trend line, by-map bar-list). Migrate each to ECharts via the F1 foundation, matching the map-leaderboard polish (diverging gold/red around 50% where applicable, emblem/label axis, parchment tooltip). Keep the existing data flow (`civ-meta.json` + the cube fetch).
+- Gates + light/dark screenshots of a civ page. Chart.js import stays until F5.
+
+### F3 — Unit pages → new ECharts charts (net-new; NEEDS DESIGN SIGN-OFF)
+- Unit pages have **no** charts today. **Open decision (confirm before building):** what to visualize — e.g. a stat-comparison bar (this unit's cost / HP / attack / armor vs its class average), and/or a counters strip (this unit vs the units that counter it). Recon `UnitStatTable.astro` + `src/pages/[lang]/units/[unit].astro` + the unit stat data in `src/data/` for available fields.
+- Build via the F1 foundation; EN/TR labels; gates + screenshots.
+
+### F4 — Analyzer charts → ECharts
+- Recon the two Chart.js charts in `analyzer.astro` (production-over-time multi-series line — villagers solid, military dashed; APM-over-time line). Migrate both to ECharts multi-series line via the F1 foundation. The head-to-head **matrix stays an HTML table** (not a chart). Careful with the ClientRouter + `astro:page-load` wrapping already present.
+- Gates + verify with the test replay on `/en/analyzer/` and `/tr/analyzer/`.
+
+### F5 — Remove Chart.js
+- Delete the `chart.js` import from `CivStats.astro` + `analyzer.astro` (now unused), remove `chart.js` from `package.json`, run `pnpm install`. Grep to confirm zero `chart.js`/`new Chart` references remain. Full gates + a bundle-size sanity check (one shared ECharts chunk, no Chart.js chunk).
+
+**Prerequisite recon** (before F2/F3/F4 bite-sized steps): read each page's current chart code + data source — same discipline as Plan C. F1 is fully known (from building MapCivRankings) and can start immediately.
