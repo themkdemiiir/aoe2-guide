@@ -107,6 +107,10 @@ const mapList = one
           <select data-cf="elo" class="select-field normal-case">
             <option value="">{tr ? "Tüm elo" : "Any elo"}</option>
             {cdims.elos.map((b) => <option value={b}>{b}</option>)}
+            <option disabled>──</option>
+            <option value="cum:1650">1650+</option>
+            <option value="cum:1800">1800+</option>
+            <option value="cum:2000">2000+</option>
           </select>
         </label>
         <label class="flex items-center gap-1.5">{tr ? "Yama" : "Patch"}
@@ -366,10 +370,14 @@ const mapList = one
       out.hidden = false;
       const parts: string[] = [];
       if (sel.map.value) parts.push(sel.map.options[sel.map.selectedIndex].text);
-      if (sel.elo.value) parts.push(sel.elo.value);
+      if (sel.elo.value) parts.push(sel.elo.options[sel.elo.selectedIndex].text);
       if (sel.patch.value) parts.push(sel.patch.options[sel.patch.selectedIndex].text.replace(/^Current · |^Güncel · /, ""));
       elLabel.textContent = parts.join(" · ");
-      const eIdx = sel.elo.value ? c._ei[sel.elo.value] : -1;
+      // Elo: an exact band (eIdx), or a cumulative "X+" cut summing every band ≥ the
+      // edge — thin high-elo bands pool into a stable, exact Σwins/Σgames win rate.
+      const eloVal = sel.elo.value;
+      const cumStart = eloVal.startsWith("cum:") ? c.elos.findIndex((b) => Number.parseInt(b, 10) >= +eloVal.slice(4)) : -1;
+      const eIdx = eloVal && cumStart < 0 ? (c._ei[eloVal] ?? -1) : -1;
       const mIdx = sel.map.value ? (c._mi[sel.map.value] ?? -2) : -1;
       // -2 = selected month absent from the cube (metas can be regenerated
       // separately) → show "no data", never silently drop the filter.
@@ -378,7 +386,7 @@ const mapList = one
       if (c._ci >= 0 && mIdx !== -2 && pIdx !== -2) {
         for (const r of c.rows) {
           if (r[0] !== c._ci) continue;
-          if (eIdx >= 0 && r[1] !== eIdx) continue;
+          if (cumStart >= 0 ? r[1] < cumStart : eIdx >= 0 && r[1] !== eIdx) continue;
           if (mIdx >= 0 && r[2] !== mIdx) continue;
           if (pIdx >= 0 && r[3] !== pIdx) continue;
           g += r[4]; w += r[5];
