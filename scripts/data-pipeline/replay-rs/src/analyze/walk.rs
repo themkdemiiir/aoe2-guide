@@ -53,18 +53,73 @@ pub struct Walked {
     pub cmd_split: HashMap<i32, (u32, u32)>,
 }
 
-/// player_id position differs per ActionData variant; we only need it for the variants we map.
 fn pid(ad: &ActionData) -> i32 {
-    match ad {
-        ActionData::DeQueue { player_id, .. }
+    // Every ActionData variant carries the acting player as its first field. An
+    // EXHAUSTIVE match (no wildcard) so a future variant fails to compile here
+    // rather than being silently dropped onto phantom player 0 — the old 7-arm
+    // match lost ~20% of commands, undercounting APM. (vendor/aoe2rec is a pinned
+    // clone-on-build fork, so this list is stable; regenerate if the enum changes.)
+    (match ad {
+        ActionData::Interact { player_id, .. }
+        | ActionData::Stop { player_id, .. }
+        | ActionData::AiInteract { player_id, .. }
+        | ActionData::Move { player_id, .. }
+        | ActionData::Create { player_id, .. }
+        | ActionData::AddAttribute { player_id, .. }
+        | ActionData::GiveAttribute { player_id, .. }
+        | ActionData::AiMove { player_id, .. }
+        | ActionData::Resign { player_id, .. }
+        | ActionData::Spec { player_id, .. }
+        | ActionData::Waypoint { player_id, .. }
+        | ActionData::Stance { player_id, .. }
+        | ActionData::Guard { player_id, .. }
+        | ActionData::Follow { player_id, .. }
+        | ActionData::Patrol { player_id, .. }
+        | ActionData::Formation { player_id, .. }
+        | ActionData::Save { player_id, .. }
+        | ActionData::AiWaypoint { player_id, .. }
+        | ActionData::Chapter { player_id, .. }
+        | ActionData::DeAttackMove { player_id, .. }
+        | ActionData::DeUnknown35 { player_id, .. }
+        | ActionData::DeUnknown37 { player_id, .. }
+        | ActionData::Autoscout { player_id, .. }
+        | ActionData::DeUnknown39 { player_id, .. }
+        | ActionData::Transform { player_id, .. }
+        | ActionData::SwitchAttack { player_id, .. }
+        | ActionData::Unknown44 { player_id, .. }
+        | ActionData::Unknown45 { player_id, .. }
+        | ActionData::AiCommand { player_id, .. }
+        | ActionData::AiQueue { player_id, .. }
         | ActionData::Research { player_id, .. }
         | ActionData::Build { player_id, .. }
-        | ActionData::Move { player_id, .. }
-        | ActionData::Interact { player_id, .. }
+        | ActionData::Game { player_id, .. }
+        | ActionData::Unknown104 { player_id, .. }
+        | ActionData::Wall { player_id, .. }
+        | ActionData::Delete { player_id, .. }
+        | ActionData::AttackGround { player_id, .. }
+        | ActionData::Tribute { player_id, .. }
+        | ActionData::DeUnknown109 { player_id, .. }
+        | ActionData::Repair { player_id, .. }
+        | ActionData::Release { player_id, .. }
+        | ActionData::Multiqueue { player_id, .. }
+        | ActionData::ToggleGate { player_id, .. }
+        | ActionData::Flare { player_id, .. }
+        | ActionData::Order { player_id, .. }
+        | ActionData::Queue { player_id, .. }
+        | ActionData::Gatherpoint { player_id, .. }
+        | ActionData::Sell { player_id, .. }
         | ActionData::Buy { player_id, .. }
-        | ActionData::Sell { player_id, .. } => *player_id as i32,
-        _ => 0,
-    }
+        | ActionData::DropRelic { player_id, .. }
+        | ActionData::TownBell { player_id, .. }
+        | ActionData::BackToWork { player_id, .. }
+        | ActionData::DeQueue { player_id, .. }
+        | ActionData::DeUnknown130 { player_id, .. }
+        | ActionData::DeUnknown131 { player_id, .. }
+        | ActionData::DeUnknown135 { player_id, .. }
+        | ActionData::DeUnknown140 { player_id, .. }
+        | ActionData::DeUnknown196 { player_id, .. }
+        | ActionData::Achievements { player_id, .. } => *player_id,
+    }) as i32
 }
 
 pub fn walk(game: &Savegame) -> Walked {

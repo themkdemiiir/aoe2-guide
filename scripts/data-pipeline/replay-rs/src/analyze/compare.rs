@@ -55,7 +55,7 @@ pub fn build_metrics(
             // peak floating-resource window (by rate) -> rate + banked + (start,end)
             let peak = float::estimate(&w.evs, pn, costs, dur)
                 .into_iter()
-                .max_by(|a, b| a.rate_gap_per_min.partial_cmp(&b.rate_gap_per_min).unwrap());
+                .max_by(|a, b| a.rate_gap_per_min.total_cmp(&b.rate_gap_per_min));
             let cm = coords.get(&pn).cloned().unwrap_or_default();
             let (vils_series, mil_series) = metrics::production_series(&w.evs, pn, dur);
             let mins = (dur as f64 / 60_000.0).max(1.0 / 60.0);

@@ -50,11 +50,41 @@ pub fn vils_at(evs: &[Ev], player: i32, until_ms: u32) -> u32 {
         .count() as u32
 }
 
-/// Crude idle-TC estimate over [0, until]: window minus (villagers * 25s busy time).
-/// Honest v1: assumes ~1 TC in the early game; flags BIG idle, not exact gaps. source: spec.
+/// Techs researched AT the Town Center — while one is in progress the TC cannot
+/// train villagers, so their duration is BUSY time, not idle. Crediting them stops
+/// the estimate from blaming a player for the unavoidable age-up / Loom occupancy
+/// (the single biggest bias in the old formula). source: aoe2techtree data.json
+/// ResearchTime — 101 Feudal 130s, 102 Castle 160s, 103 Imperial 190s, 22 Loom 25s,
+/// 213 Wheelbarrow 75s, 249 Hand Cart 55s.
+pub const TC_RESEARCH_MS: &[(u16, u32)] = &[
+    (101, 130_000),
+    (102, 160_000),
+    (103, 190_000),
+    (22, 25_000),
+    (213, 75_000),
+    (249, 55_000),
+];
+
+/// Crude idle-TC estimate over [0, until]: window minus villager-train busy time
+/// (25s each) minus TC-research busy time. Honest v1: assumes ~1 TC in the early
+/// game; flags BIG idle, not exact gaps. source: spec.
 pub fn idle_tc_ms(evs: &[Ev], player: i32, until_ms: u32) -> u32 {
-    let busy = vils_at(evs, player, until_ms).saturating_mul(VIL_TRAIN_MS);
-    until_ms.saturating_sub(busy)
+    let vil_busy = vils_at(evs, player, until_ms).saturating_mul(VIL_TRAIN_MS);
+    // A TC research that STARTS before `until` occupies the TC for its duration,
+    // capped at what fits inside the window (a research starting exactly at the
+    // boundary consumes none of it — keeps age-up credit on the right side).
+    let research_busy: u32 = evs
+        .iter()
+        .filter(|e| e.player == player && e.t_ms < until_ms)
+        .filter_map(|e| match e.kind {
+            EvKind::Research(t) => TC_RESEARCH_MS
+                .iter()
+                .find(|&&(id, _)| id == t)
+                .map(|&(_, dur)| dur.min(until_ms - e.t_ms)),
+            _ => None,
+        })
+        .sum();
+    until_ms.saturating_sub(vil_busy).saturating_sub(research_busy)
 }
 
 /// First trained non-eco unit time = first military. source: config::ECO_UNIT_IDS.
@@ -285,6 +315,21 @@ mod tests {
         // never negative
         let many: Vec<Ev> = (0..20).map(|k| ev(1, k * 1000, EvKind::Train(83))).collect();
         assert_eq!(idle_tc_ms(&many, 1, 100_000), 0);
+    }
+
+    #[test]
+    fn idle_tc_credits_tc_research_busy() {
+        // 1 villager (25s) + Loom at 30s (25s) + Feudal click at 60s (130s, capped
+        // to 40s of the 100s window) => busy 25+25+40 = 90s => idle 10s.
+        let evs = vec![
+            ev(1, 5_000, EvKind::Train(83)),
+            ev(1, 30_000, EvKind::Research(22)), // Loom, fully inside
+            ev(1, 60_000, EvKind::Research(101)), // Feudal, credited only 40s to the boundary
+        ];
+        assert_eq!(idle_tc_ms(&evs, 1, 100_000), 10_000);
+        // A research starting exactly at the boundary consumes none of the window.
+        let edge = vec![ev(1, 100_000, EvKind::Research(101))];
+        assert_eq!(idle_tc_ms(&edge, 1, 100_000), 100_000);
     }
 
     #[test]
