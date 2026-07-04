@@ -105,6 +105,10 @@ const serverTiers = labels.tiers
         <select data-f="elo" class="select-field normal-case">
           <option value="">{tr ? "Tüm elo" : "Any elo"}</option>
           {dims.elos.map((b) => <option value={b}>{b}</option>)}
+          <option disabled>──</option>
+          <option value="cum:1650">1650+</option>
+          <option value="cum:1800">1800+</option>
+          <option value="cum:2000">2000+</option>
         </select>
       </label>
       <label class="flex items-center gap-1.5">{tr ? "Yama" : "Patch"}
@@ -180,12 +184,15 @@ const serverTiers = labels.tiers
           for (const c of civData) o[c.slug] = c.overall; // [wr, games]
           return o;
         }
-        const eIdx = sel.elo.value ? cube._ei[sel.elo.value] : -1;
+        const eloVal = sel.elo.value;
+        // Cumulative "X+" cut: sum every band ≥ the edge (thin recent-patch slices pool).
+        const cumStart = eloVal.startsWith("cum:") ? cube.elos.findIndex((b) => Number.parseInt(b, 10) >= +eloVal.slice(4)) : -1;
+        const eIdx = eloVal && cumStart < 0 ? (cube._ei[eloVal] ?? -1) : -1;
         const mIdx = sel.map.value ? (cube._mi[sel.map.value] ?? -2) : -1; // -2 = selected map absent from cube
         const pIdx = sel.patch.value ? (cube._pi[sel.patch.value] ?? -2) : -1; // -2 = month absent → NO data, never all-time
         const agg = {}; // civIndex -> [g, w]
         for (const r of cube.rows) {
-          if (eIdx >= 0 && r[1] !== eIdx) continue;
+          if (cumStart >= 0 ? r[1] < cumStart : eIdx >= 0 && r[1] !== eIdx) continue;
           if (mIdx >= 0 && r[2] !== mIdx) continue;
           if (mIdx === -2 || pIdx === -2) { agg.length = 0; break; }
           if (pIdx >= 0 && r[3] !== pIdx) continue;
