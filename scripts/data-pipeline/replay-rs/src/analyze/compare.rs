@@ -183,20 +183,26 @@ pub fn findings(
             let bucket = data::elo_bucket(elo);
             let (feudal_res, castle_res, imp_res) = age_research_s(civ);
             if let Some((s, kind)) = bench.slice(civ, map_slug, bucket, mode) {
-                let ref_desc = match kind {
-                    data::MatchKind::Exact => format!("{bucket} {mode} median on {map_slug}"),
-                    data::MatchKind::MapMode => format!("{map_slug} {mode} median (all elo)"),
+                let (ref_desc, ref_kind) = match kind {
+                    data::MatchKind::Exact => (format!("{bucket} {mode} median on {map_slug}"), "exact"),
+                    data::MatchKind::MapMode => (format!("{map_slug} {mode} median (all elo)"), "mapmode"),
                     data::MatchKind::MapAll if mode == "1v1" => {
-                        format!("{map_slug} median (no 1v1 baseline — team-heavy rollup)")
+                        (format!("{map_slug} median (no 1v1 baseline — team-heavy rollup)"), "mapall_1v1")
                     }
-                    data::MatchKind::MapAll => format!("{map_slug} median (all elo/mode)"),
+                    data::MatchKind::MapAll => (format!("{map_slug} median (all elo/mode)"), "mapall"),
                 };
                 if let (Some(fms), Some(ref_s)) = (m.feudal_ms, s.feudal_s) {
                     let comp = fms as f64 / 1000.0 + feudal_res;
                     if comp > ref_s + 60.0 {
                         let sev = if comp > ref_s + 120.0 { Severity::High } else { Severity::Med };
-                        out.push(mk(pn, "feudal_slow", "Feudal up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
-                            &format!("Slower to Feudal than the {ref_desc} for {civ}.")));
+                        let mut f = mk(pn, "feudal_slow", "Feudal up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
+                            &format!("Slower to Feudal than the {ref_desc} for {civ}."));
+                        f.vars.insert("ref_kind", ref_kind.to_string());
+                        f.vars.insert("bucket", bucket.to_string());
+                        f.vars.insert("mode", mode.to_string());
+                        f.vars.insert("map", map_slug.to_string());
+                        f.vars.insert("civ", civ.to_string());
+                        out.push(f);
                     }
                 }
                 if let (Some(cms), Some(ref_s)) = (m.castle_ms, s.castle_s) {
@@ -204,15 +210,25 @@ pub fn findings(
                     let comp = cms as f64 / 1000.0 + castle_res;
                     if comp > ref_s + slack {
                         let sev = if comp > ref_s + slack + 90.0 { Severity::High } else { Severity::Med };
-                        out.push(mk(pn, "castle_slow", "Castle up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
-                            &format!("Slower to Castle than the {ref_desc}.")));
+                        let mut f = mk(pn, "castle_slow", "Castle up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, sev,
+                            &format!("Slower to Castle than the {ref_desc}."));
+                        f.vars.insert("ref_kind", ref_kind.to_string());
+                        f.vars.insert("bucket", bucket.to_string());
+                        f.vars.insert("mode", mode.to_string());
+                        f.vars.insert("map", map_slug.to_string());
+                        out.push(f);
                     }
                 }
                 if let (Some(ims), Some(ref_s)) = (m.imperial_ms, s.imperial_s) {
                     let comp = ims as f64 / 1000.0 + imp_res;
                     if comp > ref_s + 180.0 {
-                        out.push(mk(pn, "imperial_slow", "Imperial up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, Severity::Low,
-                            &format!("Slower to Imperial than the {ref_desc}.")));
+                        let mut f = mk(pn, "imperial_slow", "Imperial up-time", &fmt_mmss(comp), &fmt_mmss(ref_s), Basis::YourElo, Severity::Low,
+                            &format!("Slower to Imperial than the {ref_desc}."));
+                        f.vars.insert("ref_kind", ref_kind.to_string());
+                        f.vars.insert("bucket", bucket.to_string());
+                        f.vars.insert("mode", mode.to_string());
+                        f.vars.insert("map", map_slug.to_string());
+                        out.push(f);
                     }
                 }
                 // --- vs WINNERS at this slice: villagers trained by Castle Age.
@@ -221,9 +237,11 @@ pub fn findings(
                     let yours = m.vils_castle as f64;
                     if yours + 6.0 < ref_v {
                         let sev = if yours + 12.0 < ref_v { Severity::High } else { Severity::Med };
-                        out.push(mk(pn, "villagers_castle", "villagers by Castle", &m.vils_castle.to_string(), &format!("~{ref_v:.0}"),
+                        let mut f = mk(pn, "villagers_castle", "villagers by Castle", &m.vils_castle.to_string(), &format!("~{ref_v:.0}"),
                             Basis::YourElo, sev,
-                            &format!("Winners in this bracket train ~{ref_v:.0} villagers by Castle Age — TC idle time usually explains the gap.")));
+                            &format!("Winners in this bracket train ~{ref_v:.0} villagers by Castle Age — TC idle time usually explains the gap."));
+                        f.vars.insert("ref_v", format!("{ref_v:.0}"));
+                        out.push(f);
                     }
                 }
             }
@@ -232,9 +250,12 @@ pub fn findings(
                 if let (Some(cms), Some(pro_s)) = (m.castle_ms, p.castle_s) {
                     let comp = cms as f64 / 1000.0 + castle_res;
                     if comp > pro_s + 240.0 {
-                        out.push(mk(pn, "castle_vs_pro", "Castle vs pro", &fmt_mmss(comp), &fmt_mmss(pro_s), Basis::Pro, Severity::Low,
+                        let mut f = mk(pn, "castle_vs_pro", "Castle vs pro", &fmt_mmss(comp), &fmt_mmss(pro_s), Basis::Pro, Severity::Low,
                             &format!("Castle is {} behind the 2500+ {map_slug} median — the pace to aim for.",
-                                fmt_mmss(comp - pro_s))));
+                                fmt_mmss(comp - pro_s)));
+                        f.vars.insert("gap", fmt_mmss(comp - pro_s));
+                        f.vars.insert("map", map_slug.to_string());
+                        out.push(f);
                     }
                 }
             }
@@ -292,9 +313,12 @@ pub fn findings(
             let (slow, fast, gap) = if a > b { (0usize, 1usize, a - b) } else { (1, 0, b - a) };
             if gap > 45_000 {
                 let pn = metrics[slow].info.player_number;
-                out.push(mk(pn, "feudal_vs_opp", "Feudal vs opponent", &fmt_mmss(a.max(b) as f64 / 1000.0),
+                let mut f = mk(pn, "feudal_vs_opp", "Feudal vs opponent", &fmt_mmss(a.max(b) as f64 / 1000.0),
                     &fmt_mmss(a.min(b) as f64 / 1000.0), Basis::Opponent, Severity::Med,
-                    &format!("Reached Feudal {}s after {} — you started the game behind.", gap / 1000, metrics[fast].info.name)));
+                    &format!("Reached Feudal {}s after {} — you started the game behind.", gap / 1000, metrics[fast].info.name));
+                f.vars.insert("gap", (gap / 1000).to_string());
+                f.vars.insert("opp", metrics[fast].info.name.clone());
+                out.push(f);
             }
         }
     }

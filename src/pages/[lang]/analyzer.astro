@@ -678,9 +678,17 @@ const ecoTechs: Record<string, string> = {
         .map((f: any) => {
           const basis = f.basis && f.basis !== "absolute" ? ` <span class="font-mono text-[10px] text-stone-700/80">[${esc(L[`analyzer.basis.${f.basis}`] ?? f.basis)}]</span>` : "";
           // Localize metric + note via the stable finding code; the English strings
-          // (f.metric/f.note from the engine) fall back for unmapped/templated codes.
+          // (f.metric/f.note from the engine) fall back for unmapped codes.
           const metricTxt = L[`analyzer.fix.${f.code}`] ?? f.metric;
-          const noteTxt = L[`analyzer.fixnote.${f.code}`] ?? f.note;
+          let noteTxt = L[`analyzer.fixnote.${f.code}`] ?? f.note;
+          // Templated findings carry a `vars` map: compose the localized ref_desc
+          // from its kind, then fill the note's {placeholders} (slugs title-cased).
+          const v = f.vars as Record<string, string> | undefined;
+          if (v && Object.keys(v).length) {
+            const nameOf = (s: string) => (s ?? "").split(/[-_]/).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+            const refDesc = v.ref_kind ? fill(L[`analyzer.fixref.${v.ref_kind}`] ?? "", { ...v, map: nameOf(v.map) }) : "";
+            noteTxt = fill(noteTxt, { ...v, refDesc, civ: nameOf(v.civ ?? ""), map: nameOf(v.map ?? "") });
+          }
           return `<li class="flex items-start gap-2.5 border-b border-stone-700/15 py-2 last:border-b-0">
             <span class="mt-0.5 inline-block rounded px-1.5 font-mono text-[10px] uppercase ${sevStyle[f.severity] ?? sevStyle.low}">${esc(L[`analyzer.sev.${f.severity}`] ?? f.severity)}</span>
             <span class="text-sm text-ink"><strong class="font-display">${esc(metricTxt)}</strong> — ${esc(L["analyzer.you"])} <span class="font-mono">${esc(f.your)}</span> (${esc(L["analyzer.ref"])} <span class="font-mono">${esc(f.reference)}</span>)${basis}<br /><span class="text-stone-700">${esc(noteTxt)}</span></span>
