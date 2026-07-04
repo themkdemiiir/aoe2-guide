@@ -144,7 +144,7 @@ const mapList = one
                 <li>
                   <Tag
                     {...(m.href ? { href: m.href } : {})}
-                    title={`${m.games.toLocaleString()} ${tr ? "maç" : "games"}`}
+                    title={`${m.games.toLocaleString(tr ? "tr-TR" : "en-US")} ${tr ? "maç" : "games"}`}
                     class:list={["group flex items-center gap-2.5 rounded px-1.5 py-1", m.href && "transition-colors hover:bg-gold-500/10"]}
                   >
                     <span class="flex w-28 flex-none items-center gap-1 truncate text-sm text-ink group-hover:text-gold-700">
@@ -184,6 +184,7 @@ const mapList = one
   // session, leaving the next civ's charts blank). Colors read from theme tokens
   // each run so they track light/dark.
   function initCivStats() {
+    const numLocale = document.documentElement.lang === "tr" ? "tr-TR" : "en-US";
     const css = getComputedStyle(document.documentElement);
     const stone = css.getPropertyValue("--color-stone-700").trim() || "#5a4a33";
     const gold = css.getPropertyValue("--color-wr-good").trim() || "#c79a3c";
@@ -237,7 +238,7 @@ const mapList = one
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
-          tooltip: { callbacks: { label: (c) => `${c.parsed[horizontal ? "x" : "y"]}% win rate${games.length ? ` · ${games[c.dataIndex].toLocaleString()} games` : ""}` } },
+          tooltip: { callbacks: { label: (c) => `${c.parsed[horizontal ? "x" : "y"]}% win rate${games.length ? ` · ${games[c.dataIndex].toLocaleString(numLocale)} games` : ""}` } },
         },
         scales: horizontal ? { x: valueAxis, y: catAxis } : { y: valueAxis, x: catAxis },
       },
@@ -315,7 +316,7 @@ const mapList = one
         elWr.style.color = wr >= 50 ? "var(--color-wr-good)" : "var(--color-wr-bad)";
         elTier.textContent = t;
         elTier.style.color = TIER_COLORS[t];
-        elGames.textContent = `${g.toLocaleString()} ${gamesWord}`;
+        elGames.textContent = `${g.toLocaleString(numLocale)} ${gamesWord}`;
       } else {
         elWr.textContent = "—";
         elWr.style.color = "";

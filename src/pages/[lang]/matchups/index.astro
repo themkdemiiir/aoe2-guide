@@ -15,6 +15,9 @@ export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Locale;
+// Locale for number grouping — toLocaleString() with no arg uses the build
+// machine's locale (renders "2.316 games" on EN). Pin it to the page language.
+const numLocale = lang === "tr" ? "tr-TR" : "en-US";
 
 // Sort civs alphabetically by slug for the dropdowns.
 // Bonuses / team bonus / unique-tech text come from the LOCALIZED `civilizations`
@@ -241,7 +244,7 @@ const h2hBannerSSR = (a: string, b: string, eIdx: number): string => {
     + '<div class="text-center">'
     + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
     + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
-    + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString() + ' ' + h2hLabels.games : '') + '</div>'
+    + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games : '') + '</div>'
     + '</div>'
     + civHeadSSR(iconB, bCrown, 48)
     + '</div>'
@@ -289,7 +292,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
       <!-- Server-rendered default pair; JS replaces this on load / selection. -->
     </div>
 
-    <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS }}>
+    <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS, numLocale }}>
       // Build a slug -> civ lookup
       const byslug = Object.fromEntries(civs.map((c) => [c.slug, c]));
 
@@ -416,7 +419,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + '<div class="text-center">'
           + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
           + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
-          + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString() + ' ' + h2hLabels.games : '') + '</div>'
+          + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games : '') + '</div>'
           + '</div>'
           + civHead(iconB, bCrown, 48)
           + '</div>'

@@ -6,7 +6,6 @@
 
 import { getCollection } from "astro:content";
 import Alert from "@/components/ui/Alert.astro";
-import Badge from "@/components/ui/Badge.astro";
 import Card from "@/components/ui/Card.astro";
 import Icon from "@/components/ui/Icon.astro";
 import Stat from "@/components/ui/Stat.astro";
@@ -59,9 +58,6 @@ const blocks = slugs.map((slug) => {
           ) : (
             <span class="font-display text-lg text-ink truncate block">{name}</span>
           )}
-          {!stats && (
-            <Badge variant="outline" class="mt-1">{t(locale, "units.statsPending")}</Badge>
-          )}
         </div>
       </div>
 
@@ -79,7 +75,7 @@ const blocks = slugs.map((slug) => {
         </dl>
       ) : (
         <Alert variant="info" class="mt-3">
-          {t(locale, "units.statsUnavailable")} <code>{slug}</code>.
+          {`${t(locale, "units.statsUnavailable")} ${name}.`}
         </Alert>
       )}
 
