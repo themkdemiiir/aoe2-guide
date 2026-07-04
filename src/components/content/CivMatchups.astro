@@ -115,14 +115,17 @@ const split = (rows: M[]) => {
       {t(lang, "data.source")}
     </p>
 
+    {/* is:inline (forced by data-astro-rerun) — plain JS ONLY, no TS generics:
+        `querySelectorAll<HTMLElement>` would ship verbatim and throw at runtime
+        (the `<T>` parses as comparison operators). */}
     <script data-astro-rerun>
-      for (const root of document.querySelectorAll<HTMLElement>("[data-civ-matchups]")) {
-        const ladderGroup = root.querySelector<HTMLElement>("[data-ladder]");
-        const sel = root.querySelector<HTMLSelectElement>("[data-mselect]");
+      for (const root of document.querySelectorAll("[data-civ-matchups]")) {
+        const ladderGroup = root.querySelector("[data-ladder]");
+        const sel = root.querySelector("[data-mselect]");
         const state = { ladder: "1v1", map: "all" };
         const sync = () => {
           const want = state.ladder === "team" ? "team-all" : `1v1-${state.map}`;
-          for (const v of root.querySelectorAll<HTMLElement>("[data-view]")) v.hidden = v.dataset.view !== want;
+          for (const v of root.querySelectorAll("[data-view]")) v.hidden = v.dataset.view !== want;
           if (sel) {
             // team has no per-map breakdown — disable (don't hide) the map picker
             sel.disabled = state.ladder === "team";
@@ -130,14 +133,14 @@ const split = (rows: M[]) => {
             sel.title = state.ladder === "team" ? (sel.dataset.teamHint || "") : "";
           }
           if (ladderGroup) {
-            for (const b of ladderGroup.querySelectorAll<HTMLButtonElement>("button")) {
+            for (const b of ladderGroup.querySelectorAll("button")) {
               if (b.dataset.val === state.ladder) b.setAttribute("data-on", "");
               else b.removeAttribute("data-on");
             }
           }
         };
         if (ladderGroup) {
-          for (const b of ladderGroup.querySelectorAll<HTMLButtonElement>("button")) {
+          for (const b of ladderGroup.querySelectorAll("button")) {
             b.addEventListener("click", () => {
               state.ladder = b.dataset.val || "1v1";
               sync();
