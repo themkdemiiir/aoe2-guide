@@ -88,9 +88,9 @@ if (lineRoot) {
                   <span title="HP">❤ {(tier.stats as {hp: number}).hp}</span>
                   <span title="Attack">⚔ {(tier.stats as {attack: number}).attack}</span>
                   {(tier.stats as {range: number}).range > 0 && <span title="Range">⬡ {(tier.stats as {range: number}).range}</span>}
-                  <span title="Food" class="text-res-food">{((tier.stats as {cost: {food: number}}).cost?.food ?? 0)}f</span>
-                  <span title="Wood" class="text-res-wood">{((tier.stats as {cost: {wood: number}}).cost?.wood ?? 0)}w</span>
-                  <span title="Gold" class="text-res-gold">{((tier.stats as {cost: {gold: number}}).cost?.gold ?? 0)}g</span>
+                  {((tier.stats as {cost: {food: number}}).cost?.food ?? 0) > 0 && <span title="Food" class="text-res-food">{(tier.stats as {cost: {food: number}}).cost.food}f</span>}
+                  {((tier.stats as {cost: {wood: number}}).cost?.wood ?? 0) > 0 && <span title="Wood" class="text-res-wood">{(tier.stats as {cost: {wood: number}}).cost.wood}w</span>}
+                  {((tier.stats as {cost: {gold: number}}).cost?.gold ?? 0) > 0 && <span title="Gold" class="text-res-gold">{(tier.stats as {cost: {gold: number}}).cost.gold}g</span>}
                 </div>
               )}
             </a>
@@ -105,6 +105,9 @@ if (lineRoot) {
           <tr><th class="text-left text-stone-700">{t(lang, "units.hp")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.hp}</td></tr>
           <tr><th class="text-left text-stone-700">{t(lang, "units.attack")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.attack}</td></tr>
           <tr><th class="text-left text-stone-700">{t(lang, "units.range")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.range}</td></tr>
+          {(stats.armorMelee !== undefined || stats.armorPiercing !== undefined) && (
+            <tr><th class="text-left text-stone-700">{t(lang, "units.armor")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.armorMelee ?? 0}/{stats.armorPiercing ?? 0}</td></tr>
+          )}
           <tr><th class="text-left text-stone-700">{t(lang, "units.trainTime")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.trainTime}s</td></tr>
           <tr>
             <th class="text-left text-stone-700">{t(lang, "units.cost")}</th>
