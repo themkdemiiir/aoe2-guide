@@ -22,12 +22,18 @@
 //   node scripts/data-pipeline/stream-relic.mjs --team          # full team sweep
 //   node scripts/data-pipeline/stream-relic.mjs --players 500   # smoke test (cap)
 
-import { mkdir, appendFile } from "node:fs/promises";
+import { appendFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import {
-  API, TITLE, LEADERBOARD_1V1_RM, LEADERBOARD_TEAM_RM,
-  keepBySize as keepBySizeFor, makeClient, normalizeMatches, sleep,
+  API,
+  keepBySize as keepBySizeFor,
+  LEADERBOARD_1V1_RM,
+  LEADERBOARD_TEAM_RM,
+  makeClient,
+  normalizeMatches,
+  sleep,
+  TITLE,
 } from "./lib/relic-api.mjs";
 
 // --- CLI args (strict: a typo'd flag fails loud) --------------------------------
@@ -66,17 +72,23 @@ async function run() {
   const shard = path.join(ladderDir, `${sweepStamp()}.ndjson`);
 
   const cap = MAX_PLAYERS === Infinity ? "full ladder" : `${MAX_PLAYERS} profiles (capped)`;
-  console.log(`Sweep ${LADDER} (leaderboard_id=${LEADERBOARD}) — ${cap} → ${path.relative(process.cwd(), shard)}`);
+  console.log(
+    `Sweep ${LADDER} (leaderboard_id=${LEADERBOARD}) — ${cap} → ${path.relative(process.cwd(), shard)}`,
+  );
   const profileIds = await fetchProfileIds({ leaderboard: LEADERBOARD, limit: MAX_PLAYERS });
   console.log(`Seeded ${profileIds.length} profiles. Crawling recent histories (${CONCURRENCY}x)…`);
 
   const seen = new Set(); // per-sweep dedup ONLY — never persisted; DuckDB dedups across sweeps
-  let processed = 0, written = 0, qi = 0;
+  let processed = 0,
+    written = 0,
+    qi = 0;
 
   async function handle(pid) {
     const url = `${API}/getRecentMatchHistory?title=${TITLE}&profile_ids=%5B${pid}%5D`;
     let rows = [];
-    try { rows = normalizeMatches(await getJson(url), keepBySize); } catch (e) {
+    try {
+      rows = normalizeMatches(await getJson(url), keepBySize);
+    } catch (e) {
       process.stderr.write(`\n  [warn] profile ${pid}: ${e.message}\n`);
     }
     const fresh = rows.filter((r) => !seen.has(r.match_id));
@@ -86,14 +98,24 @@ async function run() {
       written += fresh.length;
     }
     processed++;
-    if (processed % 200 === 0 && process.stderr.isTTY) process.stderr.write(`\r  ${processed}/${profileIds.length} profiles · ${written} matches this sweep`);
+    if (processed % 200 === 0 && process.stderr.isTTY)
+      process.stderr.write(
+        `\r  ${processed}/${profileIds.length} profiles · ${written} matches this sweep`,
+      );
     if (THROTTLE_MS) await sleep(THROTTLE_MS);
   }
-  async function worker() { while (qi < profileIds.length) await handle(profileIds[qi++]); }
+  async function worker() {
+    while (qi < profileIds.length) await handle(profileIds[qi++]);
+  }
   await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
 
   process.stderr.write("\n");
-  console.log(`Done. ${written} ${LADDER} matches written to ${path.relative(process.cwd(), shard)} (DuckDB dedups on ingest).`);
+  console.log(
+    `Done. ${written} ${LADDER} matches written to ${path.relative(process.cwd(), shard)} (DuckDB dedups on ingest).`,
+  );
 }
 
-run().catch((e) => { console.error(e); process.exit(1); });
+run().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

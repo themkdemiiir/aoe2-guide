@@ -6,7 +6,12 @@ const MARKERS = {
   en: { civ: /civilization$/i, unit: /^Unique Unit/i, tech: /^Unique Tech/i, team: /^Team Bonus/i },
   // TR tech header is normally "Özgün Teknoloji(ler)" but Byzantines' source uses the
   // synonym "Özel Teknoloji" — accept both so the tech section is recognized either way.
-  tr: { civ: /medeniyeti$/i, unit: /^Özgün Birim/i, tech: /^Öz(gün|el) Teknoloji/i, team: /^Takım Bonusu/i },
+  tr: {
+    civ: /medeniyeti$/i,
+    unit: /^Özgün Birim/i,
+    tech: /^Öz(gün|el) Teknoloji/i,
+    team: /^Takım Bonusu/i,
+  },
 };
 
 export function parseHelp(raw, lang) {
@@ -24,9 +29,18 @@ export function parseHelp(raw, lang) {
       out.civType = l.replace(M.civ, "").trim();
       continue;
     }
-    if (M.unit.test(l)) { section = "unit"; continue; }
-    if (M.tech.test(l)) { section = "techs"; continue; }
-    if (M.team.test(l)) { section = "team"; continue; }
+    if (M.unit.test(l)) {
+      section = "unit";
+      continue;
+    }
+    if (M.tech.test(l)) {
+      section = "techs";
+      continue;
+    }
+    if (M.team.test(l)) {
+      section = "team";
+      continue;
+    }
 
     const text = l.replace(/^•\s*/, "").trim();
     if (section === "bonuses" && l.startsWith("•")) {
@@ -43,7 +57,9 @@ export function parseHelp(raw, lang) {
       out.teamBonus = out.teamBonus ? `${out.teamBonus} ${text}` : text;
     } else if (section === "techs" && l.startsWith("•")) {
       const m = text.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
-      out.uniqueTechs.push(m ? { name: m[1].trim(), effect: m[2].trim() } : { name: text, effect: "" });
+      out.uniqueTechs.push(
+        m ? { name: m[1].trim(), effect: m[2].trim() } : { name: text, effect: "" },
+      );
     }
   }
   return out.civBonuses.length ? out : null;

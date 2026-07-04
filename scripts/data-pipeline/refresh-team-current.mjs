@@ -19,13 +19,22 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { eloBucket } from "./lib/buckets.mjs";
 import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
-import { canonToKeyIndex, isRankedTeam, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
+import {
+  canonToKeyIndex,
+  isRankedTeam,
+  loadReplayMapTruth,
+  relicCivSlug,
+} from "./lib/relic-map.mjs";
 import { pct, tierOf, wilson } from "./lib/stats.mjs";
 
 const CIV_META = path.resolve("src/data/civ-meta.json");
 const MAP_META = path.resolve("src/data/map-meta.json");
 
-const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
+const guideCivs = new Set(
+  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
+    (c) => c.slug,
+  ),
+);
 const civMeta = JSON.parse(readFileSync(CIV_META, "utf8"));
 const mapMeta = JSON.parse(readFileSync(MAP_META, "utf8"));
 
@@ -56,17 +65,29 @@ for await (const m of crawlRecords({ recentDays: CURRENT_WINDOW_DAYS })) {
     if (!guideCivs.has(slug)) continue;
     totalApp++;
     const won = pl.won ? 1 : 0;
-    const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
+    const eb = eloBucket(pl.rating);
+    if (eb == null) {
+      skippedNullElo++;
+      continue;
+    }
     // civ aggregate
     const c = (civ[slug] ??= { g: 0, w: 0, byElo: {}, byMap: {} });
-    c.g++; c.w += won;
-    const be = (c.byElo[eb] ??= { g: 0, w: 0 }); be.g++; be.w += won;
-    if (mapKey) { const bm = (c.byMap[mapKey] ??= { g: 0, w: 0 }); bm.g++; bm.w += won; }
+    c.g++;
+    c.w += won;
+    const be = (c.byElo[eb] ??= { g: 0, w: 0 });
+    be.g++;
+    be.w += won;
+    if (mapKey) {
+      const bm = (c.byMap[mapKey] ??= { g: 0, w: 0 });
+      bm.g++;
+      bm.w += won;
+    }
     // map aggregate (per bucket + "all")
     if (mp) {
       for (const bk of [eb, "all"]) {
         const cw = ((mp[bk] ??= {})[slug] ??= { g: 0, w: 0 });
-        cw.g++; cw.w += won;
+        cw.g++;
+        cw.w += won;
       }
     }
   }
@@ -86,11 +107,15 @@ for (const [slug, c] of Object.entries(civ)) {
   o.tier = tierOf((c.w / c.g) * 100);
   o.playRate = pct(c.g / totalApp);
   o.byElo = Object.fromEntries(
-    Object.entries(c.byElo).filter(([, v]) => v.g >= MIN_ELO).map(([bk, v]) => [bk, { games: v.g, winRate: pct(v.w / v.g) }]),
+    Object.entries(c.byElo)
+      .filter(([, v]) => v.g >= MIN_ELO)
+      .map(([bk, v]) => [bk, { games: v.g, winRate: pct(v.w / v.g) }]),
   );
   // byMap is replay-VERIFIED matches only — preserve previous slices when thin.
   const byMap = Object.fromEntries(
-    Object.entries(c.byMap).filter(([, v]) => v.g >= MIN_CIV_MAP).map(([k, v]) => [k, { games: v.g, winRate: pct(v.w / v.g) }]),
+    Object.entries(c.byMap)
+      .filter(([, v]) => v.g >= MIN_CIV_MAP)
+      .map(([k, v]) => [k, { games: v.g, winRate: pct(v.w / v.g) }]),
   );
   if (Object.keys(byMap).length) o.byMap = byMap;
   civUpdated++;
@@ -124,6 +149,8 @@ mapMeta.source = `self-collected World's Edge live ladder (ranked RM, last ${CUR
 mapMeta.generated = today;
 writeFileSync(CIV_META, `${JSON.stringify(civMeta, null, 2)}\n`, "utf8");
 writeFileSync(MAP_META, `${JSON.stringify(mapMeta, null, 2)}\n`, "utf8");
-console.log(`refresh-team-current: ${totalApp} team appearances · ${civUpdated} civs + ${mapUpdated} maps got current team data · ${skippedNullElo} null-elo dropped`);
+console.log(
+  `refresh-team-current: ${totalApp} team appearances · ${civUpdated} civs + ${mapUpdated} maps got current team data · ${skippedNullElo} null-elo dropped`,
+);
 console.log(`  → ${CIV_META}`);
 console.log(`  → ${MAP_META}`);

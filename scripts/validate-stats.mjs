@@ -39,7 +39,8 @@ function scan(file, node, rates) {
   if (node && typeof node === "object") {
     for (const [k, val] of Object.entries(node)) {
       if (k === "winRate" && val != null) {
-        if (typeof val !== "number" || !Number.isFinite(val)) fail(file, `winRate not a finite number: ${JSON.stringify(val)}`);
+        if (typeof val !== "number" || !Number.isFinite(val))
+          fail(file, `winRate not a finite number: ${JSON.stringify(val)}`);
         else {
           rates.push(val);
           if (val < 0 || val > 100) fail(file, `winRate out of [0,100]: ${val}`);
@@ -65,7 +66,8 @@ for (const file of FILES) {
   const rates = [];
   scan(file, o, rates);
   // scale guard: a 0-1 fraction slipped in where 0-100 percent is expected.
-  if (rates.length && rates.every((r) => r <= 1)) fail(file, "winRate looks like a 0-1 fraction, expected 0-100 percent");
+  if (rates.length && rates.every((r) => r <= 1))
+    fail(file, "winRate looks like a 0-1 fraction, expected 0-100 percent");
 }
 
 // public/civ-cube.json — packed integer tuples [civ,elo,map,month,games,wins].

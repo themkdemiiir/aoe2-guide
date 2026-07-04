@@ -69,9 +69,18 @@ const buildOrders = defineCollection({
         // The split must reconcile with the audited Vil-Pop rail — fail the build, never render wrong numbers.
         steps.forEach((s, i) => {
           if (s.resources && s.villagers != null) {
-            const sum = s.resources.food + s.resources.wood + s.resources.gold + s.resources.stone + s.resources.builder;
+            const sum =
+              s.resources.food +
+              s.resources.wood +
+              s.resources.gold +
+              s.resources.stone +
+              s.resources.builder;
             if (sum !== s.villagers) {
-              ctx.addIssue({ code: z.ZodIssueCode.custom, path: [i, "resources"], message: `resources sum ${sum} != villagers ${s.villagers}` });
+              ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                path: [i, "resources"],
+                message: `resources sum ${sum} != villagers ${s.villagers}`,
+              });
             }
           }
         });

@@ -33,4 +33,13 @@ export const HOME_TIER_COLORS: Record<string, string> = {
 };
 
 /** analyzer per-player slot colors (2v2/3v3/4v4) */
-export const PLAYER_COLORS = ["#2f6bd8", "#c2352b", "#3f8f3f", "#c78a1e", "#7a4fb0", "#0f8a8a", "#c04f9c", "#6b7a2a"];
+export const PLAYER_COLORS = [
+  "#2f6bd8",
+  "#c2352b",
+  "#3f8f3f",
+  "#c78a1e",
+  "#7a4fb0",
+  "#0f8a8a",
+  "#c04f9c",
+  "#6b7a2a",
+];

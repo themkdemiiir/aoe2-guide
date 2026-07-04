@@ -23,7 +23,9 @@ const P = `${HOME}/aoestats/p_*.parquet`;
 const OUT = path.resolve("src/data/map-meta.json");
 
 const guideCivs = new Set(
-  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug),
+  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
+    (c) => c.slug,
+  ),
 );
 
 const ELO = eloCaseSql("p.new_rating");

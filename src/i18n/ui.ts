@@ -3,18 +3,30 @@ import type { Locale } from "./locales";
 export const ui = {
   en: {
     "nav.civs": "Civilizations",
-    "meta.home": "Age of Empires II strategy guide — data-driven civilization tier lists, 40+ verified build orders, unit counters, map guides and a replay analyzer.",
-    "meta.civs": "All 53 Age of Empires II civilizations ranked by real win rates — filter the tier list by elo, map and patch, with full bonus and strategy guides.",
-    "meta.builds": "Age of Empires II build orders verified against pro play — scout rush, archers, fast castle and more, with step-by-step villager assignments.",
-    "meta.units": "Age of Empires II unit guide — stats, counters and upgrade lines for every military unit, from Militia to unique units.",
-    "meta.maps": "Age of Empires II ranked map guides — best civilizations per map from real match data, map types and strategy notes.",
-    "meta.blog": "Age of Empires II strategy articles — fundamentals, unit counters and meta analysis backed by cited sources.",
-    "meta.learn": "Learn Age of Empires II from zero — a beginner path covering economy, military, ages and your first build order, chapter by chapter.",
-    "meta.glossary": "Age of Empires II glossary — plain-language definitions of the terms, slang and mechanics you meet in guides and casts.",
-    "meta.counters": "Age of Empires II counter chart — what beats every unit, and what it beats, at a glance for all military lines.",
-    "meta.matchups": "Age of Empires II civilization matchups — head-to-head win rates for any civ pair from millions of ranked games, by map.",
-    "meta.search": "Search the AOE2 Guide — civilizations, build orders, units, maps and strategy articles in one place.",
-    "meta.about": "About AOE2 Guide — how this Age of Empires II guide is built, where the data comes from, and its sources and attribution.",
+    "meta.home":
+      "Age of Empires II strategy guide — data-driven civilization tier lists, 40+ verified build orders, unit counters, map guides and a replay analyzer.",
+    "meta.civs":
+      "All 53 Age of Empires II civilizations ranked by real win rates — filter the tier list by elo, map and patch, with full bonus and strategy guides.",
+    "meta.builds":
+      "Age of Empires II build orders verified against pro play — scout rush, archers, fast castle and more, with step-by-step villager assignments.",
+    "meta.units":
+      "Age of Empires II unit guide — stats, counters and upgrade lines for every military unit, from Militia to unique units.",
+    "meta.maps":
+      "Age of Empires II ranked map guides — best civilizations per map from real match data, map types and strategy notes.",
+    "meta.blog":
+      "Age of Empires II strategy articles — fundamentals, unit counters and meta analysis backed by cited sources.",
+    "meta.learn":
+      "Learn Age of Empires II from zero — a beginner path covering economy, military, ages and your first build order, chapter by chapter.",
+    "meta.glossary":
+      "Age of Empires II glossary — plain-language definitions of the terms, slang and mechanics you meet in guides and casts.",
+    "meta.counters":
+      "Age of Empires II counter chart — what beats every unit, and what it beats, at a glance for all military lines.",
+    "meta.matchups":
+      "Age of Empires II civilization matchups — head-to-head win rates for any civ pair from millions of ranked games, by map.",
+    "meta.search":
+      "Search the AOE2 Guide — civilizations, build orders, units, maps and strategy articles in one place.",
+    "meta.about":
+      "About AOE2 Guide — how this Age of Empires II guide is built, where the data comes from, and its sources and attribution.",
     "nav.builds": "Build Orders",
     "nav.units": "Units",
     "nav.maps": "Maps",
@@ -187,7 +199,7 @@ export const ui = {
     "analyzer.drop": "Drop your .aoe2record file here",
     "analyzer.browse": "or choose a file",
     "analyzer.where":
-      "Replays live in your game folder under savegame/ — the newest \"MP Replay …\" file is your last game.",
+      'Replays live in your game folder under savegame/ — the newest "MP Replay …" file is your last game.',
     "analyzer.privacy": "Everything runs in your browser. The replay never leaves your computer.",
     "analyzer.version":
       "Current-patch ranked replays are supported; replays from much older patches may fail to parse.",
@@ -244,27 +256,42 @@ export const ui = {
     "analyzer.phrase.more": "{d} more than {who}",
     "analyzer.phrase.even": "even with {who}",
     "analyzer.sum.game": "You played {civ} on {map} — {result}, {dur} long.",
-    "analyzer.sum.gameUndecided": "You played {civ} on {map} ({dur} — result not recorded in the replay).",
+    "analyzer.sum.gameUndecided":
+      "You played {civ} on {map} ({dur} — result not recorded in the replay).",
     "analyzer.sum.biggestGap": "Biggest gap: you reached {age} at {you} — {vsOpp}{vsRef}.",
-    "analyzer.sum.idle": "Your Town Center sat idle for about {total} in the early game — roughly {n} villagers of lost production.",
+    "analyzer.sum.idle":
+      "Your Town Center sat idle for about {total} in the early game — roughly {n} villagers of lost production.",
     "analyzer.sum.positive": "On the bright side: {what}.",
-    "analyzer.sum.openingGood": "your {opening} opening is one of the most common among winners at your level",
+    "analyzer.sum.openingGood":
+      "your {opening} opening is one of the most common among winners at your level",
     "analyzer.sum.aheadBit": "you were {phrase}",
     "analyzer.help.feudal": "When your Feudal Age finished. Earlier = your economy started faster.",
-    "analyzer.help.castle": "When your Castle Age finished. The single best summary of your early game pace.",
+    "analyzer.help.castle":
+      "When your Castle Age finished. The single best summary of your early game pace.",
     "analyzer.help.imperial": "When your Imperial Age finished.",
-    "analyzer.help.vils": "Villagers trained before Castle Age. More villagers = more resources = more of everything later.",
-    "analyzer.help.idleDark": "Time your Town Center was NOT making villagers before Feudal (estimate). Every 25 seconds idle is one villager lost.",
-    "analyzer.help.idleFeudal": "Town Center idle time during Feudal Age (estimate). Same rule: 25 seconds ≈ one villager.",
-    "analyzer.help.float": "Highest pile of unspent resources (estimate). Big floats mean production couldn't keep up with income.",
-    "analyzer.help.market": "Market buys/sells. Occasional use is fine; heavy buying often signals an economy imbalance.",
-    "analyzer.help.ecoUpgrades": "How many of the 10 economy upgrades you had researched by Castle Age.",
-    "analyzer.help.wheelbarrow": "Wheelbarrow makes every villager faster. The % shows how many winners at your level had it before Castle Age.",
-    "analyzer.help.opening": "Your opening strategy, read from what you trained. The reference shows what winners with your civ actually open.",
+    "analyzer.help.vils":
+      "Villagers trained before Castle Age. More villagers = more resources = more of everything later.",
+    "analyzer.help.idleDark":
+      "Time your Town Center was NOT making villagers before Feudal (estimate). Every 25 seconds idle is one villager lost.",
+    "analyzer.help.idleFeudal":
+      "Town Center idle time during Feudal Age (estimate). Same rule: 25 seconds ≈ one villager.",
+    "analyzer.help.float":
+      "Highest pile of unspent resources (estimate). Big floats mean production couldn't keep up with income.",
+    "analyzer.help.market":
+      "Market buys/sells. Occasional use is fine; heavy buying often signals an economy imbalance.",
+    "analyzer.help.ecoUpgrades":
+      "How many of the 10 economy upgrades you had researched by Castle Age.",
+    "analyzer.help.wheelbarrow":
+      "Wheelbarrow makes every villager faster. The % shows how many winners at your level had it before Castle Age.",
+    "analyzer.help.opening":
+      "Your opening strategy, read from what you trained. The reference shows what winners with your civ actually open.",
     "analyzer.help.military": "When you trained your first military unit.",
-    "analyzer.help.scouting": "When your units first reached the enemy base. Earlier scouting = better decisions.",
-    "analyzer.help.apm": "Actions per minute (real commands only — no camera/selection spam counted).",
-    "analyzer.help.ecoApm": "Commands spent on your economy per minute (villagers, eco buildings, eco techs).",
+    "analyzer.help.scouting":
+      "When your units first reached the enemy base. Earlier scouting = better decisions.",
+    "analyzer.help.apm":
+      "Actions per minute (real commands only — no camera/selection spam counted).",
+    "analyzer.help.ecoApm":
+      "Commands spent on your economy per minute (villagers, eco buildings, eco techs).",
     "analyzer.help.milApm": "Commands spent on military per minute (units, military buildings).",
     "analyzer.matrix": "Head to head",
     "analyzer.matrix.note":
@@ -317,18 +344,30 @@ export const ui = {
   },
   tr: {
     "nav.civs": "Uygarlıklar",
-    "meta.home": "Age of Empires II strateji rehberi — veriye dayalı uygarlık tier listeleri, 40+ doğrulanmış build order, birim counter'ları, harita rehberleri ve replay analizörü.",
-    "meta.civs": "Age of Empires II'nin 53 uygarlığı gerçek kazanma oranlarıyla sıralı — tier listesini elo, harita ve yamaya göre filtrele; bonus ve strateji rehberleriyle.",
-    "meta.builds": "Profesyonel oyunlara göre doğrulanmış Age of Empires II build order'ları — scout rush, okçu, fast castle ve dahası; adım adım köylü görevlendirmeleri.",
-    "meta.units": "Age of Empires II birim rehberi — Militia'dan özgün birimlere tüm askeri birimlerin istatistikleri, counter'ları ve yükseltme hatları.",
-    "meta.maps": "Age of Empires II dereceli harita rehberleri — gerçek maç verisinden haritaya göre en iyi uygarlıklar, harita türleri ve strateji notları.",
-    "meta.blog": "Age of Empires II strateji makaleleri — kaynak gösterilen temeller, birim counter'ları ve meta analizleri.",
-    "meta.learn": "Age of Empires II'yi sıfırdan öğren — ekonomi, ordu, çağlar ve ilk build order'ını bölüm bölüm anlatan başlangıç rehberi.",
-    "meta.glossary": "Age of Empires II sözlüğü — rehberlerde ve yayınlarda karşılaşılan terimlerin, argonun ve mekaniklerin sade tanımları.",
-    "meta.counters": "Age of Empires II counter tablosu — her birimi neyin yendiği ve neyi yendiği; tüm askeri hatlar için tek bakışta.",
-    "meta.matchups": "Age of Empires II uygarlık eşleşmeleri — milyonlarca dereceli maçtan her uygarlık çifti için haritaya göre kazanma oranları.",
-    "meta.search": "AOE2 Guide'da ara — uygarlıklar, build order'lar, birimler, haritalar ve strateji makaleleri tek yerde.",
-    "meta.about": "AOE2 Guide hakkında — bu Age of Empires II rehberinin nasıl yapıldığı, verilerin kaynağı, kaynakça ve atıflar.",
+    "meta.home":
+      "Age of Empires II strateji rehberi — veriye dayalı uygarlık tier listeleri, 40+ doğrulanmış build order, birim counter'ları, harita rehberleri ve replay analizörü.",
+    "meta.civs":
+      "Age of Empires II'nin 53 uygarlığı gerçek kazanma oranlarıyla sıralı — tier listesini elo, harita ve yamaya göre filtrele; bonus ve strateji rehberleriyle.",
+    "meta.builds":
+      "Profesyonel oyunlara göre doğrulanmış Age of Empires II build order'ları — scout rush, okçu, fast castle ve dahası; adım adım köylü görevlendirmeleri.",
+    "meta.units":
+      "Age of Empires II birim rehberi — Militia'dan özgün birimlere tüm askeri birimlerin istatistikleri, counter'ları ve yükseltme hatları.",
+    "meta.maps":
+      "Age of Empires II dereceli harita rehberleri — gerçek maç verisinden haritaya göre en iyi uygarlıklar, harita türleri ve strateji notları.",
+    "meta.blog":
+      "Age of Empires II strateji makaleleri — kaynak gösterilen temeller, birim counter'ları ve meta analizleri.",
+    "meta.learn":
+      "Age of Empires II'yi sıfırdan öğren — ekonomi, ordu, çağlar ve ilk build order'ını bölüm bölüm anlatan başlangıç rehberi.",
+    "meta.glossary":
+      "Age of Empires II sözlüğü — rehberlerde ve yayınlarda karşılaşılan terimlerin, argonun ve mekaniklerin sade tanımları.",
+    "meta.counters":
+      "Age of Empires II counter tablosu — her birimi neyin yendiği ve neyi yendiği; tüm askeri hatlar için tek bakışta.",
+    "meta.matchups":
+      "Age of Empires II uygarlık eşleşmeleri — milyonlarca dereceli maçtan her uygarlık çifti için haritaya göre kazanma oranları.",
+    "meta.search":
+      "AOE2 Guide'da ara — uygarlıklar, build order'lar, birimler, haritalar ve strateji makaleleri tek yerde.",
+    "meta.about":
+      "AOE2 Guide hakkında — bu Age of Empires II rehberinin nasıl yapıldığı, verilerin kaynağı, kaynakça ve atıflar.",
     "nav.builds": "Yapım Sıraları",
     "nav.units": "Birimler",
     "nav.maps": "Haritalar",
@@ -501,7 +540,7 @@ export const ui = {
     "analyzer.drop": ".aoe2record dosyanı buraya bırak",
     "analyzer.browse": "veya dosya seç",
     "analyzer.where":
-      "Tekrar kayıtları oyun klasöründe savegame/ altında durur — en yeni \"MP Replay …\" dosyası son oyunundur.",
+      'Tekrar kayıtları oyun klasöründe savegame/ altında durur — en yeni "MP Replay …" dosyası son oyunundur.',
     "analyzer.privacy": "Her şey tarayıcında çalışır. Tekrar kaydı bilgisayarından asla çıkmaz.",
     "analyzer.version":
       "Güncel yamanın dereceli tekrarları desteklenir; çok eski yamalardan kalan kayıtlar açılamayabilir.",
@@ -558,27 +597,43 @@ export const ui = {
     "analyzer.phrase.more": "{who} karşısında {d} fazla",
     "analyzer.phrase.even": "{who} ile başa baş",
     "analyzer.sum.game": "{map} haritasında {civ} oynadın — {result}, {dur} sürdü.",
-    "analyzer.sum.gameUndecided": "{map} haritasında {civ} oynadın ({dur} — sonuç tekrara kaydedilmemiş).",
+    "analyzer.sum.gameUndecided":
+      "{map} haritasında {civ} oynadın ({dur} — sonuç tekrara kaydedilmemiş).",
     "analyzer.sum.biggestGap": "En büyük fark: {age} çağına {you} anında ulaştın — {vsOpp}{vsRef}.",
-    "analyzer.sum.idle": "Kent Merkezin erken oyunda toplam {total} boş kaldı — kabaca {n} köylülük üretim kaybı.",
+    "analyzer.sum.idle":
+      "Kent Merkezin erken oyunda toplam {total} boş kaldı — kabaca {n} köylülük üretim kaybı.",
     "analyzer.sum.positive": "İyi tarafı: {what}.",
-    "analyzer.sum.openingGood": "{opening} açılışın, senin seviyendeki kazananların en sık oynadıklarından",
+    "analyzer.sum.openingGood":
+      "{opening} açılışın, senin seviyendeki kazananların en sık oynadıklarından",
     "analyzer.sum.aheadBit": "{phrase}",
-    "analyzer.help.feudal": "Feodal Çağ'ın ne zaman tamamlandığı. Erken olması ekonominin daha hızlı başlaması demek.",
-    "analyzer.help.castle": "Kale Çağı'nın ne zaman tamamlandığı. Erken oyun temposunun en iyi tek özeti.",
+    "analyzer.help.feudal":
+      "Feodal Çağ'ın ne zaman tamamlandığı. Erken olması ekonominin daha hızlı başlaması demek.",
+    "analyzer.help.castle":
+      "Kale Çağı'nın ne zaman tamamlandığı. Erken oyun temposunun en iyi tek özeti.",
     "analyzer.help.imperial": "İmparatorluk Çağı'nın ne zaman tamamlandığı.",
-    "analyzer.help.vils": "Kale Çağı'ndan önce eğitilen köylüler. Daha çok köylü = daha çok kaynak = sonrası için daha çok her şey.",
-    "analyzer.help.idleDark": "Feodal'den önce Kent Merkezi'nin köylü ÜRETMEDİĞİ süre (tahmini). Her 25 saniye boşluk bir köylü kaybıdır.",
-    "analyzer.help.idleFeudal": "Feodal Çağ boyunca Kent Merkezi boş süresi (tahmini). Aynı kural: 25 saniye ≈ bir köylü.",
-    "analyzer.help.float": "Harcanmadan biriken en yüksek kaynak yığını (tahmini). Büyük birikim, üretimin gelire yetişemediğini gösterir.",
-    "analyzer.help.market": "Pazar alım/satımları. Ara sıra kullanmak normal; yoğun alım genelde ekonomi dengesizliğine işaret eder.",
-    "analyzer.help.ecoUpgrades": "10 ekonomi geliştirmesinden kaçını Kale Çağı'na kadar araştırdığın.",
-    "analyzer.help.wheelbarrow": "El Arabası her köylüyü hızlandırır. Yüzde, senin seviyendeki kazananların kaçının bunu Kale'den önce aldığını gösterir.",
-    "analyzer.help.opening": "Eğittiklerinden okunan açılış stratejin. Referans, senin uygarlığınla kazananların gerçekte ne açtığını gösterir.",
+    "analyzer.help.vils":
+      "Kale Çağı'ndan önce eğitilen köylüler. Daha çok köylü = daha çok kaynak = sonrası için daha çok her şey.",
+    "analyzer.help.idleDark":
+      "Feodal'den önce Kent Merkezi'nin köylü ÜRETMEDİĞİ süre (tahmini). Her 25 saniye boşluk bir köylü kaybıdır.",
+    "analyzer.help.idleFeudal":
+      "Feodal Çağ boyunca Kent Merkezi boş süresi (tahmini). Aynı kural: 25 saniye ≈ bir köylü.",
+    "analyzer.help.float":
+      "Harcanmadan biriken en yüksek kaynak yığını (tahmini). Büyük birikim, üretimin gelire yetişemediğini gösterir.",
+    "analyzer.help.market":
+      "Pazar alım/satımları. Ara sıra kullanmak normal; yoğun alım genelde ekonomi dengesizliğine işaret eder.",
+    "analyzer.help.ecoUpgrades":
+      "10 ekonomi geliştirmesinden kaçını Kale Çağı'na kadar araştırdığın.",
+    "analyzer.help.wheelbarrow":
+      "El Arabası her köylüyü hızlandırır. Yüzde, senin seviyendeki kazananların kaçının bunu Kale'den önce aldığını gösterir.",
+    "analyzer.help.opening":
+      "Eğittiklerinden okunan açılış stratejin. Referans, senin uygarlığınla kazananların gerçekte ne açtığını gösterir.",
     "analyzer.help.military": "İlk askeri birimini ne zaman eğittiğin.",
-    "analyzer.help.scouting": "Birimlerinin düşman üssüne ilk ulaştığı an. Erken keşif = daha iyi kararlar.",
-    "analyzer.help.apm": "Dakika başına eylem (yalnızca gerçek komutlar — kamera/seçim spamı sayılmaz).",
-    "analyzer.help.ecoApm": "Dakikada ekonomiye harcanan komutlar (köylüler, eko binalar, eko teknolojiler).",
+    "analyzer.help.scouting":
+      "Birimlerinin düşman üssüne ilk ulaştığı an. Erken keşif = daha iyi kararlar.",
+    "analyzer.help.apm":
+      "Dakika başına eylem (yalnızca gerçek komutlar — kamera/seçim spamı sayılmaz).",
+    "analyzer.help.ecoApm":
+      "Dakikada ekonomiye harcanan komutlar (köylüler, eko binalar, eko teknolojiler).",
     "analyzer.help.milApm": "Dakikada askeriyeye harcanan komutlar (birimler, askeri binalar).",
     "analyzer.matrix": "Kafa kafaya",
     "analyzer.matrix.note":
@@ -618,7 +673,8 @@ export const ui = {
     "analyzer.badge.firstMilitary": "İlk silahlanan",
     "analyzer.badge.marketRegular": "Pazar müdavimi",
     "analyzer.charts.production": "Zaman içinde üretim",
-    "analyzer.charts.productionNote": "Kümülatif kuyruğa alınan birimler — köylüler düz, askerler kesikli çizgi.",
+    "analyzer.charts.productionNote":
+      "Kümülatif kuyruğa alınan birimler — köylüler düz, askerler kesikli çizgi.",
     "analyzer.charts.apm": "Dakika başına eylem",
     "analyzer.chartProdLabel": "Zaman içinde köylü ve asker üretimi",
     "analyzer.chartApmLabel": "Zaman içinde dakika başına eylem",

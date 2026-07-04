@@ -302,8 +302,10 @@ async function run() {
     // in BOTH languages. EN feeds civilizations.json (validate-data expects EN strings);
     // TR is carried on entry.tr for the bilingual YAML output.
     const helpId = helpIdBySlug[entry.slug];
-    const en = helpId != null ? parseHelp(stringsEn[helpId] ?? stringsEn[String(helpId)], "en") : null;
-    const tr = helpId != null ? parseHelp(stringsTr[helpId] ?? stringsTr[String(helpId)], "tr") : null;
+    const en =
+      helpId != null ? parseHelp(stringsEn[helpId] ?? stringsEn[String(helpId)], "en") : null;
+    const tr =
+      helpId != null ? parseHelp(stringsTr[helpId] ?? stringsTr[String(helpId)], "tr") : null;
 
     // NO DEFAULT VALUES (owner directive): every civ fact must be source-derived. Fail loud
     // instead of silently substituting an EN-in-TR fallback or an empty string. Each AoE2 civ
@@ -318,11 +320,15 @@ async function run() {
       process.exit(1);
     }
     if (en.uniqueTechs.length < 2) {
-      console.error(`[FATAL] ${entry.slug}: EN help has ${en.uniqueTechs.length} unique tech(s), expected 2`);
+      console.error(
+        `[FATAL] ${entry.slug}: EN help has ${en.uniqueTechs.length} unique tech(s), expected 2`,
+      );
       process.exit(1);
     }
     if (tr.uniqueTechs.length < 2) {
-      console.error(`[FATAL] ${entry.slug}: TR help has ${tr.uniqueTechs.length} unique tech(s), expected 2`);
+      console.error(
+        `[FATAL] ${entry.slug}: TR help has ${tr.uniqueTechs.length} unique tech(s), expected 2`,
+      );
       process.exit(1);
     }
 

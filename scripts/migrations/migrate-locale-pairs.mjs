@@ -4,7 +4,7 @@
 // Run: node scripts/migrate-locale-pairs.mjs
 // After verifying output, delete the en/ and tr/ subdirs.
 
-import { readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import yaml from "js-yaml";
 
@@ -66,9 +66,7 @@ migrate("maps", ({ fm: en, body: enBody }, { fm: tr, body: trBody }) => ({
   type: en.type,
   ...(en.size ? { size: en.size } : {}),
   recommendedCivs: [...(en.recommendedCivs ?? [])],
-  ...(en.teamComps
-    ? { teamComps: mergeTeamComps(en.teamComps, tr.teamComps) }
-    : {}),
+  ...(en.teamComps ? { teamComps: mergeTeamComps(en.teamComps, tr.teamComps) } : {}),
   ...(enBody ? { body: { en: enBody, tr: trBody || enBody } } : {}),
 }));
 

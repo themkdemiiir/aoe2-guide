@@ -6,7 +6,8 @@
 // Wilson score 95% CI for a binomial proportion (robust for small/extreme n).
 export function wilson(wins, n, z = 1.96) {
   if (!n) return [0, 0];
-  const p = wins / n, d = 1 + (z * z) / n;
+  const p = wins / n,
+    d = 1 + (z * z) / n;
   const c = (p + (z * z) / (2 * n)) / d;
   const m = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / d;
   return [c - m, c + m];

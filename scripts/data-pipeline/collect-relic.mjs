@@ -18,12 +18,18 @@
 //   node scripts/data-pipeline/collect-relic.mjs --players 2000 --out data-cache/relic
 //   (run on the Proxmox box; safe to re-run — it resumes from the checkpoint)
 
-import { mkdir, readFile, writeFile, appendFile } from "node:fs/promises";
+import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import {
-  API, TITLE, LEADERBOARD_1V1_RM, LEADERBOARD_TEAM_RM,
-  keepBySize as keepBySizeFor, makeClient, normalizeMatches, sleep,
+  API,
+  keepBySize as keepBySizeFor,
+  LEADERBOARD_1V1_RM,
+  LEADERBOARD_TEAM_RM,
+  makeClient,
+  normalizeMatches,
+  sleep,
+  TITLE,
 } from "./lib/relic-api.mjs";
 
 // --- CLI args (strict: a typo'd flag fails loud) --------------------------------
@@ -59,13 +65,19 @@ async function run() {
 
   // resume: which profile_ids + match_ids we already have
   let ck = { doneProfiles: [], seenMatches: [] };
-  try { ck = JSON.parse(await readFile(ckPath, "utf8")); } catch (_) {}
+  try {
+    ck = JSON.parse(await readFile(ckPath, "utf8"));
+  } catch (_) {}
   const doneProfiles = new Set(ck.doneProfiles);
   const seenMatches = new Set(ck.seenMatches);
 
-  console.log(`Seeding up to ${MAX_PLAYERS} ranked profiles from the ${MODE} ladder (leaderboard_id=${LEADERBOARD})…`);
+  console.log(
+    `Seeding up to ${MAX_PLAYERS} ranked profiles from the ${MODE} ladder (leaderboard_id=${LEADERBOARD})…`,
+  );
   const profileIds = await fetchProfileIds({ leaderboard: LEADERBOARD, limit: MAX_PLAYERS });
-  console.log(`Got ${profileIds.length} profiles. Crawling match history (resume: ${doneProfiles.size} already done)…`);
+  console.log(
+    `Got ${profileIds.length} profiles. Crawling match history (resume: ${doneProfiles.size} already done)…`,
+  );
 
   let newRows = 0;
   const todo = profileIds.filter((pid) => !doneProfiles.has(pid));
@@ -75,8 +87,15 @@ async function run() {
   const saveCk = async () => {
     if (ckBusy) return; // a write is already in flight; the next checkpoint will catch up
     ckBusy = true;
-    try { await writeFile(ckPath, JSON.stringify({ doneProfiles: [...doneProfiles], seenMatches: [...seenMatches] }), "utf8"); }
-    finally { ckBusy = false; }
+    try {
+      await writeFile(
+        ckPath,
+        JSON.stringify({ doneProfiles: [...doneProfiles], seenMatches: [...seenMatches] }),
+        "utf8",
+      );
+    } finally {
+      ckBusy = false;
+    }
   };
 
   // CONCURRENCY workers pull from a shared queue. Match-ids are claimed in
@@ -84,7 +103,9 @@ async function run() {
   async function handle(pid) {
     const url = `${API}/getRecentMatchHistory?title=${TITLE}&profile_ids=%5B${pid}%5D`;
     let rows = [];
-    try { rows = normalizeMatches(await getJson(url), keepBySize); } catch (e) {
+    try {
+      rows = normalizeMatches(await getJson(url), keepBySize);
+    } catch (e) {
       process.stderr.write(`\n  [warn] profile ${pid}: ${e.message}\n`);
     }
     const fresh = rows.filter((r) => !seenMatches.has(r.match_id));
@@ -97,16 +118,27 @@ async function run() {
     processed++;
     if (processed % 150 === 0) {
       await saveCk();
-      process.stderr.write(`\r  crawled ${processed}/${profileIds.length} · ${seenMatches.size} matches · ${CONCURRENCY}x parallel`);
+      process.stderr.write(
+        `\r  crawled ${processed}/${profileIds.length} · ${seenMatches.size} matches · ${CONCURRENCY}x parallel`,
+      );
     }
     if (THROTTLE_MS) await sleep(THROTTLE_MS);
   }
-  async function worker() { while (qi < todo.length) await handle(todo[qi++]); }
+  async function worker() {
+    while (qi < todo.length) await handle(todo[qi++]);
+  }
   await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
   await saveCk();
   process.stderr.write("\n");
-  console.log(`Done. +${newRows} new matches this run · ${seenMatches.size} unique ranked ${MODE} matches total → ${outPath}`);
-  console.log(`Next: build a VERIFIED civ-id map, then aggregate (node scripts/data-pipeline/aggregate-civmeta.mjs).`);
+  console.log(
+    `Done. +${newRows} new matches this run · ${seenMatches.size} unique ranked ${MODE} matches total → ${outPath}`,
+  );
+  console.log(
+    `Next: build a VERIFIED civ-id map, then aggregate (node scripts/data-pipeline/aggregate-civmeta.mjs).`,
+  );
 }
 
-run().catch((e) => { console.error(e); process.exit(1); });
+run().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

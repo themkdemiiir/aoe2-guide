@@ -1,9 +1,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import { defaultLocale, type Locale } from "@/i18n/locales";
 
-type ContentType =
-  | "beginner"
-  | "articles";
+type ContentType = "beginner" | "articles";
 
 /** Extract locale from a Content Layer entry id like "en/britons" → "en". */
 export function localeFromEntryId(id: string): Locale {

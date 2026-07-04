@@ -70,10 +70,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "scripts/data-pipeline/**",
-        "tests/civ-generation.test.mjs"
-      ],
+      "includes": ["scripts/data-pipeline/**", "tests/civ-generation.test.mjs"],
       "linter": {
         "rules": {
           "suspicious": {

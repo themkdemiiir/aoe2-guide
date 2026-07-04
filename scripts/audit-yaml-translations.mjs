@@ -8,7 +8,11 @@ let total = 0;
 for (const t of TYPES) {
   const dir = path.resolve("src/content", t);
   let files = [];
-  try { files = readdirSync(dir).filter((f) => /\.ya?ml$/.test(f)); } catch (_) { continue; }
+  try {
+    files = readdirSync(dir).filter((f) => /\.ya?ml$/.test(f));
+  } catch (_) {
+    continue;
+  }
   for (const f of files) {
     const data = yaml.load(readFileSync(path.join(dir, f), "utf8"));
     const issues = auditEntry(t, f, data);

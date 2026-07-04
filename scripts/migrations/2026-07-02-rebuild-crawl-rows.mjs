@@ -26,7 +26,8 @@ import { ERA_START, loadReplayMapTruth, relicCivmapSql } from "../data-pipeline/
 
 const args = Object.fromEntries(
   process.argv.slice(2).reduce((acc, a, i, arr) => {
-    if (a.startsWith("--")) acc.push([a.slice(2), arr[i + 1]?.startsWith("--") ? true : arr[i + 1] ?? true]);
+    if (a.startsWith("--"))
+      acc.push([a.slice(2), arr[i + 1]?.startsWith("--") ? true : (arr[i + 1] ?? true)]);
     return acc;
   }, []),
 );
@@ -111,4 +112,6 @@ writeFileSync(sqlPath, sql, "utf8");
 console.log(`rebuild-crawl-rows: ${sources.length} sources → ${DB}`);
 const out = execFileSync(DUCKDB, [DB, "-f", sqlPath], { encoding: "utf8", maxBuffer: 1 << 26 });
 process.stdout.write(out);
-console.log("NOTE: workbench summary tables (civ_winrate/map_civ/civ_opening/civ_timing) are now stale — rebuild if needed.");
+console.log(
+  "NOTE: workbench summary tables (civ_winrate/map_civ/civ_opening/civ_timing) are now stale — rebuild if needed.",
+);

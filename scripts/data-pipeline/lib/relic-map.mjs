@@ -31,7 +31,9 @@ export const RELIC_CIV_MAP = relicDoc.map;
 // and the map is re-derived, the era boundary moves with it automatically.
 const validFrom = relicDoc.provenance?.validFrom;
 if (!/^\d{4}-\d{2}-\d{2}$/.test(validFrom ?? "")) {
-  throw new Error("relic-map: relic-civ-id-map.json provenance.validFrom missing/invalid — refusing to guess the era boundary");
+  throw new Error(
+    "relic-map: relic-civ-id-map.json provenance.validFrom missing/invalid — refusing to guess the era boundary",
+  );
 }
 export const ERA_START = Date.parse(`${validFrom}T00:00:00Z`) / 1000;
 
@@ -139,7 +141,9 @@ export async function loadReplayMapTruth({
     if (e?.code !== "Z_DATA_ERROR" && e?.code !== "Z_BUF_ERROR") throw e;
   }
   if (!truth.size) {
-    throw new Error(`relic-map: replay map truth is EMPTY (${metaPath}) — refusing to regen map slices blind`);
+    throw new Error(
+      `relic-map: replay map truth is EMPTY (${metaPath}) — refusing to regen map slices blind`,
+    );
   }
   return truth;
 }

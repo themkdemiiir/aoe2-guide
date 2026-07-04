@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ELO_BUCKETS, ELO_BUCKETS_WITH_ALL, canonMap, eloBucket, eloCaseSql } from "./buckets.mjs";
+import { canonMap, ELO_BUCKETS, ELO_BUCKETS_WITH_ALL, eloBucket, eloCaseSql } from "./buckets.mjs";
 
 describe("eloBucket", () => {
   it("returns null for null/undefined (never fabricates a band)", () => {

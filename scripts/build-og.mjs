@@ -119,7 +119,9 @@ for (const { dir, seg, label } of TYPES) {
     // Flat bilingual-YAML collection (civilizations, build-orders, units, maps).
     const yamls = readdirSync(base).filter((x) => /\.ya?ml$/i.test(x));
     if (yamls.length === 0) {
-      throw new Error(`build:og — unrecognized content shape in ${base} (no ${dir}/en/*.md and no *.yaml files)`);
+      throw new Error(
+        `build:og — unrecognized content shape in ${base} (no ${dir}/en/*.md and no *.yaml files)`,
+      );
     }
     entries = yamls.map((f) => ({ file: join(base, f), slug: f.replace(/\.ya?ml$/i, "") }));
   } else {

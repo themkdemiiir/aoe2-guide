@@ -3,7 +3,7 @@
 // Run: node scripts/migrate-builds-to-bilingual.mjs
 // After verifying output, delete src/content/build-orders/en/ and tr/.
 
-import { readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import yaml from "js-yaml";
 
@@ -19,7 +19,10 @@ function splitFrontmatter(raw) {
 
 function parseBody(body) {
   const lines = body.split("\n");
-  const content = lines.filter((l) => !l.startsWith("# ")).join("\n").trim();
+  const content = lines
+    .filter((l) => !l.startsWith("# "))
+    .join("\n")
+    .trim();
   const h2 = content.indexOf("\n## ");
   const introPart = h2 !== -1 ? content.slice(0, h2).trim() : content;
   const stratPart = h2 !== -1 ? content.slice(h2 + 4) : "";
@@ -70,9 +73,7 @@ for (const fname of enFiles) {
     civsRecommended: [...(en.civsRecommended ?? [])],
     ...(en.source ? { source: en.source } : {}),
     steps: mergeSteps(en.steps ?? [], tr.steps ?? []),
-    ...(enProse.intro
-      ? { intro: { en: enProse.intro, tr: trProse.intro || enProse.intro } }
-      : {}),
+    ...(enProse.intro ? { intro: { en: enProse.intro, tr: trProse.intro || enProse.intro } } : {}),
     ...(enProse.strategy.length
       ? {
           strategy: {

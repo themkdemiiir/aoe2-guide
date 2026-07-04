@@ -22,7 +22,9 @@ export function makeClient({ throttleMs = 120 } = {}) {
   async function getJson(url, tries = 4) {
     for (let attempt = 1; attempt <= tries; attempt++) {
       try {
-        const res = await fetch(url, { headers: { "user-agent": "aoe2guide-stats/1.0 (self-collect)" } });
+        const res = await fetch(url, {
+          headers: { "user-agent": "aoe2guide-stats/1.0 (self-collect)" },
+        });
         if (res.status === 429 || res.status >= 500) throw new Error(`HTTP ${res.status}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return await res.json();
@@ -49,8 +51,10 @@ export function makeClient({ throttleMs = 120 } = {}) {
       }
       const groups = data?.statGroups ?? [];
       if (!groups.length) break;
-      for (const g of groups) for (const m of g.members ?? []) if (m.profile_id != null) ids.add(m.profile_id);
-      if (process.stderr.isTTY) process.stderr.write(`\r  leaderboard: ${ids.size} profiles seeded`);
+      for (const g of groups)
+        for (const m of g.members ?? []) if (m.profile_id != null) ids.add(m.profile_id);
+      if (process.stderr.isTTY)
+        process.stderr.write(`\r  leaderboard: ${ids.size} profiles seeded`);
       await sleep(throttleMs);
     }
     process.stderr.write("\n");

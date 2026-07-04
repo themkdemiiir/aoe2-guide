@@ -11,7 +11,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
 const BENCH = "scripts/data-pipeline/replay-rs/data/benchmark.json";
-const csv = readFileSync(process.argv[2] ?? "/tmp/bench-vils.csv", "utf8").trim().split("\n");
+const csv = readFileSync(process.argv[2] ?? "/tmp/bench-vils.csv", "utf8")
+  .trim()
+  .split("\n");
 const head = csv.shift().split(",");
 const doc = JSON.parse(readFileSync(BENCH, "utf8"));
 
@@ -20,7 +22,10 @@ let missing = 0;
 for (const line of csv) {
   const r = Object.fromEntries(line.split(",").map((v, i) => [head[i], v]));
   const cell = doc.civs?.[r.civ]?.[r.map]?.[r.bucket]?.[r.mode];
-  if (!cell) { missing++; continue; }
+  if (!cell) {
+    missing++;
+    continue;
+  }
   cell.vils_castle = +r.vils_castle;
   merged++;
 }
@@ -28,6 +33,9 @@ if (!merged) {
   console.error("[FATAL] no vils cells merged — CSV/benchmark key mismatch. Not writing.");
   process.exit(1);
 }
-doc._source += "; vils_castle = median villagers trained by Castle Age among slice WINNERS (match_ages dark+feudal windows — see build-benchmark-vils.sql)";
+doc._source +=
+  "; vils_castle = median villagers trained by Castle Age among slice WINNERS (match_ages dark+feudal windows — see build-benchmark-vils.sql)";
 writeFileSync(BENCH, JSON.stringify(doc));
-console.log(`benchmark.json: vils_castle merged into ${merged} cells (${missing} vils-only slices skipped)`);
+console.log(
+  `benchmark.json: vils_castle merged into ${merged} cells (${missing} vils-only slices skipped)`,
+);

@@ -8,7 +8,9 @@
 //   node scripts/data-pipeline/build-winner-comps.mjs /tmp/winner-comps.csv
 import { readFileSync, writeFileSync } from "node:fs";
 
-const csv = readFileSync(process.argv[2] ?? "/tmp/winner-comps.csv", "utf8").trim().split("\n");
+const csv = readFileSync(process.argv[2] ?? "/tmp/winner-comps.csv", "utf8")
+  .trim()
+  .split("\n");
 const head = csv.shift().split(",");
 const civs = {};
 for (const line of csv) {
@@ -26,4 +28,6 @@ const out = {
 };
 writeFileSync("public/winner-comps.json", JSON.stringify(out));
 const cells = Object.values(civs).reduce((s, b) => s + Object.keys(b).length, 0);
-console.log(`winner-comps: ${Object.keys(civs).length} civs · ${cells} civ×elo cells → public/winner-comps.json`);
+console.log(
+  `winner-comps: ${Object.keys(civs).length} civs · ${cells} civ×elo cells → public/winner-comps.json`,
+);

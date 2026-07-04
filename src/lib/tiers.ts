@@ -3,7 +3,8 @@
 // variant for legibility on its dark cover — documented there, not a duplicate.
 // Any is:inline script copy of tierOf must carry a "// mirror of src/lib/tiers.ts"
 // comment (is:inline scripts can't import modules).
-export const tierOf = (wr: number) => (wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D");
+export const tierOf = (wr: number) =>
+  wr >= 53 ? "S" : wr >= 51 ? "A" : wr >= 49 ? "B" : wr >= 47 ? "C" : "D";
 
 export const TIER_COLORS: Record<string, string> = {
   S: "#8a2d22",

@@ -46,12 +46,16 @@ function structuralViolations(file, data) {
     const lead = enText.match(/^\s*\+(\d+)\s*(?:→|->)/);
     if (s.villagers != null) {
       if (lastPop != null && s.villagers < lastPop) {
-        out.push(`${file}: step ${i + 1} villagers ${s.villagers} < previous ${lastPop} (rail must not decrease).`);
+        out.push(
+          `${file}: step ${i + 1} villagers ${s.villagers} < previous ${lastPop} (rail must not decrease).`,
+        );
       }
       if (lead && plusClauses.length === 1 && prevHadPop && lastPop != null) {
         const delta = s.villagers - lastPop;
         if (delta !== Number(lead[1])) {
-          out.push(`${file}: step ${i + 1} says "+${lead[1]}" but villagers went ${lastPop}→${s.villagers} (delta ${delta}).`);
+          out.push(
+            `${file}: step ${i + 1} says "+${lead[1]}" but villagers went ${lastPop}→${s.villagers} (delta ${delta}).`,
+          );
         }
       }
       lastPop = s.villagers;
@@ -63,16 +67,26 @@ function structuralViolations(file, data) {
 
   // 4: times strictly increasing; last time within durationMin (+90s slack for the
   // trailing age-up that finishes after the last click).
-  const times = steps.map((s) => s.time).filter(Boolean).map(mmssToSec);
+  const times = steps
+    .map((s) => s.time)
+    .filter(Boolean)
+    .map(mmssToSec);
   for (let i = 1; i < times.length; i++) {
     if (times[i] != null && times[i - 1] != null && times[i] <= times[i - 1]) {
-      out.push(`${file}: step times not strictly increasing (${steps.map((s) => s.time).filter(Boolean).join(" → ")}).`);
+      out.push(
+        `${file}: step times not strictly increasing (${steps
+          .map((s) => s.time)
+          .filter(Boolean)
+          .join(" → ")}).`,
+      );
       break;
     }
   }
   const lastTime = times.filter((t) => t != null).at(-1);
   if (lastTime != null && data.durationMin != null && lastTime > data.durationMin * 60 + 90) {
-    out.push(`${file}: last step time ${lastTime}s exceeds durationMin ${data.durationMin}m (+90s slack).`);
+    out.push(
+      `${file}: last step time ${lastTime}s exceeds durationMin ${data.durationMin}m (+90s slack).`,
+    );
   }
 
   // 5: targetAge == highest phase present; phases appear in non-descending age order.
@@ -80,7 +94,9 @@ function structuralViolations(file, data) {
   let prevRank = 0;
   for (const p of phases) {
     if (PHASE_RANK[p] < prevRank) {
-      out.push(`${file}: phase "${p}" appears after a later age (phases must be in dark→feudal→castle→imperial order).`);
+      out.push(
+        `${file}: phase "${p}" appears after a later age (phases must be in dark→feudal→castle→imperial order).`,
+      );
       break;
     }
     prevRank = Math.max(prevRank, PHASE_RANK[p]);
@@ -91,7 +107,9 @@ function structuralViolations(file, data) {
   // not an error here — only a present phase that exceeds targetAge is.
   const maxPhase = phases.reduce((a, p) => (PHASE_RANK[p] > PHASE_RANK[a ?? ""] ? p : a), null);
   if (maxPhase && data.targetAge && PHASE_RANK[maxPhase] > (PHASE_RANK[data.targetAge] ?? 0)) {
-    out.push(`${file}: targetAge is ${data.targetAge} but a step reaches ${maxPhase} (a later age).`);
+    out.push(
+      `${file}: targetAge is ${data.targetAge} but a step reaches ${maxPhase} (a later age).`,
+    );
   }
   return out;
 }
@@ -112,9 +130,7 @@ async function run() {
     if (!targetAge || !(targetAge in ageRank)) continue;
     checked++;
     const limit = ageRank[targetAge];
-    const iconSlugs = new Set(
-      (data?.steps ?? []).flatMap((s) => s.icons ?? []),
-    );
+    const iconSlugs = new Set((data?.steps ?? []).flatMap((s) => s.icons ?? []));
     for (const slug of iconSlugs) {
       const unit = units[slug];
       if (!unit) continue;

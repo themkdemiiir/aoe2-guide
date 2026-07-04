@@ -17,11 +17,21 @@ const relicMap = relicDoc.map;
 const guideCivs = new Set(read("src/data/civilizations.json").civs.map((c) => c.slug));
 
 // Chronicles civs exist in both id spaces but are not on the ranked ladder / site.
-const NON_GUIDE = new Set(["random", "achaemenids", "athenians", "spartans", "macedonians", "thracians", "puru"]);
+const NON_GUIDE = new Set([
+  "random",
+  "achaemenids",
+  "athenians",
+  "spartans",
+  "macedonians",
+  "thracians",
+  "puru",
+]);
 
 describe("relic-civ-id-map (API id space)", () => {
   it("covers exactly the current-era API ids (0-52, 55-60; 53/54 retired)", () => {
-    const ids = Object.keys(relicMap).map(Number).sort((a, b) => a - b);
+    const ids = Object.keys(relicMap)
+      .map(Number)
+      .sort((a, b) => a - b);
     const expected = [...Array(53).keys(), 55, 56, 57, 58, 59, 60];
     expect(ids).toEqual(expected);
   });

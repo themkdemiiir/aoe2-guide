@@ -41,7 +41,8 @@ export function dedupedMetaMaps(): DataMap[] {
     const c = canon(display(k));
     const games = v.games["1v1"] + v.games.team;
     const cur = byCanon.get(c);
-    if (!cur || games > cur.games) byCanon.set(c, { key: k, slug: display(k).replace(/_/g, "-"), games });
+    if (!cur || games > cur.games)
+      byCanon.set(c, { key: k, slug: display(k).replace(/_/g, "-"), games });
   }
   return [...byCanon.values()].sort((a, b) => b.games - a.games);
 }

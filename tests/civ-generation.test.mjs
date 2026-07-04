@@ -1,10 +1,17 @@
-import { describe, it, expect } from "vitest";
 import { readdirSync, readFileSync } from "node:fs";
 import yaml from "js-yaml";
+import { describe, expect, it } from "vitest";
 import civData from "../src/data/civilizations.json" with { type: "json" };
 
 const CIV_DIR = "src/content/civilizations";
-const FABRICATED_SLUGS = ["achaemenids", "athenians", "macedonians", "spartans", "thracians", "puru"];
+const FABRICATED_SLUGS = [
+  "achaemenids",
+  "athenians",
+  "macedonians",
+  "spartans",
+  "thracians",
+  "puru",
+];
 
 describe("civilizations.json integrity", () => {
   it("has exactly 53 civs", () => {
@@ -27,10 +34,7 @@ describe("civ YAML bilingual invariants", () => {
     const data = yaml.load(readFileSync(`${CIV_DIR}/${file}`, "utf8"));
 
     it(`[${slug}] bonuses.tr is not a copy of bonuses.en`, () => {
-      expect(
-        data.bonuses?.tr,
-        `${slug}: bonuses.tr is missing`,
-      ).toBeDefined();
+      expect(data.bonuses?.tr, `${slug}: bonuses.tr is missing`).toBeDefined();
       expect(
         JSON.stringify(data.bonuses?.tr),
         `${slug}: bonuses.tr is deep-equal to bonuses.en (untranslated)`,
@@ -38,10 +42,7 @@ describe("civ YAML bilingual invariants", () => {
     });
 
     it(`[${slug}] teamBonus.tr !== teamBonus.en`, () => {
-      expect(
-        data.teamBonus?.tr,
-        `${slug}: teamBonus.tr is missing`,
-      ).toBeDefined();
+      expect(data.teamBonus?.tr, `${slug}: teamBonus.tr is missing`).toBeDefined();
       expect(
         data.teamBonus?.tr,
         `${slug}: teamBonus.tr is identical to teamBonus.en (untranslated)`,
@@ -51,10 +52,9 @@ describe("civ YAML bilingual invariants", () => {
     it(`[${slug}] uniqueTechs castle effect is translated`, () => {
       const castle = data.uniqueTechs?.castle?.effect;
       expect(castle?.tr, `${slug}: uniqueTechs.castle.effect.tr is missing`).toBeDefined();
-      expect(
-        castle?.tr,
-        `${slug}: uniqueTechs.castle.effect.tr === .en (untranslated)`,
-      ).not.toBe(castle?.en);
+      expect(castle?.tr, `${slug}: uniqueTechs.castle.effect.tr === .en (untranslated)`).not.toBe(
+        castle?.en,
+      );
     });
 
     it(`[${slug}] uniqueTechs imperial effect is translated`, () => {
@@ -69,10 +69,9 @@ describe("civ YAML bilingual invariants", () => {
     if (data.strategy) {
       it(`[${slug}] strategy.tr is a non-empty string`, () => {
         expect(typeof data.strategy?.tr, `${slug}: strategy.tr is not a string`).toBe("string");
-        expect(
-          data.strategy?.tr?.trim().length,
-          `${slug}: strategy.tr is empty`,
-        ).toBeGreaterThan(0);
+        expect(data.strategy?.tr?.trim().length, `${slug}: strategy.tr is empty`).toBeGreaterThan(
+          0,
+        );
       });
     }
 

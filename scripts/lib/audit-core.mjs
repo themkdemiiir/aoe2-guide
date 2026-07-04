@@ -3,16 +3,22 @@
 
 // Field-path suffixes that are intentionally EN in the tr slot.
 const ALLOW = [
-  /(^|\.)name$/,            // civ/unit/build/map names + tech names
-  /(^|\.)term$/,            // glossary terms
+  /(^|\.)name$/, // civ/unit/build/map names + tech names
+  /(^|\.)term$/, // glossary terms
 ];
 // A tr value that merely repeats a proper noun is allowed if the EN value itself is
 // a recognized proper-noun pattern (contains "(SomeProperNoun)").
 const PROPER_NOUN_VALUE = /\([A-ZÇĞİÖŞÜ][\wçğıöşü]*\)\s*$/;
 
 function isLocalized(v) {
-  return v && typeof v === "object" && "en" in v && "tr" in v &&
-    typeof v.en === "string" && typeof v.tr === "string";
+  return (
+    v &&
+    typeof v === "object" &&
+    "en" in v &&
+    "tr" in v &&
+    typeof v.en === "string" &&
+    typeof v.tr === "string"
+  );
 }
 
 export function auditEntry(_typeDir, _fileName, data) {

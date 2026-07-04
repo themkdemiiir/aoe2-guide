@@ -1,26 +1,38 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { parseHelp } from "../scripts/lib/parse-help.mjs";
 
 const EN = [
-  "Archer civilization", "",
+  "Archer civilization",
+  "",
   "• Shepherds work +25% faster",
-  "• Town Centers cost -50% wood starting in the Castle Age", "",
-  "Unique Unit:", "Longbowman (Archer)", "",
+  "• Town Centers cost -50% wood starting in the Castle Age",
+  "",
+  "Unique Unit:",
+  "Longbowman (Archer)",
+  "",
   "Unique Tech:",
   "• Yeomen (Foot archers +1 range; Towers +2 attack)",
-  "• Warwolf (Trebuchets deal blast damage and are more accurate)", "",
-  "Team Bonus:", "Archery Ranges work +10% faster",
+  "• Warwolf (Trebuchets deal blast damage and are more accurate)",
+  "",
+  "Team Bonus:",
+  "Archery Ranges work +10% faster",
 ].join("<br>");
 
 const TR = [
-  "Yaya Okçu medeniyeti", "",
+  "Yaya Okçu medeniyeti",
+  "",
   "• Çobanlar %25 daha hızlı çalışır",
-  "• Şehir Merkezleri, Kale Çağı'ndan itibaren %50 daha az odun gerektirir", "",
-  "Özgün Birim:", "Uzun Yay Okçusu (Yaya Okçu)", "",
+  "• Şehir Merkezleri, Kale Çağı'ndan itibaren %50 daha az odun gerektirir",
+  "",
+  "Özgün Birim:",
+  "Uzun Yay Okçusu (Yaya Okçu)",
+  "",
   "Özgün Teknoloji:",
   "• Levazımcı (Yaya Okçulara 1 menzil; Gözcü Kulesi türlerine 2 saldırı)",
-  "• Savaş Kurdu (Katapultlar patlama hasarı verir ve daha isabetlidir)", "",
-  "Takım Bonusu:", "Okçuluk Binası %10 daha hızlı çalışır",
+  "• Savaş Kurdu (Katapultlar patlama hasarı verir ve daha isabetlidir)",
+  "",
+  "Takım Bonusu:",
+  "Okçuluk Binası %10 daha hızlı çalışır",
 ].join("<br>");
 
 describe("parseHelp", () => {
@@ -41,13 +53,19 @@ describe("parseHelp", () => {
 
   it("captures two comma-separated unique unit names (Vikings-style EN help)", () => {
     const en = [
-      "Infantry and Naval civilization", "",
-      "• Wheelbarrow, Hand Cart free", "",
-      "Unique Units:", "Berserk (Infantry), Longboat (Warship)", "",
+      "Infantry and Naval civilization",
+      "",
+      "• Wheelbarrow, Hand Cart free",
+      "",
+      "Unique Units:",
+      "Berserk (Infantry), Longboat (Warship)",
+      "",
       "Unique Techs:",
       "• Chieftains (Infantry +5 attack vs. Cavalry)",
-      "• Bogsveigar (Archer-line and Longboats +1 attack)", "",
-      "Team Bonus:", "Docks cost -15%",
+      "• Bogsveigar (Archer-line and Longboats +1 attack)",
+      "",
+      "Team Bonus:",
+      "Docks cost -15%",
     ].join("<br>");
     const r = parseHelp(en, "en");
     expect(r.uniqueUnitNames).toEqual(["Berserk", "Longboat"]);
@@ -74,20 +92,28 @@ describe("parseHelp", () => {
 
   it("recognizes the 'Özel Teknoloji' TR tech header synonym (Byzantines source)", () => {
     const tr = [
-      "Savunma medeniyeti", "",
-      "• Binalar +DP", "",
-      "Özgün Birim", "Zırhlı Atlı (Süvari)", "",
+      "Savunma medeniyeti",
+      "",
+      "• Binalar +DP",
+      "",
+      "Özgün Birim",
+      "Zırhlı Atlı (Süvari)",
+      "",
       "Özel Teknoloji",
       "• Yunan Ateşi (Ateş Gemileri +1 menzil)",
-      "• Lojistika (Zırhlı Atlılar ezme hasarı verir)", "",
-      "Takım Bonusu:", "Keşişler %100 daha hızlı iyileştirir",
+      "• Lojistika (Zırhlı Atlılar ezme hasarı verir)",
+      "",
+      "Takım Bonusu:",
+      "Keşişler %100 daha hızlı iyileştirir",
     ].join("<br>");
     const r = parseHelp(tr, "tr");
     expect(r.uniqueTechs.map((t) => t.name)).toEqual(["Yunan Ateşi", "Lojistika"]);
   });
 
   it("returns null when there are no bullet bonuses", () => {
-    expect(parseHelp("Archer civilization<br>Unique Unit:<br>Longbowman (Archer)", "en")).toBeNull();
+    expect(
+      parseHelp("Archer civilization<br>Unique Unit:<br>Longbowman (Archer)", "en"),
+    ).toBeNull();
   });
 
   it("throws on an unknown lang", () => {

@@ -26,7 +26,14 @@
 //   node scripts/data-pipeline/ingest-stream.mjs --db <path> --stream-dir <dir> --duckdb <bin>
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  unlinkSync,
+  writeFileSync,
+} from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { parseArgs } from "node:util";
@@ -43,7 +50,9 @@ const { values: args } = parseArgs({
   strict: true,
 });
 const DB = path.resolve(args.db ?? `${os.homedir()}/aoe2-guide/data-cache/aoe2.duckdb`);
-const STREAM_DIR = path.resolve(args["stream-dir"] ?? `${os.homedir()}/aoe2-guide/data-cache/relic-stream`);
+const STREAM_DIR = path.resolve(
+  args["stream-dir"] ?? `${os.homedir()}/aoe2-guide/data-cache/relic-stream`,
+);
 const DUCKDB = args.duckdb ?? `${os.homedir()}/bin/duckdb`;
 
 const ELO_CASE = eloCaseSql("f.p.rating");
@@ -52,13 +61,18 @@ const ELO_CASE = eloCaseSql("f.p.rating");
 function shardsFor(ladder) {
   const dir = path.join(STREAM_DIR, ladder);
   if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter((f) => f.endsWith(".ndjson")).map((f) => path.join(dir, f));
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".ndjson"))
+    .map((f) => path.join(dir, f));
 }
 const sqlList = (files) => `[${files.map((f) => `'${f}'`).join(", ")}]`;
 
 const byDir = { "1v1": shardsFor("1v1"), team: shardsFor("team") };
 const files = [...byDir["1v1"], ...byDir.team];
-if (!files.length) { console.log("ingest-stream: no new shards — nothing to ingest."); process.exit(0); }
+if (!files.length) {
+  console.log("ingest-stream: no new shards — nothing to ingest.");
+  process.exit(0);
+}
 
 // QUALIFY drops intra-batch dups (same match across two sweep shards); the NOT IN
 // drops matches already in games (from aoestats or an earlier crawl). The ladder
@@ -119,7 +133,11 @@ SELECT count(*) AS games_after FROM games;
 const sqlPath = path.join(os.tmpdir(), `ingest-stream-${process.pid}.sql`);
 writeFileSync(sqlPath, sql, "utf8");
 
-console.log(`ingest-stream: ingesting ${Object.entries(byDir).map(([d, fs]) => `${d}:${fs.length}`).join(", ")} shard(s) into ${DB}`);
+console.log(
+  `ingest-stream: ingesting ${Object.entries(byDir)
+    .map(([d, fs]) => `${d}:${fs.length}`)
+    .join(", ")} shard(s) into ${DB}`,
+);
 const out = execFileSync(DUCKDB, [DB, "-f", sqlPath], { encoding: "utf8" });
 process.stdout.write(out);
 

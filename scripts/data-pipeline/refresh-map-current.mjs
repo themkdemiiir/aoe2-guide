@@ -19,12 +19,21 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { eloBucket } from "./lib/buckets.mjs";
 import { CURRENT_WINDOW_DAYS, crawlRecords } from "./lib/crawl-stream.mjs";
-import { canonToKeyIndex, isRanked1v1, loadReplayMapTruth, relicCivSlug } from "./lib/relic-map.mjs";
+import {
+  canonToKeyIndex,
+  isRanked1v1,
+  loadReplayMapTruth,
+  relicCivSlug,
+} from "./lib/relic-map.mjs";
 import { pct } from "./lib/stats.mjs";
 
 const META = path.resolve("src/data/map-meta.json");
 
-const guideCivs = new Set(JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map((c) => c.slug));
+const guideCivs = new Set(
+  JSON.parse(readFileSync(path.resolve("src/data/civilizations.json"), "utf8")).civs.map(
+    (c) => c.slug,
+  ),
+);
 const meta = JSON.parse(readFileSync(META, "utf8"));
 
 const MIN_MAP = 3000; // map needs this many current 1v1 matches to be included
@@ -60,9 +69,13 @@ for await (const m of crawlRecords({ recentDays: CURRENT_WINDOW_DAYS })) {
   for (const pl of m.players ?? []) {
     const slug = relicCivSlug(pl.civ_id);
     if (!guideCivs.has(slug)) continue;
-    const eb = eloBucket(pl.rating); if (eb == null) { skippedNullElo++; continue; }
+    const eb = eloBucket(pl.rating);
+    if (eb == null) {
+      skippedNullElo++;
+      continue;
+    }
     for (const bk of [eb, "all"]) {
-      const cw = (((mp[bk] ??= {})[slug] ??= { g: 0, w: 0 }));
+      const cw = ((mp[bk] ??= {})[slug] ??= { g: 0, w: 0 });
       cw.g++;
       if (pl.won) cw.w++;
     }
@@ -100,8 +113,11 @@ for (const [key, buckets] of Object.entries(acc)) {
   }
 }
 
-meta.source = "aoestats.io ranked archive (team) + self-collected World's Edge live ladder (1v1, current)";
+meta.source =
+  "aoestats.io ranked archive (team) + self-collected World's Edge live ladder (1v1, current)";
 meta.generated = new Date().toISOString().slice(0, 10);
 writeFileSync(META, `${JSON.stringify(meta, null, 2)}\n`, "utf8");
-console.log(`refresh-map-current: ${used} crawl rows · ${refreshed} maps refreshed · ${added} crawl-only maps added · ${skippedNullElo} null-elo dropped → ${META}`);
+console.log(
+  `refresh-map-current: ${used} crawl rows · ${refreshed} maps refreshed · ${added} crawl-only maps added · ${skippedNullElo} null-elo dropped → ${META}`,
+);
 if (added) console.log(`  added: ${addedKeys.sort().join(", ")}`);

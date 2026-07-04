@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { readdirSync, readFileSync } from "node:fs";
 import yaml from "js-yaml";
+import { describe, expect, it } from "vitest";
 import { roleTr } from "../scripts/lib/role-tr.mjs";
 
 describe("roleTr", () => {

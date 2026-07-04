@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { auditEntry } from "../scripts/lib/audit-core.mjs";
 
 describe("auditEntry", () => {
@@ -12,7 +12,9 @@ describe("auditEntry", () => {
   it("allows proper-noun fields where en==tr", () => {
     const issues = auditEntry("civilizations", "x.yaml", {
       name: { en: "Britons", tr: "Britons" },
-      uniqueTechs: { castle: { name: { en: "Warwolf", tr: "Warwolf" }, effect: { en: "A", tr: "B" } } },
+      uniqueTechs: {
+        castle: { name: { en: "Warwolf", tr: "Warwolf" }, effect: { en: "A", tr: "B" } },
+      },
     });
     expect(issues).toEqual([]);
   });
