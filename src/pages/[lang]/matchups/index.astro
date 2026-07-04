@@ -17,8 +17,27 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Locale;
 
 // Sort civs alphabetically by slug for the dropdowns.
-const civs = (await getCollection("civ-data"))
-  .map((e) => e.data)
+// Bonuses / team bonus / unique-tech text come from the LOCALIZED `civilizations`
+// collection so TR pages show Turkish sentences (not English). civ-data only
+// supplies the language-agnostic bits: region, specialty and unique-unit slugs.
+const civDataBySlug = new Map((await getCollection("civ-data")).map((e) => [e.data.slug, e.data]));
+const civs = (await getCollection("civilizations"))
+  .map((entry) => {
+    const d = entry.data;
+    const meta = civDataBySlug.get(entry.id);
+    return {
+      slug: entry.id,
+      region: meta?.region ?? "",
+      specialty: meta?.specialty ?? "",
+      uniqueUnits: meta?.uniqueUnits ?? [],
+      civBonuses: d.bonuses[lang],
+      teamBonus: d.teamBonus[lang],
+      uniqueTechs: {
+        castle: { name: d.uniqueTechs.castle.name[lang], effect: d.uniqueTechs.castle.effect[lang] },
+        imperial: { name: d.uniqueTechs.imperial.name[lang], effect: d.uniqueTechs.imperial.effect[lang] },
+      },
+    };
+  })
   .sort((a, b) => a.slug.localeCompare(b.slug));
 
 const civIcons = (iconMap as any).civs ?? {};
@@ -104,7 +123,140 @@ const h2hLabels = {
   noData: lang === "tr" ? "Bu eşleşme için yeterli veri yok." : "Not enough data for this matchup.",
   team: lang === "tr" ? "Takım" : "Team",
   byMap: lang === "tr" ? "Haritaya göre (en iyi → en kötü)" : "By map (best → worst)",
+  unknownCiv: lang === "tr" ? "Bilinmeyen uygarlık: " : "Unknown civ: ",
 };
+
+// --- Server-rendered default pair (britons vs franks) so the comparator and
+// head-to-head banner are non-blank without JS. The inline script re-renders the
+// identical markup on load and layers selection interactivity on top. These are
+// TS ports of the panel()/h2hBanner() helpers below — kept in sync with them. ---
+const escSSR = (s: unknown) =>
+  String(s).replace(/[&<>"']/g, (ch) => {
+    const map: Record<string, string> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+    return map[ch] ?? ch;
+  });
+const byslugSSR: Record<string, (typeof civs)[number]> = Object.fromEntries(civs.map((c) => [c.slug, c]));
+const displayNameSSR = (slug: string) => displayNames[slug] ?? slug;
+const fmtSSR = (n: number | null | undefined, suffix: string) => (typeof n === "number" ? n.toFixed(1) + suffix : "—");
+const tierColorMap = TIER_COLORS as Record<string, string>;
+const tierBadgeSSR = (tier: string | null) =>
+  !tier
+    ? '<span class="text-stone-700">—</span>'
+    : '<span class="inline-flex h-6 w-6 items-center justify-center rounded font-display text-sm font-bold text-parchment" style="background:'
+        + (tierColorMap[tier] || tierColorMap.D) + '">' + escSSR(tier) + '</span>';
+
+const panelSSR = (slug: string): string => {
+  const c = byslugSSR[slug];
+  if (!c) return '<div class="rounded border border-royal/40 p-4 text-royal">' + h2hLabels.unknownCiv + escSSR(slug) + '</div>';
+  const icon = civIcons[slug];
+  const meta = civMetaLite[slug];
+  const bonusesHtml = (c.civBonuses || []).map((b) => '<li>' + escSSR(b) + '</li>').join('');
+  const uniqueUnitsHtml = (c.uniqueUnits || []).map((uslug) => {
+    const uIcon = unitIcons[uslug];
+    return '<li class="flex items-center gap-2">'
+      + (uIcon ? '<img src="' + escSSR(uIcon) + '" alt="" width="24" height="24" loading="lazy" decoding="async" class="h-6 w-6"/>' : '')
+      + '<span>' + escSSR(displayNameSSR(uslug)) + '</span></li>';
+  }).join('');
+  const techsHtml = c.uniqueTechs
+    ? '<li><strong>' + escSSR(c.uniqueTechs.castle?.name || '—') + '</strong> (' + labels.castleAge + ') — '
+        + escSSR(c.uniqueTechs.castle?.effect || '—') + '</li>'
+      + '<li><strong>' + escSSR(c.uniqueTechs.imperial?.name || '—') + '</strong> (' + labels.imperialAge + ') — '
+        + escSSR(c.uniqueTechs.imperial?.effect || '—') + '</li>'
+    : '<li>—</li>';
+  const metaRow = (key: string, tier: string | null, wr: number | null) =>
+    '<div class="flex items-center gap-3 text-sm">'
+    + '<span class="w-10 font-mono text-[11px] uppercase tracking-wide text-stone-700">' + key + '</span>'
+    + tierBadgeSSR(tier)
+    + '<span class="font-mono text-ink">' + fmtSSR(wr, '%') + '</span></div>';
+  const metaHtml = meta && meta.tier
+    ? '<div class="mt-3 space-y-1">' + metaRow("1v1", meta.tier, meta.winRate) + metaRow(h2hLabels.team, meta.teamTier, meta.teamWinRate) + '</div>'
+    : '<p class="mt-3 text-sm italic text-stone-700">' + labels.noMeta + '</p>';
+  return ''
+    + '<article class="rounded border border-stone-700/40 bg-parchment p-3">'
+    + '  <header class="flex items-center gap-3">'
+    + (icon ? '    <img src="' + escSSR(icon) + '" alt="" width="56" height="56" loading="lazy" decoding="async" class="h-12 w-12 rounded border border-stone-700/40"/>' : '')
+    + '    <div>'
+    + '      <h2 class="font-display text-xl text-ink">' + escSSR(displayNameSSR(slug)) + '</h2>'
+    + '      <p class="text-sm text-stone-700">' + escSSR(c.region || '') + ' · ' + escSSR(c.specialty || '') + '</p>'
+    + '    </div>'
+    + '  </header>'
+    + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.meta + '</h3>' + metaHtml + '</section>'
+    + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.civBonuses + '</h3><ul class="mt-1 list-inside list-disc space-y-1 text-sm text-ink">' + bonusesHtml + '</ul></section>'
+    + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.teamBonus + '</h3><p class="mt-1 text-sm text-ink">' + escSSR(c.teamBonus || '—') + '</p></section>'
+    + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.uniqueUnits + '</h3><ul class="mt-1 space-y-1 text-sm text-ink">' + uniqueUnitsHtml + '</ul></section>'
+    + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.uniqueTechs + '</h3><ul class="mt-1 space-y-1 text-sm text-ink">' + techsHtml + '</ul></section>'
+    + '</article>';
+};
+
+const crownSSR = (kind: string) => {
+  const color = kind === "gold" ? "#d9a93a" : "#b9bcc4";
+  return '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="display:block">'
+    + '<path fill="' + color + '" d="M5 17 3 7l5.5 4L12 5l3.5 6L21 7l-2 10z"/>'
+    + '<rect x="5" y="18" width="14" height="2" fill="' + color + '"/></svg>';
+};
+const civHeadSSR = (icon: string | undefined, kind: string, size: number) =>
+  '<div class="flex flex-col items-center gap-1">' + crownSSR(kind)
+  + (icon ? '<img src="' + escSSR(icon) + '" alt="" width="' + size + '" height="' + size + '" class="rounded border border-stone-700/30"/>' : '')
+  + '</div>';
+const perMapHtmlSSR = (a: string, b: string) => {
+  const data = (pm[a] && pm[a][b]) || null;
+  if (!data) return '';
+  const entries = Object.keys(data)
+    .map((i) => [mapNames[Number(i)], data[Number(i)]] as [string, number])
+    .sort((x, y) => y[1] - x[1]);
+  if (!entries.length) return '';
+  return '<div class="mt-4 border-t border-stone-700/15 pt-3">'
+    + '<h3 class="mb-2 font-mono text-[10px] uppercase tracking-wide text-stone-700">' + h2hLabels.byMap + '</h3>'
+    + '<div class="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-3">'
+    + entries.map((e) =>
+        '<div class="flex items-center justify-between gap-2 text-sm">'
+        + '<span class="truncate text-ink">' + escSSR(e[0]) + '</span>'
+        + '<span class="font-mono font-medium" style="color:' + (e[1] >= 50 ? 'var(--color-fav)' : 'var(--color-wr-bad)') + '">' + e[1] + '%</span>'
+        + '</div>',
+      ).join('')
+    + '</div></div>';
+};
+const h2hBannerSSR = (a: string, b: string, eIdx: number): string => {
+  if (a === b) return '';
+  const slice = h2hElo[a] && h2hElo[a][b];
+  const rec = slice ? slice[eIdx] : null;
+  if (rec == null) {
+    return '<div class="rounded border border-stone-700/30 bg-parchment p-4">'
+      + '<p class="text-sm italic text-stone-700">' + h2hLabels.noData + '</p></div>';
+  }
+  const wr = Array.isArray(rec) ? rec[0] : rec;
+  const games = Array.isArray(rec) ? rec[1] : null;
+  const fav = wr >= 52 ? displayNameSSR(a) : wr <= 48 ? displayNameSSR(b) : null;
+  const favHtml = fav
+    ? '<span class="font-semibold" style="color:var(--color-fav)">' + escSSR(fav) + '</span> ' + h2hLabels.favored
+    : '<span class="font-semibold">' + h2hLabels.even + '</span>';
+  const iconA = civIcons[a], iconB = civIcons[b];
+  const fill = Math.max(4, Math.min(96, wr));
+  const aCrown = wr >= 52 ? "gold" : "silver";
+  const bCrown = wr <= 48 ? "gold" : "silver";
+  return ''
+    + '<div class="rounded border border-stone-700/30 bg-parchment p-4">'
+    + '<div class="flex items-center justify-center gap-5">'
+    + civHeadSSR(iconA, aCrown, 48)
+    + '<div class="text-center">'
+    + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
+    + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
+    + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString() + ' ' + h2hLabels.games : '') + '</div>'
+    + '</div>'
+    + civHeadSSR(iconB, bCrown, 48)
+    + '</div>'
+    + '<div class="mt-3 flex h-2.5 overflow-hidden rounded-full border border-stone-700/20">'
+    + '<div style="width:' + fill + '%;background:var(--color-wr-bad)"></div>'
+    + '<div style="width:' + (100 - fill) + '%;background:var(--color-wr-good)"></div>'
+    + '</div>'
+    + (eIdx === 0 ? perMapHtmlSSR(a, b) : '')
+    + '</div>';
+};
+
+const initialA = byslugSSR["britons"] ? "britons" : (civs[0]?.slug ?? "");
+const initialB = byslugSSR["franks"] ? "franks" : (civs[1]?.slug ?? civs[0]?.slug ?? "");
+const defaultH2hHtml = h2hBannerSSR(initialA, initialB, 0);
+const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
 ---
 <BaseLayout title={t(lang, "matchups.title")} description={t(lang, "meta.matchups")} canonicalPath="/matchups">
   <section class="mx-auto max-w-7xl px-4 py-6">
@@ -120,24 +272,24 @@ const h2hLabels = {
       <label class="block">
         <span class="text-xs text-stone-700">{t(lang, "matchups.pickA")}</span>
         <select id="civ-a" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
-          {civs.map((c) => <option value={c.slug}>{displayNames[c.slug]}</option>)}
+          {civs.map((c) => <option value={c.slug} selected={c.slug === initialA}>{displayNames[c.slug]}</option>)}
         </select>
       </label>
       <label class="block">
         <span class="text-xs text-stone-700">{t(lang, "matchups.pickB")}</span>
         <select id="civ-b" class="mt-1 w-full rounded border border-stone-700/40 bg-parchment p-2 text-ink">
-          {civs.map((c) => <option value={c.slug}>{displayNames[c.slug]}</option>)}
+          {civs.map((c) => <option value={c.slug} selected={c.slug === initialB}>{displayNames[c.slug]}</option>)}
         </select>
       </label>
     </form>
 
-    <div id="h2h" class="mt-4"></div>
+    <div id="h2h" class="mt-4" set:html={defaultH2hHtml}></div>
 
-    <div id="comparator" class="mt-6 grid gap-6 sm:grid-cols-2">
-      <!-- JS will populate this with two civ panels -->
+    <div id="comparator" class="mt-6 grid gap-6 sm:grid-cols-2" set:html={defaultComparatorHtml}>
+      <!-- Server-rendered default pair; JS replaces this on load / selection. -->
     </div>
 
-    <script is:inline define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS }}>
+    <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS }}>
       // Build a slug -> civ lookup
       const byslug = Object.fromEntries(civs.map((c) => [c.slug, c]));
 
@@ -177,7 +329,7 @@ const h2hLabels = {
 
       function panel(slug) {
         const c = byslug[slug];
-        if (!c) return '<div class="rounded border border-royal/40 p-4 text-royal">Unknown civ: ' + esc(slug) + '</div>';
+        if (!c) return '<div class="rounded border border-royal/40 p-4 text-royal">' + h2hLabels.unknownCiv + esc(slug) + '</div>';
 
         const icon = civIcons[slug];
         const meta = civMetaLite[slug] || {};
@@ -251,7 +403,7 @@ const h2hLabels = {
         const games = Array.isArray(rec) ? rec[1] : null;
         const fav = wr >= 52 ? displayName(a) : wr <= 48 ? displayName(b) : null;
         const favHtml = fav
-          ? '<span class="font-semibold" style="color:#3f6b34">' + esc(fav) + '</span> ' + h2hLabels.favored
+          ? '<span class="font-semibold" style="color:var(--color-fav)">' + esc(fav) + '</span> ' + h2hLabels.favored
           : '<span class="font-semibold">' + h2hLabels.even + '</span>';
         const iconA = civIcons[a], iconB = civIcons[b];
         const fill = Math.max(4, Math.min(96, wr));
@@ -269,8 +421,8 @@ const h2hLabels = {
           + civHead(iconB, bCrown, 48)
           + '</div>'
           + '<div class="mt-3 flex h-2.5 overflow-hidden rounded-full border border-stone-700/20">'
-          + '<div style="width:' + fill + '%;background:#8a2d22"></div>'
-          + '<div style="width:' + (100 - fill) + '%;background:#c79a3c"></div>'
+          + '<div style="width:' + fill + '%;background:var(--color-wr-bad)"></div>'
+          + '<div style="width:' + (100 - fill) + '%;background:var(--color-wr-good)"></div>'
           + '</div>'
           + (eloIdx === 0 ? perMapHtml(a, b) : '')
           + '</div>';
@@ -289,7 +441,7 @@ const h2hLabels = {
           + entries.map((e) =>
               '<div class="flex items-center justify-between gap-2 text-sm">'
               + '<span class="truncate text-ink">' + esc(e[0]) + '</span>'
-              + '<span class="font-mono font-medium" style="color:' + (e[1] >= 50 ? '#3f6b34' : '#8a2d22') + '">' + e[1] + '%</span>'
+              + '<span class="font-mono font-medium" style="color:' + (e[1] >= 50 ? 'var(--color-fav)' : 'var(--color-wr-bad)') + '">' + e[1] + '%</span>'
               + '</div>',
             ).join('')
           + '</div></div>';

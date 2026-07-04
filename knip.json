@@ -1,8 +1,14 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "astro": true,
-  "entry": ["src/pages/**/*.astro", "scripts/*.mjs"],
-  "project": ["src/**/*.{ts,tsx,astro,mjs}", "scripts/**/*.mjs"],
+  "entry": [
+    "src/pages/**/*.astro",
+    "scripts/*.mjs"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx,astro,mjs}",
+    "scripts/**/*.mjs"
+  ],
   "ignore": [
     "src/components/ui/Dialog.astro",
     "src/components/ui/Separator.astro",
@@ -13,12 +19,12 @@
   "ignoreDependencies": [
     "@iconify-json/lucide",
     "@iconify-json/heroicons",
-    "@floating-ui/dom",
     "@fontsource/cinzel",
     "@fontsource/inter",
     "@fontsource/jetbrains-mono",
     "pagefind",
-    "tailwindcss"
+    "tailwindcss",
+    "wasm-pack"
   ],
   "ignoreExportsUsedInFile": true
 }

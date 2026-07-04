@@ -39,10 +39,17 @@ const views: View[] = [
 const hasTeam = teamOverall.length > 0;
 if (hasTeam) views.push({ id: "team-all", rows: teamOverall });
 
-const split = (rows: M[]) => [
-  { title: tr ? "En güçlü olduğu" : "Strongest against", rows: rows.slice(0, 6) },
-  { title: tr ? "En çok zorlandığı" : "Weakest against", rows: [...rows].slice(-6).reverse() },
-];
+// Split the (win-rate-descending) rows into strongest/weakest WITHOUT overlap:
+// with < 12 rows a plain slice(0,6)/slice(-6) would show the same opponent — and
+// its positive edge — under both columns. Strongest takes the first ceil(n/2)
+// (capped at 6); weakest takes the remainder (capped at 6, weakest-first).
+const split = (rows: M[]) => {
+  const half = Math.min(6, Math.ceil(rows.length / 2));
+  return [
+    { title: tr ? "En güçlü olduğu" : "Strongest against", rows: rows.slice(0, half) },
+    { title: tr ? "En çok zorlandığı" : "Weakest against", rows: rows.slice(half).slice(-6).reverse() },
+  ];
+};
 ---
 {oneOverall.length > 0 && (
   <section class="mt-8" data-civ-matchups>
@@ -71,7 +78,7 @@ const split = (rows: M[]) => [
 
     {views.map((v) => (
       <div data-view={v.id} hidden={v.id !== "1v1-all"} class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-        {split(v.rows).map((col) => (
+        {split(v.rows).filter((col) => col.rows.length > 0).map((col) => (
           <div>
             <h3 class="mb-1.5 font-mono text-[11px] uppercase tracking-wide text-stone-700">{col.title}</h3>
             <ul class="space-y-0.5">
@@ -86,7 +93,7 @@ const split = (rows: M[]) => [
                     <span class="flex-1 truncate font-display text-[15px] text-ink group-hover:text-gold-700">
                       {civNames.get(m.opp) ?? m.opp}
                     </span>
-                    <span class="w-10 flex-none text-right font-mono text-sm font-medium" style={`color:${m.winRate >= 50 ? "#3f6b34" : "#8a2d22"}`}>
+                    <span class="w-10 flex-none text-right font-mono text-sm font-medium" style={`color:${m.winRate >= 50 ? "var(--color-fav)" : "var(--color-wr-bad)"}`}>
                       {m.winRate >= 50 ? "+" : ""}{(m.winRate - 50).toFixed(1)}
                     </span>
                     <span class="w-12 flex-none text-right font-mono text-[10px] text-stone-700/50">
@@ -108,7 +115,7 @@ const split = (rows: M[]) => [
       {t(lang, "data.source")}
     </p>
 
-    <script>
+    <script data-astro-rerun>
       for (const root of document.querySelectorAll<HTMLElement>("[data-civ-matchups]")) {
         const ladderGroup = root.querySelector<HTMLElement>("[data-ladder]");
         const sel = root.querySelector<HTMLSelectElement>("[data-mselect]");

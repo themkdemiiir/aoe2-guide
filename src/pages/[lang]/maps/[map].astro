@@ -34,6 +34,16 @@ const numFmt = new Intl.NumberFormat(lang === "tr" ? "tr-TR" : "en-US");
 
 const bodyHtml = entry?.data.body?.[lang] ? (marked.parse(entry.data.body[lang]) as string) : "";
 const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
+
+// MapCivRankings renders nothing when the map has no ladder rows in any bucket.
+// Mirror that check so we can show a localized placeholder instead of a gap.
+const rankSrc = metaKey
+  ? (mapMeta.maps as Record<string, { "1v1"?: Record<string, unknown[]> | null; team?: Record<string, unknown[]> | null }>)[metaKey]
+  : null;
+const hasRankings = !!rankSrc && (["1v1", "team"] as const).some((l) => {
+  const lad = rankSrc[l];
+  return !!lad && Object.values(lad).some((rows) => Array.isArray(rows) && rows.length > 0);
+});
 ---
 <BaseLayout
   title={name}
@@ -58,6 +68,12 @@ const civIcons = (iconMap as { civs?: Record<string, string> }).civs ?? {};
     </header>
 
     <MapCivRankings mapSlug={slug} lang={lang} />
+
+    {!hasRankings && (
+      <p class="mb-6 rounded border border-stone-700/20 bg-parchment/60 px-4 py-3 text-sm italic text-stone-700">
+        {t(lang, "ui.noRankedData")}
+      </p>
+    )}
 
     {entry && entry.data.recommendedCivs.length > 0 && (
       <section class="mb-6">

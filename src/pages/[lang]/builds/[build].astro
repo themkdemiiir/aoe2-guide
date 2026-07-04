@@ -44,7 +44,7 @@ const description = lang === "tr"
     <header class="rounded border border-stone-700/40 bg-parchment p-4 shadow-sm">
       <div class="flex flex-wrap gap-2">
         <Badge variant={difficultyVariant}>{t(lang, `difficulty.${entry.data.difficulty}`)}</Badge>
-        <Badge variant="outline">{t(lang, `age.${entry.data.targetAge}`)} {t(lang, "builds.targetBadge")}</Badge>
+        <Badge variant="outline">{`${t(lang, `age.${entry.data.targetAge}`)} ${t(lang, "builds.targetBadge")}`}</Badge>
         <Badge variant="secondary">~{entry.data.durationMin} {minutes}</Badge>
       </div>
       <h1 class="mt-4 font-display text-3xl text-ink sm:text-4xl">{entry.data.name[lang]}</h1>

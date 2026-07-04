@@ -36,7 +36,7 @@ const letters = [...grouped.keys()].sort();
     <h1 class="font-display text-4xl text-ink">{tt(lang, "nav.glossary")}</h1>
 
     {rendered.length === 0 ? (
-      <p class="mt-6 text-stone-700">No glossary terms yet — coming soon.</p>
+      <p class="mt-6 text-stone-700">{tt(lang, "ui.emptyComingSoon")}</p>
     ) : (
       <>
         <nav class="mt-4 flex flex-wrap gap-2 text-sm">
@@ -46,7 +46,7 @@ const letters = [...grouped.keys()].sort();
         </nav>
 
         {letters.map((l) => (
-          <section id={l} class="mt-10">
+          <section id={l} class="mt-10 scroll-mt-24">
             <h2 class="font-display text-2xl text-gold-500">{l}</h2>
             <dl class="mt-2 space-y-3">
               {grouped.get(l)!.map((term) => (

@@ -64,7 +64,7 @@ const maxPop = b.steps.at(-1)?.villagers ?? null;
     </div>
     <div class="flex-1 px-2 py-2.5">
       <div class="font-display text-base font-bold leading-none" style={`color:${diffColor}`}>{maxPop ?? "?"}</div>
-      <div class="mt-1 font-mono text-[8px] uppercase tracking-wide text-stone-700/60">{tr ? "max pop" : "max pop"}</div>
+      <div class="mt-1 font-mono text-[8px] uppercase tracking-wide text-stone-700/60">{t(lang, "builds.maxPop")}</div>
     </div>
   </div>
 </a>

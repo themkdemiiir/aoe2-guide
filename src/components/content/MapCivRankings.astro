@@ -114,8 +114,8 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
             <span class="h-[26px] w-[26px] flex-none"></span>
           )}
           <a href={`${labels.civBase}${r.slug}/`} class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">{r.name}</a>
-          <span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style={`width:${r.fill}%;background:${r.good ? "#c79a3c" : "#8a2d22"}`}></span></span>
-          <span class="w-14 flex-none text-right font-mono text-sm font-medium" style={`color:${r.good ? "#8a6a1f" : "#8a2d22"}`}>{r.winRate}%</span>
+          <span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style={`width:${r.fill}%;background:${r.good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}`}></span></span>
+          <span class="w-14 flex-none text-right font-mono text-sm font-medium" style={`color:${r.good ? "var(--color-wr-good)" : "var(--color-wr-bad)"}`}>{r.winRate}%</span>
           <span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">{numFmt.format(r.games)}</span>
         </li>
       ))}
@@ -125,7 +125,7 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
       {tr ? "Kazanma oranına göre. " : "Ranked by win rate. "}{t(lang, "data.source")}
     </p>
 
-    <script is:inline define:vars={{ data, civInfo, civBase: labels.civBase, defaultLadder, cubeKey: labels.cubeKey }}>
+    <script is:inline data-astro-rerun define:vars={{ data, civInfo, civBase: labels.civBase, defaultLadder, cubeKey: labels.cubeKey }}>
       (() => {
         const root = document.currentScript.closest("[data-map-civs]");
         const fmt = new Intl.NumberFormat(document.documentElement.lang || "en");
@@ -186,8 +186,8 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
             + '<span class="w-6 flex-none text-right font-mono text-xs text-stone-700/70">' + (i + 1) + '</span>'
             + (info[1] ? '<img src="' + esc(info[1]) + '" alt="" width="26" height="26" loading="lazy" class="h-[26px] w-[26px] flex-none"/>' : '<span class="h-[26px] w-[26px] flex-none"></span>')
             + '<a href="' + esc(civBase + slug + "/") + '" class="w-32 flex-none truncate font-display text-[15px] text-ink hover:text-gold-700">' + esc(info[0]) + '</a>'
-            + '<span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style="width:' + fill(wr) + '%;background:' + (good ? "#c79a3c" : "#8a2d22") + '"></span></span>'
-            + '<span class="w-14 flex-none text-right font-mono text-sm font-medium" style="color:' + (good ? "#8a6a1f" : "#8a2d22") + '">' + wr + '%</span>'
+            + '<span class="relative hidden h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10 sm:block"><span class="absolute inset-y-0 left-0 rounded-full" style="width:' + fill(wr) + '%;background:' + (good ? "var(--color-wr-good)" : "var(--color-wr-bad)") + '"></span></span>'
+            + '<span class="w-14 flex-none text-right font-mono text-sm font-medium" style="color:' + (good ? "var(--color-wr-good)" : "var(--color-wr-bad)") + '">' + wr + '%</span>'
             + '<span class="w-16 flex-none text-right font-mono text-[11px] text-stone-700/60">' + fmt.format(games) + '</span>'
             + '</li>';
         }

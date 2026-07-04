@@ -86,8 +86,8 @@ const serverTiers = labels.tiers
     <h1 class="mt-2 font-display text-2xl text-ink sm:text-3xl">{t(lang, "nav.civs")}</h1>
     <p class="mt-1 font-mono text-xs text-stone-700">
       {tr
-        ? `53 uygarlık · ${games1v1Label} ranked 1v1 maç · ${latestPatch}`
-        : `53 civs · ${games1v1Label} ranked 1v1 games · ${latestPatch}`}
+        ? `${allCivs.length} uygarlık · ${games1v1Label} ranked 1v1 maç · ${latestPatch}`
+        : `${allCivs.length} civs · ${games1v1Label} ranked 1v1 games · ${latestPatch}`}
     </p>
 
     {/* --- Combinable filters: Map × Elo × Patch. All three intersect (e.g.
@@ -145,7 +145,7 @@ const serverTiers = labels.tiers
     </p>
   </section>
 
-  <script is:inline define:vars={{ civData, labels, SHIELD, MIN }}>
+  <script is:inline data-astro-rerun define:vars={{ civData, labels, SHIELD, MIN }}>
     (() => {
       // mirror of src/scripts/html.ts (is:inline can't import — keep in sync)
       const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);

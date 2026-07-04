@@ -119,6 +119,12 @@ if (lineRoot) {
       </table>
     )}
 
+    {!stats && (
+      <p class="mt-6 rounded border border-stone-700/20 bg-parchment/60 px-4 py-3 text-sm italic text-stone-700">
+        {t(lang, "ui.statsPending")}
+      </p>
+    )}
+
     {entry.data.description?.[lang] && (
       <section class="prose prose-stone mt-10 max-w-none">
         <p>{entry.data.description[lang]}</p>

@@ -6,6 +6,9 @@ import CivMatchups from "@/components/content/CivMatchups.astro";
 import Icon from "@/components/ui/Icon.astro";
 import { getCollection, getEntry } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
+import civMeta from "@data/civ-meta.json";
+import matchupsData from "@data/civ-matchups.json";
 import { marked } from "marked";
 
 export async function getStaticPaths() {
@@ -29,6 +32,12 @@ const description = lang === "tr"
   ? `${name} uygarlık rehberi (Age of Empires II) — ${tagline}`
   : `${name} civilization guide for Age of Empires II — ${tagline}`;
 const strategyHtml = entry.data.strategy?.[lang] ? (marked.parse(entry.data.strategy[lang]) as string) : "";
+
+// When both the ranked-stats block (CivStats) and the matchup block (CivMatchups)
+// render nothing, the page would silently drop straight from the header to the
+// bonuses. Detect that and show a localized placeholder instead.
+const has1v1Stats = !!(civMeta.civs as Record<string, { "1v1": unknown } | undefined>)[civSlug]?.["1v1"];
+const hasMatchupRows = ((matchupsData.civs as Record<string, { winRate: number }[]>)[civSlug] ?? []).some((m) => m.winRate !== 50);
 ---
 <BaseLayout title={name} description={description} canonicalPath={`/civs/${civSlug}`}>
   <article class="mx-auto max-w-3xl px-4 py-6 sm:py-8">
@@ -45,17 +54,23 @@ const strategyHtml = entry.data.strategy?.[lang] ? (marked.parse(entry.data.stra
 
     <CivMatchups slug={civSlug} lang={lang} />
 
+    {!has1v1Stats && !hasMatchupRows && (
+      <p class="mt-6 rounded border border-stone-700/20 bg-parchment/60 px-4 py-3 text-sm italic text-stone-700">
+        {t(lang, "ui.civStatsPending")}
+      </p>
+    )}
+
     <section class="mt-6">
-      <h2 class="font-display text-xl text-ink">Bonuses</h2>
+      <h2 class="font-display text-xl text-ink">{t(lang, "matchups.civBonuses")}</h2>
       <ul class="mt-2 list-inside list-disc space-y-1 text-ink">
         {entry.data.bonuses[lang].map((b: string) => <li>{b}</li>)}
       </ul>
-      <p class="mt-3 text-sm text-stone-700"><strong>Team:</strong> {entry.data.teamBonus[lang]}</p>
+      <p class="mt-3 text-sm text-stone-700"><strong>{t(lang, "matchups.teamBonus")}:</strong> {entry.data.teamBonus[lang]}</p>
     </section>
 
     {meta && meta.uniqueUnits.length > 0 && (
       <section class="mt-6">
-        <h2 class="font-display text-xl text-ink">Unique Units</h2>
+        <h2 class="font-display text-xl text-ink">{t(lang, "matchups.uniqueUnits")}</h2>
         <div class="mt-3">
           <UniqueUnitBlock slugs={meta.uniqueUnits} locale={lang} />
         </div>
@@ -63,7 +78,7 @@ const strategyHtml = entry.data.strategy?.[lang] ? (marked.parse(entry.data.stra
     )}
 
     <section class="mt-6">
-      <h2 class="font-display text-xl text-ink">Unique Techs</h2>
+      <h2 class="font-display text-xl text-ink">{t(lang, "matchups.uniqueTechs")}</h2>
       <ul class="mt-2 space-y-2 text-ink">
         <li><strong>{entry.data.uniqueTechs.castle.name[lang]}</strong> — {entry.data.uniqueTechs.castle.effect[lang]}</li>
         <li><strong>{entry.data.uniqueTechs.imperial.name[lang]}</strong> — {entry.data.uniqueTechs.imperial.effect[lang]}</li>

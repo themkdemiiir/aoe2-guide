@@ -54,7 +54,7 @@ lineCards.sort((a, b) => {
 
 function lineDisplayName(card: LineCard): string {
   if (card.memberSlugs.length === 1) return card.baseTierName;
-  return `${card.baseTierName} Line`;
+  return `${card.baseTierName} ${t(lang, "units.lineSuffix")}`;
 }
 
 // Role facet — slugify so multi-word roles (e.g. "heavy cavalry") match cleanly.
@@ -71,62 +71,66 @@ const facets = [
   },
 ];
 
-// Abbreviated tier names for the chain pills (max 4 shown)
-const abbreviations: Record<string, string> = {
-  militia: "Militia",
-  "man-at-arms": "MAA",
-  "long-swordsman": "Long Sword",
-  "two-handed-swordsman": "2H Sword",
-  champion: "Champ",
-  spearman: "Spear",
-  pikeman: "Pike",
-  halberdier: "Halbs",
-  "eagle-scout": "Scout",
-  "eagle-warrior": "EW",
-  "elite-eagle-warrior": "Elite EW",
-  archer: "Archer",
-  crossbowman: "Xbow",
-  arbalester: "Arb",
-  skirmisher: "Skirmisher",
-  "elite-skirmisher": "Elite Skirm",
-  "scout-cavalry": "Scout",
-  "light-cavalry": "LC",
-  hussar: "Hussar",
-  knight: "Knight",
-  cavalier: "Cavalier",
-  paladin: "Paladin",
-  "camel-rider": "Camel",
-  "heavy-camel-rider": "HCamel",
-  "cavalry-archer": "CA",
-  "heavy-cavalry-archer": "HCA",
-  "battering-ram": "Ram",
-  "capped-ram": "Capped",
-  "siege-ram": "Siege",
-  mangonel: "Mango",
-  onager: "Onager",
-  "siege-onager": "SO",
-  scorpion: "Scorpion",
-  "heavy-scorpion": "HSCorpion",
-  galley: "Galley",
-  "war-galley": "War G",
-  galleon: "Galleon",
-  "fire-ship": "Fire",
-  "fast-fire-ship": "Fast Fire",
-  "demolition-ship": "Demo",
-  "heavy-demolition-ship": "H Demo",
-  "cannon-galleon": "Cannon G",
-  "elite-cannon-galleon": "Elite",
+// Abbreviated tier names for the chain pills (max 4 shown). Bilingual so TR
+// pages don't show English abbreviations.
+const abbreviations: Record<string, { en: string; tr: string }> = {
+  militia: { en: "Militia", tr: "Milis" },
+  "man-at-arms": { en: "MAA", tr: "MAA" },
+  "long-swordsman": { en: "Long Sword", tr: "Uzun Kılıç" },
+  "two-handed-swordsman": { en: "2H Sword", tr: "2E Kılıç" },
+  champion: { en: "Champ", tr: "Şampiyon" },
+  spearman: { en: "Spear", tr: "Mızrakçı" },
+  pikeman: { en: "Pike", tr: "Pikeci" },
+  halberdier: { en: "Halbs", tr: "Baltalı" },
+  "eagle-scout": { en: "Scout", tr: "K. İzci" },
+  "eagle-warrior": { en: "EW", tr: "K. Savaşçı" },
+  "elite-eagle-warrior": { en: "Elite EW", tr: "Elit K.S." },
+  archer: { en: "Archer", tr: "Okçu" },
+  crossbowman: { en: "Xbow", tr: "Yaylı" },
+  arbalester: { en: "Arb", tr: "Arbalet" },
+  skirmisher: { en: "Skirmisher", tr: "Avcı" },
+  "elite-skirmisher": { en: "Elite Skirm", tr: "Elit Avcı" },
+  "scout-cavalry": { en: "Scout", tr: "Keşif" },
+  "light-cavalry": { en: "LC", tr: "Hafif Süv." },
+  hussar: { en: "Hussar", tr: "Hüsar" },
+  knight: { en: "Knight", tr: "Şövalye" },
+  cavalier: { en: "Cavalier", tr: "Kavalye" },
+  paladin: { en: "Paladin", tr: "Paladin" },
+  "camel-rider": { en: "Camel", tr: "Deve" },
+  "heavy-camel-rider": { en: "HCamel", tr: "Ağır Deve" },
+  "cavalry-archer": { en: "CA", tr: "Atlı Okçu" },
+  "heavy-cavalry-archer": { en: "HCA", tr: "Ağır AO" },
+  "battering-ram": { en: "Ram", tr: "Koçbaşı" },
+  "capped-ram": { en: "Capped", tr: "Kapaklı Koç" },
+  "siege-ram": { en: "Siege", tr: "Kuşatma Koçu" },
+  mangonel: { en: "Mango", tr: "Mancınık" },
+  onager: { en: "Onager", tr: "Onager" },
+  "siege-onager": { en: "SO", tr: "Kuşatma On." },
+  scorpion: { en: "Scorpion", tr: "Akrep" },
+  "heavy-scorpion": { en: "HSCorpion", tr: "Ağır Akrep" },
+  galley: { en: "Galley", tr: "Kadırga" },
+  "war-galley": { en: "War G", tr: "Savaş K." },
+  galleon: { en: "Galleon", tr: "Kalyon" },
+  "fire-ship": { en: "Fire", tr: "Ateş G." },
+  "fast-fire-ship": { en: "Fast Fire", tr: "Hızlı Ateş" },
+  "demolition-ship": { en: "Demo", tr: "Yıkım G." },
+  "heavy-demolition-ship": { en: "H Demo", tr: "Ağır Yıkım" },
+  "cannon-galleon": { en: "Cannon G", tr: "Toplu K." },
+  "elite-cannon-galleon": { en: "Elite", tr: "Elit" },
 };
 
 function tierAbbr(slug: string): string {
-  return abbreviations[slug] ?? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const abbr = abbreviations[slug];
+  if (abbr) return abbr[lang];
+  // Fall back to the localized unit name, not the English slug.
+  return bySlug.get(slug)?.data.name[lang] ?? slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 ---
 <BaseLayout title={t(lang, "nav.units")} description={t(lang, "meta.units")} canonicalPath="/units">
   <section class="mx-auto max-w-7xl px-4 py-12" data-filter-root>
     <h1 class="mb-6 font-display text-4xl text-ink">{t(lang, "nav.units")}</h1>
     {lineCards.length === 0 ? (
-      <p class="mt-6 text-stone-700">No units yet — coming soon.</p>
+      <p class="mt-6 text-stone-700">{t(lang, "ui.emptyComingSoon")}</p>
     ) : (
       <>
         <FilterBar

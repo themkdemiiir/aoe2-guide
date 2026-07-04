@@ -44,9 +44,16 @@ const PARCHMENT = "#ece0c6";
 const INK = "#2c2620";
 const GOLD = "#b08a36";
 
+// Extract the English display name. Flat-YAML collections nest it as
+//   name:
+//     en: Britons
+// while legacy MD frontmatter puts it inline as  name: "Britons".
 const nameOf = (file) => {
-  const m = readFileSync(file, "utf8").match(/^name:\s*"?(.+?)"?\s*$/m);
-  return m ? m[1] : null;
+  const txt = readFileSync(file, "utf8");
+  const nested = txt.match(/^name:[^\S\n]*\n\s+en:\s*"?(.+?)"?\s*$/m);
+  if (nested) return nested[1];
+  const inline = txt.match(/^name:\s*"?(.+?)"?\s*$/m);
+  return inline ? inline[1] : null;
 };
 
 const node = (style, children) => ({ type: "div", props: { style, children } });
@@ -100,15 +107,27 @@ writeFileSync(
 );
 count++;
 for (const { dir, seg, label } of TYPES) {
-  const enDir = `src/content/${dir}/en`;
-  if (!existsSync(enDir)) continue;
+  const base = `src/content/${dir}`;
+  const enDir = `${base}/en`;
+  let entries; // Array<{ file, slug }>
+  if (existsSync(enDir)) {
+    // Legacy MD collection: per-locale dir, English source of truth.
+    entries = readdirSync(enDir)
+      .filter((x) => x.endsWith(".md"))
+      .map((f) => ({ file: join(enDir, f), slug: f.replace(/\.md$/, "") }));
+  } else if (existsSync(base)) {
+    // Flat bilingual-YAML collection (civilizations, build-orders, units, maps).
+    const yamls = readdirSync(base).filter((x) => /\.ya?ml$/i.test(x));
+    if (yamls.length === 0) {
+      throw new Error(`build:og — unrecognized content shape in ${base} (no ${dir}/en/*.md and no *.yaml files)`);
+    }
+    entries = yamls.map((f) => ({ file: join(base, f), slug: f.replace(/\.ya?ml$/i, "") }));
+  } else {
+    throw new Error(`build:og — content dir not found: ${base}`);
+  }
   mkdirSync(join(OUT, seg), { recursive: true });
-  for (const f of readdirSync(enDir).filter((x) => x.endsWith(".md"))) {
-    const slug = f.replace(/\.md$/, "");
-    writeFileSync(
-      join(OUT, seg, `${slug}.png`),
-      await render(nameOf(join(enDir, f)) ?? slug, label),
-    );
+  for (const { file, slug } of entries) {
+    writeFileSync(join(OUT, seg, `${slug}.png`), await render(nameOf(file) ?? slug, label));
     count++;
   }
 }

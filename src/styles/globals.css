@@ -72,6 +72,13 @@
   --color-res-gold: oklch(0.78 0.14 85);
   --color-res-stone: oklch(0.62 0 0);
 
+  /* Win-rate / stat semantics used by charts and inline styles across the site
+     (CivStats, MapCivRankings, CivMatchups, matchups). Tuned for AA on parchment;
+     the [data-theme=dark] block lightens them so they don't vanish on the dark bg. */
+  --color-wr-good: oklch(0.52 0.10 75);
+  --color-wr-bad: oklch(0.44 0.15 25);
+  --color-fav: oklch(0.50 0.10 145);
+
   --font-display: "Cinzel", serif;
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -86,6 +93,15 @@
   --color-ink: oklch(0.92 0.012 85);
   --color-stone-700: oklch(0.72 0.03 60);
   --color-gold-500: oklch(0.8 0.12 80);
+  /* These were dark-on-dark before: royal/forest/steel and the AA-on-parchment
+     gold-700 all sat near-invisible on the dark bg. Lighten for dark legibility. */
+  --color-gold-700: oklch(0.80 0.12 78);
+  --color-royal: oklch(0.70 0.16 25);
+  --color-forest: oklch(0.74 0.10 145);
+  --color-steel: oklch(0.72 0.05 240);
+  --color-wr-good: oklch(0.80 0.12 82);
+  --color-wr-bad: oklch(0.68 0.17 25);
+  --color-fav: oklch(0.74 0.12 145);
 }
 
 html {

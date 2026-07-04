@@ -11,7 +11,7 @@ import Card from "@/components/ui/Card.astro";
 import Icon from "@/components/ui/Icon.astro";
 import Stat from "@/components/ui/Stat.astro";
 import type { Locale } from "@/i18n/locales";
-import { localizedPath } from "@/i18n/utils";
+import { localizedPath, t } from "@/i18n/utils";
 
 interface Props {
   slugs: string[];
@@ -60,26 +60,26 @@ const blocks = slugs.map((slug) => {
             <span class="font-display text-lg text-ink truncate block">{name}</span>
           )}
           {!stats && (
-            <Badge variant="outline" class="mt-1">stats pending</Badge>
+            <Badge variant="outline" class="mt-1">{t(locale, "units.statsPending")}</Badge>
           )}
         </div>
       </div>
 
       {stats ? (
         <dl class="mt-3 grid grid-cols-3 gap-2">
-          <Stat label="HP">{stats.hp}</Stat>
-          <Stat label="Attack">{stats.attack}</Stat>
+          <Stat label={t(locale, "units.hp")}>{stats.hp}</Stat>
+          <Stat label={t(locale, "units.attack")}>{stats.attack}</Stat>
           {stats.range > 0 ? (
-            <Stat label="Range">{stats.range}</Stat>
+            <Stat label={t(locale, "units.range")}>{stats.range}</Stat>
           ) : stats.armorMelee !== undefined ? (
-            <Stat label="Armor">{stats.armorMelee}/{stats.armorPiercing ?? 0}</Stat>
+            <Stat label={t(locale, "units.armor")}>{stats.armorMelee}/{stats.armorPiercing ?? 0}</Stat>
           ) : (
             <div />
           )}
         </dl>
       ) : (
         <Alert variant="info" class="mt-3">
-          Stats not yet available for <code>{slug}</code>.
+          {t(locale, "units.statsUnavailable")} <code>{slug}</code>.
         </Alert>
       )}
 

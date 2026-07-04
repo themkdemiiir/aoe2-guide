@@ -130,7 +130,7 @@ const mapList = one
       {elo && (
         <div class="rounded border border-stone-700/20 bg-parchment/60 p-3">
           <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Elo'ya göre kazanma" : "Win rate by Elo"}</h3>
-          <div class="mt-2 h-36"><canvas data-chart="bar" data-labels={JSON.stringify(elo.labels)} data-values={JSON.stringify(elo.values)} data-games={JSON.stringify(elo.games)}></canvas></div>
+          <div class="mt-2 h-36"><canvas role="img" aria-label={t(lang, "ui.chartWinByElo")} data-chart="bar" data-labels={JSON.stringify(elo.labels)} data-values={JSON.stringify(elo.values)} data-games={JSON.stringify(elo.games)}></canvas></div>
         </div>
       )}
       {mapList.length > 0 && (
@@ -152,7 +152,7 @@ const mapList = one
                       {m.href && <span class="text-[10px] text-gold-700/60">↗</span>}
                     </span>
                     <span class="relative h-2 flex-1 overflow-hidden rounded-full bg-stone-700/10">
-                      <span class="absolute inset-y-0 left-0 rounded-full" style={`width:${fill}%;background:${m.winRate >= 50 ? "#c79a3c" : "#8a2d22"}`}></span>
+                      <span class="absolute inset-y-0 left-0 rounded-full" style={`width:${fill}%;background:${m.winRate >= 50 ? "var(--color-wr-good)" : "var(--color-wr-bad)"}`}></span>
                     </span>
                     <span class="w-11 flex-none text-right font-mono text-xs text-stone-700">{m.winRate}%</span>
                   </Tag>
@@ -165,7 +165,7 @@ const mapList = one
       {patch && (
         <div class="rounded border border-stone-700/20 bg-parchment/60 p-3 lg:col-span-2">
           <h3 class="font-mono text-[11px] uppercase tracking-wide text-stone-700">{tr ? "Patch'e göre kazanma" : "Win rate by patch"}</h3>
-          <div class="mt-2 h-36"><canvas data-chart="bar" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)} data-games={JSON.stringify(patch.games)}></canvas></div>
+          <div class="mt-2 h-36"><canvas role="img" aria-label={t(lang, "ui.chartWinByPatch")} data-chart="bar" data-labels={JSON.stringify(patch.labels)} data-values={JSON.stringify(patch.values)} data-games={JSON.stringify(patch.games)}></canvas></div>
         </div>
       )}
     </div>
@@ -179,20 +179,26 @@ const mapList = one
   import Chart from "chart.js/auto";
   import { tierOf, TIER_COLORS } from "@/lib/tiers";
 
-  const css = getComputedStyle(document.documentElement);
-  const stone = css.getPropertyValue("--color-stone-700").trim() || "#5a4a33";
-  const gold = "#c79a3c";
-  const maroon = "#8a2d22";
-  const grid = "rgba(120,96,52,0.18)";
-  const barColor = (v: number) => (v >= 50 ? gold : maroon);
+  // Wrapped in astro:page-load so charts + the slice filter re-initialise after
+  // ClientRouter navigations (a bundled module script otherwise runs once per
+  // session, leaving the next civ's charts blank). Colors read from theme tokens
+  // each run so they track light/dark.
+  function initCivStats() {
+    const css = getComputedStyle(document.documentElement);
+    const stone = css.getPropertyValue("--color-stone-700").trim() || "#5a4a33";
+    const gold = css.getPropertyValue("--color-wr-good").trim() || "#c79a3c";
+    const maroon = css.getPropertyValue("--color-wr-bad").trim() || "#8a2d22";
+    const grid = "rgba(120,96,52,0.18)";
+    const barColor = (v: number) => (v >= 50 ? gold : maroon);
 
-  Chart.defaults.color = stone;
-  Chart.defaults.font.family = "'JetBrains Mono', ui-monospace, monospace";
-  Chart.defaults.font.size = 10;
+    Chart.defaults.color = stone;
+    Chart.defaults.font.family = "'JetBrains Mono', ui-monospace, monospace";
+    Chart.defaults.font.size = 10;
 
-  const num = (el: HTMLElement, k: string) => JSON.parse(el.dataset[k] || "[]");
+    const num = (el: HTMLElement, k: string) => JSON.parse(el.dataset[k] || "[]");
 
-  for (const el of document.querySelectorAll<HTMLCanvasElement>("[data-civ-stats] canvas[data-chart]")) {
+    for (const el of document.querySelectorAll<HTMLCanvasElement>("[data-civ-stats] canvas[data-chart]")) {
+      Chart.getChart(el)?.destroy(); // idempotent if this runs twice on one DOM
     const kind = el.dataset.chart;
     const labels = num(el, "labels") as string[];
     const values = num(el, "values") as number[];
@@ -306,7 +312,7 @@ const mapList = one
         const wr = +((w / g) * 100).toFixed(2);
         const t = tierOf(wr);
         elWr.textContent = `${wr}%`;
-        elWr.style.color = wr >= 50 ? "#8a6a1f" : "#8a2d22";
+        elWr.style.color = wr >= 50 ? "var(--color-wr-good)" : "var(--color-wr-bad)";
         elTier.textContent = t;
         elTier.style.color = TIER_COLORS[t];
         elGames.textContent = `${g.toLocaleString()} ${gamesWord}`;
@@ -321,5 +327,8 @@ const mapList = one
     for (const s of Object.values(sel)) s.addEventListener("change", update);
     reset.addEventListener("click", () => { sel.map.value = ""; sel.elo.value = ""; sel.patch.value = ""; update(); });
     cf.hidden = false;
+    }
   }
+
+  document.addEventListener("astro:page-load", initCivStats);
 </script>

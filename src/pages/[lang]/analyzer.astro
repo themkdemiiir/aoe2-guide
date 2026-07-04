@@ -84,10 +84,17 @@ const ecoTechs: Record<string, string> = {
 
     const { L, civs, ecoTechs } = JSON.parse(document.getElementById("az-data")!.textContent!);
 
+    // Theme tokens resolve differently in light vs dark (they swap on
+    // html[data-theme]); read them at render time so charts follow the theme.
+    const cssVar = (name: string, fallback: string) => {
+      const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      return v || fallback;
+    };
+
     // Chart defaults matching the site's stat components (CivStats.astro).
     Chart.defaults.font.family = "'JetBrains Mono', monospace";
     Chart.defaults.font.size = 10;
-    Chart.defaults.color = "#6b5b41";
+    Chart.defaults.color = cssVar("--color-stone-700", "#6b5b41");
 
     // AoE2 DE slot colors by replay color_id (1=Blue … 7=Gray, 0|8=Orange).
     const PLAYER_COLORS: Record<number, string> = {
@@ -120,11 +127,20 @@ const ecoTechs: Record<string, string> = {
     let report: any = null;
     let selectedPn: number | null = null;
     let charts: Chart[] = [];
+    // Last-rendered chart inputs, so a theme switch can rebuild with new colors.
+    let lastPlayers: any[] | null = null;
+    let lastSelPn = 0;
 
     // Production + APM line charts (Chart.js — same library as the civ stats pages).
     function drawCharts(players: any[], selPn: number) {
       for (const c of charts) c.destroy();
       charts = [];
+      lastPlayers = players;
+      lastSelPn = selPn;
+      // Re-read theme tokens each draw so light/dark swaps recolor axes + grid.
+      const axisText = cssVar("--color-stone-700", "#6b5b41");
+      Chart.defaults.color = axisText;
+      const gridColor = `color-mix(in oklch, ${axisText} 15%, transparent)`;
       const mins = Math.max(...players.map((m: any) => Math.max(m.vils_series.length, m.apm_series.length)), 1);
       const labels = Array.from({ length: mins }, (_, i) => i);
       const line = (data: number[], color: string, you: boolean, dashed = false) => ({
@@ -143,7 +159,7 @@ const ecoTechs: Record<string, string> = {
         plugins: { legend: { display: false }, tooltip: { mode: "index" as const, intersect: false } },
         scales: {
           x: { grid: { display: false }, ticks: { maxTicksLimit: 12 } },
-          y: { grid: { color: "rgba(107,91,65,0.15)" }, beginAtZero: true },
+          y: { grid: { color: gridColor }, beginAtZero: true },
         },
       };
       const prodEl = document.getElementById("az-chart-prod") as HTMLCanvasElement | null;
@@ -581,11 +597,12 @@ const ecoTechs: Record<string, string> = {
       if (!cell?.units?.length) return "";
       const chips = cell.units
         .map(
-          (u: any) => `<span class="inline-flex items-center gap-1.5 rounded border border-stone-700/25 bg-parchment px-2 py-1 text-xs text-ink">${esc(displayUnit(u.unit))} <span class="font-mono text-gold-700">${esc(String(u.pct))}%</span><span class="font-mono text-[10px] text-stone-700/80">~${esc(String(Math.round(u.med)))}</span></span>`,
+          (u: any) => `<span class="inline-flex items-center gap-1.5 rounded border border-stone-700/25 bg-parchment px-2 py-1 text-xs text-ink">${esc(displayUnit(u.unit))} <span class="font-mono text-gold-700">${esc(String(u.pct))}%</span> <span class="font-mono text-[10px] text-stone-700/50">·</span> <span class="font-mono text-[10px] text-stone-700/80">~${esc(String(Math.round(u.med)))}</span></span>`,
         )
         .join("");
       return `<h3 class="mt-6 font-display text-sm font-bold uppercase tracking-wide text-stone-700">${esc(L["analyzer.winners"])}</h3>
         <p class="mt-1 text-xs text-stone-700/80">${esc(L["analyzer.winners.note"])}</p>
+        <p class="mt-1 font-mono text-[10px] text-stone-700/70">${esc(L["analyzer.medianLegend"])}</p>
         <div class="mt-2 flex flex-wrap gap-2">${chips}</div>`;
     }
     const displayUnit = (u: string) => u.replace(/\b\w/g, (c) => c.toUpperCase());
@@ -611,7 +628,7 @@ const ecoTechs: Record<string, string> = {
         award("analyzer.badge.fastestCastle", (m) => m.castle_ms, "min"),
         award("analyzer.badge.mostVils", (m) => (m.castle_ms != null ? m.vils_castle : null), "max"),
         award("analyzer.badge.highestApm", (m) => m.apm, "max"),
-        award("analyzer.badge.cleanestTc", (m) => m.idle_dark_ms + m.idle_feudal_ms, "min"),
+        award("analyzer.badge.cleanestTc", (m) => (m.feudal_ms != null && m.castle_ms != null ? m.idle_dark_ms + m.idle_feudal_ms : null), "min"),
         award("analyzer.badge.firstMilitary", (m) => m.first_military_ms, "min"),
         award("analyzer.badge.marketRegular", (m) => (m.market_buys + m.market_sells > 0 ? m.market_buys + m.market_sells : null), "max"),
       ].filter(Boolean) as Array<{ key: string; who: any }>;
@@ -722,9 +739,9 @@ const ecoTechs: Record<string, string> = {
         <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
           ${players.map((m: any) => `<span class="flex items-center gap-1.5 font-mono text-[11px] text-stone-700"><span class="inline-block h-2.5 w-2.5 rounded-sm" style="background:${colorOf(m.info.color_id)}"></span>${esc(m.info.name)}</span>`).join("")}
         </div>
-        <div class="mt-2 h-64 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-prod"></canvas></div>
+        <div class="mt-2 h-64 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-prod" role="img" aria-label="${esc(L["analyzer.chartProdLabel"])}"></canvas></div>
         <h3 class="mt-6 font-display text-xl text-ink">${esc(L["analyzer.charts.apm"])}</h3>
-        <div class="mt-2 h-48 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-apm"></canvas></div>
+        <div class="mt-2 h-48 rounded border border-stone-700/25 bg-parchment/60 p-3"><canvas id="az-chart-apm" role="img" aria-label="${esc(L["analyzer.chartApmLabel"])}"></canvas></div>
 
         <h3 class="mt-8 font-display text-xl text-ink">${esc(L["analyzer.fixes"])}</h3>
         <div class="mt-2 rounded border border-stone-700/25 bg-parchment/60 px-4 py-2">${findingsList(selPn)}</div>
@@ -823,5 +840,11 @@ const ecoTechs: Record<string, string> = {
       const f = (e as DragEvent).dataTransfer?.files?.[0];
       if (f) analyze(f);
     });
+
+    // Rebuild already-rendered charts with theme-appropriate colors when the
+    // site's light/dark toggle flips html[data-theme].
+    new MutationObserver(() => {
+      if (lastPlayers) drawCharts(lastPlayers, lastSelPn);
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   </script>
 </BaseLayout>
