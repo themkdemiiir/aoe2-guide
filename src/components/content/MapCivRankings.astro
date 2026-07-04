@@ -107,6 +107,10 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
         )}
         <select data-elo aria-label={tr ? "Elo" : "Elo"} class="select-field">
           {availBuckets.map((b) => <option value={b}>{b === "all" ? labels.allElo : b}</option>)}
+          <option disabled>──</option>
+          <option value="cum:1650">1650+</option>
+          <option value="cum:1800">1800+</option>
+          <option value="cum:2000">2000+</option>
         </select>
         {hasPatch && (
           <select data-patch aria-label={tr ? "Yama" : "Patch"} class="select-field">
@@ -251,16 +255,42 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
           });
       return cubeReq;
     }
+    // A cumulative "X+" bucket (value "cum:1650") pools every band ≥ the edge.
+    const cumCut = (b: string): number | null => (b.startsWith("cum:") ? +b.slice(4) : null);
+
+    // All-time (non-patch) rows, honouring a cumulative cut by pooling the
+    // per-bucket rows — reconstruct wins as games×wr for an exact weighted rate.
+    function allTimeRows(ladder: string, bucket: string): SliceRow[] {
+      const cut = cumCut(bucket);
+      if (cut == null) return data[ladder]?.[bucket] ?? [];
+      const agg: Record<string, [number, number]> = {};
+      for (const [b, rows] of Object.entries(data[ladder] ?? {})) {
+        const lo = Number.parseInt(b, 10);
+        if (!Number.isFinite(lo) || lo < cut) continue;
+        for (const [slug, games, wr] of rows) {
+          const a = (agg[slug] ??= [0, 0]);
+          a[0] += games;
+          a[1] += games * wr;
+        }
+      }
+      return Object.entries(agg)
+        .map(([slug, gw]) => [slug, gw[0], +(gw[1] / gw[0]).toFixed(2)] as SliceRow)
+        .filter((r) => r[1] >= 20)
+        .sort((a, b) => b[2] - a[2]);
+    }
+
     function cubeRows(bucket: string, patch: string): SliceRow[] {
       const c = cube!;
       if (c._mi < 0) return [];
-      const eIdx = bucket === "all" ? -1 : (c._ei[bucket] ?? -2);
+      const cut = cumCut(bucket);
+      const cumStart = cut != null ? c.elos.findIndex((b) => Number.parseInt(b, 10) >= cut) : -1;
+      const eIdx = cut == null && bucket !== "all" ? (c._ei[bucket] ?? -2) : -1;
       const pIdx = c._pi[patch];
       if (eIdx === -2 || pIdx == null) return [];
       const agg: Record<string, [number, number]> = {};
       for (const r of c.rows) {
         if (r[2] !== c._mi) continue;
-        if (eIdx >= 0 && r[1] !== eIdx) continue;
+        if (cumStart >= 0 ? r[1] < cumStart : eIdx >= 0 && r[1] !== eIdx) continue;
         if (r[3] !== pIdx) continue;
         const a = (agg[r[0]] ??= [0, 0]);
         a[0] += r[4];
@@ -366,7 +396,9 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
             extraCssText: "border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,0.22);",
             formatter: (params: { dataIndex: number }[]) => {
               const i = params[0]?.dataIndex ?? 0;
-              const [slug, games, wr] = rowsNow[i];
+              const row = rowsNow[i];
+              if (!row) return "";
+              const [slug, games, wr] = row;
               const [name, icon] = civInfo[slug] ?? [slug, ""];
               const img = icon ? `<img src="${esc(icon)}" width="22" height="22" style="vertical-align:-5px;margin-right:6px" alt=""/>` : "";
               return `${img}<b style="font-family:${body}">${esc(name)}</b><br/>` +
@@ -395,7 +427,7 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
                 color: c.ink,
                 fontFamily: mono,
                 fontSize: 11,
-                formatter: (p: { dataIndex: number }) => `${rowsNow[p.dataIndex][2].toFixed(1)}%`,
+                formatter: (p: { dataIndex: number }) => (rowsNow[p.dataIndex] ? `${rowsNow[p.dataIndex][2].toFixed(1)}%` : ""),
               },
               markLine: {
                 silent: true,
@@ -451,12 +483,12 @@ const defaultRows = (data[defaultLadder]?.all ?? []).map(([slug, games, winRate]
           // patch selector so the label can never disagree with the shown data.
           state.patch = "";
           if (patchSel) patchSel.value = "";
-          paint(data[state.ladder]?.[state.bucket] ?? []);
+          paint(allTimeRows(state.ladder, state.bucket));
           return;
         }
         paint(cubeRows(state.bucket, state.patch));
       } else {
-        paint(data[state.ladder]?.[state.bucket] ?? []);
+        paint(allTimeRows(state.ladder, state.bucket));
       }
     }
 
