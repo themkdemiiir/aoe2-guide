@@ -472,7 +472,7 @@ const REGION_NOUN_TR = {
   "Western European": "Batı Avrupa'dan",
 };
 
-const _titleWord = (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+const titleWord = (w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
 function fixSpecialty(s) {
   let x = s
     .replace(/Calvary/gi, "Cavalry")
@@ -480,7 +480,7 @@ function fixSpecialty(s) {
     .trim();
   x = x
     .split(/\s+and\s+/i)
-    .map((p) => p.split(/\s+/).map(_titleWord).join(" "))
+    .map((p) => p.split(/\s+/).map(titleWord).join(" "))
     .join(" and ");
   x = x.replace(/\bArchers\b/g, "Archer");
   if (x === "Cavalry Infantry") x = "Cavalry and Infantry";

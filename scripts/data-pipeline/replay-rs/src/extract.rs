@@ -9,7 +9,7 @@
 //!   - `players` : one row per real player (profile_id, civ_id, name, team, color, won)
 //!   - `events`  : EVERY player action — the full timeline, nothing dropped
 //!   - `ages`    : per player per age reached (uptime + cumulative composition),
-//!                 the same shape as the historical aoestats `match_ages` table.
+//!     the same shape as the historical aoestats `match_ages` table.
 //!
 //! Raw ids are kept as-is; id->name mapping happens later via the icon-map dim,
 //! so the parser has no name dependencies and never loses information.

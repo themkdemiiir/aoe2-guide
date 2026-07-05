@@ -34,11 +34,14 @@ export const ui = {
     "nav.learn": "Learn",
     "nav.glossary": "Glossary",
     "nav.explorer": "Explorer",
-    "meta.explorer": "Age of Empires II data explorer — win rate of any civilization by map, elo and patch, from real ranked match data. Runs in your browser.",
+    "meta.explorer":
+      "Age of Empires II data explorer — win rate of any civilization by map, elo and patch, from real ranked match data. Runs in your browser.",
     "explorer.title": "Data Explorer",
-    "explorer.intro": "Ask any slice of the ranked data: pick a civilization and filter by map, elo and patch, then break the result down into a chart. Everything runs in your browser — no server.",
+    "explorer.intro":
+      "Ask any slice of the ranked data: pick a civilization and filter by map, elo and patch, then break the result down into a chart. Everything runs in your browser — no server.",
     "explorer.breakBy": "Break down by",
-    "explorer.noData": "No games for that combination — try widening the elo (a cumulative X+ cut) or setting patch to All-time.",
+    "explorer.noData":
+      "No games for that combination — try widening the elo (a cumulative X+ cut) or setting patch to All-time.",
     "glossary.filter": "Filter terms…",
     "glossary.noMatch": "No terms match your filter.",
     "nav.search": "Search",
@@ -275,21 +278,29 @@ export const ui = {
     "analyzer.sev.med": "Improve",
     "analyzer.sev.low": "Minor",
     "analyzer.fix.idle_tc_dark_high": "idle TC (dark)",
-    "analyzer.fixnote.idle_tc_dark_high": "Lots of Dark-Age TC idle (estimate) — keep a villager queued non-stop.",
+    "analyzer.fixnote.idle_tc_dark_high":
+      "Lots of Dark-Age TC idle (estimate) — keep a villager queued non-stop.",
     "analyzer.fix.idle_tc_dark_med": "idle TC (dark)",
-    "analyzer.fixnote.idle_tc_dark_med": "Some Dark-Age TC idle (estimate) — tighten villager production.",
+    "analyzer.fixnote.idle_tc_dark_med":
+      "Some Dark-Age TC idle (estimate) — tighten villager production.",
     "analyzer.fix.idle_tc_feudal": "idle TC (feudal)",
-    "analyzer.fixnote.idle_tc_feudal": "TC idle in Feudal (estimate) — each 25s idle ≈ one lost villager.",
+    "analyzer.fixnote.idle_tc_feudal":
+      "TC idle in Feudal (estimate) — each 25s idle ≈ one lost villager.",
     "analyzer.fix.no_wheelbarrow": "Wheelbarrow",
-    "analyzer.fixnote.no_wheelbarrow": "No Wheelbarrow by Castle Age — a big eco multiplier left on the table.",
+    "analyzer.fixnote.no_wheelbarrow":
+      "No Wheelbarrow by Castle Age — a big eco multiplier left on the table.",
     "analyzer.fix.no_loom": "Loom",
-    "analyzer.fixnote.no_loom": "No Loom by Feudal — cheap villager survivability vs early aggression.",
+    "analyzer.fixnote.no_loom":
+      "No Loom by Feudal — cheap villager survivability vs early aggression.",
     "analyzer.fix.floating_res": "floating resources",
-    "analyzer.fixnote.floating_res": "Economy out-produced spending — add production buildings/villagers (estimate).",
+    "analyzer.fixnote.floating_res":
+      "Economy out-produced spending — add production buildings/villagers (estimate).",
     "analyzer.fix.late_military": "military timing",
-    "analyzer.fixnote.late_military": "No/very-late military — even a fast-castle boom needs units before the enemy arrives.",
+    "analyzer.fixnote.late_military":
+      "No/very-late military — even a fast-castle boom needs units before the enemy arrives.",
     "analyzer.fix.never_scouted": "scouting",
-    "analyzer.fixnote.never_scouted": "Your units never reached the enemy base — scout to read their build and react.",
+    "analyzer.fixnote.never_scouted":
+      "Your units never reached the enemy base — scout to read their build and react.",
     "analyzer.fix.scouted_late": "scouting",
     "analyzer.fixnote.scouted_late": "Found the enemy late — scout earlier to read their strategy.",
     "analyzer.fix.feudal_slow": "Feudal up-time",
@@ -301,9 +312,12 @@ export const ui = {
     "analyzer.fixnote.feudal_slow": "Slower to Feudal than the {refDesc} for {civ}.",
     "analyzer.fixnote.castle_slow": "Slower to Castle than the {refDesc}.",
     "analyzer.fixnote.imperial_slow": "Slower to Imperial than the {refDesc}.",
-    "analyzer.fixnote.villagers_castle": "Winners in this bracket train ~{ref_v} villagers by Castle Age — TC idle time usually explains the gap.",
-    "analyzer.fixnote.castle_vs_pro": "Castle is {gap} behind the 2500+ {map} median — the pace to aim for.",
-    "analyzer.fixnote.feudal_vs_opp": "Reached Feudal {gap}s after {opp} — you started the game behind.",
+    "analyzer.fixnote.villagers_castle":
+      "Winners in this bracket train ~{ref_v} villagers by Castle Age — TC idle time usually explains the gap.",
+    "analyzer.fixnote.castle_vs_pro":
+      "Castle is {gap} behind the 2500+ {map} median — the pace to aim for.",
+    "analyzer.fixnote.feudal_vs_opp":
+      "Reached Feudal {gap}s after {opp} — you started the game behind.",
     "analyzer.fixref.exact": "{bucket} {mode} median on {map}",
     "analyzer.fixref.mapmode": "{map} {mode} median (all elo)",
     "analyzer.fixref.mapall_1v1": "{map} median (no 1v1 baseline — team-heavy rollup)",
@@ -434,11 +448,14 @@ export const ui = {
     "nav.learn": "Öğren",
     "nav.glossary": "Sözlük",
     "nav.explorer": "Gezgin",
-    "meta.explorer": "Age of Empires II veri gezgini — herhangi bir uygarlığın haritaya, eloya ve yamaya göre kazanma oranı, gerçek sıralı maç verisinden. Tarayıcında çalışır.",
+    "meta.explorer":
+      "Age of Empires II veri gezgini — herhangi bir uygarlığın haritaya, eloya ve yamaya göre kazanma oranı, gerçek sıralı maç verisinden. Tarayıcında çalışır.",
     "explorer.title": "Veri Gezgini",
-    "explorer.intro": "Sıralı verinin herhangi bir dilimini sorgula: bir uygarlık seç, haritaya/eloya/yamaya göre filtrele, sonucu bir grafiğe dök. Her şey tarayıcında çalışır — sunucu yok.",
+    "explorer.intro":
+      "Sıralı verinin herhangi bir dilimini sorgula: bir uygarlık seç, haritaya/eloya/yamaya göre filtrele, sonucu bir grafiğe dök. Her şey tarayıcında çalışır — sunucu yok.",
     "explorer.breakBy": "Şuna göre kır",
-    "explorer.noData": "Bu kombinasyon için maç yok — eloyu genişletmeyi (kümülatif X+ kesimi) veya yamayı Tüm zamanlar yapmayı dene.",
+    "explorer.noData":
+      "Bu kombinasyon için maç yok — eloyu genişletmeyi (kümülatif X+ kesimi) veya yamayı Tüm zamanlar yapmayı dene.",
     "glossary.filter": "Terimleri filtrele…",
     "glossary.noMatch": "Filtrenle eşleşen terim yok.",
     "nav.search": "Ara",
@@ -675,23 +692,32 @@ export const ui = {
     "analyzer.sev.med": "Geliştir",
     "analyzer.sev.low": "Küçük",
     "analyzer.fix.idle_tc_dark_high": "Boş TC (Karanlık)",
-    "analyzer.fixnote.idle_tc_dark_high": "Karanlık Çağ'da çok fazla TC boş kaldı (tahmini) — durmadan köylü üretin.",
+    "analyzer.fixnote.idle_tc_dark_high":
+      "Karanlık Çağ'da çok fazla TC boş kaldı (tahmini) — durmadan köylü üretin.",
     "analyzer.fix.idle_tc_dark_med": "Boş TC (Karanlık)",
-    "analyzer.fixnote.idle_tc_dark_med": "Karanlık Çağ'da biraz TC boş kaldı (tahmini) — köylü üretimini sıklaştırın.",
+    "analyzer.fixnote.idle_tc_dark_med":
+      "Karanlık Çağ'da biraz TC boş kaldı (tahmini) — köylü üretimini sıklaştırın.",
     "analyzer.fix.idle_tc_feudal": "Boş TC (Feodal)",
-    "analyzer.fixnote.idle_tc_feudal": "Feodal'de TC boş kaldı (tahmini) — her 25s boşluk ≈ bir kayıp köylü.",
+    "analyzer.fixnote.idle_tc_feudal":
+      "Feodal'de TC boş kaldı (tahmini) — her 25s boşluk ≈ bir kayıp köylü.",
     "analyzer.fix.no_wheelbarrow": "El Arabası",
-    "analyzer.fixnote.no_wheelbarrow": "Kale Çağı'na kadar El Arabası yok — masada bırakılmış büyük bir ekonomi çarpanı.",
+    "analyzer.fixnote.no_wheelbarrow":
+      "Kale Çağı'na kadar El Arabası yok — masada bırakılmış büyük bir ekonomi çarpanı.",
     "analyzer.fix.no_loom": "Loom",
-    "analyzer.fixnote.no_loom": "Feodal'e kadar Loom yok — erken saldırıya karşı ucuz köylü dayanıklılığı.",
+    "analyzer.fixnote.no_loom":
+      "Feodal'e kadar Loom yok — erken saldırıya karşı ucuz köylü dayanıklılığı.",
     "analyzer.fix.floating_res": "biriken kaynak",
-    "analyzer.fixnote.floating_res": "Ekonomi harcamadan fazla üretti — üretim binaları/köylü ekleyin (tahmini).",
+    "analyzer.fixnote.floating_res":
+      "Ekonomi harcamadan fazla üretti — üretim binaları/köylü ekleyin (tahmini).",
     "analyzer.fix.late_military": "askerî zamanlama",
-    "analyzer.fixnote.late_military": "Asker yok/çok geç — hızlı kale ekonomisi bile düşman gelmeden önce birim ister.",
+    "analyzer.fixnote.late_military":
+      "Asker yok/çok geç — hızlı kale ekonomisi bile düşman gelmeden önce birim ister.",
     "analyzer.fix.never_scouted": "keşif",
-    "analyzer.fixnote.never_scouted": "Birimleriniz düşman üssüne hiç ulaşmadı — build'lerini okuyup tepki vermek için keşfe çıkın.",
+    "analyzer.fixnote.never_scouted":
+      "Birimleriniz düşman üssüne hiç ulaşmadı — build'lerini okuyup tepki vermek için keşfe çıkın.",
     "analyzer.fix.scouted_late": "keşif",
-    "analyzer.fixnote.scouted_late": "Düşmanı geç buldunuz — stratejilerini okumak için daha erken keşfe çıkın.",
+    "analyzer.fixnote.scouted_late":
+      "Düşmanı geç buldunuz — stratejilerini okumak için daha erken keşfe çıkın.",
     "analyzer.fix.feudal_slow": "Feodal süresi",
     "analyzer.fix.castle_slow": "Kale süresi",
     "analyzer.fix.imperial_slow": "İmparatorluk süresi",
@@ -701,9 +727,12 @@ export const ui = {
     "analyzer.fixnote.feudal_slow": "Feodal süren referansın gerisinde: {refDesc} ({civ}).",
     "analyzer.fixnote.castle_slow": "Kale süren referansın gerisinde: {refDesc}.",
     "analyzer.fixnote.imperial_slow": "İmparatorluk süren referansın gerisinde: {refDesc}.",
-    "analyzer.fixnote.villagers_castle": "Bu dilimdeki kazananlar Kale Çağı'na kadar ~{ref_v} köylü üretir — farkı genelde boş TC süresi açıklar.",
-    "analyzer.fixnote.castle_vs_pro": "Kale süren {map} 2500+ medyanının {gap} gerisinde — hedeflenecek tempo bu.",
-    "analyzer.fixnote.feudal_vs_opp": "Feodal'e rakipten {gap}s sonra ulaştın ({opp}) — oyuna geride başladın.",
+    "analyzer.fixnote.villagers_castle":
+      "Bu dilimdeki kazananlar Kale Çağı'na kadar ~{ref_v} köylü üretir — farkı genelde boş TC süresi açıklar.",
+    "analyzer.fixnote.castle_vs_pro":
+      "Kale süren {map} 2500+ medyanının {gap} gerisinde — hedeflenecek tempo bu.",
+    "analyzer.fixnote.feudal_vs_opp":
+      "Feodal'e rakipten {gap}s sonra ulaştın ({opp}) — oyuna geride başladın.",
     "analyzer.fixref.exact": "{map} haritasında {bucket} {mode} medyanı",
     "analyzer.fixref.mapmode": "{map} {mode} medyanı (tüm elo)",
     "analyzer.fixref.mapall_1v1": "{map} medyanı (1v1 tabanı yok — takım ağırlıklı toplu)",

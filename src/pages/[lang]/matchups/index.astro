@@ -302,6 +302,8 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
     </div>
 
     <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS, numLocale }}>
+      // @ts-nocheck — plain client JS shipped verbatim; the define:vars globals above
+      // (civs, displayNames, TIER_COLORS, …) are invisible to astro-check.
       // Build a slug -> civ lookup
       const byslug = Object.fromEntries(civs.map((c) => [c.slug, c]));
 

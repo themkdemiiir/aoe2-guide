@@ -409,8 +409,8 @@ fn cmd_recent(args: &[String]) -> Result<()> {
     );
     // No map column: the API's per-match mapname is wrong for most matches
     // (measured 43% agreement vs replays) — `analyze` reports the real map.
-    println!("  {:<12} {:>8}  {:<5} {:<14} {:>5}  {}",
-        "match_id", "when", "mode", "civ", "elo", "result");
+    println!("  {:<12} {:>8}  {:<5} {:<14} {:>5}  result",
+        "match_id", "when", "mode", "civ", "elo");
     for m in matches.iter().take(limit.unwrap_or(usize::MAX)) {
         // 2 members = 1v1; 4/6/8 = 2v2/3v3/4v4. source: stream-relic.mjs keepBySize.
         let mode = if m.team_size == 2 { "1v1".to_string() } else { format!("{0}v{0}", m.team_size / 2) };
@@ -470,8 +470,8 @@ mod tests {
         assert_eq!(c.get(&0).map(String::as_str), Some("armenians"));
         assert_eq!(c.get(&21).map(String::as_str), Some("hindustanis")); // API name "Indians"
         // 53/54 were jurchens/khitans only during 2025-05..08 — absent today:
-        assert!(c.get(&53).is_none());
-        assert!(c.get(&54).is_none());
+        assert!(!c.contains_key(&53));
+        assert!(!c.contains_key(&54));
         // The two spaces genuinely differ (kills any "same table" regression):
         let game = replay_rs::analyze::data::load_civs();
         assert_ne!(c.get(&32), game.get(&32)); // relic 32=persians, game 32=bulgarians

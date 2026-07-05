@@ -179,7 +179,7 @@ pub fn walk(game: &Savegame) -> Walked {
                     ActionData::DeQueue { unit_id, amount, .. } => {
                         // expand `amount` to repeated Train events for cumulative counting.
                         // cap the expansion: a corrupt replay could carry a huge `amount`.
-                        let n = (*amount).max(1).min(60);
+                        let n = (*amount).clamp(1, 60);
                         for _ in 1..n {
                             evs.push(Ev { player: p, t_ms: *world_time, kind: EvKind::Train(*unit_id) });
                         }

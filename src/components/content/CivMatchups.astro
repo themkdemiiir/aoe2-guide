@@ -118,7 +118,7 @@ const split = (rows: M[]) => {
     {/* is:inline (forced by data-astro-rerun) — plain JS ONLY, no TS generics:
         `querySelectorAll<HTMLElement>` would ship verbatim and throw at runtime
         (the `<T>` parses as comparison operators). */}
-    <script data-astro-rerun>
+    <script is:inline data-astro-rerun>
       for (const root of document.querySelectorAll("[data-civ-matchups]")) {
         const ladderGroup = root.querySelector("[data-ladder]");
         const sel = root.querySelector("[data-mselect]");

@@ -80,10 +80,19 @@ export function breakdown(cube: Cube, sel: Sel, dim: "elo" | "map" | "patch"): B
     agg.set(r[col], a);
   }
   const labelOf = (idx: number) =>
-    dim === "elo" ? cube.elos[idx] : dim === "map" ? cube.maps[idx] : (cube.months[idx]?.label ?? cube.months[idx]?.patch ?? String(idx));
+    dim === "elo"
+      ? cube.elos[idx]
+      : dim === "map"
+        ? cube.maps[idx]
+        : (cube.months[idx]?.label ?? cube.months[idx]?.patch ?? String(idx));
   const rows: BreakdownRow[] = [...agg.entries()]
     .filter(([, gw]) => gw[0] > 0)
-    .map(([idx, gw]) => ({ key: String(idx), label: labelOf(idx), games: gw[0], wr: +((gw[1] / gw[0]) * 100).toFixed(2) }));
+    .map(([idx, gw]) => ({
+      key: String(idx),
+      label: labelOf(idx),
+      games: gw[0],
+      wr: +((gw[1] / gw[0]) * 100).toFixed(2),
+    }));
   if (dim === "map") rows.sort((a, b) => b.wr - a.wr);
   else rows.sort((a, b) => +a.key - +b.key); // natural elo/patch order
   return rows;

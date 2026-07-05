@@ -22,20 +22,32 @@ const cube: Cube = {
 
 describe("sliceWinRate", () => {
   it("sums a single civ×map×elo×patch slice", () => {
-    expect(sliceWinRate(cube, { civ: "franks", map: "arabia", elo: "1650-1799", patch: "100" })).toEqual({ games: 100, wins: 60, wr: 60 });
+    expect(
+      sliceWinRate(cube, { civ: "franks", map: "arabia", elo: "1650-1799", patch: "100" }),
+    ).toEqual({ games: 100, wins: 60, wr: 60 });
   });
   it("any-elo pools every band for the fixed map/patch", () => {
-    expect(sliceWinRate(cube, { civ: "franks", map: "arabia", patch: "100" })).toEqual({ games: 300, wins: 180, wr: 60 });
+    expect(sliceWinRate(cube, { civ: "franks", map: "arabia", patch: "100" })).toEqual({
+      games: 300,
+      wins: 180,
+      wr: 60,
+    });
   });
   it("cumulative 1650+ sums only bands ≥ the edge", () => {
-    expect(sliceWinRate(cube, { civ: "franks", map: "arabia", patch: "100", elo: "cum:1650" })).toEqual({ games: 200, wins: 130, wr: 65 });
+    expect(
+      sliceWinRate(cube, { civ: "franks", map: "arabia", patch: "100", elo: "cum:1650" }),
+    ).toEqual({ games: 200, wins: 130, wr: 65 });
   });
   it("returns null win rate for an absent civ or an empty slice", () => {
     expect(sliceWinRate(cube, { civ: "aztecs" }).wr).toBeNull();
     expect(sliceWinRate(cube, { civ: "britons", map: "arena" }).wr).toBeNull();
   });
   it("a specified-but-absent map is no data, never a silent widen", () => {
-    expect(sliceWinRate(cube, { civ: "franks", map: "nomad" })).toEqual({ games: 0, wins: 0, wr: null });
+    expect(sliceWinRate(cube, { civ: "franks", map: "nomad" })).toEqual({
+      games: 0,
+      wins: 0,
+      wr: null,
+    });
   });
 });
 

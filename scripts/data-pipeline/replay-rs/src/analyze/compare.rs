@@ -287,7 +287,7 @@ pub fn findings(
         }
 
         // --- absolute: late / no military (gentle; even a boom needs defense) ---
-        if m.first_military_ms.map_or(true, |t| t > 20 * 60_000) {
+        if m.first_military_ms.is_none_or(|t| t > 20 * 60_000) {
             out.push(mk(pn, "late_military", "military timing",
                 &m.first_military_ms.map(|t| fmt_mmss(t as f64 / 1000.0)).unwrap_or_else(|| "none".into()),
                 "<20 min", Basis::Absolute, Severity::Low,
@@ -327,6 +327,8 @@ pub fn findings(
     out
 }
 
+// A Finding constructor maps 1:1 to the struct's fields — 8 params is inherent, not a smell.
+#[allow(clippy::too_many_arguments)]
 fn mk(pn: i32, code: &'static str, metric: &str, your: &str, reference: &str, basis: Basis, severity: Severity, note: &str) -> Finding {
     Finding {
         player_number: pn,
