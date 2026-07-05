@@ -28,14 +28,14 @@ COPY (
     SELECT match_id FROM players GROUP BY match_id HAVING count(*) = 2
   ),
   winners AS (
-    SELECT p.match_id, p.player_number, g.rating
+    SELECT p.match_id, p.player_number, g.rating, g.map
     FROM players p
     JOIN onev1 USING (match_id)
     JOIN gdb.games g ON g.match_id = p.match_id AND g.profile_id = p.profile_id
-    WHERE p.won = TRUE AND g.rating IS NOT NULL
+    WHERE p.won = TRUE AND g.rating IS NOT NULL AND g.map IS NOT NULL
   ),
   bucketed AS (
-    SELECT match_id, player_number, CASE
+    SELECT match_id, player_number, map, CASE
       WHEN rating < 1000 THEN '<1000'      WHEN rating < 1200 THEN '1000-1199'
       WHEN rating < 1400 THEN '1200-1399'  WHEN rating < 1650 THEN '1400-1649'
       WHEN rating < 1800 THEN '1650-1799'  WHEN rating < 2000 THEN '1800-1999'
@@ -56,7 +56,7 @@ COPY (
        OR (kind = 'research' AND target_id IN (22,202,213,14))
   ),
   per_player AS (
-    SELECT b.bucket, b.match_id, b.player_number,
+    SELECT b.bucket, b.map, b.match_id, b.player_number,
       min(CASE WHEN e.kind='train'                        THEN e.t_ms END) AS first_military_ms,
       min(CASE WHEN e.kind='research' AND e.target_id=22  THEN e.t_ms END) AS loom_ms,
       min(CASE WHEN e.kind='research' AND e.target_id=202 THEN e.t_ms END) AS dba_ms,
@@ -64,16 +64,18 @@ COPY (
       min(CASE WHEN e.kind='research' AND e.target_id=14  THEN e.t_ms END) AS horse_collar_ms
     FROM bucketed b
     JOIN events e USING (match_id, player_number)
-    GROUP BY 1,2,3
+    GROUP BY 1,2,3,4
   )
-  SELECT bucket, count(*) AS winners_n,
+  -- GROUPING SETS emits BOTH per-map cells (map, bucket) AND the all-maps rollup
+  -- (bucket, map=NULL→'all'). The analyzer picks the map cell, falls back to 'all'.
+  SELECT coalesce(map, 'all') AS map, bucket, count(*) AS winners_n,
     CAST(median(first_military_ms) AS BIGINT) AS first_military_ms,
     CAST(median(loom_ms) AS BIGINT)           AS loom_ms,
     CAST(median(dba_ms) AS BIGINT)            AS dba_ms,
     CAST(median(wheelbarrow_ms) AS BIGINT)    AS wheelbarrow_ms,
     CAST(median(horse_collar_ms) AS BIGINT)   AS horse_collar_ms
   FROM per_player
-  GROUP BY 1
-  HAVING count(*) >= 50   -- honest omission: a bucket with < 50 winners is dropped
-  ORDER BY 1
+  GROUP BY GROUPING SETS ((map, bucket), (bucket))
+  HAVING count(*) >= 50   -- honest omission: a (map,bucket) cell with < 50 winners is dropped
+  ORDER BY 1, 2
 ) TO '/tmp/winner-meds.csv' (HEADER, DELIMITER ',');
