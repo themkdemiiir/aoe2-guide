@@ -275,11 +275,11 @@ const analyzerLd = {
     // Reference = the RESOLVED benchmark slice the engine attached per player
     // (m.reference: winners' medians + honesty labels) + winner-refs.json
     // (openings / eco-tech shares). Rows without a fair reference SAY so.
-    let refsDoc: any | undefined;
-    async function loadRefs() {
+    let refsDoc: WinnerRefs | null | undefined;
+    async function loadRefs(): Promise<WinnerRefs | null> {
       if (refsDoc !== undefined) return refsDoc;
       try {
-        refsDoc = await (await fetch("/winner-refs.json")).json();
+        refsDoc = (await (await fetch("/winner-refs.json")).json()) as WinnerRefs;
       } catch {
         refsDoc = null;
       }
@@ -327,7 +327,23 @@ const analyzerLd = {
       kind?: "time" | "count" | "score"; help?: string;
     };
 
-    function matrixRows(sel: any, opp: any, refs: any): { group: string; rows: Row[] }[] {
+    // winner-refs.json shape — data whose structure this repo owns (built by
+    // scripts/data-pipeline/build-winner-refs.mjs), so it is typed, not `any`.
+    type WinnerMedCell = { winners: number; firstMilitaryMs: number; loomMs: number; dbaMs: number; wheelbarrowMs: number; horseCollarMs: number };
+    type EcoTechCell = { winners: number; wheelbarrow: number; loom: number; dba: number; horseCollar: number; goldMining: number };
+    type OpeningCell = { winners: number; list: { opening: string; pct: number }[] };
+    type WinnerRefs = {
+      source: string;
+      generated: string;
+      openings: Record<string, Record<string, OpeningCell>>;
+      ecoTechByCastle: Record<string, EcoTechCell>;
+      medsByBucket: Record<string, WinnerMedCell>;
+      medsByMap: Record<string, Record<string, WinnerMedCell>>;
+    };
+    // Engine ReportMeta fields this page reads (serialized from replay-rs model.rs).
+    type ReportMeta = { map_id: number; map_name: string; family: string; mode: string; duration_ms: number };
+
+    function matrixRows(sel: any, opp: any, refs: WinnerRefs | null, mapSlug: string): { group: string; rows: Row[] }[] {
       const r = sel.reference;
       const exact = r?.kind === "exact";
       const basis = r ? (L[`analyzer.matrix.basis.${r.kind}`] ?? r.kind) : "";
@@ -352,9 +368,9 @@ const analyzerLd = {
       };
 
       const eco: Row[] = [
-        age(L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms, r?.feudal_s, r?.age_res_s?.[0] ?? 130, L["analyzer.help.feudal"]),
-        age(L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms, r?.castle_s, r?.age_res_s?.[1] ?? 160, L["analyzer.help.castle"]),
-        age(L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms, r?.imperial_s, r?.age_res_s?.[2] ?? 190, L["analyzer.help.imperial"]),
+        age(L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms, r?.feudal_s, sel.age_res_s[0], L["analyzer.help.feudal"]),
+        age(L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms, r?.castle_s, sel.age_res_s[1], L["analyzer.help.castle"]),
+        age(L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms, r?.imperial_s, sel.age_res_s[2], L["analyzer.help.imperial"]),
         {
           label: L["analyzer.tile.vils"],
           you: sel.castle_ms != null ? String(sel.vils_castle) : "—",
@@ -396,8 +412,10 @@ const analyzerLd = {
         m?.eco_techs && m?.castle_ms != null
           ? m.eco_techs.filter((e: [number, number]) => e[1] <= m.castle_ms).length
           : null;
-      const shares = r && refs?.ecoTechByCastle?.[r.bucket];
-      const meds = r && refs?.medsByBucket?.[r.bucket];
+      const shares: EcoTechCell | undefined = r ? refs?.ecoTechByCastle?.[r.bucket] : undefined;
+      // Map-specific winner medians ONLY — no fallback to an all-maps number.
+      // Absent map cell → meds is undefined → the row shows no reference.
+      const meds: WinnerMedCell | undefined = r ? refs?.medsByMap?.[mapSlug]?.[r.bucket] : undefined;
       // Winner MEDIAN research times (Plan C) beat the %-share text when present.
       const shareTxt = meds
         ? `${L["analyzer.row.winnersResearch"]}: Loom ${mmss(meds.loomMs)} · DBA ${mmss(meds.dbaMs)} · WB ${mmss(meds.wheelbarrowMs)}`
@@ -488,7 +506,7 @@ const analyzerLd = {
 
     // Plain-language coach paragraph — every sentence assembled from real data,
     // sentences with no data behind them are simply omitted.
-    function summaryHtml(sel: any, players: any[], refs: any, meta: any) {
+    function summaryHtml(sel: any, players: any[], refs: WinnerRefs | null, meta: ReportMeta) {
       const oppInfo = opponentOf(sel, players);
       const oppShort = oppInfo ? String(oppInfo.label).split(" ")[0].slice(0, 14) : L["analyzer.matrix.opp"];
       const opp = oppInfo?.m ?? null;
@@ -508,9 +526,9 @@ const analyzerLd = {
 
       // 2) biggest age-up gap (comp-adjusted, same math as the matrix)
       const ages: Array<[string, number | null, number | null, number | null | undefined, number]> = [
-        [L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms ?? null, r?.feudal_s, r?.age_res_s?.[0] ?? 130],
-        [L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms ?? null, r?.castle_s, r?.age_res_s?.[1] ?? 160],
-        [L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms ?? null, r?.imperial_s, r?.age_res_s?.[2] ?? 190],
+        [L["analyzer.tile.feudal"], sel.feudal_ms, opp?.feudal_ms ?? null, r?.feudal_s, sel.age_res_s[0]],
+        [L["analyzer.tile.castle"], sel.castle_ms, opp?.castle_ms ?? null, r?.castle_s, sel.age_res_s[1]],
+        [L["analyzer.tile.imperial"], sel.imperial_ms, opp?.imperial_ms ?? null, r?.imperial_s, sel.age_res_s[2]],
       ];
       let worst: { label: string; you: string; dOpp: number | null; dRef: number | null; score: number } | null = null;
       let best: { label: string; d: number; who: string } | null = null;
@@ -562,10 +580,10 @@ const analyzerLd = {
         </div>`;
     }
 
-    function matrixHtml(sel: any, players: any[], refs: any) {
+    function matrixHtml(sel: any, players: any[], refs: WinnerRefs | null, mapSlug: string) {
       const oppInfo = opponentOf(sel, players);
       const oppShort = oppInfo ? String(oppInfo.label).split(" ")[0].slice(0, 14) : L["analyzer.matrix.opp"];
-      const groups = matrixRows(sel, oppInfo?.m ?? null, refs);
+      const groups = matrixRows(sel, oppInfo?.m ?? null, refs, mapSlug);
       const sections = groups
         .map(({ group, rows }) => {
           const colored = rows.filter((x) => x.colored);
@@ -728,7 +746,11 @@ const analyzerLd = {
     }
 
     function render(scrollToReport = false) {
-      const meta = report.meta;
+      const meta: ReportMeta = report.meta;
+      // Map slug for map-specific winner medians — identical rule to the Rust
+      // engine's maps::slug, matching the games.map / benchmark.json slug space
+      // (e.g. "African Clearing" → "africanclearing").
+      const mapSlug = meta.map_name.toLowerCase().replace(/[^a-z0-9]/g, "");
       const players = report.players;
       const sel = players.find((p: any) => p.info.player_number === selectedPn) ?? players[0];
       const selPn = sel.info.player_number;
@@ -831,7 +853,7 @@ const analyzerLd = {
         const sHolder = reportEl.querySelector("#az-summary");
         if (sHolder) sHolder.innerHTML = summaryHtml(sel, players, refs, meta);
         const holder = reportEl.querySelector("#az-matrix");
-        if (holder) holder.innerHTML = matrixHtml(sel, players, refs);
+        if (holder) holder.innerHTML = matrixHtml(sel, players, refs, mapSlug);
       });
       winnersBlock(sel, meta.mode).then((html) => {
         const holder = reportEl.querySelector("#az-winners");

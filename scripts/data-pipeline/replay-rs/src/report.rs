@@ -176,6 +176,7 @@ mod tests {
             feudal_ms: Some(720_000),
             castle_ms: Some(1_020_000),
             imperial_ms: None,
+            age_res_s: (130.0, 160.0, 190.0),
             vils_castle: 40,
             idle_dark_ms: 30_000,
             idle_feudal_ms: 0,

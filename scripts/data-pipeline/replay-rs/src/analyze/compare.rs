@@ -33,6 +33,7 @@ fn age_research_s(civ: &str) -> (f64, f64, f64) {
 pub fn build_metrics(
     w: &Walked,
     costs: &Costs,
+    civs: &HashMap<u32, String>,
     roles: &HashMap<i32, Role>,
     coords: &HashMap<i32, CoordMetric>,
     family: Family,
@@ -70,11 +71,15 @@ pub fn build_metrics(
             let mins = (dur as f64 / 60_000.0).max(1.0 / 60.0);
             let (eco_cmds, mil_cmds) = w.cmd_split.get(&pn).copied().unwrap_or((0, 0));
             let (market_buys, market_sells) = metrics::market_counts(&w.evs, pn);
+            // Age-up research seconds are pure civ data (baseline, Malay faster), so they
+            // ride on every player — the reference isn't required to know them.
+            let age_res_s = age_research_s(civs.get(&info.civ_id).map(String::as_str).unwrap_or(""));
             PlayerMetrics {
                 info: info.clone(),
                 feudal_ms,
                 castle_ms,
                 imperial_ms,
+                age_res_s,
                 vils_castle,
                 idle_dark_ms,
                 idle_feudal_ms,
@@ -133,7 +138,6 @@ pub fn attach_references(
                 castle_s: s.castle_s,
                 imperial_s: s.imperial_s,
                 vils_castle: s.vils_castle,
-                age_res_s: age_research_s(civ),
                 bucket: bucket.to_string(),
                 kind: match kind {
                     data::MatchKind::Exact => "exact",
@@ -372,6 +376,7 @@ mod tests {
             feudal_ms,
             castle_ms: None,
             imperial_ms: None,
+            age_res_s: (130.0, 160.0, 190.0),
             vils_castle: 0,
             idle_dark_ms,
             idle_feudal_ms: 0,

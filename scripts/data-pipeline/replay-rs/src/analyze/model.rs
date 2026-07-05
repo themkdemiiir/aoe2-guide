@@ -80,6 +80,10 @@ pub struct PlayerMetrics {
     pub feudal_ms: Option<u32>,
     pub castle_ms: Option<u32>,
     pub imperial_ms: Option<u32>,
+    /// this civ's age-up research durations (feudal/castle/imperial seconds); civ-aware
+    /// (baseline 130/160/190, Malay faster). Add to CLICK times for completion-based
+    /// comparisons. Always present — sourced from the engine, so the UI never defaults it.
+    pub age_res_s: (f64, f64, f64),
     pub vils_castle: u32,
     pub idle_dark_ms: u32,
     pub idle_feudal_ms: u32,
@@ -127,9 +131,6 @@ pub struct RefSlice {
     pub imperial_s: Option<f64>,
     /// median villagers trained by Castle among WINNERS of the slice
     pub vils_castle: Option<f64>,
-    /// this civ's age research durations (feudal/castle/imp seconds) — add to the
-    /// player's CLICK times to compare against the COMPLETION-based medians above
-    pub age_res_s: (f64, f64, f64),
     /// elo bucket the player resolved to (e.g. "1400-1649")
     pub bucket: String,
     /// how precise the match was: "exact" | "map_mode" | "map_all"
