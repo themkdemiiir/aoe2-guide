@@ -34,12 +34,11 @@ const civBySlug = new Map(civs.map((c) => [c.id, c]));
 const civData = await getCollection("civ-data");
 const specialtyBySlug = new Map(civData.map((c) => [c.data.slug, c.data.specialty]));
 
-// Tier accent colors, brightened for legibility on the dark cover. Data-driven,
-// so applied via inline style (the sanctioned exception to "classes only").
-// Intentionally brighter variant of the canonical dark codex palette in src/lib/tiers.ts.
-// Wider lightness ramp so B/C/D read as distinct tiers (were near-identical tans);
-// still warm-neutral to fit the codex, on the always-dark cover.
-const TIER_COLOR: Record<string, string> = { S: "#e0654f", A: "#e8c25f", B: "#c9b06a", C: "#a98a55", D: "#8a8770" };
+// Tier accent colors for the meta cards + distribution bar. Data-driven, so applied
+// via inline style (the sanctioned exception to "classes only"). Canonical
+// parchment-readable palette from src/lib/tiers.ts (the cover is parchment now, not
+// a dark band, so no brightened variant is needed).
+const TIER_COLOR: Record<string, string> = { S: "#8a2d22", A: "#9a6a1e", B: "#6b5b41", C: "#7a6a4a", D: "#8a7a5a" };
 const oneBySlug = civMeta.civs as Record<string, { "1v1": { winRate: number; tier: string } | null }>;
 
 const spotlight = Object.keys(oneBySlug)
@@ -111,14 +110,13 @@ const more = [
 ---
 <BaseLayout title={lang === "tr" ? "AOE2 Guide — Age of Empires II Build Order, Uygarlık ve Strateji Rehberi" : "AOE2 Guide — Age of Empires II Build Orders, Civilizations & Strategy"} description={t(lang, "meta.home")} canonicalPath="/">
   {/* ========================================================================
-       ACT I — THE GILDED COVER
-       One continuous dark band (masthead + State of the Meta). On bg-stone-bg
-       use ONLY gold/ember text tokens — text-ink / text-stone-700 swap with the
-       theme and would vanish here. The border-y gold rule is load-bearing: in
-       dark mode --color-stone-bg ≈ --color-parchment, so the rules keep the
-       band's extent visible. A faint parchment-paper layer adds vellum grain.
+       ACT I — THE COVER
+       Masthead + State of the Meta on the same parchment as the rest of the page
+       (uniform, not a dark band). Theme tokens throughout — text-ink / text-stone-700
+       / text-gold-700 — so it follows light/dark like the interior. The maroon "A"
+       gilt tile keeps light gold (it's a dark box). A faint paper layer adds grain.
      ======================================================================== */}
-  <section class="relative isolate overflow-hidden border-y border-gold-500/40 bg-stone-bg">
+  <section class="relative isolate overflow-hidden">
     <div
       class="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
       style="background-image:url(/images/aoe2/Backgrounds/bg_aoe2_hd_paper.jpg);background-size:520px;"
@@ -129,34 +127,34 @@ const more = [
            illuminated initial leads the wordmark; the lead + provenance set the
            page's thesis (the live meta) before any navigation. --- */}
       <div class="max-w-3xl">
-        <p class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-gold-400">
+        <p class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-gold-700">
           <span class="h-px w-6 bg-gold-500/60" aria-hidden="true"></span>
           {t(lang, "home.eyebrow")}
         </p>
         {/* Illuminated initial: the "A" is the same cap-height as the wordmark
             (so it reads as the first glyph of one word, not a small floating
             letter), framed in a maroon gilt box and sharing the baseline. */}
-        <h1 class="mt-4 font-display text-4xl leading-none text-gold-500 sm:text-6xl">
+        <h1 class="mt-4 font-display text-4xl leading-none text-gold-700 sm:text-6xl">
           <span class="sr-only">AOE2 Guide</span>
           <span
             class="mr-1 inline-block rounded border border-gold-500/50 bg-logo-tile px-2.5 py-0.5 align-baseline text-gold-400 shadow-md"
             aria-hidden="true"
           >A</span><span aria-hidden="true">OE2&nbsp;Guide</span>
         </h1>
-        <p class="mt-5 max-w-xl text-lg text-ember/90 sm:text-xl">{t(lang, "home.codex.lead")}</p>
-        <p class="mt-3 font-mono text-xs tracking-wide text-ember/70 sm:text-[13px]">
-          <span class="font-bold text-gold-400 tabular-nums">{matchesK}K+</span>
+        <p class="mt-5 max-w-xl text-lg text-stone-700/90 sm:text-xl">{t(lang, "home.codex.lead")}</p>
+        <p class="mt-3 font-mono text-xs tracking-wide text-stone-700/70 sm:text-[13px]">
+          <span class="font-bold text-gold-700 tabular-nums">{matchesK}K+</span>
           {" "}{t(lang, "home.codex.matches")}
           {latestPatchId && (
             <>
-              <span class="mx-1.5 text-gold-500/40" aria-hidden="true">·</span>
+              <span class="mx-1.5 text-stone-700/40" aria-hidden="true">·</span>
               {t(lang, "home.codex.currentPatch")}{" "}
-              <span class="font-bold text-gold-400 tabular-nums">{latestPatchId}</span>
+              <span class="font-bold text-gold-700 tabular-nums">{latestPatchId}</span>
             </>
           )}
           {updatedMonth && (
             <>
-              <span class="mx-1.5 text-gold-500/40" aria-hidden="true">·</span>
+              <span class="mx-1.5 text-stone-700/40" aria-hidden="true">·</span>
               {`${t(lang, "home.codex.updated")} ${updatedMonth}`}
             </>
           )}
@@ -164,14 +162,14 @@ const more = [
         <div class="mt-7 flex flex-wrap items-center gap-3">
           <a
             href={localizedPath("/civs", lang)}
-            class="inline-flex items-center gap-2 rounded border border-gold-500 bg-gold-500/20 px-6 py-3 font-medium text-gold-400 transition-colors hover:bg-gold-500/35"
+            class="inline-flex items-center gap-2 rounded border border-gold-500 bg-gold-500/15 px-6 py-3 font-medium text-gold-700 transition-colors hover:bg-gold-500/25"
           >
             <UIIcon name="lucide:castle" class="h-5 w-5" />
             {t(lang, "home.ctaPrimary")}
           </a>
           <a
             href={localizedPath("/builds", lang)}
-            class="inline-flex items-center gap-2 rounded border border-gold-500/40 px-6 py-3 font-medium text-ember transition-colors hover:border-gold-500 hover:text-gold-400"
+            class="inline-flex items-center gap-2 rounded border border-gold-500/40 px-6 py-3 font-medium text-stone-700 transition-colors hover:border-gold-500 hover:text-gold-700"
           >
             <UIIcon name="lucide:list-ordered" class="h-5 w-5" />
             {t(lang, "home.ctaSecondary")}
@@ -192,15 +190,15 @@ const more = [
         <div>
           <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <h2 class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">
+              <h2 class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gold-700">
                 <span class="h-px w-6 bg-gold-500/60" aria-hidden="true"></span>
                 {t(lang, "home.stateOfMeta.title")}
               </h2>
-              <p class="mt-2 text-sm text-ember/75">{t(lang, "home.stateOfMeta.subtitle")}</p>
+              <p class="mt-2 text-sm text-stone-700/75">{t(lang, "home.stateOfMeta.subtitle")}</p>
             </div>
             <a
               href={localizedPath("/civs", lang)}
-              class="inline-flex items-center gap-1 font-display text-xs uppercase tracking-wide text-gold-500 transition-colors hover:text-gold-400"
+              class="inline-flex items-center gap-1 font-display text-xs uppercase tracking-wide text-gold-700 transition-colors hover:text-gold-500"
             >
               {t(lang, "home.tierList")}
               <UIIcon name="lucide:arrow-right" class="h-4 w-4" />
@@ -214,18 +212,18 @@ const more = [
                   href={localizedPath(`/civs/${c.slug}`, lang)}
                   class="group flex h-full items-center gap-4 rounded border border-gold-500/25 bg-gold-500/[0.06] p-4 transition-colors hover:border-gold-500/60 hover:bg-gold-500/10 sm:flex-col sm:items-start sm:gap-3 sm:p-5"
                 >
-                  <span class="flex h-16 w-16 flex-none items-center justify-center rounded-full border border-gold-500/40 bg-royal/40 sm:h-20 sm:w-20">
+                  <span class="flex h-16 w-16 flex-none items-center justify-center rounded-full border border-gold-500/40 bg-gold-500/10 sm:h-20 sm:w-20">
                     <Icon slug={c.slug} kind="civ" size={56} framed={false} alt={c.entry.data.name[lang]} />
                   </span>
                   <span class="min-w-0 flex-1">
-                    <span class="block truncate font-display text-lg font-bold text-gold-400 sm:text-xl">{c.entry.data.name[lang]}</span>
+                    <span class="block truncate font-display text-lg font-bold text-gold-700 sm:text-xl">{c.entry.data.name[lang]}</span>
                     {c.spec && (
-                      <span class="mt-0.5 block truncate font-mono text-[10px] uppercase tracking-wide text-ember/70">{c.spec}</span>
+                      <span class="mt-0.5 block truncate font-mono text-[10px] uppercase tracking-wide text-stone-700/70">{c.spec}</span>
                     )}
                     <span class="mt-2.5 flex items-baseline gap-2">
                       <span class="font-display text-2xl font-extrabold leading-none" style={`color:${TIER_COLOR[c.tier] ?? "#8f7f60"}`}>{c.tier}</span>
-                      <span class="font-mono text-sm text-ember/85">{c.winRate.toFixed(1)}%</span>
-                      <span class="font-mono text-[11px] text-ember/55">{c.winRate >= 50 ? "+" : ""}{(c.winRate - 50).toFixed(1)} {t(lang, "home.vsAvg")}</span>
+                      <span class="font-mono text-sm text-stone-700/85">{c.winRate.toFixed(1)}%</span>
+                      <span class="font-mono text-[11px] text-stone-700/55">{c.winRate >= 50 ? "+" : ""}{(c.winRate - 50).toFixed(1)} {t(lang, "home.vsAvg")}</span>
                     </span>
                   </span>
                 </a>
@@ -236,8 +234,8 @@ const more = [
           {/* --- Tier distribution bar: the shape of the meta across all civs. --- */}
           {tieredTotal > 0 && (
             <div class="mt-7">
-              <div class="mb-2 flex items-baseline justify-between font-mono text-[11px] uppercase tracking-wide text-ember/70">
-                <span><span class="font-bold text-gold-400">{civCount}</span> {t(lang, "nav.civs")}</span>
+              <div class="mb-2 flex items-baseline justify-between font-mono text-[11px] uppercase tracking-wide text-stone-700/70">
+                <span><span class="font-bold text-gold-700">{civCount}</span> {t(lang, "nav.civs")}</span>
                 <span>{t(lang, "home.tierBar.label")}</span>
               </div>
               <div
@@ -249,7 +247,7 @@ const more = [
                   <span style={`width:${(tt.count / tieredTotal) * 100}%;background:${TIER_COLOR[tt.tier]}`}></span>
                 ))}
               </div>
-              <ul class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-ember/70">
+              <ul class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-stone-700/70">
                 {tierCounts.map((tt) => (
                   <li class="flex items-center gap-1.5">
                     <span class="font-bold" style={`color:${TIER_COLOR[tt.tier]}`}>{tt.tier}</span>
