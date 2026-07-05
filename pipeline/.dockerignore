@@ -1,0 +1,11 @@
+# Build output — large, and the compiled binary is only ever taken from inside the container.
+target/
+
+# Secrets — must never reach the Docker daemon or be baked into a layer.
+.env
+.env.*
+
+# VCS/metadata not needed for the build.
+.git/
+.gitignore
+README.md

@@ -1,6 +1,7 @@
 # aoe2-guide self-hosted data stack — all versions PINNED (no `latest`).
 # Runs in the privileged Docker LXC `aoe2-stack` (192.168.111.8) on botanera's NVMe.
-# Postgres now; Dagster + dbt join with the orchestration milestone (M5/M6).
+# Postgres now; Rust pipeline tools (migration, later ingest/export/fetch) build from
+# ../pipeline/Dockerfile, one BIN-arg image per binary; Dagster + dbt join at M5/M6.
 name: aoe2-stack
 
 services:
@@ -30,3 +31,21 @@ services:
       timeout: 5s
       retries: 6
     stop_grace_period: 30s
+
+  migration:
+    build:
+      context: ../pipeline # pipeline/ and deploy/ are repo siblings
+      dockerfile: Dockerfile
+      args:
+        BIN: migration
+    image: aoe2-migration:0.1.0 # pinned tag (matches crate version)
+    container_name: aoe2-migration
+    profiles: ["tools"] # opt-in: NOT started by `docker compose up -d`
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # built from POSTGRES_PASSWORD (already in deploy/.env); host = the `postgres` service DNS name
+      DATABASE_URL: postgresql://aoe2:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in deploy/.env}@postgres:5432/aoe2
+    restart: "no"
+    command: ["status"] # run migrations via: docker compose run --rm migration up
