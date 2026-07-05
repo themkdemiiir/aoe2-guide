@@ -23,6 +23,8 @@ pub fn slug(name: &str) -> String {
 
 #[cfg(test)]
 mod tests {
+    use proptest::prelude::*;
+
     use super::*;
 
     #[test]
@@ -30,5 +32,25 @@ mod tests {
         assert_eq!(slug("Black Forest"), "blackforest");
         assert_eq!(slug("African Clearing"), "africanclearing");
         assert_eq!(slug("Arabia"), "arabia");
+    }
+
+    proptest! {
+        /// `slug` only ever drops characters and lowercases the rest, so re-slugging an
+        /// already-slugged string is a no-op.
+        #[test]
+        fn slug_is_idempotent(s in ".*") {
+            let once = slug(&s);
+            let twice = slug(&once);
+            prop_assert_eq!(once, twice);
+        }
+
+        /// The only characters `slug` ever keeps are lowercase ASCII alphanumerics — it never
+        /// introduces a hyphen or any other separator (unlike the JS `canonMap` mirror's
+        /// extension-stripping step, deliberately not ported here — see the module doc).
+        #[test]
+        fn slug_output_is_lowercase_ascii_alphanumeric(s in ".*") {
+            let out = slug(&s);
+            prop_assert!(out.chars().all(|c| c.is_ascii_lowercase() || c.is_ascii_digit()));
+        }
     }
 }

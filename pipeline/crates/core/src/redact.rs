@@ -32,6 +32,8 @@ pub fn redact_secret(message: &str, database_url: &str) -> String {
 
 #[cfg(test)]
 mod tests {
+    use proptest::prelude::*;
+
     use super::redact_secret;
 
     /// Mirrors the reviewer's repro: a malformed `DATABASE_URL` makes sqlx echo the whole
@@ -69,5 +71,29 @@ mod tests {
 
         assert!(!redacted.contains("SUPER_SECRET_MARKER_PW"));
         assert!(!redacted.contains(database_url));
+    }
+
+    proptest! {
+        /// `redact_secret` must never panic, whatever shape `message`/`database_url` take —
+        /// including non-UTF8-adjacent unicode, empty strings, and pathological overlaps.
+        #[test]
+        fn redact_secret_never_panics(message in ".*", database_url in ".*") {
+            let _ = redact_secret(&message, &database_url);
+        }
+
+        /// The empty-url guard: an empty needle must return the message unchanged rather than
+        /// corrupting it (the bug `redact_secret`'s doc comment calls out by name).
+        #[test]
+        fn redact_secret_empty_url_is_a_no_op(message in ".*") {
+            prop_assert_eq!(redact_secret(&message, ""), message);
+        }
+
+        /// For any non-empty url, the redacted output never contains that url as a substring —
+        /// the whole point of the function.
+        #[test]
+        fn redact_secret_strips_non_empty_url(message in ".*", database_url in ".+") {
+            let redacted = redact_secret(&message, &database_url);
+            prop_assert!(!redacted.contains(database_url.as_str()));
+        }
     }
 }

@@ -8,14 +8,20 @@
 //! module's tests).
 
 // `civs` and `maps` `include_str!` repo-root data files at build time, so they compile only under
-// the `refdata` feature (on by default; off for lean `pipeline/`-context Docker builds — see
-// Cargo.toml). `elo`, `slug`, and `redact` are file-free and always compile.
+// the `refdata` feature (opt-in; off for lean `pipeline/`-context Docker builds — see
+// Cargo.toml). `ids`, `elo`, `secret`, `cli`, `slug`, and `redact` are file-free and always
+// compile.
 #[cfg(feature = "refdata")]
 pub mod civs;
+pub mod cli;
 pub mod elo;
+pub mod ids;
 #[cfg(feature = "refdata")]
 pub mod maps;
 pub mod redact;
+pub mod secret;
 pub mod slug;
 
+pub use ids::{GameCivId, MatchId, ProfileId, RelicCivId};
 pub use redact::redact_secret;
+pub use secret::Secret;

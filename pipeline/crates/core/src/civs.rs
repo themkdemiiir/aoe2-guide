@@ -16,10 +16,12 @@ use std::fmt;
 
 use serde::Deserialize;
 
+use crate::ids::{GameCivId, RelicCivId};
+
 /// A lookup for an id absent from the committed map. A new DLC/patch likely shifted (or extended)
 /// the id space — re-derive the JSON map before trusting anything built on top of this lookup.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct UnknownCivId(pub u32);
+pub struct UnknownCivId(pub i32);
 
 impl fmt::Display for UnknownCivId {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -31,20 +33,23 @@ impl std::error::Error for UnknownCivId {}
 
 /// Game/replay `civ_id` -> slug (`src/data/civ-id-map.json`). Id 0 is "random", not a real civ.
 #[derive(Debug, Clone)]
-pub struct GameCivMap(HashMap<u32, String>);
+pub struct GameCivMap(HashMap<i32, String>);
 
 impl GameCivMap {
-    /// Resolves a game-space `civ_id` to its slug. `Err(UnknownCivId)` for anything not in the
-    /// committed map — never guesses.
-    pub fn slug(&self, id: u32) -> Result<&str, UnknownCivId> {
-        self.0.get(&id).map(String::as_str).ok_or(UnknownCivId(id))
+    /// Resolves a game-space [`GameCivId`] to its slug. `Err(UnknownCivId)` for anything not in
+    /// the committed map — never guesses.
+    pub fn slug(&self, id: GameCivId) -> Result<&str, UnknownCivId> {
+        self.0
+            .get(&id.0)
+            .map(String::as_str)
+            .ok_or(UnknownCivId(id.0))
     }
 }
 
 /// Parses `civ-id-map.json`-shaped text (a flat `{ "id": "slug" }` object).
 pub fn parse_game_civs(json: &str) -> serde_json::Result<GameCivMap> {
     let raw: HashMap<String, String> = serde_json::from_str(json)?;
-    Ok(GameCivMap(str_keys_to_u32(raw)))
+    Ok(GameCivMap(str_keys_to_i32(raw)))
 }
 
 /// Loads the real, committed `src/data/civ-id-map.json`, baked into the binary at compile time.
@@ -62,20 +67,23 @@ struct RelicDoc {
 /// The Relic API's own civ id space. NEVER look up a game/replay `civ_id` here (and vice versa
 /// for [`GameCivMap`]) — see the module doc comment.
 #[derive(Debug, Clone)]
-pub struct RelicCivMap(HashMap<u32, String>);
+pub struct RelicCivMap(HashMap<i32, String>);
 
 impl RelicCivMap {
-    /// Resolves a Relic-space `civilization_id` to its slug. `Err(UnknownCivId)` for anything not
+    /// Resolves a Relic-space [`RelicCivId`] to its slug. `Err(UnknownCivId)` for anything not
     /// in the committed map — never guesses.
-    pub fn slug(&self, id: u32) -> Result<&str, UnknownCivId> {
-        self.0.get(&id).map(String::as_str).ok_or(UnknownCivId(id))
+    pub fn slug(&self, id: RelicCivId) -> Result<&str, UnknownCivId> {
+        self.0
+            .get(&id.0)
+            .map(String::as_str)
+            .ok_or(UnknownCivId(id.0))
     }
 }
 
 /// Parses `relic-civ-id-map.json`-shaped text (`{ "provenance": {...}, "map": { "id": "slug" } }`).
 pub fn parse_relic_civs(json: &str) -> serde_json::Result<RelicCivMap> {
     let doc: RelicDoc = serde_json::from_str(json)?;
-    Ok(RelicCivMap(str_keys_to_u32(doc.map)))
+    Ok(RelicCivMap(str_keys_to_i32(doc.map)))
 }
 
 /// Loads the real, committed `src/data/relic-civ-id-map.json`, baked into the binary at compile time.
@@ -87,9 +95,9 @@ pub fn load_relic_civs() -> RelicCivMap {
 /// Both source files key their JSON object by decimal-string id; convert once, sharing the same
 /// rule for both id spaces (a malformed key is dropped rather than panicking the parse, matching
 /// neither file ever having one in practice — see the tests below).
-fn str_keys_to_u32(raw: HashMap<String, String>) -> HashMap<u32, String> {
+fn str_keys_to_i32(raw: HashMap<String, String>) -> HashMap<i32, String> {
     raw.into_iter()
-        .filter_map(|(k, v)| k.parse::<u32>().ok().map(|id| (id, v)))
+        .filter_map(|(k, v)| k.parse::<i32>().ok().map(|id| (id, v)))
         .collect()
 }
 
@@ -100,24 +108,24 @@ mod tests {
     #[test]
     fn game_civ_id_2_is_franks() {
         let civs = load_game_civs();
-        assert_eq!(civs.slug(2).unwrap(), "franks");
+        assert_eq!(civs.slug(GameCivId(2)).unwrap(), "franks");
     }
 
     #[test]
     fn relic_civ_id_5_is_britons() {
         let civs = load_relic_civs();
-        assert_eq!(civs.slug(5).unwrap(), "britons");
+        assert_eq!(civs.slug(RelicCivId(5)).unwrap(), "britons");
     }
 
     #[test]
     fn unknown_game_civ_id_fails_loud() {
         let civs = load_game_civs();
-        assert_eq!(civs.slug(9999), Err(UnknownCivId(9999)));
+        assert_eq!(civs.slug(GameCivId(9999)), Err(UnknownCivId(9999)));
     }
 
     #[test]
     fn unknown_relic_civ_id_fails_loud() {
         let civs = load_relic_civs();
-        assert!(civs.slug(9999).is_err());
+        assert!(civs.slug(RelicCivId(9999)).is_err());
     }
 }
