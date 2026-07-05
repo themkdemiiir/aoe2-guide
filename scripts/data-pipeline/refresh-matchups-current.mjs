@@ -36,11 +36,15 @@ const mapTruth = await loadReplayMapTruth();
 
 const SOURCE = `self-collected World's Edge live ladder (ranked RM, last ${CURRENT_WINDOW_DAYS} days; maps replay-verified)`;
 const TODAY = new Date().toISOString().slice(0, 10);
-const MIN = 300,
-  MIN_MAP = 200,
-  MIN_BUCKET = 150,
-  MIN_ALL = 300,
-  MIN_TEAM = 500;
+// Show data down to a small floor and let the UI flag low samples (games < 150
+// render a "low sample" caveat), rather than hiding sparse pairings entirely —
+// e.g. two low-play-rate civs like Dravidians vs Wu. Below these floors the
+// number is pure noise, so they stay omitted.
+const MIN = 50,
+  MIN_MAP = 50,
+  MIN_BUCKET = 30,
+  MIN_ALL = 30,
+  MIN_TEAM = 100;
 const bump = (o, k, won) => {
   const a = (o[k] ??= [0, 0]);
   a[0]++;

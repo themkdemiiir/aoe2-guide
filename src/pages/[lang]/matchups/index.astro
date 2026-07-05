@@ -251,7 +251,7 @@ const h2hBannerSSR = (a: string, b: string, eIdx: number): string => {
     + '<div class="text-center">'
     + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
     + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
-    + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games + (games < 50 ? ' <span style="color:var(--color-royal)">(' + h2hLabels.lowSample + ')</span>' : '') : '') + '</div>'
+    + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games + (games < 150 ? ' <span style="color:var(--color-royal)">(' + h2hLabels.lowSample + ')</span>' : '') : '') + '</div>'
     + '</div>'
     + civHeadSSR(iconB, bCrown, 48)
     + '</div>'
@@ -445,7 +445,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + '<div class="text-center">'
           + '<div class="font-display text-3xl text-ink">' + wr.toFixed(1) + '%'
           + ' <span class="text-lg text-stone-700/60">vs ' + (100 - wr).toFixed(1) + '%</span></div>'
-          + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games + (games < 50 ? ' <span style="color:var(--color-royal)">(' + h2hLabels.lowSample + ')</span>' : '') : '') + '</div>'
+          + '<div class="mt-1 text-sm text-stone-700">' + favHtml + (games != null ? ' · ' + games.toLocaleString(numLocale) + ' ' + h2hLabels.games + (games < 150 ? ' <span style="color:var(--color-royal)">(' + h2hLabels.lowSample + ')</span>' : '') : '') + '</div>'
           + '</div>'
           + civHead(iconB, bCrown, 48)
           + '</div>'
