@@ -8,7 +8,7 @@ What lives here:
 
 - **Relic / aoestats crawl + ingestion** — `collect-relic.mjs`, `stream-relic.mjs`,
   `ingest-stream.mjs`, and the `aggregate-*` / `refresh-*` generators.
-- **DuckDB SQL** — `build-duckdb.sql`, `build-match-ages.sql`, `build-benchmark.sql`,
+- **DuckDB SQL** — `build-match-ages.sql`, `build-benchmark.sql`,
   `load-replays.sql`, run against the VM's `aoe2.duckdb`.
 - **`replay-rs/`** — the Rust replay crate (bulk download+parse pipeline and the
   `analyze` game-coach subcommand).

@@ -8,10 +8,9 @@ fact comes from. Sources are pinned to a commit SHA; refresh = bump the SHA in a
 
 | Source | License | Used for | Fetched by |
 |---|---|---|---|
-| [SiegeEngineers/aoe2techtree](https://github.com/SiegeEngineers/aoe2techtree) `@ b34082d` | MIT (code) · MS Game Content Usage Rules (assets) | `data/data.json` → unit stats (cost, HP, attack, attack-bonus classes, armour), per-civ tech trees; `img/` → all icons | `sync:game-data`, `assets:sync` |
+| [SiegeEngineers/aoe2techtree](https://github.com/SiegeEngineers/aoe2techtree) `@ b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0` | MIT (code) · MS Game Content Usage Rules (assets) | `data/data.json` → unit stats (cost, HP, attack, attack-bonus classes, armour), per-civ tech trees; `img/` → all icons; tree JSON `picture_index` → icon map | `sync:game-data`, `assets:sync`, `icons:map` |
 | [aalises/age-of-empires-II-api](https://github.com/aalises/age-of-empires-II-api) `@ 3ec582f` | BSD-3-Clause | `data/units.csv` → **unit Age** (Dark/Feudal/Castle/Imperial), training building, cost, attack/armour bonus; `civilizations.csv` | `sync:game-data` |
-| [SiegeEngineers/aoc-reference-data](https://github.com/SiegeEngineers/aoc-reference-data) | CC / MIT | slug ↔ in-game ID references for the icon map | `icons:map` |
-| [aoestats.io](https://aoestats.io) | attribution | civ **win rate / play rate / tier** snapshot (`civilizations.json` `meta`) | `sync:meta` |
+| [aoestats.io](https://aoestats.io) | attribution | civ **win rate / play rate / tier** snapshot, ingested via the VM-side data pipeline | `scripts/data-pipeline/` |
 
 ## Generated data files (do not edit by hand)
 
@@ -19,8 +18,9 @@ fact comes from. Sources are pinned to a commit SHA; refresh = bump the SHA in a
 |---|---|---|
 | `src/data/game-facts.json` | `pnpm build:facts` | aalises `units.csv` — per-unit `age`, `building`, `cost`, `attackBonus` |
 | `src/data/unit-stats.json` | `pnpm build:units` | aoe2techtree `data.json` + aalises `units.csv` |
-| `src/data/civilizations.json` | `pnpm build:civilizations` (+ `sync:meta` for `meta`) | aoe2techtree `data.json` + aalises CSV; meta from aoestats.io |
-| `src/data/icon-map.json` | `pnpm icons:map` | aoc-reference-data + aoe2techtree `picture_index` |
+| `src/data/civilizations.json` | `pnpm build:civilizations` | aoe2techtree `data.json` + aalises CSV |
+| `src/data/civ-meta.json` | `scripts/data-pipeline/` | aoestats.io (win rate / play rate / tier) |
+| `src/data/icon-map.json` | `pnpm icons:map` | aoe2techtree tree JSON `picture_index` |
 | `public/images/aoe2/**` | `pnpm assets:sync` | aoe2techtree `img/` at the pinned SHA |
 
 ## Verification

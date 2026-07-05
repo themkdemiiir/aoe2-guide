@@ -1,17 +1,11 @@
-# scripts/migrations — completed one-time content migrations
+# scripts/migrations
 
-These are **completed, one-off content-migration scripts**, kept here for
-provenance only. They are NOT part of any build, `pnpm` task, or CI step — each
-was run once against the content tree to perform a structural change and then
-retired. They are safe to ignore and safe to delete later.
+`2026-07-02-rebuild-crawl-rows.mjs` is the **canonical crawl-rows rebuild** —
+still live, not a retired one-off. See `scripts/data-pipeline/README.md`'s
+"Full regen chain" for where it fits in the VM-side regen order.
 
-| script | what it did (once) |
-|---|---|
-| `migrate-builds-to-bilingual.mjs` | converted build-order YAML text fields to the `{ en, tr }` bilingual shape |
-| `migrate-locale-pairs.mjs` | restructured per-locale content into bilingual locale pairs |
-| `fix-civ-content.mjs` | one-off cleanup pass over civilization content YAML |
-| `strip-attribution.mjs` | removed inline attribution text now handled by the Footer component |
-| `strip-unit-placeholders.mjs` | stripped placeholder/stub fields out of unit content YAML |
-
-> Not moved: `scripts/fill-unit-roles.mjs` stays in `scripts/` because it
-> relative-imports `./lib/role-tr.mjs`; moving it would break that import.
+The five one-off content-migration scripts that used to live here
+(`migrate-builds-to-bilingual.mjs`, `migrate-locale-pairs.mjs`,
+`fix-civ-content.mjs`, `strip-attribution.mjs`, `strip-unit-placeholders.mjs`)
+were each run once against the content tree to perform a structural change,
+then retired and deleted.
