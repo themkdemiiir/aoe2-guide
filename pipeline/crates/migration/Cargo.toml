@@ -14,12 +14,11 @@ name = "migration"
 path = "src/main.rs"
 
 [dependencies]
-pipeline-core = { path = "../core", default-features = false } # only redact_secret; no refdata
+pipeline-core = { path = "../core", default-features = false } # cli/redact_secret; no refdata
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
 tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 [dependencies.sea-orm-migration]
 version = "1.1.20"

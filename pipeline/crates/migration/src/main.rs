@@ -1,17 +1,16 @@
-//! Own clap CLI + explicit `tracing` subscriber for the migration binary.
+//! Own clap CLI + `pipeline_core::cli` bootstrap for the migration binary.
 //!
 //! Deliberately does NOT use `sea_orm_migration::cli::run_cli`: its built-in clap `Cli` exposes
 //! `--database-url` / `-u`, backed by `env = "DATABASE_URL"` with no `hide`/`hide_env_values`, so
 //! `--help` prints the live database URL (password included) — that leak already caused a real
-//! password rotation once. Instead we read `DATABASE_URL` from the environment ourselves and
-//! never put it in a clap arg, help string, or log line.
+//! password rotation once. Instead we read `DATABASE_URL` from the environment ourselves (via
+//! `pipeline_core::cli::database_url`) and never put it in a clap arg, help string, or log line.
 
 use anyhow::Context;
 use clap::{Parser, Subcommand};
 use migration::{Migrator, MigratorTrait};
-use pipeline_core::redact_secret;
+use pipeline_core::cli::{database_url, init_tracing, log_error_and_code};
 use sea_orm_migration::sea_orm::{ConnectOptions, Database};
-use tracing_subscriber::EnvFilter;
 
 /// Default log filter when `RUST_LOG` is unset: informational, with sqlx's own statement
 /// logging (which sqlx routes through `tracing` under the `sqlx` target) quieted to warnings.
@@ -54,40 +53,26 @@ enum Command {
 
 #[tokio::main]
 async fn main() {
-    init_tracing();
+    init_tracing(DEFAULT_LOG_FILTER);
 
     // Parse args before touching the environment at all, so `--help`/`--version` are handled
     // entirely by clap (and exit immediately) without ever depending on `DATABASE_URL`.
     let cli = Cli::parse();
 
-    let database_url = match std::env::var("DATABASE_URL") {
-        Ok(url) if !url.trim().is_empty() => url,
-        _ => {
-            tracing::error!("DATABASE_URL is not set");
+    let secret = match database_url() {
+        Ok(secret) => secret,
+        Err(err) => {
+            tracing::error!(error = %err, "failed to read DATABASE_URL");
             std::process::exit(1);
         }
     };
 
-    if let Err(err) = run(cli.command, database_url.clone()).await {
-        let message = redact_secret(&format!("{err:#}"), &database_url);
-        tracing::error!(error = %message, "migration command failed");
-        std::process::exit(1);
+    if let Err(err) = run(cli.command, secret.expose()).await {
+        std::process::exit(log_error_and_code(&err, &secret));
     }
 }
 
-/// Initialize the global `tracing` subscriber: structured output to stderr, filtered by
-/// `RUST_LOG` (falling back to [`DEFAULT_LOG_FILTER`] when unset/invalid).
-fn init_tracing() {
-    let filter =
-        EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new(DEFAULT_LOG_FILTER));
-
-    tracing_subscriber::fmt()
-        .with_writer(std::io::stderr)
-        .with_env_filter(filter)
-        .init();
-}
-
-async fn run(command: Command, database_url: String) -> anyhow::Result<()> {
+async fn run(command: Command, database_url: &str) -> anyhow::Result<()> {
     let connect_options = ConnectOptions::new(database_url)
         .sqlx_logging(true)
         .to_owned();

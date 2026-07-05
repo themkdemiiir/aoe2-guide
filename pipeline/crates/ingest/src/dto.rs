@@ -4,6 +4,7 @@
 //! fabricates a value for a field the schema requires.
 
 use chrono::{DateTime, Utc};
+use pipeline_core::{Age, GameCivId, MatchId, ProfileId};
 use serde::{Deserialize, Serialize};
 
 /// `matches.source` — mirrors the PG enum `source_kind` (`'replay' | 'aoestats'`).
@@ -50,10 +51,11 @@ impl Ladder {
 /// caller that lacks a real value fails to compile rather than silently defaulting one in.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct NewMatch {
-    pub match_id: i64,
+    pub match_id: MatchId,
     pub source: MatchSource,
     pub ladder: Ladder,
-    /// NOT NULL — FK to `maps(map_id)`.
+    /// NOT NULL — FK to `maps(map_id)`. Plain `i32`: no `MapId` newtype exists yet.
+    // TODO(MapId): newtype this once `core::ids` grows a `MapId`.
     pub map_id: i32,
     pub build: Option<i32>,
     pub patch: Option<String>,
@@ -69,23 +71,25 @@ pub struct NewMatch {
 /// Also excludes the parser's `name`/`team`/`color`/`player_number` — not stored by this schema.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct NewMatchPlayer {
-    pub match_id: i64,
-    pub profile_id: i64,
+    pub match_id: MatchId,
+    pub profile_id: ProfileId,
     /// NOT NULL — FK to `civs(civ_id)`.
-    pub civ_id: i32,
+    pub civ_id: GameCivId,
     pub elo: Option<i32>,
     pub won: Option<bool>,
     pub opening: Option<String>,
-    pub feudal_t: Option<f64>,
-    pub castle_t: Option<f64>,
-    pub imperial_t: Option<f64>,
+    /// `real` (float4) in Postgres — `f32`, not `f64`, so the Rust type matches the column
+    /// exactly instead of silently truncating on write. See [`crate::ingest::copy_match_players`].
+    pub feudal_t: Option<f32>,
+    pub castle_t: Option<f32>,
+    pub imperial_t: Option<f32>,
 }
 
 /// One row for `replay_events` — the highest-volume table (~100M rows), the COPY-critical path.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct NewReplayEvent {
-    pub match_id: i64,
-    pub profile_id: Option<i64>,
+    pub match_id: MatchId,
+    pub profile_id: Option<ProfileId>,
     pub player_number: i16,
     pub t_ms: i32,
     pub kind: String,
@@ -97,12 +101,12 @@ pub struct NewReplayEvent {
 /// One row for `replay_ages` — one (match, player, age) age-up summary.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct NewReplayAge {
-    pub match_id: i64,
-    pub profile_id: i64,
+    pub match_id: MatchId,
+    pub profile_id: ProfileId,
     /// NOT NULL — FK to `civs(civ_id)`.
-    pub civ_id: i32,
+    pub civ_id: GameCivId,
     pub won: Option<bool>,
-    pub age: String,
+    pub age: Age,
     pub uptime_ms: i32,
     pub villagers: Option<i32>,
     pub military: Option<i32>,
@@ -136,4 +140,72 @@ pub struct IngestStats {
     pub events: u64,
     /// Rows inserted into `replay_ages`, gated on `matches_inserted`.
     pub ages: u64,
+}
+
+#[cfg(test)]
+mod tests {
+    use chrono::TimeZone;
+
+    use super::*;
+
+    /// The id newtypes (`MatchId`/`ProfileId`/`GameCivId`) are `#[serde(transparent)]` and
+    /// [`Age`] is a lowercase bare string — adopting them in the DTOs (5b) must not change the
+    /// JSON shape a `ReplayBatch` producer/consumer (the CLI, and later `replay`) depends on.
+    #[test]
+    fn wire_format_is_unchanged_by_the_newtypes() {
+        let played_at = Utc.with_ymd_and_hms(2026, 1, 1, 0, 0, 0).unwrap();
+        let batch = ReplayBatch {
+            matches: vec![NewMatch {
+                match_id: MatchId(1001),
+                source: MatchSource::Replay,
+                ladder: Ladder::OneVOne,
+                map_id: 1,
+                build: Some(101),
+                patch: Some("1.0".to_owned()),
+                played_at,
+                duration_ms: Some(1_800_000),
+                n_players: 2,
+            }],
+            players: vec![NewMatchPlayer {
+                match_id: MatchId(1001),
+                profile_id: ProfileId(5001),
+                civ_id: GameCivId(1),
+                elo: Some(1400),
+                won: Some(true),
+                opening: None,
+                feudal_t: Some(320.5),
+                castle_t: None,
+                imperial_t: None,
+            }],
+            events: vec![],
+            ages: vec![NewReplayAge {
+                match_id: MatchId(1001),
+                profile_id: ProfileId(5001),
+                civ_id: GameCivId(1),
+                won: Some(true),
+                age: Age::Dark,
+                uptime_ms: 100,
+                villagers: None,
+                military: None,
+                n_buildings: None,
+                n_research: None,
+            }],
+        };
+
+        let value = serde_json::to_value(&batch).expect("ReplayBatch must serialize");
+
+        // Newtypes serialize as bare integers, not `{"0": 1001}`.
+        assert_eq!(value["matches"][0]["match_id"], serde_json::json!(1001));
+        assert_eq!(value["players"][0]["match_id"], serde_json::json!(1001));
+        assert_eq!(value["players"][0]["profile_id"], serde_json::json!(5001));
+        assert_eq!(value["players"][0]["civ_id"], serde_json::json!(1));
+
+        // Age is a lowercase bare string, not `{"Dark": null}`.
+        assert_eq!(value["ages"][0]["age"], serde_json::json!("dark"));
+
+        // And it round-trips back to an identical struct.
+        let round_tripped: ReplayBatch =
+            serde_json::from_value(value).expect("ReplayBatch must deserialize back");
+        assert_eq!(round_tripped, batch);
+    }
 }

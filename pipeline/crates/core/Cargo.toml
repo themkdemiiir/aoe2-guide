@@ -29,6 +29,10 @@ url = "2"
 anyhow = "1"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# For `core::age::UnknownAge` — a library-edge typed error a caller can match on (playbook
+# principle: thiserror at library edges, anyhow at binary edges). Always compiled, like `age`
+# itself.
+thiserror = "1"
 
 [dev-dependencies]
 proptest = "1"
