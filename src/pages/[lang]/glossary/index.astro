@@ -14,6 +14,33 @@ const lang = Astro.params.lang as Locale;
 const allTerms: CollectionEntry<"glossary">[] = await getCollection("glossary");
 const terms = allTerms.sort((a, b) => a.data.term[lang].localeCompare(b.data.term[lang]));
 
+// Turn the "Related terms:" list in each definition into anchor links to the
+// terms that actually exist in the glossary (others stay plain text). Multi-key
+// lookup handles "Fast Castle (FC)" being cited as "Fast Castle" or "FC".
+const norm = (s: string) => s.toLowerCase().trim();
+const nameToId: Record<string, string> = {};
+for (const term of terms) {
+  const nm = term.data.term[lang];
+  const id = `gt-${term.data.slug}`;
+  nameToId[norm(nm)] = id;
+  const noParen = nm.replace(/\s*\([^)]*\)/, "").trim();
+  if (noParen) nameToId[norm(noParen)] = id;
+  const abbr = nm.match(/\(([^)]+)\)/);
+  if (abbr) nameToId[norm(abbr[1])] = id;
+}
+const RELATED_RE = /(<strong>(?:Related terms?|İl(?:gili|işkili) terimler):<\/strong>)([^<]*)/i;
+const linkifyRelated = (html: string) =>
+  html.replace(RELATED_RE, (_m, label, rest) =>
+    label +
+    rest.replace(/[^,.;]+/g, (seg: string) => {
+      const name = seg.trim();
+      const id = nameToId[norm(name)] ?? nameToId[norm(name.replace(/\s*\([^)]*\)/, ""))];
+      if (!name || !id) return seg;
+      const lead = seg.match(/^\s*/)?.[0] ?? "";
+      return `${lead}<a href="#${id}" class="text-gold-700 hover:underline">${name}</a>`;
+    }),
+  );
+
 interface RenderedTerm {
   data: CollectionEntry<"glossary">["data"];
   html: string;
@@ -21,7 +48,7 @@ interface RenderedTerm {
 
 const rendered: RenderedTerm[] = terms.map((term) => ({
   data: term.data,
-  html: marked.parse(term.data.definition[lang]) as string,
+  html: linkifyRelated(marked.parse(term.data.definition[lang]) as string),
 }));
 
 const grouped = new Map<string, RenderedTerm[]>();
@@ -93,7 +120,7 @@ const glossaryLd = {
             </h2>
             <dl class="mt-3 space-y-3">
               {grouped.get(l)!.map((term) => (
-                <div data-term={term.data.term[lang].toLowerCase()}>
+                <div id={`gt-${term.data.slug}`} data-term={term.data.term[lang].toLowerCase()} class="scroll-mt-44">
                   <dt class="font-display text-lg text-ink">{term.data.term[lang]}</dt>
                   <dd class="prose prose-stone max-w-none" set:html={term.html} />
                 </div>
