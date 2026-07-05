@@ -1,0 +1,30 @@
+[package]
+name = "ingest"
+version = "0.1.0"
+edition = "2021"
+description = "Idempotent binary-COPY bulk loader: typed replay row batches -> the AOE2 guide's PostgreSQL pipeline store"
+publish = false
+
+[lib]
+name = "ingest"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ingest"
+path = "src/main.rs"
+
+[dependencies]
+pipeline-core = { path = "../core" }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+tokio-postgres = { version = "0.7", features = ["with-chrono-0_4"] }
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+anyhow = "1"
+
+[dev-dependencies]
+migration = { path = "../migration" }
+testcontainers-modules = { version = "0.15", features = ["postgres"] }

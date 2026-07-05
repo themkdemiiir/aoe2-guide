@@ -10,4 +10,7 @@
 pub mod civs;
 pub mod elo;
 pub mod maps;
+pub mod redact;
 pub mod slug;
+
+pub use redact::redact_secret;
