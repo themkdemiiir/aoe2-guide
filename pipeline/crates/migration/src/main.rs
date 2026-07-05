@@ -80,6 +80,12 @@ async fn main() {
 /// (catches the verbatim echo) and, if the URL parses far enough to expose a password, the
 /// password substring on its own (catches partial echoes).
 fn redact_secret(message: &str, database_url: &str) -> String {
+    if database_url.is_empty() {
+        // An empty needle would make `str::replace` insert `<DATABASE_URL redacted>` between
+        // every character of `message`, corrupting it instead of redacting anything.
+        return message.to_owned();
+    }
+
     let mut redacted = message.replace(database_url, "<DATABASE_URL redacted>");
 
     if let Some(password) = url::Url::parse(database_url)
@@ -134,6 +140,27 @@ mod tests {
     #[test]
     fn redact_secret_strips_password_and_full_url() {
         let database_url = "postgres://myuser:SUPER_SECRET_MARKER_PW@host/db";
+        let message = format!(
+            "failed to connect to the database: The connection string '{database_url}' cannot be parsed."
+        );
+
+        let redacted = redact_secret(&message, database_url);
+
+        assert!(!redacted.contains("SUPER_SECRET_MARKER_PW"));
+        assert!(!redacted.contains(database_url));
+    }
+
+    /// The real bug: a malformed connection string (bad IPv6 host) fails `url::Url::parse`
+    /// entirely, so the password-specific redaction pass never runs. Only the unconditional
+    /// full-string replacement can catch it — this pins that behavior down.
+    #[test]
+    fn redact_secret_strips_full_url_when_parsing_fails() {
+        let database_url = "postgres://myuser:SUPER_SECRET_MARKER_PW@[::1";
+        assert!(
+            url::Url::parse(database_url).is_err(),
+            "test fixture must be unparseable to exercise the parse-failure path"
+        );
+
         let message = format!(
             "failed to connect to the database: The connection string '{database_url}' cannot be parsed."
         );
