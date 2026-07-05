@@ -1,6 +1,12 @@
 [workspace]
 resolver = "2"
-members = ["crates/core", "crates/ingest", "crates/migration"]
+members = ["crates/core", "crates/ingest", "crates/migration", "crates/replay"]
+# vendor/aoe2rec sits inside this workspace's directory tree but is third-party, committed
+# as-is (never edited) — exclude it so it builds as an ordinary path dependency (no clippy
+# lints, no `cargo test`/`clippy --workspace` reaching into it) rather than being implicitly
+# absorbed into the workspace by path proximity (analyzer/Cargo.toml hit this same Cargo
+# behavior first — see its comment).
+exclude = ["vendor/aoe2rec"]
 
 [workspace.package]
 version = "0.1.0"
@@ -26,6 +32,10 @@ url = "2"
 thiserror = "2"
 tokio-postgres = { version = "0.7", features = ["with-chrono-0_4"] }
 chrono = { version = "0.4", features = ["serde"] }
+# `replay` decodes `.aoe2record` bytes via vendored aoe2rec, which itself takes `bytes::Bytes`
+# (not `&[u8]`) as its `Savegame::from_bytes` input — pinned here since `fetch`'s reqwest
+# download will also hand back `bytes::Bytes` and should reuse the same version.
+bytes = { version = "1", features = ["std"] }
 
 [workspace.dependencies.sea-orm-migration]
 version = "1.1.20"

@@ -1,0 +1,27 @@
+[package]
+name = "replay"
+version.workspace = true
+edition.workspace = true
+description = "Pure .aoe2record replay parser -> ParsedReplay (no IO; the ingest pipeline's functional core)"
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "replay"
+path = "src/lib.rs"
+
+[dependencies]
+# Vendored, committed third-party parser (pipeline/vendor/aoe2rec) — see workspace Cargo.toml's
+# `exclude` for why it isn't a workspace member.
+aoe2rec = { path = "../../vendor/aoe2rec" }
+pipeline-core = { path = "../core", default-features = false } # ids + age only; no refdata
+bytes = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+# Only the `examples/parse_json.rs` parity-gate harness needs this (binary-edge error handling,
+# per the playbook) — kept out of `[dependencies]` so the library's own dependency tree stays
+# free of it.
+anyhow = { workspace = true }
