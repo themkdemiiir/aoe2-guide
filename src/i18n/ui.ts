@@ -47,6 +47,18 @@ export const ui = {
     "nav.search": "Search",
     "nav.menu": "Menu",
     "nav.about": "About",
+    "nav.support": "Support",
+    "meta.support":
+      "Support AOE2 Guide — a free, open-source Age of Empires II guide. Ways to help keep hosting paid and new civs, maps, and tools coming.",
+    "support.eyebrow": "SUPPORT THE PROJECT",
+    "support.title": "Keep AOE2 Guide growing",
+    "support.intro":
+      "This site is free and open source. If it's sharpened your build orders or your ranked climb, any support helps cover hosting and buys time for new civs, maps, and tools. Pick whichever option suits you.",
+    "support.github.blurb":
+      "Recurring or one-time support with zero platform fees — every cent reaches the project.",
+    "support.github.cta": "Sponsor on GitHub",
+    "support.bmc.blurb": "The simplest way to say thanks — a one-off tip, no account needed.",
+    "support.bmc.cta": "Buy a coffee",
     "ui.search.placeholder": "Search guides…",
     "ui.theme.light": "Light",
     "ui.theme.dark": "Dark",
@@ -461,6 +473,19 @@ export const ui = {
     "nav.search": "Ara",
     "nav.menu": "Menü",
     "nav.about": "Hakkında",
+    "nav.support": "Destek Ol",
+    "meta.support":
+      "AOE2 Guide'a destek ol — ücretsiz, açık kaynak bir Age of Empires II rehberi. Barındırma giderlerini karşılamaya ve yeni uygarlıklar, haritalar ve araçların gelmesine yardım etmenin yolları.",
+    "support.eyebrow": "PROJEYE DESTEK OL",
+    "support.title": "AOE2 Guide'ı büyütmeye yardım et",
+    "support.intro":
+      "Bu site ücretsiz ve açık kaynak. Build order'larını ya da sıralı tırmanışını keskinleştirdiyse, her türlü destek barındırma giderlerini karşılamaya ve yeni uygarlıklar, haritalar ve araçlara zaman ayırmaya yardım eder. Sana uygun olanı seç.",
+    "support.github.blurb":
+      "Sıfır platform ücretiyle düzenli ya da tek seferlik destek — her kuruş projeye ulaşır.",
+    "support.github.cta": "GitHub'da Sponsor Ol",
+    "support.bmc.blurb":
+      "Teşekkür etmenin en basit yolu — hesap gerekmeden tek seferlik bir bağış.",
+    "support.bmc.cta": "Bir kahve ısmarla",
     "ui.search.placeholder": "Rehberlerde ara…",
     "ui.theme.light": "Açık",
     "ui.theme.dark": "Koyu",

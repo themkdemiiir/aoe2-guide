@@ -1,0 +1,22 @@
+{
+  "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+  "version": "v1.1.0",
+  "entity": {
+    "type": "individual",
+    "name": "Mehmet Kaan Demir",
+    "email": "mehmetkaandemir.md@gmail.com",
+    "description": "Solo developer and maintainer of AOE2 Guide, a bilingual Age of Empires II strategy and build-order reference site.",
+    "webpageUrl": { "url": "https://aoe2guide.com" }
+  },
+  "projects": [
+    {
+      "guid": "aoe2-guide",
+      "name": "AOE2 Guide",
+      "description": "A free, bilingual (EN/TR) static site covering Age of Empires II civilizations, build orders, maps, counters, and strategy tools. Built with Astro, statically deployed to Cloudflare Pages.",
+      "webpageUrl": { "url": "https://aoe2guide.com" },
+      "repositoryUrl": { "url": "https://github.com/themkdemiiir/aoe2-guide" },
+      "licenses": ["spdx:MIT"],
+      "tags": ["age-of-empires", "age-of-empires-2", "real-time-strategy", "gaming", "esports", "strategy-guide", "build-orders", "replay-analyzer", "game-analytics", "rust", "webassembly", "astro"]
+    }
+  ]
+}

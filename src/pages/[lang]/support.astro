@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import SectionEyebrow from "@/components/ui/SectionEyebrow.astro";
+import { locales, type Locale } from "@/i18n/locales";
+import { t } from "@/i18n/utils";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Locale;
+
+// Channel handles. GitHub Sponsors is live (themkdemiiir). Confirm the Buy Me a
+// Coffee handle before deploy — placeholder mirrors the GitHub handle.
+const GITHUB_SPONSORS = "https://github.com/sponsors/themkdemiiir";
+const BUY_ME_A_COFFEE = "https://buymeacoffee.com/themkdemiiir";
+
+const channels = [
+  {
+    name: "GitHub Sponsors",
+    href: GITHUB_SPONSORS,
+    blurb: t(lang, "support.github.blurb"),
+    cta: t(lang, "support.github.cta"),
+  },
+  {
+    name: "Buy Me a Coffee",
+    href: BUY_ME_A_COFFEE,
+    blurb: t(lang, "support.bmc.blurb"),
+    cta: t(lang, "support.bmc.cta"),
+  },
+];
+---
+<BaseLayout title={t(lang, "nav.support")} description={t(lang, "meta.support")} canonicalPath="/support">
+  <section class="mx-auto max-w-3xl px-4 py-12">
+    <SectionEyebrow label={t(lang, "support.eyebrow")} />
+    <h1 class="mt-3 font-display text-3xl text-ink">{t(lang, "support.title")}</h1>
+    <p class="mt-4 text-stone-700">{t(lang, "support.intro")}</p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {channels.map((c) => (
+        <Card>
+          <Fragment slot="header">
+            <h2 class="font-display text-xl text-ink">{c.name}</h2>
+          </Fragment>
+          <p class="text-sm text-stone-700">{c.blurb}</p>
+          <Fragment slot="footer">
+            <a
+              href={c.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-sm text-gold-700 hover:text-gold-500"
+            >
+              {c.cta} →
+            </a>
+          </Fragment>
+        </Card>
+      ))}
+    </div>
+
+    <p class="mt-12 border-t border-stone-700/30 pt-4 text-xs text-stone-700">
+      {t(lang, "footer.attribution")}
+    </p>
+  </section>
+</BaseLayout>

@@ -6,15 +6,7 @@ const locale = getLocaleFromUrl(Astro.url);
   <div class="mx-auto max-w-7xl px-4 py-6 text-xs text-stone-700">
     <p class="mb-2">{t(locale, "footer.attribution")}</p>
     <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
-      <a class="hover:text-gold-500" href={localizedPath("/analyzer", locale)}>{t(locale, "nav.analyzer")}</a>
-      ·
-      <a class="hover:text-gold-500" href={localizedPath("/counters", locale)}>{t(locale, "nav.counters")}</a>
-      ·
-      <a class="hover:text-gold-500" href={localizedPath("/blog", locale)}>{t(locale, "nav.blog")}</a>
-      ·
-      <a class="hover:text-gold-500" href={localizedPath("/glossary", locale)}>{t(locale, "nav.glossary")}</a>
-      ·
-      <a class="hover:text-gold-500" href={localizedPath("/about", locale)}>{t(locale, "nav.about")}</a>
+      <a class="hover:text-gold-500" href={localizedPath("/support", locale)}>{t(locale, "nav.support")}</a>
       ·
       <a class="hover:text-gold-500" href="https://github.com/themkdemiiir/aoe2-guide">GitHub</a>
     </p>
