@@ -1,9 +1,10 @@
 // scripts/data-pipeline/lib/buckets.mjs
 //
 // Single ingestion-boundary source for elo bucketing + map canonicalization.
-// Every JS generator imports from here. The two pure .sql files
-// (build-duckdb.sql, build-benchmark.sql) keep an inline CASE/regex as the
-// documented paired SQL face — keep thresholds in sync with eloCaseSql()/canonMap().
+// Every JS generator imports from here. The pure .sql pipeline scripts (e.g.
+// build-winner-refs.sql, build-benchmark-vils.sql) keep matching inline
+// CASE/regex logic as the documented paired SQL face — keep thresholds in
+// sync with eloCaseSql()/canonMap().
 
 // Last month covered by the frozen aoestats archive. Months <= this come from
 // the archive (full corpus, real maps); later months come from the crawl.
@@ -63,7 +64,8 @@ export function eloCaseSql(col, { nullLabel = "unknown" } = {}) {
   );
 }
 
-// Single JS mirror of the SQL canon regex (build-duckdb.sql): lowercase,
+// Single JS mirror of the SQL canon regex (mirrored inline across the
+// pipeline's .sql scripts, e.g. build-winner-refs.sql): lowercase,
 // strip a file extension, drop non-alphanumerics.
 export function canonMap(raw) {
   return String(raw)

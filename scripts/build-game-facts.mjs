@@ -17,10 +17,10 @@
 
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { AALISES_SHA } from "./lib/aoe2-sources.mjs";
 
 const CACHE = path.resolve(".cache/aoe2-data");
 const OUT = path.resolve("src/data/game-facts.json");
-const AALISES_SHA = process.env.AALISES_SHA || "3ec582fa0ebd5ea11b2d1ff405e61836c6f3a99d";
 
 // Display name (as in aalises units.csv) -> our content slug.
 // Mirrors CANONICAL_UNITS in build-units.mjs (kept in sync deliberately).

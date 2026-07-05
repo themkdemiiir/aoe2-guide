@@ -44,8 +44,8 @@ source files in-memory instead (`read_parquet(...)` / `read_json(...)`).
 
 ### Rebuild
 
-`scripts/data-pipeline/build-duckdb.sql` (crawl-only) is in the repo. The full
-merged build (aoestats + crawl + summaries) is the SQL run from this session;
+The merged build (aoestats + crawl + summaries) runs from the `scripts/data-pipeline/`
+generators (see `lib/buckets.mjs` for the shared elo/map canonicalization);
 re-run after refreshing the crawl. Builds in ~30s; the file grows on
 `CREATE OR REPLACE` — run `CHECKPOINT;` / rebuild fresh to compact.
 

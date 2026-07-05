@@ -31,7 +31,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 | `pnpm test` | Vitest unit tests |
 | `pnpm check` | Astro/TS type checks |
 | `pnpm assets:sync` | Refresh AOE2 icons from `SiegeEngineers/aoe2techtree` at the pinned SHA |
-| `pnpm icons:map` | Regenerate `src/data/icon-map.json` from aoc-reference-data |
+| `pnpm icons:map` | Regenerate `src/data/icon-map.json` from `SiegeEngineers/aoe2techtree` tree JSON (`picture_index`) |
 | `pnpm import:md <path>` | Promote a raw `md/<type>/<file>.md` source into a scaffolded EN content entry |
 | `pnpm build:wasm` | Rebuild the `/analyzer` WASM engine (needs `wasm-pack` + `rustup target add wasm32-unknown-unknown`; glue → `src/wasm/pkg/`, binary → `public/analyzer/pkg/` — both committed) |
 

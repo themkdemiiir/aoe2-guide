@@ -14,10 +14,10 @@
 
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { AALISES_SHA, AOE2TECHTREE_SHA } from "./lib/aoe2-sources.mjs";
 
 // Pinned SHAs — fetched 2026-05-23; AOE2TT_SHA bumped 2026-07-01 (picks up DE Update 177723)
-const AALISES_SHA = process.env.AALISES_SHA || "3ec582fa0ebd5ea11b2d1ff405e61836c6f3a99d";
-const AOE2TT_SHA = process.env.AOE2TT_SHA || "b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0";
+const AOE2TT_SHA = AOE2TECHTREE_SHA;
 
 const CACHE_DIR = path.resolve(".cache/aoe2-data");
 
