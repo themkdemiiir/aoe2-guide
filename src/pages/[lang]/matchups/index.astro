@@ -10,6 +10,8 @@ import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 import { displayName } from "@/lib/display";
 import { TIER_COLORS } from "@/lib/tiers";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -59,7 +61,27 @@ const labels = {
   noMeta:      t(lang, "matchups.noMeta"),
   castleAge:   t(lang, "matchups.castleAge"),
   imperialAge: t(lang, "matchups.imperialAge"),
+  winnersBuild: lang === "tr" ? "Kazananların ordusu" : "Winners build",
+  winnersNote: lang === "tr" ? "Kazananların Kale Çağı'na dek ürettikleri (tüm haritalar)" : "What winners produce through Castle Age (all maps)",
 };
+
+// Winner army comps per civ × elo bucket — trimmed to the top 5 units for a
+// compact define:vars payload. Source: public/winner-comps.json (units produced
+// through Castle Age by ranked-1v1 WINNERS; also feeds the analyzer). Per-civ×elo
+// only — not map- or opponent-specific.
+const winnerComps = JSON.parse(readFileSync(path.resolve("public/winner-comps.json"), "utf8")) as {
+  civs: Record<string, Record<string, { units: Array<{ unit: string; pct: number }> }>>;
+};
+const titleCaseUnit = (s: string) => s.replace(/\b\w/g, (ch) => ch.toUpperCase());
+const wc: Record<string, Record<string, Array<{ u: string; p: number }>>> = {};
+for (const [civ, buckets] of Object.entries(winnerComps.civs)) {
+  const bo: Record<string, Array<{ u: string; p: number }>> = {};
+  for (const [bk, cell] of Object.entries(buckets)) {
+    bo[bk] = cell.units.slice(0, 5).map((u) => ({ u: titleCaseUnit(u.unit), p: Math.round(u.pct) }));
+  }
+  wc[civ] = bo;
+}
+const eloBucketNames = (byEloData.eloBuckets as string[]) ?? [];
 
 // Display names precomputed server-side (canonical prettifier in
 // src/lib/display.ts) so the is:inline script below needs no local copy.
@@ -301,7 +323,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
       <!-- Server-rendered default pair; JS replaces this on load / selection. -->
     </div>
 
-    <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS, numLocale }}>
+    <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS, numLocale, wc, eloBucketNames }}>
       // @ts-nocheck — plain client JS shipped verbatim; the define:vars globals above
       // (civs, displayNames, TIER_COLORS, …) are invisible to astro-check.
       // Build a slug -> civ lookup
@@ -341,7 +363,35 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + (TIER_COLORS[tier] || TIER_COLORS.D) + '">' + esc(tier) + '</span>';
       }
 
-      function panel(slug) {
+      // Map the selected elo (index, or "cum:N") to a winner-comps bucket name;
+      // "all"/cumulative/top bracket fall back to a representative mid bracket.
+      function wcBucket(eloVal) {
+        const idx = (typeof eloVal === "string" && eloVal.indexOf("cum:") === 0) ? +eloVal.slice(4) : +eloVal;
+        let name = eloBucketNames[idx];
+        if (!name || name === "all" || name === "2500+") name = "1200-1399";
+        return name;
+      }
+      function compsHtml(slug, eloVal) {
+        const byBucket = wc[slug];
+        if (!byBucket) return "";
+        let bucket = wcBucket(eloVal);
+        if (!byBucket[bucket]) {
+          const keys = Object.keys(byBucket);
+          if (!keys.length) return "";
+          bucket = keys[Math.floor(keys.length / 2)];
+        }
+        const units = byBucket[bucket];
+        if (!units || !units.length) return "";
+        const chips = units
+          .map((u) => '<span class="text-ink">' + esc(u.u) + ' <span class="text-stone-700">' + u.p + '%</span></span>')
+          .join('<span class="text-stone-700/40"> · </span>');
+        return '<section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.winnersBuild
+          + ' <span class="font-mono text-[11px] normal-case tracking-normal text-stone-700/70">· ' + esc(bucket) + '</span></h3>'
+          + '<p class="mt-1 text-sm leading-relaxed">' + chips + '</p>'
+          + '<p class="mt-1 text-[11px] italic text-stone-700/70">' + labels.winnersNote + '</p></section>';
+      }
+
+      function panel(slug, eloVal) {
         const c = byslug[slug];
         if (!c) return '<div class="rounded border border-royal/40 p-4 text-royal">' + h2hLabels.unknownCiv + esc(slug) + '</div>';
 
@@ -386,6 +436,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + '    </div>'
           + '  </header>'
           + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.meta + '</h3>' + metaHtml + '</section>'
+          + compsHtml(slug, eloVal)
           + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.civBonuses + '</h3><ul class="mt-1 list-inside list-disc space-y-1 text-sm text-ink">' + bonusesHtml + '</ul></section>'
           + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.teamBonus + '</h3><p class="mt-1 text-sm text-ink">' + esc(c.teamBonus || '—') + '</p></section>'
           + '  <section class="mt-3"><h3 class="font-display text-sm uppercase text-stone-700">' + labels.uniqueUnits + '</h3><ul class="mt-1 space-y-1 text-sm text-ink">' + uniqueUnitsHtml + '</ul></section>'
@@ -482,7 +533,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
         const a = selA.value;
         const b = selB.value;
         document.getElementById("h2h").innerHTML = h2hBanner(a, b, eloSel.value);
-        document.getElementById("comparator").innerHTML = panel(a) + panel(b);
+        document.getElementById("comparator").innerHTML = panel(a, eloSel.value) + panel(b, eloSel.value);
         const url = new URL(location.href);
         url.searchParams.set("a", a);
         url.searchParams.set("b", b);
