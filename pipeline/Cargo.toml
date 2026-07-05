@@ -1,6 +1,13 @@
 [workspace]
 resolver = "2"
-members = ["crates/core", "crates/fetch", "crates/ingest", "crates/migration", "crates/replay"]
+members = [
+    "crates/core",
+    "crates/fetch",
+    "crates/ingest",
+    "crates/migration",
+    "crates/pipeline",
+    "crates/replay",
+]
 # vendor/aoe2rec sits inside this workspace's directory tree but is third-party, committed
 # as-is (never edited) — exclude it so it builds as an ordinary path dependency (no clippy
 # lints, no `cargo test`/`clippy --workspace` reaching into it) rather than being implicitly
