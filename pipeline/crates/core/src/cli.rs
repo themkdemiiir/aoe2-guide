@@ -33,7 +33,8 @@ pub fn init_tracing(default_filter: &str) {
 pub fn database_url() -> anyhow::Result<Secret> {
     match std::env::var("DATABASE_URL") {
         Ok(url) if !url.trim().is_empty() => Ok(Secret::new(url)),
-        _ => anyhow::bail!("DATABASE_URL is not set"),
+        Ok(_) => anyhow::bail!("DATABASE_URL is empty"),
+        Err(_) => anyhow::bail!("DATABASE_URL is not set"),
     }
 }
 

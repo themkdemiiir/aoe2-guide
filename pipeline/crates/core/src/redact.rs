@@ -88,12 +88,30 @@ mod tests {
             prop_assert_eq!(redact_secret(&message, ""), message);
         }
 
-        /// For any non-empty url, the redacted output never contains that url as a substring —
-        /// the whole point of the function.
+        /// For a realistic `postgres://user:password@host:port/db` connection string embedded in
+        /// a driver-style error message, the redacted output must hide both the password and the
+        /// full url. (A prior version of this property drew `database_url in ".+"` — arbitrary
+        /// Unicode — which is unsound: a single-char url like `"e"` fails to parse as a `url::Url`
+        /// (so the password pass never fires) and can itself be a substring of the marker text
+        /// `"<DATABASE_URL redacted>"` that `redact_secret` inserts, making the "doesn't contain
+        /// the url" assertion fail on the function's own output. The realistic generator below
+        /// can't produce a url that is itself a substring of the marker, so it's sound.)
         #[test]
-        fn redact_secret_strips_non_empty_url(message in ".*", database_url in ".+") {
-            let redacted = redact_secret(&message, &database_url);
-            prop_assert!(!redacted.contains(database_url.as_str()));
+        fn redact_secret_hides_password_in_realistic_url(
+            user in "[a-z][a-z0-9_]{0,15}",
+            password in "[A-Za-z0-9!@#$%^&*_-]{6,40}",
+            host in "[a-z][a-z0-9.-]{0,20}",
+            db in "[a-z][a-z0-9_]{0,15}",
+            // A message that embeds the url the way a DB driver's connect error would.
+            prefix in ".*",
+        ) {
+            let url = format!("postgres://{user}:{password}@{host}:5432/{db}");
+            let message = format!("{prefix}connection failed: {url}");
+
+            let redacted = redact_secret(&message, &url);
+
+            prop_assert!(!redacted.contains(&password), "password leaked");
+            prop_assert!(!redacted.contains(&url), "full url leaked");
         }
     }
 }
