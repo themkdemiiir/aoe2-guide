@@ -65,10 +65,11 @@ pub const TC_RESEARCH_MS: &[(u16, u32)] = &[
     (249, 55_000),
 ];
 
-/// Crude idle-TC estimate over [0, until]: window minus villager-train busy time
-/// (25s each) minus TC-research busy time. Honest v1: assumes ~1 TC in the early
-/// game; flags BIG idle, not exact gaps. source: spec.
-pub fn idle_tc_ms(evs: &[Ev], player: i32, until_ms: u32) -> u32 {
+/// Crude idle-TC estimate over [since, until]: window minus villager-train busy
+/// time (25s each) minus TC-research busy time. `since_ms` is normally 0, but on
+/// Nomad (no starting TC) it's when the first TC is placed, so the pre-TC walk/build
+/// time isn't falsely blamed as idle. Flags BIG idle, not exact gaps. source: spec.
+pub fn idle_tc_ms(evs: &[Ev], player: i32, until_ms: u32, since_ms: u32) -> u32 {
     let vil_busy = vils_at(evs, player, until_ms).saturating_mul(VIL_TRAIN_MS);
     // A TC research that STARTS before `until` occupies the TC for its duration,
     // capped at what fits inside the window (a research starting exactly at the
@@ -84,7 +85,23 @@ pub fn idle_tc_ms(evs: &[Ev], player: i32, until_ms: u32) -> u32 {
             _ => None,
         })
         .sum();
-    until_ms.saturating_sub(vil_busy).saturating_sub(research_busy)
+    until_ms.saturating_sub(since_ms).saturating_sub(vil_busy).saturating_sub(research_busy)
+}
+
+/// Town Center building ids (109 legacy, 621 DE). source: aoe2techtree data.json.
+pub const TOWN_CENTER_IDS: [i64; 2] = [109, 621];
+
+/// Time the player places their FIRST Town Center (Build command). On Nomad you
+/// start with no TC, so this is where the idle-TC window begins. Returns `None` on
+/// standard maps (the starting TC is pre-placed, never a Build event).
+pub fn first_tc_build_ms(evs: &[Ev], player: i32) -> Option<u32> {
+    evs.iter()
+        .filter(|e| e.player == player)
+        .filter_map(|e| match e.kind {
+            EvKind::Build { id, .. } if TOWN_CENTER_IDS.contains(&id) => Some(e.t_ms),
+            _ => None,
+        })
+        .min()
 }
 
 /// First trained non-eco unit time = first military. source: config::ECO_UNIT_IDS.
@@ -311,10 +328,10 @@ mod tests {
     fn idle_tc_is_window_minus_busy() {
         // 2 villagers by 200s, window=200s => busy=2*25s=50s => idle=150s.
         let evs = vec![ev(1, 10_000, EvKind::Train(83)), ev(1, 20_000, EvKind::Train(83))];
-        assert_eq!(idle_tc_ms(&evs, 1, 200_000), 150_000);
+        assert_eq!(idle_tc_ms(&evs, 1, 200_000, 0), 150_000);
         // never negative
         let many: Vec<Ev> = (0..20).map(|k| ev(1, k * 1000, EvKind::Train(83))).collect();
-        assert_eq!(idle_tc_ms(&many, 1, 100_000), 0);
+        assert_eq!(idle_tc_ms(&many, 1, 100_000, 0), 0);
     }
 
     #[test]
@@ -326,10 +343,24 @@ mod tests {
             ev(1, 30_000, EvKind::Research(22)), // Loom, fully inside
             ev(1, 60_000, EvKind::Research(101)), // Feudal, credited only 40s to the boundary
         ];
-        assert_eq!(idle_tc_ms(&evs, 1, 100_000), 10_000);
+        assert_eq!(idle_tc_ms(&evs, 1, 100_000, 0), 10_000);
         // A research starting exactly at the boundary consumes none of the window.
         let edge = vec![ev(1, 100_000, EvKind::Research(101))];
-        assert_eq!(idle_tc_ms(&edge, 1, 100_000), 100_000);
+        assert_eq!(idle_tc_ms(&edge, 1, 100_000, 0), 100_000);
+    }
+
+    #[test]
+    fn idle_tc_since_excludes_pre_tc_time_on_nomad() {
+        // Nomad: first TC placed at 180s, 1 villager at 200s, window to Feudal 400s.
+        // Old formula blamed 400 - 25 = 375s idle; starting at the TC (since=180) it's
+        // (400-180) - 25 = 195s — the pre-TC 180s walk/build isn't counted as idle.
+        let evs = vec![
+            ev(1, 180_000, EvKind::Build { id: 109, x: 0.0, y: 0.0 }),
+            ev(1, 200_000, EvKind::Train(83)),
+        ];
+        assert_eq!(first_tc_build_ms(&evs, 1), Some(180_000));
+        assert_eq!(idle_tc_ms(&evs, 1, 400_000, 180_000), 195_000);
+        assert_eq!(idle_tc_ms(&evs, 1, 400_000, 0), 375_000); // pre-fix behaviour
     }
 
     #[test]

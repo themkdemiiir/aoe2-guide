@@ -35,6 +35,7 @@ pub fn build_metrics(
     costs: &Costs,
     roles: &HashMap<i32, Role>,
     coords: &HashMap<i32, CoordMetric>,
+    family: Family,
 ) -> Vec<PlayerMetrics> {
     let dur = w.meta.duration_ms;
     w.players
@@ -45,11 +46,19 @@ pub fn build_metrics(
             let vils_castle = castle_ms
                 .map(|c| metrics::vils_at(&w.evs, pn, c))
                 .unwrap_or_else(|| metrics::vils_at(&w.evs, pn, dur));
-            let idle_dark_ms = feudal_ms.map(|f| metrics::idle_tc_ms(&w.evs, pn, f)).unwrap_or(0);
+            // On Nomad you start with NO Town Center — begin the idle window at the
+            // first TC placement so the pre-TC walk/build time isn't blamed as idle
+            // (else every player looks like they had a huge Dark-Age TC-idle). Standard
+            // maps have a pre-placed starting TC (no Build event) → offset stays 0.
+            let tc_online = if family == Family::Nomad {
+                metrics::first_tc_build_ms(&w.evs, pn).unwrap_or(0)
+            } else {
+                0
+            };
+            let idle_dark_ms = feudal_ms.map(|f| metrics::idle_tc_ms(&w.evs, pn, f, tc_online)).unwrap_or(0);
             let idle_feudal_ms = match (feudal_ms, castle_ms) {
-                (Some(f), Some(c)) => {
-                    metrics::idle_tc_ms(&w.evs, pn, c).saturating_sub(metrics::idle_tc_ms(&w.evs, pn, f))
-                }
+                (Some(f), Some(c)) => metrics::idle_tc_ms(&w.evs, pn, c, tc_online)
+                    .saturating_sub(metrics::idle_tc_ms(&w.evs, pn, f, tc_online)),
                 _ => 0,
             };
             // peak floating-resource window (by rate) -> rate + banked + (start,end)

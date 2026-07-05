@@ -40,7 +40,7 @@ pub fn analyze(game: &Savegame, you: &YouSel) -> anyhow::Result<Report> {
     let bench = data::load_benchmark();
     let civs = data::load_civs();
 
-    let mut players = compare::build_metrics(&w, &costs, &roles, &coords);
+    let mut players = compare::build_metrics(&w, &costs, &roles, &coords, family);
     let mode = if compare::is_team_game(&players) { "team" } else { "1v1" };
     let findings = compare::findings(&players, &bench, &civs, family, &map_slug, mode);
     compare::attach_references(&mut players, &bench, &civs, &map_slug, mode);
