@@ -67,10 +67,30 @@ async fn main() {
         }
     };
 
-    if let Err(err) = run(cli.command, database_url).await {
-        tracing::error!(error = %format!("{err:#}"), "migration command failed");
+    if let Err(err) = run(cli.command, database_url.clone()).await {
+        let message = redact_secret(&format!("{err:#}"), &database_url);
+        tracing::error!(error = %message, "migration command failed");
         std::process::exit(1);
     }
+}
+
+/// Remove the `DATABASE_URL` and its password from an error message before logging, so a
+/// malformed/rejected connection string — sqlx's URL-parse-failure error echoes the whole
+/// connection string verbatim — can never leak the secret. Redacts the full URL substring
+/// (catches the verbatim echo) and, if the URL parses far enough to expose a password, the
+/// password substring on its own (catches partial echoes).
+fn redact_secret(message: &str, database_url: &str) -> String {
+    let mut redacted = message.replace(database_url, "<DATABASE_URL redacted>");
+
+    if let Some(password) = url::Url::parse(database_url)
+        .ok()
+        .and_then(|url| url.password().map(str::to_owned))
+        .filter(|password| !password.is_empty())
+    {
+        redacted = redacted.replace(&password, "<redacted>");
+    }
+
+    redacted
 }
 
 /// Initialize the global `tracing` subscriber: structured output to stderr, filtered by
@@ -95,14 +115,32 @@ async fn run(command: Command, database_url: String) -> anyhow::Result<()> {
         .context("failed to connect to the database")?;
 
     match command {
-        Command::Up { steps } => Migrator::up(&db, steps).await,
-        Command::Down { steps } => Migrator::down(&db, steps).await,
-        Command::Status => Migrator::status(&db).await,
-        Command::Fresh => Migrator::fresh(&db).await,
-        Command::Refresh => Migrator::refresh(&db).await,
-        Command::Reset => Migrator::reset(&db).await,
+        Command::Up { steps } => Migrator::up(&db, steps).await.context("up failed"),
+        Command::Down { steps } => Migrator::down(&db, steps).await.context("down failed"),
+        Command::Status => Migrator::status(&db).await.context("status failed"),
+        Command::Fresh => Migrator::fresh(&db).await.context("fresh failed"),
+        Command::Refresh => Migrator::refresh(&db).await.context("refresh failed"),
+        Command::Reset => Migrator::reset(&db).await.context("reset failed"),
     }
-    .context("migration command failed")?;
+}
 
-    Ok(())
+#[cfg(test)]
+mod tests {
+    use super::redact_secret;
+
+    /// Mirrors the reviewer's repro: a malformed `DATABASE_URL` makes sqlx echo the whole
+    /// connection string (password included) back into the error message. `redact_secret` must
+    /// strip both the password and the full URL so neither ever reaches a log line.
+    #[test]
+    fn redact_secret_strips_password_and_full_url() {
+        let database_url = "postgres://myuser:SUPER_SECRET_MARKER_PW@host/db";
+        let message = format!(
+            "failed to connect to the database: The connection string '{database_url}' cannot be parsed."
+        );
+
+        let redacted = redact_secret(&message, database_url);
+
+        assert!(!redacted.contains("SUPER_SECRET_MARKER_PW"));
+        assert!(!redacted.contains(database_url));
+    }
 }
