@@ -14,7 +14,7 @@ name = "ingest"
 path = "src/main.rs"
 
 [dependencies]
-pipeline-core = { path = "../core" }
+pipeline-core = { path = "../core", default-features = false } # only redact_secret; no refdata
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 tokio-postgres = { version = "0.7", features = ["with-chrono-0_4"] }
 chrono = { version = "0.4", features = ["serde"] }

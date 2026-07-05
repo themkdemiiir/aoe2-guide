@@ -101,6 +101,11 @@ CREATE TEMP TABLE new_match_ids ON COMMIT DROP AS
   SELECT match_id FROM ins
 "#;
 
+// Children are inserted ONLY for genuinely-new `match_id`s (the `JOIN new_match_ids` below), so
+// re-ingesting an already-present match does NOT append new child rows to it — a re-parse that
+// discovered additional events (e.g. a fuller replay) will not top up an existing match's rows.
+// This is the intended no-churn contract; future producers (Task-4/5) must not rely on
+// re-ingestion to backfill/augment children of matches already in the store.
 const INSERT_MATCH_PLAYERS_SQL: &str = r#"
 INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening, feudal_t, castle_t, imperial_t)
   SELECT s.match_id, s.profile_id, s.civ_id, s.elo, s.won, s.opening, s.feudal_t, s.castle_t, s.imperial_t

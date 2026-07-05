@@ -9,6 +9,16 @@ publish = false
 name = "pipeline_core"
 path = "src/lib.rs"
 
+[features]
+# `refdata` compiles the civ/map lookup tables, which `include_str!` three data files from the
+# repo root (`src/data/*.json`, `scripts/.../maps.tsv`) at build time. It is OPT-IN (not default):
+# a workspace member's default features are unified ON across the whole workspace, so a default
+# `refdata` would force those repo-root files to exist even for a lean `pipeline/`-context Docker
+# build of a binary that only needs `redact_secret`. Enable it explicitly where the civ/map
+# lookups are actually used (and where the files are present): `--features pipeline-core/refdata`
+# or `cargo test --all-features`.
+refdata = []
+
 [dependencies]
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

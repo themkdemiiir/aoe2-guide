@@ -7,8 +7,13 @@
 //! here is verified byte-for-byte against the behavior it will eventually replace (see each
 //! module's tests).
 
+// `civs` and `maps` `include_str!` repo-root data files at build time, so they compile only under
+// the `refdata` feature (on by default; off for lean `pipeline/`-context Docker builds — see
+// Cargo.toml). `elo`, `slug`, and `redact` are file-free and always compile.
+#[cfg(feature = "refdata")]
 pub mod civs;
 pub mod elo;
+#[cfg(feature = "refdata")]
 pub mod maps;
 pub mod redact;
 pub mod slug;

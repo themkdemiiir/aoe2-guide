@@ -1,12 +1,12 @@
 //! Redact the `DATABASE_URL` secret (and its password) from error messages before logging.
 //!
 //! Every crate in this workspace that connects with `DATABASE_URL` (migration, ingest, and
-//! future producers/exporters) shares the same connect-error leak risk: sqlx's own
-//! URL-parse-failure error echoes the whole connection string verbatim. This logic must never
-//! diverge between crates, so it lives here once and every caller re-uses it.
+//! future producers/exporters) shares the same connect-error leak risk: the database driver's
+//! own URL-parse-failure error echoes the whole connection string verbatim. This logic must
+//! never diverge between crates, so it lives here once and every caller re-uses it.
 
 /// Remove the `DATABASE_URL` and its password from an error message before logging, so a
-/// malformed/rejected connection string — sqlx's URL-parse-failure error echoes the whole
+/// malformed/rejected connection string — the database driver's URL-parse error echoes the whole
 /// connection string verbatim — can never leak the secret. Redacts the full URL substring
 /// (catches the verbatim echo) and, if the URL parses far enough to expose a password, the
 /// password substring on its own (catches partial echoes).
