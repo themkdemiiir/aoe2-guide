@@ -1,0 +1,29 @@
+[package]
+# Directory is `analyzer-wasm` (new analyzer/ workspace layout), but the package
+# name stays `replay-wasm` on purpose: wasm-pack derives its output file basenames
+# (replay_wasm.js/.d.ts, replay_wasm_bg.wasm(.d.ts)) from this name, and
+# src/pages/[lang]/analyzer.astro + src/wasm/pkg/*.js import those basenames
+# directly. Keeping the package name unchanged means `pnpm build:wasm` regenerates
+# byte-compatible filenames with zero site-code changes (Task 4a constraint).
+name = "replay-wasm"
+version = "0.1.0"
+edition = "2021"
+description = "wasm-bindgen wrapper over analyzer::analyze — in-browser AoE2 replay coaching for aoe2guide.com"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# The pure analysis lib (Task 4a code-move; no CLI deps — see ../analyzer/Cargo.toml).
+analyzer = { path = "../analyzer" }
+# Same vendored parser instance the lib uses (path-dep — one crate, one version).
+aoe2rec = { path = "../../vendor/aoe2rec" }
+bytes = "1"
+serde_json = "1"
+wasm-bindgen = "0.2"
+# Panics surface as readable JS console errors instead of "unreachable executed".
+console_error_panic_hook = "0.1"
+
+# NOTE: no [profile.release] here — see ../../Cargo.toml (workspace root); this
+# crate's desired opt-level="s"/lto=true IS what the workspace root now sets.

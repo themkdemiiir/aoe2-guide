@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["crates/analyzer", "crates/analyzer-wasm"]
+# vendor/aoe2rec sits inside this workspace's directory tree but is third-party,
+# committed as-is (never edited) — exclude it so it's built as an ordinary
+# dependency (no clippy lints, no `cargo test`/`clippy --workspace` reaching into
+# it) rather than implicitly absorbed into the workspace by path proximity.
+exclude = ["vendor/aoe2rec"]
+
+# Cargo profiles are workspace-wide — a member's own [profile.*] is silently
+# ignored once it joins a workspace (`lto`/`panic` in particular can't be
+# per-package overrides, only opt-level/codegen-units/debug/etc. can). The
+# ORIGINAL standalone crates had different release profiles (replay-rs:
+# opt-level=3/lto="thin"; replay-wasm: opt-level="s"/lto=true). Since the only
+# artifact this workspace ships is the wasm-pack build of analyzer-wasm (no
+# release binary ships from `analyzer` alone), this profile is unified to match
+# the ORIGINAL replay-wasm profile — the one the brief requires parity on.
+[profile.release]
+opt-level = "s"
+lto = true
