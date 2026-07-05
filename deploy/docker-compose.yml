@@ -5,7 +5,8 @@ name: aoe2-stack
 
 services:
   postgres:
-    image: postgres:18.4 # PG 18: data-checksums + new async I/O (io_method)
+    # digest-pinned (immutable) — not just the :18.4 tag
+    image: postgres:18.4@sha256:4aabea78cf39b90e834caf3af7d602a18565f6fe2508705c8d01aa63245c2e20
     container_name: aoe2-postgres
     restart: unless-stopped
     shm_size: "1gb" # parallel workers / big sorts
