@@ -1,0 +1,40 @@
+name: Pipeline CI
+
+on:
+  pull_request:
+    paths:
+      - "pipeline/**"
+  push:
+    branches: [main]
+    paths:
+      - "pipeline/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "pipeline -> target"
+
+      - name: Build
+        working-directory: pipeline
+        run: cargo build --workspace --all-features
+
+      - name: Clippy
+        working-directory: pipeline
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+      # `#[ignore]`d testcontainers integration tests (pipeline/crates/ingest/tests/ingest_postgres.rs)
+      # need Docker and are NOT run here — `cargo test` skips `#[ignore]`d tests by default. They run
+      # locally via `cargo test -p ingest -- --ignored`. A follow-up can add a Docker-in-CI job if
+      # that coverage is wanted here too.
+      - name: Test
+        working-directory: pipeline
+        run: cargo test --workspace --all-features

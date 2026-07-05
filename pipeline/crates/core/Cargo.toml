@@ -1,9 +1,10 @@
 [package]
 name = "pipeline-core"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
 description = "Typed, regex-free slug/elo-bucket/map/civ lookups shared across the AOE2 guide's data pipeline"
-publish = false
+license.workspace = true
+publish.workspace = true
 
 [lib]
 name = "pipeline_core"
@@ -20,19 +21,19 @@ path = "src/lib.rs"
 refdata = []
 
 [dependencies]
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-url = "2"
+serde = { workspace = true }
+serde_json = { workspace = true }
+url = { workspace = true }
 # For `core::cli` — the shared binary bootstrap (`init_tracing`/`database_url`/
 # `log_error_and_code`). Always compiled: every pipeline binary wants this. See `cli.rs` for why
 # `core` accepts these as a deliberate exception to "functional core, no shell deps".
-anyhow = "1"
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 # For `core::age::UnknownAge` — a library-edge typed error a caller can match on (playbook
 # principle: thiserror at library edges, anyhow at binary edges). Always compiled, like `age`
 # itself.
-thiserror = "1"
+thiserror = { workspace = true }
 
 [dev-dependencies]
-proptest = "1"
+proptest = { workspace = true }

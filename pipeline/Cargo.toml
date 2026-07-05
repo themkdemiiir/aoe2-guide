@@ -1,3 +1,39 @@
 [workspace]
 resolver = "2"
 members = ["crates/core", "crates/ingest", "crates/migration"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+# Hoisted here so every current AND upcoming crate (replay/fetch/export) pins the same version +
+# feature set once, instead of re-declaring it per-crate. A member opts in with
+# `dep.workspace = true` (adding crate-specific extra features alongside it where needed).
+[workspace.dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+url = "2"
+# thiserror MUST stay on the 2.x line: sea-orm/sqlx/testcontainers already pull 2.0.18, and a
+# crate declaring "1" here would reintroduce the duplicate-major dependency this workspace dep
+# was added to dedupe (see the 5b review).
+thiserror = "2"
+tokio-postgres = { version = "0.7", features = ["with-chrono-0_4"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+[workspace.dependencies.sea-orm-migration]
+version = "1.1.20"
+features = ["runtime-tokio-rustls", "sqlx-postgres"]
+
+[workspace.dependencies.proptest]
+version = "1"
+
+[workspace.dependencies.testcontainers-modules]
+version = "0.15"
+features = ["postgres"]

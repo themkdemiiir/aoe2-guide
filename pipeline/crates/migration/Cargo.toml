@@ -1,9 +1,10 @@
 [package]
 name = "migration"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
 description = "SeaORM migrations for the AOE2 guide's gameplay-first PostgreSQL schema"
-publish = false
+license.workspace = true
+publish.workspace = true
 
 [lib]
 name = "migration"
@@ -15,14 +16,8 @@ path = "src/main.rs"
 
 [dependencies]
 pipeline-core = { path = "../core", default-features = false } # cli/redact_secret; no refdata
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-anyhow = "1"
-clap = { version = "4", features = ["derive"] }
-tracing = "0.1"
-
-[dependencies.sea-orm-migration]
-version = "1.1.20"
-features = [
-    "runtime-tokio-rustls",
-    "sqlx-postgres",
-]
+tokio = { workspace = true }
+anyhow = { workspace = true }
+clap = { workspace = true }
+tracing = { workspace = true }
+sea-orm-migration = { workspace = true }

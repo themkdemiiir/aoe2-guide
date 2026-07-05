@@ -506,6 +506,12 @@ async fn assert_replay_ages_rows(client: &tokio_postgres::Client) {
         .await
         .expect("full-row read-back query on replay_ages (dark) failed — Age::Dark must round-trip");
 
+    assert_eq!(dark_row.get::<_, i32>(0), 1, "replay_ages.civ_id (dark)");
+    assert_eq!(
+        dark_row.get::<_, Option<bool>>(1),
+        Some(true),
+        "replay_ages.won (dark)"
+    );
     assert_eq!(dark_row.get::<_, String>(2), "dark", "replay_ages.age (dark)");
     assert_eq!(dark_row.get::<_, i32>(3), 0, "replay_ages.uptime_ms (dark)");
     assert_eq!(
@@ -514,9 +520,19 @@ async fn assert_replay_ages_rows(client: &tokio_postgres::Client) {
         "replay_ages.villagers (dark)"
     );
     assert_eq!(
+        dark_row.get::<_, Option<i32>>(5),
+        Some(0),
+        "replay_ages.military (dark)"
+    );
+    assert_eq!(
         dark_row.get::<_, Option<i32>>(6),
         Some(2),
         "replay_ages.n_buildings (dark)"
+    );
+    assert_eq!(
+        dark_row.get::<_, Option<i32>>(7),
+        Some(0),
+        "replay_ages.n_research (dark)"
     );
 }
 
