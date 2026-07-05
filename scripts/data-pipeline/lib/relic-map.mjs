@@ -89,12 +89,13 @@ export function relicCivSlug(civId) {
 // Map<match_id, { canon, name }> (canon = lowercase-alnum slug, name = the
 // maps.tsv display name). Matches absent from it have UNKNOWN map.
 //
-// The shard is multi-member gzip and its tail member can be corrupt/mid-append
-// (the pipeline appends per run) — STREAM it and salvage every line that
-// inflates; gunzipSync would throw the whole file away.
-import { createReadStream } from "node:fs";
+// The shard is multi-member gzip whose tail member can be corrupt/mid-append
+// (an interrupted per-run append). `gzip -dc` RESYNCS to the next valid member
+// past a break, so we read the WHOLE shard — Node's createGunzip halts at the
+// first broken member and SILENTLY drops every record after it (that once
+// zeroed out Arabia: 61k matches sat in members past the corruption point).
+import { spawn } from "node:child_process";
 import { createInterface } from "node:readline";
-import { createGunzip } from "node:zlib";
 import { canonMap } from "./buckets.mjs";
 
 // map-meta key index: canon(map key) -> the higher-volume spelling's key.
@@ -120,25 +121,38 @@ export async function loadReplayMapTruth({
     const [id, name] = line.split("\t");
     if (id && name) idToCanon.set(Number(id), { canon: canonMap(name), name });
   }
-  const src = createReadStream(metaPath);
-  const input = metaPath.endsWith(".gz") ? src.pipe(createGunzip()) : src;
+  const dec = metaPath.endsWith(".gz")
+    ? spawn("gzip", ["-dc", metaPath], { stdio: ["ignore", "pipe", "ignore"] })
+    : spawn("cat", [metaPath], { stdio: ["ignore", "pipe", "ignore"] });
   const truth = new Map();
-  try {
-    for await (const line of createInterface({ input, crlfDelay: Infinity })) {
-      if (!line) continue;
-      let rec;
-      try {
-        rec = JSON.parse(line);
-      } catch {
-        continue; // truncated tail line
-      }
-      const entry = idToCanon.get(rec.map_id);
-      if (entry) truth.set(rec.match_id, entry);
+  const unknown = new Map(); // map_id -> occurrences, for a loud failure
+  for await (const line of createInterface({ input: dec.stdout, crlfDelay: Infinity })) {
+    if (!line) continue;
+    let rec;
+    try {
+      rec = JSON.parse(line);
+    } catch {
+      continue; // torn line at a member boundary
     }
-  } catch (e) {
-    // Corrupt/mid-append tail member: readline rejects with the zlib error —
-    // keep every line that inflated before it.
-    if (e?.code !== "Z_DATA_ERROR" && e?.code !== "Z_BUF_ERROR") throw e;
+    if (rec.map_id == null || rec.match_id == null) continue;
+    const entry = idToCanon.get(rec.map_id);
+    if (!entry) {
+      unknown.set(rec.map_id, (unknown.get(rec.map_id) ?? 0) + 1);
+      continue;
+    }
+    truth.set(rec.match_id, entry);
+  }
+  // Strict: a played game's map is explicitly known (the replay records its
+  // map_id), so an id maps.tsv doesn't cover must BREAK the build — add it to
+  // maps.tsv — never silently vanish into a NULL map.
+  if (unknown.size) {
+    const list = [...unknown]
+      .sort((a, b) => b[1] - a[1])
+      .map(([id, n]) => `${id} (${n}x)`)
+      .join(", ");
+    throw new Error(
+      `relic-map: ${unknown.size} replay map_id(s) missing from maps.tsv — add them, don't drop them: ${list}`,
+    );
   }
   if (!truth.size) {
     throw new Error(

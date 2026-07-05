@@ -63,6 +63,11 @@ if [ -x "$REPLAY_BIN" ]; then
   # audit the gamemod→build map against fresh replay headers (patch-index.json)
   node scripts/data-pipeline/check-patch-axis.mjs \
     || log "ALERT: patch-axis check FAILED — update src/data/patch-index.json before any stats refresh"
+  # fill games.map from the freshly-parsed replay map truth — ingest writes map
+  # NULL (API mapname is junk), so this is where every crawl row gets its REAL
+  # map. Fails loud if a new map_id is missing from maps.tsv (add it, don't NULL).
+  node scripts/data-pipeline/backfill-map-current.mjs \
+    || log "ALERT: map backfill FAILED — games.map left with NULLs; a new map_id is likely missing from maps.tsv"
 else
   log "WARN: replay-rs binary missing — skipping replay-truth refresh"
 fi

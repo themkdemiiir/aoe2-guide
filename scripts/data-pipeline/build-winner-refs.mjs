@@ -62,6 +62,17 @@ for (const r of rows(process.argv[4] ?? "/tmp/winner-meds.csv")) {
   else (medsByMap[r.map] ??= {})[r.bucket] = cell;
 }
 
+// Fail loud: an empty meds set means the winner-meds run produced no data (e.g. it
+// OOM'd or the shard read failed). Never silently ship a winner-refs.json that
+// wipes the analyzer's first-military/eco medians.
+if (Object.keys(medsByBucket).length === 0) {
+  console.error(
+    `FATAL: no all-maps rollup rows in ${process.argv[4] ?? "/tmp/winner-meds.csv"} ` +
+      `— medsByBucket is empty. Refusing to overwrite winner-refs.json.`,
+  );
+  process.exit(1);
+}
+
 const out = {
   source:
     "aoestats replay archive: ranked 1v1 RM WINNERS — opening distribution per civ × elo (share ≥8%, ≥100 winners) and eco-upgrade-researched-before-Castle shares per elo; replay event corpus: winner first-military + eco-tech research medians per elo (medsByBucket) and per map × elo (medsByMap)",
