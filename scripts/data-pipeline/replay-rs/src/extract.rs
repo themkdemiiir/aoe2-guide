@@ -6,7 +6,7 @@
 //!
 //! Produces four intact, queryable shapes per replay:
 //!   - `meta`    : one row (match_id, build, version, map_id, duration_ms, n_players)
-//!   - `players` : one row per real player (profile_id, civ_id, name, team, color, won)
+//!   - `players` : one row per real player (profile_id, civ_id, name, team, color, won, elo)
 //!   - `events`  : EVERY player action — the full timeline, nothing dropped
 //!   - `ages`    : per player per age reached (uptime + cumulative composition),
 //!     the same shape as the historical aoestats `match_ages` table.
@@ -22,6 +22,7 @@ use aoe2rec::actions::{ActionData, Game};
 use aoe2rec::{Operation, Savegame};
 
 use replay_rs::config;
+use replay_rs::postgame::{collect_leaderboard_elo, EloTable};
 
 // --- output row shapes (serialised to NDJSON; column types match store.py) ---
 
@@ -45,6 +46,11 @@ pub struct PlayerRow {
     pub team: u8,
     pub color: i32,
     pub won: Option<bool>,
+    /// Ranked ELO read straight from the replay's post-game leaderboard block
+    /// (ladder 3 = 1v1 RM, 4 = team RM — a match is one mode, so whichever is
+    /// present). `None` when the replay carries no post-game block (game end
+    /// unrecorded) — an honest absence, never a fabricated default.
+    pub elo: Option<i32>,
 }
 
 #[derive(Serialize)]
@@ -265,31 +271,37 @@ pub fn extract(match_id: i64, replay_bytes: bytes::Bytes) -> Result<Extracted> {
     let mut events: Vec<Ev> = Vec::new();
     let mut resigned: std::collections::HashSet<i32> = Default::default();
     let mut last_t: u32 = 0;
+    let mut elo = EloTable::default();
 
     for op in &game.operations {
-        let (action_data, world_time) = match op {
+        match op {
             Operation::Action {
                 action_data,
                 world_time,
                 ..
-            } => (action_data, *world_time),
-            _ => continue, // Sync / Viewlock / Chat / ... are not events
-        };
-        last_t = last_t.max(world_time);
-        let d = classify(action_data);
-        let profile_id = players.get(&d.player_number).map(|p| p.profile_id);
-        if d.kind == "resign" {
-            resigned.insert(d.player_number);
+            } => {
+                let world_time = *world_time;
+                last_t = last_t.max(world_time);
+                let d = classify(action_data);
+                let profile_id = players.get(&d.player_number).map(|p| p.profile_id);
+                if d.kind == "resign" {
+                    resigned.insert(d.player_number);
+                }
+                events.push(Ev {
+                    profile_id,
+                    player_number: d.player_number,
+                    t_ms: world_time,
+                    kind: d.kind,
+                    target_id: d.target_id,
+                    amount: d.amount,
+                    detail: d.detail,
+                });
+            }
+            Operation::PostGame { blocks, .. } => {
+                collect_leaderboard_elo(blocks, &mut elo);
+            }
+            _ => {} // Sync / Viewlock / Chat / ... are not events
         }
-        events.push(Ev {
-            profile_id,
-            player_number: d.player_number,
-            t_ms: world_time,
-            kind: d.kind,
-            target_id: d.target_id,
-            amount: d.amount,
-            detail: d.detail,
-        });
     }
 
     // --- per-age boundary time per player (first Research of 101/102/103) ------
@@ -397,6 +409,10 @@ pub fn extract(match_id: i64, replay_bytes: bytes::Bytes) -> Result<Extracted> {
             team: pi.team,
             color: pi.color,
             won: won(pn),
+            // 3 = 1v1 RM, 4 = team RM; a given match is one mode, so exactly one
+            // of these is ever populated. None when the replay has no post-game
+            // block at all (game end unrecorded).
+            elo: elo.elo(pn, 3).or_else(|| elo.elo(pn, 4)),
         })
         .collect();
 

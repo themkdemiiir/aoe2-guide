@@ -4,10 +4,11 @@
 use std::collections::HashMap;
 
 use aoe2rec::actions::ActionData;
-use aoe2rec::{Operation, PostGameBlock, Savegame};
+use aoe2rec::{Operation, Savegame};
 
 use crate::analyze::metrics::classify_cmd;
 use crate::analyze::model::{Ev, EvKind, GameMeta, PlayerInfo};
+use crate::postgame::{collect_leaderboard_elo, EloTable};
 
 /// Build action body: `x:f32@[4..8]`, `y:f32@[8..12]`, `building_id:i32@[12..16]`.
 /// Same `[12..16]` building-id offset as `extract::decode_build_id`; this superset also
@@ -20,21 +21,6 @@ pub fn decode_build(d: &[u8]) -> Option<(i64, f32, f32)> {
     let y = f32::from_le_bytes(d[8..12].try_into().ok()?);
     let id = i32::from_le_bytes(d[12..16].try_into().ok()?) as i64;
     Some((id, x, y))
-}
-
-#[derive(Default)]
-pub struct EloTable {
-    by: HashMap<(u32, i32), i32>, // (ladder_id, game_player_number) -> elo
-}
-
-impl EloTable {
-    /// Leaderboard `player_number` is 0-indexed; game player_number = lb + 1.
-    pub fn insert(&mut self, ladder: u32, lb_player_number: i32, elo: i32) {
-        self.by.insert((ladder, lb_player_number + 1), elo);
-    }
-    pub fn elo(&self, player_number: i32, ladder: u32) -> Option<i32> {
-        self.by.get(&(ladder, player_number)).copied()
-    }
 }
 
 pub struct Walked {
@@ -204,15 +190,7 @@ pub fn walk(game: &Savegame) -> Walked {
                 evs.push(Ev { player: p, t_ms: *world_time, kind });
             }
             Operation::PostGame { blocks, .. } => {
-                for b in blocks {
-                    if let PostGameBlock::Leaderboards { leaderboards, .. } = b {
-                        for lb in leaderboards {
-                            for lp in &lb.players {
-                                elo.insert(lb.id, lp.player_number, lp.elo);
-                            }
-                        }
-                    }
-                }
+                collect_leaderboard_elo(blocks, &mut elo);
             }
             _ => {}
         }
@@ -242,16 +220,8 @@ mod tests {
         assert_eq!(decode_build(&[0u8; 4]), None);
     }
 
-    #[test]
-    fn leaderboard_index_maps_to_game_player_number() {
-        // leaderboard pn is 0-indexed; game pn = lb + 1
-        let mut t = EloTable::default();
-        t.insert(3, 0, 1290);
-        t.insert(3, 1, 1309);
-        assert_eq!(t.elo(1, 3), Some(1290));
-        assert_eq!(t.elo(2, 3), Some(1309));
-        assert_eq!(t.elo(2, 4), None);
-    }
+    // the (ladder_id, player_number) -> elo mapping itself is exercised where
+    // `EloTable`/`collect_leaderboard_elo` now live: crate::postgame::tests.
 
     /// Runs only on demand against a real save: TEST_REPLAY=/path cargo test ... -- --ignored
     #[test]

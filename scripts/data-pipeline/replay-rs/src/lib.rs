@@ -3,3 +3,4 @@
 //! binary. This boundary is what the future WASM build compiles.
 pub mod analyze;
 pub mod config;
+pub mod postgame;
