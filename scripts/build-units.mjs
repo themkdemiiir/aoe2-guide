@@ -261,6 +261,14 @@ async function run() {
     existingUnitMap[u.slug] = u;
   }
 
+  // Known upstream errors in the third-party aalises units.csv, corrected against
+  // the authoritative aoe2techtree data.json (verified 2026-07-05): that CSV has the
+  // Archer's hit_points/range transposed (4/30) — the real values are 30 HP / 4 range.
+  // A re-sync re-downloads the bad CSV, so the correction lives here, not in the cache.
+  const STAT_CORRECTIONS = {
+    archer: { hp: 30, range: 4 },
+  };
+
   const unitEntries = [];
   let warnings = 0;
 
@@ -297,6 +305,7 @@ async function run() {
         trainTime,
         armorMelee: armor.melee,
         armorPiercing: armor.pierce,
+        ...(STAT_CORRECTIONS[slug] || {}),
       };
     } else {
       // No CSV data — emit minimal entry

@@ -183,9 +183,9 @@
     },
     {
       "slug": "archer",
-      "hp": 4,
+      "hp": 30,
       "attack": 4,
-      "range": 30,
+      "range": 4,
       "minRange": 0,
       "cost": {
         "food": 0,
