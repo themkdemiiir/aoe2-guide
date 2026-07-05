@@ -21,6 +21,7 @@ services:
       # Bind the NVMe mount to the WHOLE dir, not /data.
       - /opt/pgdata:/var/lib/postgresql
       - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - ./postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro # LAN-only auth
     ports:
       - "5432:5432" # LAN (offline); reached by ingest/export + Dagster
     healthcheck:
