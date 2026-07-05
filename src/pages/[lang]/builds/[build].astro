@@ -3,6 +3,7 @@ import BaseLayout from "@/components/layout/BaseLayout.astro";
 import BuildOrderSteps from "@/components/content/BuildOrderSteps.astro";
 import Badge from "@/components/ui/Badge.astro";
 import Icon from "@/components/ui/Icon.astro";
+import JsonLd from "@/components/ui/JsonLd.astro";
 import civMeta from "@data/civ-meta.json";
 import { getCollection } from "astro:content";
 import { locales, type Locale } from "@/i18n/locales";
@@ -38,8 +39,29 @@ const age = t(lang, `age.${entry.data.targetAge}`);
 const description = lang === "tr"
   ? `${entry.data.name.tr} — ${diff} seviye AoE2 build order'ı; ~${entry.data.durationMin} dakikada ${age} hedefler. Adım adım köylü görevlendirmeleri.`
   : `${entry.data.name.en} — ${diff} AoE2 build order targeting ${age} in ~${entry.data.durationMin} minutes. Step-by-step villager assignments.`;
+
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://aoe2guide.com";
+// HowTo: the semantically exact type for a step-by-step build order. Google
+// retired the HowTo rich result in 2023, but it remains valid schema.org and is
+// the clearest signal for AI/LLM crawlers reading the villager assignments.
+const howToLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: entry.data.name[lang],
+  description,
+  inLanguage: lang,
+  url: `${site}/${lang}/builds/${slug}/`,
+  ...(entry.data.durationMin ? { totalTime: `PT${entry.data.durationMin}M` } : {}),
+  step: entry.data.steps.map((s, i) => ({
+    "@type": "HowToStep",
+    position: i + 1,
+    text: [s.assign[lang], s.note?.[lang]].filter(Boolean).join(" — "),
+    ...(s.villagers != null ? { name: `${s.villagers} pop` } : {}),
+  })),
+};
 ---
 <BaseLayout title={`${entry.data.name[lang]} — AoE2 Build Order`} description={description} canonicalPath={`/builds/${slug}`}>
+  <JsonLd slot="head" data={howToLd} />
   <article class="mx-auto max-w-6xl px-4 py-6">
     <header class="rounded border border-stone-700/40 bg-parchment p-4 shadow-sm">
       <div class="flex flex-wrap gap-2">

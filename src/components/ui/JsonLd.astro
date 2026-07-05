@@ -1,0 +1,12 @@
+---
+// Renders a JSON-LD structured-data <script>. The serialized value has every "<"
+// escaped to "<" so a "</script>" (or any "<") inside content can never break
+// out of the script element — the one place raw JSON in HTML is an injection risk.
+// Place with `slot="head"` on content pages so it lands inside <head>.
+interface Props {
+  data: unknown;
+}
+const { data } = Astro.props;
+const json = JSON.stringify(data).replace(/</g, "\\u003c");
+---
+<script type="application/ld+json" is:inline set:html={json} />

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import JsonLd from "@/components/ui/JsonLd.astro";
 import { locales, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 import { t } from "@/i18n/utils";
@@ -37,9 +38,28 @@ const ecoTechs: Record<string, string> = {
   "13": "Heavy Plow", "55": "Gold Mining", "182": "Gold Shaft Mining",
   "278": "Stone Mining",
 };
+
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://aoe2guide.com";
+// WebApplication: the analyzer is a free, in-browser (WASM) coaching tool — this
+// is the schema Google/AI use for an interactive app, and it advertises price 0.
+const analyzerLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: t(lang, "analyzer.title"),
+  description: t(lang, "analyzer.tagline"),
+  url: `${site}/${lang}/analyzer/`,
+  applicationCategory: "GameApplication",
+  operatingSystem: "Web browser",
+  browserRequirements: "Requires JavaScript and WebAssembly",
+  inLanguage: lang,
+  isAccessibleForFree: true,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  publisher: { "@type": "Organization", name: "AOE2 Guide", url: "https://aoe2guide.com" },
+};
 ---
 
 <BaseLayout title={t(lang, "analyzer.title")} description={t(lang, "analyzer.tagline")} canonicalPath="/analyzer">
+  <JsonLd slot="head" data={analyzerLd} />
   <section class="mx-auto max-w-5xl px-4 py-10">
     <h1 class="font-display text-4xl text-ink">{t(lang, "analyzer.title")}</h1>
     <p class="mt-3 max-w-3xl text-stone-700">{t(lang, "analyzer.tagline")}</p>

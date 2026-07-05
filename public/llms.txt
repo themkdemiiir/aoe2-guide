@@ -1,44 +1,259 @@
 # AOE2 Guide
 
-> Free, bilingual (English/Turkish) Age of Empires II Definitive Edition strategy reference covering all 53 civilizations, 46 build orders, maps, unit counters, and game mechanics.
+> Free, bilingual (English/Turkish) Age of Empires II: Definitive Edition strategy reference covering all 53 civilizations, 43 build orders, 13 maps, 90 units, and 20 glossary terms — plus a free in-browser replay analyzer.
 
-AOE2 Guide provides step-by-step build orders with villager timing, per-civilization strategy notes, map strategies, and unit counter charts. All content is available in English (/en/) and Turkish (/tr/).
+AOE2 Guide provides step-by-step build orders with villager timings, per-civilization strategy, map guides, unit counters, and a WebAssembly replay coach that runs entirely client-side. Every page is available in English (`/en/…`) and Turkish (`/tr/…`); the URLs below show the English path.
 
-## Civilizations
-All 53 AoE2 DE civilizations with civ bonuses, team bonus, unique units, unique techs, tier rating, and strategy notes.
-- /en/civs/britons — Longbowman archer civilization; range bonus, cheap TCs, Warwolf trebuchet
-- /en/civs/franks — Cavalry civilization; free farm upgrades, faster paladin production
-- /en/civs/mongols — Cavalry archer civilization; faster Mangudai, siege engineers bonus
-- /en/civs/aztecs — Infantry/monk civilization; gold trickle, faster monk work, Jaguar Warrior
-- /en/civs/chinese — Fast start with extra food; discounted technologies, Chu Ko Nu
-- /en/civs/vikings — Strong infantry and navy; free Wheelbarrow/Hand Cart, Berserker
-- /en/civs/mayans — Archer civilization; free Obsidian Arrow, longer-lasting resources, Plumed Archer
-- /en/civs — Full civilization list
+## Tools
+- [Replay Analyzer](/en/analyzer) — Upload an AoE2 `.aoe2record` replay for instant coaching: build-order timing, eco-upgrade and first-military timings measured against winner benchmarks by Elo bracket. Runs 100% in-browser via WebAssembly — no replay is ever uploaded to a server.
+- [Data Explorer](/en/explorer) — Build custom civilization win-rate queries (by civ, map, Elo bracket, and patch) over ranked 1v1 ladder data, charted client-side.
 
 ## Build Orders
-Step-by-step villager assignment guides with population counts and timing.
-- /en/builds/18pop-scouts — Classic scout rush, Feudal Age pressure
-- /en/builds/19pop-archers — Fast archers feudal attack
-- /en/builds/maa-archers — Men-at-Arms opener into Feudal archers
-- /en/builds/25pop-knight-rush — Fast Castle Age knights pocket
-- /en/builds/fast-castle-boom — Economic boom for Arena and closed maps
-- /en/builds/drush-fc — Dark Age militia rush into Fast Castle
-- /en/builds/fc-crossbows — Fast Castle into Crossbow/Arbalest
-- /en/builds/galley-rush — Water map galley rush opening
-- /en/builds/fishing-ship-build — Water map fishing economy
-- /en/builds — Full build order list
+Step-by-step villager-assignment guides with population counts and in-game timings.
+- [18 Pop Korean Spear Skirm Rush](/en/builds/korean-spear-skirm) — beginner, feudal ~9min. Land in Feudal around 8:50 and apply forward Spearman-plus-Skirmisher pressure with cheap, trash-cost units that are easy to mass and hard to lose value on.
+- [Fast Castle into Boom](/en/builds/fast-castle-boom) — beginner, castle ~14min. Goal: Reach Castle Age as fast as possible with enough resources to boom on extra Town Centers and economy upgrades.
+- [Knight Rush (Beginner)](/en/builds/25pop-knight-rush) — beginner, castle ~16min. Reach Castle Age on a clean economy and flood Knights from two Stables for a forgiving, high-impact attack.
+- [1-Stable Scouts](/en/builds/18pop-scouts) — intermediate, feudal ~9min. Land in Feudal at 18 pop around 8:50 with a single stable, then pump Scout Cavalry to harass enemy villagers while your economy snowballs.
+- [18 Pop Cumans 2 TC Boom](/en/builds/18pop-cumans-2tc-boom) — intermediate, castle ~20min. Drop a second Town Center the moment you hit Feudal so your villager count snowballs ahead of any opponent who is still on one TC.
+- [18 Pop Double Barracks Eagles](/en/builds/18pop-double-barracks-eagles) — intermediate, feudal ~9min. Land Feudal fast off heavy hunt, then flood the enemy with Eagle Scouts trained from two Barracks at once.
+- [18 Pop Feudal Drush](/en/builds/18pop-feudal-drush) — intermediate, feudal ~9min. Reach Feudal at 18 population, push 2 Militia plus your scout into the enemy base, and keep the pressure on while your economy ticks along behind a slow wall.
+- [18 Pop Generic Man-at-Arms Rush](/en/builds/maa-archers) — intermediate, feudal ~9min. Hit Feudal Age around 8:50 on any civilization and open with 3 Militia upgraded into Man-at-Arms, then snowball the pressure into a wave of Archers.
+- [18 Pop Scouts into Archers](/en/builds/18pop-scouts-into-archers) — intermediate, feudal ~14min. Open with Scout Cavalry pressure off an 18-pop Feudal landing, then surprise the opponent with an Archer switch once the harass has them committed to anti-cavalry play.
+- [18 Pop Scouts into Cavalry Archers](/en/builds/18pop-scouts-into-cavalry-archers) — intermediate, castle ~18min. Open with Scouts for map control, wall up safely behind them, then hide a Cavalry Archer mass behind your walls in Castle Age.
+- [18 Pop Scouts into Skirms](/en/builds/scouts-into-skirms) — intermediate, feudal ~9min. Open with Scout Cavalry off an 18-pop Feudal landing, then layer in Skirmishers the moment the opponent shows Archers, giving you a cheap answer to both ranged play and S…
+- [19 Pop + 3 Fishing Ship Build](/en/builds/fishing-ship-build) — intermediate, feudal ~9min. Use the extra food from three Fishing Ships to reach Feudal Age around 9:15 with a faster, water-fed economy on hybrid and water maps.
+- [19 Pop 1-Range Archers](/en/builds/19pop-archers) — intermediate, feudal ~9min. Land in Feudal at 19 pop, throw down a single Archery Range, and pump Fletching-backed Archers before your opponent has a counter ready.
+- [21 Vils Malay Flexible Opening](/en/builds/malay-flexible-opening) — intermediate, feudal ~9min. Reach Feudal a step ahead of the field on Malay's faster age-up, then commit to Archers, Scouts, or Spear-Skirm only after you read what the opponent is doing.
+- [23 Pop Fast Castle Boom — Arena](/en/builds/23pop-fast-castle-boom-arena) — intermediate, castle ~14min. Race to Castle Age off a clean 23-pop economy on a closed map, then snowball with extra Town Centers before the opponent can punish you.
+- [Double Stable Scouts](/en/builds/double-stable-scouts) — intermediate, feudal ~9min. Land in Feudal at 18 pop around 8:50, then ramp into two stables so a steady stream of Scout Cavalry overwhelms the opponent's economy.
+- [Eagle and Range Feudal Rush](/en/builds/eagle-range-feudal) — intermediate, feudal ~9min. Hit Feudal fast off a heavy hunt, then apply two-pronged pressure with Eagle Scouts plus an Archery Range backing them up.
+- [Ethiopian 2-Range Archers for Team Games](/en/builds/ethiopian-2range-archers) — intermediate, feudal ~9min. Land in Feudal at 18 pop and open two Archery Ranges at once, leaning on Ethiopia's faster Archers and free age-up resources to flood the flank with arrows.
+- [Fast Castle 2-Stable Knights (Pocket)](/en/builds/fc-knights-pocket) — intermediate, castle ~17min. Goal: Click Feudal at 27 villagers (~10:00), reach Castle Age around 17:00 with 29 villagers, then flood Knights from 2 Stables to support your team's flanks.
+- [Fast Castle into Unique Unit](/en/builds/25pop-fast-castle-unique-unit) — intermediate, castle ~15min. Rush to Castle Age at 25 pop, immediately drop a Castle, and flood Unique Units while the opponent is still scrambling for an answer.
+- [Fast Castle Light Cav Relic Control](/en/builds/fc-light-cav-relic) — intermediate, castle ~15min. Race to Castle Age behind your walls, then flood the center with monks and a handful of Light Cavalry to scoop up every relic before your opponent reacts.
+- [Fast Castle on Fortress](/en/builds/fc-fortress) — intermediate, castle ~11min. Reach Castle Age around 10:40 from the Fortress map's pre-built start, using its free walls and towers as cover while your eco snowballs.
+- [Fast Chickens Dark Age](/en/builds/fast-chickens-dark-age) — intermediate, feudal ~9min. A flexible 18-pop Arabia opener that uses the chickens by your Town Center for fast early food, landing in Feudal around 8:50, ready for any aggressive strategy.
+- [Feudal Galley Rush](/en/builds/galley-rush) — intermediate, feudal ~10min. Goal: Reach Feudal Age at 21 villagers and pump Fire Galleys from multiple Docks to sink enemy Fishing Ships and control the water.
+- [Fire Galleys and Archers](/en/builds/fire-galleys-and-archers) — intermediate, castle ~18min. Goal: Control the water with Fire Galleys while applying land pressure with Archers, using a Fishing Ship economy to fund a smooth two-front push into Castle Age.
+- [Man-at-Arms Into Skirms](/en/builds/maa-into-skirms) — intermediate, feudal ~9min. Hit Feudal Age around 9:15 with Militia already walking out, upgrade to Man-at-Arms, and back them with Skirmishers for a full-Feudal composition that beats most early ar…
+- [Romans 5 Man-at-Arms Rush](/en/builds/romans-5-maa) — intermediate, feudal ~9min. Reach Feudal Age around 9:15 with five Militia ready, then convert them to Man-at-Arms and lean on the Roman infantry armor bonus to grind down the opponent.
+- [Scouts into Cavalry Archers](/en/builds/mongol-scouts-ca) — intermediate, castle ~18min. Open with Scout Cavalry to grab map control in Feudal, wall up safely, then snowball into massed Cavalry Archers — and the Mangudai upgrade for Mongols — in Castle Age.
+- [Win Water](/en/builds/win-water) — intermediate, feudal ~11min. Goal: Open a strong fishing economy behind defensive walls, take Feudal Age at 21 villagers, and contest the water with Fire Galleys from two Docks while booming on fish.
+- [17 Pop Japanese Man-at-Arms Rush](/en/builds/17pop-japanese-maa-rush) — advanced, feudal ~9min. Reach Feudal Age around 8:25 and apply the fastest possible Man-at-Arms pressure, layering in Archers right behind the Militia.
+- [17 Pop Teuton Tower Rush](/en/builds/17pop-teuton-tower-rush) — advanced, feudal ~9min. Reach Feudal at 17 pop, march ten villagers forward, and choke the enemy economy under a chain of cheap, garrison-stuffed Teuton towers.
+- [28 Pop Turks Fast Imperial](/en/builds/28pop-turks-fast-imp) — advanced, imperial ~20min. Rush to Imperial Age around the 20-minute mark and flood the field with instant gunpowder.
+- [30 Pop Fast Imperial Age (Generic)](/en/builds/30pop-fast-imp-generic) — advanced, imperial ~21min. Goal: Reach Imperial Age at ~21 minutes through a balanced economy with no Feudal military investment.
+- [Anti-Lame Fast Up Dark Age](/en/builds/anti-lame-dark-age) — advanced, feudal ~8min. Secure every scrap of your own food — both boars under the Town Center and a mandatory deer lure — so no opponent can lame you out of a reliable, civ-agnostic fast Feudal…
+- [Armenian Spear Rush into Fast Castle Relic Control](/en/builds/armenian-spear-fc-relic) — advanced, castle ~16min. Poke with early Spearmen to deny the enemy opening, then Fast Castle into a Fortified Church that floods the map with Warrior Priests and locks down the relics.
+- [Chinese Fast Feudal](/en/builds/chinese-fast-feudal) — advanced, feudal ~8min. Exploit the Chinese extra starting villagers and house-free opening to reach Feudal Age fast and pick whichever aggression your scouting demands.
+- [Drush Fast Castle](/en/builds/drush-fc) — advanced, castle ~16min. Harass with three Dark Age Militia, then reach Castle Age first with a clean economic and technology lead.
+- [Georgians Healing Scout Rush](/en/builds/georgians-healing-scouts) — advanced, feudal ~8min. Land in Feudal at 16 pop around 8:00 and abuse the Georgian self-healing cavalry — roughly 10 HP per minute near home — to harass relentlessly without ever paying for rep…
+- [Jurchens Fast Castle Fire Lancer Rush](/en/builds/jurchens-fc-fire-lancer) — advanced, castle ~14min. A greedy Fast Castle that skips Feudal military and lands on the Jurchens' food-free Fire Lancers and siege for a relentless mid-game push.
+- [Khmer Fast Castle Knights and Scorpions](/en/builds/khmer-fc-knights-scorpions) — advanced, castle ~14min. Goal: Exploit Khmer's no-building-prerequisite bonus to skip Feudal structures entirely and slam into Castle Age (~13:30) with an aggressive Knight-and-Scorpion push.
+- [Khmer Super Fast Scouts](/en/builds/khmer-fast-scouts) — advanced, feudal ~8min. Abuse the Khmer no-buildings-required age-up bonus to reach Feudal at 16 pop around 7:35 and flood the map with Scout Cavalry before your opponent can react.
+- [Men-at-Arms + Tower Rush](/en/builds/men-at-arms-towers) — advanced, feudal ~10min. Goal: Control your opponent's access to resources by placing towers in strategic locations in their base and severely restrict their economy.
+- [Portuguese Monk Rush](/en/builds/portuguese-monk-rush) — advanced, castle ~13min. Reach Castle Age fast on the cheap Portuguese economy, flood the map center with Monks, and seize every relic before your opponent can react.
+
+## Civilizations
+All 53 AoE2 DE civilizations — bonuses, team bonus, unique units and techs, and strategy.
+- [Armenians](/en/civs/armenians) — An Infantry and Naval civilization from the Caucasus.
+- [Aztecs](/en/civs/aztecs) — An Infantry and Monk civilization from Mesoamerica.
+- [Bengalis](/en/civs/bengalis) — An Elephant and Naval civilization from South Asia.
+- [Berbers](/en/civs/berbers) — A Cavalry and Naval civilization from North Africa.
+- [Bohemians](/en/civs/bohemians) — A Gunpowder and Monk civilization from Eastern Europe.
+- [Britons](/en/civs/britons) — A Foot Archer civilization from Western Europe.
+- [Bulgarians](/en/civs/bulgarians) — An Infantry and Cavalry civilization from Eastern Europe.
+- [Burgundians](/en/civs/burgundians) — A Cavalry civilization from Western Europe.
+- [Burmese](/en/civs/burmese) — An Infantry and Cavalry civilization from Southeast Asia.
+- [Byzantines](/en/civs/byzantines) — A Defensive civilization from the Eastern Mediterranean.
+- [Celts](/en/civs/celts) — An Infantry and Siege civilization from Western Europe.
+- [Chinese](/en/civs/chinese) — An Archer and Gunpowder civilization from East Asia.
+- [Cumans](/en/civs/cumans) — A Cavalry civilization from Central Asia.
+- [Dravidians](/en/civs/dravidians) — An Infantry and Naval civilization from South Asia.
+- [Ethiopians](/en/civs/ethiopians) — An Archer civilization from East Africa.
+- [Franks](/en/civs/franks) — A Cavalry civilization from Western Europe.
+- [Georgians](/en/civs/georgians) — A Defensive and Cavalry civilization from the Caucasus.
+- [Goths](/en/civs/goths) — An Infantry civilization from Northern Europe.
+- [Gurjaras](/en/civs/gurjaras) — A Cavalry and Camel civilization from South Asia.
+- [Hindustanis](/en/civs/hindustanis) — A Camel and Gunpowder civilization from South Asia.
+- [Huns](/en/civs/huns) — A Cavalry civilization from Central Asia.
+- [Incas](/en/civs/incas) — An Infantry civilization from South America.
+- [Italians](/en/civs/italians) — An Archer and Naval civilization from Southern Europe.
+- [Japanese](/en/civs/japanese) — An Infantry civilization from East Asia.
+- [Jurchens](/en/civs/jurchens) — A Cavalry and Gunpowder civilization from East Asia.
+- [Khitans](/en/civs/khitans) — An Infantry and Cavalry civilization from East Asia.
+- [Khmer](/en/civs/khmer) — A Siege and Elephant civilization from Southeast Asia.
+- [Koreans](/en/civs/koreans) — A Defensive and Naval civilization from East Asia.
+- [Lithuanians](/en/civs/lithuanians) — A Cavalry and Monk civilization from Eastern Europe.
+- [Magyars](/en/civs/magyars) — A Cavalry civilization from Eastern Europe.
+- [Malay](/en/civs/malay) — A Naval civilization from Southeast Asia.
+- [Malians](/en/civs/malians) — An Infantry civilization from West Africa.
+- [Mapuche](/en/civs/mapuche) — A Cavalry and Counter-units civilization from South America.
+- [Mayans](/en/civs/mayans) — An Archer civilization from Mesoamerica.
+- [Mongols](/en/civs/mongols) — A Cavalry Archer civilization from East Asia.
+- [Muisca](/en/civs/muisca) — An Archer and Monk civilization from South America.
+- [Persians](/en/civs/persians) — A Cavalry civilization from the Middle East.
+- [Poles](/en/civs/poles) — A Cavalry civilization from Eastern Europe.
+- [Portuguese](/en/civs/portuguese) — A Naval and Gunpowder civilization from Southern Europe.
+- [Romans](/en/civs/romans) — An Infantry and Cavalry civilization from the Ancient Mediterranean.
+- [Saracens](/en/civs/saracens) — A Camel and Naval civilization from the Middle East.
+- [Shu](/en/civs/shu) — An Archer and Siege civilization from East Asia.
+- [Sicilians](/en/civs/sicilians) — An Infantry and Cavalry civilization from Southern Europe.
+- [Slavs](/en/civs/slavs) — An Infantry and Siege civilization from Eastern Europe.
+- [Spanish](/en/civs/spanish) — A Gunpowder and Monk civilization from Southern Europe.
+- [Tatars](/en/civs/tatars) — A Cavalry Archer civilization from Central Asia.
+- [Teutons](/en/civs/teutons) — An Infantry and Defensive civilization from Central Europe.
+- [Tupi](/en/civs/tupi) — An Archer and Infantry civilization from South America.
+- [Turks](/en/civs/turks) — A Gunpowder civilization from the Middle East.
+- [Vietnamese](/en/civs/vietnamese) — An Archer civilization from Southeast Asia.
+- [Vikings](/en/civs/vikings) — An Infantry and Naval civilization from Northern Europe.
+- [Wei](/en/civs/wei) — A Cavalry civilization from East Asia.
+- [Wu](/en/civs/wu) — An Infantry and Naval civilization from East Asia.
 
 ## Maps
-Strategy guides for popular competitive maps.
-- /en/maps/arabia — Open map; scouts and archers dominant, early pressure meta
-- /en/maps/arena — Fully walled start; Castle/Imperial Age tower and monk strategies
-- /en/maps/black-forest — Closed map; booming, trebuchet endgame, team coordination
-- /en/maps/islands — Water map; galley rush, fishing economy, naval control
-- /en/maps — Full map list
-
-## Counters
-- /en/counters — Unit counter chart by age (what beats what)
+- [Arabia](/en/maps/arabia) — Open map. Arabia is the canonical competitive 1v1 map and the most balanced in the game's history.
+- [Arena](/en/maps/arena) — Closed map. Arena is the canonical closed map.
+- [Black Forest](/en/maps/black-forest) — Closed map. Black Forest is defined by dense, nearly impassable tree coverage that creates natural chokepoints between bases.
+- [Fortress](/en/maps/fortress) — Closed map. Fortress is a closed map similar to Arena but with pre-built towers along the stone wall ring — giving each player stronger starting defenses.
+- [Four Lakes](/en/maps/four-lakes) — Hybrid map. Four Lakes is a large team game map with four distinct lake clusters, each holding rich gold, stone, and fish deposits.
+- [Golden Pit](/en/maps/golden-pit) — Open map. Golden Pit is a competitive map with a large concentrated gold deposit in the center.
+- [Hideout](/en/maps/hideout) — Closed map. Hideout is a semi-closed map where players begin inside a palisade wall ring enclosing their base.
+- [Hill Fort](/en/maps/hill-fort) — Hybrid map. Hill Fort places each player on top of a hill enclosed by Fortified Palisade Walls — a special variant that cannot be rebuilt by players once destroyed.
+- [Islands](/en/maps/islands) — Water map. Islands is the canonical pure water map.
+- [Migration](/en/maps/migration) — Hybrid map. Migration places each player on a small island with limited resources — one gold and one stone patch, berries, sheep, and forest — that runs dry relatively quickly.
+- [Nomad](/en/maps/nomad) — Nomad map. Nomad is defined by its no-Town-Center start.
+- [Rivers](/en/maps/rivers) — Hybrid map. Rivers is a competitive map bisected by one or more river channels.
+- [Steppe](/en/maps/steppe) — Open map. Steppe is a fully open map with almost no trees near starting positions.
 
 ## Units
-Stats, costs, and roles for all standard and unique units.
-- /en/units — Unit index with HP, attack, armor, cost, and training time
+Stats, costs, and role for every standard and unique unit.
+- [Arbalest](/en/units/arbalester) — ranged infantry
+- [Archer](/en/units/archer) — ranged infantry
+- [Battering Ram](/en/units/battering-ram) — siege
+- [Berserk](/en/units/berserk) — unique unit
+- [Bombard Cannon](/en/units/bombard-cannon) — siege gunpowder
+- [Camel](/en/units/camel-rider) — anti-cavalry cavalry
+- [Cannon Galleon](/en/units/cannon-galleon) — naval siege
+- [Capped Ram](/en/units/capped-ram) — siege
+- [Cataphract](/en/units/cataphract) — unique unit
+- [Cavalier](/en/units/cavalier) — heavy cavalry
+- [Cavalry Archer](/en/units/cavalry-archer) — mounted archer
+- [Champion](/en/units/champion) — melee infantry
+- [Chu Ko Nu](/en/units/chu-ko-nu) — unique unit
+- [Conquistador](/en/units/conquistador) — unique unit
+- [Crossbowman](/en/units/crossbowman) — ranged infantry
+- [Demolition Ship](/en/units/demolition-ship) — naval suicide
+- [Eagle Warrior](/en/units/eagle-warrior) — light infantry
+- [Elite Berserk](/en/units/elite-berserk) — unique unit
+- [Elite Cannon Galleon](/en/units/elite-cannon-galleon) — naval siege
+- [Elite Cataphract](/en/units/elite-cataphract) — unique unit
+- [Elite Chu Ko Nu](/en/units/elite-chu-ko-nu) — unique unit
+- [Elite Conquistador](/en/units/elite-conquistador) — unique unit
+- [Elite Eagle Warrior](/en/units/elite-eagle-warrior) — light infantry
+- [Elite Huskarl](/en/units/elite-huskarl) — unique unit
+- [Elite Jaguar Warrior](/en/units/elite-jaguar-warrior) — unique unit
+- [Elite Janissary](/en/units/elite-janissary) — unique unit
+- [Elite Karambit Warrior](/en/units/elite-karambit-warrior) — unique unit
+- [Elite Longboat](/en/units/elite-longboat) — unique unit
+- [Elite Longbowman](/en/units/elite-longbowman) — unique unit
+- [Elite Mameluke](/en/units/elite-mameluke) — unique unit
+- [Elite Mangudai](/en/units/elite-mangudai) — unique unit
+- [Elite Plumed Archer](/en/units/elite-plumed-archer) — unique unit
+- [Elite Samurai](/en/units/elite-samurai) — unique unit
+- [Elite Skirmisher](/en/units/elite-skirmisher) — anti-archer ranged
+- [Elite Tarkan](/en/units/elite-tarkan) — unique unit
+- [Elite Teutonic Knight](/en/units/elite-teutonic-knight) — unique unit
+- [Elite Throwing Axeman](/en/units/elite-throwing-axeman) — unique unit
+- [Elite Turtle Ship](/en/units/elite-turtle-ship) — unique unit
+- [Elite War Elephant](/en/units/elite-war-elephant) — unique unit
+- [Elite War Wagon](/en/units/elite-war-wagon) — unique unit
+- [Elite Woad Raider](/en/units/elite-woad-raider) — unique unit
+- [Fast Fire Ship](/en/units/fast-fire-ship) — anti-ship naval
+- [Fire Ship](/en/units/fire-ship) — anti-ship naval
+- [Fishing Ship](/en/units/fishing-ship) — economic naval
+- [Galleon](/en/units/galleon) — naval
+- [Galley](/en/units/galley) — naval
+- [Halberdier](/en/units/halberdier) — anti-cavalry infantry
+- [Hand Cannoneer](/en/units/hand-cannoneer) — gunpowder ranged
+- [Heavy Camel](/en/units/heavy-camel-rider) — anti-cavalry cavalry
+- [Heavy Cavalry Archer](/en/units/heavy-cavalry-archer) — mounted archer
+- [Heavy Demolition Ship](/en/units/heavy-demolition-ship) — naval suicide
+- [Heavy Scorpion](/en/units/heavy-scorpion) — siege
+- [Huskarl](/en/units/huskarl) — unique unit
+- [Hussar](/en/units/hussar) — light cavalry
+- [Jaguar Warrior](/en/units/jaguar-warrior) — unique unit
+- [Janissary](/en/units/janissary) — unique unit
+- [Karambit Warrior](/en/units/karambit-warrior) — unique unit
+- [Knight](/en/units/knight) — heavy cavalry
+- [Light Cavalry](/en/units/light-cavalry) — light cavalry
+- [Long Swordsman](/en/units/long-swordsman) — melee infantry
+- [Longboat](/en/units/longboat) — unique unit
+- [Longbowman](/en/units/longbowman) — Unique foot archer (Britons)
+- [Mameluke](/en/units/mameluke) — unique unit
+- [Man-at-Arms](/en/units/man-at-arms) — melee infantry
+- [Mangonel](/en/units/mangonel) — siege
+- [Mangudai](/en/units/mangudai) — unique unit
+- [Militia](/en/units/militia) — melee infantry
+- [Monk](/en/units/monk) — support / conversion
+- [Onager](/en/units/onager) — siege
+- [Paladin](/en/units/paladin) — heavy cavalry
+- [Pikeman](/en/units/pikeman) — anti-cavalry infantry
+- [Plumed Archer](/en/units/plumed-archer) — unique unit
+- [Samurai](/en/units/samurai) — unique unit
+- [Scorpion](/en/units/scorpion) — siege
+- [Scout Cavalry](/en/units/scout-cavalry) — light cavalry
+- [Siege Onager](/en/units/siege-onager) — siege
+- [Siege Ram](/en/units/siege-ram) — siege
+- [Skirmisher](/en/units/skirmisher) — anti-archer ranged
+- [Spearman](/en/units/spearman) — anti-cavalry infantry
+- [Tarkan](/en/units/tarkan) — unique unit
+- [Teutonic Knight](/en/units/teutonic-knight) — unique unit
+- [Throwing Axeman](/en/units/throwing-axeman) — unique unit
+- [Transport Ship](/en/units/transport-ship) — utility naval
+- [Trebuchet](/en/units/trebuchet) — siege long-range
+- [Turtle Ship](/en/units/turtle-ship) — unique unit
+- [Two-Handed Swordsman](/en/units/two-handed-swordsman) — melee infantry
+- [War Elephant](/en/units/war-elephant) — unique unit
+- [War Galley](/en/units/war-galley) — naval
+- [War Wagon](/en/units/war-wagon) — unique unit
+- [Woad Raider](/en/units/woad-raider) — unique unit
+
+## Learn (beginner course)
+- [Resources & Villagers](/en/learn/01-resources) — AoE2 resources and villagers: what Food, Wood, Gold, and Stone are used for, continuous villager production, early allocation, and idle time costs.
+- [Build Orders](/en/learn/02-build-orders) — Build orders in AoE2: what they are, how steps are written, and the three foundational openings — 18-pop Scouts, 19-pop Archers, and Fast Castle.
+- [Scouting](/en/learn/03-scouting) — Scouting in AoE2: control your scout manually, map your own base first, read the enemy economy and upgrades, and orbit safely around their Town Center.
+- [Economy Upgrades](/en/learn/04-economy-upgrades) — AoE2 economy upgrades: why Lumber Camp research comes first, how farm upgrades save wood, and when to time Wheelbarrow, Hand Cart, and mining techs.
+- [Walling & Building Placement](/en/learn/05-walling-and-placement) — Walling and building placement in AoE2: when to wall, using military buildings as wall segments, smart economy placement, and the three wall types.
+- [Continuous Production & Lanchester's Law](/en/learn/06-continuous-production) — Continuous production in AoE2: never idle a military building, villager counts to feed a Range, and the Lanchester square law behind snowballing leads.
+- [Using Your Army](/en/learn/07-using-your-army) — Using your army in AoE2: why numbers beat counters, when to retreat, using high ground, and abusing power spikes before your opponent ages up.
+- [Uptimes & Timings](/en/learn/08-uptimes-and-timings) — Uptimes and timings in AoE2: the 25-second pop math behind Feudal age-up times, timing attacks that punish, and Castle and Imperial benchmarks.
+
+## Articles
+- [Unit Counters Explained: Feudal & Castle Age](/en/blog/unit-counters-explained) — How AoE2 counters actually work — pierce armour, bonus damage, and speed — plus the Feudal counter-square every player must know.
+- [The Best AoE2 Learning Resources](/en/blog/best-aoe2-learning-resources) — A curated list of the build-order sites, counter guides, stats trackers, creators, and tools we recommend for improving at Age of Empires II.
+
+## Counters
+- [Unit counter chart](/en/counters) — What beats what, by age.
+
+## Glossary
+- [Full glossary](/en/glossary) — 20 AoE2 terms defined.
+  - Boom: A play style focused on economy: skip early aggression to build extra Town Centers and out-produce your opponent.
+  - Double-Bit Axe: The first Lumber Camp wood upgrade.
+  - Drush: Short for "Dark Age Rush" — sending 3 Militia from a Barracks built in the Dark Age to the enemy base, before either player reaches Feudal Age.
+  - Fast Castle (FC): Skipping Feudal Age aggression to reach the Castle Age as fast as possible — typically around 23 villagers.
+  - Fast Imperial (FI): Rushing to the Imperial Age as quickly as possible, often with a strong-economy civilization.
+  - Feudal Age: The second of four ages.
+  - Flank: In team games, a player on the edge of the map directly next to an enemy.
+  - Galley Rush (Grush): Massing War Galleys early on water maps to seize control of the water, kill enemy Fishing Ships, and deny the enemy Dock.
+  - Idle Time: Time a Town Center or production building spends not producing anything.
+  - Laming: Stealing the opponent's sheep or boars in the Dark Age, typically using your scout.
+  - Macro: Short for macromanagement: keeping your production and economy running smoothly in the background — queuing villagers, building farms, researching upgrades, and pumping o…
+  - Man-at-Arms (MAA): The Feudal Age upgrade of the Militia and a cost-effective early infantry unit.
+  - Micro: Short for micromanagement: controlling individual units during a fight to get more value out of them — dodging projectiles, sniping key targets, and hit-and-run with rang…
+  - Pocket: In team games, a player in the center positions who is shielded from the enemy by the flank players.
+  - Scout Rush: An 18-pop Feudal Age opening that masses Scout Cavalry to raid enemy villagers — the default open-map aggression.
+  - Tower Rush (Trush): Building offensive Watch Towers in or near the enemy base during the Feudal Age to damage their economy and force a defensive response.
+  - Trash Unit: A unit that costs no gold — Skirmisher, Spearman/Pikeman, and Light Cavalry/Hussar.
+  - Uptime: The in-game time at which you reach the next Age (e.g.
+  - Wall: Defensive barriers built from wood (Palisade Wall) or stone (Stone Wall, Fortified Wall in Imperial Age).
+  - Wheelbarrow: A Town Center technology that raises villager carry capacity and move speed, giving a big boost to food and overall resource income.
