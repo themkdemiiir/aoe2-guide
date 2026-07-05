@@ -151,6 +151,7 @@ const h2hLabels = {
   even: lang === "tr" ? "başa baş" : "even",
   games: lang === "tr" ? "maç" : "games",
   lowSample: lang === "tr" ? "az veri" : "low sample",
+  allElos: lang === "tr" ? "tüm elolar — bu dilimde az veri" : "all elos — too few at this bracket",
   noData: lang === "tr" ? "Bu eşleşme için yeterli veri yok." : "Not enough data for this matchup.",
   team: lang === "tr" ? "Takım" : "Team",
   byMap: lang === "tr" ? "Haritaya göre (en iyi → en kötü)" : "By map (best → worst)",
@@ -462,7 +463,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
         // Cumulative "X+" (value "cum:<startIdx>") pools every band bucket ≥ the edge
         // into one exact weighted pairwise rate — stabler at thin high elo.
         const cut = typeof eloVal === 'string' && eloVal.startsWith('cum:') ? +eloVal.slice(4) : null;
-        let wr = null, games = null;
+        let wr = null, games = null, fellBack = false;
         if (cut != null) {
           let g = 0, w = 0;
           for (const [idxStr, rec] of Object.entries(slice || {})) {
@@ -475,6 +476,12 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
         } else {
           const rec = slice ? slice[+eloVal] : null;
           if (rec != null) { wr = Array.isArray(rec) ? rec[0] : rec; games = Array.isArray(rec) ? rec[1] : null; }
+        }
+        // Too thin at the chosen bracket → fall back to the All-Elo cell (every stored
+        // pairing has one), so we show the real number instead of "not enough data".
+        if (wr == null && slice && slice[0] != null && String(eloVal) !== '0') {
+          const r0 = slice[0];
+          wr = Array.isArray(r0) ? r0[0] : r0; games = Array.isArray(r0) ? r0[1] : null; fellBack = true;
         }
         if (wr == null) {
           return '<div class="rounded border border-stone-700/30 bg-parchment p-4">'
@@ -504,6 +511,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + '<div class="h-full" style="width:' + fill + '%;background:' + favColor + '"></div>'
           + '<div class="absolute inset-y-0 w-px bg-ink/40" style="left:50%"></div>'
           + '</div>'
+          + (fellBack ? '<p class="mt-2 text-center font-mono text-[11px] tracking-wide text-stone-700/60">' + h2hLabels.allElos + '</p>' : '')
           + (cut == null && +eloVal === 0 ? perMapHtml(a, b) : '')
           + '</div>';
       }
