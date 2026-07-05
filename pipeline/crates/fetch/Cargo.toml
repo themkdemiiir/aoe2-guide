@@ -1,0 +1,52 @@
+[package]
+name = "fetch"
+version.workspace = true
+edition.workspace = true
+description = "Relic discovery/download + resumable manifest — the AOE2 pipeline's replay-fetch adapter (all IO)"
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "fetch"
+path = "src/lib.rs"
+
+[dependencies]
+# Only the id newtypes (MatchId/ProfileId) — no refdata, no DB deps. `fetch` never touches the
+# civ/map lookup tables.
+pipeline-core = { path = "../core", default-features = false }
+# `sync` adds tokio::sync::Semaphore (bounded concurrency); `time` adds tokio::time::sleep (the
+# retry middleware's backoff wait) — both on top of the workspace's rt-multi-thread+macros set.
+tokio = { workspace = true, features = ["sync", "time"] }
+tracing = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+bytes = { workspace = true }
+chrono = { workspace = true }
+# HTTP: async, rustls (no openssl), gzip. `blocking` is deliberately NOT enabled — this crate is
+# async end-to-end (unlike the old replay-rs client). NOTE: reqwest-middleware 0.5.x pins reqwest
+# 0.13.x as a peer dependency (its `ClientBuilder::new` takes a `reqwest::Client` by value) — this
+# MUST track that major, and 0.13 renamed the TLS feature from `rustls-tls` (0.12) to `rustls`.
+reqwest = { workspace = true }
+# `FetchClient` composes reqwest-retry's STOCK `RetryTransientMiddleware` (exponential backoff +
+# jitter on 429/5xx) — there is no custom middleware here. It can't itself honor `Retry-After`
+# (its `RetryPolicy` never sees the response), so a 429 surviving its retries is surfaced by
+# `FetchClient::get_bytes`'s own status check as `Error::RateLimited` instead — see `client.rs`.
+reqwest-middleware = { workspace = true }
+reqwest-retry = { workspace = true }
+# Steady-state request RATE (GCRA), distinct from the reqwest-retry reactive backoff and the
+# tokio::Semaphore concurrency bound (three separate constraints — see the playbook).
+governor = { workspace = true }
+# Gunzips the signed replay blob to raw `.aoe2record` bytes (`api::download_replay`).
+flate2 = { workspace = true }
+# Extracts the single `.aoe2record` member from the age-archive endpoint's ZIP response
+# (`api::unzip_single_member`) — `deflate-flate2` only, see the workspace-level comment.
+zip = { workspace = true }
+# Resumable manifest. `bundled` compiles SQLite from source so the offline VM build needs no
+# system libsqlite3 (same pin as the old replay-rs manifest).
+rusqlite = { workspace = true }
+
+[dev-dependencies]
+# HTTP mocking for discovery/download parsing tests — this crate NEVER hits the live Relic API in
+# an automated test (see the brief); wiremock stands in for it.
+wiremock = { workspace = true }

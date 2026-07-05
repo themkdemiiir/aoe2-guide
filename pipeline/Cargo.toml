@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/core", "crates/ingest", "crates/migration", "crates/replay"]
+members = ["crates/core", "crates/fetch", "crates/ingest", "crates/migration", "crates/replay"]
 # vendor/aoe2rec sits inside this workspace's directory tree but is third-party, committed
 # as-is (never edited) — exclude it so it builds as an ordinary path dependency (no clippy
 # lints, no `cargo test`/`clippy --workspace` reaching into it) rather than being implicitly
@@ -36,6 +36,39 @@ chrono = { version = "0.4", features = ["serde"] }
 # (not `&[u8]`) as its `Savegame::from_bytes` input — pinned here since `fetch`'s reqwest
 # download will also hand back `bytes::Bytes` and should reuse the same version.
 bytes = { version = "1", features = ["std"] }
+
+# --- fetch-only deps, hoisted for a single workspace-wide version pin (same convention as
+# sea-orm-migration/testcontainers-modules below, which are also single-consumer today). ---
+# GCRA rate limiting for the Relic API's steady request RATE (separate constraint from the
+# `Arc<Semaphore>` concurrency bound — see pipeline/docs/rust-playbook.md's "Async / pooling").
+governor = "0.10"
+# Async HTTP: rustls only (NO openssl/native-tls — `default-tls` is disabled via
+# `default-features = false`). Transparent gzip is enabled for the JSON API responses, but the
+# replay BLOB itself is gunzipped explicitly via `flate2::read::GzDecoder` in `fetch::api` rather
+# than relying on that transparent layer — so the raw bytes are identical regardless of how the
+# CDN sets its content headers. See `fetch::client`'s module doc.
+reqwest = { version = "0.13", default-features = false, features = ["gzip", "rustls"] }
+reqwest-middleware = "0.5"
+# `fetch::client` composes the stock `RetryTransientMiddleware` (exponential backoff + jitter on
+# 429/5xx) rather than a custom middleware: `RetryPolicy::should_retry` never sees the
+# response/headers, so it can't itself honor `Retry-After` — a 429 that survives its retries is
+# instead surfaced by `FetchClient::get_bytes`'s own status check as `Error::RateLimited`, letting
+# the caller defer precisely. See `fetch::client`'s module doc.
+reqwest-retry = "0.9"
+# The resumable manifest: rusqlite `bundled` compiles SQLite in-tree (no system dependency),
+# matching `replay-rs`'s own manifest.rs.
+rusqlite = { version = "0.40", features = ["bundled"] }
+# Gunzips downloaded replay blobs (`fetch::api::download_replay`) — same crate `replay-rs` already
+# uses for the identical purpose. The age-archive's ZIP member is inflated by the `zip` crate
+# below instead (which uses flate2 as its own DEFLATE backend).
+flate2 = "1"
+# Extracts the single `.aoe2record` member from the age-archive endpoint's ZIP response
+# (`fetch::api::unzip_single_member`). `deflate-flate2` only (default-features = false): the
+# archive ships DEFLATE or STORED members, never bzip2/lzma/zstd/aes, and this backend reuses the
+# `flate2` pin above rather than pulling in zlib-ng/zopfli.
+zip = { version = "8", default-features = false, features = ["deflate-flate2"] }
+# HTTP mocking for `fetch`'s discovery/download parsing tests — never hits the live Relic API.
+wiremock = "0.6"
 
 [workspace.dependencies.sea-orm-migration]
 version = "1.1.20"
