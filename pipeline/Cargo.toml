@@ -4,6 +4,7 @@ members = [
     "crates/aoestats",
     "crates/core",
     "crates/dims",
+    "crates/export",
     "crates/fetch",
     "crates/ingest",
     "crates/migration",

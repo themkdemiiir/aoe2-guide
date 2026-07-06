@@ -1,0 +1,27 @@
+name: "aoe2_civ_meta"
+version: "1.0.0"
+config-version: 2
+
+# Matches this project's `profiles.yml` (kept in this same directory — see README.md's "Run"
+# section for `--profiles-dir .`).
+profile: "aoe2_civ_meta"
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  aoe2_civ_meta:
+    # `view` (not `table`/matview): task M5a's whole result set is at most a few hundred rows per
+    # model — cheap to recompute on every read, and a view never goes stale between `dbt run`s.
+    # M5b/c can materialize a specific model as `table` if a later, much larger aggregation
+    # actually needs it.
+    #
+    # Deliberately NO `+schema:` override here: dbt's default `generate_schema_name` macro
+    # concatenates a custom schema onto the profile's target schema (`public` + `public` ->
+    # `public_public`), which is NOT what we want. Leaving it unset means every view lands
+    # directly in `profiles.yml`'s target schema (`public`), so `pipeline/crates/export`'s queries
+    # can reference bare `civ_meta`/`civ_meta_by_map`/... without a schema qualifier.
+    +materialized: view

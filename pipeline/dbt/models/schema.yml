@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: civ_meta
+    description: >
+      Per (civ, ladder) overall win/game counts plus a per-elo-bucket breakdown, one flat grain.
+      `elo_bucket = 'all'` is the overall rollup row; the nine real buckets fill `byElo`. See the
+      model's own SQL doc for the full aggregation.
+    columns:
+      - name: civ_slug
+        data_tests: [not_null]
+      - name: ladder
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["1v1", "team"]
+      - name: elo_bucket
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "all"
+                  - "<1000"
+                  - "1000-1199"
+                  - "1200-1399"
+                  - "1400-1649"
+                  - "1650-1799"
+                  - "1800-1999"
+                  - "2000-2199"
+                  - "2200-2499"
+                  - "2500+"
+      - name: games
+        data_tests: [not_null]
+      - name: wins
+        data_tests: [not_null]
+
+  - name: civ_meta_by_map
+    description: Per (civ, ladder, map) games/winrate — feeds civ-meta.json's `byMap`.
+    columns:
+      - name: civ_slug
+        data_tests: [not_null]
+      - name: ladder
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["1v1", "team"]
+      - name: map_slug
+        data_tests: [not_null]
+      - name: games
+        data_tests: [not_null]
+
+  - name: civ_meta_by_patch
+    description: Per (civ, ladder, build) games/winrate — feeds civ-meta.json's `byPatch`.
+    columns:
+      - name: civ_slug
+        data_tests: [not_null]
+      - name: build
+        data_tests: [not_null]
+      - name: games
+        data_tests: [not_null]
+
+  - name: civ_meta_openings
+    description: Per (civ, ladder, opening) games + rank — feeds civ-meta.json's `openings`.
+    columns:
+      - name: civ_slug
+        data_tests: [not_null]
+      - name: opening
+        data_tests: [not_null]
+      - name: opening_rank
+        data_tests: [not_null]
+
+  - name: civ_meta_ageup
+    description: Per (civ, ladder) median seconds-to-age-up — feeds civ-meta.json's `ageUp`.
+    columns:
+      - name: civ_slug
+        data_tests: [not_null]
+      - name: ladder
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["1v1", "team"]
+
+  - name: patch_axis
+    description: Global, 1v1-ladder-only match counts by build — feeds civ-meta.json's `patches`.
+    columns:
+      - name: build
+        data_tests: [not_null, unique]
+      - name: matches
+        data_tests: [not_null]

@@ -1,0 +1,24 @@
+# dbt-postgres connection profile for the `aoe2_civ_meta` project (see `dbt_project.yml`'s
+# `profile:` key). Kept in THIS directory (not `~/.dbt/profiles.yml`) — invoke dbt with
+# `--profiles-dir .` (or `DBT_PROFILES_DIR=$(pwd)`) from `pipeline/dbt/`, see README.md.
+#
+# dbt-postgres's `type: postgres` adapter has no raw-DSN mode — it needs discrete
+# host/port/user/password/dbname fields, but this repo's single source of truth for the connection
+# is one `DATABASE_URL` (git-ignored `pipeline/.env`, same one every Rust binary reads). Rather
+# than maintain the secret in two shapes, `env_from_database_url.sh` derives the standard libpq
+# env vars (`PGHOST`/`PGPORT`/`PGUSER`/`PGPASSWORD`/`PGDATABASE`) FROM `DATABASE_URL` at invocation
+# time — `env_var(...)` below just reads whatever that script exported. See README.md for the
+# exact commands.
+aoe2_civ_meta:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('PGHOST') }}"
+      port: "{{ env_var('PGPORT', '5432') | as_number }}"
+      user: "{{ env_var('PGUSER') }}"
+      password: "{{ env_var('PGPASSWORD') }}"
+      dbname: "{{ env_var('PGDATABASE') }}"
+      schema: public
+      threads: 4
+      connect_timeout: 10

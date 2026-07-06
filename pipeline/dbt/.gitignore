@@ -1,0 +1,6 @@
+.venv/
+target/
+dbt_packages/
+logs/
+# Per-machine anonymous-telemetry id dbt generates on first run — not project config.
+.user.yml

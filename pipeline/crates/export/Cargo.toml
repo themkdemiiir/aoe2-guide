@@ -1,0 +1,35 @@
+[package]
+name = "export"
+version.workspace = true
+edition.workspace = true
+description = "Typed exporters: query the dbt-modeled aggregation views and write the AOE2 guide's src/data/*.json shapes"
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "export"
+path = "src/lib.rs"
+
+[[bin]]
+name = "export"
+path = "src/main.rs"
+
+[dependencies]
+# civ-meta's civ_id -> slug resolution happens in the `civ_meta` dbt VIEW (a JOIN against the live
+# `civs` dim), not in Rust — mirrors `aoestats`'s own no-Rust-side-refdata-lookup posture (see its
+# Cargo.toml/lib.rs doc). So, like `aoestats`/`ingest`, `default-features = false`: no `refdata`,
+# no repo-root `include_str!` data files, lean Docker context.
+pipeline-core = { path = "../core", default-features = false }
+tokio = { workspace = true }
+tokio-postgres = { workspace = true }
+chrono = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+clap = { workspace = true }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+migration = { path = "../migration" }
+testcontainers-modules = { workspace = true }
