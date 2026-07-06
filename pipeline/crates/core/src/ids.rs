@@ -11,12 +11,13 @@
 //! `i64`s in Postgres (`bigint`), and a future join/lookup mixing them up would be just as silent
 //! without the newtype. [`GameUnitId`] (Phase B of the replay-analytics enrichment,
 //! `match_player_units`) is the same idea for the game's `DAT` unit-id space — a distinct space
-//! from either civ-id table above.
+//! from either civ-id table above. [`TechId`] (Phase D, `match_player_techs`) is the same idea
+//! again for the game's `technology_type` id space — distinct from all four ids above.
 //!
-//! All five wrap the DB-native **signed** integer (`i32`/`i64`, matching Postgres `integer`/
+//! All six wrap the DB-native **signed** integer (`i32`/`i64`, matching Postgres `integer`/
 //! `bigint`) rather than `u32`/`u64`: they flow into `tokio-postgres` binary COPY, Postgres has no
 //! unsigned integer types, and `tokio-postgres` has no `ToSql for u32`/`u64`. Civ/match/profile/
-//! unit ids are always small non-negative numbers in practice, so this is zero value change —
+//! unit/tech ids are always small non-negative numbers in practice, so this is zero value change —
 //! just the Rust type that makes the eventual COPY code compile.
 //!
 //! Deliberately **not** `#[postgres(transparent)]` (unlike the playbook's original sketch): that
@@ -92,6 +93,24 @@ impl fmt::Display for GameUnitId {
     }
 }
 
+/// A replay `research` command's tech id (a game `technology_type` id — e.g. Loom, Wheelbarrow,
+/// Horse Collar), used by `match_player_techs` (Phase D of the replay-analytics enrichment; see
+/// `replay::derive`'s `player_techs`). Its own id space — distinct from every id above, including
+/// [`GameUnitId`] (units, not techs) — but newtyped for the same reason the module doc gives: a
+/// bare `i32` here would let a unit_id or civ_id slip into a tech_id column at a call site and the
+/// compiler would never notice. Tech ids are always small positive ints in practice (`u16` in the
+/// analyzer); this wraps `i32` for the same DB-native-signed-integer reason the module doc gives
+/// for every other id here.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(transparent)]
+pub struct TechId(pub i32);
+
+impl fmt::Display for TechId {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -103,6 +122,7 @@ mod tests {
         assert_eq!(MatchId(123456789).to_string(), "123456789");
         assert_eq!(ProfileId(987654321).to_string(), "987654321");
         assert_eq!(GameUnitId(83).to_string(), "83");
+        assert_eq!(TechId(22).to_string(), "22");
     }
 
     #[test]
@@ -115,5 +135,8 @@ mod tests {
         assert_eq!(serde_json::to_string(&GameUnitId(83)).unwrap(), "83");
         let unit: GameUnitId = serde_json::from_str("83").unwrap();
         assert_eq!(unit, GameUnitId(83));
+        assert_eq!(serde_json::to_string(&TechId(22)).unwrap(), "22");
+        let tech: TechId = serde_json::from_str("22").unwrap();
+        assert_eq!(tech, TechId(22));
     }
 }

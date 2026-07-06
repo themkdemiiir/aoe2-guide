@@ -4,7 +4,7 @@
 //! fabricates a value for a field the schema requires.
 
 use chrono::{DateTime, Utc};
-use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId};
+use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId, TechId};
 use serde::{Deserialize, Serialize};
 
 /// `matches.source` — mirrors the PG enum `source_kind` (`'replay' | 'aoestats'`).
@@ -133,6 +133,22 @@ pub struct NewMatchPlayerUnit {
     pub trained: i32,
 }
 
+/// One row for `match_player_techs` — one (match, player, watched tech ACTUALLY researched) row
+/// (Phase D of the replay-analytics enrichment, `task-enrichD`). **Replay-source ONLY** — see the
+/// migration's doc (`m20260706_000014_create_match_player_techs.rs`) for why aoestats never
+/// populates this table. `t_ms` is the first-research **CLICK** time (research START) — NOT
+/// completion, and NOT comparable to [`NewMatchPlayer::feudal_t`]/`castle_t`/`imperial_t` (those
+/// ARE completion seconds); see `replay::derive`'s module doc ("Tech-timings basis") for why the
+/// two bases must never be conflated. A tech never researched by this player has NO row here,
+/// never a fabricated sentinel.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct NewMatchPlayerTech {
+    pub match_id: MatchId,
+    pub profile_id: ProfileId,
+    pub tech_id: TechId,
+    pub t_ms: i32,
+}
+
 /// One ingest unit: everything [`crate::ingest_batch`] loads in a single transaction.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct ReplayBatch {
@@ -146,6 +162,8 @@ pub struct ReplayBatch {
     pub ages: Vec<NewReplayAge>,
     #[serde(default)]
     pub player_units: Vec<NewMatchPlayerUnit>,
+    #[serde(default)]
+    pub player_techs: Vec<NewMatchPlayerTech>,
 }
 
 /// The outcome of one [`crate::ingest_batch`] call.
@@ -163,6 +181,9 @@ pub struct IngestStats {
     pub ages: u64,
     /// Rows inserted into `match_player_units`, gated on `matches_inserted`.
     pub units: u64,
+    /// Rows inserted into `match_player_techs` (Phase D, `task-enrichD`), gated on
+    /// `matches_inserted`.
+    pub techs: u64,
 }
 
 #[cfg(test)]
@@ -220,6 +241,12 @@ mod tests {
                 unit_id: GameUnitId(83),
                 trained: 5,
             }],
+            player_techs: vec![NewMatchPlayerTech {
+                match_id: MatchId(1001),
+                profile_id: ProfileId(5001),
+                tech_id: TechId(22),
+                t_ms: 12_000,
+            }],
         };
 
         let value = serde_json::to_value(&batch).expect("ReplayBatch must serialize");
@@ -231,6 +258,8 @@ mod tests {
         assert_eq!(value["players"][0]["civ_id"], serde_json::json!(1));
         assert_eq!(value["players"][0]["apm"], serde_json::json!(42.5));
         assert_eq!(value["player_units"][0]["unit_id"], serde_json::json!(83));
+        assert_eq!(value["player_techs"][0]["tech_id"], serde_json::json!(22));
+        assert_eq!(value["player_techs"][0]["t_ms"], serde_json::json!(12_000));
 
         // Age is a lowercase bare string, not `{"Dark": null}`.
         assert_eq!(value["ages"][0]["age"], serde_json::json!("dark"));

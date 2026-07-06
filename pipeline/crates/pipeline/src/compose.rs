@@ -59,13 +59,22 @@
 //! minute — see that module's doc for the ported formula and the replay-only/never-`None`
 //! basis). Matched onto `NewMatchPlayer.apm` by the SAME `profile_id` key as `opening`/the age
 //! timings; the replay path always supplies `Some(..)`.
+//!
+//! ## Watched-tech CLICK timings derivation (Phase D enrichment, `task-enrichD`)
+//! The SAME `replay::derive(&parsed)` call also fills each `PlayerSummary.techs` (per-watched-tech
+//! first-research CLICK ms — see that module's "Tech-timings basis" doc note for the click-not-
+//! completion rationale, distinct from `feudal_t`/`castle_t`/`imperial_t` above). Flattened into
+//! `ReplayBatch.player_techs` (one `NewMatchPlayerTech` row per watched tech ACTUALLY researched),
+//! matched to its player by the SAME `profile_id` key `player_units` uses — built in the SAME pass
+//! as `player_units` (not a second separate `summaries.into_iter()`, which would try to consume
+//! the already-moved `summaries` map twice).
 
 use std::collections::HashMap;
 
 use fetch::{DiscoverySeed, RelicMatchType};
 use ingest::{
-    Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerUnit, NewReplayAge,
-    NewReplayEvent, ReplayBatch,
+    Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerTech, NewMatchPlayerUnit,
+    NewReplayAge, NewReplayEvent, ReplayBatch,
 };
 use replay::ParsedReplay;
 
@@ -207,23 +216,39 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
 
     // Phase B enrichment (see the module doc's "Unit composition derivation" section) — consumes
     // `summaries` (its `players` borrow above already ended), flattening each player's
-    // `units: Vec<(GameUnitId, i32)>` into one `NewMatchPlayerUnit` row per DISTINCT unit_id.
-    // `profile_id` comes from `summaries`' own key, so this is already matched per-player — no
-    // separate join.
-    let player_units: Vec<NewMatchPlayerUnit> = summaries
-        .into_iter()
-        .flat_map(|(profile_id, summary)| {
+    // `units: Vec<(GameUnitId, i32)>` into one `NewMatchPlayerUnit` row per DISTINCT unit_id, and
+    // (Phase D, see the module doc's "Watched-tech CLICK timings derivation" section) each
+    // player's `techs: Vec<(TechId, i32)>` into one `NewMatchPlayerTech` row per watched tech
+    // ACTUALLY researched. Both come from the SAME `summaries` map, built in ONE pass — a second
+    // `summaries.into_iter()` call would try to consume the already-moved map twice, a compile
+    // error. `profile_id` comes from `summaries`' own key, so both are already matched per-player
+    // — no separate join.
+    let mut player_units: Vec<NewMatchPlayerUnit> = Vec::new();
+    let mut player_techs: Vec<NewMatchPlayerTech> = Vec::new();
+    for (profile_id, summary) in summaries {
+        player_units.extend(
             summary
                 .units
                 .into_iter()
-                .map(move |(unit_id, trained)| NewMatchPlayerUnit {
+                .map(|(unit_id, trained)| NewMatchPlayerUnit {
                     match_id,
                     profile_id,
                     unit_id,
                     trained,
-                })
-        })
-        .collect();
+                }),
+        );
+        player_techs.extend(
+            summary
+                .techs
+                .into_iter()
+                .map(|(tech_id, t_ms)| NewMatchPlayerTech {
+                    match_id,
+                    profile_id,
+                    tech_id,
+                    t_ms,
+                }),
+        );
+    }
 
     Ok(ReplayBatch {
         matches: vec![new_match],
@@ -231,13 +256,14 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
         events,
         ages,
         player_units,
+        player_techs,
     })
 }
 
 #[cfg(test)]
 mod tests {
     use chrono::{TimeZone, Utc};
-    use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId};
+    use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId, TechId};
     use replay::{ReplayAge, ReplayEvent, ReplayPlayer};
 
     use super::*;
@@ -386,6 +412,11 @@ mod tests {
             batch.player_units.is_empty(),
             "this sample's only event is a `build` action, not `train` -> no unit composition \
              to derive; see `to_batch_flows_derived_units_into_player_units` for the populated case"
+        );
+        assert!(
+            batch.player_techs.is_empty(),
+            "this sample's only event is a `build` action, not `research` -> no watched tech \
+             to derive; see `to_batch_flows_derived_techs_into_player_techs` for the populated case"
         );
     }
 
@@ -638,6 +669,112 @@ mod tests {
             (apm5002 - (1.0_f32 / 30.0)).abs() < 0.001,
             "apm5002={apm5002} must be 1 raw command / 30 minutes, not amount-summed (2/30), \
              and must not leak player 5001's commands"
+        );
+    }
+
+    #[test]
+    fn to_batch_flows_derived_techs_into_player_techs() {
+        // Phase D enrichment (task-enrichD): two players, each researching a distinct watched
+        // tech (plus one non-watched research and one duplicate) — proves `PlayerSummary.techs`
+        // flows into `ReplayBatch.player_techs` as one `NewMatchPlayerTech` per (player, watched
+        // tech ACTUALLY researched), matched by profile_id (never mixed between players), with
+        // `t_ms` = the CLICK (min) time, not the later duplicate.
+        //
+        // Deliberately NOT `sample_player` (hardcodes `player_number: 1` for every player) —
+        // distinct player_numbers (1, 2) here, matching each event's own `player_number` below;
+        // see `to_batch_flows_derived_units_into_player_units`'s comment for why.
+        let players = vec![
+            ReplayPlayer {
+                player_number: 1,
+                profile_id: ProfileId(5001),
+                civ_id: GameCivId(1),
+                name: "Player".to_owned(),
+                team: 1,
+                color: 1,
+                won: Some(true),
+                elo: Some(1650),
+            },
+            ReplayPlayer {
+                player_number: 2,
+                profile_id: ProfileId(5002),
+                civ_id: GameCivId(2),
+                name: "Player".to_owned(),
+                team: 2,
+                color: 2,
+                won: Some(false),
+                elo: Some(1590),
+            },
+        ];
+        let mut parsed = sample_parsed(8008, Some(9), players);
+        parsed.events = vec![
+            ReplayEvent {
+                profile_id: Some(ProfileId(5001)),
+                player_number: 1,
+                t_ms: 10_000,
+                kind: "research".to_owned(),
+                target_id: Some(22), // Loom, first click
+                amount: None,
+                detail: None,
+            },
+            ReplayEvent {
+                profile_id: Some(ProfileId(5001)),
+                player_number: 1,
+                t_ms: 20_000,
+                kind: "research".to_owned(),
+                target_id: Some(22), // Loom again — later duplicate, must NOT win
+                amount: None,
+                detail: None,
+            },
+            ReplayEvent {
+                profile_id: Some(ProfileId(5001)),
+                player_number: 1,
+                t_ms: 5_000,
+                kind: "research".to_owned(),
+                target_id: Some(999), // not watched -> ignored
+                amount: None,
+                detail: None,
+            },
+            ReplayEvent {
+                profile_id: Some(ProfileId(5002)),
+                player_number: 2,
+                t_ms: 15_000,
+                kind: "research".to_owned(),
+                target_id: Some(213), // Wheelbarrow
+                amount: None,
+                detail: None,
+            },
+        ];
+        let seed = sample_seed(8008, RelicMatchType::SoloRmRanked, None);
+
+        let batch = to_batch(parsed, seed).expect("valid replay+seed must map");
+
+        assert_eq!(
+            batch.player_techs.len(),
+            2,
+            "one row per (player, watched tech actually researched); the non-watched tech (999) \
+             and the duplicate Loom research must not add extra rows"
+        );
+        let p5001 = batch
+            .player_techs
+            .iter()
+            .find(|t| t.profile_id == ProfileId(5001))
+            .expect("player 5001 must have a tech row");
+        assert_eq!(p5001.match_id, MatchId(8008));
+        assert_eq!(p5001.tech_id, TechId(22));
+        assert_eq!(
+            p5001.t_ms, 10_000,
+            "CLICK time is the MIN over duplicates (10_000), not the later 20_000"
+        );
+
+        let p5002 = batch
+            .player_techs
+            .iter()
+            .find(|t| t.profile_id == ProfileId(5002))
+            .expect("player 5002 must have a tech row");
+        assert_eq!(p5002.tech_id, TechId(213));
+        assert_eq!(
+            p5002.t_ms, 15_000,
+            "player 5002's tech must not leak into player 5001's row"
         );
     }
 }

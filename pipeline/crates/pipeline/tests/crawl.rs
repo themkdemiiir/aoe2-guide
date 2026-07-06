@@ -169,6 +169,7 @@ impl IngestSink for RecordingSink {
             events: batch.events.len() as u64,
             ages: batch.ages.len() as u64,
             units: batch.player_units.len() as u64,
+            techs: batch.player_techs.len() as u64,
         })
     }
 }

@@ -15,6 +15,18 @@ pub(crate) fn age_name(technology_type: u16) -> Option<&'static str> {
     }
 }
 
+/// The reverse of [`age_name`] — the age-up tech id for a canonical age name. Lets
+/// `derive::first_age_click` resolve the CLICK tech id to hand to `derive::first_research_ms`
+/// without re-hardcoding 101/102/103 a second time outside this module.
+pub(crate) fn age_tech_id(age: &str) -> Option<u16> {
+    match age {
+        "feudal" => Some(101),
+        "castle" => Some(102),
+        "imperial" => Some(103),
+        _ => None,
+    }
+}
+
 /// The three ages, in order, a replay's summary ever reaches — a replay never records a player
 /// still in the Dark Age at summary time (see `pipeline_core::age::Age`'s module doc for why the
 /// core enum still has a fourth, `Dark`, variant that this parser never emits).
@@ -62,6 +74,28 @@ pub(crate) const IMP_RES_S: f64 = 190.0;
 /// 96s (=160/1.66). The only civ (today) whose age-up research deviates from baseline.
 pub(crate) const MALAY_AGE_FACTOR: f64 = 1.0 / 1.66;
 
+// --- watched eco-tech research timings, ported for `crate::derive::player_techs` (Phase D,
+// `task-enrichD`) --------------------------------------------------------------------------------
+// source: analyzer/crates/analyzer/src/analyze/metrics.rs:12-23 (WATCHED_TECHS), ids verified vs
+// aoe2techtree data.json: 22 Loom, 213 Wheel Barrow, 249 Hand Cart, 202 Double Bit Axe, 203 Bow
+// Saw, 14 Horse Collar, 13 Heavy Plow, 55 Gold Mining, 182 Gold Shaft Mining, 278 Stone Mining.
+
+/// Watched eco upgrades + display name. Names are for a later exporter/provenance only (Phase E)
+/// — `derive::player_techs` uses just the ids; the pipeline stores tech_id alone, no name column
+/// (see `m20260706_000014_create_match_player_techs.rs`'s doc for why).
+pub(crate) const WATCHED_TECHS: &[(u16, &str)] = &[
+    (22, "Loom"),
+    (213, "Wheelbarrow"),
+    (249, "Hand Cart"),
+    (202, "Double-Bit Axe"),
+    (203, "Bow Saw"),
+    (14, "Horse Collar"),
+    (13, "Heavy Plow"),
+    (55, "Gold Mining"),
+    (182, "Gold Shaft Mining"),
+    (278, "Stone Mining"),
+];
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -81,5 +115,22 @@ mod tests {
             assert!(is_eco_unit(id));
         }
         assert!(!is_eco_unit(75)); // a military unit id, not eco
+    }
+
+    #[test]
+    fn age_tech_id_is_the_exact_reverse_of_age_name() {
+        for id in [101, 102, 103] {
+            let name = age_name(id).expect("101/102/103 must map to a name");
+            assert_eq!(age_tech_id(name), Some(id), "age_tech_id must invert age_name for {id}");
+        }
+        assert_eq!(age_tech_id("dark"), None);
+        assert_eq!(age_tech_id("nonsense"), None);
+    }
+
+    #[test]
+    fn watched_techs_covers_the_ten_ported_ids_verbatim() {
+        // source: analyzer/crates/analyzer/src/analyze/metrics.rs:12-23 — same order, same ids.
+        let ids: Vec<u16> = WATCHED_TECHS.iter().map(|&(id, _)| id).collect();
+        assert_eq!(ids, vec![22, 213, 249, 202, 203, 14, 13, 55, 182, 278]);
     }
 }

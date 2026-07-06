@@ -1,8 +1,8 @@
 //! SeaORM migrations for the AOE2 guide's gameplay-first, normalized PostgreSQL schema:
 //! dimension tables (`maps`, `civs`, `civs_relic`, `patch_index`) and fact tables
 //! (`matches`, `match_players`, `replay_events`, `replay_ages`, `match_ages`,
-//! `match_player_units`). See each migration module for the exact DDL. Do NOT partition any table
-//! here — that is a separate step before the 100M-row replay-event load.
+//! `match_player_units`, `match_player_techs`). See each migration module for the exact DDL. Do
+//! NOT partition any table here — that is a separate step before the 100M-row replay-event load.
 
 pub use sea_orm_migration::prelude::*;
 
@@ -19,6 +19,7 @@ mod m20260706_000010_create_match_ages;
 mod m20260706_000011_create_age_kind_enum;
 mod m20260706_000012_create_match_player_units;
 mod m20260706_000013_add_match_players_apm;
+mod m20260706_000014_create_match_player_techs;
 
 pub struct Migrator;
 
@@ -39,6 +40,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260706_000011_create_age_kind_enum::Migration),
             Box::new(m20260706_000012_create_match_player_units::Migration),
             Box::new(m20260706_000013_add_match_players_apm::Migration),
+            Box::new(m20260706_000014_create_match_player_techs::Migration),
         ]
     }
 }

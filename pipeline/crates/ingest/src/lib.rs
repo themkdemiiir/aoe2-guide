@@ -11,7 +11,7 @@ mod dto;
 mod ingest;
 
 pub use dto::{
-    IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerUnit, NewReplayAge,
-    NewReplayEvent, ReplayBatch,
+    IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerTech,
+    NewMatchPlayerUnit, NewReplayAge, NewReplayEvent, ReplayBatch,
 };
 pub use ingest::ingest_batch;

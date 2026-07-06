@@ -1,9 +1,10 @@
 //! Pure per-player derivation from a [`ParsedReplay`]'s own events: opening classification +
 //! age-up-COMPLETION timings (Phase A, `.superpowers/sdd/task-enrichA-brief.md`), per-unit
-//! trained-composition totals (Phase B, `.superpowers/sdd/task-enrichB-brief.md`), and
-//! commands-per-minute (Phase C, `.superpowers/sdd/task-enrichC-brief.md`) — fills
-//! `match_players.opening`/`feudal_t`/`castle_t`/`imperial_t`/`apm` and `match_player_units`,
-//! which the replay ingest path previously left `NULL`/empty.
+//! trained-composition totals (Phase B, `.superpowers/sdd/task-enrichB-brief.md`),
+//! commands-per-minute (Phase C, `.superpowers/sdd/task-enrichC-brief.md`), and watched-eco-tech
+//! first-research CLICK timings (Phase D, `.superpowers/sdd/task-enrichD-brief.md`) — fills
+//! `match_players.opening`/`feudal_t`/`castle_t`/`imperial_t`/`apm`, `match_player_units`, and
+//! `match_player_techs`, which the replay ingest path previously left `NULL`/empty.
 //!
 //! **Ported (not imported)** from `analyzer/crates/analyzer/src/analyze/{metrics.rs,compare.rs}`
 //! — that crate is a separate workspace root with its own vendored `aoe2rec` and a different
@@ -47,19 +48,33 @@
 //! `parse.rs`'s own age-summary walk already uses (`parse.rs:361-372`). This is units QUEUED,
 //! never surviving army: the replay format carries no deaths/losses, so survivorship is honestly
 //! unknowable from this data alone. See [`player_units`].
+//!
+//! ## Tech-timings basis — CLICK, not completion, replay-only (Phase D)
+//! `PlayerSummary.techs` (and, downstream, `match_player_techs.t_ms`) is the research-**START**
+//! (CLICK) time for each of [`config::WATCHED_TECHS`] — the min `t_ms` of that player's `research`
+//! events whose `target_id` is the watched tech, exactly what the replay records and what the
+//! analyzer's `eco_tech_times`/`first_research` return. This is the OPPOSITE basis from
+//! `feudal_t`/`castle_t`/`imperial_t` above, which store COMPLETION (click + civ-aware research
+//! seconds) so they can pool against aoestats' `*_age_uptime` columns. Tech-research timings have
+//! no aoestats equivalent at all (that archive carries no per-tech data), so there is no
+//! cross-source pooling to match here — click is the honest, directly-recorded value, and
+//! converting it to a fabricated "completion" would invent a number the replay never recorded.
+//! **Never conflate the two bases**: `match_player_techs.t_ms` (click) and
+//! `match_players.feudal_t`/`castle_t`/`imperial_t` (completion) measure different instants even
+//! for the same age-up-marking research event. See [`player_techs`].
 
 use std::collections::BTreeMap;
 
-use pipeline_core::{GameUnitId, ProfileId};
+use pipeline_core::{GameUnitId, ProfileId, TechId};
 
 use crate::config;
 use crate::error::overflow;
 use crate::types::{ParsedReplay, ReplayEvent};
 use crate::Result;
 
-/// One player's derived build-order summary + unit composition + APM. Phase A fills `opening` +
-/// the three age-up-COMPLETION timings; Phase B adds `units`; Phase C (this task) adds `apm`.
-/// Phase D (tech-timings) grows this struct later, per the task brief's scope note.
+/// One player's derived build-order summary + unit composition + APM + watched-tech timings.
+/// Phase A fills `opening` + the three age-up-COMPLETION timings; Phase B adds `units`; Phase C
+/// adds `apm`; Phase D (this task) adds `techs`.
 #[derive(Debug, Clone, PartialEq)]
 pub struct PlayerSummary {
     pub profile_id: ProfileId,
@@ -84,6 +99,12 @@ pub struct PlayerSummary {
     /// value flows into `match_players.apm`, which IS `NULL` for the aoestats path — see
     /// [`apm`].
     pub apm: Option<f32>,
+    /// Per-watched-tech first-research CLICK time in ms (Phase D enrichment) — one entry per
+    /// `config::WATCHED_TECHS` id this player ACTUALLY researched, sorted by tech_id for
+    /// determinism. **CLICK, not completion** — see the module doc's "Tech-timings basis" note
+    /// for why this differs from `feudal_t`/`castle_t`/`imperial_t` above. A tech never
+    /// researched by this player is simply absent — never a fabricated sentinel row.
+    pub techs: Vec<(TechId, i32)>,
 }
 
 /// Derives every real player's [`PlayerSummary`] from a parsed replay's own `events` — no second
@@ -130,6 +151,7 @@ pub fn derive(parsed: &ParsedReplay) -> Result<Vec<PlayerSummary>> {
                 imperial_t: completion_s(imperial_click, imperial_res_s),
                 units: player_units(&parsed.events, p.player_number)?,
                 apm: Some(apm(&parsed.events, p.player_number, parsed.duration_ms)),
+                techs: player_techs(&parsed.events, p.player_number),
             })
         })
         .collect()
@@ -143,23 +165,37 @@ fn completion_s(click_ms: Option<i32>, research_s: f64) -> Option<f32> {
     Some((f64::from(click_ms) / 1000.0 + research_s) as f32)
 }
 
-/// The first `research` event whose `target_id` decodes to the age-up tech for `age`
-/// (`config::age_name`: 101/102/103 -> feudal/castle/imperial), for one player. `.min()` over
-/// every matching event (order-independent) rather than "first in the list" — the replay's
-/// events are already in stream order in practice, but this ported function makes no assumption
-/// either way, matching the analyzer original exactly.
-/// source: analyzer/crates/analyzer/src/analyze/metrics.rs::first_research (called from
-/// age_clicks with tech ids 101/102/103 directly; this port reads them via `config::age_name`
-/// instead of re-hardcoding them, so there's one canonical copy of the three tech ids).
-fn first_age_click(evs: &[ReplayEvent], player_number: i16, age: &str) -> Option<i32> {
+/// The min `t_ms` of `player_number`'s `research` events whose `target_id` equals `tech_id` — the
+/// shared min-over-research primitive [`first_age_click`] (age-up techs 101/102/103) and
+/// [`player_techs`] (Phase D's watched eco techs) both need, factored out so neither duplicates
+/// the filter. Compares `target_id` (`i64`) by WIDENING `tech_id` up to `i64` rather than
+/// narrowing the event's value down to `u16`: `tech_id` is always representable in `i64`
+/// losslessly, so this is provably equivalent to a decode-then-compare for every input, without
+/// ever needing a fallible conversion (unlike [`player_units`], which must decode an unbounded
+/// `target_id` INTO its result and so genuinely needs the checked/fail-loud guard).
+/// source: analyzer/crates/analyzer/src/analyze/metrics.rs::first_research
+fn first_research_ms(evs: &[ReplayEvent], player_number: i16, tech_id: u16) -> Option<i32> {
+    let target = i64::from(tech_id);
     evs.iter()
-        .filter(|e| e.player_number == player_number && e.kind == "research")
-        .filter_map(|e| {
-            let tid = e.target_id?;
-            let tech = u16::try_from(tid).ok()?;
-            (config::age_name(tech) == Some(age)).then_some(e.t_ms)
+        .filter(|e| {
+            e.player_number == player_number && e.kind == "research" && e.target_id == Some(target)
         })
+        .map(|e| e.t_ms)
         .min()
+}
+
+/// The first `research` event whose `target_id` is the age-up tech for `age`
+/// (`config::age_tech_id`: feudal/castle/imperial -> 101/102/103), for one player. `.min()` (via
+/// [`first_research_ms`]) over every matching event (order-independent) rather than "first in the
+/// list" — the replay's events are already in stream order in practice, but this ported function
+/// makes no assumption either way, matching the analyzer original exactly. Resolves the tech id
+/// via `config::age_tech_id` rather than re-hardcoding 101/102/103 here, so there's one canonical
+/// copy of the three tech ids (in `config.rs`, alongside its inverse `age_name`).
+/// source: analyzer/crates/analyzer/src/analyze/metrics.rs::first_research (called from
+/// age_clicks with tech ids 101/102/103 directly).
+fn first_age_click(evs: &[ReplayEvent], player_number: i16, age: &str) -> Option<i32> {
+    let tech_id = config::age_tech_id(age)?;
+    first_research_ms(evs, player_number, tech_id)
 }
 
 /// (feudal, castle, imperial) age-up CLICK ms for one player.
@@ -269,6 +305,33 @@ fn player_units(evs: &[ReplayEvent], player_number: i16) -> Result<Vec<(GameUnit
         .collect()
 }
 
+/// Each of `config::WATCHED_TECHS`' first-research CLICK time for one player (Phase D
+/// enrichment) — see the module doc's "Tech-timings basis" note for why this is click, not
+/// completion. Folds into a `BTreeMap<i32, i32>` (tech_id -> min t_ms) exactly like
+/// [`player_units`]'s `BTreeMap<i32, i64>` fold: its iteration order is already sorted by key, so
+/// the final `Vec` comes out tech_id-ordered for free — this MATTERS here because
+/// `config::WATCHED_TECHS` is declared in provenance order (matching the analyzer source), not
+/// numeric order. A tech this player never researched contributes no entry (no fabricated
+/// sentinel row); a LATER duplicate research of an already-seen tech never overrides the
+/// earlier (min) `t_ms`, since [`first_research_ms`] itself already takes the min across every
+/// matching event for that one tech. Infallible (`Vec`, not `Result`): every id here is a
+/// compile-time `u16` constant, so widening it to `i32` (`TechId`) can never overflow — unlike
+/// `player_units`, which must decode an unbounded LIVE `target_id` and so needs the checked/
+/// fail-loud guard (see [`first_research_ms`]'s doc for the equivalence argument).
+/// source: analyzer/crates/analyzer/src/analyze/metrics.rs::eco_tech_times
+fn player_techs(evs: &[ReplayEvent], player_number: i16) -> Vec<(TechId, i32)> {
+    let mut first_click: BTreeMap<i32, i32> = BTreeMap::new();
+    for &(tech_id, _name) in config::WATCHED_TECHS {
+        if let Some(t_ms) = first_research_ms(evs, player_number, tech_id) {
+            first_click.insert(i32::from(tech_id), t_ms);
+        }
+    }
+    first_click
+        .into_iter()
+        .map(|(tech_id, t_ms)| (TechId(tech_id), t_ms))
+        .collect()
+}
+
 /// Commands-per-minute (Phase C enrichment) — see the module doc's "APM basis" note. The
 /// numerator is the COUNT of `player_number`'s events, one per RAW command: `parsed.events` is
 /// already one-event-per-raw-command (train/research/build/game/order/resign + the generic
@@ -304,7 +367,7 @@ fn age_research_s(civ_slug: &str) -> (f64, f64, f64) {
 mod tests {
     use super::*;
     use crate::types::ReplayPlayer;
-    use pipeline_core::GameCivId;
+    use pipeline_core::{GameCivId, TechId};
 
     /// GAME civ_id 29 -> "malay" (`src/data/civ-id-map.json`; verified in
     /// `pipeline_core::civs::civs::tests`). Used to prove the completion-time conversion is
@@ -654,5 +717,46 @@ mod tests {
             .unwrap();
         assert_eq!(s1.units, vec![(GameUnitId(74), 1)]);
         assert_eq!(s2.units, vec![(GameUnitId(448), 3)]);
+    }
+
+    #[test]
+    fn player_techs_captures_only_watched_techs_at_min_t_ms_sorted_by_id_ignoring_later_duplicates()
+    {
+        // Hand Cart (249) is declared BEFORE Horse Collar (14) in `config::WATCHED_TECHS`, but
+        // the result must come out sorted by tech_id ascending (14 before 249) — proving the
+        // sort is by id, not WATCHED_TECHS declaration order. Hand Cart is also researched
+        // TWICE: the later duplicate (200_000) must NOT override the earlier click (100_000).
+        // Tech 999 is not watched and must be ignored entirely.
+        let evs = vec![
+            ev(1, 100_000, "research", Some(249)), // Hand Cart, first click
+            ev(1, 200_000, "research", Some(249)), // Hand Cart again — must NOT override
+            ev(1, 150_000, "research", Some(14)),  // Horse Collar
+            ev(1, 50_000, "research", Some(999)),  // not watched -> ignored
+        ];
+        let p = parsed(vec![player(5001, 1, FRANKS)], evs);
+
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        assert_eq!(
+            s.techs,
+            vec![(TechId(14), 150_000), (TechId(249), 100_000)],
+            "sorted by tech_id ascending (14 < 249, despite 249 being declared first in \
+             WATCHED_TECHS); Hand Cart's min t_ms (100_000) wins over its later duplicate \
+             (200_000); the non-watched tech 999 is absent entirely"
+        );
+    }
+
+    #[test]
+    fn player_techs_is_empty_when_no_watched_tech_was_researched_never_fabricated() {
+        // Only a non-watched tech's research event -> nothing to capture, empty Vec, not a
+        // fabricated row.
+        let evs = vec![ev(1, 50_000, "research", Some(999))];
+        let p = parsed(vec![player(5001, 1, FRANKS)], evs);
+
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        assert_eq!(
+            s.techs,
+            Vec::new(),
+            "a player who researched no watched tech must get an empty Vec, never a fabricated row"
+        );
     }
 }

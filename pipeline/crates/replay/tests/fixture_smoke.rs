@@ -79,5 +79,16 @@ fn derives_plausible_opening_age_timings_and_units_from_a_real_replay() {
                 .map(|(unit_id, trained)| format!("{unit_id}x{trained}"))
                 .collect::<Vec<_>>()
         );
+
+        // Phase D (task-enrichD): watched-eco-tech first-research CLICK times (ms), already
+        // tech_id-ordered by `player_techs` — a human eyeball check that these look like CLICK
+        // ms (typically sub-minute to a few minutes for Loom/eco techs), not a fabricated value.
+        eprintln!(
+            "  watched techs (tech_id -> click_ms): {:?}",
+            s.techs
+                .iter()
+                .map(|(tech_id, t_ms)| format!("{tech_id}={t_ms}"))
+                .collect::<Vec<_>>()
+        );
     }
 }
