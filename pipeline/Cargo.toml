@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+    "crates/aoestats",
     "crates/core",
     "crates/dims",
     "crates/fetch",
@@ -77,6 +78,17 @@ flate2 = "1"
 zip = { version = "8", default-features = false, features = ["deflate-flate2"] }
 # HTTP mocking for `fetch`'s discovery/download parsing tests — never hits the live Relic API.
 wiremock = "0.6"
+
+# --- aoestats-only deps, hoisted per the same single-consumer-today convention above. ---
+# Native Rust parquet reader (+ writer, for the crate's own testcontainers fixture) — the
+# aoestats archive ships as `.parquet`, and the playbook's LIBRARY-FIRST rule forbids
+# hand-rolling a reader or shelling out to duckdb from the crate itself. Default features (which
+# include the `arrow` integration + the common compression codecs) are exactly what's needed;
+# `async`/`object_store` stay off (files are read from a local path, synchronously).
+parquet = "59"
+# Typed Arrow arrays/schema (`Int64Array`, `StringArray`, `RecordBatch`, ...) that
+# `parquet::arrow` hands back and the writer test fixture builds from scratch.
+arrow = "59"
 
 [workspace.dependencies.sea-orm-migration]
 version = "1.1.20"

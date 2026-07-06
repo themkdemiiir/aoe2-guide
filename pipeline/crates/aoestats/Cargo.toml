@@ -1,0 +1,39 @@
+[package]
+name = "aoestats"
+version.workspace = true
+edition.workspace = true
+description = "Import the aoestats parquet archive (matches/players) into the AOE2 guide's PostgreSQL pipeline store (source='aoestats')"
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "aoestats"
+path = "src/lib.rs"
+
+[[bin]]
+name = "aoestats"
+path = "src/main.rs"
+
+[dependencies]
+# Slug/civ/map ids are resolved via SQL JOINs against the already-loaded `maps`/`civs` dims (see
+# `src/db.rs`), not Rust-side refdata lookups — `default-features = false` keeps the Docker
+# context lean, matching `ingest`. `pipeline_core::slug::slug` (used to canonicalize aoestats'
+# `map`/`civ` strings before the JOIN, see `src/parquet_read.rs`) is NOT behind the `refdata`
+# feature, so it's still available here.
+pipeline-core = { path = "../core", default-features = false }
+tokio = { workspace = true }
+tokio-postgres = { workspace = true }
+chrono = { workspace = true }
+clap = { workspace = true }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+parquet = { workspace = true }
+arrow = { workspace = true }
+
+[dev-dependencies]
+migration = { path = "../migration" }
+testcontainers-modules = { workspace = true }
+# Auto-cleaned scratch dir for the synthetic `m_`/`p_` parquet fixtures the integration test
+# writes with `parquet::arrow::ArrowWriter` — dev-only, scoped to this one crate's tests.
+tempfile = "3"
