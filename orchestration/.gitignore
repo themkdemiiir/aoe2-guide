@@ -1,0 +1,7 @@
+.venv/
+*.egg-info/
+__pycache__/
+*.pyc
+# Local Dagster instance metadata (event log / run storage) when DAGSTER_HOME isn't overridden —
+# see README.md's "Metadata store" note. Never commit run history.
+.dagster_home/

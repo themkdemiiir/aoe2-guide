@@ -1,0 +1,28 @@
+[project]
+name = "aoe2-pipeline-orchestration"
+version = "0.1.0"
+description = "Dagster orchestration for the AOE2 guide's offline pipeline: dbt aggregation DAG (dagster-dbt) + Pipes-wrapped Rust bins + the now->old replay backfill partitions + the data-quality gate."
+requires-python = ">=3.12,<3.13"
+# Pinned exactly (see README.md's Setup section for how these were resolved) — no floating
+# ranges. dagster-dbt tracks its own version line, NOT dagster core's (0.29.12 is the version
+# that resolves cleanly against dagster==1.13.12, deploy/README.md's pin); dagster-pipes comes in
+# transitively via `dagster` itself (also 1.13.12 — see README.md).
+dependencies = [
+    "dagster==1.13.12",
+    "dagster-dbt==0.29.12",
+    "psycopg[binary]==3.3.4",
+]
+
+[project.optional-dependencies]
+# Only needed for the interactive `dagster dev` webserver — `dagster definitions validate` /
+# `dagster asset materialize` (this task's gates) don't need it.
+dev = [
+    "dagster-webserver==1.13.12",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["aoe2_pipeline"]
