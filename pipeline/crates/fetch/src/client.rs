@@ -145,7 +145,10 @@ mod tests {
 
         // HTTP-date form is intentionally not parsed.
         let mut h2 = HeaderMap::new();
-        h2.insert(RETRY_AFTER, "Wed, 21 Oct 2026 07:28:00 GMT".parse().unwrap());
+        h2.insert(
+            RETRY_AFTER,
+            "Wed, 21 Oct 2026 07:28:00 GMT".parse().unwrap(),
+        );
         assert_eq!(parse_retry_after(&h2), None);
 
         assert_eq!(parse_retry_after(&HeaderMap::new()), None);

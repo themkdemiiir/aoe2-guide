@@ -347,7 +347,8 @@ impl ReplayManifest for SqliteManifest {
             }
             vals.push(Box::new(u.match_id.0));
             let sql = format!("UPDATE matches SET {} WHERE match_id = ?", sets.join(", "));
-            let params: Vec<&dyn rusqlite::types::ToSql> = vals.iter().map(|b| b.as_ref()).collect();
+            let params: Vec<&dyn rusqlite::types::ToSql> =
+                vals.iter().map(|b| b.as_ref()).collect();
             tx.execute(&sql, params.as_slice())?;
         }
         tx.commit()?;
@@ -496,7 +497,10 @@ mod tests {
     fn retry_ready_respects_attempt_cap_and_exponential_backoff() {
         // Under the cap, attempts=1 → backoff = 60 << 1 = 120s.
         assert!(!retry_ready(1, 1_000, 1_000 + 119), "119s < 120s window");
-        assert!(retry_ready(1, 1_000, 1_000 + 120), "120s reaches the window");
+        assert!(
+            retry_ready(1, 1_000, 1_000 + 120),
+            "120s reaches the window"
+        );
         // attempts=0 → 60 << 0 = 60s.
         assert!(!retry_ready(0, 0, 59));
         assert!(retry_ready(0, 0, 60));
@@ -514,17 +518,29 @@ mod tests {
     #[test]
     fn seed_dedups_by_match_id() {
         let mut m = InMemoryManifest::default();
-        assert_eq!(m.seed(&[seed_row(1, 10, None), seed_row(2, 20, None)]).unwrap(), 2);
+        assert_eq!(
+            m.seed(&[seed_row(1, 10, None), seed_row(2, 20, None)])
+                .unwrap(),
+            2
+        );
         // Re-seeding known ids inserts nothing new.
-        assert_eq!(m.seed(&[seed_row(1, 10, None), seed_row(2, 20, None)]).unwrap(), 0);
+        assert_eq!(
+            m.seed(&[seed_row(1, 10, None), seed_row(2, 20, None)])
+                .unwrap(),
+            0
+        );
         assert_eq!(m.seed(&[seed_row(3, 30, None)]).unwrap(), 1);
     }
 
     #[test]
     fn take_ready_returns_pending_newest_first_and_honors_limit() {
         let mut m = InMemoryManifest::default();
-        m.seed(&[seed_row(1, 10, None), seed_row(2, 30, None), seed_row(3, 20, None)])
-            .unwrap();
+        m.seed(&[
+            seed_row(1, 10, None),
+            seed_row(2, 30, None),
+            seed_row(3, 20, None),
+        ])
+        .unwrap();
         let ready = m.take_ready(10, 1_000).unwrap();
         assert_eq!(
             ready.iter().map(|r| r.match_id.0).collect::<Vec<_>>(),
@@ -544,9 +560,13 @@ mod tests {
             ..Default::default()
         };
         m.seed(&[seed_row(1, 10, None)]).unwrap();
-        m.record(&[StatusUpdate::new(MatchId(1), MatchStatus::Error)]).unwrap();
+        m.record(&[StatusUpdate::new(MatchId(1), MatchStatus::Error)])
+            .unwrap();
         // Errored at t=1000 attempts=1 → not eligible until t=1000+120.
-        assert!(m.take_ready(10, 1_100).unwrap().is_empty(), "still inside backoff");
+        assert!(
+            m.take_ready(10, 1_100).unwrap().is_empty(),
+            "still inside backoff"
+        );
         let ready = m.take_ready(10, 1_000 + 120).unwrap();
         assert_eq!(ready.len(), 1);
         assert_eq!(ready[0].attempts, 1, "attempt was incremented");
@@ -555,8 +575,12 @@ mod tests {
     #[test]
     fn terminal_statuses_are_never_taken() {
         let mut m = InMemoryManifest::default();
-        m.seed(&[seed_row(1, 10, None), seed_row(2, 20, None), seed_row(3, 30, None)])
-            .unwrap();
+        m.seed(&[
+            seed_row(1, 10, None),
+            seed_row(2, 20, None),
+            seed_row(3, 30, None),
+        ])
+        .unwrap();
         m.record(&[
             StatusUpdate::new(MatchId(1), MatchStatus::Parsed),
             StatusUpdate::new(MatchId(2), MatchStatus::Expired),
@@ -575,7 +599,8 @@ mod tests {
         m.seed(&[seed_row(1, 10, None)]).unwrap();
         // Fail it MAX_ATTEMPTS times.
         for _ in 0..MAX_ATTEMPTS {
-            m.record(&[StatusUpdate::new(MatchId(1), MatchStatus::Error)]).unwrap();
+            m.record(&[StatusUpdate::new(MatchId(1), MatchStatus::Error)])
+                .unwrap();
         }
         assert!(
             m.take_ready(10, i64::MAX / 2).unwrap().is_empty(),
@@ -591,17 +616,25 @@ mod tests {
         };
         // A row goes expired without participant ids.
         m.seed(&[seed_row(2, 20, None)]).unwrap();
-        m.record(&[StatusUpdate::new(MatchId(2), MatchStatus::Expired)]).unwrap();
+        m.record(&[StatusUpdate::new(MatchId(2), MatchStatus::Expired)])
+            .unwrap();
         // A seed carrying ids enriches it AND flips expired→pending.
         m.seed(&[seed_row(2, 20, Some("30;40"))]).unwrap();
         let ready = m.take_ready(10, i64::MAX / 2).unwrap();
-        let p2 = ready.iter().find(|r| r.match_id.0 == 2).expect("row 2 back to pending");
+        let p2 = ready
+            .iter()
+            .find(|r| r.match_id.0 == 2)
+            .expect("row 2 back to pending");
         assert_eq!(p2.profile_ids.as_deref(), Some("30;40"));
         // Archive also fails → expired WITH ids; a later identical seed must NOT flip it again.
-        m.record(&[StatusUpdate::new(MatchId(2), MatchStatus::Expired)]).unwrap();
+        m.record(&[StatusUpdate::new(MatchId(2), MatchStatus::Expired)])
+            .unwrap();
         m.seed(&[seed_row(2, 20, Some("30;40"))]).unwrap();
         assert!(
-            m.take_ready(10, i64::MAX / 2).unwrap().iter().all(|r| r.match_id.0 != 2),
+            m.take_ready(10, i64::MAX / 2)
+                .unwrap()
+                .iter()
+                .all(|r| r.match_id.0 != 2),
             "an already-enriched expired row is not re-flipped"
         );
     }
@@ -613,8 +646,10 @@ mod tests {
     // actually agrees with it, using real rusqlite (no mocking, no live network).
 
     fn tmp_manifest(name: &str) -> (std::path::PathBuf, SqliteManifest) {
-        let path = std::env::temp_dir()
-            .join(format!("fetch_manifest_{name}_{}.sqlite", std::process::id()));
+        let path = std::env::temp_dir().join(format!(
+            "fetch_manifest_{name}_{}.sqlite",
+            std::process::id()
+        ));
         let _ = std::fs::remove_file(&path);
         let manifest = SqliteManifest::open(path.to_str().unwrap()).unwrap();
         (path, manifest)
@@ -624,8 +659,12 @@ mod tests {
     fn sqlite_manifest_seeds_dedups_and_orders_take_ready_newest_first() {
         let (path, mut m) = tmp_manifest("basic");
         assert_eq!(
-            m.seed(&[seed_row(1, 10, None), seed_row(2, 30, None), seed_row(3, 20, None)])
-                .unwrap(),
+            m.seed(&[
+                seed_row(1, 10, None),
+                seed_row(2, 30, None),
+                seed_row(3, 20, None)
+            ])
+            .unwrap(),
             3
         );
         // Re-seeding known ids inserts nothing new (dedup).
@@ -704,12 +743,12 @@ mod tests {
         // A status token outside the closed vocabulary (simulating a corrupt/foreign-written
         // manifest) must fail loud, never silently drop the row or panic.
         m.con
-            .execute(
-                "UPDATE matches SET status = 'bogus' WHERE match_id = 1",
-                [],
-            )
+            .execute("UPDATE matches SET status = 'bogus' WHERE match_id = 1", [])
             .unwrap();
-        assert!(m.counts().is_err(), "an unrecognized status token must fail loud");
+        assert!(
+            m.counts().is_err(),
+            "an unrecognized status token must fail loud"
+        );
         let _ = std::fs::remove_file(&path);
     }
 }
