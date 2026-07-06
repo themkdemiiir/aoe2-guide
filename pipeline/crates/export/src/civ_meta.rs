@@ -129,8 +129,8 @@ pub fn build_doc(inputs: CivMetaInputs) -> CivMetaDoc {
     }
 
     CivMetaDoc {
-        source: "PostgreSQL pipeline (matches.source='aoestats') via the dbt civ_meta model — \
-                  M5a sample, see the task report for scope"
+        source: "aoestats.io ranked archive (all-time, 2022-08 onward) — PostgreSQL pipeline via \
+                  the dbt civ_meta model"
             .to_string(),
         ladders: LADDERS.iter().map(|s| s.to_string()).collect(),
         generated: Utc::now().format("%Y-%m-%d").to_string(),
@@ -145,8 +145,8 @@ pub fn build_doc(inputs: CivMetaInputs) -> CivMetaDoc {
             .collect(),
         tier_method: TIER_METHOD.to_string(),
         civs,
-        patch_source: "matches.build (aoestats-sourced rows only; M5a sample — the full \
-                        official-build axis lands at M6)"
+        patch_source: "matches.build (aoestats-sourced rows only, all-time — the full \
+                        official-build axis)"
             .to_string(),
     }
 }

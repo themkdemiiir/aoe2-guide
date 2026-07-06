@@ -5,23 +5,21 @@
 //! dbt models, not here — see `benchmark_ageup.sql`'s doc for why this one pair of models breaks
 //! from `civ_meta`'s/`matchups`'s "thresholds only in Rust" convention.
 //!
-//! **Documented M5b sample scope:** `benchmark_ageup` clears its threshold for 22 grains today
-//! (mostly per-civ rollups, one per-map cell) — real, useful output. `benchmark_vils` clears it
-//! for ZERO grains: WINNERS who reached Castle with both early-age windows recorded number 1056
-//! players total, spread thin enough across (civ, map, elo_bucket, mode) that no single grain
-//! reaches 50. Every `vils_castle` field is therefore `None` in this M5b run — real SQL, real
-//! threshold, not enough volume yet (the exact same class of caveat `matchups.rs`'s doc accepts
-//! for `civ-matchups.json`). `vils_castle` renders as JSON `null` (never omitted) on every cell,
-//! rather than the old `build-benchmark-vils.mjs`'s plain key omission — see `model.rs`'s
-//! `BenchmarkCell` doc for why that deviation is harmless to shape parity.
+//! Sourced from the full aoestats.io ranked archive (all-time, 2022-08 onward), not a dev sample.
+//! `benchmark_vils` in particular gates on WINNERS who reached Castle Age with both early-age
+//! windows recorded — a narrower slice than `benchmark_ageup`'s civ/map rollups, so some
+//! (civ, map, elo_bucket, mode) grains may still legitimately fall under the 50-row threshold and
+//! render `vils_castle` as JSON `null` (never omitted) rather than the old
+//! `build-benchmark-vils.mjs`'s plain key omission — see `model.rs`'s `BenchmarkCell` doc for why
+//! that deviation is harmless to shape parity.
 
 use std::collections::BTreeMap;
 
 use crate::model::{BenchmarkCell, BenchmarkDoc, BenchmarkModeMap};
 use crate::query::{BenchmarkAgeupRow, BenchmarkVilsRow};
 
-const SOURCE: &str = "PostgreSQL pipeline (matches.source='aoestats') via the dbt benchmark_ageup/\
-                       benchmark_vils models — M5b sample, see the task report for scope. \
+const SOURCE: &str = "aoestats.io ranked archive (all-time, 2022-08 onward) — PostgreSQL \
+                       pipeline via the dbt benchmark_ageup/benchmark_vils models. \
                        feudal_s/castle_s/imperial_s = median age-up completion seconds by \
                        civ x map x elo_bucket x mode, with 'all'-keyed rollups; vils_castle = \
                        median villagers trained through Castle Age among slice WINNERS.";

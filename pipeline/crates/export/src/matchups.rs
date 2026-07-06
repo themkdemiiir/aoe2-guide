@@ -6,14 +6,12 @@
 //! old generator that produced all four of these files in one pass — see that script's module
 //! doc), same "replicate, don't reinvent" posture as `civ_meta.rs`.
 //!
-//! **Documented M5b sample scope:** the live corpus (`matches` = 11615 rows, `source='aoestats'`)
-//! has only 3469 1v1 matches spread across up to ~3400 possible directed civ pairs — thin enough
-//! that ZERO pairs clear `MIN_GAMES`/`MIN_MAP_GAMES` (both 50) at the time this was written, so
-//! `civ-matchups.json`/`civ-matchups-by-map.json` legitimately export an EMPTY `civs` map today
-//! (real SQL, real thresholds, just not enough 1v1 volume yet — the exact same "populated_1v1=1"
-//! caveat `civ_meta.rs`'s own doc already accepts for the identical reason). `civ-matchups-by-elo`
-//! clears its lower `MIN_BUCKET_GAMES`/`MIN_ALL_GAMES` (30) for a couple of pairs; `civ-matchups-
-//! team.json`, built from 8146 team matches, is genuinely well-populated (436+ pairs).
+//! Sourced from the full aoestats.io ranked archive (`matches.source='aoestats'`, all-time,
+//! 2022-08 onward) — not a dev sample. A directed civ pair only appears in `civ-matchups.json`/
+//! `civ-matchups-by-map.json` once it clears `MIN_GAMES`/`MIN_MAP_GAMES`; `civ-matchups-by-elo.json`
+//! clears the lower `MIN_BUCKET_GAMES`/`MIN_ALL_GAMES`; `civ-matchups-team.json` is built from team
+//! matches only. Real SQL, real thresholds — a thin cell is omitted rather than padded, per
+//! `civ_meta.rs`'s own "populated_1v1"-style caveat.
 
 use std::collections::BTreeMap;
 
@@ -39,8 +37,8 @@ pub const MIN_ALL_GAMES: i64 = 30;
 /// `refresh-matchups-current.mjs`'s `MIN_TEAM`.
 pub const MIN_TEAM_GAMES: i64 = 100;
 
-const SOURCE: &str = "PostgreSQL pipeline (matches.source='aoestats') via the dbt matchups_* \
-                       models — M5b sample, see the task report for scope";
+const SOURCE: &str = "aoestats.io ranked archive (all-time, 2022-08 onward) — PostgreSQL \
+                       pipeline via the dbt matchups_* models";
 
 fn today() -> String {
     chrono::Utc::now().format("%Y-%m-%d").to_string()

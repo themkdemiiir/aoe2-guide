@@ -13,9 +13,9 @@
 //! data, never omitted) — shape parity means the key survives, not that empty data hides it.
 //!
 //! Deliberate scope note (documented in the task report): the values populated here come from the
-//! new Postgres-backed corpus (currently one aoestats sample day — see the M5a brief's "parity
-//! model"), so counts/rates differ from the committed file's — that is the accepted, by-design
-//! trade-off. Only the SHAPE is asserted equal.
+//! Postgres-backed corpus (the full aoestats.io ranked archive, all-time), so counts/rates differ
+//! from whatever was committed before a given regen — that is the accepted, by-design trade-off.
+//! Only the SHAPE is asserted equal.
 
 use std::collections::BTreeMap;
 
