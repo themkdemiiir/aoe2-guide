@@ -83,6 +83,12 @@ pub struct NewMatchPlayer {
     pub feudal_t: Option<f32>,
     pub castle_t: Option<f32>,
     pub imperial_t: Option<f32>,
+    /// Commands-per-minute (Phase C enrichment, `task-enrichC`) — `real`/float4 in Postgres, same
+    /// treatment as `feudal_t`/`castle_t`/`imperial_t` above. **Replay-source ONLY**: the replay
+    /// path always supplies `Some(..)` (see `replay::derive`'s module doc — a player with zero
+    /// commands still gets `Some(0.0)`, never `None`); the aoestats path has no per-action data
+    /// and leaves this `None`, so those rows keep `apm = NULL` in the DB.
+    pub apm: Option<f32>,
 }
 
 /// One row for `replay_events` — the highest-volume table (~100M rows), the COPY-critical path.
@@ -193,6 +199,7 @@ mod tests {
                 feudal_t: Some(320.5),
                 castle_t: None,
                 imperial_t: None,
+                apm: Some(42.5),
             }],
             events: vec![],
             ages: vec![NewReplayAge {
@@ -222,6 +229,7 @@ mod tests {
         assert_eq!(value["players"][0]["match_id"], serde_json::json!(1001));
         assert_eq!(value["players"][0]["profile_id"], serde_json::json!(5001));
         assert_eq!(value["players"][0]["civ_id"], serde_json::json!(1));
+        assert_eq!(value["players"][0]["apm"], serde_json::json!(42.5));
         assert_eq!(value["player_units"][0]["unit_id"], serde_json::json!(83));
 
         // Age is a lowercase bare string, not `{"Dark": null}`.

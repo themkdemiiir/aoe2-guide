@@ -53,6 +53,12 @@
 //! `PlayerSummary`'s `units` become `NewMatchPlayerUnit` rows on `ReplayBatch.player_units`,
 //! matched to their player by the SAME `profile_id` key `summaries` is already built on — no
 //! separate join needed.
+//!
+//! ## APM derivation (Phase C enrichment, `task-enrichC`)
+//! The SAME `replay::derive(&parsed)` call also fills each `PlayerSummary.apm` (commands-per-
+//! minute — see that module's doc for the ported formula and the replay-only/never-`None`
+//! basis). Matched onto `NewMatchPlayer.apm` by the SAME `profile_id` key as `opening`/the age
+//! timings; the replay path always supplies `Some(..)`.
 
 use std::collections::HashMap;
 
@@ -158,6 +164,11 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
                 feudal_t: derived.and_then(|s| s.feudal_t),
                 castle_t: derived.and_then(|s| s.castle_t),
                 imperial_t: derived.and_then(|s| s.imperial_t),
+                // Phase C enrichment — see the module doc's "APM derivation" section. `derived`
+                // is only `None` when `p.profile_id` structurally can't miss a summary (see the
+                // comment above); `s.apm` itself is always `Some(..)` for a replay-derived
+                // player (never fabricated `None` — see `replay::derive`'s module doc).
+                apm: derived.and_then(|s| s.apm),
             }
         })
         .collect();
@@ -244,6 +255,12 @@ mod tests {
         }
     }
 
+    /// **Warning:** hardcodes `player_number: 1` for EVERY player it builds — fine for the
+    /// single-player-number fixtures that use it, but do NOT reuse it for attribution-sensitive
+    /// multi-player tests (`replay::derive` attributes events to a player by `player_number`, so
+    /// two players sharing `player_number: 1` would silently collapse onto the same derived
+    /// summary). Build literal `ReplayPlayer`s with distinct `player_number`s instead — see
+    /// `to_batch_flows_derived_units_into_player_units` below for the pattern.
     fn sample_player(
         profile_id: i64,
         civ_id: i32,
@@ -349,6 +366,12 @@ mod tests {
              -> derive() has nothing to classify, so opening/timings honestly stay null; see \
              `to_batch_flows_derived_opening_and_completion_timings_into_match_player` for the \
              populated case"
+        );
+        assert!(
+            batch.players.iter().all(|p| p.apm.is_some()),
+            "apm (Phase C) is always Some for a replay-derived player, unlike \
+             opening/timings/units above — see `to_batch_flows_derived_units_into_player_units` \
+             for the exact-value case"
         );
 
         assert_eq!(batch.events.len(), 1);
@@ -480,6 +503,14 @@ mod tests {
         assert_eq!(p.castle_t, None, "castle never reached -> honest None");
         assert_eq!(p.imperial_t, None, "imperial never reached -> honest None");
 
+        // Phase C enrichment (task-enrichC): 2 raw commands (the research + the train above)
+        // over the sample's 1_800_000ms (30-minute) duration -> apm = 2 / 30 events/minute.
+        let apm = p.apm.expect("apm must always be Some for a replay-derived player");
+        assert!(
+            (apm - (2.0_f32 / 30.0)).abs() < 0.001,
+            "apm={apm} must equal 2 events / 30 minutes"
+        );
+
         // Phase B enrichment (task-enrichB): the same replay's lone `train` event (unit 448,
         // amount 1) must flow into `ReplayBatch.player_units` as one row.
         assert_eq!(batch.player_units.len(), 1);
@@ -580,6 +611,33 @@ mod tests {
         assert_eq!(
             p5002.trained, 2,
             "player 5002's train must not leak into player 5001's total"
+        );
+
+        // Phase C enrichment (task-enrichC): apm flows into `NewMatchPlayer`, matched by
+        // profile_id, and is COUNT-based (raw commands), not amount-summed — player 5001's two
+        // `train` commands (batch amounts 5 and 3) count as 2 raw events, NOT 8 (the `trained`
+        // total above); player 5002's one command counts as 1, not 2. Both over the sample's
+        // 1_800_000ms (30-minute) duration.
+        let player5001 = batch
+            .players
+            .iter()
+            .find(|p| p.profile_id == ProfileId(5001))
+            .expect("player 5001 must be present");
+        let player5002 = batch
+            .players
+            .iter()
+            .find(|p| p.profile_id == ProfileId(5002))
+            .expect("player 5002 must be present");
+        let apm5001 = player5001.apm.expect("apm must always be Some");
+        let apm5002 = player5002.apm.expect("apm must always be Some");
+        assert!(
+            (apm5001 - (2.0_f32 / 30.0)).abs() < 0.001,
+            "apm5001={apm5001} must be 2 raw commands / 30 minutes, not amount-summed (8/30)"
+        );
+        assert!(
+            (apm5002 - (1.0_f32 / 30.0)).abs() < 0.001,
+            "apm5002={apm5002} must be 1 raw command / 30 minutes, not amount-summed (2/30), \
+             and must not leak player 5001's commands"
         );
     }
 }

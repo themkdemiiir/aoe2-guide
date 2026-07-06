@@ -83,6 +83,9 @@ const MATCH_PLAYERS_COLUMNS: TableColumns = TableColumns {
         ("feudal_t", Type::FLOAT4),
         ("castle_t", Type::FLOAT4),
         ("imperial_t", Type::FLOAT4),
+        // `real`/float4 (`m20260706_000013_add_match_players_apm.rs`) — same treatment as
+        // `feudal_t`/`castle_t`/`imperial_t` above.
+        ("apm", Type::FLOAT4),
     ],
 };
 
@@ -148,7 +151,8 @@ CREATE TEMP TABLE stg_match_players (
     opening TEXT,
     feudal_t REAL,
     castle_t REAL,
-    imperial_t REAL
+    imperial_t REAL,
+    apm REAL
 ) ON COMMIT DROP;
 
 CREATE TEMP TABLE stg_replay_events (
@@ -206,8 +210,8 @@ CREATE TEMP TABLE new_match_ids ON COMMIT DROP AS
 // This is the intended no-churn contract; future producers (Task-4/5) must not rely on
 // re-ingestion to backfill/augment children of matches already in the store.
 const INSERT_MATCH_PLAYERS_SQL: &str = r#"
-INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening, feudal_t, castle_t, imperial_t)
-  SELECT s.match_id, s.profile_id, s.civ_id, s.elo, s.won, s.opening, s.feudal_t, s.castle_t, s.imperial_t
+INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening, feudal_t, castle_t, imperial_t, apm)
+  SELECT s.match_id, s.profile_id, s.civ_id, s.elo, s.won, s.opening, s.feudal_t, s.castle_t, s.imperial_t, s.apm
   FROM stg_match_players s JOIN new_match_ids n USING (match_id)
 "#;
 
@@ -341,7 +345,7 @@ async fn copy_match_players(tx: &Transaction<'_>, rows: &[NewMatchPlayer]) -> Re
     let writer = BinaryCopyInWriter::new(sink, &types);
     tokio::pin!(writer);
     for row in rows {
-        let params: [&(dyn ToSql + Sync); 9] = [
+        let params: [&(dyn ToSql + Sync); 10] = [
             &row.match_id.0,
             &row.profile_id.0,
             &row.civ_id.0,
@@ -351,6 +355,7 @@ async fn copy_match_players(tx: &Transaction<'_>, rows: &[NewMatchPlayer]) -> Re
             &row.feudal_t,
             &row.castle_t,
             &row.imperial_t,
+            &row.apm,
         ];
         writer
             .as_mut()

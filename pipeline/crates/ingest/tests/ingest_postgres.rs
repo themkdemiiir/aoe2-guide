@@ -137,6 +137,8 @@ fn sample_batch() -> ReplayBatch {
                 feudal_t: Some(320.5),
                 castle_t: Some(780.0),
                 imperial_t: None,
+                // Phase C (task-enrichC): a replay-derived player always has Some(..) apm.
+                apm: Some(74.2),
             },
             NewMatchPlayer {
                 match_id: MatchId(1001),
@@ -148,6 +150,10 @@ fn sample_batch() -> ReplayBatch {
                 feudal_t: None,
                 castle_t: None,
                 imperial_t: None,
+                // Deliberately None here (unlike the other two replay players below) to prove
+                // an aoestats-shaped row (no APM data) round-trips as a genuine NULL, not a
+                // fabricated 0.0 — see `assert_match_player_5002_apm_is_null`.
+                apm: None,
             },
             NewMatchPlayer {
                 match_id: MatchId(1002),
@@ -159,6 +165,7 @@ fn sample_batch() -> ReplayBatch {
                 feudal_t: Some(300.0),
                 castle_t: None,
                 imperial_t: None,
+                apm: Some(0.0), // a replay player who issued zero commands -> honest Some(0.0)
             },
         ],
         events: vec![
@@ -307,6 +314,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
     //        through undetected. ---
     assert_match_1001_row(&client).await;
     assert_match_player_5001_row(&client).await;
+    assert_match_player_apm_null_vs_zero(&client).await;
     assert_replay_event_row(&client).await;
     assert_replay_ages_rows(&client).await;
     assert_match_player_units_rows(&client).await;
@@ -418,11 +426,12 @@ async fn assert_match_1001_row(client: &tokio_postgres::Client) {
 
 /// Full-row read-back for `match_players` (match_id = 1001, profile_id = 5001), against
 /// `sample_batch().players[0]` — including the f32 `feudal_t`/`castle_t`/`imperial_t` columns
-/// (the 5b f64->f32 fix: these are `real`/float4 in Postgres).
+/// (the 5b f64->f32 fix: these are `real`/float4 in Postgres) and (Phase C, task-enrichC) `apm`,
+/// same `real`/`Option<f32>` treatment.
 async fn assert_match_player_5001_row(client: &tokio_postgres::Client) {
     let row = client
         .query_one(
-            "SELECT civ_id, elo, won, opening, feudal_t, castle_t, imperial_t \
+            "SELECT civ_id, elo, won, opening, feudal_t, castle_t, imperial_t, apm \
              FROM match_players WHERE match_id = 1001 AND profile_id = 5001",
             &[],
         )
@@ -451,6 +460,44 @@ async fn assert_match_player_5001_row(client: &tokio_postgres::Client) {
         row.get::<_, Option<f32>>(6),
         None,
         "match_players.imperial_t"
+    );
+    assert_eq!(
+        row.get::<_, Option<f32>>(7),
+        Some(74.2_f32),
+        "match_players.apm"
+    );
+}
+
+/// Phase C (task-enrichC): `apm` round-trips its two other honest states too — a genuine `NULL`
+/// (match 1001/profile 5002, standing in for the aoestats path, which never supplies APM data at
+/// all) MUST stay `NULL`, never come back as a fabricated `0.0`; and a replay player who issued
+/// zero commands (match 1002/profile 5003) MUST come back as a real `0.0`, never `NULL` — the
+/// two states are NOT interchangeable, so this asserts them side by side against the same column.
+async fn assert_match_player_apm_null_vs_zero(client: &tokio_postgres::Client) {
+    let null_row = client
+        .query_one(
+            "SELECT apm FROM match_players WHERE match_id = 1001 AND profile_id = 5002",
+            &[],
+        )
+        .await
+        .expect("full-row read-back query on match_players (apm NULL) failed");
+    assert_eq!(
+        null_row.get::<_, Option<f32>>(0),
+        None,
+        "match_players.apm (profile 5002) must be a genuine NULL, never fabricated as 0.0"
+    );
+
+    let zero_row = client
+        .query_one(
+            "SELECT apm FROM match_players WHERE match_id = 1002 AND profile_id = 5003",
+            &[],
+        )
+        .await
+        .expect("full-row read-back query on match_players (apm 0.0) failed");
+    assert_eq!(
+        zero_row.get::<_, Option<f32>>(0),
+        Some(0.0_f32),
+        "match_players.apm (profile 5003) must be a real 0.0, never NULL"
     );
 }
 
@@ -678,6 +725,7 @@ async fn ingest_batch_fails_loud_and_rolls_back_on_fk_violation() {
             feudal_t: None,
             castle_t: None,
             imperial_t: None,
+            apm: None,
         }],
         ..Default::default()
     };

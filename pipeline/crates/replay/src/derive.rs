@@ -1,8 +1,9 @@
 //! Pure per-player derivation from a [`ParsedReplay`]'s own events: opening classification +
-//! age-up-COMPLETION timings (Phase A, `.superpowers/sdd/task-enrichA-brief.md`) and per-unit
-//! trained-composition totals (Phase B, `.superpowers/sdd/task-enrichB-brief.md`) — fills
-//! `match_players.opening`/`feudal_t`/`castle_t`/`imperial_t` and `match_player_units`, which the
-//! replay ingest path previously left `NULL`/empty.
+//! age-up-COMPLETION timings (Phase A, `.superpowers/sdd/task-enrichA-brief.md`), per-unit
+//! trained-composition totals (Phase B, `.superpowers/sdd/task-enrichB-brief.md`), and
+//! commands-per-minute (Phase C, `.superpowers/sdd/task-enrichC-brief.md`) — fills
+//! `match_players.opening`/`feudal_t`/`castle_t`/`imperial_t`/`apm` and `match_player_units`,
+//! which the replay ingest path previously left `NULL`/empty.
 //!
 //! **Ported (not imported)** from `analyzer/crates/analyzer/src/analyze/{metrics.rs,compare.rs}`
 //! — that crate is a separate workspace root with its own vendored `aoe2rec` and a different
@@ -16,6 +17,20 @@
 //! attached as a new field on the struct itself — keeps `parse`/`types` untouched (smaller,
 //! lower-risk diff) and keeps this module directly unit-testable against hand-built
 //! `ParsedReplay` values without touching the parser at all.
+//!
+//! ## APM basis — REPLAY-SOURCE ONLY, one scalar, per-command not per-batch (Phase C)
+//! [`PlayerSummary::apm`] counts a player's raw `events` (one per command the replay recorded —
+//! train/research/build/game/order/resign + the generic fallthrough already produce exactly one
+//! event per command) over `parsed.duration_ms`. A shift-queued train of 5 is ONE event here
+//! (ONE action for APM), never 5 — that batch total is Phase B's separate `trained` metric,
+//! summed over `amount`. aoestats has no per-action data at all, so its `match_players` rows keep
+//! `apm = NULL` (honest absence); nothing else ever fills this column, so — unlike the age
+//! timings' completion-vs-click cross-source pooling rule — there's no reconciliation concern:
+//! this crate's own `duration_ms` basis only needs to be internally consistent with itself, which
+//! it is by construction. Do NOT reconcile it against the analyzer's `game.get_duration()`; that
+//! is a separate system with its own duration basis. A player with zero events gets `Some(0.0)`
+//! (they genuinely acted zero times) — never `None`, which is reserved for the aoestats path.
+//! See [`apm`].
 //!
 //! ## CRITICAL correctness rule — completion, not click
 //! `match_players.{feudal_t,castle_t,imperial_t}` are **COMPLETION seconds**: the aoestats
@@ -42,9 +57,9 @@ use crate::error::overflow;
 use crate::types::{ParsedReplay, ReplayEvent};
 use crate::Result;
 
-/// One player's derived build-order summary + unit composition. Phase A fills `opening` + the
-/// three age-up-COMPLETION timings; Phase B (this task) adds `units`. Phase C/D (APM/tech-timings)
-/// grow this struct later, per the task brief's scope note.
+/// One player's derived build-order summary + unit composition + APM. Phase A fills `opening` +
+/// the three age-up-COMPLETION timings; Phase B adds `units`; Phase C (this task) adds `apm`.
+/// Phase D (tech-timings) grows this struct later, per the task brief's scope note.
 #[derive(Debug, Clone, PartialEq)]
 pub struct PlayerSummary {
     pub profile_id: ProfileId,
@@ -63,6 +78,12 @@ pub struct PlayerSummary {
     /// military alike — see the module doc's "honest metric" note). Empty (never fabricated as
     /// an all-zero row) when the player trained nothing at all.
     pub units: Vec<(GameUnitId, i32)>,
+    /// Commands-per-minute (Phase C enrichment) — always `Some`, never `None`, for a replay
+    /// player: see the module doc's "APM basis" note for why replay-derived APM is never absent
+    /// (a player with zero commands honestly gets `Some(0.0)`). `Option` only because this same
+    /// value flows into `match_players.apm`, which IS `NULL` for the aoestats path — see
+    /// [`apm`].
+    pub apm: Option<f32>,
 }
 
 /// Derives every real player's [`PlayerSummary`] from a parsed replay's own `events` — no second
@@ -108,6 +129,7 @@ pub fn derive(parsed: &ParsedReplay) -> Result<Vec<PlayerSummary>> {
                 castle_t: completion_s(castle_click, castle_res_s),
                 imperial_t: completion_s(imperial_click, imperial_res_s),
                 units: player_units(&parsed.events, p.player_number)?,
+                apm: Some(apm(&parsed.events, p.player_number, parsed.duration_ms)),
             })
         })
         .collect()
@@ -245,6 +267,19 @@ fn player_units(evs: &[ReplayEvent], player_number: i16) -> Result<Vec<(GameUnit
             Ok((GameUnitId(unit_id), trained))
         })
         .collect()
+}
+
+/// Commands-per-minute (Phase C enrichment) — see the module doc's "APM basis" note. The
+/// numerator is the COUNT of `player_number`'s events, one per RAW command: `parsed.events` is
+/// already one-event-per-raw-command (train/research/build/game/order/resign + the generic
+/// fallthrough), so a shift-queued train of 5 is still ONE event here, never 5 — that batch total
+/// is [`player_units`]'s separate `trained` metric. `duration_ms` floors at one second
+/// (`.max(1.0 / 60.0)` minutes) before dividing, the analyzer's own divide-by-zero guard.
+/// source: analyzer/crates/analyzer/src/analyze/compare.rs:88-89
+fn apm(evs: &[ReplayEvent], player_number: i16, duration_ms: i32) -> f32 {
+    let count = evs.iter().filter(|e| e.player_number == player_number).count();
+    let minutes = (f64::from(duration_ms) / 60_000.0).max(1.0 / 60.0);
+    (count as f64 / minutes) as f32
 }
 
 /// Civ-aware click -> COMPLETION age-up research seconds (feudal, castle, imperial). Baseline
@@ -525,6 +560,78 @@ mod tests {
             Vec::new(),
             "a player who trained nothing must get an empty Vec, never a fabricated row"
         );
+    }
+
+    #[test]
+    fn apm_counts_events_not_batch_amounts() {
+        // Phase C (task-enrichC): 3 raw commands (1 research + 2 train, one of which is a
+        // shift-queued batch of amount=5) over a 1-minute (60_000ms) duration -> APM must be
+        // exactly 3.0, NOT 7.0 (which would double-count the batch's `amount` as 5 actions).
+        let evs = vec![
+            ev(1, 0, "research", Some(101)),
+            ev_amt(1, 1_000, "train", Some(83), Some(5)),
+            ev_amt(1, 2_000, "train", Some(448), Some(1)),
+        ];
+        let mut p = parsed(vec![player(5001, 1, FRANKS)], evs);
+        p.duration_ms = 60_000;
+
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        assert_eq!(
+            s.apm,
+            Some(3.0),
+            "3 raw commands over 1 minute = 3.0 APM, not 7.0 (amount=5 must count as 1 command)"
+        );
+    }
+
+    #[test]
+    fn apm_max_guard_prevents_divide_by_zero_on_near_zero_duration() {
+        // duration_ms = 0 would divide-by-zero without the `.max(1.0 / 60.0)` guard (floors the
+        // denominator at 1 second = 1/60 minute). 6 events / (1/60 min) = 360.0 APM, finite.
+        let evs: Vec<ReplayEvent> = (0..6).map(|i| ev(1, i, "research", Some(101))).collect();
+        let mut p = parsed(vec![player(5001, 1, FRANKS)], evs);
+        p.duration_ms = 0;
+
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        let apm = s.apm.expect("apm must always be Some for a replay-derived player");
+        assert!(apm.is_finite(), "the .max(1/60) guard must prevent a divide-by-zero/NaN/inf");
+        assert!((apm - 360.0).abs() < 0.01, "apm={apm:?} must equal 6 / (1/60) = 360.0");
+    }
+
+    #[test]
+    fn apm_is_zero_not_none_when_player_has_zero_events() {
+        // A player with zero commands genuinely acted zero times -> Some(0.0), never None
+        // (None is reserved for the aoestats path, which has no APM data at all).
+        let p = parsed(vec![player(5001, 1, FRANKS)], vec![]);
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        assert_eq!(
+            s.apm,
+            Some(0.0),
+            "zero events must be an honest Some(0.0), never a fabricated-absence None"
+        );
+    }
+
+    #[test]
+    fn apm_only_counts_the_matching_players_own_events() {
+        // Player 2's events must not leak into player 1's APM.
+        let evs = vec![
+            ev(1, 0, "research", Some(101)),
+            ev(2, 0, "research", Some(101)),
+            ev(2, 1_000, "train", Some(448)),
+        ];
+        let mut p = parsed(vec![player(5001, 1, FRANKS), player(5002, 2, MALAY)], evs);
+        p.duration_ms = 60_000;
+
+        let summaries = derive(&p).expect("well-formed test replay must derive cleanly");
+        let s1 = summaries
+            .iter()
+            .find(|s| s.profile_id == ProfileId(5001))
+            .unwrap();
+        let s2 = summaries
+            .iter()
+            .find(|s| s.profile_id == ProfileId(5002))
+            .unwrap();
+        assert_eq!(s1.apm, Some(1.0), "player 1 only has its own 1 event");
+        assert_eq!(s2.apm, Some(2.0), "player 2 has its own 2 events");
     }
 
     #[test]
