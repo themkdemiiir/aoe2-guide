@@ -117,3 +117,106 @@ pub struct AgeUp {
     pub castle: i64,
     pub imperial: i64,
 }
+
+// --- matchups (task M5b) — typed mirrors of `civ-matchups*.json` -------------------------------
+//
+// Field order matches each committed file exactly, same "serde_json::to_string_pretty
+// reproduces the committed shape" reasoning as `CivMetaDoc` above.
+
+/// One opponent's games/winRate against a civ — the shared list-item shape of
+/// `civ-matchups.json`/`civ-matchups-by-map.json`/`civ-matchups-team.json`'s `civs` entries.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MatchupOpponent {
+    pub opp: String,
+    pub games: u64,
+    #[serde(rename = "winRate")]
+    pub win_rate: f64,
+}
+
+/// `civ-matchups.json` AND `civ-matchups-team.json` (identical shape — only `ladder`/`minGames`/
+/// `note`/`civs` content differ at runtime; see `matchups.rs::build_civ_matchups`/
+/// `build_civ_matchups_team`).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CivMatchupsDoc {
+    pub source: String,
+    pub generated: String,
+    pub ladder: String,
+    #[serde(rename = "minGames")]
+    pub min_games: u64,
+    pub note: String,
+    /// Keyed by civ slug — a data-keyed map, not a fixed field set (see `shape::DYNAMIC_MAP_FIELDS`
+    /// and its `collapse_dynamic` helper, which this doc's nested `Vec<MatchupOpponent>` entries
+    /// specifically motivated — see that function's doc).
+    pub civs: BTreeMap<String, Vec<MatchupOpponent>>,
+}
+
+/// `civ-matchups-by-map.json`: one more dynamic-keyed level than [`CivMatchupsDoc`] — each civ's
+/// entry is itself keyed by map slug, not a fixed struct.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CivMatchupsByMapDoc {
+    pub source: String,
+    pub generated: String,
+    pub ladder: String,
+    #[serde(rename = "minGames")]
+    pub min_games: u64,
+    pub note: String,
+    pub civs: BTreeMap<String, BTreeMap<String, Vec<MatchupOpponent>>>,
+}
+
+/// `civ-matchups-by-elo.json`'s `minGames: {bucket, all}` (both currently 30, kept as two named
+/// fields — not one constant — because they gate two logically distinct things: a per-bucket cell
+/// vs. the elo-agnostic `"all"` rollup cell; see `matchups.rs`'s threshold constants).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EloMinGames {
+    pub bucket: u64,
+    pub all: u64,
+}
+
+/// `[winRate, games]` — a `(f64, u64)` tuple serializes as the committed file's own 2-element JSON
+/// array (serde tuple serialization order = declaration order).
+pub type EloWinRateGames = (f64, u64);
+
+/// `civs.<civSlug>.<oppSlug>.<eloBucket>`, the innermost map of [`CivMatchupsByEloDoc`].
+pub type EloBucketMap = BTreeMap<String, EloWinRateGames>;
+
+/// `civ-matchups-by-elo.json`: `civs.<slug>.<opp> = {<bucket>: [winRate, games], ..., all: [...]}`.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CivMatchupsByEloDoc {
+    pub source: String,
+    pub generated: String,
+    pub ladder: String,
+    #[serde(rename = "eloBuckets")]
+    pub elo_buckets: Vec<String>,
+    #[serde(rename = "minGames")]
+    pub min_games: EloMinGames,
+    pub note: String,
+    pub civs: BTreeMap<String, BTreeMap<String, EloBucketMap>>,
+}
+
+// --- benchmark (task M5b) — typed mirror of `benchmark.json` ------------------------------------
+
+/// One (civ, map, elo_bucket, mode) grain's medians — `vils_castle` is `None` (JSON `null`) on any
+/// grain `benchmark_vils` doesn't cover (a real, documented state: the old
+/// `build-benchmark-vils.mjs` merged it into a SUBSET of the age-benchmark's own cells, never
+/// inventing a value for the rest — see that script's doc and `benchmark.rs`'s doc for why this
+/// crate emits `null` rather than omitting the key, unlike the old generator's plain omission).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BenchmarkCell {
+    pub feudal_s: Option<f64>,
+    pub castle_s: Option<f64>,
+    pub imperial_s: Option<f64>,
+    pub vils_castle: Option<f64>,
+}
+
+/// `civs.<civSlug>.<mapSlug>.<eloBucket>`, the innermost (mode-keyed) map of [`BenchmarkDoc`].
+pub type BenchmarkModeMap = BTreeMap<String, BenchmarkCell>;
+
+/// The whole `benchmark.json` document: `civs.<civSlug>.<mapSlug>.<eloBucket>.<mode> =
+/// BenchmarkCell`, `"all"`-keyed at every one of the three inner levels for its rollup grains (see
+/// `benchmark_ageup.sql`'s doc for exactly which grain combinations are real).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BenchmarkDoc {
+    #[serde(rename = "_source")]
+    pub source: String,
+    pub civs: BTreeMap<String, BTreeMap<String, BTreeMap<String, BenchmarkModeMap>>>,
+}

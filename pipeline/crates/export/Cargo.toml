@@ -29,6 +29,9 @@ clap = { workspace = true }
 tracing = { workspace = true }
 anyhow = { workspace = true }
 thiserror = { workspace = true }
+# `benchmark_ageup`/`benchmark_vils` stream via `query_raw` (a `RowStream`) instead of buffering —
+# see `pipeline/docs/rust-playbook.md`'s export section and `Cargo.toml`'s doc for this dep.
+futures-util = { workspace = true }
 
 [dev-dependencies]
 migration = { path = "../migration" }

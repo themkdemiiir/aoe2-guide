@@ -15,14 +15,28 @@ see `.superpowers/sdd/task-M5a-export-report.md` for the full writeup.
 | `civ_meta_openings` | (civ, ladder, opening), ranked | `.openings` (top 3) |
 | `civ_meta_ageup` | (civ, ladder) | `.ageUp` (median seconds) |
 | `patch_axis` | (build), 1v1-ladder-only, global | top-level `patches` |
+| `matchups_1v1` | (civ, opp), 1v1 | `civ-matchups.json` |
+| `matchups_1v1_by_map` | (civ, opp, map), 1v1 | `civ-matchups-by-map.json` |
+| `matchups_1v1_by_elo` | (civ, opp, elo_bucket \| `'all'`), 1v1 | `civ-matchups-by-elo.json` |
+| `matchups_team` | (civ, opp), team, cross-team pairs | `civ-matchups-team.json` |
+| `benchmark_ageup` | (civ, map \| `'all'`, elo_bucket \| `'all'`, mode \| `'all'`), GROUPING SETS | `benchmark.json` base cells |
+| `benchmark_vils` | (civ, map \| `'all'`, elo_bucket \| `'all'`, mode \| `'all'`), WINNERS only, GROUPING SETS | `benchmark.json`'s `vils_castle` overlay |
 
 All `materialized: view` (task M5a's whole result set is a few hundred rows per model — cheap to
 recompute; see `dbt_project.yml`'s doc for why a later, much larger M5b/c model might choose
-`table` instead). Every model resolves `civ_id -> slug` itself via a `civs` JOIN — see
-`pipeline/crates/export/src/lib.rs`'s doc for why the Rust side deliberately does NOT duplicate
-that lookup. Per-bucket/map/patch/civ minimum-sample thresholds (the old JS generators'
-`MIN_ELO`/`MIN_MAP`/etc.) are applied once, in `pipeline/crates/export/src/civ_meta.rs` — not
-duplicated into these views.
+`table` instead). Every model resolves `civ_id -> slug` (and `map_id -> slug`) itself via a `civs`/
+`maps` JOIN — see `pipeline/crates/export/src/lib.rs`'s doc for why the Rust side deliberately does
+NOT duplicate that lookup. Per-bucket/map/patch/civ minimum-sample thresholds (the old JS
+generators' `MIN_ELO`/`MIN_MAP`/etc.) are applied once, in `pipeline/crates/export/src/{civ_meta,
+matchups}.rs` — not duplicated into these views. The two `benchmark_*` models are the one
+exception: their `HAVING count(*) >= 50` lives IN the view, matching the old `build-benchmark*.sql`
+scripts they mirror (GROUPING SETS' four/three grains are only meaningfully comparable
+post-aggregation).
+
+Task M5b (`.superpowers/sdd/task-M5b-exporters-report.md`) added the `matchups_*`/`benchmark_*`
+models; `winner-refs`/`winner-comps`/`civ-cube` are deferred to M5c (see that report for why —
+short version: `replay_events`/`replay_ages` are still empty in the live corpus, and
+`winner-comps.json` needs a per-unit-type breakdown column `match_ages` doesn't have yet).
 
 ## Setup
 

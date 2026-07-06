@@ -1303,6 +1303,7 @@ dependencies = [
  "anyhow",
  "chrono",
  "clap",
+ "futures-util",
  "migration",
  "pipeline-core",
  "serde",

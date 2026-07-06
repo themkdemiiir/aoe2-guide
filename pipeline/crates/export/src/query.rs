@@ -5,6 +5,7 @@
 //! per civ x ladder x elo_bucket/map/patch/opening), nothing like the ~60M-row `match_ages` that
 //! `pipeline/docs/rust-playbook.md`'s "export" section reserves streaming for.
 
+use futures_util::TryStreamExt;
 use tokio_postgres::{Client, Row};
 
 use crate::error::Result;
@@ -204,4 +205,178 @@ const SELECT_SOURCE_DATE: &str = "SELECT to_char(max(played_at), 'YYYY-MM') FROM
 pub async fn fetch_source_date(client: &Client) -> Result<Option<String>> {
     let row = client.query_one(SELECT_SOURCE_DATE, &[]).await?;
     Ok(row.try_get(0)?)
+}
+
+// --- matchups (task M5b) ----------------------------------------------------------------------
+//
+// Same `client.query` (buffered) posture as the civ-meta views above: `matchups_1v1_by_elo`, the
+// largest of the four, is at most (civs x civs x elo_buckets) rows — a few thousand, nothing like
+// `match_ages`' scale.
+
+/// One row of `matchups_1v1`/`matchups_team`: a directed (civ, opp) pair — see those dbt models'
+/// docs for the self-join that produces both directions per match.
+#[derive(Debug, Clone)]
+pub struct MatchupRow {
+    pub civ_slug: String,
+    pub opp_slug: String,
+    pub games: i64,
+    pub winrate: f64,
+}
+
+const SELECT_MATCHUPS_1V1: &str = "SELECT civ_slug, opp_slug, games, winrate FROM matchups_1v1";
+
+pub async fn fetch_matchups_1v1(client: &Client) -> Result<Vec<MatchupRow>> {
+    let rows = client.query(SELECT_MATCHUPS_1V1, &[]).await?;
+    rows.iter().map(row_to_matchup).collect()
+}
+
+const SELECT_MATCHUPS_TEAM: &str = "SELECT civ_slug, opp_slug, games, winrate FROM matchups_team";
+
+pub async fn fetch_matchups_team(client: &Client) -> Result<Vec<MatchupRow>> {
+    let rows = client.query(SELECT_MATCHUPS_TEAM, &[]).await?;
+    rows.iter().map(row_to_matchup).collect()
+}
+
+fn row_to_matchup(row: &Row) -> Result<MatchupRow> {
+    Ok(MatchupRow {
+        civ_slug: row.try_get("civ_slug")?,
+        opp_slug: row.try_get("opp_slug")?,
+        games: row.try_get("games")?,
+        winrate: row.try_get("winrate")?,
+    })
+}
+
+/// One row of `matchups_1v1_by_map`.
+#[derive(Debug, Clone)]
+pub struct MatchupByMapRow {
+    pub civ_slug: String,
+    pub opp_slug: String,
+    pub map_slug: String,
+    pub games: i64,
+    pub winrate: f64,
+}
+
+const SELECT_MATCHUPS_BY_MAP: &str =
+    "SELECT civ_slug, opp_slug, map_slug, games, winrate FROM matchups_1v1_by_map";
+
+pub async fn fetch_matchups_1v1_by_map(client: &Client) -> Result<Vec<MatchupByMapRow>> {
+    let rows = client.query(SELECT_MATCHUPS_BY_MAP, &[]).await?;
+    rows.iter()
+        .map(|row| {
+            Ok(MatchupByMapRow {
+                civ_slug: row.try_get("civ_slug")?,
+                opp_slug: row.try_get("opp_slug")?,
+                map_slug: row.try_get("map_slug")?,
+                games: row.try_get("games")?,
+                winrate: row.try_get("winrate")?,
+            })
+        })
+        .collect()
+}
+
+/// One row of `matchups_1v1_by_elo`: `elo_bucket = "all"` is the (non-null-elo-only) rollup row —
+/// same convention as `civ_meta`'s own `elo_bucket = 'all'` row (see that view's doc).
+#[derive(Debug, Clone)]
+pub struct MatchupByEloRow {
+    pub civ_slug: String,
+    pub opp_slug: String,
+    pub elo_bucket: String,
+    pub games: i64,
+    pub winrate: f64,
+}
+
+const SELECT_MATCHUPS_BY_ELO: &str =
+    "SELECT civ_slug, opp_slug, elo_bucket, games, winrate FROM matchups_1v1_by_elo";
+
+pub async fn fetch_matchups_1v1_by_elo(client: &Client) -> Result<Vec<MatchupByEloRow>> {
+    let rows = client.query(SELECT_MATCHUPS_BY_ELO, &[]).await?;
+    rows.iter()
+        .map(|row| {
+            Ok(MatchupByEloRow {
+                civ_slug: row.try_get("civ_slug")?,
+                opp_slug: row.try_get("opp_slug")?,
+                elo_bucket: row.try_get("elo_bucket")?,
+                games: row.try_get("games")?,
+                winrate: row.try_get("winrate")?,
+            })
+        })
+        .collect()
+}
+
+// --- benchmark (task M5b) ----------------------------------------------------------------------
+//
+// Unlike every fetch above, these two stream via `query_raw`/`RowStream` (never
+// `client.query`/`Vec<Row>`) per `pipeline/docs/rust-playbook.md`'s export rule and the M5b task
+// brief: `benchmark_ageup`/`benchmark_vils` are GROUPING-SETS views over `match_players`/
+// `match_ages`, and at full-corpus scale (M6+) their row counts grow with civ x map x elo_bucket x
+// mode combinations — unbounded compared to civ-meta's few-hundred-row views. Streaming keeps this
+// exporter's memory flat regardless of how large that grows.
+
+/// One row of `benchmark_ageup`: `map_slug`/`elo_bucket`/`mode` are `"all"` on a rollup grain —
+/// see that view's doc for the four GROUPING SETS grains.
+#[derive(Debug, Clone)]
+pub struct BenchmarkAgeupRow {
+    pub civ_slug: String,
+    pub map_slug: String,
+    pub elo_bucket: String,
+    pub mode: String,
+    pub feudal_median: f64,
+    pub castle_median: f64,
+    pub imperial_median: f64,
+}
+
+const SELECT_BENCHMARK_AGEUP: &str = "SELECT civ_slug, map_slug, elo_bucket, mode, \
+     feudal_median, castle_median, imperial_median FROM benchmark_ageup";
+
+pub async fn fetch_benchmark_ageup(client: &Client) -> Result<Vec<BenchmarkAgeupRow>> {
+    let stream = client
+        .query_raw(SELECT_BENCHMARK_AGEUP, Vec::<i32>::new())
+        .await?;
+    tokio::pin!(stream);
+    let mut out = Vec::new();
+    while let Some(row) = stream.try_next().await? {
+        out.push(BenchmarkAgeupRow {
+            civ_slug: row.try_get("civ_slug")?,
+            map_slug: row.try_get("map_slug")?,
+            elo_bucket: row.try_get("elo_bucket")?,
+            mode: row.try_get("mode")?,
+            feudal_median: row.try_get("feudal_median")?,
+            castle_median: row.try_get("castle_median")?,
+            imperial_median: row.try_get("imperial_median")?,
+        });
+    }
+    Ok(out)
+}
+
+/// One row of `benchmark_vils` — the WINNERS-only villagers-by-Castle overlay (see that view's
+/// doc for the three GROUPING SETS grains, one fewer than `benchmark_ageup`'s four: there is no
+/// bare-`civ_slug` rollup here).
+#[derive(Debug, Clone)]
+pub struct BenchmarkVilsRow {
+    pub civ_slug: String,
+    pub map_slug: String,
+    pub elo_bucket: String,
+    pub mode: String,
+    pub vils_median: f64,
+}
+
+const SELECT_BENCHMARK_VILS: &str =
+    "SELECT civ_slug, map_slug, elo_bucket, mode, vils_median FROM benchmark_vils";
+
+pub async fn fetch_benchmark_vils(client: &Client) -> Result<Vec<BenchmarkVilsRow>> {
+    let stream = client
+        .query_raw(SELECT_BENCHMARK_VILS, Vec::<i32>::new())
+        .await?;
+    tokio::pin!(stream);
+    let mut out = Vec::new();
+    while let Some(row) = stream.try_next().await? {
+        out.push(BenchmarkVilsRow {
+            civ_slug: row.try_get("civ_slug")?,
+            map_slug: row.try_get("map_slug")?,
+            elo_bucket: row.try_get("elo_bucket")?,
+            mode: row.try_get("mode")?,
+            vils_median: row.try_get("vils_median")?,
+        });
+    }
+    Ok(out)
 }

@@ -80,6 +80,13 @@ zip = { version = "8", default-features = false, features = ["deflate-flate2"] }
 # HTTP mocking for `fetch`'s discovery/download parsing tests — never hits the live Relic API.
 wiremock = "0.6"
 
+# --- export-only dep, hoisted per the same single-consumer-today convention above. ---
+# `export::query`'s `benchmark_ageup`/`benchmark_vils` fetches use `Client::query_raw` (a
+# `RowStream`) instead of `Client::query`, per the rust-playbook's export streaming rule — the
+# stream needs `TryStreamExt::try_next()` to drive it row-by-row. `default-features = false` +
+# `std` only: no `futures::executor`/`compat` machinery, this crate is 100% tokio.
+futures-util = { version = "0.3", default-features = false, features = ["std"] }
+
 # --- aoestats-only deps, hoisted per the same single-consumer-today convention above. ---
 # Native Rust parquet reader (+ writer, for the crate's own testcontainers fixture) — the
 # aoestats archive ships as `.parquet`, and the playbook's LIBRARY-FIRST rule forbids

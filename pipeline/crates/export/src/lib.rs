@@ -11,13 +11,22 @@
 //! `include_str!`'d data files, no extra Docker-build surface — mirroring `aoestats`'s own
 //! no-Rust-side-refdata posture (see its `Cargo.toml`/`lib.rs` doc for the identical reasoning).
 
+pub mod benchmark;
 pub mod civ_meta;
 pub mod error;
+pub mod matchups;
 pub mod model;
 pub mod query;
 pub mod shape;
 pub mod stats;
 
+pub use benchmark::build_benchmark;
 pub use civ_meta::{build_doc, CivMetaInputs};
 pub use error::{ExportError, Result};
-pub use model::CivMetaDoc;
+pub use matchups::{
+    build_civ_matchups, build_civ_matchups_by_elo, build_civ_matchups_by_map,
+    build_civ_matchups_team,
+};
+pub use model::{
+    BenchmarkDoc, CivMatchupsByEloDoc, CivMatchupsByMapDoc, CivMatchupsDoc, CivMetaDoc,
+};

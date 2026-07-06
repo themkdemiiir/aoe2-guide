@@ -14,6 +14,7 @@ use clap::{Parser, Subcommand};
 use export::{build_doc, CivMetaInputs};
 use pipeline_core::cli::{database_url, init_tracing, log_error_and_code};
 use pipeline_core::redact_secret;
+use serde::Serialize;
 use tokio_postgres::NoTls;
 
 /// Default log filter when `RUST_LOG` is unset.
@@ -39,6 +40,22 @@ enum Command {
         #[arg(long, value_name = "DIR")]
         out: PathBuf,
     },
+    /// Export all four `civ-matchups*.json` files from the `pipeline/dbt` `matchups_*` views, in
+    /// one pass — mirrors `refresh-matchups-current.mjs`'s own single-pass shape (task M5b).
+    Matchups {
+        /// Directory to write `civ-matchups.json`/`civ-matchups-by-map.json`/
+        /// `civ-matchups-by-elo.json`/`civ-matchups-team.json` into. NEVER `src/data`.
+        #[arg(long, value_name = "DIR")]
+        out: PathBuf,
+    },
+    /// Export `benchmark.json` from the `pipeline/dbt` `benchmark_ageup`/`benchmark_vils` views
+    /// (task M5b) — streams both views via `query_raw` rather than buffering (see
+    /// `export::query`'s doc).
+    Benchmark {
+        /// Directory to write `benchmark.json` into. NEVER `scripts/data-pipeline/replay-rs/data`.
+        #[arg(long, value_name = "DIR")]
+        out: PathBuf,
+    },
     /// Print the structural (key-set + type-family) diff between two JSON files; exits 1 if the
     /// diff is non-empty. Values are ignored — see `export::shape`'s doc.
     ShapeDiff {
@@ -60,25 +77,46 @@ async fn main() {
     match cli.command {
         Command::ShapeDiff { a, b } => std::process::exit(run_shape_diff(&a, &b)),
         Command::CivMeta { out } => {
-            let secret = match database_url() {
-                Ok(secret) => secret,
-                Err(err) => {
-                    tracing::error!(error = %err, "failed to read DATABASE_URL");
-                    std::process::exit(1);
-                }
-            };
+            let secret = database_url_or_exit();
             if let Err(err) = run_civ_meta_export(&out, secret.expose()).await {
+                std::process::exit(log_error_and_code(&err, &secret));
+            }
+        }
+        Command::Matchups { out } => {
+            let secret = database_url_or_exit();
+            if let Err(err) = run_matchups_export(&out, secret.expose()).await {
+                std::process::exit(log_error_and_code(&err, &secret));
+            }
+        }
+        Command::Benchmark { out } => {
+            let secret = database_url_or_exit();
+            if let Err(err) = run_benchmark_export(&out, secret.expose()).await {
                 std::process::exit(log_error_and_code(&err, &secret));
             }
         }
     }
 }
 
-async fn run_civ_meta_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
+/// Reads `DATABASE_URL` or exits(1) — the identical "every DB-backed subcommand needs this first"
+/// step `civ-meta`/`matchups`/`benchmark` all share (`shape-diff` never calls this; it touches no
+/// database at all — see the module doc).
+fn database_url_or_exit() -> pipeline_core::Secret {
+    match database_url() {
+        Ok(secret) => secret,
+        Err(err) => {
+            tracing::error!(error = %err, "failed to read DATABASE_URL");
+            std::process::exit(1);
+        }
+    }
+}
+
+/// Connects to `database_url`, spawning the connection's driver task exactly like
+/// `run_civ_meta_export` did before this helper was extracted (redacts the connection error
+/// before logging, same as every other pipeline binary's `main.rs`).
+async fn connect(database_url: &str) -> anyhow::Result<tokio_postgres::Client> {
     let (client, connection) = tokio_postgres::connect(database_url, NoTls)
         .await
         .context("failed to connect to the database")?;
-
     let database_url_for_log = database_url.to_owned();
     tokio::spawn(async move {
         if let Err(err) = connection.await {
@@ -86,6 +124,67 @@ async fn run_civ_meta_export(out: &Path, database_url: &str) -> anyhow::Result<(
             tracing::error!(error = %message, "database connection closed with an error");
         }
     });
+    Ok(client)
+}
+
+async fn run_matchups_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
+    let client = connect(database_url).await?;
+
+    tracing::info!("querying matchups_* views");
+    let overall = export::query::fetch_matchups_1v1(&client).await?;
+    let by_map = export::query::fetch_matchups_1v1_by_map(&client).await?;
+    let by_elo = export::query::fetch_matchups_1v1_by_elo(&client).await?;
+    let team = export::query::fetch_matchups_team(&client).await?;
+
+    fs::create_dir_all(out).with_context(|| format!("failed to create {}", out.display()))?;
+
+    let civ_matchups = export::build_civ_matchups(&overall);
+    let civ_matchups_by_map = export::build_civ_matchups_by_map(&by_map);
+    let civ_matchups_by_elo = export::build_civ_matchups_by_elo(&by_elo);
+    let civ_matchups_team = export::build_civ_matchups_team(&team);
+
+    write_json_pretty(out, "civ-matchups.json", &civ_matchups)?;
+    write_json_pretty(out, "civ-matchups-by-map.json", &civ_matchups_by_map)?;
+    write_json_pretty(out, "civ-matchups-by-elo.json", &civ_matchups_by_elo)?;
+    write_json_pretty(out, "civ-matchups-team.json", &civ_matchups_team)?;
+
+    tracing::info!(
+        civs_1v1 = civ_matchups.civs.len(),
+        civs_by_map = civ_matchups_by_map.civs.len(),
+        civs_by_elo = civ_matchups_by_elo.civs.len(),
+        civs_team = civ_matchups_team.civs.len(),
+        out = %out.display(),
+        "matchups export complete"
+    );
+    Ok(())
+}
+
+async fn run_benchmark_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
+    let client = connect(database_url).await?;
+
+    tracing::info!("streaming benchmark_ageup/benchmark_vils views");
+    let ageup = export::query::fetch_benchmark_ageup(&client).await?;
+    let vils = export::query::fetch_benchmark_vils(&client).await?;
+    let ageup_rows = ageup.len();
+    let vils_rows = vils.len();
+
+    let doc = export::build_benchmark(&ageup, &vils);
+
+    fs::create_dir_all(out).with_context(|| format!("failed to create {}", out.display()))?;
+    write_json_pretty(out, "benchmark.json", &doc)?;
+
+    tracing::info!(
+        ageup_rows,
+        vils_rows,
+        civs = doc.civs.len(),
+        out = %out.display(),
+        "benchmark export complete"
+    );
+    Ok(())
+}
+
+async fn run_civ_meta_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
+    let client = connect(database_url).await?;
 
     tracing::info!("querying civ_meta views");
     let inputs = CivMetaInputs {
@@ -104,20 +203,28 @@ async fn run_civ_meta_export(out: &Path, database_url: &str) -> anyhow::Result<(
     let populated_team = doc.civs.values().filter(|c| c.team.is_some()).count();
 
     fs::create_dir_all(out).with_context(|| format!("failed to create {}", out.display()))?;
-    let path = out.join("civ-meta.json");
-    let json = serde_json::to_string_pretty(&doc).context("failed to serialize civ-meta.json")?;
-    fs::write(&path, format!("{json}\n"))
-        .with_context(|| format!("failed to write {}", path.display()))?;
+    write_json_pretty(out, "civ-meta.json", &doc)?;
 
     tracing::info!(
         civs = civ_count,
         populated_1v1,
         populated_team,
         patches = doc.patches.len(),
-        path = %path.display(),
+        out = %out.display(),
         "civ-meta export complete"
     );
     Ok(())
+}
+
+/// Serializes `value` as pretty JSON (trailing newline, matching every committed `src/data`/
+/// `public` JSON file's own convention) and writes it to `out/name`. Shared by every exporter
+/// subcommand — `out` is caller-created (`fs::create_dir_all`) before the first call.
+fn write_json_pretty<T: Serialize>(out: &Path, name: &str, value: &T) -> anyhow::Result<()> {
+    let path = out.join(name);
+    let json = serde_json::to_string_pretty(value)
+        .with_context(|| format!("failed to serialize {name}"))?;
+    fs::write(&path, format!("{json}\n"))
+        .with_context(|| format!("failed to write {}", path.display()))
 }
 
 fn run_shape_diff(a_path: &Path, b_path: &Path) -> i32 {
