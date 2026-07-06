@@ -113,6 +113,17 @@ fn database_url_or_exit() -> pipeline_core::Secret {
 /// Connects to `database_url`, spawning the connection's driver task exactly like
 /// `run_civ_meta_export` did before this helper was extracted (redacts the connection error
 /// before logging, same as every other pipeline binary's `main.rs`).
+///
+/// Also disables parallel-worker planning (`max_parallel_workers_per_gather = 0`) for this
+/// session only: the `civ_meta`/`matchups`/`benchmark` exports run GROUPING-SETS aggregations
+/// over the full 30M+-match table, and PostgreSQL's parallel workers allocate their DSA
+/// (dynamic shared memory) out of `/dev/shm`, which the aoe2-stack Postgres container sizes far
+/// below what those workers request — the query fails with "could not resize shared memory
+/// segment ... No space left on device" (see the M6 export-under-Dagster incident). Forcing a
+/// single-worker (serial) plan avoids that allocation entirely; it costs some wall-clock time on
+/// these already-slow analytical queries but makes `export` work under any container without an
+/// infra change. `SET` is session-scoped — it only affects this connection, not the server, and
+/// not `ingest`/`migration`/`aoestats`, which have their own separate connections.
 async fn connect(database_url: &str) -> anyhow::Result<tokio_postgres::Client> {
     let (client, connection) = tokio_postgres::connect(database_url, NoTls)
         .await
@@ -124,6 +135,10 @@ async fn connect(database_url: &str) -> anyhow::Result<tokio_postgres::Client> {
             tracing::error!(error = %message, "database connection closed with an error");
         }
     });
+    client
+        .batch_execute("SET max_parallel_workers_per_gather = 0")
+        .await
+        .context("failed to disable parallel workers on the export connection")?;
     Ok(client)
 }
 
