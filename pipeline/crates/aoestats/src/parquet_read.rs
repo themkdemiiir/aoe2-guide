@@ -99,6 +99,11 @@ pub struct RawMatchRow {
     /// canonical slug function here (rather than joining on the raw aoestats string) is the
     /// "reconcile only at the ingestion boundary" rule (`feedback_consistent_names`), not a
     /// fabricated workaround: single-word map names (`"arabia"`) are a no-op either way.
+    ///
+    /// Also passed through [`canonical_aoestats_map_slug`] AFTER `slug()` — a tiny, closed alias
+    /// table for the two ranked-map spelling/article mismatches between aoestats and `maps.tsv`
+    /// (task maps-gap, `.superpowers/sdd/task-mapsgap-brief.md`): aoestats' own spelling quirks,
+    /// mapped onto the existing `maps.tsv` dim ids, not new map data.
     pub map: Option<String>,
     /// Raw `leaderboard` string, unmodified — validated/mapped to `1v1`/`team` in `db.rs`'s SQL,
     /// which fails loud (a NOT NULL violation on `matches.ladder`) on anything else.
@@ -471,6 +476,31 @@ impl UptimeColumn<'_> {
     }
 }
 
+/// Reconciles the two known aoestats/`maps.tsv` map-slug mismatches, applied AFTER
+/// [`pipeline_core::slug::slug`] (task maps-gap — see
+/// `.superpowers/sdd/task-mapsgap-brief.md`). `slug()` only strips non-alphanumerics and
+/// lowercases; it has no way to fix an outright misspelling or a dropped article, so the ~129k
+/// aoestats rows for these two ranked maps were silently excluded by [`crate::db`]'s `JOIN maps mp
+/// ON mp.slug = s.map` until this table was added. Both entries are UNAMBIGUOUS reconciliations of
+/// an aoestats spelling quirk onto an EXISTING `maps.tsv` dim id, not fabricated map data:
+///
+/// - `"scandanavia"` (aoestats misspells "Scandinavia" with an extra 'a') -> `"scandinavia"`
+///   (`maps.tsv` id 25, "Scandinavia"). It cannot be Norse Lands (id 56, "Real-World Scandinavia",
+///   which slugs to `"norselands"`) — id 25 is the only "Scandinavia" in the dim.
+/// - `"passage"` (aoestats drops the leading article from "The Passage") -> `"thepassage"`
+///   (`maps.tsv` id 185, the only map with "Passage" in its name).
+///
+/// Kept as a closed, explicitly-enumerated `match` on purpose: a future third aoestats/`maps.tsv`
+/// mismatch must be a deliberate, reviewed addition to this table, never silently absorbed by a
+/// catch-all pattern.
+fn canonical_aoestats_map_slug(slug: &str) -> &str {
+    match slug {
+        "scandanavia" => "scandinavia",
+        "passage" => "thepassage",
+        other => other,
+    }
+}
+
 /// Reads every row of `m_*.parquet` at `path` into [`RawMatchRow`]s.
 pub fn read_matches(path: &Path) -> Result<Vec<RawMatchRow>> {
     let batches = read_projected_batches(path, MATCH_COLUMNS)?;
@@ -507,7 +537,9 @@ pub fn read_matches(path: &Path) -> Result<Vec<RawMatchRow>> {
 
             rows.push(RawMatchRow {
                 game_id: opt(game_id, i, |a, i| a.value(i).to_owned()),
-                map: opt(map, i, |a, i| pipeline_core::slug::slug(a.value(i))),
+                map: opt(map, i, |a, i| {
+                    canonical_aoestats_map_slug(&pipeline_core::slug::slug(a.value(i))).to_owned()
+                }),
                 leaderboard: opt(leaderboard, i, |a, i| a.value(i).to_owned()),
                 started_timestamp: started_timestamp_value,
                 duration_ns: opt(duration, i, |a, i| a.value(i)),
@@ -1076,5 +1108,60 @@ mod tests {
         let err = read_matches(&path)
             .expect_err("a file missing an entire expected column must still fail loud");
         assert!(matches!(err, AoestatsError::MissingColumn { .. }));
+    }
+
+    #[test]
+    fn canonical_aoestats_map_slug_fixes_the_two_known_mismatches() {
+        assert_eq!(canonical_aoestats_map_slug("scandanavia"), "scandinavia");
+        assert_eq!(canonical_aoestats_map_slug("passage"), "thepassage");
+    }
+
+    #[test]
+    fn canonical_aoestats_map_slug_passes_through_an_unrelated_slug_unchanged() {
+        assert_eq!(canonical_aoestats_map_slug("arabia"), "arabia");
+        assert_eq!(canonical_aoestats_map_slug("coastalforest"), "coastalforest");
+    }
+
+    #[test]
+    fn read_matches_applies_the_map_alias_after_slug() {
+        // Unlike `write_one_row_matches_fixture` (which hard-codes `map = "arabia"`), this builds
+        // its own one-row batch with the raw, pre-slug aoestats value `"scandanavia"` — proving
+        // `read_matches` itself (not just the standalone `canonical_aoestats_map_slug` fn above)
+        // applies the alias end to end.
+        let dir = tempfile::tempdir().expect("tempdir");
+        let path = dir.path().join("m_scandanavia.parquet");
+        let schema = Arc::new(Schema::new(vec![
+            Field::new("map", DataType::Utf8, true),
+            Field::new(
+                "started_timestamp",
+                DataType::Timestamp(TimeUnit::Microsecond, Some("UTC".into())),
+                true,
+            ),
+            Field::new("duration", DataType::Duration(TimeUnit::Nanosecond), true),
+            Field::new("game_id", DataType::Utf8, true),
+            Field::new("num_players", DataType::Int64, true),
+            Field::new("leaderboard", DataType::Utf8, true),
+            Field::new("patch", DataType::Int64, true),
+        ]));
+        let batch = RecordBatch::try_new(
+            schema.clone(),
+            vec![
+                Arc::new(StringArray::from(vec![Some("scandanavia")])),
+                Arc::new(TimestampMicrosecondArray::from(vec![Some(0i64)]).with_timezone("UTC")),
+                Arc::new(DurationNanosecondArray::from(vec![Some(0i64)])),
+                Arc::new(StringArray::from(vec![Some("2001")])),
+                Arc::new(Int64Array::from(vec![Some(2i64)])),
+                Arc::new(StringArray::from(vec![Some("random_map")])),
+                Arc::new(Int64Array::from(vec![Some(101i64)])),
+            ],
+        )
+        .expect("build one-row matches RecordBatch");
+        let file = File::create(&path).expect("create fixture file");
+        let mut writer = ArrowWriter::try_new(file, schema, None).expect("build ArrowWriter");
+        writer.write(&batch).expect("write batch");
+        writer.close().expect("close ArrowWriter");
+
+        let rows = read_matches(&path).expect("read_matches on the fixture file");
+        assert_eq!(rows[0].map.as_deref(), Some("scandinavia"));
     }
 }
