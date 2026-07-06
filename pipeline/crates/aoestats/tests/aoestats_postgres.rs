@@ -285,6 +285,7 @@ async fn import_pair_resolves_slugs_skips_unknowns_and_is_idempotent() {
             unknown_civ_slugs: vec![(Some("atlanteans".to_owned()), 1)],
             matches_missing_game_id: 0,
             players_missing_identity: 1,
+            matches_duration_out_of_range: 0,
         },
         "first import must report exactly what it wrote, which slugs it couldn't resolve, and \
          which rows it excluded for missing their own identity"
@@ -469,5 +470,188 @@ async fn assert_player_5001_row(client: &tokio_postgres::Client) {
         row.get::<_, Option<f32>>(6),
         None,
         "match_players.imperial_t"
+    );
+}
+
+/// Writes a `m_*.parquet`-shaped fixture exercising this task's two SQL-layer schema-drift fixes
+/// (see `db`'s module doc's "Two more schema-drift fixes"), all mapped to map `arabia` (seeded by
+/// [`seed_dimensions`]):
+/// - `9001`(`co_random_map`, 2 players) -> `1v1`.
+/// - `9002`(`co_team_random_map`, 4 players) -> `team`.
+/// - `9003`(**NULL leaderboard**, 2 players) -> `1v1` (the defensive `num_players` fallback — never
+///   observed in the real archive, but covered anyway).
+/// - `9004`(**NULL leaderboard**, 4 players) -> `team` (same fallback, team-shaped).
+/// - `9005`(`random_map`, a `duration` of `9_999_999_999_999_999` ns — WAY beyond Postgres
+///   `integer` range once converted to milliseconds) -> still imports, `duration_ms` NULL instead
+///   of aborting the whole file.
+fn write_drift_matches_fixture(path: &Path) {
+    let schema = Arc::new(Schema::new(vec![
+        Field::new("map", DataType::Utf8, true),
+        Field::new(
+            "started_timestamp",
+            DataType::Timestamp(TimeUnit::Microsecond, None),
+            true,
+        ),
+        Field::new("duration", DataType::Duration(TimeUnit::Nanosecond), true),
+        Field::new("game_id", DataType::Utf8, true),
+        Field::new("num_players", DataType::Int64, true),
+        Field::new("leaderboard", DataType::Utf8, true),
+        Field::new("patch", DataType::Int64, true),
+    ]));
+
+    let ts = Utc
+        .with_ymd_and_hms(2023, 5, 7, 0, 0, 0)
+        .unwrap()
+        .timestamp_micros();
+
+    let map = StringArray::from(vec![Some("arabia"); 5]);
+    let started_timestamp = TimestampMicrosecondArray::from(vec![Some(ts); 5]);
+    let duration = DurationNanosecondArray::from(vec![
+        Some(1_800_000_000_000),
+        Some(1_800_000_000_000),
+        Some(1_800_000_000_000),
+        Some(1_800_000_000_000),
+        Some(9_999_999_999_999_999),
+    ]);
+    let game_id = StringArray::from(vec![
+        Some("9001"),
+        Some("9002"),
+        Some("9003"),
+        Some("9004"),
+        Some("9005"),
+    ]);
+    let num_players = Int64Array::from(vec![Some(2), Some(4), Some(2), Some(4), Some(2)]);
+    let leaderboard = StringArray::from(vec![
+        Some("co_random_map"),
+        Some("co_team_random_map"),
+        None,
+        None,
+        Some("random_map"),
+    ]);
+    let patch = Int64Array::from(vec![Some(101); 5]);
+
+    let batch = RecordBatch::try_new(
+        schema.clone(),
+        vec![
+            Arc::new(map),
+            Arc::new(started_timestamp),
+            Arc::new(duration),
+            Arc::new(game_id),
+            Arc::new(num_players),
+            Arc::new(leaderboard),
+            Arc::new(patch),
+        ],
+    )
+    .expect("build drift-matches RecordBatch");
+
+    let file = File::create(path).expect("create drift-matches fixture file");
+    let mut writer = ArrowWriter::try_new(file, schema, None).expect("build ArrowWriter");
+    writer.write(&batch).expect("write drift-matches batch");
+    writer.close().expect("close drift-matches ArrowWriter");
+}
+
+/// An empty `p_*.parquet`-shaped fixture (zero rows) — this test only exercises `matches`-side
+/// ladder-mapping/duration-guard logic, so no players are needed; `import_pair` still requires a
+/// `players_path` to read (even if it yields nothing).
+fn write_empty_players_fixture(path: &Path) {
+    let schema = Arc::new(Schema::new(vec![
+        Field::new("game_id", DataType::Utf8, true),
+        Field::new("civ", DataType::Utf8, true),
+        Field::new("profile_id", DataType::Float64, true),
+        Field::new("winner", DataType::Boolean, true),
+        Field::new("opening", DataType::Utf8, true),
+        Field::new("feudal_age_uptime", DataType::Float64, true),
+        Field::new("castle_age_uptime", DataType::Float64, true),
+        Field::new("imperial_age_uptime", DataType::Float64, true),
+        Field::new("new_rating", DataType::Int64, true),
+    ]));
+
+    let batch = RecordBatch::try_new(
+        schema.clone(),
+        vec![
+            Arc::new(StringArray::from(Vec::<Option<&str>>::new())),
+            Arc::new(StringArray::from(Vec::<Option<&str>>::new())),
+            Arc::new(Float64Array::from(Vec::<Option<f64>>::new())),
+            Arc::new(BooleanArray::from(Vec::<Option<bool>>::new())),
+            Arc::new(StringArray::from(Vec::<Option<&str>>::new())),
+            Arc::new(Float64Array::from(Vec::<Option<f64>>::new())),
+            Arc::new(Float64Array::from(Vec::<Option<f64>>::new())),
+            Arc::new(Float64Array::from(Vec::<Option<f64>>::new())),
+            Arc::new(Int64Array::from(Vec::<Option<i64>>::new())),
+        ],
+    )
+    .expect("build empty-players RecordBatch");
+
+    let file = File::create(path).expect("create empty-players fixture file");
+    let mut writer = ArrowWriter::try_new(file, schema, None).expect("build ArrowWriter");
+    writer.write(&batch).expect("write empty-players batch");
+    writer.close().expect("close empty-players ArrowWriter");
+}
+
+/// Covers this task's two SQL-layer schema-drift fixes end to end against a real Postgres — see
+/// [`write_drift_matches_fixture`]'s doc for the exact fixture shape and expected outcomes.
+#[tokio::test]
+#[ignore]
+async fn import_pair_maps_co_leaderboards_and_guards_duration_overflow() {
+    let (_container, mut client) = migrated_client().await;
+
+    let dir = tempfile::tempdir().expect("create temp dir for fixtures");
+    let matches_path = dir.path().join("m_drift.parquet");
+    let players_path = dir.path().join("p_drift.parquet");
+    write_drift_matches_fixture(&matches_path);
+    write_empty_players_fixture(&players_path);
+
+    let stats = import_pair(&mut client, &matches_path, &players_path)
+        .await
+        .expect("import_pair failed on the schema-drift fixture");
+
+    assert_eq!(
+        stats.matches_inserted, 5,
+        "all 5 rows import — including the NULL-leaderboard and oversized-duration ones, which \
+         must NOT abort the whole file"
+    );
+    assert_eq!(
+        stats.matches_duration_out_of_range, 1,
+        "exactly one row (9005) has an out-of-i32-range duration_ms"
+    );
+
+    let ladder = |match_id: i64| {
+        let client = &client;
+        async move {
+            client
+                .query_one(
+                    "SELECT ladder::text FROM matches WHERE match_id = $1",
+                    &[&match_id],
+                )
+                .await
+                .unwrap_or_else(|err| panic!("ladder query for match_id {match_id} failed: {err}"))
+                .get::<_, String>(0)
+        }
+    };
+
+    assert_eq!(ladder(9001).await, "1v1", "co_random_map -> 1v1");
+    assert_eq!(ladder(9002).await, "team", "co_team_random_map -> team");
+    assert_eq!(
+        ladder(9003).await,
+        "1v1",
+        "NULL leaderboard, num_players=2 -> 1v1 (defensive num_players fallback)"
+    );
+    assert_eq!(
+        ladder(9004).await,
+        "team",
+        "NULL leaderboard, num_players=4 -> team (defensive num_players fallback)"
+    );
+
+    let duration_9005: Option<i32> = client
+        .query_one(
+            "SELECT duration_ms FROM matches WHERE match_id = 9005",
+            &[],
+        )
+        .await
+        .expect("duration_ms query for match_id 9005 failed")
+        .get(0);
+    assert_eq!(
+        duration_9005, None,
+        "an out-of-i32-range duration is written NULL, not silently truncated/wrapped"
     );
 }

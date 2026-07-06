@@ -31,6 +31,36 @@
 //! than parsed in Rust. Same staging/COPY/JOIN shape as above, but with one twist: `match_ages` has
 //! no primary key to `ON CONFLICT` against, so idempotency is instead a delete-then-insert scoped
 //! to the batch's own `match_id`s — see [`import_ages`]'s doc for the exact mechanics.
+//!
+//! **Two more schema-drift fixes (same task as `parquet_read`'s arrow-type widening, but these
+//! live here because they're SQL-layer, not arrow-type, issues — checked against the real archive,
+//! not assumed):**
+//!
+//! - `leaderboard` -> `ladder`: [`INSERT_MATCHES_SQL`]'s `CASE` originally mapped only
+//!   `random_map`/`team_random_map`. An archive-wide scan (all 172 `m_*.parquet` files, this task)
+//!   found the STRING column itself is never NULL, but two more values appear starting ~2023-05:
+//!   `co_random_map`/`co_team_random_map` (~4% of all rows archive-wide). Cross-tabbing against
+//!   `num_players` for every occurrence of all four values confirms `co_random_map` is >99.99%
+//!   2-player and `co_team_random_map` is >99.99% >2-player — the SAME shape split as the two
+//!   already-mapped values — so they're folded into the same `1v1`/`team` buckets rather than left
+//!   to fall through the `CASE` to NULL (which trips `matches.ladder`'s `NOT NULL` constraint and
+//!   aborts the whole transaction, per this module's "fail-loud vs. bulk-safe" note above). A
+//!   genuinely-unmapped FIFTH value would still do exactly that — the guard isn't removed, only
+//!   widened to the archive's confirmed vocabulary. A defensive `num_players`-based fallback for an
+//!   actually-NULL `leaderboard` is included too (2 players -> `1v1`, else `team`) even though this
+//!   was never observed in any of the 172 files — cheap insurance against a future file, not a
+//!   worked-around real bug.
+//! - `duration` -> `matches.duration_ms`: exactly 2 of the 172 `m_*.parquet` files (`2022-10-02`,
+//!   `2022-10-09`) contain a handful of rows whose `duration` is absurd — up to
+//!   `5_574_815_100_000_000` ns (~64 DAYS), clearly corrupt telemetry from the source, not a real
+//!   AoE2 match length — which overflows Postgres `integer` (`matches.duration_ms`'s column type,
+//!   unchanged — this crate doesn't touch migration DDL) once divided to milliseconds, aborting the
+//!   whole file's transaction with "integer out of range" for the sake of a handful of garbage
+//!   values. [`INSERT_MATCHES_SQL`] now guards the `::int` cast with an `i32`-range check, writing
+//!   `NULL` (the column is nullable) instead of aborting when it doesn't fit — the match itself
+//!   (and every one of its fields the corrupt value doesn't touch) still imports. Counted and
+//!   `tracing::warn!`'d via `matches_duration_out_of_range`, same "logged and counted, never
+//!   silent, never fabricated" posture as the rest of this module.
 
 use std::path::Path;
 
@@ -66,6 +96,11 @@ pub struct ImportStats {
     /// Staged player rows with a NULL `game_id` and/or NULL `profile_id` — excluded for the same
     /// reason (`profile_id` is part of `match_players`' primary key).
     pub players_missing_identity: u64,
+    /// Staged match rows whose `duration` doesn't fit Postgres `integer` once converted to
+    /// milliseconds (corrupt source telemetry, not a real AoE2 match length — see the module doc)
+    /// — the match itself still imports, with `duration_ms` written `NULL` instead of aborting the
+    /// whole transaction.
+    pub matches_duration_out_of_range: u64,
 }
 
 /// The outcome of one [`import_ages`] call (Task M4b).
@@ -152,26 +187,39 @@ const PLAYERS_COPY_TYPES: [Type; 9] = [
 /// free-text patch label column) has no aoestats source, so it's written `NULL` — a deliberate,
 /// documented choice per the brief's "your call, document" note, not a silent default (there's no
 /// plausible non-NULL value to invent).
+///
+/// The `ladder` `CASE` and the `duration_ms` range guard are this task's fixes — see the module
+/// doc's "Two more schema-drift fixes" section for why each one is shaped the way it is.
 const INSERT_MATCHES_SQL: &str = r#"
 INSERT INTO matches (match_id, source, ladder, map_id, build, patch, played_at, duration_ms, n_players)
 SELECT
     s.game_id::bigint,
     'aoestats'::source_kind,
-    (CASE s.leaderboard
-        WHEN 'random_map' THEN '1v1'
-        WHEN 'team_random_map' THEN 'team'
+    (CASE
+        WHEN s.leaderboard IN ('random_map', 'co_random_map') THEN '1v1'
+        WHEN s.leaderboard IN ('team_random_map', 'co_team_random_map') THEN 'team'
+        WHEN s.leaderboard IS NULL AND s.num_players = 2 THEN '1v1'
+        WHEN s.leaderboard IS NULL AND s.num_players IS NOT NULL THEN 'team'
      END)::ladder_kind,
     mp.map_id,
     s.patch::int,
     NULL::text,
     s.started_timestamp,
-    s.duration_ms::int,
+    (CASE
+        WHEN s.duration_ms BETWEEN -2147483648 AND 2147483647 THEN s.duration_ms::int
+        ELSE NULL
+     END),
     s.num_players::smallint
 FROM stg_aoestats_matches s
 JOIN maps mp ON mp.slug = s.map
 WHERE s.game_id IS NOT NULL
 ON CONFLICT (match_id) DO NOTHING
 "#;
+
+/// Diagnostic companion to [`INSERT_MATCHES_SQL`]'s `duration_ms` range guard — counted and
+/// `tracing::warn!`'d the same way `UNKNOWN_MAP_SLUGS_SQL` et al. are (see the module doc).
+const COUNT_MATCHES_DURATION_OUT_OF_RANGE_SQL: &str = "SELECT count(*) FROM stg_aoestats_matches \
+     WHERE duration_ms IS NOT NULL AND duration_ms NOT BETWEEN -2147483648 AND 2147483647";
 
 /// Gated on `JOIN matches m` (the real table, not a captured "just inserted" set — see the module
 /// doc): a player row imports only once its parent match genuinely exists, whether that match came
@@ -353,6 +401,15 @@ pub async fn import_pair(
             "aoestats import: player rows with a NULL game_id/profile_id — excluded, not fabricated"
         );
     }
+    let matches_duration_out_of_range =
+        fetch_count(&tx, COUNT_MATCHES_DURATION_OUT_OF_RANGE_SQL).await?;
+    if matches_duration_out_of_range > 0 {
+        tracing::warn!(
+            rows = matches_duration_out_of_range,
+            "aoestats import: match rows with a duration outside Postgres integer range — \
+             duration_ms written NULL instead of aborting the file, not fabricated"
+        );
+    }
 
     let matches_inserted = tx
         .execute(INSERT_MATCHES_SQL, &[])
@@ -372,6 +429,7 @@ pub async fn import_pair(
         unknown_civ_slugs,
         matches_missing_game_id: matches_missing_game_id as u64,
         players_missing_identity: players_missing_identity as u64,
+        matches_duration_out_of_range: matches_duration_out_of_range as u64,
     };
     tracing::info!(
         matches_inserted = stats.matches_inserted,
@@ -380,6 +438,7 @@ pub async fn import_pair(
         unknown_civ_slugs = stats.unknown_civ_slugs.len(),
         matches_missing_game_id = stats.matches_missing_game_id,
         players_missing_identity = stats.players_missing_identity,
+        matches_duration_out_of_range = stats.matches_duration_out_of_range,
         "aoestats import committed"
     );
     Ok(stats)

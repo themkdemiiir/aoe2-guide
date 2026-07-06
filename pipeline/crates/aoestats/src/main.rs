@@ -1,14 +1,19 @@
 //! Thin CLI over the `aoestats` library: `import` loads either one explicit `m_*`/`p_*` pair
 //! (`--matches`/`--players`) or every pair discovered in a directory (`--dir`); `import-ages`
-//! (Task M4b) loads one `p_*.parquet` file's `replay_summary_raw` per-age summaries into
-//! `match_ages` — independently, since that table has no FK to `matches`.
+//! (Task M4b) loads either one explicit `p_*.parquet` file (`--players`) or every `p_*.parquet`
+//! found in a directory (`--dir`) into `match_ages` — independently of `import`, since that table
+//! has no FK to `matches`.
 //!
 //! Like `ingest`'s and `migration`'s binaries, `DATABASE_URL` is read from the environment via
 //! `pipeline_core::cli::database_url` and never placed in a clap arg, help string, or log line.
 //!
-//! `--dir` exists for the eventual M6 full-archive run, but THIS task's own live smoke
-//! deliberately uses `--matches`/`--players` on a single sample pair — see
-//! `.superpowers/sdd/task-M4a-aoestats-report.md`.
+//! **`--dir` is the M6 full-archive run** (this task: all 172 `m_`/`p_` pairs, 2022-08 -> 2026-02,
+//! after `parquet_read`/`db`'s schema-drift fixes made every one of them loadable). Both `--dir`
+//! modes are RESILIENT by design — a single file's failure (a genuinely new, still-unhandled
+//! schema variant; a transient DB error) is logged and the run moves on to the next file rather
+//! than aborting the whole batch, since one bad file out of 172 shouldn't block the other 171. The
+//! overall command still exits non-zero if ANY file failed, so a resilient run is never silently
+//! reported as a clean success — see [`run_import`]/[`run_import_ages`]'s docs.
 
 use std::path::{Path, PathBuf};
 
@@ -48,14 +53,18 @@ enum Command {
         #[arg(long = "players", requires = "matches_file", value_name = "PATH")]
         players_file: Option<PathBuf>,
     },
-    /// Import one `p_*.parquet` file's `replay_summary_raw` per-age summaries into `match_ages`
-    /// (Task M4b). Independent of `import` — `match_ages` has no FK to `matches`, so this can run
+    /// Import `replay_summary_raw` per-age summaries into `match_ages` (Task M4b), from either one
+    /// explicit `p_*.parquet` file (`--players`) or every `p_*.parquet` found in a directory
+    /// (`--dir`). Independent of `import` — `match_ages` has no FK to `matches`, so this can run
     /// before, after, or without the matching `import` call. Requires `python3` on `PATH` (see
     /// `pipeline/py/aoestats_summaries.py`).
     ImportAges {
-        /// Path to a `p_*.parquet` file.
+        /// Directory containing `p_*.parquet` files. Mutually exclusive with `--players`.
+        #[arg(long, conflicts_with = "players_file")]
+        dir: Option<PathBuf>,
+        /// Path to a single `p_*.parquet` file. Mutually exclusive with `--dir`.
         #[arg(long = "players", value_name = "PATH")]
-        players_file: PathBuf,
+        players_file: Option<PathBuf>,
     },
 }
 
@@ -99,63 +108,190 @@ async fn run(cli: Cli, database_url: &str) -> anyhow::Result<()> {
             matches_file,
             players_file,
         } => run_import(&mut client, dir, matches_file, players_file).await,
-        Command::ImportAges { players_file } => run_import_ages(&mut client, &players_file).await,
+        Command::ImportAges { dir, players_file } => {
+            run_import_ages(&mut client, dir, players_file).await
+        }
     }
 }
 
+/// `--dir` (the M6 full-archive run): imports every discovered pair, logging and CONTINUING past a
+/// single pair's failure rather than aborting the rest — see the module doc. Returns `Err` at the
+/// end (after every pair has been attempted) if one or more pairs failed, so a partially-failed run
+/// still exits non-zero.
+///
+/// `--matches`/`--players` (a single explicit pair): unchanged fail-fast behavior — appropriate
+/// when a caller is deliberately re-running/debugging one specific file, not sweeping the archive.
 async fn run_import(
     client: &mut tokio_postgres::Client,
     dir: Option<PathBuf>,
     matches_file: Option<PathBuf>,
     players_file: Option<PathBuf>,
 ) -> anyhow::Result<()> {
-    let pairs = match (dir, matches_file, players_file) {
-        (Some(dir), None, None) => discover_pairs(&dir)?,
-        (None, Some(matches_file), Some(players_file)) => vec![(matches_file, players_file)],
+    match (dir, matches_file, players_file) {
+        (Some(dir), None, None) => run_import_dir(client, &dir).await,
+        (None, Some(matches_file), Some(players_file)) => {
+            tracing::info!(
+                matches = %matches_file.display(),
+                players = %players_file.display(),
+                "importing aoestats pair"
+            );
+            let stats = import_pair(client, &matches_file, &players_file)
+                .await
+                .with_context(|| {
+                    format!(
+                        "import_pair failed for {} / {}",
+                        matches_file.display(),
+                        players_file.display()
+                    )
+                })?;
+            tracing::info!(
+                matches_inserted = stats.matches_inserted,
+                players_inserted = stats.players_inserted,
+                "aoestats import run complete"
+            );
+            Ok(())
+        }
         _ => anyhow::bail!("pass either --dir <DIR> or both --matches <PATH> --players <PATH>"),
-    };
+    }
+}
+
+async fn run_import_dir(client: &mut tokio_postgres::Client, dir: &Path) -> anyhow::Result<()> {
+    let pairs = discover_pairs(dir)?;
     if pairs.is_empty() {
         anyhow::bail!("no m_*.parquet/p_*.parquet pairs found");
     }
 
     let mut total = ImportStats::default();
+    let mut failed: Vec<String> = Vec::new();
     for (matches_path, players_path) in &pairs {
         tracing::info!(
             matches = %matches_path.display(),
             players = %players_path.display(),
             "importing aoestats pair"
         );
-        let stats = import_pair(client, matches_path, players_path)
-            .await
-            .with_context(|| {
-                format!(
-                    "import_pair failed for {} / {}",
+        match import_pair(client, matches_path, players_path).await {
+            Ok(stats) => {
+                total.matches_inserted += stats.matches_inserted;
+                total.players_inserted += stats.players_inserted;
+                total.unknown_map_slugs.extend(stats.unknown_map_slugs);
+                total.unknown_civ_slugs.extend(stats.unknown_civ_slugs);
+                total.matches_missing_game_id += stats.matches_missing_game_id;
+                total.players_missing_identity += stats.players_missing_identity;
+                total.matches_duration_out_of_range += stats.matches_duration_out_of_range;
+            }
+            Err(err) => {
+                tracing::error!(
+                    matches = %matches_path.display(),
+                    players = %players_path.display(),
+                    error = %err,
+                    "import_pair failed for this pair — logged, continuing with the rest of the \
+                     directory"
+                );
+                failed.push(format!(
+                    "{} / {}",
                     matches_path.display(),
                     players_path.display()
-                )
-            })?;
-        total.matches_inserted += stats.matches_inserted;
-        total.players_inserted += stats.players_inserted;
-        total.unknown_map_slugs.extend(stats.unknown_map_slugs);
-        total.unknown_civ_slugs.extend(stats.unknown_civ_slugs);
-        total.matches_missing_game_id += stats.matches_missing_game_id;
-        total.players_missing_identity += stats.players_missing_identity;
+                ));
+            }
+        }
     }
 
     tracing::info!(
         pairs = pairs.len(),
+        succeeded = pairs.len() - failed.len(),
+        failed = failed.len(),
         matches_inserted = total.matches_inserted,
         players_inserted = total.players_inserted,
         unknown_map_slugs = total.unknown_map_slugs.len(),
         unknown_civ_slugs = total.unknown_civ_slugs.len(),
         matches_missing_game_id = total.matches_missing_game_id,
         players_missing_identity = total.players_missing_identity,
+        matches_duration_out_of_range = total.matches_duration_out_of_range,
         "aoestats import run complete"
     );
+    if !failed.is_empty() {
+        anyhow::bail!(
+            "{} of {} pairs failed to import: {}",
+            failed.len(),
+            pairs.len(),
+            failed.join(", ")
+        );
+    }
     Ok(())
 }
 
+/// `--dir`: imports ages from every `p_*.parquet` found, logging and CONTINUING past a single
+/// file's failure (same resilience posture as [`run_import_dir`], and for the same reason — one
+/// bad file out of 172 shouldn't block the rest). Returns `Err` at the end if any file failed.
+///
+/// `--players`: a single explicit file, unchanged fail-fast behavior.
 async fn run_import_ages(
+    client: &mut tokio_postgres::Client,
+    dir: Option<PathBuf>,
+    players_file: Option<PathBuf>,
+) -> anyhow::Result<()> {
+    match (dir, players_file) {
+        (Some(dir), None) => run_import_ages_dir(client, &dir).await,
+        (None, Some(players_file)) => import_ages_one(client, &players_file).await,
+        _ => anyhow::bail!("pass either --dir <DIR> or --players <PATH>"),
+    }
+}
+
+async fn run_import_ages_dir(client: &mut tokio_postgres::Client, dir: &Path) -> anyhow::Result<()> {
+    let players_files = discover_players_files(dir)?;
+    if players_files.is_empty() {
+        anyhow::bail!("no p_*.parquet files found");
+    }
+
+    let mut total = AgesImportStats::default();
+    let mut failed: Vec<String> = Vec::new();
+    for players_path in &players_files {
+        tracing::info!(players = %players_path.display(), "importing aoestats ages");
+        match import_ages(client, players_path).await {
+            Ok(stats) => {
+                total.source_rows += stats.source_rows;
+                total.staged_rows += stats.staged_rows;
+                total.ages_deleted += stats.ages_deleted;
+                total.ages_inserted += stats.ages_inserted;
+                total.unknown_civ_slugs.extend(stats.unknown_civ_slugs);
+                total.rows_missing_identity += stats.rows_missing_identity;
+            }
+            Err(err) => {
+                tracing::error!(
+                    players = %players_path.display(),
+                    error = %err,
+                    "import_ages failed for this file — logged, continuing with the rest of the \
+                     directory"
+                );
+                failed.push(players_path.display().to_string());
+            }
+        }
+    }
+
+    tracing::info!(
+        files = players_files.len(),
+        succeeded = players_files.len() - failed.len(),
+        failed = failed.len(),
+        source_rows = total.source_rows,
+        staged_rows = total.staged_rows,
+        ages_deleted = total.ages_deleted,
+        ages_inserted = total.ages_inserted,
+        unknown_civ_slugs = total.unknown_civ_slugs.len(),
+        rows_missing_identity = total.rows_missing_identity,
+        "aoestats ages import run complete"
+    );
+    if !failed.is_empty() {
+        anyhow::bail!(
+            "{} of {} files failed to import ages: {}",
+            failed.len(),
+            players_files.len(),
+            failed.join(", ")
+        );
+    }
+    Ok(())
+}
+
+async fn import_ages_one(
     client: &mut tokio_postgres::Client,
     players_path: &Path,
 ) -> anyhow::Result<()> {
@@ -211,4 +347,24 @@ fn discover_pairs(dir: &Path) -> anyhow::Result<Vec<(PathBuf, PathBuf)>> {
         }
     }
     Ok(pairs)
+}
+
+/// Scans `dir` for every `p_*.parquet` file, sorted — `import-ages --dir`'s counterpart to
+/// [`discover_pairs`]. No partner-file check: `match_ages` has no FK to `matches`, so an ages
+/// import doesn't need `m_*.parquet` to exist at all (see the module doc).
+fn discover_players_files(dir: &Path) -> anyhow::Result<Vec<PathBuf>> {
+    let entries = std::fs::read_dir(dir)
+        .with_context(|| format!("failed to read directory {}", dir.display()))?;
+
+    let mut players_files: Vec<PathBuf> = entries
+        .filter_map(|entry| entry.ok().map(|e| e.path()))
+        .filter(|path| {
+            path.file_name()
+                .and_then(|n| n.to_str())
+                .map(|name| name.starts_with("p_") && name.ends_with(".parquet"))
+                .unwrap_or(false)
+        })
+        .collect();
+    players_files.sort();
+    Ok(players_files)
 }
