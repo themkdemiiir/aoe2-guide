@@ -10,9 +10,9 @@
 //!   file but aren't projected — not part of the target mapping.)
 //! - `p_*`: `game_id`(Utf8), `civ`(Utf8), `profile_id`(Float64), `winner`(Boolean),
 //!   `new_rating`(Int64), `opening`(Utf8), `feudal_age_uptime`/`castle_age_uptime`/
-//!   `imperial_age_uptime`(Float64). (`team`/`old_rating`/`match_rating_diff`/
-//!   `replay_summary_raw` exist but aren't projected — `replay_summary_raw` is M4b, explicitly out
-//!   of scope here.)
+//!   `imperial_age_uptime`(Float64), and — read separately by [`read_player_age_sources`] for the
+//!   ages-import path (Task M4b), not by [`read_players`] above — `replay_summary_raw`(Utf8).
+//!   (`team`/`old_rating`/`match_rating_diff` exist but aren't projected by either reader.)
 //!
 //! **The `duration` surprise:** the brief's verified schema calls `duration` a plain "bigint
 //! SECONDS" column (true of its *physical* Parquet storage), but the file embeds a pandas/pyarrow
@@ -106,6 +106,25 @@ const PLAYER_COLUMNS: &[&str] = &[
     "imperial_age_uptime",
     "new_rating",
 ];
+
+/// One `p_*.parquet` row projected for the ages-import path (Task M4b): the columns
+/// `py::run_summaries` needs on its stdin. `civ` is canonicalized the same way as
+/// [`RawPlayerRow::civ`]/[`RawMatchRow::map`] (see their field docs) since it feeds the same
+/// `civs.slug` JOIN; `game_id`/`profile_id` are kept raw/unresolved for the same reason as
+/// [`RawPlayerRow`] — resolution happens in `db.rs`'s SQL.
+#[derive(Debug, Clone, PartialEq)]
+pub struct RawAgeSourceRow {
+    pub game_id: Option<String>,
+    pub civ: Option<String>,
+    pub profile_id: Option<f64>,
+    pub winner: Option<bool>,
+    /// Guaranteed non-empty and >50 chars by [`read_player_age_sources`]'s filter — never the raw
+    /// column's NULL/short values, which are dropped before this struct is built.
+    pub replay_summary_raw: String,
+}
+
+const PLAYER_AGE_SOURCE_COLUMNS: &[&str] =
+    &["game_id", "civ", "profile_id", "winner", "replay_summary_raw"];
 
 /// Opens `path`, projects it down to `columns` (skips everything else — notably
 /// `replay_summary_raw`, which can be a sizeable JSON blob per row and is M4b's concern, not
@@ -283,6 +302,47 @@ pub fn read_players(path: &Path) -> Result<Vec<RawPlayerRow>> {
                 castle_age_uptime: opt(castle, i, |a, i| a.value(i)),
                 imperial_age_uptime: opt(imperial, i, |a, i| a.value(i)),
                 new_rating: opt(new_rating, i, |a, i| a.value(i)),
+            });
+        }
+    }
+    Ok(rows)
+}
+
+/// Reads `p_*.parquet` at `path`, projecting down to the 5 columns the ages-import path needs
+/// (see [`RawAgeSourceRow`]), and keeps only rows passing the task brief's `replay_summary_raw IS
+/// NOT NULL AND length(replay_summary_raw) > 50` filter — applied here in Rust, not as a DuckDB
+/// `WHERE`, since this crate reads parquet directly via `arrow`/`parquet` (see the module doc's
+/// LIBRARY-FIRST rationale); there is no SQL layer between the file and this function to push the
+/// predicate into.
+pub fn read_player_age_sources(path: &Path) -> Result<Vec<RawAgeSourceRow>> {
+    let batches = read_projected_batches(path, PLAYER_AGE_SOURCE_COLUMNS)?;
+    let mut rows = Vec::new();
+    for batch in &batches {
+        let game_id = downcast::<StringArray>(column(batch, path, "game_id")?, path, "game_id")?;
+        let civ = downcast::<StringArray>(column(batch, path, "civ")?, path, "civ")?;
+        let profile_id =
+            downcast::<Float64Array>(column(batch, path, "profile_id")?, path, "profile_id")?;
+        let winner = downcast::<BooleanArray>(column(batch, path, "winner")?, path, "winner")?;
+        let replay_summary_raw = downcast::<StringArray>(
+            column(batch, path, "replay_summary_raw")?,
+            path,
+            "replay_summary_raw",
+        )?;
+
+        for i in 0..batch.num_rows() {
+            if replay_summary_raw.is_null(i) {
+                continue;
+            }
+            let raw = replay_summary_raw.value(i);
+            if raw.len() <= 50 {
+                continue;
+            }
+            rows.push(RawAgeSourceRow {
+                game_id: opt(game_id, i, |a, i| a.value(i).to_owned()),
+                civ: opt(civ, i, |a, i| pipeline_core::slug::slug(a.value(i))),
+                profile_id: opt(profile_id, i, |a, i| a.value(i)),
+                winner: opt(winner, i, |a, i| a.value(i)),
+                replay_summary_raw: raw.to_owned(),
             });
         }
     }

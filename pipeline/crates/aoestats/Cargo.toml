@@ -30,6 +30,10 @@ anyhow = { workspace = true }
 thiserror = { workspace = true }
 parquet = { workspace = true }
 arrow = { workspace = true }
+# NDJSON in/out of the `pipeline/py/aoestats_summaries.py` subprocess (Task M4b's ages-import
+# path, `src/py.rs`) — the one place this crate needs serde/serde_json.
+serde = { workspace = true }
+serde_json = { workspace = true }
 
 [dev-dependencies]
 migration = { path = "../migration" }

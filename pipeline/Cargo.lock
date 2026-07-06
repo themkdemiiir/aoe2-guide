@@ -144,6 +144,8 @@ dependencies = [
  "migration",
  "parquet",
  "pipeline-core",
+ "serde",
+ "serde_json",
  "tempfile",
  "testcontainers-modules",
  "thiserror",

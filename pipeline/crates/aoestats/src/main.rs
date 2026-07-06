@@ -1,5 +1,7 @@
-//! Thin CLI over the `aoestats` library: imports either one explicit `m_*`/`p_*` pair
-//! (`--matches`/`--players`) or every pair discovered in a directory (`--dir`).
+//! Thin CLI over the `aoestats` library: `import` loads either one explicit `m_*`/`p_*` pair
+//! (`--matches`/`--players`) or every pair discovered in a directory (`--dir`); `import-ages`
+//! (Task M4b) loads one `p_*.parquet` file's `replay_summary_raw` per-age summaries into
+//! `match_ages` — independently, since that table has no FK to `matches`.
 //!
 //! Like `ingest`'s and `migration`'s binaries, `DATABASE_URL` is read from the environment via
 //! `pipeline_core::cli::database_url` and never placed in a clap arg, help string, or log line.
@@ -11,7 +13,7 @@
 use std::path::{Path, PathBuf};
 
 use anyhow::Context;
-use aoestats::{import_pair, ImportStats};
+use aoestats::{import_ages, import_pair, AgesImportStats, ImportStats};
 use clap::{Parser, Subcommand};
 use pipeline_core::cli::{database_url, init_tracing, log_error_and_code};
 use pipeline_core::redact_secret;
@@ -46,6 +48,15 @@ enum Command {
         #[arg(long = "players", requires = "matches_file", value_name = "PATH")]
         players_file: Option<PathBuf>,
     },
+    /// Import one `p_*.parquet` file's `replay_summary_raw` per-age summaries into `match_ages`
+    /// (Task M4b). Independent of `import` — `match_ages` has no FK to `matches`, so this can run
+    /// before, after, or without the matching `import` call. Requires `python3` on `PATH` (see
+    /// `pipeline/py/aoestats_summaries.py`).
+    ImportAges {
+        /// Path to a `p_*.parquet` file.
+        #[arg(long = "players", value_name = "PATH")]
+        players_file: PathBuf,
+    },
 }
 
 #[tokio::main]
@@ -70,21 +81,6 @@ async fn main() {
 }
 
 async fn run(cli: Cli, database_url: &str) -> anyhow::Result<()> {
-    let Command::Import {
-        dir,
-        matches_file,
-        players_file,
-    } = cli.command;
-
-    let pairs = match (dir, matches_file, players_file) {
-        (Some(dir), None, None) => discover_pairs(&dir)?,
-        (None, Some(matches_file), Some(players_file)) => vec![(matches_file, players_file)],
-        _ => anyhow::bail!("pass either --dir <DIR> or both --matches <PATH> --players <PATH>"),
-    };
-    if pairs.is_empty() {
-        anyhow::bail!("no m_*.parquet/p_*.parquet pairs found");
-    }
-
     let (mut client, connection) = tokio_postgres::connect(database_url, NoTls)
         .await
         .context("failed to connect to the database")?;
@@ -97,6 +93,31 @@ async fn run(cli: Cli, database_url: &str) -> anyhow::Result<()> {
         }
     });
 
+    match cli.command {
+        Command::Import {
+            dir,
+            matches_file,
+            players_file,
+        } => run_import(&mut client, dir, matches_file, players_file).await,
+        Command::ImportAges { players_file } => run_import_ages(&mut client, &players_file).await,
+    }
+}
+
+async fn run_import(
+    client: &mut tokio_postgres::Client,
+    dir: Option<PathBuf>,
+    matches_file: Option<PathBuf>,
+    players_file: Option<PathBuf>,
+) -> anyhow::Result<()> {
+    let pairs = match (dir, matches_file, players_file) {
+        (Some(dir), None, None) => discover_pairs(&dir)?,
+        (None, Some(matches_file), Some(players_file)) => vec![(matches_file, players_file)],
+        _ => anyhow::bail!("pass either --dir <DIR> or both --matches <PATH> --players <PATH>"),
+    };
+    if pairs.is_empty() {
+        anyhow::bail!("no m_*.parquet/p_*.parquet pairs found");
+    }
+
     let mut total = ImportStats::default();
     for (matches_path, players_path) in &pairs {
         tracing::info!(
@@ -104,7 +125,7 @@ async fn run(cli: Cli, database_url: &str) -> anyhow::Result<()> {
             players = %players_path.display(),
             "importing aoestats pair"
         );
-        let stats = import_pair(&mut client, matches_path, players_path)
+        let stats = import_pair(client, matches_path, players_path)
             .await
             .with_context(|| {
                 format!(
@@ -130,6 +151,27 @@ async fn run(cli: Cli, database_url: &str) -> anyhow::Result<()> {
         matches_missing_game_id = total.matches_missing_game_id,
         players_missing_identity = total.players_missing_identity,
         "aoestats import run complete"
+    );
+    Ok(())
+}
+
+async fn run_import_ages(
+    client: &mut tokio_postgres::Client,
+    players_path: &Path,
+) -> anyhow::Result<()> {
+    tracing::info!(players = %players_path.display(), "importing aoestats ages");
+    let stats: AgesImportStats = import_ages(client, players_path)
+        .await
+        .with_context(|| format!("import_ages failed for {}", players_path.display()))?;
+
+    tracing::info!(
+        source_rows = stats.source_rows,
+        staged_rows = stats.staged_rows,
+        ages_deleted = stats.ages_deleted,
+        ages_inserted = stats.ages_inserted,
+        unknown_civ_slugs = stats.unknown_civ_slugs.len(),
+        rows_missing_identity = stats.rows_missing_identity,
+        "aoestats ages import run complete"
     );
     Ok(())
 }
