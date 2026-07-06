@@ -32,8 +32,10 @@ pub fn parse(json: &str) -> serde_json::Result<Vec<PatchBuild>> {
 }
 
 /// Loads the real, committed `src/data/patch-index.json`, baked into the binary at compile time.
-pub fn load() -> Vec<PatchBuild> {
-    parse(include_str!("../../../../src/data/patch-index.json")).expect("patch-index.json")
+/// `Err` (never a panic — playbook rule 8: no `unwrap`/`expect`/`panic` in a `pub` lib fn) if that
+/// committed file is somehow malformed; the caller (`dims::load_dims`) `.context()`s it.
+pub fn load() -> serde_json::Result<Vec<PatchBuild>> {
+    parse(include_str!("../../../../src/data/patch-index.json"))
 }
 
 #[cfg(test)]
@@ -61,7 +63,7 @@ mod tests {
 
     #[test]
     fn real_file_has_the_current_live_build() {
-        let builds = load();
+        let builds = load().expect("patch-index.json must parse");
         let build = builds
             .iter()
             .find(|b| b.build == 179_158)
@@ -72,6 +74,9 @@ mod tests {
 
     #[test]
     fn real_file_has_more_than_a_handful_of_builds() {
-        assert!(load().len() > 10, "patch-index.json has ~20 builds");
+        assert!(
+            load().expect("patch-index.json must parse").len() > 10,
+            "patch-index.json has ~20 builds"
+        );
     }
 }

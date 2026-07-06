@@ -69,9 +69,10 @@ ON CONFLICT (build) DO UPDATE SET
 /// count and contents unchanged (`ON CONFLICT DO UPDATE` with the same values is a no-op write).
 ///
 /// # Errors
-/// Any DB error, or a malformed refdata date (`civs_relic.valid_from` /
-/// `patch_index.released`) — the whole transaction rolls back on drop, so nothing partial is ever
-/// committed.
+/// Any DB error, a malformed refdata JSON file (`civs`/`civs_relic`/`patch_index` — `core`'s
+/// loaders return `Result`, never panic; see the playbook's "no panic in a pub lib fn" rule), or a
+/// malformed refdata date (`civs_relic.valid_from` / `patch_index.released`) — the whole
+/// transaction rolls back on drop, so nothing partial is ever committed.
 pub async fn load_dims(client: &mut Client) -> Result<DimsStats> {
     let tx = client
         .transaction()
@@ -79,9 +80,14 @@ pub async fn load_dims(client: &mut Client) -> Result<DimsStats> {
         .context("failed to begin dims-load transaction")?;
 
     let maps = upsert_maps(&tx, &pipeline_core::maps::load()).await?;
-    let civs = upsert_civs(&tx, &pipeline_core::civs::load_game_civs()).await?;
-    let civs_relic = upsert_civs_relic(&tx, &pipeline_core::civs::load_relic_civs()).await?;
-    let patch_index = upsert_patch_index(&tx, &pipeline_core::patch::load()).await?;
+    let game_civs =
+        pipeline_core::civs::load_game_civs().context("failed to load civ-id-map.json")?;
+    let civs = upsert_civs(&tx, &game_civs).await?;
+    let relic_civs =
+        pipeline_core::civs::load_relic_civs().context("failed to load relic-civ-id-map.json")?;
+    let civs_relic = upsert_civs_relic(&tx, &relic_civs).await?;
+    let patch_builds = pipeline_core::patch::load().context("failed to load patch-index.json")?;
+    let patch_index = upsert_patch_index(&tx, &patch_builds).await?;
 
     tx.commit()
         .await

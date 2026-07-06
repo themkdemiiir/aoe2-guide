@@ -23,6 +23,19 @@ use bytes::Bytes;
 
 use crate::raw::RawArchive;
 
+/// Stringifies a `catch_unwind` panic payload — same convention as `replay::parse`'s own private
+/// helper (not exported; duplicating ~6 lines here is cheaper than adding cross-crate API surface
+/// for it).
+fn panic_message(payload: Box<dyn std::any::Any + Send>) -> String {
+    if let Some(s) = payload.downcast_ref::<&str>() {
+        (*s).to_string()
+    } else if let Some(s) = payload.downcast_ref::<String>() {
+        s.clone()
+    } else {
+        "replay::parse panicked with a non-string payload".to_string()
+    }
+}
+
 /// [`reparse_dir`]'s outcome counts.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub struct ReparseSummary {
@@ -80,14 +93,27 @@ pub fn reparse_dir(raw_dir: &Path, limit: Option<usize>) -> std::io::Result<Repa
         };
         summary.bytes_read += raw.len() as u64;
 
-        match replay::parse(match_id, Bytes::from(raw)) {
-            Ok(_parsed) => {
+        // `replay::parse` itself no longer panics (it catches the vendored aoe2rec decoder's own
+        // panics internally — see its module doc), but this loop keeps its OWN independent guard:
+        // reparse.rs's whole reason to exist is proving one bad archived replay can't abort the
+        // rest of the corpus re-parse (see the module doc), and that promise must hold regardless
+        // of whether `replay::parse`'s own panic surface stays fully closed forever.
+        match std::panic::catch_unwind(|| replay::parse(match_id, Bytes::from(raw))) {
+            Ok(Ok(_parsed)) => {
                 summary.parsed_ok += 1;
                 tracing::debug!(match_id = %match_id, "reparse: parsed ok");
             }
-            Err(err) => {
+            Ok(Err(err)) => {
                 summary.parsed_err += 1;
                 tracing::warn!(match_id = %match_id, error = %err, "reparse: parse failed");
+            }
+            Err(payload) => {
+                summary.parsed_err += 1;
+                tracing::warn!(
+                    match_id = %match_id,
+                    panic = %panic_message(payload),
+                    "reparse: replay::parse panicked"
+                );
             }
         }
     }
@@ -128,6 +154,37 @@ mod tests {
         assert!(
             summary.bytes_read > 0,
             "the bytes were still decompressed and counted"
+        );
+    }
+
+    #[test]
+    fn reparse_dir_counts_a_replay_that_panics_the_vendored_decoder_as_a_parse_failure_not_a_crash()
+    {
+        // Crafted so the VENDORED `aoe2rec` header decompressor PANICS rather than returning
+        // `Err` — see `replay::parse`'s own test of the identical bytes for the full derivation.
+        // `replay::parse` already catches this itself, but this test proves `reparse_dir`'s OWN
+        // independent `catch_unwind` guard also holds (the module doc's point: this loop's
+        // resilience must not depend solely on `replay::parse`'s).
+        const PANIC_INDUCING_BYTES: [u8; 12] = [12, 0, 0, 0, 0, 0, 0, 0, 0xDE, 0xAD, 0xBE, 0xEF];
+
+        let dir = tempfile::tempdir().expect("create temp dir");
+        let archive = RawArchive::new(dir.path());
+        archive
+            .save(MatchId(1), &Bytes::copy_from_slice(&PANIC_INDUCING_BYTES))
+            .expect("save must succeed regardless of content");
+        archive
+            .save(
+                MatchId(2),
+                &Bytes::from_static(b"also not a real aoe2record"),
+            )
+            .expect("save must succeed regardless of content");
+
+        let summary = reparse_dir(dir.path(), None).expect("must not error, and must not panic");
+        assert_eq!(summary.found, 2);
+        assert_eq!(summary.parsed_ok, 0);
+        assert_eq!(
+            summary.parsed_err, 2,
+            "both the panic-inducing and the ordinary-garbage entry count as failures"
         );
     }
 

@@ -8,7 +8,47 @@
 use futures_util::TryStreamExt;
 use tokio_postgres::{Client, Row};
 
-use crate::error::Result;
+use crate::error::{ExportError, Result};
+
+/// The closed `ladder` vocabulary every `civ_meta`/`civ_meta_by_*` row is expected to carry —
+/// mirrors `civ_meta.rs::LADDERS`. Validated here, at the row-mapping boundary, rather than left
+/// to `civ_meta.rs::build_doc`'s grouping `HashMap`, which would otherwise silently DROP a
+/// drifted ladder value (it only ever reads the two keys it expects) or silently ADD an
+/// unexpected one as a new top-level bucket.
+const KNOWN_LADDERS: [&str; 2] = ["1v1", "team"];
+
+/// The closed `elo_bucket` vocabulary a `civ_meta` row's `elo_bucket` column is expected to carry:
+/// the nine display buckets ([`pipeline_core::elo::ELO_BUCKETS`]) plus the view's own `"all"`
+/// rollup-row sentinel (see [`CivMetaRow`]'s doc).
+fn is_known_elo_bucket(value: &str) -> bool {
+    value == "all" || pipeline_core::elo::ELO_BUCKETS.contains(&value)
+}
+
+/// Fails loud (`ExportError::UnexpectedValue`) on a `ladder` value outside [`KNOWN_LADDERS`] —
+/// see that constant's doc for why this must happen here, not in `civ_meta.rs`'s grouping.
+fn validate_ladder(value: String) -> Result<String> {
+    if KNOWN_LADDERS.contains(&value.as_str()) {
+        Ok(value)
+    } else {
+        Err(ExportError::UnexpectedValue {
+            field: "ladder",
+            value,
+        })
+    }
+}
+
+/// Fails loud (`ExportError::UnexpectedValue`) on an `elo_bucket` value outside the closed set —
+/// see [`is_known_elo_bucket`]'s doc.
+fn validate_elo_bucket(value: String) -> Result<String> {
+    if is_known_elo_bucket(&value) {
+        Ok(value)
+    } else {
+        Err(ExportError::UnexpectedValue {
+            field: "elo_bucket",
+            value,
+        })
+    }
+}
 
 /// One row of the `civ_meta` view: a (civ, ladder, elo_bucket) grain, where `elo_bucket = "all"` is
 /// the overall rollup row (see `pipeline/dbt/models/civ_meta.sql`'s doc).
@@ -36,8 +76,8 @@ pub async fn fetch_civ_meta(client: &Client) -> Result<Vec<CivMetaRow>> {
 fn row_to_civ_meta(row: &Row) -> Result<CivMetaRow> {
     Ok(CivMetaRow {
         civ_slug: row.try_get("civ_slug")?,
-        ladder: row.try_get("ladder")?,
-        elo_bucket: row.try_get("elo_bucket")?,
+        ladder: validate_ladder(row.try_get("ladder")?)?,
+        elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
         games: row.try_get("games")?,
         wins: row.try_get("wins")?,
         winrate: row.try_get("winrate")?,
@@ -64,7 +104,7 @@ pub async fn fetch_by_map(client: &Client) -> Result<Vec<ByMapRow>> {
         .map(|row| {
             Ok(ByMapRow {
                 civ_slug: row.try_get("civ_slug")?,
-                ladder: row.try_get("ladder")?,
+                ladder: validate_ladder(row.try_get("ladder")?)?,
                 map_slug: row.try_get("map_slug")?,
                 games: row.try_get("games")?,
                 winrate: row.try_get("winrate")?,
@@ -92,7 +132,7 @@ pub async fn fetch_by_patch(client: &Client) -> Result<Vec<ByPatchRow>> {
         .map(|row| {
             Ok(ByPatchRow {
                 civ_slug: row.try_get("civ_slug")?,
-                ladder: row.try_get("ladder")?,
+                ladder: validate_ladder(row.try_get("ladder")?)?,
                 build: row.try_get("build")?,
                 games: row.try_get("games")?,
                 winrate: row.try_get("winrate")?,
@@ -120,7 +160,7 @@ pub async fn fetch_openings(client: &Client) -> Result<Vec<OpeningRow>> {
         .map(|row| {
             Ok(OpeningRow {
                 civ_slug: row.try_get("civ_slug")?,
-                ladder: row.try_get("ladder")?,
+                ladder: validate_ladder(row.try_get("ladder")?)?,
                 opening: row.try_get("opening")?,
                 games: row.try_get("games")?,
             })
@@ -153,7 +193,7 @@ pub async fn fetch_ageup(client: &Client) -> Result<Vec<AgeUpRow>> {
         .map(|row| {
             Ok(AgeUpRow {
                 civ_slug: row.try_get("civ_slug")?,
-                ladder: row.try_get("ladder")?,
+                ladder: validate_ladder(row.try_get("ladder")?)?,
                 feudal_median: row.try_get("feudal_median")?,
                 castle_median: row.try_get("castle_median")?,
                 imperial_median: row.try_get("imperial_median")?,
@@ -379,4 +419,58 @@ pub async fn fetch_benchmark_vils(client: &Client) -> Result<Vec<BenchmarkVilsRo
         });
     }
     Ok(out)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // `row_to_civ_meta`/`fetch_by_map`'s etc. own closures need a real `tokio_postgres::Row`
+    // (no in-process constructor exists — it's wire-format-backed), so `validate_ladder`/
+    // `validate_elo_bucket` are exercised directly here instead: they are the exact functions
+    // those row mappers call, so this is a direct test of the wired behavior, not a proxy for it.
+
+    #[test]
+    fn validate_ladder_accepts_the_known_vocabulary() {
+        assert_eq!(validate_ladder("1v1".to_string()).unwrap(), "1v1");
+        assert_eq!(validate_ladder("team".to_string()).unwrap(), "team");
+    }
+
+    #[test]
+    fn validate_ladder_fails_loud_on_a_drifted_value() {
+        let err = validate_ladder("2v2".to_string()).unwrap_err();
+        match err {
+            ExportError::UnexpectedValue { field, value } => {
+                assert_eq!(field, "ladder");
+                assert_eq!(value, "2v2");
+            }
+            other => panic!("expected UnexpectedValue, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn validate_elo_bucket_accepts_every_known_bucket_plus_the_all_rollup() {
+        assert_eq!(validate_elo_bucket("all".to_string()).unwrap(), "all");
+        for bucket in pipeline_core::elo::ELO_BUCKETS {
+            assert_eq!(
+                validate_elo_bucket(bucket.to_string()).unwrap(),
+                bucket,
+                "every closed-set elo_bucket string must validate"
+            );
+        }
+    }
+
+    #[test]
+    fn validate_elo_bucket_fails_loud_on_a_drifted_value() {
+        // A hypothetical new/renamed bucket the dbt view might start emitting — must never
+        // silently become a new `byElo` key (see `civ_meta.rs::build_doc`'s grouping).
+        let err = validate_elo_bucket("3000+".to_string()).unwrap_err();
+        match err {
+            ExportError::UnexpectedValue { field, value } => {
+                assert_eq!(field, "elo_bucket");
+                assert_eq!(value, "3000+");
+            }
+            other => panic!("expected UnexpectedValue, got {other:?}"),
+        }
+    }
 }

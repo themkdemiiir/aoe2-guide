@@ -23,13 +23,17 @@ use serde::{Deserialize, Serialize};
 
 /// The whole `civ-meta.json` document.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct CivMetaDoc {
     pub source: String,
     pub ladders: Vec<String>,
     /// `YYYY-MM-DD`.
     pub generated: String,
+    /// `YYYY-MM` of the newest `played_at` in the corpus (`query::fetch_source_date`) — `None`
+    /// (JSON `null`) on a genuinely empty `matches` table, never a fabricated sentinel string
+    /// (see that function's doc + the "no defaults, fail loud" rule).
     #[serde(rename = "sourceDate")]
-    pub source_date: String,
+    pub source_date: Option<String>,
     pub appearances: Appearances,
     pub patches: Vec<PatchEntry>,
     #[serde(rename = "eloBuckets")]
@@ -45,6 +49,7 @@ pub struct CivMetaDoc {
 
 /// Per-ladder total appearance counts (`match_players` rows across every civ in that ladder).
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Appearances {
     #[serde(rename = "1v1")]
     pub ladder_1v1: u64,
@@ -53,6 +58,7 @@ pub struct Appearances {
 
 /// One entry of the top-level `patches` axis.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct PatchEntry {
     /// The build id, as a decimal string (matches the committed file: `"179158"`, not `179158`).
     pub patch: String,
@@ -65,6 +71,7 @@ pub struct PatchEntry {
 /// state the committed file itself uses for post-freeze-archive DLC civs (see
 /// `refresh-civ-current.mjs`'s module doc).
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct CivEntry {
     #[serde(rename = "1v1")]
     pub ladder_1v1: Option<LadderStats>,
@@ -73,6 +80,7 @@ pub struct CivEntry {
 
 /// One (civ, ladder) stats block.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct LadderStats {
     pub games: u64,
     #[serde(rename = "winRate")]
@@ -97,6 +105,7 @@ pub struct LadderStats {
 
 /// One slice's games/winRate — the shared shape of `byPatch`/`byElo`/`byMap` entries.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct BucketStats {
     pub games: u64,
     #[serde(rename = "winRate")]
@@ -105,6 +114,7 @@ pub struct BucketStats {
 
 /// One entry of the top-3 `openings` list.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Opening {
     pub opening: String,
     pub share: f64,
@@ -112,6 +122,7 @@ pub struct Opening {
 
 /// Median seconds-to-age-up, per age.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct AgeUp {
     pub feudal: i64,
     pub castle: i64,
@@ -126,6 +137,7 @@ pub struct AgeUp {
 /// One opponent's games/winRate against a civ — the shared list-item shape of
 /// `civ-matchups.json`/`civ-matchups-by-map.json`/`civ-matchups-team.json`'s `civs` entries.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct MatchupOpponent {
     pub opp: String,
     pub games: u64,
@@ -137,6 +149,7 @@ pub struct MatchupOpponent {
 /// `note`/`civs` content differ at runtime; see `matchups.rs::build_civ_matchups`/
 /// `build_civ_matchups_team`).
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct CivMatchupsDoc {
     pub source: String,
     pub generated: String,
@@ -153,6 +166,7 @@ pub struct CivMatchupsDoc {
 /// `civ-matchups-by-map.json`: one more dynamic-keyed level than [`CivMatchupsDoc`] — each civ's
 /// entry is itself keyed by map slug, not a fixed struct.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct CivMatchupsByMapDoc {
     pub source: String,
     pub generated: String,
@@ -167,6 +181,7 @@ pub struct CivMatchupsByMapDoc {
 /// fields — not one constant — because they gate two logically distinct things: a per-bucket cell
 /// vs. the elo-agnostic `"all"` rollup cell; see `matchups.rs`'s threshold constants).
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct EloMinGames {
     pub bucket: u64,
     pub all: u64,
@@ -181,6 +196,7 @@ pub type EloBucketMap = BTreeMap<String, EloWinRateGames>;
 
 /// `civ-matchups-by-elo.json`: `civs.<slug>.<opp> = {<bucket>: [winRate, games], ..., all: [...]}`.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct CivMatchupsByEloDoc {
     pub source: String,
     pub generated: String,
@@ -201,6 +217,7 @@ pub struct CivMatchupsByEloDoc {
 /// inventing a value for the rest — see that script's doc and `benchmark.rs`'s doc for why this
 /// crate emits `null` rather than omitting the key, unlike the old generator's plain omission).
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct BenchmarkCell {
     pub feudal_s: Option<f64>,
     pub castle_s: Option<f64>,
@@ -215,8 +232,36 @@ pub type BenchmarkModeMap = BTreeMap<String, BenchmarkCell>;
 /// BenchmarkCell`, `"all"`-keyed at every one of the three inner levels for its rollup grains (see
 /// `benchmark_ageup.sql`'s doc for exactly which grain combinations are real).
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct BenchmarkDoc {
     #[serde(rename = "_source")]
     pub source: String,
     pub civs: BTreeMap<String, BTreeMap<String, BTreeMap<String, BenchmarkModeMap>>>,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A committed JSON file gaining a new top-level key this crate hasn't modeled yet must fail
+    /// LOUD (a shape-parity test going red), not silently ignore the new key — that silent-ignore
+    /// is exactly what plain `#[derive(Deserialize)]` does by default, which is why every
+    /// fixed-schema struct above carries `#[serde(deny_unknown_fields)]`. Spot-checked on one
+    /// small struct rather than every one of them (the shape-parity tests already exercise every
+    /// struct against the real committed files).
+    #[test]
+    fn deny_unknown_fields_is_actually_wired_on_a_fixed_schema_struct() {
+        let json = r#"{ "opening": "scouts", "share": 12.5, "unexpectedNewKey": true }"#;
+        let err = serde_json::from_str::<Opening>(json).unwrap_err();
+        assert!(
+            err.to_string().contains("unknown field"),
+            "expected an unknown-field error, got: {err}"
+        );
+    }
+
+    #[test]
+    fn the_known_shape_still_deserializes_fine() {
+        let json = r#"{ "opening": "scouts", "share": 12.5 }"#;
+        assert!(serde_json::from_str::<Opening>(json).is_ok());
+    }
 }

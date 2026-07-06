@@ -9,8 +9,13 @@
 //!
 //! Raw ids are kept as-is; id -> name mapping happens later via the icon-map dim, so this parser
 //! has no name dependencies and never loses information.
+//!
+//! [`parse`] never panics, even if the vendored `aoe2rec` decoder does: [`parse_savegame`] wraps
+//! its one call to `Savegame::from_bytes` in `catch_unwind` and converts a caught panic into
+//! `Error::Parse` — see that function's doc.
 
 use std::collections::{HashMap, HashSet};
+use std::panic::{self, AssertUnwindSafe};
 
 use aoe2rec::actions::{ActionData, Game};
 use aoe2rec::{Operation, Savegame};
@@ -44,7 +49,12 @@ struct Decoded {
     detail: Option<String>,
 }
 
-/// Build action keeps a raw byte blob; the building id is int32 LE at `[12:16]`.
+/// Build action keeps a raw byte blob; the building id is int32 LE at `[12:16]`. This exact offset
+/// was verified byte-for-byte against the old Python/Rust extractors' own `[12:16]` slice (never
+/// independently re-derived here) and parity-checked against one real fixture replay in task 4b's
+/// report (`.superpowers/sdd/task-4b-replay-report.md`, local/gitignored) — re-verify this offset
+/// (and `pipeline/vendor/aoe2rec/VENDORED.md`'s pinned version) against a fresh fixture if a much
+/// newer game build starts producing wrong `target_id`s for `Build` actions.
 fn decode_build_id(data: &[u8]) -> Option<i64> {
     if data.len() < 16 {
         return None;
@@ -66,18 +76,49 @@ fn game_command_name(g: &Game) -> Option<String> {
 
 /// Lowercased variant name + player_id for *any* `ActionData`, read generically from its
 /// Serialize tag. This is how the old extractor classified the long tail of actions (Move,
-/// Interact, Gatherpoint, ...) without a 40-arm match.
+/// Interact, Gatherpoint, ...) without a 40-arm match. Split out from [`generic_kind_and_player`]
+/// so it's unit-testable directly against hand-built `serde_json::Value`s — every ActionData
+/// variant the CURRENT vendored `aoe2rec` defines carries a `player_id`, so the `None`/bare-string
+/// arms below are unreachable with real data today; they exist for forward compat with a future
+/// aoe2rec bump that adds a unit-like or player-less variant (see `classify`'s fallback arm, which
+/// now fails loud rather than fabricating `player_number = 0` for that case).
+fn kind_and_player_from_value(value: serde_json::Value) -> (String, Option<i64>) {
+    match value {
+        // Externally-tagged enum: exactly one top-level key = variant name.
+        serde_json::Value::Object(map) => match map.into_iter().next() {
+            Some((variant, body)) => {
+                let pid = body.get("player_id").and_then(|v| v.as_i64());
+                (variant.to_lowercase(), pid)
+            }
+            None => (String::new(), None),
+        },
+        // Unit-like variant (e.g. the nested `Game::Spy`) serializes as a bare string, same as
+        // `game_command_name` already handles — no body, so never a player_id either.
+        serde_json::Value::String(s) => (s.to_lowercase(), None),
+        _ => (String::new(), None),
+    }
+}
+
+/// Lowercased variant name + player_id for *any* `ActionData`, read generically from its
+/// Serialize tag.
 fn generic_kind_and_player(ad: &ActionData) -> (String, Option<i64>) {
     match serde_json::to_value(ad) {
-        Ok(serde_json::Value::Object(map)) => {
-            // Externally-tagged enum: exactly one top-level key = variant name.
-            if let Some((variant, body)) = map.into_iter().next() {
-                let pid = body.get("player_id").and_then(|v| v.as_i64());
-                return (variant.to_lowercase(), pid);
-            }
-            (String::new(), None)
-        }
-        _ => (String::new(), None),
+        Ok(value) => kind_and_player_from_value(value),
+        Err(_) => (String::new(), None),
+    }
+}
+
+/// Resolves a decoded `(kind, pid)` pair's `pid` to the narrowed `i32` `Decoded::player_number` —
+/// or fails loud (`Error::Parse`) when `pid` is genuinely absent, rather than fabricating `0` (a
+/// real player_number the game could otherwise legitimately assign, unlike a true "unknown").
+/// Unreachable with real data today (see [`kind_and_player_from_value`]'s doc); kept as its own
+/// pure, directly-testable function rather than inlined into `classify`.
+fn require_player_number(kind: &str, pid: Option<i64>) -> Result<i32> {
+    match pid {
+        Some(pid) => i32::try_from(pid).map_err(overflow("event.player_id")),
+        None => Err(Error::Parse(format!(
+            "action {kind:?} carries no resolvable player_id"
+        ))),
     }
 }
 
@@ -156,10 +197,7 @@ fn classify(ad: &ActionData) -> Result<Decoded> {
         // player, exactly as the old extractor's fallthrough does.
         other => {
             let (kind, pid) = generic_kind_and_player(other);
-            let player_number = match pid {
-                Some(pid) => i32::try_from(pid).map_err(overflow("event.player_id"))?,
-                None => 0,
-            };
+            let player_number = require_player_number(&kind, pid)?;
             Decoded {
                 player_number,
                 kind,
@@ -192,12 +230,40 @@ fn players_map(game: &Savegame) -> HashMap<i32, PlayerInfo> {
     out
 }
 
+/// Decodes raw `.aoe2record` bytes into an `aoe2rec::Savegame`, converting BOTH an ordinary parse
+/// error and a caught PANIC into `Error::Parse`. The vendored `aoe2rec` header decoder `.unwrap()`s
+/// internally (`vendor/aoe2rec/src/header/mod.rs:14,16`; `lib.rs:51`) — a newer game build the
+/// vendored copy doesn't understand yet panics instead of returning `Err`, which would otherwise
+/// crash the 24/7 crawler (see `pipeline/vendor/aoe2rec/VENDORED.md`). `AssertUnwindSafe`: `bytes`
+/// is moved in and never read again after this call, panic or not, so there is no shared mutable
+/// state an unwind could leave inconsistent.
+fn parse_savegame(bytes: Bytes) -> Result<Savegame> {
+    match panic::catch_unwind(AssertUnwindSafe(|| Savegame::from_bytes(bytes))) {
+        Ok(Ok(game)) => Ok(game),
+        Ok(Err(e)) => Err(Error::Parse(e.to_string())),
+        Err(payload) => Err(Error::Parse(panic_message(payload))),
+    }
+}
+
+/// Stringifies a `catch_unwind` panic payload — panics almost always carry a `&str` (a `panic!(literal)`)
+/// or `String` (a `panic!("{}", ...)`/`.unwrap()` message); anything else falls back to a fixed
+/// message rather than guessing at its shape.
+fn panic_message(payload: Box<dyn std::any::Any + Send>) -> String {
+    if let Some(s) = payload.downcast_ref::<&str>() {
+        (*s).to_string()
+    } else if let Some(s) = payload.downcast_ref::<String>() {
+        s.clone()
+    } else {
+        "replay parser panicked with a non-string payload".to_string()
+    }
+}
+
 /// Parse one replay's raw bytes into a [`ParsedReplay`]. `match_id` is supplied by the caller —
 /// a replay's own bytes never encode it; that id comes from whichever discovery seed downloaded
 /// this file (Task 4c). Pure: no IO, and no panics on malformed input — every failure mode
 /// returns `Err` (this runs in a 24/7 unattended loop later).
 pub fn parse(match_id: MatchId, bytes: Bytes) -> Result<ParsedReplay> {
-    let game = Savegame::from_bytes(bytes).map_err(|e| Error::Parse(e.to_string()))?;
+    let game = parse_savegame(bytes)?;
     let players = players_map(&game);
 
     // --- walk the operation stream: every Action carries its own world_time ---
@@ -372,4 +438,94 @@ pub fn parse(match_id: MatchId, bytes: Bytes) -> Result<ParsedReplay> {
         events: events_out,
         ages,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// Crafted so the VENDORED `aoe2rec` header decompressor PANICS rather than returning `Err`:
+    /// `Savegame`'s `length: u32` field (first 4 bytes, LE) drives `#[br(count = length - 8)]`'s
+    /// header-blob size; `length = 12` asks for 4 more bytes, which are not valid raw-deflate, so
+    /// `header::decompress`'s `yazi::decompress(...).unwrap()` (`header/mod.rs:14`) panics with
+    /// `InvalidBitstream`. Verified empirically against the unguarded vendored call before this
+    /// fix landed (see the task report) — this is a real, reproducible panic, not a guess.
+    const PANIC_INDUCING_BYTES: [u8; 12] = [12, 0, 0, 0, 0, 0, 0, 0, 0xDE, 0xAD, 0xBE, 0xEF];
+
+    #[test]
+    fn parse_savegame_returns_err_not_panic_on_bytes_that_panic_the_vendored_decoder() {
+        // `Savegame` (the `Ok` type) isn't `Debug` (vendored, not our type to change), so match
+        // directly rather than `.expect_err`/`.unwrap_err`.
+        match parse_savegame(Bytes::from_static(&PANIC_INDUCING_BYTES)) {
+            Err(Error::Parse(_)) => {}
+            Err(other) => panic!("expected Error::Parse, got {other:?}"),
+            Ok(_) => panic!("crafted bytes must fail, never panic the caller"),
+        }
+    }
+
+    #[test]
+    fn public_parse_returns_err_not_panic_on_bytes_that_panic_the_vendored_decoder() {
+        // Exercises the actual public entry point the crawler calls, not just the internal helper.
+        let result = parse(MatchId(1), Bytes::from_static(&PANIC_INDUCING_BYTES));
+        assert!(
+            result.is_err(),
+            "must return Err, never unwind past parse()"
+        );
+    }
+
+    #[test]
+    fn parse_savegame_returns_err_on_ordinary_garbage_too() {
+        // Plain-old malformed input (not the panic-inducing shape above) must also stay an
+        // ordinary `Err`, matching the pre-existing (non-panicking) failure path.
+        let result = parse_savegame(Bytes::from_static(b"not a real aoe2record at all"));
+        assert!(matches!(result, Err(Error::Parse(_))));
+    }
+
+    #[test]
+    fn kind_and_player_from_value_reads_the_bare_string_arm() {
+        // A future unit-like top-level ActionData variant would serialize this way (mirrors
+        // `game_command_name`'s existing `Value::String` arm for the nested `Game` enum).
+        let (kind, pid) = kind_and_player_from_value(serde_json::Value::String("Spy".to_string()));
+        assert_eq!(kind, "spy");
+        assert_eq!(pid, None, "a bare string variant carries no player_id");
+    }
+
+    #[test]
+    fn kind_and_player_from_value_reads_the_object_arm() {
+        let value = serde_json::json!({ "Move": { "player_id": 3 } });
+        let (kind, pid) = kind_and_player_from_value(value);
+        assert_eq!(kind, "move");
+        assert_eq!(pid, Some(3));
+    }
+
+    #[test]
+    fn kind_and_player_from_value_is_honest_when_the_body_has_no_player_id() {
+        let value = serde_json::json!({ "Foo": {} });
+        let (kind, pid) = kind_and_player_from_value(value);
+        assert_eq!(kind, "foo");
+        assert_eq!(pid, None);
+    }
+
+    #[test]
+    fn require_player_number_fails_loud_instead_of_defaulting_to_zero() {
+        let err = require_player_number("spy", None).expect_err("None must not become 0");
+        assert!(matches!(err, Error::Parse(_)));
+    }
+
+    #[test]
+    fn require_player_number_narrows_a_present_pid() {
+        assert_eq!(require_player_number("move", Some(3)).unwrap(), 3);
+    }
+
+    #[test]
+    fn require_player_number_overflow_still_reports_overflow_not_parse() {
+        let err = require_player_number("move", Some(i64::MAX)).unwrap_err();
+        assert!(matches!(
+            err,
+            Error::Overflow {
+                field: "event.player_id",
+                ..
+            }
+        ));
+    }
 }

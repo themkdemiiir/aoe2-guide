@@ -15,8 +15,13 @@ pub type Result<T> = std::result::Result<T, Error>;
 
 #[derive(Debug, Error)]
 pub enum Error {
-    /// `aoe2rec::Savegame::from_bytes` rejected the bytes (truncated file, unsupported
-    /// version, corrupt header, ...). The message is aoe2rec's own `Display` text.
+    /// `aoe2rec::Savegame::from_bytes` rejected the bytes (truncated file, unsupported version,
+    /// corrupt header, ...) — the message is aoe2rec's own `Display` text — OR the vendored
+    /// decoder PANICKED on bytes it doesn't understand yet (caught by `parse::parse_savegame`'s
+    /// `catch_unwind`; the message is the panic payload) — OR a decoded action carried no
+    /// resolvable `player_id` (`parse::require_player_number`, unreachable with the current
+    /// vendored `aoe2rec` vocabulary but kept fail-loud for a future one that adds a player-less
+    /// variant). All three are "this replay's bytes could not be turned into a `ParsedReplay`."
     #[error("failed to parse .aoe2record: {0}")]
     Parse(String),
 

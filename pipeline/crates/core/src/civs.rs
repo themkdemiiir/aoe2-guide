@@ -59,8 +59,10 @@ pub fn parse_game_civs(json: &str) -> serde_json::Result<GameCivMap> {
 }
 
 /// Loads the real, committed `src/data/civ-id-map.json`, baked into the binary at compile time.
-pub fn load_game_civs() -> GameCivMap {
-    parse_game_civs(include_str!("../../../../src/data/civ-id-map.json")).expect("civ-id-map.json")
+/// `Err` (never a panic — playbook rule 8: no `unwrap`/`expect`/`panic` in a `pub` lib fn) if that
+/// committed file is somehow malformed; the caller (`dims::load_dims`) `.context()`s it.
+pub fn load_game_civs() -> serde_json::Result<GameCivMap> {
+    parse_game_civs(include_str!("../../../../src/data/civ-id-map.json"))
 }
 
 /// Relic API `civilization_id` -> slug (`src/data/relic-civ-id-map.json`). `map` is the id->slug
@@ -124,10 +126,11 @@ pub fn parse_relic_civs(json: &str) -> serde_json::Result<RelicCivMap> {
     })
 }
 
-/// Loads the real, committed `src/data/relic-civ-id-map.json`, baked into the binary at compile time.
-pub fn load_relic_civs() -> RelicCivMap {
+/// Loads the real, committed `src/data/relic-civ-id-map.json`, baked into the binary at compile
+/// time. `Err` (never a panic — playbook rule 8) if that committed file is somehow malformed; the
+/// caller (`dims::load_dims`) `.context()`s it.
+pub fn load_relic_civs() -> serde_json::Result<RelicCivMap> {
     parse_relic_civs(include_str!("../../../../src/data/relic-civ-id-map.json"))
-        .expect("relic-civ-id-map.json")
 }
 
 /// Both source files key their JSON object by decimal-string id; convert once, sharing the same
@@ -145,31 +148,31 @@ mod tests {
 
     #[test]
     fn game_civ_id_2_is_franks() {
-        let civs = load_game_civs();
+        let civs = load_game_civs().expect("civ-id-map.json must parse");
         assert_eq!(civs.slug(GameCivId(2)).unwrap(), "franks");
     }
 
     #[test]
     fn relic_civ_id_5_is_britons() {
-        let civs = load_relic_civs();
+        let civs = load_relic_civs().expect("relic-civ-id-map.json must parse");
         assert_eq!(civs.slug(RelicCivId(5)).unwrap(), "britons");
     }
 
     #[test]
     fn unknown_game_civ_id_fails_loud() {
-        let civs = load_game_civs();
+        let civs = load_game_civs().expect("civ-id-map.json must parse");
         assert_eq!(civs.slug(GameCivId(9999)), Err(UnknownCivId(9999)));
     }
 
     #[test]
     fn unknown_relic_civ_id_fails_loud() {
-        let civs = load_relic_civs();
+        let civs = load_relic_civs().expect("relic-civ-id-map.json must parse");
         assert!(civs.slug(RelicCivId(9999)).is_err());
     }
 
     #[test]
     fn game_civ_entries_cover_every_row_including_franks() {
-        let civs = load_game_civs();
+        let civs = load_game_civs().expect("civ-id-map.json must parse");
         let by_id: HashMap<i32, &str> = civs.entries().collect();
         assert_eq!(by_id.get(&2), Some(&"franks"));
         assert!(by_id.len() > 40, "civ-id-map.json has ~50 entries");
@@ -177,7 +180,7 @@ mod tests {
 
     #[test]
     fn relic_civ_entries_and_valid_from_cover_the_real_file() {
-        let civs = load_relic_civs();
+        let civs = load_relic_civs().expect("relic-civ-id-map.json must parse");
         let by_id: HashMap<i32, &str> = civs.entries().collect();
         assert_eq!(by_id.get(&5), Some(&"britons"));
         assert!(by_id.len() > 40, "relic-civ-id-map.json has ~50 entries");

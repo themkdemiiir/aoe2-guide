@@ -134,7 +134,9 @@ pub fn build_doc(inputs: CivMetaInputs) -> CivMetaDoc {
             .to_string(),
         ladders: LADDERS.iter().map(|s| s.to_string()).collect(),
         generated: Utc::now().format("%Y-%m-%d").to_string(),
-        source_date: inputs.source_date.unwrap_or_else(|| "unknown".to_string()),
+        // Never fabricate a sentinel — `None` (JSON `null`) is the honest value on a genuinely
+        // empty `matches` table (see `query::fetch_source_date`'s doc + `model::CivMetaDoc`'s).
+        source_date: inputs.source_date,
         appearances,
         patches,
         elo_buckets: pipeline_core::elo::ELO_BUCKETS

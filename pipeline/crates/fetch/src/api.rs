@@ -67,7 +67,11 @@ pub(crate) fn archive_url(base: &str, match_id: MatchId, profile_id: ProfileId) 
 
 #[derive(Debug, Deserialize)]
 struct ReplayFilesResponse {
-    #[serde(default, rename = "replayFiles")]
+    // No `#[serde(default)]`: the Relic endpoint always returns this key (an empty array on a
+    // fully-aged-out batch, never an absent key — see the round-trip wiremock test below, and the
+    // task report for the "verified always-present" check). A RENAME/removal must fail loud
+    // (`Error::Json`) instead of silently looking like "zero files for every match".
+    #[serde(rename = "replayFiles")]
     replay_files: Vec<ReplayFile>,
 }
 
@@ -149,20 +153,23 @@ pub async fn download_replay(client: &FetchClient, match_id: MatchId, url: &str)
 
 #[derive(Debug, Deserialize)]
 struct RecentHistoryResponse {
-    #[serde(default, rename = "matchHistoryStats")]
+    // No `#[serde(default)]`: always present on a real response (verified against the probed
+    // fixture below) — a RENAME/removal must fail loud, not look like "no recent matches".
+    #[serde(rename = "matchHistoryStats")]
     match_history_stats: Vec<MatchStat>,
 }
 
 #[derive(Debug, Deserialize)]
 struct MatchStat {
     id: i64,
-    #[serde(default)]
+    // `completiontime`/`description`/`matchtype_id`/`matchhistorymember` are all always present
+    // on a real `getRecentMatchHistory` row (verified against the probed FIXTURE below, which has
+    // every field on every entry) — bare, not `#[serde(default)]`, so a Relic rename produces
+    // `Error::Json` instead of a legitimate-looking-but-wrong classification (e.g. a missing
+    // `matchtype_id` silently defaulting to `0`, which happens to also be a real non-ranked id).
     completiontime: i64,
-    #[serde(default)]
     description: String,
-    #[serde(default)]
     matchtype_id: i32,
-    #[serde(default)]
     matchhistorymember: Vec<MatchMember>,
 }
 
@@ -175,16 +182,33 @@ struct MatchMember {
     newrating: Option<i32>,
 }
 
+/// AUTOMATCH `matchtype_id`s empirically confirmed NOT to be ranked RM — sourced from the REAL
+/// probed `FIXTURE` below (profile 199325, 2026-07-02): `2` and `18`, both "some other automatch
+/// mode" (empire wars / quick play / etc. — Relic doesn't document which). These get `debug!`'d
+/// and skipped as routine. Anything OUTSIDE this allow-list AND outside the ranked set
+/// (`RelicMatchType::from_matchtype_id`'s 6/7/8/9) is UNRECOGNIZED — possibly a brand-new ranked
+/// ladder Relic just shipped — and must surface loudly (see [`normalize_recent`]) rather than be
+/// swallowed the same way as a known-routine id.
+const KNOWN_NON_RANKED_MATCHTYPE_IDS: [i32; 2] = [2, 18];
+
 /// AUTOMATCH + completed only, newest first, each mapped to a [`DiscoverySeed`]. The 1v1/team
 /// classification comes from `matchtype_id` (the SAME field + vocab
 /// `scripts/data-pipeline/lib/relic-api.mjs`'s `normalizeMatches`/`relic-map.mjs`'s `isRankedRm`
 /// key the production JS crawler's ranked-RM filter on — see
 /// [`RelicMatchType::from_matchtype_id`]). Most AUTOMATCH matches are NOT ranked RM (empire wars,
 /// death match, quick play, ...) and are expected to be skipped here at `debug` — this is routine,
-/// not a data-corruption signal. Member count alone would NOT be a safe substitute: a ranked death
-/// match 1v1 has exactly 2 members too, so counting members can't tell it apart from a ranked RM
-/// 1v1 — exactly the silent-mislabel failure mode `matchtype_id`-based classification avoids.
-fn normalize_recent(doc: RecentHistoryResponse, profile_id: ProfileId) -> Result<Vec<DiscoverySeed>> {
+/// not a data-corruption signal, PROVIDED the id is one of [`KNOWN_NON_RANKED_MATCHTYPE_IDS`]. An
+/// id outside BOTH that allow-list and the ranked set is treated differently: `tracing::warn!` +
+/// `Error::UnknownMatchType` (aborting just this profile's discovery batch, not the crawler
+/// process — the M6 run loop already treats a `discover_recent` `Err` as "no new seeds this run,
+/// retry later") — a new Relic ranked ladder must be NOTICED, not silently lumped in with routine
+/// non-ranked traffic. Member count alone would NOT be a safe substitute: a ranked death match 1v1
+/// has exactly 2 members too, so counting members can't tell it apart from a ranked RM 1v1 —
+/// exactly the silent-mislabel failure mode `matchtype_id`-based classification avoids.
+fn normalize_recent(
+    doc: RecentHistoryResponse,
+    profile_id: ProfileId,
+) -> Result<Vec<DiscoverySeed>> {
     let mut out = Vec::new();
     for m in doc.match_history_stats {
         // AUTOMATCH = ranked matchmaking; completiontime > 0 excludes in-progress/unreported.
@@ -193,21 +217,35 @@ fn normalize_recent(doc: RecentHistoryResponse, profile_id: ProfileId) -> Result
         }
         let match_type = match RelicMatchType::from_matchtype_id(m.matchtype_id) {
             Ok(t) => t,
-            Err(err) => {
+            Err(err) if KNOWN_NON_RANKED_MATCHTYPE_IDS.contains(&m.matchtype_id) => {
                 tracing::debug!(
                     match_id = m.id,
                     matchtype_id = m.matchtype_id,
                     error = %err,
-                    "skipping discovered automatch with a non-ranked-RM matchtype_id"
+                    "skipping discovered automatch with a known non-ranked-RM matchtype_id"
                 );
                 continue;
             }
+            Err(err) => {
+                tracing::warn!(
+                    match_id = m.id,
+                    matchtype_id = m.matchtype_id,
+                    error = %err,
+                    "discovered automatch with an UNRECOGNIZED matchtype_id outside both the \
+                     ranked set and the known non-ranked allow-list — possibly a new Relic \
+                     ranked ladder"
+                );
+                return Err(err.into());
+            }
         };
-        let played_at: DateTime<Utc> =
-            DateTime::from_timestamp(m.completiontime, 0).ok_or(Error::BadTimestamp(m.completiontime))?;
+        let played_at: DateTime<Utc> = DateTime::from_timestamp(m.completiontime, 0)
+            .ok_or(Error::BadTimestamp(m.completiontime))?;
         // "me" fields joined by profile_id; newrating is the post-game rating, oldrating the
         // pre-game fallback when newrating is absent (e.g. an unrated game).
-        let me = m.matchhistorymember.iter().find(|x| x.profile_id == profile_id.0);
+        let me = m
+            .matchhistorymember
+            .iter()
+            .find(|x| x.profile_id == profile_id.0);
         let new_rating = me.and_then(|x| x.newrating.or(x.oldrating));
         out.push(DiscoverySeed {
             match_id: MatchId(m.id),
@@ -413,6 +451,47 @@ mod tests {
         );
     }
 
+    // SYNTHETIC: an AUTOMATCH, completed row with a matchtype_id (42) that is neither ranked
+    // (6/7/8/9) nor on the known-non-ranked allow-list (2/18) — stands in for "Relic ships a new
+    // ladder id we haven't seen yet." Fabricated test SHAPE only, per the sibling fixture's own
+    // convention above — 42 is not asserted to be any REAL Relic matchtype_id.
+    const UNRECOGNIZED_MATCHTYPE_FIXTURE: &str = r#"{
+      "matchHistoryStats": [
+        {"id": 999, "completiontime": 1618070120, "description": "AUTOMATCH", "matchtype_id": 42,
+         "matchhistorymember": [
+           {"profile_id": 199325, "oldrating": 2000, "newrating": 2010}]}
+      ]
+    }"#;
+
+    #[test]
+    fn normalize_recent_surfaces_a_matchtype_id_outside_both_the_ranked_set_and_the_allow_list() {
+        let doc: RecentHistoryResponse =
+            serde_json::from_str(UNRECOGNIZED_MATCHTYPE_FIXTURE).unwrap();
+        let err = normalize_recent(doc, ProfileId(199325)).unwrap_err();
+        assert!(
+            matches!(err, Error::UnknownMatchType(_)),
+            "an unrecognized matchtype_id must wire the (previously dead) \
+             Error::UnknownMatchType variant, not silently vanish at debug, got {err:?}"
+        );
+    }
+
+    #[test]
+    fn normalize_recent_still_treats_the_known_non_ranked_allow_list_as_routine() {
+        // matchtype_id 2 (real, probed) must NOT trip the new unrecognized-id path.
+        const KNOWN_NON_RANKED_FIXTURE: &str = r#"{
+          "matchHistoryStats": [
+            {"id": 1, "completiontime": 1618070120, "description": "AUTOMATCH", "matchtype_id": 2,
+             "matchhistorymember": [{"profile_id": 199325, "oldrating": 2000, "newrating": 2010}]}
+          ]
+        }"#;
+        let doc: RecentHistoryResponse = serde_json::from_str(KNOWN_NON_RANKED_FIXTURE).unwrap();
+        let seeds = normalize_recent(doc, ProfileId(199325)).unwrap();
+        assert!(
+            seeds.is_empty(),
+            "a known non-ranked id is routine, not an error"
+        );
+    }
+
     // SYNTHETIC (not from the 2026-07-02 probe): two AUTOMATCH rows with matchtype_id 6, added
     // solely to exercise the ranked-RM happy path (rating fallback, played_at conversion, newest
     // -first sort) — the real fixture above has no such row. Fabricated test SHAPE, not a
@@ -465,7 +544,10 @@ mod tests {
     #[test]
     fn unzip_extracts_deflated_and_stored_members() {
         let payload = b"fake aoe2record bytes: not a real replay, just round-trip data";
-        for method in [zip::CompressionMethod::Deflated, zip::CompressionMethod::Stored] {
+        for method in [
+            zip::CompressionMethod::Deflated,
+            zip::CompressionMethod::Stored,
+        ] {
             let z = make_zip(payload, method);
             let out = unzip_single_member(&z).unwrap();
             assert_eq!(out.as_ref(), payload, "method={method:?}");
@@ -570,8 +652,7 @@ mod tests {
         Mock::given(method("GET"))
             .and(path("/getReplayFiles"))
             .respond_with(
-                ResponseTemplate::new(200)
-                    .set_body_json(serde_json::json!({ "replayFiles": [] })),
+                ResponseTemplate::new(200).set_body_json(serde_json::json!({ "replayFiles": [] })),
             )
             .mount(&server)
             .await;
@@ -599,7 +680,12 @@ mod tests {
             .await
             .unwrap_err();
         assert!(
-            matches!(err, Error::RateLimited { retry_after: Some(42) }),
+            matches!(
+                err,
+                Error::RateLimited {
+                    retry_after: Some(42)
+                }
+            ),
             "expected RateLimited{{retry_after: Some(42)}}, got {err:?}"
         );
     }
