@@ -44,6 +44,12 @@ impl GameCivMap {
             .map(String::as_str)
             .ok_or(UnknownCivId(id.0))
     }
+
+    /// Iterates every `(civ_id, slug)` pair — e.g. for the dims loader to load the whole
+    /// reference table rather than look up one id at a time.
+    pub fn entries(&self) -> impl Iterator<Item = (i32, &str)> {
+        self.0.iter().map(|(&id, slug)| (id, slug.as_str()))
+    }
 }
 
 /// Parses `civ-id-map.json`-shaped text (a flat `{ "id": "slug" }` object).
@@ -57,33 +63,65 @@ pub fn load_game_civs() -> GameCivMap {
     parse_game_civs(include_str!("../../../../src/data/civ-id-map.json")).expect("civ-id-map.json")
 }
 
-/// Relic API `civilization_id` -> slug (`src/data/relic-civ-id-map.json`). Only the `map` key is
-/// consumed; `provenance` is documentation for humans, not read here.
+/// Relic API `civilization_id` -> slug (`src/data/relic-civ-id-map.json`). `map` is the id->slug
+/// lookup; `provenance.validFrom` is read too (it feeds `civs_relic.valid_from` — see
+/// [`RelicCivMap::valid_from`]). The rest of `provenance` is documentation for humans, not read
+/// here.
 #[derive(Debug, Deserialize)]
 struct RelicDoc {
+    provenance: RelicProvenance,
     map: HashMap<String, String>,
+}
+
+#[derive(Debug, Deserialize)]
+struct RelicProvenance {
+    #[serde(rename = "validFrom")]
+    valid_from: String,
 }
 
 /// The Relic API's own civ id space. NEVER look up a game/replay `civ_id` here (and vice versa
 /// for [`GameCivMap`]) — see the module doc comment.
 #[derive(Debug, Clone)]
-pub struct RelicCivMap(HashMap<i32, String>);
+pub struct RelicCivMap {
+    by_id: HashMap<i32, String>,
+    /// `provenance.validFrom` verbatim (ISO `YYYY-MM-DD`, e.g. `"2025-09-01"`) — the era this
+    /// whole id->slug mapping is valid from (see the module doc: the Relic id space re-shuffles
+    /// at some patch/DLC boundaries). Kept as a raw string, not a date type, so this module — like
+    /// [`GameCivMap`] — stays free of a `chrono` dependency; a caller that needs a real date
+    /// parses this at the point of use.
+    valid_from: String,
+}
 
 impl RelicCivMap {
     /// Resolves a Relic-space [`RelicCivId`] to its slug. `Err(UnknownCivId)` for anything not
     /// in the committed map — never guesses.
     pub fn slug(&self, id: RelicCivId) -> Result<&str, UnknownCivId> {
-        self.0
+        self.by_id
             .get(&id.0)
             .map(String::as_str)
             .ok_or(UnknownCivId(id.0))
+    }
+
+    /// Iterates every `(civilization_id, slug)` pair — e.g. for the dims loader to load the whole
+    /// reference table rather than look up one id at a time.
+    pub fn entries(&self) -> impl Iterator<Item = (i32, &str)> {
+        self.by_id.iter().map(|(&id, slug)| (id, slug.as_str()))
+    }
+
+    /// The single era this whole mapping is valid from (`provenance.validFrom`, ISO
+    /// `YYYY-MM-DD`) — see the field doc.
+    pub fn valid_from(&self) -> &str {
+        &self.valid_from
     }
 }
 
 /// Parses `relic-civ-id-map.json`-shaped text (`{ "provenance": {...}, "map": { "id": "slug" } }`).
 pub fn parse_relic_civs(json: &str) -> serde_json::Result<RelicCivMap> {
     let doc: RelicDoc = serde_json::from_str(json)?;
-    Ok(RelicCivMap(str_keys_to_i32(doc.map)))
+    Ok(RelicCivMap {
+        by_id: str_keys_to_i32(doc.map),
+        valid_from: doc.provenance.valid_from,
+    })
 }
 
 /// Loads the real, committed `src/data/relic-civ-id-map.json`, baked into the binary at compile time.
@@ -127,5 +165,22 @@ mod tests {
     fn unknown_relic_civ_id_fails_loud() {
         let civs = load_relic_civs();
         assert!(civs.slug(RelicCivId(9999)).is_err());
+    }
+
+    #[test]
+    fn game_civ_entries_cover_every_row_including_franks() {
+        let civs = load_game_civs();
+        let by_id: HashMap<i32, &str> = civs.entries().collect();
+        assert_eq!(by_id.get(&2), Some(&"franks"));
+        assert!(by_id.len() > 40, "civ-id-map.json has ~50 entries");
+    }
+
+    #[test]
+    fn relic_civ_entries_and_valid_from_cover_the_real_file() {
+        let civs = load_relic_civs();
+        let by_id: HashMap<i32, &str> = civs.entries().collect();
+        assert_eq!(by_id.get(&5), Some(&"britons"));
+        assert!(by_id.len() > 40, "relic-civ-id-map.json has ~50 entries");
+        assert_eq!(civs.valid_from(), "2025-09-01");
     }
 }

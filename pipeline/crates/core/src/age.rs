@@ -87,7 +87,10 @@ mod tests {
                 serde_json::to_string(&age).unwrap(),
                 format!("\"{expected}\"")
             );
-            assert_eq!(serde_json::from_str::<Age>(&format!("\"{expected}\"")).unwrap(), age);
+            assert_eq!(
+                serde_json::from_str::<Age>(&format!("\"{expected}\"")).unwrap(),
+                age
+            );
         }
     }
 

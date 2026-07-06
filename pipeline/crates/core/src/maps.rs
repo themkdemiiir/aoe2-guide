@@ -35,6 +35,22 @@ impl Family {
             _ => Family::Other,
         }
     }
+
+    /// The exact lowercase label this variant casts to in Postgres's `map_family` enum
+    /// (`m20260705_000001_create_enums.rs`). Deliberately exhaustive (no wildcard arm): adding a
+    /// new [`Family`] variant without also giving it a DB label here is a `cargo build` failure,
+    /// not a silent `'other'` fallback — the dims loader's "fail loud on an unmapped family" rule.
+    pub const fn as_db_str(self) -> &'static str {
+        match self {
+            Family::Open => "open",
+            Family::Closed => "closed",
+            Family::Hybrid => "hybrid",
+            Family::Water => "water",
+            Family::Nomad => "nomad",
+            Family::Special => "special",
+            Family::Other => "other",
+        }
+    }
 }
 
 /// One `maps.tsv` row, id-keyed inside `MapTable`.
@@ -55,6 +71,12 @@ impl MapTable {
     /// Looks up a map by its `map_id`. `None` for an id `maps.tsv` doesn't cover.
     pub fn get(&self, id: u32) -> Option<&MapInfo> {
         self.by_id.get(&id)
+    }
+
+    /// Iterates every `(map_id, MapInfo)` pair — e.g. for the dims loader to load the whole
+    /// reference table rather than look up one id at a time.
+    pub fn iter(&self) -> impl Iterator<Item = (u32, &MapInfo)> {
+        self.by_id.iter().map(|(&id, info)| (id, info))
     }
 }
 
@@ -125,5 +147,37 @@ mod tests {
         let arena = t.get(29).expect("id 29 present in real maps.tsv");
         assert_eq!(arena.name, "Arena");
         assert_eq!(arena.family, Family::Closed);
+    }
+
+    #[test]
+    fn as_db_str_matches_the_map_family_enum_labels() {
+        // Mirrors the exact literal list `CREATE TYPE map_family AS ENUM (...)` declares
+        // (`m20260705_000001_create_enums.rs`) — a dims-loader spot check that these two never
+        // drift apart.
+        for (family, label) in [
+            (Family::Open, "open"),
+            (Family::Closed, "closed"),
+            (Family::Hybrid, "hybrid"),
+            (Family::Water, "water"),
+            (Family::Nomad, "nomad"),
+            (Family::Special, "special"),
+            (Family::Other, "other"),
+        ] {
+            assert_eq!(family.as_db_str(), label);
+            assert_eq!(
+                Family::parse(label),
+                family,
+                "as_db_str must round-trip through parse"
+            );
+        }
+    }
+
+    #[test]
+    fn iter_covers_every_row_including_a_known_map() {
+        let t = parse("9\tArabia\topen\twiki note\n29\tArena\tclosed\twiki note\n");
+        let by_id: HashMap<u32, &MapInfo> = t.iter().collect();
+        assert_eq!(by_id.len(), 2);
+        assert_eq!(by_id[&9].slug, "arabia");
+        assert_eq!(by_id[&29].family, Family::Closed);
     }
 }

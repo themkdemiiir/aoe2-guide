@@ -852,6 +852,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "dims"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "migration",
+ "pipeline-core",
+ "testcontainers-modules",
+ "tokio",
+ "tokio-postgres",
+ "tracing",
+]
+
+[[package]]
 name = "displaydoc"
 version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"

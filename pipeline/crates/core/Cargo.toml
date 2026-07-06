@@ -2,7 +2,7 @@
 name = "pipeline-core"
 version.workspace = true
 edition.workspace = true
-description = "Typed, regex-free slug/elo-bucket/map/civ lookups shared across the AOE2 guide's data pipeline"
+description = "Typed, regex-free slug/elo-bucket/map/civ/patch lookups shared across the AOE2 guide's data pipeline"
 license.workspace = true
 publish.workspace = true
 
@@ -11,8 +11,8 @@ name = "pipeline_core"
 path = "src/lib.rs"
 
 [features]
-# `refdata` compiles the civ/map lookup tables, which `include_str!` three data files from the
-# repo root (`src/data/*.json`, `scripts/.../maps.tsv`) at build time. It is OPT-IN (not default):
+# `refdata` compiles the civ/map/patch lookup tables, which `include_str!` four data files from
+# the repo root (`src/data/*.json`, `scripts/.../maps.tsv`) at build time. It is OPT-IN (not default):
 # a workspace member's default features are unified ON across the whole workspace, so a default
 # `refdata` would force those repo-root files to exist even for a lean `pipeline/`-context Docker
 # build of a binary that only needs `redact_secret`. Enable it explicitly where the civ/map
