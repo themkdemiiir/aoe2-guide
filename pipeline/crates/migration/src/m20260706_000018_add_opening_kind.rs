@@ -48,6 +48,10 @@ const ADD_COLUMN_SQL: &str = "ALTER TABLE match_players ADD COLUMN opening_kind 
 /// module doc for why that's mechanical, not a guess) — kept as an explicit `CASE`, not a bare
 /// `::opening_kind` cast, so a genuinely new/unexpected future label fails SAFE into `NULL`
 /// (never a runtime cast error aborting the whole backfill) instead of merely happening to match.
+/// The single source of truth for the historical backfill's reconciliation, applied OUT-OF-BAND in
+/// committed chunks (not in this migration's `up` — see `up`'s note) so a 15M-row `UPDATE` can't
+/// wedge the DB host again.
+#[allow(dead_code)] // applied by the separate batched-backfill step, not by `up` (see up's note)
 const BACKFILL_SQL: &str = r#"
 UPDATE match_players
 SET opening_kind = (
@@ -75,7 +79,15 @@ impl MigrationTrait for Migration {
         let db = manager.get_connection();
         db.execute_unprepared(CREATE_TYPE_SQL).await?;
         db.execute_unprepared(ADD_COLUMN_SQL).await?;
-        db.execute_unprepared(BACKFILL_SQL).await?;
+        // NOTE: the existing-aoestats-row backfill (`BACKFILL_SQL`) is DELIBERATELY NOT run here.
+        // A SeaORM migration runs in one transaction, so a 15M-row `UPDATE` cannot batch-commit —
+        // run as a single statement it produced ~15M dead tuples + WAL churn that compounded with
+        // residual bulk-load load to wedge the (modest 12GB/8-core) CT101 DB host (2026-07-06
+        // incident). The reconciliation for NEW rows is done at the ingest boundary (aoestats
+        // INSERT_PLAYERS_SQL + the replay derive path), which is all the going-forward crawl needs;
+        // the historical backfill of pre-existing `source='aoestats'` rows is run SEPARATELY, in
+        // committed chunks, against an idle DB (see `BACKFILL_SQL`, applied by the batched-backfill
+        // step, not this migration). Until then those rows keep `opening_kind IS NULL` (honest).
         Ok(())
     }
 
