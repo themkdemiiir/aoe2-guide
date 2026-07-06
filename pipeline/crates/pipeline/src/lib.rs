@@ -9,13 +9,19 @@
 //! no `tokio`/`reqwest`/`pg` in this crate's dependency tree beyond what `replay`/`fetch`/
 //! `ingest` themselves already pull in for their own adapters).
 //!
-//! SCOPE: this crate today only ships the pure join. The eventual
-//! discover -> download -> parse -> `to_batch` -> ingest RUN LOOP (driven by Dagster) is a later
-//! milestone (M6) — `src/main.rs` is a placeholder skeleton for that future binary, not a live
-//! loop.
+//! SCOPE: alongside that pure join, this crate now also ships the M6 discover -> download ->
+//! parse -> `to_batch` -> ingest RUN LOOP itself ([`crawl`]) — see that module's doc for the full
+//! design (resilience, bounded concurrency, graceful shutdown, dry-run). `src/main.rs` is the
+//! `pipeline crawl` CLI over it, driven standalone or (eventually) by Dagster.
 
 mod compose;
+mod crawl;
 mod error;
+mod sink;
+mod source;
 
 pub use compose::to_batch;
+pub use crawl::{crawl, CrawlConfig, CrawlError, CrawlSummary};
 pub use error::{Error, Result};
+pub use sink::{IngestSink, PgSink};
+pub use source::{FetchSource, ReplayFetch, ReplaySource};

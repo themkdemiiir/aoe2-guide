@@ -23,10 +23,23 @@ replay = { path = "../replay" }
 fetch = { path = "../fetch" }
 ingest = { path = "../ingest" }
 thiserror = { workspace = true }
-# For the thin `src/main.rs` skeleton's `init_tracing` call only — the library (`to_batch`) itself
-# never logs (pure, no IO).
 tracing = { workspace = true }
+# `sync` -> the crawl loop's own `Arc<Semaphore>` (bounded concurrency, distinct from `fetch`'s
+# internal one); `time` -> the sustained-429 courtesy pause (`tokio::time::sleep`); `signal` ->
+# `main.rs`'s Ctrl-C handler. On top of the workspace's `rt-multi-thread`+`macros`.
+tokio = { workspace = true, features = ["sync", "time", "signal"] }
+# The run loop's one root `CancellationToken` (rust-playbook.md's "Async / pooling" section).
+tokio-util = { workspace = true }
+tokio-postgres = { workspace = true }
+bytes = { workspace = true }
+chrono = { workspace = true }
+clap = { workspace = true }
+# Binary-edge error handling for `main.rs` only (playbook rule 1) — the library (`to_batch`,
+# `crawl`) stays on typed `thiserror` results.
+anyhow = { workspace = true }
 
 [dev-dependencies]
-# Test fixtures build `DiscoverySeed.played_at` (`DateTime<Utc>`) directly.
+# Test fixtures build `DiscoverySeed.played_at` (`DateTime<Utc>`) directly, and the run-loop
+# integration tests (`tests/crawl.rs`) drive `#[tokio::test]`s against FAKE `ReplaySource`/
+# `IngestSink`/`ReplayManifest` doubles — never the live Relic API or a real Postgres.
 chrono = { workspace = true }

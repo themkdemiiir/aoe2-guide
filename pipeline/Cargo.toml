@@ -80,6 +80,14 @@ zip = { version = "8", default-features = false, features = ["deflate-flate2"] }
 # HTTP mocking for `fetch`'s discovery/download parsing tests — never hits the live Relic API.
 wiremock = "0.6"
 
+# --- pipeline (the M6 run-loop)-only dep, hoisted per the same single-consumer-today convention
+# above. ---
+# `CancellationToken` for the crawl loop's graceful shutdown (rust-playbook.md's "Async / pooling"
+# section: "one root `CancellationToken` -> `.child_token()` per subsystem"). `rt` is the feature
+# that gates `tokio_util::sync` (where `CancellationToken` lives) — it also pulls in `tokio/sync`,
+# which `pipeline` needs anyway for its own `Semaphore`.
+tokio-util = { version = "0.7", features = ["rt"] }
+
 # --- export-only dep, hoisted per the same single-consumer-today convention above. ---
 # `export::query`'s `benchmark_ageup`/`benchmark_vils` fetches use `Client::query_raw` (a
 # `RowStream`) instead of `Client::query`, per the rust-playbook's export streaming rule — the
