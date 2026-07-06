@@ -40,9 +40,11 @@
 //!
 //! ## Build-order + age-up-completion derivation (Phase A enrichment, `task-enrichA`)
 //! `replay::derive(&parsed)` (pure, ported from `analyzer`'s opening/age-timing algorithm — see
-//! its module doc) computes each player's `opening`/`feudal_t`/`castle_t`/`imperial_t` from the
-//! replay's own events, BEFORE `parsed.players`/`parsed.events` are consumed below. Results are
-//! matched back onto each `NewMatchPlayer` by `profile_id`.
+//! its module doc) computes each player's `opening`/`opening_kind`/`feudal_t`/`castle_t`/
+//! `imperial_t` from the replay's own events, BEFORE `parsed.players`/`parsed.events` are consumed
+//! below. Results are matched back onto each `NewMatchPlayer` by `profile_id`. `opening_kind`
+//! (final-review finding #1) is the closed, cross-source-reconciled counterpart to the rich
+//! `opening` string — see `pipeline_core::opening`'s module doc.
 //!
 //! ## Unit composition derivation (Phase B enrichment, `task-enrichB`)
 //! The SAME `replay::derive(&parsed)` call also fills each `PlayerSummary.units` (per-unit
@@ -170,6 +172,10 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
                 // derivation" section. `feudal_t`/`castle_t`/`imperial_t` are COMPLETION seconds
                 // (`replay::derive`'s doc), matching the aoestats path's `*_age_uptime` columns.
                 opening: derived.and_then(|s| s.opening.clone()),
+                // Closes final-review finding #1 — the closed counterpart to `opening` above (see
+                // `pipeline_core::opening`'s module doc); `derived.and_then` mirrors `opening`'s
+                // own None-propagation exactly (both come from the SAME `PlayerSummary`).
+                opening_kind: derived.and_then(|s| s.opening_kind),
                 feudal_t: derived.and_then(|s| s.feudal_t),
                 castle_t: derived.and_then(|s| s.castle_t),
                 imperial_t: derived.and_then(|s| s.imperial_t),
@@ -385,13 +391,14 @@ mod tests {
         assert_eq!(batch.players[1].elo, Some(1590));
         assert!(
             batch.players.iter().all(|p| p.opening.is_none()
+                && p.opening_kind.is_none()
                 && p.feudal_t.is_none()
                 && p.castle_t.is_none()
                 && p.imperial_t.is_none()),
             "this sample carries no research events at all (only sample_event's `build` action) \
-             -> derive() has nothing to classify, so opening/timings honestly stay null; see \
-             `to_batch_flows_derived_opening_and_completion_timings_into_match_player` for the \
-             populated case"
+             -> derive() has nothing to classify, so opening/opening_kind/timings honestly stay \
+             null; see `to_batch_flows_derived_opening_and_completion_timings_into_match_player` \
+             for the populated case"
         );
         assert!(
             batch.players.iter().all(|p| p.apm.is_some()),
@@ -524,6 +531,11 @@ mod tests {
 
         let p = &batch.players[0];
         assert_eq!(p.opening.as_deref(), Some("Scouts"));
+        assert_eq!(
+            p.opening_kind,
+            Some(pipeline_core::OpeningKind::Scouts),
+            "opening_kind (final-review finding #1) flows through to_batch alongside opening"
+        );
         // COMPLETION, not click: 600.0s click + 130.0s baseline Feudal research = 730.0s. If
         // this ever regresses to storing the raw click (600.0), this assertion catches it.
         let feudal_t = p.feudal_t.expect("feudal was reached — must not be None");

@@ -174,7 +174,8 @@ fn write_matches_fixture(path: &Path) {
 /// Writes a synthetic `p_*.parquet`-shaped file. Five rows spanning three matches:
 /// - `2001`: `5001`(britons, elo 1500, winner) + `5002`(franks, elo 1490, loser) — both civs known.
 /// - `2002`: `5003`(**`atlanteans` — deliberately unseeded**, unknown-civ path) +
-///   `5004`(britons, elo 1550).
+///   `5004`(britons, elo 1550, opening `man_at_arms` — a SECOND real aoestats label, distinct from
+///   5001's `scouts`, exercising `INSERT_PLAYERS_SQL`'s `opening_kind` `CASE` on a different arm).
 /// - `2003`: `5005`(britons) — civ IS known, but `2003`'s match itself is never inserted (unknown
 ///   map), proving the `JOIN matches` gate excludes it independently of the civ join.
 /// - `2002`: a 6th row with civ `franks` (known) but a **NULL `profile_id`** — reproduces a real
@@ -226,7 +227,8 @@ fn write_players_fixture(path: &Path) {
         Some(true),
         Some(false),
     ]);
-    let opening = StringArray::from(vec![Some("scouts"), None, None, Some("maa"), None, None]);
+    let opening =
+        StringArray::from(vec![Some("scouts"), None, None, Some("man_at_arms"), None, None]);
     let feudal = Float64Array::from(vec![Some(300.5), None, None, None, None, None]);
     let castle = Float64Array::from(vec![Some(700.0), None, None, None, None, None]);
     let imperial = Float64Array::from(vec![None, None, None, None, None, None]);
@@ -298,6 +300,7 @@ async fn import_pair_resolves_slugs_skips_unknowns_and_is_idempotent() {
     assert_match_2001_row(&client).await;
     assert_match_2002_row(&client).await;
     assert_player_5001_row(&client).await;
+    assert_player_5004_opening_kind(&client).await;
 
     // `2003` (unknown map) must not exist at all.
     let match_2003: i64 = client
@@ -429,11 +432,14 @@ async fn assert_match_2002_row(client: &tokio_postgres::Client) {
 }
 
 /// Full-row read-back for `match_players` (match_id = 2001, profile_id = 5001): civ_id
-/// slug-resolved from `britons`, `elo = new_rating`.
+/// slug-resolved from `britons`, `elo = new_rating`. Also proves `INSERT_PLAYERS_SQL`'s
+/// `opening_kind` `CASE` (final-review finding #1): the raw aoestats label `"scouts"` must
+/// round-trip to the IDENTICALLY-named `opening_kind` enum value — see
+/// [`assert_player_5004_opening_kind`] for a second, distinct label on a different `CASE` arm.
 async fn assert_player_5001_row(client: &tokio_postgres::Client) {
     let row = client
         .query_one(
-            "SELECT civ_id, elo, won, opening, feudal_t, castle_t, imperial_t \
+            "SELECT civ_id, elo, won, opening, opening_kind::text, feudal_t, castle_t, imperial_t \
              FROM match_players WHERE match_id = 2001 AND profile_id = 5001",
             &[],
         )
@@ -457,19 +463,50 @@ async fn assert_player_5001_row(client: &tokio_postgres::Client) {
         "match_players.opening"
     );
     assert_eq!(
-        row.get::<_, Option<f32>>(4),
+        row.get::<_, Option<String>>(4),
+        Some("scouts".to_owned()),
+        "match_players.opening_kind — the raw aoestats label 'scouts' is ALSO the enum value \
+         (mechanical rename, not a guess — see pipeline_core::opening's module doc)"
+    );
+    assert_eq!(
+        row.get::<_, Option<f32>>(5),
         Some(300.5_f32),
         "match_players.feudal_t"
     );
     assert_eq!(
-        row.get::<_, Option<f32>>(5),
+        row.get::<_, Option<f32>>(6),
         Some(700.0_f32),
         "match_players.castle_t"
     );
     assert_eq!(
-        row.get::<_, Option<f32>>(6),
+        row.get::<_, Option<f32>>(7),
         None,
         "match_players.imperial_t"
+    );
+}
+
+/// Full-row read-back for `match_players` (match_id = 2002, profile_id = 5004): a SECOND real
+/// aoestats label (`man_at_arms`) on a DIFFERENT `opening_kind` `CASE` arm than
+/// [`assert_player_5001_row`]'s `scouts` — proves the `CASE` isn't a one-arm coincidence.
+async fn assert_player_5004_opening_kind(client: &tokio_postgres::Client) {
+    let row = client
+        .query_one(
+            "SELECT opening, opening_kind::text \
+             FROM match_players WHERE match_id = 2002 AND profile_id = 5004",
+            &[],
+        )
+        .await
+        .expect("full-row read-back query on match_players (5004) failed");
+
+    assert_eq!(
+        row.get::<_, Option<String>>(0),
+        Some("man_at_arms".to_owned()),
+        "match_players.opening"
+    );
+    assert_eq!(
+        row.get::<_, Option<String>>(1),
+        Some("man_at_arms".to_owned()),
+        "match_players.opening_kind"
     );
 }
 

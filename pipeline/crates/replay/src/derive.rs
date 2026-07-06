@@ -65,7 +65,7 @@
 
 use std::collections::BTreeMap;
 
-use pipeline_core::{GameUnitId, ProfileId, TechId};
+use pipeline_core::{GameUnitId, OpeningKind, ProfileId, TechId};
 
 use crate::config;
 use crate::error::overflow;
@@ -82,6 +82,15 @@ pub struct PlayerSummary {
     /// when there's nothing honest to say (no Feudal reached, or a passive Feudal with no
     /// Castle and no feudal military) — never a guessed label.
     pub opening: Option<String>,
+    /// The closed [`OpeningKind`] this player's rich `opening` tag reconciles onto for
+    /// cross-source pooling (final-review finding #1 — see `pipeline_core::opening`'s module doc).
+    /// ALWAYS `Some` exactly when `opening` is `Some`, and `None` exactly when `opening` is
+    /// `None` — the two are derived from the SAME classification pass in [`classify_opening`], so
+    /// they can never desync. `"Drush + X"` -> [`OpeningKind::Drush`] (drush is primary — aoestats
+    /// has its own standalone `drush` label with no memory of what followed it); otherwise the
+    /// PRIMARY (first-trained) opener line, or [`OpeningKind::FastCastle`] for a passive-Feudal
+    /// Castle rush.
+    pub opening_kind: Option<OpeningKind>,
     /// Feudal-Age-up COMPLETION time in seconds. `None` if this player never reached Feudal.
     pub feudal_t: Option<f32>,
     /// Castle-Age-up COMPLETION time in seconds. `None` if this player never reached Castle.
@@ -138,14 +147,11 @@ pub fn derive(parsed: &ParsedReplay) -> Result<Vec<PlayerSummary>> {
                 .and_then(|m| m.slug(p.civ_id).ok())
                 .unwrap_or("");
             let (feudal_res_s, castle_res_s, imperial_res_s) = age_research_s(civ_slug);
+            let opening = classify_opening(&parsed.events, p.player_number, feudal_click, castle_click);
             Ok(PlayerSummary {
                 profile_id: p.profile_id,
-                opening: classify_opening(
-                    &parsed.events,
-                    p.player_number,
-                    feudal_click,
-                    castle_click,
-                ),
+                opening: opening.as_ref().map(|(tag, _)| tag.clone()),
+                opening_kind: opening.map(|(_, kind)| kind),
                 feudal_t: completion_s(feudal_click, feudal_res_s),
                 castle_t: completion_s(castle_click, castle_res_s),
                 imperial_t: completion_s(imperial_click, imperial_res_s),
@@ -223,12 +229,25 @@ fn trains(e: &ReplayEvent, unit_ids: &[u16]) -> bool {
 /// order ("Scouts into Archers"); no feudal military but Castle reached = "Fast Castle". `None`
 /// when there's nothing to say (no Feudal, or a passive Feudal with no Castle) — never guess.
 /// source: analyzer/crates/analyzer/src/analyze/metrics.rs::classify_opening
+///
+/// Returns the rich display tag PAIRED with its [`OpeningKind`] (never one without the other —
+/// see [`PlayerSummary::opening_kind`]'s doc for why they can't desync) rather than re-deriving
+/// the kind from the formatted string afterward: `config::OPENER_LINES` already carries each
+/// line's `OpeningKind` alongside its display tag, so this reads it straight from the SAME match
+/// that builds the rich string, never a second, lossier parse of it.
+///
+/// **Kind resolution** (see `pipeline_core::opening`'s module doc for the cross-source rationale):
+/// a `"Drush + "` prefix always wins as [`OpeningKind::Drush`], regardless of the body (aoestats'
+/// own standalone `drush` label carries no memory of what followed it); otherwise a passive-Feudal
+/// Castle rush is [`OpeningKind::FastCastle`]; otherwise the PRIMARY is the first-trained opener
+/// line's own kind (`"Scouts into Archers"` -> [`OpeningKind::Scouts`], the earlier-trained line —
+/// never the later `Archers`).
 fn classify_opening(
     evs: &[ReplayEvent],
     player_number: i16,
     feudal_ms: Option<i32>,
     castle_ms: Option<i32>,
-) -> Option<String> {
+) -> Option<(String, OpeningKind)> {
     let feudal = feudal_ms?;
     let castle_or = castle_ms.unwrap_or(feudal + 12 * 60_000);
     let dark_militia = evs
@@ -237,9 +256,9 @@ fn classify_opening(
         .filter(|e| trains(e, &config::MILITIA_LINE))
         .count();
 
-    let mut opened: Vec<(i32, &str)> = config::OPENER_LINES
+    let mut opened: Vec<(i32, &str, OpeningKind)> = config::OPENER_LINES
         .iter()
-        .filter_map(|(ids, tag)| {
+        .filter_map(|&(ids, tag, kind)| {
             evs.iter()
                 .filter(|e| {
                     e.player_number == player_number && e.t_ms >= feudal && e.t_ms < castle_or
@@ -247,23 +266,24 @@ fn classify_opening(
                 .filter(|e| trains(e, ids))
                 .map(|e| e.t_ms)
                 .min()
-                .map(|t| (t, *tag))
+                .map(|t| (t, tag, kind))
         })
         .collect();
-    opened.sort_by_key(|&(t, _)| t);
+    opened.sort_by_key(|&(t, _, _)| t);
 
-    let feudal_tags: Vec<&str> = opened.iter().take(2).map(|&(_, tag)| tag).collect();
-    let body = match feudal_tags.as_slice() {
-        [] if castle_ms.is_some() => Some("Fast Castle".to_string()),
-        [] => None,
-        [one] => Some((*one).to_string()),
-        [a, b] => Some(format!("{a} into {b}")),
+    let feudal_tags: Vec<(&str, OpeningKind)> =
+        opened.iter().take(2).map(|&(_, tag, kind)| (tag, kind)).collect();
+    let (body, body_kind) = match feudal_tags.as_slice() {
+        [] if castle_ms.is_some() => ("Fast Castle".to_string(), OpeningKind::FastCastle),
+        [] => return None,
+        [(tag, kind)] => ((*tag).to_string(), *kind),
+        [(a, ak), (b, _)] => (format!("{a} into {b}"), *ak),
         _ => unreachable!(),
-    }?;
+    };
     Some(if dark_militia >= 3 {
-        format!("Drush + {body}")
+        (format!("Drush + {body}"), OpeningKind::Drush)
     } else {
-        body
+        (body, body_kind)
     })
 }
 
@@ -449,6 +469,11 @@ mod tests {
         let s = &summaries[0];
         assert_eq!(s.profile_id, ProfileId(5001));
         assert_eq!(s.opening.as_deref(), Some("Fast Castle"));
+        assert_eq!(
+            s.opening_kind,
+            Some(OpeningKind::FastCastle),
+            "opening_kind must match the rich tag it was paired with"
+        );
 
         // COMPLETION, not click: click_s + baseline research_s.
         let expected_feudal = 600.0 + 130.0;
@@ -517,6 +542,10 @@ mod tests {
             s.opening, None,
             "an unclassifiable opening must be None, never a guessed label"
         );
+        assert_eq!(
+            s.opening_kind, None,
+            "opening_kind must be None exactly when opening is None — never desynced"
+        );
         assert!(s.feudal_t.is_some(), "feudal itself WAS reached");
         assert_eq!(s.castle_t, None);
     }
@@ -526,6 +555,7 @@ mod tests {
         let p = parsed(vec![player(5001, 1, FRANKS)], vec![]);
         let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert_eq!(s.opening, None);
+        assert_eq!(s.opening_kind, None);
         assert_eq!(s.feudal_t, None);
         assert_eq!(s.castle_t, None);
         assert_eq!(s.imperial_t, None);
@@ -544,6 +574,13 @@ mod tests {
         let p = parsed(vec![player(5001, 1, FRANKS)], evs);
         let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert_eq!(s.opening.as_deref(), Some("Drush + Scouts"));
+        assert_eq!(
+            s.opening_kind,
+            Some(OpeningKind::Drush),
+            "'Drush + X' -> primary kind is Drush, not Scouts — aoestats has its own standalone \
+             'drush' label with no memory of what followed it (see pipeline_core::opening's \
+             module doc)"
+        );
     }
 
     #[test]
@@ -556,6 +593,11 @@ mod tests {
         let p = parsed(vec![player(5001, 1, FRANKS)], evs);
         let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert_eq!(s.opening.as_deref(), Some("Scouts into Archers"));
+        assert_eq!(
+            s.opening_kind,
+            Some(OpeningKind::Scouts),
+            "the PRIMARY kind is the earlier-trained line (Scouts), never the later Archers"
+        );
     }
 
     #[test]

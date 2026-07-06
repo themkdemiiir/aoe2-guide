@@ -4,7 +4,7 @@
 //! fabricates a value for a field the schema requires.
 
 use chrono::{DateTime, Utc};
-use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId, TechId};
+use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, OpeningKind, ProfileId, TechId};
 use serde::{Deserialize, Serialize};
 
 /// `matches.source` — mirrors the PG enum `source_kind` (`'replay' | 'aoestats'`).
@@ -78,6 +78,12 @@ pub struct NewMatchPlayer {
     pub elo: Option<i32>,
     pub won: Option<bool>,
     pub opening: Option<String>,
+    /// `match_players.opening_kind` — the closed, cross-source-reconciled counterpart to
+    /// `opening` above (final-review finding #1; see [`pipeline_core::opening`]'s module doc for
+    /// the full vocabulary/reconciliation trail). `None` whenever `opening` itself carries
+    /// nothing classifiable (aoestats' `'unknown'` label, or a replay player `derive` couldn't
+    /// classify) — never guessed.
+    pub opening_kind: Option<OpeningKind>,
     /// `real` (float4) in Postgres — `f32`, not `f64`, so the Rust type matches the column
     /// exactly instead of silently truncating on write. See [`crate::ingest::copy_match_players`].
     pub feudal_t: Option<f32>,
@@ -216,7 +222,8 @@ mod tests {
                 civ_id: GameCivId(1),
                 elo: Some(1400),
                 won: Some(true),
-                opening: None,
+                opening: Some("Fast Castle".to_owned()),
+                opening_kind: Some(OpeningKind::FastCastle),
                 feudal_t: Some(320.5),
                 castle_t: None,
                 imperial_t: None,
@@ -263,6 +270,13 @@ mod tests {
 
         // Age is a lowercase bare string, not `{"Dark": null}`.
         assert_eq!(value["ages"][0]["age"], serde_json::json!("dark"));
+
+        // OpeningKind is a snake_case bare string, not `{"FastCastle": null}` — same shape
+        // discipline as Age above.
+        assert_eq!(
+            value["players"][0]["opening_kind"],
+            serde_json::json!("fast_castle")
+        );
 
         // And it round-trips back to an identical struct.
         let round_tripped: ReplayBatch =

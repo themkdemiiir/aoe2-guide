@@ -63,12 +63,31 @@ models:
         data_tests: [not_null]
 
   - name: civ_meta_openings
-    description: Per (civ, ladder, opening) games + rank — feeds civ-meta.json's `openings`.
+    description: >
+      Per (civ, ladder, opening) games + rank — feeds civ-meta.json's `openings`. `opening` is the
+      closed `opening_kind` enum (final-review finding #1 — see `pipeline_core::opening`'s module
+      doc), not the free-text `match_players.opening` column.
     columns:
       - name: civ_slug
         data_tests: [not_null]
       - name: opening
-        data_tests: [not_null]
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "scouts"
+                  - "archers"
+                  - "skirms"
+                  - "eagles"
+                  - "man_at_arms"
+                  - "spears"
+                  - "fast_castle"
+                  - "drush"
+                  - "trash"
+                  - "fires"
+                  - "galleys"
+                  - "towers"
       - name: opening_rank
         data_tests: [not_null]
 

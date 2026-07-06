@@ -56,6 +56,20 @@ fn is_known_mode(value: &str) -> bool {
     value == "all" || KNOWN_LADDERS.contains(&value)
 }
 
+/// Fails loud (`ExportError::UnexpectedValue`) on an `opening` value outside the closed
+/// `opening_kind` vocabulary — reuses [`pipeline_core::OpeningKind`] itself (the SAME closed set
+/// `civ_meta_openings.sql` casts onto — see that model's doc, final-review finding #1) as the
+/// source of truth, rather than hand-duplicating its twelve values a second time here.
+fn validate_opening(value: String) -> Result<String> {
+    match pipeline_core::OpeningKind::try_from(value.as_str()) {
+        Ok(_) => Ok(value),
+        Err(_) => Err(ExportError::UnexpectedValue {
+            field: "opening",
+            value,
+        }),
+    }
+}
+
 /// Fails loud (`ExportError::UnexpectedValue`) on a `mode` value outside the closed set — see
 /// [`is_known_mode`]'s doc.
 fn validate_mode(value: String) -> Result<String> {
@@ -161,7 +175,9 @@ pub async fn fetch_by_patch(client: &Client) -> Result<Vec<ByPatchRow>> {
 }
 
 /// One row of the `civ_meta_openings` view, pre-filtered to the top 3 per (civ, ladder) —
-/// `opening_rank` is assigned by the view's own `row_number() OVER (...)`.
+/// `opening_rank` is assigned by the view's own `row_number() OVER (...)`. `opening` is the closed
+/// `opening_kind` enum value (final-review finding #1 — see that view's doc), NOT the free-text
+/// `match_players.opening` column.
 #[derive(Debug, Clone)]
 pub struct OpeningRow {
     pub civ_slug: String,
@@ -180,7 +196,7 @@ pub async fn fetch_openings(client: &Client) -> Result<Vec<OpeningRow>> {
             Ok(OpeningRow {
                 civ_slug: row.try_get("civ_slug")?,
                 ladder: validate_ladder(row.try_get("ladder")?)?,
-                opening: row.try_get("opening")?,
+                opening: validate_opening(row.try_get("opening")?)?,
                 games: row.try_get("games")?,
             })
         })
@@ -507,6 +523,48 @@ mod tests {
             match err {
                 ExportError::UnexpectedValue { field, value } => {
                     assert_eq!(field, "mode");
+                    assert_eq!(value, drifted);
+                }
+                other => panic!("expected UnexpectedValue, got {other:?}"),
+            }
+        }
+    }
+
+    #[test]
+    fn validate_opening_accepts_every_opening_kind_value() {
+        for opening in [
+            "scouts",
+            "archers",
+            "skirms",
+            "eagles",
+            "man_at_arms",
+            "spears",
+            "fast_castle",
+            "drush",
+            "trash",
+            "fires",
+            "galleys",
+            "towers",
+        ] {
+            assert_eq!(
+                validate_opening(opening.to_string()).unwrap(),
+                opening,
+                "every closed opening_kind string must validate"
+            );
+        }
+    }
+
+    #[test]
+    fn validate_opening_fails_loud_on_a_drifted_value() {
+        // `unknown` (aoestats' own non-classification bucket) is deliberately NOT an
+        // `opening_kind` member (see `pipeline_core::opening`'s module doc) — it must never
+        // appear here since `civ_meta_openings.sql` filters `opening_kind IS NOT NULL`, but if it
+        // ever did leak through, this must reject it exactly like any other drifted value.
+        for drifted in ["unknown", "man-at-arms", "Scouts"] {
+            let err = validate_opening(drifted.to_string()).unwrap_err();
+            match err {
+                ExportError::UnexpectedValue { field, value } => {
+                    assert_eq!(field, "opening");
                     assert_eq!(value, drifted);
                 }
                 other => panic!("expected UnexpectedValue, got {other:?}"),

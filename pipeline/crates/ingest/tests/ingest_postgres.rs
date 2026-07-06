@@ -12,7 +12,7 @@ use ingest::{
     NewMatchPlayerUnit, NewReplayAge, NewReplayEvent, ReplayBatch,
 };
 use migration::{Migrator, MigratorTrait};
-use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId, TechId};
+use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, OpeningKind, ProfileId, TechId};
 use testcontainers_modules::postgres::Postgres;
 use testcontainers_modules::testcontainers::runners::AsyncRunner;
 use testcontainers_modules::testcontainers::{ContainerAsync, ImageExt};
@@ -136,6 +136,7 @@ fn sample_batch() -> ReplayBatch {
                 elo: Some(1400), // -> elo_bucket '1400-1649'
                 won: Some(true),
                 opening: Some("scouts".to_owned()),
+                opening_kind: Some(OpeningKind::Scouts),
                 feudal_t: Some(320.5),
                 castle_t: Some(780.0),
                 imperial_t: None,
@@ -149,6 +150,7 @@ fn sample_batch() -> ReplayBatch {
                 elo: None, // -> elo_bucket NULL
                 won: Some(false),
                 opening: None,
+                opening_kind: None,
                 feudal_t: None,
                 castle_t: None,
                 imperial_t: None,
@@ -164,6 +166,7 @@ fn sample_batch() -> ReplayBatch {
                 elo: Some(2000),
                 won: Some(true),
                 opening: Some("man_at_arms".to_owned()),
+                opening_kind: Some(OpeningKind::ManAtArms),
                 feudal_t: Some(300.0),
                 castle_t: None,
                 imperial_t: None,
@@ -332,6 +335,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
     //        through undetected. ---
     assert_match_1001_row(&client).await;
     assert_match_player_5001_row(&client).await;
+    assert_match_player_5003_opening_kind(&client).await;
     assert_match_player_apm_null_vs_zero(&client).await;
     assert_replay_event_row(&client).await;
     assert_replay_ages_rows(&client).await;
@@ -452,11 +456,14 @@ async fn assert_match_1001_row(client: &tokio_postgres::Client) {
 /// Full-row read-back for `match_players` (match_id = 1001, profile_id = 5001), against
 /// `sample_batch().players[0]` — including the f32 `feudal_t`/`castle_t`/`imperial_t` columns
 /// (the 5b f64->f32 fix: these are `real`/float4 in Postgres) and (Phase C, task-enrichC) `apm`,
-/// same `real`/`Option<f32>` treatment.
+/// same `real`/`Option<f32>` treatment. Also proves `opening_kind` (final-review finding #1)
+/// round-trips through `ingest_batch`'s `TEXT`-staged/`::opening_kind`-cast INSERT — see
+/// [`assert_match_player_5003_opening_kind`] for a second, distinct label.
 async fn assert_match_player_5001_row(client: &tokio_postgres::Client) {
     let row = client
         .query_one(
-            "SELECT civ_id, elo, won, opening, feudal_t, castle_t, imperial_t, apm \
+            "SELECT civ_id, elo, won, opening, opening_kind::text, feudal_t, castle_t, \
+             imperial_t, apm \
              FROM match_players WHERE match_id = 1001 AND profile_id = 5001",
             &[],
         )
@@ -472,24 +479,53 @@ async fn assert_match_player_5001_row(client: &tokio_postgres::Client) {
         "match_players.opening"
     );
     assert_eq!(
-        row.get::<_, Option<f32>>(4),
+        row.get::<_, Option<String>>(4),
+        Some("scouts".to_owned()),
+        "match_players.opening_kind"
+    );
+    assert_eq!(
+        row.get::<_, Option<f32>>(5),
         Some(320.5_f32),
         "match_players.feudal_t"
     );
     assert_eq!(
-        row.get::<_, Option<f32>>(5),
+        row.get::<_, Option<f32>>(6),
         Some(780.0_f32),
         "match_players.castle_t"
     );
     assert_eq!(
-        row.get::<_, Option<f32>>(6),
+        row.get::<_, Option<f32>>(7),
         None,
         "match_players.imperial_t"
     );
     assert_eq!(
-        row.get::<_, Option<f32>>(7),
+        row.get::<_, Option<f32>>(8),
         Some(74.2_f32),
         "match_players.apm"
+    );
+}
+
+/// A SECOND, distinct `opening_kind` label (match 1002, profile 5003 — `sample_batch().players[2]`)
+/// on a DIFFERENT enum value than [`assert_match_player_5001_row`]'s `scouts` — proves
+/// `ingest_batch`'s `opening_kind::opening_kind` cast isn't a one-value coincidence.
+async fn assert_match_player_5003_opening_kind(client: &tokio_postgres::Client) {
+    let row = client
+        .query_one(
+            "SELECT opening, opening_kind::text \
+             FROM match_players WHERE match_id = 1002 AND profile_id = 5003",
+            &[],
+        )
+        .await
+        .expect("full-row read-back query on match_players (5003) failed");
+    assert_eq!(
+        row.get::<_, Option<String>>(0),
+        Some("man_at_arms".to_owned()),
+        "match_players.opening"
+    );
+    assert_eq!(
+        row.get::<_, Option<String>>(1),
+        Some("man_at_arms".to_owned()),
+        "match_players.opening_kind"
     );
 }
 
@@ -781,6 +817,7 @@ async fn ingest_batch_fails_loud_and_rolls_back_on_fk_violation() {
             elo: None,
             won: None,
             opening: None,
+            opening_kind: None,
             feudal_t: None,
             castle_t: None,
             imperial_t: None,

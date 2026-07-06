@@ -78,6 +78,10 @@ const MATCH_PLAYERS_COLUMNS: TableColumns = TableColumns {
         ("elo", Type::INT4),
         ("won", Type::BOOL),
         ("opening", Type::TEXT),
+        // Staged as plain TEXT (cast to the real `opening_kind` enum in
+        // `INSERT_MATCH_PLAYERS_SQL`, mirroring `age`'s TEXT-staged/enum-cast treatment) — closes
+        // final-review finding #1. See `dto::NewMatchPlayer::opening_kind`.
+        ("opening_kind", Type::TEXT),
         // `real`/float4 in Postgres (`m20260705_000007_create_match_players.rs`) — FLOAT4, not
         // FLOAT8, so the wire type matches the column exactly. See `dto::NewMatchPlayer`.
         ("feudal_t", Type::FLOAT4),
@@ -159,6 +163,7 @@ CREATE TEMP TABLE stg_match_players (
     elo INTEGER,
     won BOOLEAN,
     opening TEXT,
+    opening_kind TEXT,
     feudal_t REAL,
     castle_t REAL,
     imperial_t REAL,
@@ -226,9 +231,13 @@ CREATE TEMP TABLE new_match_ids ON COMMIT DROP AS
 // discovered additional events (e.g. a fuller replay) will not top up an existing match's rows.
 // This is the intended no-churn contract; future producers (Task-4/5) must not rely on
 // re-ingestion to backfill/augment children of matches already in the store.
+/// `opening_kind` is cast from the staging table's plain `TEXT` to the real `opening_kind` enum
+/// here — same treatment as [`INSERT_NEW_MATCHES_SQL`]'s `source`/`ladder` casts and
+/// [`INSERT_REPLAY_AGES_SQL`]'s `age::age_kind` (closes final-review finding #1 on the replay
+/// producer's side; `aoestats::db::INSERT_PLAYERS_SQL` does the SAME cast on ITS side).
 const INSERT_MATCH_PLAYERS_SQL: &str = r#"
-INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening, feudal_t, castle_t, imperial_t, apm)
-  SELECT s.match_id, s.profile_id, s.civ_id, s.elo, s.won, s.opening, s.feudal_t, s.castle_t, s.imperial_t, s.apm
+INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening, opening_kind, feudal_t, castle_t, imperial_t, apm)
+  SELECT s.match_id, s.profile_id, s.civ_id, s.elo, s.won, s.opening, s.opening_kind::opening_kind, s.feudal_t, s.castle_t, s.imperial_t, s.apm
   FROM stg_match_players s JOIN new_match_ids n USING (match_id)
 "#;
 
@@ -377,13 +386,15 @@ async fn copy_match_players(tx: &Transaction<'_>, rows: &[NewMatchPlayer]) -> Re
     let writer = BinaryCopyInWriter::new(sink, &types);
     tokio::pin!(writer);
     for row in rows {
-        let params: [&(dyn ToSql + Sync); 10] = [
+        let opening_kind = row.opening_kind.map(|k| k.as_db_str());
+        let params: [&(dyn ToSql + Sync); 11] = [
             &row.match_id.0,
             &row.profile_id.0,
             &row.civ_id.0,
             &row.elo,
             &row.won,
             &row.opening,
+            &opening_kind,
             &row.feudal_t,
             &row.castle_t,
             &row.imperial_t,

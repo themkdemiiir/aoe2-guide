@@ -45,18 +45,26 @@ pub(crate) fn is_eco_unit(unit_id: u16) -> bool {
 // --- opening classification (ported for `crate::derive::classify_opening`) --------------------
 // source: analyzer/crates/analyzer/src/analyze/metrics.rs (MILITIA_LINE/OPENER_LINES)
 
+use pipeline_core::OpeningKind;
+
 /// Dark-Age militia-line training, counted toward a "Drush" prefix. Feudal-opening unit lines.
 /// source: .cache/aoe2-data data.json, ids verified by COST (internal names are legacy-shifted):
 /// 74 Militia 50F/20G, 75 Man-at-Arms, 93 Spearman 35F/25W, 4 Archer, 7 Skirmisher 25F/35W,
 /// 448 Scout Cavalry, 751 Eagle Scout.
 pub(crate) const MILITIA_LINE: [u16; 2] = [74, 75];
-pub(crate) const OPENER_LINES: &[(&[u16], &str)] = &[
-    (&[448], "Scouts"),
-    (&[4], "Archers"),
-    (&[7], "Skirms"),
-    (&[751], "Eagles"),
-    (&[74, 75], "M@A"),
-    (&[93], "Spears"),
+
+/// `(unit ids, rich display tag, its OpeningKind)` — the [`OpeningKind`] rides ALONGSIDE the
+/// display tag in the SAME array entry (not a second parallel lookup) so the two can never drift:
+/// see `pipeline_core::opening`'s module doc for why `M@A` reconciles onto
+/// [`OpeningKind::ManAtArms`] (aoestats' own spelling) while `Skirms`/`Eagles`/`Spears` stay their
+/// own variants (aoestats has no equivalent to fold them into).
+pub(crate) const OPENER_LINES: &[(&[u16], &str, OpeningKind)] = &[
+    (&[448], "Scouts", OpeningKind::Scouts),
+    (&[4], "Archers", OpeningKind::Archers),
+    (&[7], "Skirms", OpeningKind::Skirms),
+    (&[751], "Eagles", OpeningKind::Eagles),
+    (&[74, 75], "M@A", OpeningKind::ManAtArms),
+    (&[93], "Spears", OpeningKind::Spears),
 ];
 
 // --- age-up research (click -> completion), ported for `crate::derive::age_research_s` -------

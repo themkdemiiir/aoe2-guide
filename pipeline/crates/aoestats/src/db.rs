@@ -224,8 +224,18 @@ const COUNT_MATCHES_DURATION_OUT_OF_RANGE_SQL: &str = "SELECT count(*) FROM stg_
 /// Gated on `JOIN matches m` (the real table, not a captured "just inserted" set — see the module
 /// doc): a player row imports only once its parent match genuinely exists, whether that match came
 /// from this same transaction's `INSERT` above or a prior run.
+///
+/// `opening_kind` is cast at this SAME ingest boundary via an explicit `CASE` (final-review
+/// finding #1 — see `pipeline_core::opening`'s module doc for the full vocabulary trail): every
+/// real aoestats label maps 1:1 onto the identically-named `opening_kind` enum value, mechanically,
+/// not by guess. `'unknown'` (aoestats' own "tried, couldn't classify" bucket) and any
+/// genuinely-unexpected future label both fall through the `CASE` to `NULL` — honest, never
+/// fabricated, and never a reason to abort the whole batch (contrast the module doc's "fail-loud
+/// vs. bulk-safe" note: an unmapped `opening` is not in the same class as a NULL identity or a
+/// non-numeric `game_id`). Keep this `CASE` byte-identical to migration
+/// `m20260706_000018_add_opening_kind`'s backfill `CASE` — both encode the SAME closed mapping.
 const INSERT_PLAYERS_SQL: &str = r#"
-INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening, feudal_t, castle_t, imperial_t)
+INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening, opening_kind, feudal_t, castle_t, imperial_t)
 SELECT
     s.game_id::bigint,
     s.profile_id::bigint,
@@ -233,6 +243,18 @@ SELECT
     s.new_rating::int,
     s.winner,
     s.opening,
+    (CASE s.opening
+        WHEN 'scouts' THEN 'scouts'
+        WHEN 'archers' THEN 'archers'
+        WHEN 'man_at_arms' THEN 'man_at_arms'
+        WHEN 'fast_castle' THEN 'fast_castle'
+        WHEN 'drush' THEN 'drush'
+        WHEN 'trash' THEN 'trash'
+        WHEN 'fires' THEN 'fires'
+        WHEN 'galleys' THEN 'galleys'
+        WHEN 'towers' THEN 'towers'
+        ELSE NULL
+     END)::opening_kind,
     s.feudal_age_uptime::real,
     s.castle_age_uptime::real,
     s.imperial_age_uptime::real
