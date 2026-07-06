@@ -14,7 +14,10 @@ path = "src/lib.rs"
 # Vendored, committed third-party parser (pipeline/vendor/aoe2rec) — see workspace Cargo.toml's
 # `exclude` for why it isn't a workspace member.
 aoe2rec = { path = "../../vendor/aoe2rec" }
-pipeline-core = { path = "../core", default-features = false } # ids + age only; no refdata
+# `refdata` (unlike before Phase A) IS needed now: `derive::age_research_s` resolves a player's
+# GAME civ_id -> slug via `pipeline_core::civs::GameCivMap` to know which civs get a faster
+# age-up (Malay) — same convention `dims` already uses for the identical reason.
+pipeline-core = { path = "../core", default-features = false, features = ["refdata"] }
 bytes = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

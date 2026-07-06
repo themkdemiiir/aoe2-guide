@@ -30,6 +30,38 @@ pub(crate) fn is_eco_unit(unit_id: u16) -> bool {
     ECO_UNIT_IDS.contains(&unit_id)
 }
 
+// --- opening classification (ported for `crate::derive::classify_opening`) --------------------
+// source: analyzer/crates/analyzer/src/analyze/metrics.rs (MILITIA_LINE/OPENER_LINES)
+
+/// Dark-Age militia-line training, counted toward a "Drush" prefix. Feudal-opening unit lines.
+/// source: .cache/aoe2-data data.json, ids verified by COST (internal names are legacy-shifted):
+/// 74 Militia 50F/20G, 75 Man-at-Arms, 93 Spearman 35F/25W, 4 Archer, 7 Skirmisher 25F/35W,
+/// 448 Scout Cavalry, 751 Eagle Scout.
+pub(crate) const MILITIA_LINE: [u16; 2] = [74, 75];
+pub(crate) const OPENER_LINES: &[(&[u16], &str)] = &[
+    (&[448], "Scouts"),
+    (&[4], "Archers"),
+    (&[7], "Skirms"),
+    (&[751], "Eagles"),
+    (&[74, 75], "M@A"),
+    (&[93], "Spears"),
+];
+
+// --- age-up research (click -> completion), ported for `crate::derive::age_research_s` -------
+// source: analyzer/crates/analyzer/src/analyze/compare.rs
+
+/// Baseline no-bonus age-up research time (seconds). source: aoe2techtree data.json Tech
+/// 101/102/103 ResearchTime — Feudal 130s, Castle 160s, Imperial 190s.
+pub(crate) const FEUDAL_RES_S: f64 = 130.0;
+pub(crate) const CASTLE_RES_S: f64 = 160.0;
+pub(crate) const IMP_RES_S: f64 = 190.0;
+
+/// Malay's Feudal-Age bonus ("Advancing to the next Age is 66% faster" — src/data/
+/// civilizations.json malay bonus; AoE2 wiki/Liquipedia Feudal Age). "66% faster" = research-rate
+/// ×1.66 ⇒ time = base / 1.66, confirmed by the wiki's Malay Feudal 78s (=130/1.66) and Castle
+/// 96s (=160/1.66). The only civ (today) whose age-up research deviates from baseline.
+pub(crate) const MALAY_AGE_FACTOR: f64 = 1.0 / 1.66;
+
 #[cfg(test)]
 mod tests {
     use super::*;

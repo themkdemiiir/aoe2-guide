@@ -37,6 +37,14 @@
 //!   "queried" profile `new_rating` is for), after which a revised `to_batch` can match it against
 //!   `ParsedReplay.players` by `profile_id` and apply the fallback correctly for exactly that one
 //!   player.
+//!
+//! ## Build-order + age-up-completion derivation (Phase A enrichment, `task-enrichA`)
+//! `replay::derive(&parsed)` (pure, ported from `analyzer`'s opening/age-timing algorithm — see
+//! its module doc) computes each player's `opening`/`feudal_t`/`castle_t`/`imperial_t` from the
+//! replay's own events, BEFORE `parsed.players`/`parsed.events` are consumed below. Results are
+//! matched back onto each `NewMatchPlayer` by `profile_id`.
+
+use std::collections::HashMap;
 
 use fetch::{DiscoverySeed, RelicMatchType};
 use ingest::{
@@ -89,6 +97,14 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
     let ladder = ladder_for(parsed.match_id, seed.match_type)?;
     let match_id = parsed.match_id;
 
+    // Phase A enrichment (see the module doc) — computed from `&parsed` before `parsed.players`/
+    // `parsed.events` are moved into the DTOs below.
+    let summaries: HashMap<pipeline_core::ProfileId, replay::PlayerSummary> =
+        replay::derive(&parsed)
+            .into_iter()
+            .map(|s| (s.profile_id, s))
+            .collect();
+
     let new_match = NewMatch {
         match_id,
         source: MatchSource::Replay,
@@ -106,19 +122,28 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
     let players = parsed
         .players
         .into_iter()
-        .map(|p| NewMatchPlayer {
-            match_id,
-            profile_id: p.profile_id,
-            civ_id: p.civ_id,
-            // Elo-fallback (resolved): only the replay's own post-game elo. `seed.new_rating` is
-            // NOT applied — see the module doc's "Elo-fallback" section for why.
-            elo: p.elo,
-            won: p.won,
-            // The parser doesn't emit these yet — leave null, never fabricate.
-            opening: None,
-            feudal_t: None,
-            castle_t: None,
-            imperial_t: None,
+        .map(|p| {
+            // Structurally always `Some` — `summaries` was built from this SAME `parsed.players`
+            // set above — but matched by key (not index/zip) so a future change to either side
+            // can't silently misalign player i with summary j. `None` (never fabricated) for any
+            // field this player's summary didn't classify/reach.
+            let derived = summaries.get(&p.profile_id);
+            NewMatchPlayer {
+                match_id,
+                profile_id: p.profile_id,
+                civ_id: p.civ_id,
+                // Elo-fallback (resolved): only the replay's own post-game elo. `seed.new_rating`
+                // is NOT applied — see the module doc's "Elo-fallback" section for why.
+                elo: p.elo,
+                won: p.won,
+                // Phase A enrichment — see the module doc's "Build-order + age-up-completion
+                // derivation" section. `feudal_t`/`castle_t`/`imperial_t` are COMPLETION seconds
+                // (`replay::derive`'s doc), matching the aoestats path's `*_age_uptime` columns.
+                opening: derived.and_then(|s| s.opening.clone()),
+                feudal_t: derived.and_then(|s| s.feudal_t),
+                castle_t: derived.and_then(|s| s.castle_t),
+                imperial_t: derived.and_then(|s| s.imperial_t),
+            }
         })
         .collect();
 
@@ -284,7 +309,10 @@ mod tests {
                 && p.feudal_t.is_none()
                 && p.castle_t.is_none()
                 && p.imperial_t.is_none()),
-            "the parser doesn't emit opening/timings yet — must stay null, never fabricated"
+            "this sample carries no research events at all (only sample_event's `build` action) \
+             -> derive() has nothing to classify, so opening/timings honestly stay null; see \
+             `to_batch_flows_derived_opening_and_completion_timings_into_match_player` for the \
+             populated case"
         );
 
         assert_eq!(batch.events.len(), 1);
@@ -362,5 +390,52 @@ mod tests {
             batch.players[1].elo, None,
             "no post-game elo and no safe attribution of seed.new_rating -> honest None"
         );
+    }
+
+    #[test]
+    fn to_batch_flows_derived_opening_and_completion_timings_into_match_player() {
+        // Phase A enrichment (task-enrichA): a replay whose events DO carry an age-up research
+        // + a feudal-window unit train must come out of `to_batch` with a populated opening and
+        // a COMPLETION (not click) feudal_t — proving `replay::derive` is actually wired in.
+        let mut parsed = sample_parsed(
+            6006,
+            Some(9),
+            vec![sample_player(5001, 2, Some(true), Some(1650))], // civ_id 2 = franks (baseline)
+        );
+        parsed.events = vec![
+            ReplayEvent {
+                profile_id: Some(ProfileId(5001)),
+                player_number: 1,
+                t_ms: 600_000, // Feudal click at 10:00
+                kind: "research".to_owned(),
+                target_id: Some(101),
+                amount: None,
+                detail: None,
+            },
+            ReplayEvent {
+                profile_id: Some(ProfileId(5001)),
+                player_number: 1,
+                t_ms: 620_000, // Scouts opened just after Feudal
+                kind: "train".to_owned(),
+                target_id: Some(448),
+                amount: Some(1),
+                detail: None,
+            },
+        ];
+        let seed = sample_seed(6006, RelicMatchType::SoloRmRanked, None);
+
+        let batch = to_batch(parsed, seed).expect("valid replay+seed must map");
+
+        let p = &batch.players[0];
+        assert_eq!(p.opening.as_deref(), Some("Scouts"));
+        // COMPLETION, not click: 600.0s click + 130.0s baseline Feudal research = 730.0s. If
+        // this ever regresses to storing the raw click (600.0), this assertion catches it.
+        let feudal_t = p.feudal_t.expect("feudal was reached — must not be None");
+        assert!(
+            (feudal_t - 730.0).abs() < 0.01,
+            "feudal_t={feudal_t} must be click+research (730.0), not raw click (600.0)"
+        );
+        assert_eq!(p.castle_t, None, "castle never reached -> honest None");
+        assert_eq!(p.imperial_t, None, "imperial never reached -> honest None");
     }
 }
