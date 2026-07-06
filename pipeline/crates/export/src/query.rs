@@ -50,6 +50,25 @@ fn validate_elo_bucket(value: String) -> Result<String> {
     }
 }
 
+/// Closed vocabulary for the benchmark views' `mode` column: the two real ladders plus the
+/// GROUPING SETS `"all"` rollup grain. Mirrors `validate_ladder`/`validate_elo_bucket`.
+fn is_known_mode(value: &str) -> bool {
+    value == "all" || KNOWN_LADDERS.contains(&value)
+}
+
+/// Fails loud (`ExportError::UnexpectedValue`) on a `mode` value outside the closed set — see
+/// [`is_known_mode`]'s doc.
+fn validate_mode(value: String) -> Result<String> {
+    if is_known_mode(&value) {
+        Ok(value)
+    } else {
+        Err(ExportError::UnexpectedValue {
+            field: "mode",
+            value,
+        })
+    }
+}
+
 /// One row of the `civ_meta` view: a (civ, ladder, elo_bucket) grain, where `elo_bucket = "all"` is
 /// the overall rollup row (see `pipeline/dbt/models/civ_meta.sql`'s doc).
 #[derive(Debug, Clone)]
@@ -335,7 +354,7 @@ pub async fn fetch_matchups_1v1_by_elo(client: &Client) -> Result<Vec<MatchupByE
             Ok(MatchupByEloRow {
                 civ_slug: row.try_get("civ_slug")?,
                 opp_slug: row.try_get("opp_slug")?,
-                elo_bucket: row.try_get("elo_bucket")?,
+                elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
                 games: row.try_get("games")?,
                 winrate: row.try_get("winrate")?,
             })
@@ -378,8 +397,8 @@ pub async fn fetch_benchmark_ageup(client: &Client) -> Result<Vec<BenchmarkAgeup
         out.push(BenchmarkAgeupRow {
             civ_slug: row.try_get("civ_slug")?,
             map_slug: row.try_get("map_slug")?,
-            elo_bucket: row.try_get("elo_bucket")?,
-            mode: row.try_get("mode")?,
+            elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+            mode: validate_mode(row.try_get("mode")?)?,
             feudal_median: row.try_get("feudal_median")?,
             castle_median: row.try_get("castle_median")?,
             imperial_median: row.try_get("imperial_median")?,
@@ -413,8 +432,8 @@ pub async fn fetch_benchmark_vils(client: &Client) -> Result<Vec<BenchmarkVilsRo
         out.push(BenchmarkVilsRow {
             civ_slug: row.try_get("civ_slug")?,
             map_slug: row.try_get("map_slug")?,
-            elo_bucket: row.try_get("elo_bucket")?,
-            mode: row.try_get("mode")?,
+            elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+            mode: validate_mode(row.try_get("mode")?)?,
             vils_median: row.try_get("vils_median")?,
         });
     }
@@ -471,6 +490,27 @@ mod tests {
                 assert_eq!(value, "3000+");
             }
             other => panic!("expected UnexpectedValue, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn validate_mode_accepts_the_known_vocabulary_plus_the_all_rollup() {
+        assert_eq!(validate_mode("1v1".to_string()).unwrap(), "1v1");
+        assert_eq!(validate_mode("team".to_string()).unwrap(), "team");
+        assert_eq!(validate_mode("all".to_string()).unwrap(), "all");
+    }
+
+    #[test]
+    fn validate_mode_fails_loud_on_a_drifted_value() {
+        for drifted in ["2v2", "ffa"] {
+            let err = validate_mode(drifted.to_string()).unwrap_err();
+            match err {
+                ExportError::UnexpectedValue { field, value } => {
+                    assert_eq!(field, "mode");
+                    assert_eq!(value, drifted);
+                }
+                other => panic!("expected UnexpectedValue, got {other:?}"),
+            }
         }
     }
 }
