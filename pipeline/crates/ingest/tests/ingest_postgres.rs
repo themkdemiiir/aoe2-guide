@@ -8,11 +8,11 @@
 
 use chrono::{DateTime, TimeZone, Utc};
 use ingest::{
-    ingest_batch, IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewReplayAge,
-    NewReplayEvent, ReplayBatch,
+    ingest_batch, IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerUnit,
+    NewReplayAge, NewReplayEvent, ReplayBatch,
 };
 use migration::{Migrator, MigratorTrait};
-use pipeline_core::{Age, GameCivId, MatchId, ProfileId};
+use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId};
 use testcontainers_modules::postgres::Postgres;
 use testcontainers_modules::testcontainers::runners::AsyncRunner;
 use testcontainers_modules::testcontainers::{ContainerAsync, ImageExt};
@@ -94,7 +94,10 @@ async fn row_count(client: &tokio_postgres::Client, table: &str) -> i64 {
 
 /// A minimal but genuine two-match batch: two matches, three players (one with a known elo,
 /// one with a NULL elo, one on a second map/civ), three events, four age-up rows (including one
-/// `Age::Dark` row to prove the aoestats-only age round-trips end-to-end).
+/// `Age::Dark` row to prove the aoestats-only age round-trips end-to-end), and three
+/// `match_player_units` rows (Phase B, task-enrichB: two distinct units for one player on match
+/// 1001, one unit for the player on match 1002 — proving the per-(match,player,unit) shape and
+/// the `new_match_ids` join gate identically to `replay_ages`).
 fn sample_batch() -> ReplayBatch {
     let played_at = Utc.with_ymd_and_hms(2026, 1, 1, 0, 0, 0).unwrap();
 
@@ -246,6 +249,26 @@ fn sample_batch() -> ReplayBatch {
                 n_research: Some(0),
             },
         ],
+        player_units: vec![
+            NewMatchPlayerUnit {
+                match_id: MatchId(1001),
+                profile_id: ProfileId(5001),
+                unit_id: GameUnitId(83),
+                trained: 5,
+            },
+            NewMatchPlayerUnit {
+                match_id: MatchId(1001),
+                profile_id: ProfileId(5001),
+                unit_id: GameUnitId(4),
+                trained: 12,
+            },
+            NewMatchPlayerUnit {
+                match_id: MatchId(1002),
+                profile_id: ProfileId(5003),
+                unit_id: GameUnitId(83),
+                trained: 3,
+            },
+        ],
     }
 }
 
@@ -267,6 +290,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
             players: 3,
             events: 3,
             ages: 4,
+            units: 3,
         },
         "first ingest must report exactly what it wrote"
     );
@@ -275,6 +299,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
     assert_eq!(row_count(&client, "match_players").await, 3);
     assert_eq!(row_count(&client, "replay_events").await, 3);
     assert_eq!(row_count(&client, "replay_ages").await, 4);
+    assert_eq!(row_count(&client, "match_player_units").await, 3);
 
     // --- 2. Full-row read-backs: every column of a known row must equal the DTO value, not
     //        just the row count. This is the check a same-typed adjacent-column swap (e.g.
@@ -284,6 +309,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
     assert_match_player_5001_row(&client).await;
     assert_replay_event_row(&client).await;
     assert_replay_ages_rows(&client).await;
+    assert_match_player_units_rows(&client).await;
 
     // --- 3. elo_bucket is GENERATED — assert the DB-computed value, not anything we wrote. ---
     let bucket_1400: Option<String> = client
@@ -325,6 +351,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
             players: 0,
             events: 0,
             ages: 0,
+            units: 0,
         },
         "re-ingesting an already-seen batch must insert zero rows anywhere"
     );
@@ -348,6 +375,11 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
         row_count(&client, "replay_ages").await,
         4,
         "idempotency: counts unchanged on re-ingest (replay_ages)"
+    );
+    assert_eq!(
+        row_count(&client, "match_player_units").await,
+        3,
+        "idempotency: counts unchanged on re-ingest (match_player_units)"
     );
 }
 
@@ -536,6 +568,54 @@ async fn assert_replay_ages_rows(client: &tokio_postgres::Client) {
         dark_row.get::<_, Option<i32>>(7),
         Some(0),
         "replay_ages.n_research (dark)"
+    );
+}
+
+/// Full-row read-back for `match_player_units` (Phase B, task-enrichB): both of match 1001/
+/// profile 5001's two distinct-unit rows (proving the per-(match,player,unit) shape — `trained`
+/// is a genuine per-row value, not a shared/aggregated one) and match 1002/profile 5003's row
+/// (proving the `new_match_ids` join scopes correctly across matches).
+async fn assert_match_player_units_rows(client: &tokio_postgres::Client) {
+    let unit_83 = client
+        .query_one(
+            "SELECT trained FROM match_player_units \
+             WHERE match_id = 1001 AND profile_id = 5001 AND unit_id = 83",
+            &[],
+        )
+        .await
+        .expect("full-row read-back query on match_player_units (unit 83) failed");
+    assert_eq!(
+        unit_83.get::<_, i32>(0),
+        5,
+        "match_player_units.trained (match 1001, profile 5001, unit 83)"
+    );
+
+    let unit_4 = client
+        .query_one(
+            "SELECT trained FROM match_player_units \
+             WHERE match_id = 1001 AND profile_id = 5001 AND unit_id = 4",
+            &[],
+        )
+        .await
+        .expect("full-row read-back query on match_player_units (unit 4) failed");
+    assert_eq!(
+        unit_4.get::<_, i32>(0),
+        12,
+        "match_player_units.trained (match 1001, profile 5001, unit 4)"
+    );
+
+    let match_1002_row = client
+        .query_one(
+            "SELECT trained FROM match_player_units \
+             WHERE match_id = 1002 AND profile_id = 5003 AND unit_id = 83",
+            &[],
+        )
+        .await
+        .expect("full-row read-back query on match_player_units (match 1002) failed");
+    assert_eq!(
+        match_1002_row.get::<_, i32>(0),
+        3,
+        "match_player_units.trained (match 1002, profile 5003, unit 83)"
     );
 }
 

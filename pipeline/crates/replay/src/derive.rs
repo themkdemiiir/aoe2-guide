@@ -1,15 +1,16 @@
 //! Pure per-player derivation from a [`ParsedReplay`]'s own events: opening classification +
-//! age-up-COMPLETION timings. Phase A of the replay-analytics enrichment
-//! (`.superpowers/sdd/task-enrichA-brief.md`) — fills `match_players.opening`/`feudal_t`/
-//! `castle_t`/`imperial_t`, which the replay ingest path previously left `NULL`.
+//! age-up-COMPLETION timings (Phase A, `.superpowers/sdd/task-enrichA-brief.md`) and per-unit
+//! trained-composition totals (Phase B, `.superpowers/sdd/task-enrichB-brief.md`) — fills
+//! `match_players.opening`/`feudal_t`/`castle_t`/`imperial_t` and `match_player_units`, which the
+//! replay ingest path previously left `NULL`/empty.
 //!
 //! **Ported (not imported)** from `analyzer/crates/analyzer/src/analyze/{metrics.rs,compare.rs}`
 //! — that crate is a separate workspace root with its own vendored `aoe2rec` and a different
 //! event model (`Ev`/`EvKind`, pre-expanded `Train` amounts), so importing it isn't an option.
 //! Each ported function below carries a `// source:` comment pointing at the original. Adapted to
 //! this crate's [`ReplayEvent`] (`kind: String`, `target_id`/`amount: Option<i64>`, NOT
-//! pre-expanded — irrelevant here since neither ported function counts amounts, only first-seen
-//! timestamps).
+//! pre-expanded — irrelevant for the Phase A functions since neither counts amounts, only
+//! first-seen timestamps; Phase B's [`player_units`] is the first function here that does).
 //!
 //! Returned ALONGSIDE `ParsedReplay` (via [`derive`], called on `&ParsedReplay`) rather than
 //! attached as a new field on the struct itself — keeps `parse`/`types` untouched (smaller,
@@ -24,15 +25,26 @@
 //! would sit ~130-190s short of the aoestats value for the same real event and corrupt that
 //! median. `None` when the player never reached that age — never fabricated. See
 //! [`completion_s`].
+//!
+//! ## The honest metric — Phase B's `units` (queued, not surviving)
+//! Each `PlayerSummary.units` entry's second element is `trained` = Σ `amount` over that player's
+//! `train` events for one `unit_id` — EXACTLY the same `amount.unwrap_or(1).max(1)` rule
+//! `parse.rs`'s own age-summary walk already uses (`parse.rs:361-372`). This is units QUEUED,
+//! never surviving army: the replay format carries no deaths/losses, so survivorship is honestly
+//! unknowable from this data alone. See [`player_units`].
 
-use pipeline_core::ProfileId;
+use std::collections::BTreeMap;
+
+use pipeline_core::{GameUnitId, ProfileId};
 
 use crate::config;
+use crate::error::overflow;
 use crate::types::{ParsedReplay, ReplayEvent};
+use crate::Result;
 
-/// One player's derived build-order summary. Phase A fills `opening` + the three
-/// age-up-COMPLETION timings only — Phase B/C/D (unit comps/APM/tech-timings) grow this struct
-/// later, per the task brief's scope note.
+/// One player's derived build-order summary + unit composition. Phase A fills `opening` + the
+/// three age-up-COMPLETION timings; Phase B (this task) adds `units`. Phase C/D (APM/tech-timings)
+/// grow this struct later, per the task brief's scope note.
 #[derive(Debug, Clone, PartialEq)]
 pub struct PlayerSummary {
     pub profile_id: ProfileId,
@@ -46,12 +58,22 @@ pub struct PlayerSummary {
     pub castle_t: Option<f32>,
     /// Imperial-Age-up COMPLETION time in seconds. `None` if this player never reached Imperial.
     pub imperial_t: Option<f32>,
+    /// Per-unit `trained` totals (Phase B enrichment) — one entry per DISTINCT unit_id this
+    /// player trained, sorted by unit_id for determinism, covering EVERY trained unit_id (eco +
+    /// military alike — see the module doc's "honest metric" note). Empty (never fabricated as
+    /// an all-zero row) when the player trained nothing at all.
+    pub units: Vec<(GameUnitId, i32)>,
 }
 
 /// Derives every real player's [`PlayerSummary`] from a parsed replay's own `events` — no second
 /// `aoe2rec` walk, no IO. Call this BEFORE consuming `parsed.players`/`parsed.events` (e.g. via
 /// `.into_iter()`); match results back to a player by [`PlayerSummary::profile_id`].
-pub fn derive(parsed: &ParsedReplay) -> Vec<PlayerSummary> {
+///
+/// # Errors
+/// [`crate::Error::Overflow`] if a `train` event's `target_id` (unit_id) or a player's
+/// summed `amount` for one unit_id doesn't fit `i32` ([`player_units`]) — unreachable with real
+/// replay data (unit ids and army sizes never approach `i32::MAX`), but never silently narrowed.
+pub fn derive(parsed: &ParsedReplay) -> Result<Vec<PlayerSummary>> {
     // `load_game_civs` parses a compile-time `include_str!`-embedded JSON (see
     // `pipeline_core::civs`'s module doc) — no runtime file IO, so calling it here doesn't
     // violate this crate's "pure, zero IO" invariant. Its `Result` is still handled without
@@ -74,7 +96,7 @@ pub fn derive(parsed: &ParsedReplay) -> Vec<PlayerSummary> {
                 .and_then(|m| m.slug(p.civ_id).ok())
                 .unwrap_or("");
             let (feudal_res_s, castle_res_s, imperial_res_s) = age_research_s(civ_slug);
-            PlayerSummary {
+            Ok(PlayerSummary {
                 profile_id: p.profile_id,
                 opening: classify_opening(
                     &parsed.events,
@@ -85,7 +107,8 @@ pub fn derive(parsed: &ParsedReplay) -> Vec<PlayerSummary> {
                 feudal_t: completion_s(feudal_click, feudal_res_s),
                 castle_t: completion_s(castle_click, castle_res_s),
                 imperial_t: completion_s(imperial_click, imperial_res_s),
-            }
+                units: player_units(&parsed.events, p.player_number)?,
+            })
         })
         .collect()
 }
@@ -186,6 +209,44 @@ fn classify_opening(
     })
 }
 
+/// Sums one player's `train`-event `amount`s per DISTINCT `unit_id` — Phase B enrichment (see
+/// the module doc's "honest metric" note): `trained` = Σ `amount.unwrap_or(1).max(1)`, EXACTLY
+/// the same rule `parse.rs`'s own age-summary walk already uses (`parse.rs:361-372`). Folds into
+/// a `BTreeMap<i32, i64>` (unit_id -> running total) first — its own iteration order is already
+/// sorted by key, so the final `Vec` comes out unit_id-ordered for free, no separate sort step —
+/// then narrows both the key and the total to `i32` (fail-loud, never silently wrapped: see the
+/// function's `# Errors`). An empty `evs`/no matching `train` events for `player_number` yields
+/// an empty `Vec`, never a fabricated all-zero row.
+///
+/// # Errors
+/// [`crate::Error::Overflow`] if a `train` event's `target_id` doesn't fit `i32` (folding into
+/// the map), or if one unit_id's summed `amount` total doesn't fit `i32` (converting to the
+/// final `Vec`) — unreachable with real replay data (AOE2 unit ids and army sizes never approach
+/// `i32::MAX`), kept fail-loud rather than silently narrowed.
+fn player_units(evs: &[ReplayEvent], player_number: i16) -> Result<Vec<(GameUnitId, i32)>> {
+    let mut totals: BTreeMap<i32, i64> = BTreeMap::new();
+    for e in evs {
+        if e.player_number != player_number || e.kind != "train" {
+            continue;
+        }
+        let Some(target_id) = e.target_id else {
+            continue;
+        };
+        let unit_id = i32::try_from(target_id).map_err(overflow("train.target_id"))?;
+        // `amount or 1`: a 0/absent amount in the record still means one queued unit — the SAME
+        // rule `parse.rs:363` uses for the age-summary walk.
+        let amount = e.amount.unwrap_or(1).max(1);
+        *totals.entry(unit_id).or_insert(0) += amount;
+    }
+    totals
+        .into_iter()
+        .map(|(unit_id, trained)| {
+            let trained = i32::try_from(trained).map_err(overflow("train.trained"))?;
+            Ok((GameUnitId(unit_id), trained))
+        })
+        .collect()
+}
+
 /// Civ-aware click -> COMPLETION age-up research seconds (feudal, castle, imperial). Baseline
 /// 130/160/190s (`config::FEUDAL_RES_S`/`CASTLE_RES_S`/`IMP_RES_S`); only civs with a sourced
 /// age-up speed bonus deviate (today: Malay, `config::MALAY_AGE_FACTOR`). `civ_slug == ""`
@@ -242,6 +303,26 @@ mod tests {
         }
     }
 
+    /// Same as [`ev`] but with an explicit `amount` — for Phase B's [`player_units`] tests, which
+    /// need to control batch sizes (`ev` always leaves `amount: None`).
+    fn ev_amt(
+        player_number: i16,
+        t_ms: i32,
+        kind: &str,
+        target_id: Option<i64>,
+        amount: Option<i64>,
+    ) -> ReplayEvent {
+        ReplayEvent {
+            profile_id: None,
+            player_number,
+            t_ms,
+            kind: kind.to_owned(),
+            target_id,
+            amount,
+            detail: None,
+        }
+    }
+
     fn parsed(players: Vec<ReplayPlayer>, events: Vec<ReplayEvent>) -> ParsedReplay {
         ParsedReplay {
             match_id: pipeline_core::MatchId(1),
@@ -265,7 +346,7 @@ mod tests {
         ];
         let p = parsed(vec![player(5001, 1, FRANKS)], evs);
 
-        let summaries = derive(&p);
+        let summaries = derive(&p).expect("well-formed test replay must derive cleanly");
         assert_eq!(summaries.len(), 1);
         let s = &summaries[0];
         assert_eq!(s.profile_id, ProfileId(5001));
@@ -297,7 +378,7 @@ mod tests {
         ];
         let p = parsed(vec![player(5001, 1, MALAY)], evs);
 
-        let s = &derive(&p)[0];
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         let expected_feudal = 600.0 + 130.0 / 1.66;
         let expected_castle = 1_500.0 + 160.0 / 1.66;
         assert!((s.feudal_t.unwrap() - expected_feudal as f32).abs() < 0.01);
@@ -317,7 +398,7 @@ mod tests {
         ];
         let p = parsed(vec![player(5001, 1, FRANKS)], evs);
 
-        let s = &derive(&p)[0];
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert!(s.feudal_t.is_some());
         assert!(s.castle_t.is_some());
         assert_eq!(
@@ -333,7 +414,7 @@ mod tests {
         let evs = vec![ev(1, 600_000, "research", Some(101))];
         let p = parsed(vec![player(5001, 1, FRANKS)], evs);
 
-        let s = &derive(&p)[0];
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert_eq!(
             s.opening, None,
             "an unclassifiable opening must be None, never a guessed label"
@@ -345,7 +426,7 @@ mod tests {
     #[test]
     fn opening_is_none_when_feudal_was_never_reached() {
         let p = parsed(vec![player(5001, 1, FRANKS)], vec![]);
-        let s = &derive(&p)[0];
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert_eq!(s.opening, None);
         assert_eq!(s.feudal_t, None);
         assert_eq!(s.castle_t, None);
@@ -363,7 +444,7 @@ mod tests {
             ev(1, 650_000, "train", Some(448)), // Scouts
         ];
         let p = parsed(vec![player(5001, 1, FRANKS)], evs);
-        let s = &derive(&p)[0];
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert_eq!(s.opening.as_deref(), Some("Drush + Scouts"));
     }
 
@@ -375,7 +456,7 @@ mod tests {
             ev(1, 650_000, "train", Some(448)), // ...but Scouts trained earlier.
         ];
         let p = parsed(vec![player(5001, 1, FRANKS)], evs);
-        let s = &derive(&p)[0];
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
         assert_eq!(s.opening.as_deref(), Some("Scouts into Archers"));
     }
 
@@ -386,9 +467,85 @@ mod tests {
             ev(2, 900_000, "research", Some(101)),
         ];
         let p = parsed(vec![player(5001, 1, FRANKS), player(5002, 2, MALAY)], evs);
-        let summaries = derive(&p);
+        let summaries = derive(&p).expect("well-formed test replay must derive cleanly");
         assert_eq!(summaries.len(), 2);
         assert!(summaries.iter().any(|s| s.profile_id == ProfileId(5001)));
         assert!(summaries.iter().any(|s| s.profile_id == ProfileId(5002)));
+    }
+
+    #[test]
+    fn player_units_sums_batched_trains_per_distinct_unit_sorted_by_unit_id() {
+        // Two unit types, each trained across multiple batches: unit 448 (Scouts) via two
+        // separate single trains, unit 83 (an eco/other unit) via one batch of 5. The expected
+        // per-unit totals are the SUMS, not one row per train command, and come out sorted by
+        // unit_id ascending regardless of train order or declaration order.
+        let evs = vec![
+            ev_amt(1, 100_000, "train", Some(448), Some(1)),
+            ev_amt(1, 100_500, "train", Some(83), Some(5)),
+            ev_amt(1, 101_000, "train", Some(448), Some(1)),
+        ];
+        let p = parsed(vec![player(5001, 1, FRANKS)], evs);
+
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        assert_eq!(
+            s.units,
+            vec![(GameUnitId(83), 5), (GameUnitId(448), 2)],
+            "83 < 448 -> sorted by unit_id; 448's two single-batch trains sum to 2"
+        );
+    }
+
+    #[test]
+    fn player_units_treats_none_or_zero_amount_as_one_queued_unit() {
+        // `amount: None` and `amount: Some(0)` must both count as exactly 1 — the SAME
+        // `amount.unwrap_or(1).max(1)` rule `parse.rs`'s age-summary walk uses.
+        let evs = vec![
+            ev_amt(1, 100_000, "train", Some(74), None),
+            ev_amt(1, 100_500, "train", Some(74), Some(0)),
+        ];
+        let p = parsed(vec![player(5001, 1, FRANKS)], evs);
+
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        assert_eq!(
+            s.units,
+            vec![(GameUnitId(74), 2)],
+            "None and Some(0) must each count as 1 queued unit, summing to 2"
+        );
+    }
+
+    #[test]
+    fn player_units_is_empty_when_nothing_was_trained_never_fabricated() {
+        // Only non-`train` events (a research click) -> nothing to sum, empty Vec, not a
+        // fabricated all-zero row.
+        let evs = vec![ev(1, 600_000, "research", Some(101))];
+        let p = parsed(vec![player(5001, 1, FRANKS)], evs);
+
+        let s = &derive(&p).expect("well-formed test replay must derive cleanly")[0];
+        assert_eq!(
+            s.units,
+            Vec::new(),
+            "a player who trained nothing must get an empty Vec, never a fabricated row"
+        );
+    }
+
+    #[test]
+    fn player_units_only_counts_the_matching_players_own_trains() {
+        // Player 2's train must not leak into player 1's totals.
+        let evs = vec![
+            ev_amt(1, 100_000, "train", Some(74), Some(1)),
+            ev_amt(2, 100_000, "train", Some(448), Some(3)),
+        ];
+        let p = parsed(vec![player(5001, 1, FRANKS), player(5002, 2, MALAY)], evs);
+
+        let summaries = derive(&p).expect("well-formed test replay must derive cleanly");
+        let s1 = summaries
+            .iter()
+            .find(|s| s.profile_id == ProfileId(5001))
+            .unwrap();
+        let s2 = summaries
+            .iter()
+            .find(|s| s.profile_id == ProfileId(5002))
+            .unwrap();
+        assert_eq!(s1.units, vec![(GameUnitId(74), 1)]);
+        assert_eq!(s2.units, vec![(GameUnitId(448), 3)]);
     }
 }

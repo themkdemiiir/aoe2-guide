@@ -1,5 +1,5 @@
 //! `ingest` — idempotent binary-`COPY` bulk loader: typed replay row batches into the AOE2
-//! guide's live PostgreSQL schema (the 9 SeaORM migrations in `migration`, applied separately —
+//! guide's live PostgreSQL schema (the SeaORM migrations in `migration`, applied separately —
 //! this crate never touches DDL).
 //!
 //! This is the write side only. Producers (the replay parser, the aoestats ETL) build a
@@ -11,7 +11,7 @@ mod dto;
 mod ingest;
 
 pub use dto::{
-    IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewReplayAge, NewReplayEvent,
-    ReplayBatch,
+    IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerUnit, NewReplayAge,
+    NewReplayEvent, ReplayBatch,
 };
 pub use ingest::ingest_batch;

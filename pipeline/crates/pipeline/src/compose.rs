@@ -43,12 +43,23 @@
 //! its module doc) computes each player's `opening`/`feudal_t`/`castle_t`/`imperial_t` from the
 //! replay's own events, BEFORE `parsed.players`/`parsed.events` are consumed below. Results are
 //! matched back onto each `NewMatchPlayer` by `profile_id`.
+//!
+//! ## Unit composition derivation (Phase B enrichment, `task-enrichB`)
+//! The SAME `replay::derive(&parsed)` call also fills each `PlayerSummary.units` (per-unit
+//! `trained` totals — see that module's doc for the honest "queued, not surviving" metric
+//! definition). Since Phase B, `replay::derive` is fallible (a `train` event's unit_id/summed
+//! amount could in principle overflow `i32` — unreachable with real data, but never silently
+//! narrowed), so its `Err` is mapped to [`Error::UnitComposition`] and propagated with `?`. Each
+//! `PlayerSummary`'s `units` become `NewMatchPlayerUnit` rows on `ReplayBatch.player_units`,
+//! matched to their player by the SAME `profile_id` key `summaries` is already built on — no
+//! separate join needed.
 
 use std::collections::HashMap;
 
 use fetch::{DiscoverySeed, RelicMatchType};
 use ingest::{
-    Ladder, MatchSource, NewMatch, NewMatchPlayer, NewReplayAge, NewReplayEvent, ReplayBatch,
+    Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerUnit, NewReplayAge,
+    NewReplayEvent, ReplayBatch,
 };
 use replay::ParsedReplay;
 
@@ -97,10 +108,14 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
     let ladder = ladder_for(parsed.match_id, seed.match_type)?;
     let match_id = parsed.match_id;
 
-    // Phase A enrichment (see the module doc) — computed from `&parsed` before `parsed.players`/
-    // `parsed.events` are moved into the DTOs below.
+    // Phase A + B enrichment (see the module doc) — computed from `&parsed` before
+    // `parsed.players`/`parsed.events` are moved into the DTOs below. `derive` is fallible since
+    // Phase B (unit_id/summed-amount `i32` overflow, unreachable with real data but never
+    // silently narrowed); mapped to `Error::UnitComposition` rather than `replay::Error` so this
+    // crate keeps its own closed failure surface.
     let summaries: HashMap<pipeline_core::ProfileId, replay::PlayerSummary> =
         replay::derive(&parsed)
+            .map_err(|e| Error::UnitComposition(match_id, e))?
             .into_iter()
             .map(|s| (s.profile_id, s))
             .collect();
@@ -179,18 +194,39 @@ pub fn to_batch(parsed: ParsedReplay, seed: DiscoverySeed) -> Result<ReplayBatch
         })
         .collect();
 
+    // Phase B enrichment (see the module doc's "Unit composition derivation" section) — consumes
+    // `summaries` (its `players` borrow above already ended), flattening each player's
+    // `units: Vec<(GameUnitId, i32)>` into one `NewMatchPlayerUnit` row per DISTINCT unit_id.
+    // `profile_id` comes from `summaries`' own key, so this is already matched per-player — no
+    // separate join.
+    let player_units: Vec<NewMatchPlayerUnit> = summaries
+        .into_iter()
+        .flat_map(|(profile_id, summary)| {
+            summary
+                .units
+                .into_iter()
+                .map(move |(unit_id, trained)| NewMatchPlayerUnit {
+                    match_id,
+                    profile_id,
+                    unit_id,
+                    trained,
+                })
+        })
+        .collect();
+
     Ok(ReplayBatch {
         matches: vec![new_match],
         players,
         events,
         ages,
+        player_units,
     })
 }
 
 #[cfg(test)]
 mod tests {
     use chrono::{TimeZone, Utc};
-    use pipeline_core::{Age, GameCivId, MatchId, ProfileId};
+    use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId};
     use replay::{ReplayAge, ReplayEvent, ReplayPlayer};
 
     use super::*;
@@ -322,6 +358,12 @@ mod tests {
         assert_eq!(batch.ages.len(), 1);
         assert_eq!(batch.ages[0].match_id, MatchId(1001));
         assert_eq!(batch.ages[0].villagers, Some(20));
+
+        assert!(
+            batch.player_units.is_empty(),
+            "this sample's only event is a `build` action, not `train` -> no unit composition \
+             to derive; see `to_batch_flows_derived_units_into_player_units` for the populated case"
+        );
     }
 
     #[test]
@@ -437,5 +479,107 @@ mod tests {
         );
         assert_eq!(p.castle_t, None, "castle never reached -> honest None");
         assert_eq!(p.imperial_t, None, "imperial never reached -> honest None");
+
+        // Phase B enrichment (task-enrichB): the same replay's lone `train` event (unit 448,
+        // amount 1) must flow into `ReplayBatch.player_units` as one row.
+        assert_eq!(batch.player_units.len(), 1);
+        assert_eq!(batch.player_units[0].match_id, MatchId(6006));
+        assert_eq!(batch.player_units[0].profile_id, ProfileId(5001));
+        assert_eq!(batch.player_units[0].unit_id, GameUnitId(448));
+        assert_eq!(batch.player_units[0].trained, 1);
+    }
+
+    #[test]
+    fn to_batch_flows_derived_units_into_player_units() {
+        // Phase B enrichment (task-enrichB): two players, each training a distinct unit across
+        // multiple batches — proves `PlayerSummary.units` flows into `ReplayBatch.player_units`
+        // as one `NewMatchPlayerUnit` per (player, distinct unit_id), matched by profile_id
+        // (never mixed between players), with `trained` = the SUMMED amount, not the row count.
+        //
+        // Deliberately NOT `sample_player` (it hardcodes `player_number: 1` for every player,
+        // fine for the single-player-number fixtures above but wrong here — `replay::derive`
+        // attributes events to a player by `player_number`, so two players sharing player_number
+        // 1 would silently collapse onto the same derived `units`). Distinct player_numbers (1,
+        // 2) here, matching each event's own `player_number` below.
+        let players = vec![
+            ReplayPlayer {
+                player_number: 1,
+                profile_id: ProfileId(5001),
+                civ_id: GameCivId(1),
+                name: "Player".to_owned(),
+                team: 1,
+                color: 1,
+                won: Some(true),
+                elo: Some(1650),
+            },
+            ReplayPlayer {
+                player_number: 2,
+                profile_id: ProfileId(5002),
+                civ_id: GameCivId(2),
+                name: "Player".to_owned(),
+                team: 2,
+                color: 2,
+                won: Some(false),
+                elo: Some(1590),
+            },
+        ];
+        let mut parsed = sample_parsed(7007, Some(9), players);
+        parsed.events = vec![
+            ReplayEvent {
+                profile_id: Some(ProfileId(5001)),
+                player_number: 1,
+                t_ms: 100_000,
+                kind: "train".to_owned(),
+                target_id: Some(83),
+                amount: Some(5),
+                detail: None,
+            },
+            ReplayEvent {
+                profile_id: Some(ProfileId(5001)),
+                player_number: 1,
+                t_ms: 150_000,
+                kind: "train".to_owned(),
+                target_id: Some(83),
+                amount: Some(3),
+                detail: None,
+            },
+            ReplayEvent {
+                profile_id: Some(ProfileId(5002)),
+                player_number: 2,
+                t_ms: 100_000,
+                kind: "train".to_owned(),
+                target_id: Some(448),
+                amount: Some(2),
+                detail: None,
+            },
+        ];
+        let seed = sample_seed(7007, RelicMatchType::SoloRmRanked, None);
+
+        let batch = to_batch(parsed, seed).expect("valid replay+seed must map");
+
+        assert_eq!(
+            batch.player_units.len(),
+            2,
+            "one row per (player, distinct unit_id)"
+        );
+        let p5001 = batch
+            .player_units
+            .iter()
+            .find(|u| u.profile_id == ProfileId(5001))
+            .expect("player 5001 must have a unit row");
+        assert_eq!(p5001.match_id, MatchId(7007));
+        assert_eq!(p5001.unit_id, GameUnitId(83));
+        assert_eq!(p5001.trained, 8, "5 + 3 = 8, summed not row-counted");
+
+        let p5002 = batch
+            .player_units
+            .iter()
+            .find(|u| u.profile_id == ProfileId(5002))
+            .expect("player 5002 must have a unit row");
+        assert_eq!(p5002.unit_id, GameUnitId(448));
+        assert_eq!(
+            p5002.trained, 2,
+            "player 5002's train must not leak into player 5001's total"
+        );
     }
 }

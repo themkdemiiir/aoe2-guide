@@ -15,7 +15,11 @@ use pipeline_core::MatchId;
 /// [`crate::compose::to_batch`]'s result alias.
 pub type Result<T> = std::result::Result<T, Error>;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
+/// No longer `Copy` (as of [`Error::UnitComposition`]): a `replay::Error` can carry a `String`
+/// (`replay::Error::Parse`), so the enum as a whole can't be. `Clone`/`PartialEq`/`Eq` are kept —
+/// `replay::Error` itself derives all three (see its doc) — so existing `assert_eq!`-based tests
+/// against this enum are unaffected.
+#[derive(Debug, Clone, PartialEq, Eq, Error)]
 pub enum Error {
     /// The parsed replay's own `match_id` disagrees with the discovery seed it was paired with —
     /// almost certainly a caller bug (the wrong seed handed to the wrong replay). Never coerced to
@@ -36,4 +40,13 @@ pub enum Error {
     /// bug, one level up).
     #[error("match {0}: relic match type {1:?} has no known db ladder mapping")]
     UnmappedMatchType(MatchId, RelicMatchType),
+
+    /// `replay::derive` rejected computing this replay's per-player unit composition (Phase B
+    /// enrichment, `task-enrichB`) — the checked `i64 -> i32` narrowing on a `train` event's
+    /// `unit_id`/summed `amount` overflowed (see `replay::derive`'s `player_units` doc). Real
+    /// replay data never approaches `i32::MAX` army sizes or unit ids, so this is unreachable
+    /// today — kept fail-loud (never silently wrapped) for the same "impossible but not unwrap"
+    /// reason as [`Error::UnmappedMatchType`].
+    #[error("match {0}: failed to derive per-player unit composition: {1}")]
+    UnitComposition(MatchId, #[source] replay::Error),
 }

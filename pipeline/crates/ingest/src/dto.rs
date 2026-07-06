@@ -4,7 +4,7 @@
 //! fabricates a value for a field the schema requires.
 
 use chrono::{DateTime, Utc};
-use pipeline_core::{Age, GameCivId, MatchId, ProfileId};
+use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, ProfileId};
 use serde::{Deserialize, Serialize};
 
 /// `matches.source` — mirrors the PG enum `source_kind` (`'replay' | 'aoestats'`).
@@ -114,6 +114,19 @@ pub struct NewReplayAge {
     pub n_research: Option<i32>,
 }
 
+/// One row for `match_player_units` — one (match, player, DISTINCT unit_id) `trained` total.
+/// **Replay-source ONLY** (aoestats' archive gives no per-unit breakdown — see the migration's
+/// doc, `m20260706_000012_create_match_player_units.rs`). `trained` is Σ `amount` over that
+/// player's `train` commands for `unit_id` — units QUEUED, never surviving army (the replay
+/// format has no deaths/losses); see `replay::derive`'s module doc for the full metric rationale.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct NewMatchPlayerUnit {
+    pub match_id: MatchId,
+    pub profile_id: ProfileId,
+    pub unit_id: GameUnitId,
+    pub trained: i32,
+}
+
 /// One ingest unit: everything [`crate::ingest_batch`] loads in a single transaction.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct ReplayBatch {
@@ -125,6 +138,8 @@ pub struct ReplayBatch {
     pub events: Vec<NewReplayEvent>,
     #[serde(default)]
     pub ages: Vec<NewReplayAge>,
+    #[serde(default)]
+    pub player_units: Vec<NewMatchPlayerUnit>,
 }
 
 /// The outcome of one [`crate::ingest_batch`] call.
@@ -140,6 +155,8 @@ pub struct IngestStats {
     pub events: u64,
     /// Rows inserted into `replay_ages`, gated on `matches_inserted`.
     pub ages: u64,
+    /// Rows inserted into `match_player_units`, gated on `matches_inserted`.
+    pub units: u64,
 }
 
 #[cfg(test)]
@@ -190,6 +207,12 @@ mod tests {
                 n_buildings: None,
                 n_research: None,
             }],
+            player_units: vec![NewMatchPlayerUnit {
+                match_id: MatchId(1001),
+                profile_id: ProfileId(5001),
+                unit_id: GameUnitId(83),
+                trained: 5,
+            }],
         };
 
         let value = serde_json::to_value(&batch).expect("ReplayBatch must serialize");
@@ -199,6 +222,7 @@ mod tests {
         assert_eq!(value["players"][0]["match_id"], serde_json::json!(1001));
         assert_eq!(value["players"][0]["profile_id"], serde_json::json!(5001));
         assert_eq!(value["players"][0]["civ_id"], serde_json::json!(1));
+        assert_eq!(value["player_units"][0]["unit_id"], serde_json::json!(83));
 
         // Age is a lowercase bare string, not `{"Dark": null}`.
         assert_eq!(value["ages"][0]["age"], serde_json::json!("dark"));

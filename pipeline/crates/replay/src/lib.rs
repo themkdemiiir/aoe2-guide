@@ -10,10 +10,13 @@
 //! `scripts/data-pipeline/replay-rs/src/{extract.rs,postgame.rs,config.rs}` (untouched —
 //! strangler rule; see `.superpowers/sdd/task-4b-replay-report.md` for the parity gate).
 //!
-//! The [`derive`] function is a second, later addition (Phase A of the replay-analytics
-//! enrichment): opening + age-up-completion timings derived from [`ParsedReplay::events`] —
-//! still pure, still zero IO. See that module's doc for the ported-from-`analyzer` provenance
-//! and the completion-vs-click correctness rule.
+//! The [`derive`] function is a second, later addition (the replay-analytics enrichment):
+//! opening + age-up-completion timings (Phase A) and per-unit trained-composition totals
+//! (Phase B) derived from [`ParsedReplay::events`] — still pure, still zero IO. See that
+//! module's doc for the ported-from-`analyzer` provenance, the completion-vs-click correctness
+//! rule, and the `trained`-not-`army` honest-metric rule. Fallible (returns [`Result`] since
+//! Phase B): fails loud on the one genuinely-possible-but-unreachable-in-practice case, a
+//! `train` event's unit_id/summed amount overflowing `i32`.
 
 mod config;
 mod derive;

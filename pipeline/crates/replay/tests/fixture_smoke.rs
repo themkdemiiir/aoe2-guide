@@ -33,18 +33,19 @@ fn parses_a_real_replay_without_error() {
     );
 }
 
-/// Opportunistic sanity check for Phase A's `replay::derive` (task-enrichA): parse a real replay
-/// and print each player's derived opening + age-up-COMPLETION timings, so a human can eyeball
-/// that they're plausible (feudal ~ minutes, not raw ms/click). Same `TEST_REPLAY` convention as
+/// Opportunistic sanity check for `replay::derive`: parse a real replay and print each player's
+/// derived opening + age-up-COMPLETION timings (Phase A, task-enrichA) + top trained units
+/// (Phase B, task-enrichB), so a human can eyeball that they're plausible (feudal ~ minutes, not
+/// raw ms/click; a villager-heavy top-unit list, not empty). Same `TEST_REPLAY` convention as
 /// [`parses_a_real_replay_without_error`] above — no fixture is committed to this repo.
 #[test]
 #[ignore = "set TEST_REPLAY=/path/to.aoe2record to run"]
-fn derives_plausible_opening_and_age_timings_from_a_real_replay() {
+fn derives_plausible_opening_age_timings_and_units_from_a_real_replay() {
     let path = std::env::var("TEST_REPLAY").expect("set TEST_REPLAY=/path/to.aoe2record");
     let bytes = Bytes::from(std::fs::read(&path).expect("TEST_REPLAY must be readable"));
 
     let parsed = replay::parse(MatchId(1), bytes).expect("a real replay must parse");
-    let summaries = replay::derive(&parsed);
+    let summaries = replay::derive(&parsed).expect("a real replay must derive cleanly");
 
     assert_eq!(
         summaries.len(),
@@ -66,5 +67,17 @@ fn derives_plausible_opening_and_age_timings_from_a_real_replay() {
                  (expected roughly 60-2400s)"
             );
         }
+
+        // Phase B: top-5 trained units by `trained` count, for a human to eyeball.
+        let mut by_trained = s.units.clone();
+        by_trained.sort_by_key(|&(_, trained)| std::cmp::Reverse(trained));
+        eprintln!(
+            "  top units: {:?}",
+            by_trained
+                .iter()
+                .take(5)
+                .map(|(unit_id, trained)| format!("{unit_id}x{trained}"))
+                .collect::<Vec<_>>()
+        );
     }
 }

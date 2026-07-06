@@ -26,6 +26,6 @@ pub mod secret;
 pub mod slug;
 
 pub use age::Age;
-pub use ids::{GameCivId, MatchId, ProfileId, RelicCivId};
+pub use ids::{GameCivId, GameUnitId, MatchId, ProfileId, RelicCivId};
 pub use redact::redact_secret;
 pub use secret::Secret;

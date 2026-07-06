@@ -13,7 +13,13 @@ use thiserror::Error;
 /// [`crate::parse`]'s result alias.
 pub type Result<T> = std::result::Result<T, Error>;
 
-#[derive(Debug, Error)]
+/// `Clone + PartialEq + Eq` (beyond the bare minimum `thiserror` needs): every variant's payload
+/// (`String`, `&'static str`, `std::num::TryFromIntError`, `pipeline_core::age::UnknownAge`)
+/// already supports all three, and `pipeline::compose::Error::UnitComposition` (Phase B
+/// enrichment, `task-enrichB`) embeds a `replay::Error` as its `#[source]` — which needs
+/// `PartialEq`/`Eq` for `pipeline::Error` to keep deriving them for its own `assert_eq!`-based
+/// tests.
+#[derive(Debug, Clone, PartialEq, Eq, Error)]
 pub enum Error {
     /// `aoe2rec::Savegame::from_bytes` rejected the bytes (truncated file, unsupported version,
     /// corrupt header, ...) — the message is aoe2rec's own `Display` text — OR the vendored

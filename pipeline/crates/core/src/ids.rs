@@ -9,13 +9,15 @@
 //!
 //! [`MatchId`] and [`ProfileId`] exist for the same reason at the row-identity boundary: both are
 //! `i64`s in Postgres (`bigint`), and a future join/lookup mixing them up would be just as silent
-//! without the newtype.
+//! without the newtype. [`GameUnitId`] (Phase B of the replay-analytics enrichment,
+//! `match_player_units`) is the same idea for the game's `DAT` unit-id space — a distinct space
+//! from either civ-id table above.
 //!
-//! All four wrap the DB-native **signed** integer (`i32`/`i64`, matching Postgres `integer`/
+//! All five wrap the DB-native **signed** integer (`i32`/`i64`, matching Postgres `integer`/
 //! `bigint`) rather than `u32`/`u64`: they flow into `tokio-postgres` binary COPY, Postgres has no
-//! unsigned integer types, and `tokio-postgres` has no `ToSql for u32`/`u64`. Civ/match/profile ids
-//! are always small non-negative numbers in practice, so this is zero value change — just the
-//! Rust type that makes the eventual COPY code compile.
+//! unsigned integer types, and `tokio-postgres` has no `ToSql for u32`/`u64`. Civ/match/profile/
+//! unit ids are always small non-negative numbers in practice, so this is zero value change —
+//! just the Rust type that makes the eventual COPY code compile.
 //!
 //! Deliberately **not** `#[postgres(transparent)]` (unlike the playbook's original sketch): that
 //! would pull a `postgres-types` dependency into `core`, breaking the "functional core, no DB
@@ -74,6 +76,22 @@ impl fmt::Display for ProfileId {
     }
 }
 
+/// A replay `train` command's `unit_id` (a game `DAT` unit id — e.g. Villager, Militia-line,
+/// Scout Cavalry), used by `match_player_units` (Phase B of the replay-analytics enrichment; see
+/// `replay::derive`'s `player_units`). Its own id space — distinct from [`GameCivId`]/
+/// [`RelicCivId`] (civs, not units) — but newtyped for the same reason the module doc gives:
+/// a bare `i32` here would let a civ_id or profile_id slip into a unit_id column at a call site
+/// and the compiler would never notice. Unit ids are always small positive ints in practice.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(transparent)]
+pub struct GameUnitId(pub i32);
+
+impl fmt::Display for GameUnitId {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -84,6 +102,7 @@ mod tests {
         assert_eq!(RelicCivId(5).to_string(), "5");
         assert_eq!(MatchId(123456789).to_string(), "123456789");
         assert_eq!(ProfileId(987654321).to_string(), "987654321");
+        assert_eq!(GameUnitId(83).to_string(), "83");
     }
 
     #[test]
@@ -93,5 +112,8 @@ mod tests {
         assert_eq!(serde_json::to_string(&GameCivId(2)).unwrap(), "2");
         let id: GameCivId = serde_json::from_str("2").unwrap();
         assert_eq!(id, GameCivId(2));
+        assert_eq!(serde_json::to_string(&GameUnitId(83)).unwrap(), "83");
+        let unit: GameUnitId = serde_json::from_str("83").unwrap();
+        assert_eq!(unit, GameUnitId(83));
     }
 }
