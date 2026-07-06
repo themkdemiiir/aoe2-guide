@@ -2402,6 +2402,7 @@ dependencies = [
  "clap",
  "pipeline-core",
  "sea-orm-migration",
+ "testcontainers-modules",
  "tokio",
  "tracing",
 ]
