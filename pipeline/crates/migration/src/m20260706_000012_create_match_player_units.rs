@@ -14,8 +14,11 @@ use sea_orm_migration::prelude::*;
 /// `pipeline_core::config::is_eco_unit` on read; this table doesn't pre-filter.
 ///
 /// Same shape/posture as `replay_ages`/`match_ages` (see `m20260705_000009_create_replay_ages.rs`):
-/// no primary key, no foreign keys, not partitioned yet. Deliberately no `units` dimension table
-/// either — `unit_id` is a plain integer here (Phase E maps ids to names, not this migration).
+/// no primary key, not partitioned yet.
+///
+/// `unit_id` gets a real FK to the `units` dimension table (id -> English name) in
+/// `m20260706_000015_create_units.rs`/`m20260706_000017_add_units_techs_fks.rs` — added later,
+/// once that dim existed, rather than retrofitted here.
 #[derive(DeriveMigrationName)]
 pub struct Migration;
 

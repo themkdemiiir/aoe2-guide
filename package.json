@@ -35,6 +35,7 @@
     "build:civilizations": "node scripts/build-civilizations.mjs",
     "build:wasm": "cd analyzer/crates/analyzer-wasm && wasm-pack build --target web --release --no-pack --out-dir ../../../src/wasm/pkg && rm -f ../../../src/wasm/pkg/.gitignore && mv ../../../src/wasm/pkg/replay_wasm_bg.wasm ../../../public/analyzer/pkg/replay_wasm_bg.wasm",
     "build:units": "node scripts/build-units.mjs",
+    "build:unit-tech-names": "node scripts/build-unit-tech-names.mjs",
     "build:facts": "node scripts/build-game-facts.mjs",
     "verify:facts": "node scripts/verify-build-facts.mjs"
   },

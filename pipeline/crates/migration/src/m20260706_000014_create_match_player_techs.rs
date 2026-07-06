@@ -19,9 +19,11 @@ use sea_orm_migration::prelude::*;
 /// sentinel time).
 ///
 /// Same shape/posture as `match_player_units` (see
-/// `m20260706_000012_create_match_player_units.rs`): no primary key, no foreign keys, not
-/// partitioned yet. Deliberately no `techs` dimension table either — `tech_id` is a plain integer
-/// here (a later exporter, Phase E, maps ids to names, not this migration).
+/// `m20260706_000012_create_match_player_units.rs`): no primary key, not partitioned yet.
+///
+/// `tech_id` gets a real FK to the `techs` dimension table (id -> English name) in
+/// `m20260706_000016_create_techs.rs`/`m20260706_000017_add_units_techs_fks.rs` — added later,
+/// once that dim existed, rather than retrofitted here.
 #[derive(DeriveMigrationName)]
 pub struct Migration;
 

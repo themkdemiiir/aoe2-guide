@@ -1,7 +1,8 @@
-//! Thin CLI over the `dims` library: idempotently loads `maps`/`civs`/`civs_relic`/`patch_index`
-//! into Postgres from the committed refdata `pipeline_core` (`refdata` feature) parses. Every
-//! `matches` row FK-references `maps`/`civs`, so this MUST run before any replay/aoestats ingest
-//! against a fresh schema — see the crate doc.
+//! Thin CLI over the `dims` library: idempotently loads `maps`/`civs`/`civs_relic`/`patch_index`/
+//! `units`/`techs` into Postgres from the committed refdata `pipeline_core` (`refdata` feature)
+//! parses. Every `matches` row FK-references `maps`/`civs`, and every replay-derived
+//! `match_player_units`/`match_player_techs` row FK-references `units`/`techs`, so this MUST run
+//! before any replay/aoestats ingest against a fresh schema — see the crate doc.
 //!
 //! Like `migration`/`ingest`, `DATABASE_URL` is read from the environment (via
 //! `pipeline_core::cli::database_url`) and never placed in a clap arg, help string, or log line —
@@ -55,6 +56,8 @@ async fn run(database_url: &str) -> anyhow::Result<()> {
         civs = stats.civs,
         civs_relic = stats.civs_relic,
         patch_index = stats.patch_index,
+        units = stats.units,
+        techs = stats.techs,
         "dims load complete"
     );
     Ok(())

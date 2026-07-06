@@ -73,6 +73,8 @@ async fn load_dims_populates_every_table_with_known_spot_values_and_is_idempoten
     assert_eq!(row_count(&client, "civs").await, 0);
     assert_eq!(row_count(&client, "civs_relic").await, 0);
     assert_eq!(row_count(&client, "patch_index").await, 0);
+    assert_eq!(row_count(&client, "units").await, 0);
+    assert_eq!(row_count(&client, "techs").await, 0);
 
     // --- 1. First load: every table non-empty. ---
     let stats1 = load_dims(&mut client)
@@ -98,15 +100,29 @@ async fn load_dims_populates_every_table_with_known_spot_values_and_is_idempoten
         "patch-index.json has ~20 rows, got {}",
         stats1.patch_index
     );
+    assert!(
+        stats1.units > 200,
+        "unit-names.json has ~238 rows, got {}",
+        stats1.units
+    );
+    assert!(
+        stats1.techs > 150,
+        "tech-names.json has ~192 rows, got {}",
+        stats1.techs
+    );
 
     let maps_count = row_count(&client, "maps").await;
     let civs_count = row_count(&client, "civs").await;
     let civs_relic_count = row_count(&client, "civs_relic").await;
     let patch_index_count = row_count(&client, "patch_index").await;
+    let units_count = row_count(&client, "units").await;
+    let techs_count = row_count(&client, "techs").await;
     assert_eq!(maps_count as u64, stats1.maps);
     assert_eq!(civs_count as u64, stats1.civs);
     assert_eq!(civs_relic_count as u64, stats1.civs_relic);
     assert_eq!(patch_index_count as u64, stats1.patch_index);
+    assert_eq!(units_count as u64, stats1.units);
+    assert_eq!(techs_count as u64, stats1.techs);
 
     // --- 2. Known spot values (M4a will JOIN on these `slug` columns). ---
     // `civs`: game/replay civ_id 2 -> franks (src/data/civ-id-map.json).
@@ -168,6 +184,34 @@ async fn load_dims_populates_every_table_with_known_spot_values_and_is_idempoten
     assert_eq!(label, "Update 179158");
     assert_eq!(released, NaiveDate::from_ymd_opt(2026, 6, 16));
 
+    // `units`: unit_id 448 -> Scout Cavalry (mirrors `pipeline_core::units`' own spot-check).
+    let (scout_name, scout_internal): (String, Option<String>) = {
+        let row = client
+            .query_one(
+                "SELECT name, internal_name FROM units WHERE unit_id = 448",
+                &[],
+            )
+            .await
+            .expect("unit_id 448 must exist");
+        (row.get(0), row.get(1))
+    };
+    assert_eq!(scout_name, "Scout Cavalry");
+    assert_eq!(scout_internal, Some("SCOUT".to_string()));
+
+    // `techs`: tech_id 22 -> Loom (mirrors `pipeline_core::techs`' own spot-check).
+    let (loom_name, loom_internal): (String, Option<String>) = {
+        let row = client
+            .query_one(
+                "SELECT name, internal_name FROM techs WHERE tech_id = 22",
+                &[],
+            )
+            .await
+            .expect("tech_id 22 must exist");
+        (row.get(0), row.get(1))
+    };
+    assert_eq!(loom_name, "Loom");
+    assert_eq!(loom_internal, Some("Loom".to_string()));
+
     // --- 3. Re-run: idempotent — identical stats, unchanged row counts. ---
     let stats2 = load_dims(&mut client)
         .await
@@ -195,6 +239,16 @@ async fn load_dims_populates_every_table_with_known_spot_values_and_is_idempoten
         row_count(&client, "patch_index").await,
         patch_index_count,
         "idempotent: patch_index row count unchanged"
+    );
+    assert_eq!(
+        row_count(&client, "units").await,
+        units_count,
+        "idempotent: units row count unchanged"
+    );
+    assert_eq!(
+        row_count(&client, "techs").await,
+        techs_count,
+        "idempotent: techs row count unchanged"
     );
 
     // Refreshing a slug (the "re-running refreshes slugs after a refdata change" contract) is
@@ -238,8 +292,9 @@ async fn load_dims_populates_every_table_with_known_spot_values_and_is_idempoten
 }
 
 /// Trivial sanity check that [`DimsStats`] fields line up positionally with what the assertions
-/// above expect (`maps, civs, civs_relic, patch_index`), guarding against an accidental field
-/// reorder silently compiling since the struct derives no `Ord`/positional API elsewhere.
+/// above expect (`maps, civs, civs_relic, patch_index, units, techs`), guarding against an
+/// accidental field reorder silently compiling since the struct derives no `Ord`/positional API
+/// elsewhere.
 #[test]
 fn dims_stats_default_is_all_zero() {
     assert_eq!(
@@ -249,6 +304,8 @@ fn dims_stats_default_is_all_zero() {
             civs: 0,
             civs_relic: 0,
             patch_index: 0,
+            units: 0,
+            techs: 0,
         }
     );
 }
