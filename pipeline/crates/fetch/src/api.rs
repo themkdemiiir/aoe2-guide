@@ -187,8 +187,11 @@ struct MatchMember {
 /// mode" (empire wars / quick play / etc. — Relic doesn't document which). These get `debug!`'d
 /// and skipped as routine. Anything OUTSIDE this allow-list AND outside the ranked set
 /// (`RelicMatchType::from_matchtype_id`'s 6/7/8/9) is UNRECOGNIZED — possibly a brand-new ranked
-/// ladder Relic just shipped — and must surface loudly (see [`normalize_recent`]) rather than be
-/// swallowed the same way as a known-routine id.
+/// ladder Relic just shipped, but far more often just ANOTHER common non-ranked mode this
+/// allow-list hasn't caught up with yet (event ladders, quick play variants, ...). It gets
+/// `warn!`'d (see [`normalize_recent`]) so a human can notice and, if it's genuinely ranked, add
+/// it here or to the ranked set — but it is SKIPPED the same as a known-routine id, not treated
+/// as fatal.
 const KNOWN_NON_RANKED_MATCHTYPE_IDS: [i32; 2] = [2, 18];
 
 /// AUTOMATCH + completed only, newest first, each mapped to a [`DiscoverySeed`]. The 1v1/team
@@ -196,15 +199,21 @@ const KNOWN_NON_RANKED_MATCHTYPE_IDS: [i32; 2] = [2, 18];
 /// `scripts/data-pipeline/lib/relic-api.mjs`'s `normalizeMatches`/`relic-map.mjs`'s `isRankedRm`
 /// key the production JS crawler's ranked-RM filter on — see
 /// [`RelicMatchType::from_matchtype_id`]). Most AUTOMATCH matches are NOT ranked RM (empire wars,
-/// death match, quick play, ...) and are expected to be skipped here at `debug` — this is routine,
-/// not a data-corruption signal, PROVIDED the id is one of [`KNOWN_NON_RANKED_MATCHTYPE_IDS`]. An
-/// id outside BOTH that allow-list and the ranked set is treated differently: `tracing::warn!` +
-/// `Error::UnknownMatchType` (aborting just this profile's discovery batch, not the crawler
-/// process — the M6 run loop already treats a `discover_recent` `Err` as "no new seeds this run,
-/// retry later") — a new Relic ranked ladder must be NOTICED, not silently lumped in with routine
-/// non-ranked traffic. Member count alone would NOT be a safe substitute: a ranked death match 1v1
-/// has exactly 2 members too, so counting members can't tell it apart from a ranked RM 1v1 —
-/// exactly the silent-mislabel failure mode `matchtype_id`-based classification avoids.
+/// death match, quick play, ...) and are expected to be skipped here — this is routine, not a
+/// data-corruption signal. A known non-ranked id ([`KNOWN_NON_RANKED_MATCHTYPE_IDS`]) is skipped
+/// quietly at `debug!`; an id outside BOTH that allow-list and the ranked set is skipped LOUDLY at
+/// `warn!` instead (a new Relic ranked ladder must be NOTICED, not silently lumped in with routine
+/// non-ranked traffic) — but EITHER WAY the match is skipped and the rest of this profile's
+/// matches keep being scanned. This mirrors the production JS crawler
+/// (`scripts/data-pipeline/lib/relic-api.mjs`'s `normalizeMatches`), which also skips-and-continues
+/// on an unrecognized `matchtype_id` and filters ranked downstream, rather than aborting: most
+/// active profiles have SOME unrecognized non-ranked match in their recent history (other event
+/// ladders, new quick-play variants, ...), so treating "unrecognized" as fatal would abort
+/// discovery for the large majority of profiles on completely mundane non-ranked traffic — not a
+/// theoretical risk, an aborted discovery batch is exactly what a live crawl run surfaced. Member
+/// count alone would NOT be a safe substitute for `matchtype_id`-based classification: a ranked
+/// death match 1v1 has exactly 2 members too, so counting members can't tell it apart from a
+/// ranked RM 1v1 — exactly the silent-mislabel failure mode this function avoids.
 fn normalize_recent(
     doc: RecentHistoryResponse,
     profile_id: ProfileId,
@@ -232,10 +241,11 @@ fn normalize_recent(
                     matchtype_id = m.matchtype_id,
                     error = %err,
                     "discovered automatch with an UNRECOGNIZED matchtype_id outside both the \
-                     ranked set and the known non-ranked allow-list — possibly a new Relic \
-                     ranked ladder"
+                     ranked set and the known non-ranked allow-list — skipping this match; if \
+                     it turns out to be a new RANKED ladder, add its id to \
+                     RelicMatchType::from_matchtype_id"
                 );
-                return Err(err.into());
+                continue;
             }
         };
         let played_at: DateTime<Utc> = DateTime::from_timestamp(m.completiontime, 0)
@@ -451,28 +461,41 @@ mod tests {
         );
     }
 
-    // SYNTHETIC: an AUTOMATCH, completed row with a matchtype_id (42) that is neither ranked
-    // (6/7/8/9) nor on the known-non-ranked allow-list (2/18) — stands in for "Relic ships a new
-    // ladder id we haven't seen yet." Fabricated test SHAPE only, per the sibling fixture's own
-    // convention above — 42 is not asserted to be any REAL Relic matchtype_id.
+    // SYNTHETIC: two AUTOMATCH, completed rows — the FIRST has a matchtype_id (42) that is neither
+    // ranked (6/7/8/9) nor on the known-non-ranked allow-list (2/18), standing in for "Relic ships
+    // a new (probably non-ranked) id we haven't seen yet"; the SECOND is a real ranked-RM id (8,
+    // per `RelicMatchType::from_matchtype_id`) for a different profile pairing. Fabricated test
+    // SHAPE only, per the sibling fixture's own convention above — 42 is not asserted to be any
+    // REAL Relic matchtype_id, and the matchtype_id=8 vocab is sourced but these ids/timestamps
+    // are made up.
     const UNRECOGNIZED_MATCHTYPE_FIXTURE: &str = r#"{
       "matchHistoryStats": [
         {"id": 999, "completiontime": 1618070120, "description": "AUTOMATCH", "matchtype_id": 42,
          "matchhistorymember": [
-           {"profile_id": 199325, "oldrating": 2000, "newrating": 2010}]}
+           {"profile_id": 199325, "oldrating": 2000, "newrating": 2010}]},
+        {"id": 1000, "completiontime": 1618070200, "description": "AUTOMATCH", "matchtype_id": 8,
+         "matchhistorymember": [
+           {"profile_id": 199325, "oldrating": 2010, "newrating": 2040}]}
       ]
     }"#;
 
     #[test]
-    fn normalize_recent_surfaces_a_matchtype_id_outside_both_the_ranked_set_and_the_allow_list() {
+    fn normalize_recent_skips_an_unrecognized_matchtype_without_aborting_the_rest() {
         let doc: RecentHistoryResponse =
             serde_json::from_str(UNRECOGNIZED_MATCHTYPE_FIXTURE).unwrap();
-        let err = normalize_recent(doc, ProfileId(199325)).unwrap_err();
-        assert!(
-            matches!(err, Error::UnknownMatchType(_)),
-            "an unrecognized matchtype_id must wire the (previously dead) \
-             Error::UnknownMatchType variant, not silently vanish at debug, got {err:?}"
+        let seeds = normalize_recent(doc, ProfileId(199325)).unwrap();
+
+        // The unrecognized-matchtype_id=42 row (match 999) is skipped, NOT an abort — the
+        // ranked-RM row AFTER it (match 1000, matchtype_id=8) is still discovered. Exactly one
+        // seed, for the ranked match only.
+        assert_eq!(
+            seeds.len(),
+            1,
+            "an unrecognized matchtype_id must be skipped, not abort the rest of this profile's \
+             discovery batch, got {seeds:?}"
         );
+        assert_eq!(seeds[0].match_id, MatchId(1000));
+        assert_eq!(seeds[0].new_rating, Some(2040));
     }
 
     #[test]
