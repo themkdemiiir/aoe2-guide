@@ -16,6 +16,7 @@ mod m20260705_000007_create_match_players;
 mod m20260705_000008_create_replay_events;
 mod m20260705_000009_create_replay_ages;
 mod m20260706_000010_create_match_ages;
+mod m20260706_000011_create_age_kind_enum;
 
 pub struct Migrator;
 
@@ -33,6 +34,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260705_000008_create_replay_events::Migration),
             Box::new(m20260705_000009_create_replay_ages::Migration),
             Box::new(m20260706_000010_create_match_ages::Migration),
+            Box::new(m20260706_000011_create_age_kind_enum::Migration),
         ]
     }
 }

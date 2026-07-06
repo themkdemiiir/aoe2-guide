@@ -167,8 +167,9 @@ CREATE TEMP TABLE stg_replay_ages (
 
 /// Insert genuinely-new matches (by `match_id`) and capture their ids in a TEMP table so the
 /// three child inserts below can gate on it. `source`/`ladder` are cast from the staging table's
-/// plain `TEXT` to the real `source_kind`/`ladder_kind` enums here — the only place a cast is
-/// needed, since every other column is already a plain type on both sides.
+/// plain `TEXT` to the real `source_kind`/`ladder_kind` enums here — one of two places a cast is
+/// needed in this function (the other is [`INSERT_REPLAY_AGES_SQL`]'s `age::age_kind`), since
+/// every other column is already a plain type on both sides.
 const INSERT_NEW_MATCHES_SQL: &str = r#"
 CREATE TEMP TABLE new_match_ids ON COMMIT DROP AS
   WITH ins AS (
@@ -198,9 +199,11 @@ INSERT INTO replay_events (match_id, profile_id, player_number, t_ms, kind, targ
   FROM stg_replay_events s JOIN new_match_ids n USING (match_id)
 "#;
 
+/// `age` is cast from the staging table's plain `TEXT` to the `age_kind` enum here — see
+/// [`INSERT_NEW_MATCHES_SQL`]'s doc for the other cast this function needs.
 const INSERT_REPLAY_AGES_SQL: &str = r#"
 INSERT INTO replay_ages (match_id, profile_id, civ_id, won, age, uptime_ms, villagers, military, n_buildings, n_research)
-  SELECT s.match_id, s.profile_id, s.civ_id, s.won, s.age, s.uptime_ms, s.villagers, s.military, s.n_buildings, s.n_research
+  SELECT s.match_id, s.profile_id, s.civ_id, s.won, s.age::age_kind, s.uptime_ms, s.villagers, s.military, s.n_buildings, s.n_research
   FROM stg_replay_ages s JOIN new_match_ids n USING (match_id)
 "#;
 

@@ -318,7 +318,9 @@ WHERE match_id IN (
 /// `match_ages.match_id`/`profile_id`/`uptime_ms` are all NOT NULL, but `uptime` can legitimately
 /// be NULL if a future python change ever omits the key (see `py::AgeOutputRow::uptime`'s doc) —
 /// without this guard, one such row would abort the WHOLE batch's insert (same "fail-loud vs.
-/// bulk-safe" reasoning as `import_pair`'s missing-identity guard, see this module's doc).
+/// bulk-safe" reasoning as `import_pair`'s missing-identity guard, see this module's doc). `age`
+/// is cast from the staging table's plain `TEXT` to the `age_kind` enum here — the only cast this
+/// function needs, mirroring [`INSERT_MATCHES_SQL`]'s `source`/`ladder` casts above.
 const INSERT_AGES_SQL: &str = r#"
 INSERT INTO match_ages (match_id, profile_id, civ_id, won, age, uptime_ms, villagers, military, n_buildings, n_research)
 SELECT
@@ -326,7 +328,7 @@ SELECT
     s.profile_id::bigint,
     c.civ_id,
     s.won,
-    s.age,
+    s.age::age_kind,
     (s.uptime * 1000)::int AS uptime_ms,
     s.villagers,
     s.military,

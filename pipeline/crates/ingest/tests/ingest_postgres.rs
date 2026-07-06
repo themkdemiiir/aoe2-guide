@@ -453,12 +453,14 @@ async fn assert_replay_event_row(client: &tokio_postgres::Client) {
 
 /// Full-row read-back for `replay_ages` (match_id = 1002, profile_id = 5003): both the ordinary
 /// `feudal` row and the `Age::Dark` row, proving the aoestats-only age round-trips through COPY
-/// into the TEXT `age` column exactly as `"dark"`.
+/// into the `age_kind` enum column exactly as `"dark"` (`age::text` in the SELECT so the
+/// read-back can compare against a plain `String`, same as the enum-column reads elsewhere).
 async fn assert_replay_ages_rows(client: &tokio_postgres::Client) {
     let feudal_row = client
         .query_one(
-            "SELECT civ_id, won, age, uptime_ms, villagers, military, n_buildings, n_research \
-             FROM replay_ages WHERE match_id = 1002 AND profile_id = 5003 AND age = 'feudal'",
+            "SELECT civ_id, won, age::text, uptime_ms, villagers, military, n_buildings, \
+             n_research FROM replay_ages WHERE match_id = 1002 AND profile_id = 5003 AND age = \
+             'feudal'",
             &[],
         )
         .await
@@ -499,8 +501,9 @@ async fn assert_replay_ages_rows(client: &tokio_postgres::Client) {
 
     let dark_row = client
         .query_one(
-            "SELECT civ_id, won, age, uptime_ms, villagers, military, n_buildings, n_research \
-             FROM replay_ages WHERE match_id = 1002 AND profile_id = 5003 AND age = 'dark'",
+            "SELECT civ_id, won, age::text, uptime_ms, villagers, military, n_buildings, \
+             n_research FROM replay_ages WHERE match_id = 1002 AND profile_id = 5003 AND age = \
+             'dark'",
             &[],
         )
         .await

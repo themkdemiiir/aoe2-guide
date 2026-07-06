@@ -241,8 +241,8 @@ async fn import_ages_resolves_civs_converts_uptime_skips_unknowns_and_is_idempot
 async fn assert_dark_age_row(client: &tokio_postgres::Client) {
     let row = client
         .query_one(
-            "SELECT profile_id, civ_id, won, age, uptime_ms, villagers, military, n_buildings, \
-             n_research FROM match_ages WHERE match_id = 3001 AND age = 'dark'",
+            "SELECT profile_id, civ_id, won, age::text, uptime_ms, villagers, military, \
+             n_buildings, n_research FROM match_ages WHERE match_id = 3001 AND age = 'dark'",
             &[],
         )
         .await
@@ -279,7 +279,7 @@ async fn assert_unresearched_age_row(client: &tokio_postgres::Client, age: &str)
     let row = client
         .query_one(
             "SELECT civ_id, uptime_ms, villagers, military, n_buildings, n_research \
-             FROM match_ages WHERE match_id = 3001 AND age = $1",
+             FROM match_ages WHERE match_id = 3001 AND age::text = $1",
             &[&age],
         )
         .await
