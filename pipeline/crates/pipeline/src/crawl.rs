@@ -51,11 +51,35 @@
 //! before starting each new worker (stop taking new work); in-flight workers are always let
 //! finish and drained; an in-flight `ingest` call is raced against cancellation specifically (a
 //! mid-transaction cancel drops the transaction, rolling it back — see [`crate::sink::IngestSink`]).
+//!
+//! ## Raw-replay archiving
+//! [`process_one`] persists the raw downloaded bytes ([`crate::raw::RawArchive::save`]) for every
+//! match that reaches [`ReplayFetch::Parsed`] or [`ReplayFetch::ParseFailed`] — i.e. every
+//! successful DOWNLOAD, including ones `replay::parse` then rejects, which is the entire point
+//! (`crate::raw`'s module doc). This runs inside the SAME spawned worker task as fetch+parse
+//! (still off the serial drain, so it does not slow the loop's per-batch bookkeeping), gated on
+//! [`CrawlConfig::raw_dir`] being `Some` (never for a dry-run — see that field's doc).
+//!
+//! **Raw-save failures are logged and counted, never fatal to the match.** A disk hiccup (or a
+//! failed write-then-verify — see `crate::raw`'s "Integrity" section) must not throw away a
+//! successful parse+ingest over an archive-side problem, so [`process_one`] logs
+//! (`tracing::warn!`) and moves on; the match's [`MatchOutcome`]/manifest status is driven ENTIRELY
+//! by fetch/parse/ingest, never by whether the raw archive succeeded. One documented consequence:
+//! if a match's ingest succeeds (manifest -> `Parsed`, terminal) but its raw-save failed, that
+//! match will not naturally be retried by this run loop (a `Parsed` row is never offered by
+//! `take_ready` again) — wiring raw-save failures into the manifest's own retry vocabulary would
+//! need a `fetch::ReplayManifest` schema/trait change, out of this feature's scope (see the task
+//! brief's "you touch only `pipeline/crates/pipeline/**`" boundary). In practice a raw-save
+//! failure is a local disk problem (full disk, permissions), not a per-match condition, so it is
+//! expected to either resolve before the next match or surface loudly in logs long before it
+//! matters at the corpus level.
 
 use std::collections::HashMap;
+use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
+use bytes::Bytes;
 use fetch::{DiscoverySeed, MatchStatus, ReplayManifest, SeedRow, StatusUpdate};
 use pipeline_core::{MatchId, ProfileId};
 use thiserror::Error;
@@ -63,6 +87,7 @@ use tokio::sync::Semaphore;
 use tokio::task::JoinSet;
 use tokio_util::sync::CancellationToken;
 
+use crate::raw::{RawArchive, SaveOutcome};
 use crate::sink::IngestSink;
 use crate::source::{ReplayFetch, ReplaySource};
 
@@ -107,6 +132,14 @@ pub struct CrawlConfig {
     /// Discover + plan only: never download, parse, or ingest. A fresh discover's `seed` call
     /// still runs (enqueuing is harmless local bookkeeping, not a live effect on Postgres).
     pub dry_run: bool,
+    /// Root directory for the raw `.aoe2record.zst` archive ([`crate::raw::RawArchive`]) — `None`
+    /// disables raw archiving entirely (no disk writes; the CLI's `--no-raw`). A live crawl with
+    /// `Some(dir)` archives every successfully-downloaded replay, including ones that then fail
+    /// to parse — see the module doc's "Raw-replay archiving" section. Irrelevant when
+    /// [`Self::dry_run`] is set: the "Process" step (the only place a save could happen) never
+    /// runs in a dry-run, so raw archiving is structurally a no-op regardless of this field —
+    /// `main.rs` also sets this to `None` for a dry-run explicitly, as defense in depth.
+    pub raw_dir: Option<PathBuf>,
 }
 
 /// One `crawl` invocation's outcome counts, for logging/monitoring.
@@ -128,6 +161,19 @@ pub struct CrawlSummary {
     /// Matches that failed at any stage (fetch, parse, compose, or ingest) — each is recorded in
     /// the manifest for a future retry or as terminal, per [`MatchStatus`].
     pub failed: usize,
+    /// Raw replays freshly written + read-back-verified to the archive this run (see the module
+    /// doc's "Raw-replay archiving" section). 0 whenever [`CrawlConfig::raw_dir`] is `None`.
+    pub raw_saved: usize,
+    /// Raw replays that were already present in the archive (a resumed crawl re-attempting a
+    /// match) and so were left untouched rather than re-written.
+    pub raw_already_present: usize,
+    /// Raw-archive writes that failed (disk error, or a write-then-verify integrity mismatch —
+    /// see `crate::raw`'s "Integrity" section) — logged individually, never fatal to the match.
+    pub raw_failed: usize,
+    /// Total COMPRESSED bytes freshly written to the raw archive this run — the "periodic bytes
+    /// tally" the raw-archive brief asks for; one crawl invocation is this loop's natural
+    /// "period" (see the module doc's "Raw-replay archiving" section).
+    pub raw_bytes_written: u64,
 }
 
 fn now_unix() -> i64 {
@@ -176,16 +222,80 @@ enum MatchOutcome {
     },
 }
 
-/// Fetch + parse + compose one match. `#[tracing::instrument]`ed with the `match_id` per the
-/// brief's "instrument the per-match work" rule.
-#[tracing::instrument(skip(source, seed), fields(match_id = %match_id))]
+/// One match's raw-archive outcome from [`process_one`], folded into [`CrawlSummary`] by the
+/// serial drain loop in [`crawl`]. See the module doc's "Raw-replay archiving" section.
+enum RawSaveOutcome {
+    /// No [`CrawlConfig::raw_dir`] configured, or nothing was downloaded for this match
+    /// ([`ReplayFetch::NoReplay`] / [`ReplayFetch::FetchFailed`]) — there is nothing to archive.
+    NotAttempted,
+    Saved {
+        bytes_written: u64,
+    },
+    AlreadyPresent,
+    /// A disk error or a write-then-verify integrity failure (`crate::raw`'s "Integrity" section)
+    /// — logged by [`process_one`] as it happens; never fatal to the match.
+    Failed,
+}
+
+/// Runs [`RawArchive::save`] (synchronous, CPU+IO-bound) on a blocking thread — playbook rule:
+/// "spawn_blocking for ... CPU-bound replay parse" applies just as much to zstd -19 compression +
+/// its read-back verification decompress.
+async fn save_raw(archive: Arc<RawArchive>, match_id: MatchId, raw: Bytes) -> RawSaveOutcome {
+    let result = tokio::task::spawn_blocking(move || archive.save(match_id, &raw)).await;
+    match result {
+        Ok(Ok(SaveOutcome::Saved { bytes_written, .. })) => {
+            tracing::debug!(match_id = %match_id, bytes_written, "raw replay archived");
+            RawSaveOutcome::Saved { bytes_written }
+        }
+        Ok(Ok(SaveOutcome::AlreadyPresent)) => {
+            tracing::debug!(match_id = %match_id, "raw replay already archived — skipped");
+            RawSaveOutcome::AlreadyPresent
+        }
+        Ok(Err(err)) => {
+            tracing::warn!(
+                match_id = %match_id,
+                error = %err,
+                "failed to save raw replay archive — parse/ingest unaffected, continuing"
+            );
+            RawSaveOutcome::Failed
+        }
+        Err(join_err) => {
+            tracing::warn!(
+                match_id = %match_id,
+                error = %join_err,
+                "raw-archive save task did not complete — parse/ingest unaffected, continuing"
+            );
+            RawSaveOutcome::Failed
+        }
+    }
+}
+
+/// Fetch + parse + compose one match, archiving the raw downloaded bytes along the way (see the
+/// module doc's "Raw-replay archiving" section). `#[tracing::instrument]`ed with the `match_id`
+/// per the brief's "instrument the per-match work" rule.
+#[tracing::instrument(skip(source, seed, raw_archive), fields(match_id = %match_id))]
 async fn process_one<S: ReplaySource>(
     source: &S,
     match_id: MatchId,
     seed: DiscoverySeed,
-) -> MatchOutcome {
-    match source.fetch_replay(match_id).await {
-        ReplayFetch::Parsed(parsed) => match crate::to_batch(parsed, seed) {
+    raw_archive: Option<Arc<RawArchive>>,
+) -> (MatchOutcome, RawSaveOutcome) {
+    let fetch_outcome = source.fetch_replay(match_id).await;
+
+    // Archive the raw bytes for the two "a download actually happened" outcomes, regardless of
+    // whether the parse embedded in `fetch_outcome` succeeded — a parse failure must never lose
+    // the replay (`crate::raw`'s whole reason for existing).
+    let raw_bytes = match &fetch_outcome {
+        ReplayFetch::Parsed { raw, .. } | ReplayFetch::ParseFailed { raw, .. } => Some(raw.clone()),
+        ReplayFetch::NoReplay | ReplayFetch::FetchFailed { .. } => None,
+    };
+    let raw_outcome = match (raw_bytes, raw_archive) {
+        (Some(raw), Some(archive)) => save_raw(archive, match_id, raw).await,
+        _ => RawSaveOutcome::NotAttempted,
+    };
+
+    let match_outcome = match fetch_outcome {
+        ReplayFetch::Parsed { parsed, .. } => match crate::to_batch(parsed, seed) {
             Ok(batch) => MatchOutcome::Ready(batch),
             // `to_batch`'s failures (mismatched id, missing map, unmapped ladder) are exactly as
             // deterministic as a parse failure — folded into the same terminal bucket rather than
@@ -193,7 +303,7 @@ async fn process_one<S: ReplaySource>(
             Err(err) => MatchOutcome::ParseFailed(err.to_string()),
         },
         ReplayFetch::NoReplay => MatchOutcome::NoReplay,
-        ReplayFetch::ParseFailed(msg) => MatchOutcome::ParseFailed(msg),
+        ReplayFetch::ParseFailed { message, .. } => MatchOutcome::ParseFailed(message),
         ReplayFetch::FetchFailed {
             message,
             retry_after,
@@ -201,7 +311,9 @@ async fn process_one<S: ReplaySource>(
             message,
             retry_after,
         },
-    }
+    };
+
+    (match_outcome, raw_outcome)
 }
 
 /// Run one discover -> plan -> process -> record crawl. See the module doc for the full shape.
@@ -287,7 +399,14 @@ where
     // 3. Process, bounded by `config.concurrency` in-flight worker tasks (see the module doc's
     // "Two independent bounds" section for why the request RATE is not re-bounded here).
     let semaphore = Arc::new(Semaphore::new(config.concurrency.max(1)));
-    let mut joinset: JoinSet<(MatchId, MatchOutcome)> = JoinSet::new();
+    let mut joinset: JoinSet<(MatchId, MatchOutcome, RawSaveOutcome)> = JoinSet::new();
+
+    // See the module doc's "Raw-replay archiving" section: `None` (never for a live run unless
+    // `--no-raw`) means `process_one` skips archiving entirely — no directory is even created.
+    let raw_archive: Option<Arc<RawArchive>> = config
+        .raw_dir
+        .clone()
+        .map(|dir| Arc::new(RawArchive::new(dir)));
 
     for pm in ready {
         if cancel.is_cancelled() {
@@ -309,11 +428,13 @@ where
         let permit = semaphore.clone().acquire_owned().await.ok();
         let match_id = pm.match_id;
         let task_source = Arc::clone(&source);
+        let task_raw_archive = raw_archive.clone();
         summary.attempted += 1;
         joinset.spawn(async move {
             let _permit = permit;
-            let outcome = process_one(task_source.as_ref(), match_id, seed).await;
-            (match_id, outcome)
+            let (outcome, raw_outcome) =
+                process_one(task_source.as_ref(), match_id, seed, task_raw_archive).await;
+            (match_id, outcome, raw_outcome)
         });
     }
     summary.cancelled_before_start = summary
@@ -327,8 +448,8 @@ where
     let mut pause_for: Option<u64> = None;
 
     while let Some(joined) = joinset.join_next().await {
-        let (match_id, outcome) = match joined {
-            Ok(pair) => pair,
+        let (match_id, outcome, raw_outcome) = match joined {
+            Ok(triple) => triple,
             Err(join_err) => {
                 tracing::error!(
                     error = %join_err,
@@ -337,6 +458,16 @@ where
                 continue;
             }
         };
+
+        match raw_outcome {
+            RawSaveOutcome::NotAttempted => {}
+            RawSaveOutcome::Saved { bytes_written } => {
+                summary.raw_saved += 1;
+                summary.raw_bytes_written += bytes_written;
+            }
+            RawSaveOutcome::AlreadyPresent => summary.raw_already_present += 1,
+            RawSaveOutcome::Failed => summary.raw_failed += 1,
+        }
 
         match outcome {
             MatchOutcome::Ready(batch) => {

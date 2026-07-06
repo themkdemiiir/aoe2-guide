@@ -11,6 +11,11 @@
 //! below this line would need to hand-roll aoe2rec's binary format, which is impractical. A test
 //! double at the [`ParsedReplay`] level needs no such fixture: [`replay::ParsedReplay`]'s fields
 //! are all `pub`, exactly like `pipeline::compose`'s own existing tests already construct them.
+//! [`ReplayFetch::Parsed`]/[`ReplayFetch::ParseFailed`] additionally carry the RAW downloaded
+//! bytes precisely so a hand-rolled `FakeSource` can supply arbitrary (non-`.aoe2record`-shaped)
+//! bytes and still exercise the real [`crate::raw::RawArchive`] save path through
+//! [`crate::crawl::process_one`] — see that module's doc for why the archive write happens there
+//! rather than inline in [`FetchSource::fetch_replay`] below.
 //!
 //! [`FetchSource`] is the ONE production implementation — it calls the REAL
 //! `fetch::discover_recent` / `fetch::get_replay_files` / `fetch::best_file` /
@@ -34,10 +39,16 @@ use replay::ParsedReplay;
 /// because it spans two crates' error surfaces (`fetch::Error` for the download, `replay::Error`
 /// for the parse) plus a genuinely-just-missing case — see [`crate::crawl`]'s `MatchOutcome` for
 /// how each variant maps to a manifest status.
+///
+/// [`Self::Parsed`] and [`Self::ParseFailed`] both carry the RAW downloaded bytes (`raw`) — the
+/// two "a download actually succeeded" cases, and per the raw-archive brief's central rule, the
+/// ONLY two that must ever reach [`crate::raw::RawArchive::save`] (see
+/// [`crate::crawl::process_one`]). [`Self::NoReplay`]/[`Self::FetchFailed`] carry no bytes because
+/// nothing was ever downloaded for them.
 #[derive(Debug, Clone)]
 pub enum ReplayFetch {
     /// Downloaded and parsed successfully.
-    Parsed(ParsedReplay),
+    Parsed { raw: Bytes, parsed: ParsedReplay },
     /// No usable replay file at the fast-path source (aged out of `getReplayFiles`, or no file
     /// was ever uploaded) — terminal until a later milestone's archive fallback retries it.
     NoReplay,
@@ -48,8 +59,10 @@ pub enum ReplayFetch {
         retry_after: Option<u64>,
     },
     /// The bytes downloaded but `replay::parse` rejected them — deterministic (corrupt/unsupported
-    /// record), so terminal: retrying without new bytes would fail identically.
-    ParseFailed(String),
+    /// record), so terminal: retrying without new bytes would fail identically. The raw bytes are
+    /// carried here too — a parse failure must never lose the replay, that is the whole point of
+    /// the raw archive.
+    ParseFailed { raw: Bytes, message: String },
 }
 
 /// The IO the crawl loop needs from a Relic replay source, abstracted for testability. See the
@@ -129,14 +142,29 @@ impl ReplaySource for FetchSource {
             Err(err) => return fetch_failed(err),
         };
 
+        // Cloned BEFORE the parse task takes ownership of `bytes` — cheap (`Bytes` is refcounted,
+        // O(1) clone) — so the raw bytes survive to be archived
+        // ([`crate::crawl::process_one`]) regardless of how parsing turns out. This is the
+        // "download -> save raw -> parse" guarantee from the raw-archive brief, expressed here as
+        // "the raw bytes are never dropped before a downstream stage gets a chance to persist
+        // them," rather than a literal call to `RawArchive::save` at this exact line — see
+        // `crate::raw`'s module doc + [`ReplayFetch`]'s own doc for why the actual disk write
+        // happens one call-frame up, in the run loop, where the SAME synthetic-bytes fake this
+        // crate's tests already use for `fetch_replay` doubles as the raw-archive test rig too.
+        let raw = bytes.clone();
+
         // CPU-bound decode off the async runtime thread (playbook: "spawn_blocking for ...
         // CPU-bound replay parse").
         match tokio::task::spawn_blocking(move || replay::parse(match_id, bytes)).await {
-            Ok(Ok(parsed)) => ReplayFetch::Parsed(parsed),
-            Ok(Err(err)) => ReplayFetch::ParseFailed(err.to_string()),
-            Err(join_err) => {
-                ReplayFetch::ParseFailed(format!("parse task did not complete: {join_err}"))
-            }
+            Ok(Ok(parsed)) => ReplayFetch::Parsed { raw, parsed },
+            Ok(Err(err)) => ReplayFetch::ParseFailed {
+                raw,
+                message: err.to_string(),
+            },
+            Err(join_err) => ReplayFetch::ParseFailed {
+                raw,
+                message: format!("parse task did not complete: {join_err}"),
+            },
         }
     }
 }

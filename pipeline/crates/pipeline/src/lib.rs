@@ -13,15 +13,23 @@
 //! parse -> `to_batch` -> ingest RUN LOOP itself ([`crawl`]) — see that module's doc for the full
 //! design (resilience, bounded concurrency, graceful shutdown, dry-run). `src/main.rs` is the
 //! `pipeline crawl` CLI over it, driven standalone or (eventually) by Dagster.
+//!
+//! It also ships the raw-replay archive ([`raw`]) [`crawl`] writes every downloaded
+//! `.aoe2record` into (even ones that fail to parse), and [`reparse`], a `pipeline reparse` entry
+//! point that reads that archive back and proves it re-usable — see each module's doc.
 
 mod compose;
 mod crawl;
 mod error;
+mod raw;
+mod reparse;
 mod sink;
 mod source;
 
 pub use compose::to_batch;
 pub use crawl::{crawl, CrawlConfig, CrawlError, CrawlSummary};
 pub use error::{Error, Result};
+pub use raw::{RawArchive, SaveOutcome};
+pub use reparse::{reparse_dir, ReparseSummary};
 pub use sink::{IngestSink, PgSink};
 pub use source::{FetchSource, ReplayFetch, ReplaySource};

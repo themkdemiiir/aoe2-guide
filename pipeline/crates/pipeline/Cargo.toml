@@ -37,9 +37,18 @@ clap = { workspace = true }
 # Binary-edge error handling for `main.rs` only (playbook rule 1) — the library (`to_batch`,
 # `crawl`) stays on typed `thiserror` results.
 anyhow = { workspace = true }
+# `raw`'s raw-replay archive: compresses every downloaded `.aoe2record` (see `raw`'s module doc
+# for why zstd over flate2/gzip).
+zstd = { workspace = true }
+# `raw`'s write-then-verify step hashes both the original bytes and the read-back-decompressed
+# copy before trusting a fresh save (see `raw`'s "Integrity" doc section).
+sha2 = { workspace = true }
 
 [dev-dependencies]
 # Test fixtures build `DiscoverySeed.played_at` (`DateTime<Utc>`) directly, and the run-loop
 # integration tests (`tests/crawl.rs`) drive `#[tokio::test]`s against FAKE `ReplaySource`/
 # `IngestSink`/`ReplayManifest` doubles — never the live Relic API or a real Postgres.
 chrono = { workspace = true }
+# `raw`'s + `reparse`'s own unit/integration tests write into isolated temp dirs — never the
+# repo's real `data-cache/`.
+tempfile = "3"

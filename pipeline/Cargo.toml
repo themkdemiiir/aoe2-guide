@@ -87,6 +87,18 @@ wiremock = "0.6"
 # that gates `tokio_util::sync` (where `CancellationToken` lives) — it also pulls in `tokio/sync`,
 # which `pipeline` needs anyway for its own `Semaphore`.
 tokio-util = { version = "0.7", features = ["rt"] }
+# `pipeline::raw`'s raw-replay archive compresses every downloaded `.aoe2record` with zstd rather
+# than flate2/gzip — measured against a real 4.3 MB replay: zstd -19 -> 7.4x (590 KB) vs gzip -9 ->
+# 7.0x (620 KB), AND zstd decompresses far faster, which matters for the eventual bulk `reparse` of
+# millions of archived files (the crawl's write side is already network-rate-limited, so the
+# slower high-level encode is free). Already resolved into the lockfile via `parquet`'s own zstd
+# codec (`aoestats`) at this same version — this pin just makes it a direct dependency too.
+zstd = "0.13"
+# SHA-256 for the raw archive's write-then-verify step (`pipeline::raw`): this is an offline
+# archive we intend to eventually be the ONLY copy of these bytes, so a fresh compress+rename is
+# read back and hashed before being trusted — silent corruption here would be a permanent loss.
+# Already resolved into the lockfile (reqwest/rustls's TLS stack) at `0.10.9`; this pin reuses it.
+sha2 = "0.10"
 
 # --- export-only dep, hoisted per the same single-consumer-today convention above. ---
 # `export::query`'s `benchmark_ageup`/`benchmark_vils` fetches use `Client::query_raw` (a

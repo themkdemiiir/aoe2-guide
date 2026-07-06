@@ -6,6 +6,11 @@
 //! `--dry-run` skips reading `DATABASE_URL` (and connecting to Postgres) entirely — it needs
 //! neither to validate CLI/manifest wiring. See [`pipeline::CrawlConfig`]'s doc for exactly which
 //! operations `--dry-run` and an omitted `--profile-id` each skip.
+//!
+//! `pipeline reparse` is a second, unrelated entry point over [`pipeline::reparse_dir`]: it reads
+//! the raw `.aoe2record.zst` archive `crawl`'s `--raw-dir` writes and re-parses it, entirely
+//! offline (no `DATABASE_URL`, no Postgres) — see that function's doc for its parse-and-count-only
+//! scope.
 
 use std::path::PathBuf;
 use std::sync::Arc;
@@ -30,6 +35,9 @@ const DEFAULT_CONCURRENCY: usize = 4;
 const DEFAULT_RATE_PER_MIN: u32 = 100;
 /// Mirrors the old `replay-rs` CLI's own default manifest filename.
 const DEFAULT_MANIFEST_PATH: &str = "manifest.sqlite";
+/// Default root for the raw `.aoe2record.zst` archive (`pipeline::RawArchive`) — see its module
+/// doc for the on-disk layout.
+const DEFAULT_RAW_DIR: &str = "data-cache/replays/raw";
 
 #[derive(Parser)]
 #[command(
@@ -46,6 +54,10 @@ struct Cli {
 enum Command {
     /// Discover a profile's recent ranked replays and download + parse + ingest the eligible ones.
     Crawl(CrawlArgs),
+    /// Re-parse every archived raw `.aoe2record.zst` under `--raw-dir`, proving the raw corpus is
+    /// re-usable by a (possibly improved) parser. Parse-and-count ONLY — never re-ingests into
+    /// Postgres and never reads `DATABASE_URL` (see `pipeline::reparse_dir`'s doc for the scope).
+    Reparse(ReparseArgs),
 }
 
 #[derive(clap::Args)]
@@ -76,6 +88,30 @@ struct CrawlArgs {
     /// connects to Postgres. Safe for wiring validation (e.g. Dagster's inert partition check).
     #[arg(long)]
     dry_run: bool,
+
+    /// Root directory for the raw `.aoe2record.zst` archive — every successfully downloaded
+    /// replay (even ones that fail to parse) is persisted here so a future parser can re-extract
+    /// more. See `pipeline::RawArchive`'s module doc for the on-disk layout. Ignored when
+    /// `--dry-run` or `--no-raw` is set.
+    #[arg(long, default_value = DEFAULT_RAW_DIR)]
+    raw_dir: PathBuf,
+
+    /// Disable raw-replay archiving entirely (no disk writes). `--dry-run` already never writes
+    /// raw regardless of this flag — see `CrawlConfig::raw_dir`'s doc.
+    #[arg(long)]
+    no_raw: bool,
+}
+
+#[derive(clap::Args)]
+struct ReparseArgs {
+    /// Root directory of the raw `.aoe2record.zst` archive to read back (matches `pipeline crawl
+    /// --raw-dir`).
+    #[arg(long, default_value = DEFAULT_RAW_DIR)]
+    raw_dir: PathBuf,
+
+    /// Stop after this many archived replays (0 = no limit).
+    #[arg(long, default_value_t = 0)]
+    limit: usize,
 }
 
 #[tokio::main]
@@ -86,8 +122,22 @@ async fn main() {
     // entirely by clap (and exit immediately) without ever depending on `DATABASE_URL` — same
     // discipline as `ingest`/`migration`'s binaries.
     let cli = Cli::parse();
-    let Command::Crawl(args) = cli.command;
 
+    match cli.command {
+        Command::Crawl(args) => run_crawl_command(args).await,
+        // Synchronous and never touches `DATABASE_URL`/Postgres (see `pipeline::reparse_dir`'s
+        // scope doc) — called directly rather than via `spawn_blocking`: this is a one-shot CLI
+        // invocation with nothing else for the runtime to interleave it with.
+        Command::Reparse(args) => {
+            if let Err(err) = run_reparse(args) {
+                tracing::error!(error = %format!("{err:#}"), "pipeline command failed");
+                std::process::exit(1);
+            }
+        }
+    }
+}
+
+async fn run_crawl_command(args: CrawlArgs) {
     if args.dry_run {
         if let Err(err) = run_dry_run(args).await {
             tracing::error!(error = %format!("{err:#}"), "pipeline command failed");
@@ -137,7 +187,30 @@ fn crawl_config(args: &CrawlArgs, dry_run: bool) -> CrawlConfig {
         limit: args.limit,
         concurrency: args.concurrency.max(1),
         dry_run,
+        // `--dry-run` never archives raw replays regardless of `--raw-dir`/`--no-raw` — the
+        // "Process" step that could save one never runs in a dry-run anyway (see
+        // `CrawlConfig::raw_dir`'s doc), but this makes that explicit rather than incidental.
+        raw_dir: if dry_run || args.no_raw {
+            None
+        } else {
+            Some(args.raw_dir.clone())
+        },
     }
+}
+
+/// `pipeline reparse` — see `pipeline::reparse_dir`'s doc for exactly what this does (and does
+/// not) do.
+fn run_reparse(args: ReparseArgs) -> anyhow::Result<()> {
+    let limit = (args.limit > 0).then_some(args.limit);
+    let summary = pipeline::reparse_dir(&args.raw_dir, limit).context("reparse failed")?;
+    tracing::info!(
+        found = summary.found,
+        parsed_ok = summary.parsed_ok,
+        parsed_err = summary.parsed_err,
+        bytes_read = summary.bytes_read,
+        "reparse complete — parse-and-count only, no re-ingest (see `pipeline::reparse_dir`'s doc)"
+    );
+    Ok(())
 }
 
 async fn run_dry_run(args: CrawlArgs) -> anyhow::Result<()> {
@@ -192,6 +265,10 @@ async fn run_live(args: CrawlArgs, database_url: &str) -> anyhow::Result<()> {
         attempted = summary.attempted,
         succeeded = summary.succeeded,
         failed = summary.failed,
+        raw_saved = summary.raw_saved,
+        raw_already_present = summary.raw_already_present,
+        raw_failed = summary.raw_failed,
+        raw_bytes_written = summary.raw_bytes_written,
         "crawl complete"
     );
     Ok(())

@@ -14,13 +14,16 @@ use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 
+use bytes::Bytes;
 use chrono::{TimeZone, Utc};
 use fetch::{
     retry_ready, DiscoverySeed, MatchStatus, PendingMatch, RelicMatchType, ReplayManifest, SeedRow,
     StatusUpdate,
 };
 use ingest::{IngestStats, ReplayBatch};
-use pipeline::{crawl, CrawlConfig, IngestSink, ReplayFetch, ReplaySource};
+use pipeline::{
+    crawl, CrawlConfig, IngestSink, RawArchive, ReplayFetch, ReplaySource, SaveOutcome,
+};
 use pipeline_core::{GameCivId, MatchId, ProfileId};
 use replay::{ParsedReplay, ReplayPlayer};
 use tokio_util::sync::CancellationToken;
@@ -214,12 +217,24 @@ fn parsed_replay(match_id: i64) -> ParsedReplay {
     }
 }
 
+/// Distinct, deterministic bytes standing in for "whatever `download_replay` returned" — the raw
+/// archive persists these verbatim, and never needs them to actually be `.aoe2record`-shaped (see
+/// `pipeline::source`'s module doc for why the seam is drawn above the real binary format).
+fn raw_bytes(match_id: i64) -> Bytes {
+    Bytes::from(
+        format!("raw-bytes-for-match-{match_id}")
+            .repeat(64)
+            .into_bytes(),
+    )
+}
+
 fn config(profile_id: Option<i64>, limit: usize, dry_run: bool) -> CrawlConfig {
     CrawlConfig {
         profile_id: profile_id.map(ProfileId),
         limit,
         concurrency: 4,
         dry_run,
+        raw_dir: None,
     }
 }
 
@@ -229,7 +244,13 @@ fn config(profile_id: Option<i64>, limit: usize, dry_run: bool) -> CrawlConfig {
 async fn happy_path_with_faked_fetch_processes_and_marks_parsed() {
     let source = Arc::new(FakeSource {
         seeds: vec![seed(100)],
-        replays: HashMap::from([(MatchId(100), ReplayFetch::Parsed(parsed_replay(100)))]),
+        replays: HashMap::from([(
+            MatchId(100),
+            ReplayFetch::Parsed {
+                raw: raw_bytes(100),
+                parsed: parsed_replay(100),
+            },
+        )]),
         ..Default::default()
     });
     let manifest = InMemoryManifest::default();
@@ -264,9 +285,18 @@ async fn bad_replay_is_skipped_and_the_rest_still_process() {
         replays: HashMap::from([
             (
                 MatchId(200),
-                ReplayFetch::ParseFailed("corrupt record".to_owned()),
+                ReplayFetch::ParseFailed {
+                    raw: raw_bytes(200),
+                    message: "corrupt record".to_owned(),
+                },
             ),
-            (MatchId(201), ReplayFetch::Parsed(parsed_replay(201))),
+            (
+                MatchId(201),
+                ReplayFetch::Parsed {
+                    raw: raw_bytes(201),
+                    parsed: parsed_replay(201),
+                },
+            ),
         ]),
         ..Default::default()
     });
@@ -301,7 +331,13 @@ async fn bad_replay_is_skipped_and_the_rest_still_process() {
 async fn second_run_is_idempotent_and_reprocesses_nothing() {
     let source = Arc::new(FakeSource {
         seeds: vec![seed(300)],
-        replays: HashMap::from([(MatchId(300), ReplayFetch::Parsed(parsed_replay(300)))]),
+        replays: HashMap::from([(
+            MatchId(300),
+            ReplayFetch::Parsed {
+                raw: raw_bytes(300),
+                parsed: parsed_replay(300),
+            },
+        )]),
         ..Default::default()
     });
     let manifest = InMemoryManifest::default();
@@ -347,7 +383,13 @@ async fn second_run_is_idempotent_and_reprocesses_nothing() {
 async fn dry_run_plans_via_a_mocked_discover_without_downloading_or_ingesting() {
     let source = Arc::new(FakeSource {
         seeds: vec![seed(400)],
-        replays: HashMap::from([(MatchId(400), ReplayFetch::Parsed(parsed_replay(400)))]),
+        replays: HashMap::from([(
+            MatchId(400),
+            ReplayFetch::Parsed {
+                raw: raw_bytes(400),
+                parsed: parsed_replay(400),
+            },
+        )]),
         ..Default::default()
     });
     let manifest = InMemoryManifest::default();
@@ -386,8 +428,20 @@ async fn no_new_work_is_started_once_cancelled() {
     let source = Arc::new(FakeSource {
         seeds: vec![seed(500), seed(501)],
         replays: HashMap::from([
-            (MatchId(500), ReplayFetch::Parsed(parsed_replay(500))),
-            (MatchId(501), ReplayFetch::Parsed(parsed_replay(501))),
+            (
+                MatchId(500),
+                ReplayFetch::Parsed {
+                    raw: raw_bytes(500),
+                    parsed: parsed_replay(500),
+                },
+            ),
+            (
+                MatchId(501),
+                ReplayFetch::Parsed {
+                    raw: raw_bytes(501),
+                    parsed: parsed_replay(501),
+                },
+            ),
         ]),
         ..Default::default()
     });
@@ -483,5 +537,222 @@ async fn a_ready_retry_with_no_fresh_seed_this_run_is_skipped() {
         manifest.status_of(MatchId(700)),
         Some(MatchStatus::Pending),
         "left untouched for a future run that rediscovers it"
+    );
+}
+
+// --- raw-replay archiving (task-rawkeep brief gate 1) -------------------------------------------
+//
+// Exercises the SAME fake-fetch seam as every test above — `FakeSource`'s `ReplayFetch::Parsed`/
+// `ParseFailed` variants now carry arbitrary raw bytes (`raw_bytes`, NOT a real `.aoe2record`; see
+// `pipeline::source`'s module doc for why that is fine for this seam) — proving `crawl` itself
+// archives them, with NO live Relic API and NO real replay fixture involved.
+
+#[tokio::test]
+async fn a_successful_download_is_archived_and_decompresses_back_to_the_original_bytes() {
+    let dir = tempfile::tempdir().expect("create temp dir");
+    let raw = raw_bytes(800);
+    let source = Arc::new(FakeSource {
+        seeds: vec![seed(800)],
+        replays: HashMap::from([(
+            MatchId(800),
+            ReplayFetch::Parsed {
+                raw: raw.clone(),
+                parsed: parsed_replay(800),
+            },
+        )]),
+        ..Default::default()
+    });
+    let manifest = InMemoryManifest::default();
+    let mut sink = RecordingSink::default();
+    let mut cfg = config(Some(1), 10, false);
+    cfg.raw_dir = Some(dir.path().to_path_buf());
+    let cancel = CancellationToken::new();
+
+    let (_manifest, summary) = crawl(source, manifest, Some(&mut sink), &cfg, &cancel)
+        .await
+        .expect("crawl must not fail");
+
+    assert_eq!(summary.raw_saved, 1);
+    assert_eq!(summary.raw_failed, 0);
+    assert!(summary.raw_bytes_written > 0);
+
+    let archive = RawArchive::new(dir.path());
+    let final_path = archive.path_for(MatchId(800));
+    assert!(
+        final_path.exists(),
+        "the raw archive file must exist at the documented sharded path"
+    );
+    let restored = zstd::stream::decode_all(std::fs::File::open(&final_path).unwrap())
+        .expect("the archived file must decompress cleanly");
+    assert_eq!(
+        restored,
+        raw.to_vec(),
+        "decompressing the archive must reproduce the exact downloaded bytes"
+    );
+}
+
+#[tokio::test]
+async fn a_parse_failure_still_leaves_its_raw_bytes_archived() {
+    // The whole point of the feature: a replay that downloads fine but fails to parse must NOT
+    // lose its raw bytes.
+    let dir = tempfile::tempdir().expect("create temp dir");
+    let raw = raw_bytes(801);
+    let source = Arc::new(FakeSource {
+        seeds: vec![seed(801)],
+        replays: HashMap::from([(
+            MatchId(801),
+            ReplayFetch::ParseFailed {
+                raw: raw.clone(),
+                message: "corrupt record".to_owned(),
+            },
+        )]),
+        ..Default::default()
+    });
+    let manifest = InMemoryManifest::default();
+    let mut sink = RecordingSink::default();
+    let mut cfg = config(Some(1), 10, false);
+    cfg.raw_dir = Some(dir.path().to_path_buf());
+    let cancel = CancellationToken::new();
+
+    let (manifest, summary) = crawl(source, manifest, Some(&mut sink), &cfg, &cancel)
+        .await
+        .expect("a parse failure must not fail the whole crawl");
+
+    assert_eq!(
+        manifest.status_of(MatchId(801)),
+        Some(MatchStatus::ParseFailed),
+        "the match itself is still terminal-failed for ingest purposes"
+    );
+    assert_eq!(
+        summary.raw_saved, 1,
+        "the raw bytes must be archived EVEN THOUGH the replay failed to parse"
+    );
+
+    let archive = RawArchive::new(dir.path());
+    let restored =
+        zstd::stream::decode_all(std::fs::File::open(archive.path_for(MatchId(801))).unwrap())
+            .unwrap();
+    assert_eq!(restored, raw.to_vec());
+}
+
+#[tokio::test]
+async fn dry_run_writes_no_raw_files_even_with_a_raw_dir_configured() {
+    let dir = tempfile::tempdir().expect("create temp dir");
+    let source = Arc::new(FakeSource {
+        seeds: vec![seed(802)],
+        replays: HashMap::from([(
+            MatchId(802),
+            ReplayFetch::Parsed {
+                raw: raw_bytes(802),
+                parsed: parsed_replay(802),
+            },
+        )]),
+        ..Default::default()
+    });
+    let manifest = InMemoryManifest::default();
+    // `raw_dir` is deliberately set to `Some(..)` here (NOT the `--no-raw` case) — this proves
+    // `crawl` itself never reaches the "Process" step in a dry-run (and so never saves) purely
+    // structurally, regardless of what `raw_dir` says (see `CrawlConfig::raw_dir`'s doc).
+    let mut cfg = config(Some(1), 10, true);
+    cfg.raw_dir = Some(dir.path().to_path_buf());
+    let cancel = CancellationToken::new();
+
+    let sink: Option<&mut RecordingSink> = None;
+    let (_manifest, summary) = crawl(source, manifest, sink, &cfg, &cancel)
+        .await
+        .expect("dry-run must not fail");
+
+    assert_eq!(summary.raw_saved, 0);
+    assert_eq!(
+        std::fs::read_dir(dir.path()).unwrap().count(),
+        0,
+        "a dry-run must write NOTHING into the raw archive directory"
+    );
+}
+
+#[tokio::test]
+async fn raw_dir_none_the_no_raw_flags_effect_at_the_config_level_writes_nothing() {
+    let source = Arc::new(FakeSource {
+        seeds: vec![seed(803)],
+        replays: HashMap::from([(
+            MatchId(803),
+            ReplayFetch::Parsed {
+                raw: raw_bytes(803),
+                parsed: parsed_replay(803),
+            },
+        )]),
+        ..Default::default()
+    });
+    let manifest = InMemoryManifest::default();
+    let mut sink = RecordingSink::default();
+    // `raw_dir: None` is exactly what `main.rs`'s `--no-raw` flag produces (see
+    // `crawl_config`'s doc) — a live (non-dry-run) crawl that still archives nothing, even though
+    // every other stage (fetch/parse/ingest) runs normally.
+    let cfg = config(Some(1), 10, false);
+    assert_eq!(
+        cfg.raw_dir, None,
+        "the `config()` fixture's default (== --no-raw)"
+    );
+    let cancel = CancellationToken::new();
+
+    let (_manifest, summary) = crawl(source, manifest, Some(&mut sink), &cfg, &cancel)
+        .await
+        .expect("crawl must not fail");
+
+    assert_eq!(summary.raw_saved, 0);
+    assert_eq!(summary.raw_already_present, 0);
+    assert_eq!(summary.raw_failed, 0);
+    assert_eq!(summary.succeeded, 1, "the match itself still ingests fine");
+}
+
+#[tokio::test]
+async fn a_resumed_crawl_skips_an_already_present_raw_archive_entry() {
+    let dir = tempfile::tempdir().expect("create temp dir");
+    let archive = RawArchive::new(dir.path());
+    let original_raw = raw_bytes(804);
+    // Simulate an EARLIER run having already archived this match's raw bytes (e.g. its ingest
+    // failed afterwards, leaving it `Error`/retryable — see `crate::raw`'s "Idempotency" doc).
+    let pre_existing = archive
+        .save(MatchId(804), &original_raw)
+        .expect("pre-seed the archive");
+    assert!(matches!(pre_existing, SaveOutcome::Saved { .. }));
+
+    // This run's FakeSource returns DIFFERENT bytes — if `crawl` ever re-wrote the archive, the
+    // on-disk content would change; it must not.
+    let different_raw = raw_bytes(999_999);
+    let source = Arc::new(FakeSource {
+        seeds: vec![seed(804)],
+        replays: HashMap::from([(
+            MatchId(804),
+            ReplayFetch::Parsed {
+                raw: different_raw,
+                parsed: parsed_replay(804),
+            },
+        )]),
+        ..Default::default()
+    });
+    let manifest = InMemoryManifest::default();
+    let mut sink = RecordingSink::default();
+    let mut cfg = config(Some(1), 10, false);
+    cfg.raw_dir = Some(dir.path().to_path_buf());
+    let cancel = CancellationToken::new();
+
+    let (_manifest, summary) = crawl(source, manifest, Some(&mut sink), &cfg, &cancel)
+        .await
+        .expect("crawl must not fail");
+
+    assert_eq!(
+        summary.raw_already_present, 1,
+        "an already-archived match must be counted as skipped, not re-saved"
+    );
+    assert_eq!(summary.raw_saved, 0);
+
+    let restored =
+        zstd::stream::decode_all(std::fs::File::open(archive.path_for(MatchId(804))).unwrap())
+            .unwrap();
+    assert_eq!(
+        restored,
+        original_raw.to_vec(),
+        "the ORIGINAL archived bytes must survive untouched, never overwritten by this run"
     );
 }
