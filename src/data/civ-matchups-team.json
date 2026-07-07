@@ -1,6 +1,6 @@
 {
   "source": "aoestats.io ranked archive (all-time, 2022-08 onward) — PostgreSQL pipeline via the dbt matchups_* models",
-  "generated": "2026-07-06",
+  "generated": "2026-07-07",
   "ladder": "team",
   "minGames": 100,
   "note": "winRate = how often <civ>'s team wins when <opp> is on the enemy team (team RM; confounded by the 3 other civs per side).",
@@ -794,7 +794,7 @@
       },
       {
         "opp": "poles",
-        "games": 59847,
+        "games": 59848,
         "winRate": 50.84
       },
       {
@@ -849,8 +849,8 @@
       },
       {
         "opp": "mongols",
-        "games": 171045,
-        "winRate": 50.0
+        "games": 171046,
+        "winRate": 50.01
       },
       {
         "opp": "malians",
@@ -869,7 +869,7 @@
       },
       {
         "opp": "magyars",
-        "games": 90876,
+        "games": 90877,
         "winRate": 49.79
       },
       {
@@ -929,7 +929,7 @@
       },
       {
         "opp": "spanish",
-        "games": 148041,
+        "games": 148042,
         "winRate": 49.28
       },
       {
@@ -1313,7 +1313,7 @@
       },
       {
         "opp": "magyars",
-        "games": 245079,
+        "games": 245080,
         "winRate": 48.76
       },
       {
@@ -1383,7 +1383,7 @@
       },
       {
         "opp": "mongols",
-        "games": 446214,
+        "games": 446215,
         "winRate": 48.36
       },
       {
@@ -1413,7 +1413,7 @@
       },
       {
         "opp": "poles",
-        "games": 199780,
+        "games": 199781,
         "winRate": 48.15
       },
       {
@@ -1433,7 +1433,7 @@
       },
       {
         "opp": "spanish",
-        "games": 356200,
+        "games": 356201,
         "winRate": 47.88
       },
       {
@@ -3057,7 +3057,7 @@
       },
       {
         "opp": "poles",
-        "games": 124501,
+        "games": 124502,
         "winRate": 52.23
       },
       {
@@ -3097,7 +3097,7 @@
       },
       {
         "opp": "mongols",
-        "games": 258479,
+        "games": 258480,
         "winRate": 51.39
       },
       {
@@ -3187,7 +3187,7 @@
       },
       {
         "opp": "magyars",
-        "games": 121031,
+        "games": 121032,
         "winRate": 50.57
       },
       {
@@ -3202,7 +3202,7 @@
       },
       {
         "opp": "spanish",
-        "games": 221196,
+        "games": 221197,
         "winRate": 50.35
       },
       {
@@ -3651,12 +3651,12 @@
       },
       {
         "opp": "magyars",
-        "games": 220538,
+        "games": 220539,
         "winRate": 50.2
       },
       {
         "opp": "mayans",
-        "games": 196511,
+        "games": 196512,
         "winRate": 50.14
       },
       {
@@ -3676,8 +3676,8 @@
       },
       {
         "opp": "shu",
-        "games": 16041,
-        "winRate": 49.88
+        "games": 16042,
+        "winRate": 49.89
       },
       {
         "opp": "spanish",
@@ -7231,7 +7231,7 @@
       },
       {
         "opp": "britons",
-        "games": 245079,
+        "games": 245080,
         "winRate": 51.24
       },
       {
@@ -7276,7 +7276,7 @@
       },
       {
         "opp": "vikings",
-        "games": 74953,
+        "games": 74954,
         "winRate": 50.61
       },
       {
@@ -7286,7 +7286,7 @@
       },
       {
         "opp": "mayans",
-        "games": 154423,
+        "games": 154425,
         "winRate": 50.53
       },
       {
@@ -7316,7 +7316,7 @@
       },
       {
         "opp": "berbers",
-        "games": 90876,
+        "games": 90877,
         "winRate": 50.21
       },
       {
@@ -7366,7 +7366,7 @@
       },
       {
         "opp": "ethiopians",
-        "games": 220538,
+        "games": 220539,
         "winRate": 49.8
       },
       {
@@ -7381,7 +7381,7 @@
       },
       {
         "opp": "cumans",
-        "games": 121031,
+        "games": 121032,
         "winRate": 49.43
       },
       {
@@ -7396,12 +7396,12 @@
       },
       {
         "opp": "shu",
-        "games": 12643,
+        "games": 12644,
         "winRate": 49.08
       },
       {
         "opp": "persians",
-        "games": 251228,
+        "games": 251229,
         "winRate": 49.01
       },
       {
@@ -8047,7 +8047,7 @@
       },
       {
         "opp": "ethiopians",
-        "games": 196511,
+        "games": 196512,
         "winRate": 49.86
       },
       {
@@ -8087,7 +8087,7 @@
       },
       {
         "opp": "magyars",
-        "games": 154423,
+        "games": 154425,
         "winRate": 49.47
       },
       {
@@ -8097,7 +8097,7 @@
       },
       {
         "opp": "shu",
-        "games": 9484,
+        "games": 9485,
         "winRate": 49.37
       },
       {
@@ -8127,7 +8127,7 @@
       },
       {
         "opp": "persians",
-        "games": 218729,
+        "games": 218730,
         "winRate": 48.95
       },
       {
@@ -8194,7 +8194,7 @@
       },
       {
         "opp": "britons",
-        "games": 446214,
+        "games": 446215,
         "winRate": 51.64
       },
       {
@@ -8234,7 +8234,7 @@
       },
       {
         "opp": "vikings",
-        "games": 145485,
+        "games": 145486,
         "winRate": 51.05
       },
       {
@@ -8318,14 +8318,14 @@
         "winRate": 50.13
       },
       {
-        "opp": "berbers",
-        "games": 171045,
-        "winRate": 50.0
-      },
-      {
         "opp": "mayans",
         "games": 230951,
         "winRate": 50.0
+      },
+      {
+        "opp": "berbers",
+        "games": 171046,
+        "winRate": 49.99
       },
       {
         "opp": "italians",
@@ -8394,7 +8394,7 @@
       },
       {
         "opp": "cumans",
-        "games": 258479,
+        "games": 258480,
         "winRate": 48.61
       },
       {
@@ -8526,12 +8526,12 @@
       },
       {
         "opp": "mayans",
-        "games": 218729,
+        "games": 218730,
         "winRate": 51.05
       },
       {
         "opp": "magyars",
-        "games": 251228,
+        "games": 251229,
         "winRate": 50.99
       },
       {
@@ -8551,7 +8551,7 @@
       },
       {
         "opp": "shu",
-        "games": 27430,
+        "games": 27431,
         "winRate": 50.81
       },
       {
@@ -8668,7 +8668,7 @@
       },
       {
         "opp": "britons",
-        "games": 199780,
+        "games": 199781,
         "winRate": 51.85
       },
       {
@@ -8778,7 +8778,7 @@
       },
       {
         "opp": "vikings",
-        "games": 65342,
+        "games": 65343,
         "winRate": 49.83
       },
       {
@@ -8833,7 +8833,7 @@
       },
       {
         "opp": "berbers",
-        "games": 59847,
+        "games": 59848,
         "winRate": 49.16
       },
       {
@@ -8883,7 +8883,7 @@
       },
       {
         "opp": "cumans",
-        "games": 124501,
+        "games": 124502,
         "winRate": 47.77
       },
       {
@@ -9691,7 +9691,7 @@
       },
       {
         "opp": "magyars",
-        "games": 12643,
+        "games": 12644,
         "winRate": 50.92
       },
       {
@@ -9731,7 +9731,7 @@
       },
       {
         "opp": "mayans",
-        "games": 9484,
+        "games": 9485,
         "winRate": 50.63
       },
       {
@@ -9766,8 +9766,8 @@
       },
       {
         "opp": "ethiopians",
-        "games": 16041,
-        "winRate": 50.12
+        "games": 16042,
+        "winRate": 50.11
       },
       {
         "opp": "teutons",
@@ -9826,7 +9826,7 @@
       },
       {
         "opp": "persians",
-        "games": 27430,
+        "games": 27431,
         "winRate": 49.19
       },
       {
@@ -10427,7 +10427,7 @@
       },
       {
         "opp": "britons",
-        "games": 356200,
+        "games": 356201,
         "winRate": 52.12
       },
       {
@@ -10467,7 +10467,7 @@
       },
       {
         "opp": "vikings",
-        "games": 170465,
+        "games": 170466,
         "winRate": 51.34
       },
       {
@@ -10542,7 +10542,7 @@
       },
       {
         "opp": "berbers",
-        "games": 148041,
+        "games": 148042,
         "winRate": 50.72
       },
       {
@@ -10617,7 +10617,7 @@
       },
       {
         "opp": "cumans",
-        "games": 221196,
+        "games": 221197,
         "winRate": 49.65
       },
       {
@@ -11712,7 +11712,7 @@
       },
       {
         "opp": "poles",
-        "games": 65342,
+        "games": 65343,
         "winRate": 50.17
       },
       {
@@ -11802,7 +11802,7 @@
       },
       {
         "opp": "magyars",
-        "games": 74953,
+        "games": 74954,
         "winRate": 49.39
       },
       {
@@ -11817,7 +11817,7 @@
       },
       {
         "opp": "mongols",
-        "games": 145485,
+        "games": 145486,
         "winRate": 48.95
       },
       {
@@ -11837,7 +11837,7 @@
       },
       {
         "opp": "spanish",
-        "games": 170465,
+        "games": 170466,
         "winRate": 48.66
       },
       {

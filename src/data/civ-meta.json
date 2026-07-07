@@ -4,11 +4,11 @@
     "1v1",
     "team"
   ],
-  "generated": "2026-07-06",
-  "sourceDate": "2026-02",
+  "generated": "2026-07-07",
+  "sourceDate": "2026-07",
   "appearances": {
-    "1v1": 37172140,
-    "team": 71130368
+    "1v1": 37172160,
+    "team": 71130384
   },
   "patches": [
     {
@@ -447,8 +447,8 @@
             "share": 0.22
           },
           {
-            "opening": "unknown",
-            "share": 0.2
+            "opening": "archers",
+            "share": 0.19
           }
         ],
         "ageUp": {
@@ -798,12 +798,12 @@
             "share": 0.35
           },
           {
-            "opening": "unknown",
-            "share": 0.27
-          },
-          {
             "opening": "man_at_arms",
             "share": 0.24
+          },
+          {
+            "opening": "galleys",
+            "share": 0.14
           }
         ],
         "ageUp": {
@@ -819,7 +819,7 @@
     },
     "aztecs": {
       "1v1": {
-        "games": 661038,
+        "games": 661039,
         "winRate": 47.71,
         "ci95": [
           47.59,
@@ -919,8 +919,8 @@
             "winRate": 51.63
           },
           "2200-2499": {
-            "games": 4545,
-            "winRate": 52.32
+            "games": 4546,
+            "winRate": 52.33
           },
           "2500+": {
             "games": 1324,
@@ -1089,7 +1089,7 @@
             "winRate": 45.28
           },
           "megarandom": {
-            "games": 51693,
+            "games": 51694,
             "winRate": 47.31
           },
           "michi": {
@@ -1195,8 +1195,8 @@
             "share": 3.61
           },
           {
-            "opening": "unknown",
-            "share": 3.32
+            "opening": "fast_castle",
+            "share": 3.2
           }
         ],
         "ageUp": {
@@ -1574,12 +1574,12 @@
             "share": 5.15
           },
           {
-            "opening": "unknown",
-            "share": 4.61
-          },
-          {
             "opening": "trash",
             "share": 1.49
+          },
+          {
+            "opening": "archers",
+            "share": 1.42
           }
         ],
         "ageUp": {
@@ -1591,7 +1591,7 @@
     },
     "bengalis": {
       "1v1": {
-        "games": 295115,
+        "games": 295117,
         "winRate": 48.84,
         "ci95": [
           48.66,
@@ -1695,8 +1695,8 @@
             "winRate": 55.46
           },
           "2500+": {
-            "games": 1273,
-            "winRate": 65.91
+            "games": 1275,
+            "winRate": 65.88
           },
           "<1000": {
             "games": 74682,
@@ -1721,7 +1721,7 @@
             "winRate": 57.8
           },
           "arabia": {
-            "games": 144995,
+            "games": 144997,
             "winRate": 46.84
           },
           "arena": {
@@ -2302,12 +2302,12 @@
             "share": 5.87
           },
           {
-            "opening": "unknown",
-            "share": 2.69
-          },
-          {
             "opening": "archers",
             "share": 1.04
+          },
+          {
+            "opening": "scouts",
+            "share": 0.73
           }
         ],
         "ageUp": {
@@ -2319,7 +2319,7 @@
     },
     "berbers": {
       "1v1": {
-        "games": 609977,
+        "games": 609978,
         "winRate": 50.34,
         "ci95": [
           50.22,
@@ -2415,8 +2415,8 @@
             "winRate": 53.28
           },
           "2000-2199": {
-            "games": 7217,
-            "winRate": 52.89
+            "games": 7218,
+            "winRate": 52.88
           },
           "2200-2499": {
             "games": 4328,
@@ -2449,7 +2449,7 @@
             "winRate": 43.91
           },
           "arabia": {
-            "games": 349157,
+            "games": 349158,
             "winRate": 51.37
           },
           "arena": {
@@ -2695,12 +2695,12 @@
             "share": 5.63
           },
           {
-            "opening": "unknown",
-            "share": 2.54
-          },
-          {
             "opening": "fast_castle",
             "share": 1.93
+          },
+          {
+            "opening": "archers",
+            "share": 1.91
           }
         ],
         "ageUp": {
@@ -2710,7 +2710,7 @@
         }
       },
       "team": {
-        "games": 1008100,
+        "games": 1008101,
         "winRate": 49.93,
         "ci95": [
           49.84,
@@ -2900,8 +2900,8 @@
             "winRate": 51.04
           },
           "glade": {
-            "games": 2480,
-            "winRate": 48.1
+            "games": 2481,
+            "winRate": 48.13
           },
           "goldenpit": {
             "games": 6948,
@@ -3094,8 +3094,8 @@
             "share": 3.43
           },
           {
-            "opening": "unknown",
-            "share": 3.37
+            "opening": "fires",
+            "share": 0.8
           }
         ],
         "ageUp": {
@@ -3471,8 +3471,8 @@
             "share": 2.32
           },
           {
-            "opening": "unknown",
-            "share": 1.45
+            "opening": "trash",
+            "share": 1.24
           }
         ],
         "ageUp": {
@@ -3854,12 +3854,12 @@
             "share": 5.67
           },
           {
-            "opening": "unknown",
-            "share": 2.87
-          },
-          {
             "opening": "archers",
             "share": 0.84
+          },
+          {
+            "opening": "trash",
+            "share": 0.8
           }
         ],
         "ageUp": {
@@ -4279,12 +4279,12 @@
             "share": 7.53
           },
           {
-            "opening": "unknown",
-            "share": 2.51
-          },
-          {
             "opening": "fast_castle",
             "share": 2.43
+          },
+          {
+            "opening": "man_at_arms",
+            "share": 1.73
           }
         ],
         "ageUp": {
@@ -4294,7 +4294,7 @@
         }
       },
       "team": {
-        "games": 3059249,
+        "games": 3059250,
         "winRate": 48.42,
         "ci95": [
           48.36,
@@ -4488,7 +4488,7 @@
             "winRate": 52.15
           },
           "glade": {
-            "games": 10956,
+            "games": 10957,
             "winRate": 49.31
           },
           "goldenpit": {
@@ -4686,8 +4686,8 @@
             "share": 4.37
           },
           {
-            "opening": "unknown",
-            "share": 3.84
+            "opening": "trash",
+            "share": 0.72
           }
         ],
         "ageUp": {
@@ -5083,12 +5083,12 @@
             "share": 5.41
           },
           {
-            "opening": "unknown",
-            "share": 3.47
-          },
-          {
             "opening": "scouts",
             "share": 2.13
+          },
+          {
+            "opening": "trash",
+            "share": 1.99
           }
         ],
         "ageUp": {
@@ -5474,16 +5474,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 5.74
-          },
-          {
             "opening": "fast_castle",
             "share": 4.17
           },
           {
             "opening": "drush",
             "share": 1.84
+          },
+          {
+            "opening": "scouts",
+            "share": 1.49
           }
         ],
         "ageUp": {
@@ -5875,8 +5875,8 @@
             "share": 3.05
           },
           {
-            "opening": "unknown",
-            "share": 2.85
+            "opening": "trash",
+            "share": 1.88
           }
         ],
         "ageUp": {
@@ -6266,12 +6266,12 @@
             "share": 5.22
           },
           {
-            "opening": "unknown",
-            "share": 4.88
-          },
-          {
             "opening": "scouts",
             "share": 1.97
+          },
+          {
+            "opening": "trash",
+            "share": 1.01
           }
         ],
         "ageUp": {
@@ -6994,12 +6994,12 @@
             "share": 5.83
           },
           {
-            "opening": "unknown",
-            "share": 3.48
-          },
-          {
             "opening": "scouts",
             "share": 1.36
+          },
+          {
+            "opening": "man_at_arms",
+            "share": 1.05
           }
         ],
         "ageUp": {
@@ -7415,8 +7415,8 @@
             "share": 2.8
           },
           {
-            "opening": "unknown",
-            "share": 2.4
+            "opening": "fast_castle",
+            "share": 2.02
           }
         ],
         "ageUp": {
@@ -7810,16 +7810,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 4.32
-          },
-          {
             "opening": "fast_castle",
             "share": 4.22
           },
           {
             "opening": "trash",
             "share": 1.66
+          },
+          {
+            "opening": "fires",
+            "share": 1.35
           }
         ],
         "ageUp": {
@@ -8207,12 +8207,12 @@
             "share": 4.27
           },
           {
-            "opening": "unknown",
-            "share": 2.37
-          },
-          {
             "opening": "fast_castle",
             "share": 2.34
+          },
+          {
+            "opening": "trash",
+            "share": 1.91
           }
         ],
         "ageUp": {
@@ -8602,12 +8602,12 @@
             "share": 5.31
           },
           {
-            "opening": "unknown",
-            "share": 4.34
-          },
-          {
             "opening": "man_at_arms",
             "share": 1.55
+          },
+          {
+            "opening": "trash",
+            "share": 1.24
           }
         ],
         "ageUp": {
@@ -9003,8 +9003,8 @@
             "share": 2.43
           },
           {
-            "opening": "unknown",
-            "share": 2.31
+            "opening": "fast_castle",
+            "share": 1.41
           }
         ],
         "ageUp": {
@@ -9390,16 +9390,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 4.21
-          },
-          {
             "opening": "fast_castle",
             "share": 3.22
           },
           {
             "opening": "archers",
             "share": 2.3
+          },
+          {
+            "opening": "trash",
+            "share": 0.9
           }
         ],
         "ageUp": {
@@ -9411,7 +9411,7 @@
     },
     "cumans": {
       "1v1": {
-        "games": 830885,
+        "games": 830886,
         "winRate": 49.86,
         "ci95": [
           49.75,
@@ -9515,8 +9515,8 @@
             "winRate": 55.51
           },
           "2500+": {
-            "games": 1313,
-            "winRate": 60.17
+            "games": 1314,
+            "winRate": 60.12
           },
           "<1000": {
             "games": 363406,
@@ -9541,7 +9541,7 @@
             "winRate": 48.44
           },
           "arabia": {
-            "games": 349246,
+            "games": 349247,
             "winRate": 49.32
           },
           "arena": {
@@ -9787,16 +9787,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 4.7
-          },
-          {
             "opening": "scouts",
             "share": 3.32
           },
           {
             "opening": "trash",
             "share": 2.36
+          },
+          {
+            "opening": "archers",
+            "share": 2.11
           }
         ],
         "ageUp": {
@@ -9806,7 +9806,7 @@
         }
       },
       "team": {
-        "games": 1704921,
+        "games": 1704922,
         "winRate": 51.66,
         "ci95": [
           51.59,
@@ -9996,7 +9996,7 @@
             "winRate": 51.49
           },
           "glade": {
-            "games": 7293,
+            "games": 7294,
             "winRate": 53.26
           },
           "goldenpit": {
@@ -10186,16 +10186,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 7.03
-          },
-          {
             "opening": "scouts",
             "share": 1.9
           },
           {
             "opening": "fast_castle",
             "share": 1.62
+          },
+          {
+            "opening": "trash",
+            "share": 1.14
           }
         ],
         "ageUp": {
@@ -10587,8 +10587,8 @@
             "share": 3.51
           },
           {
-            "opening": "unknown",
-            "share": 1.56
+            "opening": "fast_castle",
+            "share": 1.41
           }
         ],
         "ageUp": {
@@ -10966,12 +10966,12 @@
             "share": 3.48
           },
           {
-            "opening": "unknown",
-            "share": 2.49
-          },
-          {
             "opening": "archers",
             "share": 1.98
+          },
+          {
+            "opening": "fires",
+            "share": 1.76
           }
         ],
         "ageUp": {
@@ -11386,7 +11386,7 @@
         }
       },
       "team": {
-        "games": 2079593,
+        "games": 2079594,
         "winRate": 50.88,
         "ci95": [
           50.81,
@@ -11504,7 +11504,7 @@
             "winRate": 50.67
           },
           "arabia": {
-            "games": 601173,
+            "games": 601174,
             "winRate": 52.71
           },
           "archipelago": {
@@ -11774,8 +11774,8 @@
             "share": 3.49
           },
           {
-            "opening": "unknown",
-            "share": 2.37
+            "opening": "trash",
+            "share": 0.57
           }
         ],
         "ageUp": {
@@ -11787,7 +11787,7 @@
     },
     "franks": {
       "1v1": {
-        "games": 2111939,
+        "games": 2111940,
         "winRate": 51.14,
         "ci95": [
           51.07,
@@ -11891,8 +11891,8 @@
             "winRate": 57.01
           },
           "2500+": {
-            "games": 1292,
-            "winRate": 65.33
+            "games": 1293,
+            "winRate": 65.27
           },
           "<1000": {
             "games": 1145882,
@@ -11921,7 +11921,7 @@
             "winRate": 48.74
           },
           "arabia": {
-            "games": 1174294,
+            "games": 1174295,
             "winRate": 52.82
           },
           "archipelago": {
@@ -12203,8 +12203,8 @@
             "share": 3.04
           },
           {
-            "opening": "unknown",
-            "share": 2.94
+            "opening": "trash",
+            "share": 1.82
           }
         ],
         "ageUp": {
@@ -12606,12 +12606,12 @@
             "share": 5.89
           },
           {
-            "opening": "unknown",
-            "share": 4.35
-          },
-          {
             "opening": "scouts",
             "share": 4.1
+          },
+          {
+            "opening": "trash",
+            "share": 0.98
           }
         ],
         "ageUp": {
@@ -12943,8 +12943,8 @@
             "share": 0.15
           },
           {
-            "opening": "unknown",
-            "share": 0.14
+            "opening": "trash",
+            "share": 0.11
           }
         ],
         "ageUp": {
@@ -13294,12 +13294,12 @@
             "share": 0.48
           },
           {
-            "opening": "unknown",
-            "share": 0.36
-          },
-          {
             "opening": "scouts",
             "share": 0.21
+          },
+          {
+            "opening": "trash",
+            "share": 0.07
           }
         ],
         "ageUp": {
@@ -13703,8 +13703,8 @@
             "share": 2.76
           },
           {
-            "opening": "unknown",
-            "share": 2.49
+            "opening": "trash",
+            "share": 1.89
           }
         ],
         "ageUp": {
@@ -14098,12 +14098,12 @@
             "share": 6.49
           },
           {
-            "opening": "unknown",
-            "share": 4.38
-          },
-          {
             "opening": "man_at_arms",
             "share": 2.79
+          },
+          {
+            "opening": "trash",
+            "share": 1.46
           }
         ],
         "ageUp": {
@@ -14475,8 +14475,8 @@
             "share": 2.73
           },
           {
-            "opening": "unknown",
-            "share": 2.58
+            "opening": "fast_castle",
+            "share": 2.52
           }
         ],
         "ageUp": {
@@ -14850,12 +14850,12 @@
             "share": 5.97
           },
           {
-            "opening": "unknown",
-            "share": 3.94
-          },
-          {
             "opening": "scouts",
             "share": 2.4
+          },
+          {
+            "opening": "trash",
+            "share": 0.7
           }
         ],
         "ageUp": {
@@ -14867,7 +14867,7 @@
     },
     "hindustanis": {
       "1v1": {
-        "games": 768620,
+        "games": 768621,
         "winRate": 51.45,
         "ci95": [
           51.34,
@@ -14971,8 +14971,8 @@
             "winRate": 57.61
           },
           "2500+": {
-            "games": 1351,
-            "winRate": 64.4
+            "games": 1352,
+            "winRate": 64.35
           },
           "<1000": {
             "games": 270575,
@@ -14997,7 +14997,7 @@
             "winRate": 46.73
           },
           "arabia": {
-            "games": 424851,
+            "games": 424852,
             "winRate": 52.37
           },
           "arena": {
@@ -15243,12 +15243,12 @@
             "share": 3.39
           },
           {
-            "opening": "unknown",
-            "share": 1.8
-          },
-          {
             "opening": "fast_castle",
             "share": 1.78
+          },
+          {
+            "opening": "archers",
+            "share": 1.54
           }
         ],
         "ageUp": {
@@ -15630,12 +15630,12 @@
             "share": 5.38
           },
           {
-            "opening": "unknown",
-            "share": 3.41
-          },
-          {
             "opening": "scouts",
             "share": 2.23
+          },
+          {
+            "opening": "trash",
+            "share": 0.68
           }
         ],
         "ageUp": {
@@ -15647,7 +15647,7 @@
     },
     "huns": {
       "1v1": {
-        "games": 1076775,
+        "games": 1076776,
         "winRate": 51.54,
         "ci95": [
           51.45,
@@ -15751,8 +15751,8 @@
             "winRate": 58.92
           },
           "2500+": {
-            "games": 1381,
-            "winRate": 67.85
+            "games": 1382,
+            "winRate": 67.87
           },
           "<1000": {
             "games": 498412,
@@ -15777,7 +15777,7 @@
             "winRate": 44.9
           },
           "arabia": {
-            "games": 506240,
+            "games": 506241,
             "winRate": 51.98
           },
           "arena": {
@@ -16043,12 +16043,12 @@
             "share": 4.5
           },
           {
-            "opening": "unknown",
-            "share": 2.32
-          },
-          {
             "opening": "archers",
             "share": 1.98
+          },
+          {
+            "opening": "fast_castle",
+            "share": 1.55
           }
         ],
         "ageUp": {
@@ -16442,16 +16442,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 3.63
-          },
-          {
             "opening": "fast_castle",
             "share": 3.34
           },
           {
             "opening": "scouts",
             "share": 2.46
+          },
+          {
+            "opening": "trash",
+            "share": 0.77
           }
         ],
         "ageUp": {
@@ -16831,8 +16831,8 @@
             "share": 3.61
           },
           {
-            "opening": "unknown",
-            "share": 3.42
+            "opening": "trash",
+            "share": 2.63
           }
         ],
         "ageUp": {
@@ -17206,16 +17206,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 5.78
-          },
-          {
             "opening": "fast_castle",
             "share": 5.51
           },
           {
             "opening": "archers",
             "share": 2.45
+          },
+          {
+            "opening": "trash",
+            "share": 1.87
           }
         ],
         "ageUp": {
@@ -17611,8 +17611,8 @@
             "share": 2.68
           },
           {
-            "opening": "unknown",
-            "share": 2.08
+            "opening": "scouts",
+            "share": 1.59
           }
         ],
         "ageUp": {
@@ -18010,12 +18010,12 @@
             "share": 4.67
           },
           {
-            "opening": "unknown",
-            "share": 3.1
-          },
-          {
             "opening": "archers",
             "share": 1.69
+          },
+          {
+            "opening": "fires",
+            "share": 1.13
           }
         ],
         "ageUp": {
@@ -18027,7 +18027,7 @@
     },
     "japanese": {
       "1v1": {
-        "games": 767993,
+        "games": 767994,
         "winRate": 49.7,
         "ci95": [
           49.59,
@@ -18127,8 +18127,8 @@
             "winRate": 50.73
           },
           "2200-2499": {
-            "games": 4608,
-            "winRate": 52.58
+            "games": 4609,
+            "winRate": 52.59
           },
           "2500+": {
             "games": 1280,
@@ -18157,7 +18157,7 @@
             "winRate": 50.42
           },
           "arabia": {
-            "games": 353637,
+            "games": 353638,
             "winRate": 48.84
           },
           "archipelago": {
@@ -18431,8 +18431,8 @@
             "share": 2.18
           },
           {
-            "opening": "unknown",
-            "share": 2.14
+            "opening": "fast_castle",
+            "share": 1.28
           }
         ],
         "ageUp": {
@@ -18826,16 +18826,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 3.89
-          },
-          {
             "opening": "fast_castle",
             "share": 3.34
           },
           {
             "opening": "man_at_arms",
             "share": 2.13
+          },
+          {
+            "opening": "archers",
+            "share": 1.37
           }
         ],
         "ageUp": {
@@ -19185,7 +19185,7 @@
     },
     "khitans": {
       "1v1": {
-        "games": 123171,
+        "games": 123172,
         "winRate": 57.29,
         "ci95": [
           57.01,
@@ -19229,8 +19229,8 @@
             "winRate": 61.46
           },
           "2200-2499": {
-            "games": 883,
-            "winRate": 61.49
+            "games": 884,
+            "winRate": 61.43
           },
           "2500+": {
             "games": 296,
@@ -19247,7 +19247,7 @@
             "winRate": 57.05
           },
           "arabia": {
-            "games": 71800,
+            "games": 71801,
             "winRate": 58.58
           },
           "arena": {
@@ -19347,7 +19347,12 @@
             "winRate": 48.89
           }
         },
-        "openings": [],
+        "openings": [
+          {
+            "opening": "man_at_arms",
+            "share": 0.0
+          }
+        ],
         "ageUp": null
       },
       "team": {
@@ -19531,7 +19536,7 @@
     },
     "khmer": {
       "1v1": {
-        "games": 1142067,
+        "games": 1142068,
         "winRate": 48.94,
         "ci95": [
           48.84,
@@ -19627,8 +19632,8 @@
             "winRate": 55.19
           },
           "2000-2199": {
-            "games": 7327,
-            "winRate": 55.21
+            "games": 7328,
+            "winRate": 55.2
           },
           "2200-2499": {
             "games": 4728,
@@ -19661,7 +19666,7 @@
             "winRate": 48.78
           },
           "arabia": {
-            "games": 493972,
+            "games": 493973,
             "winRate": 48.87
           },
           "archipelago": {
@@ -19931,8 +19936,8 @@
             "share": 3.94
           },
           {
-            "opening": "unknown",
-            "share": 2.43
+            "opening": "archers",
+            "share": 1.9
           }
         ],
         "ageUp": {
@@ -20330,12 +20335,12 @@
             "share": 5.68
           },
           {
-            "opening": "unknown",
-            "share": 4.55
-          },
-          {
             "opening": "scouts",
             "share": 1.76
+          },
+          {
+            "opening": "trash",
+            "share": 0.58
           }
         ],
         "ageUp": {
@@ -20719,12 +20724,12 @@
             "share": 4.47
           },
           {
-            "opening": "unknown",
-            "share": 2.15
-          },
-          {
             "opening": "fast_castle",
             "share": 1.6
+          },
+          {
+            "opening": "man_at_arms",
+            "share": 1.39
           }
         ],
         "ageUp": {
@@ -21114,12 +21119,12 @@
             "share": 4.33
           },
           {
-            "opening": "unknown",
-            "share": 3.19
-          },
-          {
             "opening": "archers",
             "share": 2.04
+          },
+          {
+            "opening": "towers",
+            "share": 0.91
           }
         ],
         "ageUp": {
@@ -21131,7 +21136,7 @@
     },
     "lithuanians": {
       "1v1": {
-        "games": 1077733,
+        "games": 1077734,
         "winRate": 50.24,
         "ci95": [
           50.14,
@@ -21231,8 +21236,8 @@
             "winRate": 52.34
           },
           "2200-2499": {
-            "games": 4425,
-            "winRate": 54.64
+            "games": 4426,
+            "winRate": 54.63
           },
           "2500+": {
             "games": 1357,
@@ -21261,7 +21266,7 @@
             "winRate": 51.2
           },
           "arabia": {
-            "games": 549153,
+            "games": 549154,
             "winRate": 50.9
           },
           "arena": {
@@ -21523,8 +21528,8 @@
             "share": 2.86
           },
           {
-            "opening": "unknown",
-            "share": 2.74
+            "opening": "trash",
+            "share": 2.24
           }
         ],
         "ageUp": {
@@ -21914,12 +21919,12 @@
             "share": 6.14
           },
           {
-            "opening": "unknown",
-            "share": 3.99
-          },
-          {
             "opening": "scouts",
             "share": 3.19
+          },
+          {
+            "opening": "trash",
+            "share": 1.01
           }
         ],
         "ageUp": {
@@ -22331,12 +22336,12 @@
             "share": 8.15
           },
           {
-            "opening": "unknown",
-            "share": 1.85
-          },
-          {
             "opening": "archers",
             "share": 1.31
+          },
+          {
+            "opening": "fast_castle",
+            "share": 0.96
           }
         ],
         "ageUp": {
@@ -22346,7 +22351,7 @@
         }
       },
       "team": {
-        "games": 1684676,
+        "games": 1684679,
         "winRate": 50.58,
         "ci95": [
           50.5,
@@ -22430,7 +22435,7 @@
             "winRate": 52.95
           },
           "1400-1649": {
-            "games": 184560,
+            "games": 184561,
             "winRate": 56.11
           },
           "1650-1799": {
@@ -22464,7 +22469,7 @@
             "winRate": 49.3
           },
           "arabia": {
-            "games": 456878,
+            "games": 456880,
             "winRate": 52.39
           },
           "archipelago": {
@@ -22540,8 +22545,8 @@
             "winRate": 51.83
           },
           "glade": {
-            "games": 5579,
-            "winRate": 48.77
+            "games": 5580,
+            "winRate": 48.76
           },
           "goldenpit": {
             "games": 16596,
@@ -22734,12 +22739,12 @@
             "share": 6.48
           },
           {
-            "opening": "unknown",
-            "share": 2.78
-          },
-          {
             "opening": "fast_castle",
             "share": 2.54
+          },
+          {
+            "opening": "trash",
+            "share": 0.52
           }
         ],
         "ageUp": {
@@ -23135,8 +23140,8 @@
             "share": 3.38
           },
           {
-            "opening": "unknown",
-            "share": 2.22
+            "opening": "man_at_arms",
+            "share": 1.88
           }
         ],
         "ageUp": {
@@ -23530,12 +23535,12 @@
             "share": 5.23
           },
           {
-            "opening": "unknown",
-            "share": 3.2
-          },
-          {
             "opening": "archers",
             "share": 1.4
+          },
+          {
+            "opening": "fires",
+            "share": 1.18
           }
         ],
         "ageUp": {
@@ -24298,12 +24303,12 @@
             "share": 4.8
           },
           {
-            "opening": "unknown",
-            "share": 3.51
-          },
-          {
             "opening": "scouts",
             "share": 1.94
+          },
+          {
+            "opening": "archers",
+            "share": 1.58
           }
         ],
         "ageUp": {
@@ -24319,7 +24324,7 @@
     },
     "mayans": {
       "1v1": {
-        "games": 845877,
+        "games": 845878,
         "winRate": 48.6,
         "ci95": [
           48.49,
@@ -24419,8 +24424,8 @@
             "winRate": 57.6
           },
           "2200-2499": {
-            "games": 4564,
-            "winRate": 58.19
+            "games": 4565,
+            "winRate": 58.2
           },
           "2500+": {
             "games": 1359,
@@ -24449,7 +24454,7 @@
             "winRate": 51.26
           },
           "arabia": {
-            "games": 513489,
+            "games": 513490,
             "winRate": 49.62
           },
           "arena": {
@@ -24695,12 +24700,12 @@
             "share": 8.48
           },
           {
-            "opening": "unknown",
-            "share": 2.23
-          },
-          {
             "opening": "man_at_arms",
             "share": 1.68
+          },
+          {
+            "opening": "fast_castle",
+            "share": 1.66
           }
         ],
         "ageUp": {
@@ -24710,7 +24715,7 @@
         }
       },
       "team": {
-        "games": 1489592,
+        "games": 1489594,
         "winRate": 50.01,
         "ci95": [
           49.93,
@@ -24828,7 +24833,7 @@
             "winRate": 46.75
           },
           "arabia": {
-            "games": 389063,
+            "games": 389065,
             "winRate": 51.88
           },
           "arena": {
@@ -25086,8 +25091,8 @@
             "share": 3.74
           },
           {
-            "opening": "unknown",
-            "share": 3.22
+            "opening": "trash",
+            "share": 0.83
           }
         ],
         "ageUp": {
@@ -25510,11 +25515,11 @@
         }
       },
       "team": {
-        "games": 3344991,
+        "games": 3344992,
         "winRate": 50.58,
         "ci95": [
           50.53,
-          50.64
+          50.63
         ],
         "playRate": 4.7,
         "tier": "B",
@@ -25704,8 +25709,8 @@
             "winRate": 51.58
           },
           "glade": {
-            "games": 10219,
-            "winRate": 48.61
+            "games": 10220,
+            "winRate": 48.6
           },
           "goldenpit": {
             "games": 18127,
@@ -25902,12 +25907,12 @@
             "share": 5.46
           },
           {
-            "opening": "unknown",
-            "share": 2.99
-          },
-          {
             "opening": "scouts",
             "share": 2.72
+          },
+          {
+            "opening": "archers",
+            "share": 0.93
           }
         ],
         "ageUp": {
@@ -26319,12 +26324,12 @@
             "share": 2.25
           },
           {
-            "opening": "unknown",
-            "share": 2.11
-          },
-          {
             "opening": "fast_castle",
             "share": 1.14
+          },
+          {
+            "opening": "archers",
+            "share": 0.97
           }
         ],
         "ageUp": {
@@ -26334,7 +26339,7 @@
         }
       },
       "team": {
-        "games": 3422596,
+        "games": 3422597,
         "winRate": 51.0,
         "ci95": [
           50.94,
@@ -26452,7 +26457,7 @@
             "winRate": 52.96
           },
           "arabia": {
-            "games": 380133,
+            "games": 380134,
             "winRate": 50.78
           },
           "archipelago": {
@@ -26718,16 +26723,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 2.87
-          },
-          {
             "opening": "fast_castle",
             "share": 2.67
           },
           {
             "opening": "scouts",
             "share": 1.15
+          },
+          {
+            "opening": "fires",
+            "share": 0.64
           }
         ],
         "ageUp": {
@@ -26739,7 +26744,7 @@
     },
     "poles": {
       "1v1": {
-        "games": 629834,
+        "games": 629835,
         "winRate": 48.7,
         "ci95": [
           48.57,
@@ -26843,8 +26848,8 @@
             "winRate": 51.82
           },
           "2500+": {
-            "games": 1205,
-            "winRate": 66.56
+            "games": 1206,
+            "winRate": 66.5
           },
           "<1000": {
             "games": 264042,
@@ -26869,7 +26874,7 @@
             "winRate": 52.07
           },
           "arabia": {
-            "games": 261933,
+            "games": 261934,
             "winRate": 46.91
           },
           "arena": {
@@ -27111,8 +27116,8 @@
             "share": 3.64
           },
           {
-            "opening": "unknown",
-            "share": 2.55
+            "opening": "trash",
+            "share": 1.57
           }
         ],
         "ageUp": {
@@ -27122,7 +27127,7 @@
         }
       },
       "team": {
-        "games": 1403917,
+        "games": 1403918,
         "winRate": 50.03,
         "ci95": [
           49.94,
@@ -27210,8 +27215,8 @@
             "winRate": 54.93
           },
           "1650-1799": {
-            "games": 15951,
-            "winRate": 64.13
+            "games": 15952,
+            "winRate": 64.12
           },
           "1800-1999": {
             "games": 4871,
@@ -27308,8 +27313,8 @@
             "winRate": 50.25
           },
           "glade": {
-            "games": 4714,
-            "winRate": 51.51
+            "games": 4715,
+            "winRate": 51.5
           },
           "goldenpit": {
             "games": 9673,
@@ -27494,12 +27499,12 @@
             "share": 6.76
           },
           {
-            "opening": "unknown",
-            "share": 4.09
-          },
-          {
             "opening": "scouts",
             "share": 2.28
+          },
+          {
+            "opening": "trash",
+            "share": 0.8
           }
         ],
         "ageUp": {
@@ -27899,8 +27904,8 @@
             "share": 3.76
           },
           {
-            "opening": "unknown",
-            "share": 2.66
+            "opening": "scouts",
+            "share": 1.83
           }
         ],
         "ageUp": {
@@ -28298,12 +28303,12 @@
             "share": 6.52
           },
           {
-            "opening": "unknown",
-            "share": 4.09
-          },
-          {
             "opening": "archers",
             "share": 1.46
+          },
+          {
+            "opening": "trash",
+            "share": 0.86
           }
         ],
         "ageUp": {
@@ -28319,7 +28324,7 @@
     },
     "romans": {
       "1v1": {
-        "games": 519725,
+        "games": 519726,
         "winRate": 53.3,
         "ci95": [
           53.17,
@@ -28411,8 +28416,8 @@
             "winRate": 57.28
           },
           "2500+": {
-            "games": 1212,
-            "winRate": 66.83
+            "games": 1213,
+            "winRate": 66.86
           },
           "<1000": {
             "games": 245600,
@@ -28433,7 +28438,7 @@
             "winRate": 50.22
           },
           "arabia": {
-            "games": 222297,
+            "games": 222298,
             "winRate": 52.62
           },
           "arena": {
@@ -28671,8 +28676,8 @@
             "share": 1.99
           },
           {
-            "opening": "unknown",
-            "share": 1.86
+            "opening": "scouts",
+            "share": 1.17
           }
         ],
         "ageUp": {
@@ -29050,12 +29055,12 @@
             "share": 3.81
           },
           {
-            "opening": "unknown",
-            "share": 3.28
-          },
-          {
             "opening": "man_at_arms",
             "share": 2.72
+          },
+          {
+            "opening": "trash",
+            "share": 0.76
           }
         ],
         "ageUp": {
@@ -29443,12 +29448,12 @@
             "share": 5.18
           },
           {
-            "opening": "unknown",
-            "share": 1.84
-          },
-          {
             "opening": "fast_castle",
             "share": 1.8
+          },
+          {
+            "opening": "scouts",
+            "share": 1.51
           }
         ],
         "ageUp": {
@@ -29850,8 +29855,8 @@
             "share": 3.2
           },
           {
-            "opening": "unknown",
-            "share": 2.44
+            "opening": "scouts",
+            "share": 0.76
           }
         ],
         "ageUp": {
@@ -29863,7 +29868,7 @@
     },
     "shu": {
       "1v1": {
-        "games": 83803,
+        "games": 83804,
         "winRate": 52.17,
         "ci95": [
           51.83,
@@ -29919,8 +29924,8 @@
             "winRate": 59.9
           },
           "2500+": {
-            "games": 550,
-            "winRate": 72.91
+            "games": 551,
+            "winRate": 72.96
           },
           "<1000": {
             "games": 23627,
@@ -29937,7 +29942,7 @@
             "winRate": 50.3
           },
           "arabia": {
-            "games": 46021,
+            "games": 46022,
             "winRate": 53.54
           },
           "arena": {
@@ -30073,11 +30078,16 @@
             "winRate": 47.01
           }
         },
-        "openings": [],
+        "openings": [
+          {
+            "opening": "spears",
+            "share": 0.0
+          }
+        ],
         "ageUp": null
       },
       "team": {
-        "games": 148953,
+        "games": 148954,
         "winRate": 50.18,
         "ci95": [
           49.93,
@@ -30147,7 +30157,7 @@
             "winRate": 46.99
           },
           "arabia": {
-            "games": 26534,
+            "games": 26535,
             "winRate": 53.63
           },
           "arena": {
@@ -30299,13 +30309,18 @@
             "winRate": 50.65
           }
         },
-        "openings": [],
+        "openings": [
+          {
+            "opening": "archers",
+            "share": 0.0
+          }
+        ],
         "ageUp": null
       }
     },
     "sicilians": {
       "1v1": {
-        "games": 607635,
+        "games": 607636,
         "winRate": 51.29,
         "ci95": [
           51.16,
@@ -30409,8 +30424,8 @@
             "winRate": 51.71
           },
           "2500+": {
-            "games": 1269,
-            "winRate": 60.6
+            "games": 1270,
+            "winRate": 60.63
           },
           "<1000": {
             "games": 270751,
@@ -30435,7 +30450,7 @@
             "winRate": 48.99
           },
           "arabia": {
-            "games": 286737,
+            "games": 286738,
             "winRate": 50.95
           },
           "arena": {
@@ -30673,16 +30688,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 5.14
-          },
-          {
             "opening": "fast_castle",
             "share": 2.45
           },
           {
             "opening": "scouts",
             "share": 2.23
+          },
+          {
+            "opening": "trash",
+            "share": 1.53
           }
         ],
         "ageUp": {
@@ -31068,16 +31083,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 6.47
-          },
-          {
             "opening": "fast_castle",
             "share": 3.41
           },
           {
             "opening": "scouts",
             "share": 1.06
+          },
+          {
+            "opening": "trash",
+            "share": 0.94
           }
         ],
         "ageUp": {
@@ -31457,8 +31472,8 @@
             "share": 2.89
           },
           {
-            "opening": "unknown",
-            "share": 2.26
+            "opening": "fast_castle",
+            "share": 1.93
           }
         ],
         "ageUp": {
@@ -31836,12 +31851,12 @@
             "share": 5.34
           },
           {
-            "opening": "unknown",
-            "share": 3.99
-          },
-          {
             "opening": "scouts",
             "share": 1.46
+          },
+          {
+            "opening": "man_at_arms",
+            "share": 1.37
           }
         ],
         "ageUp": {
@@ -32257,8 +32272,8 @@
             "share": 2.78
           },
           {
-            "opening": "unknown",
-            "share": 2.69
+            "opening": "trash",
+            "share": 1.61
           }
         ],
         "ageUp": {
@@ -32268,7 +32283,7 @@
         }
       },
       "team": {
-        "games": 2975578,
+        "games": 2975579,
         "winRate": 50.93,
         "ci95": [
           50.87,
@@ -32348,7 +32363,7 @@
             "winRate": 52.18
           },
           "1200-1399": {
-            "games": 609163,
+            "games": 609164,
             "winRate": 53.58
           },
           "1400-1649": {
@@ -32462,8 +32477,8 @@
             "winRate": 47.45
           },
           "glade": {
-            "games": 8186,
-            "winRate": 50.92
+            "games": 8187,
+            "winRate": 50.91
           },
           "goldenpit": {
             "games": 12628,
@@ -32660,12 +32675,12 @@
             "share": 6.12
           },
           {
-            "opening": "unknown",
-            "share": 4.22
-          },
-          {
             "opening": "scouts",
             "share": 1.08
+          },
+          {
+            "opening": "trash",
+            "share": 0.8
           }
         ],
         "ageUp": {
@@ -33045,8 +33060,8 @@
             "share": 3.84
           },
           {
-            "opening": "unknown",
-            "share": 2.13
+            "opening": "fast_castle",
+            "share": 1.84
           }
         ],
         "ageUp": {
@@ -33424,12 +33439,12 @@
             "share": 4.56
           },
           {
-            "opening": "unknown",
-            "share": 3.55
-          },
-          {
             "opening": "scouts",
             "share": 2.12
+          },
+          {
+            "opening": "archers",
+            "share": 1.92
           }
         ],
         "ageUp": {
@@ -33833,16 +33848,16 @@
         },
         "openings": [
           {
-            "opening": "unknown",
-            "share": 3.2
-          },
-          {
             "opening": "scouts",
             "share": 3.03
           },
           {
             "opening": "fast_castle",
             "share": 2.88
+          },
+          {
+            "opening": "trash",
+            "share": 2.08
           }
         ],
         "ageUp": {
@@ -34240,12 +34255,12 @@
             "share": 5.42
           },
           {
-            "opening": "unknown",
-            "share": 5.02
-          },
-          {
             "opening": "scouts",
             "share": 1.29
+          },
+          {
+            "opening": "trash",
+            "share": 1.2
           }
         ],
         "ageUp": {
@@ -34265,7 +34280,7 @@
     },
     "turks": {
       "1v1": {
-        "games": 986060,
+        "games": 986061,
         "winRate": 51.09,
         "ci95": [
           50.99,
@@ -34369,8 +34384,8 @@
             "winRate": 54.51
           },
           "2500+": {
-            "games": 1302,
-            "winRate": 61.44
+            "games": 1303,
+            "winRate": 61.47
           },
           "<1000": {
             "games": 489221,
@@ -34395,7 +34410,7 @@
             "winRate": 53.73
           },
           "arabia": {
-            "games": 276431,
+            "games": 276432,
             "winRate": 45.69
           },
           "arena": {
@@ -34645,8 +34660,8 @@
             "share": 3.83
           },
           {
-            "opening": "unknown",
-            "share": 2.69
+            "opening": "trash",
+            "share": 1.04
           }
         ],
         "ageUp": {
@@ -35036,12 +35051,12 @@
             "share": 7.87
           },
           {
-            "opening": "unknown",
-            "share": 4.29
-          },
-          {
             "opening": "scouts",
             "share": 1.55
+          },
+          {
+            "opening": "trash",
+            "share": 0.57
           }
         ],
         "ageUp": {
@@ -35053,7 +35068,7 @@
     },
     "vietnamese": {
       "1v1": {
-        "games": 834859,
+        "games": 834860,
         "winRate": 47.34,
         "ci95": [
           47.24,
@@ -35157,8 +35172,8 @@
             "winRate": 55.52
           },
           "2500+": {
-            "games": 1296,
-            "winRate": 66.36
+            "games": 1297,
+            "winRate": 66.38
           },
           "<1000": {
             "games": 381263,
@@ -35183,7 +35198,7 @@
             "winRate": 45.71
           },
           "arabia": {
-            "games": 461471,
+            "games": 461472,
             "winRate": 48.13
           },
           "arena": {
@@ -35433,12 +35448,12 @@
             "share": 5.4
           },
           {
-            "opening": "unknown",
-            "share": 1.83
-          },
-          {
             "opening": "fast_castle",
             "share": 1.21
+          },
+          {
+            "opening": "man_at_arms",
+            "share": 1.2
           }
         ],
         "ageUp": {
@@ -35828,12 +35843,12 @@
             "share": 3.65
           },
           {
-            "opening": "unknown",
-            "share": 3.3
-          },
-          {
             "opening": "fast_castle",
             "share": 3.09
+          },
+          {
+            "opening": "trash",
+            "share": 0.82
           }
         ],
         "ageUp": {
@@ -36233,8 +36248,8 @@
             "share": 3.85
           },
           {
-            "opening": "unknown",
-            "share": 2.62
+            "opening": "fast_castle",
+            "share": 2.16
           }
         ],
         "ageUp": {
@@ -36244,7 +36259,7 @@
         }
       },
       "team": {
-        "games": 1174366,
+        "games": 1174367,
         "winRate": 49.97,
         "ci95": [
           49.88,
@@ -36438,8 +36453,8 @@
             "winRate": 49.17
           },
           "glade": {
-            "games": 2654,
-            "winRate": 50.75
+            "games": 2655,
+            "winRate": 50.77
           },
           "goldenpit": {
             "games": 4580,
@@ -36632,12 +36647,12 @@
             "share": 4.58
           },
           {
-            "opening": "unknown",
-            "share": 4.33
-          },
-          {
             "opening": "archers",
             "share": 2.26
+          },
+          {
+            "opening": "galleys",
+            "share": 2.06
           }
         ],
         "ageUp": {
@@ -37103,7 +37118,7 @@
     },
     "wu": {
       "1v1": {
-        "games": 95145,
+        "games": 95146,
         "winRate": 53.67,
         "ci95": [
           53.35,
@@ -37151,8 +37166,8 @@
             "winRate": 56.89
           },
           "2000-2199": {
-            "games": 1631,
-            "winRate": 55.12
+            "games": 1632,
+            "winRate": 55.09
           },
           "2200-2499": {
             "games": 1186,
@@ -37269,8 +37284,8 @@
             "winRate": 55.4
           },
           "megarandom": {
-            "games": 7994,
-            "winRate": 53.77
+            "games": 7995,
+            "winRate": 53.76
           },
           "michi": {
             "games": 202,
@@ -37321,7 +37336,12 @@
             "winRate": 53.99
           }
         },
-        "openings": [],
+        "openings": [
+          {
+            "opening": "man_at_arms",
+            "share": 0.0
+          }
+        ],
         "ageUp": null
       },
       "team": {

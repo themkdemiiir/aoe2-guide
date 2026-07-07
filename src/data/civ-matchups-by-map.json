@@ -1,6 +1,6 @@
 {
   "source": "aoestats.io ranked archive (all-time, 2022-08 onward) — PostgreSQL pipeline via the dbt matchups_* models",
-  "generated": "2026-07-06",
+  "generated": "2026-07-07",
   "ladder": "1v1",
   "minGames": 50,
   "note": "winRate = how often <civ> beats <opp> on <map> in 1v1 RM. Mirrors excluded.",
@@ -8317,14 +8317,14 @@
           "winRate": 38.92
         },
         {
+          "opp": "wu",
+          "games": 129,
+          "winRate": 38.76
+        },
+        {
           "opp": "wei",
           "games": 106,
           "winRate": 38.68
-        },
-        {
-          "opp": "wu",
-          "games": 128,
-          "winRate": 38.28
         }
       ],
       "migration": [
@@ -9931,8 +9931,8 @@
         },
         {
           "opp": "vietnamese",
-          "games": 3577,
-          "winRate": 47.25
+          "games": 3578,
+          "winRate": 47.23
         },
         {
           "opp": "romans",
@@ -9996,8 +9996,8 @@
         },
         {
           "opp": "khmer",
-          "games": 3893,
-          "winRate": 44.21
+          "games": 3894,
+          "winRate": 44.22
         },
         {
           "opp": "berbers",
@@ -12945,8 +12945,8 @@
         },
         {
           "opp": "mayans",
-          "games": 10246,
-          "winRate": 50.52
+          "games": 10247,
+          "winRate": 50.51
         },
         {
           "opp": "lithuanians",
@@ -64702,8 +64702,8 @@
         },
         {
           "opp": "sicilians",
-          "games": 5524,
-          "winRate": 46.33
+          "games": 5525,
+          "winRate": 46.32
         },
         {
           "opp": "incas",
@@ -81096,7 +81096,7 @@
       "arabia": [
         {
           "opp": "turks",
-          "games": 17876,
+          "games": 17877,
           "winRate": 58.93
         },
         {
@@ -105447,8 +105447,8 @@
         },
         {
           "opp": "romans",
-          "games": 5085,
-          "winRate": 43.42
+          "games": 5086,
+          "winRate": 43.41
         },
         {
           "opp": "wu",
@@ -111085,8 +111085,8 @@
         },
         {
           "opp": "khitans",
-          "games": 1842,
-          "winRate": 43.54
+          "games": 1843,
+          "winRate": 43.57
         },
         {
           "opp": "wu",
@@ -129686,8 +129686,8 @@
         },
         {
           "opp": "lithuanians",
-          "games": 10393,
-          "winRate": 49.26
+          "games": 10394,
+          "winRate": 49.27
         },
         {
           "opp": "malay",
@@ -137271,8 +137271,8 @@
         },
         {
           "opp": "huns",
-          "games": 1842,
-          "winRate": 56.46
+          "games": 1843,
+          "winRate": 56.43
         },
         {
           "opp": "hindustanis",
@@ -139216,8 +139216,8 @@
         },
         {
           "opp": "bengalis",
-          "games": 3893,
-          "winRate": 55.79
+          "games": 3894,
+          "winRate": 55.78
         },
         {
           "opp": "vietnamese",
@@ -152279,8 +152279,8 @@
         },
         {
           "opp": "japanese",
-          "games": 10393,
-          "winRate": 50.74
+          "games": 10394,
+          "winRate": 50.73
         },
         {
           "opp": "cumans",
@@ -177918,8 +177918,8 @@
         },
         {
           "opp": "berbers",
-          "games": 10246,
-          "winRate": 49.48
+          "games": 10247,
+          "winRate": 49.49
         },
         {
           "opp": "dravidians",
@@ -201216,11 +201216,6 @@
           "winRate": 46.61
         },
         {
-          "opp": "shu",
-          "games": 658,
-          "winRate": 46.5
-        },
-        {
           "opp": "saracens",
           "games": 4812,
           "winRate": 46.47
@@ -201229,6 +201224,11 @@
           "opp": "slavs",
           "games": 4244,
           "winRate": 46.47
+        },
+        {
+          "opp": "shu",
+          "games": 659,
+          "winRate": 46.43
         },
         {
           "opp": "ethiopians",
@@ -213249,8 +213249,8 @@
         },
         {
           "opp": "hindustanis",
-          "games": 5085,
-          "winRate": 56.58
+          "games": 5086,
+          "winRate": 56.59
         },
         {
           "opp": "wei",
@@ -223728,8 +223728,8 @@
         },
         {
           "opp": "poles",
-          "games": 658,
-          "winRate": 53.5
+          "games": 659,
+          "winRate": 53.57
         },
         {
           "opp": "teutons",
@@ -225026,8 +225026,8 @@
         },
         {
           "opp": "cumans",
-          "games": 5524,
-          "winRate": 53.67
+          "games": 5525,
+          "winRate": 53.68
         },
         {
           "opp": "chinese",
@@ -255428,8 +255428,8 @@
         },
         {
           "opp": "franks",
-          "games": 17876,
-          "winRate": 41.07
+          "games": 17877,
+          "winRate": 41.08
         },
         {
           "opp": "berbers",
@@ -261183,8 +261183,8 @@
         },
         {
           "opp": "bengalis",
-          "games": 3577,
-          "winRate": 52.73
+          "games": 3578,
+          "winRate": 52.74
         },
         {
           "opp": "ethiopians",
@@ -275241,8 +275241,8 @@
         },
         {
           "opp": "aztecs",
-          "games": 128,
-          "winRate": 61.72
+          "games": 129,
+          "winRate": 61.24
         },
         {
           "opp": "koreans",

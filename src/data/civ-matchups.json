@@ -1,6 +1,6 @@
 {
   "source": "aoestats.io ranked archive (all-time, 2022-08 onward) — PostgreSQL pipeline via the dbt matchups_* models",
-  "generated": "2026-07-06",
+  "generated": "2026-07-07",
   "ladder": "1v1",
   "minGames": 50,
   "note": "winRate = how often <civ> beats <opp> in 1v1 RM. Mirrors excluded.",
@@ -465,8 +465,8 @@
       },
       {
         "opp": "wu",
-        "games": 1491,
-        "winRate": 43.46
+        "games": 1492,
+        "winRate": 43.5
       },
       {
         "opp": "sicilians",
@@ -622,8 +622,8 @@
       },
       {
         "opp": "vietnamese",
-        "games": 6453,
-        "winRate": 48.94
+        "games": 6454,
+        "winRate": 48.93
       },
       {
         "opp": "sicilians",
@@ -652,7 +652,7 @@
       },
       {
         "opp": "khmer",
-        "games": 8536,
+        "games": 8537,
         "winRate": 47.86
       },
       {
@@ -869,7 +869,7 @@
       },
       {
         "opp": "mayans",
-        "games": 15284,
+        "games": 15285,
         "winRate": 50.47
       },
       {
@@ -3187,8 +3187,8 @@
       },
       {
         "opp": "sicilians",
-        "games": 13590,
-        "winRate": 46.22
+        "games": 13591,
+        "winRate": 46.21
       },
       {
         "opp": "incas",
@@ -3838,7 +3838,7 @@
       },
       {
         "opp": "turks",
-        "games": 53515,
+        "games": 53516,
         "winRate": 51.07
       },
       {
@@ -4936,8 +4936,8 @@
       },
       {
         "opp": "romans",
-        "games": 10330,
-        "winRate": 43.48
+        "games": 10331,
+        "winRate": 43.47
       },
       {
         "opp": "wu",
@@ -5183,8 +5183,8 @@
       },
       {
         "opp": "khitans",
-        "games": 3253,
-        "winRate": 44.67
+        "games": 3254,
+        "winRate": 44.68
       },
       {
         "opp": "wu",
@@ -5794,7 +5794,7 @@
       },
       {
         "opp": "lithuanians",
-        "games": 22754,
+        "games": 22755,
         "winRate": 50.57
       },
       {
@@ -6378,8 +6378,8 @@
       },
       {
         "opp": "huns",
-        "games": 3253,
-        "winRate": 55.3
+        "games": 3254,
+        "winRate": 55.29
       },
       {
         "opp": "wu",
@@ -6480,7 +6480,7 @@
       },
       {
         "opp": "bengalis",
-        "games": 8536,
+        "games": 8537,
         "winRate": 52.14
       },
       {
@@ -7069,7 +7069,7 @@
       },
       {
         "opp": "japanese",
-        "games": 22754,
+        "games": 22755,
         "winRate": 49.43
       },
       {
@@ -7997,7 +7997,7 @@
       },
       {
         "opp": "berbers",
-        "games": 15284,
+        "games": 15285,
         "winRate": 49.53
       },
       {
@@ -8773,8 +8773,8 @@
       },
       {
         "opp": "shu",
-        "games": 1352,
-        "winRate": 48.82
+        "games": 1353,
+        "winRate": 48.78
       },
       {
         "opp": "slavs",
@@ -9182,8 +9182,8 @@
       },
       {
         "opp": "hindustanis",
-        "games": 10330,
-        "winRate": 56.52
+        "games": 10331,
+        "winRate": 56.53
       },
       {
         "opp": "wei",
@@ -9806,8 +9806,8 @@
       },
       {
         "opp": "poles",
-        "games": 1352,
-        "winRate": 51.18
+        "games": 1353,
+        "winRate": 51.22
       },
       {
         "opp": "slavs",
@@ -9938,8 +9938,8 @@
       },
       {
         "opp": "cumans",
-        "games": 13590,
-        "winRate": 53.77
+        "games": 13591,
+        "winRate": 53.78
       },
       {
         "opp": "tatars",
@@ -11308,8 +11308,8 @@
       },
       {
         "opp": "franks",
-        "games": 53515,
-        "winRate": 48.92
+        "games": 53516,
+        "winRate": 48.93
       },
       {
         "opp": "sicilians",
@@ -11410,7 +11410,7 @@
       },
       {
         "opp": "bengalis",
-        "games": 6453,
+        "games": 6454,
         "winRate": 51.05
       },
       {
@@ -12176,8 +12176,8 @@
       },
       {
         "opp": "aztecs",
-        "games": 1491,
-        "winRate": 56.54
+        "games": 1492,
+        "winRate": 56.5
       },
       {
         "opp": "huns",
