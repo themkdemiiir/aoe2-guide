@@ -14,11 +14,12 @@
 
 use std::path::PathBuf;
 use std::sync::Arc;
+use std::time::Duration;
 
 use anyhow::Context;
 use clap::{Parser, Subcommand};
 use fetch::{FetchClient, SqliteManifest};
-use pipeline::{CrawlConfig, FetchSource, PgSink};
+use pipeline::{CrawlConfig, FetchSource, ImportShardsConfig, PgSink};
 use pipeline_core::cli::{database_url, init_tracing, log_error_and_code};
 use pipeline_core::{redact_secret, ProfileId};
 use tokio_postgres::NoTls;
@@ -58,6 +59,10 @@ enum Command {
     /// re-usable by a (possibly improved) parser. Parse-and-count ONLY — never re-ingests into
     /// Postgres and never reads `DATABASE_URL` (see `pipeline::reparse_dir`'s doc for the scope).
     Reparse(ReparseArgs),
+    /// Migrate the OLD parsed-replay shard corpus into the live Postgres pipeline as
+    /// `source='replay'`, re-deriving the full enrichment. See `pipeline::import_shards`'s module
+    /// doc for the full design.
+    ImportShards(ImportShardsArgs),
 }
 
 #[derive(clap::Args)]
@@ -114,6 +119,45 @@ struct ReparseArgs {
     limit: usize,
 }
 
+/// Default shard directory — matches the OLD `scripts/data-pipeline/replay-rs` extractor's
+/// output location (see `pipeline::import_shards`'s module doc).
+const DEFAULT_SHARDS_DIR: &str = "data-cache/replays/shards";
+
+#[derive(clap::Args)]
+struct ImportShardsArgs {
+    /// Directory containing `{meta,players,events,ages}.ndjson.gz`.
+    #[arg(long, default_value = DEFAULT_SHARDS_DIR)]
+    shards_dir: PathBuf,
+
+    /// Path to the read-only DuckDB snapshot carrying `games` (played_at/ladder/rating per
+    /// (match_id, profile_id)) — the seed data the shards themselves don't carry.
+    #[arg(long)]
+    duckdb: PathBuf,
+
+    /// Path to the `duckdb` CLI binary (not always on `PATH` — e.g. `~/bin/duckdb`).
+    #[arg(long, default_value = "duckdb")]
+    duckdb_bin: PathBuf,
+
+    /// Stop after this many `meta` rows (file order). 0 = every match_id in `meta` — see
+    /// `pipeline::import_shards`'s module doc for why that PHASE 2 mode isn't recommended without
+    /// the staging rework it describes.
+    #[arg(long, default_value_t = 200)]
+    limit: usize,
+
+    /// Matches per `ingest_batch` transaction.
+    #[arg(long, default_value_t = 25)]
+    batch_size: usize,
+
+    /// A batch taking longer than this many seconds is treated as a load-safety signal — pause
+    /// `--pause-secs` before the next one.
+    #[arg(long, default_value_t = 5)]
+    slow_batch_secs: u64,
+
+    /// How long to pause (seconds) after a slow batch — see `--slow-batch-secs`.
+    #[arg(long, default_value_t = 3)]
+    pause_secs: u64,
+}
+
 #[tokio::main]
 async fn main() {
     init_tracing(DEFAULT_LOG_FILTER);
@@ -134,6 +178,7 @@ async fn main() {
                 std::process::exit(1);
             }
         }
+        Command::ImportShards(args) => run_import_shards_command(args).await,
     }
 }
 
@@ -271,5 +316,50 @@ async fn run_live(args: CrawlArgs, database_url: &str) -> anyhow::Result<()> {
         raw_bytes_written = summary.raw_bytes_written,
         "crawl complete"
     );
+    Ok(())
+}
+
+async fn run_import_shards_command(args: ImportShardsArgs) {
+    let secret = match database_url() {
+        Ok(secret) => secret,
+        Err(err) => {
+            tracing::error!(error = %err, "failed to read DATABASE_URL");
+            std::process::exit(1);
+        }
+    };
+
+    if let Err(err) = run_import_shards(args, secret.expose()).await {
+        std::process::exit(log_error_and_code(&err, &secret));
+    }
+}
+
+async fn run_import_shards(args: ImportShardsArgs, database_url: &str) -> anyhow::Result<()> {
+    let (mut client, connection) = tokio_postgres::connect(database_url, NoTls)
+        .await
+        .context("failed to connect to the database")?;
+
+    let database_url_for_log = database_url.to_owned();
+    tokio::spawn(async move {
+        if let Err(err) = connection.await {
+            let message = redact_secret(&format!("{err:#}"), &database_url_for_log);
+            tracing::error!(error = %message, "database connection closed with an error");
+        }
+    });
+
+    let cfg = ImportShardsConfig {
+        shards_dir: args.shards_dir,
+        duckdb_path: args.duckdb,
+        duckdb_bin: args.duckdb_bin,
+        limit: args.limit,
+        batch_size: args.batch_size.max(1),
+        slow_batch: Duration::from_secs(args.slow_batch_secs),
+        pause: Duration::from_secs(args.pause_secs),
+    };
+
+    let summary = pipeline::import_shards(&cfg, &mut client)
+        .await
+        .context("import_shards failed")?;
+
+    tracing::info!(?summary, "import-shards complete");
     Ok(())
 }

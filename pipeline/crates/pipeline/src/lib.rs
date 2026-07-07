@@ -17,10 +17,16 @@
 //! It also ships the raw-replay archive ([`raw`]) [`crawl`] writes every downloaded
 //! `.aoe2record` into (even ones that fail to parse), and [`reparse`], a `pipeline reparse` entry
 //! point that reads that archive back and proves it re-usable — see each module's doc.
+//!
+//! Finally, [`import_shards`] is the `pipeline import-shards` one-time migration of the OLD
+//! `scripts/data-pipeline/replay-rs`-extracted shard corpus into this same live schema (also
+//! `source='replay'`), reusing [`to_batch`]/`ingest_batch` exactly like [`crawl`] does — see that
+//! module's doc for the full design.
 
 mod compose;
 mod crawl;
 mod error;
+mod import_shards;
 mod raw;
 mod reparse;
 mod sink;
@@ -29,6 +35,7 @@ mod source;
 pub use compose::to_batch;
 pub use crawl::{crawl, CrawlConfig, CrawlError, CrawlSummary};
 pub use error::{Error, Result};
+pub use import_shards::{import_shards, ImportShardsConfig, ImportShardsSummary};
 pub use raw::{RawArchive, SaveOutcome};
 pub use reparse::{reparse_dir, ReparseSummary};
 pub use sink::{IngestSink, PgSink};

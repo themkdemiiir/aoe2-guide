@@ -43,6 +43,15 @@ zstd = { workspace = true }
 # `raw`'s write-then-verify step hashes both the original bytes and the read-back-decompressed
 # copy before trusting a fresh save (see `raw`'s "Integrity" doc section).
 sha2 = { workspace = true }
+# `import_shards`: the OLD shard corpus (`data-cache/replays/shards/*.ndjson.gz`) is a
+# MULTI-MEMBER gzip stream with a corrupt/partial trailing member (an interrupted extraction run)
+# — `MultiGzDecoder` decodes every complete member and errors only on that last one, which
+# `import_shards::scan_ndjson_gz` treats as "stop, keep the valid prefix" (see its module doc).
+flate2 = { workspace = true }
+serde = { workspace = true }
+# Both the shard NDJSON rows AND the `duckdb -json` seed-query output are parsed with this —
+# `import_shards` never shells out to a CSV parser or hand-rolls JSON.
+serde_json = { workspace = true }
 
 [dev-dependencies]
 # Test fixtures build `DiscoverySeed.played_at` (`DateTime<Utc>`) directly, and the run-loop
