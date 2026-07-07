@@ -122,6 +122,8 @@ struct ReparseArgs {
 /// Default shard directory — matches the OLD `scripts/data-pipeline/replay-rs` extractor's
 /// output location (see `pipeline::import_shards`'s module doc).
 const DEFAULT_SHARDS_DIR: &str = "data-cache/replays/shards";
+/// Default scratch dir for the decompressed shards + staging DuckDB + per-chunk temp + cursor.
+const DEFAULT_WORK_DIR: &str = "data-cache/replays/shard-staging";
 
 #[derive(clap::Args)]
 struct ImportShardsArgs {
@@ -132,30 +134,41 @@ struct ImportShardsArgs {
     /// Path to the read-only DuckDB snapshot carrying `games` (played_at/ladder/rating per
     /// (match_id, profile_id)) — the seed data the shards themselves don't carry.
     #[arg(long)]
-    duckdb: PathBuf,
+    snapshot: PathBuf,
 
     /// Path to the `duckdb` CLI binary (not always on `PATH` — e.g. `~/bin/duckdb`).
     #[arg(long, default_value = "duckdb")]
     duckdb_bin: PathBuf,
 
-    /// Stop after this many `meta` rows (file order). 0 = every match_id in `meta` — see
-    /// `pipeline::import_shards`'s module doc for why that PHASE 2 mode isn't recommended without
-    /// the staging rework it describes.
+    /// Scratch dir for the decompressed shards, staging DuckDB, per-chunk temp files, and the
+    /// resume cursor. Needs ~110 GB free for the full corpus's decompressed `events`.
+    #[arg(long, default_value = DEFAULT_WORK_DIR)]
+    work_dir: PathBuf,
+
+    /// Stop after this many distinct `match_id`s (sorted). 0 = every readable match.
     #[arg(long, default_value_t = 200)]
     limit: usize,
 
+    /// Distinct matches per DuckDB range-`COPY` round-trip (bounds per-chunk RAM).
+    #[arg(long, default_value_t = 2000)]
+    chunk_size: usize,
+
     /// Matches per `ingest_batch` transaction.
-    #[arg(long, default_value_t = 25)]
+    #[arg(long, default_value_t = 40)]
     batch_size: usize,
 
     /// A batch taking longer than this many seconds is treated as a load-safety signal — pause
     /// `--pause-secs` before the next one.
-    #[arg(long, default_value_t = 5)]
+    #[arg(long, default_value_t = 10)]
     slow_batch_secs: u64,
 
     /// How long to pause (seconds) after a slow batch — see `--slow-batch-secs`.
-    #[arg(long, default_value_t = 3)]
+    #[arg(long, default_value_t = 5)]
     pause_secs: u64,
+
+    /// Force a full staging rebuild (re-decompress + reload) even if the `.done` markers exist.
+    #[arg(long)]
+    rebuild_staging: bool,
 }
 
 #[tokio::main]
@@ -348,12 +361,15 @@ async fn run_import_shards(args: ImportShardsArgs, database_url: &str) -> anyhow
 
     let cfg = ImportShardsConfig {
         shards_dir: args.shards_dir,
-        duckdb_path: args.duckdb,
+        snapshot_path: args.snapshot,
         duckdb_bin: args.duckdb_bin,
+        work_dir: args.work_dir,
         limit: args.limit,
+        chunk_size: args.chunk_size.max(1),
         batch_size: args.batch_size.max(1),
         slow_batch: Duration::from_secs(args.slow_batch_secs),
         pause: Duration::from_secs(args.pause_secs),
+        rebuild_staging: args.rebuild_staging,
     };
 
     let summary = pipeline::import_shards(&cfg, &mut client)
