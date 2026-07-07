@@ -8,8 +8,9 @@
 
 use chrono::{DateTime, TimeZone, Utc};
 use ingest::{
-    ingest_batch, IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerTech,
-    NewMatchPlayerUnit, NewReplayAge, NewReplayEvent, ReplayBatch,
+    ingest_batch, ingest_batch_with_policy, ConflictPolicy, IngestStats, Ladder, MatchSource,
+    NewMatch, NewMatchPlayer, NewMatchPlayerTech, NewMatchPlayerUnit, NewReplayAge, NewReplayEvent,
+    ReplayBatch,
 };
 use migration::{Migrator, MigratorTrait};
 use pipeline_core::{Age, GameCivId, GameUnitId, MatchId, OpeningKind, ProfileId, TechId};
@@ -313,6 +314,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
         IngestStats {
             matches_inserted: 2,
             matches_skipped: 0,
+            matches_upgraded: 0,
             players: 3,
             events: 3,
             ages: 4,
@@ -379,6 +381,7 @@ async fn ingest_batch_inserts_rows_is_idempotent_and_generates_elo_bucket() {
         IngestStats {
             matches_inserted: 0,
             matches_skipped: 2,
+            matches_upgraded: 0,
             players: 0,
             events: 0,
             ages: 0,
@@ -837,5 +840,165 @@ async fn ingest_batch_fails_loud_and_rolls_back_on_fk_violation() {
         row_count(&client, "match_players").await,
         before_players,
         "rolled back: an FK violation on match_players.civ_id must leave `match_players` unchanged"
+    );
+}
+
+/// `source` of one match (panics if absent).
+async fn source_of(client: &tokio_postgres::Client, match_id: i64) -> String {
+    client
+        .query_one("SELECT source::text FROM matches WHERE match_id = $1", &[&match_id])
+        .await
+        .unwrap_or_else(|err| panic!("source lookup for {match_id} failed: {err}"))
+        .get(0)
+}
+
+/// Child-row count for one match in `table`.
+async fn count_for_match(client: &tokio_postgres::Client, table: &str, match_id: i64) -> i64 {
+    let sql = format!("SELECT count(*) FROM {table} WHERE match_id = $1");
+    client
+        .query_one(&sql, &[&match_id])
+        .await
+        .unwrap_or_else(|err| panic!("count on {table} for {match_id} failed: {err}"))
+        .get(0)
+}
+
+/// The backfill's `ConflictPolicy::UpgradeAoestats` path: an existing `source='aoestats'` match
+/// (its aggregate `match_players` + `match_ages`) is REPLACED in place by a richer `source='replay'`
+/// row, with no orphaned children — the exact behaviour the backfill relies on, and the exact
+/// silent-corruption trap (`match_ages` has no FK to `matches`, so it must be deleted explicitly).
+/// Also proves the re-run is idempotent (an already-`replay` match is left untouched).
+#[tokio::test]
+#[ignore = "requires Docker (testcontainers) — run with `cargo test -p ingest -- --ignored`"]
+async fn upgrade_aoestats_replaces_the_aggregate_row_and_all_children_with_the_replay() {
+    let (_container, mut client) = migrated_client().await;
+
+    // 1. Seed an EXISTING aoestats match (id 3001) exactly as `aoestats_import` would: an aggregate
+    //    `matches` row, two `match_players` (no apm/opening_kind), and one `match_ages` row — the
+    //    latter is the FK-less child that a naive matches-delete would orphan.
+    client
+        .batch_execute(
+            r#"
+            INSERT INTO matches (match_id, source, ladder, map_id, played_at, n_players)
+              VALUES (3001, 'aoestats', '1v1', 1, '2026-01-01T00:00:00Z', 2);
+            INSERT INTO match_players (match_id, profile_id, civ_id, elo, won, opening) VALUES
+              (3001, 5001, 1, 1500, true,  'fast_castle'),
+              (3001, 5002, 2, 1490, false, 'scouts');
+            INSERT INTO match_ages
+              (match_id, profile_id, civ_id, won, age, uptime_ms, villagers, military, n_buildings, n_research)
+              VALUES (3001, 5001, 1, true, 'feudal', 600000, 20, 0, 5, 2);
+            "#,
+        )
+        .await
+        .expect("failed to seed the existing aoestats match");
+
+    assert_eq!(source_of(&client, 3001).await, "aoestats");
+    assert_eq!(count_for_match(&client, "match_players", 3001).await, 2);
+    assert_eq!(count_for_match(&client, "match_ages", 3001).await, 1);
+
+    // 2. A richer REPLAY batch for the SAME match_id (one player, with apm; a replay_event; a
+    //    replay_age). No units/techs — those dims aren't seeded here, and the upgrade mechanic under
+    //    test is the source flip + aggregate-child replacement, not dim filtering.
+    let played_at = Utc.with_ymd_and_hms(2026, 1, 2, 0, 0, 0).unwrap();
+    let replay = ReplayBatch {
+        matches: vec![NewMatch {
+            match_id: MatchId(3001),
+            source: MatchSource::Replay,
+            ladder: Ladder::OneVOne,
+            map_id: 1,
+            build: Some(101),
+            patch: None,
+            played_at,
+            duration_ms: Some(1_500_000),
+            n_players: 2,
+        }],
+        players: vec![NewMatchPlayer {
+            match_id: MatchId(3001),
+            profile_id: ProfileId(5001),
+            civ_id: GameCivId(1),
+            elo: Some(1500),
+            won: Some(true),
+            opening: Some("Fast Castle".to_owned()),
+            opening_kind: Some(OpeningKind::FastCastle),
+            feudal_t: Some(700.0),
+            castle_t: None,
+            imperial_t: None,
+            apm: Some(55.0),
+        }],
+        events: vec![NewReplayEvent {
+            match_id: MatchId(3001),
+            profile_id: Some(ProfileId(5001)),
+            player_number: 1,
+            t_ms: 1_000,
+            kind: "build".to_owned(),
+            target_id: Some(70),
+            amount: None,
+            detail: None,
+        }],
+        ages: vec![NewReplayAge {
+            match_id: MatchId(3001),
+            profile_id: ProfileId(5001),
+            civ_id: GameCivId(1),
+            won: Some(true),
+            age: Age::Feudal,
+            uptime_ms: 700_000,
+            villagers: Some(22),
+            military: Some(0),
+            n_buildings: Some(6),
+            n_research: Some(3),
+        }],
+        ..Default::default()
+    };
+
+    // 3. Upgrade-ingest.
+    let stats = ingest_batch_with_policy(&mut client, &replay, ConflictPolicy::UpgradeAoestats)
+        .await
+        .expect("upgrade ingest failed");
+    assert_eq!(stats.matches_upgraded, 1, "the aoestats match was upgraded");
+    assert_eq!(stats.matches_inserted, 1, "and re-inserted as the replay row");
+    assert_eq!(stats.matches_skipped, 0);
+
+    // 4. The replacement, verified end to end.
+    assert_eq!(
+        source_of(&client, 3001).await,
+        "replay",
+        "source flipped aoestats -> replay"
+    );
+    assert_eq!(
+        count_for_match(&client, "match_ages", 3001).await,
+        0,
+        "the aoestats match_ages row (no FK to matches) must be deleted, not orphaned"
+    );
+    assert_eq!(
+        count_for_match(&client, "match_players", 3001).await,
+        1,
+        "the two aggregate match_players were replaced by the replay's single player"
+    );
+    let apm: Option<f32> = client
+        .query_one(
+            "SELECT apm FROM match_players WHERE match_id = 3001 AND profile_id = 5001",
+            &[],
+        )
+        .await
+        .expect("apm lookup failed")
+        .get(0);
+    assert_eq!(apm, Some(55.0), "the upgraded row carries replay-only apm");
+    assert_eq!(count_for_match(&client, "replay_events", 3001).await, 1);
+    assert_eq!(count_for_match(&client, "replay_ages", 3001).await, 1);
+
+    // 5. Re-run is idempotent: the match is now `source='replay'`, so it's NOT in the upgrade set —
+    //    it falls through to ON CONFLICT DO NOTHING, with zero churn to its children.
+    let stats2 = ingest_batch_with_policy(&mut client, &replay, ConflictPolicy::UpgradeAoestats)
+        .await
+        .expect("re-run upgrade ingest failed");
+    assert_eq!(
+        stats2.matches_upgraded, 0,
+        "an already-replay match is not re-upgraded"
+    );
+    assert_eq!(stats2.matches_inserted, 0, "ON CONFLICT DO NOTHING");
+    assert_eq!(stats2.matches_skipped, 1);
+    assert_eq!(
+        count_for_match(&client, "match_players", 3001).await,
+        1,
+        "no churn on the idempotent re-run"
     );
 }

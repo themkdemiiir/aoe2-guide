@@ -34,8 +34,12 @@ services:
 
   migration:
     build:
-      context: ../pipeline # pipeline/ and deploy/ are repo siblings
-      dockerfile: Dockerfile
+      # Repo ROOT context (not ../pipeline): the shared Dockerfile now also copies the repo-root
+      # refdata files that `refdata`-enabled binaries (pipeline/dims) `include_str!` — migration
+      # itself doesn't read them, but the one Dockerfile serves every BIN. `deploy/` and `pipeline/`
+      # are repo siblings, so `..` is the repo root.
+      context: ..
+      dockerfile: pipeline/Dockerfile
       args:
         BIN: migration
     image: aoe2-migration:0.1.0 # pinned tag (matches crate version)

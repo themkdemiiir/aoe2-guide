@@ -17,9 +17,10 @@ use std::sync::Arc;
 use std::time::Duration;
 
 use anyhow::Context;
+use chrono::NaiveDate;
 use clap::{Parser, Subcommand};
 use fetch::{FetchClient, SqliteManifest};
-use pipeline::{CrawlConfig, FetchSource, ImportShardsConfig, PgSink};
+use pipeline::{BackfillConfig, CrawlConfig, FetchSource, ImportShardsConfig, PgSink};
 use pipeline_core::cli::{database_url, init_tracing, log_error_and_code};
 use pipeline_core::{redact_secret, ProfileId};
 use tokio_postgres::NoTls;
@@ -63,6 +64,11 @@ enum Command {
     /// `source='replay'`, re-deriving the full enrichment. See `pipeline::import_shards`'s module
     /// doc for the full design.
     ImportShards(ImportShardsArgs),
+    /// Walk the historical `source='aoestats'` corpus newest-first, download each match's real
+    /// replay from the age archive, and UPGRADE it in place to a rich `source='replay'` row. The
+    /// ongoing recent→old enrichment loop — see `pipeline::backfill`'s module doc (resumable purely
+    /// from DB state; resource-bounded on every axis).
+    Backfill(BackfillArgs),
 }
 
 #[derive(clap::Args)]
@@ -171,6 +177,47 @@ struct ImportShardsArgs {
     rebuild_staging: bool,
 }
 
+#[derive(clap::Args)]
+struct BackfillArgs {
+    /// Max `aoestats` matches to attempt this run (newest-first). The Dagster schedule is the
+    /// cadence — keep this a bounded chunk, not a firehose.
+    #[arg(long, default_value_t = 300)]
+    limit: usize,
+
+    /// Max concurrent in-flight archive fetch + parse worker tasks — also the archive HTTP client's
+    /// own concurrency bound.
+    #[arg(long, default_value_t = 3)]
+    concurrency: usize,
+
+    /// Steady archive request rate (requests/min, GCRA). Keep GENTLE — the endpoint soft-slows
+    /// under sustained load; this is deliberately far below the recent crawl's fast-path rate.
+    #[arg(long, default_value_t = 30)]
+    rate: u32,
+
+    /// Matches per upgrade-ingest transaction. Small, to bound per-transaction DB work.
+    #[arg(long, default_value_t = 20)]
+    batch_size: usize,
+
+    /// Don't attempt matches older than this `YYYY-MM-DD` (UTC) — the age archive's rolling
+    /// retention has aged their replays out, so they'd only 404. Required: the operator must state
+    /// the current retention edge explicitly rather than waste archive calls on guaranteed misses.
+    #[arg(long, value_name = "YYYY-MM-DD")]
+    archive_floor: String,
+
+    /// A batch slower than this many seconds triggers a `--pause-secs` DB-load-safety pause.
+    #[arg(long, default_value_t = 10)]
+    slow_batch_secs: u64,
+
+    /// How long to pause (seconds) after a slow batch — see `--slow-batch-secs`.
+    #[arg(long, default_value_t = 5)]
+    pause_secs: u64,
+
+    /// Discover + plan only: never download, parse, or ingest (the discovery query still runs —
+    /// it's read-only). Safe for wiring validation.
+    #[arg(long)]
+    dry_run: bool,
+}
+
 #[tokio::main]
 async fn main() {
     init_tracing(DEFAULT_LOG_FILTER);
@@ -192,6 +239,7 @@ async fn main() {
             }
         }
         Command::ImportShards(args) => run_import_shards_command(args).await,
+        Command::Backfill(args) => run_backfill_command(args).await,
     }
 }
 
@@ -377,5 +425,67 @@ async fn run_import_shards(args: ImportShardsArgs, database_url: &str) -> anyhow
         .context("import_shards failed")?;
 
     tracing::info!(?summary, "import-shards complete");
+    Ok(())
+}
+
+async fn run_backfill_command(args: BackfillArgs) {
+    let secret = match database_url() {
+        Ok(secret) => secret,
+        Err(err) => {
+            tracing::error!(error = %err, "failed to read DATABASE_URL");
+            std::process::exit(1);
+        }
+    };
+
+    if let Err(err) = run_backfill(args, secret.expose()).await {
+        std::process::exit(log_error_and_code(&err, &secret));
+    }
+}
+
+async fn run_backfill(args: BackfillArgs, database_url: &str) -> anyhow::Result<()> {
+    // Parse the retention-floor date (→ midnight UTC) before touching the DB — a malformed date is
+    // a CLI error, surfaced immediately, not a runtime one mid-run.
+    let floor_date = NaiveDate::parse_from_str(&args.archive_floor, "%Y-%m-%d").with_context(|| {
+        format!(
+            "--archive-floor must be YYYY-MM-DD, got {:?}",
+            args.archive_floor
+        )
+    })?;
+    let archive_floor = floor_date
+        .and_hms_opt(0, 0, 0)
+        .context("failed to build midnight from --archive-floor")?
+        .and_utc();
+
+    let (mut client, connection) = tokio_postgres::connect(database_url, NoTls)
+        .await
+        .context("failed to connect to the database")?;
+
+    let database_url_for_log = database_url.to_owned();
+    tokio::spawn(async move {
+        if let Err(err) = connection.await {
+            let message = redact_secret(&format!("{err:#}"), &database_url_for_log);
+            tracing::error!(error = %message, "database connection closed with an error");
+        }
+    });
+
+    let cancel = CancellationToken::new();
+    spawn_ctrl_c_handler(cancel.clone());
+
+    let cfg = BackfillConfig {
+        limit: args.limit,
+        concurrency: args.concurrency.max(1),
+        rate: args.rate,
+        batch_size: args.batch_size.max(1),
+        archive_floor,
+        slow_batch: Duration::from_secs(args.slow_batch_secs),
+        pause: Duration::from_secs(args.pause_secs),
+        dry_run: args.dry_run,
+    };
+
+    let summary = pipeline::backfill(&mut client, &cfg, &cancel)
+        .await
+        .context("backfill failed")?;
+
+    tracing::info!(?summary, "backfill complete");
     Ok(())
 }

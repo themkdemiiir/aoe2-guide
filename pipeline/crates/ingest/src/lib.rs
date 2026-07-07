@@ -14,4 +14,4 @@ pub use dto::{
     IngestStats, Ladder, MatchSource, NewMatch, NewMatchPlayer, NewMatchPlayerTech,
     NewMatchPlayerUnit, NewReplayAge, NewReplayEvent, ReplayBatch,
 };
-pub use ingest::ingest_batch;
+pub use ingest::{ingest_batch, ingest_batch_with_policy, ConflictPolicy};

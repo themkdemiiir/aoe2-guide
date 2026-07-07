@@ -18,13 +18,22 @@
 //! `.aoe2record` into (even ones that fail to parse), and [`reparse`], a `pipeline reparse` entry
 //! point that reads that archive back and proves it re-usable — see each module's doc.
 //!
-//! Finally, [`import_shards`] is the `pipeline import-shards` one-time migration of the OLD
+//! [`import_shards`] is the `pipeline import-shards` one-time migration of the OLD
 //! `scripts/data-pipeline/replay-rs`-extracted shard corpus into this same live schema (also
 //! `source='replay'`), reusing [`to_batch`]/`ingest_batch` exactly like [`crawl`] does — see that
 //! module's doc for the full design.
+//!
+//! Finally, [`backfill`] is the `pipeline backfill` ONGOING recent→old enrichment loop: it walks
+//! the historical `source='aoestats'` corpus newest-first, downloads each match's real replay from
+//! the age archive, and UPGRADES it in place to a rich `source='replay'` row — reusing the SAME
+//! [`to_batch`] + [`dimfilter`] + `ingest` spine, but with `ingest::ConflictPolicy::UpgradeAoestats`
+//! so the aggregate row is REPLACED, not skipped. See that module's doc for the resumable-from-DB
+//! design and the archive's rolling-retention reality.
 
+mod backfill;
 mod compose;
 mod crawl;
+mod dimfilter;
 mod error;
 mod import_shards;
 mod raw;
@@ -32,6 +41,7 @@ mod reparse;
 mod sink;
 mod source;
 
+pub use backfill::{backfill, BackfillConfig, BackfillSummary};
 pub use compose::to_batch;
 pub use crawl::{crawl, CrawlConfig, CrawlError, CrawlSummary};
 pub use error::{Error, Result};

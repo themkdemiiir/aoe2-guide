@@ -9,8 +9,17 @@
 # rust:1.96.1-slim-bookworm — current stable Rust (2026-06-26) on Debian bookworm.
 FROM rust:1.96.1-slim-bookworm@sha256:e18a79fc84dfcfc3ab5ba72290398a644c135c97eaa881447fddc354ee4701a3 AS builder
 
+# Build context is the repo ROOT (see the repo-root `.dockerignore`), NOT `pipeline/`: the Rust
+# workspace lives in `pipeline/`, but `pipeline-core`/`replay` `include_str!` six refdata files from
+# the repo root at build time (`src/data/*.json`, `scripts/data-pipeline/replay-rs/data/maps.tsv` —
+# see `crates/core/src/lib.rs`'s `refdata` note), so those must be reachable too. `refdata`-free
+# binaries (migration/ingest/export/aoestats) simply never read the copied files.
 WORKDIR /app
-COPY . .
+COPY pipeline/ /app/
+# Placed at the container-root paths the crates' `../../../../src/data`/`../../../../scripts/...`
+# climb (from `/app/crates/core/src/`) resolves to.
+COPY src/data/ /src/data/
+COPY scripts/data-pipeline/replay-rs/data/ /scripts/data-pipeline/replay-rs/data/
 
 ARG BIN
 RUN --mount=type=cache,target=/usr/local/cargo/registry \

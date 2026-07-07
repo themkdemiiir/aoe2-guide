@@ -82,7 +82,7 @@
 //! idempotent, re-running the importer retries them (after a smaller `--batch-size` if isolating
 //! a bad match is needed).
 
-use std::collections::{BTreeSet, HashMap, HashSet};
+use std::collections::{BTreeSet, HashMap};
 use std::io::{BufRead, BufReader, Write};
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -94,6 +94,7 @@ use flate2::read::MultiGzDecoder;
 use serde::Deserialize;
 use tokio_postgres::Client;
 
+use crate::dimfilter::{filter_to_known_dims, load_dim_ids, merge_into};
 use fetch::{DiscoverySeed, RelicMatchType};
 use ingest::{ingest_batch, ReplayBatch};
 use pipeline_core::{Age, GameCivId, MatchId, ProfileId};
@@ -728,75 +729,6 @@ fn build_parsed_replay(
     })
 }
 
-/// The live `units`/`techs` dimension id sets, loaded once from Postgres so [`filter_to_known_dims`]
-/// can drop FK-unsafe child rows without a per-row round trip.
-struct DimIds {
-    units: HashSet<i32>,
-    techs: HashSet<i32>,
-}
-
-/// Loads the `units`/`techs` dim id sets from the live schema (tiny — ~238 units, ~192 techs).
-async fn load_dim_ids(client: &Client) -> Result<DimIds> {
-    let units = client
-        .query("SELECT unit_id FROM units", &[])
-        .await
-        .context("failed to load units dim ids")?
-        .into_iter()
-        .map(|r| r.get::<_, i32>(0))
-        .collect();
-    let techs = client
-        .query("SELECT tech_id FROM techs", &[])
-        .await
-        .context("failed to load techs dim ids")?
-        .into_iter()
-        .map(|r| r.get::<_, i32>(0))
-        .collect();
-    Ok(DimIds { units, techs })
-}
-
-/// Drops `player_units`/`player_techs` rows whose id isn't in the live dim, recording the counts +
-/// the DISTINCT unknown ids on `summary`. `match_player_units.unit_id` FK-references `units`, so a
-/// `train` of a unit the dim doesn't list (verified real in this corpus: game unit ids **37** and
-/// **1570**, absent from the 238-unit `aoe2techtree` dim) would abort the whole batch's
-/// transaction — taking down every good match batched with it. Rather than fail those matches over
-/// two unattributable unit ids, this drops ONLY the offending child rows (the match itself, its
-/// KNOWN units, and all other enrichment still import) and reports the ids so the operator can
-/// decide whether to extend the dim. This is the FK-safe analog of the "skip + count, never
-/// fabricate" rule applied at row granularity — NOT a silent drop (every dropped id is surfaced in
-/// [`ImportShardsSummary`]). Techs are filtered too for symmetry, though `replay::derive` only ever
-/// emits the fixed watched-tech set (all standard dim entries), so `unknown_tech_ids` is expected
-/// to stay empty.
-fn filter_to_known_dims(batch: &mut ReplayBatch, dims: &DimIds, summary: &mut ImportShardsSummary) {
-    let before_u = batch.player_units.len();
-    batch.player_units.retain(|u| {
-        let known = dims.units.contains(&u.unit_id.0);
-        if !known {
-            summary.unknown_unit_ids.insert(u.unit_id.0);
-        }
-        known
-    });
-    summary.dropped_unit_rows += (before_u - batch.player_units.len()) as u64;
-
-    let before_t = batch.player_techs.len();
-    batch.player_techs.retain(|t| {
-        let known = dims.techs.contains(&t.tech_id.0);
-        if !known {
-            summary.unknown_tech_ids.insert(t.tech_id.0);
-        }
-        known
-    });
-    summary.dropped_tech_rows += (before_t - batch.player_techs.len()) as u64;
-}
-
-fn merge_into(pending: &mut ReplayBatch, batch: ReplayBatch) {
-    pending.matches.extend(batch.matches);
-    pending.players.extend(batch.players);
-    pending.events.extend(batch.events);
-    pending.ages.extend(batch.ages);
-    pending.player_units.extend(batch.player_units);
-    pending.player_techs.extend(batch.player_techs);
-}
-
 /// Ingests `pending` (if non-empty) in one transaction, folding the outcome into `summary` and
 /// resetting `pending`/`pending_ids`. See the module doc's "Load safety" section for the
 /// slow-batch backoff and the deliberate no-retry-split-on-failure policy.
@@ -988,9 +920,13 @@ pub async fn import_shards(
             match crate::to_batch(parsed, seed) {
                 Ok(mut batch) => {
                     // Drop FK-unsafe unit/tech rows (out-of-dim ids) before batching — see
-                    // `filter_to_known_dims`'s doc for why this is row-granular, counted, and not
-                    // a silent drop.
-                    filter_to_known_dims(&mut batch, &dims, &mut summary);
+                    // `dimfilter::filter_to_known_dims`'s doc for why this is row-granular, counted,
+                    // and not a silent drop. Fold its counts into this run's summary.
+                    let counts = filter_to_known_dims(&mut batch, &dims);
+                    summary.dropped_unit_rows += counts.dropped_unit_rows;
+                    summary.dropped_tech_rows += counts.dropped_tech_rows;
+                    summary.unknown_unit_ids.extend(counts.unknown_unit_ids);
+                    summary.unknown_tech_ids.extend(counts.unknown_tech_ids);
                     pending_ids.push(meta.match_id);
                     merge_into(&mut pending, batch);
                 }
@@ -1109,39 +1045,6 @@ mod tests {
         assert!(matches!(err, SkipReason::BadNumeric("meta.n_players")));
     }
 
-    #[test]
-    fn filter_to_known_dims_drops_out_of_dim_ids_and_records_them() {
-        use ingest::{NewMatchPlayerTech, NewMatchPlayerUnit};
-        use pipeline_core::{GameUnitId, TechId};
-
-        let mut batch = ReplayBatch {
-            player_units: vec![
-                // 83 (Villager) is in the dim; 1570 + 37 are the real out-of-dim ids this corpus
-                // actually contains (see filter_to_known_dims's doc).
-                NewMatchPlayerUnit { match_id: MatchId(1), profile_id: ProfileId(5001), unit_id: GameUnitId(83), trained: 5 },
-                NewMatchPlayerUnit { match_id: MatchId(1), profile_id: ProfileId(5001), unit_id: GameUnitId(1570), trained: 1 },
-                NewMatchPlayerUnit { match_id: MatchId(1), profile_id: ProfileId(5002), unit_id: GameUnitId(37), trained: 2 },
-            ],
-            player_techs: vec![
-                NewMatchPlayerTech { match_id: MatchId(1), profile_id: ProfileId(5001), tech_id: TechId(22), t_ms: 10_000 },
-                NewMatchPlayerTech { match_id: MatchId(1), profile_id: ProfileId(5001), tech_id: TechId(9999), t_ms: 20_000 },
-            ],
-            ..ReplayBatch::default()
-        };
-        let dims = DimIds {
-            units: HashSet::from([83, 448]),
-            techs: HashSet::from([22, 213]),
-        };
-        let mut summary = ImportShardsSummary::default();
-        filter_to_known_dims(&mut batch, &dims, &mut summary);
-
-        assert_eq!(batch.player_units.len(), 1, "only the in-dim unit (83) survives");
-        assert_eq!(batch.player_units[0].unit_id, GameUnitId(83));
-        assert_eq!(summary.dropped_unit_rows, 2);
-        assert_eq!(summary.unknown_unit_ids, BTreeSet::from([37, 1570]));
-
-        assert_eq!(batch.player_techs.len(), 1, "only the in-dim tech (22) survives");
-        assert_eq!(summary.dropped_tech_rows, 1);
-        assert_eq!(summary.unknown_tech_ids, BTreeSet::from([9999]));
-    }
+    // `filter_to_known_dims` itself is unit-tested in `crate::dimfilter` (its new home) — this
+    // module keeps only the shard-parsing tests that are import-specific.
 }

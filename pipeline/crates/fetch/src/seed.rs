@@ -58,6 +58,24 @@ impl RelicMatchType {
             other => Err(UnknownMatchType(format!("matchtype_id {other}"))),
         }
     }
+
+    /// Reconstruct the ranked mode from the DB `ladder_kind` label (`'1v1'` / `'team'`) — the
+    /// inverse of `pipeline::compose::ladder_for`'s `RelicMatchType -> Ladder` mapping. Used by the
+    /// replay BACKFILL (`pipeline backfill`), which rebuilds a [`DiscoverySeed`] for a match ALREADY
+    /// in Postgres (whose `ladder` was set at aoestats-import time) rather than from a fresh
+    /// `getRecentMatchHistory` discovery call, so it must turn the stored ladder back into the
+    /// `RelicMatchType` that `to_batch` consumes. This constructor lives HERE (not in `pipeline`)
+    /// precisely because `RelicMatchType` is `#[non_exhaustive]`, so its variants cannot be
+    /// constructed outside this crate. Fails loud on any label outside the DB `ladder_kind` enum's
+    /// two values — the same no-defaults/no-guess discipline as [`Self::from_matchtype_id`] (a new
+    /// ladder must be added deliberately, never silently coerced).
+    pub fn from_db_ladder(ladder: &str) -> Result<Self, UnknownMatchType> {
+        match ladder {
+            "1v1" => Ok(RelicMatchType::SoloRmRanked),
+            "team" => Ok(RelicMatchType::TeamRmRanked),
+            other => Err(UnknownMatchType(format!("db ladder_kind {other}"))),
+        }
+    }
 }
 
 /// A `matchtype_id` outside the known ranked-RM vocabulary. Carries a human-readable description
@@ -103,6 +121,28 @@ mod tests {
             assert!(
                 RelicMatchType::from_matchtype_id(other).is_err(),
                 "matchtype_id {other} must not classify as a ranked mode"
+            );
+        }
+    }
+
+    #[test]
+    fn from_db_ladder_inverts_ladder_for_and_fails_loud_otherwise() {
+        // The two live DB `ladder_kind` values (see migration
+        // `m20260705_000001_create_enums.rs`) invert `compose::ladder_for`'s forward mapping.
+        assert_eq!(
+            RelicMatchType::from_db_ladder("1v1"),
+            Ok(RelicMatchType::SoloRmRanked)
+        );
+        assert_eq!(
+            RelicMatchType::from_db_ladder("team"),
+            Ok(RelicMatchType::TeamRmRanked)
+        );
+        // Anything outside the enum's two labels fails loud — never a guessed mode. Includes the
+        // Relic `matchtype_id` numbers, which belong to a DIFFERENT vocabulary and must not leak in.
+        for bad in ["", "1V1", "Team", "2v2", "3v3", "6", "solo", "ranked"] {
+            assert!(
+                RelicMatchType::from_db_ladder(bad).is_err(),
+                "db ladder {bad:?} must not classify as a ranked mode"
             );
         }
     }
