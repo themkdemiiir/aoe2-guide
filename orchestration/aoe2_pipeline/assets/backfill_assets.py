@@ -31,6 +31,7 @@ from datetime import timedelta
 from dagster import (
     AssetExecutionContext,
     Config,
+    DefaultScheduleStatus,
     MaterializeResult,
     PipesSubprocessClient,
     RunRequest,
@@ -160,6 +161,9 @@ _ARCHIVE_RETENTION_DAYS = 540
     # Hourly at :17 — one bounded `--limit` chunk per hour, a gentle perpetual reach-back, never a
     # firehose. The DB state (source flip + `replay_backfill_misses`) makes each run self-advancing.
     cron_schedule="17 * * * *",
+    # Auto-start when the daemon first loads this code location (no manual UI/CLI toggle needed) —
+    # the whole point of standing the daemon up is to have this running.
+    default_status=DefaultScheduleStatus.RUNNING,
     description="Hourly recent→old backfill chunk with a rolling archive floor.",
 )
 def replay_backfill_schedule(context: ScheduleEvaluationContext) -> RunRequest:
