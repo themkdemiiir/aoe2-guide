@@ -33,20 +33,16 @@ from dagster import (
     Config,
     DefaultScheduleStatus,
     MaterializeResult,
-    PipesSubprocessClient,
     RunRequest,
     ScheduleEvaluationContext,
     asset,
     define_asset_job,
     schedule,
 )
+from dagster_docker import PipesDockerClient
 
 from ..resources import PostgresResource
 from .ingest_assets import dims
-
-# Absolute path so the subprocess finds `docker` regardless of the launcher's PATH (the native-binary
-# assets get away with a bare name only because they pass an absolute binary path themselves).
-DOCKER_BIN = "/usr/bin/docker"
 
 
 class ReplayBackfillConfig(Config):
@@ -99,35 +95,9 @@ class ReplayBackfillConfig(Config):
 def replay_backfill(
     context: AssetExecutionContext,
     config: ReplayBackfillConfig,
-    pipes_subprocess_client: PipesSubprocessClient,
+    pipes_docker_client: PipesDockerClient,
     postgres: PostgresResource,
 ) -> MaterializeResult:
-    command = [
-        DOCKER_BIN,
-        "run",
-        "--rm",
-        "--cpus",
-        config.cpus,
-        "--memory",
-        config.memory,
-        "--pids-limit",
-        str(config.pids_limit),
-        # Forward DATABASE_URL by NAME (value stays in the subprocess env, never in argv).
-        "--env",
-        "DATABASE_URL",
-        config.image,
-        "backfill",
-        "--limit",
-        str(config.limit),
-        "--archive-floor",
-        config.archive_floor,
-        "--rate",
-        str(config.rate),
-        "--concurrency",
-        str(config.concurrency),
-        "--batch-size",
-        str(config.batch_size),
-    ]
     context.log.info(
         "launching dockerized backfill: limit=%s archive_floor=%s cpus=%s memory=%s",
         config.limit,
@@ -135,10 +105,39 @@ def replay_backfill(
         config.cpus,
         config.memory,
     )
-    return pipes_subprocess_client.run(
-        command=command,
+    # PipesDockerClient (not PipesSubprocessClient + `docker run`): it injects the Pipes context via
+    # env AND reads the run's Pipes messages out of the container's LOG STREAM — the only channel
+    # that works from a container, since a host-side message file isn't visible inside it. So the
+    # Rust binary's `pipeline::Pipes` stdout messages (BackfillSummary metadata + logs) surface in
+    # the Dagster UI. `env=` forwards DATABASE_URL into the container (value never on any argv);
+    # `container_kwargs` carries the same cgroup caps the old `docker run --cpus/--memory/--pids`
+    # flags did, plus `auto_remove` (the old `--rm`) — the container stays stateless.
+    return pipes_docker_client.run(
         context=context,
+        image=config.image,
+        command=[
+            "backfill",
+            "--limit",
+            str(config.limit),
+            "--archive-floor",
+            config.archive_floor,
+            "--rate",
+            str(config.rate),
+            "--concurrency",
+            str(config.concurrency),
+            "--batch-size",
+            str(config.batch_size),
+        ],
         env={"DATABASE_URL": postgres.database_url},
+        container_kwargs={
+            # NO `auto_remove`: PipesDockerClient streams the container's logs (where the Pipes
+            # report_asset_materialization/closed messages ride) and only THEN `container.wait()`s —
+            # auto-removing on exit races that and drops the final messages (empty UI metadata). The
+            # exited container is cleaned up below instead.
+            "nano_cpus": int(float(config.cpus) * 1_000_000_000),
+            "mem_limit": config.memory,
+            "pids_limit": config.pids_limit,
+        },
     ).get_materialize_result()
 
 
@@ -154,6 +153,17 @@ replay_backfill_job = define_asset_job(
 # few guaranteed-404 tail matches ONCE each (they're then recorded in `replay_backfill_misses` and
 # never retried). Recomputed each tick so it tracks the sliding retention window with no manual edits.
 _ARCHIVE_RETENTION_DAYS = 540
+
+# Per-run throughput, calibrated 2026-07-08 against the live archive. The archive's effective ceiling
+# is ~20-30 matches RESOLVED/min: at rate=60/concurrency=6 it drops ~half the requests as connection
+# errors (not 429s — no polite throttle, just failures) with NO net throughput gain, so pushing
+# harder is pure waste. rate=40/concurrency=4 stays fast but clean; limit=1200 fills a ~50-min run
+# (near-continuous, no overlap with the hourly tick). Recent-first ordering is inherent to the
+# backfill's keyset walk, so this prioritizes the newest still-reachable matches. Bump `_LIMIT` only
+# alongside a shorter cron / run-concurrency guard, or runs will overlap.
+_LIMIT = 1200
+_RATE = 40
+_CONCURRENCY = 4
 
 
 @schedule(
@@ -171,5 +181,16 @@ def replay_backfill_schedule(context: ScheduleEvaluationContext) -> RunRequest:
         context.scheduled_execution_time.date() - timedelta(days=_ARCHIVE_RETENTION_DAYS)
     ).isoformat()
     return RunRequest(
-        run_config={"ops": {"replay_backfill": {"config": {"archive_floor": floor}}}},
+        run_config={
+            "ops": {
+                "replay_backfill": {
+                    "config": {
+                        "archive_floor": floor,
+                        "limit": _LIMIT,
+                        "rate": _RATE,
+                        "concurrency": _CONCURRENCY,
+                    }
+                }
+            }
+        },
     )

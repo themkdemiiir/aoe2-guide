@@ -482,10 +482,35 @@ async fn run_backfill(args: BackfillArgs, database_url: &str) -> anyhow::Result<
         dry_run: args.dry_run,
     };
 
-    let summary = pipeline::backfill(&mut client, &cfg, &cancel)
-        .await
-        .context("backfill failed")?;
+    // Report to Dagster Pipes if launched under it (a no-op for a plain CLI run — see
+    // `pipeline::Pipes`). Streams a start log, then the run's summary as materialization metadata.
+    let pipes = pipeline::Pipes::from_env();
+    pipes.log(
+        "INFO",
+        format!(
+            "backfill starting: limit={}, rate={}, concurrency={}, archive_floor={}",
+            cfg.limit, cfg.rate, cfg.concurrency, args.archive_floor
+        ),
+    );
 
-    tracing::info!(?summary, "backfill complete");
-    Ok(())
+    let outcome = pipeline::backfill(&mut client, &cfg, &cancel).await;
+
+    match &outcome {
+        Ok(summary) => {
+            pipes.report_materialization(serde_json::json!({
+                "discovered": {"raw_value": summary.discovered, "type": "int"},
+                "attempted": {"raw_value": summary.attempted, "type": "int"},
+                "upgraded": {"raw_value": summary.upgraded, "type": "int"},
+                "not_found": {"raw_value": summary.not_found, "type": "int"},
+                "rate_limited": {"raw_value": summary.rate_limited, "type": "int"},
+                "errored": {"raw_value": summary.errored, "type": "int"},
+                "misses_recorded": {"raw_value": summary.misses_recorded, "type": "int"},
+            }));
+            tracing::info!(?summary, "backfill complete");
+        }
+        Err(err) => pipes.log("ERROR", format!("backfill failed: {err:#}")),
+    }
+    pipes.close();
+
+    outcome.map(|_| ()).context("backfill failed")
 }

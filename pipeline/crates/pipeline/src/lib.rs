@@ -36,12 +36,14 @@ mod crawl;
 mod dimfilter;
 mod error;
 mod import_shards;
+mod pipes;
 mod raw;
 mod reparse;
 mod sink;
 mod source;
 
 pub use backfill::{backfill, BackfillConfig, BackfillSummary};
+pub use pipes::Pipes;
 pub use compose::to_batch;
 pub use crawl::{crawl, CrawlConfig, CrawlError, CrawlSummary};
 pub use error::{Error, Result};

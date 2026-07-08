@@ -35,6 +35,9 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+# Only for decoding the Dagster Pipes `DAGSTER_PIPES_MESSAGES` env var (base64 → zlib → JSON) in
+# `pipeline::pipes` — already in the lock transitively, so this pulls in no new download.
+base64 = "0.22"
 url = "2"
 # thiserror MUST stay on the 2.x line: sea-orm/sqlx/testcontainers already pull 2.0.18, and a
 # crate declaring "1" here would reintroduce the duplicate-major dependency this workspace dep

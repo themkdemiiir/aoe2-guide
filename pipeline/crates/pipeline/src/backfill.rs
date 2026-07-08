@@ -170,19 +170,30 @@ enum MatchOutcome {
 }
 
 /// Discovery: the recent→old, skip-done-and-known-misses candidate query. Read-only.
+///
+/// LIMIT-FIRST, then join: the inner subquery picks the `$2` newest still-`aoestats`, not-yet-missed
+/// matches via the `played_at` index (a bounded backward index scan — NOT a scan of all ~8.5M
+/// aoestats rows), and ONLY THEN does the outer query join `match_players` to collect their
+/// `profile_ids`. Folding the `JOIN … GROUP BY` in before the `LIMIT` (the obvious phrasing) makes
+/// PG aggregate every aoestats match's players before ordering — a ~66s full pass measured live;
+/// this keeps discovery near-instant regardless of corpus size.
 const DISCOVER_SQL: &str = r#"
-SELECT m.match_id,
-       m.ladder::text AS ladder,
-       m.played_at,
+SELECT c.match_id,
+       c.ladder,
+       c.played_at,
        array_agg(mp.profile_id ORDER BY mp.profile_id) AS profile_ids
-FROM matches m
-JOIN match_players mp ON mp.match_id = m.match_id
-WHERE m.source = 'aoestats'
-  AND m.played_at >= $1
-  AND NOT EXISTS (SELECT 1 FROM replay_backfill_misses x WHERE x.match_id = m.match_id)
-GROUP BY m.match_id, m.ladder, m.played_at
-ORDER BY m.played_at DESC
-LIMIT $2
+FROM (
+    SELECT m.match_id, m.ladder::text AS ladder, m.played_at
+    FROM matches m
+    WHERE m.source = 'aoestats'
+      AND m.played_at >= $1
+      AND NOT EXISTS (SELECT 1 FROM replay_backfill_misses x WHERE x.match_id = m.match_id)
+    ORDER BY m.played_at DESC
+    LIMIT $2
+) c
+JOIN match_players mp ON mp.match_id = c.match_id
+GROUP BY c.match_id, c.ladder, c.played_at
+ORDER BY c.played_at DESC
 "#;
 
 /// Batch-record terminal misses. `ON CONFLICT DO NOTHING` guards the (theoretically impossible,

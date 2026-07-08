@@ -13,6 +13,7 @@ import os
 
 from dagster import Definitions, EnvVar, PipesSubprocessClient
 from dagster_dbt import DbtCliResource
+from dagster_docker import PipesDockerClient
 
 from .assets.backfill_assets import (
     replay_backfill,
@@ -55,6 +56,7 @@ defs = Definitions(
     schedules=[replay_backfill_schedule],
     resources={
         "postgres": PostgresResource(database_url=EnvVar("DATABASE_URL")),
+        "pipes_docker_client": PipesDockerClient(),
         "pipes_subprocess_client": PipesSubprocessClient(),
         "dbt": DbtCliResource(
             project_dir=str(DBT_PROJECT_DIR),

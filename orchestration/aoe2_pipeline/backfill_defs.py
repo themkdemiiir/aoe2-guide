@@ -19,6 +19,7 @@ layer is later deployed on the VM, switch the daemon over to `aoe2_pipeline.defi
 """
 
 from dagster import Definitions, EnvVar, PipesSubprocessClient
+from dagster_docker import PipesDockerClient
 
 from .assets.backfill_assets import (
     replay_backfill,
@@ -36,6 +37,9 @@ defs = Definitions(
     schedules=[replay_backfill_schedule],
     resources={
         "postgres": PostgresResource(database_url=EnvVar("DATABASE_URL")),
+        # replay_backfill launches its container via PipesDockerClient (reads Pipes messages from
+        # container logs); `dims` (lineage dep) still uses the plain subprocess client.
+        "pipes_docker_client": PipesDockerClient(),
         "pipes_subprocess_client": PipesSubprocessClient(),
     },
 )
