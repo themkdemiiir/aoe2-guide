@@ -78,6 +78,17 @@ struct CrawlArgs {
     #[arg(long)]
     profile_id: Option<i64>,
 
+    /// Discover the top ranked-ladder profiles' recent matches (the "latest games" freshness crawl)
+    /// instead of a single `--profile-id`. Pass the Relic `leaderboard_id`: 3 = 1v1 RM, 4 = team RM.
+    /// Takes precedence over `--profile-id`.
+    #[arg(long)]
+    leaderboard: Option<i32>,
+
+    /// How many top ladder profiles to seed from when `--leaderboard` is set — each contributes its
+    /// recent matches (deduped by match id).
+    #[arg(long, default_value_t = 200)]
+    profiles: usize,
+
     /// Max matches to attempt this run (`take_ready`'s own LIMIT).
     #[arg(long, default_value_t = 50)]
     limit: usize,
@@ -290,6 +301,10 @@ fn build_source(args: &CrawlArgs) -> anyhow::Result<Arc<FetchSource>> {
 fn crawl_config(args: &CrawlArgs, dry_run: bool) -> CrawlConfig {
     CrawlConfig {
         profile_id: args.profile_id.map(ProfileId),
+        ladder: args.leaderboard.map(|leaderboard_id| pipeline::LadderSpec {
+            leaderboard_id,
+            profiles: args.profiles,
+        }),
         limit: args.limit,
         concurrency: args.concurrency.max(1),
         dry_run,
@@ -358,26 +373,40 @@ async fn run_live(args: CrawlArgs, database_url: &str) -> anyhow::Result<()> {
     let cancel = CancellationToken::new();
     spawn_ctrl_c_handler(cancel.clone());
 
-    let mut sink = PgSink::new(&mut client);
-    let (_manifest, summary) = pipeline::crawl(source, manifest, Some(&mut sink), &config, &cancel)
-        .await
-        .context("crawl failed")?;
-
-    tracing::info!(
-        seeded = summary.seeded,
-        planned = summary.planned,
-        skipped_no_seed = summary.skipped_no_seed,
-        cancelled_before_start = summary.cancelled_before_start,
-        attempted = summary.attempted,
-        succeeded = summary.succeeded,
-        failed = summary.failed,
-        raw_saved = summary.raw_saved,
-        raw_already_present = summary.raw_already_present,
-        raw_failed = summary.raw_failed,
-        raw_bytes_written = summary.raw_bytes_written,
-        "crawl complete"
+    // Report to Dagster Pipes if launched under it (a no-op for a plain CLI run — see
+    // `pipeline::Pipes`), so a scheduled crawl surfaces its outcome as UI metadata.
+    let pipes = pipeline::Pipes::from_env();
+    pipes.log(
+        "INFO",
+        match config.ladder {
+            Some(spec) => format!(
+                "crawl starting: ladder leaderboard={} profiles={} limit={}",
+                spec.leaderboard_id, spec.profiles, config.limit
+            ),
+            None => format!("crawl starting: profile={:?} limit={}", args.profile_id, config.limit),
+        },
     );
-    Ok(())
+
+    let mut sink = PgSink::new(&mut client);
+    let outcome = pipeline::crawl(source, manifest, Some(&mut sink), &config, &cancel).await;
+
+    match &outcome {
+        Ok((_manifest, summary)) => {
+            pipes.report_materialization(serde_json::json!({
+                "seeded": {"raw_value": summary.seeded, "type": "int"},
+                "planned": {"raw_value": summary.planned, "type": "int"},
+                "attempted": {"raw_value": summary.attempted, "type": "int"},
+                "succeeded": {"raw_value": summary.succeeded, "type": "int"},
+                "failed": {"raw_value": summary.failed, "type": "int"},
+                "skipped_no_seed": {"raw_value": summary.skipped_no_seed, "type": "int"},
+            }));
+            tracing::info!(?summary, "crawl complete");
+        }
+        Err(err) => pipes.log("ERROR", format!("crawl failed: {err:#}")),
+    }
+    pipes.close();
+
+    outcome.map(|_| ()).context("crawl failed")
 }
 
 async fn run_import_shards_command(args: ImportShardsArgs) {

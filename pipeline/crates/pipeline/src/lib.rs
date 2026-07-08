@@ -45,7 +45,7 @@ mod source;
 pub use backfill::{backfill, BackfillConfig, BackfillSummary};
 pub use pipes::Pipes;
 pub use compose::to_batch;
-pub use crawl::{crawl, CrawlConfig, CrawlError, CrawlSummary};
+pub use crawl::{crawl, CrawlConfig, CrawlError, CrawlSummary, LadderSpec};
 pub use error::{Error, Result};
 pub use import_shards::{import_shards, ImportShardsConfig, ImportShardsSummary};
 pub use raw::{RawArchive, SaveOutcome};

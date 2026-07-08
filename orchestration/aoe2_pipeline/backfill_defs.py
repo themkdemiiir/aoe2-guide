@@ -26,15 +26,22 @@ from .assets.backfill_assets import (
     replay_backfill_job,
     replay_backfill_schedule,
 )
+from .assets.crawl_assets import (
+    latest_crawl,
+    latest_crawl_job,
+    latest_crawl_schedule,
+)
 from .assets.ingest_assets import dims
 from .resources import PostgresResource
 
 defs = Definitions(
-    # `dims` is included only as the backfill's declared lineage dep (already loaded in the live DB);
-    # the schedule's job selects `replay_backfill` alone, so `dims` is never auto-materialized here.
-    assets=[dims, replay_backfill],
-    jobs=[replay_backfill_job],
-    schedules=[replay_backfill_schedule],
+    # `dims` is included only as the crawl/backfill's declared lineage dep (already loaded in the
+    # live DB); each schedule's job selects its own asset, so `dims` is never auto-materialized here.
+    # Two forward/backward gameplay flows: `latest_crawl` (newest ranked games via the fast path) +
+    # `replay_backfill` (old aoestats matches via the archive).
+    assets=[dims, replay_backfill, latest_crawl],
+    jobs=[replay_backfill_job, latest_crawl_job],
+    schedules=[replay_backfill_schedule, latest_crawl_schedule],
     resources={
         "postgres": PostgresResource(database_url=EnvVar("DATABASE_URL")),
         # replay_backfill launches its container via PipesDockerClient (reads Pipes messages from

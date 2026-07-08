@@ -79,6 +79,19 @@ pub trait ReplaySource: Send + Sync {
         profile_id: ProfileId,
     ) -> impl Future<Output = fetch::Result<Vec<DiscoverySeed>>> + Send + '_;
 
+    /// Top-ranked profiles of a ranked ladder (see [`fetch::discover_ladder`]) — the seed of the
+    /// "latest games" freshness crawl. Defaults to an empty list so a test double that only exercises
+    /// single-profile discovery need not implement it; the one production [`FetchSource`] overrides
+    /// it.
+    fn discover_ladder(
+        &self,
+        leaderboard_id: i32,
+        count: usize,
+    ) -> impl Future<Output = fetch::Result<Vec<ProfileId>>> + Send + '_ {
+        let _ = (leaderboard_id, count);
+        async { Ok(Vec::new()) }
+    }
+
     /// Fetch + parse one match. See [`ReplayFetch`] for the outcome vocabulary.
     fn fetch_replay(&self, match_id: MatchId) -> impl Future<Output = ReplayFetch> + Send + '_;
 }
@@ -118,6 +131,14 @@ impl ReplaySource for FetchSource {
     // `manual_async_fn` lint requires this form whenever the body is just one async block.
     async fn discover(&self, profile_id: ProfileId) -> fetch::Result<Vec<DiscoverySeed>> {
         discover_recent(&self.client, profile_id).await
+    }
+
+    async fn discover_ladder(
+        &self,
+        leaderboard_id: i32,
+        count: usize,
+    ) -> fetch::Result<Vec<ProfileId>> {
+        fetch::discover_ladder(&self.client, leaderboard_id, count).await
     }
 
     async fn fetch_replay(&self, match_id: MatchId) -> ReplayFetch {

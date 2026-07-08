@@ -234,6 +234,7 @@ fn raw_bytes(match_id: i64) -> Bytes {
 fn config(profile_id: Option<i64>, limit: usize, dry_run: bool) -> CrawlConfig {
     CrawlConfig {
         profile_id: profile_id.map(ProfileId),
+        ladder: None,
         limit,
         concurrency: 4,
         dry_run,
