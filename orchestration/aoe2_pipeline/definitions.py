@@ -24,6 +24,7 @@ from .assets.crawl_assets import (
     latest_crawl,
     latest_crawl_job,
     latest_crawl_schedule,
+    latest_crawl_team_schedule,
 )
 from .assets.dbt_assets import civ_meta_dbt_assets
 from .assets.export_assets import export_benchmark, export_civ_meta, export_matchups
@@ -59,7 +60,11 @@ defs = Definitions(
     ],
     asset_checks=[no_gameplay_match_missing_map_or_elo],
     jobs=[replay_backfill_job, latest_crawl_job],
-    schedules=[replay_backfill_schedule, latest_crawl_schedule],
+    schedules=[
+        replay_backfill_schedule,
+        latest_crawl_schedule,
+        latest_crawl_team_schedule,
+    ],
     resources={
         "postgres": PostgresResource(database_url=EnvVar("DATABASE_URL")),
         "pipes_docker_client": PipesDockerClient(),

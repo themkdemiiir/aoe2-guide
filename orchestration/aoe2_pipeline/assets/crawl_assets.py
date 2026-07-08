@@ -127,17 +127,32 @@ latest_crawl_job = define_asset_job(
 )
 
 
+# Both ranked ladders run every 30 min, OFFSET 15 min from each other (1v1 at :00/:30, team at
+# :15/:45), so the two crawls never run concurrently — each container has its own FetchClient rate
+# limit, and staggering keeps their combined load under Relic's fast-path ceiling. They also write
+# SEPARATE manifests (`crawl-3.sqlite` / `crawl-4.sqlite` — the asset keys the path on
+# `leaderboard_id`), so there's no SQLite contention even if a run ever overruns its slot.
+
+
 @schedule(
     job=latest_crawl_job,
-    # Every 30 minutes — top ladder players play frequently, so a short interval keeps the DB fresh
-    # while staying well inside one run's wall-clock (~8 min for 200 profiles + 500 matches).
     cron_schedule="*/30 * * * *",
     default_status=DefaultScheduleStatus.RUNNING,
     description="Every-30-min freshness crawl of the 1v1 ranked ladder.",
 )
 def latest_crawl_schedule(context: ScheduleEvaluationContext) -> RunRequest:
-    # 1v1 RM (leaderboard 3) — the bulk of ranked play. Team (4) is one config change away (a second
-    # schedule with its own manifest, to avoid SQLite contention on a shared file).
     return RunRequest(
         run_config={"ops": {"latest_crawl": {"config": {"leaderboard_id": 3}}}},
+    )
+
+
+@schedule(
+    job=latest_crawl_job,
+    cron_schedule="15,45 * * * *",
+    default_status=DefaultScheduleStatus.RUNNING,
+    description="Every-30-min freshness crawl of the TEAM ranked ladder (offset 15 min from 1v1).",
+)
+def latest_crawl_team_schedule(context: ScheduleEvaluationContext) -> RunRequest:
+    return RunRequest(
+        run_config={"ops": {"latest_crawl": {"config": {"leaderboard_id": 4}}}},
     )
