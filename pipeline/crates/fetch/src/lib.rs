@@ -21,9 +21,10 @@ mod manifest;
 mod seed;
 
 pub use api::{
-    best_file, discover_recent, download_archive_replay, download_replay, get_replay_files,
-    ArchiveFetch, ReplayFile,
+    best_file, discover_ladder, discover_recent, download_archive_replay, download_replay,
+    get_replay_files, ArchiveFetch, ReplayFile,
 };
+pub use config::{LEADERBOARD_1V1_RM, LEADERBOARD_TEAM_RM};
 pub use client::FetchClient;
 pub use error::{Error, Result};
 pub use manifest::{

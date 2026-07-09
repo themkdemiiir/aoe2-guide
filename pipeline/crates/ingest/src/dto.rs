@@ -175,10 +175,19 @@ pub struct ReplayBatch {
 /// The outcome of one [`crate::ingest_batch`] call.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct IngestStats {
-    /// Rows newly inserted into `matches` (genuinely-new `match_id`s).
+    /// Rows newly inserted into `matches` (genuinely-new `match_id`s — includes matches that were
+    /// `source='aoestats'` and got UPGRADED to `source='replay'` under
+    /// [`crate::ConflictPolicy::UpgradeAoestats`]: those are deleted then re-inserted, so they
+    /// count here AND in [`Self::matches_upgraded`]).
     pub matches_inserted: u64,
-    /// Rows in the batch whose `match_id` already existed (re-ingest, or an intra-batch dupe).
+    /// Rows in the batch whose `match_id` already existed and was left untouched (a re-ingest, an
+    /// intra-batch dupe, or — under `UpgradeAoestats` — a match already at `source='replay'`).
     pub matches_skipped: u64,
+    /// Matches that were `source='aoestats'` and got REPLACED by this batch's richer replay row
+    /// under [`crate::ConflictPolicy::UpgradeAoestats`] (their aggregate `match_players`/
+    /// `match_ages` were deleted first — see `crate::ingest`'s upgrade SQL). Always `0` under the
+    /// default [`crate::ConflictPolicy::SkipExisting`].
+    pub matches_upgraded: u64,
     /// Rows inserted into `match_players`, gated on `matches_inserted`.
     pub players: u64,
     /// Rows inserted into `replay_events`, gated on `matches_inserted`.

@@ -165,6 +165,7 @@ impl IngestSink for RecordingSink {
         Ok(IngestStats {
             matches_inserted: 1,
             matches_skipped: 0,
+            matches_upgraded: 0,
             players: batch.players.len() as u64,
             events: batch.events.len() as u64,
             ages: batch.ages.len() as u64,
@@ -233,6 +234,7 @@ fn raw_bytes(match_id: i64) -> Bytes {
 fn config(profile_id: Option<i64>, limit: usize, dry_run: bool) -> CrawlConfig {
     CrawlConfig {
         profile_id: profile_id.map(ProfileId),
+        ladder: None,
         limit,
         concurrency: 4,
         dry_run,

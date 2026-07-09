@@ -2768,13 +2768,17 @@ name = "pipeline"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "base64",
  "bytes",
  "chrono",
  "clap",
  "fetch",
+ "flate2",
  "ingest",
  "pipeline-core",
  "replay",
+ "serde",
+ "serde_json",
  "sha2 0.10.9",
  "tempfile",
  "thiserror",

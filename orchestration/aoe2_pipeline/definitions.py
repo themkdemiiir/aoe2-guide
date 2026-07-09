@@ -13,8 +13,19 @@ import os
 
 from dagster import Definitions, EnvVar, PipesSubprocessClient
 from dagster_dbt import DbtCliResource
+from dagster_docker import PipesDockerClient
 
-from .assets.backfill_assets import replay_backfill
+from .assets.backfill_assets import (
+    replay_backfill,
+    replay_backfill_job,
+    replay_backfill_schedule,
+)
+from .assets.crawl_assets import (
+    latest_crawl,
+    latest_crawl_job,
+    latest_crawl_schedule,
+    latest_crawl_team_schedule,
+)
 from .assets.dbt_assets import civ_meta_dbt_assets
 from .assets.export_assets import export_benchmark, export_civ_meta, export_matchups
 from .assets.ingest_assets import aoestats_import, dims
@@ -42,13 +53,21 @@ defs = Definitions(
         dims,
         aoestats_import,
         replay_backfill,
+        latest_crawl,
         export_civ_meta,
         export_matchups,
         export_benchmark,
     ],
     asset_checks=[no_gameplay_match_missing_map_or_elo],
+    jobs=[replay_backfill_job, latest_crawl_job],
+    schedules=[
+        replay_backfill_schedule,
+        latest_crawl_schedule,
+        latest_crawl_team_schedule,
+    ],
     resources={
         "postgres": PostgresResource(database_url=EnvVar("DATABASE_URL")),
+        "pipes_docker_client": PipesDockerClient(),
         "pipes_subprocess_client": PipesSubprocessClient(),
         "dbt": DbtCliResource(
             project_dir=str(DBT_PROJECT_DIR),

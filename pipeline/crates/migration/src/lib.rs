@@ -24,6 +24,7 @@ mod m20260706_000015_create_units;
 mod m20260706_000016_create_techs;
 mod m20260706_000017_add_units_techs_fks;
 mod m20260706_000018_add_opening_kind;
+mod m20260708_000019_create_replay_backfill_misses;
 
 pub struct Migrator;
 
@@ -49,6 +50,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260706_000016_create_techs::Migration),
             Box::new(m20260706_000017_add_units_techs_fks::Migration),
             Box::new(m20260706_000018_add_opening_kind::Migration),
+            Box::new(m20260708_000019_create_replay_backfill_misses::Migration),
         ]
     }
 }

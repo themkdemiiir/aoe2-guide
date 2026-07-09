@@ -10,7 +10,7 @@
 //!   - **archive fallback** ([`download_archive_replay`]) — api.ageofempires.com, for matches that
 //!     aged out of the fast path (what `aoe.ms/replay/…` 301-redirects to).
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::io::{Cursor, Read as _};
 
 use bytes::Bytes;
@@ -289,6 +289,108 @@ pub(crate) async fn discover_recent_at(
     normalize_recent(doc, profile_id)
 }
 
+// --- getLeaderBoard2 (ranked-ladder profile discovery) ----------------------------------------
+
+/// getLeaderBoard2 URL for one page of a ranked ladder (`sortBy=1` = by rating, top first).
+pub(crate) fn leaderboard_url(base: &str, leaderboard_id: i32, start: usize, count: usize) -> String {
+    format!(
+        "{base}/getLeaderBoard2?title={}&leaderboard_id={leaderboard_id}&start={start}&count={count}&sortBy=1",
+        config::TITLE
+    )
+}
+
+#[derive(Debug, Deserialize)]
+struct LeaderBoardResponse {
+    // Always present on a real response (an empty ladder returns `[]`, never an absent key) — a
+    // RENAME must fail loud (`Error::Json`), not silently look like "zero ranked players".
+    #[serde(rename = "statGroups")]
+    stat_groups: Vec<StatGroup>,
+}
+
+/// One ranked entity (a solo player, or a team for the team ladder); its `members` are the profiles.
+#[derive(Debug, Deserialize)]
+struct StatGroup {
+    #[serde(default)]
+    members: Vec<LeaderMember>,
+}
+
+#[derive(Debug, Deserialize)]
+struct LeaderMember {
+    #[serde(default)]
+    profile_id: Option<i64>,
+}
+
+/// Extract the profile ids from one getLeaderBoard2 page (`statGroups[].members[].profile_id`), in
+/// ladder order, skipping any member missing a profile id.
+pub(crate) fn parse_leaderboard_profiles(raw: &[u8]) -> Result<Vec<ProfileId>> {
+    let doc: LeaderBoardResponse = serde_json::from_slice(raw)?;
+    let mut out = Vec::new();
+    for group in doc.stat_groups {
+        for m in group.members {
+            if let Some(pid) = m.profile_id {
+                out.push(ProfileId(pid));
+            }
+        }
+    }
+    Ok(out)
+}
+
+/// The top `count` ranked profiles of `leaderboard_id`, rating-first, DEDUPED (a profile can appear
+/// in multiple team stat groups). Paginates `config::LEADERBOARD_PAGE` at a time until it has
+/// `count` distinct profiles or the ladder runs out. Each page is its own rate-limited request; a
+/// page that FAILS to fetch stops pagination and returns what was gathered so far — a transient
+/// ladder-page error must not lose the whole crawl (mirrors the JS crawler's "warn + keep what we
+/// have"). A genuine JSON error still fails loud (endpoint rename), consistent with the other
+/// endpoints here.
+pub async fn discover_ladder(
+    client: &FetchClient,
+    leaderboard_id: i32,
+    count: usize,
+) -> Result<Vec<ProfileId>> {
+    discover_ladder_at(client, config::API_BASE, leaderboard_id, count).await
+}
+
+/// [`discover_ladder`] against an explicit `base` — the seam wiremock tests point at a mock server.
+pub(crate) async fn discover_ladder_at(
+    client: &FetchClient,
+    base: &str,
+    leaderboard_id: i32,
+    count: usize,
+) -> Result<Vec<ProfileId>> {
+    let mut seen = HashSet::new();
+    let mut out: Vec<ProfileId> = Vec::new();
+    let mut start = 1usize;
+    while out.len() < count {
+        let url = leaderboard_url(base, leaderboard_id, start, config::LEADERBOARD_PAGE);
+        let raw = match client.get_bytes(&url, "getLeaderBoard2").await {
+            Ok(raw) => raw,
+            Err(err) => {
+                tracing::warn!(
+                    leaderboard_id,
+                    start,
+                    error = %err,
+                    "getLeaderBoard2 page failed — keeping the profiles gathered so far"
+                );
+                break;
+            }
+        };
+        let page = parse_leaderboard_profiles(&raw)?;
+        if page.is_empty() {
+            break; // ran off the end of the ladder
+        }
+        for pid in page {
+            if seen.insert(pid.0) {
+                out.push(pid);
+                if out.len() >= count {
+                    break;
+                }
+            }
+        }
+        start += config::LEADERBOARD_PAGE;
+    }
+    Ok(out)
+}
+
 // --- age-archive fallback ---------------------------------------------------------------------
 
 /// Outcome of one archive lookup across a match's participants. The rate-limit + budget PACING of
@@ -396,6 +498,25 @@ mod tests {
         assert_eq!(
             archive_url(config::ARCHIVE_BASE, MatchId(500), ProfileId(42)),
             "https://api.ageofempires.com/api/GameStats/AgeII/GetMatchReplay/?gameId=500&profileId=42&matchId=500"
+        );
+        assert_eq!(
+            leaderboard_url(config::API_BASE, config::LEADERBOARD_1V1_RM, 1, 200),
+            "https://aoe-api.worldsedgelink.com/community/leaderboard/getLeaderBoard2?title=age2&leaderboard_id=3&start=1&count=200&sortBy=1"
+        );
+    }
+
+    #[test]
+    fn parse_leaderboard_profiles_flattens_members_and_skips_missing_ids() {
+        // Two stat groups: a solo entry and a "team" entry with two members (one lacking a
+        // profile_id — must be skipped, not panic). Order is preserved.
+        let raw = br#"{"statGroups":[
+            {"members":[{"profile_id":199325,"name":"Hera"}]},
+            {"members":[{"profile_id":271202},{"name":"noid"},{"profile_id":214031}]}
+        ]}"#;
+        let pids = parse_leaderboard_profiles(raw).unwrap();
+        assert_eq!(
+            pids,
+            vec![ProfileId(199325), ProfileId(271202), ProfileId(214031)]
         );
     }
 

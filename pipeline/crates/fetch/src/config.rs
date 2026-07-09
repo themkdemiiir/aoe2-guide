@@ -14,6 +14,20 @@ pub const REPLAYFILES_PER_MIN: u32 = 100;
 /// Max matchIDs per getReplayFiles call.
 pub const REPLAYFILES_BATCH: usize = 10;
 
+// --- getLeaderBoard2 (ranked-ladder profile discovery) -----------------------
+// The freshness crawl seeds itself from the top of the ranked ladder: getLeaderBoard2 returns the
+// ranked players (as `statGroups[].members[].profile_id`), whose `getRecentMatchHistory` then
+// yields the latest ranked matches. Sourced from the OLD JS crawler
+// (`scripts/data-pipeline/lib/relic-api.mjs`): same endpoint, `leaderboard_id`s, and `count=200`
+// page size. NOT the `matchtype_id` ladder space (6/7/8/9 — see `seed::RelicMatchType`); this is
+// the SEPARATE `leaderboard_id` space, exactly the two-id-spaces distinction relic-api.mjs warns of.
+/// 1v1 ranked-RM ladder (`SOLO_RM_RANKED`).
+pub const LEADERBOARD_1V1_RM: i32 = 3;
+/// Team ranked-RM ladder (`TEAM_RM_RANKED`).
+pub const LEADERBOARD_TEAM_RM: i32 = 4;
+/// getLeaderBoard2 page size (the endpoint's own max per call).
+pub const LEADERBOARD_PAGE: usize = 200;
+
 /// Bounded concurrency: a handful of connections, never a flood. Distinct from the request RATE
 /// above — the governor limiter paces *how often* we send, the semaphore caps *how many* are in
 /// flight at once (see the playbook: separate constraints).

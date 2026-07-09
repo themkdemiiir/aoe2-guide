@@ -14,11 +14,13 @@
 
 use std::path::PathBuf;
 use std::sync::Arc;
+use std::time::Duration;
 
 use anyhow::Context;
+use chrono::NaiveDate;
 use clap::{Parser, Subcommand};
 use fetch::{FetchClient, SqliteManifest};
-use pipeline::{CrawlConfig, FetchSource, PgSink};
+use pipeline::{BackfillConfig, CrawlConfig, FetchSource, ImportShardsConfig, PgSink};
 use pipeline_core::cli::{database_url, init_tracing, log_error_and_code};
 use pipeline_core::{redact_secret, ProfileId};
 use tokio_postgres::NoTls;
@@ -58,6 +60,15 @@ enum Command {
     /// re-usable by a (possibly improved) parser. Parse-and-count ONLY — never re-ingests into
     /// Postgres and never reads `DATABASE_URL` (see `pipeline::reparse_dir`'s doc for the scope).
     Reparse(ReparseArgs),
+    /// Migrate the OLD parsed-replay shard corpus into the live Postgres pipeline as
+    /// `source='replay'`, re-deriving the full enrichment. See `pipeline::import_shards`'s module
+    /// doc for the full design.
+    ImportShards(ImportShardsArgs),
+    /// Walk the historical `source='aoestats'` corpus newest-first, download each match's real
+    /// replay from the age archive, and UPGRADE it in place to a rich `source='replay'` row. The
+    /// ongoing recent→old enrichment loop — see `pipeline::backfill`'s module doc (resumable purely
+    /// from DB state; resource-bounded on every axis).
+    Backfill(BackfillArgs),
 }
 
 #[derive(clap::Args)]
@@ -66,6 +77,17 @@ struct CrawlArgs {
     /// for it) and only attempt matches already sitting in the manifest.
     #[arg(long)]
     profile_id: Option<i64>,
+
+    /// Discover the top ranked-ladder profiles' recent matches (the "latest games" freshness crawl)
+    /// instead of a single `--profile-id`. Pass the Relic `leaderboard_id`: 3 = 1v1 RM, 4 = team RM.
+    /// Takes precedence over `--profile-id`.
+    #[arg(long)]
+    leaderboard: Option<i32>,
+
+    /// How many top ladder profiles to seed from when `--leaderboard` is set — each contributes its
+    /// recent matches (deduped by match id).
+    #[arg(long, default_value_t = 200)]
+    profiles: usize,
 
     /// Max matches to attempt this run (`take_ready`'s own LIMIT).
     #[arg(long, default_value_t = 50)]
@@ -114,6 +136,99 @@ struct ReparseArgs {
     limit: usize,
 }
 
+/// Default shard directory — matches the OLD `scripts/data-pipeline/replay-rs` extractor's
+/// output location (see `pipeline::import_shards`'s module doc).
+const DEFAULT_SHARDS_DIR: &str = "data-cache/replays/shards";
+/// Default scratch dir for the decompressed shards + staging DuckDB + per-chunk temp + cursor.
+const DEFAULT_WORK_DIR: &str = "data-cache/replays/shard-staging";
+
+#[derive(clap::Args)]
+struct ImportShardsArgs {
+    /// Directory containing `{meta,players,events,ages}.ndjson.gz`.
+    #[arg(long, default_value = DEFAULT_SHARDS_DIR)]
+    shards_dir: PathBuf,
+
+    /// Path to the read-only DuckDB snapshot carrying `games` (played_at/ladder/rating per
+    /// (match_id, profile_id)) — the seed data the shards themselves don't carry.
+    #[arg(long)]
+    snapshot: PathBuf,
+
+    /// Path to the `duckdb` CLI binary (not always on `PATH` — e.g. `~/bin/duckdb`).
+    #[arg(long, default_value = "duckdb")]
+    duckdb_bin: PathBuf,
+
+    /// Scratch dir for the decompressed shards, staging DuckDB, per-chunk temp files, and the
+    /// resume cursor. Needs ~110 GB free for the full corpus's decompressed `events`.
+    #[arg(long, default_value = DEFAULT_WORK_DIR)]
+    work_dir: PathBuf,
+
+    /// Stop after this many distinct `match_id`s (sorted). 0 = every readable match.
+    #[arg(long, default_value_t = 200)]
+    limit: usize,
+
+    /// Distinct matches per DuckDB range-`COPY` round-trip (bounds per-chunk RAM).
+    #[arg(long, default_value_t = 2000)]
+    chunk_size: usize,
+
+    /// Matches per `ingest_batch` transaction.
+    #[arg(long, default_value_t = 40)]
+    batch_size: usize,
+
+    /// A batch taking longer than this many seconds is treated as a load-safety signal — pause
+    /// `--pause-secs` before the next one.
+    #[arg(long, default_value_t = 10)]
+    slow_batch_secs: u64,
+
+    /// How long to pause (seconds) after a slow batch — see `--slow-batch-secs`.
+    #[arg(long, default_value_t = 5)]
+    pause_secs: u64,
+
+    /// Force a full staging rebuild (re-decompress + reload) even if the `.done` markers exist.
+    #[arg(long)]
+    rebuild_staging: bool,
+}
+
+#[derive(clap::Args)]
+struct BackfillArgs {
+    /// Max `aoestats` matches to attempt this run (newest-first). The Dagster schedule is the
+    /// cadence — keep this a bounded chunk, not a firehose.
+    #[arg(long, default_value_t = 300)]
+    limit: usize,
+
+    /// Max concurrent in-flight archive fetch + parse worker tasks — also the archive HTTP client's
+    /// own concurrency bound.
+    #[arg(long, default_value_t = 3)]
+    concurrency: usize,
+
+    /// Steady archive request rate (requests/min, GCRA). Keep GENTLE — the endpoint soft-slows
+    /// under sustained load; this is deliberately far below the recent crawl's fast-path rate.
+    #[arg(long, default_value_t = 30)]
+    rate: u32,
+
+    /// Matches per upgrade-ingest transaction. Small, to bound per-transaction DB work.
+    #[arg(long, default_value_t = 20)]
+    batch_size: usize,
+
+    /// Don't attempt matches older than this `YYYY-MM-DD` (UTC) — the age archive's rolling
+    /// retention has aged their replays out, so they'd only 404. Required: the operator must state
+    /// the current retention edge explicitly rather than waste archive calls on guaranteed misses.
+    #[arg(long, value_name = "YYYY-MM-DD")]
+    archive_floor: String,
+
+    /// A batch slower than this many seconds triggers a `--pause-secs` DB-load-safety pause.
+    #[arg(long, default_value_t = 10)]
+    slow_batch_secs: u64,
+
+    /// How long to pause (seconds) after a slow batch — see `--slow-batch-secs`.
+    #[arg(long, default_value_t = 5)]
+    pause_secs: u64,
+
+    /// Discover + plan only: never download, parse, or ingest (the discovery query still runs —
+    /// it's read-only). Safe for wiring validation.
+    #[arg(long)]
+    dry_run: bool,
+}
+
 #[tokio::main]
 async fn main() {
     init_tracing(DEFAULT_LOG_FILTER);
@@ -134,6 +249,8 @@ async fn main() {
                 std::process::exit(1);
             }
         }
+        Command::ImportShards(args) => run_import_shards_command(args).await,
+        Command::Backfill(args) => run_backfill_command(args).await,
     }
 }
 
@@ -184,6 +301,10 @@ fn build_source(args: &CrawlArgs) -> anyhow::Result<Arc<FetchSource>> {
 fn crawl_config(args: &CrawlArgs, dry_run: bool) -> CrawlConfig {
     CrawlConfig {
         profile_id: args.profile_id.map(ProfileId),
+        ladder: args.leaderboard.map(|leaderboard_id| pipeline::LadderSpec {
+            leaderboard_id,
+            profiles: args.profiles,
+        }),
         limit: args.limit,
         concurrency: args.concurrency.max(1),
         dry_run,
@@ -252,24 +373,173 @@ async fn run_live(args: CrawlArgs, database_url: &str) -> anyhow::Result<()> {
     let cancel = CancellationToken::new();
     spawn_ctrl_c_handler(cancel.clone());
 
-    let mut sink = PgSink::new(&mut client);
-    let (_manifest, summary) = pipeline::crawl(source, manifest, Some(&mut sink), &config, &cancel)
-        .await
-        .context("crawl failed")?;
-
-    tracing::info!(
-        seeded = summary.seeded,
-        planned = summary.planned,
-        skipped_no_seed = summary.skipped_no_seed,
-        cancelled_before_start = summary.cancelled_before_start,
-        attempted = summary.attempted,
-        succeeded = summary.succeeded,
-        failed = summary.failed,
-        raw_saved = summary.raw_saved,
-        raw_already_present = summary.raw_already_present,
-        raw_failed = summary.raw_failed,
-        raw_bytes_written = summary.raw_bytes_written,
-        "crawl complete"
+    // Report to Dagster Pipes if launched under it (a no-op for a plain CLI run — see
+    // `pipeline::Pipes`), so a scheduled crawl surfaces its outcome as UI metadata.
+    let pipes = pipeline::Pipes::from_env();
+    pipes.log(
+        "INFO",
+        match config.ladder {
+            Some(spec) => format!(
+                "crawl starting: ladder leaderboard={} profiles={} limit={}",
+                spec.leaderboard_id, spec.profiles, config.limit
+            ),
+            None => format!("crawl starting: profile={:?} limit={}", args.profile_id, config.limit),
+        },
     );
+
+    let mut sink = PgSink::new(&mut client);
+    let outcome = pipeline::crawl(source, manifest, Some(&mut sink), &config, &cancel).await;
+
+    match &outcome {
+        Ok((_manifest, summary)) => {
+            pipes.report_materialization(serde_json::json!({
+                "seeded": {"raw_value": summary.seeded, "type": "int"},
+                "planned": {"raw_value": summary.planned, "type": "int"},
+                "attempted": {"raw_value": summary.attempted, "type": "int"},
+                "succeeded": {"raw_value": summary.succeeded, "type": "int"},
+                "failed": {"raw_value": summary.failed, "type": "int"},
+                "skipped_no_seed": {"raw_value": summary.skipped_no_seed, "type": "int"},
+            }));
+            tracing::info!(?summary, "crawl complete");
+        }
+        Err(err) => pipes.log("ERROR", format!("crawl failed: {err:#}")),
+    }
+    pipes.close();
+
+    outcome.map(|_| ()).context("crawl failed")
+}
+
+async fn run_import_shards_command(args: ImportShardsArgs) {
+    let secret = match database_url() {
+        Ok(secret) => secret,
+        Err(err) => {
+            tracing::error!(error = %err, "failed to read DATABASE_URL");
+            std::process::exit(1);
+        }
+    };
+
+    if let Err(err) = run_import_shards(args, secret.expose()).await {
+        std::process::exit(log_error_and_code(&err, &secret));
+    }
+}
+
+async fn run_import_shards(args: ImportShardsArgs, database_url: &str) -> anyhow::Result<()> {
+    let (mut client, connection) = tokio_postgres::connect(database_url, NoTls)
+        .await
+        .context("failed to connect to the database")?;
+
+    let database_url_for_log = database_url.to_owned();
+    tokio::spawn(async move {
+        if let Err(err) = connection.await {
+            let message = redact_secret(&format!("{err:#}"), &database_url_for_log);
+            tracing::error!(error = %message, "database connection closed with an error");
+        }
+    });
+
+    let cfg = ImportShardsConfig {
+        shards_dir: args.shards_dir,
+        snapshot_path: args.snapshot,
+        duckdb_bin: args.duckdb_bin,
+        work_dir: args.work_dir,
+        limit: args.limit,
+        chunk_size: args.chunk_size.max(1),
+        batch_size: args.batch_size.max(1),
+        slow_batch: Duration::from_secs(args.slow_batch_secs),
+        pause: Duration::from_secs(args.pause_secs),
+        rebuild_staging: args.rebuild_staging,
+    };
+
+    let summary = pipeline::import_shards(&cfg, &mut client)
+        .await
+        .context("import_shards failed")?;
+
+    tracing::info!(?summary, "import-shards complete");
     Ok(())
+}
+
+async fn run_backfill_command(args: BackfillArgs) {
+    let secret = match database_url() {
+        Ok(secret) => secret,
+        Err(err) => {
+            tracing::error!(error = %err, "failed to read DATABASE_URL");
+            std::process::exit(1);
+        }
+    };
+
+    if let Err(err) = run_backfill(args, secret.expose()).await {
+        std::process::exit(log_error_and_code(&err, &secret));
+    }
+}
+
+async fn run_backfill(args: BackfillArgs, database_url: &str) -> anyhow::Result<()> {
+    // Parse the retention-floor date (→ midnight UTC) before touching the DB — a malformed date is
+    // a CLI error, surfaced immediately, not a runtime one mid-run.
+    let floor_date = NaiveDate::parse_from_str(&args.archive_floor, "%Y-%m-%d").with_context(|| {
+        format!(
+            "--archive-floor must be YYYY-MM-DD, got {:?}",
+            args.archive_floor
+        )
+    })?;
+    let archive_floor = floor_date
+        .and_hms_opt(0, 0, 0)
+        .context("failed to build midnight from --archive-floor")?
+        .and_utc();
+
+    let (mut client, connection) = tokio_postgres::connect(database_url, NoTls)
+        .await
+        .context("failed to connect to the database")?;
+
+    let database_url_for_log = database_url.to_owned();
+    tokio::spawn(async move {
+        if let Err(err) = connection.await {
+            let message = redact_secret(&format!("{err:#}"), &database_url_for_log);
+            tracing::error!(error = %message, "database connection closed with an error");
+        }
+    });
+
+    let cancel = CancellationToken::new();
+    spawn_ctrl_c_handler(cancel.clone());
+
+    let cfg = BackfillConfig {
+        limit: args.limit,
+        concurrency: args.concurrency.max(1),
+        rate: args.rate,
+        batch_size: args.batch_size.max(1),
+        archive_floor,
+        slow_batch: Duration::from_secs(args.slow_batch_secs),
+        pause: Duration::from_secs(args.pause_secs),
+        dry_run: args.dry_run,
+    };
+
+    // Report to Dagster Pipes if launched under it (a no-op for a plain CLI run — see
+    // `pipeline::Pipes`). Streams a start log, then the run's summary as materialization metadata.
+    let pipes = pipeline::Pipes::from_env();
+    pipes.log(
+        "INFO",
+        format!(
+            "backfill starting: limit={}, rate={}, concurrency={}, archive_floor={}",
+            cfg.limit, cfg.rate, cfg.concurrency, args.archive_floor
+        ),
+    );
+
+    let outcome = pipeline::backfill(&mut client, &cfg, &cancel).await;
+
+    match &outcome {
+        Ok(summary) => {
+            pipes.report_materialization(serde_json::json!({
+                "discovered": {"raw_value": summary.discovered, "type": "int"},
+                "attempted": {"raw_value": summary.attempted, "type": "int"},
+                "upgraded": {"raw_value": summary.upgraded, "type": "int"},
+                "not_found": {"raw_value": summary.not_found, "type": "int"},
+                "rate_limited": {"raw_value": summary.rate_limited, "type": "int"},
+                "errored": {"raw_value": summary.errored, "type": "int"},
+                "misses_recorded": {"raw_value": summary.misses_recorded, "type": "int"},
+            }));
+            tracing::info!(?summary, "backfill complete");
+        }
+        Err(err) => pipes.log("ERROR", format!("backfill failed: {err:#}")),
+    }
+    pipes.close();
+
+    outcome.map(|_| ()).context("backfill failed")
 }

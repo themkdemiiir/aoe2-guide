@@ -116,6 +116,16 @@ pub enum CrawlError {
 /// [`crawl`]'s result alias.
 pub type Result<T> = std::result::Result<T, CrawlError>;
 
+/// The ranked-ladder discovery target for a freshness ("latest games") crawl — see
+/// [`CrawlConfig::ladder`].
+#[derive(Debug, Clone, Copy)]
+pub struct LadderSpec {
+    /// Relic `leaderboard_id` (`fetch::LEADERBOARD_1V1_RM` = 3 / `fetch::LEADERBOARD_TEAM_RM` = 4).
+    pub leaderboard_id: i32,
+    /// How many top-ranked profiles to seed from — each contributes its recent matches.
+    pub profiles: usize,
+}
+
 /// One `crawl` invocation's tunables. See the module doc for how [`Self::profile_id`] and
 /// [`Self::dry_run`] interact (both independently control whether ANY network call happens).
 #[derive(Debug, Clone)]
@@ -124,6 +134,10 @@ pub struct CrawlConfig {
     /// — useful for draining an already-seeded manifest, and for a `--dry-run` invocation that
     /// must never touch the live Relic API at all (see `main.rs`'s CLI doc).
     pub profile_id: Option<ProfileId>,
+    /// When `Some`, discover the top-`profiles` of the ranked ladder and EACH of their recent
+    /// matches (the "latest games" freshness crawl), deduped by `match_id`. Takes precedence over
+    /// [`Self::profile_id`] when both are set. See the discover step in [`crawl`].
+    pub ladder: Option<LadderSpec>,
     /// Cap on how many manifest-eligible matches this run attempts (`take_ready`'s own `LIMIT`).
     pub limit: usize,
     /// Max concurrent in-flight per-match worker tasks. See the module doc's "Two independent
@@ -316,6 +330,46 @@ async fn process_one<S: ReplaySource>(
     (match_outcome, raw_outcome)
 }
 
+/// Discover the freshness crawl's seeds: the top-`spec.profiles` ranked profiles, then EACH one's
+/// recent matches, deduped by `match_id` (ladder profiles play each other, so their recent-history
+/// lists overlap heavily — the same match surfaces from both players). A failed ladder fetch or a
+/// single bad profile is logged and skipped, never aborting the crawl (mirrors the single-profile
+/// discover's own resilience).
+async fn discover_ladder_seeds<S: ReplaySource>(source: &S, spec: LadderSpec) -> Vec<DiscoverySeed> {
+    let profiles = match source.discover_ladder(spec.leaderboard_id, spec.profiles).await {
+        Ok(profiles) => profiles,
+        Err(err) => {
+            tracing::warn!(
+                leaderboard_id = spec.leaderboard_id,
+                error = %err,
+                "ladder discovery failed — no seeds this run"
+            );
+            return Vec::new();
+        }
+    };
+    tracing::info!(
+        leaderboard_id = spec.leaderboard_id,
+        profiles = profiles.len(),
+        "ladder profiles discovered — collecting their recent matches"
+    );
+    let mut by_match: HashMap<MatchId, DiscoverySeed> = HashMap::new();
+    for pid in profiles {
+        match source.discover(pid).await {
+            Ok(seeds) => {
+                for s in seeds {
+                    by_match.entry(s.match_id).or_insert(s);
+                }
+            }
+            Err(err) => tracing::warn!(
+                profile_id = pid.0,
+                error = %err,
+                "recent-history discovery failed for a ladder profile — skipping it"
+            ),
+        }
+    }
+    by_match.into_values().collect()
+}
+
 /// Run one discover -> plan -> process -> record crawl. See the module doc for the full shape.
 /// Returns the manifest back (it is moved in and threaded through every blocking call, never
 /// shared) alongside a [`CrawlSummary`] of what happened.
@@ -340,16 +394,21 @@ where
 
     // 1. Discover. See the module doc + `CrawlConfig::profile_id`'s doc for when this is
     // network-free. A discovery failure is logged and treated as "no new seeds this run" rather
-    // than aborting the whole crawl.
-    let seeds = match config.profile_id {
-        None => Vec::new(),
-        Some(profile_id) => match source.discover(profile_id).await {
-            Ok(seeds) => seeds,
-            Err(err) => {
-                tracing::warn!(error = %err, "discover_recent failed — no new seeds this run");
-                Vec::new()
-            }
-        },
+    // than aborting the whole crawl. `ladder` (the freshness crawl) takes precedence over a single
+    // `profile_id` when both are set.
+    let seeds = if let Some(spec) = config.ladder {
+        discover_ladder_seeds(source.as_ref(), spec).await
+    } else {
+        match config.profile_id {
+            None => Vec::new(),
+            Some(profile_id) => match source.discover(profile_id).await {
+                Ok(seeds) => seeds,
+                Err(err) => {
+                    tracing::warn!(error = %err, "discover_recent failed — no new seeds this run");
+                    Vec::new()
+                }
+            },
+        }
     };
 
     let seed_rows: Vec<SeedRow> = seeds

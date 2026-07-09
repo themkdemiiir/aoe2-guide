@@ -273,14 +273,82 @@ INSERT INTO match_player_techs (match_id, profile_id, tech_id, t_ms)
   FROM stg_match_player_techs s JOIN new_match_ids n USING (match_id)
 "#;
 
-/// Idempotently bulk-load a [`ReplayBatch`] into the live schema (see the module docs for the
-/// exact algorithm). Re-ingesting an identical batch leaves every table's row count unchanged.
+/// How [`ingest_batch_with_policy`] resolves a batch match whose `match_id` ALREADY has a row in
+/// `matches`. The two child inserts and the staging machinery are identical either way — only what
+/// happens to a pre-existing row differs.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ConflictPolicy {
+    /// Leave any existing `matches` row untouched (`ON CONFLICT (match_id) DO NOTHING`, and no
+    /// child rows appended) — the original, default no-churn contract. Correct for the recent
+    /// crawl and the shard import, whose match_ids don't collide with the historical aoestats
+    /// corpus (and where "first writer wins" is the intended rule). [`ingest_batch`] uses this.
+    SkipExisting,
+    /// UPGRADE an existing `source='aoestats'` row to this batch's richer `source='replay'` row.
+    /// Deletes that match's aggregate children AND the `matches` row itself first, so the INSERT
+    /// below re-creates it cleanly with full replay enrichment. Used by the replay BACKFILL
+    /// (`pipeline backfill`; see [`UPGRADE_DELETE_CHILDREN_SQL`]'s doc for why the child deletes
+    /// are EXPLICIT and not left to FK cascade). A match_id already at `source='replay'` is NOT in
+    /// the upgrade set, so a re-run is idempotent (it falls through to `DO NOTHING`); a match_id
+    /// absent entirely is a plain insert.
+    UpgradeAoestats,
+}
+
+/// [`ConflictPolicy::UpgradeAoestats`], step 1: materialize the batch's match_ids that currently
+/// hold a `source='aoestats'` row — exactly the ones being REPLACED. Scoping every subsequent
+/// upgrade delete to this set (rather than to all of `stg_matches`) is what makes the upgrade
+/// leave an already-`replay` row, and a genuinely-new match, untouched.
+const CREATE_UPGRADE_IDS_SQL: &str = r#"
+CREATE TEMP TABLE upgrade_match_ids ON COMMIT DROP AS
+  SELECT s.match_id
+  FROM stg_matches s
+  JOIN matches m ON m.match_id = s.match_id AND m.source = 'aoestats'
+"#;
+
+/// [`ConflictPolicy::UpgradeAoestats`], step 2: remove the aggregate rows the aoestats import wrote
+/// for the upgrade set. Every child is deleted EXPLICITLY — only `match_players` has a FK to
+/// `matches` (`ON DELETE CASCADE`, see `m20260705_000007_create_match_players.rs`); `match_ages`
+/// and the replay-only child tables have NO FK (deliberately, for bulk-load performance — see
+/// their migrations), so a bare `DELETE FROM matches` would ORPHAN those rows against the
+/// about-to-be-`replay` match_id. `match_ages` is the one that actually has rows for an aoestats
+/// match; the replay-only tables (`replay_events`/`replay_ages`/`match_player_units`/
+/// `match_player_techs`) are empty for it, so those deletes are cheap no-ops that also defend
+/// against any partial prior state.
+const UPGRADE_DELETE_CHILDREN_SQL: &str = r#"
+DELETE FROM match_players      WHERE match_id IN (SELECT match_id FROM upgrade_match_ids);
+DELETE FROM match_ages         WHERE match_id IN (SELECT match_id FROM upgrade_match_ids);
+DELETE FROM replay_events      WHERE match_id IN (SELECT match_id FROM upgrade_match_ids);
+DELETE FROM replay_ages        WHERE match_id IN (SELECT match_id FROM upgrade_match_ids);
+DELETE FROM match_player_units WHERE match_id IN (SELECT match_id FROM upgrade_match_ids);
+DELETE FROM match_player_techs WHERE match_id IN (SELECT match_id FROM upgrade_match_ids);
+"#;
+
+/// [`ConflictPolicy::UpgradeAoestats`], step 3: drop the old `matches` rows themselves, clearing
+/// the way for `INSERT_NEW_MATCHES_SQL` to re-insert them as `source='replay'`. Its row count IS
+/// the number of aoestats→replay upgrades ([`IngestStats::matches_upgraded`]).
+const UPGRADE_DELETE_MATCHES_SQL: &str =
+    "DELETE FROM matches WHERE match_id IN (SELECT match_id FROM upgrade_match_ids)";
+
+/// Idempotently bulk-load a [`ReplayBatch`] into the live schema under the default
+/// [`ConflictPolicy::SkipExisting`] (see the module docs for the exact algorithm). Re-ingesting an
+/// identical batch leaves every table's row count unchanged.
 ///
 /// Never fabricates a missing required field — the DTOs make `map_id`/`played_at`/`ladder`/
 /// `source`/`civ_id` non-optional, so a caller without a real value fails to compile. A FK
 /// violation (unknown `map_id`/`civ_id`) or any other DB error surfaces as `Err`; the transaction
 /// then rolls back on drop (nothing partial is ever committed).
 pub async fn ingest_batch(client: &mut Client, batch: &ReplayBatch) -> Result<IngestStats> {
+    ingest_batch_with_policy(client, batch, ConflictPolicy::SkipExisting).await
+}
+
+/// [`ingest_batch`] with an explicit [`ConflictPolicy`] for match_ids already present in `matches`.
+/// See [`ConflictPolicy::UpgradeAoestats`] for the backfill's aoestats→replay replacement path; all
+/// other behaviour (staging, child inserts, idempotency, roll-back-on-error) is identical to
+/// [`ingest_batch`].
+pub async fn ingest_batch_with_policy(
+    client: &mut Client,
+    batch: &ReplayBatch,
+    policy: ConflictPolicy,
+) -> Result<IngestStats> {
     let tx = client
         .transaction()
         .await
@@ -296,6 +364,24 @@ pub async fn ingest_batch(client: &mut Client, batch: &ReplayBatch) -> Result<In
     copy_replay_ages(&tx, &batch.ages).await?;
     copy_match_player_units(&tx, &batch.player_units).await?;
     copy_match_player_techs(&tx, &batch.player_techs).await?;
+
+    // UpgradeAoestats: replace any pre-existing aoestats rows for this batch's match_ids (their
+    // children + the matches row) BEFORE the insert, so the insert re-creates them as replay with
+    // full enrichment. A no-op under SkipExisting.
+    let matches_upgraded = match policy {
+        ConflictPolicy::SkipExisting => 0,
+        ConflictPolicy::UpgradeAoestats => {
+            tx.batch_execute(CREATE_UPGRADE_IDS_SQL)
+                .await
+                .context("failed to compute upgrade match ids")?;
+            tx.batch_execute(UPGRADE_DELETE_CHILDREN_SQL)
+                .await
+                .context("failed to delete aoestats children for upgrade")?;
+            tx.execute(UPGRADE_DELETE_MATCHES_SQL, &[])
+                .await
+                .context("failed to delete aoestats matches for upgrade")?
+        }
+    };
 
     let matches_inserted = tx
         .execute(INSERT_NEW_MATCHES_SQL, &[])
@@ -331,6 +417,7 @@ pub async fn ingest_batch(client: &mut Client, batch: &ReplayBatch) -> Result<In
     let stats = IngestStats {
         matches_inserted,
         matches_skipped,
+        matches_upgraded,
         players,
         events,
         ages,
