@@ -121,6 +121,12 @@ pub struct PlayerMetrics {
     /// vils; age medians), with its honesty labels — None when the map/civ has
     /// no data. The UI renders this as the "reference" column verbatim.
     pub reference: Option<RefSlice>,
+    /// per watched eco upgrade: the player's own first-research time vs the WINNER
+    /// p25/p50/p75 band at their elo AND map (see `EcoRef`). Empty when the player's
+    /// elo is unknown or no watched tech has a winner band at any fallback. Attached
+    /// after `build_metrics` (like `reference`) by `compare::attach_eco_references`.
+    #[serde(default)]
+    pub eco_ref: Vec<EcoRef>,
 }
 
 /// The benchmark slice actually used for this player (already fallback-resolved).
@@ -135,6 +141,28 @@ pub struct RefSlice {
     pub bucket: String,
     /// how precise the match was: "exact" | "map_mode" | "map_all"
     pub kind: String,
+}
+
+/// One watched eco upgrade's WINNER-band comparison for a player: their own first-research CLICK
+/// time (seconds) vs the winner p25/p50/p75 at their `(map, elo bucket, mode)`. `yours_s` is `None`
+/// when the player never researched it. `verdict` says where the player falls so the UI can color
+/// without recomputing; `kind` records how precise the resolved slice was (exact map+elo vs a
+/// fallback rollup — see `data::EcoMatch`).
+#[derive(Debug, Clone, Serialize)]
+pub struct EcoRef {
+    pub tech_id: u16,
+    pub name: &'static str,
+    /// the player's first-research time in seconds; `None` = never researched this game.
+    pub yours_s: Option<f64>,
+    pub p25_s: f64,
+    pub p50_s: f64,
+    pub p75_s: f64,
+    /// winner sample size behind the band.
+    pub n: u64,
+    /// "ahead" (≤p25) | "on_pace" (≤p50) | "behind" (≤p75) | "slow" (>p75) | "not_researched".
+    pub verdict: &'static str,
+    /// "exact" | "map_all_elo" | "all_map_elo" | "all_map_all_elo" — the resolved slice's precision.
+    pub kind: &'static str,
 }
 
 /// The four comparison bases: your elo-bucket median, the 2500+ "pro" median, the opponent

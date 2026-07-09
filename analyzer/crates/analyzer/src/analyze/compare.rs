@@ -3,7 +3,7 @@
 
 use std::collections::HashMap;
 
-use crate::analyze::data::{self, Benchmark, Costs};
+use crate::analyze::data::{self, Benchmark, Costs, EcoBenchmark, EcoMatch};
 use crate::analyze::model::{Basis, Family, Finding, PlayerMetrics, Role, Severity};
 use crate::analyze::position::CoordMetric;
 use crate::analyze::walk::Walked;
@@ -104,6 +104,7 @@ pub fn build_metrics(
                 market_buys,
                 market_sells,
                 reference: None, // attached after findings (attach_references)
+                eco_ref: Vec::new(), // attached after findings (attach_eco_references)
             }
         })
         .collect()
@@ -147,6 +148,70 @@ pub fn attach_references(
                 .to_string(),
             });
         }
+    }
+}
+
+/// Attach each player's per-eco-upgrade WINNER band (p25/p50/p75 at their elo AND map), so the UI
+/// can render "your Loom vs winners on this map" without shipping the whole eco benchmark to the
+/// client. Iterates the SAME `WATCHED_TECHS` the metrics use, keeping only techs that resolve to a
+/// band (via `eco.band`'s map→elo fallback); a tech the player didn't research is still listed with
+/// `yours_s = None` (`verdict = "not_researched"`) so the table shows the gap honestly. Eco pace is
+/// map-driven, so the resolution is map-specific first — an all-map fallback is labelled as such via
+/// `kind`. Civ is deliberately NOT a dimension (would fragment the replay-only corpus); elo + map +
+/// mode is the meaningful, sample-viable grain.
+pub fn attach_eco_references(
+    metrics: &mut [PlayerMetrics],
+    eco: &EcoBenchmark,
+    map_slug: &str,
+    mode: &str,
+) {
+    use crate::analyze::model::EcoRef;
+    let team = mode == "team";
+    for m in metrics.iter_mut() {
+        let elo = if team { m.elo_team.or(m.elo_1v1) } else { m.elo_1v1.or(m.elo_team) };
+        let Some(elo) = elo else { continue };
+        let bucket = data::elo_bucket(elo);
+        let mut refs = Vec::new();
+        for &(tech_id, name) in metrics::WATCHED_TECHS {
+            let Some((band, match_kind)) = eco.band(tech_id, map_slug, bucket, mode) else {
+                continue;
+            };
+            let yours_s = m
+                .eco_techs
+                .iter()
+                .find(|&&(t, _)| t == tech_id)
+                .map(|&(_, ms)| ms as f64 / 1000.0);
+            let verdict = match yours_s {
+                None => "not_researched",
+                Some(y) if y <= band.p25_s => "ahead",
+                Some(y) if y <= band.p50_s => "on_pace",
+                Some(y) if y <= band.p75_s => "behind",
+                Some(_) => "slow",
+            };
+            refs.push(EcoRef {
+                tech_id,
+                name,
+                yours_s,
+                p25_s: band.p25_s,
+                p50_s: band.p50_s,
+                p75_s: band.p75_s,
+                n: band.n,
+                verdict,
+                kind: eco_match_kind(match_kind),
+            });
+        }
+        m.eco_ref = refs;
+    }
+}
+
+/// Stable snake_case label for an [`EcoMatch`] — the UI reads this verbatim to word the baseline's
+/// precision (an exact map+elo cell vs an all-map fallback).
+fn eco_match_kind(kind: EcoMatch) -> &'static str {
+    match kind {
+        EcoMatch::Exact => "exact",
+        EcoMatch::MapAllElo => "map_all_elo",
+        EcoMatch::AllMapElo => "all_map_elo",
+        EcoMatch::AllMapAllElo => "all_map_all_elo",
     }
 }
 
@@ -400,6 +465,7 @@ mod tests {
             market_buys: 0,
             market_sells: 0,
             reference: None,
+            eco_ref: vec![],
         }
     }
 
@@ -438,6 +504,38 @@ mod tests {
         let f = findings(&[m, pm(2, 0, Some(600_000))], &load_benchmark(), &civs, Family::Open, "arabia", "1v1");
         // 2 players => 1v1 mode; franks arabia 1v1 falls back to the arabia rollup.
         assert!(f.iter().any(|x| x.metric == "Feudal up-time" && x.basis == Basis::YourElo));
+    }
+
+    #[test]
+    fn attach_eco_references_labels_verdicts_map_and_elo_specific() {
+        use crate::analyze::data::load_eco_benchmark;
+        let eco = load_eco_benchmark();
+        let mut m = pm(1, 0, Some(600_000));
+        m.elo_1v1 = Some(1300); // -> "1200-1399" bucket
+        // Loom(22) researched very fast (well under p25 ~335s), Wheelbarrow(213) never researched.
+        m.eco_techs = vec![(22, 60_000)];
+        let mut ms = vec![m];
+        attach_eco_references(&mut ms, &eco, "arabia", "1v1");
+        let refs = &ms[0].eco_ref;
+        assert!(!refs.is_empty(), "arabia 1200-1399 1v1 must have eco bands");
+        let loom = refs.iter().find(|r| r.tech_id == 22).expect("loom ref");
+        assert_eq!(loom.verdict, "ahead"); // 60s << p25
+        assert_eq!(loom.kind, "exact"); // exact map+elo cell exists for arabia
+        assert!(loom.p50_s > loom.p25_s && loom.p75_s > loom.p50_s); // a real band
+        let wheel = refs.iter().find(|r| r.tech_id == 213).expect("wheelbarrow ref");
+        assert_eq!(wheel.verdict, "not_researched");
+        assert!(wheel.yours_s.is_none());
+    }
+
+    #[test]
+    fn attach_eco_references_skips_players_with_unknown_elo() {
+        use crate::analyze::data::load_eco_benchmark;
+        let eco = load_eco_benchmark();
+        let mut m = pm(1, 0, Some(600_000)); // elo_1v1/elo_team both None
+        m.eco_techs = vec![(22, 300_000)];
+        let mut ms = vec![m];
+        attach_eco_references(&mut ms, &eco, "arabia", "1v1");
+        assert!(ms[0].eco_ref.is_empty(), "no elo -> no eco reference");
     }
 
     #[test]

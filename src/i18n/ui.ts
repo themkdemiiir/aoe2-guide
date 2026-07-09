@@ -443,6 +443,7 @@ export const ui = {
     "analyzer.chartApmLabel": "Actions per minute over time",
     "analyzer.eco": "Eco upgrades",
     "analyzer.eco.missing": "not researched",
+    "analyzer.eco.bandNote": "Your time · winner median (p25–p75 band) at your elo & map. Green = at or ahead of the median, amber = inside the band, red = slower than 75% of winners. Rolled up to all maps where a slice had under 50 winners.",
     "analyzer.result.note":
       "The result is read from resignations inside the replay — games that end another way show Undecided.",
     "analyzer.cli":
@@ -894,6 +895,7 @@ export const ui = {
     "analyzer.chartApmLabel": "Zaman içinde dakika başına eylem",
     "analyzer.eco": "Ekonomi geliştirmeleri",
     "analyzer.eco.missing": "araştırılmadı",
+    "analyzer.eco.bandNote": "Senin süren · kazananların medyanı (p25–p75 aralığı), kendi elonda ve haritanda. Yeşil = medyanda ya da önünde, kehribar = aralık içinde, kırmızı = kazananların %75'inden yavaş. Bir dilimde 50'den az kazanan varsa tüm haritalara toplanır.",
     "analyzer.result.note":
       "Sonuç, tekrar kaydındaki çekilmelerden (resign) okunur — başka şekilde biten oyunlar Belirsiz görünür.",
     "analyzer.cli":

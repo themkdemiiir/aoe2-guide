@@ -694,9 +694,18 @@ const analyzerLd = {
           .join("")}</div>`;
     }
 
-    // Watched eco upgrades: researched ones with their time, the rest greyed out.
+    // Watched eco upgrades: each shows YOUR time vs the WINNER median + p25–p75 band
+    // at your elo & map (m.eco_ref, attached by the engine). Verdict colors your time.
     function ecoRow(m: any) {
       const done = new Map<number, number>(m.eco_techs.map((e: [number, number]) => [e[0], e[1]]));
+      // eco_ref: [{ tech_id, name, yours_s, p25_s, p50_s, p75_s, n, verdict, kind }]
+      const refByTech = new Map<number, any>((m.eco_ref ?? []).map((r: any) => [r.tech_id, r]));
+      const hasBands = refByTech.size > 0;
+      // verdict → color of YOUR time (green ahead/on-pace, amber inside band, red slow).
+      const vColor: Record<string, string> = {
+        ahead: "text-forest", on_pace: "text-forest",
+        behind: "text-gold-700", slow: "text-royal", not_researched: "text-stone-700/70",
+      };
       const ordered = Object.entries(ecoTechs).sort(([a], [b]) => {
         const ta = done.get(Number(a)), tb = done.get(Number(b));
         if (ta != null && tb != null) return ta - tb; // researched: by time
@@ -704,13 +713,22 @@ const analyzerLd = {
         if (tb != null) return 1;
         return 0; // unresearched: keep stable order, after researched
       });
+      // Winner median + range, muted; "*" flags a slice rolled up beyond the exact map+elo cell.
+      const bandOf = (ref: any) =>
+        ref
+          ? ` <span class="font-mono text-[10px] text-stone-700/70">${esc(mmss(ref.p50_s * 1000))} <span class="opacity-70">(${esc(mmss(ref.p25_s * 1000))}–${esc(mmss(ref.p75_s * 1000))})</span>${ref.kind !== "exact" ? "*" : ""}</span>`
+          : "";
       const chips = ordered.map(([id, name]) => {
         const at = done.get(Number(id));
-        return at != null
-          ? `<span class="inline-flex items-center gap-1.5 rounded border border-stone-700/25 bg-parchment px-2 py-1 text-xs text-ink">${esc(name)} <span class="font-mono text-gold-700">${esc(mmss(at))}</span></span>`
-          : `<span class="inline-flex items-center gap-1.5 rounded border border-dashed border-stone-700/25 px-2 py-1 text-xs text-stone-700/70">${esc(name)} <span class="font-mono text-[10px]">${esc(L["analyzer.eco.missing"])}</span></span>`;
+        const ref = refByTech.get(Number(id));
+        if (at != null) {
+          const col = ref ? (vColor[ref.verdict] ?? "text-gold-700") : "text-gold-700";
+          return `<span class="inline-flex items-center gap-1.5 rounded border border-stone-700/25 bg-parchment px-2 py-1 text-xs text-ink">${esc(name)} <span class="font-mono ${col}">${esc(mmss(at))}</span>${bandOf(ref)}</span>`;
+        }
+        return `<span class="inline-flex items-center gap-1.5 rounded border border-dashed border-stone-700/25 px-2 py-1 text-xs text-stone-700/70">${esc(name)} <span class="font-mono text-[10px]">${esc(L["analyzer.eco.missing"])}</span>${bandOf(ref)}</span>`;
       });
       return `<h3 class="mt-6 font-display text-sm font-bold uppercase tracking-wide text-stone-700">${esc(L["analyzer.eco"])}</h3>
+        ${hasBands ? `<p class="mt-1 max-w-prose text-[11px] leading-snug text-stone-700/80">${esc(L["analyzer.eco.bandNote"])}</p>` : ""}
         <div class="mt-2 flex flex-wrap gap-2">${chips.join("")}</div>`;
     }
 

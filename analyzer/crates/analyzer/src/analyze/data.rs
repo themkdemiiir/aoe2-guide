@@ -98,6 +98,81 @@ pub fn load_benchmark() -> Benchmark {
     Benchmark(f.civs)
 }
 
+// --- eco benchmark (winner-focused eco-upgrade timing bands) ------------------
+/// One `(tech, map, elo_bucket, mode)` grain's WINNER p25/p50/p75 first-research click SECONDS.
+/// Winner-focused (the `benchmark_ecotech` view filters `won = true`) — the p25–p75 band is what the
+/// analyzer draws around the p50 median.
+#[derive(Debug, Clone, Copy, Deserialize)]
+pub struct EcoBand {
+    pub p25_s: f64,
+    pub p50_s: f64,
+    pub p75_s: f64,
+    #[serde(default)]
+    pub n: u64,
+}
+
+// tech_id(string) -> map(slug) -> elo_bucket -> mode -> EcoBand. Map/elo rollups live under "all".
+type EcoTechs = HashMap<String, HashMap<String, HashMap<String, HashMap<String, EcoBand>>>>;
+
+#[derive(Debug, Deserialize)]
+struct EcoBenchmarkFile {
+    techs: EcoTechs,
+}
+
+/// How precisely an eco band matched the request — parallels [`MatchKind`], with the extra map/elo
+/// fallback rungs `benchmark_ecotech` produces. Lets the coaching UI word the baseline honestly.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum EcoMatch {
+    /// exact `(map, bucket, mode)` cell — winners at your elo AND map
+    Exact,
+    /// same-map all-elo rollup `(map, "all", mode)` — right map, all elo
+    MapAllElo,
+    /// all-map same-elo rollup `("all", bucket, mode)` — right elo, all maps (map too thin)
+    AllMapElo,
+    /// all-map all-elo rollup `("all", "all", mode)` — last resort, mode only
+    AllMapAllElo,
+}
+
+#[derive(Debug)]
+pub struct EcoBenchmark(EcoTechs);
+
+impl EcoBenchmark {
+    /// Resolve `(tech_id, map, bucket, mode)` → `(band, kind)`. Falls back exact →
+    /// same-map/all-elo → all-map/same-elo → all-map/all-elo → `None` (no ≥50-winner sample for this
+    /// tech anywhere). `mode` is never rolled up — a 1v1 request is never answered with team data.
+    pub fn band(
+        &self,
+        tech_id: u16,
+        map: &str,
+        bucket: &str,
+        mode: &str,
+    ) -> Option<(EcoBand, EcoMatch)> {
+        let t = self.0.get(&tech_id.to_string())?;
+        if let Some(b) = t.get(map).and_then(|m| m.get(bucket)).and_then(|e| e.get(mode)) {
+            return Some((*b, EcoMatch::Exact));
+        }
+        if let Some(b) = t.get(map).and_then(|m| m.get("all")).and_then(|e| e.get(mode)) {
+            return Some((*b, EcoMatch::MapAllElo));
+        }
+        let all_map = t.get("all")?;
+        if let Some(b) = all_map.get(bucket).and_then(|e| e.get(mode)) {
+            return Some((*b, EcoMatch::AllMapElo));
+        }
+        all_map
+            .get("all")
+            .and_then(|e| e.get(mode))
+            .map(|b| (*b, EcoMatch::AllMapAllElo))
+    }
+}
+
+pub fn load_eco_benchmark() -> EcoBenchmark {
+    let f: EcoBenchmarkFile = serde_json::from_str(include_str!(
+        "../../../../../scripts/data-pipeline/replay-rs/data/benchmark-eco.json"
+    ))
+    .expect("benchmark-eco.json");
+    EcoBenchmark(f.techs)
+}
+
 // --- civ_id -> slug (benchmark key) ------------------------------------------
 pub fn load_civs() -> HashMap<u32, String> {
     include_str!("../../../../../scripts/data-pipeline/replay-rs/data/civs.tsv")
