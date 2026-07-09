@@ -9,5 +9,14 @@ civ: mayans
 line: plumed-archer-line
 lineRank: 1
 description:
-  en: The Plumed Archer is a unique unit trained at the Castle.
-  tr: Plumed Archer, Castle'da eğitilen özgün bir birliktir.
+  en: Mayan unique Foot Archer with fast movement speed. Strong vs. Archery Units and Infantry. Weak vs. Cavalry.
+  tr: >-
+    Hızlı hareket eden, Mayalara özgü Yaya Okçu. Okçu Birimlerine ve Piyadelere karşı güçlüdür. Süvarilere karşı
+    zayıftır.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); accuracy (Archery Range); attack, accuracy (University); creation speed, to Elite
+    Plumed Archer (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); isabet (Okçuluk Binası); saldırı, isabet (Üniversite); oluşturma hızı, Elit Tüylü
+    Okçuya yükseltme (Kale); Keşişlere karşı daha fazla direnç (Manastır).

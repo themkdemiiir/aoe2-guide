@@ -8,5 +8,16 @@ role:
 line: scout-line
 lineRank: 2
 description:
-  en: The Light Cavalry is a light cavalry trained at the Stable.
-  tr: Light Cavalry, Stable'da eğitilen hafif bir süvaridir.
+  en: >-
+    Fast moving Cavalry for scouting and raiding. Resistant to conversion. Exceptionally strong vs. Monastery Units.
+    Weak vs. Spearman-line and Camel Riders.
+  tr: >-
+    Gözcülük ve baskın için kullanılan ve hızlı hareket eden Süvari. Dönüştürülmeye dirençlidir. Manastır Birimlerine
+    karşı son derece güçlüdür. Mızraklı Asker türlerine ve Deve Binicilerine karşı zayıftır.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, HP, to Hussar or Winged Hussar (Stable); creation speed (Castle); more resistant
+    to Monks (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, DP, Hüssara veya Kanatlı Hüssara yükseltme (Ahır); oluşturma hızı (Kale); Keşişlere
+    karşı daha fazla direnç (Manastır).

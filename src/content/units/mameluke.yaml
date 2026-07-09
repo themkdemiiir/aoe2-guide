@@ -9,5 +9,14 @@ civ: saracens
 line: mameluke-line
 lineRank: 1
 description:
-  en: The Mameluke is a unique unit trained at the Castle.
-  tr: Mameluke, Castle'da eğitilen bir özgün birimdir.
+  en: Saracen unique Cavalry with ranged melee attack. Strong vs. Mounted Units. Weak vs. Archery Units and Spearman-line.
+  tr: >-
+    Menzilli yakın dövüş saldırısı yapabilen, Sarazenlere özgü Süvari. Binekli Birimlere karşı güçlüdür. Okçu
+    Birimlerine ve Mızraklı Asker türlerine karşı zayıftır.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, HP (Stable); creation speed, to Elite Mameluke (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, DP (Ahır); oluşturma hızı, Elit Memluk'e yükseltme (Kale); Keşişlere karşı daha fazla
+    direnç (Manastır).

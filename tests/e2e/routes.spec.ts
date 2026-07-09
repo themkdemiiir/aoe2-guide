@@ -6,13 +6,13 @@ import { expect, test } from "@playwright/test";
 const routes: Array<{ path: string; titleContains: string }> = [
   { path: "/en/", titleContains: "AOE2" },
   { path: "/tr/", titleContains: "AOE2" },
-  { path: "/en/civs/", titleContains: "Civilizations" },
-  { path: "/tr/civs/", titleContains: "Uygarlıklar" },
+  { path: "/en/civs/", titleContains: "Civilization" },
+  { path: "/tr/civs/", titleContains: "Uygarlık" },
   { path: "/en/civs/britons/", titleContains: "Britons" },
-  { path: "/en/units/", titleContains: "Units" },
+  { path: "/en/units/", titleContains: "Unit Guide" },
   { path: "/en/units/longbowman/", titleContains: "Longbowman" },
   { path: "/en/builds/", titleContains: "Build Orders" },
-  { path: "/en/maps/", titleContains: "Maps" },
+  { path: "/en/maps/", titleContains: "Map Guides" },
   { path: "/en/matchups/", titleContains: "Comparator" },
   { path: "/en/analyzer/", titleContains: "Analyzer" },
   { path: "/tr/analyzer/", titleContains: "Analiz" },
@@ -43,13 +43,17 @@ test("removed locale /de/ returns 404", async ({ request }) => {
   expect(response.status()).toBe(404);
 });
 
-test("missing TR content falls back to EN at the TR URL", async ({ page, request }) => {
+// Civ TR text has been fully sourced from aoe2techtree since 2026-06 — the
+// "not translated yet" fallback banner only exists on MD content (learn/blog),
+// and no MD entry is currently missing its TR file. Assert the TR page serves
+// real Turkish content instead.
+test("TR civ page serves localized content at the TR URL", async ({ page, request }) => {
   const response = await request.get("/tr/civs/armenians/");
   expect(response.status()).toBe(200);
 
   await page.goto("/tr/civs/armenians/");
   await expect(page).toHaveTitle(/Armenians/i);
-  await expect(page.getByText("Bu sayfa henüz çevrilmedi")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Uygarlık Bonusları" })).toBeVisible();
 });
 
 test("comparator restores selection from URL params", async ({ page }) => {

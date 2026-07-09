@@ -8,5 +8,16 @@ role:
 line: archer-line
 lineRank: 3
 description:
-  en: The Arbalest is a ranged infantry trained at the Archery Range.
-  tr: Arbalest, Archery Range'de eğitilen menzilli bir piyadedir.
+  en: >-
+    All-purpose Foot Archer. Strong vs. units at long range. Weak vs. Skirmishers, Mangonel-line and units at close
+    range.
+  tr: >-
+    Her koşula uygun Yaya Okçu. Uzak mesafedeki birimlere karşı güçlü. Akıncılar, Mancınık türleri ve yakındaki
+    birimlere karşı zayıf.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); accuracy (Archery Range); attack, accuracy (University); creation speed (Castle);
+    more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); isabet (Okçuluk Binası); saldırı, isabet (Üniversite); oluşturma hızı (Kale);
+    Keşişlere karşı daha fazla direnç (Manastır).

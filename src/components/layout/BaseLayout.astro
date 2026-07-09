@@ -5,7 +5,8 @@ import { SEO } from "astro-seo";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import { localeMeta } from "@/i18n/locales";
-import { getLocaleFromUrl, allLocalePaths } from "@/i18n/utils";
+import { getLocaleFromUrl, allLocalePaths, t } from "@/i18n/utils";
+import type { UIKey } from "@/i18n/ui";
 
 interface Props {
   title: string;
@@ -13,11 +14,13 @@ interface Props {
   description: string;
   /** Path WITHOUT locale prefix, used for hreflang and lang switcher. e.g. "/civs/britons" */
   canonicalPath?: string;
-  /** Error pages (404): robots noindex, no canonical/hreflang/breadcrumb — those tags mint crawlable dead URLs. */
+  /** Plain entry name for the breadcrumb leaf on detail pages (titles carry SEO tails); falls back to `title`. */
+  breadcrumbName?: string;
+  /** Pages that must stay out of the index (404, /search/): robots noindex, no canonical/hreflang/breadcrumb — on error pages those tags mint crawlable dead URLs. */
   noindex?: boolean;
 }
 
-const { title, description, canonicalPath = "/", noindex = false } = Astro.props;
+const { title, description, canonicalPath = "/", breadcrumbName, noindex = false } = Astro.props;
 const locale = getLocaleFromUrl(Astro.url);
 const dir = localeMeta[locale].dir;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
@@ -42,28 +45,49 @@ const jsonLd = {
   url: site,
   description,
   inLanguage: locale,
+  publisher: {
+    "@type": "Organization",
+    name: "AOE2 Guide",
+    url: site,
+    // 180×180 — favicon.png (32×32) is below Google's 112px logo floor.
+    logo: { "@type": "ImageObject", url: `${site}/apple-touch-icon.png`, width: 180, height: 180 },
+  },
 };
 
-// BreadcrumbList — computed from canonicalPath; skipped on homepage.
-const sectionLabels: Record<string, string> = {
-  civs: "Civilizations", builds: "Build Orders", maps: "Maps",
-  units: "Units", counters: "Counters", glossary: "Glossary",
-  learn: "Learn", matchups: "Matchups", analyzer: "Analyzer",
+// BreadcrumbList + visible trail — computed from canonicalPath; skipped on homepage.
+// Section labels resolve through i18n so TR pages carry Turkish crumbs in both.
+const sectionLabelKeys: Record<string, UIKey> = {
+  civs: "nav.civs", builds: "nav.builds", maps: "nav.maps",
+  units: "nav.units", counters: "nav.counters", glossary: "nav.glossary",
+  learn: "nav.learn", matchups: "nav.matchups", analyzer: "analyzer.title",
+  explorer: "nav.explorer", blog: "blog.title",
 };
 const pathParts = canonicalPath.split("/").filter(Boolean);
+const sectionKey = sectionLabelKeys[pathParts[0]];
+const sectionLabel = sectionKey ? t(locale, sectionKey) : null;
+const leafName = breadcrumbName ?? title;
 const breadcrumbLd = pathParts.length > 0 && !noindex ? {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "AOE2 Guide", item: `${site}/${locale}/` },
-    ...(sectionLabels[pathParts[0]] ? [
-      { "@type": "ListItem", position: 2, name: sectionLabels[pathParts[0]], item: withSlash(`${site}/${locale}/${pathParts[0]}`) },
+    ...(sectionLabel ? [
+      { "@type": "ListItem", position: 2, name: sectionLabel, item: withSlash(`${site}/${locale}/${pathParts[0]}`) },
     ] : []),
     ...(pathParts[1] ? [
-      { "@type": "ListItem", position: 3, name: title, item: withSlash(`${site}/${locale}${canonicalPath}`) },
+      { "@type": "ListItem", position: 3, name: leafName, item: withSlash(`${site}/${locale}${canonicalPath}`) },
     ] : []),
   ],
 } : null;
+// Visible trail mirrors the JSON-LD exactly; detail pages only (depth ≥ 2).
+const crumbs: { label: string; href?: string }[] | null =
+  !noindex && pathParts.length > 1 && sectionLabel
+    ? [
+        { label: "AOE2 Guide", href: `/${locale}/` },
+        { label: sectionLabel, href: withSlash(`/${locale}/${pathParts[0]}`) },
+        { label: leafName },
+      ]
+    : null;
 ---
 <!doctype html>
 <html lang={locale} dir={dir} data-theme="light">
@@ -138,6 +162,22 @@ const breadcrumbLd = pathParts.length > 0 && !noindex ? {
   </head>
   <body class="flex min-h-dvh flex-col">
     <Header />
+    {crumbs && (
+      <nav aria-label="Breadcrumb" class="mx-auto w-full max-w-7xl px-4 pt-3">
+        <ol class="flex flex-wrap items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-stone-700/80">
+          {crumbs.map((c, i) => (
+            <li class="flex items-center gap-1.5">
+              {i > 0 && <span aria-hidden="true">›</span>}
+              {c.href ? (
+                <a href={c.href} class="transition-colors hover:text-gold-500">{c.label}</a>
+              ) : (
+                <span class="text-ink/80">{c.label}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
     <main class="flex-1" data-pagefind-body>
       <slot />
     </main>

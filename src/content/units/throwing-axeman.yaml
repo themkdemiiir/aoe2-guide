@@ -9,5 +9,14 @@ civ: franks
 line: throwing-axeman-line
 lineRank: 1
 description:
-  en: The Throwing Axeman is a unique unit trained at the Castle.
-  tr: Throwing Axeman, Castle'da eğitilen özgün bir biriktir.
+  en: Frankish unique Infantry with ranged melee attack. Strong vs. Infantry. Weak vs. Archery Units and Siege Weapons.
+  tr: >-
+    Menzilli yakın dövüş saldırısı yapan, özgün Frank piyade. Piyadelere karşı güçlü. Okçu birimlere ve kuşatma
+    silahlarına karşı zayıf.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed (Barracks); creation speed, to Elite Throwing Axeman (Castle); more resistant to
+    Monks (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız (Kışla); oluşturma hızı, Elit Balta Atara yükseltme (Kale); Keşişlere daha fazla direnç
+    (Manastır).

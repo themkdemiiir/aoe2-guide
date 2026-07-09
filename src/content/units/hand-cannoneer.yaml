@@ -8,5 +8,12 @@ role:
 line: hand-cannoneer-line
 lineRank: 1
 description:
-  en: The Hand Cannoneer is a gunpowder ranged trained at the Archery Range.
-  tr: Hand Cannoneer, Archery Range'de eğitilen barutlu menzilli bir birimdir.
+  en: >-
+    Foot Gunner with powerful attack, but inaccurate at long range. Exceptionally strong vs. Infantry. Weak vs. Ranged
+    Soldiers.
+  tr: >-
+    Güçlü saldırısı olan Yaya Silahlı. Uzak mesafede isabetsiz. Piyadelere karşı oldukça güçlü. Menzilli Askerlere karşı
+    zayıf.
+upgrades:
+  en: armor (Blacksmith); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: zırh (Demirci); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

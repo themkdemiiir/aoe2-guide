@@ -6,6 +6,7 @@ import { locales, type Locale } from "@/i18n/locales";
 import { t } from "@/i18n/utils";
 import { displayName } from "@/lib/display";
 import countersData from "@data/counters.json";
+import gameFacts from "@data/game-facts.json";
 
 export async function getStaticPaths() {
   const units: CollectionEntry<"units">[] = await getCollection("units");
@@ -54,6 +55,18 @@ const loc = (v: Loc | undefined): string | null =>
   v == null ? null : typeof v === "string" ? v : (v[lang] ?? v.en);
 const unitCounters = (countersData.units as Record<string, CounterInfo>)[slug] ?? null;
 
+// Counter chips link to unit pages when one exists (counters.json also names
+// units without a page, e.g. eagle-scout); unique units link back to their civ.
+const unitPageIds = new Set((await getCollection("units")).map((u) => u.id));
+const unitHref = (s: string): string | null => (unitPageIds.has(s) ? `/${lang}/units/${s}/` : null);
+const civEntry = entry.data.civ ? await getEntry("civilizations", entry.data.civ) : null;
+
+// Sourced game facts (48 units): availability age, training building, attack
+// bonuses. Building names are EN proper nouns on both locales — same policy as
+// unit names; no TR building-name source exists to translate from.
+type Fact = { age: "dark" | "feudal" | "castle" | "imperial"; building: string; attackBonus: string | null };
+const facts = (gameFacts.units as Record<string, Fact>)[slug] ?? null;
+
 // --- Stat-vs-class chart: compare against the average of the unit's ROLE peers,
 // but only when the role is a real class — ≥3 units and not the "unique unit"
 // catch-all (averaging 41 wildly-different unique units would be meaningless). ---
@@ -83,10 +96,25 @@ if (stats && roleEn !== "unique unit") {
     };
   }
 }
+// Meta description: lead with the unit name for the SERP snippet, then as many
+// whole sentences of the sourced in-game text as fit the ~160-char budget.
+const helpBody = entry.data.description?.[lang];
+const metaLead = t(lang, "units.metaIntro").replace("{name}", entry.data.name[lang]);
+let metaDescription = `${entry.data.name[lang]} — ${entry.data.role[lang]}`;
+if (helpBody) {
+  metaDescription = metaLead;
+  // Sentence boundary = period + space, except after the "vs." abbreviation.
+  for (const sentence of helpBody.split(/(?<=\.)(?<!\bvs\.)\s+/)) {
+    if (`${metaDescription} ${sentence}`.length > 160) break;
+    metaDescription += ` ${sentence}`;
+  }
+  if (metaDescription === metaLead) metaDescription = `${metaLead} ${helpBody}`.slice(0, 157);
+}
 ---
 <BaseLayout
-  title={entry.data.name[lang]}
-  description={(entry.data.description?.[lang] ?? `${entry.data.name[lang]} — ${entry.data.role[lang]}`).slice(0, 155)}
+  title={`${entry.data.name[lang]} — ${t(lang, "units.seoTitle")}`}
+  breadcrumbName={entry.data.name[lang]}
+  description={metaDescription}
   canonicalPath={`/units/${slug}`}
 >
   <article class="mx-auto max-w-prose px-4 py-12">
@@ -95,8 +123,17 @@ if (stats && roleEn !== "unique unit") {
       <div>
         <h1 class="font-display text-4xl text-ink">{entry.data.name[lang]}</h1>
         <p class="text-sm text-stone-700">{entry.data.role[lang]}</p>
+        {civEntry && (
+          <p class="mt-0.5 text-sm">
+            <a href={`/${lang}/civs/${entry.data.civ}/`} class="text-gold-700 transition-colors hover:text-gold-500">
+              {t(lang, "units.uniqueOf").replace("{civ}", civEntry.data.name[lang])}
+            </a>
+          </p>
+        )}
       </div>
     </header>
+
+    {helpBody && <p class="mt-6 text-stone-700">{helpBody}</p>}
 
     {chainTiers.length > 1 && (
       <section class="mt-8">
@@ -139,7 +176,9 @@ if (stats && roleEn !== "unique unit") {
     )}
 
     {stats && (
-      <table class="mt-6 w-full text-sm">
+      <>
+      <h2 class="mt-8 mb-2 font-display text-xl text-ink">{t(lang, "units.stats")}</h2>
+      <table class="w-full text-sm">
         <tbody>
           <tr><th class="text-left text-stone-700">{t(lang, "units.hp")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.hp}</td></tr>
           <tr><th class="text-left text-stone-700">{t(lang, "units.attack")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.attack}</td></tr>
@@ -148,6 +187,15 @@ if (stats && roleEn !== "unique unit") {
             <tr><th class="text-left text-stone-700">{t(lang, "units.armor")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.armorMelee ?? 0}/{stats.armorPiercing ?? 0}</td></tr>
           )}
           <tr><th class="text-left text-stone-700">{t(lang, "units.trainTime")}</th><td class="text-right font-mono tabular-nums text-ink">{stats.trainTime}s</td></tr>
+          {facts && (
+            <tr><th class="text-left text-stone-700">{t(lang, "builds.ageLabel")}</th><td class="text-right text-ink">{t(lang, `age.${facts.age}`)}</td></tr>
+          )}
+          {facts && (
+            <tr><th class="text-left text-stone-700">{t(lang, "units.trainedAt")}</th><td class="text-right text-ink">{facts.building}</td></tr>
+          )}
+          {facts?.attackBonus && (
+            <tr><th class="text-left text-stone-700">{t(lang, "units.attackBonus")}</th><td class="text-right font-mono tabular-nums text-ink">{facts.attackBonus.split(";").join(", ")}</td></tr>
+          )}
           <tr>
             <th class="text-left text-stone-700">{t(lang, "units.cost")}</th>
             <td class="text-right font-mono tabular-nums text-ink">
@@ -161,6 +209,14 @@ if (stats && roleEn !== "unique unit") {
           </tr>
         </tbody>
       </table>
+      </>
+    )}
+
+    {entry.data.upgrades?.[lang] && (
+      <section class="mt-8">
+        <h2 class="mb-2 font-display text-xl text-ink">{t(lang, "units.upgrades")}</h2>
+        <p class="text-sm text-stone-700">{entry.data.upgrades[lang]}</p>
+      </section>
     )}
 
     {classChart && (
@@ -203,11 +259,14 @@ if (stats && roleEn !== "unique unit") {
             <div>
               <span class="text-xs font-bold uppercase tracking-wide text-forest">{t(lang, "counters.strongVs")}</span>
               <div class="mt-1.5 flex flex-wrap gap-2">
-                {unitCounters.strongVs.map((u) => (
-                  <span class="inline-flex items-center gap-1.5 rounded border border-forest/30 bg-forest/10 px-2 py-1 text-sm text-ink">
-                    <Icon slug={u} kind="unit" size={20} framed={false} /> {displayName(u)}
-                  </span>
-                ))}
+                {unitCounters.strongVs.map((u) => {
+                  const ChipEl = unitHref(u) ? "a" : "span";
+                  return (
+                    <ChipEl href={unitHref(u) ?? undefined} class={`inline-flex items-center gap-1.5 rounded border border-forest/30 bg-forest/10 px-2 py-1 text-sm text-ink${unitHref(u) ? " transition-colors hover:border-forest/60 hover:text-gold-700" : ""}`}>
+                      <Icon slug={u} kind="unit" size={20} framed={false} /> {displayName(u)}
+                    </ChipEl>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -215,11 +274,14 @@ if (stats && roleEn !== "unique unit") {
             <div>
               <span class="text-xs font-bold uppercase tracking-wide text-royal">{t(lang, "counters.weakVs")}</span>
               <div class="mt-1.5 flex flex-wrap gap-2">
-                {unitCounters.weakVs.map((u) => (
-                  <span class="inline-flex items-center gap-1.5 rounded border border-royal/30 bg-royal/10 px-2 py-1 text-sm text-ink">
-                    <Icon slug={u} kind="unit" size={20} framed={false} /> {displayName(u)}
-                  </span>
-                ))}
+                {unitCounters.weakVs.map((u) => {
+                  const ChipEl = unitHref(u) ? "a" : "span";
+                  return (
+                    <ChipEl href={unitHref(u) ?? undefined} class={`inline-flex items-center gap-1.5 rounded border border-royal/30 bg-royal/10 px-2 py-1 text-sm text-ink${unitHref(u) ? " transition-colors hover:border-royal/60 hover:text-gold-700" : ""}`}>
+                      <Icon slug={u} kind="unit" size={20} framed={false} /> {displayName(u)}
+                    </ChipEl>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -234,10 +296,5 @@ if (stats && roleEn !== "unique unit") {
       </p>
     )}
 
-    {entry.data.description?.[lang] && (
-      <section class="prose prose-stone mt-10 max-w-none">
-        <p>{entry.data.description[lang]}</p>
-      </section>
-    )}
   </article>
 </BaseLayout>

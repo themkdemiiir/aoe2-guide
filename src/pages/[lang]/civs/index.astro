@@ -78,7 +78,7 @@ const serverTiers = labels.tiers
   }))
   .filter((g) => g.civs.length);
 ---
-<BaseLayout title={t(lang, "nav.civs")} description={t(lang, "meta.civs")} canonicalPath="/civs">
+<BaseLayout title={t(lang, "title.civs")} description={t(lang, "meta.civs")} canonicalPath="/civs">
   <section class="mx-auto max-w-7xl px-4 py-6 sm:py-8">
     <div class="font-mono text-xs uppercase tracking-[0.14em] text-gold-700">
       <a href={localizedPath("/", lang)} class="hover:text-gold-500">{tr ? "Ana Sayfa" : "Home"}</a> / {t(lang, "nav.civs")}

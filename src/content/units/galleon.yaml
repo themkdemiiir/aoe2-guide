@@ -8,5 +8,12 @@ role:
 line: galley-line
 lineRank: 3
 description:
-  en: The Galleon is a naval trained at the Dock.
-  tr: Galleon, Dock'ta eğitilen bir deniz birimidir.
+  en: Warship with ranged attack. Strong vs. Hulk-line. Weak vs. Fire Ships.
+  tr: Menzilli saldırı yapabilen savaş gemisi. Hulk Gemilere karşı güçlüdür. Ateş Gemilerine karşı zayıftır.
+upgrades:
+  en: >-
+    attack, range (Blacksmith); attack, accuracy, armor, speed, cost, creation speed (University); more resistant to
+    Monks (Monastery).
+  tr: >-
+    saldırı, menzil (Demirci); saldırı, isabet, zırh, hız, maliyet, üretim hızı (Üniversite); Keşişlere karşı daha fazla
+    direnç (Manastır).

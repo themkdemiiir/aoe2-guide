@@ -8,5 +8,14 @@ role:
 line: spearman-line
 lineRank: 1
 description:
-  en: The Spearman is a anti-cavalry infantry trained at the Barracks.
-  tr: Spearman, Barracks'ta eğitilen süvari karşıtı bir piyadedir.
+  en: Anti-cavalry Infantry. Strong vs. Mounted Units, especially elephants. Weak vs. Ranged Soldiers and Infantry.
+  tr: >-
+    Süvari karşıtı Piyade. Binekli Birimlere, özellikle fillere karşı güçlüdür. Menzilli Askerlere ve Piyadelere karşı
+    zayıftır.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, to Pikeman (Barracks); creation speed (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, Kargılı Askere yükseltme (Kışla); oluşturma hızı (Kale); Keşişlere karşı daha fazla
+    direnç (Manastır).

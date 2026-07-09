@@ -9,5 +9,12 @@ civ: chinese
 line: chu-ko-nu-line
 lineRank: 1
 description:
-  en: The Chu Ko Nu is a unique unit trained at the Castle.
-  tr: Chu Ko Nu, Castle'da eğitilen bir özgün birimdir.
+  en: Chinese unique Foot Archer with rapid-fire attack. Strong vs. Infantry. Weak vs. Archery Units and Siege Weapons.
+  tr: Seri saldıran, özgün Çinli Yaya Okçu birimi. Piyadelere karşı güçlü. Okçular ve kuşatma silahlarına karşı zayıf.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); accuracy (Archery Range); attack, accuracy (University); creation speed, to Elite
+    Chu Ko Nu (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); isabet (Okçuluk Binası); saldırı, isabet (Üniversite); oluşturma hızı, Elit Chu Ko
+    Nu'ya yükseltme (Kale); Keşişlere daha fazla direnç (Manastır).

@@ -60,7 +60,7 @@ const howToLd = {
   })),
 };
 ---
-<BaseLayout title={`${entry.data.name[lang]} — AoE2 Build Order`} description={description} canonicalPath={`/builds/${slug}`}>
+<BaseLayout title={`${entry.data.name[lang]} — AoE2 Build Order`} breadcrumbName={entry.data.name[lang]} description={description} canonicalPath={`/builds/${slug}`}>
   <JsonLd slot="head" data={howToLd} />
   <article class="mx-auto max-w-6xl px-4 py-6">
     <header class="rounded border border-stone-700/40 bg-parchment p-4 shadow-sm">

@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "@/components/layout/BaseLayout.astro";
 import FilterBar from "@/components/ui/FilterBar.astro";
 import Icon from "@/components/ui/Icon.astro";
@@ -22,6 +23,11 @@ const units = counters.units as Record<string, UnitInfo>;
 const loc = (v: Localized): string => (typeof v === "string" ? v : (v[lang] ?? v.en));
 
 const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).localeCompare(displayName(b[0])));
+
+// Link unit names to their detail pages — but only slugs that HAVE a page
+// (counters.json also names units without one, e.g. eagle-scout).
+const unitPages = new Set((await getCollection("units")).map((u) => u.id));
+const unitHref = (s: string): string | null => (unitPages.has(s) ? `/${lang}/units/${s}/` : null);
 ---
 <BaseLayout title={t(lang, "counters.title")} description={t(lang, "meta.counters")} canonicalPath="/counters">
   <section class="mx-auto max-w-5xl px-4 py-12">
@@ -45,17 +51,21 @@ const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).local
                 </tr>
               </thead>
               <tbody class="divide-y divide-stone-700/15">
-                {age.relations.map((r) => (
-                  <tr class="align-top odd:bg-parchment even:bg-parchment/60">
-                    <td class="whitespace-nowrap px-3 py-2">
-                      <span class="inline-flex items-center gap-1.5 font-medium text-ink"><Icon slug={r.winner} kind="unit" size={22} /> {displayName(r.winner)}</span>
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-2">
-                      <span class="inline-flex items-center gap-1.5 text-stone-700"><Icon slug={r.loser} kind="unit" size={22} /> {displayName(r.loser)}</span>
-                    </td>
-                    <td class="px-3 py-2 text-stone-700">{loc(r.why)}</td>
-                  </tr>
-                ))}
+                {age.relations.map((r) => {
+                  const WinnerEl = unitHref(r.winner) ? "a" : "span";
+                  const LoserEl = unitHref(r.loser) ? "a" : "span";
+                  return (
+                    <tr class="align-top odd:bg-parchment even:bg-parchment/60">
+                      <td class="whitespace-nowrap px-3 py-2">
+                        <WinnerEl href={unitHref(r.winner) ?? undefined} class={`inline-flex items-center gap-1.5 font-medium text-ink${unitHref(r.winner) ? " transition-colors hover:text-gold-500" : ""}`}><Icon slug={r.winner} kind="unit" size={22} /> {displayName(r.winner)}</WinnerEl>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-2">
+                        <LoserEl href={unitHref(r.loser) ?? undefined} class={`inline-flex items-center gap-1.5 text-stone-700${unitHref(r.loser) ? " transition-colors hover:text-gold-500" : ""}`}><Icon slug={r.loser} kind="unit" size={22} /> {displayName(r.loser)}</LoserEl>
+                      </td>
+                      <td class="px-3 py-2 text-stone-700">{loc(r.why)}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -78,27 +88,39 @@ const unitEntries = Object.entries(units).sort((a, b) => displayName(a[0]).local
             <div class="flex h-full flex-col rounded border border-stone-700/40 bg-parchment p-4">
               <div class="flex items-center gap-3">
                 <Icon slug={slug} kind="unit" size={40} />
-                <h3 class="font-display text-lg text-ink">{displayName(slug)}</h3>
+                <h3 class="font-display text-lg text-ink">
+                  {unitHref(slug) ? (
+                    <a href={unitHref(slug)} class="transition-colors hover:text-gold-500">{displayName(slug)}</a>
+                  ) : (
+                    displayName(slug)
+                  )}
+                </h3>
               </div>
               <div class="mt-3 space-y-2">
                 <div>
                   <span class="text-xs font-bold uppercase tracking-wide text-forest">{t(lang, "counters.strongVs")}</span>
                   <div class="mt-1 flex flex-wrap gap-1.5">
-                    {info.strongVs.map((u) => (
-                      <span class="inline-flex items-center gap-1 rounded bg-forest/10 px-1.5 py-0.5 text-xs text-ink">
-                        <Icon slug={u} kind="unit" size={16} framed={false} /> {displayName(u)}
-                      </span>
-                    ))}
+                    {info.strongVs.map((u) => {
+                      const ChipEl = unitHref(u) ? "a" : "span";
+                      return (
+                        <ChipEl href={unitHref(u) ?? undefined} class={`inline-flex items-center gap-1 rounded bg-forest/10 px-1.5 py-0.5 text-xs text-ink${unitHref(u) ? " transition-colors hover:text-gold-500" : ""}`}>
+                          <Icon slug={u} kind="unit" size={16} framed={false} /> {displayName(u)}
+                        </ChipEl>
+                      );
+                    })}
                   </div>
                 </div>
                 <div>
                   <span class="text-xs font-bold uppercase tracking-wide text-royal">{t(lang, "counters.weakVs")}</span>
                   <div class="mt-1 flex flex-wrap gap-1.5">
-                    {info.weakVs.map((u) => (
-                      <span class="inline-flex items-center gap-1 rounded bg-royal/10 px-1.5 py-0.5 text-xs text-ink">
-                        <Icon slug={u} kind="unit" size={16} framed={false} /> {displayName(u)}
-                      </span>
-                    ))}
+                    {info.weakVs.map((u) => {
+                      const ChipEl = unitHref(u) ? "a" : "span";
+                      return (
+                        <ChipEl href={unitHref(u) ?? undefined} class={`inline-flex items-center gap-1 rounded bg-royal/10 px-1.5 py-0.5 text-xs text-ink${unitHref(u) ? " transition-colors hover:text-gold-500" : ""}`}>
+                          <Icon slug={u} kind="unit" size={16} framed={false} /> {displayName(u)}
+                        </ChipEl>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

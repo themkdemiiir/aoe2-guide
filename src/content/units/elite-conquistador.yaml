@@ -9,5 +9,12 @@ civ: spanish
 line: conquistador-line
 lineRank: 2
 description:
-  en: The Elite Conquistador is a unique unit trained at the Castle.
-  tr: Elite Conquistador, Castle'da eğitilen bir özgün birimdir.
+  en: >-
+    Spanish unique Mounted Gunner with powerful attack and mobility. Strong vs. units at range. Weak vs. Spearman-line,
+    Skirmishers, and Monks.
+  tr: >-
+    Güçlü saldırı yapabilen, hareket kabiliyetine sahip, İspanyollara özgü Binekli Silahlı. Uzak mesafedeki birimlere
+    karşı güçlüdür. Mızraklı Asker türlerine, AAkıncılarave Keşişlere karşı zayıftır.
+upgrades:
+  en: armor (Blacksmith); speed, HP (Stable); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: zırh (Demirci); hız, DP (Ahır); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

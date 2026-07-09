@@ -48,6 +48,17 @@ const civs = (await getCollection("civilizations"))
 const civIcons = (iconMap as any).civs ?? {};
 const unitIcons = (iconMap as any).units ?? {};
 
+// Unique-unit names link to their unit pages — only slugs that HAVE a page
+// (most elite/regional variants don't). Panel headers link to the civ page.
+// Used by BOTH panelSSR and the client panel() (via define:vars) — keep in sync.
+const unitPageIds = new Set((await getCollection("units")).map((u) => u.id));
+const unitHrefs: Record<string, string> = Object.fromEntries(
+  [...new Set(civs.flatMap((c) => c.uniqueUnits ?? []))]
+    .filter((s) => unitPageIds.has(s))
+    .map((s) => [s, `/${lang}/units/${s}/`]),
+);
+const civBase = `/${lang}/civs/`;
+
 // Localized UI labels — passed to client JS via define:vars.
 const labels = {
   civBonuses:  t(lang, "matchups.civBonuses"),
@@ -185,9 +196,12 @@ const panelSSR = (slug: string): string => {
   const bonusesHtml = (c.civBonuses || []).map((b) => '<li>' + escSSR(b) + '</li>').join('');
   const uniqueUnitsHtml = (c.uniqueUnits || []).map((uslug) => {
     const uIcon = unitIcons[uslug];
+    const uHref = unitHrefs[uslug];
+    const uName = '<span>' + escSSR(displayNameSSR(uslug)) + '</span>';
     return '<li class="flex items-center gap-2">'
       + (uIcon ? '<img src="' + escSSR(uIcon) + '" alt="" width="24" height="24" loading="lazy" decoding="async" class="h-6 w-6"/>' : '')
-      + '<span>' + escSSR(displayNameSSR(uslug)) + '</span></li>';
+      + (uHref ? '<a href="' + escSSR(uHref) + '" class="transition-colors hover:text-gold-500">' + uName + '</a>' : uName)
+      + '</li>';
   }).join('');
   const techsHtml = c.uniqueTechs
     ? '<li><strong>' + escSSR(c.uniqueTechs.castle?.name || '—') + '</strong> (' + labels.castleAge + ') — '
@@ -208,7 +222,7 @@ const panelSSR = (slug: string): string => {
     + '  <header class="flex items-center gap-3">'
     + (icon ? '    <img src="' + escSSR(icon) + '" alt="" width="56" height="56" loading="lazy" decoding="async" class="h-12 w-12 rounded border border-stone-700/40"/>' : '')
     + '    <div>'
-    + '      <h2 class="font-display text-xl text-ink">' + escSSR(displayNameSSR(slug)) + '</h2>'
+    + '      <h2 class="font-display text-xl text-ink"><a href="' + escSSR(civBase + slug + '/') + '" class="transition-colors hover:text-gold-500">' + escSSR(displayNameSSR(slug)) + '</a></h2>'
     + '      <p class="text-sm text-stone-700">' + escSSR(c.region || '') + ' · ' + escSSR(c.specialty || '') + '</p>'
     + '    </div>'
     + '  </header>'
@@ -324,7 +338,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
       <!-- Server-rendered default pair; JS replaces this on load / selection. -->
     </div>
 
-    <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS, numLocale, wc, eloBucketNames }}>
+    <script is:inline data-astro-rerun define:vars={{ civs, civIcons, unitIcons, labels, h2hElo, civMetaLite, h2hLabels, pm, mapNames, displayNames, TIER_COLORS, numLocale, wc, eloBucketNames, unitHrefs, civBase }}>
       // @ts-nocheck — plain client JS shipped verbatim; the define:vars globals above
       // (civs, displayNames, TIER_COLORS, …) are invisible to astro-check.
       // Build a slug -> civ lookup
@@ -403,9 +417,12 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
 
         const uniqueUnitsHtml = (c.uniqueUnits || []).map((uslug) => {
           const uIcon = unitIcons[uslug];
+          const uHref = unitHrefs[uslug];
+          const uName = '<span>' + esc(displayName(uslug)) + '</span>';
           return '<li class="flex items-center gap-2">'
                + (uIcon ? '<img src="' + esc(uIcon) + '" alt="" width="24" height="24" loading="lazy" decoding="async" class="h-6 w-6"/>' : '')
-               + '<span>' + esc(displayName(uslug)) + '</span></li>';
+               + (uHref ? '<a href="' + esc(uHref) + '" class="transition-colors hover:text-gold-500">' + uName + '</a>' : uName)
+               + '</li>';
         }).join('');
 
         const techsHtml = c.uniqueTechs
@@ -432,7 +449,7 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + '  <header class="flex items-center gap-3">'
           + (icon ? '    <img src="' + esc(icon) + '" alt="" width="56" height="56" loading="lazy" decoding="async" class="h-12 w-12 rounded border border-stone-700/40"/>' : '')
           + '    <div>'
-          + '      <h2 class="font-display text-xl text-ink">' + esc(displayName(slug)) + '</h2>'
+          + '      <h2 class="font-display text-xl text-ink"><a href="' + esc(civBase + slug + '/') + '" class="transition-colors hover:text-gold-500">' + esc(displayName(slug)) + '</a></h2>'
           + '      <p class="text-sm text-stone-700">' + esc(c.region || '') + ' · ' + esc(c.specialty || '') + '</p>'
           + '    </div>'
           + '  </header>'

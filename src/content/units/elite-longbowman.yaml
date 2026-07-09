@@ -9,5 +9,14 @@ civ: britons
 line: longbowman-line
 lineRank: 2
 description:
-  en: The Elite Longbowman is a unique unit trained at the Castle.
-  tr: Elite Longbowman, Castle'da eğitilen özgün bir birlikdir.
+  en: British unique Foot Archer with exceptional range. Strong vs. Infantry. Weak vs. Cavalry and Skirmishers.
+  tr: >-
+    Son derece uzun menzilli, İngilizlere özgü Yaya Okçu. Piyadelere karşı güçlüdür. Süvarilere ve AAkıncılarakarşı
+    zayıftır.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); attack, accuracy (University); creation speed (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); saldırı, isabet (Üniversite); oluşturma hızı (Kale); Keşişlere karşı daha fazla
+    direnç (Manastır).

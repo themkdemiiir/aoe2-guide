@@ -8,5 +8,10 @@ role:
 line: fishing-ship-line
 lineRank: 1
 description:
-  en: The Fishing Ship is a economic naval trained at the Dock.
-  tr: Fishing Ship, Dock'ta eğitilen ekonomik bir deniz birimidir.
+  en: Gathers food from fish and Fish Traps. Builds Fish Traps.
+  tr: Balıklardan ve Balık Kapanlarından yiyecek toplar. Balık Kapanları inşa eder.
+upgrades:
+  en: efficiency (Dock); armor, speed, efficiency, cost, creation speed (University); more resistant to Monks (Monastery).
+  tr: >-
+    verimlilik (Rıhtım); zırh, hız, verimlilik, maliyet, üretim hızı (Üniversite); Keşişlere karşı daha fazla direnç
+    (Manastır).

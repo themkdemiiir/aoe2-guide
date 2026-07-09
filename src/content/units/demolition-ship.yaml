@@ -8,5 +8,14 @@ role:
 line: demolition-line
 lineRank: 2
 description:
-  en: The Demolition Ship is a naval suicide trained at the Dock.
-  tr: Demolition Ship, Dock'ta eğitilen bir deniz intihar birimidir.
+  en: Demolition Warship armed with explosives that self-destructs when used. Strong vs. units at close range.
+  tr: >-
+    Kullanıldığında kendi kendini imha eden patlayıcılarla donatılmış bir İmha Savaş Gemisi. Yakın menzildeki birimlere
+    karşı güçlüdür.
+upgrades:
+  en: >-
+    to Heavy Demolition Ship (Dock); armor, speed, cost, creation speed, attack (University); more resistant to Monks
+    (Monastery).
+  tr: >-
+    Ağır İmha Gemisine yükseltme (Rıhtım); zırh, hız, maliyet, üretim hızı, saldırı (Üniversite); Keşişlere karşı daha
+    fazla direnç (Manastır).

@@ -9,5 +9,12 @@ civ: teutons
 line: teutonic-knight-line
 lineRank: 2
 description:
-  en: The Elite Teutonic Knight is a unique unit trained at the Castle.
-  tr: Elite Teutonic Knight, Castle'da eğitilen özgün bir birliktir.
+  en: >-
+    Teutonic unique Infantry with exceptional melee armor. Slow but resistant to conversion. Strong vs. melee units.
+    Weak vs. Archery Units and Gunners.
+  tr: >-
+    Üstün yakın dövüş zırhına sahip, Tötonlara özgü Piyade. Yavaş ama dönüştürülmeye karşı dirençlidir. Yakın dövüş
+    birimlerine karşı güçlüdür. Okçu Birimlere ve Silahlılara karşı zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed (Barracks); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız (Kışla); oluşturma hızı, (Kale); Keşişlere karşı daha fazla direnç (Manastır).

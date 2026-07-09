@@ -8,5 +8,16 @@ role:
 line: cavalry-archer-line
 lineRank: 1
 description:
-  en: The Cavalry Archer is a mounted archer trained at the Archery Range.
-  tr: Cavalry Archer, Archery Range'de eğitilen bir atlı okçudur.
+  en: >-
+    Fast moving Mounted Archer for hit and run attacks. Strong vs. slow units at long range. Weak vs. Skirmishers,
+    Scorpions and units at close range.
+  tr: >-
+    Vur kaç saldırıları için Atlı Okçu. Uzak mesafedeki yavaş birimlere karşı güçlü. Akıncılar, Akrepler ve yakındaki
+    birimlere karşı zayıf.
+upgrades:
+  en: >-
+    speed, HP (Stable); attack, range, armor (Blacksmith); attack, accuracy (University); accuracy, armor, to Heavy
+    Cavalry Archer (Archery Range); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    hız, DP (Ahır); saldırı, menzil, zırh (Demirci); saldırı, isabet (Üniversite); isabet, zırh, Ağır Atlı Okçuya
+    yükseltme (Okçuluk Binası); oluşturma hızı (Kale); Keşişlere daha fazla direnç (Manastır).

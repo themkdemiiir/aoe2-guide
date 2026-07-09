@@ -8,5 +8,16 @@ role:
 line: cannon-galleon-line
 lineRank: 1
 description:
-  en: The Cannon Galleon is a naval siege trained at the Dock.
-  tr: Cannon Galleon, Dock'ta eğitilen bir deniz kuşatma birimidir.
+  en: >-
+    Anti-building Siege Gunpowder Warship with long range, but cannot attack enemies at close range. Strong vs.
+    buildings. Weak vs. units at close range.
+  tr: >-
+    Uzun menzilli, binalara hasar veren Barutlu Kuşatma Savaş Gemisidir fakat yakın mesafedeki düşmanlara saldıramaz.
+    Binalara karşı güçlüdür. Yakın mesafedeki birimlere karşı zayıftır.
+upgrades:
+  en: >-
+    to Elite Cannon Galleon (Dock); attack, range, armor, speed, cost, creation speed, (University); more resistant to
+    Monks (Monastery).
+  tr: >-
+    Elit Toplu Kalyona yükseltme (Rıhtım); saldırı, menzil, zırh, hız, maliyet, üretim hızı (Üniversite); Keşişlere
+    karşı daha fazla direnç (Manastır).

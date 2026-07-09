@@ -9,5 +9,12 @@ civ: persians
 line: war-elephant-line
 lineRank: 2
 description:
-  en: The Elite War Elephant is a unique unit trained at the Castle.
-  tr: Elite War Elephant, Castle'da eğitilen bir özgün birliktir.
+  en: >-
+    Persian unique Cavalry that deals trample damage. Strong vs. buildings and units at close range. Weak vs.
+    Spearman-line and Monks.
+  tr: >-
+    Ezme hasarı veren, Perslere özgü Süvari. Binalara ve yakın mesafedeki birimlere karşı güçlüdür. Mızraklı Asker
+    türlerine ve Keşişlere karşı zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed, HP (Stable); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız, DP (Ahır); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

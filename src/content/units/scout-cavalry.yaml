@@ -8,5 +8,16 @@ role:
 line: scout-line
 lineRank: 1
 description:
-  en: The Scout Cavalry is a light cavalry trained at the Stable.
-  tr: Scout Cavalry, Stable'da eğitilen hafif bir süvaridir.
+  en: >-
+    Fast moving Cavalry for scouting and raiding. Resistant to conversion. Exceptionally strong vs. Monastery Units.
+    Weak vs. Spearman-line and Camel Riders.
+  tr: >-
+    Gözcülük ve baskın için kullanılan ve hızlı hareket eden Süvari. Dönüştürülmeye dirençli. Manastır Birimlerine karşı
+    son derece güçlü. Mızraklı Asker türlerine ve Deve Binicilerine karşı zayıf.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, HP, to Light Cavalry (Stable); creation speed (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, DP, Hafif Süvariye yükseltme (Ahır); oluşturma hızı (Kale); Keşişlere karşı daha fazla
+    direnç (Manastır).

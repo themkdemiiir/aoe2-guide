@@ -8,5 +8,14 @@ role:
 line: spearman-line
 lineRank: 2
 description:
-  en: The Pikeman is a anti-cavalry infantry trained at the Barracks.
-  tr: Pikeman, Barracks'ta eğitilen bir süvari karşıtı piyadedir.
+  en: Anti-cavalry Infantry. Strong vs. Mounted Units, especially elephants. Weak vs. Ranged Soldiers and Infantry.
+  tr: >-
+    Süvari karşıtı Piyade. Binekli Birimlere, özellikle fillere karşı güçlü. Menzilli Askerlere ve Piyadelere karşı
+    zayıf.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, to Halberdier (Barracks); creation speed (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, Kargılı Piyadeye yükseltme (Kışla); oluşturma hızı (Kale); Keşişlere karşı daha fazla
+    direnç (Manastır).

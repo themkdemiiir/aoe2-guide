@@ -9,5 +9,16 @@ civ: koreans
 line: war-wagon-line
 lineRank: 1
 description:
-  en: The War Wagon is a unique unit trained at the Castle.
-  tr: War Wagon, Castle'da eğitilen özgün bir birliktir.
+  en: >-
+    Korean unique Mounted Archer. Slow but durable. Strong vs. Infantry and Archery Units. Weak vs. Spearman-line,
+    Skirmishers and Camel Riders.
+  tr: >-
+    Korelilere özgü Binekli Okçu. Yavaş ama dayanıklıdır. Piyadelere ve Okçu Birimlerine karşı güçlüdür. Mızraklı Asker
+    türlerine, Akıncılara ve Deve Binicilerine karşı zayıftır.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); speed (Stable); accuracy (Archery Range); attack, accuracy (University); creation
+    speed, to Elite War Wagon (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); hız (Ahır); isabet (Okçuluk Binası); saldırı, isabet (Üniversite); oluşturma hızı,
+    Elit Savaş Vagonuna yükseltme (Kale); Keşişlere karşı daha fazla direnç (Manastır).

@@ -8,5 +8,12 @@ role:
 line: transport-ship-line
 lineRank: 1
 description:
-  en: The Transport Ship is a utility naval trained at the Dock.
-  tr: Transport Ship, Dock'ta eğitilen yardımcı bir deniz birimidir.
+  en: >-
+    Used to move units across water. Select the units you want to transport, then right-click on the Transport Ship to
+    board them. Use the Unload button to unload units on the shore.
+  tr: >-
+    Birimleri denizde taşımak için kullanılır. Taşımak istediğin birimleri seç ve ardından onları bindirmek istediğin
+    Taşıma Gemisi'ne sağ tıkla. Kıyıda birimleri indirmek için Boşalt düğmesini kullan.
+upgrades:
+  en: armor, speed, cost, creation speed (University); more resistant to Monks (Monastery).
+  tr: zırh, hız, maliyet, üretim hızı (Üniversite); Keşişlere daha fazla direnç (Manastır).

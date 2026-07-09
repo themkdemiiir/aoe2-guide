@@ -9,5 +9,16 @@ civ: japanese
 line: samurai-line
 lineRank: 1
 description:
-  en: The Samurai is a unique unit trained at the Castle.
-  tr: Samurai, Castle'da eğitilen özgün bir birlikdir.
+  en: >-
+    Japanese unique Infantry that quickly charges into battle and has fast attack. Strong vs. Unique Units. Weak vs.
+    Archery Units and Gunners.
+  tr: >-
+    Savaşta hızla hücum eden ve hızlı saldıran, Japonlara özgü bir piyade birimi. Özgün birimlere karşı güçlüdür. Okçu
+    Birimlerine ve Silahlılara karşı zayıftır.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed (Barracks); creation speed, to Elite Samurai (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız (Kışla); oluşturma hızı, Elit Samuraya yükseltme (Kale); Keşişlere karşı daha fazla
+    direnç (Manastır).

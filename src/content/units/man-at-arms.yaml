@@ -8,5 +8,16 @@ role:
 line: militia-line
 lineRank: 2
 description:
-  en: The Man-at-Arms is a melee infantry trained at the Barracks.
-  tr: Man-at-Arms, Barracks'ta eğitilen bir yakın dövüş piyadesidir.
+  en: >-
+    All-purpose Infantry. Strong vs. buildings, Infantry, Scout Cavalry- and Skirmisher-line. Weak vs. Ranged Soldiers
+    at long range.
+  tr: >-
+    Her koşula uygun Piyade. Binalara, piyadelere, Atlı Gözcülere ve Akıncı türlerine karşı güçlü. Uzak mesafedeki
+    Menzilli Askerlere karşı zayıf.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, pierce armor, to Long Swordsman (Barracks); creation speed (Castle); more
+    resistant to Monks (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, delici zırh, Uzun Kılıçlıya yükseltme (Kışla); oluşturma hızı (Kale); Keşişlere karşı
+    daha fazla direnç (Manastır).

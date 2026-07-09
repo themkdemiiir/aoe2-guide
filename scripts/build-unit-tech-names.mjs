@@ -113,7 +113,12 @@ function buildDim(idInfo, names, kind) {
       console.log(`    ${s.id} (internal_name: ${s.internalName ?? "?"})`);
     }
   }
-  return { map, internalNames, resolved: Object.keys(map).length, total: Object.keys(idInfo).length };
+  return {
+    map,
+    internalNames,
+    resolved: Object.keys(map).length,
+    total: Object.keys(idInfo).length,
+  };
 }
 
 async function run() {

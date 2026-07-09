@@ -8,5 +8,12 @@ role:
 line: fire-ship-line
 lineRank: 2
 description:
-  en: The Fire Ship is a anti-ship naval trained at the Dock.
-  tr: Fire Ship, Dock'ta eğitilen bir gemi karşıtı deniz birimidir.
+  en: Warship that spews fire at close range. Strong vs. Galley-line. Weak vs. Hulk-line.
+  tr: Yakın mesafede ateş püskürten Savaş Gemisi. Kadırga türlerine karşı güçlüdür. Hurda Gemi türlerine karşı zayıftır.
+upgrades:
+  en: >-
+    to Fast Fire Ship or Dragon Ship (Dock); armor, speed, cost, creation speed, attack (University); more resistant to
+    Monks (Monastery).
+  tr: >-
+    Hızlı Ateş Gemisine veya Ejder Gemisine yükseltme (Rıhtım); zırh, hız, maliyet, üretim hızı, saldırı (Üniversite);
+    Keşişlere karşı daha fazla direnç (Manastır).

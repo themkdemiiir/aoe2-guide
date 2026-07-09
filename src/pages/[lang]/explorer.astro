@@ -20,6 +20,16 @@ const civs = (await getCollection("civilizations"))
 const sliceMaps = cdims.maps.map((key, i) => ({ key, name: cdims.mapNames[i] }));
 const patches = (civMeta.patches as { patch: string; label: string }[]) ?? [];
 const labelCls = "flex flex-col gap-1 font-mono text-[11px] uppercase tracking-wide text-stone-700";
+
+// Server-rendered baseline so the page carries crawlable data without JS —
+// the interactive query tool complements it rather than replacing it.
+type Ladder = { winRate: number; games: number };
+const nameBySlug = new Map(civs.map((c) => [c.slug, c.name]));
+const overallTop = Object.entries(civMeta.civs as Record<string, { "1v1"?: Ladder | null }>)
+  .flatMap(([slug, m]) => (m["1v1"] ? [{ slug, name: nameBySlug.get(slug) ?? slug, wr: m["1v1"].winRate, games: m["1v1"].games }] : []))
+  .sort((a, b) => b.wr - a.wr)
+  .slice(0, 15);
+const numFmt = new Intl.NumberFormat(lang === "tr" ? "tr-TR" : "en-US");
 ---
 <BaseLayout title={t(lang, "explorer.title")} description={t(lang, "meta.explorer")} canonicalPath="/explorer">
   <section class="mx-auto max-w-4xl px-4 py-10" data-explorer>
@@ -80,6 +90,25 @@ const labelCls = "flex flex-col gap-1 font-mono text-[11px] uppercase tracking-w
     </div>
 
     <p data-x-nodata hidden class="mt-6 text-sm italic text-stone-700">{t(lang, "explorer.noData")}</p>
+
+    {overallTop.length > 0 && (
+      <section class="mt-10">
+        <h2 class="font-display text-xl text-ink">
+          {tr ? "Genel uygarlık kazanma oranları — dereceli 1v1, tüm zamanlar (ilk 15)" : "Overall civ win rates — ranked 1v1, all-time (top 15)"}
+        </h2>
+        <ol class="mt-3 divide-y divide-stone-700/10 rounded border border-stone-700/25 bg-parchment/60">
+          {overallTop.map((c, i) => (
+            <li class="flex items-center gap-3 px-3 py-1.5 text-sm">
+              <span class="w-6 text-right font-mono text-[11px] text-stone-700/70">{i + 1}</span>
+              <a href={`/${lang}/civs/${c.slug}/`} class="min-w-0 flex-1 truncate text-ink transition-colors hover:text-gold-500">{c.name}</a>
+              <span class="font-mono tabular-nums text-ink">{c.wr.toFixed(1)}%</span>
+              <span class="w-20 text-right font-mono text-[11px] tabular-nums text-stone-700/70">{numFmt.format(c.games)}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+
     <p class="mt-8 font-mono text-[10px] tracking-wide text-stone-700/60">
       {t(lang, "data.source")} · {tr ? "50% = ortalama · her şey tarayıcında, ücretsiz" : "50% = average · runs in your browser, free"}
     </p>

@@ -8,5 +8,16 @@ role:
 line: militia-line
 lineRank: 5
 description:
-  en: The Champion is a melee infantry trained at the Barracks.
-  tr: Champion, Barracks'ta eğitilen bir yakın dövüş piyadesidir.
+  en: >-
+    All-purpose Infantry. Strong vs. buildings, Infantry, Scout Cavalry- and Skirmisher-line. Weak vs. Ranged Soldiers
+    at long range.
+  tr: >-
+    Her amaca uygun Piyade. Binalara, Piyadelere, Atlı Gözcülere ve Akıncı türlerine karşı güçlüdür. Uzak mesafedeki
+    Menzilli Askerlere karşı zayıftır.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, pierce armor (Barracks); creation speed (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, delici zırh (Kışla); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç
+    (Manastır).

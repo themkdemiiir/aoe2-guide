@@ -8,5 +8,16 @@ role:
 line: archer-line
 lineRank: 1
 description:
-  en: The Archer is a ranged infantry trained at the Archery Range.
-  tr: Archer, Archery Range'de eğitilen menzilli bir piyadedir.
+  en: >-
+    All-purpose Foot Archer. Strong vs. units at long range. Weak vs. Skirmishers, Mangonel-line and units at close
+    range.
+  tr: >-
+    Her amaca uygun Yaya Okçu. Uzak mesafedeki birimlere karşı güçlüdür. Akıncılar, Mancınık türleri ve yakındaki
+    birimlere karşı zayıftır.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); attack, accuracy (University); accuracy, to Crossbowman (Archery Range); creation
+    speed (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); saldırı, isabet (Üniversite); isabet, Arbaletçiye yükseltme (Okçuluk Binası);
+    oluşturma hızı (Kale); Keşişlere daha fazla direnç (Manastır).

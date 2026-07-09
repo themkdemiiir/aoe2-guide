@@ -9,5 +9,16 @@ civ: aztecs
 line: eagle-line
 lineRank: 2
 description:
-  en: The Eagle Warrior is a light infantry trained at the Barracks.
-  tr: Eagle Warrior, Barracks'ta eğitilen bir hafif piyade birimidir.
+  en: >-
+    Fast moving Shock Infantry for scouting and raiding. Resistant to conversion. Strong vs. Monastery Units and Archery
+    Units. Weak vs. Militia-line and Cavalry.
+  tr: >-
+    Gözcülük ve baskın için kullanılan ve hızlı hareket eden Hücum Piyadesi. Dönüştürülmeye dirençlidir. Manastır
+    Birimlerine ve Okçu Birimlerine karşı güçlüdür. Milis türlerine ve Süvarilere karşı zayıftır.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, to Elite Eagle Warrior (Barracks); creation speed (Castle); more resistant to
+    Monks (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, Elit Kartal Savaşçıya yükseltme (Kışla); oluşturma hızı (Kale); Keşişlere karşı daha
+    fazla direnç (Manastır).

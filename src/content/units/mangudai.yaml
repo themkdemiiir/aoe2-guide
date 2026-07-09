@@ -9,5 +9,16 @@ civ: mongols
 line: mangudai-line
 lineRank: 1
 description:
-  en: The Mangudai is a unique unit trained at the Castle.
-  tr: Mangudai, Castle'da eğitilen özgün bir birliktir.
+  en: >-
+    Mongol unique Mounted Archer with fast attack. Strong vs. Siege Weapons and Infantry. Weak vs. Skirmishers,
+    Spearman-line and Camel Riders.
+  tr: >-
+    Hızlı saldırabilen, Moğollara özgü Binekli Okçu. Kuşatma Silahlarına ve Piyadelere karşı güçlüdür. Akıncılara,
+    Mızraklı Asker türlerine ve Deve Binicilere karşı zayıftır.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); speed, HP (Stable); accuracy, armor (Archery Range); attack, accuracy
+    (University); creation speed, to Elite Mangudai (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); hız, DP (Ahır); isabet, zırh (Okçuluk Binası); saldırı, isabet (Üniversite);
+    oluşturma hızı, Elit Manguday'a yükseltme (Kale); Keşişlere karşı daha fazla direnç (Manastır).

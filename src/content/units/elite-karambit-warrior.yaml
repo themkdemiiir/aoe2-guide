@@ -9,5 +9,12 @@ civ: malay
 line: karambit-warrior-line
 lineRank: 2
 description:
-  en: The Elite Karambit Warrior is a unique unit trained at the Castle.
-  tr: Elite Karambit Warrior, Castle'da eğitilen özgün bir birliktir.
+  en: >-
+    Malay unique Infantry that only takes half population space. Strong in high numbers. Weak vs. Cavalry and Ranged
+    Soldiers.
+  tr: >-
+    Yarım nüfus alanı kaplayan, Malaylara özgü Piyade. Çok sayıdayken güçlüdür. Süvarilere ve Menzilli Askerlere karşı
+    zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed (Barracks); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız (Kışla); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

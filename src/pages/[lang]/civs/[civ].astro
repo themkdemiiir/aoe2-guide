@@ -39,7 +39,7 @@ const strategyHtml = entry.data.strategy?.[lang] ? (marked.parse(entry.data.stra
 const has1v1Stats = !!(civMeta.civs as Record<string, { "1v1": unknown } | undefined>)[civSlug]?.["1v1"];
 const hasMatchupRows = ((matchupsData.civs as Record<string, { winRate: number }[]>)[civSlug] ?? []).some((m) => m.winRate !== 50);
 ---
-<BaseLayout title={name} description={description} canonicalPath={`/civs/${civSlug}`}>
+<BaseLayout title={`${name} — ${t(lang, "civs.seoTitle")}`} breadcrumbName={name} description={description} canonicalPath={`/civs/${civSlug}`}>
   <article class="mx-auto max-w-3xl px-4 py-6 sm:py-8">
     <header class="flex items-center gap-4">
       <Icon slug={civSlug} kind="civ" size={80} />

@@ -9,5 +9,10 @@ civ: turks
 line: janissary-line
 lineRank: 2
 description:
-  en: The Elite Janissary is a unique unit trained at the Castle.
-  tr: Elite Janissary, Castle'da eğitilen özgün bir birlikdir.
+  en: Turkish unique Foot Gunner with powerful attack. Strong vs. Infantry. Weak vs. Archery Units and Skirmishers.
+  tr: >-
+    Güçlü bir saldırıya sahip, Türklere özgü Yaya Silahlı. Piyadelere karşı güçlüdür. Okçu Birimlerine ve Akıncılara
+    karşı zayıftır.
+upgrades:
+  en: armor (Blacksmith); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: zırh (Demirci); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

@@ -8,5 +8,12 @@ role:
 line: knight-line
 lineRank: 3
 description:
-  en: The Paladin is a heavy cavalry trained at the Stable.
-  tr: Paladin, Stable'da eğitilen ağır bir süvaridir.
+  en: >-
+    Powerful all-purpose Heavy Cavalry. Strong vs. Infantry and Foot Archers. Weak vs. Spearman-line, Camel Riders, and
+    Monks.
+  tr: >-
+    Güçlü, her amaca uygun Ağır Süvari. Piyadelere ve Yaya Okçulara karşı güçlüdür. Mızraklı Asker türlerine, Deve
+    Binicilerine ve Keşişlere karşı zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed, HP (Stable); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız, DP (Ahır); Keşişlere karşı daha fazla direnç (Manastır).

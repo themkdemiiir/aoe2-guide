@@ -8,5 +8,14 @@ role:
 line: scorpion-line
 lineRank: 1
 description:
-  en: The Scorpion is a siege trained at the Siege Workshop.
-  tr: Scorpion, Siege Workshop'ta eğitilen bir kuşatma birimidir.
+  en: >-
+    Siege Weapon with ranged pass through attack, but cannot attack at close range. Strong vs. large groups of units.
+    Weak vs. Siege Weapons and units at close range.
+  tr: >-
+    Menzilli delici saldırı yapabilen Kuşatma Silahı. Yakın menzilde saldıramaz. Büyük birim gruplarına karşı güçlüdür.
+    Kuşatma Silahlarına ve yakın menzildeki birimlere karşı zayıftır.
+upgrades:
+  en: range, attack, accuracy (University); to Heavy Scorpion (Siege Workshop); more resistant to Monks (Monastery).
+  tr: >-
+    menzil, saldırı, isabet (Üniversite); Ağır Akrebe yükseltme (Kuşatma Atölyesi); Keşişlere daha fazla direnç
+    (Manastır).

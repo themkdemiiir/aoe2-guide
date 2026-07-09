@@ -8,5 +8,12 @@ role:
 line: mangonel-line
 lineRank: 3
 description:
-  en: The Siege Onager is a siege trained at the Siege Workshop.
-  tr: Siege Onager, Siege Workshop'ta eğitilen bir kuşatma silahıdır.
+  en: >-
+    Siege Weapon with ranged blast attack, but cannot attack at close range. Strong vs. tight groups of units. Weak vs.
+    units at close range. Can attack ground and destroy trees.
+  tr: >-
+    Menzilli patlama saldırısı yapabilen Kuşatma Silahı. Yakın menzilde saldıramaz. Yoğun birim gruplarına karşı
+    güçlüdür. Yakın menzildeki birimlere karşı zayıftır. Karaya saldırabilir ve ağaçları yok edebilir.
+upgrades:
+  en: attack, range (University); more resistant to Monks (Monastery).
+  tr: saldırı, menzil (Üniversite); Keşişlere daha fazla direnç (Manastır).

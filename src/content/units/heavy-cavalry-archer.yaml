@@ -8,5 +8,16 @@ role:
 line: cavalry-archer-line
 lineRank: 2
 description:
-  en: The Heavy Cavalry Archer is a mounted archer trained at the Archery Range.
-  tr: Heavy Cavalry Archer, Archery Range'de eğitilen bir atlı okçudur.
+  en: >-
+    Fast moving Mounted Archer for hit and run attacks. Strong vs. slow units at long range. Weak vs. Skirmishers,
+    Scorpions and units at close range.
+  tr: >-
+    Vur kaç saldırıları için hızlı hareket eden Atlı Okçu. Uzak mesafedeki yavaş birimlere karşı güçlü. Akıncılar,
+    Akrepler ve yakındaki birimlere karşı zayıf.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); accuracy, armor (Archery Range); attack, accuracy (University); speed, HP
+    (Stable); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); isabet, zırh (Okçuluk Binası); saldırı, isabet (Üniversite); hız, DP (Ahır);
+    oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

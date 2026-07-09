@@ -9,5 +9,10 @@ civ: huns
 line: tarkan-line
 lineRank: 2
 description:
-  en: The Elite Tarkan is a unique unit trained at the Castle.
-  tr: Elite Tarkan, Castle'da eğitilen özgün bir birlikdir.
+  en: Hunnic unique Heavy Cavalry. Exceptionally strong vs. buildings. Weak vs. Spearman-line and Camel Riders.
+  tr: >-
+    Hunlara özgü Ağır Atlı. Binalara karşı son derece güçlüdür. Mızraklı Asker türlerine ve Deve Binicilerine karşı
+    zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed, HP (Stable); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız, DP (Ahır); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

@@ -8,5 +8,14 @@ role:
 line: monk-line
 lineRank: 1
 description:
-  en: The Monk is a support / conversion trained at the Monastery.
-  tr: Monk, Monastery'de eğitilen bir destek / dönüştürme birimidir.
+  en: >-
+    Converts enemy units to your civilization. Heals friendly units (except ships and Siege Weapons). Strong vs. slow
+    and non-ranged units. Weak vs. Scout Cavalry-line, Eagle Warriors and Ranged Soldiers. Can collect Relics and bring
+    them to Monasteries.
+  tr: >-
+    Düşman birimlerini dönüştürür ve senin medeniyetine katar. Dost birimleri iyileştirir. (Gemiler ve kuşatma silahları
+    hariç). Ağır ve menzili olmayan birimlere karşı güçlü. Atlı Gözcü türlerine, Kartal Savaşçılara ve Menzilli
+    Askerlere karşı zayıf. Kadim Eserleri toplayabilir ve onları Manastırlara taşıyabilir.
+upgrades:
+  en: at Monastery.
+  tr: Manastırda.

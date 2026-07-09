@@ -8,5 +8,13 @@ role:
 line: ram-line
 lineRank: 2
 description:
-  en: The Capped Ram is a siege trained at the Siege Workshop.
-  tr: Capped Ram, Siege Workshop'ta eğitilen bir kuşatma birimidir.
+  en: >-
+    Anti-building Siege Weapon. Resistant to most ranged attacks. Exceptionally strong vs. buildings. Weak vs. melee
+    units. Cannot be converted by enemy Monks from distance. Garrisoned Infantry increases speed and attack.
+  tr: >-
+    Bina karşıtı kuşatma silahı. Birçok menzilli saldırıya karşı dirençli. Binalara karşı oldukça güçlü. Yakın dövüş
+    birimlerine karşı zayıf. Düşman keşişler tarafından uzaktan dönüştürülemez. Konuşlanan piyadeler saldırı hızını ve
+    gücünü artırır.
+upgrades:
+  en: attack (University); to Siege Ram (Siege Workshop); more resistant to Monks (Monastery).
+  tr: saldırı (Akademi); Şahmerdana yükseltme (Kuşatma Atölyesi); Keşişlere karşı daha fazla direnç (Tapınak).

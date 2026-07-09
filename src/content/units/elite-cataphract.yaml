@@ -9,5 +9,8 @@ civ: byzantines
 line: cataphract-line
 lineRank: 2
 description:
-  en: The Elite Cataphract is a unique unit trained at the Castle.
-  tr: Elite Cataphract, Castle'da eğitilen özgün bir birliktir.
+  en: Byzantine unique Heavy Cavalry. Exceptionally strong vs. Infantry. Weak vs. Archery Units.
+  tr: Bizans'a özgü Ağır Süvari. Piyadelere karşı son derece güçlüdür. Okçu Birimlerine karşı zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed, HP (Stable); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız, DP (Ahır); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

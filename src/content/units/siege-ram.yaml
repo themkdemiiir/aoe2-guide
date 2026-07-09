@@ -8,5 +8,13 @@ role:
 line: ram-line
 lineRank: 3
 description:
-  en: The Siege Ram is a siege trained at the Siege Workshop.
-  tr: Siege Ram, Siege Workshop'ta eğitilen bir kuşatma birimidir.
+  en: >-
+    Anti-building Siege Weapon. Resistant to most ranged attacks. Exceptionally strong vs. buildings. Weak vs. melee
+    units. Cannot be converted by enemy Monks from distance. Garrisoned Infantry increases speed and attack.
+  tr: >-
+    Bina karşıtı Kuşatma Silahı. Birçok menzilli saldırıya karşı dirençlidir. Binalara karşı oldukça güçlüdür. Yakın
+    dövüş birimlerine karşı zayıftır. Düşman keşişler tarafından uzaktan dönüştürülemez. Garnizonda görevlendirilen
+    piyadeler saldırı hızını ve gücünü artırır.
+upgrades:
+  en: attack (University); more resistant to Monks (Monastery).
+  tr: saldırı (Akademi); Keşişlere karşı daha fazla direnç (Tapınak).

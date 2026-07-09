@@ -45,12 +45,26 @@ const hasRankings = !!rankSrc && (["1v1", "team"] as const).some((l) => {
   const lad = rankSrc[l];
   return !!lad && Object.values(lad).some((rows) => Array.isArray(rows) && rows.length > 0);
 });
+
+// Meta description: unique per map — curated pages lead with the localized map type,
+// data-only pages with their ranked-game volume; both close with a live top-civ line.
+const topRow = (rankSrc?.["1v1"]?.all as { civ: string; winRate: number }[] | undefined)?.[0];
+const civNames = new Map((await getCollection("civilizations")).map((c) => [c.id, c.data.name[lang]]));
+const topCivSentence = topRow
+  ? t(lang, "maps.metaTopCiv")
+      .replace("{civ}", civNames.get(topRow.civ) ?? displayName(topRow.civ))
+      .replace("{wr}", topRow.winRate.toFixed(1))
+  : "";
+const description = entry
+  ? t(lang, "maps.metaCurated")
+      .replace("{name}", name)
+      .replace("{type}", t(lang, `mapType.${entry.data.type}`).toLocaleLowerCase(lang === "tr" ? "tr-TR" : "en-US")) + topCivSentence
+  : t(lang, "maps.metaData").replace("{name}", name).replace("{games}", numFmt.format(totalGames)) + topCivSentence;
 ---
 <BaseLayout
-  title={name}
-  description={lang === "tr"
-    ? `${name} — Age of Empires II dereceli harita rehberi: gerçek maç verisinden en iyi uygarlıklar, takım kompozisyonları ve strateji notları.`
-    : `${name} — Age of Empires II ranked map guide: best civilizations from real match data, team compositions and strategy notes.`}
+  title={`${name} — ${t(lang, "maps.seoTitle")}`}
+  breadcrumbName={name}
+  description={description}
   canonicalPath={`/maps/${slug}`}
 >
   <article class="mx-auto max-w-3xl px-4 py-8">

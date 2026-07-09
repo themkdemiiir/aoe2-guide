@@ -25,8 +25,14 @@ export default defineConfig({
   integrations: [
     mdx(),
     // The root "/" is a language-gate redirect page — a sitemap must not list
-    // URLs that redirect.
-    sitemap({ filter: (page) => new URL(page).pathname !== "/" }),
+    // URLs that redirect. /search/ is noindex (client-only Pagefind box) — a
+    // sitemap listing would contradict that.
+    sitemap({
+      filter: (page) => {
+        const p = new URL(page).pathname;
+        return p !== "/" && !p.endsWith("/search/");
+      },
+    }),
     pagefind(),
     icon({ include: { lucide: ["*"], heroicons: ["*"] } }),
   ],

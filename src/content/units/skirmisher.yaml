@@ -8,5 +8,16 @@ role:
 line: skirmisher-line
 lineRank: 1
 description:
-  en: The Skirmisher is a anti-archer ranged trained at the Archery Range.
-  tr: Skirmisher, Archery Range'de eğitilen archer counter'ı bir menzilli birimdir.
+  en: >-
+    Anti-archer Skirmisher that cannot attack at close range. Strong vs. Ranged Soldiers and Spearman-line. Weak vs.
+    units at close range.
+  tr: >-
+    Yakın mesafeden saldıramayan, okçu karşıtı Akıncı. Menzilli Askerlere ve Mızraklı Asker türlerine karşı güçlüdür.
+    Yakın mesafedeki birimlere karşı zayıftır.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); attack, accuracy (University); accuracy, to Elite Skirmisher (Archery Range);
+    creation speed (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); saldırı, isabet (Üniversite); isabet, Elit Akıncıya yükseltme (Okçuluk Binası);
+    oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

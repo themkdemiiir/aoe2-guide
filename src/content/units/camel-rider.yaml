@@ -8,5 +8,14 @@ role:
 line: camel-line
 lineRank: 1
 description:
-  en: The Camel is a anti-cavalry cavalry trained at the Stable.
-  tr: Camel Rider, Stable'da eğitilen süvari karşıtı bir süvaridir.
+  en: Fast moving anti-cavalry Cavalry. Strong vs. Mounted Units. Weak vs. Infantry, Monks and Foot Archers.
+  tr: >-
+    Hızlı hareket eden, süvari karşıtı Süvari. Binekli Birimlere karşı güçlü. Piyadelere, Keşişlere ve Yaya Okçulara
+    karşı zayıf.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed, HP, to Heavy Camel Rider (Stable); creation speed (Castle); more resistant to
+    Monks (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız, DP, Ağır Deve Binicisine yükseltme (Ahır); oluşturma hızı (Kale); Keşişlere karşı daha
+    fazla direnç (Manastır).

@@ -9,5 +9,12 @@ civ: aztecs
 line: jaguar-warrior-line
 lineRank: 2
 description:
-  en: The Elite Jaguar Warrior is a unique unit trained at the Castle.
-  tr: Elite Jaguar Warrior, Castle'da eğitilen bir özgün birimdir.
+  en: >-
+    Aztec unique Infantry that gains additional damage when defeating military units. Exceptionally strong vs. Infantry.
+    Weak vs. Cavalry and Archery Units.
+  tr: >-
+    Askerî birimleri alt ettikçe fazladan hasar kazanan, Azteklere özgü Piyade. Piyadelere karşı son derece güçlüdür.
+    Süvarilere ve Okçu Birimlerine karşı zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed (Barracks); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız (Kışla); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

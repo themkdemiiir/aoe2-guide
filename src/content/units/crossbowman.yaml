@@ -8,5 +8,16 @@ role:
 line: archer-line
 lineRank: 2
 description:
-  en: The Crossbowman is a ranged infantry trained at the Archery Range.
-  tr: Crossbowman, Archery Range'de eğitilen menzilli bir piyadedir.
+  en: >-
+    All-purpose Foot Archer. Strong vs. units at long range. Weak vs. Skirmishers, Mangonel-line and units at close
+    range.
+  tr: >-
+    Her koşula uygun Yaya Okçu. Uzak mesafedeki birimlere karşı güçlü. Akıncılar, Mancınık türleri ve yakındaki
+    birimlere karşı zayıf.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); attack, accuracy (University); accuracy, to Arbalester (Archery Range); creation
+    speed (Castle); more resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); saldırı, isabet (Üniversite); isabet, Arbaletçiye yükseltme (Okçuluk Binası);
+    oluşturma hızı (Kale); Keşişlere daha fazla direnç (Manastır).

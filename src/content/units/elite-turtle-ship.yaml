@@ -9,5 +9,12 @@ civ: koreans
 line: turtle-ship-line
 lineRank: 2
 description:
-  en: The Elite Turtle Ship is a unique unit trained at the Dock.
-  tr: Elite Turtle Ship, Dock'ta eğitilen özgün bir birimdir.
+  en: Korean unique Siege Warship with high armor and attack. Strong vs. most Warships and buildings. Weak vs. Galleys.
+  tr: >-
+    Yüksek zırha ve saldırıya sahip, Korelilere özgü Kuşatma Savaş Gemisi. Çoğu Savaş Gemisine ve binalara karşı
+    güçlüdür. Kadırgalara karşı zayıftır.
+upgrades:
+  en: armor, speed, cost, creation speed (Dock); attack, range (University); more resistant to Monks (Monastery).
+  tr: >-
+    zırh, hız, maliyet, üretim hızı (Rıhtım); saldırı, menzil (Üniversite); Keşişlere karşı daha fazla direnç
+    (Manastır).

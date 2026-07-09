@@ -9,5 +9,12 @@ civ: vikings
 line: longboat-line
 lineRank: 2
 description:
-  en: The Elite Longboat is a unique unit trained at the Dock.
-  tr: Elite Longboat, Dock'ta eğitilen özgün bir birlikdir.
+  en: Viking unique Warship that fires multiple arrows. Strong vs. Fire Galleys, land units and buildings.
+  tr: Çoklu ok fırlatan, Vikinglere özgü Savaş Gemisi. Alevatar Gemilere, kara birimlerine ve binalara karşı güçlüdür.
+upgrades:
+  en: >-
+    armor, speed, cost, creation speed (Dock); attack, range (Blacksmith); attack, accuracy (University); more resistant
+    to Monks (Monastery).
+  tr: >-
+    zırh, hız, maliyet, üretim hızı (Rıhtım); saldırı, menzil (Demirci); saldırı, isabet (Üniversite); Keşişlere karşı
+    daha fazla direnç (Manastır).

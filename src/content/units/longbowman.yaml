@@ -9,23 +9,14 @@ civ: britons
 line: longbowman-line
 lineRank: 1
 description:
-  en: >-
-    The Longbowman is the Britons' unique unit — a foot archer with the longest range in the game when supported by
-    Yeomen. Strong as a range-extending support to Crossbowman and Arbalester compositions.
-
-
-    ## How to use
-
-
-    Mass Longbowmen behind a Crossbowman line. Their range allows them to outshoot every other archer at full upgrades,
-    making them devastating in Castle and Imperial Age.
+  en: British unique Foot Archer with exceptional range. Strong vs. Infantry. Weak vs. Cavalry and Skirmishers.
   tr: >-
-    Uzunyay Okçusu, Britons'ın özgün birimidir — Yeomen ile birlikte oyundaki en uzun menzilli yaya okçusudur. Tatar
-    Yayı ve Arbalester kompozisyonlarında menzil destekçisi olarak güçlüdür.
-
-
-    ## Nasıl kullanılır
-
-
-    Uzunyay Okçularını Tatar Yayı hattının arkasında kitle olarak topla. Tam yükseltmelerle diğer tüm okçuları menzil
-    dışında bırakırlar — Kale ve İmparatorluk Çağı'nda yıkıcıdırlar.
+    Son derece uzun menzilli, İngilizlere özgü Yaya Okçusu. Piyadelere karşı güçlüdür. Süvarilere ve AAkıncılarakarşı
+    zayıftır.
+upgrades:
+  en: >-
+    attack, range, armor (Blacksmith); attack, accuracy (University); creation speed, to Elite Longbowman (Castle); more
+    resistant to Monks (Monastery).
+  tr: >-
+    saldırı, menzil, zırh (Demirci); saldırı, isabet (Üniversite); oluşturma hızı, Elit Uzun Yay Okçusuna yükseltme
+    (Kale); Keşişlere karşı daha fazla direnç (Manastır).

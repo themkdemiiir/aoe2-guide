@@ -110,6 +110,7 @@ const units = defineCollection({
     line: z.string().optional(),
     lineRank: z.number().optional(),
     description: localizedString.optional(),
+    upgrades: localizedString.optional(),
   }),
 });
 

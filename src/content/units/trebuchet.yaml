@@ -8,5 +8,12 @@ role:
 line: trebuchet-line
 lineRank: 1
 description:
-  en: The Trebuchet is a siege long-range trained at the Castle.
-  tr: Trebuchet, Castle'da eğitilen uzun menzilli bir kuşatma silahıdır.
+  en: >-
+    Powerful anti-building Siege Weapon with exceptional range. Must be packed to move, unpacked to attack. Cannot
+    attack enemies at close range. Strong vs. buildings. Can attack ground and destroy trees.
+  tr: >-
+    Son derece uzun menzilli, bina karşıtı Kuşatma Silahı. Hareket etmesi için toplanmalı, saldırması için kurulmalıdır.
+    Yakındaki birimlere ateş edemez. Binalara karşı güçlü. Alana saldırabilir ve ağaçları yok edebilir.
+upgrades:
+  en: attack, range (University); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, menzil (Üniversite); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

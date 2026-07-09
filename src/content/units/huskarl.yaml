@@ -9,5 +9,16 @@ civ: goths
 line: huskarl-line
 lineRank: 1
 description:
-  en: The Huskarl is a unique unit trained at the Castle.
-  tr: Huskarl, Castle'da eğitilen bir özgün birimdir.
+  en: >-
+    Gothic unique Infantry with exceptional pierce armor. Strong vs. Ranged Soldiers and buildings. Weak vs. Cavalry and
+    Militia-line.
+  tr: >-
+    Son derece delici zırha sahip, Gotlara özgü Piyade. Menzilli Askerlere ve binalara karşı güçlüdür. Süvarilere ve
+    Milis türlerine karşı zayıftır.
+upgrades:
+  en: >-
+    attack, armor (Blacksmith); speed (Barracks); creation speed, to Elite Huskarl (Castle); more resistant to Monks
+    (Monastery).
+  tr: >-
+    saldırı, zırh (Demirci); hız (Kışla); oluşturma hızı, Elit Huskarla yükseltme (Kale); Keşişlere karşı daha fazla
+    direnç (Manastır).

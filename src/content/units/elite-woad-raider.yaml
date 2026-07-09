@@ -9,5 +9,12 @@ civ: celts
 line: woad-raider-line
 lineRank: 2
 description:
-  en: The Elite Woad Raider is a unique unit trained at the Castle.
-  tr: Elite Woad Raider, Castle'da eğitilen özgün bir birlikdir.
+  en: >-
+    Celtic unique Infantry with fast movement speed. Strong vs. Infantry and Siege Weapons. Weak vs. Archery Units and
+    Cavalry.
+  tr: >-
+    Yüksek hareket hızına sahip, Keltlere özgü Piyade. Piyadelere ve Kuşatma Silahlarına karşı güçlüdür. Okçu birimlere
+    ve Süvarilere karşı zayıftır.
+upgrades:
+  en: attack, armor (Blacksmith); speed (Barracks); creation speed (Castle); more resistant to Monks (Monastery).
+  tr: saldırı, zırh (Demirci); hız (Kışla); oluşturma hızı (Kale); Keşişlere karşı daha fazla direnç (Manastır).

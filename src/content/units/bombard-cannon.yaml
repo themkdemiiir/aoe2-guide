@@ -8,5 +8,12 @@ role:
 line: bombard-cannon-line
 lineRank: 1
 description:
-  en: The Bombard Cannon is a siege gunpowder trained at the Siege Workshop.
-  tr: Bombard Cannon, Siege Workshop'ta eğitilen bir barut kuşatma silahıdır.
+  en: >-
+    Siege Gunpowder Unit with long range, but cannot attack at close range. Strong vs. buildings and Siege Weapons. Weak
+    vs. units at close range.
+  tr: >-
+    Uzun menzilli barutlu kuşatma birimi. Yakın menzilde saldıramaz. Binalara ve kuşatma silahlarına karşı güçlüdür.
+    Yakın dövüş birimlerine karşı zayıftır.
+upgrades:
+  en: attack, range (University); to Houfnice (Siege Workshop); more resistant to Monks (Monastery).
+  tr: saldırı, menzil (Üniversite); Obüse yükseltme (Kuşatma Atölyesi); Keşişlere daha fazla direnç (Manastır).
