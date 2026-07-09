@@ -113,16 +113,19 @@ const cumOpts = [1650, 1800, 2000]
   .map((lo) => ({ lo, idx: ELO_BUCKETS.findIndex((b) => Number.parseInt(b, 10) >= lo) }))
   .filter((o) => o.idx > 0);
 const byEloCivs = byEloData.civs as unknown as Record<string, Record<string, Record<string, [number, number]>>>;
-const h2hElo: Record<string, Record<string, Record<number, number | [number, number]>>> = {};
+const h2hElo: Record<string, Record<string, Record<number, [number, number]>>> = {};
 for (const [civ, opps] of Object.entries(byEloCivs)) {
   h2hElo[civ] = {};
   for (const [opp, slice] of Object.entries(opps)) {
     // "all" keeps [winRate, games] for the headline; elo buckets keep just the
     // win rate to keep the inline payload small.
-    const enc: Record<number, number | [number, number]> = {};
+    const enc: Record<number, [number, number]> = {};
     for (const [b, v] of Object.entries(slice)) {
-      const i = eloIdx[b];
-      enc[i] = i === 0 ? [Math.round(v[0] * 10) / 10, v[1]] : Math.round(v[0] * 10) / 10;
+      // Keep [winRate, games] for EVERY bucket, not just "all". Dropping the band-bucket games was
+      // the "az veri / too few at this bracket" bug: the client couldn't sum a cumulative "+1650"
+      // sample (it read games = 0 for every band) and fell back to all-elos even when the bracket
+      // had plenty. One extra int per (pair × bucket) — modest payload cost for correct slicing.
+      enc[eloIdx[b]] = [Math.round(v[0] * 10) / 10, v[1]];
     }
     h2hElo[civ][opp] = enc;
   }
@@ -148,12 +151,14 @@ const COMMON_MAPS = Object.entries(mapMetaData.maps as Record<string, { games: {
   .map(([k]) => k);
 const mapIdx = Object.fromEntries(COMMON_MAPS.map((m, i) => [m, i]));
 const mapNames = COMMON_MAPS.map((m) => displayName(m));
-const pm: Record<string, Record<string, Record<number, number>>> = {};
+// pm[a][opp][mapIdx] = [winRate, games]; the games count drives the DISTRIBUTION (most-played
+// first) and is shown alongside the rate. Per-map is ALL-elos (the by-map export has no elo split).
+const pm: Record<string, Record<string, Record<number, [number, number]>>> = {};
 for (const [a, maps] of Object.entries(byMapData.civs as Record<string, Record<string, MM[]>>)) {
   for (const [map, arr] of Object.entries(maps)) {
     const idx = mapIdx[map];
     if (idx === undefined) continue;
-    for (const m of arr) ((pm[a] ??= {})[m.opp] ??= {})[idx] = Math.round(m.winRate);
+    for (const m of arr) ((pm[a] ??= {})[m.opp] ??= {})[idx] = [Math.round(m.winRate), m.games];
   }
 }
 
@@ -165,7 +170,8 @@ const h2hLabels = {
   allElos: lang === "tr" ? "tüm elolar — bu dilimde az veri" : "all elos — too few at this bracket",
   noData: lang === "tr" ? "Bu eşleşme için yeterli veri yok." : "Not enough data for this matchup.",
   team: lang === "tr" ? "Takım" : "Team",
-  byMap: lang === "tr" ? "Haritaya göre (en iyi → en kötü)" : "By map (best → worst)",
+  byElo: lang === "tr" ? "Elo'ya göre (düşük → yüksek)" : "By elo (low → high)",
+  byMap: lang === "tr" ? "Haritaya göre · en çok oynanan (tüm elolar)" : "By map · most played (all elos)",
   unknownCiv: lang === "tr" ? "Bilinmeyen uygarlık: " : "Unknown civ: ",
 };
 
@@ -244,12 +250,41 @@ const civHeadSSR = (icon: string | undefined, kind: string, size: number) =>
   '<div class="flex flex-col items-center gap-1">' + crownSSR(kind)
   + (icon ? '<img src="' + escSSR(icon) + '" alt="" width="' + size + '" height="' + size + '" class="rounded border border-stone-700/30"/>' : '')
   + '</div>';
+const wrColor = (wr: number) =>
+  wr >= 52 ? 'var(--color-fav)' : wr <= 48 ? 'var(--color-wr-bad)' : 'var(--color-stone-700)';
+
+// Elo win-rate curve for a↔b: one row per band bucket present in the payload (the export already
+// drops sub-minGames buckets), low→high, so the swing (e.g. 43% at <1000 → 54% at 2000+) is
+// visible up front instead of buried behind the dropdown.
+const eloCurveHtmlSSR = (a: string, b: string): string => {
+  const slice = h2hElo[a] && h2hElo[a][b];
+  if (!slice) return '';
+  const rows = ELO_BUCKETS.map((name, i) => ({ name, i }))
+    .filter((r) => r.i > 0 && slice[r.i] != null)
+    .map((r) => ({ name: r.name, wr: slice[r.i][0], games: slice[r.i][1] }));
+  if (rows.length < 2) return '';
+  return '<div class="mt-4 border-t border-stone-700/15 pt-3">'
+    + '<h3 class="mb-2 font-mono text-[10px] uppercase tracking-wide text-stone-700">' + h2hLabels.byElo + '</h3>'
+    + '<div class="space-y-1">'
+    + rows.map((r) =>
+        '<div class="flex items-center gap-2 text-sm">'
+        + '<span class="w-20 shrink-0 font-mono text-[11px] text-stone-700">' + escSSR(r.name) + '</span>'
+        + '<span class="w-9 shrink-0 font-mono font-medium" style="color:' + wrColor(r.wr) + '">' + Math.round(r.wr) + '%</span>'
+        + '<span class="relative h-2 flex-1 overflow-hidden rounded-full border border-stone-700/20 bg-stone-700/10">'
+        + '<span class="absolute inset-y-0 left-0" style="width:' + Math.max(3, Math.min(97, r.wr)) + '%;background:' + wrColor(r.wr) + '"></span>'
+        + '<span class="absolute inset-y-0 w-px bg-ink/30" style="left:50%"></span></span>'
+        + '<span class="w-12 shrink-0 text-right text-[11px] text-stone-700/60">' + r.games.toLocaleString(numLocale) + '</span>'
+        + '</div>',
+      ).join('')
+    + '</div></div>';
+};
+
 const perMapHtmlSSR = (a: string, b: string) => {
   const data = (pm[a] && pm[a][b]) || null;
   if (!data) return '';
   const entries = Object.keys(data)
-    .map((i) => [mapNames[Number(i)], data[Number(i)]] as [string, number])
-    .sort((x, y) => y[1] - x[1]);
+    .map((i) => [mapNames[Number(i)], data[Number(i)][0], data[Number(i)][1]] as [string, number, number])
+    .sort((x, y) => y[2] - x[2]);
   if (!entries.length) return '';
   return '<div class="mt-4 border-t border-stone-700/15 pt-3">'
     + '<h3 class="mb-2 font-mono text-[10px] uppercase tracking-wide text-stone-700">' + h2hLabels.byMap + '</h3>'
@@ -257,7 +292,8 @@ const perMapHtmlSSR = (a: string, b: string) => {
     + entries.map((e) =>
         '<div class="flex items-center justify-between gap-2 text-sm">'
         + '<span class="truncate text-ink">' + escSSR(e[0]) + '</span>'
-        + '<span class="font-mono font-medium" style="color:' + (e[1] >= 52 ? 'var(--color-fav)' : e[1] <= 48 ? 'var(--color-wr-bad)' : 'var(--color-stone-700)') + '">' + e[1] + '%</span>'
+        + '<span class="font-mono"><span class="font-medium" style="color:' + wrColor(e[1]) + '">' + e[1] + '%</span> '
+        + '<span class="text-[11px] text-stone-700/60">' + e[2].toLocaleString(numLocale) + '</span></span>'
         + '</div>',
       ).join('')
     + '</div></div>';
@@ -296,7 +332,8 @@ const h2hBannerSSR = (a: string, b: string, eIdx: number): string => {
     + '<div class="h-full" style="width:' + fill + '%;background:' + favColor + '"></div>'
     + '<div class="absolute inset-y-0 w-px bg-ink/40" style="left:50%"></div>'
     + '</div>'
-    + (eIdx === 0 ? perMapHtmlSSR(a, b) : '')
+    + eloCurveHtmlSSR(a, b)
+    + perMapHtmlSSR(a, b)
     + '</div>';
 };
 
@@ -529,16 +566,44 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + '<div class="absolute inset-y-0 w-px bg-ink/40" style="left:50%"></div>'
           + '</div>'
           + (fellBack ? '<p class="mt-2 text-center font-mono text-[11px] tracking-wide text-stone-700/60">' + h2hLabels.allElos + '</p>' : '')
-          + (cut == null && +eloVal === 0 ? perMapHtml(a, b) : '')
+          + eloCurveHtml(a, b)
+          + perMapHtml(a, b)
           + '</div>';
+      }
+
+      const wrColor = (wr) => wr >= 52 ? 'var(--color-fav)' : wr <= 48 ? 'var(--color-wr-bad)' : 'var(--color-stone-700)';
+
+      // Elo win-rate curve (mirror of eloCurveHtmlSSR): one row per band bucket in the payload,
+      // low→high, so the swing across elo is always visible regardless of the selected bracket.
+      function eloCurveHtml(a, b) {
+        const slice = h2hElo[a] && h2hElo[a][b];
+        if (!slice) return '';
+        const rows = eloBucketNames.map((name, i) => ({ name, i }))
+          .filter((r) => r.i > 0 && slice[r.i] != null)
+          .map((r) => ({ name: r.name, wr: slice[r.i][0], games: slice[r.i][1] }));
+        if (rows.length < 2) return '';
+        return '<div class="mt-4 border-t border-stone-700/15 pt-3">'
+          + '<h3 class="mb-2 font-mono text-[10px] uppercase tracking-wide text-stone-700">' + h2hLabels.byElo + '</h3>'
+          + '<div class="space-y-1">'
+          + rows.map((r) =>
+              '<div class="flex items-center gap-2 text-sm">'
+              + '<span class="w-20 shrink-0 font-mono text-[11px] text-stone-700">' + esc(r.name) + '</span>'
+              + '<span class="w-9 shrink-0 font-mono font-medium" style="color:' + wrColor(r.wr) + '">' + Math.round(r.wr) + '%</span>'
+              + '<span class="relative h-2 flex-1 overflow-hidden rounded-full border border-stone-700/20 bg-stone-700/10">'
+              + '<span class="absolute inset-y-0 left-0" style="width:' + Math.max(3, Math.min(97, r.wr)) + '%;background:' + wrColor(r.wr) + '"></span>'
+              + '<span class="absolute inset-y-0 w-px bg-ink/30" style="left:50%"></span></span>'
+              + '<span class="w-12 shrink-0 text-right text-[11px] text-stone-700/60">' + r.games.toLocaleString(numLocale) + '</span>'
+              + '</div>',
+            ).join('')
+          + '</div></div>';
       }
 
       function perMapHtml(a, b) {
         const data = (pm[a] && pm[a][b]) || null;
         if (!data) return '';
         const entries = Object.keys(data)
-          .map((i) => [mapNames[i], data[i]])
-          .sort((x, y) => y[1] - x[1]);
+          .map((i) => [mapNames[i], data[i][0], data[i][1]])
+          .sort((x, y) => y[2] - x[2]);
         if (!entries.length) return '';
         return '<div class="mt-4 border-t border-stone-700/15 pt-3">'
           + '<h3 class="mb-2 font-mono text-[10px] uppercase tracking-wide text-stone-700">' + h2hLabels.byMap + '</h3>'
@@ -546,7 +611,8 @@ const defaultComparatorHtml = panelSSR(initialA) + panelSSR(initialB);
           + entries.map((e) =>
               '<div class="flex items-center justify-between gap-2 text-sm">'
               + '<span class="truncate text-ink">' + esc(e[0]) + '</span>'
-              + '<span class="font-mono font-medium" style="color:' + (e[1] >= 52 ? 'var(--color-fav)' : e[1] <= 48 ? 'var(--color-wr-bad)' : 'var(--color-stone-700)') + '">' + e[1] + '%</span>'
+              + '<span class="font-mono"><span class="font-medium" style="color:' + wrColor(e[1]) + '">' + e[1] + '%</span> '
+              + '<span class="text-[11px] text-stone-700/60">' + e[2].toLocaleString(numLocale) + '</span></span>'
               + '</div>',
             ).join('')
           + '</div></div>';
