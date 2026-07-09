@@ -239,6 +239,37 @@ pub struct BenchmarkDoc {
     pub civs: BTreeMap<String, BTreeMap<String, BTreeMap<String, BenchmarkModeMap>>>,
 }
 
+// --- eco benchmark (winner-focused eco-upgrade timing) — typed mirror of `benchmark-eco.json` ----
+
+/// One `(tech, elo_bucket, mode)` grain's WINNER-focused first-research click-time percentiles, in
+/// SECONDS. The analyzer draws the p25–p75 band around the p50 median. `n` is the winner sample
+/// size behind the cell (kept so the UI can honestly gate a thin slice).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct EcoBand {
+    pub p25_s: f64,
+    pub p50_s: f64,
+    pub p75_s: f64,
+    pub n: u64,
+}
+
+/// `techs.<techId>.<mapSlug>.<eloBucket>`, the innermost (mode-keyed) map of [`EcoBenchmarkDoc`].
+pub type EcoModeMap = BTreeMap<String, EcoBand>;
+
+/// The whole `benchmark-eco.json` document: `techs.<techId>.<mapSlug>.<eloBucket>.<mode> = EcoBand`,
+/// `"all"`-keyed for the map-rollup and elo-rollup grains (see `benchmark_ecotech.sql`). Map-keyed
+/// so the analyzer compares a player only to winners at their elo AND on their map (eco pace is
+/// map-driven — FC-on-Arena vs. fighting Arabia). `techId` is the decimal AoE2 tech id as a string
+/// (`"22"` = Loom, ...) — the analyzer's `WATCHED_TECHS` is the id↔name authority, so this file
+/// carries ids only, never names.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct EcoBenchmarkDoc {
+    #[serde(rename = "_source")]
+    pub source: String,
+    pub techs: BTreeMap<String, BTreeMap<String, BTreeMap<String, EcoModeMap>>>,
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

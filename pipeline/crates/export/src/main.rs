@@ -177,21 +177,27 @@ async fn run_matchups_export(out: &Path, database_url: &str) -> anyhow::Result<(
 async fn run_benchmark_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
     let client = connect(database_url).await?;
 
-    tracing::info!("streaming benchmark_ageup/benchmark_vils views");
+    tracing::info!("streaming benchmark_ageup/benchmark_vils/benchmark_ecotech views");
     let ageup = export::query::fetch_benchmark_ageup(&client).await?;
     let vils = export::query::fetch_benchmark_vils(&client).await?;
+    let eco = export::query::fetch_benchmark_ecotech(&client).await?;
     let ageup_rows = ageup.len();
     let vils_rows = vils.len();
+    let eco_rows = eco.len();
 
     let doc = export::build_benchmark(&ageup, &vils);
+    let eco_doc = export::build_eco_benchmark(&eco);
 
     fs::create_dir_all(out).with_context(|| format!("failed to create {}", out.display()))?;
     write_json_pretty(out, "benchmark.json", &doc)?;
+    write_json_pretty(out, "benchmark-eco.json", &eco_doc)?;
 
     tracing::info!(
         ageup_rows,
         vils_rows,
+        eco_rows,
         civs = doc.civs.len(),
+        eco_techs = eco_doc.techs.len(),
         out = %out.display(),
         "benchmark export complete"
     );

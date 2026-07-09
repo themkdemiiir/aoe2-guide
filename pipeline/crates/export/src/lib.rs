@@ -13,6 +13,7 @@
 
 pub mod benchmark;
 pub mod civ_meta;
+pub mod eco_benchmark;
 pub mod error;
 pub mod matchups;
 pub mod model;
@@ -22,6 +23,7 @@ pub mod stats;
 
 pub use benchmark::build_benchmark;
 pub use civ_meta::{build_doc, CivMetaInputs};
+pub use eco_benchmark::build_eco_benchmark;
 pub use error::{ExportError, Result};
 pub use matchups::{
     build_civ_matchups, build_civ_matchups_by_elo, build_civ_matchups_by_map,
@@ -29,4 +31,5 @@ pub use matchups::{
 };
 pub use model::{
     BenchmarkDoc, CivMatchupsByEloDoc, CivMatchupsByMapDoc, CivMatchupsDoc, CivMetaDoc,
+    EcoBenchmarkDoc,
 };

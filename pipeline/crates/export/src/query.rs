@@ -456,6 +456,47 @@ pub async fn fetch_benchmark_vils(client: &Client) -> Result<Vec<BenchmarkVilsRo
     Ok(out)
 }
 
+/// One row of `benchmark_ecotech` — the WINNERS-only eco-upgrade click-time percentiles. `map_slug`
+/// / `elo_bucket` / `mode` are `"all"` on a rollup grain (see that view's four GROUPING SETS).
+/// `tech_id` is one of the analyzer's `WATCHED_TECHS` ids; `p25_ms`/`p50_ms`/`p75_ms` are click-time
+/// percentiles in milliseconds (the exporter converts to seconds). `map_slug` is un-validated (an
+/// open vocabulary of live `maps.slug` values, exactly like `BenchmarkAgeupRow`).
+#[derive(Debug, Clone)]
+pub struct BenchmarkEcoRow {
+    pub tech_id: i32,
+    pub map_slug: String,
+    pub elo_bucket: String,
+    pub mode: String,
+    pub p25_ms: f64,
+    pub p50_ms: f64,
+    pub p75_ms: f64,
+    pub n: i64,
+}
+
+const SELECT_BENCHMARK_ECO: &str =
+    "SELECT tech_id, map_slug, elo_bucket, mode, p25_ms, p50_ms, p75_ms, n FROM benchmark_ecotech";
+
+pub async fn fetch_benchmark_ecotech(client: &Client) -> Result<Vec<BenchmarkEcoRow>> {
+    let stream = client
+        .query_raw(SELECT_BENCHMARK_ECO, Vec::<i32>::new())
+        .await?;
+    tokio::pin!(stream);
+    let mut out = Vec::new();
+    while let Some(row) = stream.try_next().await? {
+        out.push(BenchmarkEcoRow {
+            tech_id: row.try_get("tech_id")?,
+            map_slug: row.try_get("map_slug")?,
+            elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+            mode: validate_mode(row.try_get("mode")?)?,
+            p25_ms: row.try_get("p25_ms")?,
+            p50_ms: row.try_get("p50_ms")?,
+            p75_ms: row.try_get("p75_ms")?,
+            n: row.try_get("n")?,
+        });
+    }
+    Ok(out)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
