@@ -254,7 +254,11 @@ fn build_appearances(rows: &[CivMetaRow]) -> Appearances {
     }
 }
 
-fn build_patches(rows: &[PatchAxisRow]) -> Vec<PatchEntry> {
+/// `pub` (not `pub(crate)`) because `civ_cube.rs`'s assembly needs the SAME kept-patches
+/// computation `civ-meta.json`'s own `patches` axis uses, and `main.rs`'s `run_civ_cube_export`
+/// (a different crate target than this library) is the caller that bridges the two — see
+/// `civ_cube.sql`'s doc for why the two axes must never be allowed to drift apart.
+pub fn build_patches(rows: &[PatchAxisRow]) -> Vec<PatchEntry> {
     let mut kept: Vec<&PatchAxisRow> = rows
         .iter()
         .filter(|r| r.matches >= MIN_PATCH_TOTAL_MATCHES)

@@ -66,6 +66,19 @@ enum Command {
         #[arg(long, value_name = "DIR")]
         out: PathBuf,
     },
+    /// Export `civ-cube.json` + `civ-cube-dims.json` from the `pipeline/dbt` `civ_cube`/
+    /// `patch_axis` views — the FULL-corpus civ x elo_bucket x map x build cube (not
+    /// replay-only). Streams `civ_cube` via `query_raw` (see `export::query::fetch_civ_cube`'s
+    /// doc), then reuses `civ_meta::build_patches` over `patch_axis` as the single source of
+    /// truth for the kept-patches axis (see `civ_cube.sql`'s doc).
+    CivCube {
+        /// Directory to write BOTH `civ-cube.json` and `civ-cube-dims.json` into (created if
+        /// missing). NEVER `public`/`src/data` for this task — the real files
+        /// (`public/civ-cube.json`, `src/data/civ-cube-dims.json`) live in different repo
+        /// directories, so the split happens at deploy time, not here.
+        #[arg(long, value_name = "DIR")]
+        out: PathBuf,
+    },
     /// Print the structural (key-set + type-family) diff between two JSON files; exits 1 if the
     /// diff is non-empty. Values are ignored — see `export::shape`'s doc.
     ShapeDiff {
@@ -107,6 +120,12 @@ async fn main() {
         Command::WinnerComps { out } => {
             let secret = database_url_or_exit();
             if let Err(err) = run_winner_comps_export(&out, secret.expose()).await {
+                std::process::exit(log_error_and_code(&err, &secret));
+            }
+        }
+        Command::CivCube { out } => {
+            let secret = database_url_or_exit();
+            if let Err(err) = run_civ_cube_export(&out, secret.expose()).await {
                 std::process::exit(log_error_and_code(&err, &secret));
             }
         }
@@ -237,6 +256,35 @@ async fn run_winner_comps_export(out: &Path, database_url: &str) -> anyhow::Resu
         civs = doc.civs.len(),
         out = %out.display(),
         "winner-comps export complete"
+    );
+    Ok(())
+}
+
+async fn run_civ_cube_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
+    let client = connect(database_url).await?;
+
+    tracing::info!("streaming civ_cube view, querying patch_axis");
+    let rows = export::query::fetch_civ_cube(&client).await?;
+    let patch_axis = export::query::fetch_patch_axis(&client).await?;
+    let row_count = rows.len();
+
+    // Reuses `civ_meta`'s own kept-patches computation (`MIN_PATCH_TOTAL_MATCHES`/`MAX_PATCHES`)
+    // as the single source of truth for the axis — see `civ_cube.sql`'s doc point 3.
+    let patches = export::civ_meta::build_patches(&patch_axis);
+    let (doc, dims) = export::build_civ_cube(&rows, &patches);
+
+    fs::create_dir_all(out).with_context(|| format!("failed to create {}", out.display()))?;
+    write_json_pretty(out, "civ-cube.json", &doc)?;
+    write_json_pretty(out, "civ-cube-dims.json", &dims)?;
+
+    tracing::info!(
+        row_count,
+        civs = doc.civs.len(),
+        maps = doc.maps.len(),
+        months = doc.months.len(),
+        cells = doc.rows.len(),
+        out = %out.display(),
+        "civ-cube export complete"
     );
     Ok(())
 }

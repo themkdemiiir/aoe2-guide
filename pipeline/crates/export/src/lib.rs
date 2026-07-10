@@ -12,6 +12,7 @@
 //! no-Rust-side-refdata posture (see its `Cargo.toml`/`lib.rs` doc for the identical reasoning).
 
 pub mod benchmark;
+pub mod civ_cube;
 pub mod civ_meta;
 pub mod eco_benchmark;
 pub mod error;
@@ -23,6 +24,7 @@ pub mod stats;
 pub mod winner_comps;
 
 pub use benchmark::build_benchmark;
+pub use civ_cube::build_civ_cube;
 pub use civ_meta::{build_doc, CivMetaInputs};
 pub use eco_benchmark::build_eco_benchmark;
 pub use error::{ExportError, Result};
@@ -31,7 +33,7 @@ pub use matchups::{
     build_civ_matchups_team,
 };
 pub use model::{
-    BenchmarkDoc, CivMatchupsByEloDoc, CivMatchupsByMapDoc, CivMatchupsDoc, CivMetaDoc,
-    EcoBenchmarkDoc, WinnerCompsDoc,
+    BenchmarkDoc, CivCubeDimsDoc, CivCubeDoc, CivMatchupsByEloDoc, CivMatchupsByMapDoc,
+    CivMatchupsDoc, CivMetaDoc, EcoBenchmarkDoc, WinnerCompsDoc,
 };
 pub use winner_comps::build_winner_comps;

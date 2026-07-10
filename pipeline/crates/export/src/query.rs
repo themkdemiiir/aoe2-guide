@@ -543,6 +543,50 @@ pub async fn fetch_winner_comps(client: &Client) -> Result<Vec<WinnerCompsRow>> 
         .collect()
 }
 
+// --- civ cube (full-corpus civ x elo x map x build cube) -----------------------------------------
+//
+// Streams via `query_raw` (never `client.query`), like `benchmark_ageup`/`benchmark_vils`/
+// `benchmark_ecotech` above and UNLIKE `winner_comps`: `civ_cube.sql` has no `winner_comps.sql`-style
+// `unit_rank <= N` cap bounding the result to a fixed small shape — its grain is (civ x elo_bucket x
+// map x build), the SAME open-ended "grows with the corpus" combinatorial space `benchmark_ageup`'s
+// own doc describes, and the committed file already carries ~40k rows today (an order of magnitude
+// past civ-meta's few-hundred-row views). Streaming keeps this exporter's memory flat as the corpus
+// (and its patch/map vocabulary) keeps growing.
+
+/// One row of the `civ_cube` view: a `(civ_slug, elo_bucket, map_slug, build)` grain with `>= 20`
+/// games (see that view's `HAVING`). `map_slug`/`build` are open vocabularies (not validated — same
+/// posture as `ByMapRow`/`ByPatchRow`'s own `map_slug`/`build`); `elo_bucket` IS validated since it's
+/// the closed nine-bucket set (the view never emits an `"all"` rollup row, unlike `civ_meta`).
+#[derive(Debug, Clone)]
+pub struct CivCubeRow {
+    pub civ_slug: String,
+    pub elo_bucket: String,
+    pub map_slug: String,
+    pub build: String,
+    pub games: i64,
+    pub wins: i64,
+}
+
+const SELECT_CIV_CUBE: &str =
+    "SELECT civ_slug, elo_bucket, map_slug, build, games, wins FROM civ_cube";
+
+pub async fn fetch_civ_cube(client: &Client) -> Result<Vec<CivCubeRow>> {
+    let stream = client.query_raw(SELECT_CIV_CUBE, Vec::<i32>::new()).await?;
+    tokio::pin!(stream);
+    let mut out = Vec::new();
+    while let Some(row) = stream.try_next().await? {
+        out.push(CivCubeRow {
+            civ_slug: row.try_get("civ_slug")?,
+            elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+            map_slug: row.try_get("map_slug")?,
+            build: row.try_get("build")?,
+            games: row.try_get("games")?,
+            wins: row.try_get("wins")?,
+        });
+    }
+    Ok(out)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

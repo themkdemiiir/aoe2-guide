@@ -314,6 +314,68 @@ pub struct WinnerCompsDoc {
     pub civs: BTreeMap<String, WinnerCompsEloMap>,
 }
 
+// --- civ cube (dict-indexed civ x elo x map x build cube) — typed mirror of the committed
+// `public/civ-cube.json` + `src/data/civ-cube-dims.json` ----------------------------------------
+//
+// See `pipeline/dbt/models/civ_cube.sql` and `pipeline/crates/export/src/civ_cube.rs` for the
+// aggregation + dict-indexing this pair of documents is built from.
+
+/// One entry of the `months` (patch/build) axis — `{patch, label}` only, unlike [`PatchEntry`]:
+/// the cube's own axis carries no global match-count (that lives on `civ-meta.json`'s `patches`,
+/// the exact list this one is filtered FROM — see `civ_cube.rs`'s doc).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivCubeMonth {
+    pub patch: String,
+    pub label: String,
+}
+
+/// `[civIndex, eloIndex, mapIndex, monthIndex, games, wins]` — one packed cube cell. A `(u32, u32,
+/// u32, u32, u64, u64)` tuple serializes as the committed file's own 6-element JSON array (serde
+/// tuple serialization = declaration order), the same packing convention [`EloWinRateGames`] uses
+/// for its own 2-element array.
+pub type CivCubeRowPacked = (u32, u32, u32, u32, u64, u64);
+
+/// The whole `public/civ-cube.json` document: dictionary-indexed `civ x elo_bucket x map x build`
+/// cells kept as a flat array of small-int-indexed rows (not a nested map) to stay small over the
+/// wire — see `civ_cube.rs`'s doc for exactly how `rows` is packed against `civs`/`elos`/`maps`/
+/// `months`.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivCubeDoc {
+    /// `YYYY-MM-DD`.
+    pub generated: String,
+    pub source: String,
+    /// Sorted, DATA-driven (only civs with a qualifying cell after the patch-axis filter) — unlike
+    /// `civ-meta.json`'s `civs` map, this is NOT "every known civ gets an entry" (see
+    /// `civ_cube.rs`'s doc).
+    pub civs: Vec<String>,
+    /// The fixed nine-bucket vocabulary (`pipeline_core::elo::ELO_BUCKETS`), unconditional — never
+    /// filtered by what's actually present in `rows`.
+    pub elos: Vec<String>,
+    /// Sorted by total games descending (most-played first), ties broken alphabetically for
+    /// determinism.
+    pub maps: Vec<String>,
+    #[serde(rename = "mapNames")]
+    pub map_names: Vec<String>,
+    pub months: Vec<CivCubeMonth>,
+    pub rows: Vec<CivCubeRowPacked>,
+}
+
+/// `src/data/civ-cube-dims.json`: the tiny dropdown-only sibling of [`CivCubeDoc`] — deliberately
+/// NO `civs` (the `/civs` page already has its own civ list) and NO `rows`; imported at build time
+/// so the page's filter dropdowns exactly match the cube without fetching the full file.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivCubeDimsDoc {
+    pub generated: String,
+    pub elos: Vec<String>,
+    pub maps: Vec<String>,
+    #[serde(rename = "mapNames")]
+    pub map_names: Vec<String>,
+    pub months: Vec<CivCubeMonth>,
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

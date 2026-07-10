@@ -216,6 +216,40 @@ models:
       - name: n
         data_tests: [not_null]
 
+  - name: civ_cube
+    description: >
+      Joint civ stats cube (civ x elo_bucket x map x build), unthresholded on the patch axis
+      (that filter lives in `pipeline/crates/export/src/civ_cube.rs`, reusing `civ_meta.rs`'s own
+      kept-patches computation) but gated at >= 20 games per cell — feeds civ-cube.json's
+      dict-indexed `rows` plus civ-cube-dims.json. See the model's own SQL doc for the full
+      DuckDB-generator replacement.
+    columns:
+      - name: civ_slug
+        data_tests: [not_null]
+      - name: elo_bucket
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "<1000"
+                  - "1000-1199"
+                  - "1200-1399"
+                  - "1400-1649"
+                  - "1650-1799"
+                  - "1800-1999"
+                  - "2000-2199"
+                  - "2200-2499"
+                  - "2500+"
+      - name: map_slug
+        data_tests: [not_null]
+      - name: build
+        data_tests: [not_null]
+      - name: games
+        data_tests: [not_null]
+      - name: wins
+        data_tests: [not_null]
+
   - name: winner_comps
     description: >
       Winner unit-composition benchmark (REPLAY-SOURCE ONLY, whole-match totals — see the model's
