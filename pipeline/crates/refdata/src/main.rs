@@ -1,6 +1,6 @@
-//! Thin CLI over the `refdata` library: writes `unit-stats.json`, derived from the committed
-//! aoe2techtree source slices + `reference-data/unit-lines.tsv` baked into this binary at compile
-//! time (see `lib.rs`'s doc) — no other input needed, so there is no source-path flag to get wrong.
+//! Thin CLI over the `refdata` library: writes `unit-stats.json` AND `game-facts.json`, both
+//! derived from the committed aoe2techtree source slices baked into this binary at compile time
+//! (see `lib.rs`'s doc) — no other input needed, so there is no source-path flag to get wrong.
 //!
 //! Unlike every other pipeline binary, this one touches no database and needs no `DATABASE_URL` —
 //! it's a pure local-file transform, so `main` is synchronous (no `#[tokio::main]`) and only pulls
@@ -21,11 +21,12 @@ const DEFAULT_LOG_FILTER: &str = "info";
 #[command(
     name = "refdata",
     version,
-    about = "Derive src/data/unit-stats.json from the committed aoe2techtree reference-data slices"
+    about = "Derive src/data/unit-stats.json + game-facts.json from the committed aoe2techtree reference-data slices"
 )]
 struct Cli {
-    /// Directory to write `unit-stats.json` into (created if missing). NEVER `src/data` for this
-    /// task — the Astro site's committed files stay untouched until an explicit cutover.
+    /// Directory to write `unit-stats.json` + `game-facts.json` into (created if missing). NEVER
+    /// `src/data` for this task — the Astro site's committed files stay untouched until an explicit
+    /// cutover.
     #[arg(long, value_name = "DIR")]
     out: PathBuf,
 }
@@ -48,10 +49,15 @@ fn run(out_dir: &Path) -> anyhow::Result<()> {
         .context("building unit-stats.json")?;
     write_json(&out_dir.join("unit-stats.json"), &unit_stats)?;
 
+    let game_facts = refdata::game_facts::build_from_committed_reference_data()
+        .context("building game-facts.json")?;
+    write_json(&out_dir.join("game-facts.json"), &game_facts)?;
+
     tracing::info!(
         units = unit_stats.units.len(),
+        facts = game_facts.units.len(),
         out = %out_dir.display(),
-        "wrote unit-stats.json"
+        "wrote unit-stats.json and game-facts.json"
     );
     Ok(())
 }

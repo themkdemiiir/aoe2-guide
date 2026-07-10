@@ -8,9 +8,9 @@
 //! No filesystem/output-serialization variants here (playbook principle 2: a typed variant must
 //! earn its keep by something downstream matching on it) — the library half is pure
 //! string-in/typed-doc-out; the actual output file writes happen in `main.rs`, wrapped in plain
-//! `anyhow::Context`. The one deserialization variant below IS typed, because it's the library
-//! reading its OWN committed source slices, and `unit_stats` treats "source slice corrupt"
-//! distinctly from "a specific unit couldn't be resolved".
+//! `anyhow::Context`. The [`RefdataError::ParseSource`] variant IS typed, because it's the library
+//! reading its OWN committed source slices, and a caller (`unit_stats`/`game_facts`) treats "source
+//! slice corrupt" distinctly from "a specific unit couldn't be resolved".
 
 pub type Result<T> = std::result::Result<T, RefdataError>;
 
@@ -55,4 +55,19 @@ pub enum RefdataError {
     /// would have to be fabricated.
     #[error("reference-data/unit-lines.tsv has no row for canonical unit slug {slug:?}")]
     MissingUnitLine { slug: &'static str },
+
+    /// A [`crate::name_to_slug::NAME_TO_SLUG`] unit resolved by name but has no observation in
+    /// `reference-data/aoe2techtree-unit-tree.json` — the pinned tree slice changed, or the unit
+    /// isn't trained at any building. Fail loud rather than fabricate an age/building.
+    #[error("unit {unit_id} (slug {slug:?}) has no age/building observation in the tree slice")]
+    MissingAgeBuilding {
+        slug: &'static str,
+        unit_id: i32,
+    },
+
+    /// A unit's `Attacks` cites an armour class absent from
+    /// `reference-data/aoe2techtree-armor-classes.tsv` (aoe2techtree's OWN class table) — a real
+    /// anomaly (new class id), never an unnamed/guessed bonus label.
+    #[error("attack class {class} is not in the committed armor-classes table")]
+    UnknownAttackClass { class: i32 },
 }

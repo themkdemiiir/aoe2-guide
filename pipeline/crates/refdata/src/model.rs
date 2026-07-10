@@ -1,17 +1,19 @@
-//! Typed serde mirror of the committed `src/data/unit-stats.json` — field-for-field, in the SAME
-//! declared order (serde_json serializes struct fields in declaration order), so
-//! `serde_json::to_string_pretty` on [`UnitStatsDoc`] reproduces the committed file's shape.
+//! Typed serde mirrors of the committed `src/data/unit-stats.json` and `src/data/game-facts.json`
+//! — field-for-field, in the SAME declared order (serde_json serializes struct fields in
+//! declaration order), so `serde_json::to_string_pretty` reproduces each committed file's shape.
 //!
-//! **`tests/shape_parity.rs` deserializes the REAL committed file into these exact types** — if
+//! **`tests/shape_parity.rs` deserializes the REAL committed files into these exact types** — if
 //! every field these types declare round-trips against the site's live JSON, the shapes are
 //! provably compatible. Since the aoe2techtree redesign, the VALUES this crate produces
-//! deliberately DIFFER from the committed (aalises-based) file for ~68 units — those are aalises
-//! bugs the authoritative source corrects (listed in the task report) — so only SHAPE parity is
-//! asserted, never value equality.
+//! deliberately DIFFER from the committed (aalises-based) files (unit-stats: ~68 units; game-facts:
+//! authoritative age/cost/attackBonus) — those are aalises bugs the authoritative source corrects
+//! (listed in the task report) — so only SHAPE parity is asserted, never value equality.
 //!
 //! `#[serde(deny_unknown_fields)]` on every FIXED-schema struct: a committed file gaining a new
 //! top-level key this crate hasn't modeled yet must fail the parity test loud, never silently
 //! ignore it.
+
+use std::collections::BTreeMap;
 
 use serde::{Deserialize, Serialize, Serializer};
 
@@ -106,6 +108,69 @@ pub struct Cost {
     pub wood: i32,
     pub gold: i32,
     pub stone: i32,
+}
+
+// --- game-facts.json ------------------------------------------------------------------------
+
+/// The whole `game-facts.json` document (`{ _generated, _source, ageRank, units }`). Fully sourced
+/// from aoe2techtree now — see [`crate::game_facts`].
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GameFactsDoc {
+    #[serde(rename = "_generated")]
+    pub generated: String,
+    #[serde(rename = "_source")]
+    pub source: Source,
+    #[serde(rename = "ageRank")]
+    pub age_rank: AgeRank,
+    /// Keyed by content slug — a data-keyed map, not a fixed field set. `BTreeMap` (alphabetical):
+    /// key order isn't meaningful to the sole consumer (`src/pages/[lang]/units/[unit].astro` does
+    /// a keyed lookup, never iterates).
+    pub units: BTreeMap<String, GameFactsUnit>,
+}
+
+/// `_source` provenance block.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Source {
+    pub repo: String,
+    pub file: String,
+    pub sha: String,
+    pub license: String,
+    pub url: String,
+}
+
+/// `ageRank`: fixed four-age ordinal, never data-driven.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct AgeRank {
+    pub dark: i32,
+    pub feudal: i32,
+    pub castle: i32,
+    pub imperial: i32,
+}
+
+/// One unit's age/building/cost/attack-bonus facts.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GameFactsUnit {
+    /// The authoritative aoe2techtree display name (differs from the old aalises name for
+    /// `Arbalester`/`Camel Rider`/`Heavy Camel Rider`).
+    pub name: String,
+    /// `"dark" | "feudal" | "castle" | "imperial"`, derived from the tech tree (see
+    /// [`crate::unit_tree`]). Plain `String`, not a closed enum — this is a one-shot JSON export,
+    /// not a `match`-driven DB column (playbook principle 2).
+    pub age: String,
+    /// Training building display name, from the tech tree.
+    pub building: String,
+    /// SPARSE cost — only the resources this unit spends appear as keys (mirrors `data.Unit.Cost`),
+    /// so a `BTreeMap`, not the always-four-keys [`Cost`].
+    pub cost: BTreeMap<String, i32>,
+    /// `None` (JSON `null`) when the unit has no attack bonus, else `+N label;...` from
+    /// `data.Unit.Attacks` + the armour-class labels (see [`crate::game_facts`]). Authoritative
+    /// structured text — NOT aalises's editorial free-text.
+    #[serde(rename = "attackBonus")]
+    pub attack_bonus: Option<String>,
 }
 
 #[cfg(test)]

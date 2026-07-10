@@ -1,0 +1,47 @@
+# AoE2 attack/armour CLASS id -> readable name. SINGLE SOURCE OF TRUTH for game-facts.json's
+# attackBonus labels. Columns: class_id<TAB>label
+#
+# Source: SiegeEngineers/aoe2techtree js/techtree.js `attackAndArmorClasses` at pinned SHA
+#   b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0 (the same commit the repo pins for data.json/strings/icons).
+#   HTML `<abbr>` wrappers stripped to their visible text (e.g. class 8 -> "Mounted Units").
+#   This IS aoe2techtree's own tooltip vocabulary — authoritative, NOT aalises editorial text.
+# Classes 3 (Base Pierce) and 4 (Base Melee) are a unit's OWN base attack, never an attack BONUS;
+# refdata::game_facts skips them. A unit's Attacks entry citing a class absent here fails loud
+# (RefdataError::UnknownAttackClass) rather than emitting an unnamed bonus.
+0	Wonders
+1	Infantry
+2	Heavy Warships
+3	Base Pierce
+4	Base Melee
+5	Elephants
+8	Mounted Units
+11	All Buildings
+13	Stone Defense & Harbors
+14	Predator Animals
+15	All Archers
+16	Ships
+17	High Pierce Armor Siege Units
+18	Trees
+19	Unique Units
+20	Siege Units
+21	Standard Buildings
+22	Walls & Gates
+23	Gunpowder Units
+24	Aggressive Huntable Animals
+25	Monastery Units
+26	Castles & Kreposts
+27	Spearmen
+28	Mounted Archers
+29	Shock Infantry
+30	Camels
+31	Unblockable Melee
+32	Condottieri
+34	Fishing Ships
+35	Mamelukes
+36	Heroes & Kings
+37	Heavy Siege
+38	Skirmishers
+39	Cavalry Resistance
+40	Houses
+41	Fire Ships
+60	Long-Range Warships

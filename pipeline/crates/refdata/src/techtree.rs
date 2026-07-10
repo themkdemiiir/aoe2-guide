@@ -51,13 +51,19 @@ pub struct RawUnit {
     pub melee_armor: i32,
     #[serde(rename = "PierceArmor", default)]
     pub pierce_armor: i32,
+    /// Per-armour-class attack amounts (`{Amount, Class}`), including the unit's own base melee/
+    /// pierce (classes 4/3). `game-facts.json`'s `attackBonus` is derived from the NON-base
+    /// positive entries — see [`crate::game_facts`]. Empty for a unit with no `Attacks` array.
+    #[serde(rename = "Attacks", default)]
+    pub attacks: Vec<RawAttack>,
 }
 
 impl RawUnit {
-    /// The 8 stat fields that must match across two ids sharing a display name for the collision to
+    /// The stat fields that must match across two ids sharing a display name for the collision to
     /// be a safe "same unit, duplicate graphics/formation id" case (see [`TechTree::resolve`]).
     /// `ID`/`LanguageNameId` are deliberately excluded — those legitimately differ between the
-    /// duplicates.
+    /// duplicates — and so are `attacks` (a graphics/formation dup can carry a differently-ordered
+    /// but equivalent Attacks array; the 8 numeric stats already pin identity).
     fn stats_eq(&self, other: &RawUnit) -> bool {
         self.hp == other.hp
             && self.attack == other.attack
@@ -68,6 +74,16 @@ impl RawUnit {
             && self.melee_armor == other.melee_armor
             && self.pierce_armor == other.pierce_armor
     }
+}
+
+/// One `data.Unit.Attacks` entry: `Amount` damage against armour `Class` (the id
+/// `reference-data/aoe2techtree-armor-classes.tsv` names).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+pub struct RawAttack {
+    #[serde(rename = "Class")]
+    pub class: i32,
+    #[serde(rename = "Amount")]
+    pub amount: i32,
 }
 
 /// `data.Unit.Cost`, whose keys are capitalized in the source (`{"Food":..,"Gold":..}`) and sparse
