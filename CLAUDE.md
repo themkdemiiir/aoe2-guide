@@ -84,3 +84,14 @@ Footer text on every page must credit Microsoft's "Game Content Usage Rules" for
 - Don't use `entry.render()` — use `render(entry)` from `astro:content`.
 - Don't put `tailwind.config.js`/`.mjs` in the repo. Tailwind v4 is CSS-first.
 - Don't commit Pagefind indices (`.pagefind/`) or `dist/` — they're regenerated on build.
+
+## Working guidelines
+
+General coding-behavior guidance, derived from [Andrej Karpathy's notes on LLM coding pitfalls](https://x.com/karpathy/status/2015883857489522876) (MIT). Complements the project rules above; also installed globally as the `karpathy-guidelines` skill. Biases toward caution over speed — for trivial tasks, use judgment.
+
+- **Think before coding.** State assumptions explicitly; if uncertain, ask. Present multiple interpretations rather than silently picking one. If a simpler approach exists, say so and push back when warranted.
+- **Simplicity first.** Minimum code that solves the problem, nothing speculative — no unrequested features, no abstractions for single-use code, no error handling for impossible scenarios. If 200 lines could be 50, rewrite it.
+- **Surgical changes.** Touch only what the request needs and match existing style, even if you'd do it differently. Don't refactor what isn't broken or "improve" adjacent code/comments/formatting. Remove only the imports/vars/functions YOUR change orphaned; mention pre-existing dead code, don't delete it. Every changed line should trace to the request.
+- **Goal-driven execution.** Turn tasks into verifiable goals ("fix the bug" → "write a failing test that reproduces it, then make it pass"); state a brief plan with a per-step verify for multi-step work. Strong success criteria let the work loop to done without constant clarification.
+
+Working if: fewer unnecessary diff lines, fewer rewrites from overcomplication, and clarifying questions land before implementation rather than after mistakes.
