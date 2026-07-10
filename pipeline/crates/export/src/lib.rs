@@ -22,6 +22,7 @@ pub mod query;
 pub mod shape;
 pub mod stats;
 pub mod winner_comps;
+pub mod winner_refs;
 
 pub use benchmark::build_benchmark;
 pub use civ_cube::build_civ_cube;
@@ -34,6 +35,7 @@ pub use matchups::{
 };
 pub use model::{
     BenchmarkDoc, CivCubeDimsDoc, CivCubeDoc, CivMatchupsByEloDoc, CivMatchupsByMapDoc,
-    CivMatchupsDoc, CivMetaDoc, EcoBenchmarkDoc, WinnerCompsDoc,
+    CivMatchupsDoc, CivMetaDoc, EcoBenchmarkDoc, WinnerCompsDoc, WinnerRefsDoc,
 };
 pub use winner_comps::build_winner_comps;
+pub use winner_refs::build_winner_refs;

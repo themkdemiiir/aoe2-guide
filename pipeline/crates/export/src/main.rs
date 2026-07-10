@@ -79,6 +79,19 @@ enum Command {
         #[arg(long, value_name = "DIR")]
         out: PathBuf,
     },
+    /// Export `winner-refs.json` from the `pipeline/dbt` `winner_refs_openings`/
+    /// `winner_refs_ecotech`/`winner_refs_meds` views — the analyzer coaching panel's "Reference"
+    /// column (winners' openings, eco-tech-by-Castle rates, and event-timing medians). Buffered
+    /// `client.query` for all three (each is bounded by its own rank cap or grouping key — see
+    /// `export::query`'s doc). `openings` is full-corpus; `ecoTechByCastle`/`medsByBucket`/
+    /// `medsByMap` are REPLAY-SOURCE ONLY and thin — see `export::winner_refs`'s module doc before
+    /// comparing coverage against the committed file.
+    WinnerRefs {
+        /// Directory to write `winner-refs.json` into (created if missing). NEVER `public` for
+        /// this task — verify the shape/values against the committed file first.
+        #[arg(long, value_name = "DIR")]
+        out: PathBuf,
+    },
     /// Print the structural (key-set + type-family) diff between two JSON files; exits 1 if the
     /// diff is non-empty. Values are ignored — see `export::shape`'s doc.
     ShapeDiff {
@@ -126,6 +139,12 @@ async fn main() {
         Command::CivCube { out } => {
             let secret = database_url_or_exit();
             if let Err(err) = run_civ_cube_export(&out, secret.expose()).await {
+                std::process::exit(log_error_and_code(&err, &secret));
+            }
+        }
+        Command::WinnerRefs { out } => {
+            let secret = database_url_or_exit();
+            if let Err(err) = run_winner_refs_export(&out, secret.expose()).await {
                 std::process::exit(log_error_and_code(&err, &secret));
             }
         }
@@ -285,6 +304,36 @@ async fn run_civ_cube_export(out: &Path, database_url: &str) -> anyhow::Result<(
         cells = doc.rows.len(),
         out = %out.display(),
         "civ-cube export complete"
+    );
+    Ok(())
+}
+
+async fn run_winner_refs_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
+    let client = connect(database_url).await?;
+
+    tracing::info!("querying winner_refs_openings/winner_refs_ecotech/winner_refs_meds views");
+    let openings = export::query::fetch_winner_openings(&client).await?;
+    let ecotech = export::query::fetch_winner_ecotech(&client).await?;
+    let meds = export::query::fetch_winner_meds(&client).await?;
+    let openings_rows = openings.len();
+    let ecotech_rows = ecotech.len();
+    let meds_rows = meds.len();
+
+    let doc = export::build_winner_refs(&openings, &ecotech, &meds);
+
+    fs::create_dir_all(out).with_context(|| format!("failed to create {}", out.display()))?;
+    write_json_pretty(out, "winner-refs.json", &doc)?;
+
+    tracing::info!(
+        openings_rows,
+        ecotech_rows,
+        meds_rows,
+        civs = doc.openings.len(),
+        eco_buckets = doc.eco_tech_by_castle.len(),
+        meds_buckets = doc.meds_by_bucket.len(),
+        meds_maps = doc.meds_by_map.len(),
+        out = %out.display(),
+        "winner-refs export complete"
     );
     Ok(())
 }

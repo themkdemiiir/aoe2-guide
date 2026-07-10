@@ -376,6 +376,107 @@ pub struct CivCubeDimsDoc {
     pub months: Vec<CivCubeMonth>,
 }
 
+// --- winner refs (analyzer coaching-panel reference matrix) — typed mirror of the committed
+// `public/winner-refs.json` ------------------------------------------------------------------
+//
+// See `pipeline/dbt/models/winner_refs_openings.sql`/`winner_refs_ecotech.sql`/
+// `winner_refs_meds.sql` and `pipeline/crates/export/src/winner_refs.rs` for the three
+// aggregations this document assembles. THREE independently-scoped parts, not one corpus:
+// `openings` is FULL-corpus (both `aoestats`- and `replay`-sourced matches, same posture
+// `civ_meta_openings.sql` already established); `ecoTechByCastle`/`medsByBucket`/`medsByMap` are
+// REPLAY-SOURCE ONLY (`match_player_techs`/`replay_events` respectively — neither table is ever
+// populated from the aoestats archive path) — see `winner_refs.rs`'s module doc for the full
+// per-part coverage note.
+
+/// One opening entry of a `winner-refs.json` `openings` cell's `list` — the closed `opening_kind`
+/// vocabulary (see `winner_refs_openings.sql`'s doc), NOT the old free-text `opening` column's
+/// `"unknown"` pseudo-strategy the legacy aoestats-only generator used to rank (a documented scope
+/// change — see that view's doc point 2).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WinnerOpening {
+    pub opening: String,
+    pub pct: f64,
+}
+
+/// One `(civ, elo_bucket)` opening cell: how many winners are behind it, plus its top-5 openings
+/// by share (see [`WinnerOpening`]) — the same "rank in the view, cap in Rust" split
+/// [`WinnerCompsCell`] uses for its own top-6 unit list.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WinnerOpeningsCell {
+    pub winners: u64,
+    pub list: Vec<WinnerOpening>,
+}
+
+/// `openings.<civSlug>.<eloBucket>`, the inner map of [`WinnerRefsDoc::openings`].
+pub type WinnerOpeningsEloMap = BTreeMap<String, WinnerOpeningsCell>;
+
+/// One `elo_bucket` cell of `ecoTechByCastle`: how many winners reached Castle Age (the
+/// denominator), plus the share of THEM who researched each watched eco upgrade BEFORE completing
+/// Castle Age. All five percentages are always populated once a cell exists (never `null` — see
+/// `winner_refs_ecotech.sql`'s doc: the view's own `HAVING count(*) >= 50` guarantees a non-zero
+/// denominator for every emitted row).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct EcoTechByCastleCell {
+    pub winners: u64,
+    pub wheelbarrow: f64,
+    pub loom: f64,
+    pub dba: f64,
+    #[serde(rename = "horseCollar")]
+    pub horse_collar: f64,
+    #[serde(rename = "goldMining")]
+    pub gold_mining: f64,
+}
+
+/// One elo/map cell of `medsByBucket`/`medsByMap`: winner first-military-training + eco-tech
+/// research-CLICK-time MEDIANS, in milliseconds. Each `*_ms` field is `Option<i64>` (JSON `null`
+/// when absent), NOT a bare `i64` — `winner_refs_meds.sql`'s `percentile_cont` is null whenever
+/// none of that cell's winners triggered the corresponding event at all, a real "no signal" state
+/// this document must be able to represent honestly rather than fabricate a value for (see
+/// `winner_refs.rs`'s doc). The committed file's real cells happen to have no nulls today (the
+/// current sample clears every column), but the type does not assume that stays true forever.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WinnerMedsCell {
+    pub winners: u64,
+    #[serde(rename = "firstMilitaryMs")]
+    pub first_military_ms: Option<i64>,
+    #[serde(rename = "loomMs")]
+    pub loom_ms: Option<i64>,
+    #[serde(rename = "dbaMs")]
+    pub dba_ms: Option<i64>,
+    #[serde(rename = "wheelbarrowMs")]
+    pub wheelbarrow_ms: Option<i64>,
+    #[serde(rename = "horseCollarMs")]
+    pub horse_collar_ms: Option<i64>,
+}
+
+/// `medsByMap.<mapSlug>.<eloBucket>`, the inner map of [`WinnerRefsDoc::meds_by_map`].
+pub type WinnerMedsEloMap = BTreeMap<String, WinnerMedsCell>;
+
+/// The whole `winner-refs.json` document — the analyzer's coaching-panel "You | Opponent |
+/// Reference" matrix, fetched lazily. `openings` is keyed `<civSlug>.<eloBucket>` (the committed
+/// file's own top-level key, kept verbatim — unlike [`WinnerCompsDoc`], there is no wrapping
+/// `civs` field here); `ecoTechByCastle`/`medsByBucket` are keyed by `<eloBucket>` alone (no
+/// civ/map split); `medsByMap` adds one more level, `<mapSlug>.<eloBucket>`. See
+/// `winner_refs.rs`'s module doc for which of these four are full-corpus vs. replay-source-only.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WinnerRefsDoc {
+    pub source: String,
+    /// `YYYY-MM-DD`, same convention as [`WinnerCompsDoc::generated`].
+    pub generated: String,
+    pub openings: BTreeMap<String, WinnerOpeningsEloMap>,
+    #[serde(rename = "ecoTechByCastle")]
+    pub eco_tech_by_castle: BTreeMap<String, EcoTechByCastleCell>,
+    #[serde(rename = "medsByBucket")]
+    pub meds_by_bucket: BTreeMap<String, WinnerMedsCell>,
+    #[serde(rename = "medsByMap")]
+    pub meds_by_map: BTreeMap<String, WinnerMedsEloMap>,
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

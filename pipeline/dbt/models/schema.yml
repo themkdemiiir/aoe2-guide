@@ -284,3 +284,117 @@ models:
         data_tests: [not_null]
       - name: unit_rank
         data_tests: [not_null]
+
+  - name: winner_refs_openings
+    description: >
+      Per (civ, elo_bucket, opening) winners' opening share + rank, closed `opening_kind`
+      vocabulary, FULL corpus (both aoestats and replay sources) -- feeds winner-refs.json's
+      `openings`. Restricted to cells with >=100 winners and an opening's own share >=8% of them;
+      see the model's own SQL doc for the scope deviation from the old DuckDB generator (no
+      `"unknown"` bucket).
+    columns:
+      - name: civ_slug
+        data_tests: [not_null]
+      - name: elo_bucket
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "<1000"
+                  - "1000-1199"
+                  - "1200-1399"
+                  - "1400-1649"
+                  - "1650-1799"
+                  - "1800-1999"
+                  - "2000-2199"
+                  - "2200-2499"
+                  - "2500+"
+      - name: opening
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "scouts"
+                  - "archers"
+                  - "skirms"
+                  - "eagles"
+                  - "man_at_arms"
+                  - "spears"
+                  - "fast_castle"
+                  - "drush"
+                  - "trash"
+                  - "fires"
+                  - "galleys"
+                  - "towers"
+      - name: winners_n
+        data_tests: [not_null]
+      - name: share_pct
+        data_tests: [not_null]
+      - name: opening_rank
+        data_tests: [not_null]
+
+  - name: winner_refs_ecotech
+    description: >
+      Per elo_bucket (no civ/map split): winners who reached Castle Age, plus the share of them
+      who researched each of the five watched eco upgrades BEFORE completing Castle Age.
+      REPLAY-SOURCE ONLY (`match_player_techs`), with `m.source = 'replay'` also scoping the
+      denominator -- see the model's own SQL doc for why that scoping is deliberate, not a copy of
+      `winner_comps.sql`'s posture. Feeds winner-refs.json's `ecoTechByCastle`.
+    columns:
+      - name: elo_bucket
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "<1000"
+                  - "1000-1199"
+                  - "1200-1399"
+                  - "1400-1649"
+                  - "1650-1799"
+                  - "1800-1999"
+                  - "2000-2199"
+                  - "2200-2499"
+                  - "2500+"
+      - name: winners_n
+        data_tests: [not_null]
+      - name: wheelbarrow_pct
+        data_tests: [not_null]
+      - name: loom_pct
+        data_tests: [not_null]
+      - name: dba_pct
+        data_tests: [not_null]
+      - name: horse_collar_pct
+        data_tests: [not_null]
+      - name: gold_mining_pct
+        data_tests: [not_null]
+
+  - name: winner_refs_meds
+    description: >
+      Winners' first-military-training + eco-tech-research CLICK-time medians (milliseconds), per
+      elo_bucket and per elo_bucket x map (`map_slug = 'all'` on the all-maps rollup grain).
+      REPLAY-SOURCE ONLY (`replay_events`) -- the INNER JOIN to that table alone restricts the
+      corpus, no separate `source` filter needed (see the model's own SQL doc). Feeds
+      winner-refs.json's `medsByBucket`/`medsByMap`.
+    columns:
+      - name: map_slug
+        data_tests: [not_null]
+      - name: elo_bucket
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - "<1000"
+                  - "1000-1199"
+                  - "1200-1399"
+                  - "1400-1649"
+                  - "1650-1799"
+                  - "1800-1999"
+                  - "2000-2199"
+                  - "2200-2499"
+                  - "2500+"
+      - name: winners_n
+        data_tests: [not_null]

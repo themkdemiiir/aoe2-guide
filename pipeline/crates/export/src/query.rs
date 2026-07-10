@@ -587,6 +587,123 @@ pub async fn fetch_civ_cube(client: &Client) -> Result<Vec<CivCubeRow>> {
     Ok(out)
 }
 
+// --- winner refs (analyzer coaching-panel reference matrix) ------------------------------------
+//
+// Three separate views, three separate fetches — `winner_refs.rs::build_winner_refs` assembles all
+// three into one `WinnerRefsDoc`. All buffered `client.query` (like `civ_meta`/`winner_comps`
+// above, NOT the `query_raw` streaming the benchmark/civ_cube views need): every one of these three
+// views is bounded by its own rank cap or its single/double-dimension grouping key — none has
+// `civ_cube.sql`'s open-ended civ x elo x map x build combinatorial growth.
+
+/// One row of the `winner_refs_openings` view: a `(civ_slug, elo_bucket, opening)` grain, already
+/// restricted to the top 5 openings by share per `(civ, elo_bucket)` cell via `opening_rank <= 5`
+/// (mirrors [`SELECT_WINNER_COMPS`]'s `unit_rank <= 6` / [`SELECT_OPENINGS`]'s `opening_rank <= 3`
+/// conventions). `opening` is the closed `opening_kind` vocabulary — reuses [`validate_opening`].
+#[derive(Debug, Clone)]
+pub struct WinnerOpeningRow {
+    pub civ_slug: String,
+    pub elo_bucket: String,
+    pub opening: String,
+    pub winners_n: i64,
+    pub share_pct: f64,
+}
+
+const SELECT_WINNER_OPENINGS: &str = "SELECT civ_slug, elo_bucket, opening, winners_n, share_pct \
+     FROM winner_refs_openings WHERE opening_rank <= 5 \
+     ORDER BY civ_slug, elo_bucket, opening_rank";
+
+pub async fn fetch_winner_openings(client: &Client) -> Result<Vec<WinnerOpeningRow>> {
+    let rows = client.query(SELECT_WINNER_OPENINGS, &[]).await?;
+    rows.iter()
+        .map(|row| {
+            Ok(WinnerOpeningRow {
+                civ_slug: row.try_get("civ_slug")?,
+                elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+                opening: validate_opening(row.try_get("opening")?)?,
+                winners_n: row.try_get("winners_n")?,
+                share_pct: row.try_get("share_pct")?,
+            })
+        })
+        .collect()
+}
+
+/// One row of the `winner_refs_ecotech` view: an `elo_bucket`-only grain (no civ/map split — see
+/// that view's doc) with winners-who-reached-Castle plus each watched eco upgrade's
+/// before-Castle-Age research share (already a rounded percentage, same as
+/// [`WinnerCompsRow::producer_pct`] — no further rounding needed in `winner_refs.rs`).
+#[derive(Debug, Clone)]
+pub struct WinnerEcotechRow {
+    pub elo_bucket: String,
+    pub winners_n: i64,
+    pub wheelbarrow_pct: f64,
+    pub loom_pct: f64,
+    pub dba_pct: f64,
+    pub horse_collar_pct: f64,
+    pub gold_mining_pct: f64,
+}
+
+const SELECT_WINNER_ECOTECH: &str = "SELECT elo_bucket, winners_n, wheelbarrow_pct, loom_pct, \
+     dba_pct, horse_collar_pct, gold_mining_pct FROM winner_refs_ecotech ORDER BY elo_bucket";
+
+pub async fn fetch_winner_ecotech(client: &Client) -> Result<Vec<WinnerEcotechRow>> {
+    let rows = client.query(SELECT_WINNER_ECOTECH, &[]).await?;
+    rows.iter()
+        .map(|row| {
+            Ok(WinnerEcotechRow {
+                elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+                winners_n: row.try_get("winners_n")?,
+                wheelbarrow_pct: row.try_get("wheelbarrow_pct")?,
+                loom_pct: row.try_get("loom_pct")?,
+                dba_pct: row.try_get("dba_pct")?,
+                horse_collar_pct: row.try_get("horse_collar_pct")?,
+                gold_mining_pct: row.try_get("gold_mining_pct")?,
+            })
+        })
+        .collect()
+}
+
+/// One row of the `winner_refs_meds` view: a `(map_slug, elo_bucket)` grain via GROUPING SETS —
+/// `map_slug = "all"` on the all-maps rollup grain (mirrors `benchmark_ageup`'s own
+/// `'all'`-keyed rollup convention; NOT validated, same open-vocabulary posture as
+/// [`CivCubeRow::map_slug`]). The five `*_ms` fields are raw milliseconds straight off
+/// `percentile_cont` (`Option<f64>` — `None` when that cell's winners never triggered the
+/// corresponding event) — `winner_refs.rs` rounds them to the nearest millisecond for the
+/// document's `Option<i64>` fields, the same "SQL emits raw percentiles, Rust rounds for display"
+/// split `eco_benchmark.rs`'s own `round1` helper established for `benchmark_ecotech`.
+#[derive(Debug, Clone)]
+pub struct WinnerMedsRow {
+    pub map_slug: String,
+    pub elo_bucket: String,
+    pub winners_n: i64,
+    pub first_military_ms: Option<f64>,
+    pub loom_ms: Option<f64>,
+    pub dba_ms: Option<f64>,
+    pub wheelbarrow_ms: Option<f64>,
+    pub horse_collar_ms: Option<f64>,
+}
+
+const SELECT_WINNER_MEDS: &str = "SELECT map_slug, elo_bucket, winners_n, first_military_ms, \
+     loom_ms, dba_ms, wheelbarrow_ms, horse_collar_ms FROM winner_refs_meds \
+     ORDER BY map_slug, elo_bucket";
+
+pub async fn fetch_winner_meds(client: &Client) -> Result<Vec<WinnerMedsRow>> {
+    let rows = client.query(SELECT_WINNER_MEDS, &[]).await?;
+    rows.iter()
+        .map(|row| {
+            Ok(WinnerMedsRow {
+                map_slug: row.try_get("map_slug")?,
+                elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+                winners_n: row.try_get("winners_n")?,
+                first_military_ms: row.try_get("first_military_ms")?,
+                loom_ms: row.try_get("loom_ms")?,
+                dba_ms: row.try_get("dba_ms")?,
+                wheelbarrow_ms: row.try_get("wheelbarrow_ms")?,
+                horse_collar_ms: row.try_get("horse_collar_ms")?,
+            })
+        })
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

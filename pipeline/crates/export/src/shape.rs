@@ -38,7 +38,23 @@ use serde_json::{Map, Value};
 
 /// JSON keys whose OWN key set is data (not schema) — see the module doc. Only the OUTERMOST
 /// dynamic level needs a name here; [`collapse_dynamic`] finds any further nesting structurally.
-const DYNAMIC_MAP_FIELDS: &[&str] = &["civs", "byElo", "byMap", "byPatch"];
+///
+/// `openings`/`ecoTechByCastle`/`medsByBucket`/`medsByMap` are `winner-refs.json`'s own top-level
+/// data-keyed fields (civ slugs, elo buckets, or map slugs — see `model::WinnerRefsDoc`'s doc) —
+/// added alongside `civs`/`byElo`/`byMap`/`byPatch` for the identical reason: without a name here,
+/// `diff_at` would literally key-diff e.g. two different elo-bucket sample sets and report every
+/// non-overlapping bucket as "missing", which is noise for a document whose parts are explicitly
+/// documented as thin/replay-source-only (see `winner_refs.rs`'s module doc).
+const DYNAMIC_MAP_FIELDS: &[&str] = &[
+    "civs",
+    "byElo",
+    "byMap",
+    "byPatch",
+    "openings",
+    "ecoTechByCastle",
+    "medsByBucket",
+    "medsByMap",
+];
 
 /// Returns every structural difference found between `a` and `b`. Empty means "same shape".
 pub fn shape_diff(a: &Value, b: &Value) -> Vec<String> {
