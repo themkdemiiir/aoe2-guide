@@ -14,13 +14,15 @@
 --    per-age summary counts. Per-unit totals only exist in `match_player_units`
 --    (`m20260706_000012_create_match_player_units.rs`), which that migration's own doc names as
 --    the intended "Phase E winner-comps exporter" source — this view IS that Phase E.
--- 2. **REPLAY-SOURCE ONLY, so a smaller corpus.** `match_player_units` is populated exclusively
---    from parsed replays (`replay::derive::player_units`) — aoestats' archive rows carry no
---    per-unit data, so this view's corpus is the replay-derived subset of `1v1` matches (the
---    ~194k-and-growing replay backfill), not the full ~30M-match aoestats archive `civ_meta`/
---    `benchmark_ageup` draw from. Expect materially smaller `winners_n` per cell than the old
---    generator's, and some thin (civ, elo_bucket) cells that used to clear the >=100 threshold to
---    now fall out of it (or vice versa, as the replay corpus keeps growing).
+-- 2. **REPLAY-SOURCE ONLY on BOTH sides — by design, not a limitation.** `match_player_units` is
+--    populated exclusively from parsed replays (`replay::derive::player_units`) — aoestats' archive
+--    rows carry no per-unit data. The numerator (producers) is therefore replay-only, and the
+--    `winners` DENOMINATOR is source-scoped to `replay` to MATCH it (see the `and m.source =
+--    'replay'` in the CTE + its comment). This is the single most important line in the view: an
+--    unscoped denominator divides replay producers by the full ~30M aoestats winner count, crushing
+--    every `producer_pct` under the 15% gate — measured 3/53 civs (unscoped bug) vs 53/53 (scoped).
+--    With both sides on the same replay corpus, coverage is full and the ratios are honest; `winners_n`
+--    per cell is smaller than the old aoestats generator's but still >=100 for all 53 civs today.
 -- 3. **Whole-match totals, not "through Castle Age."** The old script summed only the
 --    dark+feudal+castle per-age windows of aoestats' per-age JSON (a player had to have actually
 --    reached Castle Age to count at all). `match_player_units.trained` (Σ `amount` over a player's
@@ -61,6 +63,12 @@ with winners as (
       and mp.won = true
       and mp.elo_bucket is not null
       and c.civ_id <> 0
+      -- CRITICAL: source-scope the winners DENOMINATOR to replay, matching the replay-only
+      -- `match_player_units` numerator (per_unit) below. Without this, `producer_pct` divides replay
+      -- producers by ALL winners (incl. the ~30M aoestats archive rows that carry no per-unit data),
+      -- collapsing every ratio far under the 15% gate — measured 3/53 civs surviving (buggy) vs
+      -- 53/53 (scoped). The corpus IS replay-only on both sides by design; that is not a limitation.
+      and m.source = 'replay'
 
 ),
 
