@@ -21,7 +21,7 @@
       "!**/*.astro",
       "!**/src/wasm/pkg",
       "!**/src/data/*.json",
-      "!**/scripts/data-pipeline/replay-rs/data",
+      "!**/reference-data",
       "!**/public/*.json"
     ]
   },

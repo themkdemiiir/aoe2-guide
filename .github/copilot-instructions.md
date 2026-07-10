@@ -15,7 +15,7 @@ Use these instructions for all GitHub Copilot work in this repository. Keep chan
 - Active production languages are EN and TR. EN is the source of truth; missing TR content falls back to EN through locale-aware content helpers in `src/lib/content.ts`.
 - Slugs are English-canonical and kebab-case across all locales, for example `/tr/civs/britons/`, not localized URL slugs.
 - Localized prose belongs in `src/content/<type>/{en,tr}/`. Numeric stats, unit references, counters, icon maps, and patch facts belong in `src/data/*.json`.
-- New raw guides start in `md/<type>/<source>-<topic>.md`, then move through `pnpm import:md` and `pnpm new:guide`.
+- New raw guides start in `guide-sources/<type>/<source>-<topic>.md`, then move through `pnpm import:md` and `pnpm new:guide`.
 - Keep Microsoft Game Content Usage Rules attribution centralized in the Footer component. Do not remove or paraphrase it.
 
 ## Assets And Data

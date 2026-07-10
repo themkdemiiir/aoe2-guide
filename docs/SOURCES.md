@@ -40,7 +40,7 @@ strategy / composition for every civ" videos.
 - These are **facts/methods** (not copyrightable) re-expressed in **our own synthesized prose** —
   no verbatim text from the source guide's guide or video transcripts is published.
 - the source guide's source material (the PDF + transcripts) is kept **local-only and gitignored**
-  (`md/reference/hera-*`) — never committed or redistributed; we cite a pro player's build guide and link his channels.
+  (`guide-sources/reference/hera-*`) — never committed or redistributed; we cite a pro player's build guide and link his channels.
 - Builds carry `source.author: "a pro player's build guide"` + the Patreon link.
 
 ## What is NOT source-verified (and must be treated as editorial)
@@ -48,7 +48,7 @@ strategy / composition for every civ" videos.
 - **Strategy prose tone** (matchup framing, "best/strongest" wording) remains opinion, synthesized
   from the source guide's guidance — read it as a strong recommendation, not gospel.
 - **Counter / "strong vs / weak vs" claims.** Informed by the r/aoe2 wiki and Spirit of the Law
-  (see `md/reference/unit-counters-SOURCE.md`) and cross-referenced with the attack-bonus data, but
+  (see `guide-sources/reference/unit-counters-SOURCE.md`) and cross-referenced with the attack-bonus data, but
   counters also depend on armour, speed and micro — they are not reducible to a single data field,
   so they remain editorial and are reviewed by hand.
 - **Strategy prose** (matchup framing, civ recommendations, "best/strongest" wording) is opinion.

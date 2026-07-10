@@ -32,7 +32,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 | `pnpm check` | Astro/TS type checks |
 | `pnpm assets:sync` | Refresh AOE2 icons from `SiegeEngineers/aoe2techtree` at the pinned SHA |
 | `pnpm icons:map` | Regenerate `src/data/icon-map.json` from `SiegeEngineers/aoe2techtree` tree JSON (`picture_index`) |
-| `pnpm import:md <path>` | Promote a raw `md/<type>/<file>.md` source into a scaffolded EN content entry |
+| `pnpm import:md <path>` | Promote a raw `guide-sources/<type>/<file>.md` source into a scaffolded EN content entry |
 | `pnpm build:wasm` | Rebuild the `/analyzer` WASM engine (needs `wasm-pack` + `rustup target add wasm32-unknown-unknown`; glue → `src/wasm/pkg/`, binary → `public/analyzer/pkg/` — both committed) |
 
 ## Layout map
@@ -48,7 +48,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 | `src/components/{layout,content,ui,islands}/` | Astro components |
 | `src/i18n/{locales,ui,utils}.ts` | i18n config, UI strings, helpers |
 | `src/lib/content.ts` | Locale-aware content helpers (`getLocalizedEntries`, `getLocalizedEntry`) |
-| `md/` | Raw source guides (not built — Hera build-order verification sources) |
+| `guide-sources/` | Raw source guides (not built — Hera build-order verification sources) |
 | `public/images/aoe2/` | Synced AOE2 icons (bundled in repo for offline builds) |
 | `scripts/` | sync-assets, build-icon-map, build-civilizations, audit-yaml-translations, check-translations |
 
@@ -56,7 +56,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 
 **Two civ-id spaces — never conflate them:** `src/data/civ-id-map.json` maps GAME/replay `civ_id`s (used by the analyzer + replay data); `src/data/relic-civ-id-map.json` maps the Relic API's own `civilization_id`s (used by every crawl consumer via `scripts/data-pipeline/lib/relic-map.mjs`). Applying the wrong table silently shuffles every civ label — that was a real June-2026 production bug. Guard tests: `tests/relic-civ-map.test.mjs`.
 
-**Build orders:** steps are verified against the Hera video sources in `md/build-orders/`.
+**Build orders:** steps are verified against the Hera video sources in `guide-sources/build-orders/`.
 
 ## Workflow for new content
 

@@ -1,5 +1,5 @@
 //! Map id -> `{ name, slug, family }`, parsed from the committed
-//! `scripts/data-pipeline/replay-rs/data/maps.tsv` (SINGLE SOURCE OF TRUTH — read here, never
+//! `reference-data/maps.tsv` (SINGLE SOURCE OF TRUTH — read here, never
 //! copied or modified).
 //!
 //! Mirrors `replay-rs/src/analyze/maps.rs::parse`'s structural parse exactly: `splitn(4, '\t')`
@@ -111,7 +111,7 @@ pub fn parse(tsv: &str) -> MapTable {
 /// Loads the real, committed `maps.tsv`, baked into the binary at compile time.
 pub fn load() -> MapTable {
     parse(include_str!(
-        "../../../../scripts/data-pipeline/replay-rs/data/maps.tsv"
+        "../../../../reference-data/maps.tsv"
     ))
 }
 

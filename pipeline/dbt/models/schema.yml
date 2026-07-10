@@ -179,7 +179,7 @@ models:
     description: >
       Analyzer benchmark: median age-up completion seconds by civ x map x elo_bucket x mode, with
       `'all'`-keyed rollups (civ is never rolled up) — feeds
-      scripts/data-pipeline/replay-rs/data/benchmark.json's base cells.
+      reference-data/benchmark.json's base cells.
     columns:
       - name: civ_slug
         data_tests: [not_null]

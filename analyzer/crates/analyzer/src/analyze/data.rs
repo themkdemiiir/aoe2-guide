@@ -1,7 +1,7 @@
 //! Load the committed `costs.json`, `benchmark.json`, and `civs.tsv` (baked in via
 //! `include_str!`), and bucket an ELO. No DB/network at runtime.
 //!
-//! The `include_str!` targets still live at `scripts/data-pipeline/replay-rs/data/`
+//! The `include_str!` targets still live at `reference-data/`
 //! (single source of truth, not duplicated here — see Task 4a) even though this
 //! crate now lives under `analyzer/crates/analyzer/src/analyze/`; only the
 //! relative `../..` prefix changed to keep resolving to the SAME repo files.
@@ -28,7 +28,7 @@ pub struct Costs {
 
 pub fn load_costs() -> Costs {
     serde_json::from_str(include_str!(
-        "../../../../../scripts/data-pipeline/replay-rs/data/costs.json"
+        "../../../../../reference-data/costs.json"
     ))
     .expect("costs.json")
 }
@@ -92,7 +92,7 @@ impl Benchmark {
 
 pub fn load_benchmark() -> Benchmark {
     let f: BenchmarkFile = serde_json::from_str(include_str!(
-        "../../../../../scripts/data-pipeline/replay-rs/data/benchmark.json"
+        "../../../../../reference-data/benchmark.json"
     ))
     .expect("benchmark.json");
     Benchmark(f.civs)
@@ -167,7 +167,7 @@ impl EcoBenchmark {
 
 pub fn load_eco_benchmark() -> EcoBenchmark {
     let f: EcoBenchmarkFile = serde_json::from_str(include_str!(
-        "../../../../../scripts/data-pipeline/replay-rs/data/benchmark-eco.json"
+        "../../../../../reference-data/benchmark-eco.json"
     ))
     .expect("benchmark-eco.json");
     EcoBenchmark(f.techs)
@@ -175,7 +175,7 @@ pub fn load_eco_benchmark() -> EcoBenchmark {
 
 // --- civ_id -> slug (benchmark key) ------------------------------------------
 pub fn load_civs() -> HashMap<u32, String> {
-    include_str!("../../../../../scripts/data-pipeline/replay-rs/data/civs.tsv")
+    include_str!("../../../../../reference-data/civs.tsv")
         .lines()
         .filter(|l| !l.starts_with('#') && !l.trim().is_empty())
         .filter_map(|l| {

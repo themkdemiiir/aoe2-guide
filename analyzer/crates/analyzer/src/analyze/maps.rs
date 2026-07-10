@@ -3,7 +3,7 @@
 //! `family` (col 3) drives whether a team game gets a flank/pocket role tag:
 //! only `open`/`closed` do. The notes column (col 4) is human reference, ignored here.
 //!
-//! `include_str!` target is `scripts/data-pipeline/replay-rs/data/maps.tsv` (single
+//! `include_str!` target is `reference-data/maps.tsv` (single
 //! source of truth — see `analyze/data.rs` for why this isn't duplicated here).
 
 use std::collections::HashMap;
@@ -46,7 +46,7 @@ pub fn parse(tsv: &str) -> MapTable {
 
 pub fn load() -> MapTable {
     parse(include_str!(
-        "../../../../../scripts/data-pipeline/replay-rs/data/maps.tsv"
+        "../../../../../reference-data/maps.tsv"
     ))
 }
 

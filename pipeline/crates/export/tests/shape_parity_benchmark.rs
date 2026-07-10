@@ -4,7 +4,7 @@
 use export::model::BenchmarkDoc;
 
 const COMMITTED_BENCHMARK: &str =
-    include_str!("../../../../scripts/data-pipeline/replay-rs/data/benchmark.json");
+    include_str!("../../../../reference-data/benchmark.json");
 
 #[test]
 fn committed_benchmark_matches_doc_shape() {

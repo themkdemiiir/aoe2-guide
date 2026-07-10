@@ -81,10 +81,10 @@ describe("replay-rs baked tsv mirrors", () => {
     );
 
   it("relic-civs.tsv is in sync with relic-civ-id-map.json", () => {
-    expect(parseTsv("scripts/data-pipeline/replay-rs/data/relic-civs.tsv")).toEqual(relicMap);
+    expect(parseTsv("reference-data/relic-civs.tsv")).toEqual(relicMap);
   });
 
   it("civs.tsv is in sync with civ-id-map.json", () => {
-    expect(parseTsv("scripts/data-pipeline/replay-rs/data/civs.tsv")).toEqual(gameMap);
+    expect(parseTsv("reference-data/civs.tsv")).toEqual(gameMap);
   });
 });

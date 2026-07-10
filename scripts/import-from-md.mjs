@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // scripts/import-from-md.mjs
-// Usage: node scripts/import-from-md.mjs md/<type>/<source-file>.md
+// Usage: node scripts/import-from-md.mjs guide-sources/<type>/<source-file>.md
 // Scaffolds an EN content entry from a raw source file, preserving body content
 // and adding placeholder frontmatter the user fills in.
 
@@ -28,14 +28,14 @@ async function exists(p) {
 async function run() {
   const file = process.argv[2];
   if (!file) {
-    console.error("Usage: import-from-md.mjs md/<type>/<source-file>.md");
+    console.error("Usage: import-from-md.mjs guide-sources/<type>/<source-file>.md");
     process.exit(1);
   }
 
   const abs = path.resolve(file);
-  const parts = path.relative(path.resolve("md"), abs).split(path.sep);
+  const parts = path.relative(path.resolve("guide-sources"), abs).split(path.sep);
   if (parts.length < 2) {
-    console.error("File must be under md/<type>/<file>.md");
+    console.error("File must be under guide-sources/<type>/<file>.md");
     process.exit(1);
   }
   const type = parts[0];

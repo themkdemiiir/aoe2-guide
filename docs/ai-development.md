@@ -43,8 +43,8 @@ Cloudflare account-wide or API-mutating MCPs are intentionally not enabled by de
 
 Use the Content Curator agent or `/import-raw-guide` prompt.
 
-1. Add a raw guide under `md/<type>/<source>-<topic>.md`.
-2. Run `pnpm import:md md/<type>/<file>.md`.
+1. Add a raw guide under `guide-sources/<type>/<source>-<topic>.md`.
+2. Run `pnpm import:md guide-sources/<type>/<file>.md`.
 3. Fill the generated EN entry using [src/content/config.ts](../src/content/config.ts).
 4. Run `pnpm new:guide <type> <slug>` if a TR scaffold is needed.
 5. Validate with `pnpm check`, `pnpm validate:icons`, and `pnpm check:translations`.

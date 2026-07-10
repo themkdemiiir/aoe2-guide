@@ -52,7 +52,7 @@ enum Command {
     /// (task M5b) — streams both views via `query_raw` rather than buffering (see
     /// `export::query`'s doc).
     Benchmark {
-        /// Directory to write `benchmark.json` into. NEVER `scripts/data-pipeline/replay-rs/data`.
+        /// Directory to write `benchmark.json` into. NEVER `reference-data`.
         #[arg(long, value_name = "DIR")]
         out: PathBuf,
     },

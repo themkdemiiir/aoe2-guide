@@ -1,7 +1,7 @@
 {{ config(materialized='view') }}
 
 -- Analyzer benchmark: median age-up COMPLETION seconds by civ x map x elo_bucket x mode, with
--- `'all'`-keyed rollups — feeds `scripts/data-pipeline/replay-rs/data/benchmark.json`'s
+-- `'all'`-keyed rollups — feeds `reference-data/benchmark.json`'s
 -- `civs.<slug>.<mapSlug>.<bucket>.<mode> = {feudal_s,castle_s,imperial_s}`. Mirrors
 -- `build-benchmark.sql`'s GROUPING SETS shape exactly: the most granular cell
 -- (civ,map,bucket,mode), a per-map/mode rollup (civ,map,mode), a per-map rollup (civ,map), and a

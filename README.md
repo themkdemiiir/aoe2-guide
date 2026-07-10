@@ -41,10 +41,10 @@ pnpm icons:map    # regenerate src/data/icon-map.json from aoc-reference-data
 
 ```bash
 # 1. Drop a raw guide into the staging directory
-$EDITOR md/build-orders/hera-new-build.md
+$EDITOR guide-sources/build-orders/hera-new-build.md
 
 # 2. Promote it into a scaffolded EN content entry
-pnpm import:md md/build-orders/hera-new-build.md
+pnpm import:md guide-sources/build-orders/hera-new-build.md
 
 # 3. (After EN is filled in) scaffold the TR version
 pnpm new:guide build-orders <slug>

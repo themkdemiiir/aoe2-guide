@@ -18,7 +18,7 @@ Visit `http://localhost:4321/` and pick a language to enter.
 | Content type | Where | What you need |
 |---|---|---|
 | Civilization writeup | `src/content/civilizations/<lang>/<civ>.md` | Existing civ frontmatter; just fill in bonuses, unique techs, prose |
-| Build order | `md/build-orders/<source>-<topic>.md` → `pnpm import:md ...` | Timed step list with villager allocations, source URL/author |
+| Build order | `guide-sources/build-orders/<source>-<topic>.md` → `pnpm import:md ...` | Timed step list with villager allocations, source URL/author |
 | Unit description | `src/content/units/<lang>/<unit>.md` + stats in `src/data/unit-stats.json` | Stats for the JSON, prose + role for the markdown |
 | Map strategy | `src/content/maps/<lang>/<map>.md` | Map type, recommended civs, prose covering opening/mid/late game |
 | Matchup | `src/content/matchups/<lang>/<civ-a>-vs-<civ-b>.md` | Civ slugs, difficulty rating, analysis |
@@ -28,7 +28,7 @@ Visit `http://localhost:4321/` and pick a language to enter.
 
 ## Step-by-step: adding a new build order
 
-1. Save the raw guide (notes, transcript, screenshot text) at `md/build-orders/<author>-<topic>.md`:
+1. Save the raw guide (notes, transcript, screenshot text) at `guide-sources/build-orders/<author>-<topic>.md`:
    ```yaml
    ---
    source: https://example.com/source-url
@@ -43,7 +43,7 @@ Visit `http://localhost:4321/` and pick a language to enter.
 
 2. Promote into a scaffolded EN content entry:
    ```bash
-   pnpm import:md md/build-orders/author-topic.md
+   pnpm import:md guide-sources/build-orders/author-topic.md
    ```
 
 3. Open the scaffolded `src/content/build-orders/en/<slug>.md`. Fill the frontmatter fields and write 3-4 short paragraphs of prose.

@@ -1,7 +1,7 @@
 # Repo-root Docker build context (used by pipeline/Dockerfile, which builds the Rust pipeline
 # binaries). The context is the repo ROOT — not pipeline/ — because `pipeline-core`/`replay`
 # `include_str!` a handful of refdata files from the repo root at build time (src/data/*.json,
-# scripts/data-pipeline/replay-rs/data/maps.tsv). This ignore file keeps the context lean: send
+# reference-data/maps.tsv). This ignore file keeps the context lean: send
 # only the Rust workspace + those refdata files, never the multi-GB build caches / site assets.
 
 # Secrets — must NEVER reach the Docker daemon or be baked into a layer.
@@ -35,5 +35,5 @@ public
 scripts/**
 !scripts/data-pipeline
 !scripts/data-pipeline/replay-rs
-!scripts/data-pipeline/replay-rs/data
-!scripts/data-pipeline/replay-rs/data/**
+!reference-data
+!reference-data/**
