@@ -1,13 +1,16 @@
-//! Typed serde mirrors of the committed `src/data/unit-stats.json` and `src/data/game-facts.json`
-//! — field-for-field, in the SAME declared order (serde_json serializes struct fields in
-//! declaration order), so `serde_json::to_string_pretty` reproduces each committed file's shape.
+//! Typed serde mirrors of the five committed `src/data/*.json` files this crate derives:
+//! `unit-stats.json`, `game-facts.json`, `unit-names.json`, `tech-names.json`, `icon-map.json` —
+//! field-for-field, in the SAME declared order (serde_json serializes struct fields in declaration
+//! order), so `serde_json::to_string_pretty` reproduces each committed file's shape.
 //!
 //! **`tests/shape_parity.rs` deserializes the REAL committed files into these exact types** — if
 //! every field these types declare round-trips against the site's live JSON, the shapes are
-//! provably compatible. Since the aoe2techtree redesign, the VALUES this crate produces
-//! deliberately DIFFER from the committed (aalises-based) files (unit-stats: ~68 units; game-facts:
-//! authoritative age/cost/attackBonus) — those are aalises bugs the authoritative source corrects
-//! (listed in the task report) — so only SHAPE parity is asserted, never value equality.
+//! provably compatible. Since the aoe2techtree redesign, the VALUES `unit_stats`/`game_facts`
+//! produce deliberately DIFFER from the committed (aalises-based) files (unit-stats: ~68 units;
+//! game-facts: authoritative age/cost/attackBonus) — those are aalises bugs the authoritative
+//! source corrects (listed in the task report) — so only SHAPE parity is asserted for those two,
+//! never value equality. `unit_tech_names`/`icon_map` have no aalises predecessor to correct, so
+//! their shape-parity tests assert full VALUE equality against the committed files too.
 //!
 //! `#[serde(deny_unknown_fields)]` on every FIXED-schema struct: a committed file gaining a new
 //! top-level key this crate hasn't modeled yet must fail the parity test loud, never silently
@@ -173,6 +176,54 @@ pub struct GameFactsUnit {
     pub attack_bonus: Option<String>,
 }
 
+// --- unit-names.json / tech-names.json ------------------------------------------------------
+
+/// Shared doc shape for BOTH `unit-names.json` and `tech-names.json` — identical structure,
+/// produced by [`crate::unit_tech_names::build_unit_names`] /
+/// [`crate::unit_tech_names::build_tech_names`] respectively.
+///
+/// `map`/`internalNames` are `BTreeMap`s (alphabetical key order) — order isn't meaningful to the
+/// sole consumers (`pipeline_core::units::parse_units` / `pipeline_core::techs::parse_techs`
+/// deserialize straight into a `HashMap` and iterate unordered; same rationale as
+/// [`GameFactsDoc::units`] above). The COMMITTED files happen to be numeric-ascending instead —
+/// an artifact of the old JS generator's `Object.entries()` over an all-numeric-key object (the
+/// JS spec enumerates integer-index-like keys in ascending numeric order); cosmetic only, never
+/// asserted by the shape-parity tests.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct NameMapDoc {
+    pub provenance: NameMapProvenance,
+    pub map: BTreeMap<String, String>,
+    #[serde(rename = "internalNames")]
+    pub internal_names: BTreeMap<String, String>,
+}
+
+/// `unit-names.json` / `tech-names.json`'s `provenance` block — deliberately just three fields
+/// (unlike [`Source`]'s five): matches the committed files exactly.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct NameMapProvenance {
+    pub source: String,
+    pub sha: String,
+    pub note: String,
+}
+
+// --- icon-map.json ---------------------------------------------------------------------------
+
+/// The whole `icon-map.json` document — four independently-sorted slug -> `/images/aoe2/...`
+/// path maps. Produced by [`crate::icon_map::build`]. `BTreeMap`s here are NOT just "order
+/// doesn't matter" (as above): `scripts/build-icon-map.mjs` explicitly `sortObject`s each bucket
+/// alphabetically before writing, so `BTreeMap`'s natural order is a genuine, faithful match to
+/// the committed file's actual byte order, not merely a shape-compatible substitute.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct IconMapDoc {
+    pub units: BTreeMap<String, String>,
+    pub techs: BTreeMap<String, String>,
+    pub buildings: BTreeMap<String, String>,
+    pub civs: BTreeMap<String, String>,
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -188,5 +239,29 @@ mod tests {
             err.to_string().contains("unknown field"),
             "expected an unknown-field error, got: {err}"
         );
+    }
+
+    #[test]
+    fn name_map_doc_round_trips_a_minimal_fixture() {
+        let json = r#"{
+            "provenance": { "source": "x", "sha": "y", "note": "z" },
+            "map": { "4": "Archer" },
+            "internalNames": { "4": "ARCHR" }
+        }"#;
+        let doc: NameMapDoc = serde_json::from_str(json).expect("must parse");
+        assert_eq!(doc.map.get("4"), Some(&"Archer".to_string()));
+        assert_eq!(doc.internal_names.get("4"), Some(&"ARCHR".to_string()));
+    }
+
+    #[test]
+    fn icon_map_doc_round_trips_a_minimal_fixture() {
+        let json = r#"{
+            "units": { "archer": "/images/aoe2/Unit/17.png" },
+            "techs": {},
+            "buildings": {},
+            "civs": { "britons": "/images/aoe2/Civs/Britons.png" }
+        }"#;
+        let doc: IconMapDoc = serde_json::from_str(json).expect("must parse");
+        assert_eq!(doc.units.get("archer"), Some(&"/images/aoe2/Unit/17.png".to_string()));
     }
 }

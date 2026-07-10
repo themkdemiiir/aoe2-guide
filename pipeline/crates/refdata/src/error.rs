@@ -70,4 +70,26 @@ pub enum RefdataError {
     /// anomaly (new class id), never an unnamed/guessed bonus label.
     #[error("attack class {class} is not in the committed armor-classes table")]
     UnknownAttackClass { class: i32 },
+
+    /// A `reference-data/aoe2techtree-tree-nodes.json` observation row carries a `use_type` other
+    /// than `"Unit"`/`"Tech"` — the committed slice is built to only ever contain those two (see
+    /// its `provenance.note`), so this means the slice itself is corrupt or was regenerated with
+    /// different filtering.
+    #[error("tree-node observation for node_id {node_id} has unexpected use_type {use_type:?}")]
+    UnknownTreeNodeUseType { node_id: i32, use_type: String },
+
+    /// The same `(use_type, node_id)` resolves to two DIFFERENT names across
+    /// `reference-data/aoe2techtree-tree-nodes.json`'s base-game civ observations — genuinely
+    /// conflicting per-civ tree data, which must never be silently disambiguated. Mirrors
+    /// `scripts/build-unit-tech-names.mjs`'s own `throw` on the same condition (see
+    /// [`crate::tree_nodes`]'s module doc).
+    #[error(
+        "tree node {node_id} ({use_type}) has conflicting names across civs: {first:?} vs {second:?}"
+    )]
+    ConflictingTreeNodeName {
+        node_id: i32,
+        use_type: String,
+        first: String,
+        second: String,
+    },
 }

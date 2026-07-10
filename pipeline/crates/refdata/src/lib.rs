@@ -1,7 +1,10 @@
-//! `refdata` — strict Rust replacement for `scripts/build-units.mjs` + `scripts/build-game-facts.mjs`.
-//! Derives BOTH `src/data/unit-stats.json` (numeric unit stats) and `src/data/game-facts.json`
-//! (per-unit age/building/cost/attackBonus) from the AUTHORITATIVE aoe2techtree game data — no
-//! aalises anywhere.
+//! `refdata` — strict Rust replacement for `scripts/build-units.mjs`, `scripts/build-game-facts.mjs`,
+//! `scripts/build-unit-tech-names.mjs`, and `scripts/build-icon-map.mjs`. Derives
+//! `src/data/unit-stats.json` (numeric unit stats), `src/data/game-facts.json` (per-unit
+//! age/building/cost/attackBonus), `src/data/unit-names.json` + `src/data/tech-names.json` (game DAT
+//! id -> English display name, for `pipeline-core`'s own `units`/`techs` dims), and
+//! `src/data/icon-map.json` (slug -> `/images/aoe2/...` icon path) — ALL from the AUTHORITATIVE
+//! aoe2techtree game data — no aalises anywhere.
 //!
 //! **Source: aoe2techtree, not the aalises CSV.** The earlier version of this crate read the
 //! aalises `age-of-empires-II-api` `units.csv` and then patched it with a `STAT_CORRECTIONS`
@@ -19,7 +22,10 @@
 //!
 //! Functional core, imperative shell (`pipeline/docs/rust-playbook.md`): every module here is pure
 //! string-in/typed-doc-out — the only filesystem touch is the `include_str!`'d committed source
-//! slices (`*::load`). All real output I/O (writing the JSON to `--out DIR`) lives in `main.rs`.
+//! slices (`*::load`). All real output I/O (writing the JSON to `--out DIR`) lives in `main.rs` —
+//! as does the ONE genuine input read this crate performs, [`icon_map`]'s live scan of
+//! `public/images/aoe2/` (thousands of binary PNGs, which can't be `include_str!`'d; see that
+//! module's doc for why this is a deliberate, narrow exception).
 //!
 //! Not to be confused with `pipeline_core`'s OWN `refdata` cargo feature (a different id space:
 //! `pipeline_core::units` maps a replay's numeric `unit_id` → name for DB ingest; this crate maps
@@ -28,11 +34,16 @@ pub mod armor_classes;
 pub mod canonical_units;
 pub mod error;
 pub mod game_facts;
+pub mod icon_items;
+pub mod icon_map;
 pub mod model;
 pub mod name_to_slug;
+pub mod techs;
 pub mod techtree;
+pub mod tree_nodes;
 pub mod unit_lines;
 pub mod unit_stats;
+pub mod unit_tech_names;
 pub mod unit_tree;
 
 pub use error::{RefdataError, Result};

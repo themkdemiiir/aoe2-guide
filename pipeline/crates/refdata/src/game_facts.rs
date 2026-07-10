@@ -189,6 +189,7 @@ mod tests {
                 RawAttack { class: 27, amount: 3 }, // bonus vs Spearmen
                 RawAttack { class: 15, amount: 0 }, // zero — skipped
             ],
+            internal_name: None,
         };
         assert_eq!(attack_bonus(&unit, &armor).unwrap().as_deref(), Some("+3 Spearmen"));
     }

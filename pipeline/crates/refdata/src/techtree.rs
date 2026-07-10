@@ -56,6 +56,11 @@ pub struct RawUnit {
     /// positive entries — see [`crate::game_facts`]. Empty for a unit with no `Attacks` array.
     #[serde(rename = "Attacks", default)]
     pub attacks: Vec<RawAttack>,
+    /// The DAT internal name (e.g. `"ARCHR"`) — read only by [`crate::unit_tech_names`] (via
+    /// [`load_unit_ids`]), documentation/debugging downstream, never used for lookups here.
+    /// `#[serde(default)]` so an id lacking one still deserializes.
+    #[serde(rename = "internal_name", default)]
+    pub internal_name: Option<String>,
 }
 
 impl RawUnit {
@@ -186,6 +191,28 @@ pub fn load() -> Result<TechTree> {
     )
 }
 
+/// Parses `aoe2techtree-units.json` ALONE into the full `data.Unit` id space (245 ids), keyed by
+/// id rather than grouped by resolved display name. Unlike [`parse`]/[`TechTree::by_name`] (which
+/// only covers units whose `LanguageNameId+21000` resolves to a help-string name), this covers
+/// EVERY id `data.Unit` defines — [`crate::unit_tech_names`] needs that full space (mirroring
+/// `scripts/build-unit-tech-names.mjs`'s `idInfo = dataJson.data.Unit` walk), since a unit's
+/// tree-node display name (resolved separately, via [`crate::tree_nodes`]) is a DIFFERENT
+/// resolution path than the help-string one `parse` uses. Exposed standalone (not only via
+/// [`load_unit_ids`]) so tests can drive it with a small inline fixture.
+pub fn parse_unit_ids(units_json: &str) -> Result<HashMap<i32, RawUnit>> {
+    let units: UnitsDoc = serde_json::from_str(units_json)
+        .map_err(|source| RefdataError::ParseSource { file: "aoe2techtree-units.json", source })?;
+    Ok(units.units.into_values().map(|u| (u.id, u)).collect())
+}
+
+/// Loads the real committed `aoe2techtree-units.json` ALONE, baked into the binary at compile
+/// time — the full unit DAT id space. See [`parse_unit_ids`].
+pub fn load_unit_ids() -> Result<HashMap<i32, RawUnit>> {
+    parse_unit_ids(include_str!(
+        "../../../../reference-data/aoe2techtree-units.json"
+    ))
+}
+
 /// Extracts the first `<b>...</b>` span's inner text — a regex-free port of the source scripts'
 /// `.match(/<b>(.+?)<\/b>/)` (kept regex-free per `pipeline-core`'s convention). `None` when the
 /// string has no such span.
@@ -257,6 +284,23 @@ mod tests {
     fn bold_span_extracts_the_name() {
         assert_eq!(bold_span("Create <b>Archer</b> (x)"), Some("Archer"));
         assert_eq!(bold_span("no bold here"), None);
+    }
+
+    #[test]
+    fn parse_unit_ids_covers_the_full_id_space_including_unnamed_units() {
+        // Unlike `parse`/`by_name`, `parse_unit_ids` keeps every id — even one whose
+        // LanguageNameId has no matching help string in NAMES (there is none here at all).
+        let ids = parse_unit_ids(UNITS).unwrap();
+        assert_eq!(ids.len(), 3);
+        assert_eq!(ids[&4].hp, 30);
+        assert_eq!(ids[&93].id, 93);
+    }
+
+    #[test]
+    fn real_unit_ids_slice_has_the_full_245_id_space_with_internal_names() {
+        let ids = load_unit_ids().expect("committed slice must parse");
+        assert_eq!(ids.len(), 245);
+        assert_eq!(ids[&4].internal_name.as_deref(), Some("ARCHR"));
     }
 
     #[test]
