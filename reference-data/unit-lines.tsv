@@ -1,0 +1,105 @@
+# AoE2 unit slug -> upgrade-line id -> rank within that line. SINGLE SOURCE OF TRUTH for the
+# hand-curated `line`/`lineRank` fields of `src/data/unit-stats.json` (used by the site to group a
+# unit with its upgrades, e.g. Man-at-Arms under "militia-line" rank 2). Columns: slug<TAB>line<TAB>lineRank
+#
+# Not derivable from the aalises `units.csv` source (that CSV has no upgrade-line concept) —
+# extracted 2026-07-10 from the previously committed `src/data/unit-stats.json`'s own `line`/
+# `lineRank` fields (the JS generator `scripts/build-units.mjs` carried these forward from each
+# prior run's output rather than tracking them in a standalone file; this table makes that
+# hand-authored data reviewable in git diffs instead of buried in generated JSON). Every slug in
+# `refdata::canonical_units::CANONICAL_UNITS` must have a row here — the loader fails loud
+# (`RefdataError::MissingUnitLine`) on any gap rather than defaulting to a fabricated line/rank.
+#
+# `lineRank` starting above 1 (e.g. `fire-ship-line` at 2) means rank 1 of that line belongs to a
+# unit outside this table's CANONICAL_UNITS scope (e.g. a civ-specific Fire Galley variant) — not a
+# gap, just this table's own numbering carried forward as-is from the source JSON.
+militia	militia-line	1
+man-at-arms	militia-line	2
+long-swordsman	militia-line	3
+two-handed-swordsman	militia-line	4
+champion	militia-line	5
+spearman	spearman-line	1
+pikeman	spearman-line	2
+halberdier	spearman-line	3
+eagle-warrior	eagle-line	2
+elite-eagle-warrior	eagle-line	3
+archer	archer-line	1
+crossbowman	archer-line	2
+arbalester	archer-line	3
+skirmisher	skirmisher-line	1
+elite-skirmisher	skirmisher-line	2
+cavalry-archer	cavalry-archer-line	1
+heavy-cavalry-archer	cavalry-archer-line	2
+hand-cannoneer	hand-cannoneer-line	1
+scout-cavalry	scout-line	1
+light-cavalry	scout-line	2
+hussar	scout-line	3
+knight	knight-line	1
+cavalier	knight-line	2
+paladin	knight-line	3
+camel-rider	camel-line	1
+heavy-camel-rider	camel-line	2
+monk	monk-line	1
+battering-ram	ram-line	1
+capped-ram	ram-line	2
+siege-ram	ram-line	3
+mangonel	mangonel-line	1
+onager	mangonel-line	2
+siege-onager	mangonel-line	3
+scorpion	scorpion-line	1
+heavy-scorpion	scorpion-line	2
+bombard-cannon	bombard-cannon-line	1
+trebuchet	trebuchet-line	1
+galley	galley-line	1
+war-galley	galley-line	2
+galleon	galley-line	3
+fire-ship	fire-ship-line	2
+fast-fire-ship	fire-ship-line	3
+demolition-ship	demolition-line	2
+heavy-demolition-ship	demolition-line	3
+cannon-galleon	cannon-galleon-line	1
+elite-cannon-galleon	cannon-galleon-line	2
+fishing-ship	fishing-ship-line	1
+transport-ship	transport-ship-line	1
+berserk	berserk-line	1
+elite-berserk	berserk-line	2
+cataphract	cataphract-line	1
+elite-cataphract	cataphract-line	2
+chu-ko-nu	chu-ko-nu-line	1
+elite-chu-ko-nu	chu-ko-nu-line	2
+conquistador	conquistador-line	1
+elite-conquistador	conquistador-line	2
+huskarl	huskarl-line	1
+elite-huskarl	huskarl-line	2
+jaguar-warrior	jaguar-warrior-line	1
+elite-jaguar-warrior	jaguar-warrior-line	2
+janissary	janissary-line	1
+elite-janissary	janissary-line	2
+longbowman	longbowman-line	1
+elite-longbowman	longbowman-line	2
+mameluke	mameluke-line	1
+elite-mameluke	mameluke-line	2
+mangudai	mangudai-line	1
+elite-mangudai	mangudai-line	2
+plumed-archer	plumed-archer-line	1
+elite-plumed-archer	plumed-archer-line	2
+samurai	samurai-line	1
+elite-samurai	samurai-line	2
+tarkan	tarkan-line	1
+elite-tarkan	tarkan-line	2
+teutonic-knight	teutonic-knight-line	1
+elite-teutonic-knight	teutonic-knight-line	2
+throwing-axeman	throwing-axeman-line	1
+elite-throwing-axeman	throwing-axeman-line	2
+war-elephant	war-elephant-line	1
+elite-war-elephant	war-elephant-line	2
+war-wagon	war-wagon-line	1
+elite-war-wagon	war-wagon-line	2
+woad-raider	woad-raider-line	1
+elite-woad-raider	woad-raider-line	2
+karambit-warrior	karambit-warrior-line	1
+elite-karambit-warrior	karambit-warrior-line	2
+longboat	longboat-line	1
+elite-longboat	longboat-line	2
+turtle-ship	turtle-ship-line	1
+elite-turtle-ship	turtle-ship-line	2

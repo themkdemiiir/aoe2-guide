@@ -1,0 +1,32 @@
+[package]
+name = "refdata"
+version.workspace = true
+edition.workspace = true
+description = "Typed replacement for scripts/build-units.mjs: derives src/data/unit-stats.json from the authoritative aoe2techtree game data (committed reference-data/aoe2techtree-*.json)"
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "refdata"
+path = "src/lib.rs"
+
+[[bin]]
+name = "refdata"
+path = "src/main.rs"
+
+[dependencies]
+# Only for `pipeline_core::cli::init_tracing` (the shared binary bootstrap) — this crate has no
+# DATABASE_URL/secret to read (it touches no database), so `database_url`/`log_error_and_code`/
+# `Secret` go unused. `default-features = false`: no `refdata` feature (that gates pipeline-core's
+# OWN civ/map/patch/unit lookups, an unrelated id space from this crate's unit-stats/game-facts
+# output — see this crate's `lib.rs` doc).
+pipeline-core = { path = "../core", default-features = false }
+serde = { workspace = true }
+serde_json = { workspace = true }
+clap = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+# For the `tracing::info!`/`tracing::error!` macro calls in `main.rs` only — the subscriber setup
+# itself (`tracing-subscriber`) is fully encapsulated inside `pipeline_core::cli::init_tracing` and
+# never needs to be a direct dependency here, mirroring `export`'s/`aoestats`'s Cargo.toml.
+tracing = { workspace = true }

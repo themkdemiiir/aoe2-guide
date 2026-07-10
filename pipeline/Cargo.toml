@@ -9,6 +9,7 @@ members = [
     "crates/ingest",
     "crates/migration",
     "crates/pipeline",
+    "crates/refdata",
     "crates/replay",
 ]
 # vendor/aoe2rec sits inside this workspace's directory tree but is third-party, committed
