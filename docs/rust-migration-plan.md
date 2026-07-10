@@ -9,27 +9,29 @@ full per-script assessment (2026-07). This is the execution roadmap — check it
 crawl→ingest→aggregate chain are produced by existing dbt views + the `export` crate + `pipeline crawl`.
 The old `refresh-*` / `aggregate-*` / `collect-relic` / `build-benchmark*` scripts are **superseded**.
 
-## Two tracks
+## No cutover needed — Rust + Dagster is already the sole live pipeline
 
-The work splits by whether it touches the **live `scripts/data-pipeline/sweep.sh` cron** (still
-collecting ranked data into DuckDB on the VM every ~3h).
+**Verified on the VM (2026-07):** `sweep.sh` is NOT scheduled (no user/system cron), its DuckDB
+store hasn't been written since 2026-06-25 (a 4 KB stub), no `sweep.sh`/`stream-relic` process runs,
+and Dagster runs only the Rust `aoe2-pipeline` image (`pipeline crawl`/`backfill`). The old
+`scripts/data-pipeline/` JS is dead leftover — safe to delete now, no deploy gate.
 
-### Track A — gated on the pipeline cutover (deploy Rust crawl → retire `sweep.sh`)
+## Track A — retire dead JS + port the 3 DB generators (ungated)
 
-Deleting the superseded JS and porting the 3 DB generators is only safe **after** the Rust crawl
-replaces `sweep.sh` as the live collector. Order:
-
-1. **Cutover deploy** ⛔ *(gate: live production change)* — Dagster runs `pipeline crawl` as the sole
-   collector; wire the Rust `export` as the JSON refresh; retire `sweep.sh`.
-2. **Delete superseded JS** (post-cutover): `collect-relic`, `aggregate-{maps,patches,rich}`,
-   `refresh-{civ,map,matchups,team}-current`, `build-benchmark{,-vils}`, then `stream-relic` +
-   `ingest-stream` (the live cron pair). Sweep orphaned `lib/*` after.
-3. **Port 3 DB generators** to dbt view + `export` subcommand (mirror `benchmark_ecotech`):
+1. **Delete the dead JS now** (nothing runs it): `sweep.sh` + `backfill-seed.sh`, `collect-relic`,
+   `stream-relic`, `ingest-stream`, `aggregate-{maps,patches,rich}`,
+   `refresh-{civ,map,matchups,team}-current`, `build-benchmark{,-vils}`, `check-patch-axis`,
+   `backfill-map-current`, the standalone dead `replay-rs`/`replay-wasm` crates, and the `lib/*` that
+   only those import. **Keep** the 3 DB generators + their `lib/*` deps + `relic-map.mjs` (+ its guard
+   test) until they're ported.
+2. **Port 3 DB generators** to dbt view + `export` subcommand (mirror `benchmark_ecotech`), then
+   delete their JS:
    - `build-winner-comps` → `winner-comps.json` *(medium)*
    - `build-winner-refs` → `winner-refs.json` *(large; 3 views: openings, ecotech, meds)*
    - `build-civ-cube` → `civ-cube.json` + `-dims.json` *(large; +crawl-recent merge decision)*
-4. **Port cron audits** (cutover prep, run in parallel with JS before flipping): `check-patch-axis`
-   (→ dbt `patch_axis` join), `backfill-map-current` (→ fold into Rust ingest).
+
+   These JSONs are currently **frozen** (only the dead JS regenerated them) — porting to Rust is what
+   makes them refresh again off the live Postgres corpus.
 
 ### Track B — independent (safe to port anytime, not gated)
 
@@ -61,6 +63,7 @@ index). These are Astro/pnpm build glue, not data pipeline.
 
 ## Confirmation gates (⛔ — need explicit go each time)
 
-1. **Cutover deploy** — live production data-pipeline change on the VM.
-2. **Push to main** — live site deploy (run the full CI gate first).
-3. **History force-push** — irreversible purge of `MONETIZATION_PLAN.md` (+ history-only files).
+1. **Push to main** — live site deploy (run the full CI gate first).
+2. **History force-push** — irreversible purge of `MONETIZATION_PLAN.md` (+ history-only files).
+
+(No cutover gate — Rust + Dagster is already the sole live pipeline; see the note above.)
