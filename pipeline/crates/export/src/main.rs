@@ -56,6 +56,16 @@ enum Command {
         #[arg(long, value_name = "DIR")]
         out: PathBuf,
     },
+    /// Export `winner-comps.json` from the `pipeline/dbt` `winner_comps` view (Phase E) — the
+    /// WINNERS-only unit-composition benchmark. Buffered `client.query` (not streaming): the
+    /// view's own `unit_rank <= 6` filter bounds the result at (civs) x (elo buckets) x 6 rows
+    /// (see `export::query::fetch_winner_comps`'s doc).
+    WinnerComps {
+        /// Directory to write `winner-comps.json` into (created if missing). NEVER `public` for
+        /// this task — verify the shape/values against the committed file first.
+        #[arg(long, value_name = "DIR")]
+        out: PathBuf,
+    },
     /// Print the structural (key-set + type-family) diff between two JSON files; exits 1 if the
     /// diff is non-empty. Values are ignored — see `export::shape`'s doc.
     ShapeDiff {
@@ -91,6 +101,12 @@ async fn main() {
         Command::Benchmark { out } => {
             let secret = database_url_or_exit();
             if let Err(err) = run_benchmark_export(&out, secret.expose()).await {
+                std::process::exit(log_error_and_code(&err, &secret));
+            }
+        }
+        Command::WinnerComps { out } => {
+            let secret = database_url_or_exit();
+            if let Err(err) = run_winner_comps_export(&out, secret.expose()).await {
                 std::process::exit(log_error_and_code(&err, &secret));
             }
         }
@@ -200,6 +216,27 @@ async fn run_benchmark_export(out: &Path, database_url: &str) -> anyhow::Result<
         eco_techs = eco_doc.techs.len(),
         out = %out.display(),
         "benchmark export complete"
+    );
+    Ok(())
+}
+
+async fn run_winner_comps_export(out: &Path, database_url: &str) -> anyhow::Result<()> {
+    let client = connect(database_url).await?;
+
+    tracing::info!("querying winner_comps view");
+    let rows = export::query::fetch_winner_comps(&client).await?;
+    let row_count = rows.len();
+
+    let doc = export::build_winner_comps(&rows);
+
+    fs::create_dir_all(out).with_context(|| format!("failed to create {}", out.display()))?;
+    write_json_pretty(out, "winner-comps.json", &doc)?;
+
+    tracing::info!(
+        row_count,
+        civs = doc.civs.len(),
+        out = %out.display(),
+        "winner-comps export complete"
     );
     Ok(())
 }

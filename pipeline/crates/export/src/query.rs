@@ -497,6 +497,52 @@ pub async fn fetch_benchmark_ecotech(client: &Client) -> Result<Vec<BenchmarkEco
     Ok(out)
 }
 
+// --- winner comps (Phase E) -------------------------------------------------------------------
+//
+// Buffered `client.query` (like `civ_meta`/`matchups` above), NOT the `query_raw` streaming
+// `benchmark_ageup`/`benchmark_vils`/`benchmark_ecotech` need below: `winner_comps.sql`'s own
+// `unit_rank <= 6` filter STRICTLY bounds this result at (civs) x (9 elo buckets) x 6 rows
+// regardless of corpus growth — the same "few-hundred-row, not unbounded" shape `civ_meta`'s own
+// module-doc reasoning describes, unlike the benchmark views' genuinely open-ended GROUPING-SETS
+// grains.
+
+/// One row of the `winner_comps` view: a `(civ_slug, elo_bucket, unit)` grain, already restricted
+/// to the top 6 units by producer share per `(civ, elo_bucket)` cell via `unit_rank <= 6` (see
+/// that view's `row_number()` doc). [`SELECT_WINNER_COMPS`] orders by `(civ_slug, elo_bucket,
+/// unit_rank)`, so a plain per-row push in `crate::winner_comps::build_winner_comps` reproduces
+/// the intended producer-share-descending `units` list order without a second sort.
+#[derive(Debug, Clone)]
+pub struct WinnerCompsRow {
+    pub civ_slug: String,
+    pub elo_bucket: String,
+    pub unit: String,
+    pub winners_n: i64,
+    pub producers: i64,
+    pub producer_pct: f64,
+    pub med_count: f64,
+}
+
+const SELECT_WINNER_COMPS: &str = "SELECT civ_slug, elo_bucket, unit, winners_n, producers, \
+     producer_pct, med_count FROM winner_comps WHERE unit_rank <= 6 \
+     ORDER BY civ_slug, elo_bucket, unit_rank";
+
+pub async fn fetch_winner_comps(client: &Client) -> Result<Vec<WinnerCompsRow>> {
+    let rows = client.query(SELECT_WINNER_COMPS, &[]).await?;
+    rows.iter()
+        .map(|row| {
+            Ok(WinnerCompsRow {
+                civ_slug: row.try_get("civ_slug")?,
+                elo_bucket: validate_elo_bucket(row.try_get("elo_bucket")?)?,
+                unit: row.try_get("unit")?,
+                winners_n: row.try_get("winners_n")?,
+                producers: row.try_get("producers")?,
+                producer_pct: row.try_get("producer_pct")?,
+                med_count: row.try_get("med_count")?,
+            })
+        })
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

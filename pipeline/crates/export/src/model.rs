@@ -270,6 +270,50 @@ pub struct EcoBenchmarkDoc {
     pub techs: BTreeMap<String, BTreeMap<String, BTreeMap<String, EcoModeMap>>>,
 }
 
+// --- winner comps (Phase E) — typed mirror of the committed `public/winner-comps.json` ---------
+
+/// One unit entry of a `winner-comps.json` cell's `units` list — one of the (at most 6) military
+/// units, ordered by producer share descending, that WINNERS of that `(civ, elo_bucket)` cell
+/// actually trained. `med` is a true statistical median (`percentile_cont`), so it is NOT always
+/// integral — an even producer count yields a `x.5` value (e.g. `23.5`), exactly like the
+/// committed file's own real cells.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WinnerCompUnit {
+    pub unit: String,
+    pub pct: f64,
+    pub med: f64,
+}
+
+/// One `(civ, elo_bucket)` cell: how many winners are behind it, plus its top-6 unit list (see
+/// [`WinnerCompUnit`]). A cell exists at all only once it clears `winner_comps.sql`'s own
+/// thresholds (>=100 winners, unit produced by >=15% of them) — a thin combination is simply
+/// absent from `civs`, never a fabricated empty cell.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WinnerCompsCell {
+    pub winners: u64,
+    pub units: Vec<WinnerCompUnit>,
+}
+
+/// `civs.<civSlug>.<eloBucket>`, the inner map of [`WinnerCompsDoc`]. Real elo-bucket keys only
+/// (`pipeline_core::elo::ELO_BUCKETS`) — unlike `benchmark.json`/`benchmark-eco.json`, this
+/// document has no `"all"` elo rollup (the source view emits none — see its doc).
+pub type WinnerCompsEloMap = BTreeMap<String, WinnerCompsCell>;
+
+/// The whole `winner-comps.json` document: `civs.<civSlug>.<eloBucket> = WinnerCompsCell`. Fed by
+/// `pipeline/dbt/models/winner_comps.sql` — see that view's doc for the full aggregation and its
+/// documented scope deviation (replay-source only, whole-match unit totals) from the old
+/// `build-winner-comps.mjs`/`.sql` generator this replaces.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WinnerCompsDoc {
+    pub source: String,
+    /// `YYYY-MM-DD`, same convention as [`CivMetaDoc::generated`].
+    pub generated: String,
+    pub civs: BTreeMap<String, WinnerCompsEloMap>,
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
