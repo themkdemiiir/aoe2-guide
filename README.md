@@ -66,7 +66,7 @@ src/
   pages/            ← Routes — [lang]/<section>/...
   styles/globals.css← Tailwind v4 + theme tokens (no JS config)
 
-md/                 ← Raw source material (not built; promoted via scripts)
+guide-sources/      ← Raw source material (not built; promoted via scripts)
 public/images/aoe2/ ← Synced AOE2 icons (committed for offline builds)
 scripts/            ← sync-assets, build-icon-map, import-from-md, new-guide
 docs/               ← Specs, plans, contributor docs

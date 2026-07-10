@@ -13,7 +13,7 @@ CSS-first, EN/TR). Source-derived data only (see [SOURCES.md](./SOURCES.md)).
 - ✅ **Navigation bug fixed.** `Card.astro` rendered an inert lowercase `<tag>` (Astro treats it as a literal element, not the `href?"a":"div"` variable) → every civ/unit/featured card was a non-clickable box. Capitalized to `<Tag>`; 53 civ cards + all card links work.
 - ✅ **Mobile nav menu.** Header `<nav>` was `hidden md:flex` (no menu on phones). Added a `<details>` hamburger (☰) with all 8 sections, EN/TR, outside-click close.
 - ✅ **Prose typography + Table of Contents** (`@tailwindcss/typography` was missing → all markdown was unstyled). Themed to the medieval tokens; TOC on Learn + Blog.
-- ✅ **Source-verified unit facts.** `build-game-facts.mjs` → `game-facts.json` (age/cost/building from aalises); `verify-build-facts.mjs` gates builds against real unit ages (caught light-cavalry-in-Feudal). `SOURCES.md` documents provenance.
+- ✅ **Source-verified unit facts.** `build-game-facts.mjs` → `game-facts.json` (age/cost/building from aalises); `verify-build-facts.mjs` gates builds against real unit ages (caught light-cavalry-in-Feudal). `SOURCES.md` documents provenance. A strict-Rust, aoe2techtree-sourced replacement for the aalises sourcing is built (`reference-data/`, `pipeline/crates/refdata`) and pending cutover — see `docs/rust-migration-plan.md`.
 - ✅ **Card design pass (iteration 1).** `rounded-lg`, `shadow-sm`, hover lift + gold border, focus-visible ring, `group/card` title-hover.
 
 ## In progress / next

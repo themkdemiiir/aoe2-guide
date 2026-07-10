@@ -17,14 +17,13 @@ Visit `http://localhost:4321/` and pick a language to enter.
 
 | Content type | Where | What you need |
 |---|---|---|
-| Civilization writeup | `src/content/civilizations/<lang>/<civ>.md` | Existing civ frontmatter; just fill in bonuses, unique techs, prose |
-| Build order | `guide-sources/build-orders/<source>-<topic>.md` → `pnpm import:md ...` | Timed step list with villager allocations, source URL/author |
-| Unit description | `src/content/units/<lang>/<unit>.md` + stats in `src/data/unit-stats.json` | Stats for the JSON, prose + role for the markdown |
-| Map strategy | `src/content/maps/<lang>/<map>.md` | Map type, recommended civs, prose covering opening/mid/late game |
-| Matchup | `src/content/matchups/<lang>/<civ-a>-vs-<civ-b>.md` | Civ slugs, difficulty rating, analysis |
+| Civilization writeup | `src/content/civilizations/<slug>.yaml` | Existing civ frontmatter; just fill in bonuses, unique techs, prose |
+| Build order | `guide-sources/build-orders/<source>-<topic>.md` → `pnpm import:md ...` → `src/content/build-orders/<slug>.yaml` | Timed step list with villager allocations, source URL/author |
+| Unit description | `src/content/units/<slug>.yaml` + stats in `src/data/unit-stats.json` | Stats for the JSON, prose + role for the YAML |
+| Map strategy | `src/content/maps/<slug>.yaml` | Map type, recommended civs, prose covering opening/mid/late game |
 | Beginner chapter | `src/content/beginner/<lang>/<NN>-<topic>.md` | Sequence number, title, prose |
-| Glossary term | `src/content/glossary/<lang>/<term>.md` | Letter + term + definition prose |
-| Translation | Existing `<slug>.md` in TR | Match the EN structure; localize names + prose |
+| Glossary term | `src/content/glossary/<slug>.yaml` | Letter + term + definition prose |
+| Translation | `tr` fields inside the entry's `.yaml` (civilizations/build-orders/units/maps/glossary) or `src/content/<type>/tr/<slug>.md` (beginner/articles) | Match the EN structure; localize names + prose |
 
 ## Step-by-step: adding a new build order
 
