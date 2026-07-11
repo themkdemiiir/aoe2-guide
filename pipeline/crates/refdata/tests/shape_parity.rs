@@ -1,5 +1,6 @@
-//! Shape-parity gate against all five committed `src/data/*.json` files this crate derives:
-//! `unit-stats.json`, `game-facts.json`, `unit-names.json`, `tech-names.json`, `icon-map.json`.
+//! Shape-parity gate against all six committed `src/data/*.json` files this crate derives:
+//! `unit-stats.json`, `game-facts.json`, `unit-names.json`, `tech-names.json`, `icon-map.json`,
+//! `civilizations.json`.
 //!
 //! `unit-stats`/`game-facts` are SHAPE-only — since the aoe2techtree redesign, this crate's VALUES
 //! deliberately differ from the committed aalises-based files (aalises bugs the authoritative
@@ -7,24 +8,29 @@
 //! must still hold is that the crate's output is a drop-in SHAPE for the site's Zod schema / TS
 //! consumers.
 //!
-//! `unit-names`/`tech-names`/`icon-map` have no aalises predecessor to correct — both the
-//! committed files and this crate derive straight from the same aoe2techtree base-game tree data —
-//! so those three assert full VALUE equality too, not just shape.
+//! `unit-names`/`tech-names`/`icon-map`/`civilizations` have no aalises predecessor to correct —
+//! both the committed files and this crate derive straight from the same aoe2techtree data (plus,
+//! for `civilizations`, the small hand-curated `civ_region` tables that themselves faithfully port
+//! the committed file's own prior values) — so those four assert full VALUE equality too, not just
+//! shape.
 //!
 //! Tiers, per file:
 //! 1. the REAL committed JSON deserializes into this crate's model type (proves the model still
 //!    mirrors the site's live shape);
 //! 2. the crate's freshly-generated JSON round-trips through the SAME model (proves the produced
-//!    shape is compatible), with authoritative-value spot checks (or, for the three aalises-free
+//!    shape is compatible), with authoritative-value spot checks (or, for the four aalises-free
 //!    files, full value-equality checks).
 
-use refdata::model::{GameFactsDoc, GameNumber, IconMapDoc, NameMapDoc, UnitStatsDoc};
+use refdata::model::{
+    CivilizationsDoc, GameFactsDoc, GameNumber, IconMapDoc, NameMapDoc, UnitStatsDoc,
+};
 
 const COMMITTED_UNIT_STATS_JSON: &str = include_str!("../../../../src/data/unit-stats.json");
 const COMMITTED_GAME_FACTS_JSON: &str = include_str!("../../../../src/data/game-facts.json");
 const COMMITTED_UNIT_NAMES_JSON: &str = include_str!("../../../../src/data/unit-names.json");
 const COMMITTED_TECH_NAMES_JSON: &str = include_str!("../../../../src/data/tech-names.json");
 const COMMITTED_ICON_MAP_JSON: &str = include_str!("../../../../src/data/icon-map.json");
+const COMMITTED_CIVILIZATIONS_JSON: &str = include_str!("../../../../src/data/civilizations.json");
 
 #[test]
 fn committed_unit_stats_matches_the_doc_shape() {
@@ -168,6 +174,34 @@ fn generated_icon_map_is_value_identical_to_the_committed_file() {
     let committed: IconMapDoc = serde_json::from_str(COMMITTED_ICON_MAP_JSON).unwrap();
     let produced = refdata::icon_map::build(&inventory).expect("icon_map::build must succeed");
     assert_eq!(produced, committed);
+}
+
+#[test]
+fn committed_civilizations_matches_the_doc_shape() {
+    let doc: CivilizationsDoc = serde_json::from_str(COMMITTED_CIVILIZATIONS_JSON).expect(
+        "committed src/data/civilizations.json no longer matches refdata::model::CivilizationsDoc's shape",
+    );
+    assert_eq!(doc.civs.len(), 53, "sanity: 53 base-game civs");
+    assert!(!doc.patch.is_empty());
+}
+
+#[test]
+fn generated_civilizations_is_value_identical_to_the_committed_file() {
+    // Unlike unit-stats/game-facts (deliberately different VALUES post-redesign — see this file's
+    // module doc), civilizations.json has no aalises predecessor to correct here: the region/
+    // uniqueUnits facts this crate's `civ_region` module hand-curates are themselves PORTED
+    // (verbatim, or via the tiny documented override list) from the same source the committed file
+    // was originally generated from — so the whole document must match EXACTLY, not just shape.
+    let committed: CivilizationsDoc = serde_json::from_str(COMMITTED_CIVILIZATIONS_JSON).unwrap();
+    let (produced, _help_strings) = refdata::civilizations::build_from_committed_reference_data()
+        .expect("build_from_committed_reference_data must succeed against the real committed data");
+
+    // Round-trips through the SAME model the committed file uses — i.e. a shape-compatible drop-in.
+    let json = serde_json::to_string(&produced).expect("serialize produced doc");
+    let reparsed: CivilizationsDoc =
+        serde_json::from_str(&json).expect("produced JSON must re-parse into the model");
+
+    assert_eq!(reparsed, committed, "generated civilizations.json must match the committed file exactly");
 }
 
 #[test]

@@ -18,7 +18,9 @@ use crate::error::{RefdataError, Result};
 
 /// The offset the game adds to a unit's `LanguageNameId` to reach its "Create <b>Name</b> (...)"
 /// help string — verified in `scripts/build-unit-descriptions.mjs` (`LanguageNameId + 21000`).
-const HELP_STRING_OFFSET: i64 = 21_000;
+/// `pub(crate)`: [`crate::unit_help`] needs the SAME offset to look up a resolved unit's full help
+/// text (body + upgrades), not just the bold name this module extracts.
+pub(crate) const HELP_STRING_OFFSET: i64 = 21_000;
 
 /// One `data.Unit` entry, as sliced into `reference-data/aoe2techtree-units.json`. Only the fields
 /// this crate consumes are modeled; serde ignores the ~17 others (`Speed`, `LineOfSight`,
@@ -213,10 +215,41 @@ pub fn load_unit_ids() -> Result<HashMap<i32, RawUnit>> {
     ))
 }
 
+/// Parses a `{ strings: { id: text } }`-shaped slice into its raw id -> FULL help-text map — both
+/// `aoe2techtree-unit-names.json` and its TR counterpart `aoe2techtree-unit-names-tr.json` share
+/// this shape. Unlike [`parse`] (which extracts only the `<b>...</b>` bold NAME out of each
+/// string), this keeps the whole text — [`crate::unit_help`] needs the full body + `<i>Upgrades:
+/// ...</i>` line, not just the title.
+pub fn parse_help_strings(json: &str, file: &'static str) -> Result<HashMap<String, String>> {
+    let names: NamesDoc =
+        serde_json::from_str(json).map_err(|source| RefdataError::ParseSource { file, source })?;
+    Ok(names.strings)
+}
+
+/// Loads the real committed EN unit-help-string slice, baked into the binary at compile time.
+pub fn load_help_strings_en() -> Result<HashMap<String, String>> {
+    parse_help_strings(
+        include_str!("../../../../reference-data/aoe2techtree-unit-names.json"),
+        "aoe2techtree-unit-names.json",
+    )
+}
+
+/// Loads the real committed TR unit-help-string slice (the EN file's counterpart, same id space),
+/// baked into the binary at compile time.
+pub fn load_help_strings_tr() -> Result<HashMap<String, String>> {
+    parse_help_strings(
+        include_str!("../../../../reference-data/aoe2techtree-unit-names-tr.json"),
+        "aoe2techtree-unit-names-tr.json",
+    )
+}
+
 /// Extracts the first `<b>...</b>` span's inner text — a regex-free port of the source scripts'
 /// `.match(/<b>(.+?)<\/b>/)` (kept regex-free per `pipeline-core`'s convention). `None` when the
-/// string has no such span.
-fn bold_span(help: &str) -> Option<&str> {
+/// string has no such span. `pub(crate)`: [`crate::unit_help`] reuses this exact helper (its own
+/// source script, `build-unit-descriptions.mjs`, uses the identical `<b>(.+?)<\/b>` pattern to
+/// pull a unit's title out of the SAME help-string family this module already parses) — per this
+/// crate's "reuse the shared parser, never write a second one" rule.
+pub(crate) fn bold_span(help: &str) -> Option<&str> {
     let start = help.find("<b>")? + "<b>".len();
     let end = help[start..].find("</b>")? + start;
     Some(&help[start..end])
@@ -311,5 +344,20 @@ mod tests {
         // transposed to 4/30, which is why the old crate needed a STAT_CORRECTIONS patch).
         assert_eq!(archer.hp, 30);
         assert_eq!(archer.range, 4.0);
+    }
+
+    #[test]
+    fn real_en_and_tr_help_string_slices_share_the_same_id_space() {
+        let en = load_help_strings_en().expect("committed EN slice must parse");
+        let tr = load_help_strings_tr().expect("committed TR slice must parse");
+        assert_eq!(en.len(), 225);
+        assert_eq!(tr.len(), 225);
+        let mut en_ids: Vec<&String> = en.keys().collect();
+        let mut tr_ids: Vec<&String> = tr.keys().collect();
+        en_ids.sort();
+        tr_ids.sort();
+        assert_eq!(en_ids, tr_ids, "EN/TR unit-help slices must cover the exact same id set");
+        assert!(en["26083"].contains("Archer"));
+        assert!(tr["26083"].contains("Okçu"));
     }
 }

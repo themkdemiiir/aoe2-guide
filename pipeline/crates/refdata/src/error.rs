@@ -92,4 +92,80 @@ pub enum RefdataError {
         first: String,
         second: String,
     },
+
+    /// A civ's `help_en`/`help_tr` string (from `reference-data/aoe2techtree-civs.json`) parsed to
+    /// zero civ bonuses — [`crate::civ_help::parse_help`]'s own "not real civ help text" signal
+    /// (mirrors `scripts/lib/parse-help.mjs`'s `return out.civBonuses.length ? out : null`). Fail
+    /// loud rather than emit a civ with an empty bonus list.
+    #[error("civ {civ_key:?} has no parseable {lang} help text (help_string_id {help_string_id})")]
+    CivHelpUnparseable {
+        civ_key: String,
+        lang: &'static str,
+        help_string_id: i64,
+    },
+
+    /// A civ's EN or TR help text parsed to a unique-tech count other than exactly 2 (every AoE2
+    /// civ has a Castle-Age and an Imperial-Age unique tech) — mirrors
+    /// `scripts/build-civilizations.mjs`'s own `[FATAL] ... expected 2` guard.
+    #[error("civ {civ_key:?} {lang} help has {count} unique tech(s), expected 2")]
+    CivUniqueTechCount {
+        civ_key: String,
+        lang: &'static str,
+        count: usize,
+    },
+
+    /// A civ resolved from [`crate::civs`] has no row in [`crate::civ_region::REGION_OVERRIDE`] —
+    /// that curated table (originally the aalises `civilizations.csv` `expansion` column, now a
+    /// small hand-curated replacement — see that module's doc) must cover every civ the committed
+    /// `aoe2techtree-civs.json` slice carries, or the generated `region` would have to be
+    /// fabricated.
+    #[error("no entry for civ slug {slug:?} in the curated REGION_OVERRIDE table")]
+    MissingCivRegion { slug: String },
+
+    /// A civ's help-derived unique-unit name(s), plus the small curated
+    /// [`crate::civ_region::UNIQUE_UNIT_OVERRIDE`] supplement, still resolved to an EMPTY list —
+    /// mirrors `scripts/build-civilizations.mjs`'s own `[FATAL] ... no unique unit from any
+    /// source` guard.
+    #[error("civ {slug:?} resolved to zero unique units from any source")]
+    NoCivUniqueUnit { slug: String },
+
+    /// A [`crate::canonical_units::CANONICAL_UNITS`] unit's `language_name_id` has no EN or TR
+    /// help string in the committed `aoe2techtree-unit-names(-tr).json` slices — the pinned slice
+    /// changed, or this unit's help text was never sliced in.
+    #[error("unit {slug:?} (language_name_id {language_name_id}) has no {lang} help string in the committed slice")]
+    UnitHelpStringMissing {
+        slug: &'static str,
+        language_name_id: i64,
+        lang: &'static str,
+    },
+
+    /// A unit's help string has no `<b>...</b>` title span — mirrors
+    /// `scripts/build-unit-descriptions.mjs`'s `fail("no <b>name</b> in ... help string")`.
+    #[error("unit {slug:?} {lang} help string has no <b>name</b> span")]
+    UnitHelpNoBoldName { slug: &'static str, lang: &'static str },
+
+    /// A unit's help string has no `<br>` after its title line — mirrors
+    /// `build-unit-descriptions.mjs`'s `fail("no <br> after title line")`.
+    #[error("unit {slug:?} {lang} help string has no <br> after the title line")]
+    UnitHelpNoBreakAfterTitle { slug: &'static str, lang: &'static str },
+
+    /// A unit's `<i>...</i>` upgrades line doesn't start with the expected `"Upgrades:"` /
+    /// `"Yükseltmeler:"` label — mirrors `build-unit-descriptions.mjs`'s own label-prefix guard.
+    #[error("unit {slug:?} {lang} upgrades line does not start with the expected label {label:?}")]
+    UnitHelpUpgradesLabelMismatch {
+        slug: &'static str,
+        lang: &'static str,
+        label: &'static str,
+    },
+
+    /// A unit's help body is empty after stripping HTML tags — mirrors
+    /// `build-unit-descriptions.mjs`'s `fail("empty ... help body")`.
+    #[error("unit {slug:?} {lang} help body is empty after stripping tags")]
+    UnitHelpEmptyBody { slug: &'static str, lang: &'static str },
+
+    /// A unit's `<i>Upgrades: ...</i>` line is present in one language's help string but absent
+    /// in the other — mirrors `build-unit-descriptions.mjs`'s
+    /// `fail("upgrades line present in one language but not the other")`.
+    #[error("unit {slug:?} has an upgrades line in one language but not the other")]
+    UnitHelpUpgradesLangMismatch { slug: &'static str },
 }

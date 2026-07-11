@@ -1,10 +1,15 @@
 //! `refdata` — strict Rust replacement for `scripts/build-units.mjs`, `scripts/build-game-facts.mjs`,
-//! `scripts/build-unit-tech-names.mjs`, and `scripts/build-icon-map.mjs`. Derives
+//! `scripts/build-unit-tech-names.mjs`, `scripts/build-icon-map.mjs`, and the aoe2techtree-PARSING
+//! half of `scripts/build-civilizations.mjs` / `scripts/build-unit-descriptions.mjs`. Derives
 //! `src/data/unit-stats.json` (numeric unit stats), `src/data/game-facts.json` (per-unit
 //! age/building/cost/attackBonus), `src/data/unit-names.json` + `src/data/tech-names.json` (game DAT
-//! id -> English display name, for `pipeline-core`'s own `units`/`techs` dims), and
-//! `src/data/icon-map.json` (slug -> `/images/aoe2/...` icon path) — ALL from the AUTHORITATIVE
-//! aoe2techtree game data — no aalises anywhere.
+//! id -> English display name, for `pipeline-core`'s own `units`/`techs` dims),
+//! `src/data/icon-map.json` (slug -> `/images/aoe2/...` icon path), `src/data/civilizations.json`
+//! (EN civ data), and two INTERMEDIATE (not-committed) JSONs — `civ-help-strings.json` /
+//! `unit-descriptions.json` — that thin JS wrappers apply to `src/content/{civilizations,units}/
+//! *.yaml`, preserving hand-authored prose (see [`civilizations`]'s and [`unit_help`]'s module docs
+//! for the exact wrapper contracts) — ALL from the AUTHORITATIVE aoe2techtree game data — no
+//! aalises anywhere.
 //!
 //! **Source: aoe2techtree, not the aalises CSV.** The earlier version of this crate read the
 //! aalises `age-of-empires-II-api` `units.csv` and then patched it with a `STAT_CORRECTIONS`
@@ -13,7 +18,10 @@
 //! aoe2techtree the real source of truth all along, reached through a buggy middleman. This crate
 //! now reads aoe2techtree directly (the SAME pinned `AOE2TECHTREE_SHA` the repo already uses for
 //! civ text, unit/tech names, and icons), so the corrections are gone (~68 unit-stats units get
-//! their genuinely-correct DE stats — see the task report's diff list).
+//! their genuinely-correct DE stats — see the task report's diff list). [`civilizations`] similarly
+//! replaces `build-civilizations.mjs`'s aalises `civilizations.csv` dependency with a small
+//! hand-curated table ([`civ_region`]) covering the few facts aoe2techtree genuinely doesn't carry
+//! (region) — see that module's doc for why the CSV parsing itself wasn't worth porting.
 //!
 //! The four `game-facts.json` fields all come from aoe2techtree: `name`+`cost` from `data.Unit`
 //! ([`techtree`]), `age`+`building` from the civ-mode of the 53 base-game tech trees
@@ -32,6 +40,10 @@
 //! a display NAME → stats/facts keyed by content `slug`).
 pub mod armor_classes;
 pub mod canonical_units;
+pub mod civ_help;
+pub mod civ_region;
+pub mod civilizations;
+pub mod civs;
 pub mod error;
 pub mod game_facts;
 pub mod icon_items;
@@ -41,6 +53,7 @@ pub mod name_to_slug;
 pub mod techs;
 pub mod techtree;
 pub mod tree_nodes;
+pub mod unit_help;
 pub mod unit_lines;
 pub mod unit_stats;
 pub mod unit_tech_names;

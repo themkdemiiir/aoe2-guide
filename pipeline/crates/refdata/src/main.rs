@@ -1,11 +1,12 @@
 //! Thin CLI over the `refdata` library: writes `unit-stats.json`, `game-facts.json`,
-//! `unit-names.json`, `tech-names.json`, and `icon-map.json` — all derived from the committed
-//! aoe2techtree source slices baked into this binary at compile time (see `lib.rs`'s doc). Every
-//! output but `icon-map.json` needs no other input, so there is no source-path flag to get wrong;
-//! `icon-map.json` additionally crosses the committed slice against a live scan of
-//! `public/images/aoe2/{Unit,Tech,Building,Civs}/` (thousands of binary PNGs, which can't be
-//! `include_str!`'d) — that scan is this binary's one genuine filesystem READ, kept here in the
-//! imperative shell per this crate's functional-core/imperative-shell split (see
+//! `unit-names.json`, `tech-names.json`, `icon-map.json`, `civilizations.json`, and the two
+//! INTERMEDIATE (not-committed-shape) JSONs `civ-help-strings.json` / `unit-descriptions.json` —
+//! all derived from the committed aoe2techtree source slices baked into this binary at compile
+//! time (see `lib.rs`'s doc). Every output but `icon-map.json` needs no other input, so there is no
+//! source-path flag to get wrong; `icon-map.json` additionally crosses the committed slice against
+//! a live scan of `public/images/aoe2/{Unit,Tech,Building,Civs}/` (thousands of binary PNGs, which
+//! can't be `include_str!`'d) — that scan is this binary's one genuine filesystem READ, kept here
+//! in the imperative shell per this crate's functional-core/imperative-shell split (see
 //! `icon_map`'s doc); its location is computed, not a flag (see
 //! `refdata::icon_map::default_assets_dir`'s doc).
 //!
@@ -30,11 +31,14 @@ const DEFAULT_LOG_FILTER: &str = "info";
 #[command(
     name = "refdata",
     version,
-    about = "Derive src/data/{unit-stats,game-facts,unit-names,tech-names,icon-map}.json from the committed aoe2techtree reference-data slices"
+    about = "Derive src/data/{unit-stats,game-facts,unit-names,tech-names,icon-map,civilizations}.json + the intermediate civ-help-strings.json/unit-descriptions.json from the committed aoe2techtree reference-data slices"
 )]
 struct Cli {
-    /// Directory to write the five output files into (created if missing). NEVER `src/data` for
-    /// this task — the Astro site's committed files stay untouched until an explicit cutover.
+    /// Directory to write the output files into (created if missing). NEVER `src/data` for this
+    /// task — the Astro site's committed files stay untouched until an explicit cutover. This is
+    /// ALSO where the two intermediate JSONs land — they are never a `src/data/` shape either
+    /// (`civilizations`/`unit_help`'s thin JS wrappers consume them from wherever the caller points
+    /// `--out`).
     #[arg(long, value_name = "DIR")]
     out: PathBuf,
 }
@@ -75,6 +79,15 @@ fn run(out_dir: &Path) -> anyhow::Result<()> {
     let icon_map = refdata::icon_map::build(&inventory).context("building icon-map.json")?;
     write_json(&out_dir.join("icon-map.json"), &icon_map)?;
 
+    let (civilizations, civ_help_strings) = refdata::civilizations::build_from_committed_reference_data()
+        .context("building civilizations.json / civ-help-strings.json")?;
+    write_json(&out_dir.join("civilizations.json"), &civilizations)?;
+    write_json(&out_dir.join("civ-help-strings.json"), &civ_help_strings)?;
+
+    let unit_descriptions = refdata::unit_help::build_from_committed_reference_data()
+        .context("building unit-descriptions.json")?;
+    write_json(&out_dir.join("unit-descriptions.json"), &unit_descriptions)?;
+
     tracing::info!(
         units = unit_stats.units.len(),
         facts = game_facts.units.len(),
@@ -84,8 +97,12 @@ fn run(out_dir: &Path) -> anyhow::Result<()> {
         icon_techs = icon_map.techs.len(),
         icon_buildings = icon_map.buildings.len(),
         icon_civs = icon_map.civs.len(),
+        civs = civilizations.civs.len(),
+        civ_help_strings = civ_help_strings.civs.len(),
+        unit_descriptions = unit_descriptions.units.len(),
         out = %out_dir.display(),
-        "wrote unit-stats.json, game-facts.json, unit-names.json, tech-names.json, icon-map.json"
+        "wrote unit-stats.json, game-facts.json, unit-names.json, tech-names.json, icon-map.json, \
+         civilizations.json, civ-help-strings.json, unit-descriptions.json"
     );
     Ok(())
 }

@@ -224,6 +224,136 @@ pub struct IconMapDoc {
     pub civs: BTreeMap<String, String>,
 }
 
+// --- civilizations.json ------------------------------------------------------------------------
+
+/// The whole `src/data/civilizations.json` document. Produced by [`crate::civilizations::build`].
+/// Field order matches the committed file's own key order exactly (verified against
+/// `src/data/civilizations.json` in `tests/shape_parity.rs`).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivilizationsDoc {
+    pub patch: String,
+    pub civs: Vec<CivEntry>,
+}
+
+/// One civ's EN-only data-layer entry — everything `scripts/build-civilizations.mjs`'s thin YAML
+/// wrapper needs beyond the bilingual [`CivHelpStringsDoc`] (name/tagline/strategy stay hand-authored
+/// or templated JS-side; see that crate module's doc for the full wrapper contract).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivEntry {
+    pub slug: String,
+    pub region: String,
+    pub specialty: String,
+    #[serde(rename = "uniqueUnits")]
+    pub unique_units: Vec<String>,
+    #[serde(rename = "civBonuses")]
+    pub civ_bonuses: Vec<String>,
+    #[serde(rename = "teamBonus")]
+    pub team_bonus: String,
+    #[serde(rename = "uniqueTechs")]
+    pub unique_techs: CivUniqueTechs,
+    #[serde(rename = "regionNoun")]
+    pub region_noun: String,
+}
+
+/// A civ's two unique techs — always exactly Castle + Imperial (every real AoE2 civ has both).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivUniqueTechs {
+    pub castle: CivUniqueTech,
+    pub imperial: CivUniqueTech,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivUniqueTech {
+    pub name: String,
+    pub effect: String,
+}
+
+// --- civ-help-strings.json (intermediate — NOT a committed src/data/ file) ----------------------
+
+/// The whole intermediate `civ-help-strings.json` document [`crate::civilizations::build`] also
+/// produces — the bilingual half of a civ's parsed help text that [`CivilizationsDoc`] (EN-only)
+/// doesn't carry, keyed by content SLUG (matching `src/content/civilizations/<slug>.yaml`, unlike
+/// [`crate::civs::RawCiv`]'s aoe2techtree-internal-name keying) so the JS YAML wrapper can look a
+/// civ up directly by filename. See `crate::civilizations`'s module doc for the full wrapper
+/// contract (which fields the wrapper is expected to use vs. carried for reference only).
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivHelpStringsDoc {
+    pub provenance: NameMapProvenance,
+    pub civs: BTreeMap<String, CivHelpEntry>,
+}
+
+/// One civ's bilingual parsed help text.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivHelpEntry {
+    pub en: CivHelpLang,
+    pub tr: CivHelpLang,
+}
+
+/// One civ's help text parsed in ONE language. `civType`/`civBonuses`/`teamBonus` are the EN's
+/// direct source for [`CivEntry`]'s `specialty`/`civBonuses`/`teamBonus` (so the `en` block here is
+/// carried for reference/debugging — the wrapper already has those, pre-derived, in
+/// `civilizations.json`); the `tr` block's `civBonuses`/`teamBonus`/`civType` are the ONLY place
+/// those TR strings exist and are what the wrapper is actually expected to consume.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CivHelpLang {
+    #[serde(rename = "civType")]
+    pub civ_type: String,
+    #[serde(rename = "civBonuses")]
+    pub civ_bonuses: Vec<String>,
+    #[serde(rename = "teamBonus")]
+    pub team_bonus: String,
+    /// Always exactly `[castle, imperial]` — see [`crate::civ_help::require_parsed`]. `name` here
+    /// is the (possibly-translated) name straight from THIS language's help text — the wrapper
+    /// must NOT use `tr.uniqueTechs[*].name` for the YAML's `tr` name field: unique-tech proper
+    /// nouns are allow-listed to stay EN-only site-wide (`audit-yaml-translations`'s `name`/`term`/
+    /// unique-tech-name allow-list — see the repo's `CLAUDE.md`), so the wrapper must always take
+    /// the name from `civilizations.json`'s (EN) `uniqueTechs` for BOTH languages, using only
+    /// `effect` from here.
+    #[serde(rename = "uniqueTechs")]
+    pub unique_techs: Vec<CivUniqueTech>,
+    #[serde(rename = "uniqueUnitNames")]
+    pub unique_unit_names: Vec<String>,
+}
+
+// --- unit-descriptions.json (intermediate — NOT a committed src/data/ file) ---------------------
+
+/// The whole intermediate `unit-descriptions.json` document [`crate::unit_help::build`] produces —
+/// parsed bilingual `description`/`upgrades` text per canonical unit, keyed by content slug (the
+/// `src/content/units/<slug>.yaml` filename). See that module's doc for the wrapper contract.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct UnitDescriptionsDoc {
+    pub provenance: NameMapProvenance,
+    pub units: BTreeMap<String, UnitDescriptionEntry>,
+}
+
+/// One unit's parsed bilingual description/upgrades text.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct UnitDescriptionEntry {
+    pub description: LocalizedString,
+    /// `None` (JSON `null`) when the unit's help string has no `<i>Upgrades: ...</i>` line at all
+    /// (e.g. Fishing Ship) — mirrors the YAML schema's `upgrades` being an OPTIONAL field, never an
+    /// empty-string placeholder.
+    pub upgrades: Option<LocalizedString>,
+}
+
+/// A bilingual string pair — the exact `{ en, tr }` shape `src/content/config.ts`'s
+/// `localizedString` Zod schema (and every `{en,tr}` YAML field) expects.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct LocalizedString {
+    pub en: String,
+    pub tr: String,
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -263,5 +393,69 @@ mod tests {
         }"#;
         let doc: IconMapDoc = serde_json::from_str(json).expect("must parse");
         assert_eq!(doc.units.get("archer"), Some(&"/images/aoe2/Unit/17.png".to_string()));
+    }
+
+    #[test]
+    fn civilizations_doc_round_trips_a_minimal_fixture_with_camel_case_keys() {
+        let json = r#"{
+            "patch": "v100.1.84",
+            "civs": [{
+                "slug": "britons",
+                "region": "Western European",
+                "specialty": "Foot Archer",
+                "uniqueUnits": ["longbowman"],
+                "civBonuses": ["Shepherds work +25% faster"],
+                "teamBonus": "Archery Ranges work +10% faster",
+                "uniqueTechs": {
+                    "castle": { "name": "Yeomen", "effect": "x" },
+                    "imperial": { "name": "Warwolf", "effect": "y" }
+                },
+                "regionNoun": "Western Europe"
+            }]
+        }"#;
+        let doc: CivilizationsDoc = serde_json::from_str(json).expect("must parse");
+        assert_eq!(doc.civs[0].unique_units, vec!["longbowman".to_string()]);
+        assert_eq!(doc.civs[0].unique_techs.castle.name, "Yeomen");
+    }
+
+    #[test]
+    fn civ_help_strings_doc_round_trips_a_minimal_fixture_with_camel_case_keys() {
+        let json = r#"{
+            "provenance": { "source": "x", "sha": "y", "note": "z" },
+            "civs": {
+                "britons": {
+                    "en": {
+                        "civType": "Foot Archer", "civBonuses": [], "teamBonus": "",
+                        "uniqueTechs": [], "uniqueUnitNames": []
+                    },
+                    "tr": {
+                        "civType": "Yaya Okçu", "civBonuses": [], "teamBonus": "",
+                        "uniqueTechs": [], "uniqueUnitNames": []
+                    }
+                }
+            }
+        }"#;
+        let doc: CivHelpStringsDoc = serde_json::from_str(json).expect("must parse");
+        assert_eq!(doc.civs["britons"].tr.civ_type, "Yaya Okçu");
+    }
+
+    #[test]
+    fn unit_descriptions_doc_round_trips_a_minimal_fixture() {
+        let json = r#"{
+            "provenance": { "source": "x", "sha": "y", "note": "z" },
+            "units": {
+                "archer": {
+                    "description": { "en": "a", "tr": "b" },
+                    "upgrades": { "en": "c", "tr": "d" }
+                },
+                "fishing-ship": {
+                    "description": { "en": "e", "tr": "f" },
+                    "upgrades": null
+                }
+            }
+        }"#;
+        let doc: UnitDescriptionsDoc = serde_json::from_str(json).expect("must parse");
+        assert_eq!(doc.units["archer"].upgrades.as_ref().unwrap().en, "c");
+        assert!(doc.units["fishing-ship"].upgrades.is_none());
     }
 }
