@@ -24,7 +24,7 @@
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots",
     "assets:sync": "node scripts/sync-assets.mjs && node scripts/optimize-images.mjs",
-    "icons:map": "node scripts/build-icon-map.mjs",
+    "icons:map": "pnpm build:refdata",
     "validate:icons": "node scripts/validate-icons.mjs",
     "check:knip": "knip",
     "import:md": "node scripts/import-from-md.mjs",
@@ -34,11 +34,12 @@
     "sync:game-data": "node scripts/sync-game-data.mjs",
     "build:civilizations": "node scripts/build-civilizations.mjs",
     "build:wasm": "cd analyzer/crates/analyzer-wasm && wasm-pack build --target web --release --no-pack --out-dir ../../../src/wasm/pkg && rm -f ../../../src/wasm/pkg/.gitignore && mv ../../../src/wasm/pkg/replay_wasm_bg.wasm ../../../public/analyzer/pkg/replay_wasm_bg.wasm",
-    "build:units": "node scripts/build-units.mjs",
+    "build:units": "pnpm build:refdata",
     "build:unit-descriptions": "node scripts/build-unit-descriptions.mjs",
-    "build:unit-tech-names": "node scripts/build-unit-tech-names.mjs",
-    "build:facts": "node scripts/build-game-facts.mjs",
-    "verify:facts": "node scripts/verify-build-facts.mjs"
+    "build:unit-tech-names": "pnpm build:refdata",
+    "build:facts": "pnpm build:refdata",
+    "verify:facts": "node scripts/verify-build-facts.mjs",
+    "build:refdata": "cargo run -q --manifest-path pipeline/Cargo.toml -p refdata -- --out .cache/refdata-out && cp .cache/refdata-out/unit-stats.json .cache/refdata-out/game-facts.json .cache/refdata-out/unit-names.json .cache/refdata-out/tech-names.json .cache/refdata-out/icon-map.json .cache/refdata-out/civilizations.json src/data/ && node scripts/build-civilizations.mjs && node scripts/build-unit-descriptions.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
