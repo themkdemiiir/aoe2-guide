@@ -8,7 +8,7 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 50,
         "wood": 0,
         "gold": 20,
         "stone": 0
@@ -26,7 +26,7 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 50,
         "wood": 0,
         "gold": 20,
         "stone": 0
@@ -39,36 +39,36 @@
     },
     {
       "slug": "long-swordsman",
-      "hp": 55,
+      "hp": 60,
       "attack": 9,
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 50,
         "wood": 0,
         "gold": 20,
         "stone": 0
       },
       "trainTime": 21,
-      "armorMelee": 0,
+      "armorMelee": 1,
       "armorPiercing": 1,
       "line": "militia-line",
       "lineRank": 3
     },
     {
       "slug": "two-handed-swordsman",
-      "hp": 60,
-      "attack": 11,
+      "hp": 65,
+      "attack": 12,
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 50,
         "wood": 0,
         "gold": 20,
         "stone": 0
       },
       "trainTime": 21,
-      "armorMelee": 0,
+      "armorMelee": 1,
       "armorPiercing": 1,
       "line": "militia-line",
       "lineRank": 4
@@ -76,11 +76,11 @@
     {
       "slug": "champion",
       "hp": 70,
-      "attack": 13,
+      "attack": 14,
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 50,
         "wood": 0,
         "gold": 20,
         "stone": 0
@@ -99,7 +99,7 @@
       "minRange": 0,
       "cost": {
         "food": 35,
-        "wood": 15,
+        "wood": 25,
         "gold": 0,
         "stone": 0
       },
@@ -147,7 +147,7 @@
     },
     {
       "slug": "eagle-warrior",
-      "hp": 50,
+      "hp": 55,
       "attack": 7,
       "range": 0,
       "minRange": 0,
@@ -159,7 +159,7 @@
       },
       "trainTime": 35,
       "armorMelee": 0,
-      "armorPiercing": 2,
+      "armorPiercing": 3,
       "line": "eagle-line",
       "lineRank": 2
     },
@@ -247,7 +247,7 @@
         "gold": 0,
         "stone": 0
       },
-      "trainTime": 22,
+      "trainTime": 26,
       "armorMelee": 0,
       "armorPiercing": 3,
       "line": "skirmisher-line",
@@ -280,10 +280,10 @@
       "cost": {
         "food": 0,
         "wood": 40,
-        "gold": 70,
+        "gold": 60,
         "stone": 0
       },
-      "trainTime": 34,
+      "trainTime": 37,
       "armorMelee": 0,
       "armorPiercing": 0,
       "line": "cavalry-archer-line",
@@ -298,10 +298,10 @@
       "cost": {
         "food": 0,
         "wood": 40,
-        "gold": 70,
+        "gold": 60,
         "stone": 0
       },
-      "trainTime": 27,
+      "trainTime": 30,
       "armorMelee": 1,
       "armorPiercing": 0,
       "line": "cavalry-archer-line",
@@ -309,7 +309,7 @@
     },
     {
       "slug": "hand-cannoneer",
-      "hp": 35,
+      "hp": 40,
       "attack": 17,
       "range": 7,
       "minRange": 0,
@@ -328,7 +328,7 @@
     {
       "slug": "scout-cavalry",
       "hp": 45,
-      "attack": 5,
+      "attack": 3,
       "range": 0,
       "minRange": 0,
       "cost": {
@@ -436,7 +436,7 @@
     {
       "slug": "camel-rider",
       "hp": 100,
-      "attack": 5,
+      "attack": 6,
       "range": 0,
       "minRange": 0,
       "cost": {
@@ -500,7 +500,7 @@
         "stone": 0
       },
       "trainTime": 36,
-      "armorMelee": 0,
+      "armorMelee": -3,
       "armorPiercing": 180,
       "line": "ram-line",
       "lineRank": 1
@@ -518,7 +518,7 @@
         "stone": 0
       },
       "trainTime": 36,
-      "armorMelee": 0,
+      "armorMelee": -2,
       "armorPiercing": 190,
       "line": "ram-line",
       "lineRank": 2
@@ -536,7 +536,7 @@
         "stone": 0
       },
       "trainTime": 36,
-      "armorMelee": 0,
+      "armorMelee": -1,
       "armorPiercing": 195,
       "line": "ram-line",
       "lineRank": 3
@@ -598,25 +598,7 @@
     {
       "slug": "scorpion",
       "hp": 40,
-      "attack": 12,
-      "range": 7,
-      "minRange": 2,
-      "cost": {
-        "food": 0,
-        "wood": 75,
-        "gold": 75,
-        "stone": 0
-      },
-      "trainTime": 30,
-      "armorMelee": 0,
-      "armorPiercing": 6,
-      "line": "scorpion-line",
-      "lineRank": 1
-    },
-    {
-      "slug": "heavy-scorpion",
-      "hp": 50,
-      "attack": 16,
+      "attack": 11,
       "range": 7,
       "minRange": 2,
       "cost": {
@@ -628,6 +610,24 @@
       "trainTime": 30,
       "armorMelee": 0,
       "armorPiercing": 7,
+      "line": "scorpion-line",
+      "lineRank": 1
+    },
+    {
+      "slug": "heavy-scorpion",
+      "hp": 60,
+      "attack": 14,
+      "range": 7,
+      "minRange": 2,
+      "cost": {
+        "food": 0,
+        "wood": 75,
+        "gold": 75,
+        "stone": 0
+      },
+      "trainTime": 30,
+      "armorMelee": 1,
+      "armorPiercing": 8,
       "line": "scorpion-line",
       "lineRank": 2
     },
@@ -662,14 +662,14 @@
         "stone": 0
       },
       "trainTime": 50,
-      "armorMelee": 1,
-      "armorPiercing": 150,
+      "armorMelee": 2,
+      "armorPiercing": 8,
       "line": "trebuchet-line",
       "lineRank": 1
     },
     {
       "slug": "galley",
-      "hp": 120,
+      "hp": 110,
       "attack": 6,
       "range": 5,
       "minRange": 0,
@@ -679,15 +679,15 @@
         "gold": 30,
         "stone": 0
       },
-      "trainTime": 60,
+      "trainTime": 45,
       "armorMelee": 0,
-      "armorPiercing": 6,
+      "armorPiercing": 3,
       "line": "galley-line",
       "lineRank": 1
     },
     {
       "slug": "war-galley",
-      "hp": 135,
+      "hp": 125,
       "attack": 7,
       "range": 6,
       "minRange": 0,
@@ -697,16 +697,16 @@
         "gold": 30,
         "stone": 0
       },
-      "trainTime": 36,
+      "trainTime": 27,
       "armorMelee": 0,
-      "armorPiercing": 6,
+      "armorPiercing": 4,
       "line": "galley-line",
       "lineRank": 2
     },
     {
       "slug": "galleon",
-      "hp": 165,
-      "attack": 8,
+      "hp": 155,
+      "attack": 9,
       "range": 7,
       "minRange": 0,
       "cost": {
@@ -715,17 +715,17 @@
         "gold": 30,
         "stone": 0
       },
-      "trainTime": 36,
+      "trainTime": 27,
       "armorMelee": 0,
-      "armorPiercing": 8,
+      "armorPiercing": 6,
       "line": "galley-line",
       "lineRank": 3
     },
     {
       "slug": "fire-ship",
-      "hp": 100,
-      "attack": 2,
-      "range": 2,
+      "hp": 120,
+      "attack": 3,
+      "range": 2.5,
       "minRange": 0,
       "cost": {
         "food": 0,
@@ -733,17 +733,17 @@
         "gold": 45,
         "stone": 0
       },
-      "trainTime": 36,
-      "armorMelee": 0,
-      "armorPiercing": 6,
+      "trainTime": 27,
+      "armorMelee": 2,
+      "armorPiercing": 4,
       "line": "fire-ship-line",
       "lineRank": 2
     },
     {
       "slug": "fast-fire-ship",
-      "hp": 120,
-      "attack": 3,
-      "range": 2,
+      "hp": 140,
+      "attack": 4,
+      "range": 2.5,
       "minRange": 0,
       "cost": {
         "food": 0,
@@ -751,52 +751,52 @@
         "gold": 45,
         "stone": 0
       },
-      "trainTime": 36,
-      "armorMelee": 0,
-      "armorPiercing": 8,
+      "trainTime": 27,
+      "armorMelee": 3,
+      "armorPiercing": 7,
       "line": "fire-ship-line",
       "lineRank": 3
     },
     {
       "slug": "demolition-ship",
       "hp": 50,
-      "attack": 110,
+      "attack": 95,
       "range": 0,
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 70,
-        "gold": 50,
+        "wood": 45,
+        "gold": 80,
         "stone": 0
       },
       "trainTime": 31,
-      "armorMelee": 0,
-      "armorPiercing": 3,
+      "armorMelee": 1,
+      "armorPiercing": 0,
       "line": "demolition-line",
       "lineRank": 2
     },
     {
       "slug": "heavy-demolition-ship",
-      "hp": 60,
-      "attack": 140,
+      "hp": 70,
+      "attack": 120,
       "range": 0,
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 70,
-        "gold": 50,
+        "wood": 45,
+        "gold": 80,
         "stone": 0
       },
       "trainTime": 31,
-      "armorMelee": 0,
-      "armorPiercing": 3,
+      "armorMelee": 2,
+      "armorPiercing": 0,
       "line": "demolition-line",
       "lineRank": 3
     },
     {
       "slug": "cannon-galleon",
       "hp": 120,
-      "attack": 35,
+      "attack": 50,
       "range": 13,
       "minRange": 3,
       "cost": {
@@ -807,14 +807,14 @@
       },
       "trainTime": 46,
       "armorMelee": 0,
-      "armorPiercing": 6,
+      "armorPiercing": 5,
       "line": "cannon-galleon-line",
       "lineRank": 1
     },
     {
       "slug": "elite-cannon-galleon",
       "hp": 150,
-      "attack": 45,
+      "attack": 60,
       "range": 15,
       "minRange": 3,
       "cost": {
@@ -825,13 +825,13 @@
       },
       "trainTime": 46,
       "armorMelee": 0,
-      "armorPiercing": 8,
+      "armorPiercing": 6,
       "line": "cannon-galleon-line",
       "lineRank": 2
     },
     {
       "slug": "fishing-ship",
-      "hp": 60,
+      "hp": 50,
       "attack": 0,
       "range": 0,
       "minRange": 0,
@@ -842,14 +842,14 @@
         "stone": 0
       },
       "trainTime": 40,
-      "armorMelee": 0,
-      "armorPiercing": 6,
+      "armorMelee": 1,
+      "armorPiercing": 1,
       "line": "fishing-ship-line",
       "lineRank": 1
     },
     {
       "slug": "transport-ship",
-      "hp": 100,
+      "hp": 70,
       "attack": 0,
       "range": 0,
       "minRange": 0,
@@ -859,43 +859,43 @@
         "gold": 0,
         "stone": 0
       },
-      "trainTime": 45,
-      "armorMelee": 4,
-      "armorPiercing": 8,
+      "trainTime": 46,
+      "armorMelee": 0,
+      "armorPiercing": 2,
       "line": "transport-ship-line",
       "lineRank": 1
     },
     {
       "slug": "berserk",
-      "hp": 55,
-      "attack": 9,
+      "hp": 54,
+      "attack": 12,
       "range": 0,
       "minRange": 0,
       "cost": {
         "food": 65,
         "wood": 0,
-        "gold": 25,
+        "gold": 20,
         "stone": 0
       },
-      "trainTime": 16,
-      "armorMelee": 0,
+      "trainTime": 14,
+      "armorMelee": 1,
       "armorPiercing": 1,
       "line": "berserk-line",
       "lineRank": 1
     },
     {
       "slug": "elite-berserk",
-      "hp": 72,
+      "hp": 62,
       "attack": 14,
       "range": 0,
       "minRange": 0,
       "cost": {
         "food": 65,
         "wood": 0,
-        "gold": 25,
+        "gold": 20,
         "stone": 0
       },
-      "trainTime": 16,
+      "trainTime": 12,
       "armorMelee": 2,
       "armorPiercing": 1,
       "line": "berserk-line",
@@ -949,7 +949,7 @@
         "gold": 35,
         "stone": 0
       },
-      "trainTime": 19,
+      "trainTime": 16,
       "armorMelee": 0,
       "armorPiercing": 0,
       "line": "chu-ko-nu-line",
@@ -958,8 +958,8 @@
     {
       "slug": "elite-chu-ko-nu",
       "hp": 50,
-      "attack": 8,
-      "range": 6,
+      "attack": 10,
+      "range": 4,
       "minRange": 0,
       "cost": {
         "food": 0,
@@ -980,27 +980,27 @@
       "range": 6,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 70,
         "wood": 0,
-        "gold": 70,
+        "gold": 60,
         "stone": 0
       },
       "trainTime": 24,
       "armorMelee": 2,
-      "armorPiercing": 2,
+      "armorPiercing": 1,
       "line": "conquistador-line",
       "lineRank": 1
     },
     {
       "slug": "elite-conquistador",
       "hp": 70,
-      "attack": 18,
+      "attack": 19,
       "range": 6,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 70,
         "wood": 0,
-        "gold": 70,
+        "gold": 60,
         "stone": 0
       },
       "trainTime": 24,
@@ -1016,12 +1016,12 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 52,
+        "food": 75,
         "wood": 0,
-        "gold": 26,
+        "gold": 35,
         "stone": 0
       },
-      "trainTime": 16,
+      "trainTime": 13,
       "armorMelee": 0,
       "armorPiercing": 6,
       "line": "huskarl-line",
@@ -1034,12 +1034,12 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 52,
+        "food": 75,
         "wood": 0,
-        "gold": 26,
+        "gold": 35,
         "stone": 0
       },
-      "trainTime": 16,
+      "trainTime": 13,
       "armorMelee": 0,
       "armorPiercing": 8,
       "line": "huskarl-line",
@@ -1047,8 +1047,8 @@
     },
     {
       "slug": "jaguar-warrior",
-      "hp": 50,
-      "attack": 10,
+      "hp": 65,
+      "attack": 15,
       "range": 0,
       "minRange": 0,
       "cost": {
@@ -1057,16 +1057,16 @@
         "gold": 30,
         "stone": 0
       },
-      "trainTime": 17,
+      "trainTime": 12,
       "armorMelee": 1,
-      "armorPiercing": 0,
+      "armorPiercing": 2,
       "line": "jaguar-warrior-line",
       "lineRank": 1
     },
     {
       "slug": "elite-jaguar-warrior",
       "hp": 75,
-      "attack": 12,
+      "attack": 19,
       "range": 0,
       "minRange": 0,
       "cost": {
@@ -1075,17 +1075,17 @@
         "gold": 30,
         "stone": 0
       },
-      "trainTime": 17,
+      "trainTime": 12,
       "armorMelee": 2,
-      "armorPiercing": 0,
+      "armorPiercing": 2,
       "line": "jaguar-warrior-line",
       "lineRank": 2
     },
     {
       "slug": "janissary",
-      "hp": 44,
+      "hp": 35,
       "attack": 17,
-      "range": 8,
+      "range": 7,
       "minRange": 0,
       "cost": {
         "food": 60,
@@ -1093,7 +1093,7 @@
         "gold": 55,
         "stone": 0
       },
-      "trainTime": 17,
+      "trainTime": 21,
       "armorMelee": 1,
       "armorPiercing": 0,
       "line": "janissary-line",
@@ -1101,7 +1101,7 @@
     },
     {
       "slug": "elite-janissary",
-      "hp": 50,
+      "hp": 40,
       "attack": 22,
       "range": 8,
       "minRange": 0,
@@ -1111,7 +1111,7 @@
         "gold": 55,
         "stone": 0
       },
-      "trainTime": 17,
+      "trainTime": 21,
       "armorMelee": 2,
       "armorPiercing": 0,
       "line": "janissary-line",
@@ -1120,18 +1120,18 @@
     {
       "slug": "longbowman",
       "hp": 35,
-      "attack": 7,
-      "range": 6,
+      "attack": 6,
+      "range": 5,
       "minRange": 0,
       "cost": {
-        "wood": 35,
         "food": 0,
+        "wood": 35,
         "gold": 40,
         "stone": 0
       },
       "trainTime": 18,
-      "armorPiercing": 0,
       "armorMelee": 0,
+      "armorPiercing": 0,
       "line": "longbowman-line",
       "lineRank": 1
     },
@@ -1139,7 +1139,7 @@
       "slug": "elite-longbowman",
       "hp": 40,
       "attack": 7,
-      "range": 8,
+      "range": 6,
       "minRange": 0,
       "cost": {
         "food": 0,
@@ -1147,7 +1147,7 @@
         "gold": 40,
         "stone": 0
       },
-      "trainTime": 19,
+      "trainTime": 18,
       "armorMelee": 0,
       "armorPiercing": 1,
       "line": "longbowman-line",
@@ -1155,8 +1155,8 @@
     },
     {
       "slug": "mameluke",
-      "hp": 65,
-      "attack": 7,
+      "hp": 80,
+      "attack": 8,
       "range": 3,
       "minRange": 0,
       "cost": {
@@ -1220,8 +1220,8 @@
         "stone": 0
       },
       "trainTime": 26,
-      "armorMelee": 0,
-      "armorPiercing": 1,
+      "armorMelee": 1,
+      "armorPiercing": 0,
       "line": "mangudai-line",
       "lineRank": 2
     },
@@ -1233,8 +1233,8 @@
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 37,
-        "gold": 37,
+        "wood": 55,
+        "gold": 55,
         "stone": 0
       },
       "trainTime": 16,
@@ -1251,8 +1251,8 @@
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 32,
-        "gold": 32,
+        "wood": 55,
+        "gold": 55,
         "stone": 0
       },
       "trainTime": 16,
@@ -1263,12 +1263,12 @@
     },
     {
       "slug": "samurai",
-      "hp": 60,
-      "attack": 8,
+      "hp": 70,
+      "attack": 10,
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 45,
         "wood": 0,
         "gold": 30,
         "stone": 0
@@ -1286,7 +1286,7 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 60,
+        "food": 45,
         "wood": 0,
         "gold": 30,
         "stone": 0
@@ -1299,8 +1299,8 @@
     },
     {
       "slug": "tarkan",
-      "hp": 90,
-      "attack": 7,
+      "hp": 100,
+      "attack": 8,
       "range": 0,
       "minRange": 0,
       "cost": {
@@ -1311,7 +1311,7 @@
       },
       "trainTime": 14,
       "armorMelee": 1,
-      "armorPiercing": 2,
+      "armorPiercing": 3,
       "line": "tarkan-line",
       "lineRank": 1
     },
@@ -1329,38 +1329,38 @@
       },
       "trainTime": 14,
       "armorMelee": 1,
-      "armorPiercing": 3,
+      "armorPiercing": 4,
       "line": "tarkan-line",
       "lineRank": 2
     },
     {
       "slug": "teutonic-knight",
-      "hp": 70,
-      "attack": 12,
+      "hp": 90,
+      "attack": 14,
       "range": 0,
       "minRange": 0,
       "cost": {
         "food": 85,
         "wood": 0,
-        "gold": 40,
+        "gold": 30,
         "stone": 0
       },
       "trainTime": 12,
-      "armorMelee": 5,
+      "armorMelee": 7,
       "armorPiercing": 2,
       "line": "teutonic-knight-line",
       "lineRank": 1
     },
     {
       "slug": "elite-teutonic-knight",
-      "hp": 100,
+      "hp": 110,
       "attack": 17,
       "range": 0,
       "minRange": 0,
       "cost": {
         "food": 85,
         "wood": 0,
-        "gold": 40,
+        "gold": 30,
         "stone": 0
       },
       "trainTime": 12,
@@ -1371,7 +1371,7 @@
     },
     {
       "slug": "throwing-axeman",
-      "hp": 50,
+      "hp": 60,
       "attack": 7,
       "range": 3,
       "minRange": 0,
@@ -1381,7 +1381,7 @@
         "gold": 25,
         "stone": 0
       },
-      "trainTime": 17,
+      "trainTime": 13,
       "armorMelee": 0,
       "armorPiercing": 0,
       "line": "throwing-axeman-line",
@@ -1389,7 +1389,7 @@
     },
     {
       "slug": "elite-throwing-axeman",
-      "hp": 60,
+      "hp": 70,
       "attack": 8,
       "range": 4,
       "minRange": 0,
@@ -1399,7 +1399,7 @@
         "gold": 25,
         "stone": 0
       },
-      "trainTime": 17,
+      "trainTime": 13,
       "armorMelee": 1,
       "armorPiercing": 0,
       "line": "throwing-axeman-line",
@@ -1412,12 +1412,12 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 200,
+        "food": 170,
         "wood": 0,
-        "gold": 75,
+        "gold": 85,
         "stone": 0
       },
-      "trainTime": 31,
+      "trainTime": 25,
       "armorMelee": 1,
       "armorPiercing": 2,
       "line": "war-elephant-line",
@@ -1430,12 +1430,12 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 200,
+        "food": 170,
         "wood": 0,
-        "gold": 75,
+        "gold": 85,
         "stone": 0
       },
-      "trainTime": 31,
+      "trainTime": 25,
       "armorMelee": 1,
       "armorPiercing": 3,
       "line": "war-elephant-line",
@@ -1449,13 +1449,13 @@
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 120,
+        "wood": 200,
         "gold": 60,
         "stone": 0
       },
-      "trainTime": 25,
+      "trainTime": 21,
       "armorMelee": 0,
-      "armorPiercing": 3,
+      "armorPiercing": 2,
       "line": "war-wagon-line",
       "lineRank": 1
     },
@@ -1467,11 +1467,11 @@
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 120,
+        "wood": 200,
         "gold": 60,
         "stone": 0
       },
-      "trainTime": 25,
+      "trainTime": 21,
       "armorMelee": 0,
       "armorPiercing": 4,
       "line": "war-wagon-line",
@@ -1479,12 +1479,12 @@
     },
     {
       "slug": "woad-raider",
-      "hp": 65,
-      "attack": 8,
+      "hp": 70,
+      "attack": 11,
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 65,
+        "food": 70,
         "wood": 0,
         "gold": 25,
         "stone": 0
@@ -1497,12 +1497,12 @@
     },
     {
       "slug": "elite-woad-raider",
-      "hp": 80,
-      "attack": 13,
+      "hp": 85,
+      "attack": 15,
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 65,
+        "food": 70,
         "wood": 0,
         "gold": 25,
         "stone": 0
@@ -1520,7 +1520,7 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 30,
+        "food": 25,
         "wood": 0,
         "gold": 15,
         "stone": 0
@@ -1538,7 +1538,7 @@
       "range": 0,
       "minRange": 0,
       "cost": {
-        "food": 30,
+        "food": 25,
         "wood": 0,
         "gold": 15,
         "stone": 0
@@ -1551,73 +1551,73 @@
     },
     {
       "slug": "longboat",
-      "hp": 130,
-      "attack": 7,
+      "hp": 125,
+      "attack": 5,
       "range": 6,
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 80,
-        "gold": 40,
+        "wood": 100,
+        "gold": 50,
         "stone": 0
       },
       "trainTime": 25,
       "armorMelee": 0,
-      "armorPiercing": 6,
+      "armorPiercing": 3,
       "line": "longboat-line",
       "lineRank": 1
     },
     {
       "slug": "elite-longboat",
-      "hp": 160,
-      "attack": 8,
+      "hp": 130,
+      "attack": 7,
       "range": 7,
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 80,
-        "gold": 40,
+        "wood": 100,
+        "gold": 50,
         "stone": 0
       },
       "trainTime": 25,
-      "armorMelee": 0,
-      "armorPiercing": 8,
+      "armorMelee": 1,
+      "armorPiercing": 6,
       "line": "longboat-line",
       "lineRank": 2
     },
     {
       "slug": "turtle-ship",
-      "hp": 200,
-      "attack": 50,
+      "hp": 275,
+      "attack": 9,
       "range": 6,
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 200,
-        "gold": 200,
+        "wood": 190,
+        "gold": 130,
         "stone": 0
       },
       "trainTime": 50,
-      "armorMelee": 6,
-      "armorPiercing": 5,
+      "armorMelee": 2,
+      "armorPiercing": 7,
       "line": "turtle-ship-line",
       "lineRank": 1
     },
     {
       "slug": "elite-turtle-ship",
-      "hp": 300,
-      "attack": 50,
-      "range": 6,
+      "hp": 350,
+      "attack": 13,
+      "range": 7,
       "minRange": 0,
       "cost": {
         "food": 0,
-        "wood": 200,
-        "gold": 200,
+        "wood": 190,
+        "gold": 130,
         "stone": 0
       },
       "trainTime": 50,
-      "armorMelee": 8,
-      "armorPiercing": 6,
+      "armorMelee": 3,
+      "armorPiercing": 12,
       "line": "turtle-ship-line",
       "lineRank": 2
     }

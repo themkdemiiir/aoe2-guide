@@ -1,11 +1,11 @@
 {
-  "_generated": "scripts/build-game-facts.mjs — DO NOT EDIT BY HAND",
+  "_generated": "pipeline/crates/refdata — DO NOT EDIT BY HAND",
   "_source": {
-    "repo": "aalises/age-of-empires-II-api",
-    "file": "data/units.csv",
-    "sha": "3ec582fa0ebd5ea11b2d1ff405e61836c6f3a99d",
-    "license": "BSD-3-Clause",
-    "url": "https://github.com/aalises/age-of-empires-II-api/blob/3ec582fa0ebd5ea11b2d1ff405e61836c6f3a99d/data/units.csv"
+    "repo": "SiegeEngineers/aoe2techtree",
+    "file": "data/data.json + data/trees/*.json + js/techtree.js",
+    "sha": "b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0",
+    "license": "MIT code / MS Game Content Usage Rules assets",
+    "url": "https://github.com/SiegeEngineers/aoe2techtree/tree/b9d494df6921d4080df69b22f9dbb7a4d1dcd9f0"
   },
   "ageRank": {
     "dark": 1,
@@ -14,85 +14,125 @@
     "imperial": 4
   },
   "units": {
+    "arbalester": {
+      "name": "Arbalester",
+      "age": "imperial",
+      "building": "Archery Range",
+      "cost": {
+        "gold": 45,
+        "wood": 25
+      },
+      "attackBonus": "+3 Spearmen"
+    },
     "archer": {
       "name": "Archer",
       "age": "feudal",
       "building": "Archery Range",
       "cost": {
-        "wood": 25,
-        "gold": 45
+        "gold": 45,
+        "wood": 25
+      },
+      "attackBonus": "+3 Spearmen"
+    },
+    "battering-ram": {
+      "name": "Battering Ram",
+      "age": "castle",
+      "building": "Siege Workshop",
+      "cost": {
+        "gold": 75,
+        "wood": 160
+      },
+      "attackBonus": "+150 All Buildings;+40 Siege Units"
+    },
+    "bombard-cannon": {
+      "name": "Bombard Cannon",
+      "age": "imperial",
+      "building": "Siege Workshop",
+      "cost": {
+        "gold": 225,
+        "wood": 225
+      },
+      "attackBonus": "+200 All Buildings;+40 Ships;+20 Siege Units;+40 Stone Defense & Harbors;+40 Heavy Siege"
+    },
+    "camel-rider": {
+      "name": "Camel Rider",
+      "age": "castle",
+      "building": "Stable",
+      "cost": {
+        "food": 55,
+        "gold": 60
+      },
+      "attackBonus": "+9 Mounted Units;+5 Ships;+5 Camels"
+    },
+    "cannon-galleon": {
+      "name": "Cannon Galleon",
+      "age": "imperial",
+      "building": "Dock",
+      "cost": {
+        "gold": 150,
+        "wood": 200
+      },
+      "attackBonus": "+200 All Buildings;+25 Siege Units"
+    },
+    "capped-ram": {
+      "name": "Capped Ram",
+      "age": "imperial",
+      "building": "Siege Workshop",
+      "cost": {
+        "gold": 75,
+        "wood": 160
+      },
+      "attackBonus": "+160 All Buildings;+50 Siege Units"
+    },
+    "cavalier": {
+      "name": "Cavalier",
+      "age": "imperial",
+      "building": "Stable",
+      "cost": {
+        "food": 60,
+        "gold": 75
       },
       "attackBonus": null
-    },
-    "crossbowman": {
-      "name": "Crossbowman",
-      "age": "castle",
-      "building": "Archery Range",
-      "cost": {
-        "wood": 25,
-        "gold": 45
-      },
-      "attackBonus": "+3 spearmen"
-    },
-    "arbalester": {
-      "name": "Arbalest",
-      "age": "imperial",
-      "building": "Archery Range",
-      "cost": {
-        "wood": 25,
-        "gold": 45
-      },
-      "attackBonus": "+3 spearmen"
     },
     "cavalry-archer": {
       "name": "Cavalry Archer",
       "age": "castle",
       "building": "Archery Range",
       "cost": {
-        "wood": 40,
-        "gold": 70
+        "gold": 60,
+        "wood": 40
       },
-      "attackBonus": "+2 spearmen"
+      "attackBonus": "+2 Spearmen"
     },
-    "heavy-cavalry-archer": {
-      "name": "Heavy Cavalry Archer",
+    "champion": {
+      "name": "Champion",
       "age": "imperial",
-      "building": "Archery Range",
+      "building": "Barracks",
       "cost": {
-        "wood": 40,
-        "gold": 70
+        "food": 50,
+        "gold": 20
       },
-      "attackBonus": "+2 spearmen"
+      "attackBonus": "+8 Shock Infantry;+4 Standard Buildings"
     },
-    "hand-cannoneer": {
-      "name": "Hand Cannoneer",
-      "age": "imperial",
-      "building": "Archery Range",
-      "cost": {
-        "food": 45,
-        "gold": 50
-      },
-      "attackBonus": "1 spearmen;+10 infantry;+2 rams"
-    },
-    "skirmisher": {
-      "name": "Skirmisher",
-      "age": "feudal",
-      "building": "Archery Range",
-      "cost": {
-        "food": 25,
-        "wood": 35
-      },
-      "attackBonus": "+3 spearmen;+3 archers/hand cannon/skirms/conquistadors"
-    },
-    "elite-skirmisher": {
-      "name": "Elite Skirmisher",
+    "crossbowman": {
+      "name": "Crossbowman",
       "age": "castle",
       "building": "Archery Range",
       "cost": {
-        "food": 25,
-        "wood": 35
+        "gold": 45,
+        "wood": 25
       },
-      "attackBonus": "+3 spearmen;+4 archers/hand cannon/skirms/conquistadors;+6 against cavalry archers"
+      "attackBonus": "+3 Spearmen"
+    },
+    "demolition-ship": {
+      "name": "Demolition Ship",
+      "age": "castle",
+      "building": "Dock",
+      "cost": {
+        "gold": 80,
+        "wood": 45
+      },
+      "attackBonus": "+220 All Buildings"
     },
     "eagle-warrior": {
       "name": "Eagle Warrior",
@@ -102,7 +142,17 @@
         "food": 20,
         "gold": 50
       },
-      "attackBonus": "+8 monks;+3 siege;+2 cavalry;+1 ship/camel"
+      "attackBonus": "+8 Monastery Units;+3 Mounted Units;+3 Siege Units;+1 Ships;+2 Camels"
+    },
+    "elite-cannon-galleon": {
+      "name": "Elite Cannon Galleon",
+      "age": "imperial",
+      "building": "Dock",
+      "cost": {
+        "gold": 150,
+        "wood": 200
+      },
+      "attackBonus": "+275 All Buildings;+25 Siege Units"
     },
     "elite-eagle-warrior": {
       "name": "Elite Eagle Warrior",
@@ -112,187 +162,37 @@
         "food": 20,
         "gold": 50
       },
-      "attackBonus": "+10 monks;+5 siege;+4 cavalry;+2 ship/camel"
+      "attackBonus": "+10 Monastery Units;+4 Mounted Units;+2 Ships;+5 Siege Units;+3 Camels"
     },
-    "spearman": {
-      "name": "Spearman",
-      "age": "feudal",
-      "building": "Barracks",
-      "cost": {
-        "food": 35,
-        "wood": 15
-      },
-      "attackBonus": "+1 eagles;+1 buildings;+30 war elephants;+15 cavalry;+7 camels/ships"
-    },
-    "pikeman": {
-      "name": "Pikeman",
+    "elite-skirmisher": {
+      "name": "Elite Skirmisher",
       "age": "castle",
-      "building": "Barracks",
+      "building": "Archery Range",
       "cost": {
-        "food": 35,
-        "wood": 25
+        "food": 25,
+        "wood": 35
       },
-      "attackBonus": "+1 eagles;+1 buildings;+47 war elephants;+22 cavalry;+11 camels/ships"
-    },
-    "halberdier": {
-      "name": "Halberdier",
-      "age": "imperial",
-      "building": "Barracks",
-      "cost": {
-        "food": 35,
-        "wood": 25
-      },
-      "attackBonus": "+1 eagles;+1 buildings;+60 war elephants;+32 cavalry;+16 camels/ships"
-    },
-    "militia": {
-      "name": "Militia",
-      "age": "dark",
-      "building": "Barracks",
-      "cost": {
-        "food": 60,
-        "gold": 20
-      },
-      "attackBonus": null
-    },
-    "man-at-arms": {
-      "name": "Man-at-Arms",
-      "age": "feudal",
-      "building": "Barracks",
-      "cost": {
-        "food": 60,
-        "gold": 20
-      },
-      "attackBonus": "+2 eagles;+1 buildings"
-    },
-    "long-swordsman": {
-      "name": "Long Swordsman",
-      "age": "castle",
-      "building": "Barracks",
-      "cost": {
-        "food": 60,
-        "gold": 20
-      },
-      "attackBonus": "+4 eagles;+2 buildings"
-    },
-    "two-handed-swordsman": {
-      "name": "Two-Handed Swordsman",
-      "age": "imperial",
-      "building": "Barracks",
-      "cost": {
-        "food": 60,
-        "gold": 20
-      },
-      "attackBonus": "+6 eagles;+3 buildings"
-    },
-    "champion": {
-      "name": "Champion",
-      "age": "imperial",
-      "building": "Barracks",
-      "cost": {
-        "food": 60,
-        "gold": 20
-      },
-      "attackBonus": "+6 eagles;+3 buildings"
-    },
-    "trebuchet": {
-      "name": "Trebuchet",
-      "age": "imperial",
-      "building": "Castle",
-      "cost": {
-        "wood": 200,
-        "gold": 200
-      },
-      "attackBonus": "+250 buildings"
-    },
-    "cannon-galleon": {
-      "name": "Cannon Galleon",
-      "age": "imperial",
-      "building": "Dock",
-      "cost": {
-        "wood": 200,
-        "gold": 150
-      },
-      "attackBonus": "+200 buildings;+15 infantry;+15 archers;+15 cavalry;+40 siege"
-    },
-    "elite-cannon-galleon": {
-      "name": "Elite Cannon Galleon",
-      "age": "imperial",
-      "building": "Dock",
-      "cost": {
-        "wood": 200,
-        "gold": 150
-      },
-      "attackBonus": "+275 buildings;+15 infantry;+15 archers;+15 cavalry;+40 siege"
-    },
-    "demolition-ship": {
-      "name": "Demolition Ship",
-      "age": "castle",
-      "building": "Dock",
-      "cost": {
-        "wood": 70,
-        "gold": 50
-      },
-      "attackBonus": "+220 buildings"
-    },
-    "heavy-demolition-ship": {
-      "name": "Heavy Demolition Ship",
-      "age": "imperial",
-      "building": "Dock",
-      "cost": {
-        "wood": 70,
-        "gold": 50
-      },
-      "attackBonus": "+280 buildings"
-    },
-    "fire-ship": {
-      "name": "Fire Ship",
-      "age": "castle",
-      "building": "Dock",
-      "cost": {
-        "wood": 75,
-        "gold": 45
-      },
-      "attackBonus": "+2 buildings;+3 ships/camels;+2 turtle ships;+1 melee"
+      "attackBonus": "+2 Mounted Archers;+4 Spearmen;+4 All Archers;+2 Mamelukes"
     },
     "fast-fire-ship": {
       "name": "Fast Fire Ship",
       "age": "imperial",
       "building": "Dock",
       "cost": {
-        "wood": 75,
-        "gold": 45
+        "gold": 45,
+        "wood": 75
       },
-      "attackBonus": "+3 buildings;+4 ships/camels;+3 turtle ships;+1 melee"
+      "attackBonus": "+3 All Buildings;+1 Long-Range Warships"
     },
-    "galley": {
-      "name": "Galley",
-      "age": "feudal",
-      "building": "Dock",
-      "cost": {
-        "wood": 90,
-        "gold": 30
-      },
-      "attackBonus": "+6 buildings;+8 ships/camels;+3 rams"
-    },
-    "war-galley": {
-      "name": "War Galley",
+    "fire-ship": {
+      "name": "Fire Ship",
       "age": "castle",
       "building": "Dock",
       "cost": {
-        "wood": 90,
-        "gold": 30
+        "gold": 45,
+        "wood": 75
       },
-      "attackBonus": "+7 buildings;+9 ships/camels;+4 rams"
-    },
-    "galleon": {
-      "name": "Galleon",
-      "age": "imperial",
-      "building": "Dock",
-      "cost": {
-        "wood": 90,
-        "gold": 30
-      },
-      "attackBonus": "+8 buildings;+11 ships/camels;+4 rams"
+      "attackBonus": "+2 All Buildings;+1 Long-Range Warships"
     },
     "fishing-ship": {
       "name": "Fishing Ship",
@@ -303,12 +203,151 @@
       },
       "attackBonus": null
     },
-    "transport-ship": {
-      "name": "Transport Ship",
+    "galleon": {
+      "name": "Galleon",
+      "age": "imperial",
+      "building": "Dock",
+      "cost": {
+        "gold": 30,
+        "wood": 90
+      },
+      "attackBonus": "+6 All Buildings;+3 High Pierce Armor Siege Units;+9 Long-Range Warships"
+    },
+    "galley": {
+      "name": "Galley",
       "age": "feudal",
       "building": "Dock",
       "cost": {
-        "wood": 125
+        "gold": 30,
+        "wood": 90
+      },
+      "attackBonus": "+6 All Buildings;+3 High Pierce Armor Siege Units;+5 Long-Range Warships"
+    },
+    "halberdier": {
+      "name": "Halberdier",
+      "age": "imperial",
+      "building": "Barracks",
+      "cost": {
+        "food": 35,
+        "wood": 25
+      },
+      "attackBonus": "+1 Shock Infantry;+1 Standard Buildings;+28 Elephants;+32 Mounted Units;+17 Ships;+26 Camels;+7 Mamelukes"
+    },
+    "hand-cannoneer": {
+      "name": "Hand Cannoneer",
+      "age": "imperial",
+      "building": "Archery Range",
+      "cost": {
+        "food": 45,
+        "gold": 50
+      },
+      "attackBonus": "+1 Spearmen;+10 Infantry;+2 High Pierce Armor Siege Units"
+    },
+    "heavy-camel-rider": {
+      "name": "Heavy Camel Rider",
+      "age": "imperial",
+      "building": "Stable",
+      "cost": {
+        "food": 55,
+        "gold": 60
+      },
+      "attackBonus": "+18 Mounted Units;+9 Ships;+9 Camels;+7 Mamelukes"
+    },
+    "heavy-cavalry-archer": {
+      "name": "Heavy Cavalry Archer",
+      "age": "imperial",
+      "building": "Archery Range",
+      "cost": {
+        "gold": 60,
+        "wood": 40
+      },
+      "attackBonus": "+4 Spearmen"
+    },
+    "heavy-demolition-ship": {
+      "name": "Heavy Demolition Ship",
+      "age": "imperial",
+      "building": "Dock",
+      "cost": {
+        "gold": 80,
+        "wood": 45
+      },
+      "attackBonus": "+280 All Buildings"
+    },
+    "heavy-scorpion": {
+      "name": "Heavy Scorpion",
+      "age": "imperial",
+      "building": "Siege Workshop",
+      "cost": {
+        "gold": 75,
+        "wood": 75
+      },
+      "attackBonus": "+6 All Buildings;+10 Elephants;+2 High Pierce Armor Siege Units;+2 Infantry"
+    },
+    "hussar": {
+      "name": "Hussar",
+      "age": "imperial",
+      "building": "Stable",
+      "cost": {
+        "food": 80
+      },
+      "attackBonus": "+12 Monastery Units"
+    },
+    "knight": {
+      "name": "Knight",
+      "age": "castle",
+      "building": "Stable",
+      "cost": {
+        "food": 60,
+        "gold": 75
+      },
+      "attackBonus": null
+    },
+    "light-cavalry": {
+      "name": "Light Cavalry",
+      "age": "castle",
+      "building": "Stable",
+      "cost": {
+        "food": 80
+      },
+      "attackBonus": "+10 Monastery Units"
+    },
+    "long-swordsman": {
+      "name": "Long Swordsman",
+      "age": "castle",
+      "building": "Barracks",
+      "cost": {
+        "food": 50,
+        "gold": 20
+      },
+      "attackBonus": "+6 Shock Infantry;+3 Standard Buildings"
+    },
+    "man-at-arms": {
+      "name": "Man-at-Arms",
+      "age": "feudal",
+      "building": "Barracks",
+      "cost": {
+        "food": 50,
+        "gold": 20
+      },
+      "attackBonus": "+2 Shock Infantry;+2 Standard Buildings"
+    },
+    "mangonel": {
+      "name": "Mangonel",
+      "age": "castle",
+      "building": "Siege Workshop",
+      "cost": {
+        "gold": 135,
+        "wood": 160
+      },
+      "attackBonus": "+35 All Buildings;+12 Siege Units;+40 Heavy Siege"
+    },
+    "militia": {
+      "name": "Militia",
+      "age": "dark",
+      "building": "Barracks",
+      "cost": {
+        "food": 50,
+        "gold": 20
       },
       "attackBonus": null
     },
@@ -321,135 +360,15 @@
       },
       "attackBonus": null
     },
-    "bombard-cannon": {
-      "name": "Bombard Cannon",
-      "age": "imperial",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 225,
-        "gold": 225
-      },
-      "attackBonus": "+200 buildings;+40 siege/camels;+20 siege;+40 stone defense"
-    },
-    "mangonel": {
-      "name": "Mangonel",
-      "age": "castle",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 160,
-        "gold": 135
-      },
-      "attackBonus": "+35 buildings;+12 siege"
-    },
     "onager": {
       "name": "Onager",
       "age": "imperial",
       "building": "Siege Workshop",
       "cost": {
-        "wood": 160,
-        "gold": 135
+        "gold": 135,
+        "wood": 160
       },
-      "attackBonus": "+45 buildings;+12 siege"
-    },
-    "siege-onager": {
-      "name": "Siege Onager",
-      "age": "imperial",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 160,
-        "gold": 135
-      },
-      "attackBonus": "+60 buildings;+12 siege"
-    },
-    "battering-ram": {
-      "name": "Battering Ram",
-      "age": "castle",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 160,
-        "gold": 75
-      },
-      "attackBonus": "+125 (+165 full) buildings;+40 siege;+150 (+190 full) with siege engineers buildings"
-    },
-    "capped-ram": {
-      "name": "Capped Ram",
-      "age": "imperial",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 160,
-        "gold": 75
-      },
-      "attackBonus": "+150 (+190 full) buildings;+50 siege;+180 (+220 full) with siege engineers buildings"
-    },
-    "siege-ram": {
-      "name": "Siege Ram",
-      "age": "imperial",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 160,
-        "gold": 75
-      },
-      "attackBonus": "+200 (+260 full) buildings;+65 siege;+240 (+300 full) with siege engineers buildings"
-    },
-    "scorpion": {
-      "name": "Scorpion",
-      "age": "castle",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 75,
-        "gold": 75
-      },
-      "attackBonus": "+2 buildings;+6 war elephants;+0 melee;+1 rams"
-    },
-    "heavy-scorpion": {
-      "name": "Heavy Scorpion",
-      "age": "imperial",
-      "building": "Siege Workshop",
-      "cost": {
-        "wood": 75,
-        "gold": 75
-      },
-      "attackBonus": "+4 buildings;+8 war elephants;+0 melee;+2 rams"
-    },
-    "camel-rider": {
-      "name": "Camel",
-      "age": "castle",
-      "building": "Stable",
-      "cost": {
-        "food": 55,
-        "gold": 60
-      },
-      "attackBonus": "+10 against cavalry;+5 ships/camels"
-    },
-    "heavy-camel-rider": {
-      "name": "Heavy Camel",
-      "age": "imperial",
-      "building": "Stable",
-      "cost": {
-        "food": 55,
-        "gold": 60
-      },
-      "attackBonus": "+18 against cavalry;+9 ships/camels"
-    },
-    "knight": {
-      "name": "Knight",
-      "age": "castle",
-      "building": "Stable",
-      "cost": {
-        "food": 60,
-        "gold": 75
-      },
-      "attackBonus": null
-    },
-    "cavalier": {
-      "name": "Cavalier",
-      "age": "imperial",
-      "building": "Stable",
-      "cost": {
-        "food": 60,
-        "gold": 75
-      },
-      "attackBonus": null
+      "attackBonus": "+45 All Buildings;+12 Siege Units;+50 Heavy Siege"
     },
     "paladin": {
       "name": "Paladin",
@@ -461,6 +380,26 @@
       },
       "attackBonus": null
     },
+    "pikeman": {
+      "name": "Pikeman",
+      "age": "castle",
+      "building": "Barracks",
+      "cost": {
+        "food": 35,
+        "wood": 25
+      },
+      "attackBonus": "+1 Shock Infantry;+1 Standard Buildings;+25 Elephants;+22 Mounted Units;+16 Ships;+18 Camels;+7 Mamelukes"
+    },
+    "scorpion": {
+      "name": "Scorpion",
+      "age": "castle",
+      "building": "Siege Workshop",
+      "cost": {
+        "gold": 75,
+        "wood": 75
+      },
+      "attackBonus": "+3 All Buildings;+7 Elephants;+1 High Pierce Armor Siege Units;+1 Infantry"
+    },
     "scout-cavalry": {
       "name": "Scout Cavalry",
       "age": "feudal",
@@ -468,25 +407,86 @@
       "cost": {
         "food": 80
       },
-      "attackBonus": "+6 monks"
+      "attackBonus": "+6 Monastery Units"
     },
-    "light-cavalry": {
-      "name": "Light Cavalry",
-      "age": "castle",
-      "building": "Stable",
-      "cost": {
-        "food": 80
-      },
-      "attackBonus": "+10 monks"
-    },
-    "hussar": {
-      "name": "Hussar",
+    "siege-onager": {
+      "name": "Siege Onager",
       "age": "imperial",
-      "building": "Stable",
+      "building": "Siege Workshop",
       "cost": {
-        "food": 80
+        "gold": 135,
+        "wood": 160
       },
-      "attackBonus": "+12 monks"
+      "attackBonus": "+60 All Buildings;+12 Siege Units;+50 Heavy Siege"
+    },
+    "siege-ram": {
+      "name": "Siege Ram",
+      "age": "imperial",
+      "building": "Siege Workshop",
+      "cost": {
+        "gold": 75,
+        "wood": 160
+      },
+      "attackBonus": "+200 All Buildings;+65 Siege Units"
+    },
+    "skirmisher": {
+      "name": "Skirmisher",
+      "age": "feudal",
+      "building": "Archery Range",
+      "cost": {
+        "food": 25,
+        "wood": 35
+      },
+      "attackBonus": "+3 Spearmen;+3 All Archers;+2 Mamelukes"
+    },
+    "spearman": {
+      "name": "Spearman",
+      "age": "feudal",
+      "building": "Barracks",
+      "cost": {
+        "food": 35,
+        "wood": 25
+      },
+      "attackBonus": "+1 Shock Infantry;+1 Standard Buildings;+15 Elephants;+15 Mounted Units;+9 Ships;+12 Camels"
+    },
+    "transport-ship": {
+      "name": "Transport Ship",
+      "age": "dark",
+      "building": "Dock",
+      "cost": {
+        "wood": 125
+      },
+      "attackBonus": null
+    },
+    "trebuchet": {
+      "name": "Trebuchet",
+      "age": "imperial",
+      "building": "Castle",
+      "cost": {
+        "gold": 200,
+        "wood": 200
+      },
+      "attackBonus": "+250 All Buildings"
+    },
+    "two-handed-swordsman": {
+      "name": "Two-Handed Swordsman",
+      "age": "imperial",
+      "building": "Barracks",
+      "cost": {
+        "food": 50,
+        "gold": 20
+      },
+      "attackBonus": "+8 Shock Infantry;+4 Standard Buildings"
+    },
+    "war-galley": {
+      "name": "War Galley",
+      "age": "castle",
+      "building": "Dock",
+      "cost": {
+        "gold": 30,
+        "wood": 90
+      },
+      "attackBonus": "+6 All Buildings;+3 High Pierce Armor Siege Units;+5 Long-Range Warships"
     }
   }
 }
