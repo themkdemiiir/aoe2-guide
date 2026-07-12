@@ -7,8 +7,8 @@ later milestone. This is a separate workspace from the repo-root `analyzer/` (th
 coach) — the two share no crates or Cargo.lock.
 
 - **`core`** (`pipeline-core`) is the typed, regex-free home for the slug/elo-bucket/map/civ/patch
-  lookups that today live duplicated across JS (`scripts/data-pipeline/lib/buckets.mjs`) and Rust
-  (`replay-rs/src/analyze/{maps.rs,data.rs}`), plus shared id newtypes, `Age`, `Secret`, and the
+  lookups (formerly duplicated in the retired JS pipeline, now the single Rust source), plus shared
+  id newtypes, `Age`, `Secret`, and the
   `core::cli` binary bootstrap every pipeline binary uses. Its civ/map/patch lookup tables are
   gated behind the opt-in `refdata` feature (NOT a default — see the comment in
   `crates/core/Cargo.toml`): enable it explicitly with `--features pipeline-core/refdata` (or via

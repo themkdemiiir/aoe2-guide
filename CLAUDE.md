@@ -54,7 +54,7 @@ English-canonical across all locales. `/tr/civs/britons/` — not `/tr/uygarlikl
 
 **Civ content:** EN+TR text (bonuses, team bonus, unique-tech effects, unique units) is sourced from `aoe2techtree` locale strings via `pnpm build:civilizations` (`scripts/build-civilizations.mjs`). Do not hand-edit the generated YAML fields — re-run the script instead.
 
-**Two civ-id spaces — never conflate them:** `src/data/civ-id-map.json` maps GAME/replay `civ_id`s (used by the analyzer + replay data); `src/data/relic-civ-id-map.json` maps the Relic API's own `civilization_id`s (used by every crawl consumer via `scripts/data-pipeline/lib/relic-map.mjs`). Applying the wrong table silently shuffles every civ label — that was a real June-2026 production bug. Guard tests: `tests/relic-civ-map.test.mjs`.
+**Two civ-id spaces — never conflate them:** `src/data/civ-id-map.json` maps GAME/replay `civ_id`s (used by the analyzer + replay data); `src/data/relic-civ-id-map.json` maps the Relic API's own `civilization_id`s (consumed by the Rust pipeline — `pipeline/crates/core/src/civs.rs`). Applying the wrong table silently shuffles every civ label — that was a real June-2026 production bug. Guard tests: `tests/relic-civ-map.test.mjs`.
 
 **Build orders:** steps are verified against the Hera video sources in `guide-sources/build-orders/`.
 

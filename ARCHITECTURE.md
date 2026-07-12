@@ -17,10 +17,6 @@ This repo is really two things that meet only through committed JSON files:
    replays, and **produces the committed JSON** the site reads. The site never talks to it
    live; the pipeline's output is committed to the repo.
 
-> **In-migration:** the pipeline is being ported from an older JS/DuckDB implementation
-> (`scripts/data-pipeline/`, being retired) to Rust (`pipeline/`). Some generators still
-> live in JS until their Rust replacement lands — see "What's where" below.
-
 ## Top-level map
 
 | Folder | What it is | Language / tooling |
@@ -31,7 +27,7 @@ This repo is really two things that meet only through committed JSON files:
 | `pipeline/` | The Rust data pipeline: crawl → parse replays → ingest to PostgreSQL → dbt views → export JSON. A Cargo workspace of small crates. | Rust |
 | `orchestration/` | Dagster jobs/schedules that run the pipeline containers on the VM. | Python |
 | `analyzer/` | The in-browser replay coach: a Rust crate compiled to WASM (`pnpm build:wasm`) that the `/analyzer` page loads. | Rust → WASM |
-| `scripts/` | Site **build tooling** (icon maps, civ/unit generation from `aoe2techtree`, translation audits) run during `pnpm build`. `scripts/data-pipeline/` is the **old JS pipeline** being retired. | JS (→ Rust) |
+| `scripts/` | Site **build tooling** (icon maps, civ/unit generation from `aoe2techtree`, translation audits, validation gates) run around `pnpm build`. | JS |
 | `guide-sources/` | Raw source guides (pro build-order transcripts) used to *verify* content — not built into the site. | Markdown/text |
 | `deploy/` | Pinned Docker Compose stack for the PostgreSQL + pipeline services on the VM. | Compose |
 | `docs/` | Contributor + design docs. `docs/superpowers/` holds historical specs/plans (archives). | Markdown |
