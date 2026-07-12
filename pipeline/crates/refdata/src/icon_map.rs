@@ -182,7 +182,7 @@ mod tests {
     fn a_picture_index_missing_on_disk_is_skipped() {
         let items = vec![IconItem("Ghost".to_string(), "Unit".to_string(), 999)];
         let doc = build_from_items(&items, &inventory());
-        assert!(doc.units.get("ghost").is_none());
+        assert!(!doc.units.contains_key("ghost"));
     }
 
     #[test]
