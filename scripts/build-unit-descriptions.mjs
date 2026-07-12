@@ -37,7 +37,9 @@ async function readUnitDescriptions() {
   try {
     text = await readFile(p, "utf8");
   } catch (e) {
-    fail(`cannot read ${p} (run \`cd pipeline && cargo run --bin refdata -- --out ${REFDATA_OUT}\` first): ${e.message}`);
+    fail(
+      `cannot read ${p} (run \`cd pipeline && cargo run --bin refdata -- --out ${REFDATA_OUT}\` first): ${e.message}`,
+    );
   }
   return JSON.parse(text).units;
 }
@@ -52,7 +54,9 @@ async function run() {
     const slug = file.replace(/\.ya?ml$/, "");
     const entry = descriptions[slug];
     if (!entry) {
-      fail(`${slug}: no unit-descriptions.json entry (out of sync with src/content/units/ — check refdata's CANONICAL_UNITS)`);
+      fail(
+        `${slug}: no unit-descriptions.json entry (out of sync with src/content/units/ — check refdata's CANONICAL_UNITS)`,
+      );
     }
 
     const fmPath = path.join(CONTENT_UNITS, file);

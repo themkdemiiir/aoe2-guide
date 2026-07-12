@@ -142,7 +142,8 @@ async function run() {
   for (const entry of civilizations.civs) {
     const { slug } = entry;
     const help = helpStrings.civs[slug];
-    if (!help) fail(`${slug}: no civ-help-strings.json entry (out of sync with civilizations.json)`);
+    if (!help)
+      fail(`${slug}: no civ-help-strings.json entry (out of sync with civilizations.json)`);
 
     const displayName = slug
       .split("-")
@@ -164,7 +165,11 @@ async function run() {
   // civilizations.json already matches the committed shape field-for-field (refdata's own
   // write_json uses the identical 2-space-indent + trailing-newline convention) — copy it through
   // unchanged rather than re-serializing.
-  await writeFile(DATA_OUT, await readFile(path.join(REFDATA_OUT, "civilizations.json"), "utf8"), "utf8");
+  await writeFile(
+    DATA_OUT,
+    await readFile(path.join(REFDATA_OUT, "civilizations.json"), "utf8"),
+    "utf8",
+  );
 
   for (const { slug, unit } of iconMissing) {
     console.log(`[ICON-MISSING] ${slug} → ${unit}`);
