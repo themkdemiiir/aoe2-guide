@@ -1,8 +1,13 @@
 # Self-hosted data stack (pinned Docker Compose)
 
 The offline pipeline's infrastructure, **version-pinned** and reproducible. Runs in the privileged
-Docker LXC **`aoe2-stack` (192.168.111.8)** on the Proxmox host `botanera`, data on the NVMe
+Docker LXC **`aoe2guide-data` (CT 101, 192.168.111.8)** on the Proxmox host `tengri`, data on the NVMe
 (`/opt/pgdata`). Not part of the Cloudflare Pages build — it's the VM-side data workload.
+
+> Renamed 2026-10-12: the CT was `aoe2-stack` and the host `botanera`. The compose project name and
+> `/opt/aoe2-stack` keep the old name on purpose (renaming them would orphan the running containers
+> and volumes). The old pipeline VM 100 (`mkd@192.168.111.7`) was deleted the same day; its corpus
+> lives in this Postgres.
 
 ## Services (pinned)
 | Service | Image / version | Notes |

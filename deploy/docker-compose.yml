@@ -1,7 +1,8 @@
 # aoe2-guide self-hosted data stack — all versions PINNED (no `latest`).
-# Runs in the privileged Docker LXC `aoe2-stack` (192.168.111.8) on botanera's NVMe.
+# Runs in the privileged Docker LXC `aoe2guide-data` (CT 101, 192.168.111.8) on tengri's NVMe.
 # Postgres now; Rust pipeline tools (migration, later ingest/export/fetch) build from
 # ../pipeline/Dockerfile, one BIN-arg image per binary; Dagster + dbt join at M5/M6.
+# Project name predates the CT rename; keep it (changing it orphans the running containers and volumes).
 name: aoe2-stack
 
 services:
